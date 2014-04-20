@@ -1,0 +1,323 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <!--
+    * Author:         NingG
+    -->
+    <meta charset="utf-8" />
+    <title>Eclipse下查看MOA源代码 | NingG.github.com</title>
+    <meta name="author" content="NingG" />
+    <meta name="renderer" content="webkit">
+    <meta name="description" content="NingG's Blog" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+    <link rel="stylesheet" href="/css/default.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="/atom.xml" />
+    <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+</head>
+<body>
+
+    <div class="home-menu">
+        <div class="home-icon-con">
+            <a class="home-menu-icon" href="/">NingG</a>
+            <a class="home-follow" href="#" title="Contact Me">+</a>
+        </div>
+        <div class="home-contact">
+            <a href="http://weibo.com/ggningg/" target="_blank" style="margin-left:-5px;"><img src="http://www.weibo.com/favicon.ico" alt="" width="25"/></a>
+            <a href="http://www.douban.com/people/ggningg/" target="_blank" style="text-align:center;"><img src="http://www.douban.com/favicon.ico" alt="" width="22"/></a>
+			<a href="http://github.com/ningg" alt="" target="_blank" style="text-align:right;"><img src="http://1.gravatar.com/avatar/8b3dcc5605090a24e82cc073aa7f45c7?d=https%3A%2F%2Fidenticons.github.com%2F538ed17e923262911910c39d8fe23ee4.png&amp;r=x&amp;s=140" width="22"/></a>
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="/js/prettify/prettify.css" />
+<style type="text/css">
+    body { background:#e8e8e8; }
+    @media screen and (max-width: 750px){
+        body { background:#fff; }
+    }
+    @media screen and (max-width: 1020px){
+        body { background:#fff; }
+    }
+</style>
+
+<div id="content">
+    <div class="entry">
+        <h1 class="entry-title"><a href="/moa-sourcecode-with-eclipse" title="Eclipse下查看MOA源代码">Eclipse下查看MOA源代码</a></h1>
+        <p class="entry-date">2012-10-16</p>
+        <h2>概要</h2>
+
+<p>本篇短文中，此目标包含两层意思：</p>
+
+<pre><code>1. 使用Eclipse快速查看java代码，特别是class之间的继承(extends)、实现(implements)等关系；
+2. 针对MOA源码，有没有什么特别需要注意的地方？例如，快捷方式、项目文件的组织结构等。
+</code></pre>
+
+<p>依照上面对于目标的定位，本篇将着重讨论如下几个要点：</p>
+
+<pre><code>1. java基本理论知识，针对类、继承、抽象类、接口、注解、反射的基本含义及作用进行说明；
+2. Eclipse下的快捷键，特别是源代码查询，类间继承关系、接口的实现关系的快捷查看；
+3. MOA基础知识：主要是MOA的目录结构、基本class、interface
+</code></pre>
+
+<p>此次考虑的<code>class</code>，主要是跟算法相分离的基本<code>class</code>，分为以下2类：</p>
+
+<pre><code>1. 负责数据存储功能的class，与此同时提供了对数据的基本操作方法：Instance、Stream等；
+2. 规定算法实现接口的class，这些class一般是Interface或者 Abstract class。
+</code></pre>
+
+<h2>示例准备</h2>
+
+<p>此次采用的例子是<a href="http://moa.cms.waikato.ac.nz/" title="Massive Online Analysis">MOA</a>的<a href="http://sourceforge.net/projects/moa-datastream/files/documentation/Tutorial2.pdf" title="Introduction to the API of MOA">Tutorial2</a>中提供的两个示例代码：</p>
+
+<h3>代码一：<code>ApiOfTest1.java</code></h3>
+
+<pre><code>源代码名称: ApiOfTest1.java
+文档中对应位置：Listing 1
+基本功能描述：生成一个stream，并使用learner对其进行学习。
+</code></pre>
+
+<p><strong>补充说明：</strong> 本次例子<code>ApiOfTest1.java</code>中使用的<code>stream</code>和<code>learner</code>做出改动，如下：</p>
+
+<pre><code>RandomTreeGenerator stream = new RandomTreeGenerator();
+Classifier learner = new DecisionStumpTutorial();
+</code></pre>
+
+<h3>代码二：<code>DecisionStumpTutorial.java</code></h3>
+
+<pre><code>源代码名称: DecisionStumpTutorial.java
+文档中对应位置：Listing 8
+基本功能描述：实现了一个单层的决策树分类算法（decision stump classifier）
+</code></pre>
+
+<h2>java基本知识</h2>
+
+<h3>类（class）</h3>
+
+<p><em>说明</em> ：由属性（<code>attribute</code>）和方法（<code>method</code>）构成。</p>
+
+<h3>继承（extends）</h3>
+
+<p><em>说明</em> ：<code>java</code>中类（<code>class</code>）是<strong>单继承</strong>的，即，最多只能继承一个类。</p>
+
+<h3>抽象类（abstract class）</h3>
+
+<p><em>说明</em> : 无法具体的对象被定义为抽象类（<code>abstract class</code>）；</p>
+
+<p>有时候，我们可能想要构造一个很抽象的父类对象，它可能仅仅代表一种分类或抽象概念，它的实例没有任何意义，因此不希望它能被实例化。例如：有一个父类<code>水果（Fruit）</code>，它有几个子类<code>苹果（Apple）</code>、<code>橘子（Orange）</code>、<code>香蕉（Banana）</code>等。<code>水果</code>在这里仅仅只是作为一种分类，显然<code>水果</code>的实例没有什么意义（就好像一个人如果告诉你他买了一些<code>水果</code>但是却不告诉你是<code>苹果</code>还是<code>橘子</code>，你很难想象他到底买的是什么）。而<code>水果类</code>又要能被子类化，这就要求我们使用抽象类（<code>abstract class</code>）来解决这个问题。</p>
+
+<p><em>说明</em> ：抽象类，可以有抽象方法，但不能实例化。例如：</p>
+
+<pre><code class="java">//定义抽象类水果（Fruit）
+public abstract class Fruit {
+……
+}
+//如果我们试图用以下语句来获得一个实例，将无法编译成功。
+Fruit fruit = new Fruit();
+</code></pre>
+
+<p><em>说明</em> ：抽象类中可以有实例属性。</p>
+
+<h3>接口（interface）</h3>
+
+<p>接口也是抽象对象，它甚至比抽象类更抽象。<strong>接口中的方法都是抽象方法</strong>。
+一个接口可以<code>继承</code>其他接口；一个类通过关键字implements声明要<code>实现</code>一个接口，并具体实现接口的方法。例如：</p>
+
+<pre><code class="java">//有一个接口InterfaceA，
+public  interface  InterfaceA {
+    void  methodA();
+}
+
+//类ClassA实现接口InterfaceA。
+public  class  ClassA implements InterfaceA {
+    public  void  methodA() {
+    System.out.println( ”methodA of ClassA implements InterfaceA” );
+    }
+}
+</code></pre>
+
+<p><em>说明</em> ：正常的<code>class</code>实现（<code>implements</code>）接口（<code>interface</code>），必须实现接口定义的所有方法；但抽象类（<code>abstract class</code>）实现接口，可以不用实现接口定义的方法。
+<em>说明</em> ：接口中不能有实例属性，如果有属性，必须为静态的常量（<code>static final</code>）
+<em>说明</em> ：<code>java</code>中一个类，可以同时实现（<code>implements</code>）多个接口（<code>interface</code>）</p>
+
+<h3>注解（annotation）</h3>
+
+<p>Java注解是附加在代码中的一些元信息，用于一些工具在编译、运行时进行解析和使用，起到说明、配置的功能。注解不会也不能影响代码的实际逻辑，仅仅起到辅助性的作用。包含在 <code>java.lang.annotation</code> 包中。
+<em>说明</em> ：此次只对注解<code>@Override</code>进行说明：
+<code>@Override</code>注解用于类方法(<code>Method</code>)，
+表示一个方法声明打算重写超类中的另一个方法声明。如果方法利用此注释类型进行注解但没有重写超类方法，则编译器会生成一条错误消息。</p>
+
+<h3>反射（Reflection）</h3>
+
+<p><em>说明</em> ：程序运行时，通过反射获得某个类中的各种变量，函数，数组，构造函数以及类本身，并使用它们。</p>
+
+<h3>其他概念：内部类</h3>
+
+<p>(doing...)</p>
+
+<h2>Eclipse的快捷操作</h2>
+
+<p>源代码上查看方法位置、类间继承关系的快捷键（操作）。
+自己用得最上手的几个快捷键（操作）列举如下：</p>
+
+<p><strong>代码查看</strong> 方面的快捷操作：</p>
+
+<pre><code>//查找method、class出处（不如下面的方法常用）
+F3 
+//最直接的查找method、class出处的方法（比上面的方法更常用和有效）
+Ctrl + 鼠标点击（左击）
+//返回上一次鼠标位置   
+Alt + ←      
+//与“Alt + ←”相反 
+Alt + →       
+//根据名称匹配，查找当前工作区源代码文件
+Ctrl + Shift + r/R  
+//查找，哪个类继承了此类（不如下面方法常用）
+选中“class”，右键“reference”—“Hierarchy” 
+//查看类的继承关系（被谁继承），并且在Type Hierarch窗口中显示（比上面方法跟有效）
+F4  
+//显示当前类的继承关系
+选中“class”， 然后 ctrl + T    
+</code></pre>
+
+<p><strong>代码编辑</strong> 上的操作</p>
+
+<pre><code>//注释本行
+ctrl + /    
+//注释选中的多行
+ctrl + shift + /    
+//取消对于多行的注释
+ctrl + shift + \    
+//上下行代码之间互换位置
+alt + up/down   
+//复制本行代码，并粘贴在上行、或者下行
+ctrl + alt + up/down    
+//自动添加、去除import包
+ctrl + shift + O    
+//自动代码提示（很方便，极其常用）
+Alt + /    
+//执行当前代码（只用一个main时，自动执行；当有多个main存在时，提示选择main） 
+ctrl + F11   
+//显示快捷键窗口  
+ctrl + shift + L
+//关闭当前源代码窗口   
+ctrl + w     
+//关闭所有打开的源代码窗口   
+ctrl + shift + w    
+</code></pre>
+
+<p>Eclipse中几个窗口的功能：</p>
+
+<pre><code>outline: 简要显示当前class中的attribute、method
+search: 选中“class”，右键“reference”—“Hierarchy”查找，哪个类继承了此类时，结果显示在此窗口中。
+console: 输出结果、出错、警告等信息
+problem: 编译前，警告、出错等信息的提示
+Type Hierarch: 显示当前类的继承关系（包括父类、子类）；注意此窗口中有几个按钮很重要。
+packet Explorer: 查看当前源代码的组织结构
+</code></pre>
+
+<h2>MOA基本知识</h2>
+
+<p>参看MOA自带文档，并且对于instanse的基本类借用于weka工程。</p>
+
+
+        <div id="disqus_container">
+            <div style="margin-bottom:20px" class="right">
+                <script type="text/javascript" charset="utf-8">
+                (function(){
+                  var _w = 86 , _h = 16;
+                  var param = {
+                    url:location.href,
+                    type:'6',
+                    count:'', /**是否显示分享数，1显示(可选)*/
+                    appkey:'', /**您申请的应用appkey,显示分享来源(可选)*/
+                    title:'', /**分享的文字内容(可选，默认为所在页面的title)*/
+                    pic:'', /**分享图片的路径(可选)*/
+                    ralateUid:'2356527183', /**关联用户的UID，分享微博会@该用户(可选)*/
+                    language:'zh_cn', /**设置语言，zh_cn|zh_tw(可选)*/
+                    rnd:new Date().valueOf()
+                  }
+                  var temp = [];
+                  for( var p in param ){
+                    temp.push(p + '=' + encodeURIComponent( param[p] || '' ) )
+                  }
+                  document.write('<iframe allowTransparency="true" frameborder="0" scrolling="no" src="http://hits.sinajs.cn/A1/weiboshare.html?' + temp.join('&') + '" width="'+ _w+'" height="'+_h+'"></iframe>')
+                })()
+                </script>
+            </div>
+            <a href="#" class="comment" onclick="return false;">点击查看评论</a>
+            <div id="disqus_thread"></div>
+        </div>
+    </div>
+
+	
+    <div class="sidenav">
+		<iframe width="100%" height="75" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=0&isFans=0&uid=2356527183&verifier=1ccfb61e&colors=d6f3f7,ffffff,666666,0082cb,ecfbfd&dpc=1"></iframe>
+    </div>
+
+    <div class="sidenav">
+        <h2>Blog</h2>
+        <ul class="artical-list">
+        
+            <li><a href="/how-to-use-lib">使用数据库查找材料</a></li>
+        
+            <li><a href="/what-model-is">模型是什么？</a></li>
+        
+            <li><a href="/lixiaolai-blog">lixiaolai's blog</a></li>
+        
+        </ul>
+
+        <h2>Opinion</h2>
+        <ul class="artical-list">
+        
+        </ul>
+
+        <h2>Project</h2>
+        <ul class="artical-list">
+        
+            <li><a href="/moa-random-tree-generator">MOA中RandomTreeGenerator[Basic]</a></li>
+        
+            <li><a href="/moa-sourcecode-with-eclipse">Eclipse下查看MOA源代码</a></li>
+        
+            <li><a href="/Install-MOA">MOA的安装</a></li>
+        
+        </ul>
+    </div>
+</div>
+
+<script src="/js/post.js" type="text/javascript"></script>
+
+
+    <!--*********************************************************-->
+    <!--****** 宝贝儿，看见这个时候，删掉下面的统计代码哦~ ******-->
+    <!--************* 再推荐下我的第一篇博客哦~~ ****************-->
+    <!--*********************************************************-->
+	<script>
+	  (function(i,s,o,g,r,a,m){
+		  i['GoogleAnalyticsObject']=r;i[r]=i[r] || function(){
+			(i[r].q=i[r].q||[]).push(arguments)}, i[r].l=1*new Date();
+			a=s.createElement(o), m=s.getElementsByTagName(o)[0];
+			a.async=1;
+			a.src=g;
+			m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-48535193-1', 'ningg.github.io');
+	  ga('send', 'pageview');
+	</script>
+    
+	
+    <script type="text/javascript">
+        $(function(){
+            $('.home-follow').click(function(e){
+                e.preventDefault();
+
+                if($('.home-contact').is(':visible')){
+                    $('.home-contact').slideUp(100);
+                }else{
+                    $('.home-contact').slideDown(100);
+                }
+            });
+        })
+    </script>
+</body>
+</html>

@@ -1,0 +1,12 @@
+auto: true
+
+markdown: rdiscount
+pygments: true
+paginate: 8
+permalink: /:title
+
+title: NingG.github.com
+url: http://ningg.github.com
+feed: /atom.xml
+atom_path : /atom.xml
+author_info: <a href="http://ningg.github.com/">NingG</a>
