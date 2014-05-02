@@ -4,7 +4,7 @@
    <title>NingG.github.com</title>
    <link href="http://ningg.github.com/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://ningg.github.com" rel="alternate" type="text/html" />
-   <updated>2014-03-07T11:44:40+08:00</updated>
+   <updated>2014-05-02T15:27:13+08:00</updated>
    <id>http://ningg.github.com</id>
    <author>
      <name></name>
@@ -17,7 +17,7 @@
      <link href="http://ningg.github.com/how-to-use-lib"/>
      <updated>2012-11-30T00:00:00+08:00</updated>
      <id>http://ningg.github.com/how-to-use-lib</id>
-     <content type="html">&lt;h2&gt;图书馆数据库的使用&lt;/h2&gt;
+     <content type="html">&lt;h2 id=&quot;section&quot;&gt;图书馆数据库的使用&lt;/h2&gt;
 
 &lt;p&gt;3年前在本科的时候，上过一门课“文献检索”，当时主要学了一点cnki使用的知识，没多久就忘掉了，现在想想造成这个结果有两个原因：1.当时学习就不求甚解，学习的时候，只是想到在考核上要达标，没有记录一些实用的检索手段；2.后来使用cnki的次数也少。要查找东西得时候，自己都是google，这是个好的习惯，但是，这只是初级水平；要达到中等水平，需要熟练专业数据库的检索。&lt;/p&gt;
 
@@ -28,49 +28,46 @@
 &lt;p&gt;本次主要介绍一些外文数据库的使用，具体包括：&lt;/p&gt;
 
 &lt;ol&gt;
-&lt;li&gt;&lt;a href=&quot;http://libra.msra.cn&quot;&gt;微软学术&lt;/a&gt;：包含范围比较广&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://scholar.google.com/&quot;&gt;google学术&lt;/a&gt;：最近几年，相比于&lt;a href=&quot;http://libra.msra.cn&quot;&gt;微软学术&lt;/a&gt;，能够实时收录最新的论文&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://acm.lib.tsinghua.edu.cn/acm/Main.nsp&quot;&gt;ACM&lt;/a&gt;：具体查找顶级会议、期刊的电子资源&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://ieeexplore.ieee.org/&quot;&gt;IEEE&lt;/a&gt;：具体查找顶级会议、期刊的电子资源&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://libra.msra.cn&quot;&gt;微软学术&lt;/a&gt;：包含范围比较广&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://scholar.google.com/&quot;&gt;google学术&lt;/a&gt;：最近几年，相比于&lt;a href=&quot;http://libra.msra.cn&quot;&gt;微软学术&lt;/a&gt;，能够实时收录最新的论文&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://acm.lib.tsinghua.edu.cn/acm/Main.nsp&quot;&gt;ACM&lt;/a&gt;：具体查找顶级会议、期刊的电子资源&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://ieeexplore.ieee.org/&quot;&gt;IEEE&lt;/a&gt;：具体查找顶级会议、期刊的电子资源&lt;/li&gt;
 &lt;/ol&gt;
 
-
-&lt;h2&gt;微软学术搜索&lt;/h2&gt;
+&lt;h2 id=&quot;section-1&quot;&gt;微软学术搜索&lt;/h2&gt;
 
 &lt;p&gt;网址：&lt;a href=&quot;http://libra.msra.cn&quot;&gt;http://libra.msra.cn&lt;/a&gt;&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;在搜索框中，直接进行检索，例如“decision tree for mining data stream”；&lt;/li&gt;
-&lt;li&gt;（可选）添加高级搜索条件“advanced search”；&lt;/li&gt;
-&lt;li&gt;在左边栏中，选择搜索的领域，例如选择“Computer Science”；&lt;/li&gt;
-&lt;li&gt;在左边栏中，选择搜索的“Author\Conferences\Journals\Organizations”；（注意只选这几个关键字，而不要选择关键字下面具体的内容）&lt;/li&gt;
-&lt;li&gt;在打开的界面中，依次选择“** related publication(s)”即可。&lt;/li&gt;
+  &lt;li&gt;在搜索框中，直接进行检索，例如“decision tree for mining data stream”；&lt;/li&gt;
+  &lt;li&gt;（可选）添加高级搜索条件“advanced search”；&lt;/li&gt;
+  &lt;li&gt;在左边栏中，选择搜索的领域，例如选择“Computer Science”；&lt;/li&gt;
+  &lt;li&gt;在左边栏中，选择搜索的“Author\Conferences\Journals\Organizations”；（注意只选这几个关键字，而不要选择关键字下面具体的内容）&lt;/li&gt;
+  &lt;li&gt;在打开的界面中，依次选择“** related publication(s)”即可。&lt;/li&gt;
 &lt;/ul&gt;
 
-
-&lt;h2&gt;google学术搜索&lt;/h2&gt;
+&lt;h2 id=&quot;google&quot;&gt;google学术搜索&lt;/h2&gt;
 
 &lt;p&gt;网址：&lt;a href=&quot;http://scholar.google.com/&quot;&gt;http://scholar.google.com/&lt;/a&gt;&lt;/p&gt;
 
-&lt;h2&gt;ACM&lt;/h2&gt;
+&lt;h2 id=&quot;acm&quot;&gt;ACM&lt;/h2&gt;
 
 &lt;p&gt;网址：&lt;a href=&quot;http://acm.lib.tsinghua.edu.cn/acm/Main.nsp&quot;&gt;http://acm.lib.tsinghua.edu.cn/acm/Main.nsp&lt;/a&gt;&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;首页可选择浏览“Special Interest Groups（SIGs）”或者“Transactions”等&lt;/li&gt;
+  &lt;li&gt;首页可选择浏览“Special Interest Groups（SIGs）”或者“Transactions”等&lt;/li&gt;
 &lt;/ul&gt;
 
-
-&lt;h2&gt;IEEE&lt;/h2&gt;
+&lt;h2 id=&quot;ieee&quot;&gt;IEEE&lt;/h2&gt;
 
 &lt;p&gt;网址：&lt;a href=&quot;http://ieeexplore.ieee.org/&quot;&gt;http://ieeexplore.ieee.org/&lt;/a&gt;&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;首页选择范围“conference Publications”或者“Journal &amp;amp; Magazines”；&lt;/li&gt;
+  &lt;li&gt;首页选择范围“conference Publications”或者“Journal &amp;amp; Magazines”；&lt;/li&gt;
 &lt;/ul&gt;
 
-
 &lt;p&gt;&lt;img src=&quot;/images/how-to-use-lib/lib-book.jpg&quot; alt=&quot;lib-book&quot; /&gt;&lt;/p&gt;
+
 </content>
    </entry>
    
@@ -79,78 +76,72 @@
      <link href="http://ningg.github.com/what-model-is"/>
      <updated>2012-11-13T00:00:00+08:00</updated>
      <id>http://ningg.github.com/what-model-is</id>
-     <content type="html">&lt;h2&gt;模型是什么&lt;/h2&gt;
+     <content type="html">&lt;h2 id=&quot;section&quot;&gt;模型是什么&lt;/h2&gt;
 
 &lt;p&gt;模型，如果是在一年前我应该会很反感这个词汇，因为我对“模型”的最初记忆是本科一二年级的“数学建模大赛”，而当初对数学建模的第一印象是：东拼西凑、瞎胡闹，浪费时间。现在看来当初自己是错了，“模型”很重要、很关键，一定程度上“模型”体现了一个现象的本质，并可以基于“模型”来分析甚至预测事情的发展。现在各行各业很少不使用“模型”，金融决策、国家政策、工程解决方案等都要依据“模型”。&lt;/p&gt;
 
-&lt;h2&gt;为什么会想到要说“模型”&lt;/h2&gt;
+&lt;h2 id=&quot;section-1&quot;&gt;为什么会想到要说“模型”&lt;/h2&gt;
 
 &lt;p&gt;为什么会突然想到“模型”呢？因为读了梁斌的一篇博客&lt;a href=&quot;http://blog.sina.com.cn/s/blog_593af2a701018qc0.html&quot;&gt;《百度狼》&lt;/a&gt;，其中使用一个比喻（模型）来分析了一下百度最近的狼文化；暂且不说狼性文化好不好、是否适用baidu，只是来分析&lt;a href=&quot;http://blog.sina.com.cn/s/blog_593af2a701018qc0.html&quot;&gt;《百度狼》&lt;/a&gt;这篇文章的论述结构和手法，其开始就提出了一个众所周知的模型“西游记师徒5人”，然后以此来分析，最终得出一个结论。整个文章的分析过程，自己第一感觉，有理有据，令人信服，但转念一想：&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;模型“西游记师徒5人”适用这种情况吗？&lt;/li&gt;
-&lt;li&gt;模型是由“虚幻小说”提出的，那么这个模型是合理的吗？&lt;/li&gt;
-&lt;li&gt;即使模型是真实存在的，那这个模型是能达到最高效率的模型吗？&lt;/li&gt;
-&lt;li&gt;后来这篇文章又提出军事家“曹操”的用人之道（暂不分析其是否最大效率发挥人才的作用），那么当时曹操的境遇与现在“百度”的处境是否相同呢？（模型的使用条件是否相同）&lt;/li&gt;
+  &lt;li&gt;模型“西游记师徒5人”适用这种情况吗？&lt;/li&gt;
+  &lt;li&gt;模型是由“虚幻小说”提出的，那么这个模型是合理的吗？&lt;/li&gt;
+  &lt;li&gt;即使模型是真实存在的，那这个模型是能达到最高效率的模型吗？&lt;/li&gt;
+  &lt;li&gt;后来这篇文章又提出军事家“曹操”的用人之道（暂不分析其是否最大效率发挥人才的作用），那么当时曹操的境遇与现在“百度”的处境是否相同呢？（模型的使用条件是否相同）&lt;/li&gt;
 &lt;/ul&gt;
-
 
 &lt;p&gt;&lt;img src=&quot;/images/what-model-is/xiyouji-sanzang.jpg&quot; alt=&quot;xiyouji&quot; /&gt;&lt;/p&gt;
 
-&lt;h2&gt;树立令自己信服的观点&lt;/h2&gt;
+&lt;h2 id=&quot;section-2&quot;&gt;树立令自己信服的观点&lt;/h2&gt;
 
 &lt;p&gt;到现在仍然感觉&lt;a href=&quot;http://blog.sina.com.cn/s/blog_593af2a701018qc0.html&quot;&gt;《百度狼》&lt;/a&gt;是有些参考价值的，但已然没有了第一次阅读时的“坚信不疑”了。&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;疑问：一个数学模型，最初是怎么提出的？其提出的依据是什么？模型的合理性怎么证明？另外，在企业管理研究领域，如何提高企业效率，如何最大程度提高员工的主观能动性，没有研究吗？&lt;/li&gt;
+  &lt;li&gt;疑问：一个数学模型，最初是怎么提出的？其提出的依据是什么？模型的合理性怎么证明？另外，在企业管理研究领域，如何提高企业效率，如何最大程度提高员工的主观能动性，没有研究吗？&lt;/li&gt;
 &lt;/ul&gt;
-
 
 &lt;p&gt;上面都是比较客观地去看“模型”这个问题。
 对于现实生活中的某些问题，一定程度上可以考虑使用&lt;a href=&quot;http://blog.sina.com.cn/s/blog_593af2a701018qc0.html&quot;&gt;《百度狼》&lt;/a&gt;类似的论述。（生活中的事情，是对是错，最终的评论只有后来人能说清楚）&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/images/what-model-is/wolf.jpg&quot; alt=&quot;wolf&quot; /&gt;&lt;/p&gt;
+
 </content>
    </entry>
    
    <entry>
-     <title>Moa Random Tree Generator Advance</title>
+     <title>MOA中RandomTreeGenerator[Advanced]</title>
      <link href="http://ningg.github.com/moa-random-tree-generator-advance"/>
-     <updated>2012-10-26T00:00:00+08:00</updated>
+     <updated>2012-10-27T00:00:00+08:00</updated>
      <id>http://ningg.github.com/moa-random-tree-generator-advance</id>
-     <content type="html">&lt;h2&gt;简介&lt;/h2&gt;
-
-&lt;p&gt;&lt;code&gt;RandomTreeGenerator&lt;/code&gt;是一个&lt;code&gt;stream&lt;/code&gt;产生器，源源不断的输出&lt;code&gt;Instance&lt;/code&gt;；这一部分，将详细探讨其实现；请先阅读&quot;&lt;a href=&quot;/moa-random-tree-generator/&quot;&gt;MOA中RandomTreeGenerator-Basic&lt;/a&gt;&quot;。查看源码的工具是Eclipse，关于Eclipse下查看源代码的快捷键，可参考&quot;&lt;a href=&quot;/moa-sourcecode-with-eclipse/&quot;&gt;Eclipse下查看MOA源代码&lt;/a&gt;&quot;。&lt;/p&gt;
+     <content type="html">&lt;h2 id=&quot;section&quot;&gt;简介&lt;/h2&gt;
+&lt;p&gt;&lt;code&gt;RandomTreeGenerator&lt;/code&gt;是一个&lt;code&gt;stream&lt;/code&gt;产生器，源源不断的输出&lt;code&gt;Instance&lt;/code&gt;；这一部分，将详细探讨其实现；请先阅读”&lt;a href=&quot;/moa-random-tree-generator/&quot;&gt;MOA中RandomTreeGenerator-Basic&lt;/a&gt;“。查看源码的工具是Eclipse，关于Eclipse下查看源代码的快捷键，可参考”&lt;a href=&quot;/moa-sourcecode-with-eclipse/&quot;&gt;Eclipse下查看MOA源代码&lt;/a&gt;“。&lt;/p&gt;
 
 &lt;p&gt;具体将分为2个方面来讨论&lt;code&gt;RandomTreeGenerator&lt;/code&gt;：&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;对外继承关系；&lt;/li&gt;
-&lt;li&gt;内部成员；&lt;/li&gt;
+  &lt;li&gt;对外继承关系；&lt;/li&gt;
+  &lt;li&gt;内部成员；&lt;/li&gt;
 &lt;/ul&gt;
-
 
 &lt;p&gt;这些分析是准备解决问题的，不能解决问题的分析，就是徒劳；在本篇文章的后半部分，将基于上述讨论，来分析：&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;如何使用RandomTreeGenerator？&lt;/li&gt;
-&lt;li&gt;怎样定义一个stream的Generator？&lt;/li&gt;
+  &lt;li&gt;如何使用RandomTreeGenerator？&lt;/li&gt;
+  &lt;li&gt;怎样定义一个stream的Generator？&lt;/li&gt;
 &lt;/ul&gt;
-
 
 &lt;p&gt;如果只是讨论上面的这些东西，那么相当于一台没有主角的戏，枯燥浅显；因为处理对象是&lt;code&gt;data stream&lt;/code&gt;，如果在程序中无法存储&lt;code&gt;data stream&lt;/code&gt;，那就好比没有大米，却要去煮大米粥；最后一部分，重点讨论&lt;code&gt;MOA&lt;/code&gt;中数据存储相关知识：&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;data stream的数学表示是什么？程序中存储在什么地方？&lt;/li&gt;
-&lt;li&gt;Attribute、Instance、Instances、InstancesHeader之间有什么联系？&lt;/li&gt;
+  &lt;li&gt;data stream的数学表示是什么？程序中存储在什么地方？&lt;/li&gt;
+  &lt;li&gt;Attribute、Instance、Instances、InstancesHeader之间有什么联系？&lt;/li&gt;
 &lt;/ul&gt;
 
+&lt;h2 id=&quot;section-1&quot;&gt;对外继承关系&lt;/h2&gt;
 
-&lt;h2&gt;对外继承关系&lt;/h2&gt;
-
-&lt;p&gt;几个基本的快捷键：&lt;/p&gt;
-
-&lt;table style=&quot;width: 100%;&quot; border=&quot;1&quot; cellspacing=&quot;0&quot; cellpadding=&quot;2&quot;&gt;
+&lt;p&gt;几个基本的快捷键：
+&amp;lt;table style=&quot;width: 100%;&quot; border=&quot;1&quot; cellspacing=&quot;0&quot; cellpadding=&quot;2&quot;&amp;gt;&lt;/p&gt;
 &lt;tbody&gt;
 &lt;tr&gt;
 &lt;td style=&quot;text-align: center;&quot;&gt;&lt;strong&gt;操作&lt;/strong&gt;&lt;/td&gt;
@@ -173,9 +164,7 @@
 &lt;td&gt;查看Class的继承关系&lt;/td&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
-&lt;/table&gt;
-
-
+&lt;p&gt;&amp;lt;/table&amp;gt;&lt;/p&gt;
 
 </content>
    </entry>
@@ -185,23 +174,23 @@
      <link href="http://ningg.github.com/moa-random-tree-generator"/>
      <updated>2012-10-26T00:00:00+08:00</updated>
      <id>http://ningg.github.com/moa-random-tree-generator</id>
-     <content type="html">&lt;h2&gt;简介&lt;/h2&gt;
-
+     <content type="html">&lt;h2 id=&quot;section&quot;&gt;简介&lt;/h2&gt;
 &lt;p&gt;&lt;code&gt;RandomTreeGenerator&lt;/code&gt;是一个数据流（stream）产生器，它首次提出于：&lt;/p&gt;
 
-&lt;blockquote&gt;&lt;p&gt;&lt;a href=&quot;http://www.ir.iit.edu/~dagr/DataMiningCourse/Research_Papers/p71-domingos.pdf&quot;&gt;P.Domingos and G. Hulten. Mining high-speed data streams. In KDD, 2000&lt;/a&gt;.&lt;/p&gt;&lt;/blockquote&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;a href=&quot;http://www.ir.iit.edu/~dagr/DataMiningCourse/Research_Papers/p71-domingos.pdf&quot;&gt;P.Domingos and G. Hulten. Mining high-speed data streams. In KDD, 2000&lt;/a&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
 
 &lt;p&gt;它的基本原理：基于一棵随机产生的树，来生成&lt;code&gt;Instance&lt;/code&gt;数据。关键点：&lt;/p&gt;
 
 &lt;ol&gt;
-&lt;li&gt;怎样随机产生一个随机树？&lt;/li&gt;
-&lt;li&gt;在这棵随机数上，怎样生成&lt;code&gt;Instance&lt;/code&gt;？&lt;/li&gt;
+  &lt;li&gt;怎样产生一个随机树？&lt;/li&gt;
+  &lt;li&gt;在这棵随机数上，怎样生成&lt;code&gt;Instance&lt;/code&gt;？&lt;/li&gt;
 &lt;/ol&gt;
-
 
 &lt;p&gt;下面我们来一一说明。&lt;/p&gt;
 
-&lt;h2&gt;产生随机数&lt;/h2&gt;
+&lt;h2 id=&quot;section-1&quot;&gt;产生随机数&lt;/h2&gt;
 
 &lt;p&gt;随机选取属性，作为判断条件，来进行分裂；在最终的&lt;code&gt;leaf&lt;/code&gt;上，随机标记一个&lt;code&gt;Class&lt;/code&gt;；即可获得一棵随机树，因为在生成过程中，树的中间节点进行属性判断和分裂，因此准确的说，生成的是一棵决策树（&lt;code&gt;decision tree&lt;/code&gt;）。如下图所示：&lt;/p&gt;
 
@@ -209,44 +198,42 @@
 
 &lt;p&gt;&lt;strong&gt;说明&lt;/strong&gt;：上图表示一棵决策树（&lt;code&gt;decision tree&lt;/code&gt;），&lt;code&gt;Instance&lt;/code&gt;的&lt;code&gt;Class&lt;/code&gt;共计有&lt;code&gt;A&lt;/code&gt; &lt;code&gt;B&lt;/code&gt; &lt;code&gt;C&lt;/code&gt; 3类，均已经标记在&lt;code&gt;leaf&lt;/code&gt;上。这棵树上，未标记&lt;code&gt;Class&lt;/code&gt;的节点，是中间节点，在其上进行条件判断和分裂。&lt;/p&gt;
 
-&lt;h2&gt;生成Instance&lt;/h2&gt;
+&lt;h2 id=&quot;instance&quot;&gt;生成Instance&lt;/h2&gt;
 
-&lt;p&gt;在讨论如何生成&lt;code&gt;Instance&lt;/code&gt;之前，先说明一下，&lt;code&gt;Instance&lt;/code&gt;的数学表示形式：&amp;lt; &lt;strong&gt;x&lt;/strong&gt;，y&gt;。其中， &lt;strong&gt;x&lt;/strong&gt; 是一个属性值的向量，y是class的值。例如：Instance: &amp;lt;(1,2,3),A&gt;，表示：&lt;code&gt;属性1=1&lt;/code&gt;,&lt;code&gt;属性2=2&lt;/code&gt;,&lt;code&gt;属性3=3&lt;/code&gt;,并且&lt;code&gt;Class=A&lt;/code&gt;的一个Instance。&lt;/p&gt;
+&lt;p&gt;在讨论如何生成&lt;code&gt;Instance&lt;/code&gt;之前，先说明一下，&lt;code&gt;Instance&lt;/code&gt;的数学表示形式：&amp;lt; &lt;strong&gt;x&lt;/strong&gt;，y&amp;gt;。其中， &lt;strong&gt;x&lt;/strong&gt; 是一个属性值的向量，y是class的值。例如：Instance: &amp;lt;(1,2,3),A&amp;gt;，表示：&lt;code&gt;属性1=1&lt;/code&gt;,&lt;code&gt;属性2=2&lt;/code&gt;,&lt;code&gt;属性3=3&lt;/code&gt;,并且&lt;code&gt;Class=A&lt;/code&gt;的一个Instance。&lt;/p&gt;
 
 &lt;p&gt;好了，有了这些说明，那如何利用 “产生随机数” 中获得的随机决策树，来生成&lt;code&gt;Instance&lt;/code&gt;呢？&lt;/p&gt;
 
 &lt;p&gt;具体分为2步：&lt;/p&gt;
 
 &lt;ul&gt;
-&lt;li&gt;随机生成一个属性值的向量 &lt;strong&gt;x&lt;/strong&gt;；&lt;/li&gt;
-&lt;li&gt;利用向量 &lt;strong&gt;x&lt;/strong&gt; 中的属性值，去决策树中判断对应的 y 值（class值）；
-至此，获得了一个Instance &amp;lt; &lt;strong&gt;x&lt;/strong&gt; ,y&gt;&lt;/li&gt;
+  &lt;li&gt;随机生成一个属性值的向量 &lt;strong&gt;x&lt;/strong&gt;；&lt;/li&gt;
+  &lt;li&gt;利用向量 &lt;strong&gt;x&lt;/strong&gt; 中的属性值，去决策树中判断对应的 y 值（class值）；
+至此，获得了一个Instance &amp;lt; &lt;strong&gt;x&lt;/strong&gt; ,y&amp;gt;&lt;/li&gt;
 &lt;/ul&gt;
 
+&lt;h2 id=&quot;section-2&quot;&gt;补充&lt;/h2&gt;
 
-&lt;h2&gt;补充&lt;/h2&gt;
-
-&lt;p&gt;科学实验中，注重实验结果的&lt;strong&gt;可再现&lt;/strong&gt;、&lt;strong&gt;可重现&lt;/strong&gt;性；为了保证 &lt;code&gt;Instance&lt;/code&gt; 的可再现，需要保证&lt;strong&gt;随机决策树&lt;/strong&gt;的可再现。在&lt;code&gt;MOA&lt;/code&gt;中，这些都已经实现，使用的是JAVA中&lt;code&gt;Random&lt;/code&gt;类。&lt;/p&gt;
+&lt;p&gt;科学实验中，注重实验结果的__可再现__、__可重现__性；为了保证 &lt;code&gt;Instance&lt;/code&gt; 的可再现，需要保证__随机决策树__的可再现。在&lt;code&gt;MOA&lt;/code&gt;中，这些都已经实现，使用的是JAVA中&lt;code&gt;Random&lt;/code&gt;类。&lt;/p&gt;
 
 &lt;p&gt;在实际的程序中，随机决策树的产生，可以进行设定一些参数，来进行约束：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;-r   保证 随机决策树 的再现性，只要此值相同，产生的随机树，即相同
--i   保证 Instance 的再现性，如果 -r 值相同，并且 -i 值相同，则产生的instance相同
--c   产生的class个数
--o   属性中，离散型属性的个数
--u   属性中，数值型（连续型）属性的个数
--d   树的深度
--l   首次存在 leaf  节点的level
--f   每层中leaf 节点所占的比重
+&lt;pre&gt;&lt;code&gt;-r	 保证 随机决策树 的再现性，只要此值相同，产生的随机树，即相同
+-i	 保证 Instance 的再现性，如果 -r 值相同，并且 -i 值相同，则产生的instance相同
+-c	 产生的class个数
+-o	 属性中，离散型属性的个数
+-u	 属性中，数值型（连续型）属性的个数
+-d	 树的深度
+-l	 首次存在 leaf  节点的level
+-f	 每层中leaf 节点所占的比重
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2&gt;参考来源&lt;/h2&gt;
+&lt;h2 id=&quot;section-3&quot;&gt;参考来源&lt;/h2&gt;
 
 &lt;ul&gt;
-&lt;li&gt;MOA:&lt;a href=&quot;http://heanet.dl.sourceforge.net/project/moa-datastream/documentation/StreamMining.pdf&quot;&gt;StreamMining.pdf&lt;/a&gt; PART: 2.5.1 Random Tree Generator&lt;/li&gt;
-&lt;li&gt;MOA:&lt;a href=&quot;http://heanet.dl.sourceforge.net/project/moa-datastream/documentation/Manual.pdf&quot;&gt;Manul.pdf&lt;/a&gt; PART: 6.2.7 generators.RandomTreeGenerator&lt;/li&gt;
+  &lt;li&gt;MOA:&lt;a href=&quot;http://heanet.dl.sourceforge.net/project/moa-datastream/documentation/StreamMining.pdf&quot;&gt;StreamMining.pdf&lt;/a&gt; PART: 2.5.1 Random Tree Generator&lt;/li&gt;
+  &lt;li&gt;MOA:&lt;a href=&quot;http://heanet.dl.sourceforge.net/project/moa-datastream/documentation/Manual.pdf&quot;&gt;Manul.pdf&lt;/a&gt; PART: 6.2.7 generators.RandomTreeGenerator&lt;/li&gt;
 &lt;/ul&gt;
-
 </content>
    </entry>
    
@@ -255,7 +242,7 @@
      <link href="http://ningg.github.com/lixiaolai-blog"/>
      <updated>2012-10-25T00:00:00+08:00</updated>
      <id>http://ningg.github.com/lixiaolai-blog</id>
-     <content type="html">&lt;h2&gt;[推荐]lixiaolai的博客&lt;/h2&gt;
+     <content type="html">&lt;h2 id=&quot;lixiaolai&quot;&gt;[推荐]lixiaolai的博客&lt;/h2&gt;
 
 &lt;p&gt;发个文，标记一下lixiaolai的一篇博客：&lt;a href=&quot;http://wordpress.lixiaolai.com/archives/12427.html&quot;&gt;《学习学习在学习》&lt;/a&gt;，也算为自己今后提个醒。&lt;/p&gt;
 
@@ -264,14 +251,14 @@
 &lt;p&gt;只喜欢技术的哥们儿，&lt;a href=&quot;http://wordpress.lixiaolai.com/archives/12427.html&quot;&gt;《学习学习在学习》&lt;/a&gt;里面也介绍了一部分google搜索的应用，值得一看。我一直没有系统学过google的高级搜索，今天也算入门了。摘要几点过来：&lt;/p&gt;
 
 &lt;ol&gt;
-&lt;li&gt;多使用网址：&lt;code&gt;www.google.com/ncr&lt;/code&gt;  (&lt;code&gt;No Country Redirection&lt;/code&gt;)&lt;/li&gt;
-&lt;li&gt;几种符号：引号&lt;code&gt;“”&lt;/code&gt;、星号&lt;code&gt;*&lt;/code&gt;、波浪号&lt;code&gt;~&lt;/code&gt;、加号&lt;code&gt;+&lt;/code&gt;（默认的）、减号&lt;code&gt;-&lt;/code&gt;；&lt;/li&gt;
-&lt;li&gt;站内搜索：例如，&lt;code&gt;“umts”+”opnet” site:ibcn.intec.ugent.be&lt;/code&gt;&lt;/li&gt;
-&lt;li&gt;定制搜索：&lt;a href=&quot;http://www.google.com/cse/&quot;&gt;Google cse（Custom Search Engine）&lt;/a&gt;，定制一个特定功能的搜索引擎；（试了一下，好使）(自己常用的人肉搜索利器之一，十分顺手~)&lt;/li&gt;
+  &lt;li&gt;多使用网址：&lt;code&gt;www.google.com/ncr&lt;/code&gt;  (&lt;code&gt;No Country Redirection&lt;/code&gt;)&lt;/li&gt;
+  &lt;li&gt;几种符号：引号&lt;code&gt;“”&lt;/code&gt;、星号&lt;code&gt;*&lt;/code&gt;、波浪号&lt;code&gt;~&lt;/code&gt;、加号&lt;code&gt;+&lt;/code&gt;（默认的）、减号&lt;code&gt;-&lt;/code&gt;；&lt;/li&gt;
+  &lt;li&gt;站内搜索：例如，&lt;code&gt;“umts”+”opnet” site:ibcn.intec.ugent.be&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;定制搜索：&lt;a href=&quot;http://www.google.com/cse/&quot;&gt;Google cse（Custom Search Engine）&lt;/a&gt;，定制一个特定功能的搜索引擎；（试了一下，好使）(自己常用的人肉搜索利器之一，十分顺手~)&lt;/li&gt;
 &lt;/ol&gt;
 
-
 &lt;p&gt;&lt;img src=&quot;/images/lixiaolai-blog/learn-discuss.jpg&quot; alt=&quot;learn&quot; /&gt;&lt;/p&gt;
+
 </content>
    </entry>
    
@@ -280,8 +267,7 @@
      <link href="http://ningg.github.com/moa-sourcecode-with-eclipse"/>
      <updated>2012-10-16T00:00:00+08:00</updated>
      <id>http://ningg.github.com/moa-sourcecode-with-eclipse</id>
-     <content type="html">&lt;h2&gt;概要&lt;/h2&gt;
-
+     <content type="html">&lt;h2 id=&quot;section&quot;&gt;概要&lt;/h2&gt;
 &lt;p&gt;本篇短文中，此目标包含两层意思：&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;1. 使用Eclipse快速查看java代码，特别是class之间的继承(extends)、实现(implements)等关系；
@@ -301,41 +287,39 @@
 2. 规定算法实现接口的class，这些class一般是Interface或者 Abstract class。
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2&gt;示例准备&lt;/h2&gt;
+&lt;h2 id=&quot;section-1&quot;&gt;示例准备&lt;/h2&gt;
 
-&lt;p&gt;此次采用的例子是&lt;a href=&quot;http://moa.cms.waikato.ac.nz/&quot; title=&quot;Massive Online Analysis&quot;&gt;MOA&lt;/a&gt;的&lt;a href=&quot;http://sourceforge.net/projects/moa-datastream/files/documentation/Tutorial2.pdf&quot; title=&quot;Introduction to the API of MOA&quot;&gt;Tutorial2&lt;/a&gt;中提供的两个示例代码：&lt;/p&gt;
-
-&lt;h3&gt;代码一：&lt;code&gt;ApiOfTest1.java&lt;/code&gt;&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;源代码名称: ApiOfTest1.java
+&lt;p&gt;此次采用的例子是&lt;a href=&quot;http://moa.cms.waikato.ac.nz/&quot; title=&quot;Massive Online Analysis&quot;&gt;MOA&lt;/a&gt;的&lt;a href=&quot;http://sourceforge.net/projects/moa-datastream/files/documentation/Tutorial2.pdf&quot; title=&quot;Introduction to the API of MOA&quot;&gt;Tutorial2&lt;/a&gt;中提供的两个示例代码：
+###代码一：&lt;code&gt;ApiOfTest1.java&lt;/code&gt;
+&lt;code&gt;
+源代码名称: ApiOfTest1.java
 文档中对应位置：Listing 1
 基本功能描述：生成一个stream，并使用learner对其进行学习。
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;strong&gt;补充说明：&lt;/strong&gt; 本次例子&lt;code&gt;ApiOfTest1.java&lt;/code&gt;中使用的&lt;code&gt;stream&lt;/code&gt;和&lt;code&gt;learner&lt;/code&gt;做出改动，如下：&lt;/p&gt;
+&lt;/code&gt;
+&lt;strong&gt;补充说明：&lt;/strong&gt; 本次例子&lt;code&gt;ApiOfTest1.java&lt;/code&gt;中使用的&lt;code&gt;stream&lt;/code&gt;和&lt;code&gt;learner&lt;/code&gt;做出改动，如下：&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;RandomTreeGenerator stream = new RandomTreeGenerator();
 Classifier learner = new DecisionStumpTutorial();
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;h3&gt;代码二：&lt;code&gt;DecisionStumpTutorial.java&lt;/code&gt;&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;源代码名称: DecisionStumpTutorial.java
+&lt;h3 id=&quot;decisionstumptutorialjava&quot;&gt;代码二：&lt;code&gt;DecisionStumpTutorial.java&lt;/code&gt;&lt;/h3&gt;
+&lt;p&gt;&lt;code&gt;
+源代码名称: DecisionStumpTutorial.java
 文档中对应位置：Listing 8
 基本功能描述：实现了一个单层的决策树分类算法（decision stump classifier）
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/code&gt;&lt;/p&gt;
 
-&lt;h2&gt;java基本知识&lt;/h2&gt;
+&lt;h2 id=&quot;java&quot;&gt;java基本知识&lt;/h2&gt;
 
-&lt;h3&gt;类（class）&lt;/h3&gt;
+&lt;h3 id=&quot;class&quot;&gt;类（class）&lt;/h3&gt;
 
 &lt;p&gt;&lt;em&gt;说明&lt;/em&gt; ：由属性（&lt;code&gt;attribute&lt;/code&gt;）和方法（&lt;code&gt;method&lt;/code&gt;）构成。&lt;/p&gt;
 
-&lt;h3&gt;继承（extends）&lt;/h3&gt;
+&lt;h3 id=&quot;extends&quot;&gt;继承（extends）&lt;/h3&gt;
 
-&lt;p&gt;&lt;em&gt;说明&lt;/em&gt; ：&lt;code&gt;java&lt;/code&gt;中类（&lt;code&gt;class&lt;/code&gt;）是&lt;strong&gt;单继承&lt;/strong&gt;的，即，最多只能继承一个类。&lt;/p&gt;
+&lt;p&gt;&lt;em&gt;说明&lt;/em&gt; ：&lt;code&gt;java&lt;/code&gt;中类（&lt;code&gt;class&lt;/code&gt;）是__单继承__的，即，最多只能继承一个类。&lt;/p&gt;
 
-&lt;h3&gt;抽象类（abstract class）&lt;/h3&gt;
+&lt;h3 id=&quot;abstract-class&quot;&gt;抽象类（abstract class）&lt;/h3&gt;
 
 &lt;p&gt;&lt;em&gt;说明&lt;/em&gt; : 无法具体的对象被定义为抽象类（&lt;code&gt;abstract class&lt;/code&gt;）；&lt;/p&gt;
 
@@ -343,117 +327,121 @@ Classifier learner = new DecisionStumpTutorial();
 
 &lt;p&gt;&lt;em&gt;说明&lt;/em&gt; ：抽象类，可以有抽象方法，但不能实例化。例如：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&quot;java&quot;&gt;//定义抽象类水果（Fruit）
+&lt;p&gt;&lt;code&gt;java
+//定义抽象类水果（Fruit）
 public abstract class Fruit {
 ……
 }
 //如果我们试图用以下语句来获得一个实例，将无法编译成功。
 Fruit fruit = new Fruit();
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/code&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;em&gt;说明&lt;/em&gt; ：抽象类中可以有实例属性。&lt;/p&gt;
 
-&lt;h3&gt;接口（interface）&lt;/h3&gt;
+&lt;h3 id=&quot;interface&quot;&gt;接口（interface）&lt;/h3&gt;
 
 &lt;p&gt;接口也是抽象对象，它甚至比抽象类更抽象。&lt;strong&gt;接口中的方法都是抽象方法&lt;/strong&gt;。
 一个接口可以&lt;code&gt;继承&lt;/code&gt;其他接口；一个类通过关键字implements声明要&lt;code&gt;实现&lt;/code&gt;一个接口，并具体实现接口的方法。例如：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&quot;java&quot;&gt;//有一个接口InterfaceA，
+&lt;p&gt;```java
+//有一个接口InterfaceA，
 public  interface  InterfaceA {
     void  methodA();
-}
+}&lt;/p&gt;
 
-//类ClassA实现接口InterfaceA。
+&lt;p&gt;//类ClassA实现接口InterfaceA。
 public  class  ClassA implements InterfaceA {
     public  void  methodA() {
     System.out.println( ”methodA of ClassA implements InterfaceA” );
     }
 }
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;em&gt;说明&lt;/em&gt; ：正常的&lt;code&gt;class&lt;/code&gt;实现（&lt;code&gt;implements&lt;/code&gt;）接口（&lt;code&gt;interface&lt;/code&gt;），必须实现接口定义的所有方法；但抽象类（&lt;code&gt;abstract class&lt;/code&gt;）实现接口，可以不用实现接口定义的方法。
+```
+&lt;em&gt;说明&lt;/em&gt; ：正常的&lt;code&gt;class&lt;/code&gt;实现（&lt;code&gt;implements&lt;/code&gt;）接口（&lt;code&gt;interface&lt;/code&gt;），必须实现接口定义的所有方法；但抽象类（&lt;code&gt;abstract class&lt;/code&gt;）实现接口，可以不用实现接口定义的方法。
 &lt;em&gt;说明&lt;/em&gt; ：接口中不能有实例属性，如果有属性，必须为静态的常量（&lt;code&gt;static final&lt;/code&gt;）
 &lt;em&gt;说明&lt;/em&gt; ：&lt;code&gt;java&lt;/code&gt;中一个类，可以同时实现（&lt;code&gt;implements&lt;/code&gt;）多个接口（&lt;code&gt;interface&lt;/code&gt;）&lt;/p&gt;
 
-&lt;h3&gt;注解（annotation）&lt;/h3&gt;
+&lt;h3 id=&quot;annotation&quot;&gt;注解（annotation）&lt;/h3&gt;
 
 &lt;p&gt;Java注解是附加在代码中的一些元信息，用于一些工具在编译、运行时进行解析和使用，起到说明、配置的功能。注解不会也不能影响代码的实际逻辑，仅仅起到辅助性的作用。包含在 &lt;code&gt;java.lang.annotation&lt;/code&gt; 包中。
 &lt;em&gt;说明&lt;/em&gt; ：此次只对注解&lt;code&gt;@Override&lt;/code&gt;进行说明：
 &lt;code&gt;@Override&lt;/code&gt;注解用于类方法(&lt;code&gt;Method&lt;/code&gt;)，
 表示一个方法声明打算重写超类中的另一个方法声明。如果方法利用此注释类型进行注解但没有重写超类方法，则编译器会生成一条错误消息。&lt;/p&gt;
 
-&lt;h3&gt;反射（Reflection）&lt;/h3&gt;
+&lt;h3 id=&quot;reflection&quot;&gt;反射（Reflection）&lt;/h3&gt;
 
 &lt;p&gt;&lt;em&gt;说明&lt;/em&gt; ：程序运行时，通过反射获得某个类中的各种变量，函数，数组，构造函数以及类本身，并使用它们。&lt;/p&gt;
 
-&lt;h3&gt;其他概念：内部类&lt;/h3&gt;
+&lt;h3 id=&quot;section-2&quot;&gt;其他概念：内部类&lt;/h3&gt;
+&lt;p&gt;(doing…)&lt;/p&gt;
 
-&lt;p&gt;(doing...)&lt;/p&gt;
-
-&lt;h2&gt;Eclipse的快捷操作&lt;/h2&gt;
+&lt;h2 id=&quot;eclipse&quot;&gt;Eclipse的快捷操作&lt;/h2&gt;
 
 &lt;p&gt;源代码上查看方法位置、类间继承关系的快捷键（操作）。
 自己用得最上手的几个快捷键（操作）列举如下：&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;代码查看&lt;/strong&gt; 方面的快捷操作：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;//查找method、class出处（不如下面的方法常用）
+&lt;p&gt;&lt;code&gt;
+//查找method、class出处（不如下面的方法常用）
 F3 
 //最直接的查找method、class出处的方法（比上面的方法更常用和有效）
 Ctrl + 鼠标点击（左击）
-//返回上一次鼠标位置   
-Alt + ←      
+//返回上一次鼠标位置	
+Alt + ←	   
 //与“Alt + ←”相反 
-Alt + →       
+Alt + →	    
 //根据名称匹配，查找当前工作区源代码文件
-Ctrl + Shift + r/R  
+Ctrl + Shift + r/R	
 //查找，哪个类继承了此类（不如下面方法常用）
-选中“class”，右键“reference”—“Hierarchy” 
+选中“class”，右键“reference”—“Hierarchy”	
 //查看类的继承关系（被谁继承），并且在Type Hierarch窗口中显示（比上面方法跟有效）
-F4  
+F4	
 //显示当前类的继承关系
-选中“class”， 然后 ctrl + T    
-&lt;/code&gt;&lt;/pre&gt;
+选中“class”， 然后 ctrl + T	
+&lt;/code&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;代码编辑&lt;/strong&gt; 上的操作&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;//注释本行
-ctrl + /    
+&lt;p&gt;&lt;code&gt;
+//注释本行
+ctrl + /	
 //注释选中的多行
-ctrl + shift + /    
+ctrl + shift + /	
 //取消对于多行的注释
-ctrl + shift + \    
+ctrl + shift + \	
 //上下行代码之间互换位置
-alt + up/down   
+alt + up/down	
 //复制本行代码，并粘贴在上行、或者下行
-ctrl + alt + up/down    
+ctrl + alt + up/down	
 //自动添加、去除import包
-ctrl + shift + O    
+ctrl + shift + O	
 //自动代码提示（很方便，极其常用）
-Alt + /    
+Alt + /	   
 //执行当前代码（只用一个main时，自动执行；当有多个main存在时，提示选择main） 
-ctrl + F11   
+ctrl + F11	 
 //显示快捷键窗口  
 ctrl + shift + L
-//关闭当前源代码窗口   
-ctrl + w     
+//关闭当前源代码窗口	
+ctrl + w	 
 //关闭所有打开的源代码窗口   
-ctrl + shift + w    
-&lt;/code&gt;&lt;/pre&gt;
+ctrl + shift + w	
+&lt;/code&gt;&lt;/p&gt;
 
 &lt;p&gt;Eclipse中几个窗口的功能：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;outline: 简要显示当前class中的attribute、method
+&lt;p&gt;&lt;code&gt;
+outline: 简要显示当前class中的attribute、method
 search: 选中“class”，右键“reference”—“Hierarchy”查找，哪个类继承了此类时，结果显示在此窗口中。
 console: 输出结果、出错、警告等信息
 problem: 编译前，警告、出错等信息的提示
 Type Hierarch: 显示当前类的继承关系（包括父类、子类）；注意此窗口中有几个按钮很重要。
 packet Explorer: 查看当前源代码的组织结构
-&lt;/code&gt;&lt;/pre&gt;
+&lt;/code&gt; &lt;/p&gt;
 
-&lt;h2&gt;MOA基本知识&lt;/h2&gt;
+&lt;h2 id=&quot;moa&quot;&gt;MOA基本知识&lt;/h2&gt;
 
 &lt;p&gt;参看MOA自带文档，并且对于instanse的基本类借用于weka工程。&lt;/p&gt;
+
 </content>
    </entry>
    
@@ -462,44 +450,38 @@ packet Explorer: 查看当前源代码的组织结构
      <link href="http://ningg.github.com/Install-MOA"/>
      <updated>2012-10-15T00:00:00+08:00</updated>
      <id>http://ningg.github.com/Install-MOA</id>
-     <content type="html">&lt;h2&gt;概述&lt;/h2&gt;
+     <content type="html">&lt;h2 id=&quot;section&quot;&gt;概述&lt;/h2&gt;
 
-&lt;h3&gt;目标&lt;/h3&gt;
+&lt;h3 id=&quot;section-1&quot;&gt;目标&lt;/h3&gt;
 
 &lt;p&gt;同时查看MOA源代码和Weka的源代码，记录配置过程。&lt;/p&gt;
 
-&lt;h3&gt;具体步骤&lt;/h3&gt;
-
+&lt;h3 id=&quot;section-2&quot;&gt;具体步骤&lt;/h3&gt;
 &lt;ol&gt;
-&lt;li&gt;搭建&lt;a href=&quot;http://www.cs.waikato.ac.nz/ml/weka/&quot; title=&quot;Waikato Environment for Knowledge Analysis&quot;&gt;weka&lt;/a&gt;环境，使其独立运行，无错误;&lt;/li&gt;
-&lt;li&gt;重新搭建&lt;a href=&quot;http://moa.cs.waikato.ac.nz&quot; title=&quot;Massive Online Analysis&quot;&gt;MOA&lt;/a&gt;环境，使其独立运行，无错误;&lt;/li&gt;
-&lt;li&gt;如何在&lt;a href=&quot;http://moa.cs.waikato.ac.nz&quot; title=&quot;Massive Online Analysis&quot;&gt;MOA&lt;/a&gt;独立环境中查看&lt;a href=&quot;http://www.cs.waikato.ac.nz/ml/weka/&quot; title=&quot;Waikato Environment for Knowledge Analysis&quot;&gt;weka&lt;/a&gt;源代码;&lt;/li&gt;
+  &lt;li&gt;搭建&lt;a href=&quot;http://www.cs.waikato.ac.nz/ml/weka/&quot; title=&quot;Waikato Environment for Knowledge Analysis&quot;&gt;weka&lt;/a&gt;环境，使其独立运行，无错误;&lt;/li&gt;
+  &lt;li&gt;重新搭建&lt;a href=&quot;http://moa.cs.waikato.ac.nz&quot; title=&quot;Massive Online Analysis&quot;&gt;MOA&lt;/a&gt;环境，使其独立运行，无错误;&lt;/li&gt;
+  &lt;li&gt;如何在&lt;a href=&quot;http://moa.cs.waikato.ac.nz&quot; title=&quot;Massive Online Analysis&quot;&gt;MOA&lt;/a&gt;独立环境中查看&lt;a href=&quot;http://www.cs.waikato.ac.nz/ml/weka/&quot; title=&quot;Waikato Environment for Knowledge Analysis&quot;&gt;weka&lt;/a&gt;源代码;&lt;/li&gt;
 &lt;/ol&gt;
 
-
-&lt;h3&gt;参考资料&lt;/h3&gt;
-
+&lt;h3 id=&quot;section-3&quot;&gt;参考资料&lt;/h3&gt;
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;http://moa.cs.waikato.ac.nz&quot; title=&quot;Massive Online Analysis&quot;&gt;MOA&lt;/a&gt;官网&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://www.cs.waikato.ac.nz/ml/weka/&quot; title=&quot;Waikato Environment for Knowledge Analysis&quot;&gt;weka&lt;/a&gt;官网&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://www.google.com/ncr&quot; title=&quot;google search engine&quot;&gt;google&lt;/a&gt;、&lt;a href=&quot;http://www.baidu.com&quot; title=&quot;baidu search engine&quot;&gt;baidu&lt;/a&gt;搜索&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://moa.cs.waikato.ac.nz&quot; title=&quot;Massive Online Analysis&quot;&gt;MOA&lt;/a&gt;官网&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.cs.waikato.ac.nz/ml/weka/&quot; title=&quot;Waikato Environment for Knowledge Analysis&quot;&gt;weka&lt;/a&gt;官网 &lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.google.com/ncr&quot; title=&quot;google search engine&quot;&gt;google&lt;/a&gt;、&lt;a href=&quot;http://www.baidu.com&quot; title=&quot;baidu search engine&quot;&gt;baidu&lt;/a&gt;搜索&lt;/li&gt;
 &lt;/ul&gt;
 
+&lt;h2 id=&quot;weka&quot;&gt;搭建Weka环境&lt;/h2&gt;
 
-&lt;h2&gt;搭建Weka环境&lt;/h2&gt;
-
-&lt;h3&gt;主要参考来源&lt;/h3&gt;
+&lt;h3 id=&quot;section-4&quot;&gt;主要参考来源&lt;/h3&gt;
 
 &lt;ul&gt;
-&lt;li&gt;&lt;a href=&quot;http://www.cs.waikato.ac.nz/ml/weka/&quot; title=&quot;Waikato Environment for Knowledge Analysis&quot;&gt;weka&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&quot;http://weka.wikispaces.com/Frequently+Asked+Questions&quot; title=&quot;weka Frequently Asked Questions&quot;&gt;weka-FAQ&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.cs.waikato.ac.nz/ml/weka/&quot; title=&quot;Waikato Environment for Knowledge Analysis&quot;&gt;weka&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://weka.wikispaces.com/Frequently+Asked+Questions&quot; title=&quot;weka Frequently Asked Questions&quot;&gt;weka-FAQ&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
+&lt;h3 id=&quot;section-5&quot;&gt;详细步骤&lt;/h3&gt;
 
-&lt;h3&gt;详细步骤&lt;/h3&gt;
-
-&lt;h4&gt;可执行文件方式，搭建weka环境&lt;/h4&gt;
-
+&lt;h4 id=&quot;weka-1&quot;&gt;可执行文件方式，搭建weka环境&lt;/h4&gt;
 &lt;p&gt;从&lt;a href=&quot;http://www.cs.waikato.ac.nz/ml/weka/&quot; title=&quot;Waikato Environment for Knowledge Analysis&quot;&gt;weka官网&lt;/a&gt;中下载Weka安装文件。由于目前支持&lt;code&gt;MOA&lt;/code&gt;的&lt;code&gt;Weka&lt;/code&gt;必须是&lt;code&gt;3.7.X&lt;/code&gt;以上版本，本次选择下载&lt;code&gt;weka-3.7-7&lt;/code&gt;&lt;/p&gt;
 
 &lt;p&gt;操作系统环境：&lt;/p&gt;
@@ -510,10 +492,9 @@ packet Explorer: 查看当前源代码的组织结构
 &lt;p&gt;可选择的Weka安装文件类型：&lt;/p&gt;
 
 &lt;ol&gt;
-&lt;li&gt;&lt;code&gt;weka-3-7-7.exe&lt;/code&gt;(&lt;code&gt;windows X86&lt;/code&gt;)需要安装，系统自动配置环境。&lt;/li&gt;
-&lt;li&gt;&lt;code&gt;weka-3-7-7.zip&lt;/code&gt;无需安装，手动进入目录，使用命令行启动图形界面。&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;weka-3-7-7.exe&lt;/code&gt;(&lt;code&gt;windows X86&lt;/code&gt;)需要安装，系统自动配置环境。&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;weka-3-7-7.zip&lt;/code&gt;无需安装，手动进入目录，使用命令行启动图形界面。&lt;/li&gt;
 &lt;/ol&gt;
-
 
 &lt;p&gt;本次选择&lt;code&gt;weka-3-7-7.zip&lt;/code&gt;，解压之后，运行方式：&lt;/p&gt;
 
@@ -522,7 +503,7 @@ packet Explorer: 查看当前源代码的组织结构
 
 &lt;p&gt;为了便于今后运行&lt;code&gt;weka&lt;/code&gt;方便，我写了个&lt;code&gt;weka-start.bat&lt;/code&gt;文件：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code class=&quot;bat&quot;&gt;d:
+&lt;pre&gt;&lt;code class=&quot;language-bat&quot;&gt;d:
 cd &quot;\reference\data mining\数据挖掘\weka\weka 安装文件\weka-3-7-7&quot;
 java -Xmx1000M -jar weka.jar
 &lt;/code&gt;&lt;/pre&gt;
@@ -534,10 +515,9 @@ java -Xmx1000M -jar weka.jar
 
 &lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt; ：运行&lt;code&gt;weka&lt;/code&gt;之前，需要安装&lt;code&gt;JDK&lt;/code&gt;，具体版本，查看：&lt;/p&gt;
 
-&lt;p&gt;   &lt;a href=&quot;http://www.cs.waikato.ac.nz/ml/weka/&quot; title=&quot;Waikato Environment for Knowledge Analysis&quot;&gt;weka官网&lt;/a&gt; &lt;code&gt;Requirements&lt;/code&gt;目录&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://www.cs.waikato.ac.nz/ml/weka/&quot; title=&quot;Waikato Environment for Knowledge Analysis&quot;&gt;weka官网&lt;/a&gt; &lt;code&gt;Requirements&lt;/code&gt;目录&lt;/p&gt;
 
-&lt;h4&gt;源码方式，搭建weka环境&lt;/h4&gt;
-
+&lt;h4 id=&quot;weka-2&quot;&gt;源码方式，搭建weka环境&lt;/h4&gt;
 &lt;p&gt;使用&lt;code&gt;weka&lt;/code&gt;源码，在&lt;code&gt;eclipse&lt;/code&gt;下，搭建&lt;code&gt;weka&lt;/code&gt;工程。&lt;/p&gt;
 
 &lt;p&gt;&lt;code&gt;weka&lt;/code&gt;源码位置：&lt;/p&gt;
@@ -587,23 +567,22 @@ pom.xml
 
 &lt;p&gt;运行其中的&lt;code&gt;main&lt;/code&gt;函数即可。&lt;/p&gt;
 
-&lt;h4&gt;附录：Maven知识&lt;/h4&gt;
+&lt;h4 id=&quot;maven&quot;&gt;附录：Maven知识&lt;/h4&gt;
 
 &lt;p&gt;[目标]：&lt;code&gt;maven&lt;/code&gt;可以完成什么工作？怎么完成？单独写一个文档。
-(doing...)&lt;/p&gt;
+(doing…)&lt;/p&gt;
 
-&lt;h2&gt;搭建MOA环境&lt;/h2&gt;
+&lt;h2 id=&quot;moa&quot;&gt;搭建MOA环境&lt;/h2&gt;
 
-&lt;h3&gt;主要参考来源&lt;/h3&gt;
+&lt;h3 id=&quot;section-6&quot;&gt;主要参考来源&lt;/h3&gt;
 
 &lt;ul&gt;
-&lt;li&gt;MOA自带文档&lt;a href=&quot;http://heanet.dl.sourceforge.net/project/moa-datastream/documentation/Manual.pdf&quot; title=&quot;MOA Manual Documentation&quot;&gt;Manual.pdf&lt;/a&gt;中&lt;code&gt;Installation&lt;/code&gt;部分。&lt;/li&gt;
+  &lt;li&gt;MOA自带文档&lt;a href=&quot;http://heanet.dl.sourceforge.net/project/moa-datastream/documentation/Manual.pdf&quot; title=&quot;MOA Manual Documentation&quot;&gt;Manual.pdf&lt;/a&gt;中&lt;code&gt;Installation&lt;/code&gt;部分。&lt;/li&gt;
 &lt;/ul&gt;
 
+&lt;h3 id=&quot;section-7&quot;&gt;详细步骤&lt;/h3&gt;
 
-&lt;h3&gt;详细步骤&lt;/h3&gt;
-
-&lt;h4&gt;源码方式，搭建MOA环境&lt;/h4&gt;
+&lt;h4 id=&quot;moa-1&quot;&gt;源码方式，搭建MOA环境&lt;/h4&gt;
 
 &lt;p&gt;下载文件：&lt;a href=&quot;http://moa.cms.waikato.ac.nz/downloads/&quot; title=&quot;MOA download site&quot;&gt;MOA download&lt;/a&gt;中下载&lt;code&gt;MOA Release 2012.08&lt;/code&gt;&lt;/p&gt;
 
@@ -617,10 +596,10 @@ doc
 
 //moa自带的Tutorial2.pdf中例子2的源代码。
 examples
-
+ 
 //moa对应生成的可执行jar包
 lib
-
+ 
 //开源软件声明信息
 license
 
@@ -652,17 +631,36 @@ sizeofag.jar
 
 &lt;p&gt;运行其中的&lt;code&gt;main&lt;/code&gt;函数即可。&lt;/p&gt;
 
-&lt;h4&gt;附录：Junit4知识&lt;/h4&gt;
+&lt;h4 id=&quot;junit4&quot;&gt;附录：Junit4知识&lt;/h4&gt;
 
 &lt;p&gt;目标：&lt;code&gt;Junit4&lt;/code&gt;的有什么用？怎么用？单独写一个文档。&lt;/p&gt;
 
-&lt;h2&gt;MOA环境下，查看weka源代码&lt;/h2&gt;
+&lt;h2 id=&quot;moaweka&quot;&gt;MOA环境下，查看weka源代码&lt;/h2&gt;
 
 &lt;p&gt;在搭建好&lt;code&gt;MOA&lt;/code&gt;环境之后，有些程序继承自&lt;code&gt;weka&lt;/code&gt;，&lt;code&gt;Ctrl+”点击code”&lt;/code&gt;方式查看源代码时，会弹出如下界面：&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/images/install-moa/attach-sourcecode.jpg&quot; alt=&quot;attach-src&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;解决办法&lt;/strong&gt; ：点击上面的“Attach Source”按钮，并添加&lt;code&gt;weka-src.jar&lt;/code&gt;包即可。&lt;/p&gt;
+
+&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
+
+\begin{align*}
+  &amp; \phi(x,y) = \phi \left(\sum_{i=1}^n x_ie_i, \sum_{j=1}^n y_je_j \right)
+  = \sum_{i=1}^n \sum_{j=1}^n x_i y_j \phi(e_i, e_j) = \\
+  &amp; (x_1, \ldots, x_n) \left( \begin{array}{ccc}
+      \phi(e_1, e_1) &amp; \cdots &amp; \phi(e_1, e_n) \\
+      \vdots &amp; \ddots &amp; \vdots \\
+      \phi(e_n, e_1) &amp; \cdots &amp; \phi(e_n, e_n)
+    \end{array} \right)
+  \left( \begin{array}{c}
+      y_1 \\
+      \vdots \\
+      y_n
+    \end{array} \right)
+\end{align*}
+ %]]&gt;&lt;/script&gt;
+
 </content>
    </entry>
    

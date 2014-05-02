@@ -1,11 +1,22 @@
-auto: true
+#auto: true
 
-markdown: rdiscount
+# markdown的解析器
+markdown: kramdown
+
+# 代码高亮
 pygments: true
+# 分页设置
 paginate: 8
+# 链接样式
 permalink: /:title
 
+
 title: NingG.github.com
+
+# page中head部分的meta元素
+keywords: keywords
+description: NingG's Blog
+
 url: http://ningg.github.com
 feed: /atom.xml
 atom_path : /atom.xml

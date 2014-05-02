@@ -1,6 +1,6 @@
 /**
- * Author:           BeiYuu
- * Contact:          beiyuu.com
+ * Author:           NingG
+ * Contact:          NingG.github.com
  */
 
 /* 重置浏览器CSS */
@@ -67,7 +67,7 @@ pre ol{margin-left:25px;list-style-type:decimal;}
 .entry ul li{margin-bottom:5px;list-style:disc;line-height:1.8em;}
 .entry ol{margin-bottom:25px;margin-left:25px;}
 .entry ol li{margin-bottom:5px;list-style:decimal;line-height:1.1em;}
-.entry blockquote{margin-left:25px;font-size:14px;font-style:italic}
+.entry blockquote{margin-left:25px;font-size:14px;font-style:italic;}
 .entry img{max-width:670px;display:block;margin:10px auto;}
 
 
@@ -86,14 +86,42 @@ pre ol{margin-left:25px;list-style-type:decimal;}
 .blog .aside{
     background-image:url(https://d233eq3e3p3cv0.cloudfront.net/max/1000/0*cF2i1ZosSP_UTJig.jpeg);
 }
-.opinion .aside{
+.about .aside{
     background-image:url(https://dnqgz544uhbo8.cloudfront.net/_/fp/img/bestof/june-2013.CaUUbO2jIECgCmldhmxCCA.jpg);
 }
-.project .aside{
-    background-image:url('https://d233eq3e3p3cv0.cloudfront.net/max/1000/0*kTUZamBulGQZg1MW.jpeg')
+.category .aside{
+    background-image:url(https://d233eq3e3p3cv0.cloudfront.net/max/1000/0*kTUZamBulGQZg1MW.jpeg);
 }
-.index-content .section { margin-left:30%; padding-top:80px; padding-right:15%; ;}
 
+/*****************about page****************/
+.index-content  .section { margin-left:30%; padding-top:80px; padding-right:15%; ;}
+.index-content .section .about-page { margin-left:15%; width:70%; margin:0 atuo;}
+.index-content .section .about-page ul{ margin-bottom:25px; margin-left:10%;}
+.index-content .section .about-page p+ul{ margin-top:-20px;}
+.index-content .section .about-page ul li{ margin-bottom:5px; list-style:disc; line-height:1.8em;}
+.index-content .section .about-page ol{ margin-bottom:25px; margin-left:10%; }
+.index-content .section .about-page ol li{ margin-bottom:5px; list-style:decimal; line-height:1.1em;}
+.index-content .section .about-page blockquote{margin-left:11%; font-size:14px;font-style:italic;}
+.index-content .section .about-page img{max-width:670px;display:block;margin:10px auto;}
+
+/*****************category page****************/
+.index-content .section .category-page { margin-left:15%; width:70%; margin:0 atuo;}
+.index-content .section .category-page ul{ margin-bottom:25px; margin-left:10%;}
+.index-content .section .category-page p+ul{ margin-top:-20px;}
+.index-content .section .category-page ul li{ margin-bottom:5px; list-style:disc; line-height:1.8em;}
+.index-content .section .category-page ol{ margin-bottom:25px; margin-left:10%; }
+.index-content .section .category-page ol li{ margin-bottom:5px; list-style:decimal; line-height:1.1em;}
+.index-content .section .category-page blockquote{margin-left:11%; font-size:14px;font-style:italic;}
+.index-content .section .category-page img{max-width:670px;display:block;margin:10px auto;}
+.index-content .section .category-page  li a,
+.index-content .section .category-page  li a:visited {display:inline-block; zoom:1; color:rgba(0,136,204,0.9); width:100%; }
+.index-content .section .category-page  li a:hover {text-decoration:none; color:red;}
+.index-content .section .category-page .tag_box li{ display: inline-block; padding-left: 5px; padding-right: 5px;}
+.index-content .section .category-page .tag_box li a{padding: 3px; margin: 2px; line-height: 180%; border-radius: 3px; background-color: rgba(238,238,238,0.9);}
+.index-content .section .category-page .tag_box span{vertical-align: super; font-size: 0.8em;}
+
+
+/*****************blog page******************/
 .index-content .artical-list { width:70%; margin:0 auto; }
 .index-content .artical-list li { margin-bottom:70px; }
 .index-content h2 { font-size:20px; margin-bottom:15px; word-break: break-all;}
@@ -166,8 +194,8 @@ h3.about {color:#777;margin-top:20px;font-size:22px;margin-bottom:10px}
     .index-content .artical-cate { margin-top:50px; }
 
     .blog .aside,
-    .project .aside,
-    .opinion .aside {display:none;background-image:none;}
+    .about .aside,
+    .category .aside {display:none;background-image:none;}
 }
 
 @media (max-width: 1020px){

@@ -2,7 +2,26 @@
 layout:    default
 ---
 
-{{ content }}
+<div class="index-content about">
+    <div class="section">
+        <ul class="artical-cate">
+			<li><a href="/"><span>Blog</span></a></li>
+			<li style="text-align:center"><a href="/category"><span>Category</span></a></li>
+			<li style="text-align:right" class="on"><a href="/about"><span>About</span></a></li>
+		</ul>
+
+		<div class="cate-bar"><span id="cateBar"></span></div>
+
+        <!-- <ul class="artical-list"></ul> -->
+		<div class="about-page">
+			{{ content }}
+		</div>
+    </div>
+    <div class="aside">
+    </div>
+</div>
+
+
 
 <script type="text/javascript">
     $(function(){
@@ -46,3 +65,5 @@ layout:    default
         animateBar($('.artical-cate .on'),true);
     });
 </script>
+
+<script src="/js/page.js" type="text/javascript"></script>

@@ -2,6 +2,11 @@
 layout: page
 title: Wiki
 ---
+
+##说明
+
+> 此文件完全拷贝自[BeiYuu](www.beiyuu.com)的GitHub项目[beiyuu.github.com](https://github.com/beiyuu/beiyuu.github.com).
+
 <div class="wiki">
     <h2>Javascript</h2>
     <ul class="hide">

@@ -1,0 +1,106 @@
+---
+layout:           default
+---
+
+<div class="index-content category">
+    <div class="section">
+        <ul class="artical-cate">
+			<li><a href="/"><span>Blog</span></a></li>
+			<li style="text-align:center" class="on"><a href="/category"><span>Category</span></a></li>
+			<li style="text-align:right"><a href="/about"><span>About</span></a></li>
+		</ul>
+
+		<div class="cate-bar"><span id="cateBar"></span></div>
+
+		
+		<div class="category-page">
+			<ul class="tag_box list-inline">
+				{% assign categories_list = site.categories %}
+				{% if categories_list.first[0] == null %}
+					{% for category in categories_list %} 
+						<li><a href="#{{ category }}-ref">
+							{{ category }} <span>{{ site.categories[category].size }}</span>
+						</a></li>
+					{% endfor %}
+				{% else %}
+					{% for category in categories_list %} 
+						<li><a href="#{{ category[0] }}-ref">
+							{{ category[0] }} <span>{{ category[1].size }}</span>
+						</a></li>
+					{% endfor %}
+				{% endif %}
+				{% assign categories_list = nil %}
+			</ul>
+		
+			{% for category in site.categories %}
+			<h2 id="{{ category[0] }}-ref">{{ category[0] }}</h2>
+			<ul>
+				{% assign pages_list = category[1] %}
+				{% for node in pages_list %}
+					{% if node.title != null %}
+						{% if page.url == node.url %}
+							<li class="active"><a href="{{node.url}}" class="active">{{node.title}}</a></li>
+						{% else %}
+							<li><a href="{{node.url}}">{{node.title}}</a></li>
+						{% endif %}
+					{% endif %}
+				{% endfor %}
+				{% assign pages_list = nil %}
+			</ul>
+			{% endfor %}
+			
+			{{ content }}
+			
+		</div>
+		
+    </div>
+    <div class="aside">
+    </div>
+</div>
+
+
+
+<script type="text/javascript">
+    $(function(){
+        function animateBar($item,noAni){
+            var spanLeft = $item.find('span').offset().left;
+            var conLeft = $item.parent().offset().left;
+            var left = spanLeft - conLeft;
+            var width = $item.find('span').width() + 8;
+
+            if(noAni){
+                $('#cateBar').css({left:left,width:width})
+            }else{
+                $('#cateBar').stop().animate({left:left,width:width},300)
+            }
+        }
+
+        var waitForFinalEvent = (function () {
+            var timers = {};
+            return function (callback, ms, uniqueId) {
+                if (!uniqueId) {
+                    uniqueId = "Don't call this twice without a uniqueId";
+                }
+                if (timers[uniqueId]) {
+                    clearTimeout (timers[uniqueId]);
+                }
+                timers[uniqueId] = setTimeout(callback, ms);
+            };
+        })();
+
+        $('.artical-cate li').mouseenter(function(){
+            animateBar($(this));
+        }).mouseleave(function(){
+            animateBar($('.artical-cate .on'));
+        });
+
+        $(window).resize(function(e){
+            waitForFinalEvent(function(){
+                animateBar($('.artical-cate .on'));
+            })
+        })
+        animateBar($('.artical-cate .on'),true);
+    });
+</script>
+
+<script src="/js/page.js" type="text/javascript"></script>
