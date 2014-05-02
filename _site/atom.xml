@@ -4,13 +4,86 @@
    <title>NingG.github.com</title>
    <link href="http://ningg.github.com/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://ningg.github.com" rel="alternate" type="text/html" />
-   <updated>2014-05-02T15:27:13+08:00</updated>
+   <updated>2014-05-03T00:39:46+08:00</updated>
    <id>http://ningg.github.com</id>
    <author>
      <name></name>
      <email></email>
    </author>
 
+   
+   <entry>
+     <title>GitHub上搭建个人网站</title>
+     <link href="http://ningg.github.com/build-blog-with-github"/>
+     <updated>2014-05-02T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/build-blog-with-github</id>
+     <content type="html">&lt;h2 id=&quot;section&quot;&gt;0.背景&lt;/h2&gt;
+
+&lt;p&gt;准备重新捡起博客，记录自己的生活，特别是技术生活&lt;em&gt;（过于私密的东西，也不敢往博客上放不是）。&lt;/em&gt;个人博客有两个途径：使用已有的博客网站、搭建自己的私人网站。调研了一下国内博客网站，（&lt;a href=&quot;http://www.csdn.net/&quot; title=&quot;CSDN&quot;&gt;CSDN&lt;/a&gt;、&lt;a href=&quot;http://www.iteye.com/&quot; title=&quot;javaEye(现在更名为ITeye)&quot;&gt;javaEye&lt;/a&gt;、&lt;a href=&quot;http://www.oschina.net/&quot; title=&quot;OSCHINA&quot;&gt;OSCHINA&lt;/a&gt;等）普遍文字格式、代码编排样式不是很喜欢&lt;em&gt;（太挑剔了？对，我就是一个挑剔的人），&lt;/em&gt;这让自己转向私人博客。可以预想到，自己搭建要稍微复杂一点，话又说回来了，最为&lt;code&gt;software engineer&lt;/code&gt;折腾网站也算是看家本领了&lt;em&gt;（我会告诉你我的目标是&lt;code&gt;scientist&lt;/code&gt;么）。&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;既然要搭自己的私人博客，那选定什么框架/方案呢？之前使用&lt;a href=&quot;https://wordpress.org/&quot; title=&quot;WordPress&quot;&gt;WordPress&lt;/a&gt;搭过博客，但是需要购买域名和空间；现在流行在&lt;a href=&quot;https://github.com/about&quot; title=&quot;GitHub&quot;&gt;GitHub&lt;/a&gt;上搭，并且不需要考虑购买域名和空间的问题，那就他了，上&lt;a href=&quot;https://github.com/about&quot; title=&quot;GitHub&quot;&gt;GitHub&lt;/a&gt;，走起&lt;em&gt;（其实，国内也有一个类似的地方&lt;a href=&quot;https://gitcafe.com/&quot; title=&quot;GitCafe&quot;&gt;GitCafe&lt;/a&gt;，不过，出于装B需要，最终选定了&lt;a href=&quot;https://github.com/about&quot; title=&quot;GitHub&quot;&gt;GitHub&lt;/a&gt;）。&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;1.做什么？&lt;/h2&gt;
+
+&lt;p&gt;目标：私人博客、自己搭建。&lt;/p&gt;
+
+&lt;p&gt;方式：&lt;a href=&quot;https://pages.github.com/&quot;&gt;GitHub Pages&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;2.怎么做？&lt;/h2&gt;
+
+&lt;p&gt;初步分析，在&lt;a href=&quot;https://github.com/about&quot; title=&quot;GitHub&quot;&gt;GitHub&lt;/a&gt;上搭建博客，实质是：将自己的博客内容上传到GitHub上&lt;em&gt;（因为GitHub提供了空间）；&lt;/em&gt;如果需要修改博客内容，则需要从GitHub上将download/pull下来；接下来就是让外面可以访问GitHub上的博客。总结一下，3个必要步骤：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;GitHub上创建工程、并且能够将GitHub上的文件/代码，下载到本地；&lt;/li&gt;
+  &lt;li&gt;将本地的文件/代码，上传到GitHub上；&lt;/li&gt;
+  &lt;li&gt;配置GitHub，使其对外提供私人博客的访问页面；&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;好了，都是从逻辑上凭空想出来的&lt;em&gt;（任何地方搭建博客，都是上面的逻辑步骤，而不仅限于GitHub）；&lt;/em&gt;那实际如何操作呢？具体分为4个阶段：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;熟悉GitHub的基本操作（创建工程、上传代码、下载代码）；&lt;/li&gt;
+  &lt;li&gt;利用GitHub Pages功能，搭建简易网站；&lt;/li&gt;
+  &lt;li&gt;利用jekyll框架，增强网站功能（除了jekyll，还有其他的方式）；&lt;/li&gt;
+  &lt;li&gt;在jekyll框架下，依照个人偏好，进行定制；&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;section-3&quot;&gt;3.实际操作&lt;/h2&gt;
+
+&lt;h3 id=&quot;github&quot;&gt;3.1GitHub的基本操作&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://help.github.com/articles/set-up-git&quot;&gt;安装使用Git(GitHub上传、下载文件的工具)&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://help.github.com/articles/create-a-repo&quot;&gt;GitHub上创建项目(其中包含了，GitHub上传文件的Git命令)&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://help.github.com/articles/fork-a-repo&quot;&gt;GitHub上Fork项目(其中包含了，GitHub下载文件的Git命令)&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;补充：&lt;a href=&quot;https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line&quot;&gt;上传文件至GitHub&lt;/a&gt;，另外，使用&lt;code&gt;add&lt;/code&gt;,&lt;code&gt;commit&lt;/code&gt;,&lt;code&gt;push&lt;/code&gt;等过程向GitHub提交代码时，按照上面的操作方式，需要每次都输入GitHub的用户名和密码，可以采用SSH Keys的方式来解决此问题。&lt;/p&gt;
+
+&lt;h3 id=&quot;section-4&quot;&gt;3.2如何搭建博客？&lt;/h3&gt;
+
+&lt;p&gt;GitHub上对于个人博客的支持，实质是利用GitHub Pages功能来实现的，具体操作：&lt;a href=&quot;https://pages.github.com/&quot;&gt;GitHub Pages&lt;/a&gt;,认真读一遍，5mins，一步一步操作下来，简易博客就搭建成功了（一个简单的欢迎页面index.html）。&lt;/p&gt;
+
+&lt;p&gt;补充：深入阅读&lt;a href=&quot;https://help.github.com/categories/20/articles&quot;&gt;GitHub Pages FAQ&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h3 id=&quot;jekyll&quot;&gt;3.3Jekyll增强博客网站功能&lt;/h3&gt;
+
+&lt;p&gt;详细阅读”&lt;strong&gt;3.2如何搭建博客&lt;/strong&gt;“中提到的&lt;a href=&quot;https://pages.github.com/&quot;&gt;GitHub Pages&lt;/a&gt;，在&lt;a href=&quot;https://pages.github.com/&quot;&gt;GitHub Pages&lt;/a&gt;页面最下端就提到了&lt;a href=&quot;http://jekyllrb.com/docs/quickstart/&quot;&gt;Blogging with Jekyll&lt;/a&gt;，读一遍，操作一下，搞定。&lt;/p&gt;
+
+&lt;h3 id=&quot;jekyll-1&quot;&gt;3.4基于jekyll框架，定制博客&lt;/h3&gt;
+
+&lt;p&gt;先看一下两个使用jekyll框架的博客：&lt;a href=&quot;http://beiyuu.com/&quot;&gt;BeiYuu&lt;/a&gt; &amp;amp; &lt;a href=&quot;http://havee.me/&quot;&gt;Havee&lt;/a&gt;，他们对应的模版在GitHub上都可以找到：&lt;a href=&quot;https://github.com/beiyuu/beiyuu.github.com&quot;&gt;BeiYuu.com Template of GitHub&lt;/a&gt; &amp;amp; &lt;a href=&quot;https://github.com/Ihavee/ihavee.github.io&quot;&gt;Havee.me Template of GitHub&lt;/a&gt;. 具体定制博客时，需要深入学习一下&lt;a href=&quot;http://jekyllrb.com/&quot;&gt;Jekyll的官方文档&lt;/a&gt;，现在也有了&lt;a href=&quot;http://jekyllcn.com/&quot;&gt;中文版的文档&lt;/a&gt;。&lt;em&gt;（基于jekyll，如何定制博客，我将写一篇详细的介绍，敬请期待）&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;faq&quot;&gt;4.FAQ&lt;/h2&gt;
+
+&lt;p&gt;如何使用google统计代码？&lt;/p&gt;
+
+&lt;p&gt;如何DISCUS作为评论插件？&lt;/p&gt;
+
+&lt;p&gt;遇到了哪些问题？&lt;/p&gt;
+
+</content>
+   </entry>
    
    <entry>
      <title>使用数据库查找材料</title>
