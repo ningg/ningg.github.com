@@ -1,7 +1,7 @@
 ---
 layout: post
 title: GitHub上搭建个人网站
-description: GitHub是代码管理、分享平台，ENGINEER利用其GitHub Pages功能可搭建个人网站
+description: GitHub是代码管理、分享平台，利用其GitHub Pages功能可搭建个人网站
 category: GitHub
 ---
 
@@ -58,11 +58,54 @@ GitHub上对于个人博客的支持，实质是利用GitHub Pages功能来实�
 
 ##4.FAQ
 
-如何使用google统计代码？
+###4.1使用google analytics来统计网站访问情况
 
-如何DISCUS作为评论插件？
+1. 注册[Google Analytics]账户；
+2. 在账户下，添加自己要监控的网站信息，[Google Analytics]会生成跟踪信息的JS片段；
+3. 将上述JS片段插入到自己想要统计的页面上；
 
-遇到了哪些问题？
+具体设置细节：请查看[官方文档](http://www.google.com/intl/zh-CN_ALL/analytics/learn/index.html)。
+
+###4.2如何DISCUS作为评论插件？
+
+1. 注册账户；
+2. 登录之后，点击其`Add Disqus to your site`按钮，根据提示操作下去，最终将获得，添加DISCUS的JS代码片段；
+3. 将上述JS片段插入到自己想要包含评论的页面即可；
+
+
+###4.3配置网站，支持LaTeX语法
+
+配置博客，支持LaTeX公式，此次设置kramdown来解析markdown文件。
+
+~~~
+If you have sufficient control over the publishing process (e.g. you are running Jekyll yourself), an easy solution is to switch the markdown parser to one that supports TeX. For example, using kramdown:
+gem install kramdown
+Change the markdown line in _config.yml to
+markdown: kramdown
+and add something like
+<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+to _layouts/default.html. Now you can simply mark any mathematics in your posts with $$
+~~~
+
+原文链接：[Using MathJax with Jekyll](http://stackoverflow.com/questions/10987992/using-mathjax-with-jekyll)
+
+
+###4.3遇到的问题&解决办法？
+
+1. [执行Git命令时，出错提示：（fatal: remote origin already exists.）](http://blog.csdn.net/dengjianqiang2011/article/details/9260435)
+2. [GitHub上markdown的解析引擎不同，会造成最终页面效果的差异](https://help.github.com/articles/migrating-your-pages-site-from-maruku)
+
+jekyll serve启动时，出错提示：（Liquid Exception: invalid byte sequence in GBK）
+
+1. 修改`\Ruby200\lib\ruby\gems\2.0.0\gems\jekyll-1.0.3\lib\jekyll`目录下的`convertible.rb`文件，将其中：
+
+	self.content = File.read(File.join(base, name))
+	
+修改为：
+
+	self.content = File.read(File.join(base, name),:encoding=>"utf-8")
+
+2. 	如果上述修改之后，仍然提示出错，则：`...\lib\jekyll\tags`目录下`include.rb`文件，类似对于`convertible.rb`文件的操作；
 
 
 [CSDN]:		http://www.csdn.net/		"CSDN"
@@ -75,3 +118,12 @@ GitHub上对于个人博客的支持，实质是利用GitHub Pages功能来实�
 [GitHub Pages]: https://pages.github.com/ 
 [jekyll]:	http://jekyllrb.com/ 
 [jekyllcn]:	http://jekyllcn.com/ 
+[Google Analytics]: http://www.google.com/analytics/ 
+[DISQUS]:	http://disqus.com/
+
+
+
+
+
+
+
