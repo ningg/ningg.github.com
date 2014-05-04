@@ -52,7 +52,7 @@ GitHub上对于个人博客的支持，实质是利用GitHub Pages功能来实�
 
 详细阅读"__3.2如何搭建博客__"中提到的[GitHub Pages](https://pages.github.com/)的童鞋，在[GitHub Pages](https://pages.github.com/)页面最下端一定注意到了[Blogging with Jekyll](http://jekyllrb.com/docs/quickstart/)，对，就是他，读一遍，操作一下，搞定。
 
-补充：jekyll用起来倒是用起来了，怎么发表一遍博文呢？这个...额...等到学会__3.4 基于jekyll框架，定制博客__再去写博客吧，现在建议把上面的操作反复看两遍，捋一捋逻辑流程。
+补充：jekyll用起来倒是用起来了，怎么发表一遍博文呢？这个...额...等到学会 __3.4 基于jekyll框架，定制博客__ 再去写博客吧，现在建议把上面的操作反复看两遍，捋一捋逻辑流程。
 
 ###3.4基于jekyll框架，定制博客
 
