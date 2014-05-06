@@ -21,7 +21,7 @@ description: 使用好数据库，能够事半功倍的准确定位资料
 4. [IEEE]：具体查找顶级会议、期刊的电子资源
 
 
-##微软学术搜索
+###微软学术搜索
 
 网址：[http://libra.msra.cn](http://libra.msra.cn)
 
@@ -29,21 +29,21 @@ description: 使用好数据库，能够事半功倍的准确定位资料
 * （可选）添加高级搜索条件“advanced search”；
 * 在左边栏中，选择搜索的领域，例如选择“Computer Science”；
 * 在左边栏中，选择搜索的“Author\Conferences\Journals\Organizations”；（注意只选这几个关键字，而不要选择关键字下面具体的内容）
-* 在打开的界面中，依次选择“** related publication(s)”即可。
+* 在打开的界面中，依次选择“related publication(s)”即可。
 
-##google学术搜索
+###google学术搜索
 
 网址：[http://scholar.google.com/](http://scholar.google.com/)
 
 
-##ACM
+###ACM
 
 网址：[http://acm.lib.tsinghua.edu.cn/acm/Main.nsp](http://acm.lib.tsinghua.edu.cn/acm/Main.nsp)
 
 * 首页可选择浏览“Special Interest Groups（SIGs）”或者“Transactions”等
 
 
-##IEEE
+###IEEE
 
 网址：[http://ieeexplore.ieee.org/](http://ieeexplore.ieee.org/)
 
