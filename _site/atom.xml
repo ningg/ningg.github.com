@@ -4,7 +4,7 @@
    <title>NingG.github.com</title>
    <link href="http://ningg.github.com/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://ningg.github.com" rel="alternate" type="text/html" />
-   <updated>2014-05-06T19:24:47+08:00</updated>
+   <updated>2014-05-06T19:48:38+08:00</updated>
    <id>http://ningg.github.com</id>
    <author>
      <name></name>
@@ -29,7 +29,7 @@
 
 &lt;p&gt;正则表达式，英文原名: &lt;code&gt;Regular Expression&lt;/code&gt;（简称：&lt;code&gt;regex&lt;/code&gt;或&lt;code&gt;regexp&lt;/code&gt;），直接翻译：&lt;code&gt;有规律的式子&lt;/code&gt;，或者，可以翻译为&lt;code&gt;描述规律的式子&lt;/code&gt;。&lt;em&gt;(他奶奶的，不知道谁第一个翻译的，取名&lt;code&gt;正则表达式&lt;/code&gt;？忒高大上了，听上去完全不知到干什么的，还是&lt;code&gt;描述规律的式子&lt;/code&gt;容易理解)&lt;/em&gt;&lt;/p&gt;
 
-&lt;h3 id=&quot;section-2&quot;&gt;正则表达式，解决什么问题？&lt;/h3&gt;
+&lt;h3 id=&quot;section-2&quot;&gt;解决什么问题？&lt;/h3&gt;
 
 &lt;p&gt;通俗的说：查找满足一定规则的字符串。&lt;/p&gt;
 
@@ -55,7 +55,7 @@
   &lt;li&gt;常内置于其他软件/语言中；（即，其他语言实现了正则表达式规则的解析器）&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&quot;section-5&quot;&gt;正则表达式，产生的启发点&lt;/h3&gt;
+&lt;h3 id=&quot;section-5&quot;&gt;产生的启发点&lt;/h3&gt;
 
 &lt;p&gt;1950年左右时，数学领域的一些研究工作&lt;/p&gt;
 
@@ -75,7 +75,7 @@ Author: Kleene, Stephen C;
 
 &lt;p&gt;当前，java/Python/PHP/JavaScript/C#/Ruby，都支持正则表达式。具体请参考：&lt;a href=&quot;http://www.regular-expressions.info/tools.html&quot;&gt;Applications and Languages Related with RegEx&lt;/a&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;section-6&quot;&gt;正则表达式，怎么用？&lt;/h2&gt;
+&lt;h2 id=&quot;section-6&quot;&gt;怎么用？&lt;/h2&gt;
 
 &lt;p&gt;正则表达式，俗称&lt;code&gt;描述规律的式子&lt;/code&gt;，用来查找字符串，基本逻辑是：&lt;/p&gt;
 
@@ -228,17 +228,19 @@ Author: Kleene, Stephen C;
   &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;h3 id=&quot;section-9&quot;&gt;子表达式&lt;/h3&gt;
+&lt;h2 id=&quot;section-9&quot;&gt;高级用法&lt;/h2&gt;
+
+&lt;h3 id=&quot;section-10&quot;&gt;子表达式&lt;/h3&gt;
 
 &lt;p&gt;前文提到过，在这儿单独拿出来说，是因为下文要用到。&lt;em&gt;（尼玛，下文难道不会用到前文其他内容么？凭什么单说子表达式啊；因为，实在是怕你忘了子表达式，其他内容你即使忘了，也容易自己查找）&lt;/em&gt;&lt;/p&gt;
 
-&lt;h3 id=&quot;section-10&quot;&gt;引用回溯&lt;/h3&gt;
+&lt;h3 id=&quot;section-11&quot;&gt;引用回溯&lt;/h3&gt;
 
 &lt;p&gt;本质：前后匹配一致；&lt;/p&gt;
 
 &lt;p&gt;技术上实质：后半部分引用前半部分匹配到的子表达式。&lt;/p&gt;
 
-&lt;h3 id=&quot;section-11&quot;&gt;前后查找&lt;/h3&gt;
+&lt;h3 id=&quot;section-12&quot;&gt;前后查找&lt;/h3&gt;
 
 &lt;p&gt;本质：匹配全部，返回局部；&lt;/p&gt;
 
@@ -251,13 +253,13 @@ Author: Kleene, Stephen C;
 
 &lt;p&gt;注：上式都是匹配&lt;code&gt;exp1&lt;/code&gt;，返回&lt;code&gt;exp2&lt;/code&gt;。&lt;/p&gt;
 
-&lt;h3 id=&quot;section-12&quot;&gt;嵌入条件&lt;/h3&gt;
+&lt;h3 id=&quot;section-13&quot;&gt;嵌入条件&lt;/h3&gt;
 
 &lt;p&gt;可以添加逻辑条件，类似if&lt;/p&gt;
 
-&lt;h3 id=&quot;section-13&quot;&gt;元字符？元语言？&lt;/h3&gt;
+&lt;h3 id=&quot;section-14&quot;&gt;元字符？元语言？&lt;/h3&gt;
 
-&lt;h2 id=&quot;section-14&quot;&gt;参考来源：&lt;/h2&gt;
+&lt;h2 id=&quot;section-15&quot;&gt;参考来源：&lt;/h2&gt;
 
 &lt;ul&gt;
   &lt;li&gt;《正则表达式必知必会》&lt;/li&gt;

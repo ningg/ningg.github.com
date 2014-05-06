@@ -17,7 +17,7 @@ category: Regular Exp
 
 正则表达式，英文原名: `Regular Expression`（简称：`regex`或`regexp`），直接翻译：`有规律的式子`，或者，可以翻译为`描述规律的式子`。*(他奶奶的，不知道谁第一个翻译的，取名`正则表达式`？忒高大上了，听上去完全不知到干什么的，还是`描述规律的式子`容易理解)*
 
-###正则表达式，解决什么问题？
+###解决什么问题？
 
 通俗的说：查找满足一定规则的字符串。
 
@@ -39,7 +39,7 @@ category: Regular Exp
 * 不是正规的（完备的）程序设计语言，没有专门针对正则表达式的软件来安装和运行；
 * 常内置于其他软件/语言中；（即，其他语言实现了正则表达式规则的解析器）
 
-###正则表达式，产生的启发点
+###产生的启发点
 
 1950年左右时，数学领域的一些研究工作
 
@@ -55,7 +55,7 @@ category: Regular Exp
 
 当前，java/Python/PHP/JavaScript/C#/Ruby，都支持正则表达式。具体请参考：[Applications and Languages Related with RegEx](http://www.regular-expressions.info/tools.html)
 
-##正则表达式，怎么用？
+##怎么用？
 
 正则表达式，俗称`描述规律的式子`，用来查找字符串，基本逻辑是：
 
@@ -107,6 +107,7 @@ category: Regular Exp
 |^				|		|
 |$				|		|
 
+##高级用法
 
 ###子表达式
 
