@@ -4,7 +4,7 @@
    <title>NingG.github.com</title>
    <link href="http://ningg.github.com/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://ningg.github.com" rel="alternate" type="text/html" />
-   <updated>2014-05-06T18:57:56+08:00</updated>
+   <updated>2014-05-06T19:24:47+08:00</updated>
    <id>http://ningg.github.com</id>
    <author>
      <name></name>
@@ -165,8 +165,6 @@ Author: Kleene, Stephen C;
     &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
-
-&lt;p&gt;sdfasd表格结尾&lt;/p&gt;
 
 &lt;h3 id=&quot;n&quot;&gt;匹配n个字符&lt;/h3&gt;
 
