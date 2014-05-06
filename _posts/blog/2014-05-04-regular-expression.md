@@ -47,33 +47,64 @@ category: Regular Exp
 > Author: McCulloch, Warren S., and Walter Pitts;
 > 简述：神经系统中神经元看作小巧而简单的自动控制单元。
 
-> [Representation of Events in Nerve Nets and Finite Automata](http://www.dlsi.ua.es/~mlf/nnafmc/papers/kleene56representation.pdf), 1956
-> Author: Kleene, Stephen C 
+> [Representation of Events in Nerve Nets and Finite Automata](http://www.dlsi.ua.es/~mlf/nnafmc/papers/kleene56representation.pdf), 1956;
+> Author: Kleene, Stephen C;
 > 简述：“正则集合”的数学符号来描述此模型。
 
 几年后，计算机领域借助研究成果，实现perl、grep等工具/语言，正则表达式进入实用阶段。
 
 当前，java/Python/PHP/JavaScript/C#/Ruby，都支持正则表达式。具体请参考：[Applications and Languages Related with RegEx](http://www.regular-expressions.info/tools.html)
 
-##怎么用？
+##正则表达式，怎么用？
 
-###对1个字符匹配1次
+正则表达式，俗称`描述规律的式子`，用来查找字符串，基本逻辑是：
+
+* 如何匹配出1个字符；
+* 如何匹配出n个字符；
+* 如何匹配出特定位置的字符；（特定位置：字符串的开头、结尾）
+
+###匹配1个字符
+
+|字符			|含义	|
+|:--------------|:------|
+|a				|一个字符`a`|
+|[abc]			|[..]表示集合内的任意一个字符，在此例中，[abc]表示a、b、c字符中的任意一个|
+|[0123456789]	|任意一个数字|
+|[a-z]			|任意一个消息字母（在[]内`-`为特殊字符，代表区间）|
+|[0-9]			|任意一个数字，等同于[0123456789]|
+|.				|任意一个字符|
+|\f				|		|
+|\t				|		|
+|\r				|		|
+|\n				|		|
+|\v				|		|
+|\w				|		|
+|\W				|		|
+|\d				|		|
+|\D				|		|
+|\s				|		|
+|\S				|		|
 
 
 
-###对1个字符匹配n次
+###匹配n个字符
 
+|字符			|含义	|
+|:--------------|:------|
+|?				|		|
+|+				|		|
+|*				|		|
+|{3}			|		|
+|{ ,3}			|		|
+|{1, }			|		|
+|{1,3}			|		|
 
+###匹配特定位置字符
 
-###对n个字符匹配1次
-
-
-
-###对n个字符匹配n次
-
-
-###在特定位置匹配字符
-
+|字符			|含义	|
+|:--------------|:------|
+|^				|		|
+|$				|		|
 
 ###子表达式
 
@@ -104,9 +135,14 @@ category: Regular Exp
 
 可以添加逻辑条件，类似if
 
+###元字符？元语言？
 
-##八卦：正则表达式，怎么产生的？
 
-（参考来源：正则表达式必知必会）
+
+
+##参考来源：
+
+* 《正则表达式必知必会》
+* 
 
 [NingG]:    http://ningg.github.com  "NingG"

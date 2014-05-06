@@ -4,13 +4,268 @@
    <title>NingG.github.com</title>
    <link href="http://ningg.github.com/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://ningg.github.com" rel="alternate" type="text/html" />
-   <updated>2014-05-03T11:10:35+08:00</updated>
+   <updated>2014-05-06T12:35:25+08:00</updated>
    <id>http://ningg.github.com</id>
    <author>
      <name></name>
      <email></email>
    </author>
 
+   
+   <entry>
+     <title>正则表达式（字符串匹配模式）</title>
+     <link href="http://ningg.github.com/regular-expression"/>
+     <updated>2014-05-04T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/regular-expression</id>
+     <content type="html">&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
+
+&lt;p&gt;最近队长安排我用Pig解析一下日志文件，在数据装载过程中，需要抽取原始日志文件中特定位置的字符串&lt;em&gt;（即使是数字、符号，在程序看来也是字符）。&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;回想起之前的团队中，CZW对正则表达式进行过技术分享，深入浅出，反正当时我是听懂了，应该也达到了能用的水平，无奈10月左右的时间，只剩下点滴印象了，&lt;em&gt;（唉，时光已去，曾经掌握的东西，当要用时，又需要重新去学，这正式自己写技术博客的原因之一）&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;不多说了，接下来，将整体上对正则表达式来一个梳理。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;正则表达式，是什么？&lt;/h2&gt;
+
+&lt;p&gt;正则表达式，英文原名: &lt;code&gt;Regular Expression&lt;/code&gt;（简称：&lt;code&gt;regex&lt;/code&gt;或&lt;code&gt;regexp&lt;/code&gt;），直接翻译：&lt;code&gt;有规律的式子&lt;/code&gt;，或者，可以翻译为&lt;code&gt;描述规律的式子&lt;/code&gt;。&lt;em&gt;(他奶奶的，不知道谁第一个翻译的，取名&lt;code&gt;正则表达式&lt;/code&gt;？忒高大上了，听上去完全不知到干什么的，还是&lt;code&gt;描述规律的式子&lt;/code&gt;容易理解)&lt;/em&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;正则表达式，解决什么问题？&lt;/h3&gt;
+
+&lt;p&gt;通俗的说：查找满足一定规则的字符串。&lt;/p&gt;
+
+&lt;p&gt;可用于文本的查找、替换。&lt;/p&gt;
+
+&lt;h3 id=&quot;section-3&quot;&gt;应用场景举例&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;场景1：仅查找出文本中单次&lt;code&gt;car&lt;/code&gt;，不想找出其他单次&lt;code&gt;scar&lt;/code&gt;、&lt;code&gt;carry&lt;/code&gt;等。&lt;/li&gt;
+  &lt;li&gt;场景2：用户在注册页面填写Email时，检查Email地址格式是否正确。&lt;/li&gt;
+  &lt;li&gt;场景3：查找制定目录下，文件名中包含&lt;code&gt;application&lt;/code&gt;字样的文件。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;section-4&quot;&gt;正式定义&lt;/h3&gt;
+
+&lt;p&gt;正则表达式，给个正式定义：按一定规则查找字符串，并可以进行替换操作。&lt;/p&gt;
+
+&lt;p&gt;正则表达式，几点要注意的内容：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;有自己的语法规则，即，正则表达式语言；&lt;/li&gt;
+  &lt;li&gt;不是正规的（完备的）程序设计语言，没有专门针对正则表达式的软件来安装和运行；&lt;/li&gt;
+  &lt;li&gt;常内置于其他软件/语言中；（即，其他语言实现了正则表达式规则的解析器）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;section-5&quot;&gt;正则表达式，产生的启发点&lt;/h3&gt;
+
+&lt;p&gt;1950年左右时，数学领域的一些研究工作&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;a href=&quot;http://cns-classes.bu.edu/cn550/Readings/mcculloch-pitts-43.pdf&quot;&gt;A logical calculus of the ideas immanent in nervous activity&lt;/a&gt;, 1943;
+Author: McCulloch, Warren S., and Walter Pitts;
+简述：神经系统中神经元看作小巧而简单的自动控制单元。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;a href=&quot;http://www.dlsi.ua.es/~mlf/nnafmc/papers/kleene56representation.pdf&quot;&gt;Representation of Events in Nerve Nets and Finite Automata&lt;/a&gt;, 1956;
+Author: Kleene, Stephen C;
+简述：“正则集合”的数学符号来描述此模型。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;几年后，计算机领域借助研究成果，实现perl、grep等工具/语言，正则表达式进入实用阶段。&lt;/p&gt;
+
+&lt;p&gt;当前，java/Python/PHP/JavaScript/C#/Ruby，都支持正则表达式。具体请参考：&lt;a href=&quot;http://www.regular-expressions.info/tools.html&quot;&gt;Applications and Languages Related with RegEx&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;section-6&quot;&gt;正则表达式，怎么用？&lt;/h2&gt;
+
+&lt;p&gt;正则表达式，俗称&lt;code&gt;描述规律的式子&lt;/code&gt;，用来查找字符串，基本逻辑是：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;如何匹配出1个字符；&lt;/li&gt;
+  &lt;li&gt;如何匹配出n个字符；&lt;/li&gt;
+  &lt;li&gt;如何匹配出特定位置的字符；（特定位置：字符串的开头、结尾）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;section-7&quot;&gt;匹配1个字符&lt;/h3&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;字符&lt;/th&gt;
+      &lt;th style=&quot;text-align: right&quot;&gt;含义&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;a&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;一个字符&lt;code&gt;a&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;[abc]&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;[..]表示集合内的任意一个字符，在此例中，[abc]表示a、b、c字符中的任意一个&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;[0123456789]&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;任意一个数字&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;[a-z]&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;任意一个消息字母（在[]内&lt;code&gt;-&lt;/code&gt;为特殊字符，代表区间）&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;[0-9]&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;任意一个数字，等同于[0123456789]&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;.&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;任意一个字符&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;\f&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;\t&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;\r&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;\n&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;\v&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;\w&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;\W&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;\d&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;\D&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;\s&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;\S&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;n&quot;&gt;匹配n个字符&lt;/h3&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;字符&lt;/th&gt;
+      &lt;th style=&quot;text-align: right&quot;&gt;含义&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;?&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;+&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;*&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;{3}&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;{ ,3}&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;{1, }&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;{1,3}&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;section-8&quot;&gt;匹配特定位置字符&lt;/h3&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;字符&lt;/th&gt;
+      &lt;th style=&quot;text-align: right&quot;&gt;含义&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;^&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;$&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;section-9&quot;&gt;子表达式&lt;/h3&gt;
+
+&lt;p&gt;前文提到过，在这儿单独拿出来说，是因为下文要用到。&lt;em&gt;（尼玛，下文难道不会用到前文其他内容么？凭什么单说子表达式啊；因为，实在是怕你忘了子表达式，其他内容你即使忘了，也容易自己查找）&lt;/em&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;section-10&quot;&gt;引用回溯&lt;/h3&gt;
+
+&lt;p&gt;本质：前后匹配一致；&lt;/p&gt;
+
+&lt;p&gt;技术上实质：后半部分引用前半部分匹配到的子表达式。&lt;/p&gt;
+
+&lt;h3 id=&quot;section-11&quot;&gt;前后查找&lt;/h3&gt;
+
+&lt;p&gt;本质：匹配全部，返回局部；&lt;/p&gt;
+
+&lt;p&gt;技术上实质：将子表达式向前（后）匹配到字符串返回。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;向前查找： 正 向前查找&lt;code&gt;exp2(?=exp1)&lt;/code&gt;， 负 向前查找&lt;code&gt;(exp2(?!exp1))&lt;/code&gt;；&lt;/li&gt;
+  &lt;li&gt;向后查找： 正 向后查找&lt;code&gt;(?&amp;lt;=exp1)exp2&lt;/code&gt;， 负 向后查找&lt;code&gt;(?&amp;lt;!exp1)exp2&lt;/code&gt;；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;注：上式都是匹配&lt;code&gt;exp1&lt;/code&gt;，返回&lt;code&gt;exp2&lt;/code&gt;。&lt;/p&gt;
+
+&lt;h3 id=&quot;section-12&quot;&gt;嵌入条件&lt;/h3&gt;
+
+&lt;p&gt;可以添加逻辑条件，类似if&lt;/p&gt;
+
+&lt;h3 id=&quot;section-13&quot;&gt;元字符？元语言？&lt;/h3&gt;
+
+&lt;h2 id=&quot;section-14&quot;&gt;参考来源：&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;《正则表达式必知必会》&lt;/li&gt;
+  &lt;li&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+   </entry>
    
    <entry>
      <title>GitHub上搭建个人网站</title>
@@ -70,9 +325,13 @@
 
 &lt;p&gt;详细阅读”&lt;strong&gt;3.2如何搭建博客&lt;/strong&gt;“中提到的&lt;a href=&quot;https://pages.github.com/&quot;&gt;GitHub Pages&lt;/a&gt;的童鞋，在&lt;a href=&quot;https://pages.github.com/&quot;&gt;GitHub Pages&lt;/a&gt;页面最下端一定注意到了&lt;a href=&quot;http://jekyllrb.com/docs/quickstart/&quot;&gt;Blogging with Jekyll&lt;/a&gt;，对，就是他，读一遍，操作一下，搞定。&lt;/p&gt;
 
+&lt;p&gt;补充：jekyll用起来倒是用起来了，怎么发表一遍博文呢？这个…额…等到学会 “&lt;strong&gt;3.4 基于jekyll框架，定制博客&lt;/strong&gt;” 再去写博客吧，现在建议把上面的操作反复看两遍，捋一捋逻辑流程。&lt;/p&gt;
+
 &lt;h3 id=&quot;jekyll-1&quot;&gt;3.4基于jekyll框架，定制博客&lt;/h3&gt;
 
-&lt;p&gt;先看一下两个使用jekyll框架的博客：&lt;a href=&quot;http://beiyuu.com/&quot;&gt;BeiYuu&lt;/a&gt; &amp;amp; &lt;a href=&quot;http://havee.me/&quot;&gt;Havee&lt;/a&gt;，他们对应的模版在GitHub上都可以找到：&lt;a href=&quot;https://github.com/beiyuu/beiyuu.github.com&quot;&gt;BeiYuu.com Template of GitHub&lt;/a&gt; &amp;amp; &lt;a href=&quot;https://github.com/Ihavee/ihavee.github.io&quot;&gt;Havee.me Template of GitHub&lt;/a&gt;。 具体定制博客时，需要深入学习一下&lt;a href=&quot;http://jekyllrb.com/&quot;&gt;Jekyll的官方文档&lt;/a&gt;，现在也有了&lt;a href=&quot;http://jekyllcn.com/&quot;&gt;中文版本&lt;/a&gt;。&lt;em&gt;（基于jekyll，如何定制博客，我将写一篇详细的介绍，敬请期待）&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;先看一下两个使用jekyll框架的博客：&lt;a href=&quot;http://beiyuu.com/&quot;&gt;BeiYuu&lt;/a&gt; &amp;amp; &lt;a href=&quot;http://havee.me/&quot;&gt;Havee&lt;/a&gt;，他们对应的模版在GitHub上都可以找到：&lt;a href=&quot;https://github.com/beiyuu/beiyuu.github.com&quot;&gt;BeiYuu.com Template of GitHub&lt;/a&gt; &amp;amp; &lt;a href=&quot;https://github.com/Ihavee/ihavee.github.io&quot;&gt;Havee.me Template of GitHub&lt;/a&gt;。 &lt;/p&gt;
+
+&lt;p&gt;先膜拜一下上面两个博客模板，&lt;em&gt;光彩夺目，亮瞎一双狗眼，&lt;/em&gt;好了，我能不能也搭建一个类似的博客？途径有一个：深入学习一下&lt;a href=&quot;http://jekyllrb.com/&quot;&gt;Jekyll的官方文档&lt;/a&gt;，补充：&lt;a href=&quot;http://jekyllcn.com/&quot;&gt;中文版本&lt;/a&gt;。&lt;em&gt;（基于jekyll，如何定制博客，我将写一篇详细的介绍，敬请期待）&lt;/em&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;faq&quot;&gt;4.FAQ&lt;/h2&gt;
 
