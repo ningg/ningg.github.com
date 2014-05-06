@@ -15,10 +15,47 @@ category: Regular Exp
 
 ##正则表达式，是什么？
 
-正则表达式，ENGLISH NAME: Regular Expression，直接翻译：有规律的式子，或者，可以翻译为描述规律的式子。*(他奶奶的，不知道谁第一个翻译的，正则表达式？忒高大上了，听上去完全不知到干什么的，还是“描述规律的式子”容易理解)*
+正则表达式，英文原名: `Regular Expression`（简称：`regex`或`regexp`），直接翻译：`有规律的式子`，或者，可以翻译为`描述规律的式子`。*(他奶奶的，不知道谁第一个翻译的，取名`正则表达式`？忒高大上了，听上去完全不知到干什么的，还是`描述规律的式子`容易理解)*
+
+###正则表达式，解决什么问题？
+
+通俗的说：查找满足一定规则的字符串。
 
 可用于文本的查找、替换。
 
+###应用场景举例
+
+场景1：仅查找出文本中单次`car`，不想找出其他单次`scar`、`carry`等。
+
+场景2：用户在注册页面填写Email时，检查Email地址格式是否正确。
+
+场景3：查找制定目录下，文件名中包含`application`字样的文件。
+
+###正式定义
+
+正则表达式，给个正式定义：按一定规则查找字符串，并可以进行替换操作。
+
+正则表达式，几点要注意的内容：
+
+* 有自己的语法规则，即，正则表达式语言；
+* 不是正规的（完备的）程序设计语言，没有专门针对正则表达式的软件来安装和运行；
+* 常内置于其他软件/语言中；（即，其他语言实现了正则表达式规则的解析器）
+
+###正则表达式，产生的启发点
+
+1950年左右时，数学领域的一些研究工作
+
+> [A logical calculus of the ideas immanent in nervous activity](http://cns-classes.bu.edu/cn550/Readings/mcculloch-pitts-43.pdf), 1943;
+> Author: McCulloch, Warren S., and Walter Pitts;
+> 简述：神经系统中神经元看作小巧而简单的自动控制单元。
+
+> [Representation of Events in Nerve Nets and Finite Automata](http://www.dlsi.ua.es/~mlf/nnafmc/papers/kleene56representation.pdf), 1956
+> Author: Kleene, Stephen C 
+> 简述：“正则集合”的数学符号来描述此模型。
+
+几年后，计算机领域借助研究成果，实现perl、grep等工具/语言，正则表达式进入实用阶段。
+
+当前，java/Python/PHP/JavaScript/C#/Ruby，都支持正则表达式。具体请参考：[Applications and Languages Related with RegEx](http://www.regular-expressions.info/tools.html)
 
 ##怎么用？
 
@@ -72,6 +109,6 @@ category: Regular Exp
 
 ##八卦：正则表达式，怎么产生的？
 
-
+（参考来源：正则表达式必知必会）
 
 [NingG]:    http://ningg.github.com  "NingG"
