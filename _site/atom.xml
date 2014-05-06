@@ -4,7 +4,7 @@
    <title>NingG.github.com</title>
    <link href="http://ningg.github.com/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://ningg.github.com" rel="alternate" type="text/html" />
-   <updated>2014-05-06T19:48:38+08:00</updated>
+   <updated>2014-05-06T20:02:32+08:00</updated>
    <id>http://ningg.github.com</id>
    <author>
      <name></name>
@@ -410,7 +410,7 @@ src=&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HT
      <link href="http://ningg.github.com/how-to-use-lib"/>
      <updated>2012-11-30T00:00:00+08:00</updated>
      <id>http://ningg.github.com/how-to-use-lib</id>
-     <content type="html">&lt;h2 id=&quot;section&quot;&gt;图书馆数据库的使用&lt;/h2&gt;
+     <content type="html">&lt;h3 id=&quot;section&quot;&gt;图书馆数据库的使用&lt;/h3&gt;
 
 &lt;p&gt;3年前在本科的时候，上过一门课“文献检索”，当时主要学了一点cnki使用的知识，没多久就忘掉了，现在想想造成这个结果有两个原因：1.当时学习就不求甚解，学习的时候，只是想到在考核上要达标，没有记录一些实用的检索手段；2.后来使用cnki的次数也少。要查找东西得时候，自己都是google，这是个好的习惯，但是，这只是初级水平；要达到中等水平，需要熟练专业数据库的检索。&lt;/p&gt;
 
@@ -427,7 +427,7 @@ src=&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HT
   &lt;li&gt;&lt;a href=&quot;http://ieeexplore.ieee.org/&quot;&gt;IEEE&lt;/a&gt;：具体查找顶级会议、期刊的电子资源&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2 id=&quot;section-1&quot;&gt;微软学术搜索&lt;/h2&gt;
+&lt;h3 id=&quot;section-1&quot;&gt;微软学术搜索&lt;/h3&gt;
 
 &lt;p&gt;网址：&lt;a href=&quot;http://libra.msra.cn&quot;&gt;http://libra.msra.cn&lt;/a&gt;&lt;/p&gt;
 
@@ -436,14 +436,14 @@ src=&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HT
   &lt;li&gt;（可选）添加高级搜索条件“advanced search”；&lt;/li&gt;
   &lt;li&gt;在左边栏中，选择搜索的领域，例如选择“Computer Science”；&lt;/li&gt;
   &lt;li&gt;在左边栏中，选择搜索的“Author\Conferences\Journals\Organizations”；（注意只选这几个关键字，而不要选择关键字下面具体的内容）&lt;/li&gt;
-  &lt;li&gt;在打开的界面中，依次选择“** related publication(s)”即可。&lt;/li&gt;
+  &lt;li&gt;在打开的界面中，依次选择“related publication(s)”即可。&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;google&quot;&gt;google学术搜索&lt;/h2&gt;
+&lt;h3 id=&quot;google&quot;&gt;google学术搜索&lt;/h3&gt;
 
 &lt;p&gt;网址：&lt;a href=&quot;http://scholar.google.com/&quot;&gt;http://scholar.google.com/&lt;/a&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;acm&quot;&gt;ACM&lt;/h2&gt;
+&lt;h3 id=&quot;acm&quot;&gt;ACM&lt;/h3&gt;
 
 &lt;p&gt;网址：&lt;a href=&quot;http://acm.lib.tsinghua.edu.cn/acm/Main.nsp&quot;&gt;http://acm.lib.tsinghua.edu.cn/acm/Main.nsp&lt;/a&gt;&lt;/p&gt;
 
@@ -451,7 +451,7 @@ src=&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HT
   &lt;li&gt;首页可选择浏览“Special Interest Groups（SIGs）”或者“Transactions”等&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;ieee&quot;&gt;IEEE&lt;/h2&gt;
+&lt;h3 id=&quot;ieee&quot;&gt;IEEE&lt;/h3&gt;
 
 &lt;p&gt;网址：&lt;a href=&quot;http://ieeexplore.ieee.org/&quot;&gt;http://ieeexplore.ieee.org/&lt;/a&gt;&lt;/p&gt;
 
