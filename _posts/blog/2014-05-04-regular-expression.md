@@ -198,9 +198,9 @@ __注意__：回溯引用中`\1`,`\2`只能一用子表达式（即用`()`括起
 匹配如下文本中的传输协议
 
 > http://www.baidu.com
-
+>
 > ftp://ftp.baidu.com
-
+>
 > https://mails.baidu.com
 
 正则表达式：`.+(?=:)`
@@ -210,7 +210,7 @@ __注意__：回溯引用中`\1`,`\2`只能一用子表达式（即用`()`括起
 匹配如下文本中的金额
 
 > abc: $23.01
-
+>
 > hdc: $899.00
 
 正则表达式：`(?<=\$)\d[\d.]*\d`
@@ -233,6 +233,7 @@ __注意__：回溯引用中`\1`,`\2`只能一用子表达式（即用`()`括起
 ##参考来源：
 
 * [正则表达式必知必会]
+* [Regex Tutorial](http://www.regular-expressions.info/tutorial.html)
 
 [正则表达式必知必会]:	http://book.douban.com/subject/2269648/ "《正则表达式必知必会》2007年12月，第1版"
 [NingG]:    http://ningg.github.com  "NingG"

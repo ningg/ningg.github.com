@@ -4,7 +4,7 @@
    <title>NingG.github.com</title>
    <link href="http://ningg.github.com/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://ningg.github.com" rel="alternate" type="text/html" />
-   <updated>2014-05-07T23:33:49+08:00</updated>
+   <updated>2014-05-07T23:42:21+08:00</updated>
    <id>http://ningg.github.com</id>
    <author>
      <name></name>
@@ -19,7 +19,7 @@
      <id>http://ningg.github.com/regular-expression</id>
      <content type="html">&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
 
-&lt;p&gt;最近队长安排我用Pig解析一下日志文件，在数据装载过程中，需要抽取特定位置的字符串&lt;em&gt;（即使是数字、符号，在程序看来也是字符）。&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;最近师兄安排我用Pig解析一下日志文件，在数据装载过程中，需要抽取特定位置的字符串&lt;em&gt;（即使是数字、符号，在程序看来也是字符）。&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;回想起之前的团队中，CZW对正则表达式进行过技术分享，深入浅出，反正当时我是听懂了，应该也达到了能用的水平，无奈10月左右的时间，只剩下点滴印象了，&lt;em&gt;（唉，时光已去，曾经掌握的东西，当要用时，又需要重新去学，这正是自己写技术博客的原因之一）&lt;/em&gt;&lt;/p&gt;
 
@@ -64,9 +64,11 @@
 &lt;p&gt;1950年左右时，数学领域的一些研究工作&lt;/p&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;&lt;a href=&quot;http://cns-classes.bu.edu/cn550/Readings/mcculloch-pitts-43.pdf&quot;&gt;A logical calculus of the ideas immanent in nervous activity&lt;/a&gt;, 1943;
-Author: McCulloch, Warren S., and Walter Pitts;
-简述：神经系统中神经元看作小巧而简单的自动控制单元。&lt;/p&gt;
+  &lt;p&gt;&lt;a href=&quot;http://cns-classes.bu.edu/cn550/Readings/mcculloch-pitts-43.pdf&quot;&gt;A logical calculus of the ideas immanent in nervous activity&lt;/a&gt;, 1943;&lt;/p&gt;
+
+  &lt;p&gt;Author: McCulloch, Warren S., and Walter Pitts;&lt;/p&gt;
+
+  &lt;p&gt;简述：神经系统中神经元看作小巧而简单的自动控制单元。&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;blockquote&gt;
@@ -370,13 +372,9 @@ Author: Kleene, Stephen C;
 
 &lt;blockquote&gt;
   &lt;p&gt;http://www.baidu.com&lt;/p&gt;
-&lt;/blockquote&gt;
 
-&lt;blockquote&gt;
   &lt;p&gt;ftp://ftp.baidu.com&lt;/p&gt;
-&lt;/blockquote&gt;
 
-&lt;blockquote&gt;
   &lt;p&gt;https://mails.baidu.com&lt;/p&gt;
 &lt;/blockquote&gt;
 
@@ -388,9 +386,7 @@ Author: Kleene, Stephen C;
 
 &lt;blockquote&gt;
   &lt;p&gt;abc: $23.01&lt;/p&gt;
-&lt;/blockquote&gt;
 
-&lt;blockquote&gt;
   &lt;p&gt;hdc: $899.00&lt;/p&gt;
 &lt;/blockquote&gt;
 
@@ -416,7 +412,7 @@ Author: Kleene, Stephen C;
 
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;http://book.douban.com/subject/2269648/&quot; title=&quot;《正则表达式必知必会》2007年12月，第1版&quot;&gt;正则表达式必知必会&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.regular-expressions.info/tutorial.html&quot;&gt;Regex Tutorial&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 </content>
