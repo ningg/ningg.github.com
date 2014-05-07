@@ -4,7 +4,7 @@
    <title>NingG.github.com</title>
    <link href="http://ningg.github.com/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://ningg.github.com" rel="alternate" type="text/html" />
-   <updated>2014-05-06T20:02:32+08:00</updated>
+   <updated>2014-05-07T23:33:49+08:00</updated>
    <id>http://ningg.github.com</id>
    <author>
      <name></name>
@@ -19,9 +19,9 @@
      <id>http://ningg.github.com/regular-expression</id>
      <content type="html">&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
 
-&lt;p&gt;最近队长安排我用Pig解析一下日志文件，在数据装载过程中，需要抽取原始日志文件中特定位置的字符串&lt;em&gt;（即使是数字、符号，在程序看来也是字符）。&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;最近队长安排我用Pig解析一下日志文件，在数据装载过程中，需要抽取特定位置的字符串&lt;em&gt;（即使是数字、符号，在程序看来也是字符）。&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;回想起之前的团队中，CZW对正则表达式进行过技术分享，深入浅出，反正当时我是听懂了，应该也达到了能用的水平，无奈10月左右的时间，只剩下点滴印象了，&lt;em&gt;（唉，时光已去，曾经掌握的东西，当要用时，又需要重新去学，这正式自己写技术博客的原因之一）&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;回想起之前的团队中，CZW对正则表达式进行过技术分享，深入浅出，反正当时我是听懂了，应该也达到了能用的水平，无奈10月左右的时间，只剩下点滴印象了，&lt;em&gt;（唉，时光已去，曾经掌握的东西，当要用时，又需要重新去学，这正是自己写技术博客的原因之一）&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;不多说了，接下来，将整体上对正则表达式来一个梳理。&lt;/p&gt;
 
@@ -37,11 +37,11 @@
 
 &lt;h3 id=&quot;section-3&quot;&gt;应用场景举例&lt;/h3&gt;
 
-&lt;ol&gt;
-  &lt;li&gt;场景1：仅查找出文本中单次&lt;code&gt;car&lt;/code&gt;，不想找出其他单次&lt;code&gt;scar&lt;/code&gt;、&lt;code&gt;carry&lt;/code&gt;等。&lt;/li&gt;
+&lt;ul&gt;
+  &lt;li&gt;场景1：仅查找出文本中单词&lt;code&gt;car&lt;/code&gt;，不想找出其他单词&lt;code&gt;scar&lt;/code&gt;、&lt;code&gt;carry&lt;/code&gt;等。&lt;/li&gt;
   &lt;li&gt;场景2：用户在注册页面填写Email时，检查Email地址格式是否正确。&lt;/li&gt;
-  &lt;li&gt;场景3：查找制定目录下，文件名中包含&lt;code&gt;application&lt;/code&gt;字样的文件。&lt;/li&gt;
-&lt;/ol&gt;
+  &lt;li&gt;场景3：查找指定目录下，文件名中包含&lt;code&gt;application&lt;/code&gt;字样的文件。&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;h3 id=&quot;section-4&quot;&gt;正式定义&lt;/h3&gt;
 
@@ -51,9 +51,13 @@
 
 &lt;ul&gt;
   &lt;li&gt;有自己的语法规则，即，正则表达式语言；&lt;/li&gt;
-  &lt;li&gt;不是正规的（完备的）程序设计语言，没有专门针对正则表达式的软件来安装和运行；&lt;/li&gt;
+  &lt;li&gt;不是正规的（完备的）程序设计语言，没有专门针对正则表达式的软件，来安装和运行；&lt;/li&gt;
   &lt;li&gt;常内置于其他软件/语言中；（即，其他语言实现了正则表达式规则的解析器）&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;p&gt;当前，java/Python/PHP/JavaScript等，都支持正则表达式。&lt;/p&gt;
+
+&lt;p&gt;支持正则表达式的语言\工具：&lt;a href=&quot;http://www.regular-expressions.info/tools.html&quot;&gt;Applications and Languages Related with RegEx&lt;/a&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;section-5&quot;&gt;产生的启发点&lt;/h3&gt;
 
@@ -71,9 +75,7 @@ Author: Kleene, Stephen C;
 简述：“正则集合”的数学符号来描述此模型。&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;几年后，计算机领域借助研究成果，实现perl、grep等工具/语言，正则表达式进入实用阶段。&lt;/p&gt;
-
-&lt;p&gt;当前，java/Python/PHP/JavaScript/C#/Ruby，都支持正则表达式。具体请参考：&lt;a href=&quot;http://www.regular-expressions.info/tools.html&quot;&gt;Applications and Languages Related with RegEx&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;几年后，计算机领域借助上述研究成果，实现perl、grep等工具/语言，正则表达式进入实用阶段。&lt;/p&gt;
 
 &lt;h2 id=&quot;section-6&quot;&gt;怎么用？&lt;/h2&gt;
 
@@ -104,6 +106,10 @@ Author: Kleene, Stephen C;
       &lt;td style=&quot;text-align: left&quot;&gt;[..]表示集合内的任意一个字符，在此例中，[abc]表示a、b、c字符中的任意一个&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;[^abc]&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;除去a、b、c之外的任意一个字符，注意，&lt;code&gt;^&lt;/code&gt;只限于在&lt;code&gt;[^&lt;/code&gt;位置，才表示此含义&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
       &lt;td style=&quot;text-align: left&quot;&gt;[0123456789]&lt;/td&gt;
       &lt;td style=&quot;text-align: left&quot;&gt;任意一个数字&lt;/td&gt;
     &lt;/tr&gt;
@@ -121,50 +127,60 @@ Author: Kleene, Stephen C;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td style=&quot;text-align: left&quot;&gt;\f&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;换页符&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td style=&quot;text-align: left&quot;&gt;\t&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;制表键，tab&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td style=&quot;text-align: left&quot;&gt;\r&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;回车符，return&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td style=&quot;text-align: left&quot;&gt;\n&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;换行符，nextLine&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td style=&quot;text-align: left&quot;&gt;\v&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;垂直制表符&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td style=&quot;text-align: left&quot;&gt;\w&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;等价于[a-zA-Z0-9]，任何一个字母（区分大小写）、数字、下划线&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td style=&quot;text-align: left&quot;&gt;\W&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;等价于[^a-zA-Z0-9]，任何一个非字母（区分大小写）、数字、下划线&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td style=&quot;text-align: left&quot;&gt;\d&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;任何一个数字字符,等价于[0-9]&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td style=&quot;text-align: left&quot;&gt;\D&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;等价于[^0-9]，任何一个非数字字符&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td style=&quot;text-align: left&quot;&gt;\s&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;等价于[ \f\n\r\t\v]，任何一个空白字符&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td style=&quot;text-align: left&quot;&gt;\S&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;等价于[^ \f\n\r\t\v]，任何一个非空白字符&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;\x0A&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;（16进制）对应ASCII字符10，即\n&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;\011&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;（8进制）对应ASCII字符9，即\t&lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
+
+&lt;p&gt;&lt;strong&gt;校正&lt;/strong&gt;：关于&lt;code&gt;\s&lt;/code&gt;,《&lt;a href=&quot;http://book.douban.com/subject/2269648/&quot; title=&quot;《正则表达式必知必会》2007年12月，第1版&quot;&gt;正则表达式必知必会&lt;/a&gt;》 版本信息（2007年12月，第1版），在Page 31中，&lt;code&gt;\s&lt;/code&gt;表示任何一个空白字符，应该包含空格&lt;code&gt; &lt;/code&gt;在内（具体参考：&lt;a href=&quot;http://www.regular-expressions.info/shorthand.html&quot;&gt;Shorthand Character Classes Of Regex&lt;/a&gt;）&lt;/p&gt;
 
 &lt;h3 id=&quot;n&quot;&gt;匹配n个字符&lt;/h3&gt;
 
@@ -178,31 +194,31 @@ Author: Kleene, Stephen C;
   &lt;tbody&gt;
     &lt;tr&gt;
       &lt;td style=&quot;text-align: left&quot;&gt;?&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;0次或1次&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td style=&quot;text-align: left&quot;&gt;+&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;1次以上（a+：表示一个或多个a的连续出现；[0-9]+：表示一个或多个连续出现的数字）&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td style=&quot;text-align: left&quot;&gt;*&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;0次及0次以上&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td style=&quot;text-align: left&quot;&gt;{3}&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;3次&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td style=&quot;text-align: left&quot;&gt;{ ,3}&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;0次–3次（包含0次和3次）&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td style=&quot;text-align: left&quot;&gt;{1, }&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;1次以上&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td style=&quot;text-align: left&quot;&gt;{1,3}&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;1次–3次（包含1次和3次）&lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
@@ -219,28 +235,123 @@ Author: Kleene, Stephen C;
   &lt;tbody&gt;
     &lt;tr&gt;
       &lt;td style=&quot;text-align: left&quot;&gt;^&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;在字符串开头&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td style=&quot;text-align: left&quot;&gt;$&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;在字符串结尾&lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;h2 id=&quot;section-9&quot;&gt;高级用法&lt;/h2&gt;
+&lt;h3 id=&quot;section-9&quot;&gt;过度匹配（贪婪）&lt;/h3&gt;
 
-&lt;h3 id=&quot;section-10&quot;&gt;子表达式&lt;/h3&gt;
+&lt;p&gt;要匹配文本&lt;/p&gt;
 
-&lt;p&gt;前文提到过，在这儿单独拿出来说，是因为下文要用到。&lt;em&gt;（尼玛，下文难道不会用到前文其他内容么？凭什么单说子表达式啊；因为，实在是怕你忘了子表达式，其他内容你即使忘了，也容易自己查找）&lt;/em&gt;&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;ben@cib.com.cn&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;h3 id=&quot;section-11&quot;&gt;引用回溯&lt;/h3&gt;
+&lt;p&gt;正则表达式：&lt;code&gt;\w+@\w[\w\.]+\.\w+&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;理论上，可以匹配出：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;code&gt;ben@baidu.com&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;ben@baidu.com.cn&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;但是，上述匹配结果是2，即&lt;code&gt;ben@cib.com.cn&lt;/code&gt;。原因：&lt;code&gt;+&lt;/code&gt;、&lt;code&gt;*&lt;/code&gt;默认都是贪婪匹配，即找出最长的匹配模式；如果希望匹配出结果1，即&lt;code&gt;ben@cib.com&lt;/code&gt;，惰性匹配，找出最短的匹配模式，需要修改正则表达式：&lt;code&gt;\w+?@\w[\w\.]+?\.\w+?&lt;/code&gt;，即&lt;code&gt;+&lt;/code&gt;替换为&lt;code&gt;+?&lt;/code&gt;，&lt;code&gt;*&lt;/code&gt;替换为&lt;code&gt;*?&lt;/code&gt;。&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;贪婪匹配&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;懒惰字符&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;*&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;*?&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;+&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;+?&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;{n, }&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;{n, }?&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;section-10&quot;&gt;补充说明&lt;/h3&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;字符&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;含义&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;\&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;转义字符，例如，&lt;code&gt;\.&lt;/code&gt; 表示&lt;code&gt;.&lt;/code&gt;字符本身，单独&lt;code&gt;.&lt;/code&gt;表示匹配任意一个字符；&lt;code&gt;\?&lt;/code&gt;表示&lt;code&gt;?&lt;/code&gt;字符自身&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;|&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;表示其前后两种模式的任意一个，例如&lt;code&gt;(19|20)\d{2}&lt;/code&gt;，匹配19xx和20xx，xx表示任意两位数字&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;()&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;子表达式，整体上看作一个独立元素&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;假设有一个文本&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Hello, my name is Ben&lt;code&gt;&amp;amp;nbsp;&lt;/code&gt; … Node.js, Linux&lt;code&gt;&amp;amp;nbsp;&amp;amp;nbsp;&lt;/code&gt;, and other tech.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;现在要匹配出连续的两个&lt;code&gt;&amp;amp;nbsp;&lt;/code&gt;，可以使用&lt;code&gt;&amp;amp;nbsp;&amp;amp;nbsp;&lt;/code&gt;，也可以使用&lt;code&gt;(&amp;amp;nbsp;){2}&lt;/code&gt;，而不能使用&lt;code&gt;&amp;amp;nbsp;{2}&lt;/code&gt;，因为&lt;code&gt;{2}&lt;/code&gt;，表示匹配其前面字符，实际&lt;code&gt;&amp;amp;nbsp;{2}&lt;/code&gt;等价与&lt;code&gt;&amp;amp;nbsp;;&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;匹配IP：10.108.210.111&lt;/p&gt;
+
+&lt;p&gt;正则表达式：&lt;code&gt;\d{1,3}\. \d{1,3}\. \d{1,3}\. \d{1,3}\ &lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;可以替换为： &lt;code&gt;(\d{1,3}\.){3}\d{1,3}\ &lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;section-11&quot;&gt;高级用法&lt;/h2&gt;
+
+&lt;h3 id=&quot;section-12&quot;&gt;子表达式&lt;/h3&gt;
+
+&lt;p&gt;前文提到过，在这儿单独拿出来说，是因为下文要用到。&lt;em&gt;（尼玛，下文难道不会用到前文其他内容么？凭什么单说&lt;code&gt;子表达式&lt;/code&gt;啊；因为，实在是怕你忘了，其他内容你即使忘了，也容易自己查找）&lt;/em&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;section-13&quot;&gt;引用回溯&lt;/h3&gt;
 
 &lt;p&gt;本质：前后匹配一致；&lt;/p&gt;
 
 &lt;p&gt;技术上实质：后半部分引用前半部分匹配到的子表达式。&lt;/p&gt;
 
-&lt;h3 id=&quot;section-12&quot;&gt;前后查找&lt;/h3&gt;
+&lt;p&gt;举例：&lt;/p&gt;
+
+&lt;p&gt;匹配如下文档中重复输入的单次：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;This is a block of of text, several words here are are repeated, and and they should not be.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;正则表达式：&lt;code&gt;[ ]+(\w+)[ ]+\1&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;\1&lt;/code&gt;表示&lt;code&gt;(\w+)&lt;/code&gt;中匹配到的内容。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;：回溯引用中&lt;code&gt;\1&lt;/code&gt;,&lt;code&gt;\2&lt;/code&gt;只能一用子表达式（即用&lt;code&gt;()&lt;/code&gt;括起来的部分），&lt;code&gt;\0&lt;/code&gt;代表整个正则表达式匹配的结果。&lt;/p&gt;
+
+&lt;h3 id=&quot;section-14&quot;&gt;前后查找&lt;/h3&gt;
 
 &lt;p&gt;本质：匹配全部，返回局部；&lt;/p&gt;
 
@@ -253,16 +364,58 @@ Author: Kleene, Stephen C;
 
 &lt;p&gt;注：上式都是匹配&lt;code&gt;exp1&lt;/code&gt;，返回&lt;code&gt;exp2&lt;/code&gt;。&lt;/p&gt;
 
-&lt;h3 id=&quot;section-13&quot;&gt;嵌入条件&lt;/h3&gt;
+&lt;p&gt;举例1：&lt;/p&gt;
 
-&lt;p&gt;可以添加逻辑条件，类似if&lt;/p&gt;
+&lt;p&gt;匹配如下文本中的传输协议&lt;/p&gt;
 
-&lt;h3 id=&quot;section-14&quot;&gt;元字符？元语言？&lt;/h3&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;http://www.baidu.com&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;h2 id=&quot;section-15&quot;&gt;参考来源：&lt;/h2&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;ftp://ftp.baidu.com&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;https://mails.baidu.com&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;正则表达式：&lt;code&gt;.+(?=:)&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;举例2：&lt;/p&gt;
+
+&lt;p&gt;匹配如下文本中的金额&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;abc: $23.01&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;hdc: $899.00&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;正则表达式：&lt;code&gt;(?&amp;lt;=\$)\d[\d.]*\d&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;section-15&quot;&gt;嵌入条件&lt;/h3&gt;
+
+&lt;p&gt;可以添加逻辑条件，类似if。&lt;/p&gt;
+
+&lt;p&gt;说几点：&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;《正则表达式必知必会》&lt;/li&gt;
+  &lt;li&gt;功能很强大；&lt;/li&gt;
+  &lt;li&gt;使用的不是很多；&lt;/li&gt;
+  &lt;li&gt;真要了解一下，参考《&lt;a href=&quot;http://book.douban.com/subject/2269648/&quot; title=&quot;《正则表达式必知必会》2007年12月，第1版&quot;&gt;正则表达式必知必会&lt;/a&gt;》&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;section-16&quot;&gt;元字符？&lt;/h3&gt;
+
+&lt;p&gt;啥？元字符？什么东东？小伙儿，不要激动。正则表达式为了描述匹配哪些位置的字符串，使用了&lt;code&gt;.&lt;/code&gt;,&lt;code&gt;\d&lt;/code&gt;,&lt;code&gt;\s&lt;/code&gt;,&lt;code&gt;\w&lt;/code&gt;,&lt;code&gt;\W&lt;/code&gt;,&lt;code&gt;^&lt;/code&gt;,&lt;code&gt;[]&lt;/code&gt;,&lt;code&gt;()&lt;/code&gt;,&lt;code&gt;|&lt;/code&gt;,&lt;code&gt;$&lt;/code&gt;，来描述正则表达式语言的语法，即，这些字符是表述&lt;code&gt;正则表达式语言&lt;/code&gt;语法规则的字符，成为这个语言的元字符。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-17&quot;&gt;参考来源：&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://book.douban.com/subject/2269648/&quot; title=&quot;《正则表达式必知必会》2007年12月，第1版&quot;&gt;正则表达式必知必会&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -410,7 +563,7 @@ src=&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HT
      <link href="http://ningg.github.com/how-to-use-lib"/>
      <updated>2012-11-30T00:00:00+08:00</updated>
      <id>http://ningg.github.com/how-to-use-lib</id>
-     <content type="html">&lt;h3 id=&quot;section&quot;&gt;图书馆数据库的使用&lt;/h3&gt;
+     <content type="html">&lt;h2 id=&quot;section&quot;&gt;图书馆数据库的使用&lt;/h2&gt;
 
 &lt;p&gt;3年前在本科的时候，上过一门课“文献检索”，当时主要学了一点cnki使用的知识，没多久就忘掉了，现在想想造成这个结果有两个原因：1.当时学习就不求甚解，学习的时候，只是想到在考核上要达标，没有记录一些实用的检索手段；2.后来使用cnki的次数也少。要查找东西得时候，自己都是google，这是个好的习惯，但是，这只是初级水平；要达到中等水平，需要熟练专业数据库的检索。&lt;/p&gt;
 
@@ -427,7 +580,7 @@ src=&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HT
   &lt;li&gt;&lt;a href=&quot;http://ieeexplore.ieee.org/&quot;&gt;IEEE&lt;/a&gt;：具体查找顶级会议、期刊的电子资源&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h3 id=&quot;section-1&quot;&gt;微软学术搜索&lt;/h3&gt;
+&lt;h2 id=&quot;section-1&quot;&gt;微软学术搜索&lt;/h2&gt;
 
 &lt;p&gt;网址：&lt;a href=&quot;http://libra.msra.cn&quot;&gt;http://libra.msra.cn&lt;/a&gt;&lt;/p&gt;
 
@@ -439,11 +592,11 @@ src=&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HT
   &lt;li&gt;在打开的界面中，依次选择“related publication(s)”即可。&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&quot;google&quot;&gt;google学术搜索&lt;/h3&gt;
+&lt;h2 id=&quot;google&quot;&gt;google学术搜索&lt;/h2&gt;
 
 &lt;p&gt;网址：&lt;a href=&quot;http://scholar.google.com/&quot;&gt;http://scholar.google.com/&lt;/a&gt;&lt;/p&gt;
 
-&lt;h3 id=&quot;acm&quot;&gt;ACM&lt;/h3&gt;
+&lt;h2 id=&quot;acm&quot;&gt;ACM&lt;/h2&gt;
 
 &lt;p&gt;网址：&lt;a href=&quot;http://acm.lib.tsinghua.edu.cn/acm/Main.nsp&quot;&gt;http://acm.lib.tsinghua.edu.cn/acm/Main.nsp&lt;/a&gt;&lt;/p&gt;
 
@@ -451,7 +604,7 @@ src=&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HT
   &lt;li&gt;首页可选择浏览“Special Interest Groups（SIGs）”或者“Transactions”等&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&quot;ieee&quot;&gt;IEEE&lt;/h3&gt;
+&lt;h2 id=&quot;ieee&quot;&gt;IEEE&lt;/h2&gt;
 
 &lt;p&gt;网址：&lt;a href=&quot;http://ieeexplore.ieee.org/&quot;&gt;http://ieeexplore.ieee.org/&lt;/a&gt;&lt;/p&gt;
 
