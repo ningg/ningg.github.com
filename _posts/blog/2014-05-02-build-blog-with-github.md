@@ -17,6 +17,8 @@ category: GitHub
 
 方式：[GitHub Pages]
 
+![blog or not](/images/build-blog-with-github/blog-or-not.jpg)
+
 ##2.怎么做？
 
 初步分析，在[GitHub]上搭建博客，实质是：将自己的博客内容上传到GitHub上*（因为GitHub提供了空间）；*如果需要修改博客内容，则需要从GitHub上将download/pull下来；接下来就是让外面可以访问GitHub上的博客。总结一下，对应3个必要步骤：
@@ -42,11 +44,15 @@ category: GitHub
 
 补充：[上传文件至GitHub](https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line)；另外，向GitHub提交代码时，按照上面的操作方式，需要每次都输入GitHub的用户名和密码，可以采用`SSH Keys`的方式来解决此问题。
 
+![git-github](/images/build-blog-with-github/git-github.png)
+
 ###3.2如何搭建博客？
 
 GitHub上对于个人博客的支持，实质是利用GitHub Pages功能来实现的，具体操作：[GitHub Pages](https://pages.github.com/),认真读一遍，5mins，一步一步操作下来，简易博客就搭建成功了（一个简单的欢迎页面`index.html`）。
 
 补充：扩展阅读[GitHub Pages FAQ](https://help.github.com/categories/20/articles).
+
+![github-pages](/images/build-blog-with-github/github-pages.jpg)
 
 ###3.3Jekyll增强博客网站功能
 
@@ -122,6 +128,9 @@ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorM
 	self.content = File.read(File.join(base, name),:encoding=>"utf-8")
 
 如果上述修改之后，仍然提示出错，则：`...\lib\jekyll\tags`目录下`include.rb`文件，类似对于`convertible.rb`文件的操作；
+
+
+![github-social-coding](/images/build-blog-with-github/github-social-coding.png)
 
 
 [CSDN]:		http://www.csdn.net/		"CSDN"
