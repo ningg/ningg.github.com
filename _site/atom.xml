@@ -4,13 +4,269 @@
    <title>NingG.github.com</title>
    <link href="http://ningg.github.com/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://ningg.github.com" rel="alternate" type="text/html" />
-   <updated>2014-05-08T19:17:19+08:00</updated>
+   <updated>2014-05-08T21:53:17+08:00</updated>
    <id>http://ningg.github.com</id>
    <author>
      <name></name>
      <email></email>
    </author>
 
+   
+   <entry>
+     <title>Pig入门1h</title>
+     <link href="http://ningg.github.com/introduction-to-pig"/>
+     <updated>2014-05-08T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/introduction-to-pig</id>
+     <content type="html">&lt;blockquote&gt;
+  &lt;p&gt;开篇先推荐一个PPT：&lt;a href=&quot;/download/pig/introduction-to-pig.pptx&quot; title=&quot;Pig简介，原理，简要说明&quot;&gt;Pig简介&lt;/a&gt;，简要介绍了Pig的基本原理，重点说明了其与MapReduce的关系。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;副标题&lt;/strong&gt;: Pig入门 &lt;em&gt;_之_&lt;/em&gt; 乱拳打死老师傅&lt;/p&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;从副标题展开说&lt;/h2&gt;
+
+&lt;p&gt;先说一下为什么起这么一个副标题：前几天看电视剧消遣，有个小年轻，被质疑没有经验怎么办的时候，自己吹牛打气，说“我啥也不会，乱拳打死老师傅…”；这个，倒不是说对师傅的不尊敬，而是民间俗语，大概意思是：啥也不会的情况下，受领域内固有思想、规则约束的少，敢打敢拼，敢于突破陈规，往往能够带来新气象。&lt;em&gt;（不是要煽动大家起义、造反，而是，鼓励勇于突破、敢为天下先）。&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Pig知识的学习\介绍，大部分人会按照如下思路开展：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Pig解决什么问题；&lt;em&gt;（pig产生背景）&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;Pig Latin语言的基本语法；&lt;em&gt;（配合一些基本操作）&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;Pig Latin语言的高级语法；&lt;em&gt;（针对一些特有的、容易出错的用法，进行详细介绍）&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;Pig脚本的调试；&lt;em&gt;（脚本不是一气呵成的，需要一些调试分析手段）&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;Pig的可扩展部分；&lt;em&gt;（Pig提供的内建函数，无法满足需求时，需要自己动手来实现Pig的对外接口）&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;Pig性能调优；&lt;em&gt;（上面所有的步骤，都在说如何去使用Pig来完成一件事，现在会说一下如何把事做好、做漂亮）&lt;/em&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;需要这么多吗？学个东西，有这么复杂吗？&lt;em&gt;（上面开展的思路，是为了循序渐进、由浅入深，让你从原理到操作，能有一个全面的理解和掌握，嗯，一句话：为你好，才这么安排的）&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;纳尼？我想说，你能直接一点么？上面&lt;code&gt;1、2、3、4、5、6&lt;/code&gt;，看起来头都大了，唉，我只想使用Pig，不想知道他是怎么来的。&lt;/p&gt;
+
+&lt;p&gt;妥了，是个爽快的人，也算志同道合了，不多说：直接开始一步一步用Pig，让那些乱七八糟的东西见鬼去吧。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/introduction-to-pig/pig-logo.jpg&quot; alt=&quot;pig-logo&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;pig&quot;&gt;Pig用起来&lt;/h2&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;一个例子&lt;/h3&gt;
+
+&lt;p&gt;准备数据文件&lt;code&gt;student&lt;/code&gt;：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$cat student
+Jun L. 	18	3.7
+Hhui H.	18	3.8
+Ning G.	20	3.6
+Hlong G.	22	3.6
+Chang W.	21	3.6
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;注：上述文件中，姓名、年龄、GPA之间都以TAB键分隔；&lt;/p&gt;
+
+&lt;p&gt;目标：求20岁以下和20岁以上的学生的人数以及gpa平均值&lt;/p&gt;
+
+&lt;p&gt;进入执行Pig 脚本的交互模式：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$pig –x local
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;逐行输入如下pig脚本(&lt;code&gt;student_avg_gpa.pig&lt;/code&gt;)：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;studentInfos = load ’student’ as (name: chararray, age:int, gpa:float);
+studentBag = group studentInfos all;
+result = foreach studentBag {
+  student_younger = filter studentInfos by age &amp;lt;= 20;
+  student_older = filter studentInfos by age &amp;gt; 20;
+  generate COUNT(studentInfos) as totalNum, AVG(studentInfos.gpa) as avgGPA, 
+	COUNT(student_younger) as youngerNum, AVG(student_younger.gpa) as youngerAvgGPA, 
+	COUNT(student_older) as olderNum, AVG(student_older.gpa) as olderAvgGPA;
+}
+dump result;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;看到结果了吗？&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;(5,3.659999942779541,3,3.699999968210856,2,3.5999999046325684)&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;总共6个值（&lt;code&gt;,&lt;/code&gt;逗号分割）。&lt;/p&gt;
+
+&lt;p&gt;对于结果的说明：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;总共5人；平均GPA：约3.66；&lt;/li&gt;
+  &lt;li&gt;20岁以下（包含20岁）3人；平均GPA：约3.70；（pig对于float数据运算有误差）&lt;/li&gt;
+  &lt;li&gt;20岁以上2人；平均GPA：约3.60；&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;简要说一下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;grunt&amp;gt; studentInfos = load ‘student’ as (name: chararray, age:int, gpa:float);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;其中，&lt;code&gt;load&lt;/code&gt;为加载数据的关键字，’student’表示数据文件位置，&lt;code&gt;as&lt;/code&gt; 关键字为前面数据文件指定field别名和field类型。&lt;/p&gt;
+
+&lt;p&gt;可以使用如下命令，来查看一个&lt;code&gt;studentInfos&lt;/code&gt;的数据结构：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;grunt&amp;gt; describe studentInfos
+studentInfos: {name: chararray,age: int,gpa: float}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;使用如下命令，查看&lt;code&gt;studentInfos&lt;/code&gt;的具体内容：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;grunt&amp;gt; dump studentInfos;
+(Jun L.,18,3.7)
+(Hhui H.,18,3.8)
+(Ning G.,20,3.6)
+(Hlong G.,22,3.6)
+(Chang W.,21,3.6)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;上面 &lt;code&gt;describe&lt;/code&gt;、&lt;code&gt;dump&lt;/code&gt;命令输出的内容到底是什么玩意儿？&lt;/p&gt;
+
+&lt;p&gt;我们来解释一下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;studentInfos: {name: chararray,age: int,gpa: float}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;表示&lt;code&gt;studentInfos&lt;/code&gt;的结构：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;code&gt;studentInfos&lt;/code&gt;是一个&lt;code&gt;relation&lt;/code&gt;，因为&lt;code&gt;studentInfos:{}&lt;/code&gt;指向&lt;code&gt;{}&lt;/code&gt;花括号；&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;studentInfos&lt;/code&gt;内，&lt;code&gt;tuple&lt;/code&gt;的结构为：&lt;code&gt;(name: chararray,age: int,gpa: float)&lt;/code&gt;，即，包含3个字段，依次为&lt;code&gt;name&lt;/code&gt;、&lt;code&gt;age&lt;/code&gt;、&lt;code&gt;gpa&lt;/code&gt;，名字后&lt;code&gt;:&lt;/code&gt;之后为对应的类型；&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;上面提到的&lt;code&gt;relation&lt;/code&gt;、&lt;code&gt;tuple&lt;/code&gt;是什么？从哪冒出来的？客官莫要着急，&lt;code&gt;relation&lt;/code&gt;、&lt;code&gt;tuple&lt;/code&gt;都是&lt;code&gt;Pig&lt;/code&gt;内部的几个概念，且听我慢慢道来。&lt;/p&gt;
+
+&lt;p&gt;Pig定义了几个基本概念，用于描述数据结构：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;code&gt;field&lt;/code&gt;，字段，某一位置的数据，即，(Jun L.,18,3.7)中包含了3个字段；类似RDBMS中Table中一行数据的一个字段；&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;tuple&lt;/code&gt;，元组，是field的有序组合，使用&lt;code&gt;()&lt;/code&gt;来标识，即，&lt;code&gt;(Jun L.,18,3.7)&lt;/code&gt;表示一个tuple；类似RDBMS中Table中一行数据；&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;bag&lt;/code&gt;，包，是tuple的无序组合，使用”{}”来标识，即，{(Jun L.,18,3.7),(Hhui H.,18,3.8)}表示包含2个&lt;code&gt;tuple&lt;/code&gt;的一个&lt;code&gt;bag&lt;/code&gt;；类似RDBMS中的一个Table；&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;relation&lt;/code&gt;，关系，&lt;code&gt;outer bag&lt;/code&gt;，在此，暂时将&lt;code&gt;relation&lt;/code&gt;与&lt;code&gt;bag&lt;/code&gt;等价看待；&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;补充&lt;/strong&gt;：&lt;code&gt;field&lt;/code&gt;可以为任何类型，即，&lt;code&gt;tuple&lt;/code&gt;、&lt;code&gt;bag&lt;/code&gt;都可以作为&lt;code&gt;field&lt;/code&gt;，包含在&lt;code&gt;tuple&lt;/code&gt;中。&lt;/p&gt;
+
+&lt;p&gt;现在再回过头看一下，&lt;code&gt;studentInfos&lt;/code&gt;的结构：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;grunt&amp;gt; describe studentInfos
+studentInfos: {name: chararray,age: int,gpa: float}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;是不是很明朗了？&lt;em&gt;（什么？还不明朗？把上面的分析读3遍）&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;有人问&lt;code&gt;studentInfos: {name: chararray,age: int,gpa: float}&lt;/code&gt;中，&lt;code&gt;studentInfos&lt;/code&gt;这个&lt;code&gt;relation&lt;/code&gt;内部不应该是&lt;code&gt;tuple&lt;/code&gt;吗？&lt;code&gt;tuple&lt;/code&gt;不是应该以&lt;code&gt;()&lt;/code&gt;标识吗？为什么不是&lt;code&gt;studentInfos: {(name: chararray,age: int,gpa: float)}&lt;/code&gt;？这是因为&lt;code&gt;studentInfos&lt;/code&gt;中的&lt;code&gt;tuple&lt;/code&gt;不在一行，是分行输出的，下面会看到如果&lt;code&gt;relation&lt;/code&gt;中&lt;code&gt;tuple&lt;/code&gt;都在一行的情景。&lt;/p&gt;
+
+&lt;p&gt;将&lt;code&gt;studentInfos&lt;/code&gt;按照所有字段进行&lt;code&gt;group&lt;/code&gt;，即使有某2个&lt;code&gt;tuple&lt;/code&gt;内容完全一致，也会统计为2个&lt;code&gt;tuple&lt;/code&gt;，即，本质上&lt;code&gt;group..all&lt;/code&gt;是将多行数据合并为一行。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;grunt&amp;gt; studentBag = group studentInfos all;
+
+grunt&amp;gt; describe studentBag;
+studentBag: {group: chararray,studentInfos: {(name: chararray,age: int,gpa: float)}}
+
+grunt&amp;gt; dump studentBag;
+(all,{(Jun L.,18,3.7),(Hhui H.,18,3.8),(Ning G.,20,3.5),(Hlong G.,22,3.6),(Chang W.,21,3.6)})
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;补充&lt;/strong&gt;：&lt;code&gt;group&lt;/code&gt;操作时，会生成一个&lt;code&gt;field&lt;/code&gt;，命名为&lt;code&gt;group&lt;/code&gt;，可以尝试如下命令：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;grunt&amp;gt; test = group studentInfos by age;
+
+grunt&amp;gt; describe test;
+test: {group: int,studentInfos: {(name: chararray,age: int,gpa: float)}}
+
+grunt&amp;gt; dump test;
+(18,{(Jun L.,18,3.7),(Hhui H.,18,3.8)})
+(20,{(Ning G.,20,3.6)})
+(21,{(Chang W.,21,3.6)})
+(22,{(Hlong G.,22,3.6)})
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;上面的命令：&lt;code&gt;load&lt;/code&gt;、&lt;code&gt;group&lt;/code&gt;多少有些过于简单，不刺激，不激动，下面的命令会有点意思：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;grunt&amp;gt; result = foreach studentBag {
+&amp;gt;&amp;gt;   student_younger = filter studentInfos by age &amp;lt;= 20;
+&amp;gt;&amp;gt;   student_older = filter studentInfos by age &amp;gt; 20;
+&amp;gt;&amp;gt;   generate COUNT(studentInfos) as totalNum, AVG(studentInfos.gpa) as avgGPA, 
+		COUNT(student_younger) as youngerNum, AVG(student_younger.gpa) as youngerAvgGPA, 
+		COUNT(student_older) as olderNum, AVG(student_older.gpa) as olderAvgGPA;
+&amp;gt;&amp;gt; }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;有点复杂？稍等，拆解一下，再复杂的命令也会变得简单：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;student_younger = filter studentInfos by age &amp;lt;= 20;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;filter..by..&lt;/code&gt;是过滤语句，此处，表示按照条件&lt;code&gt;age &amp;lt;= 20&lt;/code&gt;过滤出不到20岁的学生，并且将结果指定给&lt;code&gt;student_younger&lt;/code&gt;。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;generate COUNT(studentInfos) as totalNum, AVG(studentInfos.gpa) as avgGPA, 
+	COUNT(student_younger) as youngerNum, AVG(student_younger.gpa) as youngerAvgGPA, 
+	COUNT(student_older) as olderNum, AVG(student_older.gpa) as olderAvgGPA;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;上面这个&lt;code&gt;generate ..&lt;/code&gt;是生成数据的命令，&lt;code&gt;COUNT&lt;/code&gt;、&lt;code&gt;AVG&lt;/code&gt;都是内部提供的聚合函数，如果只调用如下命令：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;generate COUNT(studentInfos) as totalNum, AVG(studentInfos.gpa) as avgGPA;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;表示将&lt;code&gt;studentInfos&lt;/code&gt;中包含的学生个数，以及平均&lt;code&gt;gpa&lt;/code&gt;组合成一个&lt;code&gt;tuple&lt;/code&gt;，赋值个&lt;code&gt;result&lt;/code&gt;;&lt;code&gt;as..&lt;/code&gt; 为这些&lt;code&gt;field&lt;/code&gt;指定名字。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;grunt&amp;gt; describe result;
+result: {totalNum: long,avgGPA: double,youngerNum: long,youngerAvgGPA: double,olderNum: long,olderAvgGPA: double}
+
+grunt&amp;gt; dump result;
+(5,3.6399999618530274,3,3.6666666666666665,2,3.5999999046325684)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;建议&lt;/strong&gt;：把上面的例子，再输入执行2遍，多使用&lt;code&gt;describe&lt;/code&gt;、&lt;code&gt;dump&lt;/code&gt;命令配合查看执行过程。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/introduction-to-pig/pig-on-elephant.png&quot; alt=&quot;pig-on-elephant&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;休息一下&lt;/h3&gt;
+
+&lt;p&gt;还是上面的&lt;code&gt;student&lt;/code&gt;数据&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$cat student
+Jun L. 	18	3.7
+Hhui H.	18	3.8
+Ning G.	20	3.6
+Hlong G.	22	3.6
+Chang W.	21	3.6
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;注：上述文件中，姓名、年龄、GPA之间都以TAB键分隔；&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;目标&lt;/strong&gt;：20岁以下学生的人数以及gpa平均值，以及这些学生的名字（只要求算出这些，其他东西不要求）。&lt;/p&gt;
+
+&lt;p&gt;这就成了上面问题的一部分，可以使用如下pig脚本：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;-- 加载数据、设定field名字、设定field类型
+studentInfos = load ’student’ as (name: chararray, age:int, gpa:float);
+
+-- 找出20岁以下的学生
+student_younger = filter studentInfos by age &amp;lt;= 20;
+
+-- 要调用聚合函数COUNT\AVG必须进行group，将所有列，转换为一行
+student_younger_bag = group student_younger all;
+
+-- 输出学生人数、平均GPA，以及学生名单(下一条命令实际为一行)
+result = foreach student_younger_bag generate COUNT(student_younger),
+ AVG(student_younger.gpa), student_younger.name;
+
+dump result;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;输出结果为：&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;(3,3.699999968210856,{(Jun L.),(Hhui H.),(Ning G.)})&lt;/code&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;section-3&quot;&gt;一篇博文&lt;/h2&gt;
+
+&lt;p&gt;推荐codelast的一篇博文&lt;a href=&quot;http://www.codelast.com/?p=3621&quot;&gt;Apache Pig基础概念及用法&lt;/a&gt;, 不要着急，放松放松，CodeLast的这篇博客很轻松，嗯，很适合入门，在此向原博主致敬。&lt;/p&gt;
+
+</content>
+   </entry>
    
    <entry>
      <title>正则表达式（字符串匹配模式）</title>
@@ -80,6 +336,8 @@ Author: Kleene, Stephen C;
 &lt;p&gt;几年后，计算机领域借助上述研究成果，实现perl、grep等工具/语言，正则表达式进入实用阶段。&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/images/regular-expression/regular-expression-introduction.png&quot; alt=&quot;illustration&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;校正&lt;/strong&gt;：上面图片&lt;code&gt;Illustration of Regular Expression&lt;/code&gt;中，&lt;code&gt;Meet c&lt;/code&gt;应该修正为&lt;code&gt;Meet b&lt;/code&gt;。&lt;/p&gt;
 
 &lt;h2 id=&quot;section-6&quot;&gt;怎么用？&lt;/h2&gt;
 
@@ -479,6 +737,8 @@ Author: Kleene, Stephen C;
 
 &lt;p&gt;方式：&lt;a href=&quot;https://pages.github.com/&quot;&gt;GitHub Pages&lt;/a&gt;&lt;/p&gt;
 
+&lt;p&gt;&lt;img src=&quot;/images/build-blog-with-github/blog-or-not.jpg&quot; alt=&quot;blog or not&quot; /&gt;&lt;/p&gt;
+
 &lt;h2 id=&quot;section-2&quot;&gt;2.怎么做？&lt;/h2&gt;
 
 &lt;p&gt;初步分析，在&lt;a href=&quot;https://github.com/about&quot; title=&quot;GitHub&quot;&gt;GitHub&lt;/a&gt;上搭建博客，实质是：将自己的博客内容上传到GitHub上&lt;em&gt;（因为GitHub提供了空间）；&lt;/em&gt;如果需要修改博客内容，则需要从GitHub上将download/pull下来；接下来就是让外面可以访问GitHub上的博客。总结一下，对应3个必要步骤：&lt;/p&gt;
@@ -510,11 +770,15 @@ Author: Kleene, Stephen C;
 
 &lt;p&gt;补充：&lt;a href=&quot;https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line&quot;&gt;上传文件至GitHub&lt;/a&gt;；另外，向GitHub提交代码时，按照上面的操作方式，需要每次都输入GitHub的用户名和密码，可以采用&lt;code&gt;SSH Keys&lt;/code&gt;的方式来解决此问题。&lt;/p&gt;
 
+&lt;p&gt;&lt;img src=&quot;/images/build-blog-with-github/git-github.png&quot; alt=&quot;git-github&quot; /&gt;&lt;/p&gt;
+
 &lt;h3 id=&quot;section-4&quot;&gt;3.2如何搭建博客？&lt;/h3&gt;
 
 &lt;p&gt;GitHub上对于个人博客的支持，实质是利用GitHub Pages功能来实现的，具体操作：&lt;a href=&quot;https://pages.github.com/&quot;&gt;GitHub Pages&lt;/a&gt;,认真读一遍，5mins，一步一步操作下来，简易博客就搭建成功了（一个简单的欢迎页面&lt;code&gt;index.html&lt;/code&gt;）。&lt;/p&gt;
 
 &lt;p&gt;补充：扩展阅读&lt;a href=&quot;https://help.github.com/categories/20/articles&quot;&gt;GitHub Pages FAQ&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/build-blog-with-github/github-pages.jpg&quot; alt=&quot;github-pages&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;jekyll&quot;&gt;3.3Jekyll增强博客网站功能&lt;/h3&gt;
 
@@ -594,6 +858,8 @@ src=&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HT
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;如果上述修改之后，仍然提示出错，则：&lt;code&gt;...\lib\jekyll\tags&lt;/code&gt;目录下&lt;code&gt;include.rb&lt;/code&gt;文件，类似对于&lt;code&gt;convertible.rb&lt;/code&gt;文件的操作；&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/build-blog-with-github/github-social-coding.png&quot; alt=&quot;github-social-coding&quot; /&gt;&lt;/p&gt;
 
 </content>
    </entry>
