@@ -4,7 +4,7 @@
    <title>NingG.github.com</title>
    <link href="http://ningg.github.com/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://ningg.github.com" rel="alternate" type="text/html" />
-   <updated>2014-05-08T21:53:17+08:00</updated>
+   <updated>2014-05-09T00:16:55+08:00</updated>
    <id>http://ningg.github.com</id>
    <author>
      <name></name>
@@ -221,9 +221,7 @@ grunt&amp;gt; dump result;
 
 &lt;p&gt;&lt;strong&gt;建议&lt;/strong&gt;：把上面的例子，再输入执行2遍，多使用&lt;code&gt;describe&lt;/code&gt;、&lt;code&gt;dump&lt;/code&gt;命令配合查看执行过程。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/introduction-to-pig/pig-on-elephant.png&quot; alt=&quot;pig-on-elephant&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;section-2&quot;&gt;休息一下&lt;/h3&gt;
+&lt;h3 id=&quot;section-2&quot;&gt;练习一下&lt;/h3&gt;
 
 &lt;p&gt;还是上面的&lt;code&gt;student&lt;/code&gt;数据&lt;/p&gt;
 
@@ -264,6 +262,23 @@ dump result;
 &lt;h2 id=&quot;section-3&quot;&gt;一篇博文&lt;/h2&gt;
 
 &lt;p&gt;推荐codelast的一篇博文&lt;a href=&quot;http://www.codelast.com/?p=3621&quot;&gt;Apache Pig基础概念及用法&lt;/a&gt;, 不要着急，放松放松，CodeLast的这篇博客很轻松，嗯，很适合入门，在此向原博主致敬。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-4&quot;&gt;参考来源&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.codelast.com/?p=4550&quot;&gt;codeLast Apache Pig学习系列&lt;/a&gt;
+&lt;em&gt;（个人看法：非常不错，适合直接上手写pig脚本；）&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://book.douban.com/subject/21357721/&quot;&gt;Pig编程指南&lt;/a&gt;（Alan Gates著， 曹坤 译， 2013年2月  第1版） 
+&lt;em&gt;(个人看法：有理论、有深度、有广度，每次都有新感觉；)&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://pig.apache.org/docs/r0.12.1/&quot;&gt;Pig documentation&lt;/a&gt;，
+&lt;em&gt;(个人看法：特别详细，想要的东西，基本都能从这里找到，而且更新速度很快；)&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;由于Pig版本迭代速度比较快，所以个人建议，最好能去官网查看文档。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/introduction-to-pig/pig-on-elephant.png&quot; alt=&quot;pig-on-elephant&quot; /&gt;&lt;/p&gt;
 
 </content>
    </entry>
@@ -708,12 +723,16 @@ Author: Kleene, Stephen C;
 
 &lt;p&gt;啥？元字符？什么东东？小伙儿，不要激动。正则表达式为了描述匹配哪些位置的字符串，使用了&lt;code&gt;.&lt;/code&gt;,&lt;code&gt;\d&lt;/code&gt;,&lt;code&gt;\s&lt;/code&gt;,&lt;code&gt;\w&lt;/code&gt;,&lt;code&gt;\W&lt;/code&gt;,&lt;code&gt;^&lt;/code&gt;,&lt;code&gt;[]&lt;/code&gt;,&lt;code&gt;()&lt;/code&gt;,&lt;code&gt;|&lt;/code&gt;,&lt;code&gt;$&lt;/code&gt;，来描述正则表达式语言的语法，即，这些字符是表述&lt;code&gt;正则表达式语言&lt;/code&gt;语法规则的字符，成为这个语言的元字符。&lt;/p&gt;
 
-&lt;h2 id=&quot;section-17&quot;&gt;参考来源：&lt;/h2&gt;
+&lt;h2 id=&quot;section-17&quot;&gt;参考来源&lt;/h2&gt;
 
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;http://book.douban.com/subject/2269648/&quot; title=&quot;《正则表达式必知必会》2007年12月，第1版&quot;&gt;正则表达式必知必会&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://www.regular-expressions.info/tutorial.html&quot;&gt;Regex Tutorial&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;h2 id=&quot;section-18&quot;&gt;休息一下&lt;/h2&gt;
+
+&lt;p&gt;你能读懂下面这张图片吗？&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/images/regular-expression/regex-example.png&quot; alt=&quot;regex-example&quot; /&gt;&lt;/p&gt;
 
@@ -865,6 +884,160 @@ src=&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HT
    </entry>
    
    <entry>
+     <title>java 重载 & 重写</title>
+     <link href="http://ningg.github.com/override-overload-of-java"/>
+     <updated>2014-01-14T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/override-overload-of-java</id>
+     <content type="html">&lt;h2 id=&quot;section&quot;&gt;问题背景&lt;/h2&gt;
+
+&lt;p&gt;阅读程序时，看到在子类中的各种@Override的注解，例如：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public class A{
+	public void speak(int i){
+		  ...
+	}
+	...
+}
+ 
+public class B extends A{
+	@Override
+	public void speak(int i){
+		  ...
+	}
+	...
+	public static void main(String[] args){
+		B b = new B();
+		A a1;
+		a1 = (A)b;
+ 
+		a1.speak(1);
+	}
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;类&lt;code&gt;B&lt;/code&gt;继承了&lt;code&gt;A&lt;/code&gt;，并且在&lt;code&gt;B&lt;/code&gt;中&lt;code&gt;Override&lt;/code&gt;了方法&lt;code&gt;speak()&lt;/code&gt;;现在问&lt;code&gt;a1.speak(1)&lt;/code&gt;调用的是&lt;code&gt;class A&lt;/code&gt;？&lt;code&gt;class B&lt;/code&gt;？中的&lt;code&gt;speak()&lt;/code&gt;方法？&lt;/p&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;分析&lt;/h2&gt;
+
+&lt;p&gt;上面的例子是一个典型的&lt;code&gt;重写&lt;/code&gt;，因为：&lt;code&gt;subclass&lt;/code&gt;中方法的名称、输入参数、返回参数都与&lt;code&gt;supclass&lt;/code&gt;中完全相同。&lt;/p&gt;
+
+&lt;p&gt;现在有一个问题：重写的方法前没有&lt;code&gt;@Override&lt;/code&gt;行不行？&lt;em&gt;(这个问题很好，说明you’re thinking。)&lt;/em&gt;没有&lt;code&gt;@Override&lt;/code&gt;的注解完全可以，只需要满足：&lt;code&gt;subclass&lt;/code&gt;中方法的名称、输入参数、返回参数与&lt;code&gt;supclass&lt;/code&gt;中完全相同即可实现方法的重写。&lt;/p&gt;
+
+&lt;p&gt;现在问题又来了：既然没有&lt;code&gt;@Override&lt;/code&gt;也能实现方法的重写，为什么很多地方都加了&lt;code&gt;@Override&lt;/code&gt;？原因很简单，添加了&lt;code&gt;@Override&lt;/code&gt;，编译器会依照&lt;code&gt;supclass&lt;/code&gt;中方法来进行检查，保证此方法真的实现重写。（避免了因为粗心等造成的&lt;code&gt;bug&lt;/code&gt;）&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;重写（&lt;code&gt;override&lt;/code&gt;）&lt;/strong&gt;：就是覆盖；基于继承的，重写父类的方法，方法名什么都一样，方法体不同。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;相同的名称；&lt;/li&gt;
+  &lt;li&gt;相同的返回类型；&lt;/li&gt;
+  &lt;li&gt;子类中，重写的方法访问修饰符权限保持一致，或者增大（&lt;code&gt;public&lt;/code&gt;&amp;gt;&lt;code&gt;protected&lt;/code&gt;&amp;gt;&lt;code&gt;default&lt;/code&gt;&amp;gt;&lt;code&gt;private&lt;/code&gt;）；&lt;/li&gt;
+  &lt;li&gt;子类中，重写的方法抛出的异常不能变的更宽泛；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;重载（&lt;code&gt;overload&lt;/code&gt;）&lt;/strong&gt;：基于同一个类的，不同的重载方法，主要是参数列表不同&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;相同的名称；&lt;/li&gt;
+  &lt;li&gt;必须有不同的参数列表；&lt;/li&gt;
+  &lt;li&gt;可以有不同的返回类型，可以有不同的访问修饰符，可以抛出不同的异常；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;重写 &amp;amp; 重载&lt;/strong&gt;：都是多态性的体现，重写是子类与父类间的多态性，重载是同一类中多态性的体现。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;参考来源&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;http://blog.csdn.net/smyhmz/article/details/2716638&quot;&gt;http://blog.csdn.net/smyhmz/article/details/2716638&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://blog.csdn.net/leonardwang/article/details/7046180&quot;&gt;http://blog.csdn.net/leonardwang/article/details/7046180&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+</content>
+   </entry>
+   
+   <entry>
+     <title>Linux 后台运行命令</title>
+     <link href="http://ningg.github.com/linux-cmd-run-in-background"/>
+     <updated>2013-01-17T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/linux-cmd-run-in-background</id>
+     <content type="html">&lt;h2 id=&quot;section&quot;&gt;问题背景&lt;/h2&gt;
+
+&lt;p&gt;使用&lt;code&gt;SecureCRT&lt;/code&gt;/&lt;code&gt;putty&lt;/code&gt;等客户端，远程连接Linux服务器，并且执行脚本时，由于网络不稳定，有可能导致连接中断，在这种情况下，我担心会影响脚本程序的正常执行（不能肯定是否一定会影响）；因此希望启动一个脚本，让其在后台一直运行，不会随着&lt;code&gt;连接中断&lt;/code&gt;而中断掉。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;外加问题&lt;/strong&gt;：现在一个命令的输出信息过多，希望后台运行时，不保存输出信息。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;解决办法&lt;/h2&gt;
+
+&lt;p&gt;先说最终的解决办法：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;nohup sh collectCloSpan.sh &amp;amp;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;执行上面命令即可。输出信息在当前路径的&lt;code&gt;nohup.out&lt;/code&gt;文件中。（如果当前路径不允许新建文件，则，输出信息保存在&lt;code&gt;~/nohup.out&lt;/code&gt;文件中）&lt;/p&gt;
+
+&lt;p&gt;好了，现在怎么解决解决&lt;code&gt;nohup.out&lt;/code&gt;文件过大的问题呢？&lt;/p&gt;
+
+&lt;p&gt;经过查询有2个解决思路：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;完全删除输出信息：一点输出信息都不想要；&lt;/li&gt;
+  &lt;li&gt;删除过时的输出信息，只保留最近一段时间的输出信息。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;完全删除输出信息：在程序后台运行之后，直接删除文件nohup.out文件即可，除非重新运行程序，否则，不会再有&lt;code&gt;nohup.out&lt;/code&gt;文件；&lt;/p&gt;
+
+&lt;p&gt;删除过时的输出信息（在线清空文件内容）：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;/*执行效率较高*/
+cp /dev/null nohup.out
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;或者&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;/*文件很大时，执行较慢*/
+cat /dev/null &amp;gt; nohup.out
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;关于&lt;code&gt;/dev/null&lt;/code&gt;到底是什么，自己&lt;code&gt;google&lt;/code&gt;或者&lt;code&gt;baidu&lt;/code&gt;吧。&lt;/p&gt;
+
+&lt;p&gt;感兴趣的可以具体看下面的详细说明。&lt;em&gt;（不感兴趣的可以直接跳过了）。&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;细节分析&lt;/h2&gt;
+
+&lt;p&gt;后台运行脚本，有多种解决方法，此处只说一个比较常用的，具体如下（&lt;a href=&quot;https://www.ibm.com/developerworks/cn/linux/l-cn-nohup/&quot;&gt;参考1&lt;/a&gt;）：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;nohup ping www.baidu.com &amp;amp;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后等待，出现如下结果：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/linux-cmd-run-in-background/linux-cmd-run-in-background.jpg&quot; alt=&quot;LINUX后台运行命令nohup测试&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;输入命令&lt;code&gt;jobs&lt;/code&gt;可以查看现有的后台程序，如上图；并且可以使用&lt;code&gt;fg 1&lt;/code&gt;命令，将第一个后台程序，调入前台。
+输入后台运行命令&lt;code&gt;nohup ping www.baidu.com &amp;amp;&lt;/code&gt;后，如果没有返回到原来的&lt;code&gt;shell&lt;/code&gt;，则中间直接敲&lt;code&gt;回车(Enter)&lt;/code&gt;即可，等到返回原来&lt;code&gt;shell&lt;/code&gt;环境之后，可以使用&lt;code&gt;exit&lt;/code&gt;命令退出；如上图所示。再次使用&lt;code&gt;SecureCRT&lt;/code&gt;/&lt;code&gt;putty&lt;/code&gt;等终端登录，并输入如下命令：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ps –ef | grep “ping”
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;可以看到上图中结果，原来的程序&lt;code&gt;pid&lt;/code&gt;为&lt;code&gt;13380&lt;/code&gt;还在执行，只是此进程的父进程改为&lt;code&gt;pid=1&lt;/code&gt;的特殊进程。程序运行过程中，所有输出自动输出到当前目录的&lt;code&gt;nohup.out&lt;/code&gt;文件中（具体&lt;a href=&quot;http://www.linuxidc.com/Linux/2010-09/28366.htm&quot;&gt;参考2&lt;/a&gt;）。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;疑问1&lt;/strong&gt;：后台运行：&lt;code&gt;command &amp;amp; &lt;/code&gt;和 &lt;code&gt;nohup command &amp;amp;&lt;/code&gt;有区别吗？&lt;/p&gt;
+
+&lt;p&gt;答：&lt;code&gt;command &amp;amp;&lt;/code&gt;：后台运行，关掉中断，命令会终止运行；&lt;code&gt;nobup command &amp;amp;&lt;/code&gt;：后台运行，关掉终端，命令会继续运行。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-3&quot;&gt;参考来源&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.ibm.com/developerworks/cn/linux/l-cn-nohup/&quot;&gt;https://www.ibm.com/developerworks/cn/linux/l-cn-nohup/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.linuxidc.com/Linux/2010-09/28366.htm&quot;&gt;http://www.linuxidc.com/Linux/2010-09/28366.htm&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.cnblogs.com/lwm-1988/archive/2011/08/20/2147299.html&quot;&gt;http://www.cnblogs.com/lwm-1988/archive/2011/08/20/2147299.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/linux-cmd-run-in-background/scene-background.jpg&quot; alt=&quot;scene&quot; /&gt;&lt;/p&gt;
+
+</content>
+   </entry>
+   
+   <entry>
      <title>使用数据库查找材料</title>
      <link href="http://ningg.github.com/how-to-use-lib"/>
      <updated>2012-11-30T00:00:00+08:00</updated>
@@ -919,6 +1092,105 @@ src=&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HT
 &lt;/ul&gt;
 
 &lt;p&gt;&lt;img src=&quot;/images/how-to-use-lib/lib-book.jpg&quot; alt=&quot;lib-book&quot; /&gt;&lt;/p&gt;
+
+</content>
+   </entry>
+   
+   <entry>
+     <title>非通信专业，如何对通信有一个整体的认识</title>
+     <link href="http://ningg.github.com/frame-of-communication-knowledge"/>
+     <updated>2012-11-30T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/frame-of-communication-knowledge</id>
+     <content type="html">&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
+
+&lt;p&gt;今天有人问我，不是通信专业怎么才能对通信以及通信网络有个整体的认识，大概想了一下，列了一下自己的想法，如果有错误的地方还请大家帮忙改正。 &lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://bbs.byr.cn/&quot;&gt;北邮人论坛&lt;/a&gt;的注册用户&lt;code&gt;bacbyr (比爱成)&lt;/code&gt;和&lt;code&gt;wuxuguang ( 水炎) &lt;/code&gt;都推荐《&lt;a href=&quot;http://book.douban.com/subject/4199502/&quot;&gt;大话无线通信&lt;/a&gt;》，评语：理解清清楚楚，就靠它入门了；比较生动形象，一下子就能翻几十页，很痛快。&lt;/p&gt;
+
+&lt;p&gt;看来《&lt;a href=&quot;http://book.douban.com/subject/4199502/&quot;&gt;大话无线通信&lt;/a&gt;》这本书值得一读。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;个人观点&lt;/h2&gt;
+
+&lt;p&gt;要对通信有整体认识，需要解决下面几个问题： &lt;/p&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;1.什么是通信？&lt;/h3&gt;
+
+&lt;p&gt;我的理解，双方进行信息交换过程就是通信。 &lt;/p&gt;
+
+&lt;p&gt;举例：你和隔壁的吴老二，俩人的聊天过程就是一个典型的通信过程。见下图： &lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/frame-of-communication-knowledge/talk-with-neighbour.jpg&quot; alt=&quot;talk-with-neighbour&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;section-3&quot;&gt;2.什么是通信网？&lt;/h3&gt;
+
+&lt;p&gt;通信网是由基本通信系统组成的，一个基本的通信系统包括：信源、信道、信宿；信源实际就是发信者，信宿就是收信者；信源产生的信息，通过信道进行传输，最终到达信宿。 &lt;/p&gt;
+
+&lt;p&gt;举例：具体，在聊天过程中，当你在说、隔壁吴老二在听的时候，你是信源（发信者），空气是信道（无线信道有木有），吴老二是信宿（收信者）；反之，自己想。基本通信系统，见下图： &lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/frame-of-communication-knowledge/base-unit.jpg&quot; alt=&quot;base-unit&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;section-4&quot;&gt;3.通信知识框架-基础&lt;/h3&gt;
+
+&lt;p&gt;（理解了上面两个问题，再看这一个）上面提到的“通信系统”虽然很简单，只是由“信源、信道、信宿”构成，但是却引出整个通信的知识。简要说明如下： &lt;/p&gt;
+
+&lt;h4 id=&quot;a&quot;&gt;a)信源发出的信息，一般都是模拟信号，需要经过数字化处理，之后还需要信息编码；（对不同信息：声音、图像、视频等，都有各色各样的编码技术）什么编码方式能保证不失真，需要信息论的知识；&lt;/h4&gt;
+
+&lt;h4 id=&quot;b&quot;&gt;b)经过处理的信息，要想在信道上传输，需要信道编码；（对于不同信道，主要是有线信道、无线信道，根据信道特性不同，使用不同的传输技术；特别需要说明的是，在不同情况下，信道的衰减特性不同，使用不同的信息增强技术）&lt;/h4&gt;
+
+&lt;h4 id=&quot;c&quot;&gt;c)信宿收到信息之后，需要进行与信源相反的操作：解码。&lt;/h4&gt;
+
+&lt;p&gt;举例：具体，就好比，你跟隔壁吴老二距离很近的时候，直接说话聊天，你俩人都能听清楚；但是当你俩距离很远时，直接说话对方不一定能听清楚，这就需要经过一些处理，才能保证你俩能继续聊天，例如，用大喇叭来放大声音等。见下图： &lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/frame-of-communication-knowledge/talk-with-neighbour-advance.jpg&quot; alt=&quot;talk-with-neighbour-advance&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;section-5&quot;&gt;4.通信知识框架-深入&lt;/h3&gt;
+
+&lt;p&gt;（理解了上面三个问题，再看这一个）进一步，想构成一个能容纳多用户的通信网，就涉及到一些列的技术： &lt;/p&gt;
+
+&lt;h4 id=&quot;a-1&quot;&gt;a)双工技术：双工技术是什么？能解决什么问题？（单工、半双工、双工）&lt;/h4&gt;
+
+&lt;h4 id=&quot;b-1&quot;&gt;b)复用技术：为什么要使用复用技术？能解决什么问题？（时分复用、码分复用、频分复用）&lt;/h4&gt;
+
+&lt;h4 id=&quot;c-1&quot;&gt;c)信令：为什么有信令？没有信令行不行？现网中常用的信令都有哪些？&lt;/h4&gt;
+
+&lt;h4 id=&quot;d&quot;&gt;d)网络规划：网络扩容的依据是什么？常用的网络规划技术有哪些？（通信网拓扑结构）&lt;/h4&gt;
+
+&lt;h4 id=&quot;e&quot;&gt;e)网络中需要什么配套设备：网络中的交换机、控制中心有什么作用？没有行不行？&lt;/h4&gt;
+
+&lt;h4 id=&quot;f&quot;&gt;f)通信网络的性能指标：怎么评价一个网络的容量？怎么评价一个次通话的通信质量？怎样评价一个网络的性能？这些指标有哪些？&lt;/h4&gt;
+
+&lt;h4 id=&quot;g&quot;&gt;g)无线信道：使用无线信道，跟有线信道有什么区别？需要什么特别的技术吗？（这是整个无线通信的基础）&lt;/h4&gt;
+
+&lt;p&gt;举例：这就好比，之前在一个地方，只有你和隔壁吴老二聊天，你俩都能相互听清楚对方；但是，现在这个地方里来了很多人，都想两两之间进行聊天；如果不采取一些措施，大家都说话，那就乱哄哄的，最糟糕的情况是：所有人都听不清楚对方，这个地方的聊天这个功能瘫痪掉了；这时候，管理人员就诞生了，制定一些规则，例如，大家轮流说话，这样，就能保证至少大家都能聊天（虽然有的时候，可能要等很久，才能轮到自己聊天）。 &lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/frame-of-communication-knowledge/talk-with-neighbour-highest.jpg&quot; alt=&quot;talk-with-neighbour-highest&quot; /&gt; &lt;/p&gt;
+
+&lt;h3 id=&quot;section-6&quot;&gt;5.通信知识框架-应用&lt;/h3&gt;
+
+&lt;p&gt;（理解了上面四个问题，再看这一个）再进一步，通信网有各种类型：公共电话交换网（传统的固定电话网）、互联网（计算机网）、移动通信网（3g网）； &lt;/p&gt;
+
+&lt;h4 id=&quot;a-2&quot;&gt;a)这些网络各自有什么特点？&lt;/h4&gt;
+
+&lt;h4 id=&quot;b-2&quot;&gt;b)这些网络中各自有什么独特的问题？不同网络的瓶颈不同，例如无线网络的一个瓶颈就是：自由空间的无线资源是有限的，而且无线信道中干扰很大。&lt;/h4&gt;
+
+&lt;p&gt;上面就是对于整个通信知识的基本介绍了，建议：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;最好能弄明白上面的每一个问题，不需要知道答案； &lt;/li&gt;
+  &lt;li&gt;今后工作中用到这些知识了，再去深入学习； &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section-7&quot;&gt;几本书&lt;/h2&gt;
+
+&lt;p&gt;最后列几本我们学过的书： &lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;http://product.dangdang.com/product.aspx?product_id=9223550&quot;&gt;《通信原理（第6版）》&lt;/a&gt; 讲解的理论比较深，很多公式；&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://product.dangdang.com/product.aspx?product_id=20042290&quot;&gt;《数字通信原理（第2版）》&lt;/a&gt;主要解决&lt;code&gt;3.a&lt;/code&gt;、&lt;code&gt;4.b&lt;/code&gt;的问题；&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://product.dangdang.com/product.aspx?product_id=9046475&quot;&gt;《移动通信原理与系统》&lt;/a&gt;主要解决&lt;code&gt;3.b&lt;/code&gt;、&lt;code&gt;4.g&lt;/code&gt;、&lt;code&gt;5.b&lt;/code&gt;的问题；&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://book.douban.com/subject/4864934/&quot;&gt;《通信概论》&lt;/a&gt;我没看过这本书，在网上找了一下，感觉可能还行；&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://product.dangdang.com/product.aspx?product_id=9229349&quot;&gt;《宽带通信网原理》&lt;/a&gt;主要解决&lt;code&gt;4.d&lt;/code&gt;、&lt;code&gt;4.e&lt;/code&gt;、&lt;code&gt;4.f&lt;/code&gt;的问题；&lt;/li&gt;
+&lt;/ol&gt;
 
 </content>
    </entry>
@@ -1086,433 +1358,6 @@ src=&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HT
   &lt;li&gt;MOA:&lt;a href=&quot;http://heanet.dl.sourceforge.net/project/moa-datastream/documentation/StreamMining.pdf&quot;&gt;StreamMining.pdf&lt;/a&gt; PART: 2.5.1 Random Tree Generator&lt;/li&gt;
   &lt;li&gt;MOA:&lt;a href=&quot;http://heanet.dl.sourceforge.net/project/moa-datastream/documentation/Manual.pdf&quot;&gt;Manul.pdf&lt;/a&gt; PART: 6.2.7 generators.RandomTreeGenerator&lt;/li&gt;
 &lt;/ul&gt;
-</content>
-   </entry>
-   
-   <entry>
-     <title>lixiaolai's blog</title>
-     <link href="http://ningg.github.com/lixiaolai-blog"/>
-     <updated>2012-10-25T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/lixiaolai-blog</id>
-     <content type="html">&lt;h2 id=&quot;lixiaolai&quot;&gt;[推荐]lixiaolai的博客&lt;/h2&gt;
-
-&lt;p&gt;发个文，标记一下lixiaolai的一篇博客：&lt;a href=&quot;http://wordpress.lixiaolai.com/archives/12427.html&quot;&gt;《学习学习在学习》&lt;/a&gt;，也算为自己今后提个醒。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/lixiaolai-blog/google.jpg&quot; alt=&quot;google&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;只喜欢技术的哥们儿，&lt;a href=&quot;http://wordpress.lixiaolai.com/archives/12427.html&quot;&gt;《学习学习在学习》&lt;/a&gt;里面也介绍了一部分google搜索的应用，值得一看。我一直没有系统学过google的高级搜索，今天也算入门了。摘要几点过来：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;多使用网址：&lt;code&gt;www.google.com/ncr&lt;/code&gt;  (&lt;code&gt;No Country Redirection&lt;/code&gt;)&lt;/li&gt;
-  &lt;li&gt;几种符号：引号&lt;code&gt;“”&lt;/code&gt;、星号&lt;code&gt;*&lt;/code&gt;、波浪号&lt;code&gt;~&lt;/code&gt;、加号&lt;code&gt;+&lt;/code&gt;（默认的）、减号&lt;code&gt;-&lt;/code&gt;；&lt;/li&gt;
-  &lt;li&gt;站内搜索：例如，&lt;code&gt;“umts”+”opnet” site:ibcn.intec.ugent.be&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;定制搜索：&lt;a href=&quot;http://www.google.com/cse/&quot;&gt;Google cse（Custom Search Engine）&lt;/a&gt;，定制一个特定功能的搜索引擎；（试了一下，好使）(自己常用的人肉搜索利器之一，十分顺手~)&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/lixiaolai-blog/learn-discuss.jpg&quot; alt=&quot;learn&quot; /&gt;&lt;/p&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>Eclipse下查看MOA源代码</title>
-     <link href="http://ningg.github.com/moa-sourcecode-with-eclipse"/>
-     <updated>2012-10-16T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/moa-sourcecode-with-eclipse</id>
-     <content type="html">&lt;h2 id=&quot;section&quot;&gt;概要&lt;/h2&gt;
-&lt;p&gt;本篇短文中，此目标包含两层意思：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;1. 使用Eclipse快速查看java代码，特别是class之间的继承(extends)、实现(implements)等关系；
-2. 针对MOA源码，有没有什么特别需要注意的地方？例如，快捷方式、项目文件的组织结构等。
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;依照上面对于目标的定位，本篇将着重讨论如下几个要点：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;1. java基本理论知识，针对类、继承、抽象类、接口、注解、反射的基本含义及作用进行说明；
-2. Eclipse下的快捷键，特别是源代码查询，类间继承关系、接口的实现关系的快捷查看；
-3. MOA基础知识：主要是MOA的目录结构、基本class、interface
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;此次考虑的&lt;code&gt;class&lt;/code&gt;，主要是跟算法相分离的基本&lt;code&gt;class&lt;/code&gt;，分为以下2类：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;1. 负责数据存储功能的class，与此同时提供了对数据的基本操作方法：Instance、Stream等；
-2. 规定算法实现接口的class，这些class一般是Interface或者 Abstract class。
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&quot;section-1&quot;&gt;示例准备&lt;/h2&gt;
-
-&lt;p&gt;此次采用的例子是&lt;a href=&quot;http://moa.cms.waikato.ac.nz/&quot; title=&quot;Massive Online Analysis&quot;&gt;MOA&lt;/a&gt;的&lt;a href=&quot;http://sourceforge.net/projects/moa-datastream/files/documentation/Tutorial2.pdf&quot; title=&quot;Introduction to the API of MOA&quot;&gt;Tutorial2&lt;/a&gt;中提供的两个示例代码：
-###代码一：&lt;code&gt;ApiOfTest1.java&lt;/code&gt;
-&lt;code&gt;
-源代码名称: ApiOfTest1.java
-文档中对应位置：Listing 1
-基本功能描述：生成一个stream，并使用learner对其进行学习。
-&lt;/code&gt;
-&lt;strong&gt;补充说明：&lt;/strong&gt; 本次例子&lt;code&gt;ApiOfTest1.java&lt;/code&gt;中使用的&lt;code&gt;stream&lt;/code&gt;和&lt;code&gt;learner&lt;/code&gt;做出改动，如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;RandomTreeGenerator stream = new RandomTreeGenerator();
-Classifier learner = new DecisionStumpTutorial();
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;decisionstumptutorialjava&quot;&gt;代码二：&lt;code&gt;DecisionStumpTutorial.java&lt;/code&gt;&lt;/h3&gt;
-&lt;p&gt;&lt;code&gt;
-源代码名称: DecisionStumpTutorial.java
-文档中对应位置：Listing 8
-基本功能描述：实现了一个单层的决策树分类算法（decision stump classifier）
-&lt;/code&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;java&quot;&gt;java基本知识&lt;/h2&gt;
-
-&lt;h3 id=&quot;class&quot;&gt;类（class）&lt;/h3&gt;
-
-&lt;p&gt;&lt;em&gt;说明&lt;/em&gt; ：由属性（&lt;code&gt;attribute&lt;/code&gt;）和方法（&lt;code&gt;method&lt;/code&gt;）构成。&lt;/p&gt;
-
-&lt;h3 id=&quot;extends&quot;&gt;继承（extends）&lt;/h3&gt;
-
-&lt;p&gt;&lt;em&gt;说明&lt;/em&gt; ：&lt;code&gt;java&lt;/code&gt;中类（&lt;code&gt;class&lt;/code&gt;）是__单继承__的，即，最多只能继承一个类。&lt;/p&gt;
-
-&lt;h3 id=&quot;abstract-class&quot;&gt;抽象类（abstract class）&lt;/h3&gt;
-
-&lt;p&gt;&lt;em&gt;说明&lt;/em&gt; : 无法具体的对象被定义为抽象类（&lt;code&gt;abstract class&lt;/code&gt;）；&lt;/p&gt;
-
-&lt;p&gt;有时候，我们可能想要构造一个很抽象的父类对象，它可能仅仅代表一种分类或抽象概念，它的实例没有任何意义，因此不希望它能被实例化。例如：有一个父类&lt;code&gt;水果（Fruit）&lt;/code&gt;，它有几个子类&lt;code&gt;苹果（Apple）&lt;/code&gt;、&lt;code&gt;橘子（Orange）&lt;/code&gt;、&lt;code&gt;香蕉（Banana）&lt;/code&gt;等。&lt;code&gt;水果&lt;/code&gt;在这里仅仅只是作为一种分类，显然&lt;code&gt;水果&lt;/code&gt;的实例没有什么意义（就好像一个人如果告诉你他买了一些&lt;code&gt;水果&lt;/code&gt;但是却不告诉你是&lt;code&gt;苹果&lt;/code&gt;还是&lt;code&gt;橘子&lt;/code&gt;，你很难想象他到底买的是什么）。而&lt;code&gt;水果类&lt;/code&gt;又要能被子类化，这就要求我们使用抽象类（&lt;code&gt;abstract class&lt;/code&gt;）来解决这个问题。&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;说明&lt;/em&gt; ：抽象类，可以有抽象方法，但不能实例化。例如：&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;java
-//定义抽象类水果（Fruit）
-public abstract class Fruit {
-……
-}
-//如果我们试图用以下语句来获得一个实例，将无法编译成功。
-Fruit fruit = new Fruit();
-&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;em&gt;说明&lt;/em&gt; ：抽象类中可以有实例属性。&lt;/p&gt;
-
-&lt;h3 id=&quot;interface&quot;&gt;接口（interface）&lt;/h3&gt;
-
-&lt;p&gt;接口也是抽象对象，它甚至比抽象类更抽象。&lt;strong&gt;接口中的方法都是抽象方法&lt;/strong&gt;。
-一个接口可以&lt;code&gt;继承&lt;/code&gt;其他接口；一个类通过关键字implements声明要&lt;code&gt;实现&lt;/code&gt;一个接口，并具体实现接口的方法。例如：&lt;/p&gt;
-
-&lt;p&gt;```java
-//有一个接口InterfaceA，
-public  interface  InterfaceA {
-    void  methodA();
-}&lt;/p&gt;
-
-&lt;p&gt;//类ClassA实现接口InterfaceA。
-public  class  ClassA implements InterfaceA {
-    public  void  methodA() {
-    System.out.println( ”methodA of ClassA implements InterfaceA” );
-    }
-}
-```
-&lt;em&gt;说明&lt;/em&gt; ：正常的&lt;code&gt;class&lt;/code&gt;实现（&lt;code&gt;implements&lt;/code&gt;）接口（&lt;code&gt;interface&lt;/code&gt;），必须实现接口定义的所有方法；但抽象类（&lt;code&gt;abstract class&lt;/code&gt;）实现接口，可以不用实现接口定义的方法。
-&lt;em&gt;说明&lt;/em&gt; ：接口中不能有实例属性，如果有属性，必须为静态的常量（&lt;code&gt;static final&lt;/code&gt;）
-&lt;em&gt;说明&lt;/em&gt; ：&lt;code&gt;java&lt;/code&gt;中一个类，可以同时实现（&lt;code&gt;implements&lt;/code&gt;）多个接口（&lt;code&gt;interface&lt;/code&gt;）&lt;/p&gt;
-
-&lt;h3 id=&quot;annotation&quot;&gt;注解（annotation）&lt;/h3&gt;
-
-&lt;p&gt;Java注解是附加在代码中的一些元信息，用于一些工具在编译、运行时进行解析和使用，起到说明、配置的功能。注解不会也不能影响代码的实际逻辑，仅仅起到辅助性的作用。包含在 &lt;code&gt;java.lang.annotation&lt;/code&gt; 包中。
-&lt;em&gt;说明&lt;/em&gt; ：此次只对注解&lt;code&gt;@Override&lt;/code&gt;进行说明：
-&lt;code&gt;@Override&lt;/code&gt;注解用于类方法(&lt;code&gt;Method&lt;/code&gt;)，
-表示一个方法声明打算重写超类中的另一个方法声明。如果方法利用此注释类型进行注解但没有重写超类方法，则编译器会生成一条错误消息。&lt;/p&gt;
-
-&lt;h3 id=&quot;reflection&quot;&gt;反射（Reflection）&lt;/h3&gt;
-
-&lt;p&gt;&lt;em&gt;说明&lt;/em&gt; ：程序运行时，通过反射获得某个类中的各种变量，函数，数组，构造函数以及类本身，并使用它们。&lt;/p&gt;
-
-&lt;h3 id=&quot;section-2&quot;&gt;其他概念：内部类&lt;/h3&gt;
-&lt;p&gt;(doing…)&lt;/p&gt;
-
-&lt;h2 id=&quot;eclipse&quot;&gt;Eclipse的快捷操作&lt;/h2&gt;
-
-&lt;p&gt;源代码上查看方法位置、类间继承关系的快捷键（操作）。
-自己用得最上手的几个快捷键（操作）列举如下：&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;代码查看&lt;/strong&gt; 方面的快捷操作：&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;
-//查找method、class出处（不如下面的方法常用）
-F3 
-//最直接的查找method、class出处的方法（比上面的方法更常用和有效）
-Ctrl + 鼠标点击（左击）
-//返回上一次鼠标位置	
-Alt + ←	   
-//与“Alt + ←”相反 
-Alt + →	    
-//根据名称匹配，查找当前工作区源代码文件
-Ctrl + Shift + r/R	
-//查找，哪个类继承了此类（不如下面方法常用）
-选中“class”，右键“reference”—“Hierarchy”	
-//查看类的继承关系（被谁继承），并且在Type Hierarch窗口中显示（比上面方法跟有效）
-F4	
-//显示当前类的继承关系
-选中“class”， 然后 ctrl + T	
-&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;代码编辑&lt;/strong&gt; 上的操作&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;
-//注释本行
-ctrl + /	
-//注释选中的多行
-ctrl + shift + /	
-//取消对于多行的注释
-ctrl + shift + \	
-//上下行代码之间互换位置
-alt + up/down	
-//复制本行代码，并粘贴在上行、或者下行
-ctrl + alt + up/down	
-//自动添加、去除import包
-ctrl + shift + O	
-//自动代码提示（很方便，极其常用）
-Alt + /	   
-//执行当前代码（只用一个main时，自动执行；当有多个main存在时，提示选择main） 
-ctrl + F11	 
-//显示快捷键窗口  
-ctrl + shift + L
-//关闭当前源代码窗口	
-ctrl + w	 
-//关闭所有打开的源代码窗口   
-ctrl + shift + w	
-&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;Eclipse中几个窗口的功能：&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;
-outline: 简要显示当前class中的attribute、method
-search: 选中“class”，右键“reference”—“Hierarchy”查找，哪个类继承了此类时，结果显示在此窗口中。
-console: 输出结果、出错、警告等信息
-problem: 编译前，警告、出错等信息的提示
-Type Hierarch: 显示当前类的继承关系（包括父类、子类）；注意此窗口中有几个按钮很重要。
-packet Explorer: 查看当前源代码的组织结构
-&lt;/code&gt; &lt;/p&gt;
-
-&lt;h2 id=&quot;moa&quot;&gt;MOA基本知识&lt;/h2&gt;
-
-&lt;p&gt;参看MOA自带文档，并且对于instanse的基本类借用于weka工程。&lt;/p&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>MOA的安装</title>
-     <link href="http://ningg.github.com/Install-MOA"/>
-     <updated>2012-10-15T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/Install-MOA</id>
-     <content type="html">&lt;h2 id=&quot;section&quot;&gt;概述&lt;/h2&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;目标&lt;/h3&gt;
-
-&lt;p&gt;同时查看MOA源代码和Weka的源代码，记录配置过程。&lt;/p&gt;
-
-&lt;h3 id=&quot;section-2&quot;&gt;具体步骤&lt;/h3&gt;
-&lt;ol&gt;
-  &lt;li&gt;搭建&lt;a href=&quot;http://www.cs.waikato.ac.nz/ml/weka/&quot; title=&quot;Waikato Environment for Knowledge Analysis&quot;&gt;weka&lt;/a&gt;环境，使其独立运行，无错误;&lt;/li&gt;
-  &lt;li&gt;重新搭建&lt;a href=&quot;http://moa.cs.waikato.ac.nz&quot; title=&quot;Massive Online Analysis&quot;&gt;MOA&lt;/a&gt;环境，使其独立运行，无错误;&lt;/li&gt;
-  &lt;li&gt;如何在&lt;a href=&quot;http://moa.cs.waikato.ac.nz&quot; title=&quot;Massive Online Analysis&quot;&gt;MOA&lt;/a&gt;独立环境中查看&lt;a href=&quot;http://www.cs.waikato.ac.nz/ml/weka/&quot; title=&quot;Waikato Environment for Knowledge Analysis&quot;&gt;weka&lt;/a&gt;源代码;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;section-3&quot;&gt;参考资料&lt;/h3&gt;
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://moa.cs.waikato.ac.nz&quot; title=&quot;Massive Online Analysis&quot;&gt;MOA&lt;/a&gt;官网&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.cs.waikato.ac.nz/ml/weka/&quot; title=&quot;Waikato Environment for Knowledge Analysis&quot;&gt;weka&lt;/a&gt;官网 &lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.google.com/ncr&quot; title=&quot;google search engine&quot;&gt;google&lt;/a&gt;、&lt;a href=&quot;http://www.baidu.com&quot; title=&quot;baidu search engine&quot;&gt;baidu&lt;/a&gt;搜索&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;weka&quot;&gt;搭建Weka环境&lt;/h2&gt;
-
-&lt;h3 id=&quot;section-4&quot;&gt;主要参考来源&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.cs.waikato.ac.nz/ml/weka/&quot; title=&quot;Waikato Environment for Knowledge Analysis&quot;&gt;weka&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://weka.wikispaces.com/Frequently+Asked+Questions&quot; title=&quot;weka Frequently Asked Questions&quot;&gt;weka-FAQ&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;section-5&quot;&gt;详细步骤&lt;/h3&gt;
-
-&lt;h4 id=&quot;weka-1&quot;&gt;可执行文件方式，搭建weka环境&lt;/h4&gt;
-&lt;p&gt;从&lt;a href=&quot;http://www.cs.waikato.ac.nz/ml/weka/&quot; title=&quot;Waikato Environment for Knowledge Analysis&quot;&gt;weka官网&lt;/a&gt;中下载Weka安装文件。由于目前支持&lt;code&gt;MOA&lt;/code&gt;的&lt;code&gt;Weka&lt;/code&gt;必须是&lt;code&gt;3.7.X&lt;/code&gt;以上版本，本次选择下载&lt;code&gt;weka-3.7-7&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;操作系统环境：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;win XP Professional 5.1.2600 Service Pack 3 内部版本号2600 基于X86
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;可选择的Weka安装文件类型：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;code&gt;weka-3-7-7.exe&lt;/code&gt;(&lt;code&gt;windows X86&lt;/code&gt;)需要安装，系统自动配置环境。&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;weka-3-7-7.zip&lt;/code&gt;无需安装，手动进入目录，使用命令行启动图形界面。&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;本次选择&lt;code&gt;weka-3-7-7.zip&lt;/code&gt;，解压之后，运行方式：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;java –Xmx1000M –jar weka.jar
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;为了便于今后运行&lt;code&gt;weka&lt;/code&gt;方便，我写了个&lt;code&gt;weka-start.bat&lt;/code&gt;文件：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code class=&quot;language-bat&quot;&gt;d:
-cd &quot;\reference\data mining\数据挖掘\weka\weka 安装文件\weka-3-7-7&quot;
-java -Xmx1000M -jar weka.jar
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;strong&gt;说明&lt;/strong&gt; ：对应于上面bat文件，本地&lt;code&gt;weka-3-7-7.zip&lt;/code&gt;解压目录为：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;D：\reference\data mining\数据挖掘\weka\weka 安装文件\weka-3-7-7
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt; ：运行&lt;code&gt;weka&lt;/code&gt;之前，需要安装&lt;code&gt;JDK&lt;/code&gt;，具体版本，查看：&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://www.cs.waikato.ac.nz/ml/weka/&quot; title=&quot;Waikato Environment for Knowledge Analysis&quot;&gt;weka官网&lt;/a&gt; &lt;code&gt;Requirements&lt;/code&gt;目录&lt;/p&gt;
-
-&lt;h4 id=&quot;weka-2&quot;&gt;源码方式，搭建weka环境&lt;/h4&gt;
-&lt;p&gt;使用&lt;code&gt;weka&lt;/code&gt;源码，在&lt;code&gt;eclipse&lt;/code&gt;下，搭建&lt;code&gt;weka&lt;/code&gt;工程。&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;weka&lt;/code&gt;源码位置：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;//weka-3-7-7.exe(windows X86)
-安装目录下“weka-src.jar”
-//weka-3-7-7.zip
-解压目录下“weka-src.jar”
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;或者，通过&lt;code&gt;subversion&lt;/code&gt;来获得源码：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;http://weka.wikispaces.com/Subversion
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;解压&lt;code&gt;weka-src.jar&lt;/code&gt;得到如下文件列表：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;//Ant build file for weka.
-build.xml
-//ANT file for generating JFlex/CUP parsers.
-parsers.xml
-/*POM是项目对象模型(Project Object Model)的简称，
- *它是Maven项目中的文件，使用XML表示，名称叫做pom.xml。
- *在Maven中，当谈到Project的时候，不仅仅是一堆包含代码的文件。
- *一个Project往往包含一个配置文件，包括了与开发者有关的，缺陷跟踪系统，
- *组织与许可，项目的URL，项目依赖，以及其他。它包含了所有与这个项目相关
- *的东西。事实上，在Maven世界中，project可以什么都没有，
- *甚至没有代码，但是必须包含pom.xml文件。
- */
-pom.xml
-.classpath.default
-.project.default
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;【说明】：更详细的内容，请自行查找&lt;code&gt;maven&lt;/code&gt;、&lt;code&gt;ant&lt;/code&gt;的知识。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;在eclipse中File  –&amp;gt;  import –&amp;gt;  existing Maven Projects ，选择weka-src的解压目录。
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;OK，至此，导入源代码成功（如果没有成功，请反复再看看前面的操作细节）。&lt;/p&gt;
-
-&lt;p&gt;从源代码运行&lt;code&gt;weka&lt;/code&gt;
-找出&lt;code&gt;java&lt;/code&gt;文件：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;/weka-dev/src/main/java/weka/gui/GUIChooser.java
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;运行其中的&lt;code&gt;main&lt;/code&gt;函数即可。&lt;/p&gt;
-
-&lt;h4 id=&quot;maven&quot;&gt;附录：Maven知识&lt;/h4&gt;
-
-&lt;p&gt;[目标]：&lt;code&gt;maven&lt;/code&gt;可以完成什么工作？怎么完成？单独写一个文档。
-(doing…)&lt;/p&gt;
-
-&lt;h2 id=&quot;moa&quot;&gt;搭建MOA环境&lt;/h2&gt;
-
-&lt;h3 id=&quot;section-6&quot;&gt;主要参考来源&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;MOA自带文档&lt;a href=&quot;http://heanet.dl.sourceforge.net/project/moa-datastream/documentation/Manual.pdf&quot; title=&quot;MOA Manual Documentation&quot;&gt;Manual.pdf&lt;/a&gt;中&lt;code&gt;Installation&lt;/code&gt;部分。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;section-7&quot;&gt;详细步骤&lt;/h3&gt;
-
-&lt;h4 id=&quot;moa-1&quot;&gt;源码方式，搭建MOA环境&lt;/h4&gt;
-
-&lt;p&gt;下载文件：&lt;a href=&quot;http://moa.cms.waikato.ac.nz/downloads/&quot; title=&quot;MOA download site&quot;&gt;MOA download&lt;/a&gt;中下载&lt;code&gt;MOA Release 2012.08&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;解压并分析文件&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;//启动moa图形界面的文件：moa.bat、moa.sh
-bin
-
-//api文档（html版本），moa手册：Manual.pdf、StreamMining.pdf、 Tutorial1.pdf、Tutorial2.pdf
-doc
-
-//moa自带的Tutorial2.pdf中例子2的源代码。
-examples
- 
-//moa对应生成的可执行jar包
-lib
- 
-//开源软件声明信息
-license
-
-//源码文件
-src
-
-//编译后，可执行的moa包
-moa.jar
-
-//用于测试java对象所占内存大小，所需要的包。
-sizeofag.jar
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;在eclipse下新建&lt;code&gt;java&lt;/code&gt;工程，并将&lt;code&gt;src&lt;/code&gt;文件夹下的源代码文件夹复制到工程的&lt;code&gt;src&lt;/code&gt;目录下；注意所需&lt;code&gt;jar&lt;/code&gt;包也需要添加进去。&lt;/p&gt;
-
-&lt;p&gt;工程运行，需要&lt;code&gt;weka.jar&lt;/code&gt;包的支持，因此，下载&lt;code&gt;weka3.7.0&lt;/code&gt;以上的版本，并添加到&lt;code&gt;java project&lt;/code&gt;的路径中。&lt;/p&gt;
-
-&lt;p&gt;仔细观察，发现上面操作之后，&lt;code&gt;java&lt;/code&gt;工程仍然提示有错，无法运行。打开出错的&lt;code&gt;java&lt;/code&gt;源文件，发现&lt;code&gt;import moa.core.Globals&lt;/code&gt;出，提示&lt;code&gt;cannot be resolved&lt;/code&gt;。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;解决办法&lt;/strong&gt; ：刚才&lt;code&gt;src&lt;/code&gt;下添加的源文件，有2个&lt;code&gt;moa&lt;/code&gt;文件夹，将占存储小的&lt;code&gt;moa&lt;/code&gt;文件夹下源文件，复制到另一个&lt;code&gt;moa&lt;/code&gt;文件夹下，保持文件夹内的相对路径不变。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt; ：&lt;code&gt;moa&lt;/code&gt;的&lt;code&gt;2012.08&lt;/code&gt;版本中，使用&lt;code&gt;junit4&lt;/code&gt;进行的单元测试。原因：&lt;code&gt;test/moa/integration/SimpleClusterTest.java&lt;/code&gt; 中&lt;code&gt;import org.junit.Test;&lt;/code&gt;存在于&lt;code&gt;junit4&lt;/code&gt;中（&lt;code&gt;junit3&lt;/code&gt;中不存在此用法）。&lt;/p&gt;
-
-&lt;p&gt;从源代码运行&lt;code&gt;weka&lt;/code&gt;
-找出&lt;code&gt;java&lt;/code&gt;文件：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;/moa/src/moa/gui/GUI.java
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;运行其中的&lt;code&gt;main&lt;/code&gt;函数即可。&lt;/p&gt;
-
-&lt;h4 id=&quot;junit4&quot;&gt;附录：Junit4知识&lt;/h4&gt;
-
-&lt;p&gt;目标：&lt;code&gt;Junit4&lt;/code&gt;的有什么用？怎么用？单独写一个文档。&lt;/p&gt;
-
-&lt;h2 id=&quot;moaweka&quot;&gt;MOA环境下，查看weka源代码&lt;/h2&gt;
-
-&lt;p&gt;在搭建好&lt;code&gt;MOA&lt;/code&gt;环境之后，有些程序继承自&lt;code&gt;weka&lt;/code&gt;，&lt;code&gt;Ctrl+”点击code”&lt;/code&gt;方式查看源代码时，会弹出如下界面：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/install-moa/attach-sourcecode.jpg&quot; alt=&quot;attach-src&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;解决办法&lt;/strong&gt; ：点击上面的“Attach Source”按钮，并添加&lt;code&gt;weka-src.jar&lt;/code&gt;包即可。&lt;/p&gt;
-
-&lt;script type=&quot;math/tex; mode=display&quot;&gt;% &lt;![CDATA[
-
-\begin{align*}
-  &amp; \phi(x,y) = \phi \left(\sum_{i=1}^n x_ie_i, \sum_{j=1}^n y_je_j \right)
-  = \sum_{i=1}^n \sum_{j=1}^n x_i y_j \phi(e_i, e_j) = \\
-  &amp; (x_1, \ldots, x_n) \left( \begin{array}{ccc}
-      \phi(e_1, e_1) &amp; \cdots &amp; \phi(e_1, e_n) \\
-      \vdots &amp; \ddots &amp; \vdots \\
-      \phi(e_n, e_1) &amp; \cdots &amp; \phi(e_n, e_n)
-    \end{array} \right)
-  \left( \begin{array}{c}
-      y_1 \\
-      \vdots \\
-      y_n
-    \end{array} \right)
-\end{align*}
- %]]&gt;&lt;/script&gt;
-
 </content>
    </entry>
    

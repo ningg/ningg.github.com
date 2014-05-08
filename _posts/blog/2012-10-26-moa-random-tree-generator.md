@@ -1,7 +1,7 @@
 ---
 layout:        post
 title:         MOA中RandomTreeGenerator[Basic]
-category:      project
+category:      MOA
 description:   MOA中随机树(Random Tree)数据流产生器简介。
 ---
 
