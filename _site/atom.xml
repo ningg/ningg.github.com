@@ -4,7 +4,7 @@
    <title>NingG.github.com</title>
    <link href="http://ningg.github.com/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://ningg.github.com" rel="alternate" type="text/html" />
-   <updated>2014-05-07T23:42:21+08:00</updated>
+   <updated>2014-05-08T19:17:19+08:00</updated>
    <id>http://ningg.github.com</id>
    <author>
      <name></name>
@@ -28,6 +28,8 @@
 &lt;h2 id=&quot;section-1&quot;&gt;正则表达式，是什么？&lt;/h2&gt;
 
 &lt;p&gt;正则表达式，英文原名: &lt;code&gt;Regular Expression&lt;/code&gt;（简称：&lt;code&gt;regex&lt;/code&gt;或&lt;code&gt;regexp&lt;/code&gt;），直接翻译：&lt;code&gt;有规律的式子&lt;/code&gt;，或者，可以翻译为&lt;code&gt;描述规律的式子&lt;/code&gt;。&lt;em&gt;(他奶奶的，不知道谁第一个翻译的，取名&lt;code&gt;正则表达式&lt;/code&gt;？忒高大上了，听上去完全不知到干什么的，还是&lt;code&gt;描述规律的式子&lt;/code&gt;容易理解)&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/regular-expression/regular-expressions-comics.png&quot; alt=&quot;comics&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;section-2&quot;&gt;解决什么问题？&lt;/h3&gt;
 
@@ -64,11 +66,9 @@
 &lt;p&gt;1950年左右时，数学领域的一些研究工作&lt;/p&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;&lt;a href=&quot;http://cns-classes.bu.edu/cn550/Readings/mcculloch-pitts-43.pdf&quot;&gt;A logical calculus of the ideas immanent in nervous activity&lt;/a&gt;, 1943;&lt;/p&gt;
-
-  &lt;p&gt;Author: McCulloch, Warren S., and Walter Pitts;&lt;/p&gt;
-
-  &lt;p&gt;简述：神经系统中神经元看作小巧而简单的自动控制单元。&lt;/p&gt;
+  &lt;p&gt;&lt;a href=&quot;http://cns-classes.bu.edu/cn550/Readings/mcculloch-pitts-43.pdf&quot;&gt;A logical calculus of the ideas immanent in nervous activity&lt;/a&gt;, 1943;
+Author: McCulloch, Warren S., and Walter Pitts;
+简述：神经系统中神经元看作小巧而简单的自动控制单元。&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;blockquote&gt;
@@ -78,6 +78,8 @@ Author: Kleene, Stephen C;
 &lt;/blockquote&gt;
 
 &lt;p&gt;几年后，计算机领域借助上述研究成果，实现perl、grep等工具/语言，正则表达式进入实用阶段。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/regular-expression/regular-expression-introduction.png&quot; alt=&quot;illustration&quot; /&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;section-6&quot;&gt;怎么用？&lt;/h2&gt;
 
@@ -186,6 +188,20 @@ Author: Kleene, Stephen C;
 
 &lt;h3 id=&quot;n&quot;&gt;匹配n个字符&lt;/h3&gt;
 
+&lt;p&gt;匹配&lt;code&gt;n&lt;/code&gt;个字符，就是“匹配一个字符”重复&lt;code&gt;n&lt;/code&gt;次，嗯，很简单，则有：&lt;code&gt;aa&lt;/code&gt;，表示匹配连续两个字符&lt;code&gt;a&lt;/code&gt;；&lt;code&gt;\d\d&lt;/code&gt;,表示匹配2个数字；&lt;code&gt;\n\n\n&lt;/code&gt;,表示匹配3个换行符。&lt;em&gt;(很简单有木有)&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;问题来了，假设有如下文本：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;I $am$ the $god$.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;目标：查找出&lt;code&gt;$..$&lt;/code&gt;间的内容，正则表达式怎么写？(&lt;code&gt;$..$&lt;/code&gt;间字符的个数，不能确定，只知道1个以上)&lt;/p&gt;
+
+&lt;p&gt;我x，不是说要“匹配一个字符”重复&lt;code&gt;n&lt;/code&gt;次就可以么？关键现在&lt;code&gt;n&lt;/code&gt;是几啊？这怎么还是一个范围（&lt;code&gt;n&amp;gt;=1&lt;/code&gt;）？这如何是好？&lt;/p&gt;
+
+&lt;p&gt;莫急莫急，请往下看。&lt;/p&gt;
+
 &lt;table&gt;
   &lt;thead&gt;
     &lt;tr&gt;
@@ -225,6 +241,8 @@ Author: Kleene, Stephen C;
   &lt;/tbody&gt;
 &lt;/table&gt;
 
+&lt;p&gt;到这儿，就可以看出，使用 &lt;code&gt;$.+$&lt;/code&gt;就能匹配上面的内容了。&lt;/p&gt;
+
 &lt;h3 id=&quot;section-8&quot;&gt;匹配特定位置字符&lt;/h3&gt;
 
 &lt;table&gt;
@@ -243,8 +261,32 @@ Author: Kleene, Stephen C;
       &lt;td style=&quot;text-align: left&quot;&gt;$&lt;/td&gt;
       &lt;td style=&quot;text-align: left&quot;&gt;在字符串结尾&lt;/td&gt;
     &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;\b&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;单词的边界&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;\B&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;非单词的边界&lt;/td&gt;
+    &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
+
+&lt;p&gt;匹配出如下文本中的cat单词：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;cat catt&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;正则表达式：&lt;code&gt;\bcat\b&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;匹配如下文本中的&lt;code&gt;-&lt;/code&gt;，要求：只找出两个字母之间的&lt;code&gt;-&lt;/code&gt;，文本内容：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;A-b - ss s- f-  - a-&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;正则表达式：&lt;code&gt;\B-\B&lt;/code&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;section-9&quot;&gt;过度匹配（贪婪）&lt;/h3&gt;
 
@@ -414,6 +456,8 @@ Author: Kleene, Stephen C;
   &lt;li&gt;&lt;a href=&quot;http://book.douban.com/subject/2269648/&quot; title=&quot;《正则表达式必知必会》2007年12月，第1版&quot;&gt;正则表达式必知必会&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://www.regular-expressions.info/tutorial.html&quot;&gt;Regex Tutorial&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/regular-expression/regex-example.png&quot; alt=&quot;regex-example&quot; /&gt;&lt;/p&gt;
 
 </content>
    </entry>
