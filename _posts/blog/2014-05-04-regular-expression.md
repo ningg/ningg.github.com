@@ -62,6 +62,8 @@ category: RegExp
 
 ![illustration](/images/regular-expression/regular-expression-introduction.png)
 
+__校正__：上面图片`Illustration of Regular Expression`中，`Meet c`应该修正为`Meet b`。
+
 ##怎么用？
 
 正则表达式，俗称`描述规律的式子`，用来查找字符串，基本逻辑是：
