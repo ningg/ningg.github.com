@@ -4,13 +4,204 @@
    <title>NingG.github.com</title>
    <link href="http://ningg.github.com/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://ningg.github.com" rel="alternate" type="text/html" />
-   <updated>2014-05-09T00:16:55+08:00</updated>
+   <updated>2014-05-09T22:53:46+08:00</updated>
    <id>http://ningg.github.com</id>
    <author>
      <name></name>
      <email></email>
    </author>
 
+   
+   <entry>
+     <title>Pig解析中文文档</title>
+     <link href="http://ningg.github.com/pig-deal-with-chinese"/>
+     <updated>2014-05-09T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/pig-deal-with-chinese</id>
+     <content type="html">&lt;p&gt;&lt;code&gt;Pig&lt;/code&gt;处理文档时，&lt;code&gt;LOAD&lt;/code&gt;和&lt;code&gt;STORE&lt;/code&gt;默认数据是&lt;code&gt;UTF-8&lt;/code&gt;编码格式（参考来源？官方文档/源码）。因此，包含中文字符的数据文档，应以&lt;code&gt;UTF-8&lt;/code&gt;格式存储；相应的包含中文字符的pig脚本，也应以&lt;code&gt;UTF-8&lt;/code&gt;格式存储。&lt;/p&gt;
+
+&lt;p&gt;本文简介：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;中文文档如何转码，特别是&lt;code&gt;Linux&lt;/code&gt;下利用&lt;code&gt;iconv&lt;/code&gt;命令转码时的注意事项；&lt;/li&gt;
+  &lt;li&gt;使用&lt;code&gt;SecuryCRT&lt;/code&gt;/&lt;code&gt;putty&lt;/code&gt;客户端连接服务器时，中文文档显示乱码的解决办法；&lt;/li&gt;
+  &lt;li&gt;Pig脚本解析中文文档的步骤；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;utf-8&quot;&gt;将文档存储为UTF-8格式&lt;/h2&gt;
+
+&lt;p&gt;在&lt;code&gt;windows&lt;/code&gt;下，可以使用&lt;code&gt;notepad++&lt;/code&gt;来进行文档转码：
+&lt;code&gt;Encoding&lt;/code&gt;–&lt;code&gt;Convert to UTF-8 without BOM&lt;/code&gt;，则当前文档转换为&lt;code&gt;UTF-8&lt;/code&gt;编码方式。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/pig-deal-with-chinese/convert-utf8.png&quot; alt=&quot;convert-utf8&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;（思考：文档编码格式转换的原理？在linux下有没有类似的转换工具/命令？）&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;补充&lt;/strong&gt;：&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;Linux&lt;/code&gt;下使用&lt;code&gt;iconv&lt;/code&gt;可以进行编码格式转换，具体操作如下：&lt;/p&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;查看文档编码方式：&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;file –i origin.txt
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/pig-deal-with-chinese/file-i.png&quot; alt=&quot;file-i&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;对文档转码：&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;// 下面命令中 origin.txt.utf8为输出文件。
+iconv –f ISO-8859-1 –t UTF-8 &amp;lt; origin.txt &amp;gt; origin.txt.utf8
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;特别说明&lt;/strong&gt;：&lt;/p&gt;
+
+&lt;p&gt;如果&lt;code&gt;iconv&lt;/code&gt;转码命令，出现&lt;code&gt;iconv: illegal input sequence at position 42&lt;/code&gt;错误信息，则可以使用如下命令进行转码：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;iconv –f gbk –t UTF-8 &amp;lt; origin.txt &amp;gt; origin.txt.gbk
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;（思考：上面的原因是否是&lt;code&gt;file&lt;/code&gt;命令查询结果不精确，查询文件的编码方式，&lt;code&gt;linux&lt;/code&gt;下还有其他的命令吗？）&lt;/p&gt;
+
+&lt;p&gt;（思考：不同的编码格式的差异？为什么有多种编码？对应的应用场景？）&lt;/p&gt;
+
+&lt;h3 id=&quot;iconv&quot;&gt;iconv转码出错[重要]&lt;/h3&gt;
+
+&lt;p&gt;当对&lt;code&gt;1G&lt;/code&gt;以上的大文件，进行转码时：如果按照如下命令进行转码：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;// 下面命令中 origin.txt.utf8为输出文件。
+iconv –f gbk –t UTF-8 &amp;lt; origin.txt &amp;gt; origin.txt.utf8
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;可能仍然会出错：&lt;code&gt;iconv: illegal input sequence at position 91401042&lt;/code&gt;，查看&lt;code&gt;origin.txt.utf8&lt;/code&gt;文件，其内中文已经正常显示，只是原始文件在某个位置出现问题，没能完成整个文档的转码。&lt;/p&gt;
+
+&lt;p&gt;原因排查：是否是原始文件中真的有字符无法转码？还是文件过大？&lt;/p&gt;
+
+&lt;p&gt;排查措施：使用&lt;code&gt;split&lt;/code&gt;、&lt;code&gt;head&lt;/code&gt;等命令对文件分割之后，在相应位置仍然出错；&lt;/p&gt;
+
+&lt;p&gt;原因确定：是原始文件有非法字符，&lt;code&gt;GBK&lt;/code&gt;中不存在的编码，&lt;code&gt;GBK&lt;/code&gt;自己无法识别，因此无法转码。&lt;/p&gt;
+
+&lt;p&gt;解决途径：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;删除有乱码的行？（使用wc –l 、 sed –i 等命令；） &lt;/li&gt;
+  &lt;li&gt;跳过有乱码的几个字符？&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;iconv&lt;/code&gt;有没有强制转换，忽略/跳过错误？（尼玛，恭喜你，猜对了，有这么个机制）&lt;/li&gt;
+  &lt;li&gt;使用 &lt;code&gt;man iconv&lt;/code&gt;查询不到，应该使用&lt;code&gt;iconv –help&lt;/code&gt;，查看命令的帮助。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;最终命令：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;iconv –f gbk –t utf-8//IGNORE &amp;lt; input &amp;gt; output 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;搞定。&lt;/p&gt;
+
+&lt;p&gt;参考来源：&lt;/p&gt;
+
+&lt;p&gt;[1]	http://www.aiezu.com/system/linux/linux_iconv_code.html
+[2] http://www.linuxquestions.org/questions/linux-newbie-8/usr-bin-iconv-illegal-input-sequence-at-position-905152/&lt;/p&gt;
+
+&lt;h2 id=&quot;linux&quot;&gt;将文档传到远端linux服务器&lt;/h2&gt;
+
+&lt;p&gt;注意：在传输过程中，应尽量保持文档的属性/编码方式保持不变。
+仅仅是将&lt;code&gt;windows&lt;/code&gt;下文档传递到远端linux服务器上，方法很多：&lt;code&gt;fileZilla&lt;/code&gt;、&lt;code&gt;WinSCP&lt;/code&gt;等，下面说一种不需要安装软件的方法（亲，不要想错了，需要下载软件的，只是软件很小，不需要安装）。
+下载&lt;code&gt;PSCP&lt;/code&gt;，文件300k，果真很小；现在工具有了，如何利用&lt;code&gt;PSCP&lt;/code&gt;来向远端&lt;code&gt;linux&lt;/code&gt;传送文件呢？操作如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;//-p : preserve file attributes.（传送过程中，保持文件属性不变）
+scp –p originalFile user@ip:/home/user/destFold
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;上面命令会将本地&lt;code&gt;originalFile&lt;/code&gt;文件，无失真传送到服务器&lt;code&gt;/home/user/destFold&lt;/code&gt;目录下。&lt;/p&gt;
+
+&lt;p&gt;在远端&lt;code&gt;linux&lt;/code&gt;服务器上，如何查看文档的具体编码方式呢？&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;file –i filename
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;可以使用上述命令来确认文件的编码方式。&lt;/p&gt;
+
+&lt;p&gt;现在按照&lt;code&gt;utf-8&lt;/code&gt;编码的文件，已经在服务器上了，那原材料就齐全了，开始处理吧。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;远端服务器上，中文显示乱码&lt;/h2&gt;
+
+&lt;p&gt;既然要操作远端&lt;code&gt;linux&lt;/code&gt;服务器，最好要建立持久的连接，常用的方式：&lt;code&gt;putty&lt;/code&gt;、&lt;code&gt;secureCRT&lt;/code&gt;。然而，查看服务器上的中文文档时，可能出现乱码。&lt;/p&gt;
+
+&lt;h3 id=&quot;section-3&quot;&gt;服务器的基本环境&lt;/h3&gt;
+
+&lt;p&gt;针对上述情况，需要先检查一下服务器上设置的语言环境。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;echo $LANG
+// 上述输出结果为：en_US.UTF-8
+
+更进一步，查看3个文件，看LANG具体如何配置的：
+cat /etc/sysconfig/i18n
+//上述输出结果为：LANG=”en_US.UTF-8”
+
+cat ~/.bash_profile
+//上述输出结果中，没有LANG的配置
+
+cat ~//.bashrc
+//上述输出结果中，没有LANG的配置
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;（思考：LANG的配置有什么用？LANG不就是个环境变量吗？）&lt;/p&gt;
+
+&lt;h3 id=&quot;putty&quot;&gt;Putty连接服务器&lt;/h3&gt;
+
+&lt;p&gt;设置方式：
+&lt;code&gt;Window&lt;/code&gt;–&lt;code&gt;Translation&lt;/code&gt;–&lt;code&gt;Character set translation&lt;/code&gt;–&lt;code&gt;Remote character set&lt;/code&gt;，选中“UTF-8”。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/pig-deal-with-chinese/putty-utf8.png&quot; alt=&quot;putty-utf8.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;Window&lt;/code&gt;–&lt;code&gt;Appearance&lt;/code&gt;–&lt;code&gt;Font settings&lt;/code&gt;–&lt;code&gt;Font used in terminal window&lt;/code&gt;，选中&lt;code&gt;Courier New&lt;/code&gt;（尝试其他字体也可以解决中文乱码）。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/pig-deal-with-chinese/putty-appearance.png&quot; alt=&quot;putty-appearance&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;securecrt&quot;&gt;SecureCRT连接服务器&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;选项&lt;/code&gt;–&lt;code&gt;会话选项&lt;/code&gt;–&lt;code&gt;终端&lt;/code&gt;–&lt;code&gt;外观&lt;/code&gt;–&lt;code&gt;字体&lt;/code&gt;，&lt;code&gt;字符编码&lt;/code&gt;选中&lt;code&gt;UTF-8&lt;/code&gt;；
+&lt;code&gt;标准字体&lt;/code&gt;选中&lt;code&gt;幼圆&lt;/code&gt;（宋体等其他也可以）&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/pig-deal-with-chinese/securecrt-appearance.png&quot; alt=&quot;securecrt-appearance&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/pig-deal-with-chinese/securecrt-font.png&quot; alt=&quot;securecrt-font&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;OK，到现在位置，使用&lt;code&gt;putty&lt;/code&gt;/&lt;code&gt;secureCRT&lt;/code&gt;连接远程服务器，再查看&lt;code&gt;UTF-8&lt;/code&gt;编码的中文文档时，就不会出现乱码了。下面测试一下效果：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;less filename
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/pig-deal-with-chinese/less.png&quot; alt=&quot;less.png&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;pig&quot;&gt;Pig脚本解析中文文档&lt;/h2&gt;
+
+&lt;p&gt;千呼万唤始出来、犹抱琵琶半遮面，使用pig来解析中文文档是本文的重点，却姗姗来迟。好的，先来回顾一下前面的工作：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;将pig脚本&lt;code&gt;select_rows.pig&lt;/code&gt;使用UTF-8格式编码、待分析的文档&lt;code&gt;sfzf.log&lt;/code&gt;也使用&lt;code&gt;UTF-8&lt;/code&gt;格式编码；&lt;/li&gt;
+  &lt;li&gt;将两个文件传送到linux服务器上，并且使用&lt;code&gt;file –i filename&lt;/code&gt; 命令查看，确保其都为&lt;code&gt;UTF-8&lt;/code&gt;的编码格式；&lt;/li&gt;
+  &lt;li&gt;设置&lt;code&gt;secureCRT&lt;/code&gt;或者&lt;code&gt;putty&lt;/code&gt;，保证其查阅中文文档时，无乱码；&lt;/li&gt;
+  &lt;li&gt;到这一步了，直接运行pig脚本&lt;code&gt;select_rows.pig&lt;/code&gt;就可以了~哈哈（对，pig解析中文文档，就这么简单）；&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Pig脚本&lt;code&gt;select_rows.pig&lt;/code&gt;内容如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;/* 查找输入文档中，包含关键字“时间”的行，并输出 */
+A = load &#39;$input&#39; as (col1:chararray);
+B = filter A by ($col1 matches &#39;.*时间.*&#39;);
+
+store B into &#39;$output&#39;;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;运行命令：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;pig –x local –param input=sfzf.log –param output=out4 select_rows.pig
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/pig-deal-with-chinese/result.png&quot; alt=&quot;result&quot; /&gt;&lt;/p&gt;
+
+</content>
+   </entry>
    
    <entry>
      <title>Pig入门1h</title>
@@ -1290,74 +1481,6 @@ cat /dev/null &amp;gt; nohup.out
 &lt;/tbody&gt;
 &lt;p&gt;&amp;lt;/table&amp;gt;&lt;/p&gt;
 
-</content>
-   </entry>
-   
-   <entry>
-     <title>MOA中RandomTreeGenerator[Basic]</title>
-     <link href="http://ningg.github.com/moa-random-tree-generator"/>
-     <updated>2012-10-26T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/moa-random-tree-generator</id>
-     <content type="html">&lt;h2 id=&quot;section&quot;&gt;简介&lt;/h2&gt;
-&lt;p&gt;&lt;code&gt;RandomTreeGenerator&lt;/code&gt;是一个数据流（stream）产生器，它首次提出于：&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;a href=&quot;http://www.ir.iit.edu/~dagr/DataMiningCourse/Research_Papers/p71-domingos.pdf&quot;&gt;P.Domingos and G. Hulten. Mining high-speed data streams. In KDD, 2000&lt;/a&gt;.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;它的基本原理：基于一棵随机产生的树，来生成&lt;code&gt;Instance&lt;/code&gt;数据。关键点：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;怎样产生一个随机树？&lt;/li&gt;
-  &lt;li&gt;在这棵随机数上，怎样生成&lt;code&gt;Instance&lt;/code&gt;？&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;下面我们来一一说明。&lt;/p&gt;
-
-&lt;h2 id=&quot;section-1&quot;&gt;产生随机数&lt;/h2&gt;
-
-&lt;p&gt;随机选取属性，作为判断条件，来进行分裂；在最终的&lt;code&gt;leaf&lt;/code&gt;上，随机标记一个&lt;code&gt;Class&lt;/code&gt;；即可获得一棵随机树，因为在生成过程中，树的中间节点进行属性判断和分裂，因此准确的说，生成的是一棵决策树（&lt;code&gt;decision tree&lt;/code&gt;）。如下图所示：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/moa-random-tree-generator/randomTree.jpg&quot; alt=&quot;randomTree&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;说明&lt;/strong&gt;：上图表示一棵决策树（&lt;code&gt;decision tree&lt;/code&gt;），&lt;code&gt;Instance&lt;/code&gt;的&lt;code&gt;Class&lt;/code&gt;共计有&lt;code&gt;A&lt;/code&gt; &lt;code&gt;B&lt;/code&gt; &lt;code&gt;C&lt;/code&gt; 3类，均已经标记在&lt;code&gt;leaf&lt;/code&gt;上。这棵树上，未标记&lt;code&gt;Class&lt;/code&gt;的节点，是中间节点，在其上进行条件判断和分裂。&lt;/p&gt;
-
-&lt;h2 id=&quot;instance&quot;&gt;生成Instance&lt;/h2&gt;
-
-&lt;p&gt;在讨论如何生成&lt;code&gt;Instance&lt;/code&gt;之前，先说明一下，&lt;code&gt;Instance&lt;/code&gt;的数学表示形式：&amp;lt; &lt;strong&gt;x&lt;/strong&gt;，y&amp;gt;。其中， &lt;strong&gt;x&lt;/strong&gt; 是一个属性值的向量，y是class的值。例如：Instance: &amp;lt;(1,2,3),A&amp;gt;，表示：&lt;code&gt;属性1=1&lt;/code&gt;,&lt;code&gt;属性2=2&lt;/code&gt;,&lt;code&gt;属性3=3&lt;/code&gt;,并且&lt;code&gt;Class=A&lt;/code&gt;的一个Instance。&lt;/p&gt;
-
-&lt;p&gt;好了，有了这些说明，那如何利用 “产生随机数” 中获得的随机决策树，来生成&lt;code&gt;Instance&lt;/code&gt;呢？&lt;/p&gt;
-
-&lt;p&gt;具体分为2步：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;随机生成一个属性值的向量 &lt;strong&gt;x&lt;/strong&gt;；&lt;/li&gt;
-  &lt;li&gt;利用向量 &lt;strong&gt;x&lt;/strong&gt; 中的属性值，去决策树中判断对应的 y 值（class值）；
-至此，获得了一个Instance &amp;lt; &lt;strong&gt;x&lt;/strong&gt; ,y&amp;gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section-2&quot;&gt;补充&lt;/h2&gt;
-
-&lt;p&gt;科学实验中，注重实验结果的__可再现__、__可重现__性；为了保证 &lt;code&gt;Instance&lt;/code&gt; 的可再现，需要保证__随机决策树__的可再现。在&lt;code&gt;MOA&lt;/code&gt;中，这些都已经实现，使用的是JAVA中&lt;code&gt;Random&lt;/code&gt;类。&lt;/p&gt;
-
-&lt;p&gt;在实际的程序中，随机决策树的产生，可以进行设定一些参数，来进行约束：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;-r	 保证 随机决策树 的再现性，只要此值相同，产生的随机树，即相同
--i	 保证 Instance 的再现性，如果 -r 值相同，并且 -i 值相同，则产生的instance相同
--c	 产生的class个数
--o	 属性中，离散型属性的个数
--u	 属性中，数值型（连续型）属性的个数
--d	 树的深度
--l	 首次存在 leaf  节点的level
--f	 每层中leaf 节点所占的比重
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&quot;section-3&quot;&gt;参考来源&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;MOA:&lt;a href=&quot;http://heanet.dl.sourceforge.net/project/moa-datastream/documentation/StreamMining.pdf&quot;&gt;StreamMining.pdf&lt;/a&gt; PART: 2.5.1 Random Tree Generator&lt;/li&gt;
-  &lt;li&gt;MOA:&lt;a href=&quot;http://heanet.dl.sourceforge.net/project/moa-datastream/documentation/Manual.pdf&quot;&gt;Manul.pdf&lt;/a&gt; PART: 6.2.7 generators.RandomTreeGenerator&lt;/li&gt;
-&lt;/ul&gt;
 </content>
    </entry>
    
