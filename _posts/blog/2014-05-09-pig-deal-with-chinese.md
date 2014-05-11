@@ -2,7 +2,7 @@
 layout: post
 title: Pig解析中文文档
 description: 当处理的日志文档中包含中文时，该如何处理，有哪些注意事项
-category: pig
+category: Pig
 ---
 
 `Pig`处理文档时，`LOAD`和`STORE`默认数据是`UTF-8`编码格式（参考来源？官方文档/源码）。因此，包含中文字符的数据文档，应以`UTF-8`格式存储；相应的包含中文字符的pig脚本，也应以`UTF-8`格式存储。
