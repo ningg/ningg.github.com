@@ -7,7 +7,7 @@ category: hadoop
 
 ![learn-hadoop-outlook](/images/learn-hadoop/learn-hadoop-outlook.mmap.jpeg)
 
- 查看详细信息，点击下面链接，：[Hadoop学习之思维导图描述](/images/learn-hadoop/learn-hadoop.jpeg)。
+ 查看详细信息，点击下面链接，：[Hadoop学习之思维导图描述](/images/learn-hadoop/learn-hadoop.jpeg) *(大图，慎入)*。
 
 
 

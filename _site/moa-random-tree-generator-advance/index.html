@@ -6,7 +6,7 @@
     <title>MOA中RandomTreeGenerator[Advanced] | NingG.github.com</title>
     <meta name="author" content="NingG" />
     <meta name="renderer" content="webkit">
-    <meta name="description" content=" MOA中随机树(Random Tree)数据流产生器深入探索。  " />
+    <meta name="description" content=" MOA中随机树(Random Tree)数据流产生器深入探索  " />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
 
     <link rel="stylesheet" href="/css/default.css" type="text/css" />
@@ -45,7 +45,7 @@
     <div class="entry">
         <h1 class="entry-title"><a href="/moa-random-tree-generator-advance" title="MOA中RandomTreeGenerator[Advanced]">MOA中RandomTreeGenerator[Advanced]</a></h1>
         <p class="entry-date">2012-10-27</p>
-        <h2 id="section">简介</h2>
+        <h2 id="section">1.简介</h2>
 <p><code>RandomTreeGenerator</code>是一个<code>stream</code>产生器，源源不断的输出<code>Instance</code>；这一部分，将详细探讨其实现；请先阅读”<a href="/moa-random-tree-generator/">MOA中RandomTreeGenerator-Basic</a>“。查看源码的工具是Eclipse，关于Eclipse下查看源代码的快捷键，可参考”<a href="/moa-sourcecode-with-eclipse/">Eclipse下查看MOA源代码</a>“。</p>
 
 <p>具体将分为2个方面来讨论<code>RandomTreeGenerator</code>：</p>
@@ -69,33 +69,219 @@
   <li>Attribute、Instance、Instances、InstancesHeader之间有什么联系？</li>
 </ul>
 
-<h2 id="section-1">对外继承关系</h2>
+<h2 id="section-1">2.对外继承关系</h2>
 
-<p>几个基本的快捷键：
-&lt;table style="width: 100%;" border="1" cellspacing="0" cellpadding="2"&gt;</p>
-<tbody>
-<tr>
-<td style="text-align: center;"><strong>操作</strong></td>
-<td style="text-align: center;"><strong>说明</strong></td>
-</tr>
-<tr>
-<td>Ctrl + 鼠标左击</td>
-<td>查看class、method、attribute的源代码</td>
-</tr>
-<tr>
-<td>Alt &nbsp;+&nbsp;←</td>
-<td>返回上一次鼠标位置</td>
-</tr>
-<tr>
-<td>Alt &nbsp;+&nbsp;→</td>
-<td>与“Alt + <span style="white-space: normal;">←</span>”相反</td>
-</tr>
-<tr>
-<td>F4</td>
-<td>查看Class的继承关系</td>
-</tr>
-</tbody>
-<p>&lt;/table&gt;</p>
+<p>几个基本的快捷键：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">操作</th>
+      <th style="text-align: left">说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">Ctrl + 鼠标左击</td>
+      <td style="text-align: left">查看class、method、attribute的源代码</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Alt  + ←</td>
+      <td style="text-align: left">返回上一次鼠标位置</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">Alt  + →</td>
+      <td style="text-align: left">与“Alt + ←”相反</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">F4</td>
+      <td style="text-align: left">查看Class的继承关系</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>使用快捷键 <code>F4</code>,查看<code>RandomTreeGenerator</code>的继承关系，如下图所示。它直接继承了类<code>AbstractOptionHandler</code>,并实现了接口<code>InstanceStream</code>。</p>
+
+<p><img src="/images/moa-random-tree-generator-advance/RandomTreeGenerator-1.png" alt="RandomTreeGenerator-1" /></p>
+
+<p><strong>抽象类<code>AbstractOptionHandler</code></strong>，用于实现<code>MOA</code>的<code>GUI</code>接口。一个<code>Class</code>，如果需要在图形界面上进行参数设置，就需要继承这个类。具体说明如下：</p>
+
+<ul>
+  <li>继承自抽象类<code>AbstractMOAObject</code>，此类提供测量<code>Class</code>实例化对象的大小、复制对象、返回对象描述信息的方法。（具体实现的方法：<code>public int measureByteSize()</code>、<code>public MOAObject copy()</code>；未实现的方法：<code>public void getDescription(StringBuilder,int)</code>。）</li>
+  <li>实现接口<code>OptionHandler</code>，统一处理<code>Option</code>的方法；</li>
+</ul>
+
+<p><strong>接口<code>InstanceStream</code></strong>，规定了一个<code>data stream</code>所必须实现的方法，统一了<code>data stream</code>对外的方法。</p>
+
+<p>观察上图，发现很多class实现了<code>MOAObject</code>接口（继承自接口<code>Serializable</code>）,具体说明如下：</p>
+
+<ul>
+  <li><code>MOA</code>中所有的<code>Class</code>都要实现这个接口；</li>
+  <li><strong>作用</strong>：统一3个方法，测量<code>Class</code>实例化对象大小（<code>public int measureByteSize()</code>;）、复制对象（<code>public MOAObject copy()</code>;）、返回对象的描述信息（<code>public void  getDescription(StringBuilder sb, int indent)</code>;）</li>
+</ul>
+
+<p>隐藏了重复的<code>MOAObject</code>接口，可以将<code>RandomTreeGenerator</code>的继承关系，精简如图：图中既有类（<code>class</code>），又有抽象类（<code>Abstract class</code>）和接口（<code>Interface</code>），下面简要讨论他们之间的关系：</p>
+
+<p><img src="/images/moa-random-tree-generator-advance/RandomTreeGenerator-2.png" alt="RandomTreeGenerator-2" /></p>
+
+<ol>
+  <li>抽象类（<code>Abstract Class</code>）至少有一个方法没有具体的实现，是抽象方法；可以有实例属性；</li>
+  <li>接口（Interface）所有方法都是抽象方法，没有具体实现；不能有实例属性，如果有属性，一定是静态常量（static final）；</li>
+  <li>正常的Class只能继承（extends）一个类（class、abstract class），这就是Java的单继承性；但是可以实现（implements）多个接口（interface）；</li>
+  <li>class实现（Implements）接口（Interface），必须实现接口定义的所有方法（因为接口中方法都是抽象方法，没有具体实现，所以class中必须予以具体是实现）；</li>
+  <li>Abstract class实现（Implements）接口（Interface），不一定要实现接口中的方法（因为抽象类Abstract Class中本来就可以存在抽象方法）；</li>
+  <li>接口（Interface）可以继承（extends）接口（Interface）；
+更详细的知识，可以参考“eclipse下查看MOA源代码”中java基础知识部分。</li>
+</ol>
+
+<h2 id="section-2">3.内部成员</h2>
+
+<p>在”<strong>2. 对外继承关系</strong>“讨论的基础上，可以得出结论：</p>
+
+<ol>
+  <li><code>RandomTreeGenerator</code>的内部属性成员来源：<code>RandomTreeGenerator</code>自己定义，<code>AbstractOptionHandler</code>内定义，<code>AbstractMOAobject</code>内定义，<code>Object</code>中定义；</li>
+  <li><code>RandomTreeGenerator</code>的内部方法成员来源：<code>InstanceStream</code>、<code>OptionHandler</code>、<code>MOAObject</code>、<code>Serializable</code>接口中定义,<code>Object</code>中实现的方法；部分抽象类中实现的方法；</li>
+</ol>
+
+<p>为了充分发挥eclipse的作用，推荐先查看<code>eclipse</code>的帮助文件中<code>Type Hierarchy</code>部分,下面的一些查看源码操作都是基于此进行的。</p>
+
+<p>补充知识，<code>Object</code>类是<code>Java</code>中所有类的父类.</p>
+
+<p>说明：内部成员重点分析方法成员，默认属性成员为方法成员服务（方法成员实现某一功能，需要一些数据，因此添加了属性成员）。</p>
+
+<p>方法成员，重点考虑如下几个：</p>
+
+<ul>
+  <li>InstanceStream接口；</li>
+  <li>AbstractOptionHandler抽象类；</li>
+  <li>AbstractMOAObject抽象类；</li>
+  <li>OptionHandler接口；</li>
+  <li>MOAObject接口；</li>
+</ul>
+
+<p>现在我需要去查询MOA的API文档（或者查看MOA工程的源代码），分析、记忆上面几个类、接口中的__方法成员__。[关键*]</p>
+
+<h2 id="randomtreegenerator">4. 使用RandomTreeGenerator</h2>
+
+<p>使用分为3个步骤，说明如下：</p>
+
+<pre><code>//new一个对象
+RandomTreeGenerator stream = new RandomTreeGenerator();
+//使用前，做一个初始化
+stream.prepareForUse();
+//判断stream中是否还有instance，并获得下一个instance
+while(stream.hasMoreInstances()){
+	   Instance trainInst = stream.nextInstance();
+}
+</code></pre>
+
+<h2 id="streamgenerator">5. 定义一个stream的generator</h2>
+
+<p>只需要按下面来进行定义，并补充实现其中抽象方法即可，这就是java编写代码的好处，使用继承可以快速开发自己的类；代码如下：</p>
+
+<pre><code>public class YourselfGenerator extends AbstractOptionHandler implements InstanceStream
+</code></pre>
+
+<h2 id="data-stream">6. data stream的数学含义</h2>
+
+<p>data stream的数学表示是什么？程序中存储在什么地方？</p>
+
+<p><code>data_stream</code>数学上可以表示为：<code>&lt;instance1,instance2,…inxtanceN,…&gt;</code>，即以源源不断的<code>Instance</code>来表示。</p>
+
+<p>在MOA中，一个类，只要实现了接口<code>InstranceStream</code>，就认为他是一个<code>data stream</code>的产生器。通常，<code>data stream</code>并没有一次性产生所有的Instance并存储下来，而是采用<code>产生一个Instance，使用一个</code>的原则来实现。为实现一个<code>data_stream</code>，<code>MOA</code>提供了几个基本的类：<code>Attribute</code>、<code>Instance</code>、<code>Instances</code>、<code>InstancesHeader</code>。</p>
+
+<h2 id="class">7. 数据存储相关的class</h2>
+
+<p>数据存储相关的class：Attribute、Instance、Instances、InstancesHeader</p>
+
+<ul>
+  <li>Attribute: weka.core包中，定义属性；(weka)</li>
+  <li>Instance: weka.core包中，定义instance（由attribute构成）；（weka）</li>
+  <li>Instances: weka.core包中，定义dataset（instance的集合）；（weka）</li>
+</ul>
+
+<h3 id="wekacoreatribute">7.1 weka.core.Atribute</h3>
+
+<p>weka.core.Atribute（Class）用来表示Instance中的一个属性，共计可以表示5种：numeric、nominal、string、date、relational（这个需要注意）；典型的用法（code from the main() method of this class）：</p>
+
+<pre><code>// Create numeric attributes "length" and "weight"
+Attribute length = new Attribute("length");
+Attribute weight = new Attribute("weight");
+ 
+// Create list to hold nominal values "first", "second", "third"
+List my_nominal_values = new ArrayList(3);
+my_nominal_values.add("first");
+my_nominal_values.add("second");
+my_nominal_values.add("third");
+ 
+// Create nominal attribute "position"
+Attribute position = new Attribute("position", my_nominal_values);
+ 
+...
+</code></pre>
+
+<h3 id="wekacoreinstance">7.2 weka.core.Instance</h3>
+
+<p>weka.core.Instance(Interface),（下图表示了weka.core.Instance的继承关系）此接口统一了instance对外调用的方法；subclass：weka.core.AbstractInstance，直接由Attribute构成，用于表示data_stream中的一个例子；对于所有的Attibute类型（5种），都以浮点数（floating-point）来存储，如果Attribute类型是：nominal、string、relational，则存储的值表示相应类型真实值的索引位置。</p>
+
+<p><img src="/images/moa-random-tree-generator-advance/Instance.png" alt="Instance_继承关系" /></p>
+
+<p>举例，对于nominal属性：男，女；在存储时，使用：1,2；则1表示男，2表示女。从weka.core.Instance的继承图，可以看出DenseInstance、SparseInstance是具体实现。Instance的典型使用代码如下：</p>
+
+<pre><code>  // Create empty instance with three attribute values
+  Instance inst = new DenseInstance(3);
+ 
+  // Set instance's values for the attributes "length", "weight", and "position"
+  inst.setValue(length, 5.3); 
+  inst.setValue(weight, 300); 
+  inst.setValue(position, "first"); 
+ 
+  // Set instance's dataset to be the dataset "race" 
+  inst.setDataset(race); 
+ 
+  // Print the instance 
+  System.out.println("The instance: " + inst); 
+ 
+  ...
+</code></pre>
+
+<p>由于只是片段，上面的这段代码有些晦涩；几点补充：
+setValue方法：</p>
+
+<pre><code>public final void setValue(int attIndex, String value)
+...
+public final void setValue(Attribute att, double value)
+...
+public final void setValue(Attribute att, String value)
+...
+</code></pre>
+
+<p>上面是weka.core.Instance(Interface)中定义，并在weka.core.AbstractInstance中进行了实现，他们的本质都是调用在weka.core.Instance中定义的setValue(int,double)方法，他在具体的class中（DenseInstance、SparseInstance）进行实现。weka.core.Instance中代码定义如下：</p>
+
+<pre><code>public final void setValue(int attIndex, double value)
+...
+</code></pre>
+
+<p>setDataset方法：</p>
+
+<pre><code>public final void setDataset(Instances instances)
+...
+</code></pre>
+
+<p>上面是weka.core.AbstractInstance中的具体实现。其中Instances将在下面进行介绍。</p>
+
+<h3 id="wekacoreinstances">7.3 weka.core.Instances</h3>
+
+<p>weka.core.Instances(Class)，他的继承关系如下图，特别需要说明的是：</p>
+
+<p><img src="/images/moa-random-tree-generator-advance/Instances.png" alt="Instances_继承关系" /></p>
+
+<pre><code>public class Instances extends AbstractList
+	 implements Serializable, RevisionHandler
+...
+</code></pre>
+
+<p>Instances继承自一个由Instance组成的链表，其内部所有修改dataset的方法，都是针对备份进行的，并不涉及原始的dataset。</p>
 
 
 

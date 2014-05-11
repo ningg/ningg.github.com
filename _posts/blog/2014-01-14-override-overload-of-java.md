@@ -2,7 +2,7 @@
 layout: post
 title: java 重载 & 重写
 description: java对象，强制类型转换后，方法调用时，潜在的问题
-category: blog
+category: java
 ---
 
 ##问题背景

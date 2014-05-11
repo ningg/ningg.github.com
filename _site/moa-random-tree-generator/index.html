@@ -61,7 +61,7 @@
 
 <p>下面我们来一一说明。</p>
 
-<h2 id="section-1">产生随机数</h2>
+<h2 id="section-1">产生随机树</h2>
 
 <p>随机选取属性，作为判断条件，来进行分裂；在最终的<code>leaf</code>上，随机标记一个<code>Class</code>；即可获得一棵随机树，因为在生成过程中，树的中间节点进行属性判断和分裂，因此准确的说，生成的是一棵决策树（<code>decision tree</code>）。如下图所示：</p>
 
@@ -89,15 +89,48 @@
 
 <p>在实际的程序中，随机决策树的产生，可以进行设定一些参数，来进行约束：</p>
 
-<pre><code>-r	 保证 随机决策树 的再现性，只要此值相同，产生的随机树，即相同
--i	 保证 Instance 的再现性，如果 -r 值相同，并且 -i 值相同，则产生的instance相同
--c	 产生的class个数
--o	 属性中，离散型属性的个数
--u	 属性中，数值型（连续型）属性的个数
--d	 树的深度
--l	 首次存在 leaf  节点的level
--f	 每层中leaf 节点所占的比重
-</code></pre>
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">参数</th>
+      <th style="text-align: left">说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">-r</td>
+      <td style="text-align: left">保证 随机决策树 的再现性，只要此值相同，产生的随机树，即相同</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">-i</td>
+      <td style="text-align: left">保证 Instance 的再现性，如果 -r 值相同，并且 -i 值相同，则产生的instance相同</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">-c</td>
+      <td style="text-align: left">产生的class个数</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">-o</td>
+      <td style="text-align: left">属性中，离散型属性的个数</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">-u</td>
+      <td style="text-align: left">属性中，数值型（连续型）属性的个数</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">-d</td>
+      <td style="text-align: left">树的深度</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">-l</td>
+      <td style="text-align: left">首次存在 leaf  节点的level</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">-f</td>
+      <td style="text-align: left">每层中leaf 节点所占的比重</td>
+    </tr>
+  </tbody>
+</table>
 
 <h2 id="section-3">参考来源</h2>
 

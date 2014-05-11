@@ -4,13 +4,1417 @@
    <title>NingG.github.com</title>
    <link href="http://ningg.github.com/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://ningg.github.com" rel="alternate" type="text/html" />
-   <updated>2014-05-09T22:53:46+08:00</updated>
+   <updated>2014-05-11T23:24:58+08:00</updated>
    <id>http://ningg.github.com</id>
    <author>
      <name></name>
      <email></email>
    </author>
 
+   
+   <entry>
+     <title>Pig入门5h</title>
+     <link href="http://ningg.github.com/use-pig"/>
+     <updated>2014-05-10T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/use-pig</id>
+     <content type="html">&lt;p&gt;&lt;strong&gt;致谢&lt;/strong&gt;：本篇博客转载至codelast的博客&lt;a href=&quot;http://www.codelast.com/?p=3621&quot;&gt;Apache Pig的一些基础概念及用法总结&lt;/a&gt; ；在此，对codelast致敬，其分享精神温暖人心。&lt;em&gt;(本文会在codelast原博客的基础上陆续做一些调整)&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;下面开始学习Pig。&lt;/p&gt;
+
+&lt;p&gt;（1）关系（relation）、包（bag）、元组（tuple）、字段（field）、数据（data）的关系&lt;/p&gt;
+
+&lt;p&gt;一个关系（relation）是一个包（bag），更具体地说，是一个外部的包（outer bag）。
+一个包（bag）是一个元组（tuple）的集合。在pig中表示数据时，用大括号{}括起来的东西表示一个包——无论是在教程中的实例演示，还是在pig交互模式下的输出，都遵循这样的约定，请牢记这一点，因为不理解的话就会对数据结构的掌握产生偏差。
+一个元组（tuple）是若干字段（field）的一个有序集（ordered set）。在pig中表示数据时，用小括号()括起来的东西表示一个元组。
+一个字段是一块数据（data）。
+“元组”这个词很抽象，你可以把它想像成关系型数据库表中的一行，它含有一个或多个字段，其中，每一个字段可以是任何数据类型，并且可以有或者没有数据。
+“关系”可以比喻成关系型数据库的一张表，而上面说了，“元组”可以比喻成数据表中的一行，那么这里有人要问了，在关系型数据库中，同一张表中的每一行都有固定的字段数，pig中的“关系”与“元组”之间，是否也是这样的情况呢？不是的。“关系”并不要求每一个“元组”都含有相同数量的字段，并且也不会要求各“元组”中在相同位置处的字段具有相同的数据类型（太随意了，是吧？）&lt;/p&gt;
+
+&lt;p&gt;（2）一个 计算多维度组合下的平均值 的实际例子
+为了帮助大家理解pig的一个基本的数据处理流程，我造了一些简单的数据来举个例子——
+假设有数据文件：a.txt（各数值之间是以tab分隔的）：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[root@localhost pig]$ cat a.txt 
+a 1 2 3 4.2 9.8
+a 3 0 5 3.5 2.1
+b 7 9 9 - -
+a 7 9 9 2.6 6.2
+a 1 2 5 7.7 5.9
+a 1 2 3 1.4 0.2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;问题如下：怎样求出在第2、3、4列的所有组合的情况下，最后两列的平均值分别是多少？
+例如，第2、3、4列有一个组合为（1，2，3），即第一行和最后一行数据。对这个维度组合来说，最后两列的平均值分别为：
+（4.2+1.4）/2＝2.8
+（9.8+0.2）/2＝5.0
+而对于第2、3、4列的其他所有维度组合，都分别只有一行数据，因此最后两列的平均值其实就是它们自身。
+特别地，组合（7，9，9）有两行记录：第三、四行，但是第三行数据的最后两列没有值，因此它不应该被用于平均值的计算，也就是说，在计算平均值时，第三行是无效数据。所以（7，9，9）组合的最后两列的平均值为 2.6 和 6.2。
+我们现在用pig来算一下，并且输出最终的结果。
+先进入本地调试模式（pig -x local），再依次输入如下pig代码：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;A = LOAD &#39;a.txt&#39; AS (col1:chararray, col2:int, col3:int, col4:int, col5:double, col6:double);
+B = GROUP A BY (col2, col3, col4);
+C = FOREACH B GENERATE group, AVG(A.col5), AVG(A.col6);
+DUMP C;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;pig输出结果如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;((1,2,3),2.8,5.0)
+((1,2,5),7.7,5.9)
+((3,0,5),3.5,2.1)
+((7,9,9),2.6,6.2)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这个结果对吗？手工算一下就知道是对的。&lt;/p&gt;
+
+&lt;p&gt;下面，我们依次来看看每一句pig代码分别得到了什么样的数据。
+①加载 a.txt 文件，并指定每一列的数据类型分别为 chararray（字符串），int，int，int，double，double。同时，我们还给予了每一列别名，分别为 col1，col2，……，col6。这个别名在后面的数据处理中会用到——如果你不指定别名，那么在后面的处理中，就只能使用索引（$0，$1，……）来标识相应的列了，这样可读性会变差，因此，在列固定的情况下，还是指定别名的好。
+将数据加载之后，保存到变量A中，A的数据结构如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;A: {col1: chararray,col2: int,col3: int,col4: int,col5: double,col6: double}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;可见，A是用大括号括起来的东西。根据本文前面的说法，A是一个包（bag）。
+这个时候，A与你想像中的样子应该是一致的，也就是与前面打印出来的 a.txt 文件的内容是一样的，还是一行一行的类似于“二维表”的数据。&lt;/p&gt;
+
+&lt;p&gt;②按照A的第2、3、4列，对A进行分组。pig会找出所有第2、3、4列的组合，并按照升序进行排列，然后将它们与对应的包A整合起来，得到如下的数据结构：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;B: {group: (col2: int,col3: int,col4: int),A: {col1: chararray,col2: int,col3: int,col4: int,col5: double,col6: double}}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;可见，A的第2、3、4列的组合被pig赋予了一个别名：group，这很形象。同时我们也观察到，B的每一行其实就是由一个group和若干个A组成的——注意，是若干个A。这里之所以只显示了一个A，是因为这里表示的是数据结构，而不表示具体数据有多少组。
+实际的数据为：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;((1,2,3),{(a,1,2,3,4.2,9.8),(a,1,2,3,1.4,0.2)})
+((1,2,5),{(a,1,2,5,7.7,5.9)})
+((3,0,5),{(a,3,0,5,3.5,2.1)})
+((7,9,9),{(b,7,9,9,,),(a,7,9,9,2.6,6.2)})
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;可见，与前面所说的一样，组合（1，2，3）对应了两行数据，组合（7，9，9）也对应了两行数据。
+这个时候，B的结构就不那么明朗了，可能与你想像中有一点不一样了。&lt;/p&gt;
+
+&lt;p&gt;③计算每一种组合下的最后两列的平均值。
+根据上面得到的B的数据，你可以把B想像成一行一行的数据（只不过这些行不是对称的），FOREACH 的作用是对 B 的每一行数据进行遍历，然后进行计算。
+GENERATE 可以理解为要生成什么样的数据，这里的 group 就是上一步操作中B的第一项数据（即pig为A的第2、3、4列的组合赋予的别名），所以它告诉了我们：在数据集 C 的每一行里，第一项就是B中的group——类似于（1，2，5）这样的东西）。
+而 AVG(A.col5) 这样的计算，则是调用了pig的一个求平均值的函数 AVG，用于对 A 的名为 col5 的列求平均值。前文说了，在加载数据到A的时候，我们已经给每一列起了个别名，col5就是倒数第二列。
+到这里，可能有人要迷糊了：难道 AVG(A.col5) 不是表示对 A 的col5这一列求平均值吗？也就是说，在遍历B（FOREACH B）的每一行时候，计算结果都是相同的啊！
+事实上并不是这样。我们遍历的是B，我们需要注意到，B的数据结构中，每一行数据里，一个group对应的是若干个A，因此，这里的 A.col5，指的是B的每一行中的A，而不是包含全部数据的那个A。拿B的第一行来举例：
+((1,2,3),{(a,1,2,3,4.2,9.8),(a,1,2,3,1.4,0.2)})
+遍历到B的这一行时，要计算AVG(A.col5)，pig会找到 (a,1,2,3,4.2,9.8) 中的4.2，以及(a,1,2,3,1.4,0.2)中的1.4，加起来除以2，就得到了平均值。
+同理，我们也知道了AVG(A.col6)是怎么算出来的。但还有一点要注意的：对(7,9,9)这个组，它对应的数据(b,7,9,9,,)里最后两列是无值的，这是因为我们的数据文件对应位置上不是有效数字，而是两个“-”，pig在加载数据的时候自动将它置为空了，并且计算平均值的时候，也不会把这一组数据考虑在内（相当于忽略这组数据的存在）。
+到了这里，我们不难理解，为什么C的数据结构是这样的了：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;C: {group: (col2: int,col3: int,col4: int),double,double}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;④DUMP C就是将C中的数据输出到控制台。如果要输出到文件，需要使用：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;STORE C INTO &#39;output&#39;;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这样pig就会在当前目录下新建一个“output”目录（该目录必须事先不存在），并把结果文件放到该目录下。&lt;/p&gt;
+
+&lt;p&gt;请想像一下，如果要实现相同的功能，用Java或C++写一个Map-Reduce应用程序需要多少时间？可能仅仅是写一个build.xml或者Makefile，所需的时间就是写这段pig代码的几十倍了！
+正因为pig有如此优势，它才得到了广泛应用。&lt;/p&gt;
+
+&lt;p&gt;（3）怎样统计数据行数
+在SQL语句中，要统计表中数据的行数，很简单：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;SELECT COUNT(*) FROM table_name WHERE condition
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;在pig中，也有一个COUNT函数，在pig手册中，对COUNT函数有这样的说明：&lt;/p&gt;
+
+&lt;p&gt;Computes the number of elements in a bag.
+假设要计算数据文件a.txt的行数：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[root@localhost pig]$ cat a.txt 
+a 1 2 3 4.2 9.8
+a 3 0 5 3.5 2.1
+b 7 9 9 - -
+a 7 9 9 2.6 6.2
+a 1 2 5 7.7 5.9
+a 1 2 3 1.4 0.2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;你是否可以这样做呢：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;A = LOAD &#39;a.txt&#39; AS (col1:chararray, col2:int, col3:int, col4:int, col5:double, col6:double);
+B = COUNT(*);
+DUMP B;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;答案是：绝对不行。pig会报错。pig手册中写得很明白：&lt;/p&gt;
+
+&lt;p&gt;Note: You cannot use the tuple designator (&lt;em&gt;) with COUNT; that is, COUNT(&lt;/em&gt;) will not work.
+那么，这样对某一列计数行不行呢：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;B = COUNT(A.col2);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;答案是：仍然不行。pig会报错。
+这就与我们想像中的“正确做法”有点不一样了：我为什么不能直接统计一个字段的数目有多少呢？刚接触pig的时候，一定非常疑惑这样明显“不应该出错”的写法为什么行不通。
+要统计A中含col2字段的数据有多少行，正确的做法是：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;A = LOAD &#39;a.txt&#39; AS (col1:chararray, col2:int, col3:int, col4:int, col5:double, col6:double);
+B = GROUP A ALL;
+C = FOREACH B GENERATE COUNT(A.col2);
+DUMP C;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;输出结果：&lt;/p&gt;
+
+&lt;p&gt;(6)
+表明有6行数据。
+如此麻烦？没错。这是由pig的数据结构决定的。&lt;/p&gt;
+
+&lt;p&gt;在这个例子中，统计COUNT(A.col2)和COUNT(A)的结果是一样的，但是，如果col2这一列中含有空值：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[root@localhost pig]$ cat a.txt 
+a 1 2 3 4.2 9.8
+a   0 5 3.5 2.1
+b 7 9 9 - -
+a 7 9 9 2.6 6.2
+a 1 2 5 7.7 5.9
+a 1 2 3 1.4 0.2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;则以下pig程序及执行结果为：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;grunt&amp;gt; A = LOAD &#39;a.txt&#39; AS (col1:chararray, col2:int, col3:int, col4:int, col5:double, col6:double);
+grunt&amp;gt; B = GROUP A ALL;
+grunt&amp;gt; C = FOREACH B GENERATE COUNT(A.col2);
+grunt&amp;gt; DUMP C;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;(5)
+可见，结果为5行。那是因为你LOAD数据的时候指定了col2的数据类型为int，而a.txt的第二行数据是空的，因此数据加载到A以后，有一个字段就是空的：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;grunt&amp;gt; DUMP A;
+(a,1,2,3,4.2,9.8)
+(a,,0,5,3.5,2.1)
+(b,7,9,9,,)
+(a,7,9,9,2.6,6.2)
+(a,1,2,5,7.7,5.9)
+(a,1,2,3,1.4,0.2) 在COUNT的时候，null的字段不会被计入在内，所以结果是5。
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;The COUNT function follows syntax semantics and ignores nulls. What this means is that a tuple in the bag will not be counted if the first field in this tuple is NULL. If you want to include NULL values in the count computation, use COUNT_STAR.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;（4）FLATTEN操作符的作用
+这个玩意一开始还是挺让我费解的。从字面上看，flatten就是“弄平”的意思，但是在对一个pig的数据结构操作时，flatten到底是“弄平”了什么，又有什么作用呢？
+我们还是采用前面的a.txt数据文件来说明：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[root@localhost pig]$ cat a.txt 
+a 1 2 3 4.2 9.8
+a 3 0 5 3.5 2.1
+b 7 9 9 - -
+a 7 9 9 2.6 6.2
+a 1 2 5 7.7 5.9
+a 1 2 3 1.4 0.2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果我们按照前文的做法，计算多维度组合下的最后两列的平均值，则：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;grunt&amp;gt; A = LOAD &#39;a.txt&#39; AS (col1:chararray, col2:int, col3:int, col4:int, col5:double, col6:double);
+grunt&amp;gt; B = GROUP A BY (col2, col3, col4);
+grunt&amp;gt; C = FOREACH B GENERATE group, AVG(A.col5), AVG(A.col6);
+grunt&amp;gt; DUMP C;
+((1,2,3),2.8,5.0)
+((1,2,5),7.7,5.9)
+((3,0,5),3.5,2.1)
+((7,9,9),2.6,6.2)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;可见，输出结果中，每一行的第一项是一个tuple（元组），我们来试试看 FLATTEN 的作用：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;grunt&amp;gt; A = LOAD &#39;a.txt&#39; AS (col1:chararray, col2:int, col3:int, col4:int, col5:double, col6:double);
+grunt&amp;gt; B = GROUP A BY (col2, col3, col4);
+grunt&amp;gt; C = FOREACH B GENERATE FLATTEN(group), AVG(A.col5), AVG(A.col6);
+grunt&amp;gt; DUMP C;
+(1,2,3,2.8,5.0)
+(1,2,5,7.7,5.9)
+(3,0,5,3.5,2.1)
+(7,9,9,2.6,6.2)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;看到了吗？被 FLATTEN 的group本来是一个元组，现在变成了扁平的结构了。按照pig文档的说法，FLATTEN用于对元组（tuple）和包（bag）“解嵌套”（un-nest）：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;The FLATTEN operator looks like a UDF syntactically, but it is actually an operator that changes the structure of tuples and bags in a way that a UDF cannot. Flatten un-nests tuples as well as bags. The idea is the same, but the operation and result is different for each type of structure.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;For tuples, flatten substitutes the fields of a tuple in place of the tuple. For example, consider a relation that has a tuple of the form (a, (b, c)). The expression GENERATE $0, flatten($1), will cause that tuple to become (a, b, c).&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;所以我们就看到了上面的结果。
+在有的时候，不“解嵌套”的数据结构是不利于观察的，输出这样的数据可能不利于外围数程序的处理（例如，pig将数据输出到磁盘后，我们还需要用其他程序做后续处理，而对一个元组，输出的内容里是含括号的，这就在处理流程上又要多一道去括号的工序），因此，FLATTEN提供了一个让我们在某些情况下可以清楚、方便地分析数据的机会。&lt;/p&gt;
+
+&lt;p&gt;（5）关于GROUP操作符
+在上文的例子中，已经演示了GROUP操作符会生成什么样的数据。在这里，需要说得更理论一些：&lt;/p&gt;
+
+&lt;p&gt;用于GROUP的key如果多于一个字段（正如本文前面的例子），则GROUP之后的数据的key是一个元组（tuple），否则它就是与用于GROUP的key相同类型的东西。
+GROUP的结果是一个关系（relation），在这个关系中，每一组包含一个元组（tuple），这个元组包含两个字段：（1）第一个字段被命名为“group”——这一点非常容易与GROUP关键字相混淆，但请区分开来。该字段的类型与用于GROUP的key类型相同。（2）第二个字段是一个包（bag），它的类型与被GROUP的关系的类型相同。&lt;/p&gt;
+
+&lt;p&gt;（6）把数据当作“元组”（tuple）来加载
+还是假设有如下数据：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[root@localhost pig]$ cat a.txt 
+a 1 2 3 4.2 9.8
+a 3 0 5 3.5 2.1
+b 7 9 9 - -
+a 7 9 9 2.6 6.2
+a 1 2 5 7.7 5.9
+a 1 2 3 1.4 0.2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果我们按照以下方式来加载数据：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;A = LOAD &#39;a.txt&#39; AS (col1:chararray, col2:int, col3:int, col4:int, col5:double, col6:double); 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;那么得到的A的数据结构为：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;grunt&amp;gt; DESCRIBE A;
+A: {col1: chararray,col2: int,col3: int,col4: int,col5: double,col6: double}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如果你要把A当作一个元组（tuple）来加载：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;A = LOAD &#39;a.txt&#39; AS (T : tuple (col1:chararray, col2:int, col3:int, col4:int, col5:double, col6:double));
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;也就是想要得到这样的数据结构：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;grunt&amp;gt; DESCRIBE A;
+A: {T: (col1: chararray,col2: int,col3: int,col4: int,col5: double,col6: double)}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;那么，上面的方法将得到一个空的A：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;grunt&amp;gt; DUMP A;
+()
+()
+()
+()
+()
+()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;那是因为数据文件a.txt的结构不适合于这样加载成元组（tuple）。&lt;/p&gt;
+
+&lt;p&gt;如果有数据文件b.txt：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[root@localhost pig]$ cat b.txt 
+(a,1,2,3,4.2,9.8)
+(a,3,0,5,3.5,2.1)
+(b,7,9,9,-,-)
+(a,7,9,9,2.6,6.2)
+(a,1,2,5,7.7,5.9)
+(a,1,2,3,1.4,0.2)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;则使用上面所说的加载方法及结果为：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;grunt&amp;gt; A = LOAD &#39;b.txt&#39; AS (T : tuple (col1:chararray, col2:int, col3:int, col4:int, col5:double, col6:double));
+grunt&amp;gt; DUMP A;
+((a,1,2,3,4.2,9.8))
+((a,3,0,5,3.5,2.1))
+((b,7,9,9,,))
+((a,7,9,9,2.6,6.2))
+((a,1,2,5,7.7,5.9))
+((a,1,2,3,1.4,0.2))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;可见，加载的数据的结构确实被定义成了元组（tuple）。&lt;/p&gt;
+
+&lt;p&gt;（7）在多维度组合下，如何计算某个维度组合里的不重复记录的条数
+以数据文件 c.txt 为例：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[root@localhost pig]$ cat c.txt 
+a 1 2 3 4.2 9.8 100
+a 3 0 5 3.5 2.1 200
+b 7 9 9 - - 300
+a 7 9 9 2.6 6.2 300
+a 1 2 5 7.7 5.9 200
+a 1 2 3 1.4 0.2 500
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;问题：如何计算在第2、3、4列的所有维度组合下，最后一列不重复的记录分别有多少条？例如，第2、3、4列有一个维度组合是（1，2，3），在这个维度维度下，最后一列有两种值：100 和 500，因此不重复的记录数为2。同理可求得其他的记录条数。
+pig代码及输出结果如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;grunt&amp;gt; A = LOAD &#39;c.txt&#39; AS (col1:chararray, col2:int, col3:int, col4:int, col5:double, col6:double, col7:int);
+grunt&amp;gt; B = GROUP A BY (col2, col3, col4);
+grunt&amp;gt; C = FOREACH B {D = DISTINCT A.col7; GENERATE group, COUNT(D);};
+grunt&amp;gt; DUMP C;
+((1,2,3),2)
+((1,2,5),1)
+((3,0,5),1)
+((7,9,9),1)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;我们来看看每一步分别生成了什么样的数据：
+①LOAD不用说了，就是加载数据；
+②GROUP也不用说了，和前文所说的一样。GROUP之后得到了这样的数据：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;grunt&amp;gt; DUMP B;
+((1,2,3),{(a,1,2,3,4.2,9.8,100),(a,1,2,3,1.4,0.2,500)})
+((1,2,5),{(a,1,2,5,7.7,5.9,200)})
+((3,0,5),{(a,3,0,5,3.5,2.1,200)})
+((7,9,9),{(b,7,9,9,,,300),(a,7,9,9,2.6,6.2,300)})
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;其实到这里，我们肉眼就可以看出来最后要求的结果是什么了，当然，必须要由pig代码来完成，要不然怎么应对海量数据？&lt;/p&gt;
+
+&lt;p&gt;③这里的 FOREACH 与前面有点不一样，这就是所谓的“嵌套的FOREACH”。第一次看到这种写法，肯定会觉得很奇怪。先看一下用于去重的DISTINCT关键字的说明：&lt;/p&gt;
+
+&lt;p&gt;Removes duplicate tuples in a relation.
+然后再解释一下：FOREACH 是对B的每一行进行遍历，其中，B的每一行里含有一个包（bag），每一个包中含有若干元组（tuple）A，因此，FOREACH 后面的大括号里的操作，其实是对所谓的“内部包”（inner bag）的操作（详情请参看FOREACH的说明），在这里，我们指定了对A的col7这一列进行去重，去重的结果被命名为D，然后再对D计数（COUNT），就得到了我们想要的结果。
+④输出结果数据，与前文所述的差不多。
+这样就达成了我们的目的。从总体上说，刚接触pig不久的人会觉得这些写法怪怪的，就是扭不过来，但是要坚持，时间长了，连倒影也会让你觉得是正的了。&lt;/p&gt;
+
+&lt;p&gt;（8）如何将关系（relation）转换为标量（scalar）
+在前文中，我们要统计符合某些条件的数据的条数，使用了COUNT函数来计算，但在COUNT之后，我们得到的还是一个关系（relation），而不是一个标量的数字，如何把一个关系转换为标量，从而可以在后续处理中便于使用呢？
+具体请看这个链接。&lt;/p&gt;
+
+&lt;p&gt;（9）pig中如何使用shell进行辅助数据处理
+pig中可以嵌套使用shell进行辅助处理，下面，就以一个实际的例子来说明。
+假设我们在某一步pig处理后，得到了类似于下面 b.txt 中的数据：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[root@localhost pig]$ cat b.txt 
+1 5 98  = 7
+34  8 6 3 2
+62  0 6 = 65
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;问题：如何将数据中第4列中的“=”符号全部替换为9999？
+pig代码及输出结果如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;grunt&amp;gt; A = LOAD &#39;b.txt&#39; AS (col1:int, col2:int, col3:int, col4:chararray, col5:int);
+grunt&amp;gt; B = STREAM A THROUGH `awk &#39;{if($4 == &quot;=&quot;) print $1&quot;\t&quot;$2&quot;\t&quot;$3&quot;\t9999\t&quot;$5; else print $0}&#39;`;
+grunt&amp;gt; DUMP B;
+(1,5,98,9999,7)
+(34,8,6,3,2)
+(62,0,6,9999,65)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;我们来看看这段代码是如何做到的：
+①加载数据，这个没什么好说的。
+②通过“STREAM … THROUGH …”的方式，我们可以调用一个shell语句，用该shell语句对A的每一行数据进行处理。此处的shell逻辑为：当某一行数据的第4列为“=”符号时，将其替换为“9999”；否则就照原样输出这一行。
+③输出B，可见结果正确。&lt;/p&gt;
+
+&lt;p&gt;（10）向pig脚本中传入参数
+假设你的pig脚本输出的文件是通过外部参数指定的，则此参数不能写死，需要传入。在pig中，使用传入的参数如下所示：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;STORE A INTO &#39;$output_dir&#39;;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;则这个“output_dir”就是个传入的参数。在调用这个pig脚本的shell脚本中，我们可以这样传入参数：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;pig -param output_dir=&quot;/home/my_ourput_dir/&quot; my_pig_script.pig
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这里传入的参数“output_dir”的值为“/home/my_output_dir/”。&lt;/p&gt;
+
+&lt;p&gt;（11）就算是同样一段pig代码，多次计算所得的结果也有可能是不同的
+例如用AVG函数来计算平均值时，同样一段pig代码，多次计算所得的结果中，小数点的最后几位也有可能是不相同的（当然也有可能相同），大概是因为精度的原因吧。不过，一般来说小数点的最后几位已经不重要了。例如我对一个数据集进行处理后，小数点后13位才开始有不同，这样的精度完全足够了。&lt;/p&gt;
+
+&lt;p&gt;（12）如何编写及使用自定义函数（UDF）
+请看这个链接：《Apache Pig中文教程（进阶）》&lt;/p&gt;
+
+&lt;p&gt;（13）什么是聚合函数（Aggregate Function）
+在pig中，聚合函数就是那些接受一个输入包（bag），返回一个标量（scalar）值的函数。COUNT函数就是一个例子。&lt;/p&gt;
+
+&lt;p&gt;（14）COGROUP做了什么
+与GROUP操作符一样，COGROUP也是用来分组的，不同的是，COGROUP可以按多个关系中的字段进行分组。
+还是以一个实例来说明，假设有以下两个数据文件：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[root@localhost pig]$ cat a.txt 
+uidk  12  3
+hfd 132 99
+bbN 463 231
+UFD 13  10
+ 
+[root@localhost pig]$ cat b.txt 
+908 uidk  888
+345 hfd 557
+28790 re  00000
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;现在我们用pig做如下操作及得到的结果为：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;grunt&amp;gt; A = LOAD &#39;a.txt&#39; AS (acol1:chararray, acol2:int, acol3:int);
+grunt&amp;gt; B = LOAD &#39;b.txt&#39; AS (bcol1:int, bcol2:chararray, bcol3:int);
+grunt&amp;gt; C = COGROUP A BY acol1, B BY bcol2;
+grunt&amp;gt; DUMP C;
+(re,{},{(28790,re,0)})
+(UFD,{(UFD,13,10)},{})
+(bbN,{(bbN,463,231)},{})
+(hfd,{(hfd,132,99)},{(345,hfd,557)})
+(uidk,{(uidk,12,3)},{(908,uidk,888)})
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;每一行输出的第一项都是分组的key，第二项和第三项分别都是一个包（bag），其中，第二项是根据前面的key找到的A中的数据包，第三项是根据前面的key找到的B中的数据包。
+来看看第一行输出：“re”作为group的key时，其找不到对应的A中的数据，因此第二项就是一个空的包“{}”，“re”这个key在B中找到了对应的数据（28790    re    00000），因此第三项就是包{(28790,re,0)}。
+其他输出数据也类似。&lt;/p&gt;
+
+&lt;p&gt;（15）安装pig后，运行pig命令时提示“Cannot find hadoop configurations in classpath”等错误的解决办法
+pig安装好后，运行pig命令时提示以下错误：&lt;/p&gt;
+
+&lt;p&gt;ERROR org.apache.pig.Main - ERROR 4010: Cannot find hadoop configurations in classpath (neither hadoop-site.xml nor core-site.xml was found in the classpath).If you plan to use local mode, please put -x local option in command line
+显而易见，提示找不到与hadoop相关的配置文件。所以我们需要把hadoop安装目录下的“conf”子目录添加到系统环境变量PATH中：
+修改 /etc/profile 文件，添加：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;export HADOOP_HOME=/usr/local/hadoop
+export PIG_CLASSPATH=$HADOOP_HOME/conf
+ 
+PATH=$JAVA_HOME/bin:$HADOOP_HOME/bin:$PIG_CLASSPATH:$PATH
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后重新加载 /etc/profile 文件：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;source /etc/profile
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;（16）piggybank是什么东西&lt;/p&gt;
+
+&lt;p&gt;Pig also hosts a UDF repository called piggybank that allows users to share UDFs that they have written.
+说白了就是Apache把大家写的自定义函数放在一块儿，起了个名字，就叫做piggybank。你可以把它理解为一个SVN代码仓库。具体请看这里。&lt;/p&gt;
+
+&lt;p&gt;（17）UDF的构造函数会被调用几次
+你可能会想在UDF的构造函数中做一些初始化的工作，例如创建一些文件，等等。但是你不能假设UDF的构造函数只被调用一次，因此，如果你要在构造函数中做一些只能做一次的工作，你就要当心了——可能会导致错误。&lt;/p&gt;
+
+&lt;p&gt;（18）LOAD数据时，如何一次LOAD多个目录下的数据
+例如，我要LOAD两个HDFS目录下的数据：/abc/2010 和 /abc/2011，则我们可以这样写LOAD语句：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;A = LOAD &#39;/abc/201{0,1}&#39;;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;（19）怎样自己写一个UDF中的加载函数(load function)
+请看这个链接：《Apache Pig中文教程（进阶）》&lt;/p&gt;
+
+&lt;p&gt;（20）重载(overloading)一个UDF
+请看这个链接：《Apache Pig中文教程（进阶）》。&lt;/p&gt;
+
+&lt;p&gt;（21）pig运行不起来，提示“org.apache.hadoop.ipc.Client - Retrying connect to server: 
+请看这个链接：《Apache Pig中文教程（进阶）》&lt;/p&gt;
+
+&lt;p&gt;（22）用含有null的字段来GROUP，结果会如何
+假设有数据文件 a.txt 内容为：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;1 2 5
+1   3
+1 3 
+6 9 8
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;其中，每两列数据之间是用tab分割的，第二行的第2列、第三行的第3列没有内容（也就是说，加载到Pig里之后，对应的数据会变成null），如果把这些数据按第1、第2列来GROUP的话，第1、2列中含有null的行会被忽略吗？
+来做一下试验：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;A = LOAD &#39;a.txt&#39; AS (col1:int, col2:int, col3:int);
+B = GROUP A BY (col1, col2);
+DUMP B;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;输出结果为：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;((1,2),{(1,2,5)})
+((1,3),{(1,3,)})
+((1,),{(1,,3)})
+((6,9),{(6,9,8)})
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;从上面的结果（第三行）可见，原数据中第1、2列里含有null的行也被计入在内了，也就是说，GROUP操作是不会忽略null的，这与COUNT有所不同（见本文前面的部分）。&lt;/p&gt;
+
+&lt;p&gt;（23）如何统计数据中某些字段的组合有多少种
+假设有如下数据：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[root@localhost]# cat a.txt 
+1 3 4 7
+1 3 5 4
+2 7 0 5
+9 8 6 6
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;现在我们要统计第1、2列的不同组合有多少种，对本例来说，组合有三种：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;1 3
+2 7
+9 8
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;也就是说我们要的答案是3。
+用Pig怎么计算？&lt;/p&gt;
+
+&lt;p&gt;先写出全部的Pig代码：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;A = LOAD &#39;a.txt&#39; AS (col1:int, col2:int, col3:int, col4:int);
+B = GROUP A BY (col1, col2); 
+C = GROUP B ALL;
+D = FOREACH C GENERATE COUNT(B); 
+DUMP D;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后再来看看这些代码是如何计算出上面的结果的：
+①第一行代码加载数据，没什么好说的。
+②第二行代码，得到第1、2列数据的所有组合。B的数据结构为：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;grunt&amp;gt; DESCRIBE B;
+B: {group: (col1: int,col2: int),A: {col1: int,col2: int,col3: int,col4: int}}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;把B DUMP出来，得到：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;((1,3),{(1,3,4,7),(1,3,5,4)})
+((2,7),{(2,7,0,5)})
+((9,8),{(9,8,6,6)})
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;非常明显，(1,3)，(2,7)，(9,8)的所有组合已经被排列出来了，这里得到了若干行数据。下一步我们要做的就是统计这样的数据一共有多少行，也就得到了第1、2列的组合有多少组。
+③第三和第四行代码，就实现了统计数据行数的功能。参考本文前面部分的“怎样统计数据行数”一节。就明白这两句代码是什么意思了。
+这里需要特别说明的是：
+a)为什么倒数第二句代码中是COUNT(B)，而不是COUNT(group)？
+我们是对C进行FOREACH，所以要先看看C的数据结构：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;grunt&amp;gt; DESCRIBE C;
+C: {group: chararray,B: {group: (col1: int,col2: int),A: {col1: int,col2: int,col3: int,col4: int}}}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;可见，你可以把C想像成一个map的结构，key是一个group，value是一个包（bag），它的名字是B，这个包中有N个元素，每一个元素都对应到②中所说的一行。根据②的分析，我们就是要统计B中元素的个数，因此，这里当然就是COUNT(B)了。
+b)COUNT函数的作用是统计一个包（bag）中的元素的个数：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;COUNT
+Computes the number of elements in a bag.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;从C的数据结构看，B是一个bag，所以COUNT函数是可以用于它的。
+如果你试图把COUNT应用于一个非bag的数据结构上，会发生错误，例如：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;java.lang.ClassCastException: org.apache.pig.data.BinSedesTuple cannot be cast to org.apache.pig.data.DataBag
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这是把Tuple传给COUNT函数时发生的错误。&lt;/p&gt;
+
+&lt;p&gt;（24）两个整型数相除，如何转换为浮点型，从而得到正确的结果
+这个问题其实很傻，或许不用说你也知道了：假设有int a = 3 和 int b = 2两个数，在大多数编程语言里，a/b得到的是1，想得到正确结果1.5的话，需要转换为float再计算。在Pig中其实和这种情况一样，下面就拿几行数据来做个实验：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[root@localhost ~]# cat a.txt 
+3 2
+4 5
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;在Pig中：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;grunt&amp;gt; A = LOAD &#39;a.txt&#39; AS (col1:int, col2:int);                  
+grunt&amp;gt; B = FOREACH A GENERATE col1/col2;
+grunt&amp;gt; DUMP B;
+(1)
+(0)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;可见，不加类型转换的计算结果是取整之后的值。
+那么，转换一下试试：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;grunt&amp;gt; A = LOAD &#39;a.txt&#39; AS (col1:int, col2:int);
+grunt&amp;gt; B = FOREACH A GENERATE (float)(col1/col2);
+grunt&amp;gt; DUMP B;
+(1.0)
+(0.0)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这样转换还是不行的，这与大多数编程语言的结果一致——它只是把取整之后的数再转换为浮点数，因此当然是不行的。&lt;/p&gt;
+
+&lt;p&gt;正确的做法应该是：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;grunt&amp;gt; A = LOAD &#39;a.txt&#39; AS (col1:int, col2:int); 
+grunt&amp;gt; B = FOREACH A GENERATE (float)col1/col2;  
+grunt&amp;gt; DUMP B;
+(1.5)
+(0.8)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;或者这样也行：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;grunt&amp;gt; A = LOAD &#39;a.txt&#39; AS (col1:int, col2:int);
+grunt&amp;gt; B = FOREACH A GENERATE col1/(float)col2;       
+grunt&amp;gt; DUMP B;
+(1.5)
+(0.8)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这与我们的通常做法是一致的，因此，你要做除法运算的时候，需要注意这一点。&lt;/p&gt;
+
+&lt;p&gt;（25）UNION的一个例子
+假设有两个数据文件为：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[root@localhost ~]# cat 1.txt 
+0 3
+1 5
+0 8
+ 
+[root@localhost ~]# cat 2.txt 
+1 6
+0 9
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;现在要求出：在第一列相同的情况下，第二列的和分别为多少？
+例如，第一列为 1 的时候，第二列有5和6两个值，和为11。同理，第一列为0的时候，第二列的和为 3+8+9=20。
+计算此问题的Pig代码如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;A = LOAD &#39;1.txt&#39; AS (a: int, b: int); 
+B = LOAD &#39;2.txt&#39; AS (c: int, d: int); 
+C = UNION A, B;
+D = GROUP C BY $0; 
+E = FOREACH D GENERATE FLATTEN(group), SUM(C.$1);
+DUMP E;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;输出为：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;(0,20)
+(1,11)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;我们来看看每一步分别做了什么：
+①第1行、第2行代码分别加载数据到关系A、B中，没什么好说的。
+②第3行代码，将关系A、B合并起来了。合并后的数据结构为：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;grunt&amp;gt; DESCRIBE C;
+C: {a: int,b: int}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;其数据为：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;grunt&amp;gt; DUMP C;
+(0,3)
+(1,5)
+(0,8)
+(1,6)
+(0,9)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;③第4行代码按第1列（即$0）进行分组，分组后的数据结构为：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;grunt&amp;gt; DESCRIBE D;
+D: {group: int,C: {a: int,b: int}}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;其数据为：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;grunt&amp;gt; DUMP D;
+(0,{(0,9),(0,3),(0,8)})
+(1,{(1,5),(1,6)})
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;④最后一行代码，遍历D，将D中每一行里的所有bag(即C)的第2列(即$1)进行累加，就得到了我们要的结果。&lt;/p&gt;
+
+&lt;p&gt;（26）错误“ERROR org.apache.pig.tools.grunt.Grunt - ERROR 2042: Error in new logical plan. Try -Dpig.usenewlogicalplan=false.”的可能原因
+①Pig的bug，详见此链接；
+②其他原因。我遇到并解决了一例。具体的代码不便在此陈列，但是基本可以说是由于自己写的Pig代码对复杂数据结构的处理不当导致的，后来我尝试更改了一种实现方式，就绕过了这个问题。关于这点，确实还是要具体问题具体分析的，在这里没有实例的话，无法给大家一个明确的解决问题的指南。&lt;/p&gt;
+
+&lt;p&gt;（27）如何在Pig中使用正则表达式对字符串进行匹配
+假设你有如下数据文件：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[root@localhost ~]# cat a.txt 
+1 http://ui.qq.com/abcd.html
+5 http://tr.qq.com/743.html
+8 http://vid.163.com/trees.php
+9 http:auto.qq.com/us.php
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;现在要找出该文件中，第二列符合“&lt;em&gt;//&lt;/em&gt;.qq.com/*”模式的所有行（此处只有前两行符合条件），怎么做？
+Pig代码如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;A = LOAD &#39;a.txt&#39; AS (col1: int, col2: chararray);
+B = FILTER A BY col2 matches &#39;.*//.*\\.qq\\.com/.*&#39;;  
+DUMP B;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;我们看到，matches关键字对 col2 进行了正则匹配，它使用的是Java格式的正则表达式匹配规则。
+. 表示任意字符，* 表示字符出现任意次数；. 对 . 进行了转义，表示匹配 . 这个字符；/ 就是表示匹配 / 这个字符。
+这里需要注意的是，在引号中，用于转义的字符 \ 需要打两个才能表示一个，所以上面的 \. 就是与正则中的 . 是一样的，即匹配 . 这个字符。所以，如果你要匹配数字的话，应该用这种写法（\d表示匹配数字，在引号中必须用\d）：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;B = FILTER A BY (col matches &#39;\\d.*&#39;);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;最后输出结果为：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;(1,http://ui.qq.com/abcd.html)
+(5,http://tr.qq.com/743.html)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;可见结果是正确的。&lt;/p&gt;
+
+&lt;p&gt;（28）如何截取一个字符串中的某一段
+在处理数据时，如果你想提取出一个日期字符串的年份，例如提取出“2011-10-26”中的“2011”，可以用内置函数 SUBSTRING 来实现：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;SUBSTRING
+Returns a substring from a given string.
+Syntax
+SUBSTRING(string, startIndex, stopIndex)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;下面举一个例子。假设有数据文件：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[root@localhost ~]# cat a.txt 
+2010-05-06  abc
+2008-06-18  uio
+2011-10-11  tyr
+2010-12-23  fgh
+2011-01-05  vbn
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;第一列是日期，现在要找出所有不重复的年份有哪些，可以这样做：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;A = LOAD &#39;a.txt&#39; AS (dateStr: chararray, flag: chararray);
+B = FOREACH A GENERATE SUBSTRING(dateStr, 0, 4);
+C = DISTINCT B;
+DUMP C;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;输出结果为：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;(2008)
+(2010)
+(2011)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;可见达到了我们想要的效果。
+上面的代码太简单了，不必多言，唯一需要说明一下的是 SUBSTRING 函数，它的第一个参数是要截取的字符串，第二个参数是起始索引（从0开始），第三个参数是结束索引。&lt;/p&gt;
+
+&lt;p&gt;（29）如何拼接两个字符串
+假设有以下数据文件：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[root@localhost ~]# cat 1.txt 
+abc 123
+cde 456
+fgh 789
+ijk 200
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;现在要把第一列和第二列作为字符串拼接起来，例如第一行会变成“abc123”，那么使用CONCAT这个求值函数（eval function）就可以做到：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;A = LOAD &#39;1.txt&#39; AS (col1: chararray, col2: int);
+B = FOREACH A GENERATE CONCAT(col1, (chararray)col2);
+DUMP B;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;输出结果为：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;(abc123)
+(cde456)
+(fgh789)
+(ijk200)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;注意这里故意在加载数据的时候把第二列指定为int类型，这是为了说明数据类型不一致的时候CONCAT会出错（你可以试验一下）：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;ERROR org.apache.pig.tools.grunt.Grunt - ERROR 1045: Could not infer the matching function for org.apache.pig.builtin.CONCAT as multiple or none of them fit. Please use an explicit cast.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;所以在后面CONCAT的时候，对第二列进行了类型转换。
+另外，如果数据文件内容为：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[root@localhost ~]# cat 1.txt 
+5 123
+7 456
+8 789
+0 200
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;那么，如果对两列整数CONCAT：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;A = LOAD &#39;1.txt&#39; AS (col1: int, col2: int);
+B = FOREACH A GENERATE CONCAT(col1, col2);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;同样也会出错：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;ERROR org.apache.pig.tools.grunt.Grunt - ERROR 1045: Could not infer the matching function for org.apache.pig.builtin.CONCAT as multiple or none of them fit. Please use an explicit cast.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;要注意这一点。
+有人可能会问：要拼接几个字符串的话怎么办？CONCAT 套 CONCAT 就要可以了（有点笨，但管用）： CONCAT(a, CONCAT(b, c))&lt;/p&gt;
+
+&lt;p&gt;（30）如何求两个数据集的重合 &amp;amp; 不同的数据类型JOIN会失败
+假设有以下两个数据文件：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[root@localhost ~]# cat 1.txt 
+123
+456
+789
+200
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;以及：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[root@localhost ~]# cat 2.txt 
+200
+333
+789
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;现在要找出两个文件中，相同的数据有多少行，怎么做？这也就是所谓的求两个数据集的重合。
+用关系操作符JOIN，我们可以达到这个目的。在处理海量数据时，经常会有求重合的需求。所以JOIN是Pig中一个极其重要的操作。
+在本例中，两个文件中有两个相同的数据行：789以及200，因此，结果应该是2。
+我们先来看看正确的代码：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;A = LOAD &#39;1.txt&#39; AS (a: int);   
+B = LOAD &#39;2.txt&#39; AS (b: int);
+C = JOIN A BY a, B BY b;
+D = GROUP C ALL;
+E = FOREACH D GENERATE COUNT(C);
+DUMP E;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;解释一下：
+①第一、二行是加载数据，不必多言。
+②第三行按A的第1列、B的第二列进行“结合”，JOIN之后，a、b两列不相同的数据就被剔除掉了。C的数据结构为：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;C: {A::a: int,B::b: int}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;C的数据为：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;(200,200)
+(789,789)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;③由于我们要统计的是数据行数，所以上面的Pig代码中的第4、5行就进行了计数的运算。
+④如果文件 2.txt 多一行数据“200”，结果会是什么？答案是：结果为3行。这个时候C的数据为：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;(200,200)
+(200,200)
+(789,789)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;所以如果你要去除重复的，还需要用DISTINCE对C处理一下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;A = LOAD &#39;1.txt&#39; AS (a: int);
+B = LOAD &#39;2.txt&#39; AS (b: int);
+C = JOIN A BY a, B BY b;
+uniq_C = DISTINCT C;
+D = GROUP uniq_C ALL;
+E = FOREACH D GENERATE COUNT(uniq_C);
+DUMP E;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这样得到的结果就是2了。&lt;/p&gt;
+
+&lt;p&gt;尤其需要注意的是，如果JOIN的两列具有不同的数据类型，是会失败的。例如以下代码：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;A = LOAD &#39;1.txt&#39; AS (a: int);   
+B = LOAD &#39;2.txt&#39; AS (b: chararray);
+C = JOIN A BY a, B BY b;
+D = GROUP C ALL;
+E = FOREACH D GENERATE COUNT(C);
+DUMP E;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;在语法上是没有错误的，但是一运行就会报错：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;ERROR org.apache.pig.tools.grunt.Grunt - ERROR 1107: Cannot merge join keys, incompatible types&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;这是因为a、b具有不同的类型：int和chararray。
+（31）使用三目运算符“ ? : ”有时候必须加括号
+假设有以下数据文件：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[root@localhost ~]# cat a.txt 
+5 8 9
+6   0
+4 3 1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;其中，第二行的第二列数据是有缺失的，因此，加载数据之后，它会成为null。顺便废话一句，在处理海量数据时，数据有缺失是经常遇到的现象。
+现在，我们如果要把所有缺失的数据填为 -1， 可以使用三目运算符来操作：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;A = LOAD &#39;a.txt&#39; AS (col1:int, col2:int, col3:int);
+B = FOREACH A GENERATE col1, ((col2 is null)? -1 : col2), col3;
+DUMP B;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;输出结果为：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;(5,8,9)
+(6,-1,0)
+(4,3,1)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;((col2 is null)? -1 : col2) 的含义不用解释你也知道，就是当col2为null的时候将其置为-1，否则就保持原来的值，但是注意，它最外面是用括号括起来的，如果去掉括号，写成 (col2 is null)? -1 : col2，那么就会有语法错误：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;ERROR org.apache.pig.tools.grunt.Grunt - ERROR 1000: Error during parsing. Encountered “ “is” “is “” at line 1, column 36.
+Was expecting one of （后面省略）&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;错误提示有点不直观。所以，有时候使用三目运算符是必须要使用括号的。
+（32）如何补上缺失的数据
+通过前面的文章，我们已经知道了如何按自己的需求补上缺失的数据，那么这里还有一个例子，可以让你多了解一些特殊的情况。
+数据文件如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[root@localhost ~]# cat 1.txt 
+1 (4,9)
+5 
+8 (3,0)
+5 (9,2)
+6 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这些数据的布局比较怪，我们要把它加载成什么样的schema呢？答：第一列为一个int，第二列为一个tuple，此tuple又含两个int。加载成这样的模式不是为了制造复杂度，而是为了说明后面的问题而设计的。
+同时，我们也注意到，第二列数据是有缺失的。
+问题：怎样求在第一列数据相同的情况下，第二列数据中的第一个整数的和分别为多少？
+例如，第一列为1的数据只有一行（即第一行），因此，第二列的第一个整数的和就是4。
+但是对最后一行，也就是第一列为6时，由于其第二列数据缺失，我们希望它输出的结果是0。
+先来看看Pig代码：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;A = LOAD &#39;1.txt&#39; AS (a:int, b:tuple(x:int, y:int));
+B = FOREACH A GENERATE a, FLATTEN(b);
+C = GROUP B BY a;
+D = FOREACH C GENERATE group, SUM(B.x);
+DUMP D;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;结果为：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;(1,4)
+(5,9)
+(6,)
+(8,3)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;我们注意到，(5,9) 这一行是由数据文件 1.txt 的第 2、4行计算得到的，其中，第2行数据有缺失，但这并不影响求和计算，因为另一行数据没有缺失。你可以这样想：一个包（bag）中有多个数，当其中一个为null，而其他不为null时，把它们相加会自动忽略null。
+然而，第三行 (6,) 是不是太刺眼了？没错，因为数据文件 1.txt 的最后一行缺失了第二列，所以，在 SUM(B.x) 中的 B.x 为null就会导致计算结果为null，从而什么也输出不了。
+这就与我们期望的输出有点不同了。我们希望这种缺失的数据不要空着，而是输出0。该怎么做呢？&lt;/p&gt;
+
+&lt;p&gt;想法1：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;D = FOREACH C GENERATE group, ((IsEmpty(B.x)) ? 0 : SUM(B.x));
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;输出结果为：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;(1,4)
+(5,9)
+(6,)
+(8,3)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;可见行不通。从这个结果我们知道，IsEmpty(B.x) 为false，即B.x不是empty的，所以不能这样做。
+想法2：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;D = FOREACH C GENERATE group, ((B.x is null) ? 0 : SUM(B.x));
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;输出结果还是与上面一样！仍然行不通。这更奇怪了：B.x既非empty，也非null，那么它是什么情况？按照我的理解，当group为6时，它应该是一个非空的包（bag），里面有一个null的东西，所以，这个包不是empty的，它也非null。我不知道这样理解是否正确，但是它看上去就像是这样的。
+想法3：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;D = FOREACH C GENERATE group, SUM(B.x) AS s;
+E = FOREACH D GENERATE group, ((s is null) ? -1 : s);
+DUMP E;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;输出结果为：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;(1,4)
+(5,9)
+(6,-1)
+(8,3)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;可见达到了我们想要的结果。这与本文前面部分的做法是一致的，即：先得到含null的结果，再把这个结果中的null替换为指定的值。
+有人会问：就没有办法在生成数据集D的时候，就直接通过判断语句来实现这个效果吗？据我目前所知是不行的，如果哪位读者知道，不妨告知。&lt;/p&gt;
+
+&lt;p&gt;（33）DISTINCT操作用于去重，正因为它要把数据集合到一起，才知道哪些数据是重复的，因此，它会产生reduce过程。同时，在map阶段，它也会利用combiner来先去除一部分重复数据以加快处理速度。&lt;/p&gt;
+
+&lt;p&gt;（34）如何将Pig job的优先级设为HIGH
+嫌Pig job运行太慢？只需在Pig脚本的开头加上一句：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;set job.priority HIGH;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;即可将Pig job的优先级设为高了。&lt;/p&gt;
+
+&lt;p&gt;（35）“Scalars can be only used with projections”错误的原因
+这个错误提示比较不直观，光看这句话是不容易发现错误所在的，但是，只要你一Google，可能就找到原因了，例如这个链接里的反馈。
+在这里，我也想用一个简单的例子给大家用演示一下产生这个错误的原因之一。
+假设有如下数据文件：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[root@localhost ~]$ cat 1.txt 
+a 1
+b 8
+c 3
+c 3
+d 6
+d 3
+c 5
+e 7
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;现在要统计：在第1列的每一种组合下，第二列为3和6的数据分别有多少条？
+例如，当第1列为 c 时，第二列为3的数据有2条，为6的数据有0条；当第1列为d时，第二列为3的数据有1条，为6的数据有1条。其他的依此类推。
+Pig代码如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;A = LOAD &#39;1.txt&#39; AS (col1:chararray, col2:int);
+B = GROUP A BY col1;
+C = FOREACH B {
+  D = FILTER A BY col2 == 3;
+  E = FILTER A BY col2 == 6;
+  GENERATE group, COUNT(D), COUNT(E);
+};
+DUMP C;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;输出结果为：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;(a,0,0)
+(b,0,0)
+(c,2,0)
+(d,1,1)
+(e,0,0)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;可见结果是正确的。&lt;/p&gt;
+
+&lt;p&gt;那么，如果我在上面的代码中，把“D = FILTER A BY col2 == 3”不小心写成了“D = FILTER B BY col2 == 3”，就肯定会得到“Scalars can be only used with projections”的错误提示。
+说白了，还是要时刻注意你每一步生成的数据的结构，眼睛睁大，千万不要用错了relation。&lt;/p&gt;
+
+&lt;p&gt;（36）什么是嵌套的FOREACH/内部的FOREACH
+嵌套的（nested）FOREACH和内部的（inner）FOREACH是一个意思，正如你在本文第(35)条中所见，一个FOREACH可以对每一条记录施以多种不同的关系操作，然后再GENERATE得到想要的结果，这就是嵌套的/内部的FOREACH。&lt;/p&gt;
+
+&lt;p&gt;（37）错误“Could not infer the matching function for org.apache.pig.builtin.CONCAT”的原因之一
+如果你遇到这个错误，那么有可能是你在多级CONCAT嵌套的时候，没有写对语句，例如“CONCAT(CONCAT(CONCAT(a, b), c), d)”这样的嵌套，由于括号众多，所以写错了是一点也不奇怪的。我遇这个错误的时候，是由于CONCAT太多，自己多写了一个都没有发现。希望我的提醒能给你一点解决问题的提示。&lt;/p&gt;
+
+&lt;p&gt;（38）用Pig加载HBase数据时遇到的错误“ERROR 2999: Unexpected internal error. could not instantiate ‘com.twitter.elephantbird.pig.load.HBaseLoader’ with arguments XXX”的原因之一
+请看这个链接：《Apache Pig中文教程（进阶）》&lt;/p&gt;
+
+&lt;p&gt;（39）错误“ERROR 1039: In alias XX, incompatible types in EqualTo Operator left hand side:XXX right hand side:XXX”的原因
+其实这个错误提示太明显了，就是类型不匹配造成的。上面的XXX可以指代不同的类型。
+这说明，前面可能有一个类型为long的字段，后面你却把它当chararray来用了，例如：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;A = LOAD &#39;1.txt&#39; AS (col1: int, col2: long);
+B = FILTER A BY col2 == &#39;123456789&#39;;
+C = GROUP B ALL;
+D = FOREACH C GENERATE COUNT(B);
+DUMP D;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;就会出错：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;ERROR 1039: In alias B, incompatible types in EqualTo Operator left hand side:long right hand side:chararray&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;只要把col2强制类型转换一下（或者一开始就将其类型指定为chararray）就可以解决问题。&lt;/p&gt;
+
+&lt;p&gt;不仅在进行数据比较中，在JOIN时也经常出现数据类型不匹配导致的错误问题。我在实际工作中发现，有的同学写了比较长的Pig代码，出现了这样的错误却不会仔细去看错误提示，而是绞尽脑汁地逐句去检查语法（语法是没有错的），结果费了很大的劲才知道是类型问题，得不偿失，还不如仔细看错误提示想想为什么。&lt;/p&gt;
+
+&lt;p&gt;（40）在grunt交互模式下，如何在编辑Pig代码的时候跳到行首和行末/行尾
+在grunt模式下，如果你写了一句超长的Pig代码，那么，你想通过HOME/END键跳到行首和行末是做不到的。
+按HOME时，Pig会在你的光标处插入一个“1~”：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;A = LOAD &#39;1.txt&#39; AS (col: int1~);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;按END时，Pig会在你的光标处插入一个“4~”：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;A = LOAD &#39;1.txt&#39; AS (col: int4~);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;正确的做法是：按Ctrl+A 和 Ctrl+E 代替 HOME 和 END，就可以跳到行首和行末了。&lt;/p&gt;
+
+&lt;p&gt;（41）不能对同一个关系（relation）进行JOIN
+假设有如下文件：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[root@localhost ~]# cat 1.txt 
+1 a
+2 e
+3 v
+4 n
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;我想对第一列这样JOIN：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;A = LOAD &#39;1.txt&#39; AS (col1: int, col2: chararray); 
+B = JOIN A BY col1, A BY col1;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;那么当你试图 DUMP B 的时候，会报如下的错：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;ERROR org.apache.pig.tools.grunt.Grunt - ERROR 1108: Duplicate schema alias: A::col1 in “B”&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;这是因为Pig会弄不清JOIN之后的字段名——两个字段均为A::col1，使得一个关系（relation）中出现了重复的名字，这是不允许的。&lt;/p&gt;
+
+&lt;p&gt;要解决这个问题，只需将数据LOAD两次，并且给它们起不同的名字就可以了：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;grunt&amp;gt; A = LOAD &#39;1.txt&#39; AS (col1: int, col2: chararray);
+grunt&amp;gt; B = LOAD &#39;1.txt&#39; AS (col1: int, col2: chararray);
+grunt&amp;gt; C = JOIN A BY col1, B BY col1;                   
+grunt&amp;gt; DESCRIBE C;
+C: {A::col1: int,A::col2: chararray,B::col1: int,B::col2: chararray}
+grunt&amp;gt; DUMP C;
+(1,a,1,a)
+(2,e,2,e)
+(3,v,3,v)
+(4,n,4,n)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;从上面的 C 的schema，你可以看出来，如果对同一个关系A的第一列进行JOIN，会导致schema中出现相同的字段名，所以当然会出错。&lt;/p&gt;
+
+&lt;p&gt;（42）外部的JOIN(outer JOIN)
+初次使用JOIN时，一般人使用的都是所谓的“内部的JOIN”(inner JOIN)，也即类似于 C = JOIN A BY col1, B BY col2 这样的JOIN。Pig也支持“外部的JOIN”(outer JOIN)，下面就举一个例子。
+假设有文件：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[root@localhost ~]# cat 1.txt 
+1 a
+2 e
+3 v
+4 n
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;以及：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[root@localhost ~]# cat 2.txt 
+9 a
+2 e
+3 v
+0 n
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;现在来对这两个文件的第一列作一个outer JOIN：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;grunt&amp;gt; A = LOAD &#39;1.txt&#39; AS (col1: int, col2: chararray);
+grunt&amp;gt; B = LOAD &#39;2.txt&#39; AS (col1: int, col2: chararray);
+grunt&amp;gt; C = JOIN A BY col1 LEFT OUTER, B BY col1;
+grunt&amp;gt; DESCRIBE C;
+C: {A::col1: int,A::col2: chararray,B::col1: int,B::col2: chararray}
+grunt&amp;gt; DUMP C;
+(1,a,,)
+(2,e,2,e)
+(3,v,3,v)
+(4,n,,)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;在outer JOIN中，“OUTER”关键字是可以省略的。从上面的结果，我们注意到：如果换成一个inner JOIN，则两个输入文件的第一、第四行都不会出现在结果中（因为它们的第一列不相同），而在LEFT OUTER JOIN中，文件1.txt的第一、四行却被输出了，所以这就是LEFT OUTER JOIN的特点：对左边的记录来说，即使它与右边的记录不匹配，它也会被包含在输出数据中。&lt;/p&gt;
+
+&lt;p&gt;同理可知RIGHT OUTER JOIN的功能——把上面的 LEFT 换成 RIGHT，结果如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;(,,0,n)
+(2,e,2,e)
+(3,v,3,v)
+(,,9,a)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;可见，与左边的记录不匹配的右边的记录被保存了下来，而左边的记录没有保存下来（两个逗号表明其为空），这就是RIGHT OUTER JOIN的效果，与我们想像的一样。
+有人会问，OUTER JOIN在实际中可以用来做什么？举一个例子：可以用来求“不在某数据集中的那些数据（即：不重合的数据）”。还是以上面的两个数据文件为例，现在我要求出 1.txt 中，第一列不在 2.txt 中的第一列的那些记录，肉眼一看就知道，1和4这两个数字在 2.txt 的第一列里没有出现，而2和3出现了，因此，我们要找的记录就是：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;1 a
+4 n
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;要实现这个效果，Pig代码及结果为：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;grunt&amp;gt; A = LOAD &#39;1.txt&#39; AS (col1: int, col2: chararray);
+grunt&amp;gt; B = LOAD &#39;2.txt&#39; AS (col1: int, col2: chararray);
+grunt&amp;gt; C = JOIN A BY col1 LEFT OUTER, B BY col1;        
+grunt&amp;gt; DESCRIBE C;                 
+C: {A::col1: int,A::col2: chararray,B::col1: int,B::col2: chararray}
+grunt&amp;gt; D = FILTER C BY (B::col1 is null); 
+grunt&amp;gt; E = FOREACH D GENERATE A::col1 AS col1, A::col2 AS col2;
+grunt&amp;gt; DUMP E;
+(1,a)
+(4,n)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;可见，我们确实找出了“不重合的记录”。在作海量数据分析时，这种功能是极为有用的。
+最后来一个总结：
+假设有两个数据集（在1.txt和2.txt中），分别都只有1列，则如下代码：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;A = LOAD &#39;1.txt&#39; AS (col1: chararray);
+B = LOAD &#39;2.txt&#39; AS (col1: chararray);  
+C = JOIN A BY col1 LEFT OUTER, B BY col1;
+D = FILTER C BY (B::col1 is null);
+E = FOREACH D GENERATE A::col1 AS col1;                 
+DUMP E;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;计算结果为：在A中，但不在B中的记录。&lt;/p&gt;
+
+&lt;p&gt;（43）JOIN的优化
+请看这个链接：《Apache Pig中文教程（进阶）》&lt;/p&gt;
+
+&lt;p&gt;（44）GROUP时按所有字段分组可以用GROUP ALL吗
+假设你有如下数据文件：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[root@localhost ~]# cat 3.txt 
+1 9
+2 2
+3 3
+4 0
+1 9
+1 9
+4 0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;现在要找出第1、2列的组合中，每一种的个数分别为多少，例如，(1,9)组合有3个，(4,0)组合有两个，依此类推。
+显而易见，我们只需要用GROUP就可以轻易完成这个任务。于是写出如下代码：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;A = LOAD &#39;3.txt&#39; AS (col1: int, col2: int);
+B = GROUP A ALL;
+C = FOREACH B GENERATE group, COUNT(A);
+DUMP C;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;可惜，结果不是我们想要的：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;(all,7)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;为什么呢？我们的本意是按所有列来GROUP，于是使用了GROUP ALL，但是这实际上变成了统计行数，下面的代码就是一段标准的统计数据行数的代码：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;A = LOAD &#39;3.txt&#39; AS (col1: int, col2: int);
+B = GROUP A ALL;
+C = FOREACH B GENERATE COUNT(A);
+DUMP C;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;因此，上面的 C = FOREACH B GENERATE group, COUNT(A) 也无非就是多打印了一个group的名字（all）而已——group的名字被设置为“all”，这是Pig帮你做的。&lt;/p&gt;
+
+&lt;p&gt;正确的做法很简单，只需要按所有字段GROUP，就可以了：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;A = LOAD &#39;3.txt&#39; AS (col1: int, col2: int);
+B = GROUP A BY (col1, col2);
+C = FOREACH B GENERATE group, COUNT(A);
+DUMP C;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;结果如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;((1,9),3)
+((2,2),1)
+((3,3),1)
+((4,0),2)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这与我们前面分析的正确结果是一样的。&lt;/p&gt;
+
+&lt;p&gt;（45）在Pig中使用中文字符串
+有读者来信问我，如何在Pig中使用中文作为FILTER的条件？我做了如下测试，结论是可以使用中文。
+数据文件 data.txt 内容为（每一列之间以TAB为分隔符）：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;1 北京市 a
+2 上海市 b
+3 北京市 c
+4 北京市 f
+5 天津市 e
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Pig脚本文件 test.pig 内容为：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;A = LOAD &#39;data.txt&#39; AS (col1: int, col2: chararray, col3: chararray);
+B = FILTER A BY (col2 == &#39;北京市&#39;);
+DUMP B;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;首先，我这两个文件的编码都是UTF-8(无BOM)，在Linux命令行下，我直接以本地模式执行Pig脚本 test.pig：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;pig -x local test.pig
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;得到的输出结果为：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;(1,北京市,a)
+(3,北京市,c)
+(4,北京市,f)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;可见结果是正确的。&lt;/p&gt;
+
+&lt;p&gt;但是，如果我在grunt交互模式下，把 test.pig 的内容粘贴进去执行，是得不到任何输出结果的：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;grunt&amp;gt; A = LOAD &#39;data.txt&#39; AS (col1: int, col2: chararray, col3: chararray);
+grunt&amp;gt; B = FILTER A BY (col2 == &#39;北京市&#39;);
+grunt&amp;gt; DUMP B;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;具体原因我不清楚，但是至少有一点是肯定的：可以使用中文作为FILTER的条件，只要不在交互模式下执行你的Pig脚本即可。&lt;/p&gt;
+
+&lt;p&gt;（46）如何统计 tuple 中的 field 数，bag 中的 tuple 数，map 中的 key/value 组数
+一句话：用Pig内建的 SIZE 函数：&lt;/p&gt;
+
+&lt;p&gt;Computes the number of elements based on any Pig data type.
+具体可看这个链接。&lt;/p&gt;
+
+&lt;p&gt;（47）一个字符串为null，与它为空不一定等价
+在某些情况下，要获取“不为空”的字符串，仅仅用 is not null 来判断是不够的，还应该加上 SIZE(field_name) &amp;gt; 0 的条件：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;B = FILTER A BY (field_name is not null AND (SIZE(field_name) &amp;gt; 0L));
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;注意，这只是在某些情况下需要这样做，在一般情况下，仅用 is not null 来过滤就可以了。我并没有总结出特殊情况是哪些情况，我只能说我我不是第一次遇到此情况了，所以才有了这一个结论。
+注意上面使用的是“0L”，因为SIZE()返回的是long类型，如果不加L，在Pig0.10下会出现一个警告，例如：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;[main] WARN  org.apache.pig.PigServer - Encountered Warning IMPLICIT_CAST_TO_LONG 1 time(s)&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;（48）Pig中的各operator（操作符），哪些会触发reduce过程
+①GROUP：由于GROUP操作会将所有具有相同key的记录收集到一起，所以数据如果正在map中处理的话，就会触发shuffle→reduce的过程。
+②ORDER：由于需要将所有相等的记录收集到一起（才能排序），所以ORDER会触发reduce过程。同时，除了你写的那个Pig job之外，Pig还会添加一个额外的M-R job到你的数据流程中，因为Pig需要对你的数据集做采样，以确定数据的分布情况，从而解决数据分布严重不均的情况下job效率过于低下的问题。
+③DISTINCT：由于需要将记录收集到一起，才能确定它们是不是重复的，因此DISTINCT会触发reduce过程。当然，DISTINCT也会利用combiner在map阶段就把重复的记录移除。
+④JOIN：JOIN用于求重合，由于求重合的时候，需要将具有相同key的记录收集到一起，因此，JOIN会触发reduce过程。
+⑤LIMIT：由于需要将记录收集到一起，才能统计出它返回的条数，因此，LIMIT会触发reduce过程。
+⑥COGROUP：与GROUP类似（参看本文前面的部分），因此它会触发reduce过程。
+⑦CROSS：计算两个或多个关系的叉积。&lt;/p&gt;
+
+&lt;p&gt;（49）如何统计一个字符串中包含的指定字符数
+这可以不算是个Pig的问题了，你可以把它认为是一个shell的问题。从本文前面部分我们已经知道，Pig中可以用 STREAM … THROUGH 来调用shell进行辅助数据处理，所以在这我们也能这样干。
+假设有文本文件：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[root@localhost ~]$ cat 1.txt 
+123 abcdef:243789174
+456 DFJKSDFJ:3646:555558888
+789 yKDSF:00000%0999:2343324:11111:33333
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;现在要统计：每一行中，第二列里所包含的冒号（“:”）分别为多少？代码如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;A = LOAD &#39;1.txt&#39; AS (col1: chararray, col2: chararray);
+B = STREAM A THROUGH `awk -F&quot;:&quot; &#39;{print NF-1}&#39;` AS (colon_count: int);
+DUMP B;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;结果为：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;(1)
+(2)
+(4)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;（50）UDF是区分大小写的
+因为UDF是由Java类来实现的，所以区分大小写，就这么简单。&lt;/p&gt;
+
+&lt;p&gt;（51）设置Pig job的job name
+在Pig脚本开头加上一句：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;set job.name &#39;My-Job-Name&#39;;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;那么，执行该Pig脚本之后，在Hadoop的Job Tracker中看到的“Name”就是“My-Job-Name”了。
+如果不设置，显示的name是类似于“Job6245768625829738970.jar”这样的东西，job多的时候完全没有标识度，建议一定要设置一个特殊的job name。&lt;/p&gt;
+
+</content>
+   </entry>
    
    <entry>
      <title>Pig解析中文文档</title>
@@ -1146,6 +2550,74 @@ public class B extends A{
    </entry>
    
    <entry>
+     <title>1个月学习小结——代价敏感的数据流分类算法</title>
+     <link href="http://ningg.github.com/summary-of-20130103"/>
+     <updated>2014-01-03T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/summary-of-20130103</id>
+     <content type="html">&lt;p&gt;最近几个月阅读论文都是“抄家底”的方式进行，即，认准一个作者，把他最近几年的论文看个遍，然后再看看自己有没有新的想法。&lt;/p&gt;
+
+&lt;p&gt;其中，第一个作者是西北农林科技的张阳教授，再一个就是针对&lt;code&gt;cost-sensitive decision tree&lt;/code&gt;方向看了一些论文，值得说明的是找到一篇比较全面的综述，还是2011年左右的，不过这篇文章还没有详细去看。&lt;/p&gt;
+
+&lt;p&gt;这一个多月内（从&lt;code&gt;2012.10.12&lt;/code&gt;开题那一天算起），确定了这个月将围绕一个主题进行学习&lt;code&gt;数据流、代价敏感、分类&lt;/code&gt;；基于这个主题，可以预想到的工作有：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;ol&gt;
+    &lt;li&gt;研究现有的数据流data-stream中的classification；研究现有的cost-sensitive classification；&lt;/li&gt;
+    &lt;li&gt;将cost-sensitive应用于data stream classification中（设计算法）；&lt;/li&gt;
+    &lt;li&gt;初期处理数据，改造实验平台（weka、MOA）进行试验；&lt;/li&gt;
+    &lt;li&gt;小论文（EI）、毕业论文（中期、最终）；&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;现在的进展：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;code&gt;data stream classification&lt;/code&gt; &amp;amp; &lt;code&gt;cost sensitive classification&lt;/code&gt;都有有了一点了解；&lt;/li&gt;
+    &lt;li&gt;决定classification使用&lt;code&gt;Decision tree&lt;/code&gt;进行；（在&lt;code&gt;data stream&lt;/code&gt;和&lt;code&gt;cost sensitive&lt;/code&gt;中&lt;code&gt;Decision-tree&lt;/code&gt;都有前人进行过较深入的研究工作）&lt;/li&gt;
+    &lt;li&gt;遇到第一个问题：2012年TKDE中有文章指出&lt;code&gt;VFDT&lt;/code&gt;中使用的&lt;code&gt;Hoeffding’s-bound&lt;/code&gt;不严格，而应改为使用&lt;code&gt;McDiarmid’s-bound&lt;/code&gt;，针对这个自己很纠结，因为新提出的&lt;code&gt;bound&lt;/code&gt;限定的n值更大，需要的训练&lt;code&gt;instance&lt;/code&gt;更多，这对自己有什么影响吗？&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;blockquote&gt;
+    &lt;ol&gt;
+      &lt;li&gt;需要更多的instance&lt;/li&gt;
+      &lt;li&gt;或者，更换选择分裂属性的指标（可以使用Gini Index）&lt;/li&gt;
+      &lt;li&gt;思考能否，重新描述“VFDT”中数学问题，并提出与McDiarmid’s-Bound并列的界限值（换个角度想），或者能否改进McDiarmid’s-Bound。&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/blockquote&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;————————————–2013/01/04———————————————&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;今天的进展&lt;/strong&gt;：改进了[2]中针对Infomation-gain提出的McDiarmid’s-bound，将其值降低了18倍，但仍然不可用。如果能够再降低10倍，与“VFDT”中bound结果逼近，则可以在实际试验中使用参数info-gain。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;目标&lt;/strong&gt;：改进[2]中针对Infomation-gain提出的McDiarmid’s-bound&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;具体&lt;/strong&gt;：重新审视McDiarmid’s_inequality，参考[1]中Hoeffding’s_inequality是一个特列。参考[3]中（Definition 1）empirical-entropy和entropy-norm之间关系，结合[2]中原始的McDiarmid’s bound重新计算info-gain的bound。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;下一步打算&lt;/strong&gt;：继续改进Infomation-gain提出的McDiarmid’s-bound，具体可以从[3][4]中获得想法（改进思路：决策树分裂属性的数学描述、信息增益的原始计算公式、熵、McDiarmid’s-inequality）。（目标：最终可用）&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;参考文献&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;ashish-mcdiarmid.pdf&lt;/li&gt;
+  &lt;li&gt;Decision trees for mining data streams based on the McDiarmid’s bound.pdf&lt;/li&gt;
+  &lt;li&gt;A Near-Optimal Algorithm for Computing the Entropy of a Stream.pdf&lt;/li&gt;
+  &lt;li&gt;Extensions to McDiarmid’s inequality when differences are bounded with high probability.pdf&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;结束语&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;问：世间此山最高？或者另有高处？&lt;/p&gt;
+
+&lt;p&gt;答：世间自有他山高此山，Open-mind比天高。&lt;/p&gt;
+
+</content>
+   </entry>
+   
+   <entry>
      <title>Linux 后台运行命令</title>
      <link href="http://ningg.github.com/linux-cmd-run-in-background"/>
      <updated>2013-01-17T00:00:00+08:00</updated>
@@ -1229,257 +2701,358 @@ cat /dev/null &amp;gt; nohup.out
    </entry>
    
    <entry>
-     <title>使用数据库查找材料</title>
-     <link href="http://ningg.github.com/how-to-use-lib"/>
-     <updated>2012-11-30T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/how-to-use-lib</id>
-     <content type="html">&lt;h2 id=&quot;section&quot;&gt;图书馆数据库的使用&lt;/h2&gt;
-
-&lt;p&gt;3年前在本科的时候，上过一门课“文献检索”，当时主要学了一点cnki使用的知识，没多久就忘掉了，现在想想造成这个结果有两个原因：1.当时学习就不求甚解，学习的时候，只是想到在考核上要达标，没有记录一些实用的检索手段；2.后来使用cnki的次数也少。要查找东西得时候，自己都是google，这是个好的习惯，但是，这只是初级水平；要达到中等水平，需要熟练专业数据库的检索。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/how-to-use-lib/lib-floor.jpg&quot; alt=&quot;lib-floor&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;现在越来越发现，数据库的使用是多么的重要。特别是在资料查询上，如果使用数据库检索得心应手，就会节省很多时间，而且，能够很精确的找到自己想要的材料。&lt;/p&gt;
-
-&lt;p&gt;本次主要介绍一些外文数据库的使用，具体包括：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;http://libra.msra.cn&quot;&gt;微软学术&lt;/a&gt;：包含范围比较广&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://scholar.google.com/&quot;&gt;google学术&lt;/a&gt;：最近几年，相比于&lt;a href=&quot;http://libra.msra.cn&quot;&gt;微软学术&lt;/a&gt;，能够实时收录最新的论文&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://acm.lib.tsinghua.edu.cn/acm/Main.nsp&quot;&gt;ACM&lt;/a&gt;：具体查找顶级会议、期刊的电子资源&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://ieeexplore.ieee.org/&quot;&gt;IEEE&lt;/a&gt;：具体查找顶级会议、期刊的电子资源&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;section-1&quot;&gt;微软学术搜索&lt;/h2&gt;
-
-&lt;p&gt;网址：&lt;a href=&quot;http://libra.msra.cn&quot;&gt;http://libra.msra.cn&lt;/a&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;在搜索框中，直接进行检索，例如“decision tree for mining data stream”；&lt;/li&gt;
-  &lt;li&gt;（可选）添加高级搜索条件“advanced search”；&lt;/li&gt;
-  &lt;li&gt;在左边栏中，选择搜索的领域，例如选择“Computer Science”；&lt;/li&gt;
-  &lt;li&gt;在左边栏中，选择搜索的“Author\Conferences\Journals\Organizations”；（注意只选这几个关键字，而不要选择关键字下面具体的内容）&lt;/li&gt;
-  &lt;li&gt;在打开的界面中，依次选择“related publication(s)”即可。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;google&quot;&gt;google学术搜索&lt;/h2&gt;
-
-&lt;p&gt;网址：&lt;a href=&quot;http://scholar.google.com/&quot;&gt;http://scholar.google.com/&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;acm&quot;&gt;ACM&lt;/h2&gt;
-
-&lt;p&gt;网址：&lt;a href=&quot;http://acm.lib.tsinghua.edu.cn/acm/Main.nsp&quot;&gt;http://acm.lib.tsinghua.edu.cn/acm/Main.nsp&lt;/a&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;首页可选择浏览“Special Interest Groups（SIGs）”或者“Transactions”等&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;ieee&quot;&gt;IEEE&lt;/h2&gt;
-
-&lt;p&gt;网址：&lt;a href=&quot;http://ieeexplore.ieee.org/&quot;&gt;http://ieeexplore.ieee.org/&lt;/a&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;首页选择范围“conference Publications”或者“Journal &amp;amp; Magazines”；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/how-to-use-lib/lib-book.jpg&quot; alt=&quot;lib-book&quot; /&gt;&lt;/p&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>非通信专业，如何对通信有一个整体的认识</title>
-     <link href="http://ningg.github.com/frame-of-communication-knowledge"/>
-     <updated>2012-11-30T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/frame-of-communication-knowledge</id>
-     <content type="html">&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
-
-&lt;p&gt;今天有人问我，不是通信专业怎么才能对通信以及通信网络有个整体的认识，大概想了一下，列了一下自己的想法，如果有错误的地方还请大家帮忙改正。 &lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://bbs.byr.cn/&quot;&gt;北邮人论坛&lt;/a&gt;的注册用户&lt;code&gt;bacbyr (比爱成)&lt;/code&gt;和&lt;code&gt;wuxuguang ( 水炎) &lt;/code&gt;都推荐《&lt;a href=&quot;http://book.douban.com/subject/4199502/&quot;&gt;大话无线通信&lt;/a&gt;》，评语：理解清清楚楚，就靠它入门了；比较生动形象，一下子就能翻几十页，很痛快。&lt;/p&gt;
-
-&lt;p&gt;看来《&lt;a href=&quot;http://book.douban.com/subject/4199502/&quot;&gt;大话无线通信&lt;/a&gt;》这本书值得一读。&lt;/p&gt;
-
-&lt;h2 id=&quot;section-1&quot;&gt;个人观点&lt;/h2&gt;
-
-&lt;p&gt;要对通信有整体认识，需要解决下面几个问题： &lt;/p&gt;
-
-&lt;h3 id=&quot;section-2&quot;&gt;1.什么是通信？&lt;/h3&gt;
-
-&lt;p&gt;我的理解，双方进行信息交换过程就是通信。 &lt;/p&gt;
-
-&lt;p&gt;举例：你和隔壁的吴老二，俩人的聊天过程就是一个典型的通信过程。见下图： &lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/frame-of-communication-knowledge/talk-with-neighbour.jpg&quot; alt=&quot;talk-with-neighbour&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;section-3&quot;&gt;2.什么是通信网？&lt;/h3&gt;
-
-&lt;p&gt;通信网是由基本通信系统组成的，一个基本的通信系统包括：信源、信道、信宿；信源实际就是发信者，信宿就是收信者；信源产生的信息，通过信道进行传输，最终到达信宿。 &lt;/p&gt;
-
-&lt;p&gt;举例：具体，在聊天过程中，当你在说、隔壁吴老二在听的时候，你是信源（发信者），空气是信道（无线信道有木有），吴老二是信宿（收信者）；反之，自己想。基本通信系统，见下图： &lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/frame-of-communication-knowledge/base-unit.jpg&quot; alt=&quot;base-unit&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;section-4&quot;&gt;3.通信知识框架-基础&lt;/h3&gt;
-
-&lt;p&gt;（理解了上面两个问题，再看这一个）上面提到的“通信系统”虽然很简单，只是由“信源、信道、信宿”构成，但是却引出整个通信的知识。简要说明如下： &lt;/p&gt;
-
-&lt;h4 id=&quot;a&quot;&gt;a)信源发出的信息，一般都是模拟信号，需要经过数字化处理，之后还需要信息编码；（对不同信息：声音、图像、视频等，都有各色各样的编码技术）什么编码方式能保证不失真，需要信息论的知识；&lt;/h4&gt;
-
-&lt;h4 id=&quot;b&quot;&gt;b)经过处理的信息，要想在信道上传输，需要信道编码；（对于不同信道，主要是有线信道、无线信道，根据信道特性不同，使用不同的传输技术；特别需要说明的是，在不同情况下，信道的衰减特性不同，使用不同的信息增强技术）&lt;/h4&gt;
-
-&lt;h4 id=&quot;c&quot;&gt;c)信宿收到信息之后，需要进行与信源相反的操作：解码。&lt;/h4&gt;
-
-&lt;p&gt;举例：具体，就好比，你跟隔壁吴老二距离很近的时候，直接说话聊天，你俩人都能听清楚；但是当你俩距离很远时，直接说话对方不一定能听清楚，这就需要经过一些处理，才能保证你俩能继续聊天，例如，用大喇叭来放大声音等。见下图： &lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/frame-of-communication-knowledge/talk-with-neighbour-advance.jpg&quot; alt=&quot;talk-with-neighbour-advance&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;section-5&quot;&gt;4.通信知识框架-深入&lt;/h3&gt;
-
-&lt;p&gt;（理解了上面三个问题，再看这一个）进一步，想构成一个能容纳多用户的通信网，就涉及到一些列的技术： &lt;/p&gt;
-
-&lt;h4 id=&quot;a-1&quot;&gt;a)双工技术：双工技术是什么？能解决什么问题？（单工、半双工、双工）&lt;/h4&gt;
-
-&lt;h4 id=&quot;b-1&quot;&gt;b)复用技术：为什么要使用复用技术？能解决什么问题？（时分复用、码分复用、频分复用）&lt;/h4&gt;
-
-&lt;h4 id=&quot;c-1&quot;&gt;c)信令：为什么有信令？没有信令行不行？现网中常用的信令都有哪些？&lt;/h4&gt;
-
-&lt;h4 id=&quot;d&quot;&gt;d)网络规划：网络扩容的依据是什么？常用的网络规划技术有哪些？（通信网拓扑结构）&lt;/h4&gt;
-
-&lt;h4 id=&quot;e&quot;&gt;e)网络中需要什么配套设备：网络中的交换机、控制中心有什么作用？没有行不行？&lt;/h4&gt;
-
-&lt;h4 id=&quot;f&quot;&gt;f)通信网络的性能指标：怎么评价一个网络的容量？怎么评价一个次通话的通信质量？怎样评价一个网络的性能？这些指标有哪些？&lt;/h4&gt;
-
-&lt;h4 id=&quot;g&quot;&gt;g)无线信道：使用无线信道，跟有线信道有什么区别？需要什么特别的技术吗？（这是整个无线通信的基础）&lt;/h4&gt;
-
-&lt;p&gt;举例：这就好比，之前在一个地方，只有你和隔壁吴老二聊天，你俩都能相互听清楚对方；但是，现在这个地方里来了很多人，都想两两之间进行聊天；如果不采取一些措施，大家都说话，那就乱哄哄的，最糟糕的情况是：所有人都听不清楚对方，这个地方的聊天这个功能瘫痪掉了；这时候，管理人员就诞生了，制定一些规则，例如，大家轮流说话，这样，就能保证至少大家都能聊天（虽然有的时候，可能要等很久，才能轮到自己聊天）。 &lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/frame-of-communication-knowledge/talk-with-neighbour-highest.jpg&quot; alt=&quot;talk-with-neighbour-highest&quot; /&gt; &lt;/p&gt;
-
-&lt;h3 id=&quot;section-6&quot;&gt;5.通信知识框架-应用&lt;/h3&gt;
-
-&lt;p&gt;（理解了上面四个问题，再看这一个）再进一步，通信网有各种类型：公共电话交换网（传统的固定电话网）、互联网（计算机网）、移动通信网（3g网）； &lt;/p&gt;
-
-&lt;h4 id=&quot;a-2&quot;&gt;a)这些网络各自有什么特点？&lt;/h4&gt;
-
-&lt;h4 id=&quot;b-2&quot;&gt;b)这些网络中各自有什么独特的问题？不同网络的瓶颈不同，例如无线网络的一个瓶颈就是：自由空间的无线资源是有限的，而且无线信道中干扰很大。&lt;/h4&gt;
-
-&lt;p&gt;上面就是对于整个通信知识的基本介绍了，建议：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;最好能弄明白上面的每一个问题，不需要知道答案； &lt;/li&gt;
-  &lt;li&gt;今后工作中用到这些知识了，再去深入学习； &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section-7&quot;&gt;几本书&lt;/h2&gt;
-
-&lt;p&gt;最后列几本我们学过的书： &lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;http://product.dangdang.com/product.aspx?product_id=9223550&quot;&gt;《通信原理（第6版）》&lt;/a&gt; 讲解的理论比较深，很多公式；&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://product.dangdang.com/product.aspx?product_id=20042290&quot;&gt;《数字通信原理（第2版）》&lt;/a&gt;主要解决&lt;code&gt;3.a&lt;/code&gt;、&lt;code&gt;4.b&lt;/code&gt;的问题；&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://product.dangdang.com/product.aspx?product_id=9046475&quot;&gt;《移动通信原理与系统》&lt;/a&gt;主要解决&lt;code&gt;3.b&lt;/code&gt;、&lt;code&gt;4.g&lt;/code&gt;、&lt;code&gt;5.b&lt;/code&gt;的问题；&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://book.douban.com/subject/4864934/&quot;&gt;《通信概论》&lt;/a&gt;我没看过这本书，在网上找了一下，感觉可能还行；&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://product.dangdang.com/product.aspx?product_id=9229349&quot;&gt;《宽带通信网原理》&lt;/a&gt;主要解决&lt;code&gt;4.d&lt;/code&gt;、&lt;code&gt;4.e&lt;/code&gt;、&lt;code&gt;4.f&lt;/code&gt;的问题；&lt;/li&gt;
-&lt;/ol&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>模型是什么？</title>
-     <link href="http://ningg.github.com/what-model-is"/>
-     <updated>2012-11-13T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/what-model-is</id>
-     <content type="html">&lt;h2 id=&quot;section&quot;&gt;模型是什么&lt;/h2&gt;
-
-&lt;p&gt;模型，如果是在一年前我应该会很反感这个词汇，因为我对“模型”的最初记忆是本科一二年级的“数学建模大赛”，而当初对数学建模的第一印象是：东拼西凑、瞎胡闹，浪费时间。现在看来当初自己是错了，“模型”很重要、很关键，一定程度上“模型”体现了一个现象的本质，并可以基于“模型”来分析甚至预测事情的发展。现在各行各业很少不使用“模型”，金融决策、国家政策、工程解决方案等都要依据“模型”。&lt;/p&gt;
-
-&lt;h2 id=&quot;section-1&quot;&gt;为什么会想到要说“模型”&lt;/h2&gt;
-
-&lt;p&gt;为什么会突然想到“模型”呢？因为读了梁斌的一篇博客&lt;a href=&quot;http://blog.sina.com.cn/s/blog_593af2a701018qc0.html&quot;&gt;《百度狼》&lt;/a&gt;，其中使用一个比喻（模型）来分析了一下百度最近的狼文化；暂且不说狼性文化好不好、是否适用baidu，只是来分析&lt;a href=&quot;http://blog.sina.com.cn/s/blog_593af2a701018qc0.html&quot;&gt;《百度狼》&lt;/a&gt;这篇文章的论述结构和手法，其开始就提出了一个众所周知的模型“西游记师徒5人”，然后以此来分析，最终得出一个结论。整个文章的分析过程，自己第一感觉，有理有据，令人信服，但转念一想：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;模型“西游记师徒5人”适用这种情况吗？&lt;/li&gt;
-  &lt;li&gt;模型是由“虚幻小说”提出的，那么这个模型是合理的吗？&lt;/li&gt;
-  &lt;li&gt;即使模型是真实存在的，那这个模型是能达到最高效率的模型吗？&lt;/li&gt;
-  &lt;li&gt;后来这篇文章又提出军事家“曹操”的用人之道（暂不分析其是否最大效率发挥人才的作用），那么当时曹操的境遇与现在“百度”的处境是否相同呢？（模型的使用条件是否相同）&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/what-model-is/xiyouji-sanzang.jpg&quot; alt=&quot;xiyouji&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;section-2&quot;&gt;树立令自己信服的观点&lt;/h2&gt;
-
-&lt;p&gt;到现在仍然感觉&lt;a href=&quot;http://blog.sina.com.cn/s/blog_593af2a701018qc0.html&quot;&gt;《百度狼》&lt;/a&gt;是有些参考价值的，但已然没有了第一次阅读时的“坚信不疑”了。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;疑问：一个数学模型，最初是怎么提出的？其提出的依据是什么？模型的合理性怎么证明？另外，在企业管理研究领域，如何提高企业效率，如何最大程度提高员工的主观能动性，没有研究吗？&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;上面都是比较客观地去看“模型”这个问题。
-对于现实生活中的某些问题，一定程度上可以考虑使用&lt;a href=&quot;http://blog.sina.com.cn/s/blog_593af2a701018qc0.html&quot;&gt;《百度狼》&lt;/a&gt;类似的论述。（生活中的事情，是对是错，最终的评论只有后来人能说清楚）&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/what-model-is/wolf.jpg&quot; alt=&quot;wolf&quot; /&gt;&lt;/p&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>MOA中RandomTreeGenerator[Advanced]</title>
-     <link href="http://ningg.github.com/moa-random-tree-generator-advance"/>
-     <updated>2012-10-27T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/moa-random-tree-generator-advance</id>
+     <title>MySQL--基本操作</title>
+     <link href="http://ningg.github.com/mysql-basic-info"/>
+     <updated>2013-01-16T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/mysql-basic-info</id>
      <content type="html">&lt;h2 id=&quot;section&quot;&gt;简介&lt;/h2&gt;
-&lt;p&gt;&lt;code&gt;RandomTreeGenerator&lt;/code&gt;是一个&lt;code&gt;stream&lt;/code&gt;产生器，源源不断的输出&lt;code&gt;Instance&lt;/code&gt;；这一部分，将详细探讨其实现；请先阅读”&lt;a href=&quot;/moa-random-tree-generator/&quot;&gt;MOA中RandomTreeGenerator-Basic&lt;/a&gt;“。查看源码的工具是Eclipse，关于Eclipse下查看源代码的快捷键，可参考”&lt;a href=&quot;/moa-sourcecode-with-eclipse/&quot;&gt;Eclipse下查看MOA源代码&lt;/a&gt;“。&lt;/p&gt;
 
-&lt;p&gt;具体将分为2个方面来讨论&lt;code&gt;RandomTreeGenerator&lt;/code&gt;：&lt;/p&gt;
+&lt;p&gt;难得最近两天重新接触Mysql，正好整理一下基本的知识。下面是自己本篇文章的大纲：&lt;/p&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;对外继承关系；&lt;/li&gt;
-  &lt;li&gt;内部成员；&lt;/li&gt;
-&lt;/ul&gt;
+&lt;blockquote&gt;
+  &lt;ol&gt;
+    &lt;li&gt;增删改查；&lt;/li&gt;
+    &lt;li&gt;&lt;code&gt;group by&lt;/code&gt;、&lt;code&gt;order by&lt;/code&gt;、&lt;code&gt;distinct&lt;/code&gt;；&lt;/li&gt;
+    &lt;li&gt;常用函数：&lt;code&gt;count()&lt;/code&gt;、&lt;code&gt;min()&lt;/code&gt;、&lt;code&gt;max()&lt;/code&gt;、&lt;code&gt;substing_index()&lt;/code&gt;等；&lt;/li&gt;
+    &lt;li&gt;查看mysql日志，主要是针对&lt;code&gt;warings&lt;/code&gt;`errors`的查询和处理；&lt;/li&gt;
+    &lt;li&gt;mysql存储过程；&lt;/li&gt;
+    &lt;li&gt;数据备份；&lt;/li&gt;
+    &lt;li&gt;常用工具的介绍及特点；&lt;/li&gt;
+    &lt;li&gt;（万佛归宗）MySQL的整体框架，备份时内部的线程机制，语句执行效率。&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/blockquote&gt;
 
-&lt;p&gt;这些分析是准备解决问题的，不能解决问题的分析，就是徒劳；在本篇文章的后半部分，将基于上述讨论，来分析：&lt;/p&gt;
+&lt;p&gt;首先对于上面的8个要点进行一个整体的说明：&lt;code&gt;1-3&lt;/code&gt;是基本的操作；&lt;code&gt;4-7&lt;/code&gt;属于较深入的学习（有点难度），但仍然是操作过程；&lt;code&gt;8&lt;/code&gt;是整个MySQL的基础，最核心的东西，从这里就可以窥见Mysql的起源了。操作部分关键是要记忆+操作；底层的理论需要一些理解（brain power）。&lt;/p&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;如何使用RandomTreeGenerator？&lt;/li&gt;
-  &lt;li&gt;怎样定义一个stream的Generator？&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;说明&lt;/strong&gt;：整篇的表述，都是以自己浅显的理解为基础的；有描述不当的地方，还请留言指正。&lt;/p&gt;
 
-&lt;p&gt;如果只是讨论上面的这些东西，那么相当于一台没有主角的戏，枯燥浅显；因为处理对象是&lt;code&gt;data stream&lt;/code&gt;，如果在程序中无法存储&lt;code&gt;data stream&lt;/code&gt;，那就好比没有大米，却要去煮大米粥；最后一部分，重点讨论&lt;code&gt;MOA&lt;/code&gt;中数据存储相关知识：&lt;/p&gt;
+&lt;h2 id=&quot;section-1&quot;&gt;具体&lt;/h2&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;data stream的数学表示是什么？程序中存储在什么地方？&lt;/li&gt;
-  &lt;li&gt;Attribute、Instance、Instances、InstancesHeader之间有什么联系？&lt;/li&gt;
-&lt;/ul&gt;
+&lt;h3 id=&quot;section-2&quot;&gt;1.增删改查&lt;/h3&gt;
 
-&lt;h2 id=&quot;section-1&quot;&gt;对外继承关系&lt;/h2&gt;
+&lt;h3 id=&quot;group-byorder-bydistinct&quot;&gt;2.group by、order by、distinct&lt;/h3&gt;
 
-&lt;p&gt;几个基本的快捷键：
-&amp;lt;table style=&quot;width: 100%;&quot; border=&quot;1&quot; cellspacing=&quot;0&quot; cellpadding=&quot;2&quot;&amp;gt;&lt;/p&gt;
-&lt;tbody&gt;
-&lt;tr&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;&lt;strong&gt;操作&lt;/strong&gt;&lt;/td&gt;
-&lt;td style=&quot;text-align: center;&quot;&gt;&lt;strong&gt;说明&lt;/strong&gt;&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Ctrl + 鼠标左击&lt;/td&gt;
-&lt;td&gt;查看class、method、attribute的源代码&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Alt &amp;nbsp;+&amp;nbsp;←&lt;/td&gt;
-&lt;td&gt;返回上一次鼠标位置&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;Alt &amp;nbsp;+&amp;nbsp;→&lt;/td&gt;
-&lt;td&gt;与“Alt + &lt;span style=&quot;white-space: normal;&quot;&gt;←&lt;/span&gt;”相反&lt;/td&gt;
-&lt;/tr&gt;
-&lt;tr&gt;
-&lt;td&gt;F4&lt;/td&gt;
-&lt;td&gt;查看Class的继承关系&lt;/td&gt;
-&lt;/tr&gt;
-&lt;/tbody&gt;
-&lt;p&gt;&amp;lt;/table&amp;gt;&lt;/p&gt;
+&lt;h3 id=&quot;countminmaxsubstringindex&quot;&gt;3.常用函数：count、min、max、substring_index&lt;/h3&gt;
+
+&lt;p&gt;前3项，参照下面链接，把命令反复敲2遍，重复的也要敲。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.cnblogs.com/hateislove214/archive/2010/11/05/1869889.html&quot;&gt;MySQL常用命令汇总1&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://zhaofeng2007625.blog.163.com/blog/static/311815972010111512437937/&quot;&gt;MySQL常用命令汇总2&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://blog.sina.com.cn/s/blog_9707fac301017kb3.html&quot;&gt;MySQL常用命令汇总3&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;:有疑问的地方多GOOGLE，实在无法解决的，就跳过。
+简要说明几点（查找《MySQL必知必会》中对应部分）：&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;group by &lt;/code&gt;分组，本质将表格分为逻辑组，基于逻辑组，同时进行相同处理（统计、汇总等）；可以嵌套分组，（效率很低的嵌套分组，过滤分组）常在group by之后，添加一个order by，按照某种规律进行排序。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;order by&lt;/code&gt; 排序，按多个列排序：order by column_1,column_2；DESC:降序；ASC：默认值，升序。（多列排序、指定排序方向）&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;distinct&lt;/code&gt; 过滤重复内容；可以使用distinct column_1,column_2；（多列去重）&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;select&lt;/code&gt;语句最后添加“\G”，会以列的格式来显示行。&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;alter&lt;/code&gt;：修改表结构等。&lt;/p&gt;
+
+&lt;h3 id=&quot;section-3&quot;&gt;4.日志&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;读日志是熟悉使用一个工具的最基本要求&lt;/strong&gt;。如果执行了一个sql脚本之后，提示&lt;code&gt;n warnings&lt;/code&gt;，可以使用&lt;code&gt;show warnings&lt;/code&gt;命令来查看详细信息。&lt;/p&gt;
+
+&lt;p&gt;假设场景：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;ul&gt;
+    &lt;li&gt;现在mysql运行，希望知道哪些sql命令正在运行；（正在执行的命令）&lt;/li&gt;
+    &lt;li&gt;现在mysql运行，希望知道曾经执行过的sql命令；（历史命令）&lt;/li&gt;
+    &lt;li&gt;运行出现问题，mysql无法正常使用，现在希望查看mysql的运行日志；&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;查看mysql的运行状态，命令：status；结果如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mysql&amp;gt; status;
+--------------
+mysql  Ver 14.14 Distrib 5.1.60, for redhat-linux-gnu (x86_64) using readline 5.1
+ 
+Connection id:          21449
+Current database:       chinacache
+Current user:           root@localhost
+SSL:                    Not in use
+Current pager:          stdout
+Using outfile:          &#39;&#39;
+Using delimiter:        ;
+Server version:         5.1.60 Source distribution
+Protocol version:       10
+Connection:             Localhost via UNIX socket
+Server characterset:    utf8
+Db     characterset:    utf8
+Client characterset:    utf8
+Conn.  characterset:    utf8
+UNIX socket:            /home/data/mysqlData/mysql5.5.sock
+Uptime:                 33 days 9 min 48 sec
+ 
+Threads: 9  Questions: 15701727  Slow queries: 47  Opens: 1039  Flush tables: 1  Open tables: 541  Queries per second avg: 5.505
+--------------
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;注意看，上面最后一行&lt;code&gt;slow queries&lt;/code&gt;这一项的值，如果多次查看的值都大于0，则说明有些查询的sql命令执行时间过长。&lt;/p&gt;
+
+&lt;p&gt;查看当前正在运行的SQL，使用命令&lt;code&gt;show processlist；&lt;/code&gt;，从中找出运行较慢的语句，再使用&lt;code&gt;explain&lt;/code&gt;命令查看这些语句的执行计划。如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mysql&amp;gt; show processlist;
++-------+------+----------------------+------------+---------+------+----------------+-
+| Id    | User | Host                 | db         | Command | Time | State          |
++-------+------+----------------------+------------+---------+------+----------------+-
+| 21185 | root | localhost            | chinacache | Sleep   | 3744 |                | 
+| 21449 | root | localhost            | chinacache | Sleep   |  501 |                | 
+| 21626 | root | localhost            | chinacache | Query   |    0 | NULL           | 
+| 21630 | root | localhost            | chinacache | Query   |    0 | Sorting result | 
+| 21695 | root | localhost            | chinacache | Sleep   |  685 |                | 
+| 21732 | zuo  | 10.108.210.111:50198 | chinacache | Sleep   |   19 |                | 
+| 21733 | zuo  | 10.108.210.111:50201 | chinacache | Sleep   |  258 |                | 
+| 21742 | zuo  | 10.108.210.111:50229 | chinacache | Sleep   |   19 |                | 
+| 21744 | root | localhost            | wordpress  | Sleep   |    6 |                | 
++-------+------+----------------------+------------+---------+------+----------------+-
+9 rows in set (0.00 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;对于MySQL的历史命令：需要在&lt;code&gt;my.cnf&lt;/code&gt;文件中添加:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[mysqld]
+log=command.log
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;重新启动&lt;code&gt;mysqld&lt;/code&gt;，之后所有的命令都可以到上述文件中查询得到。&lt;/p&gt;
+
+&lt;p&gt;查看当前启用的日志[7]，以及日志的存储路径：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;show variables like ‘log_%’;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;mysqlprocedure&quot;&gt;5.mysql存储过程（procedure）&lt;/h3&gt;
+
+&lt;p&gt;什么是&lt;code&gt;mysql的存储过程&lt;/code&gt;[1][2][3]？简单的说，为方便使用而保存的一条或者多条MySQL语句的集合，就是一个sql脚本文件，有输入\出参数，根据参数来动态执行其内部SQL语句（存储过程，实际是一种函数）。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;DELIMITER //
+-- Name:ordertotal
+-- Parameters:onumber = order number
+--            taxable = 0 if not taxable, 1 if taxable
+--            ototal = order total variable
+CREATE PROCEDURE ordertotal(
+		  IN onumber INT,
+		  IN taxable BOOLEAN,
+		  OUT ototal DECIMAL(8,2)
+)COMMENT &#39;Obtain order total, optionally adding tax&#39;
+BEGIN
+ 
+-- Declare variable for total
+DECLARE total DECIMAL(8,2);
+-- Declare tax percentage
+DECLARE taxrate INT DEFAULT 6;
+ 
+-- Get the order total
+SELECT SUM(item_price*quantity)
+		FROM ordertimes WHERE order_num = onumber INTO total;
+ 
+-- Is this taxable?
+IF taxable THEN 
+		-- YES, so add taxrate to the total
+		SELECT total+(total/100*taxrate) INTO total;
+END IF;
+ 
+-- And finally, save to our variable
+SELECT total INTO ototal;
+ 
+END //
+ 
+DELIMITER ;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;看上面简单的&lt;code&gt;存储过程&lt;/code&gt;[1]，以此为例进行说明：首先，从意识上将上面的存储过程，看做一个函数。&lt;/p&gt;
+
+&lt;p&gt;具体细节：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;ul&gt;
+    &lt;li&gt;&lt;code&gt;DELIMITER //&lt;/code&gt;表示暂时更改分隔符（mysql内判断为开始执行的分隔符）；&lt;/li&gt;
+    &lt;li&gt;&lt;code&gt;–- &lt;/code&gt;（最后有一个空格）表示单行注释；&lt;/li&gt;
+    &lt;li&gt;上面的&lt;code&gt;procedure&lt;/code&gt;包含了2个输入参数（IN）和一个返回参数（OUT）；&lt;/li&gt;
+    &lt;li&gt;过程body中，使用&lt;code&gt;declare&lt;/code&gt;定义了2个局部变量，&lt;code&gt;declare&lt;/code&gt;要求使用变量名和类型；&lt;code&gt;select… into…&lt;/code&gt; 语句将查询结果保存到&lt;code&gt;into&lt;/code&gt;后面的变量中；&lt;/li&gt;
+    &lt;li&gt;&lt;code&gt;if…then…end&lt;/code&gt; if语句表示了是否一个条件判断执行过程。&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;补充&lt;/strong&gt;：&lt;code&gt;procedure&lt;/code&gt;的参数后面有&lt;code&gt;COMMENT&lt;/code&gt;类似于备注，当使用&lt;code&gt;SHOW PROCEDURE STATUS;&lt;/code&gt;时可以看到此字段。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;:注意存储过程中的&lt;strong&gt;输入参数&lt;/strong&gt; 不能作为表名（&lt;code&gt;table name&lt;/code&gt;）,如果必须将表名当做输入参数，可以使用预处理机制：&lt;code&gt;PREPARE&lt;/code&gt;、&lt;code&gt;EXECUTE&lt;/code&gt;、&lt;code&gt;DEALLOCATE PREPARE&lt;/code&gt;。具体借鉴另一篇blog&lt;a href=&quot;/mysql-data-cleaning/&quot;&gt;MYsql——数据去重&lt;/a&gt;。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;:上面使用&lt;code&gt;DECLARE&lt;/code&gt;进行变量的声明，在很多情况下会看到&lt;code&gt;set @var&lt;/code&gt;类型的变量，关于变量详细信息参考[5]（猜测只是变量的作用范围不同，其他的本质都是变量，没有什么不同？）。&lt;/p&gt;
+
+&lt;p&gt;常用的操作：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;ul&gt;
+    &lt;li&gt;执行存储过程：&lt;code&gt;CALL procedure_name(params);&lt;/code&gt;&lt;/li&gt;
+    &lt;li&gt;删除存储过程：&lt;code&gt;DROP PROCEDURE procedure_name;&lt;/code&gt;（&lt;code&gt;DROP PROCEDURE IF EXISTS procedure_name;&lt;/code&gt;）&lt;/li&gt;
+    &lt;li&gt;显示所有正在运行的存储过程：&lt;code&gt;SHOW PROCEDURE STATUS&lt;/code&gt;;其中包含了&lt;code&gt;procedure&lt;/code&gt;的名称、创建时间、修改时间等;&lt;/li&gt;
+    &lt;li&gt;显示存储过程的创建语句：&lt;code&gt;SHOW CREATE PROCEDURE procedure_name&lt;/code&gt;;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;section-4&quot;&gt;6.数据备份（操作）&lt;/h3&gt;
+
+&lt;p&gt;(doing…)&lt;/p&gt;
+
+&lt;h3 id=&quot;section-5&quot;&gt;7.常用工具&lt;/h3&gt;
+
+&lt;p&gt;(doing…)&lt;/p&gt;
+
+&lt;h3 id=&quot;mysql&quot;&gt;8.(万佛归宗)Mysql整体框架，内部线程机制，语句执行效率&lt;/h3&gt;
+
+&lt;p&gt;(doing…)&lt;/p&gt;
+
+&lt;h2 id=&quot;section-6&quot;&gt;参考来源&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;《MySQL必知必会》Page171&lt;/li&gt;
+  &lt;li&gt;http://blog.sina.com.cn/s/blog_71f4cdbe0100yut4.html&lt;/li&gt;
+  &lt;li&gt;http://www.ccvita.com/100.html&lt;/li&gt;
+  &lt;li&gt;http://www.ccvita.com/category/mysql/&lt;/li&gt;
+  &lt;li&gt;http://blog.csdn.net/lxgwm2008/article/details/7738306&lt;/li&gt;
+  &lt;li&gt;http://joewalker.iteye.com/blog/277626&lt;/li&gt;
+  &lt;li&gt;http://blog.sina.com.cn/s/blog_406127500100pvar.html&lt;/li&gt;
+&lt;/ol&gt;
+
+</content>
+   </entry>
+   
+   <entry>
+     <title>MySQL--字段内信息抽取</title>
+     <link href="http://ningg.github.com/mysql-data-extract"/>
+     <updated>2013-01-15T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/mysql-data-extract</id>
+     <content type="html">&lt;h2 id=&quot;section&quot;&gt;问题背景&lt;/h2&gt;
+
+&lt;p&gt;现在有一张表，结构如下：&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;字段&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;类型&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;IP&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;varchar(30)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;timeStart&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;double(13,3)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;durationTime&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;double(13,3)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;httpURL&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;varchar(1000)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;terminalType&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;varchar(1000)&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;现在要从字段&lt;code&gt;httpURL&lt;/code&gt;中提取一些字符串，并作为新的属性，添加到表中。&lt;/p&gt;
+
+&lt;p&gt;一个典型的httpURL格式如下：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;http://appldnld.apple.com/iOS6/041cfbLY/com_Update/6b2a5.zip&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;现在要提取&lt;code&gt;iOS6&lt;/code&gt;和&lt;code&gt;com_Update&lt;/code&gt;字段，并且组合为：&lt;code&gt;iOS6_com_Update&lt;/code&gt;，将此作为新字段添加到表中。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;解决办法&lt;/h2&gt;
+
+&lt;p&gt;初步思考，解决步骤如下：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;ol&gt;
+    &lt;li&gt;取出一条记录；&lt;/li&gt;
+    &lt;li&gt;将字段“httpURL”中信息提取出来，组合；&lt;/li&gt;
+    &lt;li&gt;将获得的最终组合信息，添加到最新字段中。&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;关键&lt;/strong&gt;，使用&lt;code&gt;substring_index&lt;/code&gt;函数。&lt;/p&gt;
+
+&lt;p&gt;直接贴上脚本吧（利用MySQL存储过程）：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;/*
+ *
+ *usage：
+ *      1) login the &#39;mysql&#39; ;
+ *      2) source ~/enurl.sql;
+ *      3) CALL enurl(&#39;oldTable&#39;,&#39;newTable&#39;);
+ *
+ *function: get the information from column &quot;httpURL&quot;, then store it in an new-bulit column &quot;info_1&quot;; we create a new table &#39;newTable&#39; to store the results;
+ *
+ *parameters:
+ *      oldTable: the original table, that we need to get some information from the column &quot;httpURL&quot;;
+ *      newTable: the new build table, where we store the results.
+ *
+ *author：Ning Guo
+ *
+ *time: 1/16/2013
+ *
+ *程序运行效果：
+ *  260万数据，执行时间为：1min 2s
+ *
+ *
+ */
+DROP PROCEDURE IF EXISTS enurl;
+DELIMITER //
+CREATE PROCEDURE enurl(
+		$oldTable VARCHAR(60),
+		$newTable VARCHAR(60)
+)
+BEGIN
+		SET @SQL= concat(&#39;DROP TABLE IF EXISTS &#39;,$newTable);
+		PREPARE stmt1 FROM @SQL;
+		EXECUTE stmt1;
+		DEALLOCATE PREPARE stmt1;
+ 
+		SET @SQL= concat(&#39;CREATE TABLE &#39;,$newTable,&#39; SELECT * FROM &#39;,$oldTable);
+		PREPARE stmt1 FROM @SQL;
+		EXECUTE stmt1;
+		DEALLOCATE PREPARE stmt1;
+ 
+		SET @SQL= concat(&#39;ALTER TABLE &#39;,$newTable,&#39; ADD info_1 varchar(60)&#39;);
+		PREPARE stmt1 FROM @SQL;
+		EXECUTE stmt1;
+		DEALLOCATE PREPARE stmt1;
+ 
+		SET @SQL= concat(&#39;UPDATE &#39;,$newTable,&#39; SET info_1=(select concat(substring_index(substring_index(httpURL,\&#39;/\&#39;,4),\&#39;/\&#39;,-1),concat(\&#39;_\&#39;,substring_index(substring_index(
+httpURL,\&#39;/\&#39;,6),\&#39;/\&#39;,-1))))&#39;);
+		PREPARE stmt1 FROM @SQL;
+		EXECUTE stmt1;
+		DEALLOCATE PREPARE stmt1;
+ 
+END //
+DELIMITER ;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;参考来源&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;http://www.chinesejy.com/jishu/508/518/20101017465148.html&lt;/li&gt;
+  &lt;li&gt;http://www.jb51.net/article/27458.htm&lt;/li&gt;
+&lt;/ol&gt;
 
 </content>
    </entry>
