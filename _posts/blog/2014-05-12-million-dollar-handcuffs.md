@@ -83,9 +83,8 @@ category: blog
 
 　　在他开挖之前（开 Whatsapp 公司之前），他曾经写下了这两条推特讯息：
 
-> Got denied by Twitter HQ. That's ok. Would have been a long commute.
-
-> Facebook turned me down. It was a great opportunity to connect with some fantastic people. Looking forward to life's next adventure.
+> 1. Got denied by Twitter HQ. That's ok. Would have been a long commute.
+> 2. Facebook turned me down. It was a great opportunity to connect with some fantastic people. Looking forward to life's next adventure.
 
 　　你觉得那 55 个人有需要去跟 Facebook 谈判，要 50 万美金的薪水吗？还是你觉得当那些人获利了结，要从 Facebook 出走时， Facebook 会砸下重金，并拿出股票来留人？
 
