@@ -4,13 +4,123 @@
    <title>NingG.github.com</title>
    <link href="http://ningg.github.com/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://ningg.github.com" rel="alternate" type="text/html" />
-   <updated>2014-05-12T00:12:08+08:00</updated>
+   <updated>2014-05-12T20:55:46+08:00</updated>
    <id>http://ningg.github.com</id>
    <author>
      <name></name>
      <email></email>
    </author>
 
+   
+   <entry>
+     <title>同工不同酬，有什么神本事？</title>
+     <link href="http://ningg.github.com/million-dollar-handcuffs"/>
+     <updated>2014-05-12T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/million-dollar-handcuffs</id>
+     <content type="html">&lt;blockquote&gt;
+  &lt;ul&gt;
+    &lt;li&gt;英文原文：&lt;a href=&quot;http://www.aminariana.com/essays/million-dollar-handcuffs&quot;&gt;What kind of jobs do the software engineers who earn $500K a year do?&lt;/a&gt; &lt;/li&gt;
+    &lt;li&gt;Winston中文(繁体)译文：&lt;a href=&quot;http://winston-zh.attlin.com/2014/03/50.html&quot;&gt;同工不同酬？年薪 50 萬美金的工程師到底作哪些工作啊？&lt;/a&gt;&lt;/li&gt;
+    &lt;li&gt;itwriter中文(简体)译文：&lt;a href=&quot;http://news.cnblogs.com/n/207596/&quot;&gt;同工不同酬，年薪 50 万美金的工程师到底有什么神本事？&lt;/a&gt;&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;　　他们究竟是作哪些事情，或是拥有哪些技术，让他们如此值钱？这些东西有办法用『学』吗？&lt;/p&gt;
+
+&lt;p&gt;　　这位叫 Amin Ariana 的创业家就上 &lt;a href=&quot;http://www.quora.com/What-kind-of-jobs-do-the-software-engineers-who-earn-500k-per-year-do&quot;&gt;Quora 写了一则被赞到破表的回答&lt;/a&gt; ，我自己非常同意，也受到很多启发，因此跟 Amin 联络，获得允许，分享他的文章如下。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/million-dollar-handcuffs/lg2.jpg&quot; alt=&quot;lg&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;　　&lt;strong&gt;以下正文开始&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;　　声明：我之前也是 Google 的员工，但是我的回答不代表 Google 的观点。&lt;/p&gt;
+
+&lt;p&gt;　　首先，这问题问得有点奇怪，有点误导人，好像只要工程师做了哪几点，或是获得哪些技能以后，就可以挂到年薪 50 万的保证。其实 Business Insider 那边说得很清楚了，50 万美金其实是薪水跟股票的总和。&lt;/p&gt;
+
+&lt;p&gt;　　&lt;strong&gt;高昂报酬背后的条件：贡献不同等级的能力&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;　　要了解高昂报酬背后的条件，我先先来打个比方。&lt;/p&gt;
+
+&lt;p&gt;　　假设你是村子里面非常重要的，负责水源供给的劳工。我们分为：一类劳工，与二类劳工。&lt;/p&gt;
+
+&lt;p&gt;　　一类劳工会拎起一到两个水桶，冲到水源旁边，装满它们，把他们两个挑回来。水大概够 20 个人喝，如此一来有水喝的村民就皆大欢喜了。这个劳工挑水的过程可能会喝掉一些水，然后回到村中，他也可能可以分一些水回家作他的报酬。&lt;/p&gt;
+
+&lt;p&gt;　　二类劳工不太理所谓『公平分水』的概念，他会拿起一把铲子，带上一只水杯，然后忽然间就消失了。他跑到水源处，挖一条可以通到村庄的小溪，希望可以把水源引过来。每当他拖着疲惫的身躯，拎着空杯子回到村庄的时候，总会引起一阵失望，但是不知道为什么那村中的长老相信他，相信他在做的事情（还丢根骨头给他啃，让他不会饿肚子）。&lt;/p&gt;
+
+&lt;p&gt;　　某天，他直挺挺的站在村庄前面，他身后白涔涔地流躺着一条饮用水的小溪。这条小溪立刻把一类专门经营『水快递』的劳工赶出市场，他们只好转行，加入别的团队。这个二类劳工呢，看他对这条小溪拥有多少的控制权，一般而言，他有小溪很大部分的拥有权。&lt;/p&gt;
+
+&lt;p&gt;　　后来村庄决定要把小溪整个买下来，整进整个村庄的供水系统，于是村庄拿了他们一部分的财产去换，比如说土地啊什么的，这个二类劳工于是瞬间升级变成地主了。&lt;/p&gt;
+
+&lt;p&gt;　　村子里面的媒体注意到村子给这个二类劳工的薪水奇高，别村的人根本挖不动他（他应该是有跟村子签订协议，比如要在村子里留两年，才能领完全额的报酬之类的），于是出了一篇报导，写得好像别村出高价挖角，却因为村子给的薪水太好，以致于这个二类劳工根本不会考虑。&lt;/p&gt;
+
+&lt;p&gt;　　这时候，一类劳工看了媒体报导，觉得村子亏待他们，同工不同酬，心生不满。&lt;/p&gt;
+
+&lt;p&gt;　　&lt;strong&gt;沙滩上的掘渠者：冒险精神创造差异，创造高报酬&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;　　来说说一个真实的故事吧。&lt;/p&gt;
+
+&lt;p&gt;　　今年跨年的时候，我跑去 Monterey Bay 玩，沙滩上有个年轻人在挖洞，我饶有兴致地站在高处看，我太太欣赏着沙滩的美景，其他人根本不在意这个年轻人的举动，没有人理他。我指着他转头跟太太说：「你等着看，30 分钟以后，周遭的所有人都会加入，帮这个年轻人挖」。&lt;/p&gt;
+
+&lt;p&gt;　　30分钟以后，他挖出了一条小渠道，从他沙滩上的城堡直挺挺的延伸到海边有水的地方，希望把海水引入渠道，注入他的护城河。那渠道还不够深，海水还进不来，于是年轻人忙着加深河道。又过了5分钟，原本站在旁边看热闹的小孩们开始加入，动手帮忙。10 分钟以后，周遭的机个大人也开始挖掘。15 分钟以后，一个腼腆的，拎着相机的外国人也投入帮忙。60 分钟之内，这位二类劳工影响了 15 个一类劳工自愿投入，一起把海水引入护城河。&lt;/p&gt;
+
+&lt;p&gt;　　文章开头的照片就是我当时照的，永久地纪念我对个人力量的赌注。那个拿着紫色桶子的家伙就是渠道的创造者，不过照片上看不出来就是了。&lt;/p&gt;
+
+&lt;p&gt;　　新闻报导总是很喜欢忽略很多真实的细节，这篇年薪 50 万的报导就忽略掉『汗水并不等价』这个部分。二类劳工愿意突破现状，孤独地，有时候可能还要挨饿一小段时间来引入村子赖以维生的水源，一类劳工则是用自己完成的工作与技能去交换薪水，两者最主要的差异是冒险，而且不保证一定会回收。&lt;/p&gt;
+
+&lt;p&gt;　　村子里有远见的那群人可以说都是二类劳工（在 Goolge 里面领高薪的那群），他们筚路蓝缕，以启山林，连结了村庄的水源。这些拿很多股票的家伙大概是下列其中一种：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;ol&gt;
+    &lt;li&gt;在 Goolge 当初创立时，就已经负责创造其核心价值的那群人。&lt;/li&gt;
+    &lt;li&gt;自己业余的时候玩玩自己的专案（side project），然后公司觉得超级有用，也是很有价值的那群人。（译注：Gmaill 其实就是这样从 Side Project 长成现在 Goolge 核心产品的。）&lt;/li&gt;
+    &lt;li&gt;自己开新创公司，被 Google 买进来的（比较少拉）不知道为什么有办法成为某种核心科技或是技能的唯一提供者。&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;　　除此之外，这种待遇大都是凭空想像出来的，用来卖很多很多 Business Insider 的文章（以台湾的例子来说，就是商周，还有今周刊那些 XD）。&lt;/p&gt;
+
+&lt;p&gt;　　&lt;strong&gt;价值 190 亿美金的不录取通知&lt;/strong&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;每颗心都会歌唱，只是唱得不完整，直到另一颗心跟着附和。 —— 柏拉图&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;　　多谢大家的热情支持，本文在 Quora 上面已经累积了 12 万则浏览，Quora 真是太屌了。&lt;/p&gt;
+
+&lt;p&gt;　　我收到很多评论，有一部分跟我说上列的故事很难应用到他们的生活中，另一部分的评论问到跟公司谈判股权的技巧，希望要到 50 万美金收入的方式，其他的评论则说我这篇文章根本没有回答到他的问题。&lt;/p&gt;
+
+&lt;p&gt;　　&lt;strong&gt;大部分的评论者都是一类劳工，还在想怎么作才能炒高自己的市场价值，获得更高的『收入』。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;　　那我再来说个故事吧，一个发生在上列文章出来一个礼拜之内的故事，希望这次会具体一点，比较好懂。&lt;/p&gt;
+
+&lt;p&gt;　　被 Twitter、Facebook 拒绝，但创业后被 Facebook 以 190 亿美金收购&lt;/p&gt;
+
+&lt;p&gt;　　2009 年 5 月，有个一类劳工应聘 Twitter ，但是他被拒绝了，于是 2009 年 8 月，他又跑去 Facebook 应聘，他也被拒绝了，怎么办？他决定自己出来试试看，挑起二类劳工的大樑，从『增进人类沟通』的水源处，挖起那条之前拒绝他一类服务的那两间公司都非常需要的小溪。&lt;/p&gt;
+
+&lt;p&gt;　　一路走来，他与跟他一起挖小溪的朋友影响了 55 人加入团队，一起努力，村中的长老也丢了些骨头给他，一开始只有 25 万美元，接下来 8 百万美元，眼看着小溪越来越成功，红杉创投到后来注入 5000 万美元的资金。&lt;/p&gt;
+
+&lt;p&gt;　　我写这篇文章的 3 小时前， CNN 刚刚报导他们二类劳工的作品被 Facebook 以 190 亿美金收购（你没听错， 190 亿美元）。&lt;/p&gt;
+
+&lt;p&gt;　　Facebook 买了 Whatsapp。而帮 Facebook 挖了五年小溪的 Brian Acton ，正式成为 Facebook 的股东，正是那个当初拒绝他工作申请的 Facebook 。&lt;/p&gt;
+
+&lt;p&gt;　　在他开挖之前（开 Whatsapp 公司之前），他曾经写下了这两条推特讯息：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Got denied by Twitter HQ. That’s ok. Would have been a long commute.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Facebook turned me down. It was a great opportunity to connect with some fantastic people. Looking forward to life’s next adventure.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;　　你觉得那 55 个人有需要去跟 Facebook 谈判，要 50 万美金的薪水吗？还是你觉得当那些人获利了结，要从 Facebook 出走时， Facebook 会砸下重金，并拿出股票来留人？&lt;/p&gt;
+
+&lt;p&gt;　　二类劳工不会去比较，或是谈判薪水，因为他们不是在出卖他们的劳力给村庄（公司），他们卖的是被低估的财富，那些出价的村庄没有别的选择，只能拿出相对于这些财富的数字，这些二类劳工端出来的财富，可以让村庄与自己双双受益（你看看 Facebook 往上冲的股价就知道）。&lt;/p&gt;
+
+&lt;p&gt;　　你可以想想，要卖掉你挖通的水源时，有没有哪个村庄愿意坐在谈判桌的另一边。当村庄决定买水的时候，薪水条中多出来的几个零，都不过是基本条件罢了。&lt;/p&gt;
+
+</content>
+   </entry>
    
    <entry>
      <title>Pig入门5h</title>
@@ -2589,9 +2699,7 @@ public class B extends A{
   &lt;/blockquote&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;————————————–2013/01/04———————————————&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;今天的进展&lt;/strong&gt;：改进了[2]中针对Infomation-gain提出的McDiarmid’s-bound，将其值降低了18倍，但仍然不可用。如果能够再降低10倍，与“VFDT”中bound结果逼近，则可以在实际试验中使用参数info-gain。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;今天的进展&lt;/strong&gt;：&lt;em&gt;(2013/01/04)&lt;/em&gt;改进了[2]中针对Infomation-gain提出的McDiarmid’s-bound，将其值降低了18倍，但仍然不可用。如果能够再降低10倍，与“VFDT”中bound结果逼近，则可以在实际试验中使用参数info-gain。&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;目标&lt;/strong&gt;：改进[2]中针对Infomation-gain提出的McDiarmid’s-bound&lt;/p&gt;
 
@@ -2922,136 +3030,6 @@ DELIMITER ;
   &lt;li&gt;http://blog.csdn.net/lxgwm2008/article/details/7738306&lt;/li&gt;
   &lt;li&gt;http://joewalker.iteye.com/blog/277626&lt;/li&gt;
   &lt;li&gt;http://blog.sina.com.cn/s/blog_406127500100pvar.html&lt;/li&gt;
-&lt;/ol&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>MySQL--字段内信息抽取</title>
-     <link href="http://ningg.github.com/mysql-data-extract"/>
-     <updated>2013-01-15T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/mysql-data-extract</id>
-     <content type="html">&lt;h2 id=&quot;section&quot;&gt;问题背景&lt;/h2&gt;
-
-&lt;p&gt;现在有一张表，结构如下：&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: left&quot;&gt;字段&lt;/th&gt;
-      &lt;th style=&quot;text-align: left&quot;&gt;类型&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;IP&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;varchar(30)&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;timeStart&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;double(13,3)&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;durationTime&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;double(13,3)&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;httpURL&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;varchar(1000)&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;terminalType&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;varchar(1000)&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;现在要从字段&lt;code&gt;httpURL&lt;/code&gt;中提取一些字符串，并作为新的属性，添加到表中。&lt;/p&gt;
-
-&lt;p&gt;一个典型的httpURL格式如下：&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;http://appldnld.apple.com/iOS6/041cfbLY/com_Update/6b2a5.zip&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;现在要提取&lt;code&gt;iOS6&lt;/code&gt;和&lt;code&gt;com_Update&lt;/code&gt;字段，并且组合为：&lt;code&gt;iOS6_com_Update&lt;/code&gt;，将此作为新字段添加到表中。&lt;/p&gt;
-
-&lt;h2 id=&quot;section-1&quot;&gt;解决办法&lt;/h2&gt;
-
-&lt;p&gt;初步思考，解决步骤如下：&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;ol&gt;
-    &lt;li&gt;取出一条记录；&lt;/li&gt;
-    &lt;li&gt;将字段“httpURL”中信息提取出来，组合；&lt;/li&gt;
-    &lt;li&gt;将获得的最终组合信息，添加到最新字段中。&lt;/li&gt;
-  &lt;/ol&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;strong&gt;关键&lt;/strong&gt;，使用&lt;code&gt;substring_index&lt;/code&gt;函数。&lt;/p&gt;
-
-&lt;p&gt;直接贴上脚本吧（利用MySQL存储过程）：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;/*
- *
- *usage：
- *      1) login the &#39;mysql&#39; ;
- *      2) source ~/enurl.sql;
- *      3) CALL enurl(&#39;oldTable&#39;,&#39;newTable&#39;);
- *
- *function: get the information from column &quot;httpURL&quot;, then store it in an new-bulit column &quot;info_1&quot;; we create a new table &#39;newTable&#39; to store the results;
- *
- *parameters:
- *      oldTable: the original table, that we need to get some information from the column &quot;httpURL&quot;;
- *      newTable: the new build table, where we store the results.
- *
- *author：Ning Guo
- *
- *time: 1/16/2013
- *
- *程序运行效果：
- *  260万数据，执行时间为：1min 2s
- *
- *
- */
-DROP PROCEDURE IF EXISTS enurl;
-DELIMITER //
-CREATE PROCEDURE enurl(
-		$oldTable VARCHAR(60),
-		$newTable VARCHAR(60)
-)
-BEGIN
-		SET @SQL= concat(&#39;DROP TABLE IF EXISTS &#39;,$newTable);
-		PREPARE stmt1 FROM @SQL;
-		EXECUTE stmt1;
-		DEALLOCATE PREPARE stmt1;
- 
-		SET @SQL= concat(&#39;CREATE TABLE &#39;,$newTable,&#39; SELECT * FROM &#39;,$oldTable);
-		PREPARE stmt1 FROM @SQL;
-		EXECUTE stmt1;
-		DEALLOCATE PREPARE stmt1;
- 
-		SET @SQL= concat(&#39;ALTER TABLE &#39;,$newTable,&#39; ADD info_1 varchar(60)&#39;);
-		PREPARE stmt1 FROM @SQL;
-		EXECUTE stmt1;
-		DEALLOCATE PREPARE stmt1;
- 
-		SET @SQL= concat(&#39;UPDATE &#39;,$newTable,&#39; SET info_1=(select concat(substring_index(substring_index(httpURL,\&#39;/\&#39;,4),\&#39;/\&#39;,-1),concat(\&#39;_\&#39;,substring_index(substring_index(
-httpURL,\&#39;/\&#39;,6),\&#39;/\&#39;,-1))))&#39;);
-		PREPARE stmt1 FROM @SQL;
-		EXECUTE stmt1;
-		DEALLOCATE PREPARE stmt1;
- 
-END //
-DELIMITER ;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&quot;section-2&quot;&gt;参考来源&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;http://www.chinesejy.com/jishu/508/518/20101017465148.html&lt;/li&gt;
-  &lt;li&gt;http://www.jb51.net/article/27458.htm&lt;/li&gt;
 &lt;/ol&gt;
 
 </content>
