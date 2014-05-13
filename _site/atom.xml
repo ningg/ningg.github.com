@@ -4,13 +4,120 @@
    <title>NingG.github.com</title>
    <link href="http://ningg.github.com/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://ningg.github.com" rel="alternate" type="text/html" />
-   <updated>2014-05-12T20:55:46+08:00</updated>
+   <updated>2014-05-14T01:24:39+08:00</updated>
    <id>http://ningg.github.com</id>
    <author>
      <name></name>
      <email></email>
    </author>
 
+   
+   <entry>
+     <title>S.M.A.R.T.经验</title>
+     <link href="http://ningg.github.com/smarter-experience"/>
+     <updated>2014-05-13T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/smarter-experience</id>
+     <content type="html">&lt;h2 id=&quot;section&quot;&gt;事情背景&lt;/h2&gt;
+
+&lt;p&gt;今天读了月光博客上的一篇文章&lt;a href=&quot;http://www.williamlong.info/archives/3849.html&quot;&gt;《通过SMART法则进行网站策划》&lt;/a&gt;， 里面提到网站前期策划，是影响网站能否按做成的重要原因之一，这大概就是&lt;strong&gt;谋事在人&lt;/strong&gt;的意思，展开来说，做其他事情能否也借鉴S.M.A.R.T.经验？&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/smarter-experience/smart-bike.jpg&quot; alt=&quot;bike&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;smart&quot;&gt;S.M.A.R.T.经验&lt;/h2&gt;
+
+&lt;p&gt;SMART Criteria, S.M.A.R.T. 标准\原则,但在我更愿意将其翻译为：S.M.A.R.T.经验，因为其提出者也指出S.M.A.R.T.不是万能的，这样我将其称为&lt;code&gt;经验&lt;/code&gt;,用于提示自己这个东西使用的时候要慎重。&lt;em&gt;（尽信书不如无书）&lt;/em&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;是什么？&lt;/h3&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://en.wikipedia.org/wiki/SMART_criteria&quot;&gt;SMART criteria&lt;/a&gt;, wiki上说的很清楚了，SMART经验，可用于指导如何设定目标，是个好工具，个人成长过程可以使用。&lt;em&gt;（另，项目管理、员工绩效管理也有采用；插一下嘴，个人感觉，对普通员工，上行下效还是比较有用，如果这个真的对自己成长有利，也可以推荐给员工，甚至亲自为员工提供指导，这样的效果要比找讲企业文化的人来给员工培训直接、有效；另一方面，如果这个东西，自己都不愿意用，反倒想在员工中推广，我只想说：糊弄鬼呢？）&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;SMART, 也有一个拓展版本SMARTER，其实是几个单词的首字母缩写：&lt;em&gt;（下面只是其中一个版本）&lt;/em&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Specific&lt;/li&gt;
+  &lt;li&gt;Meassurable&lt;/li&gt;
+  &lt;li&gt;Assignable&lt;/li&gt;
+  &lt;li&gt;Realistic&lt;/li&gt;
+  &lt;li&gt;Time-related&lt;/li&gt;
+  &lt;li&gt;Evaluated&lt;/li&gt;
+  &lt;li&gt;Reviewed&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/smarter-experience/smart.jpg&quot; alt=&quot;smart&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;个人理解&lt;/h3&gt;
+
+&lt;p&gt;别人的引导很有用，而自己的思考更深刻、重要。对于SMARTER，当前个人有一点理解：&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;要点&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;个人理解&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Specific&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;要做的事情需要明确：整体什么事情，分为几个模块/部分，都有什么可量化的要求&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Meassurable&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;事情进展，能够衡量：事情进展到哪一步了？还需要多久？&lt;em&gt;（时间纬度，可以采用小步快跑，快速迭代方式，分阶段，先来一期，画个轮廓——对事情整体上把握）&lt;/em&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Assignable&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;事情，可以找到合适的人来做，即，谁来做哪一块事情？&lt;em&gt;（对于个人而言，做事的就是自己；有机会时，用心体会\尝试任务分派）&lt;/em&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Realistic&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;事情能够完成吗？需要哪些人力、物力资源？人力、物力，分别要用到哪一部分？&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Time-related&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;事情严格时间限制，每一阶段都有截至日期&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Evaluated&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;评估当前进展，防止遗忘当初设立的目标&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Reviewed&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;回顾已完成的部分，总结经验、教训&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;&lt;strong&gt;小结&lt;/strong&gt;，上面哒哒哒说了这么多，总结一下，设立目标有几点：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;目标明确、分解，整体轮廓清晰；&lt;em&gt;（做什么？）&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;现有资源清晰、资源分配合理；&lt;em&gt;（怎么做？）&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;小步快跑、快速迭代，掌握事情推进速度；&lt;em&gt;（做到哪了？）&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;阶段评估\思考当前进展\问题，及时改进\改善；&lt;em&gt;（做得更好）&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;smart-1&quot;&gt;SMART经验的利弊&lt;/h3&gt;
+
+&lt;p&gt;利：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;设定的目标清晰、直观、易理解；&lt;/li&gt;
+  &lt;li&gt;容易执行（因为明确指导要在每一步做什么）；&lt;/li&gt;
+  &lt;li&gt;能直观看到事情进展；&lt;em&gt;（本来想说，把握事情进展，转念一想，多用通俗的词）&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;特别注意：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;目标是设想，执行才能看到结果，应侧重执行，避免束缚在目标的设定上&lt;em&gt;（明确的目标，需要依照执行情况，进行调整）&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;明确的目标对于短期进展，很有效；而长期的事情，一个抽象的目标，如同信念一般，很重要；&lt;em&gt;（长期的事情，发展曲折，多有变化，甚至做事的人的期望也会有变化）&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/smarter-experience/valley.jpg&quot; alt=&quot;valley&quot; /&gt;&lt;/p&gt;
+
+</content>
+   </entry>
    
    <entry>
      <title>同工不同酬，有什么神本事？</title>
@@ -37,7 +144,7 @@
 
 &lt;p&gt;　　首先，这问题问得有点奇怪，有点误导人，好像只要工程师做了哪几点，或是获得哪些技能以后，就可以挂到年薪 50 万的保证。其实 Business Insider 那边说得很清楚了，50 万美金其实是薪水跟股票的总和。&lt;/p&gt;
 
-&lt;p&gt;　　&lt;strong&gt;高昂报酬背后的条件：贡献不同等级的能力&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&quot;section&quot;&gt;高昂报酬背后的条件：贡献不同等级的能力&lt;/h2&gt;
 
 &lt;p&gt;　　要了解高昂报酬背后的条件，我先先来打个比方。&lt;/p&gt;
 
@@ -55,7 +162,7 @@
 
 &lt;p&gt;　　这时候，一类劳工看了媒体报导，觉得村子亏待他们，同工不同酬，心生不满。&lt;/p&gt;
 
-&lt;p&gt;　　&lt;strong&gt;沙滩上的掘渠者：冒险精神创造差异，创造高报酬&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&quot;section-1&quot;&gt;沙滩上的掘渠者：冒险精神创造差异，创造高报酬&lt;/h2&gt;
 
 &lt;p&gt;　　来说说一个真实的故事吧。&lt;/p&gt;
 
@@ -79,7 +186,7 @@
 
 &lt;p&gt;　　除此之外，这种待遇大都是凭空想像出来的，用来卖很多很多 Business Insider 的文章（以台湾的例子来说，就是商周，还有今周刊那些 XD）。&lt;/p&gt;
 
-&lt;p&gt;　　&lt;strong&gt;价值 190 亿美金的不录取通知&lt;/strong&gt;&lt;/p&gt;
+&lt;h2 id=&quot;section-2&quot;&gt;价值 190 亿美金的不录取通知&lt;/h2&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;每颗心都会歌唱，只是唱得不完整，直到另一颗心跟着附和。 —— 柏拉图&lt;/p&gt;
@@ -106,11 +213,10 @@
 &lt;p&gt;　　在他开挖之前（开 Whatsapp 公司之前），他曾经写下了这两条推特讯息：&lt;/p&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;Got denied by Twitter HQ. That’s ok. Would have been a long commute.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Facebook turned me down. It was a great opportunity to connect with some fantastic people. Looking forward to life’s next adventure.&lt;/p&gt;
+  &lt;ol&gt;
+    &lt;li&gt;Got denied by Twitter HQ. That’s ok. Would have been a long commute.&lt;/li&gt;
+    &lt;li&gt;Facebook turned me down. It was a great opportunity to connect with some fantastic people. Looking forward to life’s next adventure.&lt;/li&gt;
+  &lt;/ol&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;　　你觉得那 55 个人有需要去跟 Facebook 谈判，要 50 万美金的薪水吗？还是你觉得当那些人获利了结，要从 Facebook 出走时， Facebook 会砸下重金，并拿出股票来留人？&lt;/p&gt;
@@ -2589,143 +2695,6 @@ src=&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HT
    </entry>
    
    <entry>
-     <title>java 重载 & 重写</title>
-     <link href="http://ningg.github.com/override-overload-of-java"/>
-     <updated>2014-01-14T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/override-overload-of-java</id>
-     <content type="html">&lt;h2 id=&quot;section&quot;&gt;问题背景&lt;/h2&gt;
-
-&lt;p&gt;阅读程序时，看到在子类中的各种@Override的注解，例如：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;public class A{
-	public void speak(int i){
-		  ...
-	}
-	...
-}
- 
-public class B extends A{
-	@Override
-	public void speak(int i){
-		  ...
-	}
-	...
-	public static void main(String[] args){
-		B b = new B();
-		A a1;
-		a1 = (A)b;
- 
-		a1.speak(1);
-	}
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;类&lt;code&gt;B&lt;/code&gt;继承了&lt;code&gt;A&lt;/code&gt;，并且在&lt;code&gt;B&lt;/code&gt;中&lt;code&gt;Override&lt;/code&gt;了方法&lt;code&gt;speak()&lt;/code&gt;;现在问&lt;code&gt;a1.speak(1)&lt;/code&gt;调用的是&lt;code&gt;class A&lt;/code&gt;？&lt;code&gt;class B&lt;/code&gt;？中的&lt;code&gt;speak()&lt;/code&gt;方法？&lt;/p&gt;
-
-&lt;h2 id=&quot;section-1&quot;&gt;分析&lt;/h2&gt;
-
-&lt;p&gt;上面的例子是一个典型的&lt;code&gt;重写&lt;/code&gt;，因为：&lt;code&gt;subclass&lt;/code&gt;中方法的名称、输入参数、返回参数都与&lt;code&gt;supclass&lt;/code&gt;中完全相同。&lt;/p&gt;
-
-&lt;p&gt;现在有一个问题：重写的方法前没有&lt;code&gt;@Override&lt;/code&gt;行不行？&lt;em&gt;(这个问题很好，说明you’re thinking。)&lt;/em&gt;没有&lt;code&gt;@Override&lt;/code&gt;的注解完全可以，只需要满足：&lt;code&gt;subclass&lt;/code&gt;中方法的名称、输入参数、返回参数与&lt;code&gt;supclass&lt;/code&gt;中完全相同即可实现方法的重写。&lt;/p&gt;
-
-&lt;p&gt;现在问题又来了：既然没有&lt;code&gt;@Override&lt;/code&gt;也能实现方法的重写，为什么很多地方都加了&lt;code&gt;@Override&lt;/code&gt;？原因很简单，添加了&lt;code&gt;@Override&lt;/code&gt;，编译器会依照&lt;code&gt;supclass&lt;/code&gt;中方法来进行检查，保证此方法真的实现重写。（避免了因为粗心等造成的&lt;code&gt;bug&lt;/code&gt;）&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;重写（&lt;code&gt;override&lt;/code&gt;）&lt;/strong&gt;：就是覆盖；基于继承的，重写父类的方法，方法名什么都一样，方法体不同。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;相同的名称；&lt;/li&gt;
-  &lt;li&gt;相同的返回类型；&lt;/li&gt;
-  &lt;li&gt;子类中，重写的方法访问修饰符权限保持一致，或者增大（&lt;code&gt;public&lt;/code&gt;&amp;gt;&lt;code&gt;protected&lt;/code&gt;&amp;gt;&lt;code&gt;default&lt;/code&gt;&amp;gt;&lt;code&gt;private&lt;/code&gt;）；&lt;/li&gt;
-  &lt;li&gt;子类中，重写的方法抛出的异常不能变的更宽泛；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;重载（&lt;code&gt;overload&lt;/code&gt;）&lt;/strong&gt;：基于同一个类的，不同的重载方法，主要是参数列表不同&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;相同的名称；&lt;/li&gt;
-  &lt;li&gt;必须有不同的参数列表；&lt;/li&gt;
-  &lt;li&gt;可以有不同的返回类型，可以有不同的访问修饰符，可以抛出不同的异常；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;重写 &amp;amp; 重载&lt;/strong&gt;：都是多态性的体现，重写是子类与父类间的多态性，重载是同一类中多态性的体现。&lt;/p&gt;
-
-&lt;h2 id=&quot;section-2&quot;&gt;参考来源&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;http://blog.csdn.net/smyhmz/article/details/2716638&quot;&gt;http://blog.csdn.net/smyhmz/article/details/2716638&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://blog.csdn.net/leonardwang/article/details/7046180&quot;&gt;http://blog.csdn.net/leonardwang/article/details/7046180&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>1个月学习小结——代价敏感的数据流分类算法</title>
-     <link href="http://ningg.github.com/summary-of-20130103"/>
-     <updated>2014-01-03T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/summary-of-20130103</id>
-     <content type="html">&lt;p&gt;最近几个月阅读论文都是“抄家底”的方式进行，即，认准一个作者，把他最近几年的论文看个遍，然后再看看自己有没有新的想法。&lt;/p&gt;
-
-&lt;p&gt;其中，第一个作者是西北农林科技的张阳教授，再一个就是针对&lt;code&gt;cost-sensitive decision tree&lt;/code&gt;方向看了一些论文，值得说明的是找到一篇比较全面的综述，还是2011年左右的，不过这篇文章还没有详细去看。&lt;/p&gt;
-
-&lt;p&gt;这一个多月内（从&lt;code&gt;2012.10.12&lt;/code&gt;开题那一天算起），确定了这个月将围绕一个主题进行学习&lt;code&gt;数据流、代价敏感、分类&lt;/code&gt;；基于这个主题，可以预想到的工作有：&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;ol&gt;
-    &lt;li&gt;研究现有的数据流data-stream中的classification；研究现有的cost-sensitive classification；&lt;/li&gt;
-    &lt;li&gt;将cost-sensitive应用于data stream classification中（设计算法）；&lt;/li&gt;
-    &lt;li&gt;初期处理数据，改造实验平台（weka、MOA）进行试验；&lt;/li&gt;
-    &lt;li&gt;小论文（EI）、毕业论文（中期、最终）；&lt;/li&gt;
-  &lt;/ol&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;现在的进展：&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;ul&gt;
-    &lt;li&gt;&lt;code&gt;data stream classification&lt;/code&gt; &amp;amp; &lt;code&gt;cost sensitive classification&lt;/code&gt;都有有了一点了解；&lt;/li&gt;
-    &lt;li&gt;决定classification使用&lt;code&gt;Decision tree&lt;/code&gt;进行；（在&lt;code&gt;data stream&lt;/code&gt;和&lt;code&gt;cost sensitive&lt;/code&gt;中&lt;code&gt;Decision-tree&lt;/code&gt;都有前人进行过较深入的研究工作）&lt;/li&gt;
-    &lt;li&gt;遇到第一个问题：2012年TKDE中有文章指出&lt;code&gt;VFDT&lt;/code&gt;中使用的&lt;code&gt;Hoeffding’s-bound&lt;/code&gt;不严格，而应改为使用&lt;code&gt;McDiarmid’s-bound&lt;/code&gt;，针对这个自己很纠结，因为新提出的&lt;code&gt;bound&lt;/code&gt;限定的n值更大，需要的训练&lt;code&gt;instance&lt;/code&gt;更多，这对自己有什么影响吗？&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  &lt;blockquote&gt;
-    &lt;ol&gt;
-      &lt;li&gt;需要更多的instance&lt;/li&gt;
-      &lt;li&gt;或者，更换选择分裂属性的指标（可以使用Gini Index）&lt;/li&gt;
-      &lt;li&gt;思考能否，重新描述“VFDT”中数学问题，并提出与McDiarmid’s-Bound并列的界限值（换个角度想），或者能否改进McDiarmid’s-Bound。&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/blockquote&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;strong&gt;今天的进展&lt;/strong&gt;：&lt;em&gt;(2013/01/04)&lt;/em&gt;改进了[2]中针对Infomation-gain提出的McDiarmid’s-bound，将其值降低了18倍，但仍然不可用。如果能够再降低10倍，与“VFDT”中bound结果逼近，则可以在实际试验中使用参数info-gain。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;目标&lt;/strong&gt;：改进[2]中针对Infomation-gain提出的McDiarmid’s-bound&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;具体&lt;/strong&gt;：重新审视McDiarmid’s_inequality，参考[1]中Hoeffding’s_inequality是一个特列。参考[3]中（Definition 1）empirical-entropy和entropy-norm之间关系，结合[2]中原始的McDiarmid’s bound重新计算info-gain的bound。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;下一步打算&lt;/strong&gt;：继续改进Infomation-gain提出的McDiarmid’s-bound，具体可以从[3][4]中获得想法（改进思路：决策树分裂属性的数学描述、信息增益的原始计算公式、熵、McDiarmid’s-inequality）。（目标：最终可用）&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;参考文献&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;ashish-mcdiarmid.pdf&lt;/li&gt;
-  &lt;li&gt;Decision trees for mining data streams based on the McDiarmid’s bound.pdf&lt;/li&gt;
-  &lt;li&gt;A Near-Optimal Algorithm for Computing the Entropy of a Stream.pdf&lt;/li&gt;
-  &lt;li&gt;Extensions to McDiarmid’s inequality when differences are bounded with high probability.pdf&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;strong&gt;结束语&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;问：世间此山最高？或者另有高处？&lt;/p&gt;
-
-&lt;p&gt;答：世间自有他山高此山，Open-mind比天高。&lt;/p&gt;
-
-</content>
-   </entry>
-   
-   <entry>
      <title>Linux 后台运行命令</title>
      <link href="http://ningg.github.com/linux-cmd-run-in-background"/>
      <updated>2013-01-17T00:00:00+08:00</updated>
@@ -3030,6 +2999,136 @@ DELIMITER ;
   &lt;li&gt;http://blog.csdn.net/lxgwm2008/article/details/7738306&lt;/li&gt;
   &lt;li&gt;http://joewalker.iteye.com/blog/277626&lt;/li&gt;
   &lt;li&gt;http://blog.sina.com.cn/s/blog_406127500100pvar.html&lt;/li&gt;
+&lt;/ol&gt;
+
+</content>
+   </entry>
+   
+   <entry>
+     <title>MySQL--字段内信息抽取</title>
+     <link href="http://ningg.github.com/mysql-data-extract"/>
+     <updated>2013-01-15T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/mysql-data-extract</id>
+     <content type="html">&lt;h2 id=&quot;section&quot;&gt;问题背景&lt;/h2&gt;
+
+&lt;p&gt;现在有一张表，结构如下：&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;字段&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;类型&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;IP&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;varchar(30)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;timeStart&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;double(13,3)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;durationTime&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;double(13,3)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;httpURL&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;varchar(1000)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;terminalType&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;varchar(1000)&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;现在要从字段&lt;code&gt;httpURL&lt;/code&gt;中提取一些字符串，并作为新的属性，添加到表中。&lt;/p&gt;
+
+&lt;p&gt;一个典型的httpURL格式如下：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;http://appldnld.apple.com/iOS6/041cfbLY/com_Update/6b2a5.zip&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;现在要提取&lt;code&gt;iOS6&lt;/code&gt;和&lt;code&gt;com_Update&lt;/code&gt;字段，并且组合为：&lt;code&gt;iOS6_com_Update&lt;/code&gt;，将此作为新字段添加到表中。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;解决办法&lt;/h2&gt;
+
+&lt;p&gt;初步思考，解决步骤如下：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;ol&gt;
+    &lt;li&gt;取出一条记录；&lt;/li&gt;
+    &lt;li&gt;将字段“httpURL”中信息提取出来，组合；&lt;/li&gt;
+    &lt;li&gt;将获得的最终组合信息，添加到最新字段中。&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;关键&lt;/strong&gt;，使用&lt;code&gt;substring_index&lt;/code&gt;函数。&lt;/p&gt;
+
+&lt;p&gt;直接贴上脚本吧（利用MySQL存储过程）：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;/*
+ *
+ *usage：
+ *      1) login the &#39;mysql&#39; ;
+ *      2) source ~/enurl.sql;
+ *      3) CALL enurl(&#39;oldTable&#39;,&#39;newTable&#39;);
+ *
+ *function: get the information from column &quot;httpURL&quot;, then store it in an new-bulit column &quot;info_1&quot;; we create a new table &#39;newTable&#39; to store the results;
+ *
+ *parameters:
+ *      oldTable: the original table, that we need to get some information from the column &quot;httpURL&quot;;
+ *      newTable: the new build table, where we store the results.
+ *
+ *author：Ning Guo
+ *
+ *time: 1/16/2013
+ *
+ *程序运行效果：
+ *  260万数据，执行时间为：1min 2s
+ *
+ *
+ */
+DROP PROCEDURE IF EXISTS enurl;
+DELIMITER //
+CREATE PROCEDURE enurl(
+		$oldTable VARCHAR(60),
+		$newTable VARCHAR(60)
+)
+BEGIN
+		SET @SQL= concat(&#39;DROP TABLE IF EXISTS &#39;,$newTable);
+		PREPARE stmt1 FROM @SQL;
+		EXECUTE stmt1;
+		DEALLOCATE PREPARE stmt1;
+ 
+		SET @SQL= concat(&#39;CREATE TABLE &#39;,$newTable,&#39; SELECT * FROM &#39;,$oldTable);
+		PREPARE stmt1 FROM @SQL;
+		EXECUTE stmt1;
+		DEALLOCATE PREPARE stmt1;
+ 
+		SET @SQL= concat(&#39;ALTER TABLE &#39;,$newTable,&#39; ADD info_1 varchar(60)&#39;);
+		PREPARE stmt1 FROM @SQL;
+		EXECUTE stmt1;
+		DEALLOCATE PREPARE stmt1;
+ 
+		SET @SQL= concat(&#39;UPDATE &#39;,$newTable,&#39; SET info_1=(select concat(substring_index(substring_index(httpURL,\&#39;/\&#39;,4),\&#39;/\&#39;,-1),concat(\&#39;_\&#39;,substring_index(substring_index(
+httpURL,\&#39;/\&#39;,6),\&#39;/\&#39;,-1))))&#39;);
+		PREPARE stmt1 FROM @SQL;
+		EXECUTE stmt1;
+		DEALLOCATE PREPARE stmt1;
+ 
+END //
+DELIMITER ;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;参考来源&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;http://www.chinesejy.com/jishu/508/518/20101017465148.html&lt;/li&gt;
+  &lt;li&gt;http://www.jb51.net/article/27458.htm&lt;/li&gt;
 &lt;/ol&gt;
 
 </content>
