@@ -10,7 +10,7 @@ article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{di
 body,button,input,select,textarea{font-size:12px/1.5;}
 input,select,textarea{font-size:100%;}
 
-table {width: 100%; border-collapse: collapse; margin-bottom: 25px}
+table {width: 100%; border-collapse: collapse; margin-bottom: 25px;margin-top: 40px}
 /* Zebra striping */
 tr:nth-of-type(odd) { background: #eee; }
 th { background: #333; color: white; font-weight: bold; }
@@ -119,6 +119,7 @@ pre ol{margin-left:25px;list-style-type:decimal;}
 .index-content .section .about-page { margin-left:15%; width:70%; margin:0 atuo;}
 .index-content .section .about-page ul{ margin-bottom:25px; margin-left:10%;}
 .index-content .section .about-page p+ul{ margin-top:-20px;}
+.index-content .section .about-page p { text-indent: 2em;}
 .index-content .section .about-page ul li{ margin-bottom:5px; list-style:disc; line-height:1.5em;}
 .index-content .section .about-page ol{ margin-bottom:25px; margin-left:10%; }
 .index-content .section .about-page ol li{ margin-bottom:5px; list-style:decimal; line-height:1.5em;}
