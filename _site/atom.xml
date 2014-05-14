@@ -4,7 +4,7 @@
    <title>NingG.github.com</title>
    <link href="http://ningg.github.com/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://ningg.github.com" rel="alternate" type="text/html" />
-   <updated>2014-05-14T08:08:37+08:00</updated>
+   <updated>2014-05-15T01:03:52+08:00</updated>
    <id>http://ningg.github.com</id>
    <author>
      <name></name>
@@ -25,13 +25,13 @@
 
 &lt;h2 id=&quot;smart&quot;&gt;S.M.A.R.T.经验&lt;/h2&gt;
 
-&lt;p&gt;&lt;code&gt;SMART Criteria&lt;/code&gt;, &lt;code&gt;S.M.A.R.T.&lt;/code&gt; 标准\原则,但我更愿意将其翻译为：&lt;code&gt;S.M.A.R.T.&lt;/code&gt;经验，因为其提出者也指出S.M.A.R.T.不是万能的，这样将其称为&lt;code&gt;经验&lt;/code&gt;,用于提示自己这个东西使用的时候要慎重。&lt;em&gt;（尽信书不如无书）&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;SMART Criteria&lt;/code&gt;，&lt;code&gt;S.M.A.R.T.&lt;/code&gt; 标准\原则，但我更愿意将其翻译为：&lt;code&gt;S.M.A.R.T.&lt;/code&gt;经验，因为其提出者也指出S.M.A.R.T.不是万能的，这样将其称为&lt;code&gt;经验&lt;/code&gt;，用于提示自己这个东西使用的时候要慎重。&lt;em&gt;（尽信书不如无书）&lt;/em&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;section-1&quot;&gt;是什么？&lt;/h3&gt;
 
-&lt;p&gt;&lt;a href=&quot;http://en.wikipedia.org/wiki/SMART_criteria&quot;&gt;SMART criteria&lt;/a&gt;, wiki上说的很清楚了，SMART经验，可用于指导如何设定目标，是个好工具，个人成长过程可以使用。&lt;em&gt;（另，项目管理、员工绩效管理也有采用；插一下嘴，个人感觉，对普通员工，上行下效还是比较有用，如果这个真的对自己成长有利，也可以推荐给员工，甚至亲自为员工提供指导，这样的效果要比找讲企业文化的人来给员工培训直接、有效；另一方面，如果这个东西，自己都不愿意用，反倒想在员工中推广，我只想说：糊弄鬼呢？）&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a href=&quot;http://en.wikipedia.org/wiki/SMART_criteria&quot;&gt;SMART criteria&lt;/a&gt;， wiki上说的很清楚了，SMART经验，可用于指导设定目标，是个好工具，鼓励个人成长过程中使用。&lt;em&gt;（另，项目管理、员工绩效管理也有采用；插一下嘴，个人感觉，对普通员工，上行下效还是比较有用，如果这个真的对自己成长有利，也可以推荐给员工，甚至亲自为员工提供指导，这样的效果要比，找讲企业文化的人来给员工培训直接、有效；另一方面，如果这个东西，自己都不愿意用，反倒想在员工中推广，我只想说：糊弄鬼呢？）&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;SMART, 也有一个拓展版本SMARTER，其实是几个单词的首字母缩写：&lt;em&gt;（下面只是其中一个版本）&lt;/em&gt;&lt;/p&gt;
+&lt;p&gt;SMART，也有一个拓展版本SMARTER，其实是几个单词的首字母缩写：&lt;em&gt;（下面只是其中一个版本）&lt;/em&gt;&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;Specific&lt;/li&gt;
@@ -79,7 +79,7 @@
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td style=&quot;text-align: left&quot;&gt;Evaluated&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;评估当前进展，防止遗忘当初设立的目标&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;评估当前进展，重新描绘当初设立的目标&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td style=&quot;text-align: left&quot;&gt;Reviewed&lt;/td&gt;
@@ -91,9 +91,9 @@
 &lt;p&gt;&lt;strong&gt;小结&lt;/strong&gt;，上面哒哒哒说了这么多，总结一下，设立目标有几点：&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;目标明确、分解，整体轮廓清晰；&lt;em&gt;（做什么？）&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;目标明确，分解、量化，整体轮廓清晰；&lt;em&gt;（做什么？）&lt;/em&gt;&lt;/li&gt;
   &lt;li&gt;现有资源清晰、资源分配合理；&lt;em&gt;（怎么做？）&lt;/em&gt;&lt;/li&gt;
-  &lt;li&gt;小步快跑、快速迭代，掌握事情推进速度；&lt;em&gt;（做到哪了？）&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;小步快跑、快速迭代，控制事情推进速度；&lt;em&gt;（做到哪了？）&lt;/em&gt;&lt;/li&gt;
   &lt;li&gt;阶段评估\思考当前进展\问题，及时改进\改善；&lt;em&gt;（做得更好）&lt;/em&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
