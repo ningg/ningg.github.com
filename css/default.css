@@ -10,7 +10,7 @@ article,aside,details,figcaption,figure,footer,header,hgroup,menu,nav,section{di
 body,button,input,select,textarea{font-size:12px/1.5;}
 input,select,textarea{font-size:100%;}
 
-table {width: 100%; border-collapse: collapse; margin-bottom: 25px}
+table {width: 100%; border-collapse: collapse; margin-bottom: 25px;margin-top: 40px}
 /* Zebra striping */
 tr:nth-of-type(odd) { background: #eee; }
 th { background: #333; color: white; font-weight: bold; }
