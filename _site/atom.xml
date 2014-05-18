@@ -4,13 +4,78 @@
    <title>NingG.github.com</title>
    <link href="http://ningg.github.com/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://ningg.github.com" rel="alternate" type="text/html" />
-   <updated>2014-05-15T01:45:22+08:00</updated>
+   <updated>2014-05-18T10:31:03+08:00</updated>
    <id>http://ningg.github.com</id>
    <author>
      <name></name>
      <email></email>
    </author>
 
+   
+   <entry>
+     <title>小记：让欲望信马由缰</title>
+     <link href="http://ningg.github.com/personal-think-20140517"/>
+     <updated>2014-05-17T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/personal-think-20140517</id>
+     <content type="html">&lt;p&gt;最近一段时间感触很多，年轻气盛？年富力强？浮躁？&lt;/p&gt;
+
+&lt;p&gt;不管是什么情绪，避免给一件事情贴上单一的标签，画地为牢不好，嗯，是这样，要避免过多的依赖之前的经验，破旧才能立新。&lt;/p&gt;
+
+&lt;p&gt;既然不想贴单一的标签，那同时贴上多个标签？NO，NO，我不喜欢复杂。&lt;em&gt;（什么？你说这个本来就是复杂的，要实事求是，面对事实？面你妹，在我看来就是很简单，这就是事实，如果你看起来复杂，那是你的事，你要面对事实）。&lt;/em&gt;嗯，那就把当前的情绪/氛围，称作那种情绪（&lt;code&gt;the emotion&lt;/code&gt;）吧，说破了天也不过是情绪的一种。&lt;/p&gt;
+
+&lt;p&gt;最近想做的事情特别多，那就列一下吧：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;学习web 前端技术，包括JavaScript、HTML5、CSS3、JQuery；&lt;em&gt;（之前只是用什么查什么，没有整体上的理解）。&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;学习Node.JS；&lt;/li&gt;
+  &lt;li&gt;系统学习计算机的基本理论，主要是&lt;a href=&quot;http://book.douban.com/subject/5333562/&quot;&gt;《深入理解计算机系统》&lt;/a&gt; 这本书；&lt;/li&gt;
+  &lt;li&gt;移动端APP开发：主要是Andorid；&lt;/li&gt;
+  &lt;li&gt;微信公共帐号开发；&lt;em&gt;（昨天在&lt;a href=&quot;http://bbs.byr.cn&quot;&gt;http://bbs.byr.cn&lt;/a&gt;上看到的）&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;网络安全技术：&lt;a href=&quot;/download/web-security/阿里巴巴集团web安全标准Ver1.4.doc&quot;&gt;《阿里巴巴集团web安全标准ver1.4》&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;数据库引擎的基本原理：&lt;a href=&quot;http://db.cs.berkeley.edu/papers/fntdb07-architecture.pdf&quot;&gt; Architecture of a Database System&lt;/a&gt; 或者&lt;a href=&quot;/download/database/fntdb07-architecture.pdf&quot;&gt;本地下载&lt;/a&gt;， &lt;a href=&quot;http://www.h2database.com/html/mvstore.html&quot;&gt;H2数据库的MVStore存储引擎&lt;/a&gt;，&lt;a href=&quot;http://book.douban.com/subject/6847455/&quot;&gt;《高可用MySQL》&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;UI设计&lt;/li&gt;
+  &lt;li&gt;找个女朋友&lt;em&gt;（这个，要认真对待）&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;还有的，今后再补上；&lt;em&gt;（我x，想做的事也忒多了点吧；想做这么多？为啥？是为了满足自己装B需求么？本质上就一条，看我啥都会？）&lt;/em&gt;别说，还真有点这么个原因，&lt;em&gt;（这个动机大概占2/3）&lt;/em&gt;，还有一个原因是，自己毕竟算是计算机科班出身，而且这两年也准备从事软件研发的工作，需要有些系统的知识，例如，&lt;a href=&quot;http://book.douban.com/subject/5333562/&quot;&gt;《深入理解计算机系统》&lt;/a&gt; 这本书。&lt;/p&gt;
+
+&lt;p&gt;这两年自己逐渐有个感触：参考资料找对了，事情就成了一半；混乱的书籍、博客、论坛，解决问题、开拓思路还可以，但要系统学习，还需要依照经典书籍、一手官方文档。&lt;/p&gt;
+
+&lt;p&gt;想想自己也是能够坚持的人，&lt;em&gt;（有几件事能够佐证，在此不表），&lt;/em&gt;做事情，需要认准方向，然后持续的付出时间，这样就妥了。&lt;/p&gt;
+
+&lt;p&gt;想想xxx的几句话：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;求学而不是求得&lt;/li&gt;
+  &lt;li&gt;选中后期难度大的，吃苦努力提高自身能力&lt;/li&gt;
+  &lt;li&gt;唯一好的是知识，唯一坏的是无知&lt;/li&gt;
+  &lt;li&gt;认准方向，用心去做&lt;/li&gt;
+  &lt;li&gt;要自信、不要急、慢慢来，在一个方向上积累&lt;/li&gt;
+  &lt;li&gt;随遇而安&lt;/li&gt;
+  &lt;li&gt;欲速则不达&lt;/li&gt;
+  &lt;li&gt;大器晚成&lt;/li&gt;
+  &lt;li&gt;大巧不工&lt;/li&gt;
+  &lt;li&gt;行百里者半九十&lt;/li&gt;
+  &lt;li&gt;千里之堤溃于蚁穴&lt;/li&gt;
+  &lt;li&gt;为腹不为目&lt;/li&gt;
+  &lt;li&gt;知行合一&lt;/li&gt;
+  &lt;li&gt;所担心的坏事必然发生&lt;/li&gt;
+  &lt;li&gt;一专多能&lt;/li&gt;
+  &lt;li&gt;利见大人&lt;/li&gt;
+  &lt;li&gt;厚积薄发&lt;/li&gt;
+  &lt;li&gt;情深不寿&lt;/li&gt;
+  &lt;li&gt;强极必辱&lt;/li&gt;
+  &lt;li&gt;道不同不相为谋&lt;/li&gt;
+  &lt;li&gt;叶公好龙&lt;/li&gt;
+  &lt;li&gt;道可道非恒道&lt;/li&gt;
+  &lt;li&gt;天地不仁&lt;/li&gt;
+  &lt;li&gt;圣人不仁&lt;/li&gt;
+  &lt;li&gt;很多喜欢的事情只是因自己擅长，让自己觉得此方面比别人发展快，有成就感，乐意往此发展&lt;/li&gt;
+  &lt;li&gt;人应该做什么事情时，不能因为不会不擅长而逃避，否则你在什么上面偷懒逃避，什么上就会出问题&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+   </entry>
    
    <entry>
      <title>S.M.A.R.T.经验</title>
@@ -2999,136 +3064,6 @@ DELIMITER ;
   &lt;li&gt;http://blog.csdn.net/lxgwm2008/article/details/7738306&lt;/li&gt;
   &lt;li&gt;http://joewalker.iteye.com/blog/277626&lt;/li&gt;
   &lt;li&gt;http://blog.sina.com.cn/s/blog_406127500100pvar.html&lt;/li&gt;
-&lt;/ol&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>MySQL--字段内信息抽取</title>
-     <link href="http://ningg.github.com/mysql-data-extract"/>
-     <updated>2013-01-15T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/mysql-data-extract</id>
-     <content type="html">&lt;h2 id=&quot;section&quot;&gt;问题背景&lt;/h2&gt;
-
-&lt;p&gt;现在有一张表，结构如下：&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: left&quot;&gt;字段&lt;/th&gt;
-      &lt;th style=&quot;text-align: left&quot;&gt;类型&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;IP&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;varchar(30)&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;timeStart&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;double(13,3)&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;durationTime&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;double(13,3)&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;httpURL&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;varchar(1000)&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;terminalType&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;varchar(1000)&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;现在要从字段&lt;code&gt;httpURL&lt;/code&gt;中提取一些字符串，并作为新的属性，添加到表中。&lt;/p&gt;
-
-&lt;p&gt;一个典型的httpURL格式如下：&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;http://appldnld.apple.com/iOS6/041cfbLY/com_Update/6b2a5.zip&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;现在要提取&lt;code&gt;iOS6&lt;/code&gt;和&lt;code&gt;com_Update&lt;/code&gt;字段，并且组合为：&lt;code&gt;iOS6_com_Update&lt;/code&gt;，将此作为新字段添加到表中。&lt;/p&gt;
-
-&lt;h2 id=&quot;section-1&quot;&gt;解决办法&lt;/h2&gt;
-
-&lt;p&gt;初步思考，解决步骤如下：&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;ol&gt;
-    &lt;li&gt;取出一条记录；&lt;/li&gt;
-    &lt;li&gt;将字段“httpURL”中信息提取出来，组合；&lt;/li&gt;
-    &lt;li&gt;将获得的最终组合信息，添加到最新字段中。&lt;/li&gt;
-  &lt;/ol&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;strong&gt;关键&lt;/strong&gt;，使用&lt;code&gt;substring_index&lt;/code&gt;函数。&lt;/p&gt;
-
-&lt;p&gt;直接贴上脚本吧（利用MySQL存储过程）：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;/*
- *
- *usage：
- *      1) login the &#39;mysql&#39; ;
- *      2) source ~/enurl.sql;
- *      3) CALL enurl(&#39;oldTable&#39;,&#39;newTable&#39;);
- *
- *function: get the information from column &quot;httpURL&quot;, then store it in an new-bulit column &quot;info_1&quot;; we create a new table &#39;newTable&#39; to store the results;
- *
- *parameters:
- *      oldTable: the original table, that we need to get some information from the column &quot;httpURL&quot;;
- *      newTable: the new build table, where we store the results.
- *
- *author：Ning Guo
- *
- *time: 1/16/2013
- *
- *程序运行效果：
- *  260万数据，执行时间为：1min 2s
- *
- *
- */
-DROP PROCEDURE IF EXISTS enurl;
-DELIMITER //
-CREATE PROCEDURE enurl(
-		$oldTable VARCHAR(60),
-		$newTable VARCHAR(60)
-)
-BEGIN
-		SET @SQL= concat(&#39;DROP TABLE IF EXISTS &#39;,$newTable);
-		PREPARE stmt1 FROM @SQL;
-		EXECUTE stmt1;
-		DEALLOCATE PREPARE stmt1;
- 
-		SET @SQL= concat(&#39;CREATE TABLE &#39;,$newTable,&#39; SELECT * FROM &#39;,$oldTable);
-		PREPARE stmt1 FROM @SQL;
-		EXECUTE stmt1;
-		DEALLOCATE PREPARE stmt1;
- 
-		SET @SQL= concat(&#39;ALTER TABLE &#39;,$newTable,&#39; ADD info_1 varchar(60)&#39;);
-		PREPARE stmt1 FROM @SQL;
-		EXECUTE stmt1;
-		DEALLOCATE PREPARE stmt1;
- 
-		SET @SQL= concat(&#39;UPDATE &#39;,$newTable,&#39; SET info_1=(select concat(substring_index(substring_index(httpURL,\&#39;/\&#39;,4),\&#39;/\&#39;,-1),concat(\&#39;_\&#39;,substring_index(substring_index(
-httpURL,\&#39;/\&#39;,6),\&#39;/\&#39;,-1))))&#39;);
-		PREPARE stmt1 FROM @SQL;
-		EXECUTE stmt1;
-		DEALLOCATE PREPARE stmt1;
- 
-END //
-DELIMITER ;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&quot;section-2&quot;&gt;参考来源&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;http://www.chinesejy.com/jishu/508/518/20101017465148.html&lt;/li&gt;
-  &lt;li&gt;http://www.jb51.net/article/27458.htm&lt;/li&gt;
 &lt;/ol&gt;
 
 </content>
