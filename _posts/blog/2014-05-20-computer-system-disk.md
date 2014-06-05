@@ -1,11 +1,11 @@
 ---
 layout: post
-title: 硬盘结构
-description: 计算机上，数据写在硬盘上，那么，硬盘是什么结构？硬盘读写速度有没有瓶颈？
+title: 磁盘结构
+description: 计算机上，数据写在磁盘上，那么，磁盘是什么结构？磁盘读写速度有没有瓶颈？
 category: computer system
 ---
 
-##硬盘
+##磁盘
 
 硬盘大小：台式机3.5寸，笔记本尺寸2.5寸。
 
@@ -24,13 +24,27 @@ category: computer system
 
 ![disk-reading](/images/computer-system-disk/disk-reading.JPG)
 
-上图可以明显的看出，一个盘片对应的磁头可能有多个。
+###磁盘内部结构
+
+（扇区、磁柱、磁轨）
+（多区记录技术）
 
 下面将对磁盘涉及的专业术语进行简要介绍，先来一张磁盘结构的简图：
 
 ![cylinder_head_sector](/images/computer-system-disk/cylinder_head_sector.svg)
 
+###磁盘的接口
 
+SATA？IDE？SCSI？
+
+###选磁盘注意事项
+
+
+###查看磁盘详情
+
+查看步骤；
+
+###测试磁盘读写速度
 
 
 [NingG]:    http://ningg.github.com  "NingG"
