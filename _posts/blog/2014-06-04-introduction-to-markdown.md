@@ -69,8 +69,6 @@ __说明__：下文的基本语法，主要是[kramdown]解析引擎支持的mar
 
 如何约束图片的大小？
 
-###段落和引用
-
 
 
 ###代码
@@ -85,7 +83,7 @@ __说明__：下文的基本语法，主要是[kramdown]解析引擎支持的mar
 
 ###表格
 
-
+![chinese-carrier](/images/introduction-to-markdown/chinese-carrier.jpg)
 
 [Maruku]:	https://github.com/bhollis/maruku/
 [kramdown]:	http://kramdown.gettalong.org/ "kramdown"
