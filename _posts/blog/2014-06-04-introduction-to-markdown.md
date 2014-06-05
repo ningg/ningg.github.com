@@ -55,7 +55,7 @@ markdown有不同的解析引擎，GitHub上，应该使用哪一个？对此，
 
 __说明__：下文的基本语法，主要是[kramdown]解析引擎支持的markdown语法。*（甚至有些语法，不是标准markdown语法，而是kramdown的扩展语法）*。
 
-##基本语法
+##基本语法(doing...)
 
 对于标准markdown的语法规则，[markdown官网][markdown]已经有了完善的介绍，当然也有中文版的[markdown语法(简体中文)](http://wowubuntu.com/markdown/) 。
 
