@@ -4,7 +4,7 @@
    <title>NingG.github.com</title>
    <link href="http://ningg.github.com/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://ningg.github.com" rel="alternate" type="text/html" />
-   <updated>2014-05-18T10:31:03+08:00</updated>
+   <updated>2014-06-05T23:00:53+08:00</updated>
    <id>http://ningg.github.com</id>
    <author>
      <name></name>
@@ -13,7 +13,130 @@
 
    
    <entry>
-     <title>小记：让欲望信马由缰</title>
+     <title>markdown入门介绍</title>
+     <link href="http://ningg.github.com/introduction-to-markdown"/>
+     <updated>2014-06-04T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/introduction-to-markdown</id>
+     <content type="html">&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
+
+&lt;p&gt;几个问题：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;ol&gt;
+    &lt;li&gt;markdown产生之前，没有markdown；随着时间推进，为什么会有markdown？&lt;/li&gt;
+    &lt;li&gt;markdown能解决什么问题？这个问题之前没有解决办法吗？&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;书写WEB页面大都需要写HTML语法的页面，有很多类似&lt;code&gt;&amp;lt;h1&amp;gt;&lt;/code&gt;、 &lt;code&gt;&amp;lt;\h1&amp;gt;&lt;/code&gt;、 &lt;code&gt;&amp;lt;div&amp;gt;&lt;/code&gt;、 &lt;code&gt;&amp;lt;\div&amp;gt;&lt;/code&gt;、 &lt;code&gt;&amp;lt;img&amp;gt;&lt;/code&gt;等的标签。&lt;/p&gt;
+
+&lt;p&gt;有些WEB开发人员，厌倦了写HTML标签，同时，用文本编辑器查看HTML页面，内容读起来不简洁、看不出层次感。总结一下，就是两个需求：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;HTML页面写起来要简单；&lt;em&gt;（易写）&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;用文本编辑器查看，读起来要简洁；&lt;em&gt;（易读）&lt;/em&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;为实现&lt;strong&gt;1.HTML页面易写&lt;/strong&gt;这一功能，就不能再直接写HTML页面了，怎么办？重新定义一种易写的文本书写格式，然后，用个程序，将其转换为HTML页面。&lt;em&gt;（你看，HTML页面是否变得容易写了？）&lt;/em&gt;
+同时，为了实现&lt;strong&gt;2.文本易读&lt;/strong&gt;这一功能，要求重新定义的文本书写格式具备格式简洁、层次清晰等特点。&lt;/p&gt;
+
+&lt;p&gt;在这一背景下，markdown产生了。&lt;/p&gt;
+
+&lt;h2 id=&quot;markdown&quot;&gt;markdown是什么？&lt;/h2&gt;
+
+&lt;p&gt;markdown到底是什么？最原始介绍在这儿&lt;a href=&quot;http://daringfireball.net/projects/markdown/&quot; title=&quot;original markdown introduction&quot;&gt;markdown&lt;/a&gt; ，markdown有两层含义：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;一种文本格式：简洁的文本书写格式；&lt;em&gt;（易写、易读）&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;一种软件&lt;em&gt;（又称，解析引擎）&lt;/em&gt;：将markdown格式的文件，转换为HTML页面；&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/introduction-to-markdown/markdown-and-html.png&quot; alt=&quot;markdown-and-html&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;看到上面图示，有人会问，markdown能够转换为HTML文档，那么，HTML文档能否转换为markdown格式文档呢？我x，你说呢，两种文档之间有映射关系，当然可以相互转换了，参考工具&lt;a href=&quot;http://www.aaronsw.com/2002/html2text/&quot;&gt;html2text&lt;/a&gt;。 &lt;/p&gt;
+
+&lt;h2 id=&quot;notepadmarkdown&quot;&gt;Notepad++上配置markdown&lt;/h2&gt;
+
+&lt;p&gt;GitHub上已经有人公开了Notepad++支持markdown语法的配置文件&lt;a href=&quot;https://github.com/thomsmits/markdown_npp&quot;&gt;markdown of Notepad++&lt;/a&gt;， 尝试用了一下，其中提到的&lt;a href=&quot;https://raw.github.com/thomsmits/markdown_npp/master/debug_theme/userDefineLang.xml&quot;&gt;debug theme&lt;/a&gt; 风格感觉不错。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;说明&lt;/strong&gt;：一个bug需要调整，当markdown文档内url包含1个&lt;code&gt;_&lt;/code&gt;时，下文的显示样式错乱，需要在&lt;a href=&quot;https://raw.github.com/thomsmits/markdown_npp/master/debug_theme/userDefineLang.xml&quot;&gt;debug theme&lt;/a&gt; 格式定义文件中，将Delimiters中的&lt;code&gt;_&lt;/code&gt;字符删除即可。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/introduction-to-markdown/markdown-to-html.jpg&quot; alt=&quot;markdown-to-html&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;githubmarkdown&quot;&gt;GitHub上使用markdown&lt;/h2&gt;
+
+&lt;p&gt;markdown有不同的解析引擎，GitHub上，应该使用哪一个？对此，GitHub帮助文档上有&lt;a href=&quot;https://help.github.com/articles/migrating-your-pages-site-from-maruku&quot;&gt;详细介绍&lt;/a&gt;， 简要介绍如下：&lt;/p&gt;
+
+&lt;p&gt;2012年10月之前，GitHub Pages上使用&lt;a href=&quot;https://github.com/bhollis/maruku/&quot;&gt;Maruku&lt;/a&gt;作为markdown文档的解析引擎，来生成最终的HTML页面。&lt;/p&gt;
+
+&lt;p&gt;2012年10月之后，Maruku官网声明：&lt;a href=&quot;http://benhollis.net/blog/2013/10/20/maruku-is-obsolete/&quot;&gt;Maruku项目将终止&lt;/a&gt; ，因此，GitHub建议使用&lt;a href=&quot;http://kramdown.gettalong.org/&quot; title=&quot;kramdown&quot;&gt;kramdown&lt;/a&gt;来替代&lt;a href=&quot;https://github.com/bhollis/maruku/&quot;&gt;Maruku&lt;/a&gt;。&lt;em&gt;（本blog使用的就是&lt;a href=&quot;http://kramdown.gettalong.org/&quot; title=&quot;kramdown&quot;&gt;kramdown&lt;/a&gt;解析引擎）&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;说明&lt;/strong&gt;：下文的基本语法，主要是&lt;a href=&quot;http://kramdown.gettalong.org/&quot; title=&quot;kramdown&quot;&gt;kramdown&lt;/a&gt;解析引擎支持的markdown语法。&lt;em&gt;（甚至有些语法，不是标准markdown语法，而是kramdown的扩展语法）&lt;/em&gt;。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;基本语法&lt;/h2&gt;
+
+&lt;p&gt;对于标准markdown的语法规则，&lt;a href=&quot;http://daringfireball.net/projects/markdown/&quot; title=&quot;original markdown introduction&quot;&gt;markdown官网&lt;/a&gt;已经有了完善的介绍，当然也有中文版的&lt;a href=&quot;http://wowubuntu.com/markdown/&quot;&gt;markdown语法(简体中文)&lt;/a&gt; 。&lt;/p&gt;
+
+&lt;p&gt;本文这一部分，主要是针对&lt;a href=&quot;http://kramdown.gettalong.org/&quot; title=&quot;kramdown&quot;&gt;kramdown&lt;/a&gt;解析引擎来说的，建议阅读官网的介绍：&lt;a href=&quot;http://kramdown.gettalong.org/syntax.html&quot;&gt;语法规则细则&lt;/a&gt; 和&lt;a href=&quot;http://kramdown.gettalong.org/quickref.html&quot;&gt;快速查询手册&lt;/a&gt; 。&lt;em&gt;（为什么介绍kramdown支持的语法？因为我在GitHub上指定的是kramdown解析引擎）&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;下文将对自己常用到的语法，进行简要介绍，以备查阅。&lt;/p&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;链接&lt;/h3&gt;
+
+&lt;p&gt;包括：图片、文档、其他网页链接；&lt;/p&gt;
+
+&lt;p&gt;如何约束图片的大小？&lt;/p&gt;
+
+&lt;h3 id=&quot;section-3&quot;&gt;段落和引用&lt;/h3&gt;
+
+&lt;h3 id=&quot;section-4&quot;&gt;代码&lt;/h3&gt;
+
+&lt;h3 id=&quot;section-5&quot;&gt;公式&lt;/h3&gt;
+
+&lt;h3 id=&quot;section-6&quot;&gt;表格&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/introduction-to-markdown/i-love-markdown.png&quot; alt=&quot;i-love-markdown&quot; /&gt;&lt;/p&gt;
+
+</content>
+   </entry>
+   
+   <entry>
+     <title>硬盘结构</title>
+     <link href="http://ningg.github.com/computer-system-disk"/>
+     <updated>2014-05-20T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/computer-system-disk</id>
+     <content type="html">&lt;h2 id=&quot;section&quot;&gt;硬盘&lt;/h2&gt;
+
+&lt;p&gt;硬盘大小：台式机3.5寸，笔记本尺寸2.5寸。&lt;/p&gt;
+
+&lt;p&gt;下图为硬盘的物理结构：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/computer-system-disk/true-disk.jpg&quot; alt=&quot;true-disk&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;上图可以直观看出，硬盘包含如下几个基本结构：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;盘片&lt;em&gt;（存储数据）&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;磁头&lt;em&gt;（向盘片，读取/写入数据）&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;主轴马达&lt;/li&gt;
+  &lt;li&gt;机械手臂&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;给一个正在读取磁盘内容的近景图：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/computer-system-disk/disk-reading.JPG&quot; alt=&quot;disk-reading&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;上图可以明显的看出，一个盘片对应的磁头可能有多个。&lt;/p&gt;
+
+&lt;p&gt;下面将对磁盘涉及的专业术语进行简要介绍，先来一张磁盘结构的简图：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/computer-system-disk/cylinder_head_sector.svg&quot; alt=&quot;cylinder_head_sector&quot; /&gt;&lt;/p&gt;
+
+</content>
+   </entry>
+   
+   <entry>
+     <title>小记：杂乱就理一理</title>
      <link href="http://ningg.github.com/personal-think-20140517"/>
      <updated>2014-05-17T00:00:00+08:00</updated>
      <id>http://ningg.github.com/personal-think-20140517</id>
@@ -2755,316 +2878,6 @@ src=&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HT
 &lt;p&gt;如果上述修改之后，仍然提示出错，则：&lt;code&gt;...\lib\jekyll\tags&lt;/code&gt;目录下&lt;code&gt;include.rb&lt;/code&gt;文件，类似对于&lt;code&gt;convertible.rb&lt;/code&gt;文件的操作；&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/images/build-blog-with-github/github-social-coding.png&quot; alt=&quot;github-social-coding&quot; /&gt;&lt;/p&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>Linux 后台运行命令</title>
-     <link href="http://ningg.github.com/linux-cmd-run-in-background"/>
-     <updated>2013-01-17T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/linux-cmd-run-in-background</id>
-     <content type="html">&lt;h2 id=&quot;section&quot;&gt;问题背景&lt;/h2&gt;
-
-&lt;p&gt;使用&lt;code&gt;SecureCRT&lt;/code&gt;/&lt;code&gt;putty&lt;/code&gt;等客户端，远程连接Linux服务器，并且执行脚本时，由于网络不稳定，有可能导致连接中断，在这种情况下，我担心会影响脚本程序的正常执行（不能肯定是否一定会影响）；因此希望启动一个脚本，让其在后台一直运行，不会随着&lt;code&gt;连接中断&lt;/code&gt;而中断掉。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;外加问题&lt;/strong&gt;：现在一个命令的输出信息过多，希望后台运行时，不保存输出信息。&lt;/p&gt;
-
-&lt;h2 id=&quot;section-1&quot;&gt;解决办法&lt;/h2&gt;
-
-&lt;p&gt;先说最终的解决办法：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;nohup sh collectCloSpan.sh &amp;amp;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;执行上面命令即可。输出信息在当前路径的&lt;code&gt;nohup.out&lt;/code&gt;文件中。（如果当前路径不允许新建文件，则，输出信息保存在&lt;code&gt;~/nohup.out&lt;/code&gt;文件中）&lt;/p&gt;
-
-&lt;p&gt;好了，现在怎么解决解决&lt;code&gt;nohup.out&lt;/code&gt;文件过大的问题呢？&lt;/p&gt;
-
-&lt;p&gt;经过查询有2个解决思路：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;完全删除输出信息：一点输出信息都不想要；&lt;/li&gt;
-  &lt;li&gt;删除过时的输出信息，只保留最近一段时间的输出信息。&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;完全删除输出信息：在程序后台运行之后，直接删除文件nohup.out文件即可，除非重新运行程序，否则，不会再有&lt;code&gt;nohup.out&lt;/code&gt;文件；&lt;/p&gt;
-
-&lt;p&gt;删除过时的输出信息（在线清空文件内容）：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;/*执行效率较高*/
-cp /dev/null nohup.out
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;或者&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;/*文件很大时，执行较慢*/
-cat /dev/null &amp;gt; nohup.out
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;关于&lt;code&gt;/dev/null&lt;/code&gt;到底是什么，自己&lt;code&gt;google&lt;/code&gt;或者&lt;code&gt;baidu&lt;/code&gt;吧。&lt;/p&gt;
-
-&lt;p&gt;感兴趣的可以具体看下面的详细说明。&lt;em&gt;（不感兴趣的可以直接跳过了）。&lt;/em&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;section-2&quot;&gt;细节分析&lt;/h2&gt;
-
-&lt;p&gt;后台运行脚本，有多种解决方法，此处只说一个比较常用的，具体如下（&lt;a href=&quot;https://www.ibm.com/developerworks/cn/linux/l-cn-nohup/&quot;&gt;参考1&lt;/a&gt;）：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;nohup ping www.baidu.com &amp;amp;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;然后等待，出现如下结果：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/linux-cmd-run-in-background/linux-cmd-run-in-background.jpg&quot; alt=&quot;LINUX后台运行命令nohup测试&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;输入命令&lt;code&gt;jobs&lt;/code&gt;可以查看现有的后台程序，如上图；并且可以使用&lt;code&gt;fg 1&lt;/code&gt;命令，将第一个后台程序，调入前台。
-输入后台运行命令&lt;code&gt;nohup ping www.baidu.com &amp;amp;&lt;/code&gt;后，如果没有返回到原来的&lt;code&gt;shell&lt;/code&gt;，则中间直接敲&lt;code&gt;回车(Enter)&lt;/code&gt;即可，等到返回原来&lt;code&gt;shell&lt;/code&gt;环境之后，可以使用&lt;code&gt;exit&lt;/code&gt;命令退出；如上图所示。再次使用&lt;code&gt;SecureCRT&lt;/code&gt;/&lt;code&gt;putty&lt;/code&gt;等终端登录，并输入如下命令：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;ps –ef | grep “ping”
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;可以看到上图中结果，原来的程序&lt;code&gt;pid&lt;/code&gt;为&lt;code&gt;13380&lt;/code&gt;还在执行，只是此进程的父进程改为&lt;code&gt;pid=1&lt;/code&gt;的特殊进程。程序运行过程中，所有输出自动输出到当前目录的&lt;code&gt;nohup.out&lt;/code&gt;文件中（具体&lt;a href=&quot;http://www.linuxidc.com/Linux/2010-09/28366.htm&quot;&gt;参考2&lt;/a&gt;）。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;疑问1&lt;/strong&gt;：后台运行：&lt;code&gt;command &amp;amp; &lt;/code&gt;和 &lt;code&gt;nohup command &amp;amp;&lt;/code&gt;有区别吗？&lt;/p&gt;
-
-&lt;p&gt;答：&lt;code&gt;command &amp;amp;&lt;/code&gt;：后台运行，关掉中断，命令会终止运行；&lt;code&gt;nobup command &amp;amp;&lt;/code&gt;：后台运行，关掉终端，命令会继续运行。&lt;/p&gt;
-
-&lt;h2 id=&quot;section-3&quot;&gt;参考来源&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;https://www.ibm.com/developerworks/cn/linux/l-cn-nohup/&quot;&gt;https://www.ibm.com/developerworks/cn/linux/l-cn-nohup/&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.linuxidc.com/Linux/2010-09/28366.htm&quot;&gt;http://www.linuxidc.com/Linux/2010-09/28366.htm&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.cnblogs.com/lwm-1988/archive/2011/08/20/2147299.html&quot;&gt;http://www.cnblogs.com/lwm-1988/archive/2011/08/20/2147299.html&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/linux-cmd-run-in-background/scene-background.jpg&quot; alt=&quot;scene&quot; /&gt;&lt;/p&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>MySQL--基本操作</title>
-     <link href="http://ningg.github.com/mysql-basic-info"/>
-     <updated>2013-01-16T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/mysql-basic-info</id>
-     <content type="html">&lt;h2 id=&quot;section&quot;&gt;简介&lt;/h2&gt;
-
-&lt;p&gt;难得最近两天重新接触Mysql，正好整理一下基本的知识。下面是自己本篇文章的大纲：&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;ol&gt;
-    &lt;li&gt;增删改查；&lt;/li&gt;
-    &lt;li&gt;&lt;code&gt;group by&lt;/code&gt;、&lt;code&gt;order by&lt;/code&gt;、&lt;code&gt;distinct&lt;/code&gt;；&lt;/li&gt;
-    &lt;li&gt;常用函数：&lt;code&gt;count()&lt;/code&gt;、&lt;code&gt;min()&lt;/code&gt;、&lt;code&gt;max()&lt;/code&gt;、&lt;code&gt;substing_index()&lt;/code&gt;等；&lt;/li&gt;
-    &lt;li&gt;查看mysql日志，主要是针对&lt;code&gt;warings&lt;/code&gt;`errors`的查询和处理；&lt;/li&gt;
-    &lt;li&gt;mysql存储过程；&lt;/li&gt;
-    &lt;li&gt;数据备份；&lt;/li&gt;
-    &lt;li&gt;常用工具的介绍及特点；&lt;/li&gt;
-    &lt;li&gt;（万佛归宗）MySQL的整体框架，备份时内部的线程机制，语句执行效率。&lt;/li&gt;
-  &lt;/ol&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;首先对于上面的8个要点进行一个整体的说明：&lt;code&gt;1-3&lt;/code&gt;是基本的操作；&lt;code&gt;4-7&lt;/code&gt;属于较深入的学习（有点难度），但仍然是操作过程；&lt;code&gt;8&lt;/code&gt;是整个MySQL的基础，最核心的东西，从这里就可以窥见Mysql的起源了。操作部分关键是要记忆+操作；底层的理论需要一些理解（brain power）。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;说明&lt;/strong&gt;：整篇的表述，都是以自己浅显的理解为基础的；有描述不当的地方，还请留言指正。&lt;/p&gt;
-
-&lt;h2 id=&quot;section-1&quot;&gt;具体&lt;/h2&gt;
-
-&lt;h3 id=&quot;section-2&quot;&gt;1.增删改查&lt;/h3&gt;
-
-&lt;h3 id=&quot;group-byorder-bydistinct&quot;&gt;2.group by、order by、distinct&lt;/h3&gt;
-
-&lt;h3 id=&quot;countminmaxsubstringindex&quot;&gt;3.常用函数：count、min、max、substring_index&lt;/h3&gt;
-
-&lt;p&gt;前3项，参照下面链接，把命令反复敲2遍，重复的也要敲。&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.cnblogs.com/hateislove214/archive/2010/11/05/1869889.html&quot;&gt;MySQL常用命令汇总1&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://zhaofeng2007625.blog.163.com/blog/static/311815972010111512437937/&quot;&gt;MySQL常用命令汇总2&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://blog.sina.com.cn/s/blog_9707fac301017kb3.html&quot;&gt;MySQL常用命令汇总3&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;:有疑问的地方多GOOGLE，实在无法解决的，就跳过。
-简要说明几点（查找《MySQL必知必会》中对应部分）：&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;group by &lt;/code&gt;分组，本质将表格分为逻辑组，基于逻辑组，同时进行相同处理（统计、汇总等）；可以嵌套分组，（效率很低的嵌套分组，过滤分组）常在group by之后，添加一个order by，按照某种规律进行排序。&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;order by&lt;/code&gt; 排序，按多个列排序：order by column_1,column_2；DESC:降序；ASC：默认值，升序。（多列排序、指定排序方向）&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;distinct&lt;/code&gt; 过滤重复内容；可以使用distinct column_1,column_2；（多列去重）&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;select&lt;/code&gt;语句最后添加“\G”，会以列的格式来显示行。&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;alter&lt;/code&gt;：修改表结构等。&lt;/p&gt;
-
-&lt;h3 id=&quot;section-3&quot;&gt;4.日志&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;读日志是熟悉使用一个工具的最基本要求&lt;/strong&gt;。如果执行了一个sql脚本之后，提示&lt;code&gt;n warnings&lt;/code&gt;，可以使用&lt;code&gt;show warnings&lt;/code&gt;命令来查看详细信息。&lt;/p&gt;
-
-&lt;p&gt;假设场景：&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;ul&gt;
-    &lt;li&gt;现在mysql运行，希望知道哪些sql命令正在运行；（正在执行的命令）&lt;/li&gt;
-    &lt;li&gt;现在mysql运行，希望知道曾经执行过的sql命令；（历史命令）&lt;/li&gt;
-    &lt;li&gt;运行出现问题，mysql无法正常使用，现在希望查看mysql的运行日志；&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;查看mysql的运行状态，命令：status；结果如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;mysql&amp;gt; status;
---------------
-mysql  Ver 14.14 Distrib 5.1.60, for redhat-linux-gnu (x86_64) using readline 5.1
- 
-Connection id:          21449
-Current database:       chinacache
-Current user:           root@localhost
-SSL:                    Not in use
-Current pager:          stdout
-Using outfile:          &#39;&#39;
-Using delimiter:        ;
-Server version:         5.1.60 Source distribution
-Protocol version:       10
-Connection:             Localhost via UNIX socket
-Server characterset:    utf8
-Db     characterset:    utf8
-Client characterset:    utf8
-Conn.  characterset:    utf8
-UNIX socket:            /home/data/mysqlData/mysql5.5.sock
-Uptime:                 33 days 9 min 48 sec
- 
-Threads: 9  Questions: 15701727  Slow queries: 47  Opens: 1039  Flush tables: 1  Open tables: 541  Queries per second avg: 5.505
---------------
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;注意看，上面最后一行&lt;code&gt;slow queries&lt;/code&gt;这一项的值，如果多次查看的值都大于0，则说明有些查询的sql命令执行时间过长。&lt;/p&gt;
-
-&lt;p&gt;查看当前正在运行的SQL，使用命令&lt;code&gt;show processlist；&lt;/code&gt;，从中找出运行较慢的语句，再使用&lt;code&gt;explain&lt;/code&gt;命令查看这些语句的执行计划。如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;mysql&amp;gt; show processlist;
-+-------+------+----------------------+------------+---------+------+----------------+-
-| Id    | User | Host                 | db         | Command | Time | State          |
-+-------+------+----------------------+------------+---------+------+----------------+-
-| 21185 | root | localhost            | chinacache | Sleep   | 3744 |                | 
-| 21449 | root | localhost            | chinacache | Sleep   |  501 |                | 
-| 21626 | root | localhost            | chinacache | Query   |    0 | NULL           | 
-| 21630 | root | localhost            | chinacache | Query   |    0 | Sorting result | 
-| 21695 | root | localhost            | chinacache | Sleep   |  685 |                | 
-| 21732 | zuo  | 10.108.210.111:50198 | chinacache | Sleep   |   19 |                | 
-| 21733 | zuo  | 10.108.210.111:50201 | chinacache | Sleep   |  258 |                | 
-| 21742 | zuo  | 10.108.210.111:50229 | chinacache | Sleep   |   19 |                | 
-| 21744 | root | localhost            | wordpress  | Sleep   |    6 |                | 
-+-------+------+----------------------+------------+---------+------+----------------+-
-9 rows in set (0.00 sec)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;对于MySQL的历史命令：需要在&lt;code&gt;my.cnf&lt;/code&gt;文件中添加:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;[mysqld]
-log=command.log
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;重新启动&lt;code&gt;mysqld&lt;/code&gt;，之后所有的命令都可以到上述文件中查询得到。&lt;/p&gt;
-
-&lt;p&gt;查看当前启用的日志[7]，以及日志的存储路径：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;show variables like ‘log_%’;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;mysqlprocedure&quot;&gt;5.mysql存储过程（procedure）&lt;/h3&gt;
-
-&lt;p&gt;什么是&lt;code&gt;mysql的存储过程&lt;/code&gt;[1][2][3]？简单的说，为方便使用而保存的一条或者多条MySQL语句的集合，就是一个sql脚本文件，有输入\出参数，根据参数来动态执行其内部SQL语句（存储过程，实际是一种函数）。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;DELIMITER //
--- Name:ordertotal
--- Parameters:onumber = order number
---            taxable = 0 if not taxable, 1 if taxable
---            ototal = order total variable
-CREATE PROCEDURE ordertotal(
-		  IN onumber INT,
-		  IN taxable BOOLEAN,
-		  OUT ototal DECIMAL(8,2)
-)COMMENT &#39;Obtain order total, optionally adding tax&#39;
-BEGIN
- 
--- Declare variable for total
-DECLARE total DECIMAL(8,2);
--- Declare tax percentage
-DECLARE taxrate INT DEFAULT 6;
- 
--- Get the order total
-SELECT SUM(item_price*quantity)
-		FROM ordertimes WHERE order_num = onumber INTO total;
- 
--- Is this taxable?
-IF taxable THEN 
-		-- YES, so add taxrate to the total
-		SELECT total+(total/100*taxrate) INTO total;
-END IF;
- 
--- And finally, save to our variable
-SELECT total INTO ototal;
- 
-END //
- 
-DELIMITER ;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;看上面简单的&lt;code&gt;存储过程&lt;/code&gt;[1]，以此为例进行说明：首先，从意识上将上面的存储过程，看做一个函数。&lt;/p&gt;
-
-&lt;p&gt;具体细节：&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;ul&gt;
-    &lt;li&gt;&lt;code&gt;DELIMITER //&lt;/code&gt;表示暂时更改分隔符（mysql内判断为开始执行的分隔符）；&lt;/li&gt;
-    &lt;li&gt;&lt;code&gt;–- &lt;/code&gt;（最后有一个空格）表示单行注释；&lt;/li&gt;
-    &lt;li&gt;上面的&lt;code&gt;procedure&lt;/code&gt;包含了2个输入参数（IN）和一个返回参数（OUT）；&lt;/li&gt;
-    &lt;li&gt;过程body中，使用&lt;code&gt;declare&lt;/code&gt;定义了2个局部变量，&lt;code&gt;declare&lt;/code&gt;要求使用变量名和类型；&lt;code&gt;select… into…&lt;/code&gt; 语句将查询结果保存到&lt;code&gt;into&lt;/code&gt;后面的变量中；&lt;/li&gt;
-    &lt;li&gt;&lt;code&gt;if…then…end&lt;/code&gt; if语句表示了是否一个条件判断执行过程。&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;strong&gt;补充&lt;/strong&gt;：&lt;code&gt;procedure&lt;/code&gt;的参数后面有&lt;code&gt;COMMENT&lt;/code&gt;类似于备注，当使用&lt;code&gt;SHOW PROCEDURE STATUS;&lt;/code&gt;时可以看到此字段。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;:注意存储过程中的&lt;strong&gt;输入参数&lt;/strong&gt; 不能作为表名（&lt;code&gt;table name&lt;/code&gt;）,如果必须将表名当做输入参数，可以使用预处理机制：&lt;code&gt;PREPARE&lt;/code&gt;、&lt;code&gt;EXECUTE&lt;/code&gt;、&lt;code&gt;DEALLOCATE PREPARE&lt;/code&gt;。具体借鉴另一篇blog&lt;a href=&quot;/mysql-data-cleaning/&quot;&gt;MYsql——数据去重&lt;/a&gt;。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;NOTE&lt;/strong&gt;:上面使用&lt;code&gt;DECLARE&lt;/code&gt;进行变量的声明，在很多情况下会看到&lt;code&gt;set @var&lt;/code&gt;类型的变量，关于变量详细信息参考[5]（猜测只是变量的作用范围不同，其他的本质都是变量，没有什么不同？）。&lt;/p&gt;
-
-&lt;p&gt;常用的操作：&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;ul&gt;
-    &lt;li&gt;执行存储过程：&lt;code&gt;CALL procedure_name(params);&lt;/code&gt;&lt;/li&gt;
-    &lt;li&gt;删除存储过程：&lt;code&gt;DROP PROCEDURE procedure_name;&lt;/code&gt;（&lt;code&gt;DROP PROCEDURE IF EXISTS procedure_name;&lt;/code&gt;）&lt;/li&gt;
-    &lt;li&gt;显示所有正在运行的存储过程：&lt;code&gt;SHOW PROCEDURE STATUS&lt;/code&gt;;其中包含了&lt;code&gt;procedure&lt;/code&gt;的名称、创建时间、修改时间等;&lt;/li&gt;
-    &lt;li&gt;显示存储过程的创建语句：&lt;code&gt;SHOW CREATE PROCEDURE procedure_name&lt;/code&gt;;&lt;/li&gt;
-  &lt;/ul&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&quot;section-4&quot;&gt;6.数据备份（操作）&lt;/h3&gt;
-
-&lt;p&gt;(doing…)&lt;/p&gt;
-
-&lt;h3 id=&quot;section-5&quot;&gt;7.常用工具&lt;/h3&gt;
-
-&lt;p&gt;(doing…)&lt;/p&gt;
-
-&lt;h3 id=&quot;mysql&quot;&gt;8.(万佛归宗)Mysql整体框架，内部线程机制，语句执行效率&lt;/h3&gt;
-
-&lt;p&gt;(doing…)&lt;/p&gt;
-
-&lt;h2 id=&quot;section-6&quot;&gt;参考来源&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;《MySQL必知必会》Page171&lt;/li&gt;
-  &lt;li&gt;http://blog.sina.com.cn/s/blog_71f4cdbe0100yut4.html&lt;/li&gt;
-  &lt;li&gt;http://www.ccvita.com/100.html&lt;/li&gt;
-  &lt;li&gt;http://www.ccvita.com/category/mysql/&lt;/li&gt;
-  &lt;li&gt;http://blog.csdn.net/lxgwm2008/article/details/7738306&lt;/li&gt;
-  &lt;li&gt;http://joewalker.iteye.com/blog/277626&lt;/li&gt;
-  &lt;li&gt;http://blog.sina.com.cn/s/blog_406127500100pvar.html&lt;/li&gt;
-&lt;/ol&gt;
 
 </content>
    </entry>
