@@ -4,7 +4,7 @@
    <title>NingG.github.com</title>
    <link href="http://ningg.github.com/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://ningg.github.com" rel="alternate" type="text/html" />
-   <updated>2014-06-05T23:00:53+08:00</updated>
+   <updated>2014-06-06T00:16:34+08:00</updated>
    <id>http://ningg.github.com</id>
    <author>
      <name></name>
@@ -37,8 +37,8 @@
   &lt;li&gt;用文本编辑器查看，读起来要简洁；&lt;em&gt;（易读）&lt;/em&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;为实现&lt;strong&gt;1.HTML页面易写&lt;/strong&gt;这一功能，就不能再直接写HTML页面了，怎么办？重新定义一种易写的文本书写格式，然后，用个程序，将其转换为HTML页面。&lt;em&gt;（你看，HTML页面是否变得容易写了？）&lt;/em&gt;
-同时，为了实现&lt;strong&gt;2.文本易读&lt;/strong&gt;这一功能，要求重新定义的文本书写格式具备格式简洁、层次清晰等特点。&lt;/p&gt;
+&lt;p&gt;为实现”&lt;strong&gt;1.HTML页面易写&lt;/strong&gt;“这一功能，就不能再直接写HTML页面了，怎么办？重新定义一种易写的文本书写格式，然后，用个程序，将其转换为HTML页面。&lt;em&gt;（你看，HTML页面是否变得容易写了？）&lt;/em&gt;
+同时，为了实现”&lt;strong&gt;2.文本易读&lt;/strong&gt;“这一功能，要求重新定义的文本书写格式具备格式简洁、层次清晰等特点。&lt;/p&gt;
 
 &lt;p&gt;在这一背景下，markdown产生了。&lt;/p&gt;
 
@@ -73,7 +73,7 @@
 
 &lt;p&gt;&lt;strong&gt;说明&lt;/strong&gt;：下文的基本语法，主要是&lt;a href=&quot;http://kramdown.gettalong.org/&quot; title=&quot;kramdown&quot;&gt;kramdown&lt;/a&gt;解析引擎支持的markdown语法。&lt;em&gt;（甚至有些语法，不是标准markdown语法，而是kramdown的扩展语法）&lt;/em&gt;。&lt;/p&gt;
 
-&lt;h2 id=&quot;section-1&quot;&gt;基本语法&lt;/h2&gt;
+&lt;h2 id=&quot;doing&quot;&gt;基本语法(doing…)&lt;/h2&gt;
 
 &lt;p&gt;对于标准markdown的语法规则，&lt;a href=&quot;http://daringfireball.net/projects/markdown/&quot; title=&quot;original markdown introduction&quot;&gt;markdown官网&lt;/a&gt;已经有了完善的介绍，当然也有中文版的&lt;a href=&quot;http://wowubuntu.com/markdown/&quot;&gt;markdown语法(简体中文)&lt;/a&gt; 。&lt;/p&gt;
 
@@ -81,31 +81,29 @@
 
 &lt;p&gt;下文将对自己常用到的语法，进行简要介绍，以备查阅。&lt;/p&gt;
 
-&lt;h3 id=&quot;section-2&quot;&gt;链接&lt;/h3&gt;
+&lt;h3 id=&quot;section-1&quot;&gt;链接&lt;/h3&gt;
 
 &lt;p&gt;包括：图片、文档、其他网页链接；&lt;/p&gt;
 
 &lt;p&gt;如何约束图片的大小？&lt;/p&gt;
 
-&lt;h3 id=&quot;section-3&quot;&gt;段落和引用&lt;/h3&gt;
+&lt;h3 id=&quot;section-2&quot;&gt;代码&lt;/h3&gt;
 
-&lt;h3 id=&quot;section-4&quot;&gt;代码&lt;/h3&gt;
+&lt;h3 id=&quot;section-3&quot;&gt;公式&lt;/h3&gt;
 
-&lt;h3 id=&quot;section-5&quot;&gt;公式&lt;/h3&gt;
+&lt;h3 id=&quot;section-4&quot;&gt;表格&lt;/h3&gt;
 
-&lt;h3 id=&quot;section-6&quot;&gt;表格&lt;/h3&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/introduction-to-markdown/i-love-markdown.png&quot; alt=&quot;i-love-markdown&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/introduction-to-markdown/chinese-carrier.jpg&quot; alt=&quot;chinese-carrier&quot; /&gt;&lt;/p&gt;
 
 </content>
    </entry>
    
    <entry>
-     <title>硬盘结构</title>
+     <title>磁盘结构</title>
      <link href="http://ningg.github.com/computer-system-disk"/>
      <updated>2014-05-20T00:00:00+08:00</updated>
      <id>http://ningg.github.com/computer-system-disk</id>
-     <content type="html">&lt;h2 id=&quot;section&quot;&gt;硬盘&lt;/h2&gt;
+     <content type="html">&lt;h2 id=&quot;section&quot;&gt;磁盘&lt;/h2&gt;
 
 &lt;p&gt;硬盘大小：台式机3.5寸，笔记本尺寸2.5寸。&lt;/p&gt;
 
@@ -126,11 +124,26 @@
 
 &lt;p&gt;&lt;img src=&quot;/images/computer-system-disk/disk-reading.JPG&quot; alt=&quot;disk-reading&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;上图可以明显的看出，一个盘片对应的磁头可能有多个。&lt;/p&gt;
+&lt;h3 id=&quot;section-1&quot;&gt;磁盘内部结构&lt;/h3&gt;
+
+&lt;p&gt;（扇区、磁柱、磁轨）
+（多区记录技术）&lt;/p&gt;
 
 &lt;p&gt;下面将对磁盘涉及的专业术语进行简要介绍，先来一张磁盘结构的简图：&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/images/computer-system-disk/cylinder_head_sector.svg&quot; alt=&quot;cylinder_head_sector&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;磁盘的接口&lt;/h3&gt;
+
+&lt;p&gt;SATA？IDE？SCSI？&lt;/p&gt;
+
+&lt;h3 id=&quot;section-3&quot;&gt;选磁盘注意事项&lt;/h3&gt;
+
+&lt;h3 id=&quot;section-4&quot;&gt;查看磁盘详情&lt;/h3&gt;
+
+&lt;p&gt;查看步骤；&lt;/p&gt;
+
+&lt;h3 id=&quot;section-5&quot;&gt;测试磁盘读写速度&lt;/h3&gt;
 
 </content>
    </entry>
