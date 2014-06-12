@@ -26,7 +26,7 @@ $(document).ready(function(){
     //***********************
     //**评论的代码也删掉哦***
     window.disqus_shortname = 'ningg'; // required: replace example with your forum shortname(register on DISQUS)
-    $('#disqus_container .comment').on('click',function(){
+    $('#disqus_container .comment').on('onload',function(){
         $(this).html('加载中...');
         var that = this;
         $.getScript('http://' + disqus_shortname + '.disqus.com/embed.js',function(){$(that).remove()});
