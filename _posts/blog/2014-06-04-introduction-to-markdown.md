@@ -42,7 +42,7 @@ GitHub上已经有人公开了Notepad++支持markdown语法的配置文件[markd
 
 __说明__：一个bug需要调整，当markdown文档内url包含1个`_`时，下文的显示样式错乱，需要在[debug theme](https://raw.github.com/thomsmits/markdown_npp/master/debug_theme/userDefineLang.xml) 格式定义文件中，将Delimiters中的`_`字符删除即可。
 
-![markdown-to-html](/images/introduction-to-markdown/markdown-to-html.jpg)
+
 
 
 ##GitHub上使用markdown
@@ -54,6 +54,8 @@ markdown有不同的解析引擎，GitHub上，应该使用哪一个？对此，
 2012年10月之后，Maruku官网声明：[Maruku项目将终止](http://benhollis.net/blog/2013/10/20/maruku-is-obsolete/) ，因此，GitHub建议使用[kramdown]来替代[Maruku]。*（本blog使用的就是[kramdown]解析引擎）*
 
 __说明__：下文的基本语法，主要是[kramdown]解析引擎支持的markdown语法。*（甚至有些语法，不是标准markdown语法，而是kramdown的扩展语法）*。
+
+__更新__：GitHub现在使用[GitHub Flavored Markdown](https://help.github.com/articles/github-flavored-markdown) 的Markdown语法，其在标准的[markdown]语法上，进行了一些改进。
 
 ##基本语法(doing...)
 
@@ -84,6 +86,7 @@ __说明__：下文的基本语法，主要是[kramdown]解析引擎支持的mar
 ###表格
 
 ![chinese-carrier](/images/introduction-to-markdown/chinese-carrier.jpg)
+![markdown-to-html](/images/introduction-to-markdown/markdown-to-html.jpg)
 
 [Maruku]:	https://github.com/bhollis/maruku/
 [kramdown]:	http://kramdown.gettalong.org/ "kramdown"
