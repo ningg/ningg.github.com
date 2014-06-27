@@ -4,13 +4,94 @@
    <title>NingG.github.com</title>
    <link href="http://ningg.github.com/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://ningg.github.com" rel="alternate" type="text/html" />
-   <updated>2014-06-13T01:29:52+08:00</updated>
+   <updated>2014-06-27T21:07:10+08:00</updated>
    <id>http://ningg.github.com</id>
    <author>
      <name></name>
      <email></email>
    </author>
 
+   
+   <entry>
+     <title>Linux下查看进程的内存占用（top命令）</title>
+     <link href="http://ningg.github.com/linux-top"/>
+     <updated>2014-06-23T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/linux-top</id>
+     <content type="html">&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
+
+&lt;p&gt;最近几天，服务器使用&lt;code&gt;free -g&lt;/code&gt;来查看当前内存使用情况时，会发现内存空间几乎被完全占用了，如何能查看是哪个进程的问题？自己使用&lt;code&gt;top&lt;/code&gt;进来，看着不断刷新的监控数据，也无法找出哪个进程占用的内存最多，有位哥们儿建议：你按内存占用来排序，这样就直观看出来了。&lt;/p&gt;
+
+&lt;h2 id=&quot;top&quot;&gt;top简介&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;top&lt;/strong&gt; - display Linux tasks&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;blockquote&gt;
+  &lt;ul&gt;
+    &lt;li&gt;The  top  program  provides a dynamic real-time view of a running system.  It can display system summary information as
+well as a list of tasks currently being managed by the Linux kernel.  The types of system summary information shown and
+the  types,  order  and size of information displayed for tasks are all user configurable and that configuration can be
+made persistent across restarts.&lt;/li&gt;
+    &lt;li&gt;The program provides a limited interactive interface for process manipulation as well as a much more  extensive  interface for personal configuration  –  encompassing every aspect of its operation.  And while top is referred to throughout this document, you are free to name the program anything you wish.  That new name, possibly an alias, will then  be reflected on top’s display and used when reading and writing a configuration file.&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;top-1&quot;&gt;top使用&lt;/h2&gt;
+
+&lt;p&gt;输入&lt;code&gt;top&lt;/code&gt;命令之后，可以继续进行如下操作，依次来获取想要的信息。&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;输入&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;说明&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;h&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;获取帮助信息  or &lt;code&gt;?&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;q&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;退出top监控页面 or &lt;code&gt;ctrl + c&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;u&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;某一用户启动的所有进程&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;c&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;显示/取消，进程执行的详细信息，在COMMAND字段显示&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;k&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;kill指定PID的进程&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;O&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;排序，设置排序字段；&lt;code&gt;n&lt;/code&gt;:Mem，&lt;code&gt;k&lt;/code&gt;:CPU&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;R&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;倒序；即，如果原来按从小到大排序，则，变为从大到小排序&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;Z&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;设置窗口颜色配置方案&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;W&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;保存当前top命令的设置&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;&lt;strong&gt;思考&lt;/strong&gt;：top命令显示的监控信息，是如何计算出来的？是使用&lt;code&gt;/proc&lt;/code&gt;目录下的文件吗？&lt;/p&gt;
+
+</content>
+   </entry>
    
    <entry>
      <title>markdown入门介绍</title>
@@ -61,8 +142,6 @@
 
 &lt;p&gt;&lt;strong&gt;说明&lt;/strong&gt;：一个bug需要调整，当markdown文档内url包含1个&lt;code&gt;_&lt;/code&gt;时，下文的显示样式错乱，需要在&lt;a href=&quot;https://raw.github.com/thomsmits/markdown_npp/master/debug_theme/userDefineLang.xml&quot;&gt;debug theme&lt;/a&gt; 格式定义文件中，将Delimiters中的&lt;code&gt;_&lt;/code&gt;字符删除即可。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/introduction-to-markdown/markdown-to-html.jpg&quot; alt=&quot;markdown-to-html&quot; /&gt;&lt;/p&gt;
-
 &lt;h2 id=&quot;githubmarkdown&quot;&gt;GitHub上使用markdown&lt;/h2&gt;
 
 &lt;p&gt;markdown有不同的解析引擎，GitHub上，应该使用哪一个？对此，GitHub帮助文档上有&lt;a href=&quot;https://help.github.com/articles/migrating-your-pages-site-from-maruku&quot;&gt;详细介绍&lt;/a&gt;， 简要介绍如下：&lt;/p&gt;
@@ -72,6 +151,8 @@
 &lt;p&gt;2012年10月之后，Maruku官网声明：&lt;a href=&quot;http://benhollis.net/blog/2013/10/20/maruku-is-obsolete/&quot;&gt;Maruku项目将终止&lt;/a&gt; ，因此，GitHub建议使用&lt;a href=&quot;http://kramdown.gettalong.org/&quot; title=&quot;kramdown&quot;&gt;kramdown&lt;/a&gt;来替代&lt;a href=&quot;https://github.com/bhollis/maruku/&quot;&gt;Maruku&lt;/a&gt;。&lt;em&gt;（本blog使用的就是&lt;a href=&quot;http://kramdown.gettalong.org/&quot; title=&quot;kramdown&quot;&gt;kramdown&lt;/a&gt;解析引擎）&lt;/em&gt;&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;说明&lt;/strong&gt;：下文的基本语法，主要是&lt;a href=&quot;http://kramdown.gettalong.org/&quot; title=&quot;kramdown&quot;&gt;kramdown&lt;/a&gt;解析引擎支持的markdown语法。&lt;em&gt;（甚至有些语法，不是标准markdown语法，而是kramdown的扩展语法）&lt;/em&gt;。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;更新&lt;/strong&gt;：GitHub现在使用&lt;a href=&quot;https://help.github.com/articles/github-flavored-markdown&quot;&gt;GitHub Flavored Markdown&lt;/a&gt; 的Markdown语法，其在标准的&lt;a href=&quot;http://daringfireball.net/projects/markdown/&quot; title=&quot;original markdown introduction&quot;&gt;markdown&lt;/a&gt;语法上，进行了一些改进。&lt;/p&gt;
 
 &lt;h2 id=&quot;doing&quot;&gt;基本语法(doing…)&lt;/h2&gt;
 
@@ -93,7 +174,8 @@
 
 &lt;h3 id=&quot;section-4&quot;&gt;表格&lt;/h3&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/introduction-to-markdown/chinese-carrier.jpg&quot; alt=&quot;chinese-carrier&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/introduction-to-markdown/chinese-carrier.jpg&quot; alt=&quot;chinese-carrier&quot; /&gt;
+&lt;img src=&quot;/images/introduction-to-markdown/markdown-to-html.jpg&quot; alt=&quot;markdown-to-html&quot; /&gt;&lt;/p&gt;
 
 </content>
    </entry>
@@ -2747,150 +2829,6 @@ Author: Kleene, Stephen C;
 &lt;p&gt;你能读懂下面这张图片吗？&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/images/regular-expression/regex-example.png&quot; alt=&quot;regex-example&quot; /&gt;&lt;/p&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>GitHub上搭建个人网站</title>
-     <link href="http://ningg.github.com/build-blog-with-github"/>
-     <updated>2014-05-02T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/build-blog-with-github</id>
-     <content type="html">&lt;h2 id=&quot;section&quot;&gt;0.背景&lt;/h2&gt;
-
-&lt;p&gt;准备重新捡起博客，记录自己的生活，特别是技术生活&lt;em&gt;（过于私密的东西，也不敢往博客上放不是）。&lt;/em&gt;个人博客有两个途径：a.使用已有的博客网站; b.搭建自己的私人网站。调研了一下国内博客网站，（&lt;a href=&quot;http://www.csdn.net/&quot; title=&quot;CSDN&quot;&gt;CSDN&lt;/a&gt;、&lt;a href=&quot;http://www.iteye.com/&quot; title=&quot;javaEye(现在更名为ITeye)&quot;&gt;javaEye&lt;/a&gt;、&lt;a href=&quot;http://www.oschina.net/&quot; title=&quot;OSCHINA&quot;&gt;OSCHINA&lt;/a&gt;等）普遍文字格式、代码编排样式不是很喜欢&lt;em&gt;（太挑剔了？对，我就是一个挑剔的人），&lt;/em&gt;这让自己转向私人博客。可以预想到，自己搭建要稍微复杂一点，话又说回来了，作为&lt;code&gt;software engineer&lt;/code&gt;折腾网站也算看家本领了&lt;em&gt;（我会告诉你我的目标是&lt;code&gt;scientist&lt;/code&gt;么）。&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;既然要搭自己的私人博客，那选定什么框架/方案呢？之前使用&lt;a href=&quot;https://wordpress.org/&quot; title=&quot;WordPress&quot;&gt;WordPress&lt;/a&gt;搭过，但需要购买域名和空间；现在流行在&lt;a href=&quot;https://github.com/about&quot; title=&quot;GitHub&quot;&gt;GitHub&lt;/a&gt;上搭，并且不需要考虑域名和空间的问题，那就他了，上&lt;a href=&quot;https://github.com/about&quot; title=&quot;GitHub&quot;&gt;GitHub&lt;/a&gt;，走起&lt;em&gt;（其实，国内也有一个类似的地方&lt;a href=&quot;https://gitcafe.com/&quot; title=&quot;GitCafe&quot;&gt;GitCafe&lt;/a&gt;，不过，出于装B需要，最终选定了&lt;a href=&quot;https://github.com/about&quot; title=&quot;GitHub&quot;&gt;GitHub&lt;/a&gt;）。&lt;/em&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;section-1&quot;&gt;1.做什么？&lt;/h2&gt;
-
-&lt;p&gt;目标：私人博客、自己搭建。&lt;/p&gt;
-
-&lt;p&gt;方式：&lt;a href=&quot;https://pages.github.com/&quot;&gt;GitHub Pages&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/build-blog-with-github/blog-or-not.jpg&quot; alt=&quot;blog or not&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;section-2&quot;&gt;2.怎么做？&lt;/h2&gt;
-
-&lt;p&gt;初步分析，在&lt;a href=&quot;https://github.com/about&quot; title=&quot;GitHub&quot;&gt;GitHub&lt;/a&gt;上搭建博客，实质是：将自己的博客内容上传到GitHub上&lt;em&gt;（因为GitHub提供了空间）；&lt;/em&gt;如果需要修改博客内容，则需要从GitHub上将download/pull下来；接下来就是让外面可以访问GitHub上的博客。总结一下，对应3个必要步骤：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;GitHub上创建工程、并且能够将GitHub上的文件/代码，下载到本地；&lt;/li&gt;
-  &lt;li&gt;将本地的文件/代码，上传到GitHub上；&lt;/li&gt;
-  &lt;li&gt;配置GitHub，使其对外提供私人博客的访问页面；&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;好了，上面是凭空想出来的&lt;em&gt;（任何地方搭建博客，都是上面的逻辑步骤，而不仅限于GitHub）；&lt;/em&gt;那实际如何操作呢？具体分为4个阶段：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;熟悉&lt;a href=&quot;https://github.com/about&quot; title=&quot;GitHub&quot;&gt;GitHub&lt;/a&gt;的基本操作（创建工程、上传代码、下载代码）；&lt;/li&gt;
-  &lt;li&gt;利用&lt;a href=&quot;https://pages.github.com/&quot;&gt;GitHub Pages&lt;/a&gt;功能，搭建简易网站；&lt;/li&gt;
-  &lt;li&gt;利用&lt;a href=&quot;http://jekyllrb.com/&quot;&gt;jekyll&lt;/a&gt;，增强网站功能（除了jekyll，还有其他的方式）；&lt;/li&gt;
-  &lt;li&gt;在&lt;a href=&quot;http://jekyllrb.com/&quot;&gt;jekyll&lt;/a&gt;框架下，依照个人偏好，进行定制；&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;section-3&quot;&gt;3.实际操作&lt;/h2&gt;
-
-&lt;h3 id=&quot;github&quot;&gt;3.1GitHub的基本操作&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://help.github.com/articles/set-up-git&quot;&gt;安装使用Git（GitHub上传、下载文件的工具）&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://help.github.com/articles/create-a-repo&quot;&gt;GitHub上创建项目（其中包含了，GitHub上传文件的Git命令）&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://help.github.com/articles/fork-a-repo&quot;&gt;GitHub上Fork项目（其中包含了，GitHub下载文件的Git命令）&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;补充：&lt;a href=&quot;https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line&quot;&gt;上传文件至GitHub&lt;/a&gt;；另外，向GitHub提交代码时，按照上面的操作方式，需要每次都输入GitHub的用户名和密码，可以采用&lt;code&gt;SSH Keys&lt;/code&gt;的方式来解决此问题。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/build-blog-with-github/git-github.png&quot; alt=&quot;git-github&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;section-4&quot;&gt;3.2如何搭建博客？&lt;/h3&gt;
-
-&lt;p&gt;GitHub上对于个人博客的支持，实质是利用GitHub Pages功能来实现的，具体操作：&lt;a href=&quot;https://pages.github.com/&quot;&gt;GitHub Pages&lt;/a&gt;,认真读一遍，5mins，一步一步操作下来，简易博客就搭建成功了（一个简单的欢迎页面&lt;code&gt;index.html&lt;/code&gt;）。&lt;/p&gt;
-
-&lt;p&gt;补充：扩展阅读&lt;a href=&quot;https://help.github.com/categories/20/articles&quot;&gt;GitHub Pages FAQ&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/build-blog-with-github/github-pages.jpg&quot; alt=&quot;github-pages&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;jekyll&quot;&gt;3.3Jekyll增强博客网站功能&lt;/h3&gt;
-
-&lt;p&gt;详细阅读”&lt;strong&gt;3.2如何搭建博客&lt;/strong&gt;“中提到的&lt;a href=&quot;https://pages.github.com/&quot;&gt;GitHub Pages&lt;/a&gt;的童鞋，在&lt;a href=&quot;https://pages.github.com/&quot;&gt;GitHub Pages&lt;/a&gt;页面最下端一定注意到了&lt;a href=&quot;http://jekyllrb.com/docs/quickstart/&quot;&gt;Blogging with Jekyll&lt;/a&gt;，对，就是他，读一遍，操作一下，搞定。&lt;/p&gt;
-
-&lt;p&gt;补充：jekyll用起来倒是用起来了，怎么发表一遍博文呢？这个…额…等到学会 “&lt;strong&gt;3.4 基于jekyll框架，定制博客&lt;/strong&gt;” 再去写博客吧，现在建议把上面的操作反复看两遍，捋一捋逻辑流程。&lt;/p&gt;
-
-&lt;h3 id=&quot;jekyll-1&quot;&gt;3.4基于jekyll框架，定制博客&lt;/h3&gt;
-
-&lt;p&gt;先看一下两个使用jekyll框架的博客：&lt;a href=&quot;http://beiyuu.com/&quot;&gt;BeiYuu&lt;/a&gt; &amp;amp; &lt;a href=&quot;http://havee.me/&quot;&gt;Havee&lt;/a&gt;，他们对应的模版在GitHub上都可以找到：&lt;a href=&quot;https://github.com/beiyuu/beiyuu.github.com&quot;&gt;BeiYuu.com Template of GitHub&lt;/a&gt; &amp;amp; &lt;a href=&quot;https://github.com/Ihavee/ihavee.github.io&quot;&gt;Havee.me Template of GitHub&lt;/a&gt;。 &lt;/p&gt;
-
-&lt;p&gt;先膜拜一下上面两个博客模板，&lt;em&gt;光彩夺目，亮瞎一双狗眼，&lt;/em&gt;好了，我能不能也搭建一个类似的博客？途径有一个：深入学习一下&lt;a href=&quot;http://jekyllrb.com/&quot;&gt;Jekyll的官方文档&lt;/a&gt;，补充：&lt;a href=&quot;http://jekyllcn.com/&quot;&gt;中文版本&lt;/a&gt;。&lt;em&gt;（基于jekyll，如何定制博客，我将写一篇详细的介绍，敬请期待）&lt;/em&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;faq&quot;&gt;4.FAQ&lt;/h2&gt;
-
-&lt;h3 id=&quot;google-analytics&quot;&gt;4.1使用google analytics来统计网站访问情况&lt;/h3&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;注册&lt;a href=&quot;http://www.google.com/analytics/&quot;&gt;Google Analytics&lt;/a&gt;账户；&lt;/li&gt;
-  &lt;li&gt;在账户下，添加要监控的网站信息，&lt;a href=&quot;http://www.google.com/analytics/&quot;&gt;Google Analytics&lt;/a&gt;会生成跟踪信息的JS片段；&lt;/li&gt;
-  &lt;li&gt;将上述JS片段插入到自己想要统计的页面上；&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;具体设置细节：请查看&lt;a href=&quot;http://www.google.com/intl/zh-CN_ALL/analytics/learn/index.html&quot;&gt;官方文档&lt;/a&gt;。&lt;/p&gt;
-
-&lt;h3 id=&quot;discus&quot;&gt;4.2如何DISCUS作为评论插件？&lt;/h3&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;注册&lt;a href=&quot;http://disqus.com/&quot;&gt;DISQUS&lt;/a&gt;账户；&lt;/li&gt;
-  &lt;li&gt;登录后，点击&lt;code&gt;Add Disqus to your site&lt;/code&gt;按钮，操作下去，最终将获得相应的JS片段；&lt;/li&gt;
-  &lt;li&gt;将上述JS片段插入到自己想要包含评论的页面即可；&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;latex&quot;&gt;4.3配置网站，支持LaTeX语法&lt;/h3&gt;
-
-&lt;p&gt;配置博客，支持&lt;a href=&quot;http://www.latex-project.org/&quot;&gt;LaTeX&lt;/a&gt;公式，此次设置&lt;a href=&quot;http://kramdown.gettalong.org&quot;&gt;kramdown&lt;/a&gt;来解析&lt;a href=&quot;http://daringfireball.net/projects/markdown/syntax&quot;&gt;Markdown&lt;/a&gt;文件。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;/*
-If you have sufficient control over the publishing process
-(e.g. you are running Jekyll yourself), an easy solution is
-to switch the markdown parser to one that supports TeX.
-*/
-
-//For example, using kramdown:
-gem install kramdown
-
-//Change the markdown line in _config.yml to
-markdown: kramdown
-
-//and add something like
-&amp;lt;script type=&quot;text/javascript&quot; 
-src=&quot;http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML&quot;&amp;gt;
-&amp;lt;/script&amp;gt;
-//to _layouts/default.html. 
-
-//Now you can simply mark any mathematics in your posts with $$
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;原文链接：&lt;a href=&quot;http://stackoverflow.com/questions/10987992/using-mathjax-with-jekyll&quot;&gt;Using MathJax with Jekyll&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;section-5&quot;&gt;4.3遇到的问题&amp;amp;解决办法？&lt;/h3&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;http://blog.csdn.net/dengjianqiang2011/article/details/9260435&quot;&gt;执行Git命令时，出错提示：（fatal: remote origin already exists.）&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://help.github.com/articles/migrating-your-pages-site-from-maruku&quot;&gt;GitHub上markdown的解析引擎不同，会造成最终页面效果的差异&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;jekyll serve启动出错提示：（Liquid Exception: invalid byte sequence in GBK）&lt;strong&gt;见下文&lt;/strong&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;修改&lt;code&gt;\Ruby200\lib\ruby\gems\2.0.0\gems\jekyll-1.0.3\lib\jekyll&lt;/code&gt;目录下的&lt;code&gt;convertible.rb&lt;/code&gt;文件，将其中：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;self.content = File.read(File.join(base, name))
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;修改为：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;self.content = File.read(File.join(base, name),:encoding=&amp;gt;&quot;utf-8&quot;)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;如果上述修改之后，仍然提示出错，则：&lt;code&gt;...\lib\jekyll\tags&lt;/code&gt;目录下&lt;code&gt;include.rb&lt;/code&gt;文件，类似对于&lt;code&gt;convertible.rb&lt;/code&gt;文件的操作；&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/build-blog-with-github/github-social-coding.png&quot; alt=&quot;github-social-coding&quot; /&gt;&lt;/p&gt;
 
 </content>
    </entry>
