@@ -4,7 +4,7 @@
    <title>NingG.github.com</title>
    <link href="http://ningg.github.com/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://ningg.github.com" rel="alternate" type="text/html" />
-   <updated>2014-06-27T21:07:10+08:00</updated>
+   <updated>2014-06-29T00:21:25+08:00</updated>
    <id>http://ningg.github.com</id>
    <author>
      <name></name>
@@ -13,7 +13,7 @@
 
    
    <entry>
-     <title>Linux下查看进程的内存占用（top命令）</title>
+     <title>Linux下查看进程的内存占用</title>
      <link href="http://ningg.github.com/linux-top"/>
      <updated>2014-06-23T00:00:00+08:00</updated>
      <id>http://ningg.github.com/linux-top</id>
@@ -181,51 +181,142 @@ made persistent across restarts.&lt;/li&gt;
    </entry>
    
    <entry>
-     <title>磁盘结构</title>
+     <title>磁盘和文件系统</title>
      <link href="http://ningg.github.com/computer-system-disk"/>
      <updated>2014-05-20T00:00:00+08:00</updated>
      <id>http://ningg.github.com/computer-system-disk</id>
-     <content type="html">&lt;h2 id=&quot;section&quot;&gt;磁盘&lt;/h2&gt;
+     <content type="html">&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
 
-&lt;p&gt;硬盘大小：台式机3.5寸，笔记本尺寸2.5寸。&lt;/p&gt;
+&lt;p&gt;最近在服务器间传送文件，需要监控磁盘IO和网络IO，确定哪一个是瓶颈，并且找出服务器之间&lt;code&gt;高效传输文件&lt;/code&gt;的方案。&lt;/p&gt;
 
-&lt;p&gt;下图为硬盘的物理结构：&lt;/p&gt;
+&lt;p&gt;更细节一些的：例如，提高磁盘的转速、改进磁盘接口，当前环境下，哪个有效？&lt;/p&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;磁盘&lt;/h2&gt;
+
+&lt;p&gt;（本文关注的是旋转磁盘，固态硬盘不包含在内。）&lt;/p&gt;
+
+&lt;p&gt;开篇有个疑问：要想在服务器间&lt;code&gt;高效地传输文件&lt;/code&gt;，首先要弄明白的是：文件在哪？好，文件不是凭空想想的，而是实实在在存储在物理介质上的，当前主要是存储于磁盘中。&lt;/p&gt;
+
+&lt;p&gt;几个小常识：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;硬盘尺寸：台式机3.5英寸，笔记本尺寸2.5英寸；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;物理结构&lt;/h3&gt;
 
 &lt;p&gt;&lt;img src=&quot;/images/computer-system-disk/true-disk.jpg&quot; alt=&quot;true-disk&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;上图可以直观看出，硬盘包含如下几个基本结构：&lt;/p&gt;
+&lt;p&gt;从上图可以看出，磁盘物理上，包含如下几个部分：&lt;/p&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;盘片&lt;em&gt;（存储数据）&lt;/em&gt;&lt;/li&gt;
-  &lt;li&gt;磁头&lt;em&gt;（向盘片，读取/写入数据）&lt;/em&gt;&lt;/li&gt;
-  &lt;li&gt;主轴马达&lt;/li&gt;
-  &lt;li&gt;机械手臂&lt;/li&gt;
-&lt;/ul&gt;
+&lt;ol&gt;
+  &lt;li&gt;盘片：通常包含两个&lt;code&gt;盘面&lt;/code&gt;，上面覆盖了磁性物质，用于记录数据；&lt;/li&gt;
+  &lt;li&gt;磁头：每个&lt;code&gt;盘面&lt;/code&gt;对应一个磁头，读取&lt;code&gt;盘面&lt;/code&gt;上的数据；&lt;/li&gt;
+  &lt;li&gt;主轴马达：带动盘片转动；&lt;/li&gt;
+  &lt;li&gt;机械手臂：调整磁头位置；&lt;/li&gt;
+&lt;/ol&gt;
 
-&lt;p&gt;给一个正在读取磁盘内容的近景图：&lt;/p&gt;
+&lt;p&gt;备注：所有磁头，任何时刻，都在同一&lt;code&gt;磁柱&lt;/code&gt;上。&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/computer-system-disk/disk-reading.JPG&quot; alt=&quot;disk-reading&quot; /&gt;&lt;/p&gt;
+&lt;h3 id=&quot;section-3&quot;&gt;逻辑结构&lt;/h3&gt;
 
-&lt;h3 id=&quot;section-1&quot;&gt;磁盘内部结构&lt;/h3&gt;
+&lt;p&gt;磁盘有一个指标叫作&lt;code&gt;磁盘容量&lt;/code&gt;，它标识了一个磁盘可以存储多少个字节；那好，一个字节过来了，应该存储在哪个地方？&lt;em&gt;（类比，一位新兵到了，应该到部队中哪个地方去？）&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;（扇区、磁柱、磁轨）
-（多区记录技术）&lt;/p&gt;
+&lt;p&gt;为避免混乱，方便管理，需要为磁盘设计一个组织方式。&lt;em&gt;（类比，部队被划分为一个个基本单元：&lt;code&gt;班&lt;/code&gt;，几个&lt;code&gt;班&lt;/code&gt;构成一个&lt;code&gt;排&lt;/code&gt;，几个&lt;code&gt;排&lt;/code&gt;构成一个&lt;code&gt;连&lt;/code&gt;……）&lt;/em&gt;&lt;/p&gt;
 
-&lt;p&gt;下面将对磁盘涉及的专业术语进行简要介绍，先来一张磁盘结构的简图：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/computer-system-disk/disk-layer-structure.png&quot; alt=&quot;disk-layer-structure&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/computer-system-disk/cylinder_head_sector.svg&quot; alt=&quot;cylinder_head_sector&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;磁盘的组织方式如上图所示，简要说明如下：&lt;/p&gt;
 
-&lt;h3 id=&quot;section-2&quot;&gt;磁盘的接口&lt;/h3&gt;
+&lt;ol&gt;
+  &lt;li&gt;磁盘最小的物理单元为&lt;code&gt;扇区&lt;/code&gt;(sector)，扇区的大小是固定的，通常为 512 bytes；&lt;/li&gt;
+  &lt;li&gt;同一个&lt;code&gt;盘面&lt;/code&gt;上，同一圆圈上的所有&lt;code&gt;扇区&lt;/code&gt;组成一个&lt;code&gt;磁道&lt;/code&gt;(track)，又称&lt;code&gt;磁轨&lt;/code&gt;；&lt;/li&gt;
+  &lt;li&gt;所有&lt;code&gt;盘面&lt;/code&gt;上，在对应位置的所有&lt;code&gt;磁道&lt;/code&gt;组成一个&lt;code&gt;磁柱&lt;/code&gt;(cylinder)；&lt;/li&gt;
+&lt;/ol&gt;
 
-&lt;p&gt;SATA？IDE？SCSI？&lt;/p&gt;
+&lt;p&gt;将上面的磁盘组织方式对应到实际物理磁盘上，如下图所示：&lt;/p&gt;
 
-&lt;h3 id=&quot;section-3&quot;&gt;选磁盘注意事项&lt;/h3&gt;
+&lt;p&gt;&lt;img src=&quot;/images/computer-system-disk/disk-logic-structure.png&quot; alt=&quot;disk-logic-structure&quot; /&gt;&lt;/p&gt;
 
-&lt;h3 id=&quot;section-4&quot;&gt;查看磁盘详情&lt;/h3&gt;
+&lt;p&gt;补充说明：&lt;/p&gt;
 
-&lt;p&gt;查看步骤；&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;现在有的磁盘的&lt;code&gt;扇区&lt;/code&gt;大小为 4096 bytes;&lt;/li&gt;
+  &lt;li&gt;通常，每个&lt;code&gt;磁道&lt;/code&gt;上&lt;code&gt;扇区&lt;/code&gt;个数相同，则，外圈的磁道上，扇区分布稀疏。为提升盘片的利用率，产生了&lt;code&gt;多区记录技术&lt;/code&gt;(multiple zone recording)：相邻的几个磁柱被分割为一个记录区（recording zone），一个记录区中，每个磁柱的每个磁道拥有相同数量的扇区，扇区数由记录区中最里侧的磁道来决定。&lt;/li&gt;
+&lt;/ol&gt;
 
-&lt;h3 id=&quot;section-5&quot;&gt;测试磁盘读写速度&lt;/h3&gt;
+&lt;h3 id=&quot;section-4&quot;&gt;接口&lt;/h3&gt;
+
+&lt;p&gt;为了读取磁盘中数据，需要一根排线，将磁盘连到电脑上；磁盘连接排线的地方叫接口，接口的传输速度限制了读取磁盘的最大速度。常见的磁盘接口，有IDE、SATA、SCSI。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;IDE接口&lt;/strong&gt;：Integrated Drive Electronics，集成电路设备，具有如下特点：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;排线较宽；&lt;/li&gt;
+  &lt;li&gt;Ultra 133，即理论速度 133MB/s&lt;/li&gt;
+  &lt;li&gt;每条IDE排线，可接2个IDE接口设备，分为master和slave，需要设置跳针；&lt;/li&gt;
+  &lt;li&gt;常用于个人电脑；&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;SATA接口&lt;/strong&gt;：Serial ATA，具有如下特点：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;插槽比IDE小；&lt;/li&gt;
+  &lt;li&gt;每条SATA排线，仅能连接一个SATA接口设备；&lt;/li&gt;
+  &lt;li&gt;SATA-1理论速度：150MB/s，SATA-2理论速度：300MB/s，最近的SATA-3理论速度：600MB/s；&lt;/li&gt;
+  &lt;li&gt;常用于个人电脑；&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;SCSI接口&lt;/strong&gt;：Small Computer System Interface，小型计算机系统接口，具有如下特点：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;对应磁盘上，有一个处理器，节省主板上CPU资源；&lt;/li&gt;
+  &lt;li&gt;SCSI-3 Ultra 320的理论速度：320MB/s，Ultra 640的理论速度：640MB/s；&lt;/li&gt;
+  &lt;li&gt;常用于服务器、工作站；&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;section-5&quot;&gt;筛选磁盘注意事项&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;接口类型：IDE？SATA？SCSI？主板上插槽是否支持？&lt;/li&gt;
+  &lt;li&gt;容量：2T？500G？&lt;/li&gt;
+  &lt;li&gt;转速：7200转？5400转？&lt;/li&gt;
+  &lt;li&gt;磁盘缓冲内存大小：磁盘上此机制，加速文件读取速率；&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;备注：建议每次正常关机，这样磁盘的机械手臂会回到原位。&lt;em&gt;（当前已有技术使得磁盘停止旋转后，机械手臂自动回到原位）&lt;/em&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;section-6&quot;&gt;查看磁盘详情&lt;/h3&gt;
+
+&lt;p&gt;（查看步骤）&lt;/p&gt;
+
+&lt;h3 id=&quot;section-7&quot;&gt;读写磁盘耗时&lt;/h3&gt;
+
+&lt;p&gt;读写磁盘所需时间，较为专业的称呼是&lt;code&gt;磁盘访问时间&lt;/code&gt;，其主要分为：寻道时间、旋转时间、传送时间，具体如下：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;寻道时间，&lt;code&gt;seek time&lt;/code&gt;：机械手臂摆动，将磁头定位到目标扇区所在的磁道上，其耗时是ms级的；&lt;/li&gt;
+  &lt;li&gt;旋转时间，&lt;code&gt;rotational time&lt;/code&gt;：磁头定位到磁道后，需要等待目标扇区的第一个bit旋转到磁头下；&lt;/li&gt;
+  &lt;li&gt;传送时间，&lt;code&gt;transfer time&lt;/code&gt;：磁头从目标扇区第一个bit扫描到最后一个bit所需时间；&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;备注：旋转磁盘的访问时间是ms级别的。&lt;/p&gt;
+
+&lt;h3 id=&quot;section-8&quot;&gt;测试磁盘读写速度&lt;/h3&gt;
+
+&lt;p&gt;（doing…）&lt;/p&gt;
+
+&lt;h2 id=&quot;section-9&quot;&gt;文件系统&lt;/h2&gt;
+
+&lt;h3 id=&quot;section-10&quot;&gt;磁盘分区&lt;/h3&gt;
+
+&lt;h2 id=&quot;section-11&quot;&gt;参考资料&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;深入理解计算机系统&lt;/li&gt;
+  &lt;li&gt;鸟哥私房菜（基础篇）第三版&lt;/li&gt;
+  &lt;li&gt;&lt;/li&gt;
+&lt;/ol&gt;
 
 </content>
    </entry>
