@@ -4,13 +4,620 @@
    <title>NingG.github.com</title>
    <link href="http://ningg.github.com/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://ningg.github.com" rel="alternate" type="text/html" />
-   <updated>2014-06-29T00:21:25+08:00</updated>
+   <updated>2014-07-04T22:41:45+08:00</updated>
    <id>http://ningg.github.com</id>
    <author>
      <name></name>
      <email></email>
    </author>
 
+   
+   <entry>
+     <title>maven使用入门</title>
+     <link href="http://ningg.github.com/maven-intro"/>
+     <updated>2014-07-04T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/maven-intro</id>
+     <content type="html">&lt;blockquote&gt;
+  &lt;p&gt;题记：&lt;a href=&quot;http://www.infoq.com/cn/minibooks/maven-in-action&quot;&gt;《Maven实战（迷你版）》&lt;/a&gt;这本书写的太好了，我忍不住把其中的内容又敲一遍。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
+
+&lt;p&gt;今天在GitHub上找了一个java语言编写的HDFS client，其使用Maven来进行工程的管理和构建；作为Maven工程导入eclipse，提示pom.xml相关错误近10条。&lt;/p&gt;
+
+&lt;p&gt;好吧，pom.xml是Maven的配置文件，看来Maven逃脱不了关系了。（之前，多次接触/使用Maven，不过都没有整理资料，导致每次使用都需要重新学习，如此反复，浪费时间，引以为戒，故有此博客）。&lt;/p&gt;
+
+&lt;p&gt;备注：准备购买书籍，《Maven实战》&lt;/p&gt;
+
+&lt;p&gt;要学东西，需要先找些比较可靠严谨的书籍，大概搜索了一下，&lt;a href=&quot;http://www.juvenxu.com/mvn-in-action/&quot;&gt;《Maven实战》&lt;/a&gt;这本书的评价较高，那就他了。一两天内，也无法拿到纸质版的书籍，索性在InfoQ上找了一个&lt;a href=&quot;http://www.infoq.com/cn/minibooks/maven-in-action&quot;&gt;《Maven实战（迷你版）》&lt;/a&gt;。 &lt;/p&gt;
+
+&lt;h2 id=&quot;maven&quot;&gt;Maven的安装与配置&lt;/h2&gt;
+
+&lt;h3 id=&quot;maven-1&quot;&gt;Maven的安装&lt;/h3&gt;
+
+&lt;p&gt;从Maven官网下载软件，根据官方文档安装即可。基本步骤：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;下载并解压文件；&lt;/li&gt;
+  &lt;li&gt;添加环境变量：$M2_HOME=Maven安装目录，并将$M2_HOME/bin添加到$PATH。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;补充：安装软件，就不可避免会遇到软件版本升级问题，现有的较成熟的方案：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;win环境下，升级新版本的软件后，直接修改环境变量，指向新版本目录即可；&lt;/li&gt;
+  &lt;li&gt;Linux环境下，升级软件版本之后，修改环境变量；除此之外，Linux下，还有更简便的办法：在软件安装目录下，新建一个符号链接文件，环境变量指向此文件，软件升级后，只需更新此符号链接文件即可。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Linux下，使用符号链接文件，来作为软件升级方案：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#新建符号链接apache-maven，指向apache-maven-3.0文件
+ln -s apache-maven-3.0 apache-maven
+
+#在配置文件~./bashrc中，添加环境变量
+export M2_HOME=/home/devp/apache-maven
+export PATH=$PATH:$M2_HOME/bin
+
+#升级软件时，更新符号连接文件apache-maven
+rm apache-maven
+ln -s apache-maven-3.1 apache-maven
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;安装目录分析&lt;/h3&gt;
+
+&lt;p&gt;前文简要说明了Maven的安装与升级步骤，现在我们简要分析一下Maven的安装文件。&lt;/p&gt;
+
+&lt;h4 id=&quot;m2home&quot;&gt;M2_HOME&lt;/h4&gt;
+
+&lt;p&gt;前面的讲解中，我们都是将环境变量M2_HOME指向Maven的安装目录，本文之后所有使用M2_HOME的地方都代表了该安装目录，让我们看一下该目录的安装结构和内容：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;|--bin
+| 	|--m2.conf
+|	|--mvn
+|	|--mvnDebug
+|
+|--boot
+| 	|--plexus-classworlds-xxx.jar
+| 	
+|--conf
+|	|--settings.xml
+|	|--logging
+|		|--simplelogger.properties
+|
+|--lib
+|	|--... ...
+|
+|--LICENSE
+|--README.txt
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;bin&lt;/strong&gt;：该目录包含了mvn运行的脚本，用来配置java命令，准备好classpath和相关的java命令参数，然后执行java命令。其中包含了mvn和mvnDebug两类脚本，打开来查看，就会看到mvnDebug只是比mvn多一条MAVEN_DEBUG_OPTS配置，作用就是在运行Maven时开启debug，方便调试Maven自身。此外，该目录还包含m2.conf文件，这是classworlds的配置文件，如果有必要，下文会对其进行介绍。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;boot&lt;/strong&gt;：以Maven 3.2.2为例，其中只包含了一个jar包plexus-classworlds-2.5.1.jar。这是一个类加载器框架，相对于默认的java类加载器。&lt;/p&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;常见错误&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;创建/导入 Maven Project&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;错误详情：&lt;/p&gt;
+
+&lt;p&gt;An internal error occurred during: “Updating Maven Project”. Lorg/codehaus/plexus/archiver/jar/JarArchiver;&lt;/p&gt;
+
+&lt;p&gt;解决办法：在pom.xml中&lt;build&gt;&lt;plugins&gt;下添加&lt;/plugins&gt;&lt;/build&gt;&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;plugin&amp;gt;
+	&amp;lt;groupId&amp;gt;org.apache.maven.plugins&amp;lt;/groupId&amp;gt;
+	&amp;lt;artifactId&amp;gt;maven-jar-plugin&amp;lt;/artifactId&amp;gt;
+	&amp;lt;version&amp;gt;2.4&amp;lt;/version&amp;gt;
+&amp;lt;/plugin&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;重新更新&lt;code&gt;Maven Project...&lt;/code&gt;（默认快捷键：&lt;code&gt;Alt + F5&lt;/code&gt;）。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-3&quot;&gt;入门实例&lt;/h2&gt;
+
+&lt;p&gt;在此之前，需要安装配置好Maven，如果要在Eclipse下建立Maven工程，则需要安装配置Eclipse下的Maven的插件。具体信息，参考：[《Maven实战（迷你版）》]中第一章 Maven的安装与配置。&lt;/p&gt;
+
+&lt;h3 id=&quot;pom&quot;&gt;编写POM&lt;/h3&gt;
+
+&lt;p&gt;Maven项目的核心是：pom.xml文件。POM:(Project Object Model，项目对象模型)定义了项目的基本信息：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;项目如何构建（源文件编译、复制、打包）；&lt;/li&gt;
+  &lt;li&gt;项目所需的依赖（个个依赖的项目内部之间的依赖关系）；&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;现在我们新建一个Hello World项目，并编写一个最简单的pom.xml文件。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&amp;gt;
+&amp;lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
+		 xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
+		 xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 
+				http://maven.apache.org/maven-v4_0_0.xsd&quot;&amp;gt;
+	
+	&amp;lt;!-- POM模型的版本，对于Maven2和Maven3只能是4.0.0 --&amp;gt;
+	&amp;lt;modelVersion&amp;gt;4.0.0&amp;lt;/modelVersion&amp;gt;
+	
+	&amp;lt;!-- groupId,artifactId,version 唯一定位项目（任何jar、pom、war） --&amp;gt;
+	&amp;lt;!-- 定义project属于哪个组 --&amp;gt;
+	&amp;lt;!-- 例如，公司为mycom，项目为myapp，则groupId：com.mycom.myapp --&amp;gt;
+	&amp;lt;groupId&amp;gt;com.github.ningg.mvnbook&amp;lt;/groupId&amp;gt;
+	
+	&amp;lt;!-- 定义project在组内的代号，例如，你可能会为不同的子项目(模块)分配artifactId，
+	例如，myapp组下，myapp-util,myapp-domain,myapp-domain --&amp;gt;
+	&amp;lt;artifactId&amp;gt;hello-world&amp;lt;/artifactId&amp;gt;
+	
+	&amp;lt;!-- 定义当前artifact的版本，SNAPSHOT:快照，说明项目仍在开发中，当前还不稳定 --&amp;gt;
+	&amp;lt;version&amp;gt;1.0-SNAPSHOT&amp;lt;/version&amp;gt;
+	
+	&amp;lt;!-- 声明一个别名，用户可理解的别名，不是必须的，但为方便交流，推荐每个POM --&amp;gt;
+	&amp;lt;name&amp;gt;Maven Hello World Project&amp;lt;/name&amp;gt;
+	
+	&amp;lt;properties&amp;gt;
+		&amp;lt;!-- 告知Maven进行复制、编译等操作时，使用的编码方式 --&amp;gt;
+		&amp;lt;project.build.sourceEncoding&amp;gt;UTF-8&amp;lt;/project.build.sourceEncoding&amp;gt;
+	&amp;lt;/properties&amp;gt;
+&amp;lt;/project&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;代码第一行是XML头，指定版本和编码方式。project是所有pom.xml的根元素，它还声明了一些命名空间和xsd（XML Schemas Definition，XML结构定义）元素，虽然这些属性是非必须的，但它们能够让第三方工具（如IDE中的XML编辑器）帮助我们快速编译POM。&lt;/p&gt;
+
+&lt;h3 id=&quot;section-4&quot;&gt;编写主代码&lt;/h3&gt;
+
+&lt;p&gt;项目主代码与测试代码不同。项目主代码会被打包到最终发布的构件中（例如jar包），而测试代码只在运行测试的时候使用，不会被打包发布。
+默认情况下，Maven假设项目的主代码位于src/main/java目录下，我们遵循Maven的约定，创建该目录，并在该项目下创建文件com/github/ningg/mvnbook/helloworld/HelloWorld.java，其内容如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;package com.github.ningg.mvnbook.helloworld;
+
+public class HelloWorld {
+
+	public String sayHello(){
+		return &quot;Hello Maven&quot;;
+	}
+	
+	public static void main(String[] args){
+		System.out.println(new HelloWorld().sayHello());
+	}
+	
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;补充说明如下：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;95%情况下，应将项目主代码放在src/main/java/目录下（Maven默认的约定），这样无需额外配置，Maven会自动搜索该项目主代码。&lt;/li&gt;
+  &lt;li&gt;Java类的包名（package），应该与POM中定义的groupId和artifactId相吻合，例如，本例中的com.github.ningg.mvnbook.helloworld，这样代码结构清晰，符合基本逻辑，方便搜索构件或者java类。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;section-5&quot;&gt;进行编译&lt;/h3&gt;
+
+&lt;p&gt;运行命令&lt;code&gt;mvn clean compile&lt;/code&gt;，则输出：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;E:\reference\blogOfGit\maven-intro\hello-world&amp;gt;mvn clean compile
+[INFO] Scanning for projects...
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Maven Hello World Project 1.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO]
+[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ hello-world ---
+[INFO] Deleting E:\reference\blogOfGit\maven-intro\hello-world\target
+[INFO]
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ hello-world ---
+[INFO] Using &#39;UTF-8&#39; encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory E:\reference\blogOfGit\maven-intro\hello-world\src\main\resources
+[INFO]
+[INFO] --- maven-compiler-plugin:2.5.1:compile (default-compile) @ hello-world ---
+[INFO] Compiling 1 source file to E:\reference\blogOfGit\maven-intro\hello-world\target\classes
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 0.828 s
+[INFO] Finished at: 2014-07-01T20:46:45+08:00
+[INFO] Final Memory: 6M/15M
+[INFO] ------------------------------------------------------------------------
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;说明：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;从输出信息上可以看出，Maven具体包含3个操作：clean、resources、compile&lt;/li&gt;
+  &lt;li&gt;clean：清理目录target/；&lt;/li&gt;
+  &lt;li&gt;resources：（本实例中，没有定义项目资源，暂时略过）；&lt;/li&gt;
+  &lt;li&gt;compile：编译项目主代码，默认输出到target/目录下；&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;说明：上文提到的3个操作，对应了Maven的插件以及插件目标，例如：clean操作，实际上是maven-clean-plugin:2.5插件的clean目标；（Maven插件的编写是很重要的一个方向）&lt;/p&gt;
+
+&lt;p&gt;至此，Maven在没有修改pom.xml配置的情况下，就进行了项目的清理和编译任务，在下文中，将继续编写一些测试单元代码并让Maven自动化测试。&lt;/p&gt;
+
+&lt;h3 id=&quot;section-6&quot;&gt;编写测试代码&lt;/h3&gt;
+
+&lt;p&gt;为保持项目结构清晰，主代码与测试代码分别在独立的目录中，前文提到过，主代码在src/main/java/目录下，对应的测试代码的目录是src/test/java/。因此，在编写代码前，应先创建这两个目录。&lt;/p&gt;
+
+&lt;p&gt;在java世界中，JUnit是事实上的单元测试标准。要使用JUnit需要在项目的配置文件中添加一个JUnit依赖，修改项目POM如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;dependencies&amp;gt;
+	&amp;lt;dependency&amp;gt;
+		&amp;lt;groupId&amp;gt;junit&amp;lt;/groupId&amp;gt;
+		&amp;lt;artifactId&amp;gt;junit&amp;lt;/artifactId&amp;gt;
+		&amp;lt;version&amp;gt;4.7&amp;lt;/version&amp;gt;
+		&amp;lt;scope&amp;gt;test&amp;lt;/scope&amp;gt;
+	&amp;lt;/dependency&amp;gt;
+&amp;lt;/dependencies&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;在project元素下，添加了dependencies元素，该元素下可以包含多个dependency元素，用与声明项目所需的依赖，这里我们添加的是(groupId,artifactId,version)为(junit,junit,4.7)的project，有了这段声明，Maven会自动下载junit-4.7.jar包。你可能会问，Maven从哪里下载这个jar呢？实际上，没有使用Maven时，我们需要自己去JUnit官网下载这个jar；而使用了Maven，它会自动访问自己的中央仓库(http://repo1.maven.org/maven2/)，下载所需要的文件，我们也可以自己访问这个中央仓库，打开junit/junit/4.7/路径，就能看到junit-4.7.pom和junit-4.7.jar。&lt;/p&gt;
+
+&lt;p&gt;上述POM代码中，还设置了scope=test，其表示当前依赖仅对测试代码有效，换句话说，测试代码中import junit代码是正确的，而主代码中如果使用import junit就会编译出错。如果不设定scope，默认scope=compile，表示该依赖对主代码和测试代码都有效。&lt;/p&gt;
+
+&lt;p&gt;配置好了测试依赖，就可以编写测试代码了，前面HelloWorld类中，需要测试sayHello()方法的返回值是否为“Hello Maven”。在src/test/java目录下创建文件，内容如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;package com.github.ningg.mvnbook.helloworld;
+
+import static org.junit.Assert.assertEquals;
+import org.junit.Test;
+
+public class HelloWorldTest {
+
+	@Test
+	public void testSayHello(){
+		HelloWorld helloWorld = new HelloWorld();
+		String result = helloWorld.sayHello();
+		assertEquals(&quot;Hello Maven&quot;, result);
+	}
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;（&lt;strong&gt;注意&lt;/strong&gt;：eclipse集成开发环境下，在src/main/java/以及src/test/java/目录下编写java文件时，如何使用代码提示，特别是，很多jar的依赖都在pom.xml中配置的，当前工程暂时看不到jar包，import jar包都会提示出错。）&lt;/p&gt;
+
+&lt;p&gt;典型的单元测试，包含3个步骤：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;准备测试类及数据；&lt;/li&gt;
+  &lt;li&gt;执行要测试的行为；&lt;/li&gt;
+  &lt;li&gt;检查结果；&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;上述测试代码中，我们首先初始化一个要测试的HelloWorld实例，接着执行该实例的sayHello()方法并将结果保存到result变量中，最后使用JUnit框架的Assert类检查结果是否为我们期望的“Hello Maven”。在JUnit 3中，约定所有需要执行测试的方法都以test开头，这里我们使用JUnit 4，但我们仍遵守这一约定，在JUnit中，需要执行的测试方法都以@Test进行标注。&lt;/p&gt;
+
+&lt;p&gt;测试代码编写完成之后，调用Maven执行测试，运行命令：&lt;code&gt;mvn clean test&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;E:\reference\blogOfGit\maven-intro\hello-world&amp;gt;mvn clean test
+[INFO] Scanning for projects...
+[INFO]
+[INFO] ------------------------------------------------------------------------
+[INFO] Building Maven Hello World Project 1.0-SNAPSHOT
+[INFO] ------------------------------------------------------------------------
+[INFO]
+
+...
+Downloading: http://repo.maven.apache.org/maven2/junit/junit/4.7/junit-4.7.pom
+Downloaded: http://repo.maven.apache.org/maven2/junit/junit/4.7/junit-4.7.pom (2 KB at 0.7 KB/sec)
+Downloading: http://repo.maven.apache.org/maven2/junit/junit/4.7/junit-4.7.jar
+Downloaded: http://repo.maven.apache.org/maven2/junit/junit/4.7/junit-4.7.jar (227 KB at 87.0 KB/sec)
+...
+
+[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ hello-world ---
+[INFO] Deleting E:\reference\blogOfGit\maven-intro\hello-world\target
+[INFO]
+[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ hello-world ---
+[INFO] Using &#39;UTF-8&#39; encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory E:\reference\blogOfGit\maven-intro\hello-world\src\main\resources
+[INFO]
+[INFO] --- maven-compiler-plugin:2.5.1:compile (default-compile) @ hello-world ---
+[INFO] Compiling 1 source file to E:\reference\blogOfGit\maven-intro\hello-world\target\classes
+[INFO]
+[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ hello-world ---
+[INFO] Using &#39;UTF-8&#39; encoding to copy filtered resources.
+[INFO] skip non existing resourceDirectory E:\reference\blogOfGit\maven-intro\hello-world\src\test\resources
+[INFO]
+[INFO] --- maven-compiler-plugin:2.5.1:testCompile (default-testCompile) @ hello-world ---
+[INFO] Compiling 1 source file to E:\reference\blogOfGit\maven-intro\hello-world\target\test-classes
+[INFO]
+[INFO] --- maven-surefire-plugin:2.12.4:test (default-test) @ hello-world ---
+[INFO] Surefire report directory: E:\reference\blogOfGit\maven-intro\hello-world\target\surefire-reports
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running com.github.ningg.mvnbook.helloworld.HelloWorldTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.016 sec
+
+Results :
+
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 1.359 s
+[INFO] Finished at: 2014-07-01T21:41:33+08:00
+[INFO] Final Memory: 7M/16M
+[INFO] ------------------------------------------------------------------------
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;从输出结果可以看出，执行&lt;code&gt;mvn clean test&lt;/code&gt;时，Maven实际执行了:&lt;code&gt;clean:clean&lt;/code&gt;,&lt;code&gt;resources:resources&lt;/code&gt;,&lt;code&gt;compiler:compile&lt;/code&gt;,&lt;code&gt;resources:testResources&lt;/code&gt;,&lt;code&gt;compiler:testCompile&lt;/code&gt;,&lt;code&gt;surefire:test&lt;/code&gt;。详细来说，Maven在执行测试（test）之前，会先执行：目录清理、主资源处理、主代码编译、测试资源处理、测试代码编译、执行测试等过程，这是Maven声明周期的一个特性，本文后续部分会详细介绍Maven的生命周期。（注：surefire是执行测试的插件，其运行测试用例，并输出测试报告。）&lt;/p&gt;
+
+&lt;h3 id=&quot;section-7&quot;&gt;打包和运行&lt;/h3&gt;
+
+&lt;p&gt;项目进行编译、测试之后，下一步就是打包（package）。Hello World项目的POM中没有设置打包类型，默认为jar；执行命令：&lt;code&gt;mvn clean package&lt;/code&gt;进行打包，可以看到如下输出：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;... ...
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running com.github.ningg.mvnbook.helloworld.HelloWorldTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.016 sec
+
+Results :
+
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+
+[INFO]
+[INFO] --- maven-jar-plugin:2.4:jar (default-jar) @ hello-world ---
+[INFO] Building jar: E:\reference\blogOfGit\maven-intro\hello-world\target\hello-world-1.0-SNAPSHOT.jar
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 1.531 s
+[INFO] Finished at: 2014-07-01T22:00:37+08:00
+[INFO] Final Memory: 7M/17M
+[INFO] ------------------------------------------------------------------------
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;类似的，Maven在打包之前，会执行编译、测试等操作。这里我们看到jar:jar负责打包，实际上，就是jar插件的jar目标，将项目主代码打包成为一个名为hello-world-1.0-SNAPSHOT.jar的文件，该文件也位于target/目录下，它是根据artifactId-version.jar规则进行命名的，如有需要，可以使用finalName来定义文件名称。&lt;/p&gt;
+
+&lt;p&gt;至此，我们得到了最终的jar包，如有需要，可以将这个jar包复制到其他项目的classpath中，从而使用HelloWorld类。但是，如何才能让其他Maven项目直接引用这个jar包呢？我们需要一个安装步骤，执行&lt;code&gt;mvn clean install&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;... ...
+
+-------------------------------------------------------
+ T E S T S
+-------------------------------------------------------
+Running com.github.ningg.mvnbook.helloworld.HelloWorldTest
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.031 sec
+
+Results :
+
+Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
+
+[INFO]
+[INFO] --- maven-jar-plugin:2.4:jar (default-jar) @ hello-world ---
+[INFO]
+[INFO] --- maven-install-plugin:2.4:install (default-install) @ hello-world ---
+[INFO] Installing E:\reference\blogOfGit\maven-intro\hello-world\target\hello-world-1.0-SNAPSHOT.jar to C:\Documents and
+ Settings\Luious\.m2\repository\com\github\ningg\mvnbook\hello-world\1.0-SNAPSHOT\hello-world-1.0-SNAPSHOT.jar
+[INFO] Installing E:\reference\blogOfGit\maven-intro\hello-world\pom.xml to C:\Documents and Settings\Luious\.m2\reposit
+ory\com\github\ningg\mvnbook\hello-world\1.0-SNAPSHOT\hello-world-1.0-SNAPSHOT.pom
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+[INFO] ------------------------------------------------------------------------
+[INFO] Total time: 1.219 s
+[INFO] Finished at: 2014-07-01T22:11:04+08:00
+[INFO] Final Memory: 5M/15M
+[INFO] ------------------------------------------------------------------------
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;从输出结果可知，在jar:jar之后，Maven又执行了install:install，其将当前项目的jar包以及其POM配置文件，安装到了Maven的本地库中(~/.m2/repository/)。前文讲述JUnit的POM及jar下载的时候，我们说只有构件被下载到本地仓库后，才能由所有Maven项目使用类似，只有将Hello World的构件安装到本地仓库后，
+其他Maven项目才能使用它。&lt;/p&gt;
+
+&lt;p&gt;我们已经尝试使用了Maven的主要命令：&lt;code&gt;mvn clean compile&lt;/code&gt;,&lt;code&gt;mvn clean test&lt;/code&gt;,&lt;code&gt;mvn clean package&lt;/code&gt;,&lt;code&gt;mvn clean install&lt;/code&gt;。
+执行test之前会先执行compile，执行package之前会先执行test，执行install之前会先执行package。至此，我们已经知道这些命令是用来干什么的了，可以在其他任何Maven项目中执行这些命令。&lt;/p&gt;
+
+&lt;p&gt;重要提示：到目前为止，我们还没有运行Hello World项目，不要忘了HelloWorld类可能有一个main方法。默认打包生成的jar包并不能直接运行其中的main方法，因为带有main方法的类信息不会添加到manifest中（我们可以打开jar文件中的META-INF/MANIFEST.MF文件，将无法看到Main-Class一行）。为了生成可执行的jar文件，我们需要借助maven-shade-plugin，配置该插件如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;build&amp;gt;
+ &amp;lt;plugins&amp;gt;
+  &amp;lt;plugin&amp;gt;
+   &amp;lt;groupId&amp;gt;org.apache.maven.plugins&amp;lt;/groupId&amp;gt;
+   &amp;lt;artifactId&amp;gt;maven-shade-plugin&amp;lt;/artifactId&amp;gt;
+   &amp;lt;version&amp;gt;1.2.1&amp;lt;/version&amp;gt;
+   &amp;lt;executions&amp;gt;
+    &amp;lt;execution&amp;gt;
+    &amp;lt;phase&amp;gt;package&amp;lt;/phase&amp;gt;
+    &amp;lt;goals&amp;gt;
+    	&amp;lt;goal&amp;gt;shade&amp;lt;/goal&amp;gt;
+    &amp;lt;/goals&amp;gt;
+    &amp;lt;configuration&amp;gt;
+	 &amp;lt;transformers&amp;gt;
+	 	&amp;lt;transformer implementation=&quot;org.apache.maven.plugins.shade.resource.ManifestResourceTransformer&quot;&amp;gt;
+	 		&amp;lt;mainClass&amp;gt;com.github.ningg.mvnbook.helloworld.HelloWorld&amp;lt;/mainClass&amp;gt;
+	 	&amp;lt;/transformer&amp;gt;
+	 &amp;lt;/transformers&amp;gt;
+    &amp;lt;/configuration&amp;gt;
+    &amp;lt;/execution&amp;gt;
+   &amp;lt;/executions&amp;gt;
+  &amp;lt;/plugin&amp;gt;
+ &amp;lt;/plugins&amp;gt;
+&amp;lt;/build&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;上面的plugin元素在POM中的相对位置应该在 &lt;code&gt;&amp;lt;project&amp;gt;&amp;lt;build&amp;gt;&amp;lt;plugins&amp;gt;&lt;/code&gt; 下面。其中我们配置，&lt;code&gt;mainClass&lt;/code&gt; 为 &lt;code&gt;com.github.ningg.mvnbook.helloworld.HelloWorld&lt;/code&gt; ，项目在打包时，会将该信息放在MANIFEST中。执行完 &lt;code&gt;mvn clean package&lt;/code&gt; 之后，在target/目录下，我们可以看到 &lt;code&gt;hello-world-1.0-SNAPSHOT.jar&lt;/code&gt; 
+和 &lt;code&gt;original-hello-world-1.0-SNAPSHOT.jar&lt;/code&gt;，前者是带有Main-class信息的可运行jar，后者是原始的jar，打开 &lt;code&gt;hello-world-1.0-SNAPSHOT.jar&lt;/code&gt; 的 &lt;code&gt;META-INF/MANIFEST.MF&lt;/code&gt;，可以看到 &lt;code&gt;Main-class&lt;/code&gt; 信息。&lt;/p&gt;
+
+&lt;p&gt;我们在项目根目录中执行该jar文件：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;E:\...\hello-world&amp;gt;java -jar target/hello-world-1.0-SNAPSHOT.jar
+Hello Maven
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;（&lt;strong&gt;注意&lt;/strong&gt;：java命令行的使用方法，jar包等知识的补充）&lt;/p&gt;
+
+&lt;p&gt;控制台输出：Hello Maven，这正是我们所期望的。&lt;/p&gt;
+
+&lt;p&gt;本小节介绍了一个Hello World实例，侧重点是Maven而非Java代码，介绍了POM，Maven项目结构，以及如何编译、测试、打包、发布、运行。&lt;/p&gt;
+
+&lt;h3 id=&quot;archetype&quot;&gt;使用Archetype生成项目骨架&lt;/h3&gt;
+
+&lt;p&gt;Hello World项目中有一些Maven的约定：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;pom.xml在项目的根目录；&lt;/li&gt;
+  &lt;li&gt;主代码在src/main/java/目录下；&lt;/li&gt;
+  &lt;li&gt;测试代码在src/test/java/目录下；&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;我们称这些基本的目录结构和pom.xml文件内容为项目的骨架。每次创建项目都要手动创建项目骨架，会让程序员不高兴，为此，Maven提供了Archetype以帮助我们快速勾勒出项目骨架。&lt;/p&gt;
+
+&lt;p&gt;以Hello World为例，我们使用maven archetype来创建该项目的骨架，新建一个Maven项目目录。&lt;/p&gt;
+
+&lt;p&gt;如果是Maven3，简单运行：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mvn archetype:generate
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;（如果是Maven2，请参考：[《Maven实战（迷你版）》]）&lt;/p&gt;
+
+&lt;p&gt;实际上，我们运行的是maven-archetype-plugin插件，其输入格式是：groupId:artifactId:version:goal，注意冒号的分隔。紧接着，我们会看到很长的输出，有很多可用的archetype供我们选择，包括注明的Appfuse项目、JPA项目的archetype等等。每一个archetype前面都会对应一个编号，同时命令行会提示一个默认的编号，对应archetype为maven-archetype-quickstart，直接回车选择该archetype，紧接着Maven会提示我们输入要创建的项目的groupId,artifactId,version以及包名（package，默认与groupId和artifactId保持对应关系），具体如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Define value for property &#39;groupId&#39;: : com.github.ningg.mvnbook
+Define value for property &#39;artifactId&#39;: : hello-world-archetype
+Define value for property &#39;version&#39;:  1.0-SNAPSHOT: :
+Define value for property &#39;package&#39;:  com.github.ningg.mvnbook: : com.github.ningg.mvnbook.helloworldarchetype
+Confirm properties configuration:
+groupId: com.github.ningg.mvnbook
+artifactId: hello-world-archetype
+version: 1.0-SNAPSHOT
+package: com.github.ningg.mvnbook.helloworldarchetype
+ Y: : Y
+[INFO] ----------------------------------------------------------------------------
+[INFO] Using following parameters for creating project from Old (1.x) Archetype: maven-archetype-quickstart:RELEASE
+[INFO] ----------------------------------------------------------------------------
+[INFO] Parameter: groupId, Value: com.github.ningg.mvnbook
+[INFO] Parameter: packageName, Value: com.github.ningg.mvnbook.helloworldarchetype
+[INFO] Parameter: package, Value: com.github.ningg.mvnbook.helloworldarchetype
+[INFO] Parameter: artifactId, Value: hello-world-archetype
+[INFO] Parameter: basedir, Value: E:\reference\blogOfGit\maven-intro
+[INFO] Parameter: version, Value: 1.0-SNAPSHOT
+[INFO] project created from Old (1.x) Archetype in dir: E:\reference\blogOfGit\maven-intro\hello-world-archetype
+[INFO] ------------------------------------------------------------------------
+[INFO] BUILD SUCCESS
+
+...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;运行完毕之后，在当前目录下会生成一个hello-world-archetype目录，其下是一个完整的项目骨架。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;特别说明&lt;/strong&gt;：如果你有很多项目拥有类似的项目骨架（项目结构和配置文件），你可以一劳永逸的开发自己的archetype，然后在项目中使用自定义的archetype来快速生成项目骨架。（具体请参考：[《Maven实战（迷你版）》]）&lt;/p&gt;
+
+&lt;h3 id=&quot;m2eclipse&quot;&gt;m2eclipse简单使用&lt;/h3&gt;
+
+&lt;p&gt;前面介绍这么多，都没有涉及IDE，对于一个稍微大一点的项目来说，没有IDE是不可想象的，本文我们先介绍m2eclipse的基本使用。&lt;/p&gt;
+
+&lt;p&gt;如果命令行方式下，使用&lt;code&gt;mvn&lt;/code&gt;的命令编译没有问题，而使用eclipse时，&lt;code&gt;mvn install&lt;/code&gt;等命令出现问题，则,解决办法：在pom.xml中指定project,build,plugins内添加plugin，设置成与命令行条件下&lt;code&gt;mvn&lt;/code&gt;调用的plugin保持一致。&lt;a href=&quot;http://blog.csdn.net/imlmy/article/details/8268293&quot;&gt;参考1&lt;/a&gt;、&lt;a href=&quot;http://blog.csdn.net/huang86411/article/details/17548481&quot;&gt;参考2&lt;/a&gt;，当然还有另一种办法：&lt;a href=&quot;http://central.maven.org/maven2/org/apache/maven/plugins/&quot;&gt;手动下载jar和pom&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;校正：真正应该参考：&lt;a href=&quot;http://stackoverflow.com/questions/14491298/an-internal-error-occurred-during-updating-maven-dependencies&quot;&gt;stackoverflow&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;如果当前使用了代理等方式导致网络连接局部受限，造成命令行方式&lt;code&gt;mvn&lt;/code&gt;能够正常下载依赖的jar包，但在eclipse环境下，无法下载所需的项目的依赖包，可以在命令行方式下，先进行下载，然后，在eclipse下进行更新、运行即可。&lt;/p&gt;
+
+&lt;p&gt;[《Maven实战（迷你版）》]:	&lt;/p&gt;
+
+</content>
+   </entry>
+   
+   <entry>
+     <title>Notepad++快捷键</title>
+     <link href="http://ningg.github.com/npp-shortcuts"/>
+     <updated>2014-07-01T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/npp-shortcuts</id>
+     <content type="html">&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
+
+&lt;p&gt;notepad++ 用来编辑文档，总感觉不顺手，例如：多行同时编辑、剪切当前行、删除当前光标至行尾等都是手动操作。今天安装了Sublime Text 2，准备替代Notepad++，原因：听说Sublime提供了强大的快捷操作。&lt;/p&gt;
+
+&lt;p&gt;转念一想，不对啊，难道Notepad++没有强大的快捷操作吗？可能是自己不知道，而不是Notepad++没有。&lt;/p&gt;
+
+&lt;h2 id=&quot;notepad&quot;&gt;notepad++快捷键&lt;/h2&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;快捷键查找\设置&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;Settings&lt;/code&gt; – &lt;code&gt;Shortcut Mapper...&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;常用快捷键&lt;/h3&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;快捷键&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;说明&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;tab&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;插入，缩进&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;shift + tab&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;删除，缩进&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;ctrl + J&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;合并，多行&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;ctrl + D&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;复制，并粘贴，当前行&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;ctrl + L&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;删除，当前行&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;ctrl + T&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;上移，当前行&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;ctrl + G&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;光标定位，指定行&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;ctrl + BackSpace&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;删除，光标前单词&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;ctrl + Delete&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;删除，光标后单词&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;ctrl + u&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;转换，小写字母&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;ctrl + shift + u&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;转化，大写字母&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;ctrl + b&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;定位，匹配的括号&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;ctrl + alt + b&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;选中，匹配括号间的内容&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;F11&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;全屏显示&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;ctrl + tab&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;下一个文档&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;alt + shift + up/down&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;编辑，多行&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;ctrl + shift + up/down&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;上移/下移，当前行&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+</content>
+   </entry>
    
    <entry>
      <title>Linux下查看进程的内存占用</title>
@@ -280,7 +887,7 @@ made persistent across restarts.&lt;/li&gt;
 &lt;ol&gt;
   &lt;li&gt;接口类型：IDE？SATA？SCSI？主板上插槽是否支持？&lt;/li&gt;
   &lt;li&gt;容量：2T？500G？&lt;/li&gt;
-  &lt;li&gt;转速：7200转？5400转？&lt;/li&gt;
+  &lt;li&gt;转速：7200转/min？5400转/min？&lt;/li&gt;
   &lt;li&gt;磁盘缓冲内存大小：磁盘上此机制，加速文件读取速率；&lt;/li&gt;
 &lt;/ol&gt;
 
@@ -302,20 +909,42 @@ made persistent across restarts.&lt;/li&gt;
 
 &lt;p&gt;备注：旋转磁盘的访问时间是ms级别的。&lt;/p&gt;
 
-&lt;h3 id=&quot;section-8&quot;&gt;测试磁盘读写速度&lt;/h3&gt;
+&lt;h3 id=&quot;section-8&quot;&gt;查询磁盘参数&lt;/h3&gt;
+
+&lt;p&gt;（出厂参数）&lt;/p&gt;
+
+&lt;h3 id=&quot;io&quot;&gt;磁盘IO的基本过程&lt;/h3&gt;
+
+&lt;p&gt;（DMA）&lt;/p&gt;
+
+&lt;h3 id=&quot;section-9&quot;&gt;测试磁盘读写速度&lt;/h3&gt;
 
 &lt;p&gt;（doing…）&lt;/p&gt;
 
-&lt;h2 id=&quot;section-9&quot;&gt;文件系统&lt;/h2&gt;
+&lt;h2 id=&quot;section-10&quot;&gt;磁盘格式化&lt;/h2&gt;
 
-&lt;h3 id=&quot;section-10&quot;&gt;磁盘分区&lt;/h3&gt;
+&lt;p&gt;一块新磁盘放在我面前，怎么往上面写文件呢？要想使用，需要先把磁盘内部的东西整理一下，即进行格式化。具体磁盘格式化包括：&lt;/p&gt;
 
-&lt;h2 id=&quot;section-11&quot;&gt;参考资料&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;低级格式化：又称，低阶格式化，&lt;/li&gt;
+  &lt;li&gt;分区：&lt;/li&gt;
+  &lt;li&gt;高级格式化：又称，高阶格式化，&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;section-11&quot;&gt;#&lt;/h2&gt;
+
+&lt;h3 id=&quot;section-12&quot;&gt;磁盘分区&lt;/h3&gt;
+
+&lt;h3 id=&quot;section-13&quot;&gt;磁盘格式化&lt;/h3&gt;
+
+&lt;h2 id=&quot;section-14&quot;&gt;文件系统&lt;/h2&gt;
+
+&lt;h2 id=&quot;section-15&quot;&gt;参考资料&lt;/h2&gt;
 
 &lt;ol&gt;
   &lt;li&gt;深入理解计算机系统&lt;/li&gt;
   &lt;li&gt;鸟哥私房菜（基础篇）第三版&lt;/li&gt;
-  &lt;li&gt;&lt;/li&gt;
+  &lt;li&gt;Disk formatting WIKI&lt;a href=&quot;http://en.wikipedia.org/wiki/Disk_formatting&quot;&gt;http://en.wikipedia.org/wiki/Disk_formatting&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
 </content>
@@ -381,6 +1010,16 @@ made persistent across restarts.&lt;/li&gt;
   &lt;li&gt;圣人不仁&lt;/li&gt;
   &lt;li&gt;很多喜欢的事情只是因自己擅长，让自己觉得此方面比别人发展快，有成就感，乐意往此发展&lt;/li&gt;
   &lt;li&gt;人应该做什么事情时，不能因为不会不擅长而逃避，否则你在什么上面偷懒逃避，什么上就会出问题&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;20140701&lt;/h2&gt;
+
+&lt;p&gt;有一点坚持的东西：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;选定自己坚持的东西；&lt;/li&gt;
+  &lt;li&gt;选定自己坚持的东西的同时，要顺势而为，不要随心所欲；&lt;/li&gt;
+  &lt;li&gt;花时间用心整理，要有积累；&lt;/li&gt;
 &lt;/ul&gt;
 
 </content>
@@ -2193,733 +2832,6 @@ store B into &#39;$output&#39;;
 &lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;img src=&quot;/images/pig-deal-with-chinese/result.png&quot; alt=&quot;result&quot; /&gt;&lt;/p&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>Pig入门1h</title>
-     <link href="http://ningg.github.com/introduction-to-pig"/>
-     <updated>2014-05-08T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/introduction-to-pig</id>
-     <content type="html">&lt;blockquote&gt;
-  &lt;p&gt;开篇先推荐一个PPT：&lt;a href=&quot;/download/pig/introduction-to-pig.pptx&quot; title=&quot;Pig简介，原理，简要说明&quot;&gt;Pig简介&lt;/a&gt;，简要介绍了Pig的基本原理，重点说明了其与MapReduce的关系。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;strong&gt;副标题&lt;/strong&gt;: Pig入门 &lt;em&gt;_之_&lt;/em&gt; 乱拳打死老师傅&lt;/p&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;从副标题展开说&lt;/h2&gt;
-
-&lt;p&gt;先说一下为什么起这么一个副标题：前几天看电视剧消遣，有个小年轻，被质疑没有经验怎么办的时候，自己吹牛打气，说“我啥也不会，乱拳打死老师傅…”；这个，倒不是说对师傅的不尊敬，而是民间俗语，大概意思是：啥也不会的情况下，受领域内固有思想、规则约束的少，敢打敢拼，敢于突破陈规，往往能够带来新气象。&lt;em&gt;（不是要煽动大家起义、造反，而是，鼓励勇于突破、敢为天下先）。&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;Pig知识的学习\介绍，大部分人会按照如下思路开展：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Pig解决什么问题；&lt;em&gt;（pig产生背景）&lt;/em&gt;&lt;/li&gt;
-  &lt;li&gt;Pig Latin语言的基本语法；&lt;em&gt;（配合一些基本操作）&lt;/em&gt;&lt;/li&gt;
-  &lt;li&gt;Pig Latin语言的高级语法；&lt;em&gt;（针对一些特有的、容易出错的用法，进行详细介绍）&lt;/em&gt;&lt;/li&gt;
-  &lt;li&gt;Pig脚本的调试；&lt;em&gt;（脚本不是一气呵成的，需要一些调试分析手段）&lt;/em&gt;&lt;/li&gt;
-  &lt;li&gt;Pig的可扩展部分；&lt;em&gt;（Pig提供的内建函数，无法满足需求时，需要自己动手来实现Pig的对外接口）&lt;/em&gt;&lt;/li&gt;
-  &lt;li&gt;Pig性能调优；&lt;em&gt;（上面所有的步骤，都在说如何去使用Pig来完成一件事，现在会说一下如何把事做好、做漂亮）&lt;/em&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;需要这么多吗？学个东西，有这么复杂吗？&lt;em&gt;（上面开展的思路，是为了循序渐进、由浅入深，让你从原理到操作，能有一个全面的理解和掌握，嗯，一句话：为你好，才这么安排的）&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;纳尼？我想说，你能直接一点么？上面&lt;code&gt;1、2、3、4、5、6&lt;/code&gt;，看起来头都大了，唉，我只想使用Pig，不想知道他是怎么来的。&lt;/p&gt;
-
-&lt;p&gt;妥了，是个爽快的人，也算志同道合了，不多说：直接开始一步一步用Pig，让那些乱七八糟的东西见鬼去吧。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/introduction-to-pig/pig-logo.jpg&quot; alt=&quot;pig-logo&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;pig&quot;&gt;Pig用起来&lt;/h2&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;一个例子&lt;/h3&gt;
-
-&lt;p&gt;准备数据文件&lt;code&gt;student&lt;/code&gt;：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$cat student
-Jun L. 	18	3.7
-Hhui H.	18	3.8
-Ning G.	20	3.6
-Hlong G.	22	3.6
-Chang W.	21	3.6
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;注：上述文件中，姓名、年龄、GPA之间都以TAB键分隔；&lt;/p&gt;
-
-&lt;p&gt;目标：求20岁以下和20岁以上的学生的人数以及gpa平均值&lt;/p&gt;
-
-&lt;p&gt;进入执行Pig 脚本的交互模式：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$pig –x local
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;逐行输入如下pig脚本(&lt;code&gt;student_avg_gpa.pig&lt;/code&gt;)：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;studentInfos = load ’student’ as (name: chararray, age:int, gpa:float);
-studentBag = group studentInfos all;
-result = foreach studentBag {
-  student_younger = filter studentInfos by age &amp;lt;= 20;
-  student_older = filter studentInfos by age &amp;gt; 20;
-  generate COUNT(studentInfos) as totalNum, AVG(studentInfos.gpa) as avgGPA, 
-	COUNT(student_younger) as youngerNum, AVG(student_younger.gpa) as youngerAvgGPA, 
-	COUNT(student_older) as olderNum, AVG(student_older.gpa) as olderAvgGPA;
-}
-dump result;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;看到结果了吗？&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;(5,3.659999942779541,3,3.699999968210856,2,3.5999999046325684)&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;总共6个值（&lt;code&gt;,&lt;/code&gt;逗号分割）。&lt;/p&gt;
-
-&lt;p&gt;对于结果的说明：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;总共5人；平均GPA：约3.66；&lt;/li&gt;
-  &lt;li&gt;20岁以下（包含20岁）3人；平均GPA：约3.70；（pig对于float数据运算有误差）&lt;/li&gt;
-  &lt;li&gt;20岁以上2人；平均GPA：约3.60；&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;简要说一下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;grunt&amp;gt; studentInfos = load ‘student’ as (name: chararray, age:int, gpa:float);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;其中，&lt;code&gt;load&lt;/code&gt;为加载数据的关键字，’student’表示数据文件位置，&lt;code&gt;as&lt;/code&gt; 关键字为前面数据文件指定field别名和field类型。&lt;/p&gt;
-
-&lt;p&gt;可以使用如下命令，来查看一个&lt;code&gt;studentInfos&lt;/code&gt;的数据结构：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;grunt&amp;gt; describe studentInfos
-studentInfos: {name: chararray,age: int,gpa: float}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;使用如下命令，查看&lt;code&gt;studentInfos&lt;/code&gt;的具体内容：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;grunt&amp;gt; dump studentInfos;
-(Jun L.,18,3.7)
-(Hhui H.,18,3.8)
-(Ning G.,20,3.6)
-(Hlong G.,22,3.6)
-(Chang W.,21,3.6)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;上面 &lt;code&gt;describe&lt;/code&gt;、&lt;code&gt;dump&lt;/code&gt;命令输出的内容到底是什么玩意儿？&lt;/p&gt;
-
-&lt;p&gt;我们来解释一下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;studentInfos: {name: chararray,age: int,gpa: float}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;表示&lt;code&gt;studentInfos&lt;/code&gt;的结构：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;code&gt;studentInfos&lt;/code&gt;是一个&lt;code&gt;relation&lt;/code&gt;，因为&lt;code&gt;studentInfos:{}&lt;/code&gt;指向&lt;code&gt;{}&lt;/code&gt;花括号；&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;studentInfos&lt;/code&gt;内，&lt;code&gt;tuple&lt;/code&gt;的结构为：&lt;code&gt;(name: chararray,age: int,gpa: float)&lt;/code&gt;，即，包含3个字段，依次为&lt;code&gt;name&lt;/code&gt;、&lt;code&gt;age&lt;/code&gt;、&lt;code&gt;gpa&lt;/code&gt;，名字后&lt;code&gt;:&lt;/code&gt;之后为对应的类型；&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;上面提到的&lt;code&gt;relation&lt;/code&gt;、&lt;code&gt;tuple&lt;/code&gt;是什么？从哪冒出来的？客官莫要着急，&lt;code&gt;relation&lt;/code&gt;、&lt;code&gt;tuple&lt;/code&gt;都是&lt;code&gt;Pig&lt;/code&gt;内部的几个概念，且听我慢慢道来。&lt;/p&gt;
-
-&lt;p&gt;Pig定义了几个基本概念，用于描述数据结构：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;code&gt;field&lt;/code&gt;，字段，某一位置的数据，即，(Jun L.,18,3.7)中包含了3个字段；类似RDBMS中Table中一行数据的一个字段；&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;tuple&lt;/code&gt;，元组，是field的有序组合，使用&lt;code&gt;()&lt;/code&gt;来标识，即，&lt;code&gt;(Jun L.,18,3.7)&lt;/code&gt;表示一个tuple；类似RDBMS中Table中一行数据；&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;bag&lt;/code&gt;，包，是tuple的无序组合，使用”{}”来标识，即，{(Jun L.,18,3.7),(Hhui H.,18,3.8)}表示包含2个&lt;code&gt;tuple&lt;/code&gt;的一个&lt;code&gt;bag&lt;/code&gt;；类似RDBMS中的一个Table；&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;relation&lt;/code&gt;，关系，&lt;code&gt;outer bag&lt;/code&gt;，在此，暂时将&lt;code&gt;relation&lt;/code&gt;与&lt;code&gt;bag&lt;/code&gt;等价看待；&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;strong&gt;补充&lt;/strong&gt;：&lt;code&gt;field&lt;/code&gt;可以为任何类型，即，&lt;code&gt;tuple&lt;/code&gt;、&lt;code&gt;bag&lt;/code&gt;都可以作为&lt;code&gt;field&lt;/code&gt;，包含在&lt;code&gt;tuple&lt;/code&gt;中。&lt;/p&gt;
-
-&lt;p&gt;现在再回过头看一下，&lt;code&gt;studentInfos&lt;/code&gt;的结构：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;grunt&amp;gt; describe studentInfos
-studentInfos: {name: chararray,age: int,gpa: float}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;是不是很明朗了？&lt;em&gt;（什么？还不明朗？把上面的分析读3遍）&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;有人问&lt;code&gt;studentInfos: {name: chararray,age: int,gpa: float}&lt;/code&gt;中，&lt;code&gt;studentInfos&lt;/code&gt;这个&lt;code&gt;relation&lt;/code&gt;内部不应该是&lt;code&gt;tuple&lt;/code&gt;吗？&lt;code&gt;tuple&lt;/code&gt;不是应该以&lt;code&gt;()&lt;/code&gt;标识吗？为什么不是&lt;code&gt;studentInfos: {(name: chararray,age: int,gpa: float)}&lt;/code&gt;？这是因为&lt;code&gt;studentInfos&lt;/code&gt;中的&lt;code&gt;tuple&lt;/code&gt;不在一行，是分行输出的，下面会看到如果&lt;code&gt;relation&lt;/code&gt;中&lt;code&gt;tuple&lt;/code&gt;都在一行的情景。&lt;/p&gt;
-
-&lt;p&gt;将&lt;code&gt;studentInfos&lt;/code&gt;按照所有字段进行&lt;code&gt;group&lt;/code&gt;，即使有某2个&lt;code&gt;tuple&lt;/code&gt;内容完全一致，也会统计为2个&lt;code&gt;tuple&lt;/code&gt;，即，本质上&lt;code&gt;group..all&lt;/code&gt;是将多行数据合并为一行。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;grunt&amp;gt; studentBag = group studentInfos all;
-
-grunt&amp;gt; describe studentBag;
-studentBag: {group: chararray,studentInfos: {(name: chararray,age: int,gpa: float)}}
-
-grunt&amp;gt; dump studentBag;
-(all,{(Jun L.,18,3.7),(Hhui H.,18,3.8),(Ning G.,20,3.5),(Hlong G.,22,3.6),(Chang W.,21,3.6)})
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;strong&gt;补充&lt;/strong&gt;：&lt;code&gt;group&lt;/code&gt;操作时，会生成一个&lt;code&gt;field&lt;/code&gt;，命名为&lt;code&gt;group&lt;/code&gt;，可以尝试如下命令：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;grunt&amp;gt; test = group studentInfos by age;
-
-grunt&amp;gt; describe test;
-test: {group: int,studentInfos: {(name: chararray,age: int,gpa: float)}}
-
-grunt&amp;gt; dump test;
-(18,{(Jun L.,18,3.7),(Hhui H.,18,3.8)})
-(20,{(Ning G.,20,3.6)})
-(21,{(Chang W.,21,3.6)})
-(22,{(Hlong G.,22,3.6)})
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;上面的命令：&lt;code&gt;load&lt;/code&gt;、&lt;code&gt;group&lt;/code&gt;多少有些过于简单，不刺激，不激动，下面的命令会有点意思：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;grunt&amp;gt; result = foreach studentBag {
-&amp;gt;&amp;gt;   student_younger = filter studentInfos by age &amp;lt;= 20;
-&amp;gt;&amp;gt;   student_older = filter studentInfos by age &amp;gt; 20;
-&amp;gt;&amp;gt;   generate COUNT(studentInfos) as totalNum, AVG(studentInfos.gpa) as avgGPA, 
-		COUNT(student_younger) as youngerNum, AVG(student_younger.gpa) as youngerAvgGPA, 
-		COUNT(student_older) as olderNum, AVG(student_older.gpa) as olderAvgGPA;
-&amp;gt;&amp;gt; }
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;有点复杂？稍等，拆解一下，再复杂的命令也会变得简单：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;student_younger = filter studentInfos by age &amp;lt;= 20;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;code&gt;filter..by..&lt;/code&gt;是过滤语句，此处，表示按照条件&lt;code&gt;age &amp;lt;= 20&lt;/code&gt;过滤出不到20岁的学生，并且将结果指定给&lt;code&gt;student_younger&lt;/code&gt;。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;generate COUNT(studentInfos) as totalNum, AVG(studentInfos.gpa) as avgGPA, 
-	COUNT(student_younger) as youngerNum, AVG(student_younger.gpa) as youngerAvgGPA, 
-	COUNT(student_older) as olderNum, AVG(student_older.gpa) as olderAvgGPA;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;上面这个&lt;code&gt;generate ..&lt;/code&gt;是生成数据的命令，&lt;code&gt;COUNT&lt;/code&gt;、&lt;code&gt;AVG&lt;/code&gt;都是内部提供的聚合函数，如果只调用如下命令：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;generate COUNT(studentInfos) as totalNum, AVG(studentInfos.gpa) as avgGPA;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;表示将&lt;code&gt;studentInfos&lt;/code&gt;中包含的学生个数，以及平均&lt;code&gt;gpa&lt;/code&gt;组合成一个&lt;code&gt;tuple&lt;/code&gt;，赋值个&lt;code&gt;result&lt;/code&gt;;&lt;code&gt;as..&lt;/code&gt; 为这些&lt;code&gt;field&lt;/code&gt;指定名字。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;grunt&amp;gt; describe result;
-result: {totalNum: long,avgGPA: double,youngerNum: long,youngerAvgGPA: double,olderNum: long,olderAvgGPA: double}
-
-grunt&amp;gt; dump result;
-(5,3.6399999618530274,3,3.6666666666666665,2,3.5999999046325684)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;strong&gt;建议&lt;/strong&gt;：把上面的例子，再输入执行2遍，多使用&lt;code&gt;describe&lt;/code&gt;、&lt;code&gt;dump&lt;/code&gt;命令配合查看执行过程。&lt;/p&gt;
-
-&lt;h3 id=&quot;section-2&quot;&gt;练习一下&lt;/h3&gt;
-
-&lt;p&gt;还是上面的&lt;code&gt;student&lt;/code&gt;数据&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$cat student
-Jun L. 	18	3.7
-Hhui H.	18	3.8
-Ning G.	20	3.6
-Hlong G.	22	3.6
-Chang W.	21	3.6
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;注：上述文件中，姓名、年龄、GPA之间都以TAB键分隔；&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;目标&lt;/strong&gt;：20岁以下学生的人数以及gpa平均值，以及这些学生的名字（只要求算出这些，其他东西不要求）。&lt;/p&gt;
-
-&lt;p&gt;这就成了上面问题的一部分，可以使用如下pig脚本：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;-- 加载数据、设定field名字、设定field类型
-studentInfos = load ’student’ as (name: chararray, age:int, gpa:float);
-
--- 找出20岁以下的学生
-student_younger = filter studentInfos by age &amp;lt;= 20;
-
--- 要调用聚合函数COUNT\AVG必须进行group，将所有列，转换为一行
-student_younger_bag = group student_younger all;
-
--- 输出学生人数、平均GPA，以及学生名单(下一条命令实际为一行)
-result = foreach student_younger_bag generate COUNT(student_younger),
- AVG(student_younger.gpa), student_younger.name;
-
-dump result;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;输出结果为：&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;(3,3.699999968210856,{(Jun L.),(Hhui H.),(Ning G.)})&lt;/code&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;section-3&quot;&gt;一篇博文&lt;/h2&gt;
-
-&lt;p&gt;推荐codelast的一篇博文&lt;a href=&quot;http://www.codelast.com/?p=3621&quot;&gt;Apache Pig基础概念及用法&lt;/a&gt;, 不要着急，放松放松，CodeLast的这篇博客很轻松，嗯，很适合入门，在此向原博主致敬。&lt;/p&gt;
-
-&lt;h2 id=&quot;section-4&quot;&gt;参考来源&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.codelast.com/?p=4550&quot;&gt;codeLast Apache Pig学习系列&lt;/a&gt;
-&lt;em&gt;（个人看法：非常不错，适合直接上手写pig脚本；）&lt;/em&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://book.douban.com/subject/21357721/&quot;&gt;Pig编程指南&lt;/a&gt;（Alan Gates著， 曹坤 译， 2013年2月  第1版） 
-&lt;em&gt;(个人看法：有理论、有深度、有广度，每次都有新感觉；)&lt;/em&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://pig.apache.org/docs/r0.12.1/&quot;&gt;Pig documentation&lt;/a&gt;，
-&lt;em&gt;(个人看法：特别详细，想要的东西，基本都能从这里找到，而且更新速度很快；)&lt;/em&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;由于Pig版本迭代速度比较快，所以个人建议，最好能去官网查看文档。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/introduction-to-pig/pig-on-elephant.png&quot; alt=&quot;pig-on-elephant&quot; /&gt;&lt;/p&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>正则表达式（字符串匹配模式）</title>
-     <link href="http://ningg.github.com/regular-expression"/>
-     <updated>2014-05-04T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/regular-expression</id>
-     <content type="html">&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
-
-&lt;p&gt;最近师兄安排我用Pig解析一下日志文件，在数据装载过程中，需要抽取特定位置的字符串&lt;em&gt;（即使是数字、符号，在程序看来也是字符）。&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;回想起之前的团队中，CZW对正则表达式进行过技术分享，深入浅出，反正当时我是听懂了，应该也达到了能用的水平，无奈10月左右的时间，只剩下点滴印象了，&lt;em&gt;（唉，时光已去，曾经掌握的东西，当要用时，又需要重新去学，这正是自己写技术博客的原因之一）&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;不多说了，接下来，将整体上对正则表达式来一个梳理。&lt;/p&gt;
-
-&lt;h2 id=&quot;section-1&quot;&gt;正则表达式，是什么？&lt;/h2&gt;
-
-&lt;p&gt;正则表达式，英文原名: &lt;code&gt;Regular Expression&lt;/code&gt;（简称：&lt;code&gt;regex&lt;/code&gt;或&lt;code&gt;regexp&lt;/code&gt;），直接翻译：&lt;code&gt;有规律的式子&lt;/code&gt;，或者，可以翻译为&lt;code&gt;描述规律的式子&lt;/code&gt;。&lt;em&gt;(他奶奶的，不知道谁第一个翻译的，取名&lt;code&gt;正则表达式&lt;/code&gt;？忒高大上了，听上去完全不知到干什么的，还是&lt;code&gt;描述规律的式子&lt;/code&gt;容易理解)&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/regular-expression/regular-expressions-comics.png&quot; alt=&quot;comics&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;section-2&quot;&gt;解决什么问题？&lt;/h3&gt;
-
-&lt;p&gt;通俗的说：查找满足一定规则的字符串。&lt;/p&gt;
-
-&lt;p&gt;可用于文本的查找、替换。&lt;/p&gt;
-
-&lt;h3 id=&quot;section-3&quot;&gt;应用场景举例&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;场景1：仅查找出文本中单词&lt;code&gt;car&lt;/code&gt;，不想找出其他单词&lt;code&gt;scar&lt;/code&gt;、&lt;code&gt;carry&lt;/code&gt;等。&lt;/li&gt;
-  &lt;li&gt;场景2：用户在注册页面填写Email时，检查Email地址格式是否正确。&lt;/li&gt;
-  &lt;li&gt;场景3：查找指定目录下，文件名中包含&lt;code&gt;application&lt;/code&gt;字样的文件。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;section-4&quot;&gt;正式定义&lt;/h3&gt;
-
-&lt;p&gt;正则表达式，给个正式定义：按一定规则查找字符串，并可以进行替换操作。&lt;/p&gt;
-
-&lt;p&gt;正则表达式，几点要注意的内容：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;有自己的语法规则，即，正则表达式语言；&lt;/li&gt;
-  &lt;li&gt;不是正规的（完备的）程序设计语言，没有专门针对正则表达式的软件，来安装和运行；&lt;/li&gt;
-  &lt;li&gt;常内置于其他软件/语言中；（即，其他语言实现了正则表达式规则的解析器）&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;当前，java/Python/PHP/JavaScript等，都支持正则表达式。&lt;/p&gt;
-
-&lt;p&gt;支持正则表达式的语言\工具：&lt;a href=&quot;http://www.regular-expressions.info/tools.html&quot;&gt;Applications and Languages Related with RegEx&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;section-5&quot;&gt;产生的启发点&lt;/h3&gt;
-
-&lt;p&gt;1950年左右时，数学领域的一些研究工作&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;a href=&quot;http://cns-classes.bu.edu/cn550/Readings/mcculloch-pitts-43.pdf&quot;&gt;A logical calculus of the ideas immanent in nervous activity&lt;/a&gt;, 1943;
-Author: McCulloch, Warren S., and Walter Pitts;
-简述：神经系统中神经元看作小巧而简单的自动控制单元。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;a href=&quot;http://www.dlsi.ua.es/~mlf/nnafmc/papers/kleene56representation.pdf&quot;&gt;Representation of Events in Nerve Nets and Finite Automata&lt;/a&gt;, 1956;
-Author: Kleene, Stephen C;
-简述：“正则集合”的数学符号来描述此模型。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;几年后，计算机领域借助上述研究成果，实现perl、grep等工具/语言，正则表达式进入实用阶段。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/regular-expression/regular-expression-introduction.png&quot; alt=&quot;illustration&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;校正&lt;/strong&gt;：上面图片&lt;code&gt;Illustration of Regular Expression&lt;/code&gt;中，&lt;code&gt;Meet c&lt;/code&gt;应该修正为&lt;code&gt;Meet b&lt;/code&gt;。&lt;/p&gt;
-
-&lt;h2 id=&quot;section-6&quot;&gt;怎么用？&lt;/h2&gt;
-
-&lt;p&gt;正则表达式，俗称&lt;code&gt;描述规律的式子&lt;/code&gt;，用来查找字符串，基本逻辑是：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;如何匹配出1个字符；&lt;/li&gt;
-  &lt;li&gt;如何匹配出n个字符；&lt;/li&gt;
-  &lt;li&gt;如何匹配出特定位置的字符；（特定位置：字符串的开头、结尾）&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;section-7&quot;&gt;匹配1个字符&lt;/h3&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: left&quot;&gt;字符&lt;/th&gt;
-      &lt;th style=&quot;text-align: left&quot;&gt;含义&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;a&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;一个字符&lt;code&gt;a&lt;/code&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;[abc]&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;[..]表示集合内的任意一个字符，在此例中，[abc]表示a、b、c字符中的任意一个&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;[^abc]&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;除去a、b、c之外的任意一个字符，注意，&lt;code&gt;^&lt;/code&gt;只限于在&lt;code&gt;[^&lt;/code&gt;位置，才表示此含义&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;[0123456789]&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;任意一个数字&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;[a-z]&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;任意一个消息字母（在[]内&lt;code&gt;-&lt;/code&gt;为特殊字符，代表区间）&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;[0-9]&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;任意一个数字，等同于[0123456789]&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;.&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;任意一个字符&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;\f&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;换页符&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;\t&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;制表键，tab&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;\r&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;回车符，return&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;\n&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;换行符，nextLine&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;\v&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;垂直制表符&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;\w&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;等价于[a-zA-Z0-9]，任何一个字母（区分大小写）、数字、下划线&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;\W&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;等价于[^a-zA-Z0-9]，任何一个非字母（区分大小写）、数字、下划线&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;\d&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;任何一个数字字符,等价于[0-9]&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;\D&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;等价于[^0-9]，任何一个非数字字符&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;\s&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;等价于[ \f\n\r\t\v]，任何一个空白字符&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;\S&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;等价于[^ \f\n\r\t\v]，任何一个非空白字符&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;\x0A&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;（16进制）对应ASCII字符10，即\n&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;\011&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;（8进制）对应ASCII字符9，即\t&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;&lt;strong&gt;校正&lt;/strong&gt;：关于&lt;code&gt;\s&lt;/code&gt;,《&lt;a href=&quot;http://book.douban.com/subject/2269648/&quot; title=&quot;《正则表达式必知必会》2007年12月，第1版&quot;&gt;正则表达式必知必会&lt;/a&gt;》 版本信息（2007年12月，第1版），在Page 31中，&lt;code&gt;\s&lt;/code&gt;表示任何一个空白字符，应该包含空格&lt;code&gt; &lt;/code&gt;在内（具体参考：&lt;a href=&quot;http://www.regular-expressions.info/shorthand.html&quot;&gt;Shorthand Character Classes Of Regex&lt;/a&gt;）&lt;/p&gt;
-
-&lt;h3 id=&quot;n&quot;&gt;匹配n个字符&lt;/h3&gt;
-
-&lt;p&gt;匹配&lt;code&gt;n&lt;/code&gt;个字符，就是“匹配一个字符”重复&lt;code&gt;n&lt;/code&gt;次，嗯，很简单，则有：&lt;code&gt;aa&lt;/code&gt;，表示匹配连续两个字符&lt;code&gt;a&lt;/code&gt;；&lt;code&gt;\d\d&lt;/code&gt;,表示匹配2个数字；&lt;code&gt;\n\n\n&lt;/code&gt;,表示匹配3个换行符。&lt;em&gt;(很简单有木有)&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;问题来了，假设有如下文本：&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;I $am$ the $god$.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;目标：查找出&lt;code&gt;$..$&lt;/code&gt;间的内容，正则表达式怎么写？(&lt;code&gt;$..$&lt;/code&gt;间字符的个数，不能确定，只知道1个以上)&lt;/p&gt;
-
-&lt;p&gt;我x，不是说要“匹配一个字符”重复&lt;code&gt;n&lt;/code&gt;次就可以么？关键现在&lt;code&gt;n&lt;/code&gt;是几啊？这怎么还是一个范围（&lt;code&gt;n&amp;gt;=1&lt;/code&gt;）？这如何是好？&lt;/p&gt;
-
-&lt;p&gt;莫急莫急，请往下看。&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: left&quot;&gt;字符&lt;/th&gt;
-      &lt;th style=&quot;text-align: left&quot;&gt;含义&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;?&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;0次或1次&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;+&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;1次以上（a+：表示一个或多个a的连续出现；[0-9]+：表示一个或多个连续出现的数字）&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;*&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;0次及0次以上&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;{3}&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;3次&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;{ ,3}&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;0次–3次（包含0次和3次）&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;{1, }&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;1次以上&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;{1,3}&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;1次–3次（包含1次和3次）&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;到这儿，就可以看出，使用 &lt;code&gt;$.+$&lt;/code&gt;就能匹配上面的内容了。&lt;/p&gt;
-
-&lt;h3 id=&quot;section-8&quot;&gt;匹配特定位置字符&lt;/h3&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: left&quot;&gt;字符&lt;/th&gt;
-      &lt;th style=&quot;text-align: left&quot;&gt;含义&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;^&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;在字符串开头&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;$&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;在字符串结尾&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;\b&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;单词的边界&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;\B&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;非单词的边界&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;匹配出如下文本中的cat单词：&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;cat catt&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;正则表达式：&lt;code&gt;\bcat\b&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;匹配如下文本中的&lt;code&gt;-&lt;/code&gt;，要求：只找出两个字母之间的&lt;code&gt;-&lt;/code&gt;，文本内容：&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;A-b - ss s- f-  - a-&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;正则表达式：&lt;code&gt;\B-\B&lt;/code&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;section-9&quot;&gt;过度匹配（贪婪）&lt;/h3&gt;
-
-&lt;p&gt;要匹配文本&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;ben@cib.com.cn&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;正则表达式：&lt;code&gt;\w+@\w[\w\.]+\.\w+&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;理论上，可以匹配出：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;code&gt;ben@baidu.com&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;ben@baidu.com.cn&lt;/code&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;但是，上述匹配结果是2，即&lt;code&gt;ben@cib.com.cn&lt;/code&gt;。原因：&lt;code&gt;+&lt;/code&gt;、&lt;code&gt;*&lt;/code&gt;默认都是贪婪匹配，即找出最长的匹配模式；如果希望匹配出结果1，即&lt;code&gt;ben@cib.com&lt;/code&gt;，惰性匹配，找出最短的匹配模式，需要修改正则表达式：&lt;code&gt;\w+?@\w[\w\.]+?\.\w+?&lt;/code&gt;，即&lt;code&gt;+&lt;/code&gt;替换为&lt;code&gt;+?&lt;/code&gt;，&lt;code&gt;*&lt;/code&gt;替换为&lt;code&gt;*?&lt;/code&gt;。&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: left&quot;&gt;贪婪匹配&lt;/th&gt;
-      &lt;th style=&quot;text-align: left&quot;&gt;懒惰字符&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;*&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;*?&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;+&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;+?&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;{n, }&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;{n, }?&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h3 id=&quot;section-10&quot;&gt;补充说明&lt;/h3&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: left&quot;&gt;字符&lt;/th&gt;
-      &lt;th style=&quot;text-align: left&quot;&gt;含义&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;\&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;转义字符，例如，&lt;code&gt;\.&lt;/code&gt; 表示&lt;code&gt;.&lt;/code&gt;字符本身，单独&lt;code&gt;.&lt;/code&gt;表示匹配任意一个字符；&lt;code&gt;\?&lt;/code&gt;表示&lt;code&gt;?&lt;/code&gt;字符自身&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;|&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;表示其前后两种模式的任意一个，例如&lt;code&gt;(19|20)\d{2}&lt;/code&gt;，匹配19xx和20xx，xx表示任意两位数字&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;()&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;子表达式，整体上看作一个独立元素&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;假设有一个文本&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Hello, my name is Ben&lt;code&gt;&amp;amp;nbsp;&lt;/code&gt; … Node.js, Linux&lt;code&gt;&amp;amp;nbsp;&amp;amp;nbsp;&lt;/code&gt;, and other tech.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;现在要匹配出连续的两个&lt;code&gt;&amp;amp;nbsp;&lt;/code&gt;，可以使用&lt;code&gt;&amp;amp;nbsp;&amp;amp;nbsp;&lt;/code&gt;，也可以使用&lt;code&gt;(&amp;amp;nbsp;){2}&lt;/code&gt;，而不能使用&lt;code&gt;&amp;amp;nbsp;{2}&lt;/code&gt;，因为&lt;code&gt;{2}&lt;/code&gt;，表示匹配其前面字符，实际&lt;code&gt;&amp;amp;nbsp;{2}&lt;/code&gt;等价与&lt;code&gt;&amp;amp;nbsp;;&lt;/code&gt;。&lt;/p&gt;
-
-&lt;p&gt;匹配IP：10.108.210.111&lt;/p&gt;
-
-&lt;p&gt;正则表达式：&lt;code&gt;\d{1,3}\. \d{1,3}\. \d{1,3}\. \d{1,3}\ &lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;可以替换为： &lt;code&gt;(\d{1,3}\.){3}\d{1,3}\ &lt;/code&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;section-11&quot;&gt;高级用法&lt;/h2&gt;
-
-&lt;h3 id=&quot;section-12&quot;&gt;子表达式&lt;/h3&gt;
-
-&lt;p&gt;前文提到过，在这儿单独拿出来说，是因为下文要用到。&lt;em&gt;（尼玛，下文难道不会用到前文其他内容么？凭什么单说&lt;code&gt;子表达式&lt;/code&gt;啊；因为，实在是怕你忘了，其他内容你即使忘了，也容易自己查找）&lt;/em&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;section-13&quot;&gt;引用回溯&lt;/h3&gt;
-
-&lt;p&gt;本质：前后匹配一致；&lt;/p&gt;
-
-&lt;p&gt;技术上实质：后半部分引用前半部分匹配到的子表达式。&lt;/p&gt;
-
-&lt;p&gt;举例：&lt;/p&gt;
-
-&lt;p&gt;匹配如下文档中重复输入的单次：&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;This is a block of of text, several words here are are repeated, and and they should not be.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;正则表达式：&lt;code&gt;[ ]+(\w+)[ ]+\1&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;\1&lt;/code&gt;表示&lt;code&gt;(\w+)&lt;/code&gt;中匹配到的内容。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;：回溯引用中&lt;code&gt;\1&lt;/code&gt;,&lt;code&gt;\2&lt;/code&gt;只能一用子表达式（即用&lt;code&gt;()&lt;/code&gt;括起来的部分），&lt;code&gt;\0&lt;/code&gt;代表整个正则表达式匹配的结果。&lt;/p&gt;
-
-&lt;h3 id=&quot;section-14&quot;&gt;前后查找&lt;/h3&gt;
-
-&lt;p&gt;本质：匹配全部，返回局部；&lt;/p&gt;
-
-&lt;p&gt;技术上实质：将子表达式向前（后）匹配到字符串返回。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;向前查找： 正 向前查找&lt;code&gt;exp2(?=exp1)&lt;/code&gt;， 负 向前查找&lt;code&gt;(exp2(?!exp1))&lt;/code&gt;；&lt;/li&gt;
-  &lt;li&gt;向后查找： 正 向后查找&lt;code&gt;(?&amp;lt;=exp1)exp2&lt;/code&gt;， 负 向后查找&lt;code&gt;(?&amp;lt;!exp1)exp2&lt;/code&gt;；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;注：上式都是匹配&lt;code&gt;exp1&lt;/code&gt;，返回&lt;code&gt;exp2&lt;/code&gt;。&lt;/p&gt;
-
-&lt;p&gt;举例1：&lt;/p&gt;
-
-&lt;p&gt;匹配如下文本中的传输协议&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;http://www.baidu.com&lt;/p&gt;
-
-  &lt;p&gt;ftp://ftp.baidu.com&lt;/p&gt;
-
-  &lt;p&gt;https://mails.baidu.com&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;正则表达式：&lt;code&gt;.+(?=:)&lt;/code&gt;&lt;/p&gt;
-
-&lt;p&gt;举例2：&lt;/p&gt;
-
-&lt;p&gt;匹配如下文本中的金额&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;abc: $23.01&lt;/p&gt;
-
-  &lt;p&gt;hdc: $899.00&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;正则表达式：&lt;code&gt;(?&amp;lt;=\$)\d[\d.]*\d&lt;/code&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;section-15&quot;&gt;嵌入条件&lt;/h3&gt;
-
-&lt;p&gt;可以添加逻辑条件，类似if。&lt;/p&gt;
-
-&lt;p&gt;说几点：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;功能很强大；&lt;/li&gt;
-  &lt;li&gt;使用的不是很多；&lt;/li&gt;
-  &lt;li&gt;真要了解一下，参考《&lt;a href=&quot;http://book.douban.com/subject/2269648/&quot; title=&quot;《正则表达式必知必会》2007年12月，第1版&quot;&gt;正则表达式必知必会&lt;/a&gt;》&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;section-16&quot;&gt;元字符？&lt;/h3&gt;
-
-&lt;p&gt;啥？元字符？什么东东？小伙儿，不要激动。正则表达式为了描述匹配哪些位置的字符串，使用了&lt;code&gt;.&lt;/code&gt;,&lt;code&gt;\d&lt;/code&gt;,&lt;code&gt;\s&lt;/code&gt;,&lt;code&gt;\w&lt;/code&gt;,&lt;code&gt;\W&lt;/code&gt;,&lt;code&gt;^&lt;/code&gt;,&lt;code&gt;[]&lt;/code&gt;,&lt;code&gt;()&lt;/code&gt;,&lt;code&gt;|&lt;/code&gt;,&lt;code&gt;$&lt;/code&gt;，来描述正则表达式语言的语法，即，这些字符是表述&lt;code&gt;正则表达式语言&lt;/code&gt;语法规则的字符，成为这个语言的元字符。&lt;/p&gt;
-
-&lt;h2 id=&quot;section-17&quot;&gt;参考来源&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://book.douban.com/subject/2269648/&quot; title=&quot;《正则表达式必知必会》2007年12月，第1版&quot;&gt;正则表达式必知必会&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.regular-expressions.info/tutorial.html&quot;&gt;Regex Tutorial&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section-18&quot;&gt;休息一下&lt;/h2&gt;
-
-&lt;p&gt;你能读懂下面这张图片吗？&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/regular-expression/regex-example.png&quot; alt=&quot;regex-example&quot; /&gt;&lt;/p&gt;
 
 </content>
    </entry>

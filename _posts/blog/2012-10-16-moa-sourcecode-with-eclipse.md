@@ -7,20 +7,20 @@ description:	MOA:Massive Online Analysis,开源的数据流挖掘框架。
 ##概要
 本篇短文中，此目标包含两层意思：
 
-    1. 使用Eclipse快速查看java代码，特别是class之间的继承(extends)、实现(implements)等关系；
-    2. 针对MOA源码，有没有什么特别需要注意的地方？例如，快捷方式、项目文件的组织结构等。
+1. 使用Eclipse快速查看java代码，特别是class之间的继承(extends)、实现(implements)等关系；
+2. 针对MOA源码，有没有什么特别需要注意的地方？例如，快捷方式、项目文件的组织结构等。
 
 
 依照上面对于目标的定位，本篇将着重讨论如下几个要点：
 
-    1. java基本理论知识，针对类、继承、抽象类、接口、注解、反射的基本含义及作用进行说明；
-    2. Eclipse下的快捷键，特别是源代码查询，类间继承关系、接口的实现关系的快捷查看；
-    3. MOA基础知识：主要是MOA的目录结构、基本class、interface
+1. java基本理论知识，针对类、继承、抽象类、接口、注解、反射的基本含义及作用进行说明；
+2. Eclipse下的快捷键，特别是源代码查询，类间继承关系、接口的实现关系的快捷查看；
+3. MOA基础知识：主要是MOA的目录结构、基本class、interface
 
 此次考虑的`class`，主要是跟算法相分离的基本`class`，分为以下2类：
 
-    1. 负责数据存储功能的class，与此同时提供了对数据的基本操作方法：Instance、Stream等；
-    2. 规定算法实现接口的class，这些class一般是Interface或者 Abstract class。
+1. 负责数据存储功能的class，与此同时提供了对数据的基本操作方法：Instance、Stream等；
+2. 规定算法实现接口的class，这些class一般是Interface或者 Abstract class。
 
 
 ##示例准备
@@ -114,69 +114,6 @@ _说明_ ：程序运行时，通过反射获得某个类中的各种变量，�
 ###其他概念：内部类
 (doing...)
 
-##Eclipse的快捷操作
-
-源代码上查看方法位置、类间继承关系的快捷键（操作）。
-自己用得最上手的几个快捷键（操作）列举如下：
-
-__代码查看__ 方面的快捷操作：
-
-```
-//查找method、class出处（不如下面的方法常用）
-F3 
-//最直接的查找method、class出处的方法（比上面的方法更常用和有效）
-Ctrl + 鼠标点击（左击）
-//返回上一次鼠标位置	
-Alt + ←	   
-//与“Alt + ←”相反 
-Alt + →	    
-//根据名称匹配，查找当前工作区源代码文件
-Ctrl + Shift + r/R	
-//查找，哪个类继承了此类（不如下面方法常用）
-选中“class”，右键“reference”—“Hierarchy”	
-//查看类的继承关系（被谁继承），并且在Type Hierarch窗口中显示（比上面方法跟有效）
-F4	
-//显示当前类的继承关系
-选中“class”， 然后 ctrl + T	
-```
-
-__代码编辑__ 上的操作
-
-```
-//注释本行
-ctrl + /	
-//注释选中的多行
-ctrl + shift + /	
-//取消对于多行的注释
-ctrl + shift + \	
-//上下行代码之间互换位置
-alt + up/down	
-//复制本行代码，并粘贴在上行、或者下行
-ctrl + alt + up/down	
-//自动添加、去除import包
-ctrl + shift + O	
-//自动代码提示（很方便，极其常用）
-Alt + /	   
-//执行当前代码（只用一个main时，自动执行；当有多个main存在时，提示选择main） 
-ctrl + F11	 
-//显示快捷键窗口  
-ctrl + shift + L
-//关闭当前源代码窗口	
-ctrl + w	 
-//关闭所有打开的源代码窗口   
-ctrl + shift + w	
-```
-
-Eclipse中几个窗口的功能：
-
-```
-outline: 简要显示当前class中的attribute、method
-search: 选中“class”，右键“reference”—“Hierarchy”查找，哪个类继承了此类时，结果显示在此窗口中。
-console: 输出结果、出错、警告等信息
-problem: 编译前，警告、出错等信息的提示
-Type Hierarch: 显示当前类的继承关系（包括父类、子类）；注意此窗口中有几个按钮很重要。
-packet Explorer: 查看当前源代码的组织结构
-``` 
 
 ##MOA基本知识
 
