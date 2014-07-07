@@ -1,7 +1,7 @@
 ---
 layout: post
 title: maven使用入门
-description: 项目构建，一般包括java源文件编译、文件复制、打包等，手动很繁琐，需要借助其他工具
+description: 项目构建，包括java源文件编译、文件复制、打包等，手动很繁琐，需要借助其他工具
 category: tool
 ---
 
@@ -9,13 +9,22 @@ category: tool
 
 ##背景
 
-今天在GitHub上找了一个java语言编写的HDFS client，其使用Maven来进行工程的管理和构建；作为Maven工程导入eclipse，提示pom.xml相关错误近10条。
+今天在GitHub上找了一个java语言编写的HDFS client，其使用Maven来进行工程的管理和构建；作为Maven工程导入Eclipse，提示pom.xml相关错误近10条。
 
 好吧，pom.xml是Maven的配置文件，看来Maven逃脱不了关系了。（之前，多次接触/使用Maven，不过都没有整理资料，导致每次使用都需要重新学习，如此反复，浪费时间，引以为戒，故有此博客）。
 
 备注：准备购买书籍，《Maven实战》
 
-要学东西，需要先找些比较可靠严谨的书籍，大概搜索了一下，[《Maven实战》](http://www.juvenxu.com/mvn-in-action/)这本书的评价较高，那就他了。一两天内，也无法拿到纸质版的书籍，索性在InfoQ上找了一个[《Maven实战（迷你版）》](http://www.infoq.com/cn/minibooks/maven-in-action)。 
+要学东西，需要先找些比较可靠严谨的书籍，大概搜索了一下，[《Maven实战》](http://www.juvenxu.com/mvn-in-action/)这本书的评价较高，那就他了。 一两天内，也无法拿到纸质版的书籍，索性在InfoQ上找了一个[《Maven实战（迷你版）》](http://www.infoq.com/cn/minibooks/maven-in-action)。 
+
+###Maven是什么？能做什么？
+
+在开始正式介绍之前，还总结一下Maven到底能做什么吧，所谓学以致用，还是希望能够在今后的开发中把Maven用起来的。
+
+Maven能做什么？
+
+
+
 
 ##Maven的安装与配置
 
@@ -48,7 +57,7 @@ Linux下，使用符号链接文件，来作为软件升级方案：
 
 前文简要说明了Maven的安装与升级步骤，现在我们简要分析一下Maven的安装文件。
 
-####M2_HOME
+####安装目录：M2_HOME
 
 前面的讲解中，我们都是将环境变量M2_HOME指向Maven的安装目录，本文之后所有使用M2_HOME的地方都代表了该安装目录，让我们看一下该目录的安装结构和内容：
 
@@ -69,15 +78,85 @@ Linux下，使用符号链接文件，来作为软件升级方案：
 	|	|--... ...
 	|
 	|--LICENSE
+	|--NOTICE
 	|--README.txt
 
 **bin**：该目录包含了mvn运行的脚本，用来配置java命令，准备好classpath和相关的java命令参数，然后执行java命令。其中包含了mvn和mvnDebug两类脚本，打开来查看，就会看到mvnDebug只是比mvn多一条MAVEN_DEBUG_OPTS配置，作用就是在运行Maven时开启debug，方便调试Maven自身。此外，该目录还包含m2.conf文件，这是classworlds的配置文件，如果有必要，下文会对其进行介绍。
 
-**boot**：以Maven 3.2.2为例，其中只包含了一个jar包plexus-classworlds-2.5.1.jar。这是一个类加载器框架，相对于默认的java类加载器。
+**boot**：以Maven 3.2.2为例，其中只包含了一个jar包plexus-classworlds-2.5.1.jar。这是一个类加载器框架，相对于默认的java类加载器，它提供了丰富的语法以方便配置，Maven使用该框架加载自己的类库。更多关于classworlds的信息请参考[http://classworlds.codehaus.org](http://classworlds.codehaus.org)。 对于普通的Maven用户，不必关心这一文件。
+
+**conf**：该目录包含了一个非常重要的配置文件settings.xml，直接修改此文件，能够在机器上全局定制Maven的行文。一般情况下，我们更偏向于复制该文件到 `~/.m2/` 目录下（此处 `~` 代表用户目录），然后修改该配置文件，在用户范围内定制Maven行为。
+
+**lib**：该目录包含了Maven运行所需的各类java类库，Maven本身是分模块开发的，因此用户能够看到诸如：maven-compact-3.2.2.jar、maven-core-3.2.2.jar、maven-model-3.2.2.jar等文件，此外这里含包含了一些Maven用到的第三方依赖，例如：guava-14.0.1.jar、commons-cli-1.2.jar等。（对于Maven2来说，该目录只包含一个如maven-2.2.1-uber.jar的文件，它是由原本相互独立的jar文件的Maven模块以及依赖的第三方类库拆解后，重新合并而成的）。可以说，这个目录才是真正的Maven。
+
+其他几个文件的简介：
+
+* LICENSE：记录了Maven使用的软件许可证，Apache License Version 2.0。
+* NOTICE：记录了Maven的发行机构。
+* README.txt：包含了Maven的简要介绍、安装步骤以及参考资料的链接。
+
+####本地仓库：~/.m2目录
+
+安装完Maven之后，运行命令`mvn help:system` ，该命令打印出所有的Java系统属性和环境变量，这些信息对我们日常的编程工作很有帮助。这条命令执行之后，可以看到Maven会下载maven-help-plugin，包括pom文件和jar文件，这些文件都被存储在本地仓库中。
+
+打开当前登录用户的主目录（即，用户目录），下文使用`~` 来表示用户目录。在用户目录下，可以看到 `.m2` 目录。默认情况下，该文件夹下放置了Maven本地仓库：`.m2/repository` 。所有的Maven构建（artifact）都被存储在本仓库中，以方便重用。我们可以在`~/.m2/repository/org/apache/maven/plugins/maven-help-plugins/` 目录下，找到刚才下载的pom文件和jar文件（两文件缺一不可）。Maven根据几套规则来确定任何一个构建（artifact）在仓库中的位置。特别说明：由于Maven仓库是通过简单文件系统透明地展示给Maven用户的，有时候可以绕过Maven直接查看或修改仓库文件，在遇到疑难问题时，这往往十分有用。
+
+
+###配置HTTP代理
+
+有时候公司处于安全考虑，要求通过安全认证的代理访问因特网。这就要求设置Maven通过HTTP代理方式，来访问外网的仓库，以下载所需的资源。
+
+确认当前代理可用，然后编辑 `~\.m2\settings.xml` 文件（如果没有这一文件，就将`$M2_HOME\conf\settings.xml` 复制过来）。添加代理配置如下：
+
+	<proxies>
+		<!-- proxy
+		 | Specification for one proxy, to be used in connecting to the network.
+		 |-->
+		<proxy>
+		  <id>optional</id>
+		  <active>true</active>
+		  <protocol>http</protocol>
+		  <!-- 
+		  <username>proxyuser</username>
+		  <password>proxypass</password>
+		  -->
+		  <host>proxy.host.net</host>
+		  <port>80</port>
+		  <nonProxyHosts>local.net|some.host.com</nonProxyHosts>
+		</proxy>
+	</proxies>
+
+上述代理的配置方式十分简单，porxies下可以配置多个proxy，如果声明了多个proxy元素，默认第一个proxy被激活，否则active值为true表示被激活。当代理服务需要认证时，需要配置username和password。nonProxyHosts元素用于指定哪些主机名不需要代理，可以使用 `|` 来分隔多个主机名。此外，该配置也支持通配符，例如，*.google.com表示所有以google.com结尾的域名访问都不通过代理。
+
+###安装Eclipse的Maven插件
+
+对于一个稍微大一点的项目来说，没有IDE是不可想象的，还好很多IDE都有Maven的插件。
+
+Eclipse平台下，插件名称：m2eclipse，我下载的Eclispe版本中，默认已经安装了此插件，因此，本文不暂讨论此问题。
+
+###Maven安装最佳实践
+
+本节介绍一些，Maven安装过程中不是必须的，但却比较使用的建议。
+
+####配置用户范围的settings.xml
+
+Maven用户可以选择配置 `$M2_HOME/settings.xml` 或者 `~/.m2/settings.xml` 。前者是全局范围的配置，整台机器上的所有用户都会受这一配置的影响，而后者是用户范围的，只有当前用户会收到该配置的影响。
+
+推荐使用用户范围的配置，避免影响其他用户的配置，另一方面，也便于Maven升级：直接修改conf 目录下的settings.xml文件，这样每次升级时，都需要复制该文件，而如果使用.m2/settings.xml，则升级时，不需要触动settings.xml文件。
+
+####不使用IDE内嵌的Maven
+
+无论Eclipse还是NetBeans，当我们集成Maven时，都会安装一个内嵌的Maven：一方面，这个Maven通常比较新，但不一定很稳定；另一方面，通常我们还需要使用Maven的命令行方式，如果两个Maven版本不同的话，可能造成项目构建过程不一致，这也是我们不希望看到的。因此，建议单独下载安装一个Maven，并将恰配置到IDE中。
+
+Eclipse下，配置Maven：`Windows`--`Preferences`--`Maven`--`Installations`。
+
+
 
 ###常见错误
 
-1. 创建/导入 Maven Project
+这一节，记录一些可能会遇到的问题，以及解决办法。
+
+####创建/导入 Maven Project
 
 错误详情：
 
@@ -93,8 +172,18 @@ An internal error occurred during: "Updating Maven Project". Lorg/codehaus/plexu
 
 重新更新`Maven Project...`（默认快捷键：`Alt + F5`）。
 
+参考：[stackoverflow](http://stackoverflow.com/questions/14491298/an-internal-error-occurred-during-updating-maven-dependencies)
+
+####Eclipse环境下，Maven报错找不到某些jar包
 
 
+如果命令行方式下，使用`mvn`的命令编译没有问题，而使用Eclipse时，`mvn install`等命令出现问题，则,解决办法：在pom.xml中指定project,build,plugins内添加plugin，设置成与命令行条件下`mvn`调用的plugin保持一致。[参考1](http://blog.csdn.net/imlmy/article/details/8268293)、[参考2](http://blog.csdn.net/huang86411/article/details/17548481)，当然还有另一种办法：[手动下载jar和pom](http://central.maven.org/maven2/org/apache/maven/plugins/).
+
+疑问：在POM中 `<project> <dependencies>` 下添加 `<dependency>`元素 和 `<project> <build> <plugins>` 下添加 `<plugin>` 元素，有差异吗？有什么差异？备注：当前调试结果，可得有差异。
+
+如果当前使用了代理等方式导致网络连接局部受限，造成命令行方式 `mvn`能够正常下载依赖的jar包，但在Eclipse环境下，无法下载所需的项目的依赖包，可以在命令行方式下，先进行下载，然后，在Eclipse下进行更新、运行即可。
+
+思考：Maven已经在settings.xml中配置了代理，那么，在Eclipse中开发调试Maven工程时，需要再配置Eclipse的代理吗？
 
 
 ##入门实例
@@ -242,7 +331,7 @@ Maven项目的核心是：pom.xml文件。POM:(Project Object Model，项目对�
 		}
 	}
 
-（**注意**：eclipse集成开发环境下，在src/main/java/以及src/test/java/目录下编写java文件时，如何使用代码提示，特别是，很多jar的依赖都在pom.xml中配置的，当前工程暂时看不到jar包，import jar包都会提示出错。）
+（**注意**：Eclipse集成开发环境下，在src/main/java/以及src/test/java/目录下编写java文件时，如何使用代码提示，特别是，很多jar的依赖都在pom.xml中配置的，当前工程暂时看不到jar包，import jar包都会提示出错。）
 	
 典型的单元测试，包含3个步骤：
 
@@ -431,7 +520,7 @@ Hello World项目中有一些Maven的约定：
 
 	mvn archetype:generate
 
-（如果是Maven2，请参考：[《Maven实战（迷你版）》]）
+（如果是Maven2，请参考：[《Maven实战（迷你版）》][《Maven实战（迷你版）》]）
 
 实际上，我们运行的是maven-archetype-plugin插件，其输入格式是：groupId:artifactId:version:goal，注意冒号的分隔。紧接着，我们会看到很长的输出，有很多可用的archetype供我们选择，包括注明的Appfuse项目、JPA项目的archetype等等。每一个archetype前面都会对应一个编号，同时命令行会提示一个默认的编号，对应archetype为maven-archetype-quickstart，直接回车选择该archetype，紧接着Maven会提示我们输入要创建的项目的groupId,artifactId,version以及包名（package，默认与groupId和artifactId保持对应关系），具体如下：
 
@@ -462,24 +551,12 @@ Hello World项目中有一些Maven的约定：
 
 运行完毕之后，在当前目录下会生成一个hello-world-archetype目录，其下是一个完整的项目骨架。
 
-**特别说明**：如果你有很多项目拥有类似的项目骨架（项目结构和配置文件），你可以一劳永逸的开发自己的archetype，然后在项目中使用自定义的archetype来快速生成项目骨架。（具体请参考：[《Maven实战（迷你版）》]）
-
-
-###m2eclipse简单使用
-
-前面介绍这么多，都没有涉及IDE，对于一个稍微大一点的项目来说，没有IDE是不可想象的，本文我们先介绍m2eclipse的基本使用。
-
-如果命令行方式下，使用`mvn`的命令编译没有问题，而使用eclipse时，`mvn install`等命令出现问题，则,解决办法：在pom.xml中指定project,build,plugins内添加plugin，设置成与命令行条件下`mvn`调用的plugin保持一致。[参考1](http://blog.csdn.net/imlmy/article/details/8268293)、[参考2](http://blog.csdn.net/huang86411/article/details/17548481)，当然还有另一种办法：[手动下载jar和pom](http://central.maven.org/maven2/org/apache/maven/plugins/).
-
-校正：真正应该参考：[stackoverflow](http://stackoverflow.com/questions/14491298/an-internal-error-occurred-during-updating-maven-dependencies)
-
-如果当前使用了代理等方式导致网络连接局部受限，造成命令行方式`mvn`能够正常下载依赖的jar包，但在eclipse环境下，无法下载所需的项目的依赖包，可以在命令行方式下，先进行下载，然后，在eclipse下进行更新、运行即可。
+**特别说明**：如果你有很多项目拥有类似的项目骨架（项目结构和配置文件），你可以一劳永逸的开发自己的archetype，然后在项目中使用自定义的archetype来快速生成项目骨架。（具体请参考：[《Maven实战（迷你版）》][《Maven实战（迷你版）》]）
 
 
 
 
-
-[《Maven实战（迷你版）》]:	
+[《Maven实战（迷你版）》]:	/download/maven/Maven+in+action.pdf
 
 
 
