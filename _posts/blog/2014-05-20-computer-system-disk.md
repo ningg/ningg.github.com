@@ -56,7 +56,7 @@ category: computer system
 
 补充说明：
 
-1. 现在有的磁盘的`扇区`大小为 4096 bytes;
+1. 2009年底，磁盘制造商逐渐推广`扇区`大小为 4096 bytes;
 2. 通常，每个`磁道`上`扇区`个数相同，则，外圈的磁道上，扇区分布稀疏。为提升盘片的利用率，产生了`多区记录技术`(multiple zone recording)：相邻的几个磁柱被分割为一个记录区（recording zone），一个记录区中，每个磁柱的每个磁道拥有相同数量的扇区，扇区数由记录区中最里侧的磁道来决定。
 
 ###接口
@@ -128,9 +128,25 @@ category: computer system
 2. 分区：
 3. 高级格式化：又称，高阶格式化，
 
-###
+###逻辑区块Block
+
+逻辑区块（Block），这个概念很重要，需要单独拎出来说一下。
+
+数据总是要存储在磁盘上的，磁盘的最小物理单元为`扇区`（Sector），通常一个扇区 512 Bytes，磁盘通过磁头读取扇区内的信息，对于一个 10M Bytes的文件，磁头要进行20480次读取（I/O）。
+
+为了克服上述文件读取效率问题，逻辑区块（Block）这一概念就产生了！逻辑区块，是在磁盘格式化为某一种文件系统（File System）时，所指定的`最小存储单元`。这个最小存储单元，是架构在`扇区`之上的（因为`扇区`是磁盘的最小物理存储单元），由多个连续的Sector构成；Block的大小一般为Sector的2的n次方倍。此时，磁头一次读取一个Block，假设格式化时，指定Block为4KB（即由8个512Bytes的Sector组成），那么同样10MB大小的文件，读取时，磁头的读取次数降至2560次，文件的读取效率大大提升了。
+通常Block越大，文件读取效率越高。
+
+Block是不是越大越好？不是，因为一个Block最多仅能容纳一个文件；举例来说：假设Block为4KB，而文件只有100B，这个文件仍然要占用1个Block的存储空间。因此，在进行Block大小规划的时候，需要考虑如下两个方面：
+
+* 文件的读写效率；
+* 文件大小可能造成的磁盘空间浪费；
 
 ###磁盘分区
+
+我是一个保守的人，做事的原则是能不改变就不要改变（墨守成规？嗯，是这样），想问一下，磁盘分区出现之前没有磁盘分区，后来为什么会出现磁盘分区（partition）？
+
+你是什么样的人，我管不着，不过上面是个好问题。
 
 ###磁盘格式化
 
@@ -143,7 +159,8 @@ category: computer system
 
 1. 深入理解计算机系统
 2. 鸟哥私房菜（基础篇）第三版
-3. Disk formatting WIKI[http://en.wikipedia.org/wiki/Disk_formatting](http://en.wikipedia.org/wiki/Disk_formatting)
+3. Disk formatting wiki: [http://en.wikipedia.org/wiki/Disk_formatting](http://en.wikipedia.org/wiki/Disk_formatting)
+4. ID：南非蚂蚁的[介绍](http://linux.chinaunix.net/techdoc/beginner/2009/07/15/1124345.shtml)
 
 
 [NingG]:    http://ningg.github.com  "NingG"
