@@ -43,7 +43,7 @@ Pig知识的学习\介绍，大部分人会按照如下思路开展：
 	Hlong G.	22	3.6
 	Chang W.	21	3.6
 
-注：上述文件中，姓名、年龄、GPA之间都以TAB键分隔；
+注：上述文件中，3列分别表示：姓名、年龄、GPA，他们之间都以TAB键分隔；
 
 目标：求20岁以下和20岁以上的学生的人数以及gpa平均值
 
@@ -64,6 +64,8 @@ Pig知识的学习\介绍，大部分人会按照如下思路开展：
 	}
 	dump result;
 
+__备注__：可以将上面的脚本写在文件`student_avg_gpa.pig`内，在`grunt`交互场景下使用命令：`run <pigScript>` 来执行脚本。
+	
 看到结果了吗？
 
 `(5,3.659999942779541,3,3.699999968210856,2,3.5999999046325684)`
@@ -80,7 +82,7 @@ Pig知识的学习\介绍，大部分人会按照如下思路开展：
 
 	grunt> studentInfos = load ‘student’ as (name: chararray, age:int, gpa:float);
 
-其中，`load`为加载数据的关键字，’student’表示数据文件位置，`as` 关键字为前面数据文件指定field别名和field类型。
+其中，`load`为加载数据的关键字，`student`表示数据文件位置，`as` 关键字为前面数据文件指定field别名和field类型。
 
 可以使用如下命令，来查看一个`studentInfos`的数据结构：
 
@@ -100,20 +102,21 @@ Pig知识的学习\介绍，大部分人会按照如下思路开展：
 
 我们来解释一下：
 
+	# describe studentInfos 命令输出如下：
 	studentInfos: {name: chararray,age: int,gpa: float}
 
-表示`studentInfos`的结构：
+表示显示`studentInfos`的结构：
 
-1.	`studentInfos`是一个`relation`，因为`studentInfos:{}`指向`{}`花括号；
-2.	`studentInfos`内，`tuple`的结构为：`(name: chararray,age: int,gpa: float)`，即，包含3个字段，依次为`name`、`age`、`gpa`，名字后`:`之后为对应的类型；
+1.	`studentInfos`是一个`relation`，因为`studentInfos:{}`在冒号后指向了花括号`{}`，这是一个`relation`的标识；
+2.	`studentInfos`内，`tuple`的结构为：`(name: chararray,age: int,gpa: float)`，即，包含3个字段，依次为`name`、`age`、`gpa`，名字后`:`之后字段对应的类型；
 
 上面提到的`relation`、`tuple`是什么？从哪冒出来的？客官莫要着急，`relation`、`tuple`都是`Pig`内部的几个概念，且听我慢慢道来。
 
 Pig定义了几个基本概念，用于描述数据结构：
 
-1.	`field`，字段，某一位置的数据，即，(Jun L.,18,3.7)中包含了3个字段；类似RDBMS中Table中一行数据的一个字段；
-2.	`tuple`，元组，是field的有序组合，使用`()`来标识，即，`(Jun L.,18,3.7)`表示一个tuple；类似RDBMS中Table中一行数据；
-3.	`bag`，包，是tuple的无序组合，使用”{}”来标识，即，{(Jun L.,18,3.7),(Hhui H.,18,3.8)}表示包含2个`tuple`的一个`bag`；类似RDBMS中的一个Table；
+1.	`field`，字段，某一位置的数据，即，`(Jun L.,18,3.7)`中包含了3个字段；类似RDBMS中Table中一行数据的一个字段；
+2.	`tuple`，元组，是`field`的有序组合，使用`()`来标识，即，`(Jun L.,18,3.7)`表示一个`tuple`；类似RDBMS中Table中一行数据；
+3.	`bag`，包，是`tuple`的无序组合，使用`{}`来标识，即，`{(Jun L.,18,3.7),(Hhui H.,18,3.8)}` 表示包含2个`tuple`的一个`bag`；类似RDBMS中的一个Table；
 4.	`relation`，关系，`outer bag`，在此，暂时将`relation`与`bag`等价看待；
 
 __补充__：`field`可以为任何类型，即，`tuple`、`bag`都可以作为`field`，包含在`tuple`中。
@@ -172,11 +175,11 @@ __补充__：`group`操作时，会生成一个`field`，命名为`group`，可�
 		COUNT(student_younger) as youngerNum, AVG(student_younger.gpa) as youngerAvgGPA, 
 		COUNT(student_older) as olderNum, AVG(student_older.gpa) as olderAvgGPA;
 
-上面这个`generate ..`是生成数据的命令，`COUNT`、`AVG`都是内部提供的聚合函数，如果只调用如下命令：
+上面这个`generate ..`是生成数据的命令，`COUNT`、`AVG`都是内部提供的聚合函数，看其中的一个命令：
 
 	generate COUNT(studentInfos) as totalNum, AVG(studentInfos.gpa) as avgGPA;
 
-表示将`studentInfos`中包含的学生个数，以及平均`gpa`组合成一个`tuple`，赋值个`result`;`as..` 为这些`field`指定名字。
+表示将`studentInfos`中包含的学生个数，以及所有学生的`gpa`平均值，组合成一个`tuple`，赋值给`result`；`as..` 关键字为这些`field`指定名字。
 
 	grunt> describe result;
 	result: {totalNum: long,avgGPA: double,youngerNum: long,youngerAvgGPA: double,olderNum: long,olderAvgGPA: double}
@@ -201,7 +204,7 @@ __建议__：把上面的例子，再输入执行2遍，多使用`describe`、`d
 
 注：上述文件中，姓名、年龄、GPA之间都以TAB键分隔；
 
-__目标__：20岁以下学生的人数以及gpa平均值，以及这些学生的名字（只要求算出这些，其他东西不要求）。
+__目标__：20岁以下学生的人数以及gpa平均值，以及这些学生的名字（要求只算出这些，其他东西不要求）。
 
 这就成了上面问题的一部分，可以使用如下pig脚本：
 

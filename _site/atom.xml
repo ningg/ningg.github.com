@@ -4,13 +4,68 @@
    <title>NingG.github.com</title>
    <link href="http://ningg.github.com/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://ningg.github.com" rel="alternate" type="text/html" />
-   <updated>2014-07-06T20:47:33+08:00</updated>
+   <updated>2014-07-21T18:29:14+08:00</updated>
    <id>http://ningg.github.com</id>
    <author>
      <name></name>
      <email></email>
    </author>
 
+   
+   <entry>
+     <title>HDFS:Hadoop Distributed File System简介</title>
+     <link href="http://ningg.github.com/hdfs-intro"/>
+     <updated>2014-07-14T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/hdfs-intro</id>
+     <content type="html">&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
+
+&lt;p&gt;最近要做一件事：调研远端节点向HDFS上传/下载文件的方法，并确定一个高效率的方案，这个最终方案初步确定了WebHDFS REST API方式，不过一些HDFS内部的实现细节/原理，自己很想一窥究竟，OK，既然有这份心情，那就走起，趁热打铁、一鼓作气。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;文件系统&lt;/h2&gt;
+
+&lt;p&gt;为了实现多个应用可以并发的向存储介质上写入信息，出现了文件（File）这一概念，即把信息以一种单元（File，文件）的形式存储在介质上。文件是一个命名的、存储在设备上的信息的线性字节流。对文件的管理，包括文件的逻辑组成结构、命名、操作（读、写、删除）、权限管理、具体实现（如何组织存储区域），称为&lt;code&gt;文件系统&lt;/code&gt;（FileSystem，FS）。&lt;/p&gt;
+
+&lt;p&gt;总结一下，文件系统需要解决文件相关的几个问题：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;怎么找到文件？（文件的命名）&lt;/li&gt;
+  &lt;li&gt;可以对文件进行哪些操作？（读、写、删除、复制等）&lt;/li&gt;
+  &lt;li&gt;哪些人可以对这个文件进行操作？（权限管理）&lt;/li&gt;
+  &lt;li&gt;为保证上面的功能，并且，兼顾文件读写等操作的效率，逻辑上，一个文件可以划分为几个部分？（逻辑组成结构）&lt;/li&gt;
+  &lt;li&gt;说一千道一万，上面这些东西，如何在物理磁盘上实现？（具体实现）&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;无结构的文件 vs. 结构化的文件&lt;/p&gt;
+
+&lt;p&gt;无结构的文件：大部分文件系统，不关系文件里保存的数据，把文件内容作为无结构的字节序列保存。也有一些文件系统支持结构化的文件，以记录为单位组织信息，免去文件系统使用者将“原始的”字节流转换成记录流的麻烦。&lt;/p&gt;
+
+&lt;p&gt;一个文件，通常包含：文件名和文件数据，还包括，创建日期、文件长度、引用计数等额外信息，通常将这些额外项，称为文件属性，也称文件元数据。&lt;/p&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;目录与目录树&lt;/h3&gt;
+
+&lt;p&gt;如何找到一个文件呢？为了能够高效地找到文件，引入了“目录”这一概念。“目录”，又称“文件夹”，就是一个虚拟容器，其内部可能包含着一组文件和其他的目录（子目录）。目录和子目录，就形成了一个层次结构，称为目录树。&lt;/p&gt;
+
+&lt;p&gt;为什么要有目录？没有行不行？没有目录可以，但是文件命名就比较麻烦，因为没有目录，所有的文件都不能同名，哪怕是简单的 &lt;code&gt;index.html&lt;/code&gt;、&lt;code&gt;default.css&lt;/code&gt;等文件也都只能有一个，所以说，本质上，目录实现了文件命名空间的分割，不同命名空间内，可以有同名文件存在。&lt;/p&gt;
+
+&lt;p&gt;不同物理磁盘上，格式化得到的多个文件系统，可以相互挂载（嫁接），例如两个文件系统 FS1 和 FS2 ，将 FS2 挂载到 FS1 的 &lt;code&gt;/home&lt;/code&gt; 目录下，则，可以通过 &lt;code&gt;/home/user1&lt;/code&gt;
+访问原来 FS2 上的 &lt;code&gt;/user1&lt;/code&gt; 目录。有一点需要说明的是：原来 FS1 目录 &lt;code&gt;/home&lt;/code&gt; 下的所有内容，都被隐藏而无法访问了，但是将 FS2 从 FS1 上卸载之后，仍能正常访问。&lt;/p&gt;
+
+&lt;h3 id=&quot;section-3&quot;&gt;文件系统的实现&lt;/h3&gt;
+
+&lt;h2 id=&quot;section-4&quot;&gt;常见问题&lt;/h2&gt;
+
+&lt;h3 id=&quot;section-5&quot;&gt;小文件个数多&lt;/h3&gt;
+
+&lt;p&gt;HDFS支持超大文件（几百MB、几百GB、甚至TB=1024GB、PB=1024TB的文件），是通过将数据分布在数据节点（DataNode），并且将文件的元数据（目录树结构、文件-数据块索引等信息）存放在名字节点（NameNode）上，来实现的。名字节点（NameNode）的内存大小，决定了HDFS可以保存的文件数量；虽然现在内存数量比较大，但大量的小文件仍然严重影响名字节点（NameNode）的性能。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-6&quot;&gt;参考来源&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;《Hadoop技术内幕：深入解析Hadoop Common和HDFS架构的设计和实现原理》&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+   </entry>
    
    <entry>
      <title>maven使用入门</title>
@@ -1324,17 +1379,33 @@ made persistent across restarts.&lt;/li&gt;
 
 &lt;p&gt;下面开始学习Pig。&lt;/p&gt;
 
-&lt;p&gt;（1）关系（relation）、包（bag）、元组（tuple）、字段（field）、数据（data）的关系&lt;/p&gt;
+&lt;h2 id=&quot;pig&quot;&gt;Pig学习要点&lt;/h2&gt;
 
-&lt;p&gt;一个关系（relation）是一个包（bag），更具体地说，是一个外部的包（outer bag）。
-一个包（bag）是一个元组（tuple）的集合。在pig中表示数据时，用大括号{}括起来的东西表示一个包——无论是在教程中的实例演示，还是在pig交互模式下的输出，都遵循这样的约定，请牢记这一点，因为不理解的话就会对数据结构的掌握产生偏差。
-一个元组（tuple）是若干字段（field）的一个有序集（ordered set）。在pig中表示数据时，用小括号()括起来的东西表示一个元组。
-一个字段是一块数据（data）。
-“元组”这个词很抽象，你可以把它想像成关系型数据库表中的一行，它含有一个或多个字段，其中，每一个字段可以是任何数据类型，并且可以有或者没有数据。
-“关系”可以比喻成关系型数据库的一张表，而上面说了，“元组”可以比喻成数据表中的一行，那么这里有人要问了，在关系型数据库中，同一张表中的每一行都有固定的字段数，pig中的“关系”与“元组”之间，是否也是这样的情况呢？不是的。“关系”并不要求每一个“元组”都含有相同数量的字段，并且也不会要求各“元组”中在相同位置处的字段具有相同的数据类型（太随意了，是吧？）&lt;/p&gt;
+&lt;h3 id=&quot;section&quot;&gt;数据结构&lt;/h3&gt;
 
-&lt;p&gt;（2）一个 计算多维度组合下的平均值 的实际例子
-为了帮助大家理解pig的一个基本的数据处理流程，我造了一些简单的数据来举个例子——
+&lt;p&gt;数据结构，名字听起来好像很高大上，什么含义？其本质，是要表示数据是什么形式存储的，使用不同形式/结构存储的数据，在不同操作下的效率千差万别。&lt;/p&gt;
+
+&lt;p&gt;关系（relation）、包（bag）、元组（tuple）、字段（field）、数据（data）的关系&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;一个关系（relation）是一个包（bag），更具体地说，是一个外部的包（outer bag）。&lt;/li&gt;
+  &lt;li&gt;一个包（bag）是一个元组（tuple）的集合。在pig中表示数据时，用大括号{}括起来的东西表示一个包——无论是在教程中的实例演示，还是在pig交互模式下的输出，都遵循这样的约定，请牢记这一点，因为不理解的话就会对数据结构的掌握产生偏差。&lt;/li&gt;
+  &lt;li&gt;一个元组（tuple）是若干字段（field）的一个有序集合（ordered set）。在pig中表示数据时，用小括号()括起来的东西表示一个元组。&lt;/li&gt;
+  &lt;li&gt;一个字段（field）是一块数据（data）。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;针对上面几个概念，解释几点：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;“元组”这个词很抽象，你可以把它想像成关系型数据库表中的一行，它含有一个或多个字段，其中，每一个字段可以是任何数据类型，并且可以有或者没有数据。&lt;/li&gt;
+  &lt;li&gt;“关系”可以比喻成关系型数据库的一张表，而上面说了，“元组”可以比喻成数据表中的一行，那么这里有人要问了，在关系型数据库中，同一张表中的每一行都有固定的字段数，pig中的“关系”与“元组”之间，是否也是这样的情况呢？不是的。“关系”并不要求每一个“元组”都含有相同数量的字段，并且也不会要求各“元组”中在相同位置处的字段具有相同的数据类型（太随意了，是吧？）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;一个实例&lt;/h3&gt;
+
+&lt;p&gt;一个计算多维度组合下的平均值的实际例子&lt;/p&gt;
+
+&lt;p&gt;为了帮助大家理解pig的一个基本的数据处理流程，我造了一些简单的数据来举个例子——
 假设有数据文件：a.txt（各数值之间是以tab分隔的）：&lt;/p&gt;
 
 &lt;pre&gt;&lt;code&gt;[root@localhost pig]$ cat a.txt 
@@ -2715,197 +2786,6 @@ DUMP B;
 
 &lt;p&gt;那么，执行该Pig脚本之后，在Hadoop的Job Tracker中看到的“Name”就是“My-Job-Name”了。
 如果不设置，显示的name是类似于“Job6245768625829738970.jar”这样的东西，job多的时候完全没有标识度，建议一定要设置一个特殊的job name。&lt;/p&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>Pig解析中文文档</title>
-     <link href="http://ningg.github.com/pig-deal-with-chinese"/>
-     <updated>2014-05-09T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/pig-deal-with-chinese</id>
-     <content type="html">&lt;p&gt;&lt;code&gt;Pig&lt;/code&gt;处理文档时，&lt;code&gt;LOAD&lt;/code&gt;和&lt;code&gt;STORE&lt;/code&gt;默认数据是&lt;code&gt;UTF-8&lt;/code&gt;编码格式（参考来源？官方文档/源码）。因此，包含中文字符的数据文档，应以&lt;code&gt;UTF-8&lt;/code&gt;格式存储；相应的包含中文字符的pig脚本，也应以&lt;code&gt;UTF-8&lt;/code&gt;格式存储。&lt;/p&gt;
-
-&lt;p&gt;本文简介：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;中文文档如何转码，特别是&lt;code&gt;Linux&lt;/code&gt;下利用&lt;code&gt;iconv&lt;/code&gt;命令转码时的注意事项；&lt;/li&gt;
-  &lt;li&gt;使用&lt;code&gt;SecuryCRT&lt;/code&gt;/&lt;code&gt;putty&lt;/code&gt;客户端连接服务器时，中文文档显示乱码的解决办法；&lt;/li&gt;
-  &lt;li&gt;Pig脚本解析中文文档的步骤；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;utf-8&quot;&gt;将文档存储为UTF-8格式&lt;/h2&gt;
-
-&lt;p&gt;在&lt;code&gt;windows&lt;/code&gt;下，可以使用&lt;code&gt;notepad++&lt;/code&gt;来进行文档转码：
-&lt;code&gt;Encoding&lt;/code&gt;–&lt;code&gt;Convert to UTF-8 without BOM&lt;/code&gt;，则当前文档转换为&lt;code&gt;UTF-8&lt;/code&gt;编码方式。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/pig-deal-with-chinese/convert-utf8.png&quot; alt=&quot;convert-utf8&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;（思考：文档编码格式转换的原理？在linux下有没有类似的转换工具/命令？）&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;补充&lt;/strong&gt;：&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;Linux&lt;/code&gt;下使用&lt;code&gt;iconv&lt;/code&gt;可以进行编码格式转换，具体操作如下：&lt;/p&gt;
-
-&lt;h3 id=&quot;section&quot;&gt;查看文档编码方式：&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;file –i origin.txt
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/pig-deal-with-chinese/file-i.png&quot; alt=&quot;file-i&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;对文档转码：&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;// 下面命令中 origin.txt.utf8为输出文件。
-iconv –f ISO-8859-1 –t UTF-8 &amp;lt; origin.txt &amp;gt; origin.txt.utf8
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;strong&gt;特别说明&lt;/strong&gt;：&lt;/p&gt;
-
-&lt;p&gt;如果&lt;code&gt;iconv&lt;/code&gt;转码命令，出现&lt;code&gt;iconv: illegal input sequence at position 42&lt;/code&gt;错误信息，则可以使用如下命令进行转码：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;iconv –f gbk –t UTF-8 &amp;lt; origin.txt &amp;gt; origin.txt.gbk
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;（思考：上面的原因是否是&lt;code&gt;file&lt;/code&gt;命令查询结果不精确，查询文件的编码方式，&lt;code&gt;linux&lt;/code&gt;下还有其他的命令吗？）&lt;/p&gt;
-
-&lt;p&gt;（思考：不同的编码格式的差异？为什么有多种编码？对应的应用场景？）&lt;/p&gt;
-
-&lt;h3 id=&quot;iconv&quot;&gt;iconv转码出错[重要]&lt;/h3&gt;
-
-&lt;p&gt;当对&lt;code&gt;1G&lt;/code&gt;以上的大文件，进行转码时：如果按照如下命令进行转码：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;// 下面命令中 origin.txt.utf8为输出文件。
-iconv –f gbk –t UTF-8 &amp;lt; origin.txt &amp;gt; origin.txt.utf8
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;可能仍然会出错：&lt;code&gt;iconv: illegal input sequence at position 91401042&lt;/code&gt;，查看&lt;code&gt;origin.txt.utf8&lt;/code&gt;文件，其内中文已经正常显示，只是原始文件在某个位置出现问题，没能完成整个文档的转码。&lt;/p&gt;
-
-&lt;p&gt;原因排查：是否是原始文件中真的有字符无法转码？还是文件过大？&lt;/p&gt;
-
-&lt;p&gt;排查措施：使用&lt;code&gt;split&lt;/code&gt;、&lt;code&gt;head&lt;/code&gt;等命令对文件分割之后，在相应位置仍然出错；&lt;/p&gt;
-
-&lt;p&gt;原因确定：是原始文件有非法字符，&lt;code&gt;GBK&lt;/code&gt;中不存在的编码，&lt;code&gt;GBK&lt;/code&gt;自己无法识别，因此无法转码。&lt;/p&gt;
-
-&lt;p&gt;解决途径：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;删除有乱码的行？（使用wc –l 、 sed –i 等命令；） &lt;/li&gt;
-  &lt;li&gt;跳过有乱码的几个字符？&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;iconv&lt;/code&gt;有没有强制转换，忽略/跳过错误？（尼玛，恭喜你，猜对了，有这么个机制）&lt;/li&gt;
-  &lt;li&gt;使用 &lt;code&gt;man iconv&lt;/code&gt;查询不到，应该使用&lt;code&gt;iconv –help&lt;/code&gt;，查看命令的帮助。&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;最终命令：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;iconv –f gbk –t utf-8//IGNORE &amp;lt; input &amp;gt; output 
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;搞定。&lt;/p&gt;
-
-&lt;p&gt;参考来源：&lt;/p&gt;
-
-&lt;p&gt;[1]	http://www.aiezu.com/system/linux/linux_iconv_code.html
-[2] http://www.linuxquestions.org/questions/linux-newbie-8/usr-bin-iconv-illegal-input-sequence-at-position-905152/&lt;/p&gt;
-
-&lt;h2 id=&quot;linux&quot;&gt;将文档传到远端linux服务器&lt;/h2&gt;
-
-&lt;p&gt;注意：在传输过程中，应尽量保持文档的属性/编码方式保持不变。
-仅仅是将&lt;code&gt;windows&lt;/code&gt;下文档传递到远端linux服务器上，方法很多：&lt;code&gt;fileZilla&lt;/code&gt;、&lt;code&gt;WinSCP&lt;/code&gt;等，下面说一种不需要安装软件的方法（亲，不要想错了，需要下载软件的，只是软件很小，不需要安装）。
-下载&lt;code&gt;PSCP&lt;/code&gt;，文件300k，果真很小；现在工具有了，如何利用&lt;code&gt;PSCP&lt;/code&gt;来向远端&lt;code&gt;linux&lt;/code&gt;传送文件呢？操作如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;//-p : preserve file attributes.（传送过程中，保持文件属性不变）
-scp –p originalFile user@ip:/home/user/destFold
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;上面命令会将本地&lt;code&gt;originalFile&lt;/code&gt;文件，无失真传送到服务器&lt;code&gt;/home/user/destFold&lt;/code&gt;目录下。&lt;/p&gt;
-
-&lt;p&gt;在远端&lt;code&gt;linux&lt;/code&gt;服务器上，如何查看文档的具体编码方式呢？&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;file –i filename
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;可以使用上述命令来确认文件的编码方式。&lt;/p&gt;
-
-&lt;p&gt;现在按照&lt;code&gt;utf-8&lt;/code&gt;编码的文件，已经在服务器上了，那原材料就齐全了，开始处理吧。&lt;/p&gt;
-
-&lt;h2 id=&quot;section-2&quot;&gt;远端服务器上，中文显示乱码&lt;/h2&gt;
-
-&lt;p&gt;既然要操作远端&lt;code&gt;linux&lt;/code&gt;服务器，最好要建立持久的连接，常用的方式：&lt;code&gt;putty&lt;/code&gt;、&lt;code&gt;secureCRT&lt;/code&gt;。然而，查看服务器上的中文文档时，可能出现乱码。&lt;/p&gt;
-
-&lt;h3 id=&quot;section-3&quot;&gt;服务器的基本环境&lt;/h3&gt;
-
-&lt;p&gt;针对上述情况，需要先检查一下服务器上设置的语言环境。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;echo $LANG
-// 上述输出结果为：en_US.UTF-8
-
-更进一步，查看3个文件，看LANG具体如何配置的：
-cat /etc/sysconfig/i18n
-//上述输出结果为：LANG=”en_US.UTF-8”
-
-cat ~/.bash_profile
-//上述输出结果中，没有LANG的配置
-
-cat ~//.bashrc
-//上述输出结果中，没有LANG的配置
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;（思考：LANG的配置有什么用？LANG不就是个环境变量吗？）&lt;/p&gt;
-
-&lt;h3 id=&quot;putty&quot;&gt;Putty连接服务器&lt;/h3&gt;
-
-&lt;p&gt;设置方式：
-&lt;code&gt;Window&lt;/code&gt;–&lt;code&gt;Translation&lt;/code&gt;–&lt;code&gt;Character set translation&lt;/code&gt;–&lt;code&gt;Remote character set&lt;/code&gt;，选中“UTF-8”。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/pig-deal-with-chinese/putty-utf8.png&quot; alt=&quot;putty-utf8.png&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;Window&lt;/code&gt;–&lt;code&gt;Appearance&lt;/code&gt;–&lt;code&gt;Font settings&lt;/code&gt;–&lt;code&gt;Font used in terminal window&lt;/code&gt;，选中&lt;code&gt;Courier New&lt;/code&gt;（尝试其他字体也可以解决中文乱码）。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/pig-deal-with-chinese/putty-appearance.png&quot; alt=&quot;putty-appearance&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;securecrt&quot;&gt;SecureCRT连接服务器&lt;/h3&gt;
-
-&lt;p&gt;&lt;code&gt;选项&lt;/code&gt;–&lt;code&gt;会话选项&lt;/code&gt;–&lt;code&gt;终端&lt;/code&gt;–&lt;code&gt;外观&lt;/code&gt;–&lt;code&gt;字体&lt;/code&gt;，&lt;code&gt;字符编码&lt;/code&gt;选中&lt;code&gt;UTF-8&lt;/code&gt;；
-&lt;code&gt;标准字体&lt;/code&gt;选中&lt;code&gt;幼圆&lt;/code&gt;（宋体等其他也可以）&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/pig-deal-with-chinese/securecrt-appearance.png&quot; alt=&quot;securecrt-appearance&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/pig-deal-with-chinese/securecrt-font.png&quot; alt=&quot;securecrt-font&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;OK，到现在位置，使用&lt;code&gt;putty&lt;/code&gt;/&lt;code&gt;secureCRT&lt;/code&gt;连接远程服务器，再查看&lt;code&gt;UTF-8&lt;/code&gt;编码的中文文档时，就不会出现乱码了。下面测试一下效果：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;less filename
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/pig-deal-with-chinese/less.png&quot; alt=&quot;less.png&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;pig&quot;&gt;Pig脚本解析中文文档&lt;/h2&gt;
-
-&lt;p&gt;千呼万唤始出来、犹抱琵琶半遮面，使用pig来解析中文文档是本文的重点，却姗姗来迟。好的，先来回顾一下前面的工作：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;将pig脚本&lt;code&gt;select_rows.pig&lt;/code&gt;使用UTF-8格式编码、待分析的文档&lt;code&gt;sfzf.log&lt;/code&gt;也使用&lt;code&gt;UTF-8&lt;/code&gt;格式编码；&lt;/li&gt;
-  &lt;li&gt;将两个文件传送到linux服务器上，并且使用&lt;code&gt;file –i filename&lt;/code&gt; 命令查看，确保其都为&lt;code&gt;UTF-8&lt;/code&gt;的编码格式；&lt;/li&gt;
-  &lt;li&gt;设置&lt;code&gt;secureCRT&lt;/code&gt;或者&lt;code&gt;putty&lt;/code&gt;，保证其查阅中文文档时，无乱码；&lt;/li&gt;
-  &lt;li&gt;到这一步了，直接运行pig脚本&lt;code&gt;select_rows.pig&lt;/code&gt;就可以了~哈哈（对，pig解析中文文档，就这么简单）；&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Pig脚本&lt;code&gt;select_rows.pig&lt;/code&gt;内容如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;/* 查找输入文档中，包含关键字“时间”的行，并输出 */
-A = load &#39;$input&#39; as (col1:chararray);
-B = filter A by ($col1 matches &#39;.*时间.*&#39;);
-
-store B into &#39;$output&#39;;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;运行命令：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;pig –x local –param input=sfzf.log –param output=out4 select_rows.pig
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/pig-deal-with-chinese/result.png&quot; alt=&quot;result&quot; /&gt;&lt;/p&gt;
 
 </content>
    </entry>
