@@ -4,7 +4,7 @@
    <title>NingG.github.com</title>
    <link href="http://ningg.github.com/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://ningg.github.com" rel="alternate" type="text/html" />
-   <updated>2014-07-21T18:29:14+08:00</updated>
+   <updated>2014-07-24T00:07:27+08:00</updated>
    <id>http://ningg.github.com</id>
    <author>
      <name></name>
@@ -51,6 +51,8 @@
 访问原来 FS2 上的 &lt;code&gt;/user1&lt;/code&gt; 目录。有一点需要说明的是：原来 FS1 目录 &lt;code&gt;/home&lt;/code&gt; 下的所有内容，都被隐藏而无法访问了，但是将 FS2 从 FS1 上卸载之后，仍能正常访问。&lt;/p&gt;
 
 &lt;h3 id=&quot;section-3&quot;&gt;文件系统的实现&lt;/h3&gt;
+
+&lt;p&gt;文件，是逻辑上的概念，其实际上在物理磁盘上是如何存储的呢？&lt;/p&gt;
 
 &lt;h2 id=&quot;section-4&quot;&gt;常见问题&lt;/h2&gt;
 
@@ -977,7 +979,7 @@ made persistent across restarts.&lt;/li&gt;
 &lt;p&gt;补充说明：&lt;/p&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;现在有的磁盘的&lt;code&gt;扇区&lt;/code&gt;大小为 4096 bytes;&lt;/li&gt;
+  &lt;li&gt;2009年底，磁盘制造商逐渐推广&lt;code&gt;扇区&lt;/code&gt;大小为 4096 bytes;&lt;/li&gt;
   &lt;li&gt;通常，每个&lt;code&gt;磁道&lt;/code&gt;上&lt;code&gt;扇区&lt;/code&gt;个数相同，则，外圈的磁道上，扇区分布稀疏。为提升盘片的利用率，产生了&lt;code&gt;多区记录技术&lt;/code&gt;(multiple zone recording)：相邻的几个磁柱被分割为一个记录区（recording zone），一个记录区中，每个磁柱的每个磁道拥有相同数量的扇区，扇区数由记录区中最里侧的磁道来决定。&lt;/li&gt;
 &lt;/ol&gt;
 
@@ -1060,20 +1062,83 @@ made persistent across restarts.&lt;/li&gt;
   &lt;li&gt;高级格式化：又称，高阶格式化，&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2 id=&quot;section-11&quot;&gt;#&lt;/h2&gt;
+&lt;h3 id=&quot;block&quot;&gt;逻辑区块Block&lt;/h3&gt;
 
-&lt;h3 id=&quot;section-12&quot;&gt;磁盘分区&lt;/h3&gt;
+&lt;p&gt;逻辑区块（Block），这个概念很重要，需要单独拎出来说一下。&lt;/p&gt;
 
-&lt;h3 id=&quot;section-13&quot;&gt;磁盘格式化&lt;/h3&gt;
+&lt;p&gt;数据总是要存储在磁盘上的，磁盘的最小物理单元为&lt;code&gt;扇区&lt;/code&gt;（Sector），通常一个扇区 512 Bytes，磁盘通过磁头读取扇区内的信息，对于一个 10M Bytes的文件，磁头要进行20480次读取（I/O）。&lt;/p&gt;
 
-&lt;h2 id=&quot;section-14&quot;&gt;文件系统&lt;/h2&gt;
+&lt;p&gt;为了克服上述文件读取效率问题，逻辑区块（Block）这一概念就产生了！逻辑区块，是在磁盘格式化为某一种文件系统（File System）时，所指定的&lt;code&gt;最小存储单元&lt;/code&gt;。这个最小存储单元，是架构在&lt;code&gt;扇区&lt;/code&gt;之上的（因为&lt;code&gt;扇区&lt;/code&gt;是磁盘的最小物理存储单元），由多个连续的Sector构成；Block的大小一般为Sector的2的n次方倍。此时，磁头一次读取一个Block，假设格式化时，指定Block为4KB（即由8个512Bytes的Sector组成），那么同样10MB大小的文件，读取时，磁头的读取次数降至2560次，文件的读取效率大大提升了。
+通常Block越大，文件读取效率越高。&lt;/p&gt;
 
-&lt;h2 id=&quot;section-15&quot;&gt;参考资料&lt;/h2&gt;
+&lt;p&gt;小结一下，有几点：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;ol&gt;
+    &lt;li&gt;硬盘最小物理存储单元，扇区（Sector），通常 512 Bytes；&lt;/li&gt;
+    &lt;li&gt;数据最小逻辑存储单元，逻辑区块（Block），由 2 的 n 次方个连续的Sector组成；&lt;/li&gt;
+    &lt;li&gt;磁头一次读取一个Block；&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Block是不是越大越好？不是，因为一个Block最多仅能容纳一个文件；举例来说：假设Block为4KB，而文件只有100B，这个文件仍然要占用1个Block的存储空间。因此，在进行Block大小规划的时候，需要考虑如下两个方面：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;文件的读写效率；&lt;/li&gt;
+  &lt;li&gt;文件大小可能造成的磁盘空间浪费；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;section-11&quot;&gt;磁盘分区&lt;/h3&gt;
+
+&lt;p&gt;我是一个保守的人，做事的原则是能不改变就不要改变（墨守成规？嗯，是这样），想问一下，磁盘分区出现之前没有磁盘分区，后来为什么会出现磁盘分区（partition）？&lt;/p&gt;
+
+&lt;p&gt;你是什么样的人，我管不着，不过上面是个好问题。对磁盘进行分区，主要从两点考虑：&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;1.数据安全性&lt;/strong&gt;：将磁盘分区，不同分区之间不会相互影响，举例：分区A损坏了，其内部的文件将无法恢复，但这并不会影响分区B；最常见的情况时，重装系统时，只需要覆盖掉系统分区，不会影响其他分区上的文件。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;2.数据读写性能&lt;/strong&gt;
+：分区实质是按照磁柱进行分割的，即，一个分区有一个开始磁柱和一个终止磁柱，分区将数据集中在某些连续的磁柱区间内；举例：一次分区位于磁柱1~100，则当从该分区读取数据文件时，磁盘只会搜索1~100范围内的磁柱，由于数据集中了，有助于数据读取的速度和效率。&lt;/p&gt;
+
+&lt;p&gt;上面已经简单说明了磁盘分区的必要性，那具体是如何进行磁盘分区的呢？&lt;/p&gt;
+
+&lt;p&gt;一块磁盘分区（partition）的详情，以分区表（partition table）的形式存储在磁盘第一个扇区内。&lt;/p&gt;
+
+&lt;p&gt;补充一下：每块磁盘的第一个扇区都是最终要的扇区，其内存储了两个重要信息：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;MBR（Master Boot Record，主启动区）：指定当前区块中内容分布（什么意思？不明白），系统启动后会主动读取MBR，446 Bytes；&lt;/li&gt;
+  &lt;li&gt;分区表（Partation Table）：磁盘的分区详细信息，64 Bytes；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;分区表，有几点：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;ol&gt;
+    &lt;li&gt;64B的分区表，共4条分区记录；&lt;/li&gt;
+    &lt;li&gt;每条分区记录为 16B，对应一个起始磁柱和一个截止磁柱；&lt;/li&gt;
+    &lt;li&gt;每条分区记录，只能为主分区（Primary）或扩展分区（Extended）；&lt;/li&gt;
+    &lt;li&gt;扩展分区，最多有 1 个；&lt;/li&gt;
+    &lt;li&gt;扩展分区，可进一步划分为逻辑分区；&lt;/li&gt;
+    &lt;li&gt;逻辑分区数量有限制，IDE硬盘（编号：5~63，共计59个）、SATA硬盘（编号：5~15，共计11个）；&lt;/li&gt;
+    &lt;li&gt;扩展分区不能被格式化，只有主分区和逻辑分区可以；&lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/computer-system-disk/disk-partition.png&quot; alt=&quot;disk-partition&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;思考：一个操作系统下，有多块磁盘，如何分区？每块磁盘最多划分为4个分区？一块磁盘最少划分为一个分区？多块磁盘能否构成一个分区？&lt;/p&gt;
+
+&lt;h3 id=&quot;section-12&quot;&gt;磁盘格式化&lt;/h3&gt;
+
+&lt;h2 id=&quot;section-13&quot;&gt;文件系统&lt;/h2&gt;
+
+&lt;h2 id=&quot;section-14&quot;&gt;参考资料&lt;/h2&gt;
 
 &lt;ol&gt;
   &lt;li&gt;深入理解计算机系统&lt;/li&gt;
   &lt;li&gt;鸟哥私房菜（基础篇）第三版&lt;/li&gt;
-  &lt;li&gt;Disk formatting WIKI&lt;a href=&quot;http://en.wikipedia.org/wiki/Disk_formatting&quot;&gt;http://en.wikipedia.org/wiki/Disk_formatting&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Disk formatting wiki: &lt;a href=&quot;http://en.wikipedia.org/wiki/Disk_formatting&quot;&gt;http://en.wikipedia.org/wiki/Disk_formatting&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;南非蚂蚁的&lt;a href=&quot;http://linux.chinaunix.net/techdoc/beginner/2009/07/15/1124345.shtml&quot;&gt;逻辑区块的介绍&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
 </content>
