@@ -52,10 +52,10 @@ a.external:hover {background-position:right -15px;}
 .entry-title a:hover {text-decoration:none;}
 .entry-date {text-align:center;color:#999;margin-bottom:60px;font-size:14px;}
 
-h2 {font-size:22px;font-weight:bold;margin-bottom:25px;margin-left:0px; margin-top:60px}
-h3 {font-size:18px;font-weight:bold;margin-bottom:20px;margin-left:0px; margin-top:50px}
-h4,h5,h6 {font-weight:bold;margin-bottom:15px;margin-left:0px;}
-p {margin-bottom:20px; margin-top:40px;line-height:1.8em;}
+h2 {font-size:22px;font-weight:bold;margin-bottom:25px;margin-left:0px; margin-top:50px}
+h3 {font-size:18px;font-weight:bold;margin-bottom:20px;margin-left:0px; margin-top:35px}
+h4,h5,h6 {font-weight:bold;margin-bottom:15px;margin-left:0px;margin-top:30px}
+p {margin-bottom:20px; margin-top:20px;line-height:1.8em;}
 code {background:#eee;border:1px solid #ccc;padding:0 5px;font-family:"Courier";line-height:14px;font-size:14px;word-wrap:break-word; }
 pre {background-color:#000;padding:15px;overflow:auto;margin-bottom:40px;font-size:14px;border: 1px solid #eee;-webkit-border-radius: 4px 4px 4px 4px;-moz-border-radius: 4px 4px 4px 4px;border-radius: 4px 4px 4px 4px;color:#b9bdb6;margin-top:-20px; }
 h4+pre, h3+pre { margin-top:20px; }
@@ -290,4 +290,11 @@ only screen and (max-width: 760px),
 	td:nth-of-type(9):before { content: "9th Column"; }
 	td:nth-of-type(10):before { content: "10th Column"; }
 	
+}
+
+
+hr{
+
+margin-bottom: 20px;
+
 }
