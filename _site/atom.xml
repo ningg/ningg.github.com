@@ -4,13 +4,292 @@
    <title>NingG.github.com</title>
    <link href="http://ningg.github.com/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://ningg.github.com" rel="alternate" type="text/html" />
-   <updated>2014-09-04T07:55:12+08:00</updated>
+   <updated>2014-09-20T15:31:32+08:00</updated>
    <id>http://ningg.github.com</id>
    <author>
      <name></name>
      <email></email>
    </author>
 
+   
+   <entry>
+     <title>编译flume：使用eclipse查看flume源码</title>
+     <link href="http://ningg.github.com/build-flume"/>
+     <updated>2014-09-19T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/build-flume</id>
+     <content type="html">&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
+
+&lt;p&gt;最近要弄日志收集系统，初始方案是将日志压缩之后，通过类似FTP方式上传，其中有一个问题：日志不能实时收集，因此，无法实时监控系统状态。&lt;/p&gt;
+
+&lt;p&gt;说实话，类似FTP方式上传文件时，还有几个问题，自己仍在思考：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;日志上传时，如何确定日志上传完成？&lt;/li&gt;
+  &lt;li&gt;如果上传过程中出现意外，接收端是否会丢弃已经接收到的文件片段？&lt;/li&gt;
+  &lt;li&gt;传输的文件是否压缩？&lt;/li&gt;
+  &lt;li&gt;传输文件直接上传到HDFS上，还是先上传到local FS上？&lt;/li&gt;
+  &lt;li&gt;日志传输到服务器上之后，如何才能立即就进行分析？&lt;/li&gt;
+  &lt;li&gt;分析日志之前，怎么判断日志是否满足规范？（命名、编码等）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;编译环境&lt;/h2&gt;
+
+&lt;p&gt;查看自己机器的环境：我用笔记本来编译的，是win 7（x64）操作系统；更详细的编译环境信息通过如下方式查看：&lt;code&gt;CMD&lt;/code&gt;–&amp;gt;&lt;code&gt;systeminfo&lt;/code&gt;，这个命令收集系统信息，需要花费40s，稍等一会儿，得到如下信息：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;C:\Users\Administrator&amp;gt;systeminfo
+
+OS 名称:          Microsoft Windows 7 旗舰版
+OS 版本:          6.1.7601 Service Pack 1 Build 7601
+
+系统类型:         x64-based PC
+处理器:           安装了 1 个处理器。
+	 [01]: Intel64 Family 6 Model 23 Stepping 6 GenuineIntel ~785 Mhz
+
+物理内存总量:     2,968 MB
+可用的物理内存:   819 MB
+虚拟内存: 最大值: 5,934 MB
+虚拟内存: 可用:   2,196 MB
+虚拟内存: 使用中: 3,738 MB
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;开始编译&lt;/h2&gt;
+
+&lt;p&gt;OK，在这台Win7上，编译flume源码，走起。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;特别说明：这些内容，都是我从官网看来的，建议有点追求的coder，多看看&lt;a href=&quot;http://flume.apache.org/&quot;&gt;flume官网&lt;/a&gt;，这样才能有提高，我的博客仅仅是自己留作备份看的。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;section-3&quot;&gt;下载源码&lt;/h3&gt;
+
+&lt;p&gt;Apache flume的下载页面：&lt;a href=&quot;http://flume.apache.org/download.html&quot;&gt;Apache Flume Download&lt;/a&gt;。&lt;/p&gt;
+
+&lt;p&gt;我下载的是当前稳定版本flume对应的源码：&lt;a href=&quot;http://www.apache.org/dyn/closer.cgi/flume/1.5.0.1/apache-flume-1.5.0.1-src.tar.gz&quot;&gt;apache-flume-1.5.0.1-src&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;section-4&quot;&gt;开始编译&lt;/h3&gt;
+
+&lt;p&gt;根据官方资料：&lt;a href=&quot;https://cwiki.apache.org/confluence/display/FLUME/Development+Environment&quot;&gt;flume开发&amp;amp;调试环境&lt;/a&gt;，开始编译。此次编译，我的目标很简单：在eclipse下查看flume的源代码。具体编译时，使用的命令：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mvn install -DskipTests
+mvn eclipse:eclipse -DdownloadSources
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-5&quot;&gt;出现的问题&lt;/h3&gt;
+
+&lt;p&gt;执行命令&lt;code&gt;mvn install -DskipTests&lt;/code&gt;后，程序有一段时间静止在编译flume ng core的模块上，强行终止（操作：&lt;code&gt;ctrl + c&lt;/code&gt;）后，使用  “mvn install -rf :flume-ng-core -X “ 启动debug进行问题定位找到线索:&lt;/p&gt;
+
+&lt;p&gt;分析之后，修改flume-ng-core\scripts\目录下&lt;code&gt;saveVersion.ps1&lt;/code&gt;，将其中powershell的两个参数&lt;code&gt;args[0]&lt;/code&gt;和&lt;code&gt;args[1]&lt;/code&gt;替换为实际值即可。在此之前，需要确认windows系统已经安装了powershell，验证是否安装powershell的方法：&lt;code&gt;运行&lt;/code&gt;–&amp;gt;&lt;code&gt;powershell&lt;/code&gt;，看看是否能够进入与&lt;code&gt;cmd&lt;/code&gt;类似的命令页面（我的win7系统默认带了powershell）。
+如果没有安装powershell，请参考：&lt;a href=&quot;http://support.microsoft.com/kb/968929&quot;&gt;windows管理框架&lt;/a&gt;。&lt;/p&gt;
+
+&lt;p&gt;在编译&lt;code&gt;flume-ng-morphline-solr-sink&lt;/code&gt;过程中，由于GFW等等原因，可能无法访问&lt;code&gt; repository.cloudera.com&lt;/code&gt;，导致编译失败，失败信息详情如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[ERROR] Failed to execute goal on project flume-ng-morphline-solr
+-sink: Could not resolve dependencies for project org.apache.flum
+e.flume-ng-sinks:flume-ng-morphline-solr-sink:jar:1.5.0.1: Failed
+ to collect dependencies at org.kitesdk:kite-morphlines-all:pom:0
+.12.0: Failed to read artifact descriptor for org.kitesdk:kite-mo
+rphlines-all:pom:0.12.0: Could not transfer artifact org.kitesdk:
+kite-morphlines-all:pom:0.12.0 from/to cdh.repo (https://reposito
+ry.cloudera.com/artifactory/cloudera-repos): repository.cloudera.
+com: Unknown host repository.cloudera.com -&amp;gt; [Help 1]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;浏览一下，失败信息的大意是：编译&lt;code&gt;flume-ng-morphline-solr-sink&lt;/code&gt;过程中，寻找依赖(dependency)失败，这是由于远端cloudera仓库对应的域名&lt;code&gt;repository.cloudera.com&lt;/code&gt;无法解析引发的。OK，既然找不到这个cloudera仓库，那直接取消对这一仓库的引用好了，具体：修改flume-ng-sinks\flume-ng-morphline-solr-sink\目录下&lt;code&gt;pom.xml&lt;/code&gt;文件，将&lt;code&gt;&amp;lt;repository&amp;gt;&lt;/code&gt;元素注释掉，最终效果如表：&lt;/p&gt;
+
+&lt;repositories&gt;
+
+	&lt;!--
+	&lt;repository&gt;
+	  &lt;id&gt;cdh.repo&lt;/id&gt;
+	  &lt;url&gt;https://repository.cloudera.com/artifactory/cloudera-repos&lt;/url&gt;
+	  &lt;name&gt;Cloudera Repositories&lt;/name&gt;
+	  &lt;snapshots&gt;
+		&lt;enabled&gt;false&lt;/enabled&gt;
+	  &lt;/snapshots&gt;
+	&lt;/repository&gt;
+
+	&lt;repository&gt;
+	  &lt;id&gt;cdh.snapshots.repo&lt;/id&gt;
+	  &lt;url&gt;https://repository.cloudera.com/artifactory/libs-snapshot-local&lt;/url&gt;
+	  &lt;name&gt;Cloudera Snapshots Repository&lt;/name&gt;
+	  &lt;snapshots&gt;
+		&lt;enabled&gt;true&lt;/enabled&gt;
+	  &lt;/snapshots&gt;
+	  &lt;releases&gt;
+		&lt;enabled&gt;false&lt;/enabled&gt;
+	  &lt;/releases&gt;
+	&lt;/repository&gt;
+	--&gt;
+
+  &lt;/repositories&gt;
+
+&lt;p&gt;ok，重新执行命令&lt;code&gt;mvn install -DskipTests&lt;/code&gt;，欧NO，又出错了，得到如下信息：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[ERROR] Failed to execute goal on project flume-ng-morphline-solr
+-sink: Could not resolve dependencies for project org.apache.flum
+e.flume-ng-sinks:flume-ng-morphline-solr-sink:jar:1.5.0.1: The fo
+-llowing artifacts could not be resolved: org.kitesdk:kite-morphli
+nes-all:pom:0.12.0, org.kitesdk:kite-morphlines-solr-core:jar:tes
+-ts:0.12.0: Failure to find org.kitesdk:kite-morphlines-all:pom:0.
+12.0 in http://repo1.maven.org/maven2 was cached in the local repo
+-sitory, resolution will not be reattempted until the update inte
+rval of repo1.maven.org has elapsed or updates are forced -&amp;gt; [Help 1]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;平复一下心情，看看上面的提示，大意是说找不到&lt;code&gt;kite-morphlines-all&lt;/code&gt;，看来之前粗鲁的将&lt;code&gt;&amp;lt;repository&amp;gt;&lt;/code&gt;元素注释掉，并不能解决问题，OK，再找两个替代的repository就好了，具体再次修改flume-ng-sinks\flume-ng-morphline-solr-sink\目录下&lt;code&gt;pom.xml&lt;/code&gt;文件如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;  &amp;lt;repositories&amp;gt;
+	&amp;lt;repository&amp;gt;
+		&amp;lt;id&amp;gt;maven-restlet&amp;lt;/id&amp;gt;
+		&amp;lt;name&amp;gt;Public online Restlet repository&amp;lt;/name&amp;gt;
+		&amp;lt;url&amp;gt;http://maven.restlet.org&amp;lt;/url&amp;gt;
+	&amp;lt;/repository&amp;gt;
+  &amp;lt;/repositories&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;并且修改flume源代码根目录下的&lt;code&gt;pom.xml&lt;/code&gt;文件，将其中&lt;code&gt;&amp;lt;kite.version&amp;gt;0.12.0&amp;lt;/kite.version&amp;gt;&lt;/code&gt;，修改为&lt;code&gt;&amp;lt;kite.version&amp;gt;0.15.0&amp;lt;/kite.version&amp;gt;&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;又有依赖(dependency)找不到了：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[ERROR] Failed to execute goal on project flume-ng-morphline-solr
+-sink: Could not resolve dependencies for project org.apache.flum
+e.flume-ng-sinks:flume-ng-morphline-solr-sink:jar:1.5.0.1: Failed
+ to collect dependencies at org.kitesdk:kite-morphlines-all:pom:0
+.12.0 -&amp;gt; org.kitesdk:kite-morphlines-useragent:jar:0.12.0 -&amp;gt; ua_p
+arser:ua-parser:jar:1.3.0: Failed to read artifact descriptor for
+ ua_parser:ua-parser:jar:1.3.0: Could not transfer artifact ua_pa
+rser:ua-parser:pom:1.3.0 from/to maven-twttr (http://maven.twttr.
+com): Connection to http://maven.twttr.com refused: Connection ti
+med out: connect -&amp;gt; [Help 1]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;再次修改flume-ng-sinks\flume-ng-morphline-solr-sink\目录下&lt;code&gt;pom.xml&lt;/code&gt;文件，在&lt;code&gt;&amp;lt;repositories&amp;gt;&lt;/code&gt;下添加一个元素：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;repositories&amp;gt;
+	
+	... 
+	
+	&amp;lt;repository&amp;gt;
+	  &amp;lt;id&amp;gt;p2.jfrog.org&amp;lt;/id&amp;gt;
+	  &amp;lt;url&amp;gt;http://p2.jfrog.org/libs-releases&amp;lt;/url&amp;gt;
+	&amp;lt;/repository&amp;gt;
+&amp;lt;/repositories&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;重新编译，还不行，说是找不到&lt;code&gt;p2.jfrog.org&lt;/code&gt;，怒了，翻墙，再编译，搞定。（有的网络环境，不需要翻墙，也能编译通过）&lt;/p&gt;
+
+&lt;h3 id=&quot;eclipse&quot;&gt;eclipse下查看源码&lt;/h3&gt;
+
+&lt;p&gt;上面编译之后，在eclipse下，&lt;code&gt;Import&lt;/code&gt;–&amp;gt;&lt;code&gt;Existing Projects into Workspace&lt;/code&gt;，然后选择flume编译源码的路径即可，结果如下图所示：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/build-flume/eclipse-flume-src.jpg&quot; alt=&quot;eclipse-src&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;疑问&lt;/strong&gt;：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;使用maven管理的代码，为什么不作为maven项目Import到eclipse下？而是先运行命令&lt;code&gt;mvn eclipse:eclipse&lt;/code&gt;，然后将项目作为普通的java project导入到eclipse？&lt;/li&gt;
+  &lt;li&gt;使用eclipse来查看、调试flume源码，那如何对外发布源码？&lt;/li&gt;
+  &lt;li&gt;总结一下，就是一个问题&lt;code&gt;mvn eclipse:eclipse&lt;/code&gt;过程中到底执行了什么？为什么要这么做？&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;后记&lt;/strong&gt;：每次编译代码，网络都让人蛋疼，GFW让人蛋疼，有一个VPN太重要了。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;section-6&quot;&gt;参考来源&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://flume.apache.org/&quot;&gt;flume官网&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cwiki.apache.org/confluence/display/FLUME/Development+Environment&quot;&gt;flume开发&amp;amp;调试环境&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+   </entry>
+   
+   <entry>
+     <title>wordpress的开发调试环境</title>
+     <link href="http://ningg.github.com/wordpress-debug-env"/>
+     <updated>2014-09-05T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/wordpress-debug-env</id>
+     <content type="html">&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
+
+&lt;p&gt;用wordpress建站，两个功能：一个是展示团队工作，另一个是方便其他人进来讨论。&lt;/p&gt;
+
+&lt;p&gt;初步立意：使用wordpress搭建两个网站，团队工作展示一个，讨论区一个；&lt;/p&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;组件与安装&lt;/h2&gt;
+
+&lt;p&gt;环境：Win 7，已经安装了JDK 6 和 JDK 7&lt;/p&gt;
+
+&lt;p&gt;下载软件清单如下：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;下载XAMPP：&lt;a href=&quot;https://www.apachefriends.org/zh_cn/index.html&quot;&gt;https://www.apachefriends.org/zh_cn/index.html&lt;/a&gt; 版本：1.8.3；对应PHP: 5.5.1&lt;/li&gt;
+  &lt;li&gt;下载eclipse for php：&lt;a href=&quot;http://www.eclipse.org/downloads/&quot;&gt;http://www.eclipse.org/downloads/&lt;/a&gt;  版本：eclipse-php-luna-R-win32-x86_64&lt;/li&gt;
+  &lt;li&gt;下载wordpress：&lt;a href=&quot;http://cn.wordpress.org/&quot;&gt;http://cn.wordpress.org/&lt;/a&gt; 版本：3.9&lt;/li&gt;
+  &lt;li&gt;下载主题：
+    &lt;ol&gt;
+      &lt;li&gt;hum：&lt;a href=&quot;http://wordpress.org/extend/themes/hum/&quot;&gt;http://wordpress.org/extend/themes/hum/&lt;/a&gt; 版本：0.2.1&lt;/li&gt;
+      &lt;li&gt;twenty eleven：&lt;a href=&quot;http://wordpress.org/themes/twentyeleven&quot;&gt;http://wordpress.org/themes/twentyeleven&lt;/a&gt; 版本：1.9&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;下载JDK：&lt;a href=&quot;http://www.oracle.com/technetwork/java/javase/downloads/index.html&quot;&gt;Oracle JDK(Sun)&lt;/a&gt; 版本：JDK 7u67&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;依次安装：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;XAMPP：wordpress的运行环境&lt;/li&gt;
+  &lt;li&gt;wordpress，并为其配置主题：
+    &lt;ul&gt;
+      &lt;li&gt;twenty eleven&lt;/li&gt;
+      &lt;li&gt;hum&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;eclipse：将整个wordpress文件夹，新建为PHP Project；&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;配置&lt;/h2&gt;
+
+&lt;p&gt;设计搭建其调试环境所需要的基本配置。&lt;/p&gt;
+
+&lt;h3 id=&quot;section-3&quot;&gt;基本配置&lt;/h3&gt;
+
+&lt;p&gt;主要是Apache、MySQL、PHP相关：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;设置MySQL的root密码，两种方式都可以：
+    &lt;ol&gt;
+      &lt;li&gt;CMD的命令行；&lt;/li&gt;
+      &lt;li&gt;myphpAdmin图形界面；&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;section-4&quot;&gt;主题配置&lt;/h3&gt;
+
+&lt;p&gt;主要是为成功安装主题，所需要进行的配置。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;wordpress
+    &lt;ol&gt;
+      &lt;li&gt;取消twenty eleven主题中google front（因为google被墙了）&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section-5&quot;&gt;调试&lt;/h2&gt;
+
+&lt;p&gt;调试是学习一个框架/语言较快的方式，这一部分将着重介绍如何进行调试。关注几点：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;如何进行调试；&lt;/li&gt;
+  &lt;li&gt;PHP web基本处理逻辑；&lt;/li&gt;
+  &lt;li&gt;wordpress中使用了哪些巧妙的设计，使其流行数年；&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+   </entry>
    
    <entry>
      <title>PHP入门知识</title>
@@ -207,7 +486,7 @@
 &lt;ul&gt;
   &lt;li&gt;$_POST，数组，捕获POST方式表单数据；
     &lt;ol&gt;
-      &lt;li&gt;使用键访问数组元素：print $_POST[‘name_value’];&lt;/li&gt;
+      &lt;li&gt;使用键访问数组元素：&lt;code&gt;print $_POST[&#39;name_value&#39;]&lt;/code&gt;;&lt;/li&gt;
       &lt;li&gt;严格区分大小写，并且以&lt;code&gt;$_&lt;/code&gt;开头，全部大写；&lt;/li&gt;
       &lt;li&gt;双引号内部，不能使用数组的单引号来引用key；&lt;/li&gt;
     &lt;/ol&gt;
@@ -224,7 +503,7 @@ $input_name_value = $_POST[&#39;name&#39;];
 print &quot;Thank U : $input_name_value&quot;;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;疑问：能使用双引号，即 $_POST[“name”] 样式，来获取数组中内容吗？当然可以，单引号能做，双引号也能。&lt;/p&gt;
+&lt;p&gt;疑问：能使用双引号，即 &lt;code&gt;$_POST[&quot;name&quot;]&lt;/code&gt; 样式，来获取数组中内容吗？当然可以，单引号能做，双引号也能。&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;$_GET，捕获GET方式表单数据，与$_POST类似；&lt;/li&gt;
@@ -269,14 +548,15 @@ $evens = range (0, 100, 2);
 &lt;ul&gt;
   &lt;li&gt;创建数组
     &lt;ol&gt;
-      &lt;li&gt;$list = array ();&lt;/li&gt;
+      &lt;li&gt;&lt;code&gt;$list = array ()&lt;/code&gt;;&lt;/li&gt;
+      &lt;li&gt;&lt;code&gt;evens = array ()&lt;/code&gt;;&lt;/li&gt;
     &lt;/ol&gt;
   &lt;/li&gt;
   &lt;li&gt;输出数组
     &lt;ol&gt;
-      &lt;li&gt;print_r()函数&lt;/li&gt;
-      &lt;li&gt;var_dump()函数&lt;/li&gt;
-      &lt;li&gt;foreach()&lt;/li&gt;
+      &lt;li&gt;&lt;code&gt;print_r()&lt;/code&gt;函数&lt;/li&gt;
+      &lt;li&gt;&lt;code&gt;var_dump()&lt;/code&gt;函数&lt;/li&gt;
+      &lt;li&gt;&lt;code&gt;foreach()&lt;/code&gt;&lt;/li&gt;
     &lt;/ol&gt;
   &lt;/li&gt;
   &lt;li&gt;引用元素
@@ -288,60 +568,60 @@ $evens = range (0, 100, 2);
   &lt;/li&gt;
   &lt;li&gt;追加元素
     &lt;ol&gt;
-      &lt;li&gt;数值索引时：	$list[] = ‘pears’;&lt;/li&gt;
+      &lt;li&gt;数值索引时：	&lt;code&gt;$list[] = &#39;pears&#39;&lt;/code&gt;;&lt;/li&gt;
       &lt;li&gt;字符串索引：必须指定key；&lt;/li&gt;
     &lt;/ol&gt;
   &lt;/li&gt;
   &lt;li&gt;修改元素
     &lt;ol&gt;
-      &lt;li&gt;数值索引：$list[2] = ‘pears’;&lt;/li&gt;
-      &lt;li&gt;字符串索引：$list[‘Wed’] = ‘pears’;&lt;/li&gt;
+      &lt;li&gt;数值索引：&lt;code&gt;$list[2] = &#39;pears&#39;&lt;/code&gt;;&lt;/li&gt;
+      &lt;li&gt;字符串索引：&lt;code&gt;$list[&#39;Wed&#39;] = &#39;pears&#39;&lt;/code&gt;;&lt;/li&gt;
       &lt;li&gt;字符串索引时，不能使用数值；&lt;/li&gt;
     &lt;/ol&gt;
   &lt;/li&gt;
   &lt;li&gt;元素个数
     &lt;ol&gt;
-      &lt;li&gt;$how_many = count($array);&lt;/li&gt;
+      &lt;li&gt;&lt;code&gt;$how_many = count($array)&lt;/code&gt;;&lt;/li&gt;
     &lt;/ol&gt;
   &lt;/li&gt;
   &lt;li&gt;删除元素
     &lt;ol&gt;
-      &lt;li&gt;unset($list[1]);&lt;/li&gt;
-      &lt;li&gt;unset($list[‘Wed’]);&lt;/li&gt;
-      &lt;li&gt;unset($list);//删除整个数组&lt;/li&gt;
-      &lt;li&gt;$list = array();//等价于删除数组&lt;/li&gt;
+      &lt;li&gt;&lt;code&gt;unset($list[1])&lt;/code&gt;;&lt;/li&gt;
+      &lt;li&gt;&lt;code&gt;unset($list[&#39;Wed&#39;])&lt;/code&gt;;&lt;/li&gt;
+      &lt;li&gt;&lt;code&gt;unset($list)&lt;/code&gt;;//删除整个数组&lt;/li&gt;
+      &lt;li&gt;&lt;code&gt;$list = array()&lt;/code&gt;;//等价于删除数组&lt;/li&gt;
     &lt;/ol&gt;
   &lt;/li&gt;
   &lt;li&gt;合并数组
     &lt;ol&gt;
-      &lt;li&gt;array_merge($list1， $list2);&lt;/li&gt;
-      &lt;li&gt;$list = $list1 + $list2;&lt;/li&gt;
+      &lt;li&gt;&lt;code&gt;array_merge($list1， $list2)&lt;/code&gt;;&lt;/li&gt;
+      &lt;li&gt;&lt;code&gt;$list = $list1 + $list2&lt;/code&gt;;&lt;/li&gt;
     &lt;/ol&gt;
   &lt;/li&gt;
   &lt;li&gt;数组排序：会单独列张表
     &lt;ol&gt;
-      &lt;li&gt;sort($array)、rsort()；&lt;/li&gt;
-      &lt;li&gt;asort()、arsort();&lt;/li&gt;
-      &lt;li&gt;ksort()、krsort();&lt;/li&gt;
-      &lt;li&gt;shuffle()：数组元素顺序随机重组；&lt;/li&gt;
+      &lt;li&gt;&lt;code&gt;sort($array)&lt;/code&gt;、&lt;code&gt;rsort()&lt;/code&gt;；&lt;/li&gt;
+      &lt;li&gt;&lt;code&gt;asort()&lt;/code&gt;、&lt;code&gt;arsort()&lt;/code&gt;;&lt;/li&gt;
+      &lt;li&gt;&lt;code&gt;ksort()&lt;/code&gt;、&lt;code&gt;krsort()&lt;/code&gt;;&lt;/li&gt;
+      &lt;li&gt;&lt;code&gt;shuffle()&lt;/code&gt;：数组元素顺序随机重组；&lt;/li&gt;
     &lt;/ol&gt;
   &lt;/li&gt;
   &lt;li&gt;字符串与数组间相互转换
     &lt;ol&gt;
-      &lt;li&gt;implode()：数组转换为字符串；&lt;/li&gt;
-      &lt;li&gt;explode()：字符串转换为数组；&lt;/li&gt;
+      &lt;li&gt;&lt;code&gt;implode()&lt;/code&gt;：数组转换为字符串；&lt;/li&gt;
+      &lt;li&gt;&lt;code&gt;explode()&lt;/code&gt;：字符串转换为数组；&lt;/li&gt;
     &lt;/ol&gt;
   &lt;/li&gt;
   &lt;li&gt;判断是否为数组
     &lt;ol&gt;
-      &lt;li&gt;is_array($array);&lt;/li&gt;
+      &lt;li&gt;&lt;code&gt;is_array($array)&lt;/code&gt;;&lt;/li&gt;
     &lt;/ol&gt;
   &lt;/li&gt;
   &lt;li&gt;额外几个函数
     &lt;ol&gt;
-      &lt;li&gt;array_key_exists()&lt;/li&gt;
-      &lt;li&gt;array_search()&lt;/li&gt;
-      &lt;li&gt;in_array()&lt;/li&gt;
+      &lt;li&gt;&lt;code&gt;array_key_exists()&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;code&gt;array_search()&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;code&gt;in_array()&lt;/code&gt;&lt;/li&gt;
     &lt;/ol&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
@@ -349,9 +629,9 @@ $evens = range (0, 100, 2);
 &lt;p&gt;数组使用过程总结如下：&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;如果 $list 不存在，$list[] = ‘value’，会去创建数组；&lt;/li&gt;
+  &lt;li&gt;如果 $list 不存在，&lt;code&gt;$list[] = &#39;value&#39;&lt;/code&gt;，会去创建数组；&lt;/li&gt;
   &lt;li&gt;数组中使用单引号 &lt;code&gt;&#39;&lt;/code&gt; 来引用 key 和 value，也可以使用双引号&lt;code&gt;&quot;&lt;/code&gt;；&lt;/li&gt;
-  &lt;li&gt;sizeof() 函数是 count() 的别名，返回数组的元素个数；&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;sizeof()&lt;/code&gt; 函数是 &lt;code&gt;count()&lt;/code&gt; 的别名，返回数组的元素个数；&lt;/li&gt;
   &lt;li&gt;当key为数值、变量、常数时，不用引号引用，即可调用；&lt;/li&gt;
 &lt;/ul&gt;
 
@@ -468,7 +748,7 @@ $array = explode(&#39;,&#39;, $string);
 list($weekday, $day, $month) = $date;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;实践：查看PHP手册中的几个函数，array_key_exists()、array_search()、in_array()。&lt;/p&gt;
+&lt;p&gt;实践：查看PHP手册中的几个函数，&lt;code&gt;array_key_exists()&lt;/code&gt;、&lt;code&gt;array_search()&lt;/code&gt;、&lt;code&gt;in_array()&lt;/code&gt;。&lt;/p&gt;
 
 &lt;h2 id=&quot;section-10&quot;&gt;常量&lt;/h2&gt;
 
@@ -489,12 +769,12 @@ list($weekday, $day, $month) = $date;
   &lt;li&gt;定义常量，define()中常量名，使用引号；&lt;/li&gt;
   &lt;li&gt;输出常量，直接使用常量名即可；&lt;/li&gt;
   &lt;li&gt;引号内部（单引号、双引号）无法输出常量；&lt;/li&gt;
-  &lt;li&gt;判断是否定义常量：defined(‘CONSTANT_NAME’)；&lt;/li&gt;
+  &lt;li&gt;判断是否定义常量：&lt;code&gt;defined(&#39;CONSTANT_NAME&#39;)&lt;/code&gt;；&lt;/li&gt;
   &lt;li&gt;常量是全局作用域的；&lt;/li&gt;
   &lt;li&gt;常量的值不能修改，常量本身也不能修改；&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;section-12&quot;&gt;预定义常量&lt;/h2&gt;
+&lt;h3 id=&quot;section-12&quot;&gt;预定义常量&lt;/h3&gt;
 
 &lt;ul&gt;
   &lt;li&gt;PHP_VERSION：正在运行的PHP版本&lt;/li&gt;
@@ -642,15 +922,15 @@ round (100.2);
 ?&amp;gt;
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;类似函数还有：number_format()、printf()、sprintf()；&lt;/p&gt;
+&lt;p&gt;类似函数还有：&lt;code&gt;number_format()&lt;/code&gt;、&lt;code&gt;printf()&lt;/code&gt;、&lt;code&gt;sprintf()&lt;/code&gt;；&lt;/p&gt;
 
 &lt;h3 id=&quot;section-16&quot;&gt;随机数&lt;/h3&gt;
 
-&lt;p&gt;rand()、mt_rand()，具体不多说，查看操作手册即可；&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;rand()&lt;/code&gt;、&lt;code&gt;mt_rand()&lt;/code&gt;，具体不多说，查看操作手册即可；&lt;/p&gt;
 
 &lt;h3 id=&quot;section-17&quot;&gt;字符串连接&lt;/h3&gt;
 
-&lt;p&gt;字符串连接：句点&lt;code&gt;.&lt;/code&gt;，举例：$result = $first_name . $last_name;&lt;/p&gt;
+&lt;p&gt;字符串连接：句点&lt;code&gt;.&lt;/code&gt;，举例：&lt;code&gt;$result = $first_name . $last_name&lt;/code&gt;;&lt;/p&gt;
 
 &lt;h3 id=&quot;html&quot;&gt;转换HTML格式&lt;/h3&gt;
 
@@ -667,36 +947,36 @@ round (100.2);
 
 &lt;ul&gt;
   &lt;li&gt;HTML实体是什么？例如：&lt;code&gt;&amp;lt;&lt;/code&gt; 对应HTML实体为 &lt;code&gt;&amp;amp;lt;&lt;/code&gt; ；使用HTML实体主要原因：防止输入文本中包含HTML标签，打乱整个页面的布局，更近一步，防止用户提交JS进行跨站点攻击（XSS，Cross-Site Scripting）。补充：XSS 能够做的事情：破环网站风格、功能；盗取浏览用户的session信息。&lt;/li&gt;
-  &lt;li&gt;通常先移除所有HTML、PHP标签，再将&lt;code&gt;\n&lt;/code&gt;等转义符，转换为HTML换行符，即：strip_tags()之后nl2br();&lt;/li&gt;
+  &lt;li&gt;通常先移除所有HTML、PHP标签，再将&lt;code&gt;\n&lt;/code&gt;等转义符，转换为HTML换行符，即：&lt;code&gt;strip_tags()&lt;/code&gt; 之后 &lt;code&gt;nl2br()&lt;/code&gt; ;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&quot;section-18&quot;&gt;字符串编/解码&lt;/h3&gt;
 
 &lt;p&gt;背景：通过URL的query向服务器发送参数时，要求参数不能包含空格、特殊字符等；如果一定要使用URL的query向服务器传送数据，可以先对数据进行编码，即可解决此问题。&lt;/p&gt;
 
-&lt;p&gt;urlencode()，专门解决这一问题，将字符串转换为适合最为URL的一部分来传输。几点说明：&lt;/p&gt;
+&lt;p&gt;&lt;code&gt;urlencode()&lt;/code&gt;，专门解决这一问题，将字符串转换为适合最为URL的一部分来传输。几点说明：&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;表单发送出去的数据，会自动进行URL编码，在服务器端，会自动解码，因此，本例中，只需要在页面上通过urlencode()编码即可，服务器能够自动解码；&lt;/li&gt;
-  &lt;li&gt;urldecode()，能够进行解码，但不常用，因为服务器能够自动解码；&lt;/li&gt;
+  &lt;li&gt;表单发送出去的数据，会自动进行URL编码，在服务器端，会自动解码，因此，本例中，只需要在页面上通过 &lt;code&gt;urlencode()&lt;/code&gt; 编码即可，服务器能够自动解码；&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;urldecode()&lt;/code&gt;，能够进行解码，但不常用，因为服务器能够自动解码；&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h3 id=&quot;section-19&quot;&gt;子字符串&lt;/h3&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;strtok($string, $token)，按照$token来分割$string，并返回最新的子串；&lt;/li&gt;
-  &lt;li&gt;substring($string, 0, 10)，从$string中索引为0的字符开始（包含在内），累计截取10个字符；&lt;/li&gt;
-  &lt;li&gt;substring($string, -3, 3)，从$string中倒数第3个字符开始（包含在内），累计截取3个字符；&lt;/li&gt;
-  &lt;li&gt;strlen($string)，字符串中字符个数；&lt;/li&gt;
-  &lt;li&gt;str_word_count()，字符串中单词个数；&lt;/li&gt;
-  &lt;li&gt;str_ireplace($needle, $replacement, $haystack)，将$haystack中$needle替换为$replacement；&lt;/li&gt;
-  &lt;li&gt;str_replace()，区分大小写，其余与str_ireplace()类似；&lt;/li&gt;
-  &lt;li&gt;trim()，删除字符串首尾的空格、换行符、制表符；&lt;/li&gt;
-  &lt;li&gt;rtrim()，删除最右端的空白字符；&lt;/li&gt;
-  &lt;li&gt;ltrim()，删除最左端的空白字符；&lt;/li&gt;
-  &lt;li&gt;strtoupper()，字符串转换为大写；&lt;/li&gt;
-  &lt;li&gt;strtolower()，字符串转换为小写；&lt;/li&gt;
-  &lt;li&gt;substr_count($string, $substr)，子字符串出现的次数；&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;strtok($string, $token)&lt;/code&gt;，按照$token来分割$string，并返回最新的子串；&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;substring($string, 0, 10)&lt;/code&gt;，从$string中索引为0的字符开始（包含在内），累计截取10个字符；&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;substring($string, -3, 3)&lt;/code&gt;，从$string中倒数第3个字符开始（包含在内），累计截取3个字符；&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;strlen($string)&lt;/code&gt;，字符串中字符个数；&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;str_word_count()&lt;/code&gt;，字符串中单词个数；&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;str_ireplace($needle, $replacement, $haystack)&lt;/code&gt;，将$haystack中$needle替换为$replacement；&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;str_replace()&lt;/code&gt;，区分大小写，其余与str_ireplace()类似；&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;trim()&lt;/code&gt;，删除字符串首尾的空格、换行符、制表符；&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;rtrim()&lt;/code&gt;，删除最右端的空白字符；&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;ltrim()&lt;/code&gt;，删除最左端的空白字符；&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;strtoupper()&lt;/code&gt;，字符串转换为大写；&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;strtolower()&lt;/code&gt;，字符串转换为小写；&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;substr_count($string, $substr)&lt;/code&gt;，子字符串出现的次数；&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;PHP中所有索引的位置都是从0开始的。&lt;/p&gt;
@@ -710,12 +990,12 @@ round (100.2);
 &lt;p&gt;说几个函数，有点印象就行，具体用法去查PHP手册：&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;date() 返回某一日期格式；&lt;/li&gt;
-  &lt;li&gt;date() 中第二参数为时间戳（timestamp），是表示从1970年1月1日算起的秒数；&lt;/li&gt;
-  &lt;li&gt;time() 返回当前时间戳；&lt;/li&gt;
-  &lt;li&gt;mktime() 返回一个给定日期和时间对应的时间戳；&lt;/li&gt;
-  &lt;li&gt;date_default_timezone_set() 设置时间默认的时区；&lt;/li&gt;
-  &lt;li&gt;date_default_timezone_get() 获取当前时间对应的时区；&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;date()&lt;/code&gt; 返回某一日期格式；&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;date()&lt;/code&gt; 中第二参数为时间戳（timestamp），是表示从1970年1月1日算起的秒数；&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;time()&lt;/code&gt; 返回当前时间戳；&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;mktime()&lt;/code&gt; 返回一个给定日期和时间对应的时间戳；&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;date_default_timezone_set()&lt;/code&gt; 设置时间默认的时区；&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;date_default_timezone_get()&lt;/code&gt; 获取当前时间对应的时区；&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;额外说明几点：&lt;/p&gt;
@@ -765,10 +1045,11 @@ function function_name($arg1 = &#39;world&#39;, $arg2){
 &lt;p&gt;几个验证函数：&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;empty()，除去变量未定义、值为0、空字符串外，返回FALSE;&lt;/li&gt;
-  &lt;li&gt;isset()，仅当变量未定义时，返回False；（能够接受任意个数的变量）&lt;/li&gt;
-  &lt;li&gt;is_numeric()，仅当变量为数值时，返回TRUE;&lt;/li&gt;
-  &lt;li&gt;checkdate()，验证日期是否存在；&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;empty()&lt;/code&gt;，除去变量未定义、值为0、空字符串外，返回FALSE;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;isset()&lt;/code&gt;，仅当变量未定义时，返回False；（能够接受任意个数的变量）&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;is_numeric()&lt;/code&gt;，仅当变量为数值时，返回TRUE;&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;checkdate()&lt;/code&gt;，验证日期是否存在；&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;is_array()&lt;/code&gt;，判断是否数组；&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;p&gt;举例如下：&lt;/p&gt;
@@ -852,14 +1133,14 @@ for (init_exp; condition ; closing_exp){
 
 &lt;h3 id=&quot;section-27&quot;&gt;输出错误信息&lt;/h3&gt;
 
-&lt;p&gt;安装PHP之后，默认安全配置下，是不允许向Web端输出任何出错信息的，即，display_errors出于关闭状态；为了方便调试，有两种方法：&lt;/p&gt;
+&lt;p&gt;安装PHP之后，默认安全配置下，是不允许向Web端输出任何出错信息的，即，&lt;code&gt;display_errors&lt;/code&gt; 出于关闭状态；为了方便调试，有两种方法：&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;开启display_errors设置；&lt;/li&gt;
-  &lt;li&gt;为某些脚本单独开启display_errors设置；&lt;/li&gt;
+  &lt;li&gt;开启 &lt;code&gt;display_errors&lt;/code&gt; 设置；&lt;/li&gt;
+  &lt;li&gt;为某些脚本单独开启 &lt;code&gt;display_errors&lt;/code&gt; 设置；&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;当前首选第一个选项，但是只有root用户才有如此权限；普通用户，可以在php页面中添加代码：&lt;code&gt;ini_set(&#39;display_errors&#39;, 1);&lt;/code&gt; 实现为某些脚本开启display_errors。说明：这种方式进行的设置，只在当前php脚本执行期间有效，脚本结束后恢复原始设置；display_errors只能控制是否向浏览器发送错误信息，而不会控制错误的发生。&lt;/p&gt;
+&lt;p&gt;当前首选第一个选项，但是只有root用户才有如此权限；普通用户，可以在php页面中添加代码：&lt;code&gt;ini_set(&#39;display_errors&#39;, 1);&lt;/code&gt; 实现为某些脚本开启 &lt;code&gt;display_errors&lt;/code&gt; 。说明：这种方式进行的设置，只在当前php脚本执行期间有效，脚本结束后恢复原始设置；&lt;code&gt;display_errors&lt;/code&gt; 只能控制是否向浏览器发送错误信息，而不会控制错误的发生。&lt;/p&gt;
 
 &lt;h3 id=&quot;section-28&quot;&gt;输出错误信息级别&lt;/h3&gt;
 
@@ -2706,628 +2987,6 @@ tmpfs        					  tmpfs  16G   60K   16G   1%    /dev/shm
   &lt;li&gt;&lt;code&gt;/dev/mapper/vg_localhost-lv_home&lt;/code&gt; 与之前lsblk查询得知的 &lt;code&gt;/sda2/vg_localhost-lv_home&lt;/code&gt; 之间什么关系？&lt;/li&gt;
   &lt;li&gt;&lt;code&gt;tmpfs&lt;/code&gt; 与之前 &lt;code&gt;vg_localhost-lv_swap [SWAP]&lt;/code&gt; 之间的关系？&lt;/li&gt;
 &lt;/ul&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>maven坐标和依赖</title>
-     <link href="http://ningg.github.com/maven-coordinate"/>
-     <updated>2014-07-07T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/maven-coordinate</id>
-     <content type="html">&lt;blockquote&gt;
-  &lt;p&gt;题记：&lt;a href=&quot;http://www.infoq.com/cn/minibooks/maven-in-action&quot;&gt;《Maven实战（迷你版）》&lt;/a&gt;这本书写的太好了，我忍不住把其中的内容又敲一遍。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&quot;maven&quot;&gt;何为Maven坐标&lt;/h3&gt;
-
-&lt;p&gt;Maven来管理项目依赖。为了能自动化解析任何一个java构建，Maven必须将他们唯一标识，这是依赖管理的基础——坐标（coordinate）。本文将详细介绍Maven坐标的作用，并在此基础上介绍Maven的配置。&lt;/p&gt;
-
-&lt;p&gt;Maven坐标的元素包括：&lt;code&gt;groupId&lt;/code&gt;，&lt;code&gt;artifactId&lt;/code&gt;，&lt;code&gt;version&lt;/code&gt;，&lt;code&gt;packaging&lt;/code&gt;，&lt;code&gt;classifier&lt;/code&gt;。根据坐标，Maven能够从中央仓库（http://repo1.maven.org/maven2）中，找出java构件并进行下载。&lt;/p&gt;
-
-&lt;h3 id=&quot;section&quot;&gt;坐标详解&lt;/h3&gt;
-
-&lt;p&gt;先看一个坐标定义：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;lt;groupId&amp;gt;org.sonatype.nexus&amp;lt;/groupId&amp;gt;
-&amp;lt;artifactId&amp;gt;nexus-indexer&amp;lt;/artifactId&amp;gt;
-&amp;lt;version&amp;gt;2.0.0&amp;lt;/version&amp;gt;
-&amp;lt;packaging&amp;gt;jar&amp;lt;/packaging&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;上述代码中，并没有classifier。下面详细解释一下各个坐标元素：&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;groupId&lt;/strong&gt;；定义当前Maven项目所属的实际项目。首先，Maven项目与实际项目不是一一对应的关系，因为Maven中有一个模块的概念，因此实际的项目会被分为很多模块，比如，SpringFramework实际项目对应的maven项目有spring-core，spring-context等。其次，groupId不应对应到项目所属的组织或公司，原因很简单，一个组织下有很多实际项目，每个项目又要包含很多模块（Maven项目），应将groupId指定到实际项目，然后，通过artifactId来定义项目模块，并以此作为一个Maven项目。最后，groupId与java包名的表示方式类似，通常与域名反向一一对应。上述例子中，groupId为org.sonatype.nexus，其中，org.sonatype表示Sonatype公司建立的一个非营利组织，nexus表示Nexus这一实际项目，该groupId与实际域名nexus.sonatype.org对应。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;artifactId&lt;/strong&gt;：对应实际项目中的一个模块（Maven项目），推荐使用实际项目名最为前缀，例如，nexus-indexer，使用实际nexus作为前缀，这样的好处是方便寻找实际构建。默认情况下，Maven生成的构建，以 &lt;code&gt;artifactId-version.packaging&lt;/code&gt; 格式命名，以实际项目名命名，方便区分不同项目。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;version&lt;/strong&gt;：标识当前Maven项目的版本。特别说明：Maven定义了一套完整的版本规范，以及快照（SNAPSHOT）的概念，后文会涉及到。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;packaging&lt;/strong&gt;：声明项目打包方式。首先，其常作为生成构件的扩展名，例如，jar，war；其次，打包方式会影响到构建过程的声明周期，比如，jar打包、war打包使用不同的命令；最后，不定义packaging时，默认jar。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;classifier&lt;/strong&gt;：&lt;/p&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>maven使用入门</title>
-     <link href="http://ningg.github.com/maven-intro"/>
-     <updated>2014-07-04T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/maven-intro</id>
-     <content type="html">&lt;blockquote&gt;
-  &lt;p&gt;题记：&lt;a href=&quot;http://www.infoq.com/cn/minibooks/maven-in-action&quot;&gt;《Maven实战（迷你版）》&lt;/a&gt;这本书写的太好了，我忍不住把其中的内容又敲一遍。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;0. 背景&lt;/h2&gt;
-
-&lt;p&gt;今天在GitHub上找了一个java语言编写的HDFS client，其使用Maven来进行工程的管理和构建；作为Maven工程导入Eclipse，提示pom.xml相关错误近10条。&lt;/p&gt;
-
-&lt;p&gt;好吧，pom.xml是Maven的配置文件，看来Maven逃脱不了关系了。（之前，多次接触/使用Maven，不过都没有整理资料，导致每次使用都需要重新学习，如此反复，浪费时间，引以为戒，故有此博客）。&lt;/p&gt;
-
-&lt;p&gt;要学东西，需要先找些可靠、严谨的书籍，大概搜索了一下，&lt;a href=&quot;http://www.juvenxu.com/mvn-in-action/&quot;&gt;《Maven实战》&lt;/a&gt; 的评价较高，那就他了。 一两天内，也无法拿到纸质版的书籍，索性在InfoQ上找了一个&lt;a href=&quot;http://www.infoq.com/cn/minibooks/maven-in-action&quot;&gt;《Maven实战（迷你版）》&lt;/a&gt;。 &lt;/p&gt;
-
-&lt;h3 id=&quot;maven&quot;&gt;0.1 Maven是什么？能做什么？&lt;/h3&gt;
-
-&lt;p&gt;在开始正式介绍之前，还总结一下Maven到底能做什么吧，所谓&lt;strong&gt;学以致用&lt;/strong&gt;，还是希望能够在今后的开发中，把Maven用起来的。&lt;/p&gt;
-
-&lt;p&gt;Maven能做什么？&lt;/p&gt;
-
-&lt;h2 id=&quot;maven-1&quot;&gt;1. Maven的安装与配置&lt;/h2&gt;
-
-&lt;h3 id=&quot;maven-2&quot;&gt;1.1 Maven的安装&lt;/h3&gt;
-
-&lt;p&gt;从Maven官网下载软件，根据官方文档安装即可。基本步骤：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;下载并解压文件；&lt;/li&gt;
-  &lt;li&gt;添加环境变量：&lt;code&gt;$M2_HOME&lt;/code&gt;=&lt;code&gt;Maven安装目录&lt;/code&gt;，并将&lt;code&gt;$M2_HOME/bin&lt;/code&gt;添加到&lt;code&gt;$PATH&lt;/code&gt;。&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;strong&gt;补充&lt;/strong&gt;：安装软件，就不可避免会遇到软件版本升级问题，现有较成熟的方案：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;win环境下，升级新版本的软件后，直接修改环境变量，指向新版本目录即可；&lt;/li&gt;
-  &lt;li&gt;Linux环境下，升级软件版本之后，修改环境变量；&lt;/li&gt;
-  &lt;li&gt;特别说明：Linux下，还有更简便的办法：在软件安装目录下，新建一个符号链接文件，环境变量指向此文件，软件升级后，只需更新此符号链接文件即可。&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Linux下，使用符号链接文件，来作为软件升级方案：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;#新建符号链接apache-maven，指向apache-maven-3.0文件
-ln -s apache-maven-3.0 apache-maven
-
-#在配置文件~/.bashrc中，添加环境变量
-export M2_HOME=/home/devp/apache-maven
-export PATH=$M2_HOME/bin:$PATH
-
-#升级软件时，更新符号连接文件apache-maven
-rm apache-maven
-ln -s apache-maven-3.1 apache-maven
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;1.2 安装目录分析&lt;/h3&gt;
-
-&lt;p&gt;前文简要说明了Maven的安装与升级步骤，现在我们简要分析一下Maven的安装文件。&lt;/p&gt;
-
-&lt;h4 id=&quot;m2home&quot;&gt;安装目录：M2_HOME&lt;/h4&gt;
-
-&lt;p&gt;前面的讲解中，我们都是将环境变量&lt;code&gt;M2_HOME&lt;/code&gt;指向Maven的安装目录，本文之后所有使用&lt;code&gt;M2_HOME&lt;/code&gt;的地方都代表了该安装目录，让我们看一下该目录的安装结构和内容：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;|--bin
-|   |--m2.conf
-|   |--mvn
-|   |--mvnDebug
-|
-|--boot
-|   |--plexus-classworlds-xxx.jar
-| 	
-|--conf
-|   |--settings.xml
-|   |--logging
-|       |--simplelogger.properties
-|
-|--lib
-|   |--... ...
-|
-|--LICENSE
-|--NOTICE
-|--README.txt
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;strong&gt;bin&lt;/strong&gt;：该目录包含了mvn运行的脚本，用来配置java命令，准备好classpath和相关的java命令参数，然后执行java命令。其中包含了mvn和mvnDebug两类脚本，打开来查看，就会看到mvnDebug只是比mvn多一条MAVEN_DEBUG_OPTS配置，作用就是在运行Maven时开启debug，方便调试Maven自身。此外，该目录还包含m2.conf文件，这是classworlds的配置文件，如果有必要，下文会对其进行介绍。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;boot&lt;/strong&gt;：以Maven 3.2.2为例，其中只包含了一个jar包plexus-classworlds-2.5.1.jar。这是一个类加载器框架，相对于默认的java类加载器，它提供了丰富的语法以方便配置，Maven使用该框架加载自己的类库。更多关于classworlds的信息请参考&lt;a href=&quot;http://classworlds.codehaus.org&quot;&gt;http://classworlds.codehaus.org&lt;/a&gt;。 对于普通的Maven用户，不必关心这一文件。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;conf&lt;/strong&gt;：该目录包含了一个非常重要的配置文件settings.xml，直接修改此文件，能够在机器上，全局定制Maven的行为。一般情况下，我们更偏向于复制该文件到 &lt;code&gt;~/.m2/&lt;/code&gt; 目录下（此处 &lt;code&gt;~&lt;/code&gt; 代表用户目录），然后修改该配置文件，在用户范围内定制Maven行为。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;lib&lt;/strong&gt;：该目录包含了Maven运行所需的各类java类库，Maven本身是分模块开发的，因此用户能够看到诸如：maven-compact-3.2.2.jar、maven-core-3.2.2.jar、maven-model-3.2.2.jar等文件，此外这里含包含了一些Maven用到的第三方依赖，例如：guava-14.0.1.jar、commons-cli-1.2.jar等。（对于Maven2来说，该目录只包含一个如maven-2.2.1-uber.jar的文件，它是由原本相互独立的jar文件的Maven模块以及依赖的第三方类库拆解后，重新合并而成的）。可以说，这个目录才是真正的Maven。&lt;/p&gt;
-
-&lt;p&gt;其他几个文件的简介：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;LICENSE：记录了Maven使用的软件许可证，Apache License Version 2.0。&lt;/li&gt;
-  &lt;li&gt;NOTICE：记录了Maven的发行机构。&lt;/li&gt;
-  &lt;li&gt;README.txt：包含了Maven的简要介绍、安装步骤以及参考资料的链接。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;m2&quot;&gt;本地仓库：~/.m2目录&lt;/h4&gt;
-
-&lt;p&gt;安装完Maven之后，运行命令&lt;code&gt;mvn help:system&lt;/code&gt; ，该命令打印出所有的Java系统属性和环境变量，这些信息对我们日常的编程工作很有帮助。这条命令执行之后，可以看到Maven会下载&lt;code&gt;maven-help-plugin&lt;/code&gt;，包括pom文件和jar文件，这些文件都被存储在本地仓库中。&lt;/p&gt;
-
-&lt;p&gt;打开当前登录用户的主目录（即，用户目录），下文使用&lt;code&gt;~&lt;/code&gt; 来表示用户目录。在用户目录下，可以看到 &lt;code&gt;.m2&lt;/code&gt; 目录。默认情况下，该文件夹下放置了Maven本地仓库：&lt;code&gt;.m2/repository&lt;/code&gt; 。所有的Maven构建（artifact）都被存储在本仓库中，以方便重用。我们可以在&lt;code&gt;~/.m2/repository/org/apache/maven/plugins/maven-help-plugins/&lt;/code&gt; 目录下，找到刚才下载的pom文件和jar文件（两文件缺一不可）。Maven根据几套规则来确定任何一个构建（artifact）在仓库中的位置。&lt;strong&gt;特别说明&lt;/strong&gt;：由于Maven仓库是通过简单文件系统，透明地展示给Maven用户的，有时候可以绕过Maven直接查看或修改仓库文件，在遇到疑难问题时，这往往十分有用。&lt;/p&gt;
-
-&lt;h3 id=&quot;http&quot;&gt;1.3 配置HTTP代理&lt;/h3&gt;
-
-&lt;p&gt;有时候公司处于安全考虑，要求通过安全认证的代理访问因特网。这就要求设置Maven通过HTTP代理方式，来访问外网的仓库，以下载所需的资源。&lt;/p&gt;
-
-&lt;p&gt;确认当前代理可用，然后编辑 &lt;code&gt;~\.m2\settings.xml&lt;/code&gt; 文件（如果没有这一文件，就将&lt;code&gt;$M2_HOME\conf\settings.xml&lt;/code&gt; 复制过来）。添加代理配置如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;lt;proxies&amp;gt;
-   &amp;lt;!-- proxy
-    | Specification for one proxy, to be used in connecting to the network.
-    |--&amp;gt;
-   &amp;lt;proxy&amp;gt;
-     &amp;lt;id&amp;gt;optional&amp;lt;/id&amp;gt;
-     &amp;lt;active&amp;gt;true&amp;lt;/active&amp;gt;
-     &amp;lt;protocol&amp;gt;http&amp;lt;/protocol&amp;gt;
-     &amp;lt;!-- 
-     &amp;lt;username&amp;gt;proxyuser&amp;lt;/username&amp;gt;
-     &amp;lt;password&amp;gt;proxypass&amp;lt;/password&amp;gt;
-     --&amp;gt;
-     &amp;lt;host&amp;gt;proxy.host.net&amp;lt;/host&amp;gt;
-     &amp;lt;port&amp;gt;80&amp;lt;/port&amp;gt;
-     &amp;lt;nonProxyHosts&amp;gt;local.net|some.host.com&amp;lt;/nonProxyHosts&amp;gt;
-   &amp;lt;/proxy&amp;gt;
-&amp;lt;/proxies&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;上述代理的配置方式十分简单，porxies下可以配置多个proxy，如果声明了多个proxy元素，默认第一个proxy被激活，否则active值为true表示被激活。当代理服务需要认证时，需要配置username和password。nonProxyHosts元素用于指定哪些主机名不需要代理，可以使用 &lt;code&gt;|&lt;/code&gt; 来分隔多个主机名。此外，该配置也支持通配符，例如，*.google.com表示所有以google.com结尾的域名访问都不通过代理。&lt;/p&gt;
-
-&lt;h3 id=&quot;eclipsemaven&quot;&gt;1.4 安装Eclipse的Maven插件&lt;/h3&gt;
-
-&lt;p&gt;对于一个稍微大一点的项目来说，没有IDE是不可想象的，还好很多IDE都有Maven的插件。&lt;/p&gt;
-
-&lt;p&gt;Eclipse平台下，插件名称：m2eclipse，我下载的Eclispe版本中，默认已经安装了此插件，因此，本文不暂讨论此问题。&lt;/p&gt;
-
-&lt;h3 id=&quot;maven-3&quot;&gt;1.5 Maven安装最佳实践&lt;/h3&gt;
-
-&lt;p&gt;本节介绍一些配置要点，在Maven安装过程中，这些要点是非必要的，但这些要点却比较实用。&lt;/p&gt;
-
-&lt;h4 id=&quot;settingsxml&quot;&gt;1.5.1 配置用户范围的settings.xml&lt;/h4&gt;
-
-&lt;p&gt;Maven用户可以选择配置 &lt;code&gt;$M2_HOME/settings.xml&lt;/code&gt; 或者 &lt;code&gt;~/.m2/settings.xml&lt;/code&gt; 。前者是全局范围的配置，整台机器上的所有用户都会受这一配置的影响，而后者是用户范围的，只有当前用户会受到该配置的影响。&lt;/p&gt;
-
-&lt;p&gt;推荐使用用户范围的配置，避免影响其他用户的配置，另一方面，也便于Maven升级：直接修改conf 目录下的settings.xml文件，这样每次升级时，都需要复制该文件，而如果使用&lt;code&gt;.m2/settings.xml&lt;/code&gt;，则升级时，不需要触动settings.xml文件。&lt;/p&gt;
-
-&lt;h4 id=&quot;idemaven&quot;&gt;1.5.2 不使用IDE内嵌的Maven&lt;/h4&gt;
-
-&lt;p&gt;无论Eclipse还是NetBeans，当我们集成Maven时，都会安装一个内嵌的Maven：一方面，这个Maven通常比较新，但不一定很稳定；另一方面，通常我们还需要使用Maven的命令行方式，如果两个Maven版本不同的话，可能造成项目构建过程不一致，这也是我们不希望看到的。因此，建议单独下载安装一个Maven，并将恰配置到IDE中。&lt;/p&gt;
-
-&lt;p&gt;Eclipse下，配置Maven：&lt;code&gt;Windows&lt;/code&gt;–&lt;code&gt;Preferences&lt;/code&gt;–&lt;code&gt;Maven&lt;/code&gt;–&lt;code&gt;Installations&lt;/code&gt;。&lt;/p&gt;
-
-&lt;h3 id=&quot;section-2&quot;&gt;1.6 常见错误&lt;/h3&gt;
-
-&lt;p&gt;这一节，记录一些可能会遇到的问题，以及解决办法。&lt;/p&gt;
-
-&lt;h4 id=&quot;maven-project&quot;&gt;1.6.1 创建/导入 Maven Project&lt;/h4&gt;
-
-&lt;p&gt;错误详情：&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;An internal error occurred during: “Updating Maven Project”. Lorg/codehaus/plexus/archiver/jar/JarArchiver;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;解决办法：在pom.xml中&lt;code&gt;&amp;lt;project&amp;gt; &amp;lt;build&amp;gt; &amp;lt;plugins&amp;gt;&lt;/code&gt;下添加&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;lt;plugin&amp;gt;
-  &amp;lt;groupId&amp;gt;org.apache.maven.plugins&amp;lt;/groupId&amp;gt;
-  &amp;lt;artifactId&amp;gt;maven-jar-plugin&amp;lt;/artifactId&amp;gt;
-  &amp;lt;version&amp;gt;2.4&amp;lt;/version&amp;gt;
-&amp;lt;/plugin&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;重新更新&lt;code&gt;Maven Project...&lt;/code&gt;（默认快捷键：&lt;code&gt;Alt + F5&lt;/code&gt;）。&lt;/p&gt;
-
-&lt;p&gt;参考：&lt;a href=&quot;http://stackoverflow.com/questions/14491298/an-internal-error-occurred-during-updating-maven-dependencies&quot;&gt;stackoverflow&lt;/a&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;eclipsemavenjar&quot;&gt;1.6.2 Eclipse环境下，Maven报错找不到某些jar包&lt;/h4&gt;
-
-&lt;p&gt;如果命令行方式下，使用&lt;code&gt;mvn&lt;/code&gt;的命令编译没有问题，而使用Eclipse时，&lt;code&gt;mvn install&lt;/code&gt;等出现问题，则，解决办法：在pom.xml中指定&lt;code&gt;&amp;lt;project&amp;gt; &amp;lt;build&amp;gt; &amp;lt;plugins&amp;gt;&lt;/code&gt;内添加&lt;code&gt;&amp;lt;plugin&amp;gt;&lt;/code&gt;，设置成与命令行条件下&lt;code&gt;mvn&lt;/code&gt;调用的&lt;code&gt;&amp;lt;plugin&amp;gt;&lt;/code&gt;保持一致。&lt;a href=&quot;http://blog.csdn.net/imlmy/article/details/8268293&quot;&gt;参考1&lt;/a&gt;、&lt;a href=&quot;http://blog.csdn.net/huang86411/article/details/17548481&quot;&gt;参考2&lt;/a&gt;，当然还有另一种办法：&lt;a href=&quot;http://central.maven.org/maven2/org/apache/maven/plugins/&quot;&gt;手动下载jar和pom&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;疑问&lt;/strong&gt;：在POM中 &lt;code&gt;&amp;lt;project&amp;gt; &amp;lt;dependencies&amp;gt;&lt;/code&gt; 下添加 &lt;code&gt;&amp;lt;dependency&amp;gt;&lt;/code&gt;元素 和 &lt;code&gt;&amp;lt;project&amp;gt; &amp;lt;build&amp;gt; &amp;lt;plugins&amp;gt;&lt;/code&gt; 下添加 &lt;code&gt;&amp;lt;plugin&amp;gt;&lt;/code&gt; 元素，有差异吗？有什么差异？（备注：当前调试结果，可得有差异）。&lt;/p&gt;
-
-&lt;p&gt;如果当前使用了代理等方式导致网络连接局部受限，造成命令行方式 &lt;code&gt;mvn&lt;/code&gt;能够正常下载依赖的jar包，但在Eclipse环境下，无法下载所需的项目的依赖包，可以在命令行方式下，先进行下载，然后，在Eclipse下进行更新、运行即可。（命令行方式为主）&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;思考&lt;/strong&gt;：Maven已经在settings.xml中配置了代理，那么，在Eclipse中开发调试Maven工程时，需要再配置Eclipse的代理吗？RE：不需要，只需要在Maven的配置中指定代理即可。&lt;/p&gt;
-
-&lt;h2 id=&quot;section-3&quot;&gt;2. 入门实例&lt;/h2&gt;
-
-&lt;p&gt;在此之前，需要安装配置好Maven，如果要在Eclipse下建立Maven工程，则需要安装配置Eclipse下的Maven的插件。具体信息，参考：&lt;a href=&quot;/download/maven/Maven+in+action.pdf&quot;&gt;《Maven实战（迷你版）》&lt;/a&gt;中第一章 Maven的安装与配置。&lt;/p&gt;
-
-&lt;h3 id=&quot;pom&quot;&gt;2.1 编写POM&lt;/h3&gt;
-
-&lt;p&gt;Maven项目的核心是：pom.xml文件。POM：（Project Object Model，项目对象模型）定义了项目的基本信息：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;项目如何构建（源文件编译、复制、打包）；&lt;/li&gt;
-  &lt;li&gt;项目所需的依赖（项目所需的依赖包，也可能需要依赖额外的包）；&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;现在我们新建一个Hello World项目，并编写一个最简单的pom.xml文件。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;lt;?xml version=&quot;1.0&quot; encoding=&quot;UTF-8&quot;?&amp;gt;
-&amp;lt;project xmlns=&quot;http://maven.apache.org/POM/4.0.0&quot;
-   xmlns:xsi=&quot;http://www.w3.org/2001/XMLSchema-instance&quot;
-   xsi:schemaLocation=&quot;http://maven.apache.org/POM/4.0.0 
-       http://maven.apache.org/maven-v4_0_0.xsd&quot;&amp;gt;
-  
-  &amp;lt;!-- POM模型的版本，对于Maven2和Maven3只能是4.0.0 --&amp;gt;
-  &amp;lt;modelVersion&amp;gt;4.0.0&amp;lt;/modelVersion&amp;gt;
-  
-  &amp;lt;!-- groupId,artifactId,version 唯一定位项目（任何jar、pom、war） --&amp;gt;
-  &amp;lt;!-- 定义project属于哪个组 --&amp;gt;
-  &amp;lt;!-- 例如，公司为mycom，项目为myapp，则groupId：com.mycom.myapp --&amp;gt;
-  &amp;lt;groupId&amp;gt;com.github.ningg.mvnbook&amp;lt;/groupId&amp;gt;
-  
-  &amp;lt;!-- 定义project在组内的代号，例如，你可能会为不同的子项目(模块)分配artifactId，
-  例如，myapp组下，myapp-util,myapp-domain --&amp;gt;
-  &amp;lt;artifactId&amp;gt;hello-world&amp;lt;/artifactId&amp;gt;
-  
-  &amp;lt;!-- 定义当前artifact的版本，SNAPSHOT:快照，说明项目仍在开发中，当前还不稳定 --&amp;gt;
-  &amp;lt;version&amp;gt;1.0-SNAPSHOT&amp;lt;/version&amp;gt;
-  
-  &amp;lt;!-- 声明一个别名，用户可理解的别名，不是必须的，但为方便交流，推荐每个POM --&amp;gt;
-  &amp;lt;name&amp;gt;Maven Hello World Project&amp;lt;/name&amp;gt;
-  
-  &amp;lt;properties&amp;gt;
-    &amp;lt;!-- 告知Maven进行复制、编译等操作时，使用的编码方式 --&amp;gt;
-    &amp;lt;project.build.sourceEncoding&amp;gt;UTF-8&amp;lt;/project.build.sourceEncoding&amp;gt;
-  &amp;lt;/properties&amp;gt;
-&amp;lt;/project&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;代码第一行是XML头，指定版本和编码方式。project是所有pom.xml的根元素，它还声明了一些命名空间和xsd（XML Schemas Definition，XML结构定义）元素，虽然这些属性是非必须的，但它们能够让第三方工具（如IDE中的XML编辑器）帮助我们快速编译POM。&lt;/p&gt;
-
-&lt;h3 id=&quot;section-4&quot;&gt;2.2 编写主代码&lt;/h3&gt;
-
-&lt;p&gt;项目主代码与测试代码不同。项目主代码会被打包到最终发布的构件中（例如jar包），而测试代码只在运行测试的时候使用，不会被打包发布。
-默认情况下，Maven假设项目的主代码位于src/main/java目录下，我们遵循Maven的约定，创建该目录，并在该项目下创建文件com/github/ningg/mvnbook/helloworld/HelloWorld.java，其内容如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;package com.github.ningg.mvnbook.helloworld;
-
-public class HelloWorld {
-
-	public String sayHello(){
-		return &quot;Hello Maven&quot;;
-	}
-	
-	public static void main(String[] args){
-		System.out.println(new HelloWorld().sayHello());
-	}
-	
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;补充说明如下：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;95%情况下，应将项目主代码放在src/main/java/目录下（Maven默认的约定），这样无需额外配置，Maven会自动搜索该项目主代码。&lt;/li&gt;
-  &lt;li&gt;Java类的包名（package），应该与POM中定义的groupId和artifactId相吻合，例如，本例中的com.github.ningg.mvnbook.helloworld，这样代码结构清晰，符合基本逻辑，方便搜索构件或者java类。&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;section-5&quot;&gt;2.3 进行编译&lt;/h3&gt;
-
-&lt;p&gt;运行命令&lt;code&gt;mvn clean compile&lt;/code&gt;，则输出：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;E:\reference\blogOfGit\maven-intro\hello-world&amp;gt;mvn clean compile
-[INFO] Scanning for projects...
-[INFO]
-[INFO] ------------------------------------------------------------------------
-[INFO] Building Maven Hello World Project 1.0-SNAPSHOT
-[INFO] ------------------------------------------------------------------------
-[INFO]
-[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ hello-world ---
-[INFO] Deleting E:\reference\blogOfGit\maven-intro\hello-world\target
-[INFO]
-[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ hello-world ---
-[INFO] Using &#39;UTF-8&#39; encoding to copy filtered resources.
-[INFO] skip non existing resourceDirectory E:\reference\blogOfGit\maven-intro\hello-world\src\main\resources
-[INFO]
-[INFO] --- maven-compiler-plugin:2.5.1:compile (default-compile) @ hello-world ---
-[INFO] Compiling 1 source file to E:\reference\blogOfGit\maven-intro\hello-world\target\classes
-[INFO] ------------------------------------------------------------------------
-[INFO] BUILD SUCCESS
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time: 0.828 s
-[INFO] Finished at: 2014-07-01T20:46:45+08:00
-[INFO] Final Memory: 6M/15M
-[INFO] ------------------------------------------------------------------------
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;说明：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;从输出信息上可以看出，Maven具体包含3个操作：clean、resources、compile&lt;/li&gt;
-  &lt;li&gt;clean：清理目录target/；&lt;/li&gt;
-  &lt;li&gt;resources：（本实例中，没有定义项目资源，暂时略过）；&lt;/li&gt;
-  &lt;li&gt;compile：编译项目主代码，默认输出到target/目录下；&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;说明：上文提到的3个操作，对应了Maven的插件以及插件目标，例如：clean操作，实际上是maven-clean-plugin:2.5插件的clean目标；（Maven插件的编写是很重要的一个方向）&lt;/p&gt;
-
-&lt;p&gt;至此，Maven在没有修改pom.xml配置的情况下，就进行了项目的清理和编译任务，在下文中，将继续编写一些测试单元代码并让Maven自动化测试。&lt;/p&gt;
-
-&lt;h3 id=&quot;section-6&quot;&gt;2.4 编写测试代码&lt;/h3&gt;
-
-&lt;p&gt;为保持项目结构清晰，主代码与测试代码分别在独立的目录中，前文提到过，主代码在src/main/java/目录下，对应的测试代码的目录是src/test/java/。因此，在编写代码前，应先创建这两个目录。&lt;/p&gt;
-
-&lt;p&gt;在java世界中，JUnit是事实上的单元测试标准。要使用JUnit需要在项目的配置文件中添加一个JUnit依赖，修改项目POM如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;lt;dependencies&amp;gt;
-   &amp;lt;dependency&amp;gt;
-      &amp;lt;groupId&amp;gt;junit&amp;lt;/groupId&amp;gt;
-      &amp;lt;artifactId&amp;gt;junit&amp;lt;/artifactId&amp;gt;
-      &amp;lt;version&amp;gt;4.7&amp;lt;/version&amp;gt;
-      &amp;lt;scope&amp;gt;test&amp;lt;/scope&amp;gt;
-   &amp;lt;/dependency&amp;gt;
-&amp;lt;/dependencies&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;在project元素下，添加了dependencies元素，该元素下可以包含多个dependency元素，用与声明项目所需的依赖，这里我们添加的是(groupId,artifactId,version)为(junit,junit,4.7)的project，有了这段声明，Maven会自动下载junit-4.7.jar包。你可能会问，Maven从哪里下载这个jar呢？实际上，没有使用Maven时，我们需要自己去JUnit官网下载这个jar；而使用了Maven，它会自动访问自己的&lt;a href=&quot;http://repo1.maven.org/maven2/&quot;&gt;中央仓库&lt;/a&gt; ，下载所需要的文件，我们也可以自己访问这个中央仓库，打开&lt;a href=&quot;http://repo1.maven.org/maven2/junit/junit/4.7/&quot;&gt;junit/junit/4.7/&lt;/a&gt; 路径，就能看到junit-4.7.pom和junit-4.7.jar。&lt;/p&gt;
-
-&lt;p&gt;上述POM代码中，还设置了scope=test，其表示当前依赖仅对测试代码有效，换句话说，测试代码中import junit代码是正确的，而主代码中如果使用import junit就会编译出错。如果不设定scope，默认scope=compile，表示该依赖对主代码和测试代码都有效。&lt;/p&gt;
-
-&lt;p&gt;配置好了测试依赖，就可以编写测试代码了，前面HelloWorld类中，需要测试sayHello()方法的返回值是否为“Hello Maven”。在src/test/java目录下创建文件，内容如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;package com.github.ningg.mvnbook.helloworld;
-
-import org.junit.Assert;
-import org.junit.Test;
-
-public class HelloWorldTest {
-
-	@Test
-	public void testSayHello(){
-		HelloWorld helloWorld = new HelloWorld();
-		String result = helloWorld.sayHello();
-		Assert.assertEquals(&quot;Hello Maven&quot;, result);
-	}
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;（&lt;strong&gt;注意&lt;/strong&gt;：Eclipse集成开发环境下，在src/main/java/以及src/test/java/目录下编写java文件时，如何使用代码提示，特别是，很多jar的依赖都在pom.xml中配置的，当前工程暂时看不到jar包，import jar包都会提示出错。&lt;strong&gt;简要答复&lt;/strong&gt;：在Eclipse环境下，创建Maven工程，使用Maven来管理项目，只要Maven能够连接到Internet来下载依赖的包，就不会出现找不到jar的情况，而且能够使用Eclipse下的代码提示功能；额外补充一点：Eclipse下，Maven管理项目时，当要查看依赖jar包对应的源码包时，Maven会自动下载相应的源码包）&lt;/p&gt;
-
-&lt;p&gt;典型的单元测试，包含3个步骤：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;准备测试类及数据；&lt;/li&gt;
-  &lt;li&gt;执行要测试的行为；&lt;/li&gt;
-  &lt;li&gt;检查结果；&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;上述测试代码中，我们首先初始化一个要测试的HelloWorld实例，接着执行该实例的sayHello()方法并将结果保存到result变量中，最后使用JUnit框架的Assert类检查结果是否为我们期望的“Hello Maven”。在JUnit 3中，约定所有需要执行测试的方法都以test开头，这里我们使用JUnit 4，但我们仍遵守这一约定，在JUnit中，需要执行的测试方法都以&lt;code&gt;@Test&lt;/code&gt;进行标注。&lt;/p&gt;
-
-&lt;p&gt;测试代码编写完成之后，调用Maven执行测试，运行命令：&lt;code&gt;mvn clean test&lt;/code&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;E:\reference\blogOfGit\maven-intro\hello-world&amp;gt;mvn clean test
-[INFO] Scanning for projects...
-[INFO]
-[INFO] ------------------------------------------------------------------------
-[INFO] Building Maven Hello World Project 1.0-SNAPSHOT
-[INFO] ------------------------------------------------------------------------
-[INFO]
-
-...
-Downloading: http://repo.maven.apache.org/maven2/junit/junit/4.7/junit-4.7.pom
-Downloaded: http://repo.maven.apache.org/maven2/junit/junit/4.7/junit-4.7.pom (2 KB at 0.7 KB/sec)
-Downloading: http://repo.maven.apache.org/maven2/junit/junit/4.7/junit-4.7.jar
-Downloaded: http://repo.maven.apache.org/maven2/junit/junit/4.7/junit-4.7.jar (227 KB at 87.0 KB/sec)
-...
-
-[INFO] --- maven-clean-plugin:2.5:clean (default-clean) @ hello-world ---
-[INFO] Deleting E:\reference\blogOfGit\maven-intro\hello-world\target
-[INFO]
-[INFO] --- maven-resources-plugin:2.6:resources (default-resources) @ hello-world ---
-[INFO] Using &#39;UTF-8&#39; encoding to copy filtered resources.
-[INFO] skip non existing resourceDirectory E:\reference\blogOfGit\maven-intro\hello-world\src\main\resources
-[INFO]
-[INFO] --- maven-compiler-plugin:2.5.1:compile (default-compile) @ hello-world ---
-[INFO] Compiling 1 source file to E:\reference\blogOfGit\maven-intro\hello-world\target\classes
-[INFO]
-[INFO] --- maven-resources-plugin:2.6:testResources (default-testResources) @ hello-world ---
-[INFO] Using &#39;UTF-8&#39; encoding to copy filtered resources.
-[INFO] skip non existing resourceDirectory E:\reference\blogOfGit\maven-intro\hello-world\src\test\resources
-[INFO]
-[INFO] --- maven-compiler-plugin:2.5.1:testCompile (default-testCompile) @ hello-world ---
-[INFO] Compiling 1 source file to E:\reference\blogOfGit\maven-intro\hello-world\target\test-classes
-[INFO]
-[INFO] --- maven-surefire-plugin:2.12.4:test (default-test) @ hello-world ---
-[INFO] Surefire report directory: E:\reference\blogOfGit\maven-intro\hello-world\target\surefire-reports
-
--------------------------------------------------------
- T E S T S
--------------------------------------------------------
-Running com.github.ningg.mvnbook.helloworld.HelloWorldTest
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.016 sec
-
-Results :
-
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
-
-[INFO] ------------------------------------------------------------------------
-[INFO] BUILD SUCCESS
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time: 1.359 s
-[INFO] Finished at: 2014-07-01T21:41:33+08:00
-[INFO] Final Memory: 7M/16M
-[INFO] ------------------------------------------------------------------------
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;从输出结果可以看出，执行&lt;code&gt;mvn clean test&lt;/code&gt;时，Maven实际执行了：clean: clean，resources: resources，compiler: compile，resources: testResources，compiler: testCompile，surefire: test。详细来说，Maven在执行测试（test）之前，会先执行：目录清理、主资源处理、主代码编译、测试资源处理、测试代码编译、执行测试等过程，这是Maven生命周期的一个特性，本文后续部分会详细介绍Maven的生命周期。（注：surefire是执行测试的插件，其运行测试用例，并输出测试报告。）&lt;/p&gt;
-
-&lt;h3 id=&quot;section-7&quot;&gt;2.5 打包和运行&lt;/h3&gt;
-
-&lt;p&gt;项目进行编译、测试之后，下一步就是打包（package）。Hello World项目的POM中没有设置打包类型，默认为jar；执行命令：&lt;code&gt;mvn clean package&lt;/code&gt;进行打包，可以看到如下输出：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;... ...
-
--------------------------------------------------------
- T E S T S
--------------------------------------------------------
-Running com.github.ningg.mvnbook.helloworld.HelloWorldTest
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.016 sec
-
-Results :
-
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
-
-[INFO]
-[INFO] --- maven-jar-plugin:2.4:jar (default-jar) @ hello-world ---
-[INFO] Building jar: E:\reference\blogOfGit\maven-intro\hello-world\target\hello-world-1.0-SNAPSHOT.jar
-[INFO] ------------------------------------------------------------------------
-[INFO] BUILD SUCCESS
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time: 1.531 s
-[INFO] Finished at: 2014-07-01T22:00:37+08:00
-[INFO] Final Memory: 7M/17M
-[INFO] ------------------------------------------------------------------------
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;类似的，Maven在打包之前，会执行编译、测试等操作。这里我们看到jar:jar负责打包，实际上，就是jar插件的jar目标，将项目主代码打包成为一个名为hello-world-1.0-SNAPSHOT.jar的文件，该文件也位于target/目录下，它是根据artifactId-version.jar规则进行命名的，如有需要，可以使用finalName来定义文件名称。&lt;/p&gt;
-
-&lt;p&gt;至此，我们得到了最终的jar包，如有需要，可以将这个jar包复制到其他项目的classpath中，从而使用HelloWorld类。但是，如何才能让其他Maven项目直接引用这个jar包呢？我们需要一个安装步骤，执行&lt;code&gt;mvn clean install&lt;/code&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;... ...
-
--------------------------------------------------------
- T E S T S
--------------------------------------------------------
-Running com.github.ningg.mvnbook.helloworld.HelloWorldTest
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0, Time elapsed: 0.031 sec
-
-Results :
-
-Tests run: 1, Failures: 0, Errors: 0, Skipped: 0
-
-[INFO]
-[INFO] --- maven-jar-plugin:2.4:jar (default-jar) @ hello-world ---
-[INFO]
-[INFO] --- maven-install-plugin:2.4:install (default-install) @ hello-world ---
-[INFO] Installing E:\reference\blogOfGit\maven-intro\hello-world\target\hello-world-1.0-SNAPSHOT.jar to C:\Documents and
- Settings\Luious\.m2\repository\com\github\ningg\mvnbook\hello-world\1.0-SNAPSHOT\hello-world-1.0-SNAPSHOT.jar
-[INFO] Installing E:\reference\blogOfGit\maven-intro\hello-world\pom.xml to C:\Documents and Settings\Luious\.m2\reposit
-ory\com\github\ningg\mvnbook\hello-world\1.0-SNAPSHOT\hello-world-1.0-SNAPSHOT.pom
-[INFO] ------------------------------------------------------------------------
-[INFO] BUILD SUCCESS
-[INFO] ------------------------------------------------------------------------
-[INFO] Total time: 1.219 s
-[INFO] Finished at: 2014-07-01T22:11:04+08:00
-[INFO] Final Memory: 5M/15M
-[INFO] ------------------------------------------------------------------------
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;从输出结果可知，在jar:jar之后，Maven又执行了install:install，其将当前项目的jar包以及其POM配置文件，安装到了Maven的本地库中(&lt;code&gt;~/.m2/repository/&lt;/code&gt;)。前文讲述JUnit的POM及jar下载的时候，我们说只有构件被下载到本地仓库后，才能由所有Maven项目使用类似，只有将Hello World的构件安装到本地仓库后，
-其他Maven项目才能使用它。&lt;/p&gt;
-
-&lt;p&gt;我们已经尝试使用了Maven的主要命令：mvn clean compile，mvn clean test，mvn clean package，mvn clean install。
-执行test之前会先执行compile，执行package之前会先执行test，执行install之前会先执行package。至此，我们已经知道这些命令是用来干什么的了，可以在其他任何Maven项目中执行这些命令。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;重要提示&lt;/strong&gt;：到目前为止，我们还没有运行Hello World项目，不要忘了HelloWorld类可能有一个main方法。默认打包生成的jar包并不能直接运行其中的main方法，因为带有main方法的类信息不会添加到manifest中（我们可以打开jar文件中的META-INF/MANIFEST.MF文件，将无法看到Main-Class一行）。为了生成可执行的jar文件，我们需要借助maven-shade-plugin，配置该插件如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;lt;build&amp;gt;
- &amp;lt;plugins&amp;gt;
-  &amp;lt;plugin&amp;gt;
-   &amp;lt;groupId&amp;gt;org.apache.maven.plugins&amp;lt;/groupId&amp;gt;
-   &amp;lt;artifactId&amp;gt;maven-shade-plugin&amp;lt;/artifactId&amp;gt;
-   &amp;lt;version&amp;gt;1.2.1&amp;lt;/version&amp;gt;
-   &amp;lt;executions&amp;gt;
-     &amp;lt;execution&amp;gt;
-       &amp;lt;phase&amp;gt;package&amp;lt;/phase&amp;gt;
-       &amp;lt;goals&amp;gt;
-         &amp;lt;goal&amp;gt;shade&amp;lt;/goal&amp;gt;
-       &amp;lt;/goals&amp;gt;
-       &amp;lt;configuration&amp;gt;
-         &amp;lt;transformers&amp;gt;
-         &amp;lt;transformer implementation=&quot;org.apache.maven.plugins.shade.resource.ManifestResourceTransformer&quot;&amp;gt;
-           &amp;lt;mainClass&amp;gt;com.github.ningg.mvnbook.helloworld.HelloWorld&amp;lt;/mainClass&amp;gt;
-         &amp;lt;/transformer&amp;gt;
-         &amp;lt;/transformers&amp;gt;
-       &amp;lt;/configuration&amp;gt;
-     &amp;lt;/execution&amp;gt;
-   &amp;lt;/executions&amp;gt;
-  &amp;lt;/plugin&amp;gt;
- &amp;lt;/plugins&amp;gt;
-&amp;lt;/build&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;上面的plugin元素在POM中的相对位置应该在 &lt;code&gt;&amp;lt;project&amp;gt;&amp;lt;build&amp;gt;&amp;lt;plugins&amp;gt;&lt;/code&gt; 下面。其中我们配置，mainClass 为 com.github.ningg.mvnbook.helloworld.HelloWorld ，项目在打包时，会将该信息放在MANIFEST中。执行完 &lt;code&gt;mvn clean package&lt;/code&gt; 之后，在target/目录下，我们可以看到 hello-world-1.0-SNAPSHOT.jar 
-和 original-hello-world-1.0-SNAPSHOT.jar，前者是带有Main-class信息的可运行jar，后者是原始的jar，打开 hello-world-1.0-SNAPSHOT.jar 的 META-INF/MANIFEST.MF，可以看到 Main-class 信息。&lt;/p&gt;
-
-&lt;p&gt;我们在项目根目录中执行该jar文件：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;E:\...\hello-world&amp;gt;java -jar target/hello-world-1.0-SNAPSHOT.jar
-Hello Maven
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;（&lt;strong&gt;注意&lt;/strong&gt;：java命令行的使用方法，jar包等知识的补充）&lt;/p&gt;
-
-&lt;p&gt;控制台输出：&lt;code&gt;Hello Maven&lt;/code&gt;，这正是我们所期望的。&lt;/p&gt;
-
-&lt;p&gt;本小节介绍了一个Hello World实例，侧重点是Maven而非Java代码，介绍了POM，Maven项目结构，以及如何编译、测试、打包、发布、运行。&lt;/p&gt;
-
-&lt;h3 id=&quot;archetype&quot;&gt;2.6 使用Archetype生成项目骨架&lt;/h3&gt;
-
-&lt;p&gt;Hello World项目中有一些Maven的约定：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;pom.xml在项目的根目录；&lt;/li&gt;
-  &lt;li&gt;主代码在src/main/java/目录下；&lt;/li&gt;
-  &lt;li&gt;测试代码在src/test/java/目录下；&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;我们称这些基本的目录结构和pom.xml文件内容为项目的骨架。每次创建项目都要手动创建项目骨架，会让程序员不高兴，为此，Maven提供了Archetype以帮助我们快速勾勒出项目骨架。&lt;/p&gt;
-
-&lt;p&gt;以Hello World为例，我们使用maven archetype来创建该项目的骨架，新建一个Maven项目目录。&lt;/p&gt;
-
-&lt;p&gt;如果是Maven3，简单运行：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;mvn archetype:generate
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;（如果是Maven2，请参考：&lt;a href=&quot;/download/maven/Maven+in+action.pdf&quot;&gt;《Maven实战（迷你版）》&lt;/a&gt;）&lt;/p&gt;
-
-&lt;p&gt;实际上，我们运行的是maven-archetype-plugin插件，其输入格式是：groupId: artifactId: version: goal ，注意冒号的分隔。紧接着，我们会看到很长的输出，有很多可用的archetype供我们选择，包括注明的Appfuse项目、JPA项目的archetype等等。每一个archetype前面都会对应一个编号，同时命令行会提示一个默认的编号，对应archetype为maven-archetype-quickstart，直接回车选择该archetype，紧接着Maven会提示我们输入要创建的项目的groupId，artifactId，version以及包名（package，默认与groupId和artifactId保持对应关系），具体如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;Define value for property &#39;groupId&#39;: : com.github.ningg.mvnbook
-Define value for property &#39;artifactId&#39;: : hello-world-archetype
-Define value for property &#39;version&#39;:  1.0-SNAPSHOT: :
-Define value for property &#39;package&#39;:  com.github.ningg.mvnbook: : com.github.ningg.mvnbook.helloworldarchetype
-Confirm properties configuration:
-groupId: com.github.ningg.mvnbook
-artifactId: hello-world-archetype
-version: 1.0-SNAPSHOT
-package: com.github.ningg.mvnbook.helloworldarchetype
- Y: : Y
-[INFO] ----------------------------------------------------------------------------
-[INFO] Using following parameters for creating project from Old (1.x) Archetype: maven-archetype-quickstart:RELEASE
-[INFO] ----------------------------------------------------------------------------
-[INFO] Parameter: groupId, Value: com.github.ningg.mvnbook
-[INFO] Parameter: packageName, Value: com.github.ningg.mvnbook.helloworldarchetype
-[INFO] Parameter: package, Value: com.github.ningg.mvnbook.helloworldarchetype
-[INFO] Parameter: artifactId, Value: hello-world-archetype
-[INFO] Parameter: basedir, Value: E:\reference\blogOfGit\maven-intro
-[INFO] Parameter: version, Value: 1.0-SNAPSHOT
-[INFO] project created from Old (1.x) Archetype in dir: E:\reference\blogOfGit\maven-intro\hello-world-archetype
-[INFO] ------------------------------------------------------------------------
-[INFO] BUILD SUCCESS
-
-...
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;运行完毕之后，在当前目录下会生成一个hello-world-archetype目录，其下是一个完整的项目骨架。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;特别说明&lt;/strong&gt;：如果你有很多项目拥有类似的项目骨架（项目结构和配置文件），你可以一劳永逸的开发自己的archetype，然后在项目中使用自定义的archetype来快速生成项目骨架。（具体请参考：&lt;a href=&quot;/download/maven/Maven+in+action.pdf&quot;&gt;《Maven实战（迷你版）》&lt;/a&gt;）&lt;/p&gt;
 
 </content>
    </entry>
