@@ -4,7 +4,7 @@
    <title>NingG.github.com</title>
    <link href="http://ningg.github.com/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://ningg.github.com" rel="alternate" type="text/html" />
-   <updated>2014-09-20T15:31:32+08:00</updated>
+   <updated>2014-09-24T22:30:16+08:00</updated>
    <id>http://ningg.github.com</id>
    <author>
      <name></name>
@@ -13,15 +13,79 @@
 
    
    <entry>
+     <title>搭建Android开发环境</title>
+     <link href="http://ningg.github.com/install-android-dev-env"/>
+     <updated>2014-09-22T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/install-android-dev-env</id>
+     <content type="html">&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
+
+&lt;p&gt;哈哈，这个背景说不说呢？说，坦坦荡荡的：想做一个对Android手机的截屏图片，直接打马赛克的小APP，当前满足这一需求的APP有不少，例如：美图秀秀等，但是不好意思，我想要一个轻量级的，而且最简单的打码操作。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;搭建开发环境&lt;/h2&gt;
+
+&lt;p&gt;打码APP，目标确定了，就开发搞起。&lt;em&gt;（具体功能是什么？技术方案定了吗？别急，这些我现在都不会、都不确定，个人估计折腾折腾就清晰的，我对这个还是有信心的）&lt;/em&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;特别提醒&lt;/strong&gt;：下面是我看官网的操作记录，请那些还有丁点技术追求的coder，也去看官网，我写blog不是为了布道，而且blog的精准、严谨程度，与官网差得太远。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;下载软件&lt;/h3&gt;
+
+&lt;p&gt;图省事，我从官网直接下载了”Eclipse ADT bundle”，详细版本信息：”adt-bundle-windows-x86_64-20140702.zip”，其下载地址如下：&lt;a href=&quot;https://dl.google.com/android/adt/adt-bundle-windows-x86_64-20140702.zip&quot;&gt;https://dl.google.com/android/adt/adt-bundle-windows-x86_64-20140702.zip&lt;/a&gt; 。由于GFW的存在，很多地方无法直接下载上面链接文件，怎么办？用迅雷，复制上面的链接，新建一个迅雷下载任务，妥了，下载完毕。&lt;/p&gt;
+
+&lt;p&gt;Eclipse ADT Bundle包含3个部分：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Android SDK&lt;/li&gt;
+  &lt;li&gt;Eclipse IDE&lt;/li&gt;
+  &lt;li&gt;ADT(Android Developer Tools)：Eclipse下进行Android开发的插件；&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;客观，留意一下：上面Eclipse ADT Bundle对应的解压包中，自带了Android开发的文档，具体路径：&lt;code&gt;%ECLIPSE_ADT_BUNDLE%/sdk/docs/&lt;/code&gt;，这个极其有用，我有问题，都会偷偷看这个。&lt;/p&gt;
+
+&lt;h3 id=&quot;package&quot;&gt;安装package&lt;/h3&gt;
+
+&lt;p&gt;上面Eclipse ADT Bundle对应的解压包中eclipse直接可以使用了，不过很多时候，需要安装写package，来支持Android的开发。通常，通过Android SDK Manager来安装package，截个图如下：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/install-android-dev-env/sdk-manager.jpg&quot; alt=&quot;Android SDK Manager&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;安装package，本来挺简单个事，由于GFW的存在，唉，上面的package基本无法下载，或者极其慢，解决办法：修改hosts文件，在其中添加片段：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#Google主页
+203.208.46.146 www.google.com
+#这行是为了方便打开Android开发官网 现在好像不VPN也可以打开
+#74.125.113.121 developer.android.com
+#更新的内容从以下地址下载
+203.208.46.146 dl.google.com
+203.208.46.146 dl-ssl.google.com
+****************************************
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;参考来源：&lt;a href=&quot;http://www.cnblogs.com/tc310/archive/2012/12/21/2828450.html&quot;&gt;http://www.cnblogs.com/tc310/archive/2012/12/21/2828450.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;section-3&quot;&gt;推荐书籍&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://book.douban.com/subject/25942191/&quot;&gt;第一行代码——Android&lt;/a&gt;
+    &lt;ul&gt;
+      &lt;li&gt;这个入门不错，对于有开发经验的人员也可以借鉴一下&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+   </entry>
+   
+   <entry>
      <title>编译flume：使用eclipse查看flume源码</title>
      <link href="http://ningg.github.com/build-flume"/>
      <updated>2014-09-19T00:00:00+08:00</updated>
      <id>http://ningg.github.com/build-flume</id>
      <content type="html">&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
 
-&lt;p&gt;最近要弄日志收集系统，初始方案是将日志压缩之后，通过类似FTP方式上传，其中有一个问题：日志不能实时收集，因此，无法实时监控系统状态。&lt;/p&gt;
+&lt;p&gt;最近要弄日志收集系统，初始方案是将日志压缩之后，通过类似FTP方式上传，其中有一个问题：日志不能实时收集，因此，无法实时监控系统状态。Flume支持实时的日志采集，妥了，尝试用一下。&lt;/p&gt;
 
-&lt;p&gt;说实话，类似FTP方式上传文件时，还有几个问题，自己仍在思考：&lt;/p&gt;
+&lt;p&gt;说点题外话，通过类似FTP方式上传文件时，还有几个问题，自己仍在思考：&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;日志上传时，如何确定日志上传完成？&lt;/li&gt;
@@ -2945,47 +3009,6 @@ hdfs:!::
 
 &lt;ul&gt;
   &lt;li&gt;《Hadoop技术内幕：深入解析Hadoop Common和HDFS架构的设计和实现原理》&lt;/li&gt;
-&lt;/ul&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>LVM入门介绍</title>
-     <link href="http://ningg.github.com/lvm-intro"/>
-     <updated>2014-07-10T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/lvm-intro</id>
-     <content type="html">&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
-
-&lt;p&gt;这两天重装Hadoop，由Intel发行版本（试用）变更为Hortonworks发行版本（试用），这样，我需要卸载原始Intel版本的Hadoop，最好将HDFS存储数据的分区进行格式化。使用 &lt;code&gt;lsblk&lt;/code&gt; 查看了一下，当前机器上磁盘分区 &lt;code&gt;/dev/sda&lt;/code&gt; 的结构如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;[root@localhost ~]# lsblk
-NAME                            MAJ:MIN RM   SIZE RO TYPE MOUNTPOINT
-sda                               8:0    0 558.9G  0 disk
-├─sda1                            8:1    0   500M  0 part /boot
-└─sda2                            8:2    0 558.4G  0 part
-  ├─vg_localhost-lv_root (dm-0) 253:0    0    50G  0 lvm  /
-  ├─vg_localhost-lv_swap (dm-1) 253:1    0  15.7G  0 lvm  [SWAP]
-  └─vg_localhost-lv_home (dm-2) 253:2    0 492.7G  0 lvm  /home
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;现在有个问题，上面 &lt;code&gt;lv_root&lt;/code&gt;、&lt;code&gt;lv_swap&lt;/code&gt;、&lt;code&gt;lv_home&lt;/code&gt; 都是什么分区？其 &lt;code&gt;TYPE=lvm&lt;/code&gt;，那LVM到底是怎么回事？&lt;/p&gt;
-
-&lt;p&gt;还有几个问题：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;[root@localhost ~]# df -hT
-文件系统    					  类型   容量  已用  可用 已用%% 挂载点
-/dev/mapper/vg_localhost-lv_root  ext4   50G   17G   31G   36%   /
-tmpfs        					  tmpfs  16G   60K   16G   1%    /dev/shm
-/dev/sda1   					  ext4   485M  38M   422M  9%    /boot
-/dev/mapper/vg_localhost-lv_home  ext4   485G  156G  305G  34%   /home
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;上面 &lt;code&gt;df -hT&lt;/code&gt; 命令查询查询结果中:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code&gt;/dev/mapper/vg_localhost-lv_home&lt;/code&gt; 与之前lsblk查询得知的 &lt;code&gt;/sda2/vg_localhost-lv_home&lt;/code&gt; 之间什么关系？&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;tmpfs&lt;/code&gt; 与之前 &lt;code&gt;vg_localhost-lv_swap [SWAP]&lt;/code&gt; 之间的关系？&lt;/li&gt;
 &lt;/ul&gt;
 
 </content>
