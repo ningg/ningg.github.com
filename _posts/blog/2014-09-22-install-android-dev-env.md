@@ -26,7 +26,7 @@ Eclipse ADT Bundle包含3个部分：
 2.	Eclipse IDE
 3.	ADT(Android Developer Tools)：Eclipse下进行Android开发的插件；
 
-客观，留意一下：上面Eclipse ADT Bundle对应的解压包中，自带了Android开发的文档，具体路径：`%ECLIPSE_ADT_BUNDLE%/sdk/docs/`，这个极其有用，我有问题，都会偷偷看这个。
+客官，留意一下：上面Eclipse ADT Bundle对应的解压包中，自带了Android开发的文档，具体路径：`%ECLIPSE_ADT_BUNDLE%/sdk/docs/`，这个极其有用，我有问题，都会偷偷看这个。
 
 ###安装package
 

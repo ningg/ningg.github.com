@@ -4,13 +4,240 @@
    <title>NingG.github.com</title>
    <link href="http://ningg.github.com/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://ningg.github.com" rel="alternate" type="text/html" />
-   <updated>2014-09-24T22:30:16+08:00</updated>
+   <updated>2014-09-26T00:05:33+08:00</updated>
    <id>http://ningg.github.com</id>
    <author>
      <name></name>
      <email></email>
    </author>
 
+   
+   <entry>
+     <title>Android入门几个基本知识</title>
+     <link href="http://ningg.github.com/android-lesson-one"/>
+     <updated>2014-09-23T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/android-lesson-one</id>
+     <content type="html">&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
+
+&lt;p&gt;最近参加某活动，也算掌握了点滴的内容，整理一下，算是阶段的笔记。&lt;/p&gt;
+
+&lt;h2 id=&quot;android4&quot;&gt;Android的4个模块&lt;/h2&gt;
+
+&lt;p&gt;Android开发中涉及4个模块/对象：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Activity；&lt;/li&gt;
+  &lt;li&gt;Service；&lt;/li&gt;
+  &lt;li&gt;Broadcast Receiver；&lt;/li&gt;
+  &lt;li&gt;Content Provider；&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;activity&quot;&gt;Activity&lt;/h3&gt;
+
+&lt;p&gt;通常是用户界面，粒度也可能更细些，例如：菜单列表、图片、图片标题，都可能是一个单独的Activity；&lt;/p&gt;
+
+&lt;h3 id=&quot;service&quot;&gt;Service&lt;/h3&gt;
+
+&lt;p&gt;没有用户界面，但会一直在后台运行，例如：进行其他操作时，播放背景音乐、后台下载数据；&lt;/p&gt;
+
+&lt;h3 id=&quot;broadcast-receiver&quot;&gt;Broadcast Receiver&lt;/h3&gt;
+
+&lt;p&gt;应用程序利用Broadcast Receiver机制，来接收、发送广播消息，举例：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;接收/拨打电话；&lt;/li&gt;
+  &lt;li&gt;接收/发送短信；&lt;/li&gt;
+  &lt;li&gt;手机所处时区改变时，应用程序会接收到通知；&lt;/li&gt;
+  &lt;li&gt;电池电量不足；&lt;/li&gt;
+  &lt;li&gt;用户选择一张图片；&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;content-provider&quot;&gt;Content Provider&lt;/h3&gt;
+
+&lt;p&gt;应用程序利用Content Provider机制，来进行数据共享，例如：读取系统电话簿中联系人；&lt;/p&gt;
+
+&lt;h2 id=&quot;activity-1&quot;&gt;Activity的生命周期&lt;/h2&gt;
+
+&lt;p&gt;生命周期？对，这个术语在计算机相关的开发中，总能听到，到底什么意思？干什么的？生命周期，&lt;code&gt;lifecycle&lt;/code&gt;，其基本目标是：描述清楚一个对象从产生到消亡的过程，为开发者干预这一过程提供方法。&lt;em&gt;（用个通俗的术语来重新表述一下Object lifecycle：物体的状态变化路径）&lt;/em&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;back-stack&quot;&gt;返回站（Back Stack）&lt;/h3&gt;
+
+&lt;p&gt;说Activity的生命周期之前，补充一个概念：返回栈；为了方便管理Activity，将多个相互关联的Activity合并称作一个Task，一个Task对应一个Back Stack。如下图：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/android-lesson-one/diagram_backstack.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;关于返回栈，简要说明几点（官方文档）：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;A &lt;code&gt;task&lt;/code&gt; is a collection of activities that users interact with when performing a certain job.&lt;/li&gt;
+  &lt;li&gt;the back stack operates as a &lt;code&gt;last in, first out&lt;/code&gt; object structure.&lt;/li&gt;
+  &lt;li&gt;pushed onto the stack when started by the current activity and popped off when the user leaves it using the Back button.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;activity-2&quot;&gt;Activity状态&lt;/h3&gt;
+
+&lt;p&gt;Activity从产生到消亡，会有几个典型的状态，简要说一下（来自官方文档）：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;运行状态：栈顶，显示Activity；&lt;/li&gt;
+  &lt;li&gt;暂停状态：不处于栈顶，但部分可见；&lt;/li&gt;
+  &lt;li&gt;停止状态：不处于栈顶，也全部不可见；&lt;/li&gt;
+  &lt;li&gt;销毁状态：返回栈中，已经移除；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;acitivity-lifecycle&quot;&gt;Acitivity lifecycle&lt;/h3&gt;
+
+&lt;p&gt;Activity生命周期如下：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/android-lesson-one/activity_lifecycle.png&quot; alt=&quot;activity_lifecycle.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;备注：可利用上面7个回调方法，来调整Activity。&lt;/p&gt;
+
+&lt;h2 id=&quot;intent&quot;&gt;Intent简介&lt;/h2&gt;
+
+&lt;p&gt;Intent是不同组件之间进行交互的重要方式，基本点两个：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;指明当前组件要执行的动作；&lt;/li&gt;
+  &lt;li&gt;不同组件之间传递的数据；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Intent能够携带数据，具体用途有：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;启动Activity；&lt;/li&gt;
+  &lt;li&gt;启动Service；&lt;/li&gt;
+  &lt;li&gt;发送广播；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Intent分为2类：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;显式Intent：举例，Intent直接指定下一步启动的Activity；&lt;/li&gt;
+  &lt;li&gt;隐式Intent；举例，通过Activity的&lt;code&gt;&amp;lt;activity&amp;gt;&amp;lt;intent-filter&amp;gt;&lt;/code&gt;来隐式指定，某个Activity来捕获哪一类的Intent；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;android&quot;&gt;Android测试相关&lt;/h2&gt;
+
+&lt;p&gt;之前，我对测试不感兴趣的，但最近感觉，开发中前期，对系统弄一个测试框架，能够提升开发、调试的效率，同时，也能在产品最终上线前进行较为全面的验证。&lt;/p&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;测试点&lt;/h3&gt;
+
+&lt;p&gt;测试，到底要测哪些方面？&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;功能测试
+    &lt;ul&gt;
+      &lt;li&gt;安装/卸载&lt;/li&gt;
+      &lt;li&gt;具体功能点&lt;/li&gt;
+      &lt;li&gt;联网（默认的联网方式：wifi or sim卡？网络切换是否有相应提示？飞行模式）&lt;/li&gt;
+      &lt;li&gt;程序进入输入功能时，是否正常弹出键盘？键盘是否遮挡应用需要输入内容的对话框？&lt;/li&gt;
+      &lt;li&gt;home键与应用之间，多次切换&lt;/li&gt;
+      &lt;li&gt;返回上一级操作，退出程序后的提示&lt;/li&gt;
+      &lt;li&gt;当离开应用一段事件后，再次回到应用程序时，不能丢失用户数据；&lt;/li&gt;
+      &lt;li&gt;横屏、竖屏切换时，不能丢失用户数据；&lt;/li&gt;
+      &lt;li&gt;长按某一按钮，是否会触发其他事件；&lt;/li&gt;
+      &lt;li&gt;PC端与APP端的数据同步（例如，bloger在PC端设置禁止他人评论，则，APP上也应禁止评论）&lt;/li&gt;
+      &lt;li&gt;APP中内嵌的链接，程序如何处理？如果调用设备的浏览器，能否正常切回到APP？&lt;/li&gt;
+      &lt;li&gt;各个页面间，多次切换&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;性能测试
+    &lt;ul&gt;
+      &lt;li&gt;APP的整体响应速度；&lt;/li&gt;
+      &lt;li&gt;连续点击相同按钮（游戏类APP）&lt;/li&gt;
+      &lt;li&gt;快速划屏（游戏类APP）&lt;/li&gt;
+      &lt;li&gt;长时间使用应用&lt;/li&gt;
+      &lt;li&gt;当应用不处于活动状态时，不能大量消耗系统资源&lt;/li&gt;
+      &lt;li&gt;耗电情况&lt;/li&gt;
+      &lt;li&gt;运行过程中，需要产看内存和CPU的使用情况：&lt;code&gt;adb shell top&lt;/code&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;异常测试
+    &lt;ul&gt;
+      &lt;li&gt;低电量情况下使用应用&lt;/li&gt;
+      &lt;li&gt;（处理以下情况时，应用不能崩溃，并且返回应用后，数据不能丢失）&lt;/li&gt;
+      &lt;li&gt;使用应用时，对来电的处理&lt;/li&gt;
+      &lt;li&gt;使用应用时，对短信的处理&lt;/li&gt;
+      &lt;li&gt;使用应用时，闹铃响起&lt;/li&gt;
+      &lt;li&gt;使用应用时，锁屏、解锁&lt;/li&gt;
+      &lt;li&gt;网络异常：使用应用时，断网；断网情况下，启动应用 &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;UI测试&lt;/li&gt;
+  &lt;li&gt;不同系统语言的支持&lt;/li&gt;
+  &lt;li&gt;适配测试
+    &lt;ul&gt;
+      &lt;li&gt;目标：测试不同厂家、型号的手机上，APP的运行效果；&lt;/li&gt;
+      &lt;li&gt;背景：由于手机型号、总类繁多，通常只关注当前用户数较多的手机&lt;/li&gt;
+      &lt;li&gt;问题1：如何找出用户较多的具体手机型号？&lt;/li&gt;
+      &lt;li&gt;RE问题1：选几个纬度，屏幕尺寸、分辨率、Android系统版本，正交定位一下&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;android-testing-framework&quot;&gt;Android Testing Framework&lt;/h3&gt;
+
+&lt;p&gt;下面会列出一张图（官网拿的），简要说几点：&lt;em&gt;（可能理解有错，会陆续更正）&lt;/em&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code&gt;Mock Objects&lt;/code&gt;：模拟系统的一切行为；另，支持依赖注入；&lt;/li&gt;
+  &lt;li&gt;JUnit：写单元测试；（白盒测试）&lt;/li&gt;
+  &lt;li&gt;Instrumentation：可以模拟系统行为，捕获Activity的任何一个回调方法；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/android-lesson-one/test_framework.png&quot; alt=&quot;test_framework.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;基于这一测试框架，能够进行如下几个测试：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;单元测试；&lt;/li&gt;
+  &lt;li&gt;框架测试；（什么意思？）&lt;/li&gt;
+  &lt;li&gt;UI测试；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;备注：在官网文档中，&lt;code&gt;Develop&lt;/code&gt;–&lt;code&gt;Tools&lt;/code&gt;部分，针对&lt;code&gt;Tests&lt;/code&gt;有详细介绍。&lt;/p&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;测试工具&lt;/h3&gt;
+
+&lt;p&gt;列几个常用测试工具，以及简要的说明：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;monkey：产生伪随机事件流，用途：压力测试、随机点击；&lt;/li&gt;
+  &lt;li&gt;monkey runner：利用python脚本，进行自动化测试，可以测试安装/卸载、截图、业务使用流程；&lt;/li&gt;
+  &lt;li&gt;Hierarchy Viewer：可视化方式，显示UI树，用途：调试、优化，用户界面；另，可以放大界面；&lt;/li&gt;
+  &lt;li&gt;DDMS（Dalvik Debug Monitor Service）：Eclipse下的一个视图，用途：模拟设备的地理位置变动；&lt;/li&gt;
+  &lt;li&gt;traceview：跟踪程序性能，并且具体到method；&lt;em&gt;（&lt;code&gt;Debug.startMethodtrace(FILE)&lt;/code&gt;启动跟踪）&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section-3&quot;&gt;附录&lt;/h2&gt;
+
+&lt;h3 id=&quot;section-4&quot;&gt;几个名词&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;回归测试：修改代码之后，重新测试。&lt;/li&gt;
+  &lt;li&gt;AVD：Android Virtual Devices，模拟器&lt;/li&gt;
+  &lt;li&gt;SDK：Software Development Kit，软件开发平台&lt;/li&gt;
+  &lt;li&gt;ADT；Android Development Tools，Eclipse下Android开发时用到的插件&lt;/li&gt;
+  &lt;li&gt;ADB：Android Debug Bridge，调试桥&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;section-5&quot;&gt;产品设计几点&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;允许用户登录情况下，使用app的大部分通用功能；&lt;/li&gt;
+  &lt;li&gt;当且仅当用户要使用一些核心功能时，强制用户注册、登录；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section-6&quot;&gt;参考来源&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://developer.android.com/index.html&quot;&gt;Android官方开发者网站&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://developer.android.com/develop/index.html&quot;&gt;Android官方文档&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+   </entry>
    
    <entry>
      <title>搭建Android开发环境</title>
@@ -41,7 +268,7 @@
   &lt;li&gt;ADT(Android Developer Tools)：Eclipse下进行Android开发的插件；&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;客观，留意一下：上面Eclipse ADT Bundle对应的解压包中，自带了Android开发的文档，具体路径：&lt;code&gt;%ECLIPSE_ADT_BUNDLE%/sdk/docs/&lt;/code&gt;，这个极其有用，我有问题，都会偷偷看这个。&lt;/p&gt;
+&lt;p&gt;客官，留意一下：上面Eclipse ADT Bundle对应的解压包中，自带了Android开发的文档，具体路径：&lt;code&gt;%ECLIPSE_ADT_BUNDLE%/sdk/docs/&lt;/code&gt;，这个极其有用，我有问题，都会偷偷看这个。&lt;/p&gt;
 
 &lt;h3 id=&quot;package&quot;&gt;安装package&lt;/h3&gt;
 
@@ -2952,63 +3179,6 @@ hdfs:!::
 &lt;ul&gt;
   &lt;li&gt;《鸟哥私房菜基础篇（第三版）》 第6章 Linux的档案权限与目录配置&lt;/li&gt;
   &lt;li&gt;《鸟哥私房菜基础篇（第三版）》 第14章 Linux帐号管理与ACL权限设定&lt;/li&gt;
-&lt;/ul&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>HDFS:Hadoop Distributed File System简介</title>
-     <link href="http://ningg.github.com/hdfs-intro"/>
-     <updated>2014-07-14T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/hdfs-intro</id>
-     <content type="html">&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
-
-&lt;p&gt;最近要做一件事：调研远端节点向HDFS上传/下载文件的方法，并确定一个高效率的方案，这个最终方案初步确定了WebHDFS REST API方式，不过一些HDFS内部的实现细节/原理，自己很想一窥究竟，OK，既然有这份心情，那就走起，趁热打铁、一鼓作气。&lt;/p&gt;
-
-&lt;h2 id=&quot;section-1&quot;&gt;文件系统&lt;/h2&gt;
-
-&lt;p&gt;为了实现多个应用可以并发的向存储介质上写入信息，出现了文件（File）这一概念，即把信息以一种单元（File，文件）的形式存储在介质上。文件是一个命名的、存储在设备上的信息的线性字节流。对文件的管理，包括文件的逻辑组成结构、命名、操作（读、写、删除）、权限管理、具体实现（如何组织存储区域），称为&lt;code&gt;文件系统&lt;/code&gt;（FileSystem，FS）。&lt;/p&gt;
-
-&lt;p&gt;总结一下，文件系统需要解决文件相关的几个问题：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;怎么找到文件？（文件的命名）&lt;/li&gt;
-  &lt;li&gt;可以对文件进行哪些操作？（读、写、删除、复制等）&lt;/li&gt;
-  &lt;li&gt;哪些人可以对这个文件进行操作？（权限管理）&lt;/li&gt;
-  &lt;li&gt;为保证上面的功能，并且，兼顾文件读写等操作的效率，逻辑上，一个文件可以划分为几个部分？（逻辑组成结构）&lt;/li&gt;
-  &lt;li&gt;说一千道一万，上面这些东西，如何在物理磁盘上实现？（具体实现）&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;无结构的文件 vs. 结构化的文件&lt;/p&gt;
-
-&lt;p&gt;无结构的文件：大部分文件系统，不关系文件里保存的数据，把文件内容作为无结构的字节序列保存。也有一些文件系统支持结构化的文件，以记录为单位组织信息，免去文件系统使用者将“原始的”字节流转换成记录流的麻烦。&lt;/p&gt;
-
-&lt;p&gt;一个文件，通常包含：文件名和文件数据，还包括，创建日期、文件长度、引用计数等额外信息，通常将这些额外项，称为文件属性，也称文件元数据。&lt;/p&gt;
-
-&lt;h3 id=&quot;section-2&quot;&gt;目录与目录树&lt;/h3&gt;
-
-&lt;p&gt;如何找到一个文件呢？为了能够高效地找到文件，引入了“目录”这一概念。“目录”，又称“文件夹”，就是一个虚拟容器，其内部可能包含着一组文件和其他的目录（子目录）。目录和子目录，就形成了一个层次结构，称为目录树。&lt;/p&gt;
-
-&lt;p&gt;为什么要有目录？没有行不行？没有目录可以，但是文件命名就比较麻烦，因为没有目录，所有的文件都不能同名，哪怕是简单的 &lt;code&gt;index.html&lt;/code&gt;、&lt;code&gt;default.css&lt;/code&gt;等文件也都只能有一个，所以说，本质上，目录实现了文件命名空间的分割，不同命名空间内，可以有同名文件存在。&lt;/p&gt;
-
-&lt;p&gt;不同物理磁盘上，格式化得到的多个文件系统，可以相互挂载（嫁接），例如两个文件系统 FS1 和 FS2 ，将 FS2 挂载到 FS1 的 &lt;code&gt;/home&lt;/code&gt; 目录下，则，可以通过 &lt;code&gt;/home/user1&lt;/code&gt;
-访问原来 FS2 上的 &lt;code&gt;/user1&lt;/code&gt; 目录。有一点需要说明的是：原来 FS1 目录 &lt;code&gt;/home&lt;/code&gt; 下的所有内容，都被隐藏而无法访问了，但是将 FS2 从 FS1 上卸载之后，仍能正常访问。&lt;/p&gt;
-
-&lt;h3 id=&quot;section-3&quot;&gt;文件系统的实现&lt;/h3&gt;
-
-&lt;p&gt;文件，是逻辑上的概念，其实际上在物理磁盘上是如何存储的呢？&lt;/p&gt;
-
-&lt;h2 id=&quot;section-4&quot;&gt;常见问题&lt;/h2&gt;
-
-&lt;h3 id=&quot;section-5&quot;&gt;小文件个数多&lt;/h3&gt;
-
-&lt;p&gt;HDFS支持超大文件（几百MB、几百GB、甚至TB=1024GB、PB=1024TB的文件），是通过将数据分布在数据节点（DataNode），并且将文件的元数据（目录树结构、文件-数据块索引等信息）存放在名字节点（NameNode）上，来实现的。名字节点（NameNode）的内存大小，决定了HDFS可以保存的文件数量；虽然现在内存数量比较大，但大量的小文件仍然严重影响名字节点（NameNode）的性能。&lt;/p&gt;
-
-&lt;h2 id=&quot;section-6&quot;&gt;参考来源&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;《Hadoop技术内幕：深入解析Hadoop Common和HDFS架构的设计和实现原理》&lt;/li&gt;
 &lt;/ul&gt;
 
 </content>
