@@ -85,7 +85,6 @@ __更新__：GitHub现在使用[GitHub Flavored Markdown](https://help.github.co
 
 ###表格
 
-![chinese-carrier](/images/introduction-to-markdown/chinese-carrier.jpg)
 ![markdown-to-html](/images/introduction-to-markdown/markdown-to-html.jpg)
 
 [Maruku]:	https://github.com/bhollis/maruku/

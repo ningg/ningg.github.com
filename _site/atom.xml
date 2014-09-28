@@ -4,13 +4,88 @@
    <title>NingG.github.com</title>
    <link href="http://ningg.github.com/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://ningg.github.com" rel="alternate" type="text/html" />
-   <updated>2014-09-26T00:12:18+08:00</updated>
+   <updated>2014-09-28T20:57:03+08:00</updated>
    <id>http://ningg.github.com</id>
    <author>
      <name></name>
      <email></email>
    </author>
 
+   
+   <entry>
+     <title>CTO这点事</title>
+     <link href="http://ningg.github.com/talk-about-cto"/>
+     <updated>2014-09-28T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/talk-about-cto</id>
+     <content type="html">&lt;blockquote&gt;
+  &lt;p&gt;题记：本文转载自caoz，原文地址：&lt;a href=&quot;http://zhuanlan.zhihu.com/iamcaoz/19856992&quot;&gt;CTO这点事&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;几乎整个互联网行业都缺CTO，特别是一些草根背景的创业者，这个问题更加显著。从我自己的感受，身边各种朋友委托我找CTO的需求，嗯，算下来超过两位数了，光最近一个月就有3个，而且这三家都是刚拿了A轮的。其他那些公司CTO大部分空缺了一两年，或者其他高管临时暂代过渡。实话说，我觉得每个公司都不错的，但通常也只能遗憾的说，真没有能推荐的。
+其实，根据个人的观察，每个互联网团队都喊需要CTO，但是具体诉求却各不相同，如果说共性，就只有一点，那就是，公司老板对技术的期望值与目前技术团队的能力表现，有较大的差异，而这个差异，对于老板来说，就是一个想法，找个合格的CTO，一切就都解决了。其实，真不是这回事。&lt;/p&gt;
+
+&lt;p&gt;今天要说的第一点，就是期望值的控制；很多互联网公司都希望自己走技术驱动的路线，期望小而美，复制美国技术新贵的市场表现；这不能说是一个错误的期望，但是，现实能有多少符合这种需求的人才呢？这样的人才需要技术有前瞻性，对产业格局有判断，对管理有心得，情商还不能低（算了一下，四项里我至少三项不符合。）。整个行业内这样的人有几个？凭什么会跟你？　事实上我身边确实有这样的案例，一个以业务为主的公司，搞定了一个超棒的CTO，很快就转型成以技术为驱动的公司，公司价值极大提升，问题是，这种现象很难具有复制性。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/talk-about-cto/chinese-carrier.jpg&quot; alt=&quot;chinese-carrier&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;cto&quot;&gt;大家对CTO的期望&lt;/h2&gt;
+
+&lt;p&gt;下面我说一下一个最基本的让人纠结的问题，到底什么是CTO？其实，空谈这个名词的定义毫无意义，从我身边很多朋友公司的实例来看，他们对这个角色的定义和定位是差异非常大的。具体而言，不同创业团队，对CTO需求的真实想法，包括如下层面。&lt;/p&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;技术选型&lt;/h3&gt;
+
+&lt;p&gt;这其实是创业公司最纠结的问题；他们往往一上来基于已有的程序员的个人习惯和爱好，选择了一个技术方案，然后到某一天一看，我靠，全是坑（当然，也可能与执行者的能力有关）。而更糟的是，这个技术方案相对冷门，市场上去招聘都很难做。还有就是技术方案成本过高，（不只是钱的问题，特别是时间成本！）结果严重影响到后续的发展速度。　我举个简单例子，最近我给多个创业者提建议，比如做app，很多以内容运营为核心的app，不要用原生态开发，目前一堆第三方的跨平台开发架构，如果选择合适，可以极大减少开发成本，以及降低技术招聘的难度。微信开店开社区，也有一堆第三方平台，这些事情，对于一些创业者来说，就是特纠结的事情，第一，他们并不完全了解这个领域；第二，他们就算有所了解，也很难判断究竟谁家的方案更靠谱？难道要靠百度竞价排名来裁决么？　而对于技术人员，包括相当多技术高手，他们也会有一些自己的打算，比如说，我就熟悉这个，为啥要用我不熟悉的？（没有考虑从公司长远的人力成本和开发效率）。比如说，我本来服务端技术很强，现在用了一个开源服务端框架，比如skynet，我变成写脚本的了，我价值怎么体现？（不知道自己的价值来自于产品的市场表现）。&lt;/p&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;万能适配器&lt;/h3&gt;
+
+&lt;p&gt;公司有了一个基本的起步，比如在某个平台上有了一点成绩，然后希望扩展到不同领域，不同平台，然后老板突然发现，哦，原来程序员不是什么都会的。服务端，前端，运维，安全，数据库，甚至SEO优化（你敢说这不是技术？）最好有个牛人都能带起来，这个牛人，就是他们定义的CTO，咳咳。创业公司，人少而事杂，其实，真的可以理解。我认识不少创业者，最终万般无奈下，硬是把自己逼成了万能哥。话说当年我也是创业的时候，万般无奈才自学怎么做运维的，虽然很多都没学会，但是偶尔也能出去忽悠一下。&lt;/p&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;性能调优及架构扩展&lt;/h3&gt;
+
+&lt;p&gt;很多小公司到了一定的用户规模和并发规模的时候，一下子就扛不住了，甚至严重影响业务的拓展，某著名淘品牌自己做了一个独立网店，结果一搞秒杀活动就崩溃，（吐个槽，他们运营人员也死心眼，就知道搞秒杀，知道技术架构不行，不会搞点别的形式么）。结果独立网店一直就没搞起来。其实很多这些偏传统的互联网公司，他们所遇到的问题，在高手眼里不值一提，但是这个坎过不去，他们真就发展不起来。说个题外话八卦一下，当年腾讯叫oicq的时候，一堆*icq，只有腾讯牛了，其他的为啥不行？真的是产品原因么？其实都是这个问题，到了１００万用户的时候，就只有腾讯还能发展新用户，其他的技术全都撑不住了。大家看到的都是剩者为王，我看到的是，数不清非常不错的产品，死在这个环节上了。严格的说，这其实不是CTO的工作，按照分工来说，通常涉及系统分析师，系统架构师，以及DBA来做这方面的工作，但是对于创业公司，根本就没这种角色设定，他们遇到这个问题，通常想到的是，有个好的CTO就好了。&lt;/p&gt;
+
+&lt;h3 id=&quot;section-3&quot;&gt;团队管理和效率提升&lt;/h3&gt;
+
+&lt;p&gt;这还真是CTO的本职工作了，我遇到技术出身的创业者，他纠结的问题是，当时自己一个人做开发，连带着做运营，七七八八一堆事，也把东西做起来了，现在公司产品知名度有了，拿到投资了，开发团队也搭起来了，怎么开发效率反而下去了？所以，他的理解是，需要一个CTO。　从技术人才招聘，团队培养，技术培训，到开发模式培训（比如现在流行的敏捷开发），产品质量测评体系，信息安全防护等等，这些林林总总的事情，对于创业者来说，就全部归纳为“需要一个CTO”，嗯。&lt;/p&gt;
+
+&lt;h3 id=&quot;section-4&quot;&gt;数据决策体系&lt;/h3&gt;
+
+&lt;p&gt;自从“大数据”概念火了以后，基本上所有创业者都在谈，我的业务模式，发展了海量用户后，一定是基于数据驱动，可是数据咋驱动？没几个人真想清楚了，但是没关系，只要有CTO，这个问题就解决了。　我知道真有能搞定此事的CTO，真的有，不过，真的属于稀缺品种，目测比大熊猫还少。因为，要理解数据驱动，首先要理解业务，而理解业务，往往不是技术人员的特长。又要自吹一句，我在百度的时候，最牛逼的事情就是在产品部门里搭出一个技术团队，来做数据，为什么要坚持在产品部门编制？（实话说，当年技术部门的薪酬更高一些），我坚持认为重心在于数据目标和解读，而不是技术实现。　所以，这里我多说一句，数据决策体系，先想清楚具体目标和具体展现，再寻求技术支持，而不是一句话推给技术团队去弄，除非你公司里真有这么一只极品稀缺大熊猫。　实际上，再吐个槽，最基本的数据处理的结果，经过正确严谨的解读，就已经有极大的价值了，而很多人往往无视这些，去追求更高深的技术实现，搞一些莫名其妙的算法和逻辑，来彰显技术价值，其实是舍近求远的表现。　&lt;/p&gt;
+
+&lt;h3 id=&quot;section-5&quot;&gt;重构商业模式&lt;/h3&gt;
+
+&lt;p&gt;这个，咳咳，怎么说呢，公司觉得自己商业模式不够酷，不够吸引资本关注，希望从业务驱动转为技术驱动，嗯，来个牛逼的CTO，这事真可行，嗯，话说，这事真可行，点到为止，不展开了。　&lt;/p&gt;
+
+&lt;p&gt;以上是我观测到的，身边以及业内一些典型的CTO需求，当然，不同公司诉求真的不一样。有的侧重管理，有的侧重解决瓶颈问题，但是对老板而言，只要他们认为目前技术团队不够好，不够给力，不够预期，那么，这就是他们认为缺乏的，CTO。不仅仅是创业公司，上市公司乃至巨头，这个问题也一样存在，比如说，百度的CTO，貌似空缺了好几年呢。是他们的人才不够优秀么？还不是达不到李厂长期望值。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-6&quot;&gt;个人观点&lt;/h2&gt;
+
+&lt;p&gt;下面说我的一些观点&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;第一&lt;/strong&gt;，相当比例大公司背景的技术牛人，并不适合去创业公司做CTO，原因1：技术再牛，不够全面，这没辙，大公司求深，创业公司求全；原因2：技术再牛，要懂业务。创业公司没有完备严谨的产品经理，没有明确的目标规划，很多工作是一个初步的目标，然后做起来看。如果技术人员不懂业务，很可能就会走弯路，做出很多不伦不类的东西，所以创业公司遇到这样的大牛，要先沟通到位再决定，不要迷信简历，当然，不乏这里有非常出色的。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;第二&lt;/strong&gt;，创始公司老板要想清楚自己当前真正需要的是什么，控制一下目标和欲望，有些事不能强求的。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;第三&lt;/strong&gt;，要给人才成长的空间，CTO也不是天生的，不要认为外面的和尚一定好念经。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;第四&lt;/strong&gt;，遇到真的特别合适的人才，要舍得本钱，理想可以谈，但是让人家舍弃各种丰厚回报的机会来跟你打拼，总要出示一些诚意。要知道这样的人才是稀缺品。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-7&quot;&gt;几点解释&lt;/h2&gt;
+
+&lt;p&gt;最后解释一下 CTO所需要的四个领域的能力&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;技术前瞻性&lt;/strong&gt;，就好比2010年谷歌手机发布了，您还在那里吭哧吭哧跟老板说咱们好好弄塞班。（好多技术牛人，大公司的技术总监都是这样的！！！）。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;对产业格局有判断&lt;/strong&gt;，举例来说，移动互联网起来了，能知道工具型，娱乐性，生活性的应用大概的爆发周期和爆发规模。 能对移动游戏，电商的发展速度和市场顶点在哪里，这样才能给老板正确的技术投入建议和规划目标建议，别市场喷发的时候不去考虑准备架构扩容，还在角落里扣扣索索的算怎么比同行省点运维成本。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;管理心得&lt;/strong&gt;，技术团队的培养和带动，别光顾着自己牛逼，要让团队牛逼。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;情商&lt;/strong&gt;，各种沟通，协调，不解释。&lt;/p&gt;
+
+&lt;p&gt;就这样，有点凌乱，凑活看吧&lt;/p&gt;
+
+</content>
+   </entry>
    
    <entry>
      <title>Android入门几个基本知识</title>
@@ -2898,287 +2973,6 @@ export PATH=$PATH:$JAVA_HOME/bin
 
 &lt;ul&gt;
   &lt;li&gt;《鸟哥私房菜（第三版）》 第11章 认识和学习BASH&lt;/li&gt;
-&lt;/ul&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>Linux下用户和组管理</title>
-     <link href="http://ningg.github.com/linux-user-and-group"/>
-     <updated>2014-07-27T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/linux-user-and-group</id>
-     <content type="html">&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
-
-&lt;p&gt;平日里，常遇到几个需求：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Linux服务器上，为新人开个账号，并加入到某一组中；&lt;/li&gt;
-  &lt;li&gt;查询，组中的所有用户；&lt;/li&gt;
-  &lt;li&gt;查询，用户是否存在；&lt;/li&gt;
-  &lt;li&gt;查询，某一用户所在组；&lt;/li&gt;
-  &lt;li&gt;用户和组管理，如何实现的；&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;section-1&quot;&gt;如何使用&lt;/h2&gt;
-
-&lt;h3 id=&quot;section-2&quot;&gt;几个命令&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;用户相关&lt;/strong&gt;：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code&gt;useradd [LOGIN]&lt;/code&gt;：新增用户&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;passwd [LOGIN]&lt;/code&gt;：设置用户密码&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;usermod [options] [LOGIN]&lt;/code&gt;：修改用户的属性信息，与&lt;code&gt;useradd&lt;/code&gt;类似&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;userdel [LOGIN]&lt;/code&gt;：删除用户&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;whoami&lt;/code&gt;：当前登录的用户&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;用户组相关&lt;/strong&gt;：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code&gt;groups [LOGIN]&lt;/code&gt;：查询用户所属组&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;groupadd [GROUP]&lt;/code&gt;：新增用户组&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;gpasswd [GROUP]&lt;/code&gt;：设置组成员、添加组管理员（参考命令：&lt;code&gt;usermod&lt;/code&gt;）&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;groupmod [GROUP]&lt;/code&gt;：修改用户组信息，与&lt;code&gt;groupadd&lt;/code&gt;类似&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;groupdel [GROUP]&lt;/code&gt;：删除组&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;newgrp [GROUP]&lt;/code&gt;：设置&lt;code&gt;有效组&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;注：作为&lt;code&gt;初始组&lt;/code&gt;的用户组，无法使用命令&lt;code&gt;groupdel&lt;/code&gt;进行删除。&lt;/p&gt;
-
-&lt;p&gt;上面的命令，细节不想多说，用的时候，直接&lt;code&gt;man command&lt;/code&gt;查看帮助文档即可。&lt;/p&gt;
-
-&lt;h3 id=&quot;section-3&quot;&gt;几个文件&lt;/h3&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: left&quot;&gt;文件&lt;/th&gt;
-      &lt;th style=&quot;text-align: left&quot;&gt;说明&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;/etc/passwd&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;用户信息&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;/etc/shadow&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;用户密码信息&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;/etc/group&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;用户组信息&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;/etc/gshadow&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;用户组管理信息&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h4 id=&quot;etcpasswd&quot;&gt;/etc/passwd&lt;/h4&gt;
-
-&lt;p&gt;文件片段：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;root:x:0:0:root:/root:/bin/bash
-bin:x:1:1:bin:/bin:/sbin/nologin
-daemon:x:2:2:daemon:/sbin:/sbin/nologin
-adm:x:3:4:adm:/var/adm:/sbin/nologin
-lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin
-sync:x:5:0:sync:/sbin:/bin/sync
-shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown
-hbase:x:1002:507::/home/hbase:/bin/bash
-nagios:x:1003:508::/home/nagios:/bin/bash
-oozie:x:1004:507::/home/oozie:/bin/bash
-hcat:x:1005:507::/home/hcat:/bin/bash
-hive:x:1006:507::/home/hive:/bin/bash
-yarn:x:1007:507::/home/yarn:/bin/bash
-hdfs:x:1008:507::/home/hdfs:/bin/bash
-mapred:x:1009:507::/home/mapred:/bin/bash
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;格式说明:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;`用户名`:`密码`:`UID`:`GID`:`用户说明信息`:`默认登录路径`:`Shell`
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;补充说明：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;code&gt;密码&lt;/code&gt;列，是历史遗留问题，现在所有的&lt;code&gt;密码&lt;/code&gt;，都已被单独的提出并存储至&lt;code&gt;/etc/passwd&lt;/code&gt;文件中；&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;UID&lt;/code&gt;=0，表示系统管理员；&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;GID&lt;/code&gt;，与文件&lt;code&gt;/etc/group&lt;/code&gt;有关，这个文件用于规范组名和GID的对应关系；&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;Shell&lt;/code&gt;，用户登录之后，就会获得一个Shell进程来与系统核心进行沟通，以进行用户的操作任务；&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h4 id=&quot;etcshadow&quot;&gt;/etc/shadow&lt;/h4&gt;
-
-&lt;p&gt;文件片段：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;root:$6$t...(实际密码较长):15996:0:99999:7:::
-bin:*:15422:0:99999:7:::
-sshd:!!:15977::::::
-dev:!!:15989:0:99999:7:::
-devp:$6$...(实际密码较长):15989:0:99999:7:::
-mysql:!!:15990::::::
-storm:$6$2...(实际密码较长):15991:0:99999:7:::
-strom:!!:15991:0:99999:7:::
-ambari-qa:!!:16262:0:99999:7:::
-hbase:!!:16262:0:99999:7:::
-nagios:!!:16262:0:99999:7:::
-oozie:!!:16262:0:99999:7:::
-hcat:!!:16262:0:99999:7:::
-hive:!!:16262:0:99999:7:::
-yarn:!!:16262:0:99999:7:::
-hdfs:!!:16262:0:99999:7:::
-mapred:!!:16262:0:99999:7:::
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;格式说明(&lt;code&gt;:&lt;/code&gt;分隔各个列)：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;code&gt;用户名&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;密码&lt;/code&gt;：是加密后的结果，但仍有可能被破解；&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;最近改动密码日期&lt;/code&gt;：单位：天，从1970.01.01算起的天数；&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;密码不可被改动的天数&lt;/code&gt;：多少天内不能修改；如果为0，表示随时可以更改；&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;密码需要重新改动的天数&lt;/code&gt;：多少天内需要修改再次密码；&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;需要变更前的警告天数&lt;/code&gt;：在&lt;code&gt;密码需要重新改动的天数&lt;/code&gt;到来之前，提前显示警告信息；&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;密码过期后帐号宽限期&lt;/code&gt;：在&lt;code&gt;密码需要重新改动的天数&lt;/code&gt;到来之前，都没有修改密码，那么还有机会，在宽限期内，用户登录，系统会强制用户必须重新设定密码；&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;帐号失效日期&lt;/code&gt;：单位：天，从1970.01.01算起的天数；过了这一天，帐号当即失效；&lt;/li&gt;
-  &lt;li&gt;（保留）&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;补充说明：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;code&gt;密码&lt;/code&gt;列，是加密后的结果，但仍有可能被破解；&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;最近改动密码日期&lt;/code&gt;列，单位：天，从1970.01.01算起的天数；&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;密码不可被改动的天数&lt;/code&gt;列，从&lt;code&gt;最近改动密码日期&lt;/code&gt;向后推迟的天数，如果为0，表示随时可以更改；&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;密码需要重新改动的天数&lt;/code&gt;列，强制用户在多少天内必须修改密码；&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;chage -l [LOGIN]&lt;/code&gt;命令，可用于查询用户密码相关的详细信息；&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;小提示：&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;有趣的功能：用户第一次登录后，强制其修改密码后才能使用系统资源.
-具体命令：&lt;code&gt;chage -d 0 [LOGIN]&lt;/code&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h4 id=&quot;etcgroup&quot;&gt;/etc/group&lt;/h4&gt;
-
-&lt;p&gt;文件片段：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;hadoop:x:507:hbase,hdfs,mapred
-nagios:x:508:
-mailnull:x:47:
-smmsp:x:51:
-hdfs:x:481:devp
-hbase:x:480:
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;格式说明：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;`组名`:`群组密码`:`GID`:`组内成员`
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;补充说明：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;在上面文件片段中，如果想将用户nagios，添加到hdfs组中，则，只需在hdfs的&lt;code&gt;组内成员&lt;/code&gt;列中添加&lt;code&gt;,nagios&lt;/code&gt;即可；&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;id&lt;/code&gt;命令，可查询用户组的详细信息；（类似&lt;code&gt;groups&lt;/code&gt;命令）&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;疑问：&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;有的账户，在&lt;code&gt;/etc/passwd&lt;/code&gt;中，看出其&lt;code&gt;GID&lt;/code&gt;项为507，而在&lt;code&gt;/etc/group&lt;/code&gt;中&lt;code&gt;GID&lt;/code&gt;=507的组内成员中，并没有看到这些账户？&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;这个涉及到&lt;code&gt;有效组（effective group）&lt;/code&gt;和&lt;code&gt;初始组（initial group）&lt;/code&gt;的概念，请往下继续看。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;有效组（effective group） vs. 初始组（initial group）&lt;/strong&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;文件&lt;code&gt;/etc/passwd&lt;/code&gt;中，每个用户对应有且只有一个&lt;code&gt;GID&lt;/code&gt;，这是&lt;code&gt;初始组&lt;/code&gt;，即用户一登入系统，立即拥有这个群组的权限；&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;初始组&lt;/code&gt;，不需要在&lt;code&gt;/etc/group&lt;/code&gt;文件的&lt;code&gt;组内成员&lt;/code&gt;中写入该用户（也可以写入）；&lt;/li&gt;
-  &lt;li&gt;若用户还属于&lt;code&gt;非初始组&lt;/code&gt;，则，在&lt;code&gt;/etc/group&lt;/code&gt;文件的&lt;code&gt;组内成员&lt;/code&gt;部分进行标识；&lt;/li&gt;
-  &lt;li&gt;用户新建一个文件，这个文件属于&lt;code&gt;有效组&lt;/code&gt;；&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;groups&lt;/code&gt;命令，查询出的组中，第一个组为&lt;code&gt;有效组&lt;/code&gt;；&lt;/li&gt;
-  &lt;li&gt;用户登录之后，&lt;code&gt;newgrp [GROUP]&lt;/code&gt;命令，可以切换有效组；&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;额外，需要说明一下&lt;code&gt;newgrp [GROUP]&lt;/code&gt;，其实质上是有启动了一个shell，来实现切换&lt;code&gt;有效组&lt;/code&gt;的，具体如下：&lt;/p&gt;
-
-&lt;p&gt;如何将用户添加到组中呢？两种方式：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;root用户，使用命令：&lt;code&gt;usermod&lt;/code&gt;；&lt;/li&gt;
-  &lt;li&gt;组管理员，使用命令：&lt;code&gt;gpasswd&lt;/code&gt;；（下文会介绍）&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;有个问题，记录一下：&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;疑问：命令&lt;code&gt;newgrp&lt;/code&gt;会重新启动一个shell，shell是kernel之外的一层壳，shell与进程、线程之间什么关系？shell是如何调用内核？&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;（之前APUE课程上，有个课下作业：写一个自己的shell，类似bash）&lt;/p&gt;
-
-&lt;h4 id=&quot;etcgshadow&quot;&gt;/etc/gshadow&lt;/h4&gt;
-
-&lt;p&gt;文件片段：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;hadoop:!::hbase,hdfs,mapred
-nagios:!::
-mailnull:!::
-smmsp:!::
-hdfs:!::
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;格式说明：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;`组名`:`组密码`:`组管理员帐号`:`组内成员`
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;补充说明：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;code&gt;组密码&lt;/code&gt;为&lt;code&gt;!&lt;/code&gt;，表示无合法密码，无组管理员；&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;组内成员&lt;/code&gt;，与&lt;code&gt;/etc/group&lt;/code&gt;文件中内容相同；&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;具体添加组内成员、设置组的管理员，使用命令：&lt;code&gt;gpasswd&lt;/code&gt;。&lt;/p&gt;
-
-&lt;h4 id=&quot;section-4&quot;&gt;特别提示&lt;/h4&gt;
-
-&lt;p&gt;使用&lt;code&gt;useradd&lt;/code&gt;、&lt;code&gt;passwd&lt;/code&gt;等命令添加用户，并为用户设置用户组之后，如果想修改用户的信息，两条途径：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;直接修改&lt;code&gt;/etc/passwd&lt;/code&gt;和&lt;code&gt;/etc/shadow&lt;/code&gt;文件中相应字段；&lt;/li&gt;
-  &lt;li&gt;使用&lt;code&gt;usermod&lt;/code&gt;命令进行修改；&lt;strong&gt;[推荐]&lt;/strong&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;section-5&quot;&gt;深入原理&lt;/h2&gt;
-
-&lt;h3 id=&quot;section-6&quot;&gt;为什么存在用户和用户组&lt;/h3&gt;
-
-&lt;p&gt;主机放在这，谁都想用，如果所有人（UserA\UserB\UserC）都使用同一个帐号登录，则，大家都没有隐私可言，而且UserA的文件可能会被UserB给删除；这就要求创建多个帐号（用户），UserA\UserB\UserC每人使用一个不同的帐号来登陆，这样大家的文件就相互隔离了；问题又来了，UserA想与UserB共享文件FileA，但是不想与UserC共享这一文件怎么办？这就产生了&lt;code&gt;用户组&lt;/code&gt;这一概念，只需要UserA\UserB同属某个用户组GroupA，然后设置组GroupA内的人都有权操作FileA就可以了。&lt;/p&gt;
-
-&lt;h3 id=&quot;section-7&quot;&gt;具体实现原理&lt;/h3&gt;
-
-&lt;p&gt;用户登录时，输入&lt;code&gt;用户名&lt;/code&gt;和&lt;code&gt;密码&lt;/code&gt;，实际上，Linux主机是按照 &lt;code&gt;UID&lt;/code&gt;（User ID） 来识别用户的，&lt;code&gt;用户名&lt;/code&gt;是为便于人们记忆才存在的。
-同理，Linux主机只识别&lt;code&gt;GID&lt;/code&gt;（Group ID）来标识&lt;code&gt;用户组&lt;/code&gt;。具体，使用&lt;code&gt;ls -l&lt;/code&gt;命令查询文件详情时，系统会按照&lt;code&gt;GID&lt;/code&gt;和&lt;code&gt;UID&lt;/code&gt;分别去文件&lt;code&gt;/etc/group&lt;/code&gt;和&lt;code&gt;/etc/passwd&lt;/code&gt;中查询相应的&lt;code&gt;用户组&lt;/code&gt;和&lt;code&gt;用户&lt;/code&gt;的名字并显示出来。&lt;/p&gt;
-
-&lt;p&gt;上面一段话，总结：系统上文件属性、权限等存储的都是&lt;code&gt;UID&lt;/code&gt;和&lt;code&gt;GID&lt;/code&gt;，只有在登录、显示时，才会用到&lt;code&gt;用户名&lt;/code&gt;和&lt;code&gt;用户组名&lt;/code&gt;。&lt;/p&gt;
-
-&lt;h2 id=&quot;section-8&quot;&gt;参考来源&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;《鸟哥私房菜基础篇（第三版）》 第6章 Linux的档案权限与目录配置&lt;/li&gt;
-  &lt;li&gt;《鸟哥私房菜基础篇（第三版）》 第14章 Linux帐号管理与ACL权限设定&lt;/li&gt;
 &lt;/ul&gt;
 
 </content>
