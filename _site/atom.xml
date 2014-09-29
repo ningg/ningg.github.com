@@ -4,13 +4,85 @@
    <title>NingG.github.com</title>
    <link href="http://ningg.github.com/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://ningg.github.com" rel="alternate" type="text/html" />
-   <updated>2014-09-28T20:57:03+08:00</updated>
+   <updated>2014-09-30T01:38:48+08:00</updated>
    <id>http://ningg.github.com</id>
    <author>
      <name></name>
      <email></email>
    </author>
 
+   
+   <entry>
+     <title>线框图工具：mockups</title>
+     <link href="http://ningg.github.com/mockups-intro"/>
+     <updated>2014-09-29T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/mockups-intro</id>
+     <content type="html">&lt;h2 id=&quot;mockups&quot;&gt;mockups的特点&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;快：提供常用的元素，通过简单托、拉、拽等动作，即可完成线框图绘制；&lt;/li&gt;
+  &lt;li&gt;手绘风格：展示效果，朴素、简洁，能够突出内容、层次结构、业务流程；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;基础用法&lt;/h2&gt;
+
+&lt;p&gt;简单的托、拉、拽内置的组件，就能够达到如下的效果：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/mockups-intro/simple-operate.jpg&quot; alt=&quot;简单的鼠标操作&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;高效用法&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;操作&lt;/td&gt;
+      &lt;td&gt;说明&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code&gt;/&lt;/code&gt;/&lt;code&gt;+&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;快速定位到&lt;code&gt;Quick Add&lt;/code&gt;输入框，在其中输入控件名字，即可自动添加一个元素&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code&gt;Enter&lt;/code&gt;/&lt;code&gt;F2&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;编辑&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code&gt;Ctrl+2&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;锁定&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code&gt;Ctrl+Up&lt;/code&gt;/&lt;code&gt;Ctrl+Down&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;上移、下移一层&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code&gt;Ctrl+D&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;复制并粘贴，相当于&lt;code&gt;Ctrl+C&lt;/code&gt; + &lt;code&gt;Ctrl+D&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;几点补充：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;官方提供一些现有的UI模版：&lt;a href=&quot;http://support.balsamiq.com/customer/portal/articles/1311316-how-to-download-from-mockups-to-go&quot;&gt;Mockups To Go&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;通过点击，可实现mockups一个页面跳转到同一目录下的另一个页面；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;（官方网站内容还没有看完，doing…）&lt;/p&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;参考来源&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://support.balsamiq.com/#support-documentation&quot;&gt;Mockups官网文档&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://support.balsamiq.com/customer/portal/topics/49503-tutorials&quot;&gt;Mockups官网Tutorial&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;扯一点小事：写这篇文章关于mockups操作的文章，起初是无意间受到&lt;code&gt;1-2-3&lt;/code&gt;的博客《&lt;a href=&quot;http://www.cnblogs.com/1-2-3/archive/2009/08/17/Balsamiq-Mockups-Introduction.html&quot;&gt;我喜欢Balsamiq Mockups的三大理由&lt;/a&gt;》和《&lt;a href=&quot;http://www.cnblogs.com/1-2-3/archive/2009/06/30/Balsamiq-Mockups-tips.html&quot;&gt;Balsamiq Mockups 小技巧&lt;/a&gt;》 启发，不过自己当时冷静了一下，脑海里闪烁一个疑问：&lt;code&gt;1-2-3&lt;/code&gt;关于mockups的知识是从哪获取的？哦，官网，最初的知识传播，肯定是某人比较认真，读了官网，然后知识就散播开了，OK，为避免知识在传播过程中有损伤、误解，我直接找根源好了，这样的做法在普通人看来笨拙，却是真正捷径，最简洁、省时、省力的方法。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+</content>
+   </entry>
    
    <entry>
      <title>CTO这点事</title>
@@ -83,6 +155,137 @@
 &lt;p&gt;&lt;strong&gt;情商&lt;/strong&gt;，各种沟通，协调，不解释。&lt;/p&gt;
 
 &lt;p&gt;就这样，有点凌乱，凑活看吧&lt;/p&gt;
+
+</content>
+   </entry>
+   
+   <entry>
+     <title>优秀的软件工程师</title>
+     <link href="http://ningg.github.com/software-engineer-self-test"/>
+     <updated>2014-09-28T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/software-engineer-self-test</id>
+     <content type="html">&lt;blockquote&gt;
+  &lt;p&gt;题记：本文转载自邹欣的书籍《&lt;a href=&quot;http://book.douban.com/subject/25965995//&quot;&gt;构建之法&lt;/a&gt;》&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;
+    &lt;p&gt;保持高标准，不要受制于破窗理论(broken windows theory)。
+当你看到不靠谱的设计、糟糕的代码、过时的文档和测试用例的时候，不要想“既然别人的代码已经这样了，我的代码也可以随便一点啦。”&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;主动解决问题。当看到不靠谱的设计，糟糕的代码的时候，不要想“可能别人会来管这个事情” ，或者“我下个月发一个邮件让大家讨论一下”。要主动地把问题给解决了[ii]。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;经常给自己充电，身体训练是运动员生活的一部分，学习是软件工程师职业的伴侣。每半年就要了解和学习一些新的相关技术。通过定期分享（面对面的分享，写技术博客等）来确保自己真正掌握了新技术。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;DRY （Don’t Repeat Yourself）——别重复。在一个系统中，每一个知识点都应该有一个无异议的、正规的表现形式。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;消除不相关模块之间的影响，在设计模块的时候，要让它们目标明确并单一，能独立存在，没有不明确的外部依赖。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;通过快速原型来学习，快速原型的目的是学习，它的价值不在于代码，而在于你通过快速原型学到了什么。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;设计要接近问题领域，在设计的时候，要接近你目标用户的语言和环境。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;估计任务所花费的时间，避免意外。在开始工作的时候，要做出时间和潜在影响的估计，并通告相关人士，避免最后关头意外发生。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;图形界面的工具有它的长处，但是不要忘了命令行工具也可以发挥很高的效率，特别是可以用脚本构建各种组合命令的时候。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;有很多代码编辑器，请把其中一个用得非常熟练。让编辑器可以实现自己的定制，可以用脚本驱动，用起来得心应手。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;理解常用的设计模式，并知道择机而用。设计模式不错，更重要的是知道它的目的是什么，什么时候用，什么时候不用。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;代码版本管理工具是你代码的保障，重要的代码一定要有代码版本管理。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;在debug的时候，不要惊慌，想想导致问题的原因可能在哪里。一步一步地找到原因。要在实践中运用工具，善于分析日志（log），从中找到bug。同时，在自己的代码里面加 log.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;重要的接口要用形式化的“合同”来规定。用文档和断言、自动化测试等工具来保证代码的确按照合同来做事，不多也不少。使用断言 (assertion) 或者其他技术来验证代码中的假设，你认为不可能发生的事情在现实世界中往往会发生。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;只在异常的情况下才使用异常 (Exception),  不加判断地过多使用异常，会降低代码的效率和可维护性。记住不要用异常来传递正常的信息。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;善始善终。如果某个函数申请了空间或其他资源，这个函数负责释放这些资源。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;当你的软件有多种技术结合在一起的时候，要采用松耦合的配置模式，而不是要把所有代码都集成到一起。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;把常用模块的功能打造成独立的服务，通过良好的界面 (API) 来调用不同的服务。[YEKA1] &lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;在设计中考虑对并行的支持，这样你的API 设计会比较容易扩展。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;在设计中把展现模块 (View) 和实体模块 (Model) 分开，这样你的设计会更有灵活性。 &lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;重视算法的效率，在开始写之前就要估计好算法的效率是哪一个数量级上的（big-O）。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;在实际的运行场景中测试你的算法，不要停留在数学分析层面。有时候一个小小的实际因素 (是否支持大小写敏感的排序，数据是否支持多语言)会导致算法效率的巨大变化。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;经常重构代码，同时注意要解决问题的根源。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;在开始设计的时候就要考虑如何测试 ，如果代码出了问题，有log 来辅助debug 么? 尽早测试，经常测试，争取实现自动化测试，争取每一个构建的版本都能有某些自动测试。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;代码生成工具可以生成一堆一堆的代码，在正式使用它们之前，要确保你能理解它们，并且必要的时候能debug 这些代码。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;和一个实际的用户一起使用软件，获得第一手反馈。 &lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;在自动测试的时候，要有意引地入bug，来保证自动测试的确能捕获这些错误。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;如果测试没有做完，那么开发也没有做完。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;适当地追求代码覆盖率：每一行的代码都覆盖了，但是程序未必正确。要确保程序覆盖了不同的程序状态和各种组合条件。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;如果团队成员碰到了一个有普遍意义的bug,  应该建立一个测试用例抓住以后将会出现的类似的bug。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;测试：多走一步，多考虑一层。如果程序运行了一星期不退出，如果用户的屏幕分辨率再提高一个档次，这个程序会出什么可能的错误?&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;（带领团队）了解用户的期望值，稍稍超出用户的期望值，让用户有惊喜。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;(带领团队) 不要停留在被动地收集需求，要挖掘需求。真正的需求可能被过时的假设、对用户的误解或其他因素所遮挡。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;（带领团队）把所有的术语和项目相关的名词、缩写等都放在一个地方。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;（带领团队）不要依赖于某个人的手动操作，而是要把这些操作都做成有相关权限的人士都能运行的脚本。这样就不会出现因为某人休假而项目被卡住的情况。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;（带领团队）要让重用变得更容易。一个软件团队要创造一种环境，让软件的重用变得更容易。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;（带领团队）在每一次迭代之后，都要总结经验，让下一次迭代的日程安排更可靠。&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;备注：&lt;/p&gt;
+
+&lt;p&gt;其他上面的内容，其他地方也有转载和评论：&lt;a href=&quot;http://www.cnblogs.com/xinz/p/3852177.html&quot;&gt;邹欣的教学博客&lt;/a&gt;和&lt;a href=&quot;http://www.zhihu.com/question/19560521/answer/31141681&quot;&gt;知乎出版人周筠&lt;/a&gt;。&lt;/p&gt;
 
 </content>
    </entry>
@@ -2529,451 +2732,6 @@ other::---
 &lt;h2 id=&quot;hdfsacl&quot;&gt;HDFS中的ACL&lt;/h2&gt;
 
 &lt;p&gt;Hadoop从2.4.0版本开始支持ACL（英文原版的出处），并且已经有人对此进行了测试：http://blog.csdn.net/j2eelamp/article/details/24594159&lt;/p&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>HTTP协议</title>
-     <link href="http://ningg.github.com/protocol-http-intro"/>
-     <updated>2014-08-13T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/protocol-http-intro</id>
-     <content type="html">&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;最近要用java来构造HTTP请求、接收HTTP响应，并从HTTP响应中获取尽可能多的上下文信息，自己每次都查看JAVA的API，不过结果总是浑浑噩噩的感觉，因为自己并不确定HTTP响应中包含了哪些详细的信息，更何谈要提取这些信息了。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;（备注：不要求大而全，而要求先能够解决问题）&lt;/p&gt;
-
-&lt;h2 id=&quot;http&quot;&gt;HTTP协议的由来&lt;/h2&gt;
-
-&lt;p&gt;OSI模型把网络通信分成七层：物理层、数据链路层、网络层、传输层、会话层、表示层和应用层，对于开发网络应用人员来说，一般把网络分成五层，这样比较容易理解。这五层为：物理层、数据链路层、网络层、传输层和应用层（最顶层），如下图所示：&lt;/p&gt;
-
-&lt;p&gt;网络中的计算机互相通信就是实现了层与层之间的通信，要实现层与层之间的通信，则各层都要遵守规则，这样才能完成更好的通信， 我们就把它们之间遵守的规则就叫个“协议”，然而网络上的五层之间遵守的协议不一样，每层都有各自的协议。下面就对各层进行简要介绍：&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;物理层&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;物理层是五层模型中的最底层，物理层为计算机之间的数据通信提供了传输媒体和互连设备的标准，为数据传输提供了可靠的环境，媒体包括电缆、光纤、无线信道等，互连设备指是计算机和调制解调器之间的互连设备，如各种插头、插座等。该层的作用是透明的传输比特流（即二进制流），为数据链路层提供一个传输原始比特流的物理连接。&lt;/p&gt;
-
-&lt;p&gt;总结一下：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;目标：透明地传输bit。&lt;/li&gt;
-  &lt;li&gt;传输单元：bit。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;数据链路层&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;数据链路层是模型中的第2层，该层对接受到物理层传输过来的比特流进行分组，一组电信号构成的数据包，就叫做”帧”，数据链链路层就是来传输以”帧”为单位的数据包，把数据传递给上一层（网络层），帧数据由两部分组成：帧头和帧数据，帧头包括接受方物理地址（就是网卡的地址）和其他的网络信息，帧数据就是要传输的数据体。数据帧的最长为1500字节，如果数据很长，就必须分割成多个帧进行发送。&lt;/p&gt;
-
-&lt;p&gt;总结一下：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;目标：通过&lt;code&gt;MAC地址&lt;/code&gt;来标识设备，并且在两个相邻设备之间，透明、可靠地传输&lt;code&gt;数据帧&lt;/code&gt;。&lt;/li&gt;
-  &lt;li&gt;传输单元：&lt;code&gt;帧&lt;/code&gt;，包含帧头和帧数据。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;网络层&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;该层通过寻址（寻址地址）来建立两个节点之间的连接，大家都知道我们的电脑连接上网络后都一个IP地址，我们可以通过IP地址来确定不同的计算机是否在同一个子网内。如果我们的电脑连接上网络后就有两种地址：物理地址和网络地址（IP地址），网络上的计算机要通信，必须要知道通信的计算机“在哪里”， 首先通过网络地址来判断是否处于同一个子网，然后再对物理地址（MAC）地址进行处理，从而准确确定要通信计算机的位置。&lt;/p&gt;
-
-&lt;p&gt;在网络层中有我们熟悉的IP协议（即规定网络地址的协议），目前广泛采用的是IP协议第四版（IPv4）,这个版本规定，网络地址由32位二进制位组成。&lt;/p&gt;
-
-&lt;p&gt;网络层中以IP数据包的形式来传递数据，IP数据包也包括两部分：头（Head）和数据(Data)，IP数据包放进数据帧中的数据部分进行传输。&lt;/p&gt;
-
-&lt;p&gt;总结一下：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;目标：通过&lt;code&gt;IP地址&lt;/code&gt;来标识网络节点，并且在网络中任意两个节点之间，透明、可靠地传输&lt;code&gt;IP数据包&lt;/code&gt;。&lt;/li&gt;
-  &lt;li&gt;传输单元：&lt;code&gt;IP数据包&lt;/code&gt;，包含包头和数据。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;传输层&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;通过MAC和IP地址，我们可以找到互联网上任意两台主机来建立通信。然而这里有一个问题，找到主机后，主机上有很多程序都需要用到网络，比如说你在一边听歌和好用QQ聊天，当网络上发送来一个数据包时，是怎么知道它是表示聊天的内容还是歌曲的内容的， 这时候就需要一个参数来表示这个数据包是发送给那个程序（进程）来使用的，这个参数我们就叫做&lt;code&gt;端口号&lt;/code&gt;，主机上用端口号来标识不同的程序（进程），端口是0到65535之间的一个整数，0到1023的端口被系统占用，用户只能选择大于1023的端口。&lt;/p&gt;
-
-&lt;p&gt;传输层的功能就是建立端口到端口的通信，网络层就是建立主机与主机的通信，这样如果我们确定了主机和端口，这样就可以实现程序之间的通信了。我们所说的Socket编程就是通过代码来实现传输层之间的通信。因为初始化Socket类对象要指定IP地址和端口号。&lt;/p&gt;
-
-&lt;p&gt;在传输层有两个非常重要的协议：UDP 协议和TCP协议&lt;/p&gt;
-
-&lt;p&gt;采用UDP协议话传输的就是UDP数据包，同样UDP数据包也由头和数据两部分组成，头部分主要标识了发送端口和接受端口，数据部分就是具体的内容信息。同样UDP数据包是放入IP数据包中的”数据”部分，IP数据包再放入数据帧中在网络上传输。&lt;/p&gt;
-
-&lt;p&gt;由于UDP协议的可靠性差（数据发送后无法确定对方是否收到），所以又定义了一个可靠性高的协议——TCP协议，TCP协议采取了握手的方式要确保对方收到了数据。&lt;/p&gt;
-
-&lt;p&gt;总结一下：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;目标：通过&lt;code&gt;IP地址：端口号&lt;/code&gt;来标识网络节点上的一个进程，并在网络中任意两个节点上的两个进程之间，实现消息的透明传输。&lt;/li&gt;
-  &lt;li&gt;传输单元：数据包，TCP数据包或者UDP数据包。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;应用层&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;应用层是模型中的最顶层，是用户与网络的接口，HTTP协议就属于这一层。HTTP协议能做什么？
-很多人首先一定会想到：浏览网页。没错，浏览网页是HTTP的主要应用，但是这并不代表HTTP就只能应用于网页的浏览。HTTP是一种协议，只要通信的双方都遵守这个协议，HTTP就能有用武之地。比如咱们常用的QQ，迅雷这些软件，都会使用HTTP协议(还包括其他的协议)。需要说明的是，应用层HTTP协议传输的数据，在传输层，是由TCP协议承载的。&lt;/p&gt;
-
-&lt;p&gt;数据流动的时候，发送端，应用数据从上层向下，层层打包（添加包头），接收端，数据从下层向上，层层解包（去除包头）。&lt;/p&gt;
-
-&lt;p&gt;（应用层到底是什么？应用层与端口之间什么关系？会话层、表示层、应用层之间又有什么差异？）&lt;/p&gt;
-
-&lt;h2 id=&quot;http-1&quot;&gt;HTTP协议如何工作&lt;/h2&gt;
-
-&lt;p&gt;利用HTTP协议传输数据时，其基本过程：Client发送HTTP请求，Server返回HTTP响应；如下图所示：&lt;/p&gt;
-
-&lt;p&gt;（插入一个图片）&lt;/p&gt;
-
-&lt;h3 id=&quot;requestresponse&quot;&gt;Request\Response格式&lt;/h3&gt;
-
-&lt;p&gt;详细信息请参考：&lt;a href=&quot;http://tools.ietf.org/html/rfc2616&quot;&gt;RFC2616&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;关于HTTP headers的简要汇总和介绍，请参看：&lt;a href=&quot;http://www.cs.tut.fi/~jkorpela/http.html&quot;&gt;Quick reference to HTTP headers&lt;/a&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;request&quot;&gt;Request&lt;/h4&gt;
-
-&lt;p&gt;Request格式：&lt;/p&gt;
-
-&lt;p&gt;（插入一张图片：Request格式）&lt;/p&gt;
-
-&lt;p&gt;备注：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;cr&gt;&lt;lf&gt;为回车换行，其中：CR，Carriage Return，回车，打字机头部位置；LF，Line Feed，换行，打字机向下换一行；
-&lt;/lf&gt;&lt;/cr&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;Null Line&lt;/code&gt;中必须只有&lt;cr&gt;&lt;lf&gt;而无其他空格；&lt;/lf&gt;&lt;/cr&gt;&lt;/li&gt;
-  &lt;li&gt;在HTTP/1.1协议中，所有的&lt;code&gt;Headers&lt;/code&gt;中，除Host外，都是可选的；&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Requset实例：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;GET http://www.cnblogs.com/gpcuster/ HTTP/1.1
-Host: www.cnblogs.com
-Proxy-Connection: keep-alive
-Cache-Control: max-age=0
-Accept: text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,*/*;q=0.8
-User-Agent: Mozilla/5.0 (Windows NT 5.1) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/36.0.1985.125 Safari/537.36
-Referer: http://www.baidu.com/s?wd=http%3A%2F%2Fwww.cnblogs.com%2Fgpcuster%2F&amp;amp;rsv_spt=1&amp;amp;issp=1&amp;amp;rsv_bp=0&amp;amp;ie=utf-8&amp;amp;tn=baiduhome_pg&amp;amp;rsv_n=2&amp;amp;rsv_sug3=1&amp;amp;rsv_sug4=271&amp;amp;inputT=2186
-Accept-Encoding: gzip,deflate,sdch
-Accept-Language: zh-CN,zh;q=0.8,en;q=0.6
-Cookie: __gads=ID=d58f6aafc2b1682a:T=1399182693:S=ALNI_MbGQmpINTGEw1DKhg8-v-WGcqmDGg; CNZZDATA4902471=cnzz_eid%3D780096130-1402377079-http%253A%252F%252Fwww.baidu.com%252F%26ntime%3D1403490466; CNZZDATA3980738=cnzz_eid%3D371156967-1402987944-http%253A%252F%252Fwww.baidu.com%252F%26ntime%3D1404384515; CNZZDATA1923552=cnzz_eid%3D857445479-1402888944-http%253A%252F%252Fwww.cnblogs.com%252F%26ntime%3D1405079579; AJSTAT_ok_times=5; gs_u_GSN-690926-A=567797657:3115:11443:1407743725372; _ga=GA1.2.1054927095.1399182860; __utma=226521935.1054927095.1399182860.1407743656.1407743991.33; __utmb=226521935.2.10.1407743991; __utmc=226521935; __utmz=226521935.1407743991.33.27.utmcsr=baidu|utmccn=(organic)|utmcmd=organic|utmctr=http%3A%2F%2Fwww.cnblogs.com%2Fgpcuster%2F
-If-Modified-Since: Mon, 11 Aug 2014 07:59:18 GMT
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&quot;response&quot;&gt;Response&lt;/h4&gt;
-
-&lt;p&gt;Response格式：&lt;/p&gt;
-
-&lt;p&gt;（插入一张图片：Response格式）&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;HTTP/1.1 200 OK
-Date: Mon, 11 Aug 2014 07:59:41 GMT
-Content-Type: text/html; charset=utf-8
-Transfer-Encoding: chunked
-Proxy-Connection: keep-alive
-Vary: Accept-Encoding
-Cache-Control: private, max-age=10
-Expires: Mon, 11 Aug 2014 07:59:33 GMT
-Last-Modified: Mon, 11 Aug 2014 07:59:23 GMT
-X-UA-Compatible: IE=10
-Content-Encoding: gzip
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&quot;headers&quot;&gt;常用的Headers&lt;/h4&gt;
-
-&lt;p&gt;（doing…）&lt;/p&gt;
-
-&lt;p&gt;参考：&lt;/p&gt;
-
-&lt;p&gt;http://blog.csdn.net/adparking/article/details/7265496
-http://blog.csdn.net/kfanning/article/details/6062118
-http://www.cnblogs.com/loveyakamoz/archive/2011/07/22/2113614.html
-http://blog.sina.com.cn/s/blog_5dd2af0901012oko.html
-http://canrry.iteye.com/blog/1331292&lt;/p&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;建立连接的方式&lt;/h3&gt;
-
-&lt;p&gt;HTTP支持2种建立连接的方式：非持久连接和持久连接（HTTP 1.0 默认：持久连接的带流水线方式）&lt;/p&gt;
-
-&lt;h4 id=&quot;section-2&quot;&gt;非持久连接&lt;/h4&gt;
-
-&lt;p&gt;让我们查看一下非持久连接情况下，从Server到Client传送一个Web页面的步骤。假设该页面由：1个基本HTML文件和10个JPEG图像构成，而且所有这些对象都存放在同一台服务器中。再假设该基本HTML文件的URL为：&lt;code&gt;gpcuster.cnblogs.com/index.html&lt;/code&gt;。&lt;/p&gt;
-
-&lt;p&gt;下面是具体步骡:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;code&gt;HTTP Client&lt;/code&gt;初始化一个与&lt;code&gt;HTTP Server&lt;/code&gt;之间的TCP连接。&lt;code&gt;HTTP Server&lt;/code&gt;使用默认端口号80监听来自&lt;code&gt;HTTP Client&lt;/code&gt;的连接建立请求。&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;HTTP Client&lt;/code&gt;经由与TCP连接相关联的本地套接字，发出—个HTTP请求消息。这个消息中包含路径名/somepath/index.html。&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;HTTP Server&lt;/code&gt; 经由与TCP连接相关联的本地套接字，接收这个请求消息，再从服务器主机的内存或硬盘中取出对象/somepath/index.html，经由同一个套接字发出包含该对象的响应消息。&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;HTTP Server&lt;/code&gt;告知TCP关闭这个TCP连接(不过TCP要到客户收到刚才这个响应消息之后才会真正终止这个连接)。&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;HTTP Client&lt;/code&gt;经由同一个套接字接收这个响应消息，TCP连接随后终止。&lt;/li&gt;
-  &lt;li&gt;HTTP响应中，所封装的对象是一个HTML文件。&lt;code&gt;HTTP Server&lt;/code&gt;从响应中取出这个HTML文件，加以分析后发现其中有10个JPEG对象的引用。&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;HTTP Client&lt;/code&gt;针对每一个JPEG对象引用，重复步骡1-5。&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;上述步骤之所以称为&lt;code&gt;非持久连接&lt;/code&gt;，原因是每次&lt;code&gt;HTTP Server&lt;/code&gt;返回一个HTTP响应后，相应的TCP连接就被关闭，即，每个TCP连接只用于传输一个请求消息和一个响应消息。针对上述例子，用户每请求一次那个web页面，就反复建立、释放了11个TCP连接。&lt;/p&gt;
-
-&lt;p&gt;关于非持久连接，总结一下：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;HTTP请求之前，建立TCP连接，HTTP响应之后，释放TCP连接；&lt;/li&gt;
-  &lt;li&gt;每个TCP连接只承载一组HTTP请求和响应消息；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;备注：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;名词&lt;code&gt;套接字&lt;/code&gt;socket是什么？&lt;/li&gt;
-  &lt;li&gt;TCP连接建立时，有3次握手，详细过程；&lt;/li&gt;
-  &lt;li&gt;TCP连接释放时，也有4次握手，详细过程；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h4 id=&quot;section-3&quot;&gt;持久连接&lt;/h4&gt;
-
-&lt;p&gt;&lt;code&gt;非持久连接&lt;/code&gt;有几点效率问题：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;每个等待请求的对象，都需要建立并维护一个独立的TCP连接；对于每个这样的连接，TCP得在客户端和服务器端分配TCP缓冲区，并维持TCP变量。对于有可能同时为来自数百个不同客户的请求提供服务的web服务器来说，这会严重增加其负担。&lt;/li&gt;
-  &lt;li&gt;如前所述，每个对象都有2个RTT的响应延长——一个RTT用于建立TCP连接，另—个RTT用于请求和接收对象。&lt;/li&gt;
-  &lt;li&gt;每个对象都受TCP慢启动影响，因为每个TCP连接都有一个慢启动阶段。&lt;/li&gt;
-  &lt;li&gt;&lt;em&gt;（优点）&lt;/em&gt;也有优势：并行TCP连接的使用，能够部分减轻RTT延迟和慢启动延迟的影响。&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;为解决非持久连接情况下，反复建立、释放TCP连接时，所产生的资源占用、效率低下的问题，提出了&lt;code&gt;持久连接&lt;/code&gt;，其核心：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;code&gt;HTTP Server&lt;/code&gt;返回一个HTTP响应之后，TCP连接保持存活一段时间，用于承载后续的其他HTTP请求/响应;&lt;/li&gt;
-  &lt;li&gt;TCP连接的存活时间是可以设定的;&lt;/li&gt;
-  &lt;li&gt;超过存活时间之后，TCP连接自动释放；&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;持久连接分为&lt;code&gt;不带流水线(without pipelining)&lt;/code&gt;和&lt;code&gt;带流水线(with pipelining)&lt;/code&gt;两个版本。&lt;/p&gt;
-
-&lt;p&gt;不带流水线的持久化连接，特点如下：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Client只在收到前一个请求的响应后才发出新的请求，这种情况下，web页面所引用的每个对象(上例中的10个图像)都经历1个RTT的延迟，用于请求和接收该对象；&lt;/li&gt;
-  &lt;li&gt;服务器返回一个响应后，开始等待下一个请求，而这个新请求却不能马上到达，这段时间服务器资源便闲置了；&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;带流水线的持久化连接，特点如下：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;HTTP/1.1的默认模式；&lt;/li&gt;
-  &lt;li&gt;HTTP Client每碰到一个对象引用，就立即发出一个请求（如果没有可用的TCP连接，则新建一个），&lt;code&gt;HTTP Server&lt;/code&gt;每收到一个请求，就立即返回一个响应；&lt;/li&gt;
-  &lt;li&gt;所有引用到的对象一共只经历1个RTT的延迟(而不是像不带流水线的版本那样，每个引用到的对象都各有1个RTT的延迟)；&lt;/li&gt;
-  &lt;li&gt;带流水线的持久连接中服务器空等请求的时间比较少；&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;section-4&quot;&gt;缓存机制&lt;/h3&gt;
-
-&lt;p&gt;HTTP/1.1中缓存机制主要目标：提高页面访问速度；实现途径，有两条：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;减少Client发送请求的次数：Client本地缓存页面，发送请求之前先检查一下，当前缓存页面是否&lt;code&gt;过期（expiration）&lt;/code&gt;；&lt;/li&gt;
-  &lt;li&gt;Server只发送局部响应信息：即，Server不返回完整的响应信息，以此减少网络带宽的占用，&lt;code&gt;验证（validation）&lt;/code&gt;机制能够实现此目标；&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;实际上，HTTP定义了3中缓存机制：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Freshness&lt;/strong&gt; allows a response to be used without re-checking it on the origin server, and can be controlled by both the server and the client. For example, the Expires response header gives a date when the document becomes stale, and the Cache-Control: max-age directive tells the cache how many seconds the response is fresh for.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Validation&lt;/strong&gt; can be used to check whether a cached response is still good after it becomes stale. For example, if the response has a Last-Modified header, a cache can make a conditional request using the If-Modified-Since header to see if it has changed.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Invalidation&lt;/strong&gt; is usually a side effect of another request that passes through the cache. For example, if URL associated with a cached response subsequently gets a POST, PUT or DELETE request, the cached response will be invalidated.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;关于web缓存方面的内容可以参考：Caching Tutorial for Web Authors and Webmasters（&lt;a href=&quot;https://www.mnot.net/cache_docs/#DEFINITION&quot;&gt;英文版&lt;/a&gt;）（&lt;a href=&quot;http://www.chedong.com/tech/cache_docs.html&quot;&gt;中文版&lt;/a&gt;）&lt;/p&gt;
-
-&lt;h2 id=&quot;http-2&quot;&gt;基于HTTP的应用&lt;/h2&gt;
-
-&lt;h3 id=&quot;http-3&quot;&gt;HTTP代理&lt;/h3&gt;
-
-&lt;p&gt;（doing…）&lt;/p&gt;
-
-&lt;p&gt;参考：&lt;a href=&quot;http://www.cnblogs.com/gpcuster/archive/2009/05/25/1488749.html&quot;&gt;浅析HTTP协议&lt;/a&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;透明代理&lt;/li&gt;
-  &lt;li&gt;非透明代理&lt;/li&gt;
-  &lt;li&gt;反向代理&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;section-5&quot;&gt;多线程下载&lt;/h3&gt;
-
-&lt;p&gt;（doing…）&lt;/p&gt;
-
-&lt;p&gt;基本过程如下：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;下载工具开启多个线程，来发出HTTP请求；&lt;/li&gt;
-  &lt;li&gt;每个HTTP请求只请求资源文件的一部分：Content-Range:bytes 20000-40000/47000&lt;/li&gt;
-  &lt;li&gt;合并每个线程下载的文件&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;https&quot;&gt;HTTPS传输协议原理&lt;/h3&gt;
-
-&lt;p&gt;（doing…）&lt;/p&gt;
-
-&lt;p&gt;参考：&lt;a href=&quot;http://www.cnblogs.com/gpcuster/archive/2009/05/25/1488749.html&quot;&gt;浅析HTTP协议&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;webrequest-methods&quot;&gt;WEB开发过程中常用的Request Methods&lt;/h3&gt;
-
-&lt;p&gt;（doing…）&lt;/p&gt;
-
-&lt;p&gt;参考：&lt;a href=&quot;http://www.cnblogs.com/gpcuster/archive/2009/05/25/1488749.html&quot;&gt;浅析HTTP协议&lt;/a&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;HEAD
-  *（Head方法）要求响应与相应的GET请求的响应一样，但是没有的响应体（response body）。这用来获得响应头（response header）中的元数据信息（meta-infomation）有（很）帮助，（因为）它不需要传输所有的内容。&lt;/li&gt;
-  &lt;li&gt;TRACE
-  *（Trace方法告诉服务器端）返回收到的请求。客户端可以（通过此方法）察看在请求过程中中间服务器添加或者改变哪些内容。&lt;/li&gt;
-  &lt;li&gt;OPTIONS
-    &lt;ul&gt;
-      &lt;li&gt;返回服务器（在指定URL上）支持的HTTP方法。通过请求“*”而不是指定的资源，这个方法可以用来检查网络服务器的功能。&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;CONNECT
-    &lt;ul&gt;
-      &lt;li&gt;将请求的连接转换成透明的TCP/IP通道，通常用来简化通过非加密的HTTP代理的SSL-加密通讯（HTTPS）。&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;section-6&quot;&gt;用户与服务器交互&lt;/h3&gt;
-
-&lt;p&gt;（doing…）&lt;/p&gt;
-
-&lt;p&gt;参考：&lt;a href=&quot;http://www.cnblogs.com/gpcuster/archive/2009/05/25/1488749.html&quot;&gt;浅析HTTP协议&lt;/a&gt;&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;身份认证；&lt;/li&gt;
-  &lt;li&gt;cookie；&lt;/li&gt;
-  &lt;li&gt;待条件的GET；&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;javahttp&quot;&gt;java中的HTTP协议&lt;/h2&gt;
-
-&lt;p&gt;（doing…）&lt;/p&gt;
-
-&lt;h3 id=&quot;javahttp-1&quot;&gt;java中HTTP协议&lt;/h3&gt;
-
-&lt;p&gt;（主要两种方式：java api 和 http-common.jar?）&lt;/p&gt;
-
-&lt;h3 id=&quot;servlethttp&quot;&gt;servlet中HTTP协议&lt;/h3&gt;
-
-&lt;h2 id=&quot;section-7&quot;&gt;参考来源&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.w3.org/Protocols/&quot;&gt;W3C: HTTP (HTTP Activity statement)&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.chinaw3c.org/about.html&quot;&gt;W3C中文版简介&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.cnblogs.com/qiqibo/p/3143964.html&quot;&gt;HTTP协议原理解析第一篇&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.cnblogs.com/gpcuster/archive/2009/05/25/1488749.html&quot;&gt;浅析HTTP协议&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.chedong.com/tech/cache_docs.html&quot;&gt;面向站长和网站管理员的Web缓存加速指南-翻译&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://tools.ietf.org/html/rfc2616&quot;&gt;RFC2616&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.cs.tut.fi/~jkorpela/http.html&quot;&gt;Quick reference to HTTP headers&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;[O’Reilly - HTTP Pocket Reference]&lt;/li&gt;
-  &lt;li&gt;[Sams - HTTP Developers Handbook]&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;section-8&quot;&gt;附录&lt;/h2&gt;
-
-&lt;p&gt;对与几个名词/组织的简介&lt;/p&gt;
-
-&lt;h3 id=&quot;w3c&quot;&gt;W3C&lt;/h3&gt;
-&lt;p&gt;万维网联盟（World Wide Web Consortium，简称W3C）创建与1994年，是Web技术领域，影响力较强的国际中立性，技术标准机构。其致力于开发协议、标准、指南，来确保Web的长期发展。详细信息参考：&lt;a href=&quot;http://www.w3.org/Protocols/&quot;&gt;W3C: HTTP (HTTP Activity statement)&lt;/a&gt;。&lt;/p&gt;
-
-&lt;h3 id=&quot;ietf&quot;&gt;IETF&lt;/h3&gt;
-&lt;p&gt;互联网工程任务组（Internet Engineering Task Force，简称IETF）成立于1985年底，是全球互联网领域，极具权威的技术标准化组织，主要任务是负责互联网相关技术规范的研发和制定，当前绝大多数互联网技术标准都出自IETF。详细信息参考：&lt;a href=&quot;http://www.ietf.org/&quot;&gt;IETF&lt;/a&gt;。&lt;/p&gt;
-
-&lt;h3 id=&quot;rfc&quot;&gt;RFC&lt;/h3&gt;
-
-&lt;p&gt;IETF（互联网工程任务组）产生两种文件，一个叫Internet Draft，即”互联网草案”，另一个叫RFC（Request For Comments，意见征求书、请求注解书），RFC相对Draft更为正式，一般情况下，RFC文档发布后，其内容不再做变动。&lt;/p&gt;
-
-&lt;p&gt;[O’Reilly - HTTP Pocket Reference]:		
-[Sams - HTTP Developers Handbook]:		&lt;/p&gt;
-</content>
-   </entry>
-   
-   <entry>
-     <title>Linux的环境变量</title>
-     <link href="http://ningg.github.com/linux-env-var"/>
-     <updated>2014-07-28T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/linux-env-var</id>
-     <content type="html">&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
-
-&lt;p&gt;最近某个需求，要去修改jar包内的配置文件，中间几个细节不想多说，但期间有个需求是：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;将Linux自带的JDK由OpenJDK升级为Oracle(Sun)版本的JDK；&lt;/li&gt;
-  &lt;li&gt;要求所有用户都能使用Oracle(Sun)版本的JDK；&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;section-1&quot;&gt;安装软件&lt;/h2&gt;
-
-&lt;p&gt;这次把软件的安装过程拿出来，为了说明几件小事：Linux下安装软件最好通过已成符号链接文件进行，以方便软件今后的升级；&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;// 将jdk的压缩文件解压到目录/usr/java下，解压之后文件夹为jdk-7u51-linux-x64
-tar -zxvf jdk-7u51-linux-x64.gz -C /usr/java
-// 在目录/usr/java下新建一个符号连接default
-ln -n jdk-7u51-linux-x64 default
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;下面添加环境变量：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;vim ~/.bashrc
-// 添加环境变量JAVA_HOME（要求：对所有用户有效）
-export JAVA_HOME=/usr/java/default
-// 将java添加到PATH中（要求：对所有用户有效）
-export PATH=$JAVA_HOME/bin:$PATH
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;注：上面使用符号链接文件的方式，来设置软件安装路径，方便软件升级，很巧妙，仔细体会一下。&lt;/p&gt;
-
-&lt;h2 id=&quot;section-2&quot;&gt;环境变量&lt;/h2&gt;
-
-&lt;h3 id=&quot;section-3&quot;&gt;简介&lt;/h3&gt;
-
-&lt;p&gt;变量的作用范围一般是某个进程（正在运行的程序）之内，如果希望多个进程共享这个变量，也是可以的，将这个变量设置为&lt;code&gt;环境变量&lt;/code&gt;即可。&lt;/p&gt;
-
-&lt;p&gt;上面可以看出：环境变量是在某个进程中设置的，而且，目标是希望其他进程共享。&lt;/p&gt;
-
-&lt;p&gt;设置环境变量：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;export JAVA_HOME=/usr/java/default
-export PATH=$PATH:$JAVA_HOME/bin
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;section-4&quot;&gt;作用范围&lt;/h3&gt;
-
-&lt;p&gt;当前系统中设置的环境变量，两个基本问题：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;环境变量在哪设置的？&lt;/li&gt;
-  &lt;li&gt;它的作用范围是什么？&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;code&gt;环境变量&lt;/code&gt;是在一个bash进程中定义的，其作用范围是当前进程以及当前进程的所有子进程。&lt;/p&gt;
-
-&lt;p&gt;根据范围大小，可以设置一些环境变量：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;所有bash进程共享的环境变量；&lt;/li&gt;
-  &lt;li&gt;某个用户独享的环境变量；&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;/etc/profile：整个系统共享的环境变量；&lt;/li&gt;
-  &lt;li&gt;~/.bash_profile 或者 ~/.bash_login 或者 ~/.profile 或者 ~/.bashrc，各个用户独享的环境变量；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;（详解：各个文件加载过程？以及各个文件的用途，为什么要分这么多文件/层次来加载？等待补充）&lt;/p&gt;
-
-&lt;h2 id=&quot;section-5&quot;&gt;参考来源&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;《鸟哥私房菜（第三版）》 第11章 认识和学习BASH&lt;/li&gt;
-&lt;/ul&gt;
 
 </content>
    </entry>

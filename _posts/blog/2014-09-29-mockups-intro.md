@@ -25,7 +25,7 @@ category: product
 |`Enter`/`F2`|编辑|
 |`Ctrl+2`|锁定|
 |`Ctrl+Up`/`Ctrl+Down`|上移、下移一层|
-|`Ctrl+D`|复制并粘贴，相当于`Ctrl+C` + `Ctrl+D`|
+|`Ctrl+D`|复制并粘贴，相当于`Ctrl+C` + `Ctrl+V`|
 
 几点补充：
 
