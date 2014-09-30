@@ -7,10 +7,13 @@ category: product
 
 ##mockups的特点
 
+
+
 * 快：提供常用的元素，通过简单托、拉、拽等动作，即可完成线框图绘制；
 * 手绘风格：展示效果，朴素、简洁，能够突出内容、层次结构、业务流程；
 
 ##基础用法
+
 
 简单的托、拉、拽内置的组件，就能够达到如下的效果：
 
@@ -18,6 +21,7 @@ category: product
 
 
 ##高效用法
+
 
  
 |操作|说明|
@@ -39,11 +43,17 @@ category: product
 ##参考来源
 
 
+
+
 * [Mockups官网文档](http://support.balsamiq.com/#support-documentation)
 * [Mockups官网Tutorial](http://support.balsamiq.com/customer/portal/topics/49503-tutorials)
 
 
-> 扯一点小事：写这篇文章关于mockups操作的文章，起初是无意间受到`1-2-3`的博客《[我喜欢Balsamiq Mockups的三大理由](http://www.cnblogs.com/1-2-3/archive/2009/08/17/Balsamiq-Mockups-Introduction.html)》和《[Balsamiq Mockups 小技巧](http://www.cnblogs.com/1-2-3/archive/2009/06/30/Balsamiq-Mockups-tips.html)》 启发，不过自己当时冷静了一下，脑海里闪烁一个疑问：`1-2-3`关于mockups的知识是从哪获取的？哦，官网，最初的知识传播，肯定是某人比较认真，读了官网，然后知识就散播开了，OK，为避免知识在传播过程中有损伤、误解，我直接找根源好了，这样的做法在普通人看来笨拙，却是真正捷径，最简洁、省时、省力的方法。
+##闲谈
+
+
+
+扯一点小事：写这篇文章关于mockups操作的文章，起初是无意间受到`1-2-3`的博客《[我喜欢Balsamiq Mockups的三大理由](http://www.cnblogs.com/1-2-3/archive/2009/08/17/Balsamiq-Mockups-Introduction.html)》和《[Balsamiq Mockups 小技巧](http://www.cnblogs.com/1-2-3/archive/2009/06/30/Balsamiq-Mockups-tips.html)》 启发，不过自己当时冷静了一下，脑海里闪烁一个疑问：`1-2-3`关于mockups的知识是从哪获取的？哦，官网，最初的知识传播，肯定是某人比较认真，读了官网，然后知识就散播开了，OK，为避免知识在传播过程中有损伤、误解，我直接找根源好了，这样的做法在普通人看来笨拙，却是真正捷径，最简洁、省时、省力的方法。
 
 
 

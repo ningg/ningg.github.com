@@ -73,10 +73,10 @@ pre ol{margin-left:25px;list-style-type:decimal;}
 .sidenav li { margin-bottom:12px; word-break: break-all;}
 .sidenav a { color:#555; font-size:14px; display:block;}
 .entry{margin-bottom:80px;width:680px; float:left; background:#fff; padding:30px; box-shadow:0 2px 6px #ccc; }
-.entry ul{margin-bottom:25px;margin-left:40px;}
+.entry ul{margin-bottom:25px;margin-left:25px;margin-top: 10px;}
 .entry p+ul {margin-top:-5px;}
 .entry ul li{margin-bottom:5px;list-style:disc;line-height:1.5em;}
-.entry ol{margin-top:0px;margin-bottom:25px;margin-left:40px;}
+.entry ol{margin-top:0px;margin-bottom:25px;margin-left:25px;}
 .entry ol li{margin-bottom:5px;list-style:decimal;line-height:1.5em;}
 
 /*.entry blockquote{margin-left:25px;font-size:14px;font-style:italic;}*/
@@ -84,8 +84,8 @@ pre ol{margin-left:25px;list-style-type:decimal;}
 
 
 
-.entry blockquote{border-left: 5px solid #26C06A; border-left-width:10px;background-color:rgba(102,128,153,0.05);border-top-right-radius:10px;border-bottom-right-radius:5px;padding:15px 20px; font-size:14px;}
-.entry blockquote p{margin-bottom:15px;font-size:14px;line-height:1.428571429;margin-top:20px}
+.entry blockquote{border-left: 5px solid #26C06A; border-left-width:10px;background-color:rgba(102,128,153,0.05);border-top-right-radius:10px;border-bottom-right-radius:5px;padding:15px 20px; /* font-size:14px; */}
+.entry blockquote p{margin-bottom:15px;/* font-size:14px; line-height:1.428571429; */ margin-top:20px}
 .entry blockquote ul:last-child,blockquote ol:last-child{margin-bottom:0}
 
 
@@ -126,17 +126,17 @@ pre ol{margin-left:25px;list-style-type:decimal;}
 .index-content .section .about-page ul li{ margin-bottom:5px; list-style:disc; line-height:1.5em;}
 .index-content .section .about-page ol{ margin-bottom:25px; margin-left:10%; }
 .index-content .section .about-page ol li{ margin-bottom:5px; list-style:decimal; line-height:1.5em;}
-.index-content .section .about-page blockquote{margin-left:11%; font-size:14px;font-style:italic;}
+.index-content .section .about-page blockquote{margin-left:11%; /* font-size:14px; */ font-style:italic;}
 .index-content .section .about-page img{max-width:670px;display:block;margin:10px auto;}
 
 /*****************category page****************/
-.index-content .section .category-page { margin-left:15%; width:70%; margin:0 atuo;}
+.index-content .section .category-page { margin-left:15%; width:70%; margin:0 atuo;margin-bottom:700px;}
 .index-content .section .category-page ul{ margin-bottom:25px; margin-left:10%;}
 .index-content .section .category-page p+ul{ margin-top:-20px;}
 .index-content .section .category-page ul li{ margin-bottom:5px; list-style:disc; line-height:1.5em;}
 .index-content .section .category-page ol{ margin-bottom:25px; margin-left:10%; }
 .index-content .section .category-page ol li{ margin-bottom:5px; list-style:decimal; line-height:1.5em;}
-.index-content .section .category-page blockquote{margin-left:11%; font-size:14px;font-style:italic;}
+.index-content .section .category-page blockquote{margin-left:11%; /* font-size:14px; */ font-style:italic;}
 .index-content .section .category-page img{max-width:670px;display:block;margin:10px auto;}
 .index-content .section .category-page  li a,
 .index-content .section .category-page  li a:visited {display:inline-block; zoom:1; color:rgba(0,136,204,0.9); width:100%; }

@@ -4,13 +4,95 @@
    <title>NingG.github.com</title>
    <link href="http://ningg.github.com/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://ningg.github.com" rel="alternate" type="text/html" />
-   <updated>2014-09-30T01:38:48+08:00</updated>
+   <updated>2014-09-30T19:17:13+08:00</updated>
    <id>http://ningg.github.com</id>
    <author>
      <name></name>
      <email></email>
    </author>
 
+   
+   <entry>
+     <title>想和自己谈一谈</title>
+     <link href="http://ningg.github.com/personal-think"/>
+     <updated>2014-09-30T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/personal-think</id>
+     <content type="html">&lt;p&gt;（下面自己的思考，警惕列举过多1、2、3，导致排版散乱）&lt;/p&gt;
+
+&lt;p&gt;今天读了&lt;code&gt;***&lt;/code&gt;的博客，特别是每年的个人总结，基本上2004–2013的都看了，希望能从中窥探一点前辈工作十余年的体会，同时也想看看有没有能够借鉴的，万幸，读的较为认真，我也产生了一点想法，借这个时机，我想和自己谈一谈。&lt;/p&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;有个打算，有点追求&lt;/h2&gt;
+
+&lt;p&gt;整体上，我需要有些时间较长的总结、计划，比如一年、6个月、3个月的打算；每次打算，需要要涵盖3个方面：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;前一段，我做了什么？有什么可以积累的地方、有什么改进的地方；&lt;/li&gt;
+  &lt;li&gt;接下来我需要做什么？计划怎么行动？&lt;/li&gt;
+  &lt;li&gt;做这些事情，有一个基本的理念，有吗？&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;说到较长时间的打算，我在学校读书的最后一年，曾有过3个月的打算，其实打算开始之前，已经陆续铺垫有3个多月，事后总结，最初的打算完成了60%，当时获得了很大的信心，那种幸福、自信的感觉为自己今后的一些决定带来了内心的支撑，特别是，当出现争议的时候，自己能够在自己进行深入分析后做决断。&lt;/p&gt;
+
+&lt;p&gt;自己做事情，脑袋里有一个基本的理念吗？理念还是有的，整体上几个点：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;知识、认识方面的&lt;strong&gt;分享&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;多人一起做事时的&lt;strong&gt;协作&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;所用基础工具的&lt;strong&gt;开源&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;团队、个人核心在于&lt;strong&gt;成长&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;从上述理念出发，更能得到自己的共鸣，不要怕对外开放、交流之后，技术上被超越，即使被超越了，对整个社会的进步也是好的。&lt;em&gt;（如果公司对于某些技术有保密要求，这就绝不能对外分享，但是整体的框架，一些设计理念上的东西，也可以在交流中成长）&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;能够随身携带的技能，如果可以预见的时间内会用到，那就尽多获取、提早准备，例如，驾驶、外语、急救措施、生活中安全措施。当然，其中最重要是：身体。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;视野放开，保持敏感&lt;/h2&gt;
+
+&lt;p&gt;要将视野放开，保持与时代相接触，对于自己所处行业，需要有自己的认识，这个认识可以是错误的，分享出去，自然会有人忍不住来指正，关注国内和国外最新的科技动态，包括产品、生活、行业；主要途径：业内顶尖人才、顶尖公司动向，领域内主流媒体的动向。&lt;/p&gt;
+
+&lt;p&gt;下面是自己&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;前沿媒体：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;www.36kr.com&quot;&gt;36Kr&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;www.infoq.com&quot;&gt;InfoQ&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;www.valleytalk.org&quot;&gt;弯曲评论&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;个人博客、微信：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;coolshell.cn&quot;&gt;酷壳coolshell&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;www.williamlong.info&quot;&gt;月光博客&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;陈利人：&lt;a href=&quot;http://weibo.com/lirenchen&quot;&gt;微博&lt;/a&gt;、&lt;code&gt;微信号：daiziguizhongren&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;梁斌：&lt;a href=&quot;http://weibo.com/pennyliang&quot;&gt;微博&lt;/a&gt;、&lt;code&gt;微信号：pennyjob&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;Fenng：&lt;a href=&quot;http://hutu.me/&quot;&gt;小道消息&lt;/a&gt;、&lt;a href=&quot;http://news.dbanotes.net/&quot;&gt;Startup News&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;新兴的潮流网站：对一些如同爆炸性出现的新技术、网站、观点，保持敏感度，进行简要学习，基本原则，了解轮廓。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;小结&lt;/h2&gt;
+
+&lt;p&gt;上面说了两点，其实就是一个意思：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;有个打算，有点追求：做事情，集中精力，一件一件解决掉；&lt;/li&gt;
+  &lt;li&gt;视野放开，保持敏感：做事情，看趋势，3~5年、20年；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section-3&quot;&gt;闲谈&lt;/h2&gt;
+
+&lt;p&gt;我写blog，大都是分要点，列一个1、2、3，调理还算清晰，但，我总感觉我blog读起来味道怪怪的，相反，读Fenng、caoz、haoel的文章，能感觉到有平铺直叙、娓娓道来，很有味道。写blog，不仅要内容有用，而且，让人读起来也要舒服，这一点，我需要学习改进。&lt;/p&gt;
+
+</content>
+   </entry>
    
    <entry>
      <title>线框图工具：mockups</title>
@@ -33,11 +115,13 @@
 &lt;h2 id=&quot;section-1&quot;&gt;高效用法&lt;/h2&gt;
 
 &lt;table&gt;
-  &lt;tbody&gt;
+  &lt;thead&gt;
     &lt;tr&gt;
-      &lt;td&gt;操作&lt;/td&gt;
-      &lt;td&gt;说明&lt;/td&gt;
+      &lt;th&gt;操作&lt;/th&gt;
+      &lt;th&gt;说明&lt;/th&gt;
     &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
     &lt;tr&gt;
       &lt;td&gt;&lt;code&gt;/&lt;/code&gt;/&lt;code&gt;+&lt;/code&gt;&lt;/td&gt;
       &lt;td&gt;快速定位到&lt;code&gt;Quick Add&lt;/code&gt;输入框，在其中输入控件名字，即可自动添加一个元素&lt;/td&gt;
@@ -56,7 +140,7 @@
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;&lt;code&gt;Ctrl+D&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;复制并粘贴，相当于&lt;code&gt;Ctrl+C&lt;/code&gt; + &lt;code&gt;Ctrl+D&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;复制并粘贴，相当于&lt;code&gt;Ctrl+C&lt;/code&gt; + &lt;code&gt;Ctrl+V&lt;/code&gt;&lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
@@ -77,9 +161,160 @@
   &lt;li&gt;&lt;a href=&quot;http://support.balsamiq.com/customer/portal/topics/49503-tutorials&quot;&gt;Mockups官网Tutorial&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;blockquote&gt;
-  &lt;p&gt;扯一点小事：写这篇文章关于mockups操作的文章，起初是无意间受到&lt;code&gt;1-2-3&lt;/code&gt;的博客《&lt;a href=&quot;http://www.cnblogs.com/1-2-3/archive/2009/08/17/Balsamiq-Mockups-Introduction.html&quot;&gt;我喜欢Balsamiq Mockups的三大理由&lt;/a&gt;》和《&lt;a href=&quot;http://www.cnblogs.com/1-2-3/archive/2009/06/30/Balsamiq-Mockups-tips.html&quot;&gt;Balsamiq Mockups 小技巧&lt;/a&gt;》 启发，不过自己当时冷静了一下，脑海里闪烁一个疑问：&lt;code&gt;1-2-3&lt;/code&gt;关于mockups的知识是从哪获取的？哦，官网，最初的知识传播，肯定是某人比较认真，读了官网，然后知识就散播开了，OK，为避免知识在传播过程中有损伤、误解，我直接找根源好了，这样的做法在普通人看来笨拙，却是真正捷径，最简洁、省时、省力的方法。&lt;/p&gt;
+&lt;h2 id=&quot;section-3&quot;&gt;闲谈&lt;/h2&gt;
+
+&lt;p&gt;扯一点小事：写这篇文章关于mockups操作的文章，起初是无意间受到&lt;code&gt;1-2-3&lt;/code&gt;的博客《&lt;a href=&quot;http://www.cnblogs.com/1-2-3/archive/2009/08/17/Balsamiq-Mockups-Introduction.html&quot;&gt;我喜欢Balsamiq Mockups的三大理由&lt;/a&gt;》和《&lt;a href=&quot;http://www.cnblogs.com/1-2-3/archive/2009/06/30/Balsamiq-Mockups-tips.html&quot;&gt;Balsamiq Mockups 小技巧&lt;/a&gt;》 启发，不过自己当时冷静了一下，脑海里闪烁一个疑问：&lt;code&gt;1-2-3&lt;/code&gt;关于mockups的知识是从哪获取的？哦，官网，最初的知识传播，肯定是某人比较认真，读了官网，然后知识就散播开了，OK，为避免知识在传播过程中有损伤、误解，我直接找根源好了，这样的做法在普通人看来笨拙，却是真正捷径，最简洁、省时、省力的方法。&lt;/p&gt;
+
+</content>
+   </entry>
+   
+   <entry>
+     <title>产品设计：线框图</title>
+     <link href="http://ningg.github.com/wireframe"/>
+     <updated>2014-09-28T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/wireframe</id>
+     <content type="html">&lt;blockquote&gt;
+  &lt;p&gt;题记：从网上找了一份材料：&lt;a href=&quot;/download/wireframe/wireframe-learning.pptx&quot;&gt;Wireframes.ppt&lt;/a&gt;，下面的内容基本都是从其中整理出来的。&lt;/p&gt;
 &lt;/blockquote&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;项目流程&lt;/h2&gt;
+
+&lt;p&gt;直接贴一张图片：项目流程（中大型产品），这张图片来自于&lt;a href=&quot;/download/wireframe/wireframe-learning.pptx&quot;&gt;Wireframes.ppt&lt;/a&gt;。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/wireframe/project-process.png&quot; alt=&quot;project-process.png&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;说明一点：线框图产生于项目前期，对应到上面的流程中，就是&lt;code&gt;交互设计初稿&lt;/code&gt;的阶段。&lt;/p&gt;
+
+&lt;p&gt;总结一下上面图片中展示的项目流程，一个中大型产品的开发基本过程是：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;需求分析&lt;/li&gt;
+  &lt;li&gt;需求确定&lt;/li&gt;
+  &lt;li&gt;交互设计稿&lt;em&gt;（线框图）&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;视觉设计稿&lt;em&gt;（线框图）&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;项目计划，包括：
+    &lt;ul&gt;
+      &lt;li&gt;功能需求分析&lt;/li&gt;
+      &lt;li&gt;开发设计&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;产品开发，包括：
+    &lt;ul&gt;
+      &lt;li&gt;前端程序开发&lt;/li&gt;
+      &lt;li&gt;后端程序开发&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;测试&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;线框图&lt;/h2&gt;
+
+&lt;p&gt;线框图，就是几张骨架图，两点：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;线框、简单的线条，来表现内容；&lt;/li&gt;
+  &lt;li&gt;不关心视觉效果和细节；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;要做一个用户展示界面的，有几个方面需要考虑：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;需要展示什么内容？&lt;/li&gt;
+  &lt;li&gt;这些内容的重要程度怎么划分？&lt;/li&gt;
+  &lt;li&gt;内容之间的层次关系？&lt;/li&gt;
+  &lt;li&gt;同一页面上，不同内容的位置？&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;上面前两点，需要通过需求分析来确定；后两点，在线框图上能够体现出来。&lt;/p&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;线框图的意义&lt;/h3&gt;
+
+&lt;p&gt;线框图在产品的设计过程中，具有不可替代的优势：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;快速创建：设计师不需要考虑太多细节；&lt;/li&gt;
+  &lt;li&gt;直观呈现，帮助聚焦：项目前期，去除视觉和细节干扰，确保讨论中，大家将注意力集中在：需求是什么？需要放啥东西？需要怎么样与用户交互？这些内容的层次如何划分？&lt;/li&gt;
+  &lt;li&gt;方便修改：轻松修改设计、甚至放弃某一设计；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;section-3&quot;&gt;几点理论&lt;/h3&gt;
+
+&lt;p&gt;关于线框图，有几点要说明的：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;每个阶段的线框图都有其特定的价值，并不是精美细致的就是好的；&lt;/li&gt;
+  &lt;li&gt;从最简单的设计开始，逐渐添加细节；&lt;/li&gt;
+  &lt;li&gt;线框图的最大价值在于讨论和优化；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;通常用户进行产品设计时，绘制产品原型的过程，分为：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;草图&lt;/li&gt;
+  &lt;li&gt;粗略线框图&lt;/li&gt;
+  &lt;li&gt;详细线框图&lt;/li&gt;
+  &lt;li&gt;交互说明图&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;section-4&quot;&gt;线框图分类&lt;/h3&gt;
+
+&lt;p&gt;当前不同人员都会使用线框图，主要的有3类设计师：PD、交互、视觉。他们使用线框图的侧重有所不同：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;PD：关注，功能、内容、业务流程；&lt;/li&gt;
+  &lt;li&gt;交互：关注，业务流程、页面布局、层次结构；&lt;/li&gt;
+  &lt;li&gt;视觉：关注，整体风格/气质、颜色、质感，以及其他精细的视觉元素；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;总结一下，对于中小工程，应该一个工程师搞定所有、一切。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-5&quot;&gt;画线框图的工具&lt;/h2&gt;
+
+&lt;p&gt;选取工具有几个依据：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;保证线框图本身的优势不缺失：快速创建、帮助聚焦、方便修改；&lt;/li&gt;
+  &lt;li&gt;工具制作的输出文档要易用：例如，保存为多种形式；&lt;/li&gt;
+  &lt;li&gt;想法不受工具的束缚；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;更详细一点，产品设计时，选取工具要考虑如下几点：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Design更容易：线框图、流程图、架构图&lt;/li&gt;
+  &lt;li&gt;Present更方便：策划文档、规格书&lt;/li&gt;
+  &lt;li&gt;Experience更交互：体验原型、交互设计&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;说两个工具：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Mockups&lt;/li&gt;
+  &lt;li&gt;Axure&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section-6&quot;&gt;小结&lt;/h2&gt;
+
+&lt;p&gt;工具能够提升做事的效率，但归根结底，进行设计的时候，是需要想法、需要思考的，工具只是表达；具体在使用线框图时，说两点：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;从最简单的开始，在迭代中逐步增加细节；&lt;/li&gt;
+  &lt;li&gt;留下会议纪要、修改纪要；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;嗳，刚刚回头看了一下上面对线框图的说明，我x，是我故意把事情说复杂了吧，线框图存在的意义，其实，就几点：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;把想法写出来；&lt;em&gt;（借助工具）&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;从其他人那里得到反馈意见；&lt;/li&gt;
+  &lt;li&gt;修改至定稿；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section-7&quot;&gt;参考来源&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;/download/wireframe/wireframe-learning.pptx&quot;&gt;Wireframes.ppt&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
 </content>
    </entry>
@@ -288,6 +523,87 @@
 &lt;p&gt;其他上面的内容，其他地方也有转载和评论：&lt;a href=&quot;http://www.cnblogs.com/xinz/p/3852177.html&quot;&gt;邹欣的教学博客&lt;/a&gt;和&lt;a href=&quot;http://www.zhihu.com/question/19560521/answer/31141681&quot;&gt;知乎出版人周筠&lt;/a&gt;。&lt;/p&gt;
 
 </content>
+   </entry>
+   
+   <entry>
+     <title>产品设计：概要</title>
+     <link href="http://ningg.github.com/product-design"/>
+     <updated>2014-09-28T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/product-design</id>
+     <content type="html">&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
+
+&lt;p&gt;最近要做一个系统，包含了三部分：数据收集、分析处理、结果展示交互；其中，系统用户关心的只有&lt;code&gt;结果展示交互&lt;/code&gt;模块；这一模块的设计，直接决定了&lt;code&gt;分析处理&lt;/code&gt;模块中，数据结果的存储形式。现在的问题是，需要先设计好&lt;code&gt;结果展示交互&lt;/code&gt;模块，这样才能保证&lt;code&gt;分析处理&lt;/code&gt;模块开发完成。&lt;/p&gt;
+
+&lt;p&gt;冷静想一想，上面问题的产生，根源是：没有按照正常的互联网产品开发流程，来推进项目。由于系统规模并不大，现在调整为互联网产品的开发流程也不迟。没有相关的人才？我是干什么的，需要什么，就能会什么，搞起。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;产品的诞生流程&lt;/h2&gt;
+
+&lt;p&gt;直接点，当前我对这些产品原型什么的都没有概念，之前在某处的时候，见过产品开发的基本流程：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;产品/设计狮，出一版PSD；&lt;/li&gt;
+  &lt;li&gt;研发工程狮，开始开发；说点细节：
+    &lt;ul&gt;
+      &lt;li&gt;核心攻城狮，敲定表格字段；&lt;/li&gt;
+      &lt;li&gt;核心攻城狮，搭起前后端分离的整体架构；&lt;/li&gt;
+      &lt;li&gt;所有攻城狮，一起编码实现业务逻辑；&lt;/li&gt;
+      &lt;li&gt;Review代码、结伴编程，保证代码质量；&lt;/li&gt;
+      &lt;li&gt;夜黑风高时，系统上线（如果是测试环境，则，不用赶在晚上了）；&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;整个运营团队、开发团队一边使用系统，一边提交改进意见（包含当前系统截图）；&lt;/li&gt;
+  &lt;li&gt;系统细节调整、更新；&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;从上面的清单中，可以看出步骤2的工作量较大，其实不是这样的，只是自己以前参与了工程的研发，所以知道的研发方面比较细节的东西；实际上，每一步骤，都包含了差不多的工作量，有的脑力多一些，有的体力多一些。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;关注点&lt;/h2&gt;
+
+&lt;p&gt;进行线上产品设计，关注点：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;色彩搭配&lt;/li&gt;
+  &lt;li&gt;字体选择&lt;/li&gt;
+  &lt;li&gt;语言风格&lt;em&gt;（严肃？活泼？）&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;视觉元素&lt;em&gt;（这是什么？）&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section-3&quot;&gt;方法&lt;/h2&gt;
+
+&lt;p&gt;当前进行产品设计时，常用的方法如下：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;手绘草图：设计变得自由；&lt;/li&gt;
+  &lt;li&gt;线框图：？&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section-4&quot;&gt;参考来源&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://udc.weibo.com/&quot;&gt;weibo UDC&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://mux.baidu.com/&quot;&gt;baidu MUX&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://ued.taobao.org/&quot;&gt;taobao UED&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.woshipm.com/tag/ued&quot;&gt;woshipm UED&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://cued.xunlei.com/&quot;&gt;xunlei CUED&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://ued.orzk.com/&quot;&gt;orzk UED&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://ued.ctrip.com/blog/&quot;&gt;ctrip UED&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://uedc.163.com/&quot;&gt;163 UEDC&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://ued.sina.com/&quot;&gt;sina UED&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://cdc.tencent.com/&quot;&gt;tencent CDC&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://mxd.tencent.com/&quot;&gt;tencent MXD&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://isux.tencent.com/&quot;&gt;tencent ISUX&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://fex.baidu.com/&quot;&gt;baidu FEX&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+   </entry>
+   
+   <entry>
+     <title>Git使用入门</title>
+     <link href="http://ningg.github.com/git-intro"/>
+     <updated>2014-09-27T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/git-intro</id>
+     <content type="html"></content>
    </entry>
    
    <entry>
@@ -771,1967 +1087,6 @@ med out: connect -&amp;gt; [Help 1]
   &lt;li&gt;&lt;a href=&quot;http://flume.apache.org/&quot;&gt;flume官网&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://cwiki.apache.org/confluence/display/FLUME/Development+Environment&quot;&gt;flume开发&amp;amp;调试环境&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>wordpress的开发调试环境</title>
-     <link href="http://ningg.github.com/wordpress-debug-env"/>
-     <updated>2014-09-05T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/wordpress-debug-env</id>
-     <content type="html">&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
-
-&lt;p&gt;用wordpress建站，两个功能：一个是展示团队工作，另一个是方便其他人进来讨论。&lt;/p&gt;
-
-&lt;p&gt;初步立意：使用wordpress搭建两个网站，团队工作展示一个，讨论区一个；&lt;/p&gt;
-
-&lt;h2 id=&quot;section-1&quot;&gt;组件与安装&lt;/h2&gt;
-
-&lt;p&gt;环境：Win 7，已经安装了JDK 6 和 JDK 7&lt;/p&gt;
-
-&lt;p&gt;下载软件清单如下：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;下载XAMPP：&lt;a href=&quot;https://www.apachefriends.org/zh_cn/index.html&quot;&gt;https://www.apachefriends.org/zh_cn/index.html&lt;/a&gt; 版本：1.8.3；对应PHP: 5.5.1&lt;/li&gt;
-  &lt;li&gt;下载eclipse for php：&lt;a href=&quot;http://www.eclipse.org/downloads/&quot;&gt;http://www.eclipse.org/downloads/&lt;/a&gt;  版本：eclipse-php-luna-R-win32-x86_64&lt;/li&gt;
-  &lt;li&gt;下载wordpress：&lt;a href=&quot;http://cn.wordpress.org/&quot;&gt;http://cn.wordpress.org/&lt;/a&gt; 版本：3.9&lt;/li&gt;
-  &lt;li&gt;下载主题：
-    &lt;ol&gt;
-      &lt;li&gt;hum：&lt;a href=&quot;http://wordpress.org/extend/themes/hum/&quot;&gt;http://wordpress.org/extend/themes/hum/&lt;/a&gt; 版本：0.2.1&lt;/li&gt;
-      &lt;li&gt;twenty eleven：&lt;a href=&quot;http://wordpress.org/themes/twentyeleven&quot;&gt;http://wordpress.org/themes/twentyeleven&lt;/a&gt; 版本：1.9&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-  &lt;li&gt;下载JDK：&lt;a href=&quot;http://www.oracle.com/technetwork/java/javase/downloads/index.html&quot;&gt;Oracle JDK(Sun)&lt;/a&gt; 版本：JDK 7u67&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;依次安装：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;XAMPP：wordpress的运行环境&lt;/li&gt;
-  &lt;li&gt;wordpress，并为其配置主题：
-    &lt;ul&gt;
-      &lt;li&gt;twenty eleven&lt;/li&gt;
-      &lt;li&gt;hum&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;eclipse：将整个wordpress文件夹，新建为PHP Project；&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;section-2&quot;&gt;配置&lt;/h2&gt;
-
-&lt;p&gt;设计搭建其调试环境所需要的基本配置。&lt;/p&gt;
-
-&lt;h3 id=&quot;section-3&quot;&gt;基本配置&lt;/h3&gt;
-
-&lt;p&gt;主要是Apache、MySQL、PHP相关：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;设置MySQL的root密码，两种方式都可以：
-    &lt;ol&gt;
-      &lt;li&gt;CMD的命令行；&lt;/li&gt;
-      &lt;li&gt;myphpAdmin图形界面；&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;section-4&quot;&gt;主题配置&lt;/h3&gt;
-
-&lt;p&gt;主要是为成功安装主题，所需要进行的配置。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;wordpress
-    &lt;ol&gt;
-      &lt;li&gt;取消twenty eleven主题中google front（因为google被墙了）&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section-5&quot;&gt;调试&lt;/h2&gt;
-
-&lt;p&gt;调试是学习一个框架/语言较快的方式，这一部分将着重介绍如何进行调试。关注几点：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;如何进行调试；&lt;/li&gt;
-  &lt;li&gt;PHP web基本处理逻辑；&lt;/li&gt;
-  &lt;li&gt;wordpress中使用了哪些巧妙的设计，使其流行数年；&lt;/li&gt;
-&lt;/ul&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>PHP入门知识</title>
-     <link href="http://ningg.github.com/php-intro"/>
-     <updated>2014-08-31T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/php-intro</id>
-     <content type="html">&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
-
-&lt;p&gt;最近要快速搭建一个网站，用途：实现团队内容的对外展现，第一反应就是用wordpress框架实现，号称5分钟建站，够快了。问题来了：网站要实现一些特定的效果，这个就需要定制一下了，wordpress后端是PHP写的处理逻辑，OK，熟悉一下PHP。&lt;/p&gt;
-
-&lt;h2 id=&quot;section-1&quot;&gt;学习路线&lt;/h2&gt;
-
-&lt;p&gt;自己之前接触过1个多月的PHP，当时的内容就是搭建web站点；针对一门不熟悉的语言，只需要掌握其基本知识即可开始工作，包括：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;定义变量；&lt;/li&gt;
-  &lt;li&gt;不同数据结构对应的变量；（链表、集合）&lt;/li&gt;
-  &lt;li&gt;多个文件之间的组织结构；&lt;/li&gt;
-  &lt;li&gt;调试程序；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section-2&quot;&gt;变量&lt;/h2&gt;
-
-&lt;p&gt;变量，就是存储数据的容器，对变量进行操作就是处理数据；&lt;/p&gt;
-
-&lt;h3 id=&quot;section-3&quot;&gt;定义变量&lt;/h3&gt;
-
-&lt;p&gt;变量名，几点：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;变量名必须以&lt;code&gt;$&lt;/code&gt;开头；&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;$&lt;/code&gt;之后，第一个字符必须为字母、下划线&lt;code&gt;_&lt;/code&gt;，不能为数字；&lt;/li&gt;
-  &lt;li&gt;变量名剩余部分，可以包含任意字母、数字、下划线；&lt;/li&gt;
-  &lt;li&gt;变量名，区分大小写；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;关于变量名，建议：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;变量名，全部小写字母；&lt;/li&gt;
-  &lt;li&gt;变量名，表示其含义，举例：&lt;code&gt;$first_name&lt;/code&gt;好于&lt;code&gt;$fn&lt;/code&gt;;&lt;/li&gt;
-  &lt;li&gt;注释变量用途，例：$first_name = ‘Guo’; //the first name&lt;/li&gt;
-  &lt;li&gt;保持一致命名模式，如果要大写，就全部大写；举例：预定义变量&lt;code&gt;$_SERVER&lt;/code&gt;；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;变量定义，几点：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;PHP是脚本语言，不要求必须先定义变量或者初始化变量；但为了规范开发、减少出错，建议先定义变量后使用；&lt;/li&gt;
-  &lt;li&gt;在定义时，对变量用途进行注释；&lt;/li&gt;
-  &lt;li&gt;变量命名风格，有两种：驼峰式（&lt;code&gt;$FirstName&lt;/code&gt;）和下划线式（&lt;code&gt;$first_name&lt;/code&gt;），建议下划线式。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;section-4&quot;&gt;变量类型&lt;/h3&gt;
-
-&lt;p&gt;这一部分，将介绍3种变量类型：数值型、字符串型和数组；&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;数值
-    &lt;ol&gt;
-      &lt;li&gt;整数：1、-1；&lt;/li&gt;
-      &lt;li&gt;浮点数：1.0、2.2；&lt;/li&gt;
-      &lt;li&gt;注：&lt;code&gt;1/3&lt;/code&gt;包含&lt;code&gt;/&lt;/code&gt;是错误表示；&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-  &lt;li&gt;字符串
-    &lt;ol&gt;
-      &lt;li&gt;单引号&lt;code&gt;&#39;&lt;/code&gt;、双引号&lt;code&gt;“&lt;/code&gt;包含起来的任意符号；&lt;/li&gt;
-      &lt;li&gt;可以包含变量，例：&lt;code&gt;&#39;$field_name&#39;&lt;/code&gt;；&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-  &lt;li&gt;数组
-    &lt;ol&gt;
-      &lt;li&gt;基本单元：key-value；&lt;/li&gt;
-      &lt;li&gt;key不同，数组分为两类：索引数组（key为数值）、关联数组（key为字符串）；&lt;/li&gt;
-      &lt;li&gt;数组的key，又称索引；&lt;/li&gt;
-      &lt;li&gt;如果数组的value也是数组，则，为多维数组；&lt;/li&gt;
-      &lt;li&gt;PHP中关联数组，在Perl和Ruby中称为散列；&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;索引数组如下：&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: left&quot;&gt;key&lt;/th&gt;
-      &lt;th style=&quot;text-align: left&quot;&gt;value&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;0&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;Don&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;1&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;Jane&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;2&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;Roger&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;关联数组如下：&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: left&quot;&gt;key&lt;/th&gt;
-      &lt;th style=&quot;text-align: left&quot;&gt;value&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;D&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;Don&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;J&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;Jane&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;R&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;Roger&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h3 id=&quot;section-5&quot;&gt;变量赋值&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;普通变量（数值、字符串）
-    &lt;ol&gt;
-      &lt;li&gt;等号赋值，例： $number = 1;&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-  &lt;li&gt;数组
-    &lt;ol&gt;
-      &lt;li&gt;使用array()函数，例：$list = array();&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;section-6&quot;&gt;使用变量&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;直接输出变量
-    &lt;ul&gt;
-      &lt;li&gt;echo $number;&lt;/li&gt;
-      &lt;li&gt;print $number;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;上下文中输出变量
-    &lt;ul&gt;
-      &lt;li&gt;echo “number is $number”;&lt;/li&gt;
-      &lt;li&gt;注：上述不能使用单引号&lt;code&gt;‘&lt;/code&gt;，下文会提到；&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;数组
-    &lt;ul&gt;
-      &lt;li&gt;print_r “$_SERVER”;&lt;/li&gt;
-      &lt;li&gt;注：print “$_SERVER”; 结果是：&lt;code&gt;Array&lt;/code&gt;;&lt;/li&gt;
-      &lt;li&gt;数组是非标量类型，还有其他输出方式；&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;特别说明&lt;/strong&gt;：打印出变量内容，是调试脚本的重要方法。&lt;/p&gt;
-
-&lt;h3 id=&quot;section-7&quot;&gt;引号说明&lt;/h3&gt;
-
-&lt;p&gt;这个比较重要，单拎出来说一下：&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;单引号&lt;code&gt;‘&lt;/code&gt;内容，原样输出；双引号&lt;code&gt;”&lt;/code&gt;内容，进行变量带入；&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;针对引号，几点注意：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;坚持使用双引号&lt;code&gt;&quot;&lt;/code&gt;即可解决大部分问题；&lt;/li&gt;
-  &lt;li&gt;当输出&lt;code&gt;\n&lt;/code&gt;、&lt;code&gt;\t&lt;/code&gt;时，需要使用双引号&lt;code&gt;&quot;&lt;/code&gt;；&lt;/li&gt;
-  &lt;li&gt;建议输出所有变量时，都使用双引号&lt;code&gt;&quot;&lt;/code&gt;；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;section-8&quot;&gt;预定义变量&lt;/h3&gt;
-
-&lt;p&gt;PHP中已经预先定义了一些变量，这些变量功能强大，需要熟记。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;$_POST，数组，捕获POST方式表单数据；
-    &lt;ol&gt;
-      &lt;li&gt;使用键访问数组元素：&lt;code&gt;print $_POST[&#39;name_value&#39;]&lt;/code&gt;;&lt;/li&gt;
-      &lt;li&gt;严格区分大小写，并且以&lt;code&gt;$_&lt;/code&gt;开头，全部大写；&lt;/li&gt;
-      &lt;li&gt;双引号内部，不能使用数组的单引号来引用key；&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;针对上面 3. 中提到的情况，说明如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;// 下面输出会出错
-print &quot;Thank U : $_POST[&#39;name&#39;]&quot;;
-
-// 可选解决办法（先取出，后使用）
-$input_name_value = $_POST[&#39;name&#39;];
-print &quot;Thank U : $input_name_value&quot;;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;疑问：能使用双引号，即 &lt;code&gt;$_POST[&quot;name&quot;]&lt;/code&gt; 样式，来获取数组中内容吗？当然可以，单引号能做，双引号也能。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;$_GET，捕获GET方式表单数据，与$_POST类似；&lt;/li&gt;
-  &lt;li&gt;$_REQUEST，捕获任意方式提交的数据；(不推荐)&lt;/li&gt;
-  &lt;li&gt;$_COOKIE，设置和查询当前cookie中信息；&lt;/li&gt;
-  &lt;li&gt;$_SERVER，服务器和执行环境信息；
-    &lt;ol&gt;
-      &lt;li&gt;‘PHP_SELF’：当前执行脚本的文件名，与document root有关，例如：&lt;code&gt;/test.php/foo.bar&lt;/code&gt;，具体看PHP手册；&lt;/li&gt;
-      &lt;li&gt;‘REQUEST_METHOD’：访问页面的请求方法，例如：GET、POST、PUT；&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;section-9&quot;&gt;数组&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;操作数组&lt;/strong&gt;：array()函数创建数组：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$list = array (&#39;appales&#39;, &#39;bananas&#39;, &#39;oranges&#39;);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;默认，数组的索引从0开始；当然有办法从1开始，代码如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$list = array(
-	1 =&amp;gt; &#39;apples&#39;,
-	2 =&amp;gt; &#39;bananas&#39;,
-	3 =&amp;gt; &#39;oranges&#39;
-);
-
-//key值也可以为字符串
-$list = array(
-	&#39;Mon&#39; =&amp;gt; &#39;apples&#39;,
-	&#39;Tue&#39; =&amp;gt; &#39;bananas&#39;,
-	&#39;Wed&#39; =&amp;gt; &#39;oranges&#39;
-);
-
-//range () 函数创建数组
-$evens = range (0, 100, 2);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;关于数组的常用操作，小结如下：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;创建数组
-    &lt;ol&gt;
-      &lt;li&gt;&lt;code&gt;$list = array ()&lt;/code&gt;;&lt;/li&gt;
-      &lt;li&gt;&lt;code&gt;evens = array ()&lt;/code&gt;;&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-  &lt;li&gt;输出数组
-    &lt;ol&gt;
-      &lt;li&gt;&lt;code&gt;print_r()&lt;/code&gt;函数&lt;/li&gt;
-      &lt;li&gt;&lt;code&gt;var_dump()&lt;/code&gt;函数&lt;/li&gt;
-      &lt;li&gt;&lt;code&gt;foreach()&lt;/code&gt;&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-  &lt;li&gt;引用元素
-    &lt;ol&gt;
-      &lt;li&gt;只能通过key的引用来获取；&lt;/li&gt;
-      &lt;li&gt;key区分大小写；&lt;/li&gt;
-      &lt;li&gt;key是字符串的，通过$list[1]无法访问任何元素；&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-  &lt;li&gt;追加元素
-    &lt;ol&gt;
-      &lt;li&gt;数值索引时：	&lt;code&gt;$list[] = &#39;pears&#39;&lt;/code&gt;;&lt;/li&gt;
-      &lt;li&gt;字符串索引：必须指定key；&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-  &lt;li&gt;修改元素
-    &lt;ol&gt;
-      &lt;li&gt;数值索引：&lt;code&gt;$list[2] = &#39;pears&#39;&lt;/code&gt;;&lt;/li&gt;
-      &lt;li&gt;字符串索引：&lt;code&gt;$list[&#39;Wed&#39;] = &#39;pears&#39;&lt;/code&gt;;&lt;/li&gt;
-      &lt;li&gt;字符串索引时，不能使用数值；&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-  &lt;li&gt;元素个数
-    &lt;ol&gt;
-      &lt;li&gt;&lt;code&gt;$how_many = count($array)&lt;/code&gt;;&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-  &lt;li&gt;删除元素
-    &lt;ol&gt;
-      &lt;li&gt;&lt;code&gt;unset($list[1])&lt;/code&gt;;&lt;/li&gt;
-      &lt;li&gt;&lt;code&gt;unset($list[&#39;Wed&#39;])&lt;/code&gt;;&lt;/li&gt;
-      &lt;li&gt;&lt;code&gt;unset($list)&lt;/code&gt;;//删除整个数组&lt;/li&gt;
-      &lt;li&gt;&lt;code&gt;$list = array()&lt;/code&gt;;//等价于删除数组&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-  &lt;li&gt;合并数组
-    &lt;ol&gt;
-      &lt;li&gt;&lt;code&gt;array_merge($list1， $list2)&lt;/code&gt;;&lt;/li&gt;
-      &lt;li&gt;&lt;code&gt;$list = $list1 + $list2&lt;/code&gt;;&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-  &lt;li&gt;数组排序：会单独列张表
-    &lt;ol&gt;
-      &lt;li&gt;&lt;code&gt;sort($array)&lt;/code&gt;、&lt;code&gt;rsort()&lt;/code&gt;；&lt;/li&gt;
-      &lt;li&gt;&lt;code&gt;asort()&lt;/code&gt;、&lt;code&gt;arsort()&lt;/code&gt;;&lt;/li&gt;
-      &lt;li&gt;&lt;code&gt;ksort()&lt;/code&gt;、&lt;code&gt;krsort()&lt;/code&gt;;&lt;/li&gt;
-      &lt;li&gt;&lt;code&gt;shuffle()&lt;/code&gt;：数组元素顺序随机重组；&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-  &lt;li&gt;字符串与数组间相互转换
-    &lt;ol&gt;
-      &lt;li&gt;&lt;code&gt;implode()&lt;/code&gt;：数组转换为字符串；&lt;/li&gt;
-      &lt;li&gt;&lt;code&gt;explode()&lt;/code&gt;：字符串转换为数组；&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-  &lt;li&gt;判断是否为数组
-    &lt;ol&gt;
-      &lt;li&gt;&lt;code&gt;is_array($array)&lt;/code&gt;;&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-  &lt;li&gt;额外几个函数
-    &lt;ol&gt;
-      &lt;li&gt;&lt;code&gt;array_key_exists()&lt;/code&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;code&gt;array_search()&lt;/code&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;code&gt;in_array()&lt;/code&gt;&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;数组使用过程总结如下：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;如果 $list 不存在，&lt;code&gt;$list[] = &#39;value&#39;&lt;/code&gt;，会去创建数组；&lt;/li&gt;
-  &lt;li&gt;数组中使用单引号 &lt;code&gt;&#39;&lt;/code&gt; 来引用 key 和 value，也可以使用双引号&lt;code&gt;&quot;&lt;/code&gt;；&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;sizeof()&lt;/code&gt; 函数是 &lt;code&gt;count()&lt;/code&gt; 的别名，返回数组的元素个数；&lt;/li&gt;
-  &lt;li&gt;当key为数值、变量、常数时，不用引号引用，即可调用；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;特别要说的是foreach遍历数组，举例如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;//同时，使用key 和value
-foreach($array as $key =&amp;gt; $value) {
-	print &quot;&amp;lt;p&amp;gt;Key is $key. Value is $value. &amp;lt;/p&amp;gt;&quot;;
-}
-
-//只使用value
-foreach($array as $value){
-	print &quot;&amp;lt;p&amp;gt;Value is $value.&amp;lt;/p&amp;gt;&quot;;
-}
-
-//对于数值索引数组
-for($n = 0; $n &amp;lt; count($array); $n++){
-	print &quot;&amp;lt;p&amp;gt;Value is $array[$n].&amp;lt;/p&amp;gt;&quot;;
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;备注：上述&lt;code&gt;$key =&amp;gt; $value&lt;/code&gt;，可以替换为&lt;code&gt;$k =&amp;gt; $v&lt;/code&gt;等类似形式。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;多维数组&lt;/strong&gt;&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$fruits = array (
-	1 =&amp;gt; &#39;apples&#39;,
-	2 =&amp;gt; &#39;bananas&#39;,
-	3 =&amp;gt; &#39;oranges&#39;
-);
-
-$meats =array (
-	&#39;fruits&#39; =&amp;gt; $fruits,
-	&#39;other&#39; =&amp;gt; &#39;peanuts&#39;,
-	&#39;cash&#39; =&amp;gt; 30.00
-);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;数组排序，常用函数如下：&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;函数&lt;/th&gt;
-      &lt;th&gt;排序依据&lt;/th&gt;
-      &lt;th&gt;是否保持key-value对应关系&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;sort()&lt;/td&gt;
-      &lt;td&gt;Values&lt;/td&gt;
-      &lt;td&gt;No&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;rsort()&lt;/td&gt;
-      &lt;td&gt;Values&lt;/td&gt;
-      &lt;td&gt;No&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;asort()&lt;/td&gt;
-      &lt;td&gt;Values&lt;/td&gt;
-      &lt;td&gt;Yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;arsort()&lt;/td&gt;
-      &lt;td&gt;Values&lt;/td&gt;
-      &lt;td&gt;Yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;ksort()&lt;/td&gt;
-      &lt;td&gt;Keys&lt;/td&gt;
-      &lt;td&gt;Yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;krsort()&lt;/td&gt;
-      &lt;td&gt;Keys&lt;/td&gt;
-      &lt;td&gt;Yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;natsort()&lt;/td&gt;
-      &lt;td&gt;Keys，自然顺序&lt;/td&gt;
-      &lt;td&gt;Yes&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;natcasesort()&lt;/td&gt;
-      &lt;td&gt;Keys&lt;/td&gt;
-      &lt;td&gt;Yes&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;字符串与数组之间转换，通常如下原因：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;数组-&amp;gt;字符串，为了在URL中传输数组；&lt;/li&gt;
-  &lt;li&gt;数组-&amp;gt;字符串，方便将数组存储到数据库；&lt;/li&gt;
-  &lt;li&gt;字符串-&amp;gt;数组，逗号分割的文本，转化为相互独立形式；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;数组与字符串间转换实例：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;// 将array以&#39;,&#39;为分割，转换为字符串
-$string = implode(&#39;,&#39;, $array);
-
-//将string以&#39;,&#39;为分割，转换为数组
-$array = explode(&#39;,&#39;, $string);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;将数组中元素分别指定给不同变量，使用 list() 函数：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$date = array(&#39;Thursday&#39;, 23, &#39;October&#39;);
-//为3个变量赋值
-list($weekday, $day, $month) = $date;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;实践：查看PHP手册中的几个函数，&lt;code&gt;array_key_exists()&lt;/code&gt;、&lt;code&gt;array_search()&lt;/code&gt;、&lt;code&gt;in_array()&lt;/code&gt;。&lt;/p&gt;
-
-&lt;h2 id=&quot;section-10&quot;&gt;常量&lt;/h2&gt;
-
-&lt;p&gt;与变量不同，常量在脚本的执行过程中，一直保持初始值；常量一旦设定就不能更改。&lt;/p&gt;
-
-&lt;h3 id=&quot;section-11&quot;&gt;定义常量&lt;/h3&gt;
-
-&lt;p&gt;使用define()函数&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;define(&#39;CONSTANT_NAME&#39;, value);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;几点：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;常量名，以字母、下划线开头，全部大写；&lt;/li&gt;
-  &lt;li&gt;常量名，不需要以&lt;code&gt;$&lt;/code&gt;开头；&lt;/li&gt;
-  &lt;li&gt;定义常量，define()中常量名，使用引号；&lt;/li&gt;
-  &lt;li&gt;输出常量，直接使用常量名即可；&lt;/li&gt;
-  &lt;li&gt;引号内部（单引号、双引号）无法输出常量；&lt;/li&gt;
-  &lt;li&gt;判断是否定义常量：&lt;code&gt;defined(&#39;CONSTANT_NAME&#39;)&lt;/code&gt;；&lt;/li&gt;
-  &lt;li&gt;常量是全局作用域的；&lt;/li&gt;
-  &lt;li&gt;常量的值不能修改，常量本身也不能修改；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;section-12&quot;&gt;预定义常量&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;PHP_VERSION：正在运行的PHP版本&lt;/li&gt;
-  &lt;li&gt;PHP_OS：服务器操作系统&lt;/li&gt;
-  &lt;li&gt;SID：session ID&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section-13&quot;&gt;运算符&lt;/h2&gt;
-
-&lt;p&gt;PHP中运算符，参考下表：&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;运算符&lt;/th&gt;
-      &lt;th&gt;用法&lt;/th&gt;
-      &lt;th&gt;类型&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code&gt;+&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;加&lt;/td&gt;
-      &lt;td&gt;算数&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code&gt;-&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;减&lt;/td&gt;
-      &lt;td&gt;算数&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code&gt;*&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;乘&lt;/td&gt;
-      &lt;td&gt;算数&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code&gt;/&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;除&lt;/td&gt;
-      &lt;td&gt;算数&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code&gt;%&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;取模&lt;/td&gt;
-      &lt;td&gt;算数&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code&gt;++&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;自增&lt;/td&gt;
-      &lt;td&gt;算数&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code&gt;--&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;自减&lt;/td&gt;
-      &lt;td&gt;算数&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code&gt;=&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;赋值&lt;/td&gt;
-      &lt;td&gt;赋值&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code&gt;==&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;相等&lt;/td&gt;
-      &lt;td&gt;比较&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code&gt;!=&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;不等&lt;/td&gt;
-      &lt;td&gt;比较&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code&gt;&amp;lt;&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;小于&lt;/td&gt;
-      &lt;td&gt;比较&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code&gt;&amp;gt;&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;大于&lt;/td&gt;
-      &lt;td&gt;比较&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code&gt;&amp;lt;=&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;小于等于&lt;/td&gt;
-      &lt;td&gt;比较&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code&gt;&amp;gt;=&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;大于等于&lt;/td&gt;
-      &lt;td&gt;比较&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code&gt;!&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;非&lt;/td&gt;
-      &lt;td&gt;逻辑&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code&gt;AND&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;与&lt;/td&gt;
-      &lt;td&gt;逻辑&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code&gt;&amp;amp;&amp;amp;&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;与&lt;/td&gt;
-      &lt;td&gt;逻辑&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code&gt;OR&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;或&lt;/td&gt;
-      &lt;td&gt;逻辑&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code&gt;||&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;或&lt;/td&gt;
-      &lt;td&gt;逻辑&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code&gt;XOR&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;异或&lt;/td&gt;
-      &lt;td&gt;逻辑&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code&gt;.&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;连接&lt;/td&gt;
-      &lt;td&gt;字符串&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h2 id=&quot;section-14&quot;&gt;函数&lt;/h2&gt;
-
-&lt;p&gt;特别说明：PHP中函数名与&lt;code&gt;()&lt;/code&gt;之间可以有空格，即，如下两种方式都正确：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;round(100.2);
-round (100.2);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;section-15&quot;&gt;数值格式化&lt;/h3&gt;
-
-&lt;p&gt;round()，进行数值四舍五入，具体参阅[PHP Manual]，举例如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;lt;?php
-	round(3.4);			//3
-	round(4.12, 1);		//4.1
-	round(1221, -2);	//1200
-?&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;类似函数还有：&lt;code&gt;number_format()&lt;/code&gt;、&lt;code&gt;printf()&lt;/code&gt;、&lt;code&gt;sprintf()&lt;/code&gt;；&lt;/p&gt;
-
-&lt;h3 id=&quot;section-16&quot;&gt;随机数&lt;/h3&gt;
-
-&lt;p&gt;&lt;code&gt;rand()&lt;/code&gt;、&lt;code&gt;mt_rand()&lt;/code&gt;，具体不多说，查看操作手册即可；&lt;/p&gt;
-
-&lt;h3 id=&quot;section-17&quot;&gt;字符串连接&lt;/h3&gt;
-
-&lt;p&gt;字符串连接：句点&lt;code&gt;.&lt;/code&gt;，举例：&lt;code&gt;$result = $first_name . $last_name&lt;/code&gt;;&lt;/p&gt;
-
-&lt;h3 id=&quot;html&quot;&gt;转换HTML格式&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;nl2br($string);		//将$string内的\n转换为&lt;br /&gt;&lt;/li&gt;
-  &lt;li&gt;htmlsprcialchars();	//将特定的HTML标签转换为实体版本&lt;/li&gt;
-  &lt;li&gt;htmlentities();		//将所有的HTML标签转换为实体版本&lt;/li&gt;
-  &lt;li&gt;strip_tags();		//移除所有HTML和PHP标签&lt;/li&gt;
-  &lt;li&gt;html_entity_decode();	//将HTML实体转换为相应HTML代码&lt;/li&gt;
-  &lt;li&gt;wordwrap();			//按照指定长度，换行处理字符串&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;几个问题：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;HTML实体是什么？例如：&lt;code&gt;&amp;lt;&lt;/code&gt; 对应HTML实体为 &lt;code&gt;&amp;amp;lt;&lt;/code&gt; ；使用HTML实体主要原因：防止输入文本中包含HTML标签，打乱整个页面的布局，更近一步，防止用户提交JS进行跨站点攻击（XSS，Cross-Site Scripting）。补充：XSS 能够做的事情：破环网站风格、功能；盗取浏览用户的session信息。&lt;/li&gt;
-  &lt;li&gt;通常先移除所有HTML、PHP标签，再将&lt;code&gt;\n&lt;/code&gt;等转义符，转换为HTML换行符，即：&lt;code&gt;strip_tags()&lt;/code&gt; 之后 &lt;code&gt;nl2br()&lt;/code&gt; ;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;section-18&quot;&gt;字符串编/解码&lt;/h3&gt;
-
-&lt;p&gt;背景：通过URL的query向服务器发送参数时，要求参数不能包含空格、特殊字符等；如果一定要使用URL的query向服务器传送数据，可以先对数据进行编码，即可解决此问题。&lt;/p&gt;
-
-&lt;p&gt;&lt;code&gt;urlencode()&lt;/code&gt;，专门解决这一问题，将字符串转换为适合最为URL的一部分来传输。几点说明：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;表单发送出去的数据，会自动进行URL编码，在服务器端，会自动解码，因此，本例中，只需要在页面上通过 &lt;code&gt;urlencode()&lt;/code&gt; 编码即可，服务器能够自动解码；&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;urldecode()&lt;/code&gt;，能够进行解码，但不常用，因为服务器能够自动解码；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;section-19&quot;&gt;子字符串&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code&gt;strtok($string, $token)&lt;/code&gt;，按照$token来分割$string，并返回最新的子串；&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;substring($string, 0, 10)&lt;/code&gt;，从$string中索引为0的字符开始（包含在内），累计截取10个字符；&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;substring($string, -3, 3)&lt;/code&gt;，从$string中倒数第3个字符开始（包含在内），累计截取3个字符；&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;strlen($string)&lt;/code&gt;，字符串中字符个数；&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;str_word_count()&lt;/code&gt;，字符串中单词个数；&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;str_ireplace($needle, $replacement, $haystack)&lt;/code&gt;，将$haystack中$needle替换为$replacement；&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;str_replace()&lt;/code&gt;，区分大小写，其余与str_ireplace()类似；&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;trim()&lt;/code&gt;，删除字符串首尾的空格、换行符、制表符；&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;rtrim()&lt;/code&gt;，删除最右端的空白字符；&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;ltrim()&lt;/code&gt;，删除最左端的空白字符；&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;strtoupper()&lt;/code&gt;，字符串转换为大写；&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;strtolower()&lt;/code&gt;，字符串转换为小写；&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;substr_count($string, $substr)&lt;/code&gt;，子字符串出现的次数；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;PHP中所有索引的位置都是从0开始的。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;$evens = range (0, 100, 2); 创建等差数列；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;section-20&quot;&gt;日期和时间&lt;/h3&gt;
-
-&lt;p&gt;说几个函数，有点印象就行，具体用法去查PHP手册：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code&gt;date()&lt;/code&gt; 返回某一日期格式；&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;date()&lt;/code&gt; 中第二参数为时间戳（timestamp），是表示从1970年1月1日算起的秒数；&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;time()&lt;/code&gt; 返回当前时间戳；&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;mktime()&lt;/code&gt; 返回一个给定日期和时间对应的时间戳；&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;date_default_timezone_set()&lt;/code&gt; 设置时间默认的时区；&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;date_default_timezone_get()&lt;/code&gt; 获取当前时间对应的时区；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;额外说明几点：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;PHP是服务器端的技术，函数反映的是服务器上的时间，如果要获取客户端的时间，需要使用JavaScript；&lt;/li&gt;
-  &lt;li&gt;PHP 5.3中，加入一个创建、操作日期和时间的类：DateTime类；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;section-21&quot;&gt;创建函数&lt;/h3&gt;
-
-&lt;p&gt;一个典型函数的格式如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;//设置参数默认值
-function function_name($arg1 = &#39;world&#39;, $arg2){
-	statements;
-	//函数的返回值（返回多个值：数组）
-	return $name;
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;说几点：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;函数名，不区分大小写；&lt;/li&gt;
-  &lt;li&gt;函数function_exists(function_name)，用于判断一个函数是否存在；&lt;/li&gt;
-  &lt;li&gt;PHP中不要求：函数在调用之前就定义好，但，推荐在脚本开头就定义好函数；（放在引入文件中）&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;section-22&quot;&gt;变量作用域&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;通常，变量作用域：整个脚本的声明周期中；&lt;/li&gt;
-  &lt;li&gt;函数中传参数时，传递变量值，而不传递变量本身；&lt;/li&gt;
-  &lt;li&gt;函数内部定义的变量，为局部变量；&lt;/li&gt;
-  &lt;li&gt;global可以将函数内局部变量设置为全局变量；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section-23&quot;&gt;控制结构&lt;/h2&gt;
-
-&lt;p&gt;几点注意：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code&gt;{&lt;/code&gt;、&lt;code&gt;}&lt;/code&gt;的前后，不能出现&lt;code&gt;;&lt;/code&gt;，否则报错；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;几个验证函数：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code&gt;empty()&lt;/code&gt;，除去变量未定义、值为0、空字符串外，返回FALSE;&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;isset()&lt;/code&gt;，仅当变量未定义时，返回False；（能够接受任意个数的变量）&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;is_numeric()&lt;/code&gt;，仅当变量为数值时，返回TRUE;&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;checkdate()&lt;/code&gt;，验证日期是否存在；&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;is_array()&lt;/code&gt;，判断是否数组；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;举例如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$var1 = 0;
-$var2 = &quot;&quot;;
-$var3 = &quot;HELLO!&quot;
-
-empty($var);	//TRUE，没有定义的变量
-empty($var1);	//TRUE，空值
-empty($var2);	//TRUE，空值
-empty($var3);	//FALSE，非空（这个是这样吗？）
-
-isset($var);	//FALSE，变量未定义
-isset($var1);	//TRUE
-isset($var2);	//TRUE
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;if&quot;&gt;if条件语句&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;if (condition1) {
-	statement(s);
-} elseif (condition2) {
-	statement(s);
-} else {
-	statements(s);
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;switch&quot;&gt;switch条件语句&lt;/h3&gt;
-
-&lt;p&gt;switch($var)，变量$var，可以为字符串、数值，在case后的value，如果是数值，则不需要加引号。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;switch ($var) {
-	case value1:
-		statements1;
-		break;
-	case value2:
-		statements2;
-		break;
-	default:
-		statements3;
-		break;
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;section-24&quot;&gt;循环语句&lt;/h3&gt;
-
-&lt;p&gt;主要是for、while，以及foreach，不多说，给个示例：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;while(condition) {
-	statement(s);
-}
-
-do {
-	statement(s);
-} while (condition);
-
-for (init_exp; condition ; closing_exp){
-	statement(s);
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&quot;section-25&quot;&gt;调试程序&lt;/h2&gt;
-
-&lt;p&gt;调试程序有2种方式：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;输出变量和错误信息；&lt;/li&gt;
-  &lt;li&gt;用IDE，打断点，debug；&lt;/li&gt;
-  &lt;li&gt;查看程序运行日志，特别是出错日志；&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;section-26&quot;&gt;输出变量&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;echo “$var”;&lt;/li&gt;
-  &lt;li&gt;print “$var”;&lt;/li&gt;
-  &lt;li&gt;print_r “$_SERVER”;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;section-27&quot;&gt;输出错误信息&lt;/h3&gt;
-
-&lt;p&gt;安装PHP之后，默认安全配置下，是不允许向Web端输出任何出错信息的，即，&lt;code&gt;display_errors&lt;/code&gt; 出于关闭状态；为了方便调试，有两种方法：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;开启 &lt;code&gt;display_errors&lt;/code&gt; 设置；&lt;/li&gt;
-  &lt;li&gt;为某些脚本单独开启 &lt;code&gt;display_errors&lt;/code&gt; 设置；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;当前首选第一个选项，但是只有root用户才有如此权限；普通用户，可以在php页面中添加代码：&lt;code&gt;ini_set(&#39;display_errors&#39;, 1);&lt;/code&gt; 实现为某些脚本开启 &lt;code&gt;display_errors&lt;/code&gt; 。说明：这种方式进行的设置，只在当前php脚本执行期间有效，脚本结束后恢复原始设置；&lt;code&gt;display_errors&lt;/code&gt; 只能控制是否向浏览器发送错误信息，而不会控制错误的发生。&lt;/p&gt;
-
-&lt;h3 id=&quot;section-28&quot;&gt;输出错误信息级别&lt;/h3&gt;
-
-&lt;p&gt;通过设置display_errors可以实现输出错误信息，但是要输出哪一类的错误信息呢？警告信息要不要输出？&lt;/p&gt;
-
-&lt;p&gt;PHP中错误的类型，见下表：&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;类型&lt;/th&gt;
-      &lt;th&gt;描述&lt;/th&gt;
-      &lt;th&gt;示例&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;通知&lt;/td&gt;
-      &lt;td&gt;非致命性错误，程序不一定有问题&lt;/td&gt;
-      &lt;td&gt;引用一个没有值的变量&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;警告&lt;/td&gt;
-      &lt;td&gt;非致命错误，程序有问题&lt;/td&gt;
-      &lt;td&gt;函数误用&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;解析错误&lt;/td&gt;
-      &lt;td&gt;致命错误，语法错误&lt;/td&gt;
-      &lt;td&gt;缺少分好、引号、圆括号、花括号&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;错误&lt;/td&gt;
-      &lt;td&gt;致命错误，一般错误&lt;/td&gt;
-      &lt;td&gt;内存分配问题&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;错误报告常量（不完整，完整版查看[PHP Manual]），见下表：&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;名称&lt;/th&gt;
-      &lt;th&gt;描述&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;E_NOTICE&lt;/td&gt;
-      &lt;td&gt;通知&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;E_WARRING&lt;/td&gt;
-      &lt;td&gt;警告&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;E_PARSE&lt;/td&gt;
-      &lt;td&gt;解析错误&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;E_ERROR&lt;/td&gt;
-      &lt;td&gt;错误&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;E_ALL&lt;/td&gt;
-      &lt;td&gt;所有错误（E_STRICT除外）&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;E_STRICT&lt;/td&gt;
-      &lt;td&gt;PHP代码修改建议&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;注：上面的常量，是二进制位掩码，可以使用按位运算符来对其进行组合，例如，php.ini中，&lt;code&gt;|&lt;/code&gt;、&lt;code&gt;~&lt;/code&gt;、&lt;code&gt;&amp;amp;&lt;/code&gt;；&lt;/p&gt;
-
-&lt;p&gt;两种方式可以设置错误提示级别：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;全局设置：PHP配置文件php.ini中，调整error_reporting()级别；&lt;/li&gt;
-  &lt;li&gt;局部设置：php脚本中，使用error_reporting()函数；&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;举例说明如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;//不报告任何错误
-error_reporting(0);
-
-//报告所有错误
-error_reporting(E_ALL);
-
-//报告除通知之外的所有错误
-error_reporting(E_ALL &amp;amp; ~E_NOTICE);
-
-//所有错误以及代码修改建议
-error_reporting(E_ALL | E_STRICT);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&quot;web&quot;&gt;Web开发基本过程&lt;/h2&gt;
-
-&lt;p&gt;Web开发的基本过程：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;创建模版HTML文件；&lt;/li&gt;
-  &lt;li&gt;从模版中抽取：页头文件、页脚文件；&lt;/li&gt;
-  &lt;li&gt;将页头、页脚文件导入php主文件中；
-    &lt;ol&gt;
-      &lt;li&gt;&lt;code&gt;include(&#39;file.php&#39;);&lt;/code&gt; 若include()函数失败，发出警告；&lt;/li&gt;
-      &lt;li&gt;&lt;code&gt;require(&#39;file.php&#39;);&lt;/code&gt; 若require()函数失败，终止脚本；&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-  &lt;li&gt;通常两个php脚本来处理表单：一个显示表单，一个接收和处理表单数据；
-    &lt;ol&gt;
-      &lt;li&gt;让同一个脚本来完成整个流程更好；&lt;/li&gt;
-      &lt;li&gt;检查变量是否设置：&lt;code&gt;isset($_POST[&#39;something&#39;])；&lt;/code&gt;&lt;/li&gt;
-      &lt;li&gt;检查表单提交的方法：&lt;code&gt;$_SERVER[&#39;REQUEST_METHOD&#39;] == &#39;POST&#39;&lt;/code&gt;;&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-  &lt;li&gt;表单粘性：若表单提交后出错，则，重新提交表单，希望能够记录初次填写的表单数值；
-    &lt;ol&gt;
-      &lt;li&gt;&amp;lt;input … value=”&lt;?php print $_POST[&#39;name&#39;]; ?&gt;” /&amp;gt;&lt;/li&gt;
-      &lt;li&gt;不要引用不存在的变量；在引用之前，判断是否存在isset()&lt;/li&gt;
-      &lt;li&gt;用户提交的内容，直接显示在表单中有样式问题，可以使用htmlspecialchars()；&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-  &lt;li&gt;发送Email
-    &lt;ol&gt;
-      &lt;li&gt;服务器上Email应用程序发送Email；&lt;/li&gt;
-      &lt;li&gt;具体：调用函数&lt;code&gt;mail(to, subject, body)&lt;/code&gt;;&lt;/li&gt;
-      &lt;li&gt;&lt;code&gt;substr_count($_POST[&#39;eamil&#39;], &#39;@&#39;) == 1&lt;/code&gt;，邮件验证；&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-  &lt;li&gt;输出缓冲，只能在服务器发出响应之前进行调用：
-    &lt;ol&gt;
-      &lt;li&gt;header()：&lt;/li&gt;
-      &lt;li&gt;setcookie()：&lt;/li&gt;
-      &lt;li&gt;session_start()：&lt;/li&gt;
-      &lt;li&gt;ob_start()；开启输出缓存，output buffering；&lt;/li&gt;
-      &lt;li&gt;ob_end_flush()；输出缓冲数据；&lt;/li&gt;
-      &lt;li&gt;ob_end_clean()；删除缓冲数据，不进行传输；&lt;/li&gt;
-      &lt;li&gt;php.ini中可设置输出缓冲区的大写；&lt;/li&gt;
-      &lt;li&gt;ob_get_length()；当前输出缓冲区的大小；&lt;/li&gt;
-      &lt;li&gt;ob_get_contents()；获取缓冲区内容；&lt;/li&gt;
-      &lt;li&gt;ob_flush()；输出当前缓冲区内容，以方便继续缓冲新内容；&lt;/li&gt;
-      &lt;li&gt;ob_clean()；清空缓冲区内容，但后续仍会继续缓冲；&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-  &lt;li&gt;HTTP头，header()函数
-    &lt;ol&gt;
-      &lt;li&gt;重定向：header(‘Location: index.php’);&lt;/li&gt;
-      &lt;li&gt;重定向，接着使用函数，exit()；&lt;/li&gt;
-      &lt;li&gt;开启输出缓存：ob_start()；&lt;/li&gt;
-      &lt;li&gt;如果浏览器已经收到HTTP头，则headers_sent()函数返回TRUE；&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;cookiesession&quot;&gt;cookie和session&lt;/h3&gt;
-
-&lt;p&gt;cookie、session的作用：跟踪用户，记录用户信息。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;什么是cookie&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;客户端保存用户信息的一种方式，服务器通过此信息识别用户身份；将从几点来介绍cookie：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;建立cookie；&lt;/li&gt;
-  &lt;li&gt;从cookie中检索信息；&lt;/li&gt;
-  &lt;li&gt;删除cookie；&lt;/li&gt;
-  &lt;li&gt;限制cookie的可选参数；&lt;/li&gt;
-  &lt;li&gt;如何调试与cookie相关的问题；&lt;/li&gt;
-  &lt;li&gt;如何传输和接收cookie；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;cookie的访问时间和方式：用户输入URL后，浏览器会将cookie信息包含至HTTP请求内发送给服务器。额外几点说明：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;服务器端的PHP和浏览器端的JavaScript都能发送、读取、删除cookie，这是两种脚本重叠的功能之一；&lt;/li&gt;
-  &lt;li&gt;cookie必须在服务器发送任何信息之前，从服务器发送到客户端；&lt;/li&gt;
-  &lt;li&gt;setcookie(name, value)函数，向浏览器发送cookie；&lt;/li&gt;
-  &lt;li&gt;发送cookie，应位于整个HTML页面标签之前（&amp;lt;!DOCTYPE html … &amp;gt;）；&lt;/li&gt;
-  &lt;li&gt;若使用输出缓存机制（output buffering），则setcookie()可以位于PHP脚本中任意位置；&lt;/li&gt;
-  &lt;li&gt;cookie的总数，限制在4KB；&lt;/li&gt;
-  &lt;li&gt;headers_sent()函数可用与测试HTTP头部是否发送出去；&lt;/li&gt;
-  &lt;li&gt;cookie的值在发送时，将自动编码，接收时会自动解码；对于PHP表单发送的值也是如此；&lt;/li&gt;
-  &lt;li&gt;setcookie()函数在不同的浏览器中，有兼容性问题；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;读取cookie&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;预定义的数组$_COOKIE中存储了所有cookie数据，按照key值，从数组$_COOKIE中读取即可。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;向cookie中添加参数&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;函数setcookie()，具体用法如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;//expiration：过期时间点，单位秒(s)；默认关闭浏览器之前有效；
-//domain：设置一个子域的cookie；
-//secure：为1时，表示只能通过https传送；
-//httponly：设置防止JS读取cookie，但不是所有浏览器都支持；
-setcookie(name, value, expiration, path, domain, secure, httponly);
-
-setcookie(name, value, time() + 3600)；
-setcookie(name, value, time() + 3600, &#39;/subfolder/&#39;);
-setcookie(name, value, time() + 3600, &#39;&#39;, &#39;forum.example.com&#39;);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;几点注意：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;cookie过期时间的选择：
-    &lt;ol&gt;
-      &lt;li&gt;cookie持续时间如果同用户浏览网站的时间一样长，则，不需要设置过期时间；&lt;/li&gt;
-      &lt;li&gt;如果需要cookie在关闭、重启浏览器之后继续存在，可将过期时间设置为数个月；&lt;/li&gt;
-      &lt;li&gt;若cookie可能引发安全隐患，则可将过期时间设置为小于1h；&lt;/li&gt;
-      &lt;li&gt;出于安全考虑，可以设定cookie过期时间为5min~10min，同时，让用户每访问一个新页面时，重新发送一次cookie；&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;删除cookie&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;删除cookie，本质就是设置一个空值，同时可以设置一个过去的过期时间：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;//重设值，同时设置过去的过期时间
-setcookie(&#39;username&#39;, FALSE, time() - 600);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;特别提醒：删除cookie时，一定要使用与设置cookie一致的参数（除去值和过期时间）。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;setcookie(&#39;user&#39;, &#39;larry&#39;, time() + 3600, &#39;&#39;, &#39;forums.example.com&#39;);
-setcookie(&#39;user&#39;, &#39;&#39;, time() - 600, &#39;&#39;, &#39;forums.example.com&#39;);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;strong&gt;什么是session&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;session的数据保存在服务器端，cookie数据保存在客户端；由此，session比cookie拥有更多的优势：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;session通常更安全，因为数据不会在客户端、浏览器之间重复传输；&lt;/li&gt;
-  &lt;li&gt;session存储比cookie更多的信息；&lt;/li&gt;
-  &lt;li&gt;session能够在禁止cookie的浏览器上，继续工作；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;几点说明：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;开启一个session时，PHP会自动创建一个随机的session ID；&lt;/li&gt;
-  &lt;li&gt;每个用户都拥有一个自己的Session ID，这也是服务器上存储该用户session数据的文件名称；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;cookie相对于session的优势有：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;cookie相对容易创建和使用；&lt;/li&gt;
-  &lt;li&gt;cookie耗费服务端的资源少；&lt;/li&gt;
-  &lt;li&gt;如果希望长期保存用户身份信息，则应采用cookie；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;结论：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;当保存数据较少，同时安全性要求不高时，推荐首选cookie；&lt;/li&gt;
-  &lt;li&gt;保存数据较多或者敏感，同时安全性要求较高时，首选session；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;创建session&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;session_start()函数用于创建一个session，并且在session首次启动时发送一个cookie，因此，必须在所有HTML响应发送回浏览器之前，创建session。
-第一次开启session时，随机产生一个session ID，并向Web浏览器发送一个名为PHPSESSID（session的名称）的cookie。&lt;/p&gt;
-
-&lt;p&gt;一旦启用session，就可以通过向数组赋值的方式来存储数据：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$_SESSION[&#39;first_name&#39;] = &#39;Sam&#39;;
-$_SESSION[&#39;age&#39;] = 14；
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;每次向session中添加数据时，PHP将向服务器上一个临时文件中添加一些数据：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;//session数据在服务器文件中的存储方式
-email|s:14:&quot;me@example.com&quot;; loggedin|i:1292;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;关于session几点信息：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;php.ini中可以配置session信息；&lt;/li&gt;
-  &lt;li&gt;ini_set()函数可以设置session信息；&lt;/li&gt;
-  &lt;li&gt;session_name()函数可以修改session名称（默认名称PHPSESSID），注意：必须在调用session_start()之前使用；&lt;/li&gt;
-  &lt;li&gt;session_set_cookie_params()函数，用户修改session cookie的设置（过期时间、路径、域）；&lt;/li&gt;
-  &lt;li&gt;常量SID用格式name=ID的方式保存一个字符串；&lt;/li&gt;
-  &lt;li&gt;session中可以保存任意类型数据，甚至对象；&lt;/li&gt;
-  &lt;li&gt;在session中，数据都会以纯文本的形式保存在一个开放可读的文本文件中；永远不要将真实的敏感信息存在session中，例如信用卡数据；&lt;/li&gt;
-  &lt;li&gt;为提高安全性，可以将数据加密后保存到session中，在读取session后再解密（Mcrypt库）；&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;strong&gt;删除session&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;服务器端session中包含的数据都保存在$_SESSION数组中，可以对数组重新赋值，以达到删除session的效果，但也需要删除服务器上保存session数据的临时文件，具体操作如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;//重置session
-$_SESSION = array();
-//删除服务器端session临时文件
-session_destroy();
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;函数unset($var)，可用于删除一个变量，也能达到删除$_SESSION的效果；同时，如果浏览器禁用cookie，则可以在URL上添加session ID作为附属参数，以继续使用session，注意：需要在php.ini中启用enable_trans_side。&lt;/p&gt;
-
-&lt;h3 id=&quot;section-29&quot;&gt;文件和目录&lt;/h3&gt;
-
-&lt;p&gt;Web应用程序，不可避免两个问题：数据存储、检索数据。当前数据存储的方法主要有两种：文件（和目录）、数据库。这一部分，主要介绍一下文件的写入、读取和锁定。&lt;/p&gt;
-
-&lt;p&gt;疑问：读取、上传的文件，为什么在Web目录之外？&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;file_exists(‘somefile.ext’)，判断文件是否存在；&lt;/li&gt;
-  &lt;li&gt;is_readable()测试文件是否可读；&lt;/li&gt;
-  &lt;li&gt;touch(‘somefile.ext’)，创建空白文件；&lt;/li&gt;
-  &lt;li&gt;chgrp()、chown()、chmod()，修改文件、目录权限；&lt;/li&gt;
-  &lt;li&gt;file_put_contents($file, $data)，向文件写入数据；
-    &lt;ol&gt;
-      &lt;li&gt;文件不存在，则，函数主动创建；&lt;/li&gt;
-      &lt;li&gt;文件存在，覆盖文件内容；&lt;/li&gt;
-      &lt;li&gt;file_put_contents($file, $data, FILE_APPEND)，追加；&lt;/li&gt;
-      &lt;li&gt;如果需要追加的内容独占一行，则需要在内容后，添加换行符，PHP专用常量 PHP_EOL 可以解决这一问题，file_put_contents($file, $data . PHP_EOL, FILE_APPEND)&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-  &lt;li&gt;file_put_contents($file, $data, LOCK_EX);写文件同时锁定文件；
-    &lt;ol&gt;
-      &lt;li&gt;若同时追加文件、锁定文件，则，&lt;code&gt;LOCK_EX | FILE_APPEND&lt;/code&gt;；&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-  &lt;li&gt;file_get_contents($file)，一次读取文件所有内容；&lt;/li&gt;
-  &lt;li&gt;file($file)，读取文件内容，并且返回一个数组，每个元素为原文件中的一行；&lt;/li&gt;
-  &lt;li&gt;更多文件读取方式：fgets()、fgetcsv()；&lt;/li&gt;
-  &lt;li&gt;filesize($file)，返回文件大小（单位Byte）；&lt;/li&gt;
-  &lt;li&gt;filetime($file)，返回文件修改时间戳，可使用date()格式化；&lt;/li&gt;
-  &lt;li&gt;is_writeable()&lt;/li&gt;
-  &lt;li&gt;is_readable()&lt;/li&gt;
-  &lt;li&gt;is_dir()&lt;/li&gt;
-  &lt;li&gt;is_file()&lt;/li&gt;
-  &lt;li&gt;glob()，搜索名字与模式匹配的文件（*.jpg）&lt;/li&gt;
-  &lt;li&gt;fileperms()，文件权限；&lt;/li&gt;
-  &lt;li&gt;fileatime()，文件最后访问时间；&lt;/li&gt;
-  &lt;li&gt;fileowner()，拥有该文件的用户名称；&lt;/li&gt;
-  &lt;li&gt;basename()、dirname()，返回文件名、路径名；&lt;/li&gt;
-  &lt;li&gt;finfo_file()，文件的MIME类型；&lt;/li&gt;
-  &lt;li&gt;mkdir(‘dir_name’, permissions)，创建文件；&lt;/li&gt;
-  &lt;li&gt;rmdir()，删除现有目录；&lt;/li&gt;
-  &lt;li&gt;fgets()，返回指定长度的字符串；&lt;/li&gt;
-  &lt;li&gt;feof()，判断是否达到文件末尾；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;补充几点：&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;读取文件&lt;/strong&gt;：PHP 4 以及以下版本，不能使用file_put_contents()，需要按照旧方法来写数据：打开文件、写数据、关闭文件；&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;//文件模式mode，查PHP手册很详细
-$file_pointer = fopen($file, mode);
-fwrite($file_pointer, $data . PHP_EOL);
-fclose($file_pointer);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;strong&gt;上传文件&lt;/strong&gt;：通过表单上传，修改3处：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;form表单添加enctype，即 &amp;lt;form action=… enctype=”multipart/form-data” method=”post” &amp;gt;；必须使用POST方式；&lt;/li&gt;
-  &lt;li&gt;添加银行输入框：&lt;input type=&quot;hidden&quot; name=&quot;MAX_FILE_SIZE&quot; value=&quot;30000&quot; /&gt;，用于建议浏览器最大能够上传的文件；&lt;/li&gt;
-  &lt;li&gt;使用file元素，创建所需的表单：&lt;input type=&quot;file&quot; name=&quot;pic&quot; /&gt;，file类型允许用户上传一个文件；&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;PHP脚本中，使用$_FILES变量能够引用上传的文件。$_FILES数组包含5个成员：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;name，用户上传文件的原始名字；&lt;/li&gt;
-  &lt;li&gt;type，文件MIME类型，例：image/jpg；&lt;/li&gt;
-  &lt;li&gt;size，文件大小（单位Byte）&lt;/li&gt;
-  &lt;li&gt;tmp_name，文件存放在服务器上的临时文件名称；&lt;/li&gt;
-  &lt;li&gt;error，发生错误时，保存的错误代码；（查看PHP手册）&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;文件上传之后，需要将临时文件移动到最终目标位置：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;//将临时文件移动到最终位置
-move_uploaded_file($_FILES[&#39;pic&#39;][&#39;tmp_name&#39;], &#39;/path/filename&#39;);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;一个php脚本可以同时处理多个文件上传，只要name属性不同即可，此时只需要一个隐含输入框设定MAX_FILE_SIZE。另外，针对移动文件的函数小结：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;move_uplodaded_file()，将上传的临时文件移动到最终位置；&lt;/li&gt;
-  &lt;li&gt;unlink()，删除文件，不会进行移动或者复制；&lt;/li&gt;
-  &lt;li&gt;copy()，复制文件；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;上传文件时，有几点注意：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;php.ini中，开启file_uploads配置；&lt;/li&gt;
-  &lt;li&gt;php.ini中，设置upload_tmp_dir，如果没有设置，可能会指定一个隐含值；&lt;/li&gt;
-  &lt;li&gt;php.ini中，upload_max_filesize和post_max_size用于设定PHP能够处理的文件大小；&lt;/li&gt;
-  &lt;li&gt;form中隐含input元素中设定的MAX_FILE_SIZE只是在前端浏览器处，进行的约束；&lt;/li&gt;
-  &lt;li&gt;当缺失要上传大文件时，除了上述相关的配置，还应设置两个参数：memory_limit、max_execution_time，来给PHP脚本足够的处理时间和空间；&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;strong&gt;目录相关&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;浏览目录：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;scandir($dir)，返回目录下所有内容，一个数组：包含文件和子目录；&lt;/li&gt;
-  &lt;li&gt;旧版本的PHP中，需要使用opendir()、readdir()、closedir()；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;mysql&quot;&gt;数据库MySQL&lt;/h3&gt;
-
-&lt;p&gt;PHP中操作MySQL数据库，基本过程，连接数据库、操作、释放连接，具体几点：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;$dbc = mysql_connect(hostname, username, passwd)，获取数据库连接&lt;/li&gt;
-  &lt;li&gt;mysql_query($query, $dbc)&lt;/li&gt;
-  &lt;li&gt;mysql_query(‘create database somedb’, $dbc);&lt;/li&gt;
-  &lt;li&gt;mysql_select_db(‘somedb’, $dbc);&lt;/li&gt;
-  &lt;li&gt;$result = mysql_query($query, $dbc)， 执行$query&lt;/li&gt;
-  &lt;li&gt;mysql_num_rows($result)，返回查询结果的个数，可用于删除、查询之前判断？&lt;/li&gt;
-  &lt;li&gt;$row = mysql_fetch_array($result)，每次返回一行数据，形式：数组；&lt;/li&gt;
-  &lt;li&gt;mysql_fetch_array($result, MYSQL_ASSOC or MYSQL_NUM)，关联数组、索引数组；&lt;/li&gt;
-  &lt;li&gt;while( $row = mysql_fetch_array($result) ){ … }，用于遍历结果；&lt;/li&gt;
-  &lt;li&gt;mysql_affected_rows()，返回INSERT、DELETE、UPDATE等影响到的行数；&lt;/li&gt;
-  &lt;li&gt;msyql_close($dbc)，释放连接&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;PHP中对MySQL的支持&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;PHP操作MySQL，根据扩展不同，分为两类：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;标准MySQL，支持所有MySQL版本，函数以 &lt;code&gt;mysql_&lt;/code&gt; 作为前缀；&lt;/li&gt;
-  &lt;li&gt;扩展MySQL，MySQLi（Improved MySQL Extension），PHP5之后引入的，支持MySQL4.1以上的版本，能够利用MySQL的一些额外特性，函数以 &lt;code&gt;mysqli_&lt;/code&gt; 最为前缀；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;MySQL错误处理&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;常见的错误类型有：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;连接MySQL失败；&lt;/li&gt;
-  &lt;li&gt;选择数据库失败；&lt;/li&gt;
-  &lt;li&gt;无法运行查询；&lt;/li&gt;
-  &lt;li&gt;查询没有返回结果；&lt;/li&gt;
-  &lt;li&gt;数据没有插入到表中；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;具体说几点：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;mysql_error()，显示发生错误的详细信息；&lt;/li&gt;
-  &lt;li&gt;错误控制符&lt;code&gt;@&lt;/code&gt;，在函数名之前使用，阻止显示错误信息，但并不能阻止错误的发生，仅当希望自己处理错误时，才使用&lt;code&gt;@&lt;/code&gt;；&lt;/li&gt;
-  &lt;li&gt;错误控制符&lt;code&gt;@&lt;/code&gt;，可以用于阻止任何函数的错误、通知、警告，而不仅限于MySQL相关函数；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;关于PHP中使用MySQL，具体说几点：&lt;/p&gt;
-
-&lt;p&gt;为避免SQL注入攻击，可随意用mysql_real_escape_string()函数，来转义危险字符：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$var = mysql_real_escape_string($var, $dbc);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;注意几点：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;所有文件编码方式需要与HTML中指定的charset一致；&lt;/li&gt;
-  &lt;li&gt;如果为UTF-8编码方式，则，必须为UTF-8 without BOM方式；&lt;/li&gt;
-  &lt;li&gt;通过include(‘path/file.php’)，路径为相对与最终php脚本的位置；&lt;/li&gt;
-  &lt;li&gt;include_once()、require_once()，表示同一个文件只包含一次；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;特别说明&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;/download/php-intro/PHP基础教程（第4版）.pdf&quot;&gt;PHP基础教程（第4版）&lt;/a&gt;的附录部分，有很多进一步学习的建议。&lt;/p&gt;
-
-&lt;h2 id=&quot;section-30&quot;&gt;参考资料&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;/download/php-intro/PHP基础教程（第4版）.pdf&quot;&gt;PHP基础教程（第4版）&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;/download/php-intro/php_enhanced_zh.chm&quot;&gt;PHP Manual&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>Linux下su和sudo进行身份变换</title>
-     <link href="http://ningg.github.com/linux-su-sudo"/>
-     <updated>2014-08-16T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/linux-su-sudo</id>
-     <content type="html">&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
-
-&lt;p&gt;最近，一些普通用户要在服务器上，安装软件，不时遇到权限问题，因此，只好将root密码献了出去；太多人知道root密码是件很危险的事，特别是，有的人习惯使用root权限登录，这中情况下，很有可能误操作，删除系统文件；有没有其他办法来避免这个问题呢？&lt;/p&gt;
-
-&lt;p&gt;说几个典型场景：&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;场景A&lt;/strong&gt;：用户 &lt;code&gt;UserA&lt;/code&gt; 输入命令 &lt;code&gt;find / -name &quot;hello&quot;&lt;/code&gt;，结果提示: &lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;find: /etc/cups/ssl: Permission denied
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;操作服务器时，不同用户之间的权限差异，概括几点：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;是否有权限，读（r）、写（w）、执行（x），文件 &lt;code&gt;FileA&lt;/code&gt; ；&lt;/li&gt;
-  &lt;li&gt;是否有权限，执行命令&lt;code&gt;commandA&lt;/code&gt;；实质上，命令&lt;code&gt;commandA&lt;/code&gt;对应了某个可执行的文件&lt;code&gt;commandA-File&lt;/code&gt;，有权限执行命令&lt;code&gt;commandA&lt;/code&gt;等价于具有文件&lt;code&gt;commandA-File&lt;/code&gt;的执行（x）权限；&lt;/li&gt;
-  &lt;li&gt;用户&lt;code&gt;UserA&lt;/code&gt;，找不到命令&lt;code&gt;commandA&lt;/code&gt;，说明，没有将命令&lt;code&gt;commandA&lt;/code&gt;添加到用户&lt;code&gt;UserA&lt;/code&gt;的环境变量&lt;code&gt;PATH&lt;/code&gt;中；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;之前介绍的Linux ACL（Access Control List，访问控制列表），已经实现了对文件&lt;code&gt;rwx&lt;/code&gt;权限的控制，因此，问题基本解决。&lt;/p&gt;
-
-&lt;p&gt;Linux下，进行身份变换这一功能，有必要吗？公认的原因有几个：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;使用一般帐号：系统日常维护的好习惯。仅当需要设定系统环境时，才变换为root身份，来进行系统管理；&lt;/li&gt;
-  &lt;li&gt;使用较低权限启动系统服务。例如，额外建立一个用户起名：apache，并以此来启动apache软件，这样如果apache程序被攻破了，系统还不至于被摧毁；&lt;/li&gt;
-  &lt;li&gt;软件本身的限制：有些远程连接程序（例如ssh），可设置为仅允许非root用户登录；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;基于上述考虑，通常使用一般帐号登录，在必要的时候，切换成root身份。问题来了：如何使一般用户转换为root用户呢？主要方式有两种：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code&gt;su - root&lt;/code&gt;命令，直接切换为root用户：
-    &lt;ul&gt;
-      &lt;li&gt;需要输入root密码来确认；&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;sudo CMD&lt;/code&gt;命令，利用root身份执行命令&lt;code&gt;CMD&lt;/code&gt;：
-    &lt;ul&gt;
-      &lt;li&gt;需要事先设定普通用户具备sudo的权限；&lt;/li&gt;
-      &lt;li&gt;在进行sudo操作时，需要输入普通用户自己的密码；&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;su&quot;&gt;su命令&lt;/h2&gt;
-
-&lt;p&gt;使用&lt;code&gt;man su&lt;/code&gt;来查看命令使用方法：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;NAME
-	   su - run a shell with substitute user and group IDs
-
-SYNOPSIS
-	   su [OPTION]... [-] [USER [ARG]...]
-
-DESCRIPTION
-	   Change  the  effective  user  id  and group id to that of
-	   USER.
-
-	   -, -l, --login
-			  make the shell a login shell
-
-	   -c, --command=COMMAND
-			  pass a single COMMAND to the shell with -c
-
-	   --session-command=COMMAND
-			  pass a single COMMAND to the shell with -c and  do
-			  not create a new session
-
-	   -f, --fast
-			  pass -f to the shell (for csh or tcsh)
-
-	   -m, --preserve-environment
-			  do not reset environment variables
-
-	   -p     same as -m
-
-	   -s, --shell=SHELL
-			  run SHELL if /etc/shells allows it
-
-	   --help display this help and exit
-
-	   --version
-			  output version information and exit
-
-	   A mere - implies -l.   If USER not given, assume root.
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;需要额外说明的一点：&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;pre&gt;&lt;code&gt;命令`su root`与`su - root`命令差异很大：
-* `su root`：使用login shell方式登录；
-* `su - root`：使用non-login shell方式登录；
-&lt;/code&gt;&lt;/pre&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;（疑问：login shell 和 non-login shell之间有什么差异？）&lt;/p&gt;
-
-&lt;p&gt;（说明：non-login shell方式登录，很多环境变量无法读取到，需要使用绝度路径的方式来执行）&lt;/p&gt;
-
-&lt;p&gt;命令&lt;code&gt;su - root&lt;/code&gt;需要root密码，因此不方便多用户之间的使用；有没有既能够以root身份来执行命令，同时也不需要root密码的方式？有，sudo命令，就是干这个的。&lt;/p&gt;
-
-&lt;h2 id=&quot;sudo&quot;&gt;sudo命令&lt;/h2&gt;
-
-&lt;p&gt;使用&lt;code&gt;man sudo&lt;/code&gt;来查看命令详情：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;NAME
-	   sudo, sudoedit - execute a command as another user
-
-SYNOPSIS
-	   sudo -h | -K | -k | -L | -V
-
-	   sudo -v [-AknS] [-g group name|#gid] [-p prompt]
-	   [-u user name|#uid] [command]
-
-	   sudo -l[l] [-AknS] [-g group name|#gid] [-p prompt]
-	   [-U user name] [-u user name|#uid] [command]
-
-	   sudo [-AbEHnPS] [-C fd] [-g group name|#gid] [-p prompt]
-	   [-r role] [-t type] [-u user name|#uid] [VAR=value]
-	   [-i | -s] [command]
-
-	   sudoedit [-AnS] [-C fd] [-g group name|#gid] [-p prompt]
-	   [-u user name|#uid] file ...
-
-DESCRIPTION
-	   sudo allows a permitted user to execute a command as the
-	   superuser or another user, as specified in the sudoers
-	   file.  The real and effective uid and gid are set to
-	   match those of the target user as specified in the passwd
-	   file and the group vector is initialized based on the
-	   group file (unless the -P option was specified).  If the
-	   invoking user is root or if the target user is the same
-	   as the invoking user, no password is required.
-	   
-	   Otherwise, sudo requires that users authenticate
-	   themselves with a password by default (NOTE: in the
-	   default configuration this is the user’s password, not
-	   the root password).  Once a user has been authenticated,
-	   a time stamp is updated and the user may then use sudo
-	   without a password for a short period of time (5 minutes
-	   unless overridden in sudoers).
-
-	   When invoked as sudoedit, the -e option (described
-	   below), is implied.
-
-	   sudo determines who is an authorized user by consulting
-	   the file /etc/sudoers.  By running sudo with the -v
-	   option, a user can update the time stamp without running
-	   a command.  If a password is required, sudo will exit if
-	   the user’s password is not entered within a configurable
-	   time limit.  The default password prompt timeout is 5
-	   minutes.
-
-	   If a user who is not listed in the sudoers file tries to
-	   run a command via sudo, mail is sent to the proper
-	   authorities, as defined at configure time or in the
-	   sudoers file (defaults to root).  Note that the mail will
-	   not be sent if an unauthorized user tries to run sudo
-	   with the -l or -v option.  This allows users to determine
-	   for themselves whether or not they are allowed to use
-	   sudo.
-
-	   If sudo is run by root and the SUDO_USER environment
-	   variable is set, sudo will use this value to determine
-	   who the actual user is.  This can be used by a user to
-	   log commands through sudo even when a root shell has been
-	   invoked.  It also allows the -e option to remain useful
-	   even when being run via a sudo-run script or program.
-	   Note however, that the sudoers lookup is still done for
-	   root, not the user specified by SUDO_USER.
-
-	   sudo can log both successful and unsuccessful attempts
-	   (as well as errors) to syslog(3), a log file, or both.
-	   By default sudo will log via syslog(3) but this is
-	   changeable at configure time or via the sudoers file.
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;sudo命令，注意事项：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;默认，只有root能使用&lt;code&gt;sudo&lt;/code&gt;命令；&lt;/li&gt;
-  &lt;li&gt;基本用法：&lt;code&gt;sudo -u [username] [command]&lt;/code&gt;；&lt;/li&gt;
-  &lt;li&gt;没有指定&lt;code&gt;-u [username]&lt;/code&gt;选项时，默认&lt;code&gt;-u root&lt;/code&gt;；&lt;/li&gt;
-  &lt;li&gt;root执行sudo时，不需要输入密码；&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;sudo -u [username] [command]&lt;/code&gt;中当前用户即为&lt;code&gt;username&lt;/code&gt;时，也不需要输入密码；（即，自己切换为自己身份时，不需要输入密码）&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;sudo执行流程：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;用户执行sudo时，系统于/etc/sudoers文件中，查找用户是否有执行sudo的权限；&lt;/li&gt;
-  &lt;li&gt;若具有执行sudo的权限，则让用户输入自己密码来确认执行；&lt;/li&gt;
-  &lt;li&gt;密码正确，则执行命令；&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;用户是否具有sudo执行权限，依据是/etc/sudoers文件，因此，为某一用户开通sudo权限，本质就是修改/etc/sudoers文件，直接使用vim来编辑，有可能会破坏文件的规范，推荐使用命令&lt;code&gt;visudo&lt;/code&gt;来修改这一文件。&lt;/p&gt;
-
-&lt;h2 id=&quot;visudo&quot;&gt;visudo命令&lt;/h2&gt;
-
-&lt;h3 id=&quot;aroot&quot;&gt;场景A：单个用户拥有root所有命令&lt;/h3&gt;
-
-&lt;p&gt;（分析：拥有root的所有命令？命令难道不是添加到PATH环境变量中就可以了吗？不是的，命令添加到PATH变量中，也是需要用户有这个命令的执行&lt;code&gt;x&lt;/code&gt;权限的。）&lt;/p&gt;
-
-&lt;p&gt;如果希望dev用户使用root的所有命令，那么可以进行如下修改：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;[root@localhost ~]# visudo
-...
-## Allow root to run any commands anywhere
-root    ALL=(ALL)       ALL
-# 新增的一行
-dev		ALL=(ALL)       ALL
-...
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;下面对新增行的格式进行简要说明：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;用户      用户登录来源主机名=(可切换的身份)	可执行的命令
-root                     ALL=(ALL)	       	ALL
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;上面四个组件含义进行简要说明：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;用户：这个用户可以使用sudo命令，默认为root用户；&lt;/li&gt;
-  &lt;li&gt;用户登录来源主机：设定允许用户通过哪些主机登录过来；&lt;/li&gt;
-  &lt;li&gt;可切换的身份：可以切换为什么身份来执行命令，默认root可以切换为任何用户；&lt;/li&gt;
-  &lt;li&gt;可执行的命令：务必使用绝对路径；&lt;/li&gt;
-  &lt;li&gt;ALL关键词：代表任何身份、主机、命令；&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;现在dev用户就可以执行sudo命令了，按照下面操作试一试：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;[dev@localhost /]$ head -n 1 /etc/shadow
-head: cannot open `/etc/shadow&#39; for reading: Permission denied
-[dev@localhost /]$ sudo head -n 1 /etc/shadow
-[sudo] password for devp:
-root:$6$2t1NiW.e$SM0:16296:0:99999:7:::
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;授予sudo命令的执行权限之前，需调查用户的人品，除非必要，一概不授予普通用户sudo权限。上述设置中，dev用户相当于拥有了整个系统的所有权限，通过&lt;code&gt;sudo visudo&lt;/code&gt;命令，用户&lt;code&gt;dev&lt;/code&gt;也能够像&lt;code&gt;root&lt;/code&gt;用户一样设定所有用户的sudo权限，欧，这也太危险了。&lt;/p&gt;
-
-&lt;h3 id=&quot;bsudo&quot;&gt;场景B：群组的sudo权限及免密码功能&lt;/h3&gt;
-
-&lt;p&gt;如果希望&lt;code&gt;group=dev&lt;/code&gt;内的所有成员都具有sudo命令权限，则进行如下设置：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;[root@localhost ~]# visudo
-...
-## Allows people in group wheel to run all commands
-# %wheel        ALL=(ALL)       ALL
-# 新增的一行
-%dev   ALL=(ALL)       ALL
-...
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;通过上述设置，&lt;code&gt;group=dev&lt;/code&gt;内成员都具有了sudo权限命令，今后赋予新的成员sudo权限时，只需要将其加入&lt;code&gt;dev&lt;/code&gt;组内即可，而不必每次都修改&lt;code&gt;/etc/sudoers&lt;/code&gt;文件。补充：如何设置用户免密码使用sudo权限？OK，请看如下操作：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;[root@localhost ~]# visudo
-...
-## Same thing without a password
-# %wheel        ALL=(ALL)       NOPASSWD: ALL
-...
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;csudo&quot;&gt;场景C：命令受限的sudo权限&lt;/h3&gt;
-
-&lt;p&gt;前面两个场景中，普通用户获得了与root相当的权限，甚至普通用户反过来能修改root的密码（使用命令：&lt;code&gt;sudo -u root passwd&lt;/code&gt;），这是篡权啊，想想就害怕。然而，害怕并不能解决问题，一些情况下，又必须给普通用户sudo权限，好了，能不能只给用户受限制的sudo权限呢？&lt;/p&gt;
-
-&lt;p&gt;下面以添加用户dev，使其辅助root修改其他用户的密码：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;[root@localhost ~]# visudo
-...
-## 为`dev`用户添加权限，使其辅助root修改其他用户密码
-dev        ALL=(root)       /usr/bin/passwd [A-Za-Z]*,!/usr/bin/passwd,!/usr/bin/passwd root
-...
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;几点说明：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;通过sudo授权用户可执行的命令&lt;code&gt;/usr/bin/passwd&lt;/code&gt;等，要使用绝对路径；&lt;/li&gt;
-  &lt;li&gt;多个授权命令之间，使用逗号&lt;code&gt;,&lt;/code&gt;分割；&lt;/li&gt;
-  &lt;li&gt;在命令前添加感叹号&lt;code&gt;!&lt;/code&gt;，表示禁止执行此命令；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;dvisudo&quot;&gt;场景D：visudo用别名简化配置&lt;/h3&gt;
-
-&lt;p&gt;针对这个情况，举个例子，就清晰了：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;User_Alias ADMPW = pro1,pro2
-Cmnd_Alias ADMPWCMD = !/usr/bin/passwd, \
-		/usr/bin/passwd [A-Za-z]*, !/usr/bin/passwd root
-
-ADMPW ALL=(root) ADMPWCOM
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;实际场景中如果忘记了这个例子，没有关系的，只需要&lt;code&gt;visudo&lt;/code&gt;命令，就能看到文件&lt;code&gt;/etc/sudoers&lt;/code&gt;中注释部分的提示了。&lt;/p&gt;
-
-&lt;h3 id=&quot;sudo-1&quot;&gt;sudo命令密码有效时长&lt;/h3&gt;
-
-&lt;p&gt;如果第一次执行sudo命令，则需要输入用户密码，但短时间内T，再次使用sudo命令时，并不需要输入密码。因为系统相信短时间T内，你不会离开服务器，所以再次执行sudo命令，是同一个人。&lt;/p&gt;
-
-&lt;p&gt;（如何设置sudo命令密码的有效时长？）&lt;/p&gt;
-
-&lt;h3 id=&quot;sudosu&quot;&gt;sudo搭配su的使用方式&lt;/h3&gt;
-
-&lt;p&gt;很多时候，我们需要大量的执行很多root的工作，所以，一直使用sudo觉得很烦！那有没有方法使用sudo搭配su，一口气身份转换为root，并且还用用户自己的密码来编程root呢？是有的，而且方法简单的会让你想笑！具体如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;[root@www ~]visudo
-...
-User_Alias ADMINS =pro1,pro2,pro3
-ADMINS ALL=(root) /bin/su -
-...
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;接下来，上述pro1、pro2、pro3共计3个用户，只需要输入&lt;code&gt;sudo su -&lt;/code&gt;命令，并且输入自己的密码后，立即转换为root身份了！但root密码不会外流。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;特别说明&lt;/strong&gt;：所有sudo用户，都是经过人格调查后，服务器管理员绝对信任的用户，否则，禁掉这一用户的sudo权限。&lt;/p&gt;
-
-&lt;h2 id=&quot;section-1&quot;&gt;参考来源&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;《&lt;a href=&quot;&quot;&gt;鸟哥的Linux私房菜 基础版（第三版）–Chapter 14&lt;/a&gt;》&lt;/li&gt;
-&lt;/ul&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>ACL入门</title>
-     <link href="http://ningg.github.com/linux-acl"/>
-     <updated>2014-08-14T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/linux-acl</id>
-     <content type="html">&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
-
-&lt;p&gt;文件系统上，文件权限管理的时候，通常有一个词语：ACL。ACL到底是什么？&lt;/p&gt;
-
-&lt;h2 id=&quot;section-1&quot;&gt;是什么&lt;/h2&gt;
-
-&lt;p&gt;（侧重于ACL能做什么事）&lt;/p&gt;
-
-&lt;p&gt;ACL（&lt;code&gt;Access Control List&lt;/code&gt;，访问控制列表），并不用于设定&lt;code&gt;文件&lt;/code&gt;/&lt;code&gt;目录&lt;/code&gt;的owner、group、others的read、write、execute（&lt;code&gt;r&lt;/code&gt;,&lt;code&gt;w&lt;/code&gt;,&lt;code&gt;x&lt;/code&gt;）权限，而是除此权限设置之外的更细节的权限设置。&lt;/p&gt;
-
-&lt;p&gt;特别说明：实际上，ACL也可以设置文件owner、group、others对应的&lt;code&gt;r&lt;/code&gt;/&lt;code&gt;w&lt;/code&gt;/&lt;code&gt;e&lt;/code&gt;权限，但我们通常使用&lt;code&gt;chmod&lt;/code&gt;命令来实现此功能，而倾向将ACL用于除此之外的权限设置。&lt;/p&gt;
-
-&lt;p&gt;ACL设定的权限主要有：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;使用者（&lt;code&gt;user&lt;/code&gt;）：设置某个使用者（&lt;code&gt;user&lt;/code&gt;）读、写、执行一个文件的权限；解释：此处的&lt;code&gt;user&lt;/code&gt;，不是&lt;code&gt;owner&lt;/code&gt;，而是其他的用户；&lt;/li&gt;
-  &lt;li&gt;群组（&lt;code&gt;group&lt;/code&gt;）：设置某个群组（&lt;code&gt;group&lt;/code&gt;）读、写、执行一个文件的权限；解释：此处的&lt;code&gt;group&lt;/code&gt;不是指，文件对应的&lt;code&gt;owning group&lt;/code&gt;的执行权限，而是除&lt;code&gt;owning group&lt;/code&gt;之外的其他&lt;code&gt;group&lt;/code&gt;，操作此文件的权限；&lt;/li&gt;
-  &lt;li&gt;默认属性（&lt;code&gt;mask&lt;/code&gt;）：设定某一个&lt;code&gt;目录&lt;/code&gt;之下，新建&lt;code&gt;文件&lt;/code&gt;/&lt;code&gt;目录&lt;/code&gt;时，这些新建的&lt;code&gt;文件&lt;/code&gt;/&lt;code&gt;目录&lt;/code&gt;的默认权限;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;（上面内容有待补充）&lt;/p&gt;
-
-&lt;h2 id=&quot;section-2&quot;&gt;怎么用&lt;/h2&gt;
-
-&lt;p&gt;ACL（&lt;code&gt;访问控制列表&lt;/code&gt;），是Unix-like操作系统权限的额外支持项目，需要文件系统（&lt;code&gt;File System&lt;/code&gt;）的支持。当前大部分文件系统都支持ACL，例如：EXT2/3
-、JFS、XFS等。&lt;/p&gt;
-
-&lt;h3 id=&quot;acl&quot;&gt;是否支持ACL&lt;/h3&gt;
-
-&lt;p&gt;使用命令&lt;code&gt;dumpe2fs -h /dev/sda1&lt;/code&gt;查看某一分区上文件系统是否支持ACL，例如：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;[root@localhost devp]# dumpe2fs -h /dev/sda1
-dumpe2fs 1.41.12 (17-May-2010)
-...
-Default mount options:    user_xattr acl
-...
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;注：&lt;code&gt;dumpe2fs&lt;/code&gt;含义：dump ext2/ext3/ext4 filesystem information.	&lt;/p&gt;
-
-&lt;h3 id=&quot;acl-1&quot;&gt;是否启用ACL&lt;/h3&gt;
-
-&lt;p&gt;文件系统支持ACL，即有能力开启ACL，但是文件系统需要开启ACL，通过如下方式来查询是否开启ACL：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# 直接参阅挂载参数
-[root@localhost ~]# mount
-proc on /proc type proc (rw)
-sysfs on /sys type sysfs (rw)
-tmpfs on /dev/shm type tmpfs (rw)
-/dev/sda1 on /boot type ext4 (rw)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;备注：“是否支持ACL”和“是否启用ACL”这两部分，自己理解不能肯定，需要补充。&lt;/p&gt;
-
-&lt;h3 id=&quot;section-3&quot;&gt;两个命令&lt;/h3&gt;
-
-&lt;p&gt;filesystem启动ACL支持之后，就可以设定和查看ACL了，主要是两条命令：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code&gt;getfacl&lt;/code&gt;：查看文件的ACL；&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;setfacl&lt;/code&gt;：设置文件的ACL；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;这两个命令侧重于使用命令：&lt;code&gt;man [COMMAND]&lt;/code&gt;来查看命令细节。两个命令相互配合使用，通常&lt;code&gt;setfacl&lt;/code&gt;之后，跟着一个&lt;code&gt;getfacl&lt;/code&gt;来查看设置是否成功。&lt;/p&gt;
-
-&lt;h3 id=&quot;section-4&quot;&gt;几个场景和实例&lt;/h3&gt;
-
-&lt;h4 id=&quot;section-5&quot;&gt;简介&lt;/h4&gt;
-
-&lt;p&gt;&lt;code&gt;setfacl&lt;/code&gt;：&lt;code&gt;set file access control list&lt;/code&gt;，设置ACL。命令详情如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;[superman@localhost /]$ setfacl --help
-setfacl 2.2.49 -- `set file access control lists`
-Usage: setfacl [-bkndRLP] { -m|-M|-x|-X ... } file ...
-  -m, --modify=acl        modify the current ACL(s) of file(s)
-  -M, --modify-file=file  read ACL entries to modify from file
-  -x, --remove=acl        remove entries from the ACL(s) of file(s)
-  -X, --remove-file=file  read ACL entries to remove from file
-  -b, --remove-all        remove all extended ACL entries
-  -k, --remove-default    remove the default ACL
-	  --set=acl           set the ACL of file(s), replacing the current ACL
-	  --set-file=file     read ACL entries to set from file
-	  --mask              do recalculate the effective rights mask
-  -n, --no-mask           don&#39;t recalculate the effective rights mask
-  -d, --default           operations apply to the default ACL
-  -R, --recursive         recurse into subdirectories
-  -L, --logical           logical walk, follow symbolic links
-  -P, --physical          physical walk, do not follow symbolic links
-	  --restore=file      restore ACLs (inverse of `getfacl -R&#39;)
-	  --test              test mode (ACLs are not modified)
-  -v, --version           print version and exit
-  -h, --help              this help text
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;code&gt;getfacl&lt;/code&gt;：&lt;code&gt;get file access control lists&lt;/code&gt;，查看ACL。命令详情如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;[god@localhost /]$ getfacl -h
-getfacl 2.2.49 -- get file access control lists
-Usage: getfacl [-aceEsRLPtpndvh] file ...
-  -a,  --access           display the file access control list only
-  -d, --default           display the default access control list only
-  -c, --omit-header       do not display the comment header
-  -e, --all-effective     print all effective rights
-  -E, --no-effective      print no effective rights
-  -s, --skip-base         skip files that only have the base entries
-  -R, --recursive         recurse into subdirectories
-  -L, --logical           logical walk, follow symbolic links
-  -P, --physical          physical walk, do not follow symbolic links
-  -t, --tabular           use tabular output format
-  -n, --numeric           print numeric user/group identifiers
-  -p, --absolute-names    don&#39;t strip leading &#39;/&#39; in pathnames
-  -v, --version           print version and exit
-  -h, --help              this help text
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&quot;user&quot;&gt;场景1：设置user权限&lt;/h4&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;场景描述：让devp用户获取查看&lt;code&gt;/root&lt;/code&gt;目录的权限。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;设置user权限的命令如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;setfacl -m u:devp:rx /root
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;查看结果：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;// 查看目录详情（不是目录下内容列表）
-// 查询结果中`dr-xr-x---+`，最后的`+`表示有ACL附加权限；
-[god@localhost /]# ll -d root
-dr-xr-x---+ 18 root root 4096 Aug  5 09:32 root
-// 查看ACL详情
-[god@localhost /]# getfacl root
-# file: root 
-# owner: root
-# group: root
-user::r-x       //`owner`的权限
-user:devp:r-x   //用户`devp`的权限（ACL设置的细节）
-group::r-x      //`owning group`的权限
-mask::r-x       //什么含义？（ACL设置的细节）
-other::---
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&quot;user-1&quot;&gt;场景2：取消user权限&lt;/h4&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;场景描述：在场景1中设置了devp用户查看&lt;code&gt;/root&lt;/code&gt;目录的权限，如何取消devp用户的这一权限呢？&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;取消&lt;code&gt;user&lt;/code&gt;权限的命令如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;setfacl -x u:devp /root
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;查看结果：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;// 查看ACL详情
-[god@localhost /]# getfacl root
-# file: root 
-# owner: root
-# group: root
-user::r-x       //`owner`的权限
-group::r-x      //`owning group`的权限
-mask::r-x       
-other::---
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&quot;group&quot;&gt;场景3：设置group权限&lt;/h4&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;场景描述：如何设置&lt;code&gt;devp&lt;/code&gt;组拥有&lt;code&gt;/root&lt;/code&gt;目录的查看权限？&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;设置命令：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;set -m g:devp:rx /root
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;查询结果：&lt;/p&gt;
-
-&lt;p&gt;（未完待续，各个典型场景）	&lt;/p&gt;
-
-&lt;h2 id=&quot;section-6&quot;&gt;什么原理&lt;/h2&gt;
-
-&lt;p&gt;（参考：Hadoop技术内幕中HDFS的架构设计与实现原理）&lt;/p&gt;
-
-&lt;h2 id=&quot;hdfsacl&quot;&gt;HDFS中的ACL&lt;/h2&gt;
-
-&lt;p&gt;Hadoop从2.4.0版本开始支持ACL（英文原版的出处），并且已经有人对此进行了测试：http://blog.csdn.net/j2eelamp/article/details/24594159&lt;/p&gt;
 
 </content>
    </entry>
