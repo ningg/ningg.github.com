@@ -6,7 +6,7 @@ markdown: kramdown
 # 代码高亮
 pygments: true
 # 分页设置
-paginate: 8
+#paginate: 8
 # 链接样式
 permalink: /:title
 

@@ -4,7 +4,7 @@
    <title>NingG.github.com</title>
    <link href="http://ningg.github.com/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://ningg.github.com" rel="alternate" type="text/html" />
-   <updated>2014-09-30T19:17:13+08:00</updated>
+   <updated>2014-09-30T21:25:47+08:00</updated>
    <id>http://ningg.github.com</id>
    <author>
      <name></name>
@@ -17,9 +17,7 @@
      <link href="http://ningg.github.com/personal-think"/>
      <updated>2014-09-30T00:00:00+08:00</updated>
      <id>http://ningg.github.com/personal-think</id>
-     <content type="html">&lt;p&gt;（下面自己的思考，警惕列举过多1、2、3，导致排版散乱）&lt;/p&gt;
-
-&lt;p&gt;今天读了&lt;code&gt;***&lt;/code&gt;的博客，特别是每年的个人总结，基本上2004–2013的都看了，希望能从中窥探一点前辈工作十余年的体会，同时也想看看有没有能够借鉴的，万幸，读的较为认真，我也产生了一点想法，借这个时机，我想和自己谈一谈。&lt;/p&gt;
+     <content type="html">&lt;p&gt;今天读了&lt;code&gt;***&lt;/code&gt;的博客，特别是每年的个人总结，基本上2004–2013的都看了，希望能从中窥探一点前辈工作十余年的体会，同时也想看看有没有能够借鉴的，万幸，读的较为认真，我也产生了一点想法，借这个时机，我想和自己谈一谈。&lt;/p&gt;
 
 &lt;h2 id=&quot;section&quot;&gt;有个打算，有点追求&lt;/h2&gt;
 
@@ -50,8 +48,6 @@
 
 &lt;p&gt;要将视野放开，保持与时代相接触，对于自己所处行业，需要有自己的认识，这个认识可以是错误的，分享出去，自然会有人忍不住来指正，关注国内和国外最新的科技动态，包括产品、生活、行业；主要途径：业内顶尖人才、顶尖公司动向，领域内主流媒体的动向。&lt;/p&gt;
 
-&lt;p&gt;下面是自己&lt;/p&gt;
-
 &lt;hr /&gt;
 
 &lt;p&gt;前沿媒体：&lt;/p&gt;
@@ -76,7 +72,7 @@
 
 &lt;hr /&gt;
 
-&lt;p&gt;新兴的潮流网站：对一些如同爆炸性出现的新技术、网站、观点，保持敏感度，进行简要学习，基本原则，了解轮廓。&lt;/p&gt;
+&lt;p&gt;新兴的潮流网站：对一些如同爆炸性出现的新技术、网站、观点，保持敏感度，进行简要学习其基本规律，了解轮廓。&lt;/p&gt;
 
 &lt;h2 id=&quot;section-2&quot;&gt;小结&lt;/h2&gt;
 
@@ -599,14 +595,6 @@
    </entry>
    
    <entry>
-     <title>Git使用入门</title>
-     <link href="http://ningg.github.com/git-intro"/>
-     <updated>2014-09-27T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/git-intro</id>
-     <content type="html"></content>
-   </entry>
-   
-   <entry>
      <title>Android入门几个基本知识</title>
      <link href="http://ningg.github.com/android-lesson-one"/>
      <updated>2014-09-23T00:00:00+08:00</updated>
@@ -1086,6 +1074,91 @@ med out: connect -&amp;gt; [Help 1]
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;http://flume.apache.org/&quot;&gt;flume官网&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://cwiki.apache.org/confluence/display/FLUME/Development+Environment&quot;&gt;flume开发&amp;amp;调试环境&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+   </entry>
+   
+   <entry>
+     <title>wordpress的开发调试环境</title>
+     <link href="http://ningg.github.com/wordpress-debug-env"/>
+     <updated>2014-09-05T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/wordpress-debug-env</id>
+     <content type="html">&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
+
+&lt;p&gt;用wordpress建站，两个功能：一个是展示团队工作，另一个是方便其他人进来讨论。&lt;/p&gt;
+
+&lt;p&gt;初步立意：使用wordpress搭建两个网站，团队工作展示一个，讨论区一个；&lt;/p&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;组件与安装&lt;/h2&gt;
+
+&lt;p&gt;环境：Win 7，已经安装了JDK 6 和 JDK 7&lt;/p&gt;
+
+&lt;p&gt;下载软件清单如下：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;下载XAMPP：&lt;a href=&quot;https://www.apachefriends.org/zh_cn/index.html&quot;&gt;https://www.apachefriends.org/zh_cn/index.html&lt;/a&gt; 版本：1.8.3；对应PHP: 5.5.1&lt;/li&gt;
+  &lt;li&gt;下载eclipse for php：&lt;a href=&quot;http://www.eclipse.org/downloads/&quot;&gt;http://www.eclipse.org/downloads/&lt;/a&gt;  版本：eclipse-php-luna-R-win32-x86_64&lt;/li&gt;
+  &lt;li&gt;下载wordpress：&lt;a href=&quot;http://cn.wordpress.org/&quot;&gt;http://cn.wordpress.org/&lt;/a&gt; 版本：3.9&lt;/li&gt;
+  &lt;li&gt;下载主题：
+    &lt;ol&gt;
+      &lt;li&gt;hum：&lt;a href=&quot;http://wordpress.org/extend/themes/hum/&quot;&gt;http://wordpress.org/extend/themes/hum/&lt;/a&gt; 版本：0.2.1&lt;/li&gt;
+      &lt;li&gt;twenty eleven：&lt;a href=&quot;http://wordpress.org/themes/twentyeleven&quot;&gt;http://wordpress.org/themes/twentyeleven&lt;/a&gt; 版本：1.9&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;下载JDK：&lt;a href=&quot;http://www.oracle.com/technetwork/java/javase/downloads/index.html&quot;&gt;Oracle JDK(Sun)&lt;/a&gt; 版本：JDK 7u67&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;依次安装：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;XAMPP：wordpress的运行环境&lt;/li&gt;
+  &lt;li&gt;wordpress，并为其配置主题：
+    &lt;ul&gt;
+      &lt;li&gt;twenty eleven&lt;/li&gt;
+      &lt;li&gt;hum&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;eclipse：将整个wordpress文件夹，新建为PHP Project；&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;配置&lt;/h2&gt;
+
+&lt;p&gt;设计搭建其调试环境所需要的基本配置。&lt;/p&gt;
+
+&lt;h3 id=&quot;section-3&quot;&gt;基本配置&lt;/h3&gt;
+
+&lt;p&gt;主要是Apache、MySQL、PHP相关：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;设置MySQL的root密码，两种方式都可以：
+    &lt;ol&gt;
+      &lt;li&gt;CMD的命令行；&lt;/li&gt;
+      &lt;li&gt;myphpAdmin图形界面；&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;section-4&quot;&gt;主题配置&lt;/h3&gt;
+
+&lt;p&gt;主要是为成功安装主题，所需要进行的配置。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;wordpress
+    &lt;ol&gt;
+      &lt;li&gt;取消twenty eleven主题中google front（因为google被墙了）&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section-5&quot;&gt;调试&lt;/h2&gt;
+
+&lt;p&gt;调试是学习一个框架/语言较快的方式，这一部分将着重介绍如何进行调试。关注几点：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;如何进行调试；&lt;/li&gt;
+  &lt;li&gt;PHP web基本处理逻辑；&lt;/li&gt;
+  &lt;li&gt;wordpress中使用了哪些巧妙的设计，使其流行数年；&lt;/li&gt;
 &lt;/ul&gt;
 
 </content>
