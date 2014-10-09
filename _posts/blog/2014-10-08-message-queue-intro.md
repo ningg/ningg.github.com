@@ -62,7 +62,6 @@ category: message queue
 
 * top 10 uses for message queue：[英文原文](http://blog.iron.io/2012/12/top-10-uses-for-message-queue.html)、[pdf版本](/download/message-queue-intro/top-10-mq.pdf)、[中文译文](http://www.oschina.net/translate/top-10-uses-for-message-queue)
 * [Message Queue wiki](http://en.wikipedia.org/wiki/Message_queue)
-
 * [http://bbs.csdn.net/topics/110160741](http://bbs.csdn.net/topics/110160741)
 * [http://www.cnblogs.com/yuanyi_wang/archive/2009/12/30/1636178.html](http://www.cnblogs.com/yuanyi_wang/archive/2009/12/30/1636178.html)
 * [http://www.php1.cn/article/9865.html](http://www.php1.cn/article/9865.html)
