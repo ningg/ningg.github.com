@@ -7,13 +7,13 @@ category: message queue
 
 ##背景
 
-之前做日志收集模块时，用到flume，另外也有人为了可扩展性，集成了kafaka，其中涉及到了`消息队列`，当时自己并不清楚为什么要在系统中使用到`消息队列`这么个模块，而，在我自己提出的原始日志采集方案中：1.日志文件上传过程，有个基本的`生产者-消费者`问题；2.另外系统崩溃时，数据丢失的处理问题。
+之前做日志收集模块时，用到flume，另外也有的方案，集成kafaka来提升系统可扩展性，其中涉及到`消息队列`，当时自己并不清楚为什么要使用`消息队列`，而在我自己提出的原始日志采集方案中不适用`消息队列`时，有几个基本问题：1.日志文件上传过程，有个基本的`生产者-消费者`问题；2.另外系统崩溃时，数据丢失的处理问题。
 
-今天，几个人大概说道消息队列的时候，再次谈到`消息队列`这么个东西，很NB的样子，我也想弄清楚，OK，搞起。
+今天，几位同事再次谈到`消息队列`这么个东西，很NB的样子，我也想弄清楚，OK，搞起。
 
 ##什么是消息队列
 
-消息队列（Message Queue，简称MQ），从字面意思上看，本质是个队列（Queue），FIFO（first in, first out）先入先出，只不过队列中存放的内容是`message`。其主要用途：不同进程Process/线程Thread之间通信。为什么会产生`消息队列`？这个问题问的好，我大概查了一下，没有查到最初产生消息队列的背景，但我猜测可能几个原因：
+消息队列（Message Queue，简称MQ），从字面意思上看，本质是个队列，FIFO先入先出，只不过队列中存放的内容是`message`而已。其主要用途：不同进程Process/线程Thread之间通信。为什么会产生`消息队列`？这个问题问的好，我大概查了一下，没有查到最初产生消息队列的背景，但我猜测可能几个原因：
 
 * 不同进程（process）之间传递消息时，两个进程之间耦合程度过高，改动一个进程，引发必须修改另一个进程，为了隔离这两个进程，在两进程间抽离出一层（一个模块），所有两进程之间传递的消息，都必须通过`消息队列`来传递，单独修改某一个进程，不会影响另一个；
 * 不同进程（process）之间传递消息时，为了实现标准化，将消息的格式规范化了，并且，某一个进程接受的消息太多，一下子无法处理完，并且也有先后顺序，必须对收到的消息进行排队，因此诞生了事实上的`消息队列`；
@@ -33,7 +33,6 @@ category: message queue
 * 如果MQ_1中message_1已经被Process_B取出，正在处理的关键时刻，Process_B崩溃了，哭啊，我的问题是，如果重启Process_B，是否会丢失message_1？
 
 不要着急，阅读了下面的简要介绍后，水到渠成，上面几个问题就可以解决了。
-
 消息队列有如下几个好处，这大都是由其**系统解耦**和**消息缓存**两点扩展而来的：
 
 * 提升系统可靠性：
@@ -64,9 +63,9 @@ category: message queue
 * top 10 uses for message queue：[英文原文](http://blog.iron.io/2012/12/top-10-uses-for-message-queue.html)、[pdf版本](/download/message-queue-intro/top-10-mq.pdf)、[中文译文](http://www.oschina.net/translate/top-10-uses-for-message-queue)
 * [Message Queue wiki](http://en.wikipedia.org/wiki/Message_queue)
 
-* http://bbs.csdn.net/topics/110160741
-* http://www.cnblogs.com/yuanyi_wang/archive/2009/12/30/1636178.html
-* http://www.php1.cn/article/9865.html
+* [http://bbs.csdn.net/topics/110160741](http://bbs.csdn.net/topics/110160741)
+* [http://www.cnblogs.com/yuanyi_wang/archive/2009/12/30/1636178.html](http://www.cnblogs.com/yuanyi_wang/archive/2009/12/30/1636178.html)
+* [http://www.php1.cn/article/9865.html](http://www.php1.cn/article/9865.html)
 
 
 
