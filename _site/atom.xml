@@ -4,13 +4,586 @@
    <title>NingG.github.com</title>
    <link href="http://ningg.github.com/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://ningg.github.com" rel="alternate" type="text/html" />
-   <updated>2014-09-30T21:25:47+08:00</updated>
+   <updated>2014-10-14T23:22:06+08:00</updated>
    <id>http://ningg.github.com</id>
    <author>
      <name></name>
      <email></email>
    </author>
 
+   
+   <entry>
+     <title>In-Stream Big Data Processing</title>
+     <link href="http://ningg.github.com/in-stream-big-data-processing"/>
+     <updated>2014-10-14T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/in-stream-big-data-processing</id>
+     <content type="html">&lt;blockquote&gt;
+  &lt;p&gt;英文原文：&lt;a href=&quot;http://highlyscalable.wordpress.com/2013/08/20/in-stream-big-data-processing/&quot;&gt;In-Stream-big-data-processing&lt;/a&gt;，有人翻译了&lt;a href=&quot;http://blog.csdn.net/idontwantobe/article/details/25938511&quot;&gt;中文版&lt;/a&gt;，也有直接&lt;a href=&quot;http://dirlt.com/in-stream-big-data-processing.html&quot;&gt;英文注释中文版&lt;/a&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The shortcomings and drawbacks of batch-oriented data processing were widely recognized by the Big Data community quite a long time ago. It became clear that real-time query processing and in-stream processing is the immediate need in many practical applications. In recent years, this idea got a lot of traction and a whole bunch of solutions like Twitter’s Storm, Yahoo’s S4, Cloudera’s Impala, Apache Spark, and Apache Tez appeared and joined the army of Big Data and NoSQL systems. This article is an effort to explore techniques used by developers of in-stream data processing systems, trace the connections of these techniques to massive batch processing and OLTP/OLAP databases, and discuss how one unified query engine can support in-stream, batch, and OLAP processing at the same time.&lt;/p&gt;
+
+&lt;p&gt;At Grid Dynamics, we recently faced a necessity to build an in-stream data processing system that aimed to crunch about 8 billion events daily providing fault-tolerance and strict transactioanlity i.e. none of these events can be lost or duplicated. This system has been designed to supplement and succeed the existing Hadoop-based system that had too high latency of data processing and too high maintenance costs. The requirements and the system itself were so generic and typical that we describe it below as a canonical model, just like an abstract problem statement.&lt;/p&gt;
+
+&lt;p&gt;A high-level overview of the environment we worked with is shown in the figure below:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/in-stream-big-data-processing/cover-2.png&quot; alt=&quot;cover-2&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;One can see that this environment is a typical Big Data installation: there is a set of applications that produce the raw data in multiple datacenters, the data is shipped by means of Data Collection subsystem to HDFS located in the central facility, then the raw data is aggregated and analyzed using the standard Hadoop stack (MapReduce, Pig, Hive) and the aggregated results are stored in HDFS and NoSQL, imported to the OLAP database and accessed by custom user applications. Our goal was to equip all facilities with a new in-stream engine (shown in the bottom of the figure) that processes most intensive data flows and ships the pre-aggregated data to the central facility, thus decreasing the amount of raw data and heavy batch jobs in Hadoop. The design of the in-stream processing engine itself was driven by the following requirements:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;SQL-like functionality&lt;/strong&gt;. The engine has to evaluate SQL-like queries continuously, including joins over time windows and different aggregation functions that implement quite complex custom business logic. The engine can also involve relatively static data (admixtures) loaded from the stores of Aggregated Data. Complex multi-pass data mining algorithms are beyond the immediate goals.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Modularity and flexibility&lt;/strong&gt;. It is not to say that one can simply issue a SQL-like query and the corresponding pipeline will be created and deployed automatically, but it should be relatively easy to assemble quite complex data processing chains by linking one block to another.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Fault-tolerance&lt;/strong&gt;. Strict fault-tolerance is a principal requirement for the engine. As it sketched in the bottom part of the figure, one possible design of the engine is to use distributed data processing pipelines that implement operations like joins and aggregations or chains of such operations, and connect these pipelines by means of fault-tolerant persistent buffers. These buffers also improve modularity of the system by enabling publish/subscribe communication style and easy addition/removal of the pipelines. The pipelines can be stateful and the engine’s middleware should provide a persistent storage to enable state checkpointing. All these topics will be discussed in the later sections of the article.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Interoperability with Hadoop&lt;/strong&gt;. The engine should be able to ingest both streaming data and data from Hadoop i.e. serve as a custom query engine atop of HDFS.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;High performance and mobility&lt;/strong&gt;. The system should deliver performance of tens of thousands messages per second even on clusters of minimal size. The engine should be compact and efficient, so one can deploy it in multiple datacenters on small clusters.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;To find out how such a system can be implemented, we discuss the following topics in the rest of the article:&lt;/p&gt;
+
+&lt;p&gt;First, we explore relations between in-stream data processing systems, massive batch processing systems, and relational query engines to understand how in-stream processing can leverage a huge number of techniques that were devised for other classes of systems.&lt;/p&gt;
+
+&lt;p&gt;Second, we describe a number of patterns and techniques that are frequently used in building of in-stream processing frameworks and systems. In addition, we survey the current and emerging technologies and provide a few implementation tips.&lt;/p&gt;
+
+&lt;p&gt;The article is based on a research project developed at Grid Dynamics Labs. Much of the credit goes to Alexey Kharlamov and Rafael Bagmanov who led the project and other contributors: Dmitry Suslov, Konstantine Golikov, Evelina Stepanova, Anatoly Vinogradov, Roman Belous, and Varvara Strizhkova.&lt;/p&gt;
+
+&lt;h2 id=&quot;basics-of-distributed-query-processing&quot;&gt;Basics of Distributed Query Processing&lt;/h2&gt;
+
+&lt;p&gt;It is clear that distributed in-stream data processing has something to do with query processing in distributed relational databases. Many standard query processing techniques can be employed by in-stream processing engine, so it is extremely useful to understand classical algorithms of distributed query processing and see how it all relates to in-stream processing and other popular paradigms like MapReduce.&lt;/p&gt;
+
+&lt;p&gt;Distributed query processing is a very large area of knowledge that was under development for decades, so we start with a brief overview of the main techniques just to provide a context for further discussion.&lt;/p&gt;
+
+&lt;h3 id=&quot;partitioning-and-shuffling&quot;&gt;Partitioning and Shuffling&lt;/h3&gt;
+
+&lt;p&gt;Distributed and parallel query processing heavily relies on data partitioning to break down a large data set into multiple pieces that can be processed by independent processors. Query processing could consist of multiple steps and each step could require its own partitioning strategy, so data shuffling is an operation frequently performed by distributed databases.&lt;/p&gt;
+
+&lt;p&gt;Although optimal partitioning for selection and projection operations can be tricky (e.g. for range queries), we can assume that for in-stream data filtering it is practically enough to distribute data among the processors using a hash-based partitioning.&lt;/p&gt;
+
+&lt;p&gt;Processing of distributed joins is not so easy and requires a more thorough examination. In distributed environments, parallelism of join processing is achieved through data partitioning, i.e. the data is distributed among processors and each processor employs a serial join algorithm (e.g. nested-loop join or sort-merge join or hash-based join) to process its part of the data. The final results are consolidated from the results obtained from different processors.&lt;/p&gt;
+
+&lt;p&gt;There are two main data partitioning techniques that can be employed by distributed join processing:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Disjoint data partitioning&lt;/li&gt;
+  &lt;li&gt;Divide and broadcast join&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Disjoint data partitioning technique shuffles the data into several partitions in such a way that join keys in different partitions do not overlap. Each processor performs the join operation on each of these partitions and the final result is obtained as a simple concatenation of the results obtained from different processors.  Consider an example where relation R is joined with relation S on a numerical key k and a simple modulo-based hash function is used to produce the partitions (it is assumes that the data initially distributed among the processors based on some other policy):&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/in-stream-big-data-processing/disjoint-partitioning.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The divide and broadcast join algorithm is illustrated in the figure below. This method divides the first data set into multiple disjoint partitions (R1, R2, and R3 in the figure) and replicates the second data set to all processors. In a distributed database, division typically is not a part of the query processing itself because data sets are initially distributed among multiple nodes.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/in-stream-big-data-processing/broadcast-join.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This strategy is applicable for joining of a large relation with a small relation or two small relations. In-stream data processing systems can employ this technique for stream enrichment i.e. joining a static data (admixture) to a data stream.&lt;/p&gt;
+
+&lt;p&gt;Processing of GroupBy queries also relies on shuffling and fundamentally similar to the MapReduce paradigm in its pure form.  Consider an example where the data is grouped by a string key and sum of the numerical values is computed in each group:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/in-stream-big-data-processing/group-by-query.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;In this example, computation consists of two steps: local aggregation and global aggregation. These steps basically correspond to Map and Reduce operations. Local aggregation is optional and raw records can be emitted, shuffled, and aggregated on a global aggregation phase.&lt;/p&gt;
+
+&lt;p&gt;The whole point of this section is that all the algorithms above can be naturally implemented using a message passing architectural style i.e. the query execution engine can be considered as a distributed network of nodes connected by the messaging queues. It is conceptually similar to the in-stream processing pipelines.&lt;/p&gt;
+
+&lt;h3 id=&quot;pipelining&quot;&gt;Pipelining&lt;/h3&gt;
+
+&lt;p&gt;In the previous section, we noted that many distributed query processing algorithms resemble message passing networks. However, it is not enough to organize efficient in-stream processing: all operators in a query should be chained in such a way that the data flows smoothly through the entire pipeline i.e. neither operation should block processing by waiting for a large piece of input data without producing any output or by writing intermediate results on disk. Some operations like sorting are inherently incompatible with this concept (obviously, a sorting block cannot produce any output until the entire input is ingested), but in many cases pipelining algorithms are applicable.  A typical example of pipelining is shown below:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/in-stream-big-data-processing/join-pipeline.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;In this example, the hash join algorithm is employed to join four relations: R1, S1, S2, and S3 using 3 processors. The idea is to build hash tables for S1, S2 and S3 in parallel and then stream R1 tuples one by one though the pipeline that joins them with S1, S2 and S3 by looking up matches in the hash tables. In-stream processing naturally employs this technique to join a data stream with the static data (admixtures).&lt;/p&gt;
+
+&lt;p&gt;In relational databases, join operation can take advantage of pipelining by using the symmetric hash join algorithm or some of its advanced variants [1,2]. Symmetric hash join is a generalization of hash join. Whereas a normal hash join requires at least one of its inputs to be completely available to produce first results (the input is needed to build a hash table), symmetric hash join is able to produce first results immediately. In contrast to the normal hash join, it maintains hash tables for both inputs and populates these tables as tuples arrive:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/in-stream-big-data-processing/symmetric-join.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;As a tuple comes in, the joiner first looks it up in the hash table of the other stream. If match is found, an output tuple is produced. Then the tuple is inserted in its own hash table.&lt;/p&gt;
+
+&lt;p&gt;However, it does not make a lot of sense to perform a complete join of infinite streams. In many cases join is performed on a finite time window or other type of buffer e.g. LFU cache that contains most frequent tuples in the stream. Symmetric hash join can be employed if the buffer is large comparing to the stream rate or buffer is flushed frequently according to some application logic or buffer eviction strategy is not predictable. In other cases, simple hash join is often sufficient since the buffer is constantly full and does not block the processing:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/in-stream-big-data-processing/stream-join.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;It is worth noting that in-stream processing often deals with sophisticated stream correlation algorithms where records are matched based on scoring metrics, not on field equality condition. A more complex system of buffers can be required for both streams in such cases.&lt;/p&gt;
+
+&lt;h2 id=&quot;in-stream-processing-patterns&quot;&gt;In-Stream Processing Patterns&lt;/h2&gt;
+
+&lt;p&gt;In the previous section, we discussed a number of standard query processing techniques that can be used in massively parallel stream processing. Thus, on a conceptual level, an efficient query engine in a distributed database can act as a stream processing system and vice versa, a stream processing system can act as a distributed database query engine. Shuffling and pipelining are the key techniques of distributed query processing and message passing networks can naturally implement them. However, things are not so simple. In a contrast to database query engines where reliability is not critical because a read-only query can always be restarted, streaming systems should pay a lot of attention to reliable events processing. In this section, we discuss a number of techniques that are used by streaming systems to provide message delivery guarantees and some other patterns that are not typical for standard query processing.&lt;/p&gt;
+
+&lt;h3 id=&quot;stream-replay&quot;&gt;Stream Replay&lt;/h3&gt;
+
+&lt;p&gt;Ability to rewind data stream back in time and replay the data is very important for in-stream processing systems because of the following reasons:
+This is the only way to guarantee correct data processing. Even if data processing pipeline is fault-tolerant, it is very problematic to guarantee that the deployed processing logic is defect-free. One can always face a necessity to fix and redeploy the system and replay the data on a new version of the pipeline.&lt;/p&gt;
+
+&lt;p&gt;Issue investigation could require ad hoc queries. If something goes wrong, one could need to rerun the system on the problematic data with better logging or with code alternations.&lt;/p&gt;
+
+&lt;p&gt;Although it is not always the case, the in-stream processing system can be designed in such a way that it re-reads individual messages from the source in case of processing errors and local failures, even if the system in general is fault-tolerant.&lt;/p&gt;
+
+&lt;p&gt;As a result, the input data typically goes from the data source to the in-stream pipeline via a persistent buffer that allows clients to move their reading pointers back and forth.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/in-stream-big-data-processing/replay-buffer.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Kafka messaging queue is well known implementation of such a buffer that also supports scalable distributed deployments, fault-tolerance, and provides high performance.
+As a bottom line, Stream Replay technique imposes the following requirements of the system design:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The system is able to store the raw input data for a preconfigured period time.&lt;/li&gt;
+  &lt;li&gt;The system is able to revoke a part of the produced results, replay the corresponding input data and produce a new version of the results.&lt;/li&gt;
+  &lt;li&gt;The system should work fast enough to rewind the data back in time, replay them, and then catch up with the constantly arriving data stream.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;lineage-tracking&quot;&gt;Lineage Tracking&lt;/h3&gt;
+
+&lt;p&gt;In a streaming system, events flow through a chain of processors until the result reaches the final destination (like an external database). Each input event produces a directed graph of descendant events (lineage) that ends by the final results. To guarantee reliable data processing, it is necessary to ensure that the entire graph was processed successfully and to restart processing in case of failures.&lt;/p&gt;
+
+&lt;p&gt;Efficient lineage tracking is not a trivial problem. Let us first consider how Twitter’s Storm tracks the messages to guarantee at-least-once delivery semantics (see the diagram below):&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;All events that emitted by the sources (first nodes in the data processing graph) are marked by a random ID. For each source, the framework maintains a set of pairs [event ID -&amp;gt; signature] for each initial event. The signature is initially initialized by the event ID.&lt;/li&gt;
+  &lt;li&gt;Downstream nodes can generate zero or more events based on the received initial event. Each event carries its own random ID and the ID of the initial event.&lt;/li&gt;
+  &lt;li&gt;If the event is successfully received and processed by the next node in the graph, this node updates the signature of the corresponding initial event by XORing the signature with (a) ID of the incoming event and (b) IDs of all events produced based on the incoming event. In the part 2 of diagram below, event 01111 produces events 01100, 10010, and 00010, so the signature for event 01111 becomes 11100 (= 01111 (initial value) xor 01111 xor 01100 xor 10010 xor 00010).&lt;/li&gt;
+  &lt;li&gt;An event can be produced based on more than one incoming event. In this case, it is attached several initial event and carries more than one initial IDs downstream (yellow-black event in the part 3 of the figure below).&lt;/li&gt;
+  &lt;li&gt;The event considered to be successfully processed as soon as its signature turns into zero i.e. the final node acknowledged that the last event in the graph was processed successfully and no events were emitted downstream. The framework sends a commit message to the source node (see part 3 in the diagram below).&lt;/li&gt;
+  &lt;li&gt;The framework traverses a table of the initial events periodically looking for old uncommitted events (events with non-zero signature). Such events are considered as failed and the framework asks the source nodes to replay them.&lt;/li&gt;
+  &lt;li&gt;It is important to note that the order of signature updates is not important due to commutative nature of the XOR operation. In the figure below, acknowledgements depicted in the part 2 can arrive after acknowledgements depicted in the part 3. This enables fully asynchronous processing.&lt;/li&gt;
+  &lt;li&gt;One can note that the algorithm above is not strictly reliable – the signature could turn into zero accidentally due to unfortunate combination of IDs. However, 64-bit IDs are sufficient to guarantee a very low probability of error, about 2^(-64), that is acceptable in almost all practical applications. As result, the table of signatures could have a small memory footprint.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/in-stream-big-data-processing/lineage-tracking-storm.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The described approach is elegant due to its decentrilized nature: nodes act independently sending acknowledgement messages, there is no cental entity that tracks all lineages explicitly. However, it could be difficult to manage transactional processing in this way for flows that maintain sliding windows or other buffers. For example, processing on a sliding window can involve hundreds of thousands events at each moment of time, so it becomes difficult to manage acknowledgements because many events stay uncommitted or computational state should be persisted frequently.&lt;/p&gt;
+
+&lt;p&gt;An alternative approach is used in Apache Spark [3]. The idea is to consider the final result as a function of the incoming data. To simplify lineage tracking, the framework processes events in batches, so the result is a sequence of batches where each batch is a function of the input batches. Resulting batches can be computed in parallel and if some computation fails, the framework simply reruns it. Consider an example:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/in-stream-big-data-processing/stream-join-microbatching-tx.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;In this example, the framework joins two streams on a sliding window and then the result passes through one more processing stage. The framework considers the incoming streams not as streams, but as set of batches. Each batch has an ID and the framework can fetch it by the ID at any moment of time. So, stream processing can be represented as a bunch of transactions where each transaction takes a group of input batches, transforms them using a processing function, and persists a result. In the figure above, one of such transactions is highlighted in red. If the transaction fails, the framework simply reruns it. It is important that transactions can be executed in parallel.&lt;/p&gt;
+
+&lt;p&gt;This simple but powerful paradigm enables centralized transaction management and inherently provides exactly-once message processing semantics. It is worth noting that this technique can be used both for batch processing and for stream processing because it treats the input data as a set of batches regardless to their streaming of static nature.&lt;/p&gt;
+
+&lt;h3 id=&quot;state-checkpointing&quot;&gt;State Checkpointing&lt;/h3&gt;
+
+&lt;p&gt;In the previous section we have considered the lineage tracking algorithm that uses signatures (checksums) to provide at-least-one message delivery semantics. This technique improves reliability of the system, but it leaves at least two major open questions:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;In many cases, exactly-once processing semantics is required. For example, the pipeline that counts events can produce incorrect results if some messages will be delivered twice.&lt;/li&gt;
+  &lt;li&gt;Nodes in the pipeline can have a computational state that is updated as the messages processed. This state can be lost in case of node failure, so it is necessary to persist or replicate it.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Twitter’s Storm addresses these issues by using the following protocol:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Events are grouped into batches and each batch is associated with a transaction ID. A transaction ID is a monotonically growing numerical value (e.g. the first batch has ID 1, the second ID 2, and so on). If the pipeline fails to process a batch, this batch is re-emitted with the same transaction ID.&lt;/li&gt;
+  &lt;li&gt;First, the framework announces to the nodes in the pipeline that a new transaction attempt is started. Second, the framework to sends the batch through the pipeline. Finally, the framework announces that transaction attempt if completed and all nodes can commit their state e.g. update it in the external database.&lt;/li&gt;
+  &lt;li&gt;The framework guarantees that commit phases are globally ordered across all transactions i.e. the transaction 2 can never be committed before the transaction 1. This guarantee enables processing nodes to use following logic of persistent state updates:
+    &lt;ul&gt;
+      &lt;li&gt;The latest transaction ID is persisted along with the state.&lt;/li&gt;
+      &lt;li&gt;If the framework requests to commit the current transaction with the ID that differs from the ID value persisted in the database, the state can be updated e.g. a counter in the database can be incremented. Assuming a strong ordering of transactions, such update will happen exactly one for each batch.&lt;/li&gt;
+      &lt;li&gt;If the current transaction ID equals to the value persisted in the storage, the node skips the commit because this is a batch replay. The node must have processed the batch earlier and updated the state accordingly, but the transaction failed due to an error somewhere else in the pipeline.&lt;/li&gt;
+      &lt;li&gt;Strong order of commits is important to achieve exactly-once processing semantics. However, strictly sequential processing of transactions is not feasible because first nodes in the pipeline will often be idle waiting until processing on the downstream nodes is completed. This issues can be alleviated by allowing parallel processing of transactions but serialization of commit steps only, as it shown in the figure below:&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/in-stream-big-data-processing/pipelining-commits-2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This technique allows one to achieve exactly-once processing semantics assuming that data sources are fault-tolerant and can be replayed. However, persistent state updates can cause serious performance degradation even if large batches are used. By this reason, the intermediate computational state should be minimized or avoided whenever possible.&lt;/p&gt;
+
+&lt;p&gt;As a footnote, it is worth mentioning that state writing can be implemented in different ways. The most straightforward approach is to dump in-memory state to the persistent store as part of the transaction commit process. This does not work well for large states (sliding windows an so on). An alternative is to write a kind of transaction log i.e. a sequence of operations that transform the old state into the new one (for a sliding window it can be a set of added and evicted events). This approach complicates crash recovery because the state has to be reconstructed from the log, but can provide performance benefits in a variety of cases.&lt;/p&gt;
+
+&lt;h3 id=&quot;additive-state-and-sketches&quot;&gt;Additive State and Sketches&lt;/h3&gt;
+
+&lt;p&gt;Additivity of intermediate and final computational results is an important property that drastically simplifies design, implementation, maintenance, and recovery of in-stream data processing systems. Additivity means that the computational result for a larger time range or a larger data partition can be calculated as a combination of results for smaller time ranges or smaller partitions. For example, a daily number of page views can be calculated as a sum of hourly numbers of page views. Additive state allows one to split processing of a stream into processing of batches that can be computed and re-computed independently and, as we discussed in the previous sections, this helps to simplify lineage tracking and reduce complexity of state maintenance.&lt;/p&gt;
+
+&lt;p&gt;It is not always trivial to achieve additivity:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;In many cases, additivity is indeed trivial. For example, simple counters are additive.&lt;/li&gt;
+  &lt;li&gt;In some cases, it is possible to achieve additivity by storing a small amount of additional information. For example, consider a system that calculates average purchase value in the internet shop for each hour. Daily average cannot be obtained from 24 hourly average values. However, the system can easily store a number of transactions along with each hourly average and it is enough to calculate the daily average value.&lt;/li&gt;
+  &lt;li&gt;In many cases, it is very difficult or impossible to achieve additivity. For example, consider a system that counts unique visitors on some internet site. If 100 unique users visited the site yesterday and 100 unique user visited the site today, the total number of unique user for two days can be from 100 to 200 depends on how many users visited the site both yesterday and today. One have to maintain lists of user IDs to achieve additivity through intersection/union of the ID lists. Size and processing complexity for these lists can be comparable to the size and processing complexity of the raw data.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Sketches is a very efficient way to transform non-additive values into additive. In the previous example, lists of ID can be replaced by compact additive statistical counters. These counters provide approximations instead of precise result, but it is acceptable for many practical applications. Sketches are very popular in certain areas like internet advertising and can be considered as an independent pattern of in-stream processing. A thorough overview of the sketching techniques can be found in [5].&lt;/p&gt;
+
+&lt;h3 id=&quot;logical-time-tracking&quot;&gt;Logical Time Tracking&lt;/h3&gt;
+
+&lt;p&gt;It is very common for in-stream computations to depend on time: aggregations and joins are often performed on sliding time windows; processing logic often depends on a time interval between events and so on. Obviously, the in-stream processing system should have a notion of application’s view of time, instead of CPU wall-clock. However, proper time tracking is not trivial because data streams and particular events can be replayed in case of failures. It is often a good idea to have a notion of global logical time that can be implemented as follows:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;All events should be marked with a timestamp generated by the original application.&lt;/li&gt;
+  &lt;li&gt;Each processor in a pipeline tracks the maximal timestamp it has seen in a stream and updates a global persistent clock by this timestamp if the global clock is behind. All other processors synchronize their time with the global clock.&lt;/li&gt;
+  &lt;li&gt;Global clock can be reset in case of data replay.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;aggregation-in-a-persistent-store&quot;&gt;Aggregation in a Persistent Store&lt;/h3&gt;
+
+&lt;p&gt;We already have discussed that persistent store can be used for state checkpointing. However, it not the only way to employ an external store for in-stream processing. Let us consider an example that employs Cassandra to join multiple data streams over a time window. Instead of maintaining in-memory event buffers, one can simply save all incoming events from all data streams to Casandra using a join key as row key, as it shown in the figure below:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/in-stream-big-data-processing/cassandra-join.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;On the other side, the second process traverses the records periodically, assembles and emits joined events, and evicts the events that fell out of the time window. Cassandra even can facilitate this activity by sorting events according to their timestamps.
+It is important to understand that such techniques can defeat the whole purpose of in-stream data processing if implemented incorrectly – writing individual events to the data store can introduce a serious performance bottleneck even for fast stores like Cassandra or Redis. On the other hand, this approach provides perfect persistence of the computational state and different performance optimizations – say, batch writes – can help to achieve acceptable performance in many use cases.&lt;/p&gt;
+
+&lt;h3 id=&quot;aggregation-on-a-sliding-window&quot;&gt;Aggregation on a Sliding Window&lt;/h3&gt;
+
+&lt;p&gt;In-stream data processing frequently deals with queries like “What is the sum of the values in the stream over last 10 minutes?” i.e. with continuous queries on a sliding time window. A straightforward approach to processing of such queries is to compute the aggregation function like sum for each instance of the time window independently. It is clear that this approach is not optimal because of the high similarity between two sequential instances of the time window. If the window at the time T contains samples {s(0), s(1), s(2), …, s(T-1), s(T)}, then the window at the time T+1 contains samples {s(1), s(2), s(3), …, s(T), s(T+1)}. This observation suggests that incremental processing might be used.&lt;/p&gt;
+
+&lt;p&gt;Incremental computations over sliding windows is a group of techniques that are widely used in digital signal processing, in both software and hardware. A typical example is a computation of the sum function. If the sum over the current time window is known, then the sum over the next time window can be computed by adding a new sample and subtracting the eldest sample in the window:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/in-stream-big-data-processing/inremental-aggregation.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Similar techniques exist not only for simple aggregations like sums or products, but also for more complex transformations. For example, the SDFT (Sliding Discreet Fourier Transform) algorithm [4] is a computationally efficient alternative to per-window calculation of the FFT (Fast Fourier Transform) algorithm.&lt;/p&gt;
+
+&lt;h2 id=&quot;query-processing-pipeline-storm-cassandra-kafka&quot;&gt;Query Processing Pipeline: Storm, Cassandra, Kafka&lt;/h2&gt;
+
+&lt;p&gt;Now let us return to the practical problem that was stated in the beginning of this article. We have designed and implemented our in-stream data processing system on top of Storm, Kafka, and Cassandra adopting the techniques described earlier in this article. Here we provide just a very brief overview of the solution – a detailed description of all implementation pitfalls and tricks is too large and probably requires a separate article.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/in-stream-big-data-processing/storm-kafka-cassandra-system.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The system naturally uses Kafka 0.8 as a partitioned fault-tolerant event buffer to enable stream replay and improve system extensibility by easy addition of new event producers and consumers. Kafka’s ability to rewind read pointers also enables random access to the incoming batches and, consequently, Spark-style lineage tracking. It is also possible to point the system input to HDFS to process the historical data.&lt;/p&gt;
+
+&lt;p&gt;Cassandra is employed for state checkpointing and in-store aggregation, as described earlier. In many use cases, it also stores the final results.&lt;/p&gt;
+
+&lt;p&gt;Twitter’s Storm is a backbone of the system. All active query processing is performed in Storm’s topologies that interact with Kafka and Cassandra. Some data flows are simple and straightforward: the data arrives to Kafka; Storm reads and processes it and persist the results to Cassandra or other destination. Other flows are more sophisticated: one Storm topology can pass the data to another topology via Kafka or Cassandra. Two examples of such flows are shown in the figure above (red and blue curved arrows).&lt;/p&gt;
+
+&lt;h2 id=&quot;towards-unified-big-data-processing&quot;&gt;Towards Unified Big Data Processing&lt;/h2&gt;
+
+&lt;p&gt;It is great that the existing technologies like Hive, Storm, and Impala enable us to crunch Big Data using both batch processing for complex analytics and machine learning, and real-time query processing for online analytics, and in-stream processing for continuous querying. Moreover, techniques like Lambda Architecture [6, 7] were developed and adopted to combine these solutions efficiently. This brings us to the question of how all these technologies and approaches could converge to a solid solution in the future.  In this section, we discuss the striking similarity between distributed relational query processing, batch processing, and in-stream query processing to figure out the technologies that could cover all these use cases and, consequently, have the highest potential in this area.&lt;/p&gt;
+
+&lt;p&gt;The key observation is that relational query processing, MapReduce, and in-stream processing could be implemented using exactly the same concepts and techniques like shuffling and pipelining. At the same time:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;In-stream processing could require strict data delivery guarantees and persistence of the intermediate state. These properties are not crucial for batch processing where computations can be easily restarted.&lt;/li&gt;
+  &lt;li&gt;In-stream processing is inseparable from pipelining. For batch processing, pipelining is not so crucial and even inapplicable in certain cases. Systems like Apache &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Hive are based on staged MapReduce with materialization of the intermediate state and do not take full advantage of pipelining.
+The two statement above imply that tunable persistence (in-memory message passing versus on-disk materialization) and reliability are the distinctive features of the imaginary query engine that provides a set of processing primitives and interfaces to the high-level frameworks:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/in-stream-big-data-processing/unified-engine.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Among the emerging technologies, the following two are especially notable in the context of this discussion:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Apache Tez [8], a part of the Stinger Initiative [9]. Apache Tez is designed to succeed the MapReduce framework introducing a set of fine-grained query processing primitives. The goal is to enable frameworks like Apache Pig and Apache Hive to decompose their queries and scripts into efficient query processing pipelines instead of sequences of MapReduce jobs that are generally slow due to materialization of intermediate results.&lt;/li&gt;
+  &lt;li&gt;Apache Spark [10]. This project is probably the most advanced and promising technology for unified Big Data processing that already includes a batch processing framework, SQL query engine, and a stream processing framework.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;A. Wilschut and P. Apers, “Dataflow Query Execution in a Parallel Main-Memory Environment “&lt;/li&gt;
+  &lt;li&gt;T. Urhan and M. Franklin, “XJoin: A Reactively-Scheduled Pipelined Join Operator“&lt;/li&gt;
+  &lt;li&gt;M. Zaharia, T. Das, H. Li, S. Shenker, and I. Stoica, “Discretized Streams: An Efﬁcient and Fault-Tolerant Model for Stream Processing on Large Clusters”&lt;/li&gt;
+  &lt;li&gt;E. Jacobsen and R. Lyons, “The Sliding DFT“&lt;/li&gt;
+  &lt;li&gt;A. Elmagarmid, Data Streams Models and Algorithms&lt;/li&gt;
+  &lt;li&gt;N. Marz, “Big Data Lambda Architecture”&lt;/li&gt;
+  &lt;li&gt;J. Kinley, “The Lambda architecture: principles for architecting realtime Big Data systems”&lt;/li&gt;
+  &lt;li&gt;http://hortonworks.com/hadoop/tez/&lt;/li&gt;
+  &lt;li&gt;http://hortonworks.com/stinger/&lt;/li&gt;
+  &lt;li&gt;http://spark-project.org/&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;杂谈&lt;/h2&gt;
+
+&lt;p&gt;这次看到dirtysalt的文章：&lt;a href=&quot;http://dirlt.com/in-stream-big-data-processing.html&quot;&gt;In-stream-big-data-processing（英文注释中文版）&lt;/a&gt;，顿时解决了困扰自己的一个问题，英文的好文章，如何做记录？直接翻译中文？直接转载中文？NO，最佳方式当然是在原文基础上，添加自己的注释，OK，作者dirtysalt已经在做了，今后我也这么办。&lt;/p&gt;
+
+</content>
+   </entry>
+   
+   <entry>
+     <title>MySQL安装</title>
+     <link href="http://ningg.github.com/install-mysql"/>
+     <updated>2014-10-13T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/install-mysql</id>
+     <content type="html">&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
+
+&lt;p&gt;“在服务器上装个MySQL，我要用。”“OK，稍等。”这么一稍等，就等了40mins，而且，自己之前整理的MySQL安装步骤，并不完整，借这次安装的机会，整理一下吧。&lt;/p&gt;
+
+&lt;h2 id=&quot;mysql&quot;&gt;安装MySQL&lt;/h2&gt;
+
+&lt;p&gt;通常安装MySQL分为几个基本步骤：本地安装MySQL、设置MySQL的root密码、开启MySQL允许远程访问。&lt;/p&gt;
+
+&lt;h3 id=&quot;mysql-1&quot;&gt;本地安装MySQL&lt;/h3&gt;
+
+&lt;p&gt;Linux环境下安装MySQL，有两种方式：rpm包方式、yum源方式（暂不考虑编译源代码方式）。&lt;/p&gt;
+
+&lt;h4 id=&quot;rpm&quot;&gt;rpm包方式&lt;/h4&gt;
+
+&lt;p&gt;到MySQL官网，下载MySQL社区开源版本，详细版本号为：MySQL-5.6.21-1.linux_glibc2.5.x86_64.rpm-bundle.tar。这是一个集合，包含了如下组件：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;MySQL-server&lt;/li&gt;
+  &lt;li&gt;MySQL-client&lt;/li&gt;
+  &lt;li&gt;MySQL-embedded&lt;/li&gt;
+  &lt;li&gt;MySQL-shared&lt;/li&gt;
+  &lt;li&gt;MySQL-shared-compat&lt;/li&gt;
+  &lt;li&gt;MySQL-test&lt;/li&gt;
+  &lt;li&gt;MySQL-devel&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;mysql-2&quot;&gt;1.解压MySQL安装包&lt;/h5&gt;
+
+&lt;p&gt;执行如下命令：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[root@ningg mysql]#tar -xf MySQL-5.6.21-1.linux_glibc2.5.x86_64.rpm-bundle.tar
+[root@ningg mysql]#ls
+	MySQL-server-5.6.20-1.el6.x86_64.rpm
+	MySQL-client-5.6.20-1.el6.x86_64.rpm      
+	MySQL-shared-5.6.20-1.el6.x86_64.rpm
+	MySQL-devel-5.6.20-1.el6.x86_64.rpm       
+	MySQL-shared-compat-5.6.20-1.el6.x86_64.rpm
+	MySQL-embedded-5.6.20-1.el6.x86_64.rpm    
+	MySQL-test-5.6.20-1.el6.x86_64.rpm
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h5 id=&quot;mysql-3&quot;&gt;2.创建MySQL系统管理员&lt;/h5&gt;
+
+&lt;p&gt;执行如下命令：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[root@ningg mysql]#groupadd mysql
+[root@ningg mysql]#useradd -g mysql mysql
+[root@ningg mysql]#id mysql
+	uid=27(mysql) gid=27(mysql) groups=27(mysql)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h5 id=&quot;mysql-rpm&quot;&gt;3.安装MySQL rpm包&lt;/h5&gt;
+
+&lt;p&gt;执行命令如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[root@ningg mysql]#rpm -ivh &quot;*.rpm&quot;
+Preparing...              ########### [100%]
+   1:MySQL-devel          ########### [ 14%]
+   2:MySQL-client         ########### [ 29%]
+   3:MySQL-test           ########### [ 43%]
+   4:MySQL-embedded       ########### [ 57%]
+   5:MySQL-shared-compat  ########### [ 71%]
+   6:MySQL-shared         ########### [ 86%]
+   7:MySQL-server         ########### [100%]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;补充一下，如果安装出现意外，希望卸载MySQL组件，则，卸载顺序如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[root@ningg ~]# rpm -e MySQL-server-5.5.24-1.rhel5
+[root@ningg ~]# rpm -e MySQL-embedded-5.5.24-1.rhel5
+[root@ningg ~]# rpm -e MySQL-shared-5.5.24-1.rhel5
+[root@ningg ~]# rpm -e MySQL-devel-5.5.24-1.rhel5
+[root@ningg ~]# rpm -e MySQL-test-5.5.24-1.rhel5
+[root@ningg ~]# rpm -e MySQL-client-5.5.24-1.rhel5
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;思考：如何保证是mysql用户启动的MySQL？如果使用root运行MySQL，一旦MySQL进程被Hacker控制，Hacker就拥有了root权限？&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;yum&quot;&gt;yum源方式&lt;/h4&gt;
+
+&lt;p&gt;（doing…）&lt;/p&gt;
+
+&lt;h3 id=&quot;mysqlroot&quot;&gt;设置MySQL的root密码&lt;/h3&gt;
+
+&lt;p&gt;更详细内容参考&lt;a href=&quot;http://dev.mysql.com/doc/mysql-security-excerpt/5.6/en/user-account-management.html&quot;&gt;MySQL 5.6 Manual: User account management&lt;/a&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;mysql-4&quot;&gt;1.修改MySQL启动配置&lt;/h4&gt;
+
+&lt;p&gt;查找&lt;code&gt;my.cnf&lt;/code&gt;文件位置，两个命令：&lt;code&gt;locate &quot;my.cnf&quot;&lt;/code&gt;和&lt;code&gt;find / -name &quot;my.cnf&quot;&lt;/code&gt;（备注：两个命令有差异，具体参考&lt;a href=&quot;http://312788172.iteye.com/blog/730280&quot;&gt;文章&lt;/a&gt;）。
+通常文件位置&lt;code&gt;/etc/my.cnf&lt;/code&gt;或者&lt;code&gt;/usr/my.cnf&lt;/code&gt;，依具体情况行事，在其中设置不启用授权表：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[root@ningg mysql]# vim /usr/my.cnf
+# For advice on how to change settings please see
+# http://dev.mysql.com/doc/refman/5.6/en/server-configuration-defaults.html
+
+[mysqld]
+# 新增加下面一行，含义：设置不启用授权表
+skip-grant-tables
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&quot;root&quot;&gt;2.重置root密码&lt;/h4&gt;
+
+&lt;p&gt;重新启动MySQL：&lt;code&gt;service mysql restart&lt;/code&gt;，然后进行如下操作：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[root@ningg mysql]# mysql
+
+mysql&amp;gt; use mysql
+mysql&amp;gt; update user set Password=PASSWORD(&#39;1234&#39;) where User=&#39;root&#39;;
+mysql&amp;gt; flush privileges;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;之后，修改&lt;code&gt;my.cnf&lt;/code&gt;文件，注释掉&lt;code&gt;skip-grant-tables&lt;/code&gt;；然后，重启MySQL：&lt;code&gt;service mysql restart&lt;/code&gt;。&lt;/p&gt;
+
+&lt;h4 id=&quot;section-1&quot;&gt;3.补充说明&lt;/h4&gt;
+
+&lt;p&gt;针对msyql数据库下的user表，说明几点：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mysql&amp;gt; use mysql
+#使用下面命令查看表格当前记录
+mysql&amp;gt; select * from user \G;
+#查看user表格的字段类型
+mysql&amp;gt; describe user;
+#查看Host\User\Password字段；
+mysql&amp;gt; select host,user,password from user;
++-----------+------+---------------+
+| host      | user | password      |
++-----------+------+---------------+
+| %         | root | *81B936FD50F6 |
+| cib02167  | root | *81B936FD50F6 |
+| 127.0.0.1 | root | *81B936FD50F6 |
+| ::1       | root | *81B936FD50F6 |
++-----------+------+---------------+
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;具体：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;user表：用户信息、用户权限、密码、可以登录访问的远端主机等。&lt;/li&gt;
+  &lt;li&gt;host字段：表示登录MySQL的主机，可以是IP、主机名，如果为&lt;code&gt;%&lt;/code&gt;则表示任何客户端主机都能登录，建议开发时，设置为&lt;code&gt;%&lt;/code&gt;。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;命令SET PASSWORD&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#设置用户在不同主机环境下的登录密码
+SET PASSWORD FOR &#39;root&#39;@&#39;%&#39; = PASSWORD(&#39;newpass&#39;);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;命令UPDATE&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# 可修改user表格内容（MySQL不区分大小写）
+update user set password=password(&#39;new-pw&#39;) where user=&#39;root&#39; and host=&#39;%&#39;;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;更新授权表&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# 修改用户信息等，务必flush
+flush privileges
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;mysql-5&quot;&gt;开启MySQL允许远程访问&lt;/h3&gt;
+
+&lt;p&gt;在user表中，添加一条&lt;code&gt;user=root&lt;/code&gt;且&lt;code&gt;host=%&lt;/code&gt;的记录，并且通过SET PASSWORD命令重置密码即可。host字段取值&lt;code&gt;%&lt;/code&gt;，即表示任何客户端机器，涵盖远程访问的机器。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# 可修改user表格内容（MySQL不区分大小写）
+update user set password=password(&#39;new-pw&#39;) where user=&#39;root&#39; and host=&#39;%&#39;;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;疑问：如果没有&lt;code&gt;user=root&lt;/code&gt;且&lt;code&gt;host=%&lt;/code&gt;的记录怎么办？
+RE：新建一条记录，或者将&lt;code&gt;user=root&lt;/code&gt;的记录，利用update命令修改为&lt;code&gt;host=%&lt;/code&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;常见问题&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;问题1&lt;/strong&gt;：You must SET PASSWORD before executing this statement&lt;/p&gt;
+
+&lt;p&gt;解决办法：根据提示直接使用set password命令重置密码即可，如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mysql&amp;gt; set password=password(&#39;new-pw&#39;);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;问题2&lt;/strong&gt;：这个本质上是不是MySQL的管理问题？有哪些用户，哪些用户可以远程登录？&lt;/p&gt;
+
+&lt;p&gt;回应：是的，你很用心在思考，官方文档有很多细节，很有意思的，可以看一下，具体：&lt;code&gt;MySQL Manual&lt;/code&gt;–&lt;code&gt;Security in MySQL&lt;/code&gt;–&lt;code&gt;User Account Management&lt;/code&gt;，有详尽的说明。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-3&quot;&gt;参考来源&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://dev.mysql.com/doc/mysql-security-excerpt/5.6/en/grant-table-structure.html&quot;&gt;MySQL 5.6 Manual: Privilege system grant tables&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://dev.mysql.com/doc/mysql-security-excerpt/5.6/en/user-account-management.html&quot;&gt;MySQL 5.6 Manual: User account management&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://dev.mysql.com/downloads/mysql/&quot;&gt;MySQL开源社区版本下载地址&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://dev.mysql.com/doc/&quot;&gt;MySQL官方文档下载地址&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://312788172.iteye.com/blog/730280&quot;&gt;linux下which、whereis、locate、find 命令的区别&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section-4&quot;&gt;闲谈&lt;/h2&gt;
+
+&lt;p&gt;这篇文章，写的都是小问题，如果读过MySQL的官方文档，就知道&lt;code&gt;User Account Management&lt;/code&gt;的基本知识了，也不用遇到什么问题就蒙圈了，用一个东西，先浏览学习一下官方文档很必要的，看似浪费时间，其实是捷径。当然，一个个小问题折磨自己，才让我意识到读一遍MySQL官方文档的好处。&lt;/p&gt;
+
+</content>
+   </entry>
+   
+   <entry>
+     <title>消息队列（Message Queue）基本概念</title>
+     <link href="http://ningg.github.com/message-queue-intro"/>
+     <updated>2014-10-08T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/message-queue-intro</id>
+     <content type="html">&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
+
+&lt;p&gt;之前做日志收集模块时，用到flume，另外也有的方案，集成kafaka来提升系统可扩展性，其中涉及到&lt;code&gt;消息队列&lt;/code&gt;，当时自己并不清楚为什么要使用&lt;code&gt;消息队列&lt;/code&gt;，而在我自己提出的原始日志采集方案中不适用&lt;code&gt;消息队列&lt;/code&gt;时，有几个基本问题：1.日志文件上传过程，有个基本的&lt;code&gt;生产者-消费者&lt;/code&gt;问题；2.另外系统崩溃时，数据丢失的处理问题。&lt;/p&gt;
+
+&lt;p&gt;今天，几位同事再次谈到&lt;code&gt;消息队列&lt;/code&gt;这么个东西，很NB的样子，我也想弄清楚，OK，搞起。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;什么是消息队列&lt;/h2&gt;
+
+&lt;p&gt;消息队列（Message Queue，简称MQ），从字面意思上看，本质是个队列，FIFO先入先出，只不过队列中存放的内容是&lt;code&gt;message&lt;/code&gt;而已。其主要用途：不同进程Process/线程Thread之间通信。为什么会产生&lt;code&gt;消息队列&lt;/code&gt;？这个问题问的好，我大概查了一下，没有查到最初产生消息队列的背景，但我猜测可能几个原因：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;不同进程（process）之间传递消息时，两个进程之间耦合程度过高，改动一个进程，引发必须修改另一个进程，为了隔离这两个进程，在两进程间抽离出一层（一个模块），所有两进程之间传递的消息，都必须通过&lt;code&gt;消息队列&lt;/code&gt;来传递，单独修改某一个进程，不会影响另一个；&lt;/li&gt;
+  &lt;li&gt;不同进程（process）之间传递消息时，为了实现标准化，将消息的格式规范化了，并且，某一个进程接受的消息太多，一下子无法处理完，并且也有先后顺序，必须对收到的消息进行排队，因此诞生了事实上的&lt;code&gt;消息队列&lt;/code&gt;；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;不管到底是什么原因催生了&lt;code&gt;消息队列&lt;/code&gt;，总之，上面两个猜测是其实际应用的典型场景。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;为什么要用&lt;/h2&gt;
+
+&lt;p&gt;切合前一部分猜测的&lt;code&gt;消息队列&lt;/code&gt;产生背景，其主要解决两个问题：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;系统解耦：项目开始时，无法确定最终需求，不同进程间，添加一层，实现解耦，方便今后的扩展。&lt;/li&gt;
+  &lt;li&gt;消息缓存：系统中，不同进程处理消息速度不同，MQ，可以实现不同Process之间的缓冲，即，写入MQ的速度可以尽可能地快，而处理消息的速度可以适当调整（或快、或慢）。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;下面针对&lt;strong&gt;系统解耦&lt;/strong&gt;、&lt;strong&gt;消息缓存&lt;/strong&gt;两点，来分析实际应用&lt;code&gt;消息队列&lt;/code&gt;过程中，可能遇到的问题。虚拟场景：Process_A通过消息队列MQ_1向Process_B传递消息，几个问题：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;针对MQ_1中一条消息message_1，如何确保Process_B从MQ_1中只取一次message_1，不会重复多次取出message_1？&lt;/li&gt;
+  &lt;li&gt;如果MQ_1中message_1已经被Process_B取出，正在处理的关键时刻，Process_B崩溃了，哭啊，我的问题是，如果重启Process_B，是否会丢失message_1？&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;不要着急，阅读了下面的简要介绍后，水到渠成，上面几个问题就可以解决了。
+消息队列有如下几个好处，这大都是由其&lt;strong&gt;系统解耦&lt;/strong&gt;和&lt;strong&gt;消息缓存&lt;/strong&gt;两点扩展而来的：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;提升系统可靠性：
+    &lt;ul&gt;
+      &lt;li&gt;冗余：Process_B崩溃之后，数据并不会丢失，因为MQ多采用&lt;code&gt;put-get-delete&lt;/code&gt;模式，即，仅当确认message被完成处理之后，才从MQ中移除message；&lt;/li&gt;
+      &lt;li&gt;可恢复：MQ实现解耦，部分进程崩溃，不会拖累整个系统瘫痪，例，Process_B崩溃之后，Process_A仍可向MQ中添加message，并等待Process_B恢复；&lt;/li&gt;
+      &lt;li&gt;可伸缩：有较强的峰值处理能力，通常应用会有突发的访问流量上升情况，使用足够的硬件资源时刻待命，空闲时刻较长，资源浪费，而&lt;code&gt;消息队列&lt;/code&gt;却能够平滑峰值流量，缓解系统组件的峰值压力；&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;提升系统可扩展性：
+    &lt;ul&gt;
+      &lt;li&gt;调整模块：由于实现解耦，可以很容易调整，消息入队速率、消息处理速率、增加新的Process；&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;其他：
+    &lt;ul&gt;
+      &lt;li&gt;单次送达：保证MQ中一个message被处理一次，并且只被处理一次，本质：get获取一个message后，这一message即被预定，同一进程不会再次获取这一message，当且仅当进程处理完这一message后，MQ中会delete这个message，否则，过一段时间后，这一message自动解除被预订状态，进程能够重新预定这个message；&lt;/li&gt;
+      &lt;li&gt;排序保证：即，满足队列的FIFO，先入先出策略；&lt;/li&gt;
+      &lt;li&gt;异步通信：很多场景下，不会立即处理消息，这是，可以在MQ中存储message，并在某一时刻再进行处理；&lt;/li&gt;
+      &lt;li&gt;数据流的阶段性能定位：获取用户某一操作的各个阶段（通过message来标识），捕获不同阶段的耗时，可用于定位系统瓶颈。&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section-3&quot;&gt;常用的消息队列&lt;/h2&gt;
+
+&lt;p&gt;（doing…）&lt;/p&gt;
+
+&lt;h2 id=&quot;section-4&quot;&gt;小结&lt;/h2&gt;
+
+&lt;p&gt;&lt;code&gt;消息队列&lt;/code&gt;实现了进程间通信的升级，如下图所示：&lt;/p&gt;
+
+&lt;h2 id=&quot;section-5&quot;&gt;参考来源&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;top 10 uses for message queue：&lt;a href=&quot;http://blog.iron.io/2012/12/top-10-uses-for-message-queue.html&quot;&gt;英文原文&lt;/a&gt;、&lt;a href=&quot;/download/message-queue-intro/top-10-mq.pdf&quot;&gt;pdf版本&lt;/a&gt;、&lt;a href=&quot;http://www.oschina.net/translate/top-10-uses-for-message-queue&quot;&gt;中文译文&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://en.wikipedia.org/wiki/Message_queue&quot;&gt;Message Queue wiki&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://bbs.csdn.net/topics/110160741&quot;&gt;http://bbs.csdn.net/topics/110160741&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.cnblogs.com/yuanyi_wang/archive/2009/12/30/1636178.html&quot;&gt;http://www.cnblogs.com/yuanyi_wang/archive/2009/12/30/1636178.html&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.php1.cn/article/9865.html&quot;&gt;http://www.php1.cn/article/9865.html&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+   </entry>
    
    <entry>
      <title>想和自己谈一谈</title>
@@ -48,8 +621,6 @@
 
 &lt;p&gt;要将视野放开，保持与时代相接触，对于自己所处行业，需要有自己的认识，这个认识可以是错误的，分享出去，自然会有人忍不住来指正，关注国内和国外最新的科技动态，包括产品、生活、行业；主要途径：业内顶尖人才、顶尖公司动向，领域内主流媒体的动向。&lt;/p&gt;
 
-&lt;hr /&gt;
-
 &lt;p&gt;前沿媒体：&lt;/p&gt;
 
 &lt;ul&gt;
@@ -57,8 +628,6 @@
   &lt;li&gt;&lt;a href=&quot;www.infoq.com&quot;&gt;InfoQ&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;www.valleytalk.org&quot;&gt;弯曲评论&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;hr /&gt;
 
 &lt;p&gt;个人博客、微信：&lt;/p&gt;
 
@@ -69,8 +638,6 @@
   &lt;li&gt;梁斌：&lt;a href=&quot;http://weibo.com/pennyliang&quot;&gt;微博&lt;/a&gt;、&lt;code&gt;微信号：pennyjob&lt;/code&gt;&lt;/li&gt;
   &lt;li&gt;Fenng：&lt;a href=&quot;http://hutu.me/&quot;&gt;小道消息&lt;/a&gt;、&lt;a href=&quot;http://news.dbanotes.net/&quot;&gt;Startup News&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;hr /&gt;
 
 &lt;p&gt;新兴的潮流网站：对一些如同爆炸性出现的新技术、网站、观点，保持敏感度，进行简要学习其基本规律，了解轮廓。&lt;/p&gt;
 
@@ -816,349 +1383,6 @@
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;http://developer.android.com/index.html&quot;&gt;Android官方开发者网站&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://developer.android.com/develop/index.html&quot;&gt;Android官方文档&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>搭建Android开发环境</title>
-     <link href="http://ningg.github.com/install-android-dev-env"/>
-     <updated>2014-09-22T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/install-android-dev-env</id>
-     <content type="html">&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
-
-&lt;p&gt;哈哈，这个背景说不说呢？说，坦坦荡荡的：想做一个对Android手机的截屏图片，直接打马赛克的小APP，当前满足这一需求的APP有不少，例如：美图秀秀等，但是不好意思，我想要一个轻量级的，而且最简单的打码操作。&lt;/p&gt;
-
-&lt;h2 id=&quot;section-1&quot;&gt;搭建开发环境&lt;/h2&gt;
-
-&lt;p&gt;打码APP，目标确定了，就开发搞起。&lt;em&gt;（具体功能是什么？技术方案定了吗？别急，这些我现在都不会、都不确定，个人估计折腾折腾就清晰的，我对这个还是有信心的）&lt;/em&gt;&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;特别提醒&lt;/strong&gt;：下面是我看官网的操作记录，请那些还有丁点技术追求的coder，也去看官网，我写blog不是为了布道，而且blog的精准、严谨程度，与官网差得太远。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&quot;section-2&quot;&gt;下载软件&lt;/h3&gt;
-
-&lt;p&gt;图省事，我从官网直接下载了”Eclipse ADT bundle”，详细版本信息：”adt-bundle-windows-x86_64-20140702.zip”，其下载地址如下：&lt;a href=&quot;https://dl.google.com/android/adt/adt-bundle-windows-x86_64-20140702.zip&quot;&gt;https://dl.google.com/android/adt/adt-bundle-windows-x86_64-20140702.zip&lt;/a&gt; 。由于GFW的存在，很多地方无法直接下载上面链接文件，怎么办？用迅雷，复制上面的链接，新建一个迅雷下载任务，妥了，下载完毕。&lt;/p&gt;
-
-&lt;p&gt;Eclipse ADT Bundle包含3个部分：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Android SDK&lt;/li&gt;
-  &lt;li&gt;Eclipse IDE&lt;/li&gt;
-  &lt;li&gt;ADT(Android Developer Tools)：Eclipse下进行Android开发的插件；&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;客官，留意一下：上面Eclipse ADT Bundle对应的解压包中，自带了Android开发的文档，具体路径：&lt;code&gt;%ECLIPSE_ADT_BUNDLE%/sdk/docs/&lt;/code&gt;，这个极其有用，我有问题，都会偷偷看这个。&lt;/p&gt;
-
-&lt;h3 id=&quot;package&quot;&gt;安装package&lt;/h3&gt;
-
-&lt;p&gt;上面Eclipse ADT Bundle对应的解压包中eclipse直接可以使用了，不过很多时候，需要安装写package，来支持Android的开发。通常，通过Android SDK Manager来安装package，截个图如下：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/install-android-dev-env/sdk-manager.jpg&quot; alt=&quot;Android SDK Manager&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;安装package，本来挺简单个事，由于GFW的存在，唉，上面的package基本无法下载，或者极其慢，解决办法：修改hosts文件，在其中添加片段：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;#Google主页
-203.208.46.146 www.google.com
-#这行是为了方便打开Android开发官网 现在好像不VPN也可以打开
-#74.125.113.121 developer.android.com
-#更新的内容从以下地址下载
-203.208.46.146 dl.google.com
-203.208.46.146 dl-ssl.google.com
-****************************************
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;参考来源：&lt;a href=&quot;http://www.cnblogs.com/tc310/archive/2012/12/21/2828450.html&quot;&gt;http://www.cnblogs.com/tc310/archive/2012/12/21/2828450.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;section-3&quot;&gt;推荐书籍&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://book.douban.com/subject/25942191/&quot;&gt;第一行代码——Android&lt;/a&gt;
-    &lt;ul&gt;
-      &lt;li&gt;这个入门不错，对于有开发经验的人员也可以借鉴一下&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>编译flume：使用eclipse查看flume源码</title>
-     <link href="http://ningg.github.com/build-flume"/>
-     <updated>2014-09-19T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/build-flume</id>
-     <content type="html">&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
-
-&lt;p&gt;最近要弄日志收集系统，初始方案是将日志压缩之后，通过类似FTP方式上传，其中有一个问题：日志不能实时收集，因此，无法实时监控系统状态。Flume支持实时的日志采集，妥了，尝试用一下。&lt;/p&gt;
-
-&lt;p&gt;说点题外话，通过类似FTP方式上传文件时，还有几个问题，自己仍在思考：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;日志上传时，如何确定日志上传完成？&lt;/li&gt;
-  &lt;li&gt;如果上传过程中出现意外，接收端是否会丢弃已经接收到的文件片段？&lt;/li&gt;
-  &lt;li&gt;传输的文件是否压缩？&lt;/li&gt;
-  &lt;li&gt;传输文件直接上传到HDFS上，还是先上传到local FS上？&lt;/li&gt;
-  &lt;li&gt;日志传输到服务器上之后，如何才能立即就进行分析？&lt;/li&gt;
-  &lt;li&gt;分析日志之前，怎么判断日志是否满足规范？（命名、编码等）&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section-1&quot;&gt;编译环境&lt;/h2&gt;
-
-&lt;p&gt;查看自己机器的环境：我用笔记本来编译的，是win 7（x64）操作系统；更详细的编译环境信息通过如下方式查看：&lt;code&gt;CMD&lt;/code&gt;–&amp;gt;&lt;code&gt;systeminfo&lt;/code&gt;，这个命令收集系统信息，需要花费40s，稍等一会儿，得到如下信息：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;C:\Users\Administrator&amp;gt;systeminfo
-
-OS 名称:          Microsoft Windows 7 旗舰版
-OS 版本:          6.1.7601 Service Pack 1 Build 7601
-
-系统类型:         x64-based PC
-处理器:           安装了 1 个处理器。
-	 [01]: Intel64 Family 6 Model 23 Stepping 6 GenuineIntel ~785 Mhz
-
-物理内存总量:     2,968 MB
-可用的物理内存:   819 MB
-虚拟内存: 最大值: 5,934 MB
-虚拟内存: 可用:   2,196 MB
-虚拟内存: 使用中: 3,738 MB
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&quot;section-2&quot;&gt;开始编译&lt;/h2&gt;
-
-&lt;p&gt;OK，在这台Win7上，编译flume源码，走起。&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;特别说明：这些内容，都是我从官网看来的，建议有点追求的coder，多看看&lt;a href=&quot;http://flume.apache.org/&quot;&gt;flume官网&lt;/a&gt;，这样才能有提高，我的博客仅仅是自己留作备份看的。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&quot;section-3&quot;&gt;下载源码&lt;/h3&gt;
-
-&lt;p&gt;Apache flume的下载页面：&lt;a href=&quot;http://flume.apache.org/download.html&quot;&gt;Apache Flume Download&lt;/a&gt;。&lt;/p&gt;
-
-&lt;p&gt;我下载的是当前稳定版本flume对应的源码：&lt;a href=&quot;http://www.apache.org/dyn/closer.cgi/flume/1.5.0.1/apache-flume-1.5.0.1-src.tar.gz&quot;&gt;apache-flume-1.5.0.1-src&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;section-4&quot;&gt;开始编译&lt;/h3&gt;
-
-&lt;p&gt;根据官方资料：&lt;a href=&quot;https://cwiki.apache.org/confluence/display/FLUME/Development+Environment&quot;&gt;flume开发&amp;amp;调试环境&lt;/a&gt;，开始编译。此次编译，我的目标很简单：在eclipse下查看flume的源代码。具体编译时，使用的命令：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;mvn install -DskipTests
-mvn eclipse:eclipse -DdownloadSources
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;section-5&quot;&gt;出现的问题&lt;/h3&gt;
-
-&lt;p&gt;执行命令&lt;code&gt;mvn install -DskipTests&lt;/code&gt;后，程序有一段时间静止在编译flume ng core的模块上，强行终止（操作：&lt;code&gt;ctrl + c&lt;/code&gt;）后，使用  “mvn install -rf :flume-ng-core -X “ 启动debug进行问题定位找到线索:&lt;/p&gt;
-
-&lt;p&gt;分析之后，修改flume-ng-core\scripts\目录下&lt;code&gt;saveVersion.ps1&lt;/code&gt;，将其中powershell的两个参数&lt;code&gt;args[0]&lt;/code&gt;和&lt;code&gt;args[1]&lt;/code&gt;替换为实际值即可。在此之前，需要确认windows系统已经安装了powershell，验证是否安装powershell的方法：&lt;code&gt;运行&lt;/code&gt;–&amp;gt;&lt;code&gt;powershell&lt;/code&gt;，看看是否能够进入与&lt;code&gt;cmd&lt;/code&gt;类似的命令页面（我的win7系统默认带了powershell）。
-如果没有安装powershell，请参考：&lt;a href=&quot;http://support.microsoft.com/kb/968929&quot;&gt;windows管理框架&lt;/a&gt;。&lt;/p&gt;
-
-&lt;p&gt;在编译&lt;code&gt;flume-ng-morphline-solr-sink&lt;/code&gt;过程中，由于GFW等等原因，可能无法访问&lt;code&gt; repository.cloudera.com&lt;/code&gt;，导致编译失败，失败信息详情如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;[ERROR] Failed to execute goal on project flume-ng-morphline-solr
--sink: Could not resolve dependencies for project org.apache.flum
-e.flume-ng-sinks:flume-ng-morphline-solr-sink:jar:1.5.0.1: Failed
- to collect dependencies at org.kitesdk:kite-morphlines-all:pom:0
-.12.0: Failed to read artifact descriptor for org.kitesdk:kite-mo
-rphlines-all:pom:0.12.0: Could not transfer artifact org.kitesdk:
-kite-morphlines-all:pom:0.12.0 from/to cdh.repo (https://reposito
-ry.cloudera.com/artifactory/cloudera-repos): repository.cloudera.
-com: Unknown host repository.cloudera.com -&amp;gt; [Help 1]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;浏览一下，失败信息的大意是：编译&lt;code&gt;flume-ng-morphline-solr-sink&lt;/code&gt;过程中，寻找依赖(dependency)失败，这是由于远端cloudera仓库对应的域名&lt;code&gt;repository.cloudera.com&lt;/code&gt;无法解析引发的。OK，既然找不到这个cloudera仓库，那直接取消对这一仓库的引用好了，具体：修改flume-ng-sinks\flume-ng-morphline-solr-sink\目录下&lt;code&gt;pom.xml&lt;/code&gt;文件，将&lt;code&gt;&amp;lt;repository&amp;gt;&lt;/code&gt;元素注释掉，最终效果如表：&lt;/p&gt;
-
-&lt;repositories&gt;
-
-	&lt;!--
-	&lt;repository&gt;
-	  &lt;id&gt;cdh.repo&lt;/id&gt;
-	  &lt;url&gt;https://repository.cloudera.com/artifactory/cloudera-repos&lt;/url&gt;
-	  &lt;name&gt;Cloudera Repositories&lt;/name&gt;
-	  &lt;snapshots&gt;
-		&lt;enabled&gt;false&lt;/enabled&gt;
-	  &lt;/snapshots&gt;
-	&lt;/repository&gt;
-
-	&lt;repository&gt;
-	  &lt;id&gt;cdh.snapshots.repo&lt;/id&gt;
-	  &lt;url&gt;https://repository.cloudera.com/artifactory/libs-snapshot-local&lt;/url&gt;
-	  &lt;name&gt;Cloudera Snapshots Repository&lt;/name&gt;
-	  &lt;snapshots&gt;
-		&lt;enabled&gt;true&lt;/enabled&gt;
-	  &lt;/snapshots&gt;
-	  &lt;releases&gt;
-		&lt;enabled&gt;false&lt;/enabled&gt;
-	  &lt;/releases&gt;
-	&lt;/repository&gt;
-	--&gt;
-
-  &lt;/repositories&gt;
-
-&lt;p&gt;ok，重新执行命令&lt;code&gt;mvn install -DskipTests&lt;/code&gt;，欧NO，又出错了，得到如下信息：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;[ERROR] Failed to execute goal on project flume-ng-morphline-solr
--sink: Could not resolve dependencies for project org.apache.flum
-e.flume-ng-sinks:flume-ng-morphline-solr-sink:jar:1.5.0.1: The fo
--llowing artifacts could not be resolved: org.kitesdk:kite-morphli
-nes-all:pom:0.12.0, org.kitesdk:kite-morphlines-solr-core:jar:tes
--ts:0.12.0: Failure to find org.kitesdk:kite-morphlines-all:pom:0.
-12.0 in http://repo1.maven.org/maven2 was cached in the local repo
--sitory, resolution will not be reattempted until the update inte
-rval of repo1.maven.org has elapsed or updates are forced -&amp;gt; [Help 1]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;平复一下心情，看看上面的提示，大意是说找不到&lt;code&gt;kite-morphlines-all&lt;/code&gt;，看来之前粗鲁的将&lt;code&gt;&amp;lt;repository&amp;gt;&lt;/code&gt;元素注释掉，并不能解决问题，OK，再找两个替代的repository就好了，具体再次修改flume-ng-sinks\flume-ng-morphline-solr-sink\目录下&lt;code&gt;pom.xml&lt;/code&gt;文件如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;  &amp;lt;repositories&amp;gt;
-	&amp;lt;repository&amp;gt;
-		&amp;lt;id&amp;gt;maven-restlet&amp;lt;/id&amp;gt;
-		&amp;lt;name&amp;gt;Public online Restlet repository&amp;lt;/name&amp;gt;
-		&amp;lt;url&amp;gt;http://maven.restlet.org&amp;lt;/url&amp;gt;
-	&amp;lt;/repository&amp;gt;
-  &amp;lt;/repositories&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;并且修改flume源代码根目录下的&lt;code&gt;pom.xml&lt;/code&gt;文件，将其中&lt;code&gt;&amp;lt;kite.version&amp;gt;0.12.0&amp;lt;/kite.version&amp;gt;&lt;/code&gt;，修改为&lt;code&gt;&amp;lt;kite.version&amp;gt;0.15.0&amp;lt;/kite.version&amp;gt;&lt;/code&gt;。&lt;/p&gt;
-
-&lt;p&gt;又有依赖(dependency)找不到了：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;[ERROR] Failed to execute goal on project flume-ng-morphline-solr
--sink: Could not resolve dependencies for project org.apache.flum
-e.flume-ng-sinks:flume-ng-morphline-solr-sink:jar:1.5.0.1: Failed
- to collect dependencies at org.kitesdk:kite-morphlines-all:pom:0
-.12.0 -&amp;gt; org.kitesdk:kite-morphlines-useragent:jar:0.12.0 -&amp;gt; ua_p
-arser:ua-parser:jar:1.3.0: Failed to read artifact descriptor for
- ua_parser:ua-parser:jar:1.3.0: Could not transfer artifact ua_pa
-rser:ua-parser:pom:1.3.0 from/to maven-twttr (http://maven.twttr.
-com): Connection to http://maven.twttr.com refused: Connection ti
-med out: connect -&amp;gt; [Help 1]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;再次修改flume-ng-sinks\flume-ng-morphline-solr-sink\目录下&lt;code&gt;pom.xml&lt;/code&gt;文件，在&lt;code&gt;&amp;lt;repositories&amp;gt;&lt;/code&gt;下添加一个元素：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;lt;repositories&amp;gt;
-	
-	... 
-	
-	&amp;lt;repository&amp;gt;
-	  &amp;lt;id&amp;gt;p2.jfrog.org&amp;lt;/id&amp;gt;
-	  &amp;lt;url&amp;gt;http://p2.jfrog.org/libs-releases&amp;lt;/url&amp;gt;
-	&amp;lt;/repository&amp;gt;
-&amp;lt;/repositories&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;重新编译，还不行，说是找不到&lt;code&gt;p2.jfrog.org&lt;/code&gt;，怒了，翻墙，再编译，搞定。（有的网络环境，不需要翻墙，也能编译通过）&lt;/p&gt;
-
-&lt;h3 id=&quot;eclipse&quot;&gt;eclipse下查看源码&lt;/h3&gt;
-
-&lt;p&gt;上面编译之后，在eclipse下，&lt;code&gt;Import&lt;/code&gt;–&amp;gt;&lt;code&gt;Existing Projects into Workspace&lt;/code&gt;，然后选择flume编译源码的路径即可，结果如下图所示：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/build-flume/eclipse-flume-src.jpg&quot; alt=&quot;eclipse-src&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;疑问&lt;/strong&gt;：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;使用maven管理的代码，为什么不作为maven项目Import到eclipse下？而是先运行命令&lt;code&gt;mvn eclipse:eclipse&lt;/code&gt;，然后将项目作为普通的java project导入到eclipse？&lt;/li&gt;
-  &lt;li&gt;使用eclipse来查看、调试flume源码，那如何对外发布源码？&lt;/li&gt;
-  &lt;li&gt;总结一下，就是一个问题&lt;code&gt;mvn eclipse:eclipse&lt;/code&gt;过程中到底执行了什么？为什么要这么做？&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;后记&lt;/strong&gt;：每次编译代码，网络都让人蛋疼，GFW让人蛋疼，有一个VPN太重要了。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;section-6&quot;&gt;参考来源&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://flume.apache.org/&quot;&gt;flume官网&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://cwiki.apache.org/confluence/display/FLUME/Development+Environment&quot;&gt;flume开发&amp;amp;调试环境&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>wordpress的开发调试环境</title>
-     <link href="http://ningg.github.com/wordpress-debug-env"/>
-     <updated>2014-09-05T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/wordpress-debug-env</id>
-     <content type="html">&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
-
-&lt;p&gt;用wordpress建站，两个功能：一个是展示团队工作，另一个是方便其他人进来讨论。&lt;/p&gt;
-
-&lt;p&gt;初步立意：使用wordpress搭建两个网站，团队工作展示一个，讨论区一个；&lt;/p&gt;
-
-&lt;h2 id=&quot;section-1&quot;&gt;组件与安装&lt;/h2&gt;
-
-&lt;p&gt;环境：Win 7，已经安装了JDK 6 和 JDK 7&lt;/p&gt;
-
-&lt;p&gt;下载软件清单如下：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;下载XAMPP：&lt;a href=&quot;https://www.apachefriends.org/zh_cn/index.html&quot;&gt;https://www.apachefriends.org/zh_cn/index.html&lt;/a&gt; 版本：1.8.3；对应PHP: 5.5.1&lt;/li&gt;
-  &lt;li&gt;下载eclipse for php：&lt;a href=&quot;http://www.eclipse.org/downloads/&quot;&gt;http://www.eclipse.org/downloads/&lt;/a&gt;  版本：eclipse-php-luna-R-win32-x86_64&lt;/li&gt;
-  &lt;li&gt;下载wordpress：&lt;a href=&quot;http://cn.wordpress.org/&quot;&gt;http://cn.wordpress.org/&lt;/a&gt; 版本：3.9&lt;/li&gt;
-  &lt;li&gt;下载主题：
-    &lt;ol&gt;
-      &lt;li&gt;hum：&lt;a href=&quot;http://wordpress.org/extend/themes/hum/&quot;&gt;http://wordpress.org/extend/themes/hum/&lt;/a&gt; 版本：0.2.1&lt;/li&gt;
-      &lt;li&gt;twenty eleven：&lt;a href=&quot;http://wordpress.org/themes/twentyeleven&quot;&gt;http://wordpress.org/themes/twentyeleven&lt;/a&gt; 版本：1.9&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-  &lt;li&gt;下载JDK：&lt;a href=&quot;http://www.oracle.com/technetwork/java/javase/downloads/index.html&quot;&gt;Oracle JDK(Sun)&lt;/a&gt; 版本：JDK 7u67&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;依次安装：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;XAMPP：wordpress的运行环境&lt;/li&gt;
-  &lt;li&gt;wordpress，并为其配置主题：
-    &lt;ul&gt;
-      &lt;li&gt;twenty eleven&lt;/li&gt;
-      &lt;li&gt;hum&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;eclipse：将整个wordpress文件夹，新建为PHP Project；&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;section-2&quot;&gt;配置&lt;/h2&gt;
-
-&lt;p&gt;设计搭建其调试环境所需要的基本配置。&lt;/p&gt;
-
-&lt;h3 id=&quot;section-3&quot;&gt;基本配置&lt;/h3&gt;
-
-&lt;p&gt;主要是Apache、MySQL、PHP相关：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;设置MySQL的root密码，两种方式都可以：
-    &lt;ol&gt;
-      &lt;li&gt;CMD的命令行；&lt;/li&gt;
-      &lt;li&gt;myphpAdmin图形界面；&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;section-4&quot;&gt;主题配置&lt;/h3&gt;
-
-&lt;p&gt;主要是为成功安装主题，所需要进行的配置。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;wordpress
-    &lt;ol&gt;
-      &lt;li&gt;取消twenty eleven主题中google front（因为google被墙了）&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section-5&quot;&gt;调试&lt;/h2&gt;
-
-&lt;p&gt;调试是学习一个框架/语言较快的方式，这一部分将着重介绍如何进行调试。关注几点：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;如何进行调试；&lt;/li&gt;
-  &lt;li&gt;PHP web基本处理逻辑；&lt;/li&gt;
-  &lt;li&gt;wordpress中使用了哪些巧妙的设计，使其流行数年；&lt;/li&gt;
 &lt;/ul&gt;
 
 </content>
