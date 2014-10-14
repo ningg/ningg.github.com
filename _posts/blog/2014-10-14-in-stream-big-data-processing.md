@@ -127,7 +127,7 @@ Efficient lineage tracking is not a trivial problem. Let us first consider how T
 * It is important to note that the order of signature updates is not important due to commutative nature of the XOR operation. In the figure below, acknowledgements depicted in the part 2 can arrive after acknowledgements depicted in the part 3. This enables fully asynchronous processing.
 * One can note that the algorithm above is not strictly reliable – the signature could turn into zero accidentally due to unfortunate combination of IDs. However, 64-bit IDs are sufficient to guarantee a very low probability of error, about 2^(-64), that is acceptable in almost all practical applications. As result, the table of signatures could have a small memory footprint.
 
-![](/images/in-stream-big-data-processing/lineage-tracking-storm.png)
+![](/images/in-stream-big-data-processing/lineage-tracking-storm1.png)
 
 
 The described approach is elegant due to its decentrilized nature: nodes act independently sending acknowledgement messages, there is no cental entity that tracks all lineages explicitly. However, it could be difficult to manage transactional processing in this way for flows that maintain sliding windows or other buffers. For example, processing on a sliding window can involve hundreds of thousands events at each moment of time, so it becomes difficult to manage acknowledgements because many events stay uncommitted or computational state should be persisted frequently.
@@ -238,13 +238,13 @@ Among the emerging technologies, the following two are especially notable in the
 1. A. Wilschut and P. Apers, “Dataflow Query Execution in a Parallel Main-Memory Environment “
 1. T. Urhan and M. Franklin, “XJoin: A Reactively-Scheduled Pipelined Join Operator“
 1. M. Zaharia, T. Das, H. Li, S. Shenker, and I. Stoica, “Discretized Streams: An Efﬁcient and Fault-Tolerant Model for Stream Processing on Large Clusters”
-1. E. Jacobsen and R. Lyons, “The Sliding DFT“
+1. E. Jacobsen and R. Lyons, [“The Sliding DFT“](http://www.ingelec.uns.edu.ar/pds2803/materiales/articulos/slidingdft_bw.pdf)
 1. A. Elmagarmid, Data Streams Models and Algorithms
-1. N. Marz, “Big Data Lambda Architecture”
-1. J. Kinley, “The Lambda architecture: principles for architecting realtime Big Data systems”
-1. http://hortonworks.com/hadoop/tez/
-1. http://hortonworks.com/stinger/
-1. http://spark-project.org/
+1. N. Marz, [“Big Data Lambda Architecture”](http://www.databasetube.com/database/big-data-lambda-architecture/)
+1. J. Kinley, [“The Lambda architecture: principles for architecting realtime Big Data systems”](http://jameskinley.tumblr.com/post/37398560534/the-lambda-architecture-principles-for-architecting)
+1. [http://hortonworks.com/hadoop/tez/](http://hortonworks.com/hadoop/tez/)
+1. [http://hortonworks.com/stinger/](http://hortonworks.com/stinger/)
+1. [http://spark-project.org/](http://spark-project.org/)
 
 
 ##杂谈

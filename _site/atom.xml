@@ -4,7 +4,7 @@
    <title>NingG.github.com</title>
    <link href="http://ningg.github.com/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://ningg.github.com" rel="alternate" type="text/html" />
-   <updated>2014-10-14T23:22:06+08:00</updated>
+   <updated>2014-10-14T23:31:06+08:00</updated>
    <id>http://ningg.github.com</id>
    <author>
      <name></name>
@@ -18,7 +18,7 @@
      <updated>2014-10-14T00:00:00+08:00</updated>
      <id>http://ningg.github.com/in-stream-big-data-processing</id>
      <content type="html">&lt;blockquote&gt;
-  &lt;p&gt;英文原文：&lt;a href=&quot;http://highlyscalable.wordpress.com/2013/08/20/in-stream-big-data-processing/&quot;&gt;In-Stream-big-data-processing&lt;/a&gt;，有人翻译了&lt;a href=&quot;http://blog.csdn.net/idontwantobe/article/details/25938511&quot;&gt;中文版&lt;/a&gt;，也有直接&lt;a href=&quot;http://dirlt.com/in-stream-big-data-processing.html&quot;&gt;英文注释中文版&lt;/a&gt;。&lt;/p&gt;
+  &lt;p&gt;英文原文：&lt;a href=&quot;http://highlyscalable.wordpress.com/2013/08/20/in-stream-big-data-processing/&quot;&gt;In-Stream-big-data-processing&lt;/a&gt;，有人翻译了&lt;a href=&quot;http://blog.csdn.net/idontwantobe/article/details/25938511&quot;&gt;中文版&lt;/a&gt;，也有直接&lt;a href=&quot;http://dirlt.com/in-stream-big-data-processing.html&quot;&gt;中文注释英文版&lt;/a&gt;。&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;The shortcomings and drawbacks of batch-oriented data processing were widely recognized by the Big Data community quite a long time ago. It became clear that real-time query processing and in-stream processing is the immediate need in many practical applications. In recent years, this idea got a lot of traction and a whole bunch of solutions like Twitter’s Storm, Yahoo’s S4, Cloudera’s Impala, Apache Spark, and Apache Tez appeared and joined the army of Big Data and NoSQL systems. This article is an effort to explore techniques used by developers of in-stream data processing systems, trace the connections of these techniques to massive batch processing and OLTP/OLAP databases, and discuss how one unified query engine can support in-stream, batch, and OLAP processing at the same time.&lt;/p&gt;
@@ -149,7 +149,7 @@ As a bottom line, Stream Replay technique imposes the following requirements of 
   &lt;li&gt;One can note that the algorithm above is not strictly reliable – the signature could turn into zero accidentally due to unfortunate combination of IDs. However, 64-bit IDs are sufficient to guarantee a very low probability of error, about 2^(-64), that is acceptable in almost all practical applications. As result, the table of signatures could have a small memory footprint.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/in-stream-big-data-processing/lineage-tracking-storm.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/in-stream-big-data-processing/lineage-tracking-storm1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;The described approach is elegant due to its decentrilized nature: nodes act independently sending acknowledgement messages, there is no cental entity that tracks all lineages explicitly. However, it could be difficult to manage transactional processing in this way for flows that maintain sliding windows or other buffers. For example, processing on a sliding window can involve hundreds of thousands events at each moment of time, so it becomes difficult to manage acknowledgements because many events stay uncommitted or computational state should be persisted frequently.&lt;/p&gt;
 
@@ -275,13 +275,13 @@ The two statement above imply that tunable persistence (in-memory message passin
   &lt;li&gt;A. Wilschut and P. Apers, “Dataflow Query Execution in a Parallel Main-Memory Environment “&lt;/li&gt;
   &lt;li&gt;T. Urhan and M. Franklin, “XJoin: A Reactively-Scheduled Pipelined Join Operator“&lt;/li&gt;
   &lt;li&gt;M. Zaharia, T. Das, H. Li, S. Shenker, and I. Stoica, “Discretized Streams: An Efﬁcient and Fault-Tolerant Model for Stream Processing on Large Clusters”&lt;/li&gt;
-  &lt;li&gt;E. Jacobsen and R. Lyons, “The Sliding DFT“&lt;/li&gt;
+  &lt;li&gt;E. Jacobsen and R. Lyons, &lt;a href=&quot;http://www.ingelec.uns.edu.ar/pds2803/materiales/articulos/slidingdft_bw.pdf&quot;&gt;“The Sliding DFT“&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;A. Elmagarmid, Data Streams Models and Algorithms&lt;/li&gt;
-  &lt;li&gt;N. Marz, “Big Data Lambda Architecture”&lt;/li&gt;
-  &lt;li&gt;J. Kinley, “The Lambda architecture: principles for architecting realtime Big Data systems”&lt;/li&gt;
-  &lt;li&gt;http://hortonworks.com/hadoop/tez/&lt;/li&gt;
-  &lt;li&gt;http://hortonworks.com/stinger/&lt;/li&gt;
-  &lt;li&gt;http://spark-project.org/&lt;/li&gt;
+  &lt;li&gt;N. Marz, &lt;a href=&quot;http://www.databasetube.com/database/big-data-lambda-architecture/&quot;&gt;“Big Data Lambda Architecture”&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;J. Kinley, &lt;a href=&quot;http://jameskinley.tumblr.com/post/37398560534/the-lambda-architecture-principles-for-architecting&quot;&gt;“The Lambda architecture: principles for architecting realtime Big Data systems”&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://hortonworks.com/hadoop/tez/&quot;&gt;http://hortonworks.com/hadoop/tez/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://hortonworks.com/stinger/&quot;&gt;http://hortonworks.com/stinger/&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://spark-project.org/&quot;&gt;http://spark-project.org/&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 
 &lt;h2 id=&quot;section&quot;&gt;杂谈&lt;/h2&gt;
