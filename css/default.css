@@ -43,7 +43,7 @@ body .hide{display:none;}
 
 
 /***********default settings**********/
-body {font-family: "微软雅黑","Arial","Helvetica","sans-serif";font-size:16px;}
+body {font-family:times,Courier New,Console,Verdana,"Microsoft YaHei";/*font-family: "times","微软雅黑","Arial","Helvetica","sans-serif";*//*font-family:Times,Helvetica Neue',Arial,'Liberation Sans',FreeSans,'Hiragino Sans GB',sans-serif;*/font-size:15px;}
 a {color:#4A75B5;text-decoration:none;outline:none;}
 a:hover {text-decoration:underline}
 a.external {padding-right:13px;background:url('/images/icons.gif') no-repeat right 1px;}
@@ -76,6 +76,8 @@ pre ol{margin-left:25px;list-style-type:decimal;}
 .entry ul{margin-bottom:25px;margin-left:25px;margin-top: 10px;}
 .entry p+ul {margin-top:-5px;}
 .entry ul li{margin-bottom:5px;list-style:disc;line-height:1.5em;}
+.entry ul li ul li{list-style-type:circle;}
+.entry ul li ol li{list-style-type:decimal;}
 .entry ol{margin-top:0px;margin-bottom:25px;margin-left:25px;}
 .entry ol li{margin-bottom:5px;list-style:decimal;line-height:1.5em;}
 
