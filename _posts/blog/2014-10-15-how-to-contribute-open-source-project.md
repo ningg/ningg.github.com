@@ -56,15 +56,21 @@ In order to provide patches, follow these guidelines:
 	* The preferred naming convention for Flume patches is `FLUME-12345.patch`, or `FLUME-12345-0.patch` where 12345 is the JIRA number. You might want to name successive versions of the patch something like `FLUME-12345-1.patch`, `FLUME-12345-2.patch`, etc. as you iterate on your changes based on review feedback and re-submit them.（patch命名方式）
 	* The command to generate the patch is `git diff`. Example:
 	
+---
+
 	$ git diff > /path/to/FLUME-1234-0.patch
+
 
 * **How to apply someone else's patch file**:
 	* You can apply someone else's patch with the GNU patch tool. Example:
+	* Contributors may variously submit patches in a couple of different formats. If you get some dialog from the patch tool asking which file you want to patch, try variously the "-p1" or "-p0" flags to patch. Without any additional arguments, git diff generates patches that are applied using patch `-p1`. If you use git diff `--no-prefix` to generate your patch, you have to apply it using patch `-p0`. The ReviewBoard tool understands both formats and is able to apply both types automatically.（`patch`命令的选项）
+
+---
 
 	$ cd ~/src/flume # or wherever you keep the root of your Flume source tree
 	$ patch -p1 < FLUME-1234.patch
 
-	* Contributors may variously submit patches in a couple of different formats. If you get some dialog from the patch tool asking which file you want to patch, try variously the "-p1" or "-p0" flags to patch. Without any additional arguments, git diff generates patches that are applied using patch `-p1`. If you use git diff `--no-prefix` to generate your patch, you have to apply it using patch `-p0`. The ReviewBoard tool understands both formats and is able to apply both types automatically.（`patch`命令的选项）
+
 * **Submitting your patch for review**:
 	1. To submit a patch, attach the patch file to the JIRA and change the status of the JIRA to "Patch Available".（JIRA上，提交patch，修改状态）
 	1. If the change is non-trivial, please also post it for review on the Review Board. Use the Repository "flume-git" on Review Board.（关键的bug，需要在Review Board上标记一下）
