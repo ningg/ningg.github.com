@@ -222,8 +222,8 @@ The key observation is that relational query processing, MapReduce, and in-strea
 
 * In-stream processing could require strict data delivery guarantees and persistence of the intermediate state. These properties are not crucial for batch processing where computations can be easily restarted.
 * In-stream processing is inseparable from pipelining. For batch processing, pipelining is not so crucial and even inapplicable in certain cases. Systems like Apache 
-
 Hive are based on staged MapReduce with materialization of the intermediate state and do not take full advantage of pipelining.
+
 The two statement above imply that tunable persistence (in-memory message passing versus on-disk materialization) and reliability are the distinctive features of the imaginary query engine that provides a set of processing primitives and interfaces to the high-level frameworks:
 
 ![](/images/in-stream-big-data-processing/unified-engine.png)
