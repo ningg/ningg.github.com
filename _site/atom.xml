@@ -4,13 +4,98 @@
    <title>NingG.github.com</title>
    <link href="http://ningg.github.com/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://ningg.github.com" rel="alternate" type="text/html" />
-   <updated>2014-10-14T23:31:06+08:00</updated>
+   <updated>2014-10-15T23:17:43+08:00</updated>
    <id>http://ningg.github.com</id>
    <author>
      <name></name>
      <email></email>
    </author>
 
+   
+   <entry>
+     <title>如何参与开源项目</title>
+     <link href="http://ningg.github.com/how-to-contribute-open-source-project"/>
+     <updated>2014-10-15T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/how-to-contribute-open-source-project</id>
+     <content type="html">&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
+
+&lt;p&gt;本来今天晚上想浏览一下flume官网的，不过突然看到How to Get Involved，再看看哪些提交了代码的名单，很是羡慕，我这个人爱吹牛，如果我也在名单中，那岂不又能吹牛一把？哈哈~想想都能笑出声。另一方面，用过的开源工具不少，但是如何参与到开源项目中，我还真不知道，碰巧在看flume官网，那就看看如何参与到flume这个开源项目中去吧。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;官方原文地址：&lt;a href=&quot;https://cwiki.apache.org/confluence/display/FLUME/How+to+Contribute&quot;&gt;How to Contribute&lt;/a&gt;，本文使用&lt;code&gt;英文原文+中文注释&lt;/code&gt;方式来写。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;preface&quot;&gt;Preface&lt;/h2&gt;
+
+&lt;p&gt;Welcome contributors! We strive to include everyone’s contributions. This page provides necessary guidelines on how to contribute effectively towards furthering the development and evolution of Flume. You should also read the guide on setting up &lt;a href=&quot;https://cwiki.apache.org/confluence/display/FLUME/Development+Environment&quot;&gt;Development Environment&lt;/a&gt; where you will find details on how to checkout, build and test Flume.
+（如何下载源码、编译源码、测试源码，需要先阅读&lt;a href=&quot;https://cwiki.apache.org/confluence/display/FLUME/Development+Environment&quot;&gt;Development Environment&lt;/a&gt;。）&lt;/p&gt;
+
+&lt;p&gt;Note: This guide applies to general contributors. If you are a committer, please read the &lt;a href=&quot;https://cwiki.apache.org/confluence/display/FLUME/How+to+Commit&quot;&gt;How to Commit&lt;/a&gt; as well.
+（committer还需阅读&lt;a href=&quot;https://cwiki.apache.org/confluence/display/FLUME/How+to+Commit&quot;&gt;How to Commit&lt;/a&gt;）&lt;/p&gt;
+
+&lt;h2 id=&quot;what-can-be-contributed&quot;&gt;What can be contributed?&lt;/h2&gt;
+
+&lt;p&gt;There are many ways you can contribute towards the project. A few of these are:（参与方式，有如下几种）&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Jump in on discussions&lt;/strong&gt;: It is possible that someone initiates a thread on the mailing list describing a problem that you have dealt with in the past. You can help the project by chiming in on that thread and guiding that user to overcome or workaround that problem or limitation.（查看邮件列表，参与讨论，帮助他人解决问题）&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;File Bugs&lt;/strong&gt;: If you notice a problem and are sure it is a bug, then go ahead and file a JIRA. If however, you are not very sure that it is a bug, you should first confirm it by discussing it on the Mailing Lists.（通过JIRA，提交bug；如果不确定，通过邮件列表提问，确认是否为bug）&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Review Code&lt;/strong&gt;: If you see that a JIRA ticket has a “Patch Available” status, go ahead and review it. It cannot be stressed enough that you must be kind in your review and explain the rationale for your feedback and suggestions. Also note that not all review feedback is accepted - often times it is a compromise between the contributor and reviewer. If you are happy with the change and do not spot any major issues, then +1 it. More information on this is available in the following sections.（通过JIRA，检查代码-Patch补丁，提出反馈意见）&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Provide Patches&lt;/strong&gt;: We encourage you to assign the relevant JIRA issue to yourself and supply a patch for it. The patch you provide can be code, documentation, build changes, or any combination of these. More information on this is available in the following sections.（通过JIRA，提交代码-patch补丁，可以是代码、文档、编译细节等）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)：邮件列表、JIRA，我都没有关注过，也不会使用；patch文件了解一点。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;providing-patches&quot;&gt;Providing Patches&lt;/h2&gt;
+
+&lt;p&gt;In order to provide patches, follow these guidelines:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Make sure there is a JIRA:
+    &lt;ol&gt;
+      &lt;li&gt;If you are working on fixing a problem that already has an associated JIRA, then go ahead and assign it to yourself.&lt;/li&gt;
+      &lt;li&gt;If it is already assigned to someone else, check with the current assignee before moving it over to your queue.&lt;/li&gt;
+      &lt;li&gt;If the current assignee has already worked out some part of the fix, suggest that you can take that change over from them and complete the remaining parts.&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Attach the patches as you go through development:
+While small fixes are easily done in a single patch, it is preferable that you attach patches to the JIRA as you go along. This serves as an early feedback mechanism where interested folks can look it over and suggest changes where necessary. It also ensures that if for some reason you are not able to find the time to complete the change, someone else can take up your initial patches and drive them to completion.
+Before you submit your patch:
+Your change should be well-formatted and readable. Please use two spaces for indentation (no tabs).
+Carefully consider whether you have handled all boundary conditions and have provided sufficiently defensive code where necessary.
+Add one or more unit tests, if your change is not covered by existing automated tests.
+Insert javadocs and code comments where appropriate.
+Update the Flume User Guide (source) if your change affects the Flume config file or any user interface. Include those changes in your patch.
+Make sure you update the relevant developer documentation, wiki pages, etc. if your change affects the development environment.
+Test your changes before submitting a review:
+Before you make the JIRA status as “Patch Available”, please test your changes thoroughly. Try any new feature or fix out for yourself, and make sure that it works.
+Make sure that all unit/integration tests are passing, and that the functionality you have worked on is tested through existing or new tests.
+You can run all the tests by going to the root level of the source tree and typing mvn clean install.
+How to create a patch file:
+The preferred naming convention for Flume patches is FLUME-12345.patch, or FLUME-12345-0.patch where 12345 is the JIRA number. You might want to name successive versions of the patch something like FLUME-12345-1.patch, FLUME-12345-2.patch, etc. as you iterate on your changes based on review feedback and re-submit them.
+The command to generate the patch is “git diff”. Example:
+$ git diff &amp;gt; /path/to/FLUME-1234-0.patch
+How to apply someone else’s patch file:
+You can apply someone else’s patch with the GNU patch tool. Example:
+$ cd ~/src/flume # or wherever you keep the root of your Flume source tree
+$ patch -p1 &amp;lt; FLUME-1234.patch
+Contributors may variously submit patches in a couple of different formats. If you get some dialog from the patch tool asking which file you want to patch, try variously the “-p1” or “-p0” flags to patch. Without any additional arguments, git diff generates patches that are applied using patch -p1. If you use git diff –no-prefix to generate your patch, you have to apply it using patch -p0. The ReviewBoard tool understands both formats and is able to apply both types automatically.
+Submitting your patch for review:
+To submit a patch, attach the patch file to the JIRA and change the status of the JIRA to “Patch Available”.
+If the change is non-trivial, please also post it for review on the Review Board. Use the Repository “flume-git” on Review Board.
+Link the JIRA to the Review Board review. JIRA has a feature you can use for this by going to More Actions &amp;gt; Link &amp;gt; Web Link when logged into JIRA.
+Identify a reviewer:
+When posting on review board (repository: “flume-git”), always add the Group “Flume” to the list of reviewers.
+Optionally, you may also add a specific reviewer to the review. You can pick any of the project committers for review. Note that identifying a reviewer does not stop others from reviewing your change. Be prepared for having your change reviewed by others at any time.
+If you have posted your change for review and no one has had a chance to review it yet, you can gently remind everyone by dropping a note on the developer mailing list with a link to the review.
+Work with reviewers to get your change fleshed out:
+When your change is reviewed, please engage with the reviewer via JIRA or review board to get necessary clarifications and work out other details.
+The goal is to ensure that the final state of your change is acceptable to the reviewer so that they can +1 it.&lt;/p&gt;
+
+</content>
+   </entry>
    
    <entry>
      <title>In-Stream Big Data Processing</title>
@@ -254,11 +339,11 @@ It is important to understand that such techniques can defeat the whole purpose 
 
 &lt;ul&gt;
   &lt;li&gt;In-stream processing could require strict data delivery guarantees and persistence of the intermediate state. These properties are not crucial for batch processing where computations can be easily restarted.&lt;/li&gt;
-  &lt;li&gt;In-stream processing is inseparable from pipelining. For batch processing, pipelining is not so crucial and even inapplicable in certain cases. Systems like Apache &lt;/li&gt;
+  &lt;li&gt;In-stream processing is inseparable from pipelining. For batch processing, pipelining is not so crucial and even inapplicable in certain cases. Systems like Apache 
+Hive are based on staged MapReduce with materialization of the intermediate state and do not take full advantage of pipelining.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;Hive are based on staged MapReduce with materialization of the intermediate state and do not take full advantage of pipelining.
-The two statement above imply that tunable persistence (in-memory message passing versus on-disk materialization) and reliability are the distinctive features of the imaginary query engine that provides a set of processing primitives and interfaces to the high-level frameworks:&lt;/p&gt;
+&lt;p&gt;The two statement above imply that tunable persistence (in-memory message passing versus on-disk materialization) and reliability are the distinctive features of the imaginary query engine that provides a set of processing primitives and interfaces to the high-level frameworks:&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/images/in-stream-big-data-processing/unified-engine.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
@@ -286,7 +371,7 @@ The two statement above imply that tunable persistence (in-memory message passin
 
 &lt;h2 id=&quot;section&quot;&gt;杂谈&lt;/h2&gt;
 
-&lt;p&gt;这次看到dirtysalt的文章：&lt;a href=&quot;http://dirlt.com/in-stream-big-data-processing.html&quot;&gt;In-stream-big-data-processing（英文注释中文版）&lt;/a&gt;，顿时解决了困扰自己的一个问题，英文的好文章，如何做记录？直接翻译中文？直接转载中文？NO，最佳方式当然是在原文基础上，添加自己的注释，OK，作者dirtysalt已经在做了，今后我也这么办。&lt;/p&gt;
+&lt;p&gt;这次看到dirtysalt的文章：&lt;a href=&quot;http://dirlt.com/in-stream-big-data-processing.html&quot;&gt;In-stream-big-data-processing（英文版+中文注释）&lt;/a&gt;，顿时解决了困扰自己的一个问题，英文的好文章，如何做记录？直接翻译中文？直接转载中文？NO，最佳方式当然是在原文基础上，添加自己的注释，OK，作者dirtysalt已经在做了，今后我也这么办。&lt;/p&gt;
 
 </content>
    </entry>
@@ -1156,233 +1241,6 @@ RE：新建一条记录，或者将&lt;code&gt;user=root&lt;/code&gt;的记录�
   &lt;li&gt;&lt;a href=&quot;http://mxd.tencent.com/&quot;&gt;tencent MXD&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://isux.tencent.com/&quot;&gt;tencent ISUX&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://fex.baidu.com/&quot;&gt;baidu FEX&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>Android入门几个基本知识</title>
-     <link href="http://ningg.github.com/android-lesson-one"/>
-     <updated>2014-09-23T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/android-lesson-one</id>
-     <content type="html">&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
-
-&lt;p&gt;最近参加某活动，也算掌握了点滴的内容，整理一下，算是阶段的笔记。&lt;/p&gt;
-
-&lt;h2 id=&quot;android4&quot;&gt;Android的4个模块&lt;/h2&gt;
-
-&lt;p&gt;Android开发中涉及4个模块/对象：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Activity；&lt;/li&gt;
-  &lt;li&gt;Service；&lt;/li&gt;
-  &lt;li&gt;Broadcast Receiver；&lt;/li&gt;
-  &lt;li&gt;Content Provider；&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;activity&quot;&gt;Activity&lt;/h3&gt;
-
-&lt;p&gt;通常是用户界面，粒度也可能更细些，例如：菜单列表、图片、图片标题，都可能是一个单独的Activity；&lt;/p&gt;
-
-&lt;h3 id=&quot;service&quot;&gt;Service&lt;/h3&gt;
-
-&lt;p&gt;没有用户界面，但会一直在后台运行，例如：进行其他操作时，播放背景音乐、后台下载数据；&lt;/p&gt;
-
-&lt;h3 id=&quot;broadcast-receiver&quot;&gt;Broadcast Receiver&lt;/h3&gt;
-
-&lt;p&gt;应用程序利用Broadcast Receiver机制，来接收、发送广播消息，举例：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;接收/拨打电话；&lt;/li&gt;
-  &lt;li&gt;接收/发送短信；&lt;/li&gt;
-  &lt;li&gt;手机所处时区改变时，应用程序会接收到通知；&lt;/li&gt;
-  &lt;li&gt;电池电量不足；&lt;/li&gt;
-  &lt;li&gt;用户选择一张图片；&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;content-provider&quot;&gt;Content Provider&lt;/h3&gt;
-
-&lt;p&gt;应用程序利用Content Provider机制，来进行数据共享，例如：读取系统电话簿中联系人；&lt;/p&gt;
-
-&lt;h2 id=&quot;activity-1&quot;&gt;Activity的生命周期&lt;/h2&gt;
-
-&lt;p&gt;生命周期？对，这个术语在计算机相关的开发中，总能听到，到底什么意思？干什么的？生命周期，&lt;code&gt;lifecycle&lt;/code&gt;，其基本目标是：描述清楚一个对象从产生到消亡的过程，为开发者干预这一过程提供方法。&lt;em&gt;（用个通俗的术语来重新表述一下Object lifecycle：物体的状态变化路径）&lt;/em&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;back-stack&quot;&gt;返回站（Back Stack）&lt;/h3&gt;
-
-&lt;p&gt;说Activity的生命周期之前，补充一个概念：返回栈；为了方便管理Activity，将多个相互关联的Activity合并称作一个Task，一个Task对应一个Back Stack。如下图：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/android-lesson-one/diagram_backstack.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;关于返回栈，简要说明几点（官方文档）：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;A &lt;code&gt;task&lt;/code&gt; is a collection of activities that users interact with when performing a certain job.&lt;/li&gt;
-  &lt;li&gt;the back stack operates as a &lt;code&gt;last in, first out&lt;/code&gt; object structure.&lt;/li&gt;
-  &lt;li&gt;pushed onto the stack when started by the current activity and popped off when the user leaves it using the Back button.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;activity-2&quot;&gt;Activity状态&lt;/h3&gt;
-
-&lt;p&gt;Activity从产生到消亡，会有几个典型的状态，简要说一下（来自官方文档）：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;运行状态：栈顶，显示Activity；&lt;/li&gt;
-  &lt;li&gt;暂停状态：不处于栈顶，但部分可见；&lt;/li&gt;
-  &lt;li&gt;停止状态：不处于栈顶，也全部不可见；&lt;/li&gt;
-  &lt;li&gt;销毁状态：返回栈中，已经移除；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;acitivity-lifecycle&quot;&gt;Acitivity lifecycle&lt;/h3&gt;
-
-&lt;p&gt;Activity生命周期如下：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/android-lesson-one/activity_lifecycle.png&quot; alt=&quot;activity_lifecycle.png&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;备注：可利用上面7个回调方法，来调整Activity。&lt;/p&gt;
-
-&lt;h2 id=&quot;intent&quot;&gt;Intent简介&lt;/h2&gt;
-
-&lt;p&gt;Intent是不同组件之间进行交互的重要方式，基本点两个：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;指明当前组件要执行的动作；&lt;/li&gt;
-  &lt;li&gt;不同组件之间传递的数据；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Intent能够携带数据，具体用途有：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;启动Activity；&lt;/li&gt;
-  &lt;li&gt;启动Service；&lt;/li&gt;
-  &lt;li&gt;发送广播；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Intent分为2类：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;显式Intent：举例，Intent直接指定下一步启动的Activity；&lt;/li&gt;
-  &lt;li&gt;隐式Intent；举例，通过Activity的&lt;code&gt;&amp;lt;activity&amp;gt;&amp;lt;intent-filter&amp;gt;&lt;/code&gt;来隐式指定，某个Activity来捕获哪一类的Intent；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;android&quot;&gt;Android测试相关&lt;/h2&gt;
-
-&lt;p&gt;之前，我对测试不感兴趣的，但最近感觉，开发中前期，对系统弄一个测试框架，能够提升开发、调试的效率，同时，也能在产品最终上线前进行较为全面的验证。&lt;/p&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;测试点&lt;/h3&gt;
-
-&lt;p&gt;测试，到底要测哪些方面？&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;功能测试
-    &lt;ul&gt;
-      &lt;li&gt;安装/卸载&lt;/li&gt;
-      &lt;li&gt;具体功能点&lt;/li&gt;
-      &lt;li&gt;联网（默认的联网方式：wifi or sim卡？网络切换是否有相应提示？飞行模式）&lt;/li&gt;
-      &lt;li&gt;程序进入输入功能时，是否正常弹出键盘？键盘是否遮挡应用需要输入内容的对话框？&lt;/li&gt;
-      &lt;li&gt;home键与应用之间，多次切换&lt;/li&gt;
-      &lt;li&gt;返回上一级操作，退出程序后的提示&lt;/li&gt;
-      &lt;li&gt;当离开应用一段事件后，再次回到应用程序时，不能丢失用户数据；&lt;/li&gt;
-      &lt;li&gt;横屏、竖屏切换时，不能丢失用户数据；&lt;/li&gt;
-      &lt;li&gt;长按某一按钮，是否会触发其他事件；&lt;/li&gt;
-      &lt;li&gt;PC端与APP端的数据同步（例如，bloger在PC端设置禁止他人评论，则，APP上也应禁止评论）&lt;/li&gt;
-      &lt;li&gt;APP中内嵌的链接，程序如何处理？如果调用设备的浏览器，能否正常切回到APP？&lt;/li&gt;
-      &lt;li&gt;各个页面间，多次切换&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;性能测试
-    &lt;ul&gt;
-      &lt;li&gt;APP的整体响应速度；&lt;/li&gt;
-      &lt;li&gt;连续点击相同按钮（游戏类APP）&lt;/li&gt;
-      &lt;li&gt;快速划屏（游戏类APP）&lt;/li&gt;
-      &lt;li&gt;长时间使用应用&lt;/li&gt;
-      &lt;li&gt;当应用不处于活动状态时，不能大量消耗系统资源&lt;/li&gt;
-      &lt;li&gt;耗电情况&lt;/li&gt;
-      &lt;li&gt;运行过程中，需要产看内存和CPU的使用情况：&lt;code&gt;adb shell top&lt;/code&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;异常测试
-    &lt;ul&gt;
-      &lt;li&gt;低电量情况下使用应用&lt;/li&gt;
-      &lt;li&gt;（处理以下情况时，应用不能崩溃，并且返回应用后，数据不能丢失）&lt;/li&gt;
-      &lt;li&gt;使用应用时，对来电的处理&lt;/li&gt;
-      &lt;li&gt;使用应用时，对短信的处理&lt;/li&gt;
-      &lt;li&gt;使用应用时，闹铃响起&lt;/li&gt;
-      &lt;li&gt;使用应用时，锁屏、解锁&lt;/li&gt;
-      &lt;li&gt;网络异常：使用应用时，断网；断网情况下，启动应用 &lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;UI测试&lt;/li&gt;
-  &lt;li&gt;不同系统语言的支持&lt;/li&gt;
-  &lt;li&gt;适配测试
-    &lt;ul&gt;
-      &lt;li&gt;目标：测试不同厂家、型号的手机上，APP的运行效果；&lt;/li&gt;
-      &lt;li&gt;背景：由于手机型号、总类繁多，通常只关注当前用户数较多的手机&lt;/li&gt;
-      &lt;li&gt;问题1：如何找出用户较多的具体手机型号？&lt;/li&gt;
-      &lt;li&gt;RE问题1：选几个纬度，屏幕尺寸、分辨率、Android系统版本，正交定位一下&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;android-testing-framework&quot;&gt;Android Testing Framework&lt;/h3&gt;
-
-&lt;p&gt;下面会列出一张图（官网拿的），简要说几点：&lt;em&gt;（可能理解有错，会陆续更正）&lt;/em&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code&gt;Mock Objects&lt;/code&gt;：模拟系统的一切行为；另，支持依赖注入；&lt;/li&gt;
-  &lt;li&gt;JUnit：写单元测试；（白盒测试）&lt;/li&gt;
-  &lt;li&gt;Instrumentation：可以模拟系统行为，捕获Activity的任何一个回调方法；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/android-lesson-one/test_framework.png&quot; alt=&quot;test_framework.png&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;基于这一测试框架，能够进行如下几个测试：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;单元测试；&lt;/li&gt;
-  &lt;li&gt;框架测试；（什么意思？）&lt;/li&gt;
-  &lt;li&gt;UI测试；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;备注：在官网文档中，&lt;code&gt;Develop&lt;/code&gt;–&lt;code&gt;Tools&lt;/code&gt;部分，针对&lt;code&gt;Tests&lt;/code&gt;有详细介绍。&lt;/p&gt;
-
-&lt;h3 id=&quot;section-2&quot;&gt;测试工具&lt;/h3&gt;
-
-&lt;p&gt;列几个常用测试工具，以及简要的说明：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;monkey：产生伪随机事件流，用途：压力测试、随机点击；&lt;/li&gt;
-  &lt;li&gt;monkey runner：利用python脚本，进行自动化测试，可以测试安装/卸载、截图、业务使用流程；&lt;/li&gt;
-  &lt;li&gt;Hierarchy Viewer：可视化方式，显示UI树，用途：调试、优化，用户界面；另，可以放大界面；&lt;/li&gt;
-  &lt;li&gt;DDMS（Dalvik Debug Monitor Service）：Eclipse下的一个视图，用途：模拟设备的地理位置变动；&lt;/li&gt;
-  &lt;li&gt;traceview：跟踪程序性能，并且具体到method；&lt;em&gt;（&lt;code&gt;Debug.startMethodtrace(FILE)&lt;/code&gt;启动跟踪）&lt;/em&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section-3&quot;&gt;附录&lt;/h2&gt;
-
-&lt;h3 id=&quot;section-4&quot;&gt;几个名词&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;回归测试：修改代码之后，重新测试。&lt;/li&gt;
-  &lt;li&gt;AVD：Android Virtual Devices，模拟器&lt;/li&gt;
-  &lt;li&gt;SDK：Software Development Kit，软件开发平台&lt;/li&gt;
-  &lt;li&gt;ADT；Android Development Tools，Eclipse下Android开发时用到的插件&lt;/li&gt;
-  &lt;li&gt;ADB：Android Debug Bridge，调试桥&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;section-5&quot;&gt;产品设计几点&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;允许用户登录情况下，使用app的大部分通用功能；&lt;/li&gt;
-  &lt;li&gt;当且仅当用户要使用一些核心功能时，强制用户注册、登录；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section-6&quot;&gt;参考来源&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://developer.android.com/index.html&quot;&gt;Android官方开发者网站&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://developer.android.com/develop/index.html&quot;&gt;Android官方文档&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 </content>

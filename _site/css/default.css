@@ -43,7 +43,7 @@ body .hide{display:none;}
 
 
 /***********default settings**********/
-body {font-family: "微软雅黑","Arial","Helvetica","sans-serif";font-size:16px;}
+body {font-family:times,Courier New,Console,Verdana,"Microsoft YaHei";/*font-family: "times","微软雅黑","Arial","Helvetica","sans-serif";*//*font-family:Times,Helvetica Neue',Arial,'Liberation Sans',FreeSans,'Hiragino Sans GB',sans-serif;*/font-size:15px;}
 a {color:#4A75B5;text-decoration:none;outline:none;}
 a:hover {text-decoration:underline}
 a.external {padding-right:13px;background:url('/images/icons.gif') no-repeat right 1px;}
@@ -76,6 +76,8 @@ pre ol{margin-left:25px;list-style-type:decimal;}
 .entry ul{margin-bottom:25px;margin-left:25px;margin-top: 10px;}
 .entry p+ul {margin-top:-5px;}
 .entry ul li{margin-bottom:5px;list-style:disc;line-height:1.5em;}
+.entry ul li ul li{list-style-type:circle;}
+.entry ul li ol li{list-style-type:decimal;}
 .entry ol{margin-top:0px;margin-bottom:25px;margin-left:25px;}
 .entry ol li{margin-bottom:5px;list-style:decimal;line-height:1.5em;}
 
@@ -107,16 +109,16 @@ pre ol{margin-left:25px;list-style-type:decimal;}
 
 .blog .aside{
     /* background-image:url(https://dnqgz544uhbo8.cloudfront.net/_/fp/img/bestof/june-2013.CaUUbO2jIECgCmldhmxCCA.jpg); */
-	background-image: url("/images/side-background.jpg");
+	/* background-image: url("/images/side-background.jpg"); */
 }
 .about .aside{
     /* background-image:url(https://d233eq3e3p3cv0.cloudfront.net/max/1000/0*kTUZamBulGQZg1MW.jpeg); */
-    background-image: url("/images/side-background.jpg");
+    /* background-image: url("/images/side-background.jpg"); */
 );
 }
 .category .aside{
     /* background-image:url(https://d233eq3e3p3cv0.cloudfront.net/max/1000/0*cF2i1ZosSP_UTJig.jpeg); */
-    background-image: url("/images/side-background.jpg");
+    /* background-image: url("/images/side-background.jpg"); */
 }
 
 /*****************about page****************/

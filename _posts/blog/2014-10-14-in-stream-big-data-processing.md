@@ -249,6 +249,6 @@ Among the emerging technologies, the following two are especially notable in the
 
 ##杂谈
 
-这次看到dirtysalt的文章：[In-stream-big-data-processing（英文注释中文版）](http://dirlt.com/in-stream-big-data-processing.html)，顿时解决了困扰自己的一个问题，英文的好文章，如何做记录？直接翻译中文？直接转载中文？NO，最佳方式当然是在原文基础上，添加自己的注释，OK，作者dirtysalt已经在做了，今后我也这么办。
+这次看到dirtysalt的文章：[In-stream-big-data-processing（英文版+中文注释）](http://dirlt.com/in-stream-big-data-processing.html)，顿时解决了困扰自己的一个问题，英文的好文章，如何做记录？直接翻译中文？直接转载中文？NO，最佳方式当然是在原文基础上，添加自己的注释，OK，作者dirtysalt已经在做了，今后我也这么办。
 
 [NingG]:    http://ningg.github.com  "NingG"
