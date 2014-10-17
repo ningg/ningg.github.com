@@ -4,13 +4,1379 @@
    <title>NingG.github.com</title>
    <link href="http://ningg.github.com/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://ningg.github.com" rel="alternate" type="text/html" />
-   <updated>2014-10-16T00:07:32+08:00</updated>
+   <updated>2014-10-17T22:42:48+08:00</updated>
    <id>http://ningg.github.com</id>
    <author>
      <name></name>
      <email></email>
    </author>
 
+   
+   <entry>
+     <title>Flume 1.5.0.1 User Guide：Flume Sources</title>
+     <link href="http://ningg.github.com/flume-user-guide-source"/>
+     <updated>2014-10-17T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/flume-user-guide-source</id>
+     <content type="html">&lt;h2 id=&quot;avro-source&quot;&gt;Avro Source&lt;/h2&gt;
+
+&lt;p&gt;Listens on Avro port and receives events from external Avro client streams. When paired with the built-in Avro Sink on another (previous hop) Flume agent, it can create tiered collection topologies. Required properties are in bold.（必须属性加黑了）&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Property Name&lt;/td&gt;
+      &lt;td&gt;Default&lt;/td&gt;
+      &lt;td&gt;Description&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;channels&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;–&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;type&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;–&lt;/td&gt;
+      &lt;td&gt;The component type name, needs to be &lt;code&gt;avro&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;bind&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;–&lt;/td&gt;
+      &lt;td&gt;hostname or IP address to listen on&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;port&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;–&lt;/td&gt;
+      &lt;td&gt;Port # to bind to&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;threads&lt;/td&gt;
+      &lt;td&gt;–&lt;/td&gt;
+      &lt;td&gt;Maximum number of worker threads to spawn&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;selector.type&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;selector.*&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;interceptors&lt;/td&gt;
+      &lt;td&gt;–&lt;/td&gt;
+      &lt;td&gt;Space-separated list of interceptors&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;interceptors.*&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;compression-type&lt;/td&gt;
+      &lt;td&gt;none&lt;/td&gt;
+      &lt;td&gt;This can be “none” or “deflate”. The compression-type must match the compression-type of matching AvroSource&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;ssl&lt;/td&gt;
+      &lt;td&gt;false&lt;/td&gt;
+      &lt;td&gt;Set this to true to enable SSL encryption. You must also specify a “keystore” and a “keystore-password”.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;keystore&lt;/td&gt;
+      &lt;td&gt;–&lt;/td&gt;
+      &lt;td&gt;This is the path to a Java keystore file. Required for SSL.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;keystore-password&lt;/td&gt;
+      &lt;td&gt;–&lt;/td&gt;
+      &lt;td&gt;The password for the Java keystore. Required for SSL.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;keystore-type&lt;/td&gt;
+      &lt;td&gt;JKS	The type of the Java keystore. This can be “JKS” or “PKCS12”.&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;ipFilter&lt;/td&gt;
+      &lt;td&gt;false&lt;/td&gt;
+      &lt;td&gt;Set this to true to enable ipFiltering for netty&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;ipFilter.rules&lt;/td&gt;
+      &lt;td&gt;–&lt;/td&gt;
+      &lt;td&gt;Define N netty ipFilter pattern rules with this config.&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Example for agent named a1:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;a1.sources = r1
+a1.channels = c1
+a1.sources.r1.type = avro
+a1.sources.r1.channels = c1
+a1.sources.r1.bind = 0.0.0.0
+a1.sources.r1.port = 4141
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Example of ipFilter.rules&lt;/p&gt;
+
+&lt;p&gt;ipFilter.rules defines N netty ipFilters separated by a comma(&lt;code&gt;,&lt;/code&gt;) a pattern rule must be in this format.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;`allow` or `deny`&amp;gt;:&amp;lt;`ip` or `name` for computer name&amp;gt;:&amp;lt;`pattern`&amp;gt; 
+allow/deny:ip/name:pattern
+
+# example
+ipFilter.rules=allow:ip:127.*,allow:name:localhost,deny:ip:*
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Note that the first rule to match will apply as the example below shows from a client on the localhost（从左向右，第一个匹配出的rules生效）&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# This will Allow the client on localhost be deny clients from any other ip 
+ipFilter.rules = allow:name:localhost,deny:ip:
+
+# This will deny the client on localhost be allow clients from any other ip 
+ipFilter.rules = deny:name:localhost,allow:ip:
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;thrift-source&quot;&gt;Thrift Source&lt;/h2&gt;
+
+&lt;p&gt;Listens on Thrift port and receives events from external Thrift client streams. When paired with the built-in ThriftSink on another (previous hop) Flume agent, it can create tiered collection topologies. Required properties are in bold.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Property Name&lt;/td&gt;
+      &lt;td&gt;Default&lt;/td&gt;
+      &lt;td&gt;Description&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;channels&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;–&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;type&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;–&lt;/td&gt;
+      &lt;td&gt;The component type name, needs to be thrift&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;bind&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;–&lt;/td&gt;
+      &lt;td&gt;hostname or IP address to listen on&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;port&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;–&lt;/td&gt;
+      &lt;td&gt;Port # to bind to&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;threads&lt;/td&gt;
+      &lt;td&gt;–&lt;/td&gt;
+      &lt;td&gt;Maximum number of worker threads to spawn&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;selector.type&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;selector.*&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;interceptors&lt;/td&gt;
+      &lt;td&gt;–&lt;/td&gt;
+      &lt;td&gt;Space separated list of interceptors&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;interceptors.*&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Example for agent named a1:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;a1.sources = r1
+a1.channels = c1
+a1.sources.r1.type = thrift
+a1.sources.r1.channels = c1
+a1.sources.r1.bind = 0.0.0.0
+a1.sources.r1.port = 4141
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;exec-source&quot;&gt;Exec Source&lt;/h2&gt;
+
+&lt;p&gt;Exec source runs a given Unix command on start-up and expects that process to continuously produce data on standard out (stderr is simply discarded, unless property logStdErr is set to true). If the process exits for any reason, the source also exits and will produce no further data. This means configurations such as &lt;code&gt;cat [named pipe]&lt;/code&gt; or &lt;code&gt;tail -F [file]&lt;/code&gt; are going to produce the desired results where as &lt;code&gt;date&lt;/code&gt; will probably not - the former two commands produce streams of data where as the latter produces a single event and exits.（捕获命令的输出，并按行处理，当&lt;code&gt;logStdErr&lt;/code&gt;设为true时，也将捕获stderr的输出；）&lt;/p&gt;
+
+&lt;p&gt;Required properties are in bold.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Property Name&lt;/td&gt;
+      &lt;td&gt;Default&lt;/td&gt;
+      &lt;td&gt;Description&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;channels&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;–&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;type&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;–&lt;/td&gt;
+      &lt;td&gt;The component type name, needs to be exec&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;command&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;–&lt;/td&gt;
+      &lt;td&gt;The command to execute&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;shell&lt;/td&gt;
+      &lt;td&gt;–&lt;/td&gt;
+      &lt;td&gt;A shell invocation used to run the command. e.g. /bin/sh -c. Required only for commands relying on shell features like wildcards, back ticks, pipes etc.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;restartThrottle&lt;/td&gt;
+      &lt;td&gt;10000&lt;/td&gt;
+      &lt;td&gt;Amount of time (in millis) to wait before attempting a restart&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;restart&lt;/td&gt;
+      &lt;td&gt;false&lt;/td&gt;
+      &lt;td&gt;Whether the executed cmd should be restarted if it dies&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;logStdErr&lt;/td&gt;
+      &lt;td&gt;false&lt;/td&gt;
+      &lt;td&gt;Whether the command’s stderr should be logged&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;batchSize&lt;/td&gt;
+      &lt;td&gt;20&lt;/td&gt;
+      &lt;td&gt;The max number of lines to read and send to the channel at a time&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;selector.type&lt;/td&gt;
+      &lt;td&gt;replicating&lt;/td&gt;
+      &lt;td&gt;replicating or multiplexing&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;selector.*&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;Depends on the selector.type value&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;interceptors&lt;/td&gt;
+      &lt;td&gt;–&lt;/td&gt;
+      &lt;td&gt;Space-separated list of interceptors&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;interceptors.*&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;Warning&lt;/strong&gt;： The problem with ExecSource and other asynchronous sources is that the source can not guarantee that if there is a failure to put the event into the Channel the client knows about it. In such cases, the data will be lost. As a for instance, one of the most commonly requested features is the &lt;code&gt;tail -F [file]&lt;/code&gt;-like use case where an application writes to a log file on disk and Flume tails the file, sending each line as an event. While this is possible, there’s an obvious problem; what happens if the channel fills up and Flume can’t send an event? Flume has no way of indicating to the application writing the log file that it needs to retain the log or that the event hasn’t been sent, for some reason. If this doesn’t make sense, you need only know this: Your application can never guarantee data has been received when using a unidirectional asynchronous interface such as ExecSource! As an extension of this warning - and to be completely clear - there is absolutely zero guarantee of event delivery when using this source. For stronger reliability guarantees, consider the Spooling Directory Source or direct integration with Flume via the SDK.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：ExecSource方式，当command异常退出后，会丢失数据。解决办法：考虑Spooling Directory Source或者通过SDK直接与Flume集成。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;：You can use ExecSource to emulate TailSource from Flume 0.9x (flume og). Just use unix command tail -F /full/path/to/your/file. Parameter -F is better in this case than -f as it will also follow file rotation.（Flume 0.9x版本中，可以使用 &lt;code&gt;tail -F path&lt;/code&gt;命令模仿 TailSource）&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Example for agent named a1:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;a1.sources = r1
+a1.channels = c1
+a1.sources.r1.type = exec
+# follow file rotation
+a1.sources.r1.command = tail -F /var/log/secure
+a1.sources.r1.channels = c1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The ‘shell’ config is used to invoke the ‘command’ through a command shell (such as Bash or Powershell). The ‘command’ is passed as an argument to ‘shell’ for execution. This allows the ‘command’ to use features from the shell such as wildcards, back ticks, pipes, loops, conditionals etc. In the absence of the ‘shell’ config, the ‘command’ will be invoked directly. Common values for ‘shell’ : ‘/bin/sh -c’, ‘/bin/ksh -c’, ‘cmd /c’, ‘powershell -Command’, etc.（启用shell选项时，系统会将command当作参数，传送给shell执行，此时，能利用不同shell的特性）&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;agent_foo.sources.tailsource-1.type = exec
+agent_foo.sources.tailsource-1.shell = /bin/bash -c
+agent_foo.sources.tailsource-1.command = for i in /path/*.txt; do cat $i; done
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;jms-source&quot;&gt;JMS Source&lt;/h2&gt;
+
+&lt;p&gt;JMS Source reads messages from a JMS destination such as a queue or topic. Being a JMS application it should work with any JMS provider but has only been tested with ActiveMQ. The JMS source provides configurable batch size, message selector, user/pass, and message to flume event converter. Note that the vendor provided JMS jars should be included in the Flume classpath using plugins.d directory (preferred), –classpath on command line, or via FLUME_CLASSPATH variable in flume-env.sh.&lt;/p&gt;
+
+&lt;p&gt;Required properties are in bold.&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Property Name&lt;/td&gt;
+      &lt;td&gt;Default&lt;/td&gt;
+      &lt;td&gt;Description&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;channels&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;–&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;type&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;–&lt;/td&gt;
+      &lt;td&gt;The component type name, needs to be jms&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;initialContextFactory&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;–&lt;/td&gt;
+      &lt;td&gt;Inital Context Factory, e.g: org.apache.activemq.jndi.ActiveMQInitialContextFactory&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;connectionFactory&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;–&lt;/td&gt;
+      &lt;td&gt;The JNDI name the connection factory shoulld appear as&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;providerURL&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;–&lt;/td&gt;
+      &lt;td&gt;The JMS provider URL&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;destinationName&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;–&lt;/td&gt;
+      &lt;td&gt;Destination name&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;strong&gt;destinationType&lt;/strong&gt;&lt;/td&gt;
+      &lt;td&gt;–&lt;/td&gt;
+      &lt;td&gt;Destination type (queue or topic)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;messageSelector&lt;/td&gt;
+      &lt;td&gt;–&lt;/td&gt;
+      &lt;td&gt;Message selector to use when creating the consumer&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;userName&lt;/td&gt;
+      &lt;td&gt;–&lt;/td&gt;
+      &lt;td&gt;Username for the destination/provider&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;passwordFile&lt;/td&gt;
+      &lt;td&gt;–&lt;/td&gt;
+      &lt;td&gt;File containing the password for the destination/provider&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;batchSize&lt;/td&gt;
+      &lt;td&gt;100&lt;/td&gt;
+      &lt;td&gt;Number of messages to consume in one batch&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;converter.type&lt;/td&gt;
+      &lt;td&gt;DEFAULT&lt;/td&gt;
+      &lt;td&gt;Class to use to convert messages to flume events. See below.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;converter.*&lt;/td&gt;
+      &lt;td&gt;–&lt;/td&gt;
+      &lt;td&gt;Converter properties.&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;converter.charset&lt;/td&gt;
+      &lt;td&gt;UTF-8&lt;/td&gt;
+      &lt;td&gt;Default converter only. Charset to use when converting JMS TextMessages to byte arrays.&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：JMS是java方面的消息队列？做几年java了，对这个我还不清楚~~&lt;/p&gt;
+
+&lt;h3 id=&quot;converter&quot;&gt;Converter&lt;/h3&gt;
+
+&lt;p&gt;The JMS source allows pluggable converters, though it’s likely the default converter will work for most purposes. The default converter is able to convert Bytes, Text, and Object messages to FlumeEvents. In all cases, the properties in the message are added as headers to the FlumeEvent.（默认，message的properties会转换为FlumeEvent的headers）&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;BytesMessage: Bytes of message are copied to body of the FlumeEvent. Cannot convert more than 2GB of data per message.&lt;/li&gt;
+  &lt;li&gt;TextMessage: Text of message is converted to a byte array and copied to the body of the FlumeEvent. The default converter uses UTF-8 by default but this is configurable.&lt;/li&gt;
+  &lt;li&gt;ObjectMessage: Object is written out to a ByteArrayOutputStream wrapped in an ObjectOutputStream and the resulting array is copied to the body of the FlumeEvent.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Example for agent named a1:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;a1.sources = r1
+a1.channels = c1
+a1.sources.r1.type = jms
+a1.sources.r1.channels = c1
+a1.sources.r1.initialContextFactory = org.apache.activemq.jndi.ActiveMQInitialContextFactory
+a1.sources.r1.connectionFactory = GenericConnectionFactory
+a1.sources.r1.providerURL = tcp://mqserver:61616
+a1.sources.r1.destinationName = BUSINESS_DATA
+a1.sources.r1.destinationType = QUEUE
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;spooling-directory-source&quot;&gt;Spooling Directory Source&lt;/h2&gt;
+
+&lt;p&gt;This source lets you ingest data by placing files to be ingested into a “spooling” directory on disk. This source will watch the specified directory for new files, and will parse events out of new files as they appear. The event parsing logic is pluggable. After a given file has been fully read into the channel, it is renamed to indicate completion (or optionally deleted).&lt;/p&gt;
+
+&lt;p&gt;Unlike the Exec source, this source is reliable and will not miss data, even if Flume is restarted or killed. In exchange for this reliability, only immutable, uniquely-named files must be dropped into the spooling directory. Flume tries to detect these problem conditions and will fail loudly if they are violated:&lt;/p&gt;
+
+&lt;p&gt;If a file is written to after being placed into the spooling directory, Flume will print an error to its log file and stop processing.
+If a file name is reused at a later time, Flume will print an error to its log file and stop processing.
+To avoid the above issues, it may be useful to add a unique identifier (such as a timestamp) to log file names when they are moved into the spooling directory.&lt;/p&gt;
+
+&lt;p&gt;Despite the reliability guarantees of this source, there are still cases in which events may be duplicated if certain downstream failures occur. This is consistent with the guarantees offered by other Flume components.&lt;/p&gt;
+
+&lt;p&gt;Property Name	Default	Description
+channels	–	 
+type	–	The component type name, needs to be spooldir.
+spoolDir	–	The directory from which to read files from.
+fileSuffix	.COMPLETED	Suffix to append to completely ingested files
+deletePolicy	never	When to delete completed files: never or immediate
+fileHeader	false	Whether to add a header storing the absolute path filename.
+fileHeaderKey	file	Header key to use when appending absolute path filename to event header.
+basenameHeader	false	Whether to add a header storing the basename of the file.
+basenameHeaderKey	basename	Header Key to use when appending basename of file to event header.
+ignorePattern	^$	Regular expression specifying which files to ignore (skip)
+trackerDir	.flumespool	Directory to store metadata related to processing of files. If this path is not an absolute path, then it is interpreted as relative to the spoolDir.
+consumeOrder	oldest	In which order files in the spooling directory will be consumed oldest, youngest and random. In case of oldest and youngest, the last modified time of the files will be used to compare the files. In case of a tie, the file with smallest laxicographical order will be consumed first. In case of random any file will be picked randomly. When using oldest and youngest the whole directory will be scanned to pick the oldest/youngest file, which might be slow if there are a large number of files, while using random may cause old files to be consumed very late if new files keep coming in the spooling directory.
+maxBackoff	4000	The maximum time (in millis) to wait between consecutive attempts to write to the channel(s) if the channel is full. The source will start at a low backoff and increase it exponentially each time the channel throws a ChannelException, upto the value specified by this parameter.
+batchSize	100	Granularity at which to batch transfer to the channel
+inputCharset	UTF-8	Character set used by deserializers that treat the input file as text.
+decodeErrorPolicy	FAIL	What to do when we see a non-decodable character in the input file. FAIL: Throw an exception and fail to parse the file. REPLACE: Replace the unparseable character with the “replacement character” char, typically Unicode U+FFFD. IGNORE: Drop the unparseable character sequence.
+deserializer	LINE	Specify the deserializer used to parse the file into events. Defaults to parsing each line as an event. The class specified must implement EventDeserializer.Builder.
+deserializer.*	 	Varies per event deserializer.
+bufferMaxLines	–	(Obselete) This option is now ignored.
+bufferMaxLineLength	5000	(Deprecated) Maximum length of a line in the commit buffer. Use deserializer.maxLineLength instead.
+selector.type	replicating	replicating or multiplexing
+selector.*	 	Depends on the selector.type value
+interceptors	–	Space-separated list of interceptors
+interceptors.*	 	 
+Example for an agent named agent-1:&lt;/p&gt;
+
+&lt;p&gt;agent-1.channels = ch-1
+agent-1.sources = src-1&lt;/p&gt;
+
+&lt;p&gt;agent-1.sources.src-1.type = spooldir
+agent-1.sources.src-1.channels = ch-1
+agent-1.sources.src-1.spoolDir = /var/log/apache/flumeSpool
+agent-1.sources.src-1.fileHeader = true
+Twitter 1% firehose Source (experimental)&lt;/p&gt;
+
+&lt;p&gt;Warning This source is hightly experimental and may change between minor versions of Flume. Use at your own risk.
+Experimental source that connects via Streaming API to the 1% sample twitter firehose, continously downloads tweets, converts them to Avro format and sends Avro events to a downstream Flume sink. Requires the consumer and access tokens and secrets of a Twitter developer account. Required properties are in bold.&lt;/p&gt;
+
+&lt;p&gt;Property Name	Default	Description
+channels	–	 
+type	–	The component type name, needs to be org.apache.flume.source.twitter.TwitterSource
+consumerKey	–	OAuth consumer key
+consumerSecret	–	OAuth consumer secret
+accessToken	–	OAuth access token
+accessTokenSecret	–	OAuth toekn secret
+maxBatchSize	1000	Maximum number of twitter messages to put in a single batch
+maxBatchDurationMillis	1000	Maximum number of milliseconds to wait before closing a batch
+Example for agent named a1:&lt;/p&gt;
+
+&lt;p&gt;a1.sources = r1
+a1.channels = c1
+a1.sources.r1.type = org.apache.flume.source.twitter.TwitterSource
+a1.sources.r1.channels = c1
+a1.sources.r1.consumerKey = YOUR_TWITTER_CONSUMER_KEY
+a1.sources.r1.consumerSecret = YOUR_TWITTER_CONSUMER_SECRET
+a1.sources.r1.accessToken = YOUR_TWITTER_ACCESS_TOKEN
+a1.sources.r1.accessTokenSecret = YOUR_TWITTER_ACCESS_TOKEN_SECRET
+a1.sources.r1.maxBatchSize = 10
+a1.sources.r1.maxBatchDurationMillis = 200
+Event Deserializers&lt;/p&gt;
+
+&lt;p&gt;The following event deserializers ship with Flume.&lt;/p&gt;
+
+&lt;p&gt;LINE&lt;/p&gt;
+
+&lt;p&gt;This deserializer generates one event per line of text input.&lt;/p&gt;
+
+&lt;p&gt;Property Name	Default	Description
+deserializer.maxLineLength	2048	Maximum number of characters to include in a single event. If a line exceeds this length, it is truncated, and the remaining characters on the line will appear in a subsequent event.
+deserializer.outputCharset	UTF-8	Charset to use for encoding events put into the channel.
+AVRO&lt;/p&gt;
+
+&lt;p&gt;This deserializer is able to read an Avro container file, and it generates one event per Avro record in the file. Each event is annotated with a header that indicates the schema used. The body of the event is the binary Avro record data, not including the schema or the rest of the container file elements.&lt;/p&gt;
+
+&lt;p&gt;Note that if the spool directory source must retry putting one of these events onto a channel (for example, because the channel is full), then it will reset and retry from the most recent Avro container file sync point. To reduce potential event duplication in such a failure scenario, write sync markers more frequently in your Avro input files.&lt;/p&gt;
+
+&lt;p&gt;Property Name	Default	Description
+deserializer.schemaType	HASH	How the schema is represented. By default, or when the value HASH is specified, the Avro schema is hashed and the hash is stored in every event in the event header “flume.avro.schema.hash”. If LITERAL is specified, the JSON-encoded schema itself is stored in every event in the event header “flume.avro.schema.literal”. Using LITERAL mode is relatively inefficient compared to HASH mode.
+BlobDeserializer&lt;/p&gt;
+
+&lt;p&gt;This deserializer reads a Binary Large Object (BLOB) per event, typically one BLOB per file. For example a PDF or JPG file. Note that this approach is not suitable for very large objects because the entire BLOB is buffered in RAM.&lt;/p&gt;
+
+&lt;p&gt;Property Name	Default	Description
+deserializer	–	The FQCN of this class: org.apache.flume.sink.solr.morphline.BlobDeserializer$Builder
+deserializer.maxBlobLength	100000000	The maximum number of bytes to read and buffer for a given request
+NetCat Source&lt;/p&gt;
+
+&lt;p&gt;A netcat-like source that listens on a given port and turns each line of text into an event. Acts like nc -k -l [host] [port]. In other words, it opens a specified port and listens for data. The expectation is that the supplied data is newline separated text. Each line of text is turned into a Flume event and sent via the connected channel.&lt;/p&gt;
+
+&lt;p&gt;Required properties are in bold.&lt;/p&gt;
+
+&lt;p&gt;Property Name	Default	Description
+channels	–	 
+type	–	The component type name, needs to be netcat
+bind	–	Host name or IP address to bind to
+port	–	Port # to bind to
+max-line-length	512	Max line length per event body (in bytes)
+ack-every-event	true	Respond with an “OK” for every event received
+selector.type	replicating	replicating or multiplexing
+selector.*	 	Depends on the selector.type value
+interceptors	–	Space-separated list of interceptors
+interceptors.*	 	 
+Example for agent named a1:&lt;/p&gt;
+
+&lt;p&gt;a1.sources = r1
+a1.channels = c1
+a1.sources.r1.type = netcat
+a1.sources.r1.bind = 0.0.0.0
+a1.sources.r1.bind = 6666
+a1.sources.r1.channels = c1
+Sequence Generator Source&lt;/p&gt;
+
+&lt;p&gt;A simple sequence generator that continuously generates events with a counter that starts from 0 and increments by 1. Useful mainly for testing. Required properties are in bold.&lt;/p&gt;
+
+&lt;p&gt;Property Name	Default	Description
+channels	–	 
+type	–	The component type name, needs to be seq
+selector.type	 	replicating or multiplexing
+selector.*	replicating	Depends on the selector.type value
+interceptors	–	Space-separated list of interceptors
+interceptors.*	 	 
+batchSize	1	 
+Example for agent named a1:&lt;/p&gt;
+
+&lt;p&gt;a1.sources = r1
+a1.channels = c1
+a1.sources.r1.type = seq
+a1.sources.r1.channels = c1
+Syslog Sources&lt;/p&gt;
+
+&lt;p&gt;Reads syslog data and generate Flume events. The UDP source treats an entire message as a single event. The TCP sources create a new event for each string of characters separated by a newline (‘n’).&lt;/p&gt;
+
+&lt;p&gt;Required properties are in bold.&lt;/p&gt;
+
+&lt;p&gt;Syslog TCP Source&lt;/p&gt;
+
+&lt;p&gt;The original, tried-and-true syslog TCP source.&lt;/p&gt;
+
+&lt;p&gt;Property Name	Default	Description
+channels	–	 
+type	–	The component type name, needs to be syslogtcp
+host	–	Host name or IP address to bind to
+port	–	Port # to bind to
+eventSize	2500	Maximum size of a single event line, in bytes
+keepFields	false	Setting this to true will preserve the Priority, Timestamp and Hostname in the body of the event.
+selector.type	 	replicating or multiplexing
+selector.*	replicating	Depends on the selector.type value
+interceptors	–	Space-separated list of interceptors
+interceptors.*	 	 
+For example, a syslog TCP source for agent named a1:&lt;/p&gt;
+
+&lt;p&gt;a1.sources = r1
+a1.channels = c1
+a1.sources.r1.type = syslogtcp
+a1.sources.r1.port = 5140
+a1.sources.r1.host = localhost
+a1.sources.r1.channels = c1
+Multiport Syslog TCP Source&lt;/p&gt;
+
+&lt;p&gt;This is a newer, faster, multi-port capable version of the Syslog TCP source. Note that the ports configuration setting has replaced port. Multi-port capability means that it can listen on many ports at once in an efficient manner. This source uses the Apache Mina library to do that. Provides support for RFC-3164 and many common RFC-5424 formatted messages. Also provides the capability to configure the character set used on a per-port basis.&lt;/p&gt;
+
+&lt;p&gt;Property Name	Default	Description
+channels	–	 
+type	–	The component type name, needs to be multiport_syslogtcp
+host	–	Host name or IP address to bind to.
+ports	–	Space-separated list (one or more) of ports to bind to.
+eventSize	2500	Maximum size of a single event line, in bytes.
+keepFields	false	Setting this to true will preserve the Priority, Timestamp and Hostname in the body of the event.
+portHeader	–	If specified, the port number will be stored in the header of each event using the header name specified here. This allows for interceptors and channel selectors to customize routing logic based on the incoming port.
+charset.default	UTF-8	Default character set used while parsing syslog events into strings.
+charset.port.&lt;port&gt;	–	Character set is configurable on a per-port basis.
+batchSize	100	Maximum number of events to attempt to process per request loop. Using the default is usually fine.
+readBufferSize	1024	Size of the internal Mina read buffer. Provided for performance tuning. Using the default is usually fine.
+numProcessors	(auto-detected)	Number of processors available on the system for use while processing messages. Default is to auto-detect # of CPUs using the Java Runtime API. Mina will spawn 2 request-processing threads per detected CPU, which is often reasonable.
+selector.type	replicating	replicating, multiplexing, or custom
+selector.*	–	Depends on the selector.type value
+interceptors	–	Space-separated list of interceptors.
+interceptors.*	 	 
+For example, a multiport syslog TCP source for agent named a1:&lt;/port&gt;&lt;/p&gt;
+
+&lt;p&gt;a1.sources = r1
+a1.channels = c1
+a1.sources.r1.type = multiport_syslogtcp
+a1.sources.r1.channels = c1
+a1.sources.r1.host = 0.0.0.0
+a1.sources.r1.ports = 10001 10002 10003
+a1.sources.r1.portHeader = port
+Syslog UDP Source&lt;/p&gt;
+
+&lt;p&gt;Property Name	Default	Description
+channels	–	 
+type	–	The component type name, needs to be syslogudp
+host	–	Host name or IP address to bind to
+port	–	Port # to bind to
+keepFields	false	Setting this to true will preserve the Priority, Timestamp and Hostname in the body of the event.
+selector.type	 	replicating or multiplexing
+selector.*	replicating	Depends on the selector.type value
+interceptors	–	Space-separated list of interceptors
+interceptors.*	 	 
+For example, a syslog UDP source for agent named a1:&lt;/p&gt;
+
+&lt;p&gt;a1.sources = r1
+a1.channels = c1
+a1.sources.r1.type = syslogudp
+a1.sources.r1.port = 5140
+a1.sources.r1.host = localhost
+a1.sources.r1.channels = c1
+HTTP Source&lt;/p&gt;
+
+&lt;p&gt;A source which accepts Flume Events by HTTP POST and GET. GET should be used for experimentation only. HTTP requests are converted into flume events by a pluggable “handler” which must implement the HTTPSourceHandler interface. This handler takes a HttpServletRequest and returns a list of flume events. All events handled from one Http request are committed to the channel in one transaction, thus allowing for increased efficiency on channels like the file channel. If the handler throws an exception, this source will return a HTTP status of 400. If the channel is full, or the source is unable to append events to the channel, the source will return a HTTP 503 - Temporarily unavailable status.&lt;/p&gt;
+
+&lt;p&gt;All events sent in one post request are considered to be one batch and inserted into the channel in one transaction.&lt;/p&gt;
+
+&lt;p&gt;Property Name	Default	Description
+type	 	The component type name, needs to be http
+port	–	The port the source should bind to.
+bind	0.0.0.0	The hostname or IP address to listen on
+handler	org.apache.flume.source.http.JSONHandler	The FQCN of the handler class.
+handler.*	–	Config parameters for the handler
+selector.type	replicating	replicating or multiplexing
+selector.*	 	Depends on the selector.type value
+interceptors	–	Space-separated list of interceptors
+interceptors.*	 	 
+enableSSL	false	Set the property true, to enable SSL
+keystore	 	Location of the keystore includng keystore file name
+keystorePassword Keystore password
+For example, a http source for agent named a1:&lt;/p&gt;
+
+&lt;p&gt;a1.sources = r1
+a1.channels = c1
+a1.sources.r1.type = http
+a1.sources.r1.port = 5140
+a1.sources.r1.channels = c1
+a1.sources.r1.handler = org.example.rest.RestHandler
+a1.sources.r1.handler.nickname = random props
+JSONHandler&lt;/p&gt;
+
+&lt;p&gt;A handler is provided out of the box which can handle events represented in JSON format, and supports UTF-8, UTF-16 and UTF-32 character sets. The handler accepts an array of events (even if there is only one event, the event has to be sent in an array) and converts them to a Flume event based on the encoding specified in the request. If no encoding is specified, UTF-8 is assumed. The JSON handler supports UTF-8, UTF-16 and UTF-32. Events are represented as follows.&lt;/p&gt;
+
+&lt;p&gt;[{
+  “headers” : {
+             “timestamp” : “434324343”,
+             “host” : “random_host.example.com”
+             },
+  “body” : “random_body”
+  },
+  {
+  “headers” : {
+             “namenode” : “namenode.example.com”,
+             “datanode” : “random_datanode.example.com”
+             },
+  “body” : “really_random_body”
+  }]
+To set the charset, the request must have content type specified as application/json; charset=UTF-8 (replace UTF-8 with UTF-16 or UTF-32 as required).&lt;/p&gt;
+
+&lt;p&gt;One way to create an event in the format expected by this handler is to use JSONEvent provided in the Flume SDK and use Google Gson to create the JSON string using the Gson#fromJson(Object, Type) method. The type token to pass as the 2nd argument of this method for list of events can be created by:&lt;/p&gt;
+
+&lt;p&gt;Type type = new TypeToken&amp;lt;List&lt;jsonevent&gt;&amp;gt;() {}.getType();
+BlobHandler&lt;/jsonevent&gt;&lt;/p&gt;
+
+&lt;p&gt;By default HTTPSource splits JSON input into Flume events. As an alternative, BlobHandler is a handler for HTTPSource that returns an event that contains the request parameters as well as the Binary Large Object (BLOB) uploaded with this request. For example a PDF or JPG file. Note that this approach is not suitable for very large objects because it buffers up the entire BLOB in RAM.&lt;/p&gt;
+
+&lt;p&gt;Property Name	Default	Description
+handler	–	The FQCN of this class: org.apache.flume.sink.solr.morphline.BlobHandler
+handler.maxBlobLength	100000000	The maximum number of bytes to read and buffer for a given request
+Legacy Sources&lt;/p&gt;
+
+&lt;p&gt;The legacy sources allow a Flume 1.x agent to receive events from Flume 0.9.4 agents. It accepts events in the Flume 0.9.4 format, converts them to the Flume 1.0 format, and stores them in the connected channel. The 0.9.4 event properties like timestamp, pri, host, nanos, etc get converted to 1.x event header attributes. The legacy source supports both Avro and Thrift RPC connections. To use this bridge between two Flume versions, you need to start a Flume 1.x agent with the avroLegacy or thriftLegacy source. The 0.9.4 agent should have the agent Sink pointing to the host/port of the 1.x agent.&lt;/p&gt;
+
+&lt;p&gt;Note The reliability semantics of Flume 1.x are different from that of Flume 0.9.x. The E2E or DFO mode of a Flume 0.9.x agent will not be supported by the legacy source. The only supported 0.9.x mode is the best effort, though the reliability setting of the 1.x flow will be applicable to the events once they are saved into the Flume 1.x channel by the legacy source.
+Required properties are in bold.&lt;/p&gt;
+
+&lt;p&gt;Avro Legacy Source&lt;/p&gt;
+
+&lt;p&gt;Property Name	Default	Description
+channels	–	 
+type	–	The component type name, needs to be org.apache.flume.source.avroLegacy.AvroLegacySource
+host	–	The hostname or IP address to bind to
+port	–	The port # to listen on
+selector.type	 	replicating or multiplexing
+selector.*	replicating	Depends on the selector.type value
+interceptors	–	Space-separated list of interceptors
+interceptors.*	 	 
+Example for agent named a1:&lt;/p&gt;
+
+&lt;p&gt;a1.sources = r1
+a1.channels = c1
+a1.sources.r1.type = org.apache.flume.source.avroLegacy.AvroLegacySource
+a1.sources.r1.host = 0.0.0.0
+a1.sources.r1.bind = 6666
+a1.sources.r1.channels = c1
+Thrift Legacy Source&lt;/p&gt;
+
+&lt;p&gt;Property Name	Default	Description
+channels	–	 
+type	–	The component type name, needs to be org.apache.flume.source.thriftLegacy.ThriftLegacySource
+host	–	The hostname or IP address to bind to
+port	–	The port # to listen on
+selector.type	 	replicating or multiplexing
+selector.*	replicating	Depends on the selector.type value
+interceptors	–	Space-separated list of interceptors
+interceptors.*	 	 
+Example for agent named a1:&lt;/p&gt;
+
+&lt;p&gt;a1.sources = r1
+a1.channels = c1
+a1.sources.r1.type = org.apache.flume.source.thriftLegacy.ThriftLegacySource
+a1.sources.r1.host = 0.0.0.0
+a1.sources.r1.bind = 6666
+a1.sources.r1.channels = c1
+Custom Source&lt;/p&gt;
+
+&lt;p&gt;A custom source is your own implementation of the Source interface. A custom source’s class and its dependencies must be included in the agent’s classpath when starting the Flume agent. The type of the custom source is its FQCN.&lt;/p&gt;
+
+&lt;p&gt;Property Name	Default	Description
+channels	–	 
+type	–	The component type name, needs to be your FQCN
+selector.type	 	replicating or multiplexing
+selector.*	replicating	Depends on the selector.type value
+interceptors	–	Space-separated list of interceptors
+interceptors.*	 	 
+Example for agent named a1:&lt;/p&gt;
+
+&lt;p&gt;a1.sources = r1
+a1.channels = c1
+a1.sources.r1.type = org.example.MySource
+a1.sources.r1.channels = c1
+Scribe Source&lt;/p&gt;
+
+&lt;p&gt;Scribe is another type of ingest system. To adopt existing Scribe ingest system, Flume should use ScribeSource based on Thrift with compatible transfering protocol. For deployment of Scribe please follow the guide from Facebook. Required properties are in bold.&lt;/p&gt;
+
+&lt;p&gt;Property Name	Default	Description
+type	–	The component type name, needs to be org.apache.flume.source.scribe.ScribeSource
+port	1499	Port that Scribe should be connected
+workerThreads	5	Handing threads number in Thrift
+selector.type	 	 
+selector.*	 	 
+Example for agent named a1:&lt;/p&gt;
+
+&lt;p&gt;a1.sources = r1
+a1.channels = c1
+a1.sources.r1.type = org.apache.flume.source.scribe.ScribeSource
+a1.sources.r1.port = 1463
+a1.sources.r1.workerThreads = 5
+a1.sources.r1.channels = c1&lt;/p&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;参考来源&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://flume.apache.org/FlumeUserGuide.html&quot;&gt;Flume User Guide 1.5.0.1&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+   </entry>
+   
+   <entry>
+     <title>Flume 1.5.0.1 User Guide</title>
+     <link href="http://ningg.github.com/flume-user-guide"/>
+     <updated>2014-10-17T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/flume-user-guide</id>
+     <content type="html">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
+
+&lt;h3 id=&quot;overview&quot;&gt;Overview&lt;/h3&gt;
+
+&lt;p&gt;Apache Flume is a distributed, reliable, and available system for efficiently collecting, aggregating and moving large amounts of log data from many different sources to a centralized data store.&lt;/p&gt;
+
+&lt;p&gt;The use of Apache Flume is not only restricted to log data aggregation. Since data sources are customizable, Flume can be used to transport massive quantities of event data including but not limited to network traffic data, social-media-generated data, email messages and pretty much any data source possible.（数据源：网络流量数据、社交媒体产生的数据、email数据、其他数据，Flume都能收集）&lt;/p&gt;
+
+&lt;p&gt;Apache Flume is a top level project at the Apache Software Foundation.&lt;/p&gt;
+
+&lt;p&gt;There are currently two release code lines available, versions 0.9.x and 1.x.&lt;/p&gt;
+
+&lt;p&gt;Documentation for the 0.9.x track is available at the &lt;a href=&quot;http://archive.cloudera.com/cdh/3/flume/UserGuide/&quot;&gt;Flume 0.9.x User Guide&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;This documentation applies to the 1.4.x track.&lt;/p&gt;
+
+&lt;p&gt;New and existing users are encouraged to use the 1.x releases so as to leverage the performance improvements and configuration flexibilities available in the latest architecture.（推荐使用Flume 1.x版本：性能有改善、配置方便，使用了最新架构）&lt;/p&gt;
+
+&lt;h3 id=&quot;system-requirements&quot;&gt;System Requirements&lt;/h3&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Java Runtime Environment - Java 1.6 or later (Java 1.7 Recommended) （运行环境：JRE 1.6+，推荐JRE1.7）&lt;/li&gt;
+  &lt;li&gt;Memory - Sufficient memory for configurations used by sources, channels or sinks&lt;/li&gt;
+  &lt;li&gt;Disk Space - Sufficient disk space for configurations used by channels or sinks&lt;/li&gt;
+  &lt;li&gt;Directory Permissions - Read/Write permissions for directories used by agent （agent需要R/W权限）&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;architecture&quot;&gt;Architecture&lt;/h3&gt;
+
+&lt;h4 id=&quot;data-flow-model&quot;&gt;Data flow model&lt;/h4&gt;
+
+&lt;p&gt;A Flume event is defined as a unit of data flow having a byte payload and an optional set of string attributes. A Flume agent is a (JVM) process that hosts the components through which events flow from an external source to the next destination (hop).（Flume Event是a unit of data flow having a byte payload 和几个属性集合；Flume Agent是JVM进程，将events flow从一端送到另一端）&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/flume-user-guide/UserGuide_image00.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;A Flume source consumes events delivered to it by an external source like a web server. The external source sends events to Flume in a format that is recognized by the target Flume source. For example, an Avro Flume source can be used to receive Avro events from Avro clients or other Flume agents in the flow that send events from an Avro sink. A similar flow can be defined using a Thrift Flume Source to receive events from a Thrift Sink or a Flume Thrift Rpc Client or Thrift clients written in any language generated from the Flume thrift protocol.When a Flume source receives an event, it stores it into one or more channels. The channel is a passive store that keeps the event until it’s consumed by a Flume sink. The file channel is one example – it is backed by the local filesystem. The sink removes the event from the channel and puts it into an external repository like HDFS (via Flume HDFS sink) or forwards it to the Flume source of the next Flume agent (next hop) in the flow. The source and sink within the given agent run asynchronously with the events staged in the channel.（Source，接收外部data source的数据；Channel，被动接收Source的数据；Sink主动从Channel读取数据，并将其传递出去；利用Channel机制，Source、Sink实现异步处理）&lt;/p&gt;
+
+&lt;h4 id=&quot;complex-flows&quot;&gt;Complex flows&lt;/h4&gt;
+
+&lt;p&gt;Flume allows a user to build multi-hop flows where events travel through multiple agents before reaching the final destination. It also allows fan-in and fan-out flows, contextual routing and backup routes (fail-over) for failed hops.（Flume内flows支持fan-in、fan-out——多入多出，contextual touting和backup routes(fail-over)）&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)：contextual routing 和 backup routes的含义？&lt;/strong&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;reliability&quot;&gt;Reliability&lt;/h4&gt;
+
+&lt;p&gt;The events are staged in a channel on each agent. The events are then delivered to the next agent or terminal repository (like HDFS) in the flow. The events are removed from a channel only after they are stored in the channel of next agent or in the terminal repository. This is a how the single-hop message delivery semantics in Flume provide end-to-end reliability of the flow.（&lt;strong&gt;single-hop message delivery semantics&lt;/strong&gt;：Channel中的event仅在被成功处理之后，才从Channel中删掉。）&lt;/p&gt;
+
+&lt;p&gt;Flume uses a transactional approach to guarantee the reliable delivery of the events. The sources and sinks encapsulate in a transaction the storage/retrieval, respectively, of the events placed in or provided by a transaction provided by the channel. This ensures that the set of events are reliably passed from point to point in the flow. In the case of a multi-hop flow, the sink from the previous hop and the source from the next hop both have their transactions running to ensure that the data is safely stored in the channel of the next hop.（&lt;strong&gt;multi-hop&lt;/strong&gt;：）&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：Flume如何保证事物操作？没看懂&lt;/p&gt;
+
+&lt;h4 id=&quot;recoverability&quot;&gt;Recoverability&lt;/h4&gt;
+
+&lt;p&gt;The events are staged in the channel, which manages recovery from failure. Flume supports a durable file channel which is backed by the local file system. There’s also a memory channel which simply stores the events in an in-memory queue, which is faster but any events still left in the memory channel when an agent process dies can’t be recovered.（Channel需保证崩溃后，能恢复events，具体：本地FS上保存durable file channel，另，占用一个in-memory queue，Channel进程崩溃后，能加快恢复速度；但，如果agent进程崩溃，将导致内存泄漏：无法回收这一内存）&lt;/p&gt;
+
+&lt;h2 id=&quot;setup&quot;&gt;Setup&lt;/h2&gt;
+
+&lt;h3 id=&quot;setting-up-an-agent&quot;&gt;Setting up an agent&lt;/h3&gt;
+
+&lt;p&gt;Flume agent configuration is stored in a local configuration file. This is a text file that follows the Java properties file format. Configurations for one or more agents can be specified in the same configuration file. The configuration file includes properties of each source, sink and channel in an agent and how they are wired together to form data flows.（Agent利用config file设置：source、channel、sink的属性，以及不同Agent之间前后联系）&lt;/p&gt;
+
+&lt;h4 id=&quot;configuring-individual-components&quot;&gt;Configuring individual components&lt;/h4&gt;
+
+&lt;p&gt;Each component (source, sink or channel) in the flow has a name, type, and set of properties that are specific to the type and instantiation. For example, an Avro source needs a hostname (or IP address) and a port number to receive data from. A memory channel can have max queue size (“capacity”), and an HDFS sink needs to know the file system URI, path to create files, frequency of file rotation (“hdfs.rollInterval”) etc. All such attributes of a component needs to be set in the properties file of the hosting Flume agent.（设置Component的属性）&lt;/p&gt;
+
+&lt;h4 id=&quot;wiring-the-pieces-together&quot;&gt;Wiring the pieces together&lt;/h4&gt;
+
+&lt;p&gt;The agent needs to know what individual components to load and how they are connected in order to constitute the flow. This is done by listing the names of each of the sources, sinks and channels in the agent, and then specifying the connecting channel for each sink and source. For example, an agent flows events from an Avro source called avroWeb to HDFS sink hdfs-cluster1 via a file channel called file-channel. The configuration file will contain names of these components and file-channel as a shared channel for both avroWeb source and hdfs-cluster1 sink.（设置不同agent构成的topologies）&lt;/p&gt;
+
+&lt;h4 id=&quot;starting-an-agent&quot;&gt;Starting an agent&lt;/h4&gt;
+
+&lt;p&gt;An agent is started using a shell script called flume-ng which is located in the bin directory of the Flume distribution. You need to specify the agent name, the config directory, and the config file on the command line:（启动agent，需要指定参数：agent name、config dir、config file。）&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ bin/flume-ng agent -n $agent_name -c conf -f conf/flume-conf.properties.template
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now the agent will start running source and sinks configured in the given properties file.&lt;/p&gt;
+
+&lt;h4 id=&quot;a-simple-example&quot;&gt;A simple example&lt;/h4&gt;
+
+&lt;p&gt;Here, we give an example configuration file, describing a single-node Flume deployment. This configuration lets a user generate events and subsequently logs them to the console.（场景：single-node模式，user产生events并且将其输出到控制台）&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# example.conf: A single-node Flume configuration
+
+# Name the components on this agent
+a1.sources = r1
+a1.sinks = k1
+a1.channels = c1
+
+# Describe/configure the source
+a1.sources.r1.type = netcat
+a1.sources.r1.bind = localhost
+a1.sources.r1.port = 44444
+
+# Describe the sink
+a1.sinks.k1.type = logger
+
+# Use a channel which buffers events in memory
+a1.channels.c1.type = memory
+a1.channels.c1.capacity = 1000
+a1.channels.c1.transactionCapacity = 100
+
+# Bind the source and sink to the channel
+a1.sources.r1.channels = c1
+a1.sinks.k1.channel = c1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This configuration defines a single agent named a1. a1 has a source that listens for data on port 44444, a channel that buffers event data in memory, and a sink that logs event data to the console. The configuration file names the various components, then describes their types and configuration parameters. A given configuration file might define several named agents; when a given Flume process is launched a flag is passed telling it which named agent to manifest.（一个配置文件中，可设定多个agents，Flume进程启动时，会指定agent运行）&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：配置文件中，具体参数配置：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/flume-user-guide/flume-config-tree.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Given this configuration file, we can start Flume as follows:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ bin/flume-ng agent --conf conf --conf-file example.conf --name a1 -Dflume.root.logger=INFO,console
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Note that in a full deployment we would typically include one more option: –conf=&lt;conf-dir&gt;. The &lt;conf-dir&gt; directory would include a shell script flume-env.sh and potentially a log4j properties file. In this example, we pass a Java option to force Flume to log to the console and we go without a custom environment script.（实际开发场景下，通过`--conf=&lt;conf-dir&gt;`传入`&lt;conf-dir&gt;`，通常这一目录下应包含flume-env.sh文件和log4j的配置文件）&lt;/conf-dir&gt;&lt;/conf-dir&gt;&lt;/conf-dir&gt;&lt;/conf-dir&gt;&lt;/p&gt;
+
+&lt;p&gt;From a separate terminal, we can then telnet port 44444 and send Flume an event:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ telnet localhost 44444
+Trying 127.0.0.1...
+Connected to localhost.localdomain (127.0.0.1).
+Escape character is &#39;^]&#39;.
+Hello world! &amp;lt;ENTER&amp;gt;
+OK
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The original Flume terminal will output the event in a log message.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;12/06/19 15:32:19 INFO source.NetcatSource: Source starting
+12/06/19 15:32:19 INFO source.NetcatSource: Created serverSocket:sun.nio.ch.ServerSocketChannelImpl[/127.0.0.1:44444]
+12/06/19 15:32:34 INFO sink.LoggerSink: Event: { headers:{} body: 48 65 6C 6C 6F 20 77 6F 72 6C 64 21 0D          Hello world!. }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Congratulations - you’ve successfully configured and deployed a Flume agent! Subsequent sections cover agent configuration in much more detail.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：telnet通过命令行方式，能够发送字符？那么能与服务器交互吗？telnet命令方式下，典型应用场景有哪些？&lt;/p&gt;
+
+&lt;h4 id=&quot;installing-third-party-plugins&quot;&gt;Installing third-party plugins&lt;/h4&gt;
+
+&lt;p&gt;Flume has a fully plugin-based architecture. While Flume ships with many out-of-the-box sources, channels, sinks, serializers, and the like, many implementations exist which ship separately from Flume.&lt;/p&gt;
+
+&lt;p&gt;While it has always been possible to include custom Flume components by adding their jars to the FLUME_CLASSPATH variable in the flume-env.sh file, Flume now supports a special directory called plugins.d which automatically picks up plugins that are packaged in a specific format. This allows for easier management of plugin packaging issues as well as simpler debugging and troubleshooting of several classes of issues, especially library dependency conflicts.（在flume-env.sh中向FLUME_CLASSPATH中添加plugin的位置；另一种方式，向&lt;code&gt;plugins.d&lt;/code&gt;目录下添加plugin，即可自动安装。）&lt;/p&gt;
+
+&lt;h5 id=&quot;the-pluginsd-directory&quot;&gt;The plugins.d directory&lt;/h5&gt;
+
+&lt;p&gt;The &lt;code&gt;plugins.d&lt;/code&gt; directory is located at &lt;code&gt;$FLUME_HOME/plugins.d&lt;/code&gt;. At startup time, the flume-ng start script looks in the &lt;code&gt;plugins.d&lt;/code&gt; directory for plugins that conform to the below format and includes them in proper paths when starting up &lt;code&gt;java&lt;/code&gt;.（系统其中前，自动预处理plugins.d下的plugin）&lt;/p&gt;
+
+&lt;h5 id=&quot;directory-layout-for-plugins&quot;&gt;Directory layout for plugins&lt;/h5&gt;
+
+&lt;p&gt;Each plugin (subdirectory) within plugins.d can have up to three sub-directories:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;lib - the plugin’s jar(s)&lt;/li&gt;
+  &lt;li&gt;libext - the plugin’s dependency jar(s)&lt;/li&gt;
+  &lt;li&gt;native - any required native libraries, such as .so files&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Example of two plugins within the plugins.d directory:（&lt;code&gt;plugins.d&lt;/code&gt;目录下，plugin的目录结构如下）&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;plugins.d/
+plugins.d/custom-source-1/
+plugins.d/custom-source-1/lib/my-source.jar
+plugins.d/custom-source-1/libext/spring-core-2.5.6.jar
+plugins.d/custom-source-2/
+plugins.d/custom-source-2/lib/custom.jar
+plugins.d/custom-source-2/native/gettext.so
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;data-ingestion&quot;&gt;Data ingestion&lt;/h3&gt;
+
+&lt;p&gt;Flume supports a number of mechanisms to ingest data from external sources.（从外部 sources 获取数据，Flume有多种方式）&lt;/p&gt;
+
+&lt;h4 id=&quot;rpc&quot;&gt;RPC&lt;/h4&gt;
+
+&lt;p&gt;An Avro client included in the Flume distribution can send a given file to Flume Avro source using avro RPC mechanism:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ bin/flume-ng avro-client -H localhost -p 41414 -F /usr/logs/log.10
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The above command will send the contents of &lt;code&gt;/usr/logs/log.10&lt;/code&gt; to to the Flume source listening on that ports.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：什么含义？以Avro方式，向localhost:41414发送文件？仅仅是Data Source？有一个单独的Flume Source在localhost:41414监听？&lt;/p&gt;
+
+&lt;h4 id=&quot;executing-commands&quot;&gt;Executing commands&lt;/h4&gt;
+
+&lt;p&gt;There’s an exec source that executes a given command and consumes the output. A single ‘line’ of output ie. text followed by carriage return (‘\r’) or line feed (‘\n’) or both together.（exec source，执行command并将output按行发送至Channel）&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: Flume does not support &lt;code&gt;tail&lt;/code&gt; as a source. One can wrap the &lt;code&gt;tail&lt;/code&gt; command in an exec source to stream the file.（无法直接使用tail，需要包装在exec source中。）&lt;/p&gt;
+
+&lt;h4 id=&quot;network-streams&quot;&gt;Network streams&lt;/h4&gt;
+
+&lt;p&gt;Flume supports the following mechanisms to read data from popular log stream types, such as:（下述方式支持从log system中读取stream）&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Avro&lt;/li&gt;
+  &lt;li&gt;Thrift&lt;/li&gt;
+  &lt;li&gt;Syslog&lt;/li&gt;
+  &lt;li&gt;Netcat&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：上面都是什么呐？&lt;/p&gt;
+
+&lt;h3 id=&quot;setting-multi-agent-flow&quot;&gt;Setting multi-agent flow&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/flume-user-guide/UserGuide_image03.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;In order to flow the data across multiple agents or hops, the sink of the previous agent and source of the current hop need to be avro type with the sink pointing to the hostname (or IP address) and port of the source.（multiple agents时，previous agent中sink、current agent中source都应为avro类型，对应到相同的&lt;code&gt;IP:port&lt;/code&gt;）&lt;/p&gt;
+
+&lt;h3 id=&quot;consolidation&quot;&gt;Consolidation&lt;/h3&gt;
+
+&lt;p&gt;A very common scenario in log collection is a large number of log producing clients sending data to a few consumer agents that are attached to the storage subsystem. For example, logs collected from hundreds of web servers sent to a dozen of agents that write to HDFS cluster.（一个常见场景：大量client收集数据，写入一个集中系统）&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/flume-user-guide/UserGuide_image02.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;This can be achieved in Flume by configuring a number of first tier agents with an avro sink, all pointing to an avro source of single agent (Again you could use the thrift sources/sinks/clients in such a scenario). This source on the second tier agent consolidates the received events into a single channel which is consumed by a sink to its final destination.（解决办法：为每个client分配一个agent，再第二层，使用一个agent进行合并，然后写入最后的集中存储系统；不适用single-agent中的multi-sources，因为multi-sources，要求sources必须与channel在同一物理机器上，即，一个agent必须在一个物理机器上）&lt;/p&gt;
+
+&lt;h3 id=&quot;multiplexing-the-flow&quot;&gt;Multiplexing the flow&lt;/h3&gt;
+
+&lt;p&gt;Flume supports multiplexing the event flow to one or more destinations. This is achieved by defining a flow multiplexer that can replicate or selectively route an event to one or more channels.（对agent扩展，定义多个channel，实现fan-out）&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/flume-user-guide/UserGuide_image01.png&quot; alt=&quot;A fan-out flow using a (multiplexing) channel selector&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The above example shows a source from agent “foo” fanning out the flow to three different channels. This fan out can be replicating or multiplexing. In case of replicating flow, each event is sent to all three channels. For the multiplexing case, an event is delivered to a subset of available channels when an event’s attribute matches a preconfigured value. For example, if an event attribute called “txnType” is set to “customer”, then it should go to channel1 and channel3, if it’s “vendor” then it should go to channel2, otherwise channel3. The mapping can be set in the agent’s configuration file.（两种fan-out方式，replicating\multiplexing，即，复制和多路复用；replicating，输入复制到每个channel中一份；multiplexing，输入仅复制到匹配的channel中，相当于channel前加了个filter）&lt;/p&gt;
+
+&lt;h2 id=&quot;configuration&quot;&gt;Configuration&lt;/h2&gt;
+
+&lt;p&gt;As mentioned in the earlier section, Flume agent configuration is read from a file that resembles a Java property file format with hierarchical property settings.（hierarchical property settings？）&lt;/p&gt;
+
+&lt;h3 id=&quot;defining-the-flow&quot;&gt;Defining the flow&lt;/h3&gt;
+
+&lt;p&gt;To define the flow within a single agent, you need to link the sources and sinks via a channel. （定义single-agent内的flow时，几点：）&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;列出agent对应的sources、sinks、channels；&lt;/li&gt;
+  &lt;li&gt;指定与source对应的channels，指定与sink对应的channel；&lt;/li&gt;
+  &lt;li&gt;一个source可对应多个channel，一个sink只能对应一个channel； &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The format is as follows:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# list the sources, sinks and channels for the agent
+&amp;lt;Agent&amp;gt;.sources = &amp;lt;Source&amp;gt;
+&amp;lt;Agent&amp;gt;.sinks = &amp;lt;Sink&amp;gt;
+&amp;lt;Agent&amp;gt;.channels = &amp;lt;Channel1&amp;gt; &amp;lt;Channel2&amp;gt;
+
+# set channel for source
+&amp;lt;Agent&amp;gt;.sources.&amp;lt;Source&amp;gt;.channels = &amp;lt;Channel1&amp;gt; &amp;lt;Channel2&amp;gt; ...
+
+# set channel for sink
+&amp;lt;Agent&amp;gt;.sinks.&amp;lt;Sink&amp;gt;.channel = &amp;lt;Channel1&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：source绑定&lt;span style=&quot;color:red&quot;&gt;channels&lt;/span&gt;、sink绑定&lt;span style=&quot;color:red&quot;&gt;channel&lt;/span&gt;。疑问：单个agent中source只能有一个吗？如果single-agent中有多个source，那么是否也可以实现fan-in？&lt;/p&gt;
+
+&lt;p&gt;For example, an agent named agent_foo is reading data from an external avro client and sending it to HDFS via a memory channel. The config file weblog.config could look like:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# list the sources, sinks and channels for the agent
+agent_foo.sources = avro-appserver-src-1
+agent_foo.sinks = hdfs-sink-1
+agent_foo.channels = mem-channel-1
+
+# set channel for source
+agent_foo.sources.avro-appserver-src-1.channels = mem-channel-1
+
+# set channel for sink
+agent_foo.sinks.hdfs-sink-1.channel = mem-channel-1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This will make the events flow from avro-AppSrv-source to hdfs-Cluster1-sink through the memory channel mem-channel-1. When the agent is started with the weblog.config as its config file, it will instantiate that flow.&lt;/p&gt;
+
+&lt;h3 id=&quot;configuring-individual-components-1&quot;&gt;Configuring individual components&lt;/h3&gt;
+
+&lt;p&gt;After defining the flow, you need to set properties of each source, sink and channel. This is done in the same hierarchical namespace fashion where you set the component type and other values for the properties specific to each component:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# properties for sources
+&amp;lt;Agent&amp;gt;.sources.&amp;lt;Source&amp;gt;.&amp;lt;someProperty&amp;gt; = &amp;lt;someValue&amp;gt;
+
+# properties for channels
+&amp;lt;Agent&amp;gt;.channel.&amp;lt;Channel&amp;gt;.&amp;lt;someProperty&amp;gt; = &amp;lt;someValue&amp;gt;
+
+# properties for sinks
+&amp;lt;Agent&amp;gt;.sources.&amp;lt;Sink&amp;gt;.&amp;lt;someProperty&amp;gt; = &amp;lt;someValue&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The property &lt;code&gt;type&lt;/code&gt; needs to be set for each component for Flume to understand what kind of object it needs to be. Each source, sink and channel type has its own set of properties required for it to function as intended. All those need to be set as needed. In the previous example, we have a flow from avro-AppSrv-source to hdfs-Cluster1-sink through the memory channel mem-channel-1. Here’s an example that shows configuration of each of those components:（不同的组件有不同的property，但都有&lt;code&gt;type&lt;/code&gt;属性）&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;agent_foo.sources = avro-AppSrv-source
+agent_foo.sinks = hdfs-Cluster1-sink
+agent_foo.channels = mem-channel-1
+
+# set channel for sources, sinks
+
+# properties of avro-AppSrv-source
+agent_foo.sources.avro-AppSrv-source.type = avro
+agent_foo.sources.avro-AppSrv-source.bind = localhost
+agent_foo.sources.avro-AppSrv-source.port = 10000
+
+# properties of mem-channel-1
+agent_foo.channels.mem-channel-1.type = memory
+agent_foo.channels.mem-channel-1.capacity = 1000
+agent_foo.channels.mem-channel-1.transactionCapacity = 100
+
+# properties of hdfs-Cluster1-sink
+agent_foo.sinks.hdfs-Cluster1-sink.type = hdfs
+agent_foo.sinks.hdfs-Cluster1-sink.hdfs.path = hdfs://namenode/flume/webdata
+
+#...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;adding-multiple-flows-in-an-agent&quot;&gt;Adding multiple flows in an agent&lt;/h3&gt;
+
+&lt;p&gt;A single Flume agent can contain several independent flows. You can list multiple sources, sinks and channels in a config. These components can be linked to form multiple flows:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# list the sources, sinks and channels for the agent
+&amp;lt;Agent&amp;gt;.sources = &amp;lt;Source1&amp;gt; &amp;lt;Source2&amp;gt;
+&amp;lt;Agent&amp;gt;.sinks = &amp;lt;Sink1&amp;gt; &amp;lt;Sink2&amp;gt;
+&amp;lt;Agent&amp;gt;.channels = &amp;lt;Channel1&amp;gt; &amp;lt;Channel2&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：关于single-agent说几点：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;可包含多个sources、sinks、channels；&lt;/li&gt;
+  &lt;li&gt;定义多个sources时，&lt;code&gt;source1&lt;/code&gt;和&lt;code&gt;source2&lt;/code&gt;间，空格间隔；&lt;/li&gt;
+  &lt;li&gt;&lt;span style=&quot;color:red&quot;&gt;sink与channel一一对应吗&lt;/span&gt;？&lt;/li&gt;
+  &lt;li&gt;可包含多个相互独立的flow；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;疑问：source、channel、sink之间对应关系？&lt;code&gt;1：1&lt;/code&gt;？&lt;code&gt;1：n&lt;/code&gt;？&lt;code&gt;n：1&lt;/code&gt;？&lt;code&gt;n：n&lt;/code&gt;？&lt;/p&gt;
+
+&lt;p&gt;Then you can link the sources and sinks to their corresponding channels (for sources) of channel (for sinks) to setup two different flows. For example, if you need to setup two flows in an agent, one going from an external avro client to external HDFS and another from output of a tail to avro sink, then here’s a config to do that:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# list the sources, sinks and channels in the agent
+agent_foo.sources = avro-AppSrv-source1 exec-tail-source2
+agent_foo.sinks = hdfs-Cluster1-sink1 avro-forward-sink2
+agent_foo.channels = mem-channel-1 file-channel-2
+
+# flow #1 configuration
+agent_foo.sources.avro-AppSrv-source1.channels = mem-channel-1
+agent_foo.sinks.hdfs-Cluster1-sink1.channel = mem-channel-1
+
+# flow #2 configuration
+agent_foo.sources.exec-tail-source2.channels = file-channel-2
+agent_foo.sinks.avro-forward-sink2.channel = file-channel-2	
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;configuring-a-multi-agent-flow&quot;&gt;Configuring a multi agent flow&lt;/h3&gt;
+
+&lt;p&gt;To setup a multi-tier flow, you need to have an avro/thrift sink of first hop pointing to avro/thrift source of the next hop. This will result in the first Flume agent forwarding events to the next Flume agent. For example, if you are periodically sending files (1 file per event) using avro client to a local Flume agent, then this local agent can forward it to another agent that has the mounted for storage.（multi-agent之间通过avro、thrift方式进行连接，通过&lt;code&gt;IP:port&lt;/code&gt;来交互）&lt;/p&gt;
+
+&lt;p&gt;Weblog agent config:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# list sources, sinks and channels in the agent
+agent_foo.sources = avro-AppSrv-source
+agent_foo.sinks = avro-forward-sink
+agent_foo.channels = file-channel
+
+# define the flow
+agent_foo.sources.avro-AppSrv-source.channels = file-channel
+agent_foo.sinks.avro-forward-sink.channel = file-channel
+
+# avro sink properties
+agent_foo.sources.avro-forward-sink.type = avro
+agent_foo.sources.avro-forward-sink.hostname = 10.1.1.100
+agent_foo.sources.avro-forward-sink.port = 10000
+
+# configure other pieces
+#...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;HDFS agent config:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# list sources, sinks and channels in the agent
+agent_foo.sources = avro-collection-source
+agent_foo.sinks = hdfs-sink
+agent_foo.channels = mem-channel
+
+# define the flow
+agent_foo.sources.avro-collection-source.channels = mem-channel
+agent_foo.sinks.hdfs-sink.channel = mem-channel
+
+# avro sink properties
+agent_foo.sources.avro-collection-source.type = avro
+agent_foo.sources.avro-collection-source.bind = 10.1.1.100
+agent_foo.sources.avro-collection-source.port = 10000
+
+# configure other pieces
+#...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Here we link the avro-forward-sink from the weblog agent to the avro-collection-source of the hdfs agent. This will result in the events coming from the external appserver source eventually getting stored in HDFS.&lt;/p&gt;
+
+&lt;h3 id=&quot;fan-out-flow&quot;&gt;Fan out flow&lt;/h3&gt;
+
+&lt;p&gt;As discussed in previous section, Flume supports fanning out the flow from one source to multiple channels. There are two modes of fan out, replicating and multiplexing. In the replicating flow, the event is sent to all the configured channels. In case of multiplexing, the event is sent to only a subset of qualifying channels. To fan out the flow, one needs to specify a list of channels for a source and the policy for the fanning it out. This is done by adding a channel “selector” that can be replicating or multiplexing. Then further specify the selection rules if it’s a multiplexer. If you don’t specify a selector, then by default it’s replicating:（fan-out，两种实现方式：replicating、multiplexing；replicating，发送给所有channel；multiplexing，发送给满足条件的channel。具体，设置&lt;code&gt;selector&lt;/code&gt;，并指定规则；默认是replicating）&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# List the sources, sinks and channels for the agent
+&amp;lt;Agent&amp;gt;.sources = &amp;lt;Source1&amp;gt;
+&amp;lt;Agent&amp;gt;.sinks = &amp;lt;Sink1&amp;gt; &amp;lt;Sink2&amp;gt;
+&amp;lt;Agent&amp;gt;.channels = &amp;lt;Channel1&amp;gt; &amp;lt;Channel2&amp;gt;
+
+# set list of channels for source (separated by space)
+&amp;lt;Agent&amp;gt;.sources.&amp;lt;Source1&amp;gt;.channels = &amp;lt;Channel1&amp;gt; &amp;lt;Channel2&amp;gt;
+
+# set channel for sinks
+&amp;lt;Agent&amp;gt;.sinks.&amp;lt;Sink1&amp;gt;.channel = &amp;lt;Channel1&amp;gt;
+&amp;lt;Agent&amp;gt;.sinks.&amp;lt;Sink2&amp;gt;.channel = &amp;lt;Channel2&amp;gt;
+
+# set selector.type = replicating
+&amp;lt;Agent&amp;gt;.sources.&amp;lt;Source1&amp;gt;.selector.type = replicating
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The multiplexing select has a further set of properties to bifurcate the flow. This requires specifying a mapping of an event attribute to a set for channel. The selector checks for each configured attribute in the event header. If it matches the specified value, then that event is sent to all the channels mapped to that value. If there’s no match, then the event is sent to set of channels configured as default:（multiplexing方式时，设置header属性，根据header取值不同，分发到相应的channel；都不匹配的，分发到default）&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：header的值，是谁设置的？在哪设置的？难道是event中自带的？&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# Mapping for multiplexing selector
+&amp;lt;Agent&amp;gt;.sources.&amp;lt;Source1&amp;gt;.selector.type = multiplexing
+&amp;lt;Agent&amp;gt;.sources.&amp;lt;Source1&amp;gt;.selector.header = &amp;lt;someHeader&amp;gt;
+&amp;lt;Agent&amp;gt;.sources.&amp;lt;Source1&amp;gt;.selector.mapping.&amp;lt;Value1&amp;gt; = &amp;lt;Channel1&amp;gt;
+&amp;lt;Agent&amp;gt;.sources.&amp;lt;Source1&amp;gt;.selector.mapping.&amp;lt;Value2&amp;gt; = &amp;lt;Channel1&amp;gt; &amp;lt;Channel2&amp;gt;
+&amp;lt;Agent&amp;gt;.sources.&amp;lt;Source1&amp;gt;.selector.mapping.&amp;lt;Value3&amp;gt; = &amp;lt;Channel2&amp;gt;
+#...
+
+&amp;lt;Agent&amp;gt;.sources.&amp;lt;Source1&amp;gt;.selector.default = &amp;lt;Channel2&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The mapping allows overlapping the channels for each value.（不同header取值对应的channel，可以重复）&lt;/p&gt;
+
+&lt;p&gt;The following example has a single flow that multiplexed to two paths. The agent named agent_foo has a single avro source and two channels linked to two sinks:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# list the sources, sinks and channels in the agent
+agent_foo.sources = avro-AppSrv-source1
+agent_foo.sinks = hdfs-Cluster1-sink1 avro-forward-sink2
+agent_foo.channels = mem-channel-1 file-channel-2
+
+# set channels for source
+agent_foo.sources.avro-AppSrv-source1.channels = mem-channel-1 file-channel-2
+
+# set channel for sinks
+agent_foo.sinks.hdfs-Cluster1-sink1.channel = mem-channel-1
+agent_foo.sinks.avro-forward-sink2.channel = file-channel-2
+
+# channel selector configuration
+agent_foo.sources.avro-AppSrv-source1.selector.type = multiplexing
+agent_foo.sources.avro-AppSrv-source1.selector.header = State
+agent_foo.sources.avro-AppSrv-source1.selector.mapping.CA = mem-channel-1
+agent_foo.sources.avro-AppSrv-source1.selector.mapping.AZ = file-channel-2
+agent_foo.sources.avro-AppSrv-source1.selector.mapping.NY = mem-channel-1 file-channel-2
+agent_foo.sources.avro-AppSrv-source1.selector.default = mem-channel-1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The selector checks for a header called “State”. If the value is “CA” then its sent to mem-channel-1, if its “AZ” then it goes to file-channel-2 or if its “NY” then both. If the “State” header is not set or doesn’t match any of the three, then it goes to mem-channel-1 which is designated as ‘default’.&lt;/p&gt;
+
+&lt;p&gt;The selector also supports optional channels. To specify optional channels for a header, the config parameter ‘optional’ is used in the following way:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：optional channels，要解决什么问题？RE：仅当required channel中event运行失败，才有可能涉及optional channel。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# channel selector configuration
+agent_foo.sources.avro-AppSrv-source1.selector.type = multiplexing
+agent_foo.sources.avro-AppSrv-source1.selector.header = State
+agent_foo.sources.avro-AppSrv-source1.selector.mapping.CA = mem-channel-1
+agent_foo.sources.avro-AppSrv-source1.selector.mapping.AZ = file-channel-2
+agent_foo.sources.avro-AppSrv-source1.selector.mapping.NY = mem-channel-1 file-channel-2
+agent_foo.sources.avro-AppSrv-source1.selector.optional.CA = mem-channel-1 file-channel-2
+agent_foo.sources.avro-AppSrv-source1.selector.mapping.AZ = file-channel-2
+agent_foo.sources.avro-AppSrv-source1.selector.default = mem-channel-1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The selector will attempt to write to the required channels first and will fail the transaction if even one of these channels fails to consume the events. The transaction is reattempted on all of the channels. Once all required channels have consumed the events, then the selector will attempt to write to the optional channels. A failure by any of the optional channels to consume the event is simply ignored and not retried.（运行异常的事务，会尝试在所有required channels中重新运行，如果重新运行成功，则将event写入optional channels内。）&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：transaction、event是怎么划分的？到底什么是transaction？&lt;/p&gt;
+
+&lt;p&gt;If there is an overlap between the optional channels and required channels for a specific header, the channel is considered to be required, and a failure in the channel will cause the entire set of required channels to be retried. For instance, in the above example, for the header “CA” mem-channel-1 is considered to be a required channel even though it is marked both as required and optional, and a failure to write to this channel will cause that event to be retried on all channels configured for the selector.（如果一个channel既是required channel，又是optional channel，则强制认定channel为required channel）&lt;/p&gt;
+
+&lt;p&gt;Note that if a header does not have any required channels, then the event will be written to the default channels and will be attempted to be written to the optional channels for that header. Specifying optional channels will still cause the event to be written to the default channels, if no required channels are specified. If no channels are designated as default and there are no required, the selector will attempt to write the events to the optional channels. Any failures are simply ignored in that case.（如果event，没有任何对应的required channel，则尝试写入default channel，并且尝试写入对应的optional channel；如果没有default channel，则，也会写入optional channel中。）&lt;/p&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;参考来源&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://flume.apache.org/FlumeUserGuide.html&quot;&gt;Flume User Guide 1.5.0.1&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+   </entry>
+   
+   <entry>
+     <title>MySQL字符编码和大小写敏感问题</title>
+     <link href="http://ningg.github.com/mysql-charset-and-table-name-lower-case"/>
+     <updated>2014-10-16T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/mysql-charset-and-table-name-lower-case</id>
+     <content type="html">&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
+
+&lt;p&gt;关于MySQL，遇到几个问题，列一下：&lt;/p&gt;
+
+&lt;p&gt;乱码问题：字符集不统一；
+无法启动：查看错误日志；
+无法删除database：先在数据存储目录清理；
+table找不到：table区分大小写；&lt;/p&gt;
+
+&lt;p&gt;MySQL版本：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[devp@localhost ~]$ mysql -V
+mysql  Ver 14.14 Distrib 5.6.20, for Linux (x86_64) using  EditLine wrapper
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;乱码问题&lt;/h2&gt;
+
+&lt;p&gt;看官网，mysql的refman（reference manual，参考手册）中，globalization –&amp;gt; character set configuration，其中提到：
+system、server、client的charset不一致时，会产生乱码。&lt;/p&gt;
+
+&lt;p&gt;通过如下命令查看一下，当前mysql各个组件的字符集详情：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mysql&amp;gt; show variables like &quot;character%&quot;;
++--------------------------+----------------------------+
+| Variable_name            | Value                      |
++--------------------------+----------------------------+
+| character_set_client     | utf8                       |
+| character_set_connection | utf8                       |
+| character_set_database   | latin1                     |
+| character_set_filesystem | binary                     |
+| character_set_results    | utf8                       |
+| character_set_server     | latin1                     |
+| character_set_system     | utf8                       |
+| character_sets_dir       | /usr/share/mysql/charsets/ |
++--------------------------+----------------------------+
+8 rows in set (0.00 sec)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;通过命令：show collation，查看当前MySQL支持的字符集。从上面查询结果可知，server的字符集与system、client不同，则，在my.cnf文件中设定server的字符集即可。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# /usr/my.cnf
+character_set_server=utf8
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;重新启动MySQL，OK（根据&lt;a href=&quot;http://dev.mysql.com/doc/refman/5.6/en/server-system-variables.html#sysvar_character_set_server&quot;&gt;官网解释&lt;/a&gt;，不需要向数据库重新插入数据）。database的编码方式，不要手动调整，其始终与default database保持一致，若没有default database，则由server的编码方式决定。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;无法启动&lt;/h2&gt;
+
+&lt;p&gt;通过service mysql start，无法启动MySQL，提示出错，略焦躁，不要着急，有错误日志，查看即可。错误日志位置：/var/lib/mysql/*.err，出错信息：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[ERROR] /usr/sbin/mysqld: unknown variable &#39;default-character-set=utf-8&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;原来是在my.cnf文件中添加了一个变量，MySQL无法识别，从my.cnf删除即可。官方文档中&lt;a href=&quot;http://dev.mysql.com/doc/refman/5.6/en/server-administration.html&quot;&gt;MySQL Server Administration&lt;/a&gt;，有查看错误日志的详细信息，另外，错误日志位置参考&lt;a href=&quot;http://dev.mysql.com/doc/refman/5.6/en/installing.html&quot;&gt;Installing and Upgrading MySQL&lt;/a&gt;中提到的安装目录结构。&lt;/p&gt;
+
+&lt;h2 id=&quot;database&quot;&gt;无法删除Database&lt;/h2&gt;
+
+&lt;p&gt;删除database时，出错：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mysql&amp;gt; drop database test;
+ERROR 1010 (HY000): Error dropping database (can&#39;t rmdir &#39;./test&#39;, errno: 39)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;解决办法：到MySQL存放数据的路径下（/var/lib/mysql/），将shcourt数据库对应目录（./shcourt）下内容清空，再删除shcourt数据库即可。&lt;/p&gt;
+
+&lt;h2 id=&quot;table&quot;&gt;找不到table&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;MySQL无法连接问题；设置对table名称不区分大小写；
+http://www.cnblogs.com/jifeng/archive/2010/08/29/1811879.html 
+思考：字段是否区分大小写？数据库不区分大小写。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;1.用ROOT登录，修改/etc/my.cnf
+　　2.在[mysqld]下加入一行：lower_case_table_names=1
+　　3.重新启动数据库即可&lt;/p&gt;
+
+&lt;h2 id=&quot;section-3&quot;&gt;参考来源&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://dev.mysql.com/doc/&quot;&gt;MySQL官方文档&lt;/a&gt;
+&lt;a href=&quot;http://dev.mysql.com/doc/refman/5.6/en/installing.html&quot;&gt;Installing and Upgrading MySQL&lt;/a&gt;
+&lt;a href=&quot;http://dev.mysql.com/doc/refman/5.6/en/server-administration.html&quot;&gt;MySQL Server Administration&lt;/a&gt;&lt;/p&gt;
+
+</content>
+   </entry>
    
    <entry>
      <title>如何参与开源项目</title>
@@ -1005,285 +2371,6 @@ RE：新建一条记录，或者将&lt;code&gt;user=root&lt;/code&gt;的记录�
 
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;/download/wireframe/wireframe-learning.pptx&quot;&gt;Wireframes.ppt&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>CTO这点事</title>
-     <link href="http://ningg.github.com/talk-about-cto"/>
-     <updated>2014-09-28T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/talk-about-cto</id>
-     <content type="html">&lt;blockquote&gt;
-  &lt;p&gt;题记：本文转载自caoz，原文地址：&lt;a href=&quot;http://zhuanlan.zhihu.com/iamcaoz/19856992&quot;&gt;CTO这点事&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;几乎整个互联网行业都缺CTO，特别是一些草根背景的创业者，这个问题更加显著。从我自己的感受，身边各种朋友委托我找CTO的需求，嗯，算下来超过两位数了，光最近一个月就有3个，而且这三家都是刚拿了A轮的。其他那些公司CTO大部分空缺了一两年，或者其他高管临时暂代过渡。实话说，我觉得每个公司都不错的，但通常也只能遗憾的说，真没有能推荐的。
-其实，根据个人的观察，每个互联网团队都喊需要CTO，但是具体诉求却各不相同，如果说共性，就只有一点，那就是，公司老板对技术的期望值与目前技术团队的能力表现，有较大的差异，而这个差异，对于老板来说，就是一个想法，找个合格的CTO，一切就都解决了。其实，真不是这回事。&lt;/p&gt;
-
-&lt;p&gt;今天要说的第一点，就是期望值的控制；很多互联网公司都希望自己走技术驱动的路线，期望小而美，复制美国技术新贵的市场表现；这不能说是一个错误的期望，但是，现实能有多少符合这种需求的人才呢？这样的人才需要技术有前瞻性，对产业格局有判断，对管理有心得，情商还不能低（算了一下，四项里我至少三项不符合。）。整个行业内这样的人有几个？凭什么会跟你？　事实上我身边确实有这样的案例，一个以业务为主的公司，搞定了一个超棒的CTO，很快就转型成以技术为驱动的公司，公司价值极大提升，问题是，这种现象很难具有复制性。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/talk-about-cto/chinese-carrier.jpg&quot; alt=&quot;chinese-carrier&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;cto&quot;&gt;大家对CTO的期望&lt;/h2&gt;
-
-&lt;p&gt;下面我说一下一个最基本的让人纠结的问题，到底什么是CTO？其实，空谈这个名词的定义毫无意义，从我身边很多朋友公司的实例来看，他们对这个角色的定义和定位是差异非常大的。具体而言，不同创业团队，对CTO需求的真实想法，包括如下层面。&lt;/p&gt;
-
-&lt;h3 id=&quot;section&quot;&gt;技术选型&lt;/h3&gt;
-
-&lt;p&gt;这其实是创业公司最纠结的问题；他们往往一上来基于已有的程序员的个人习惯和爱好，选择了一个技术方案，然后到某一天一看，我靠，全是坑（当然，也可能与执行者的能力有关）。而更糟的是，这个技术方案相对冷门，市场上去招聘都很难做。还有就是技术方案成本过高，（不只是钱的问题，特别是时间成本！）结果严重影响到后续的发展速度。　我举个简单例子，最近我给多个创业者提建议，比如做app，很多以内容运营为核心的app，不要用原生态开发，目前一堆第三方的跨平台开发架构，如果选择合适，可以极大减少开发成本，以及降低技术招聘的难度。微信开店开社区，也有一堆第三方平台，这些事情，对于一些创业者来说，就是特纠结的事情，第一，他们并不完全了解这个领域；第二，他们就算有所了解，也很难判断究竟谁家的方案更靠谱？难道要靠百度竞价排名来裁决么？　而对于技术人员，包括相当多技术高手，他们也会有一些自己的打算，比如说，我就熟悉这个，为啥要用我不熟悉的？（没有考虑从公司长远的人力成本和开发效率）。比如说，我本来服务端技术很强，现在用了一个开源服务端框架，比如skynet，我变成写脚本的了，我价值怎么体现？（不知道自己的价值来自于产品的市场表现）。&lt;/p&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;万能适配器&lt;/h3&gt;
-
-&lt;p&gt;公司有了一个基本的起步，比如在某个平台上有了一点成绩，然后希望扩展到不同领域，不同平台，然后老板突然发现，哦，原来程序员不是什么都会的。服务端，前端，运维，安全，数据库，甚至SEO优化（你敢说这不是技术？）最好有个牛人都能带起来，这个牛人，就是他们定义的CTO，咳咳。创业公司，人少而事杂，其实，真的可以理解。我认识不少创业者，最终万般无奈下，硬是把自己逼成了万能哥。话说当年我也是创业的时候，万般无奈才自学怎么做运维的，虽然很多都没学会，但是偶尔也能出去忽悠一下。&lt;/p&gt;
-
-&lt;h3 id=&quot;section-2&quot;&gt;性能调优及架构扩展&lt;/h3&gt;
-
-&lt;p&gt;很多小公司到了一定的用户规模和并发规模的时候，一下子就扛不住了，甚至严重影响业务的拓展，某著名淘品牌自己做了一个独立网店，结果一搞秒杀活动就崩溃，（吐个槽，他们运营人员也死心眼，就知道搞秒杀，知道技术架构不行，不会搞点别的形式么）。结果独立网店一直就没搞起来。其实很多这些偏传统的互联网公司，他们所遇到的问题，在高手眼里不值一提，但是这个坎过不去，他们真就发展不起来。说个题外话八卦一下，当年腾讯叫oicq的时候，一堆*icq，只有腾讯牛了，其他的为啥不行？真的是产品原因么？其实都是这个问题，到了１００万用户的时候，就只有腾讯还能发展新用户，其他的技术全都撑不住了。大家看到的都是剩者为王，我看到的是，数不清非常不错的产品，死在这个环节上了。严格的说，这其实不是CTO的工作，按照分工来说，通常涉及系统分析师，系统架构师，以及DBA来做这方面的工作，但是对于创业公司，根本就没这种角色设定，他们遇到这个问题，通常想到的是，有个好的CTO就好了。&lt;/p&gt;
-
-&lt;h3 id=&quot;section-3&quot;&gt;团队管理和效率提升&lt;/h3&gt;
-
-&lt;p&gt;这还真是CTO的本职工作了，我遇到技术出身的创业者，他纠结的问题是，当时自己一个人做开发，连带着做运营，七七八八一堆事，也把东西做起来了，现在公司产品知名度有了，拿到投资了，开发团队也搭起来了，怎么开发效率反而下去了？所以，他的理解是，需要一个CTO。　从技术人才招聘，团队培养，技术培训，到开发模式培训（比如现在流行的敏捷开发），产品质量测评体系，信息安全防护等等，这些林林总总的事情，对于创业者来说，就全部归纳为“需要一个CTO”，嗯。&lt;/p&gt;
-
-&lt;h3 id=&quot;section-4&quot;&gt;数据决策体系&lt;/h3&gt;
-
-&lt;p&gt;自从“大数据”概念火了以后，基本上所有创业者都在谈，我的业务模式，发展了海量用户后，一定是基于数据驱动，可是数据咋驱动？没几个人真想清楚了，但是没关系，只要有CTO，这个问题就解决了。　我知道真有能搞定此事的CTO，真的有，不过，真的属于稀缺品种，目测比大熊猫还少。因为，要理解数据驱动，首先要理解业务，而理解业务，往往不是技术人员的特长。又要自吹一句，我在百度的时候，最牛逼的事情就是在产品部门里搭出一个技术团队，来做数据，为什么要坚持在产品部门编制？（实话说，当年技术部门的薪酬更高一些），我坚持认为重心在于数据目标和解读，而不是技术实现。　所以，这里我多说一句，数据决策体系，先想清楚具体目标和具体展现，再寻求技术支持，而不是一句话推给技术团队去弄，除非你公司里真有这么一只极品稀缺大熊猫。　实际上，再吐个槽，最基本的数据处理的结果，经过正确严谨的解读，就已经有极大的价值了，而很多人往往无视这些，去追求更高深的技术实现，搞一些莫名其妙的算法和逻辑，来彰显技术价值，其实是舍近求远的表现。　&lt;/p&gt;
-
-&lt;h3 id=&quot;section-5&quot;&gt;重构商业模式&lt;/h3&gt;
-
-&lt;p&gt;这个，咳咳，怎么说呢，公司觉得自己商业模式不够酷，不够吸引资本关注，希望从业务驱动转为技术驱动，嗯，来个牛逼的CTO，这事真可行，嗯，话说，这事真可行，点到为止，不展开了。　&lt;/p&gt;
-
-&lt;p&gt;以上是我观测到的，身边以及业内一些典型的CTO需求，当然，不同公司诉求真的不一样。有的侧重管理，有的侧重解决瓶颈问题，但是对老板而言，只要他们认为目前技术团队不够好，不够给力，不够预期，那么，这就是他们认为缺乏的，CTO。不仅仅是创业公司，上市公司乃至巨头，这个问题也一样存在，比如说，百度的CTO，貌似空缺了好几年呢。是他们的人才不够优秀么？还不是达不到李厂长期望值。&lt;/p&gt;
-
-&lt;h2 id=&quot;section-6&quot;&gt;个人观点&lt;/h2&gt;
-
-&lt;p&gt;下面说我的一些观点&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;第一&lt;/strong&gt;，相当比例大公司背景的技术牛人，并不适合去创业公司做CTO，原因1：技术再牛，不够全面，这没辙，大公司求深，创业公司求全；原因2：技术再牛，要懂业务。创业公司没有完备严谨的产品经理，没有明确的目标规划，很多工作是一个初步的目标，然后做起来看。如果技术人员不懂业务，很可能就会走弯路，做出很多不伦不类的东西，所以创业公司遇到这样的大牛，要先沟通到位再决定，不要迷信简历，当然，不乏这里有非常出色的。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;第二&lt;/strong&gt;，创始公司老板要想清楚自己当前真正需要的是什么，控制一下目标和欲望，有些事不能强求的。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;第三&lt;/strong&gt;，要给人才成长的空间，CTO也不是天生的，不要认为外面的和尚一定好念经。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;第四&lt;/strong&gt;，遇到真的特别合适的人才，要舍得本钱，理想可以谈，但是让人家舍弃各种丰厚回报的机会来跟你打拼，总要出示一些诚意。要知道这样的人才是稀缺品。&lt;/p&gt;
-
-&lt;h2 id=&quot;section-7&quot;&gt;几点解释&lt;/h2&gt;
-
-&lt;p&gt;最后解释一下 CTO所需要的四个领域的能力&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;技术前瞻性&lt;/strong&gt;，就好比2010年谷歌手机发布了，您还在那里吭哧吭哧跟老板说咱们好好弄塞班。（好多技术牛人，大公司的技术总监都是这样的！！！）。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;对产业格局有判断&lt;/strong&gt;，举例来说，移动互联网起来了，能知道工具型，娱乐性，生活性的应用大概的爆发周期和爆发规模。 能对移动游戏，电商的发展速度和市场顶点在哪里，这样才能给老板正确的技术投入建议和规划目标建议，别市场喷发的时候不去考虑准备架构扩容，还在角落里扣扣索索的算怎么比同行省点运维成本。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;管理心得&lt;/strong&gt;，技术团队的培养和带动，别光顾着自己牛逼，要让团队牛逼。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;情商&lt;/strong&gt;，各种沟通，协调，不解释。&lt;/p&gt;
-
-&lt;p&gt;就这样，有点凌乱，凑活看吧&lt;/p&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>优秀的软件工程师</title>
-     <link href="http://ningg.github.com/software-engineer-self-test"/>
-     <updated>2014-09-28T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/software-engineer-self-test</id>
-     <content type="html">&lt;blockquote&gt;
-  &lt;p&gt;题记：本文转载自邹欣的书籍《&lt;a href=&quot;http://book.douban.com/subject/25965995//&quot;&gt;构建之法&lt;/a&gt;》&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;保持高标准，不要受制于破窗理论(broken windows theory)。
-当你看到不靠谱的设计、糟糕的代码、过时的文档和测试用例的时候，不要想“既然别人的代码已经这样了，我的代码也可以随便一点啦。”&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;主动解决问题。当看到不靠谱的设计，糟糕的代码的时候，不要想“可能别人会来管这个事情” ，或者“我下个月发一个邮件让大家讨论一下”。要主动地把问题给解决了[ii]。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;经常给自己充电，身体训练是运动员生活的一部分，学习是软件工程师职业的伴侣。每半年就要了解和学习一些新的相关技术。通过定期分享（面对面的分享，写技术博客等）来确保自己真正掌握了新技术。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;DRY （Don’t Repeat Yourself）——别重复。在一个系统中，每一个知识点都应该有一个无异议的、正规的表现形式。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;消除不相关模块之间的影响，在设计模块的时候，要让它们目标明确并单一，能独立存在，没有不明确的外部依赖。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;通过快速原型来学习，快速原型的目的是学习，它的价值不在于代码，而在于你通过快速原型学到了什么。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;设计要接近问题领域，在设计的时候，要接近你目标用户的语言和环境。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;估计任务所花费的时间，避免意外。在开始工作的时候，要做出时间和潜在影响的估计，并通告相关人士，避免最后关头意外发生。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;图形界面的工具有它的长处，但是不要忘了命令行工具也可以发挥很高的效率，特别是可以用脚本构建各种组合命令的时候。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;有很多代码编辑器，请把其中一个用得非常熟练。让编辑器可以实现自己的定制，可以用脚本驱动，用起来得心应手。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;理解常用的设计模式，并知道择机而用。设计模式不错，更重要的是知道它的目的是什么，什么时候用，什么时候不用。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;代码版本管理工具是你代码的保障，重要的代码一定要有代码版本管理。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;在debug的时候，不要惊慌，想想导致问题的原因可能在哪里。一步一步地找到原因。要在实践中运用工具，善于分析日志（log），从中找到bug。同时，在自己的代码里面加 log.&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;重要的接口要用形式化的“合同”来规定。用文档和断言、自动化测试等工具来保证代码的确按照合同来做事，不多也不少。使用断言 (assertion) 或者其他技术来验证代码中的假设，你认为不可能发生的事情在现实世界中往往会发生。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;只在异常的情况下才使用异常 (Exception),  不加判断地过多使用异常，会降低代码的效率和可维护性。记住不要用异常来传递正常的信息。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;善始善终。如果某个函数申请了空间或其他资源，这个函数负责释放这些资源。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;当你的软件有多种技术结合在一起的时候，要采用松耦合的配置模式，而不是要把所有代码都集成到一起。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;把常用模块的功能打造成独立的服务，通过良好的界面 (API) 来调用不同的服务。[YEKA1] &lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;在设计中考虑对并行的支持，这样你的API 设计会比较容易扩展。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;在设计中把展现模块 (View) 和实体模块 (Model) 分开，这样你的设计会更有灵活性。 &lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;重视算法的效率，在开始写之前就要估计好算法的效率是哪一个数量级上的（big-O）。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;在实际的运行场景中测试你的算法，不要停留在数学分析层面。有时候一个小小的实际因素 (是否支持大小写敏感的排序，数据是否支持多语言)会导致算法效率的巨大变化。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;经常重构代码，同时注意要解决问题的根源。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;在开始设计的时候就要考虑如何测试 ，如果代码出了问题，有log 来辅助debug 么? 尽早测试，经常测试，争取实现自动化测试，争取每一个构建的版本都能有某些自动测试。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;代码生成工具可以生成一堆一堆的代码，在正式使用它们之前，要确保你能理解它们，并且必要的时候能debug 这些代码。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;和一个实际的用户一起使用软件，获得第一手反馈。 &lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;在自动测试的时候，要有意引地入bug，来保证自动测试的确能捕获这些错误。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;如果测试没有做完，那么开发也没有做完。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;适当地追求代码覆盖率：每一行的代码都覆盖了，但是程序未必正确。要确保程序覆盖了不同的程序状态和各种组合条件。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;如果团队成员碰到了一个有普遍意义的bug,  应该建立一个测试用例抓住以后将会出现的类似的bug。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;测试：多走一步，多考虑一层。如果程序运行了一星期不退出，如果用户的屏幕分辨率再提高一个档次，这个程序会出什么可能的错误?&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;（带领团队）了解用户的期望值，稍稍超出用户的期望值，让用户有惊喜。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;(带领团队) 不要停留在被动地收集需求，要挖掘需求。真正的需求可能被过时的假设、对用户的误解或其他因素所遮挡。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;（带领团队）把所有的术语和项目相关的名词、缩写等都放在一个地方。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;（带领团队）不要依赖于某个人的手动操作，而是要把这些操作都做成有相关权限的人士都能运行的脚本。这样就不会出现因为某人休假而项目被卡住的情况。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;（带领团队）要让重用变得更容易。一个软件团队要创造一种环境，让软件的重用变得更容易。&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;（带领团队）在每一次迭代之后，都要总结经验，让下一次迭代的日程安排更可靠。&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;备注：&lt;/p&gt;
-
-&lt;p&gt;其他上面的内容，其他地方也有转载和评论：&lt;a href=&quot;http://www.cnblogs.com/xinz/p/3852177.html&quot;&gt;邹欣的教学博客&lt;/a&gt;和&lt;a href=&quot;http://www.zhihu.com/question/19560521/answer/31141681&quot;&gt;知乎出版人周筠&lt;/a&gt;。&lt;/p&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>产品设计：概要</title>
-     <link href="http://ningg.github.com/product-design"/>
-     <updated>2014-09-28T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/product-design</id>
-     <content type="html">&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
-
-&lt;p&gt;最近要做一个系统，包含了三部分：数据收集、分析处理、结果展示交互；其中，系统用户关心的只有&lt;code&gt;结果展示交互&lt;/code&gt;模块；这一模块的设计，直接决定了&lt;code&gt;分析处理&lt;/code&gt;模块中，数据结果的存储形式。现在的问题是，需要先设计好&lt;code&gt;结果展示交互&lt;/code&gt;模块，这样才能保证&lt;code&gt;分析处理&lt;/code&gt;模块开发完成。&lt;/p&gt;
-
-&lt;p&gt;冷静想一想，上面问题的产生，根源是：没有按照正常的互联网产品开发流程，来推进项目。由于系统规模并不大，现在调整为互联网产品的开发流程也不迟。没有相关的人才？我是干什么的，需要什么，就能会什么，搞起。&lt;/p&gt;
-
-&lt;h2 id=&quot;section-1&quot;&gt;产品的诞生流程&lt;/h2&gt;
-
-&lt;p&gt;直接点，当前我对这些产品原型什么的都没有概念，之前在某处的时候，见过产品开发的基本流程：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;产品/设计狮，出一版PSD；&lt;/li&gt;
-  &lt;li&gt;研发工程狮，开始开发；说点细节：
-    &lt;ul&gt;
-      &lt;li&gt;核心攻城狮，敲定表格字段；&lt;/li&gt;
-      &lt;li&gt;核心攻城狮，搭起前后端分离的整体架构；&lt;/li&gt;
-      &lt;li&gt;所有攻城狮，一起编码实现业务逻辑；&lt;/li&gt;
-      &lt;li&gt;Review代码、结伴编程，保证代码质量；&lt;/li&gt;
-      &lt;li&gt;夜黑风高时，系统上线（如果是测试环境，则，不用赶在晚上了）；&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;整个运营团队、开发团队一边使用系统，一边提交改进意见（包含当前系统截图）；&lt;/li&gt;
-  &lt;li&gt;系统细节调整、更新；&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;从上面的清单中，可以看出步骤2的工作量较大，其实不是这样的，只是自己以前参与了工程的研发，所以知道的研发方面比较细节的东西；实际上，每一步骤，都包含了差不多的工作量，有的脑力多一些，有的体力多一些。&lt;/p&gt;
-
-&lt;h2 id=&quot;section-2&quot;&gt;关注点&lt;/h2&gt;
-
-&lt;p&gt;进行线上产品设计，关注点：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;色彩搭配&lt;/li&gt;
-  &lt;li&gt;字体选择&lt;/li&gt;
-  &lt;li&gt;语言风格&lt;em&gt;（严肃？活泼？）&lt;/em&gt;&lt;/li&gt;
-  &lt;li&gt;视觉元素&lt;em&gt;（这是什么？）&lt;/em&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section-3&quot;&gt;方法&lt;/h2&gt;
-
-&lt;p&gt;当前进行产品设计时，常用的方法如下：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;手绘草图：设计变得自由；&lt;/li&gt;
-  &lt;li&gt;线框图：？&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section-4&quot;&gt;参考来源&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://udc.weibo.com/&quot;&gt;weibo UDC&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://mux.baidu.com/&quot;&gt;baidu MUX&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://ued.taobao.org/&quot;&gt;taobao UED&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.woshipm.com/tag/ued&quot;&gt;woshipm UED&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://cued.xunlei.com/&quot;&gt;xunlei CUED&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://ued.orzk.com/&quot;&gt;orzk UED&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://ued.ctrip.com/blog/&quot;&gt;ctrip UED&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://uedc.163.com/&quot;&gt;163 UEDC&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://ued.sina.com/&quot;&gt;sina UED&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://cdc.tencent.com/&quot;&gt;tencent CDC&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://mxd.tencent.com/&quot;&gt;tencent MXD&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://isux.tencent.com/&quot;&gt;tencent ISUX&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://fex.baidu.com/&quot;&gt;baidu FEX&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 </content>
