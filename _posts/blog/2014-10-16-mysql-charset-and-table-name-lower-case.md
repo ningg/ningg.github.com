@@ -1,7 +1,7 @@
 ---
 layout: post
 title: MySQL字符编码和大小写敏感问题
-description: 遇到乱码了，MySQL给出的数据有这个问题，
+description: 没有系统整理过MySQL知识，先这样零散地整理了
 category: mysql
 ---
 
@@ -81,9 +81,9 @@ MySQL无法连接，提示表格不存在，设置table名称不区分大小写�
 
 ##参考来源
 
-[MySQL官方文档](http://dev.mysql.com/doc/)
-[Installing and Upgrading MySQL](http://dev.mysql.com/doc/refman/5.6/en/installing.html)
-[MySQL Server Administration](http://dev.mysql.com/doc/refman/5.6/en/server-administration.html)
+* [MySQL官方文档](http://dev.mysql.com/doc/)
+* [Installing and Upgrading MySQL](http://dev.mysql.com/doc/refman/5.6/en/installing.html)
+* [MySQL Server Administration](http://dev.mysql.com/doc/refman/5.6/en/server-administration.html)
 
 
 
