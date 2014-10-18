@@ -4,13 +4,459 @@
    <title>NingG.github.com</title>
    <link href="http://ningg.github.com/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://ningg.github.com" rel="alternate" type="text/html" />
-   <updated>2014-10-17T22:42:48+08:00</updated>
+   <updated>2014-10-18T23:26:33+08:00</updated>
    <id>http://ningg.github.com</id>
    <author>
      <name></name>
      <email></email>
    </author>
 
+   
+   <entry>
+     <title>Kafka 0.8.1 Documentation：Design</title>
+     <link href="http://ningg.github.com/kafka-documentation-design"/>
+     <updated>2014-10-18T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/kafka-documentation-design</id>
+     <content type="html">&lt;h2 id=&quot;section&quot;&gt;参考来源&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://kafka.apache.org/documentation.html&quot;&gt;Kafka Documentation&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+   </entry>
+   
+   <entry>
+     <title>Kafka 0.8.1 Documentation：Getting Started</title>
+     <link href="http://ningg.github.com/kafka-documentation"/>
+     <updated>2014-10-18T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/kafka-documentation</id>
+     <content type="html">&lt;h2 id=&quot;getting-started&quot;&gt;1. Getting Started&lt;/h2&gt;
+
+&lt;h3 id=&quot;introduction&quot;&gt;1.1 Introduction&lt;/h3&gt;
+
+&lt;p&gt;Kafka is a distributed, partitioned, replicated commit log service. It provides the functionality of a messaging system, but with a unique design.
+What does all that mean?&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：distributed, partitioned, replicated commit log service?&lt;/p&gt;
+
+&lt;p&gt;First let’s review some basic messaging terminology:（几个messaging概念）&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Kafka maintains feeds of messages in categories called topics.（按topic来分类message？）&lt;/li&gt;
+  &lt;li&gt;We’ll call processes that publish messages to a Kafka topic producers.（调用process，向topic producer中写message）&lt;/li&gt;
+  &lt;li&gt;We’ll call processes that subscribe to topics and process the feed of published messages consumers..&lt;/li&gt;
+  &lt;li&gt;Kafka is run as a cluster comprised of one or more servers each of which is called a broker.（kafka集群由borker构成）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;So, at a high level, producers send messages over the network to the Kafka cluster which in turn serves them up to consumers like this:（producer向kafka集群写入message，consumer从kafka集群中读取message）&lt;/p&gt;
+
+&lt;p&gt;![/images/kafa-documentation/producer_consumer.png]&lt;/p&gt;
+
+&lt;p&gt;Communication between the clients and the servers is done with a simple, high-performance, language agnostic &lt;a href=&quot;https://cwiki.apache.org/confluence/display/KAFKA/A+Guide+To+The+Kafka+Protocol&quot;&gt;TCP protocol&lt;/a&gt;. We provide a Java client for Kafka, but clients are available in &lt;a href=&quot;https://cwiki.apache.org/confluence/display/KAFKA/Clients&quot;&gt;many languages&lt;/a&gt;.（client与server之间通过TCP协议通信，默认为kafka提供了java client，当然也可以用其他语言实现client）&lt;/p&gt;
+
+&lt;h4 id=&quot;topics-and-logs&quot;&gt;Topics and Logs&lt;/h4&gt;
+
+&lt;p&gt;A topic is a category or feed name to which messages are published. For each topic, the Kafka cluster maintains a partitioned log that looks like this:（topic，就是category、feed name，message按此分开存放；每个topic，对应一个partitioned log）&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/kafka-documentation/log_anatomy.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Each partition is an ordered, immutable sequence of messages that is continually appended to—a commit log. The messages in the partitions are each assigned a sequential id number called the offset that uniquely identifies each message within the partition.（partition是ordered、immutable sequence of message，其中的message被唯一标识，partition对应 a commit log）&lt;/p&gt;
+
+&lt;p&gt;The Kafka cluster retains all published messages—whether or not they have been consumed—for a configurable period of time. For example if the log retention is set to two days, then for the two days after a message is published it is available for consumption, after which it will be discarded to free up space. Kafka’s performance is effectively constant with respect to data size so retaining lots of data is not a problem.（在一段可配置的时间内，kafka始终保存所有的published messages，即使message已经被consume；Kafka对data size不敏感，lots of data对performance造成太大影响）&lt;/p&gt;
+
+&lt;p&gt;In fact the only metadata retained on a per-consumer basis is the position of the consumer in the log, called the “offset”. This offset is controlled by the consumer: normally a consumer will advance its offset linearly as it reads messages, but in fact the position is controlled by the consumer and it can consume messages in any order it likes. For example a consumer can reset to an older offset to reprocess.
+（on a per-consumer basis，只需保存元数据：consumer在log中的position，即，offset；这个offset完全由consumer自己决定，offset默认是顺序递增，但实际上consumer可以任意调整。）&lt;/p&gt;
+
+&lt;p&gt;This combination of features means that Kafka consumers are very cheap—they can come and go without much impact on the cluster or on other consumers. For example, you can use our command line tools to “tail” the contents of any topic without changing what is consumed by any existing consumers.（总之，consumer在kafka中非常cheap：随意的come and go，对系统影响很小，consumer相互之间的影响也很小）&lt;/p&gt;
+
+&lt;p&gt;The partitions in the log serve several purposes. First, they allow the log to scale beyond a size that will fit on a single server. Each individual partition must fit on the servers that host it, but a topic may have many partitions so it can handle an arbitrary amount of data. Second they act as the unit of parallelism—more on that in a bit.（对log分partition，有几点目的：1.single server支撑较大的log，单个partition受到server的限制，但partition的数量不受限；2.多partition可以支撑并发处理，每个partition作为一个unit。）&lt;/p&gt;
+
+&lt;h4 id=&quot;distribution&quot;&gt;Distribution&lt;/h4&gt;
+
+&lt;p&gt;The partitions of the log are distributed over the servers in the Kafka cluster with each server handling data and requests for a share of the partitions. Each partition is replicated across a configurable number of servers for fault tolerance.
+（partition分布式存储，方便共享；同时可配置每个patition的复制份数，以提升系统可靠性）&lt;/p&gt;
+
+&lt;p&gt;Each partition has one server which acts as the “leader” and zero or more servers which act as “followers”. The leader handles all read and write requests for the partition while the followers passively replicate the leader. If the leader fails, one of the followers will automatically become the new leader. Each server acts as a leader for some of its partitions and a follower for others so load is well balanced within the cluster.
+（每个partition都对应一个server担当”leader”角色，也可能有其他server担当”follower”角色；leader负责所有的Read、write；follower只replicate the leader；如果leader崩溃，则自动推选一个follower升级为leader；server只对其上的部分partition充当leader角色，方便cluster的均衡。）&lt;/p&gt;
+
+&lt;h4 id=&quot;producers&quot;&gt;Producers&lt;/h4&gt;
+
+&lt;p&gt;Producers publish data to the topics of their choice. The producer is responsible for choosing which message to assign to which partition within the topic. This can be done in a round-robin fashion simply to balance load or it can be done according to some semantic partition function (say based on some key in the message). More on the use of partitioning in a second.
+（producer复制将message分发到相应的topic，具体：1.将message分发到哪个topic的哪个partition，常用方式，轮询、函数；）&lt;/p&gt;
+
+&lt;h4 id=&quot;consumers&quot;&gt;Consumers&lt;/h4&gt;
+
+&lt;p&gt;Messaging traditionally has two models: &lt;a href=&quot;http://en.wikipedia.org/wiki/Message_queue&quot;&gt;queuing&lt;/a&gt; and &lt;a href=&quot;http://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern&quot;&gt;publish-subscribe&lt;/a&gt;. In a queue, a pool of consumers may read from a server and each message goes to one of them; in publish-subscribe the message is broadcast to all consumers. Kafka offers a single consumer abstraction that generalizes both of these—the consumer group.
+（messaging，消息发送，由两种方式：queuing、publish-subscribe。Queuing，message发送到某一个consumer；publish-subscribe，message广播到所有的consumers。Kafka，通过将consumer泛化为consumer group，来支持这两种方式）&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：publish-subscribe，发布-订阅模式的含义？&lt;/p&gt;
+
+&lt;p&gt;Consumers label themselves with a consumer group name, and each message published to a topic is delivered to one consumer instance within each subscribing consumer group. Consumer instances can be in separate processes or on separate machines.
+（每个consumer都标记有consumer group name，每个message都被分发给subscribing consumer group中的一个consumer instance，consumer instances可以是不同的进程，也可以分布在不同的物理机器上。）&lt;/p&gt;
+
+&lt;p&gt;If all the consumer instances have the same consumer group, then this works just like a traditional queue balancing load over the consumers.（若所有的consumer都属于同一个consumer group，则，情况变为：queue的负载均衡？）&lt;/p&gt;
+
+&lt;p&gt;If all the consumer instances have different consumer groups, then this works like publish-subscribe and all messages are broadcast to all consumers.
+（若所有的consumer都属不同的consumer group，则，情况变为：publish-subscribe，message广播发送到所有consumer）&lt;/p&gt;
+
+&lt;p&gt;More commonly, however, we have found that topics have a small number of consumer groups, one for each “logical subscriber”. Each group is composed of many consumer instances for scalability and fault tolerance. This is nothing more than publish-subscribe semantics where the subscriber is cluster of consumers instead of a single process.
+（topics只对应少数的consumer group，即，consumer group类似&lt;code&gt;logical subscriber&lt;/code&gt;；每个group中有多个consumer，目的是提升可扩展性、容错能力）&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：consumer group下有多个consumer？这些consumer怎么调用的？相互之间有什么差异？&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/kafka-documentation/consumer-groups.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;A two server Kafka cluster hosting four partitions (P0-P3) with two consumer groups. Consumer group A has two consumer instances and group B has four.&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Kafka has stronger ordering guarantees than a traditional messaging system, too.（kafka有strong ordering guarantees）&lt;/p&gt;
+
+&lt;p&gt;A traditional queue retains messages in-order on the server, and if multiple consumers consume from the queue then the server hands out messages in the order they are stored. However, although the server hands out messages in order, the messages are delivered asynchronously to consumers, so they may arrive out of order on different consumers. This effectively means the ordering of the messages is lost in the presence of parallel consumption. Messaging systems often work around this by having a notion of “exclusive consumer” that allows only one process to consume from a queue, but of course this means that there is no parallelism in processing.
+（message queue中存放的message，按照顺序发送到不同的consumers，但是这些发送是异步的，因此，后发送的message可能先到达consumer，即，并行处理时，有可能message乱序。现有的Messaging system，常用&lt;code&gt;exclusive consumer&lt;/code&gt;，独占消费，仅仅启动一个process来读取一个queue中的数据，此时，就无法实现并行处理。）&lt;/p&gt;
+
+&lt;p&gt;Kafka does it better. By having a notion of parallelism—the partition—within the topics, Kafka is able to provide both ordering guarantees and load balancing over a pool of consumer processes. This is achieved by assigning the partitions in the topic to the consumers in the consumer group so that each partition is consumed by exactly one consumer in the group. By doing this we ensure that the consumer is the only reader of that partition and consumes the data in order. Since there are many partitions this still balances the load over many consumer instances. Note however that there cannot be more consumer instances than partitions.
+（Kafka，采用&lt;code&gt;partition&lt;/code&gt;的方式解决上述问题：每个partition被指定给topic对应的consumer group中的特定的consumer，这样能保证一点：一个partition中的message被顺序处理。由于有多个partition，并且对应多个consumer instance来处理，从而实现负载均衡；特别注意：consumer instance个数不能多于partitions个数）&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：message是怎么分配到topic对应的partition中的？consumer instance为什么不能多于partition个数？&lt;/p&gt;
+
+&lt;p&gt;Kafka only provides a total order over messages within a partition, not between different partitions in a topic. Per-partition ordering combined with the ability to partition data by key is sufficient for most applications. However, if you require a total order over messages this can be achieved with a topic that has only one partition, though this will mean only one consumer process.
+（Kafka只保证partition内mesaage的顺序处理，不保证partition之间的处理顺序。per-partition ordering和partition data by key，满足了大部分需求。如果要保证所有message顺序处理，则，将topic设置为only one partition，此时，变为串行处理。）&lt;/p&gt;
+
+&lt;h4 id=&quot;guarantees&quot;&gt;Guarantees&lt;/h4&gt;
+
+&lt;p&gt;At a high-level Kafka gives the following guarantees:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Messages sent by a producer to a particular topic partition will be appended in the order they are sent. That is, if a message M1 is sent by the same producer as a message M2, and M1 is sent first, then M1 will have a lower offset than M2 and appear earlier in the log.（同一个producer发送到a particular topic partition的message，保证在partition中是有序的）&lt;/li&gt;
+  &lt;li&gt;A consumer instance sees messages in the order they are stored in the log.（partition对应的commit log中message是有序的）&lt;/li&gt;
+  &lt;li&gt;For a topic with replication factor N, we will tolerate up to N-1 server failures without losing any messages committed to the log.（复制N份的topic，保证N-1份都丢失的情况下能够恢复。）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;More details on these guarantees are given in the design section of the documentation.&lt;/p&gt;
+
+&lt;h3 id=&quot;use-cases&quot;&gt;1.2 Use Cases&lt;/h3&gt;
+
+&lt;p&gt;Here is a description of a few of the popular use cases for Apache Kafka. For an overview of a number of these areas in action, see &lt;a href=&quot;http://engineering.linkedin.com/distributed-systems/log-what-every-software-engineer-should-know-about-real-time-datas-unifying&quot;&gt;this blog post&lt;/a&gt;.
+（使用Kafka的典型场景，详细应用参考&lt;a href=&quot;http://engineering.linkedin.com/distributed-systems/log-what-every-software-engineer-should-know-about-real-time-datas-unifying&quot;&gt;this blog post&lt;/a&gt;）&lt;/p&gt;
+
+&lt;h4 id=&quot;messaging&quot;&gt;Messaging&lt;/h4&gt;
+
+&lt;p&gt;Kafka works well as a replacement for a more traditional message broker. Message brokers are used for a variety of reasons (to decouple processing from data producers, to buffer unprocessed messages, etc). In comparison to most messaging systems Kafka has better throughput, built-in partitioning, replication, and fault-tolerance which makes it a good solution for large scale message processing applications.
+（替换传统的message broker/消息代理，其基本用途：解耦processing和data producer，缓存message，etc。）&lt;/p&gt;
+
+&lt;p&gt;In our experience messaging uses are often comparatively low-throughput, but may require low end-to-end latency and often depend on the strong durability guarantees Kafka provides.
+（实验发现messaging过程中，对broker的吞吐量要求不高，但要求低延迟、高可靠，这些kafka都满足。）&lt;/p&gt;
+
+&lt;p&gt;In this domain Kafka is comparable to traditional messaging systems such as &lt;a href=&quot;http://activemq.apache.org/&quot;&gt;ActiveMQ&lt;/a&gt; or &lt;a href=&quot;https://www.rabbitmq.com/&quot;&gt;RabbitMQ&lt;/a&gt;.
+（在messaging方面，Kafka的性能可与ActiveMQ、RabbitMQ相匹敌。）&lt;/p&gt;
+
+&lt;h4 id=&quot;website-activity-tracking&quot;&gt;Website Activity Tracking&lt;/h4&gt;
+
+&lt;p&gt;The original use case for Kafka was to be able to rebuild a user activity tracking pipeline as a set of real-time publish-subscribe feeds. This means site activity (page views, searches, or other actions users may take) is published to central topics with one topic per activity type. These feeds are available for subscription for a range of use cases including real-time processing, real-time monitoring, and loading into Hadoop or offline data warehousing systems for offline processing and reporting.&lt;/p&gt;
+
+&lt;p&gt;Activity tracking is often very high volume as many activity messages are generated for each user page view.
+（活动追踪，数据流量很大）&lt;/p&gt;
+
+&lt;h4 id=&quot;metrics&quot;&gt;Metrics&lt;/h4&gt;
+
+&lt;p&gt;Kafka is often used for operational monitoring data. This involves aggregating statistics from distributed applications to produce centralized feeds of operational data.
+（运行状态监控系统，从分布式应用中，汇总统计数据，形成集中的运行监控数据）&lt;/p&gt;
+
+&lt;h4 id=&quot;log-aggregation&quot;&gt;Log Aggregation&lt;/h4&gt;
+
+&lt;p&gt;Many people use Kafka as a replacement for a log aggregation solution. Log aggregation typically collects physical log files off servers and puts them in a central place (a file server or HDFS perhaps) for processing. Kafka abstracts away the details of files and gives a cleaner abstraction of log or event data as a stream of messages. This allows for lower-latency processing and easier support for multiple data sources and distributed data consumption. In comparison to log-centric systems like Scribe or Flume, Kafka offers equally good performance, stronger durability guarantees due to replication, and much lower end-to-end latency.
+（收集不同物理机器上的log，汇总到a central place：a file server or HDFS。与 Scribe or Flume相比，Kafka提供相当的performance、可靠性、低延迟。）&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：日志收集方面，Kafka的性能与Flume相当？Kafka能取代掉Flume吗？&lt;/p&gt;
+
+&lt;h4 id=&quot;stream-processing&quot;&gt;Stream Processing&lt;/h4&gt;
+
+&lt;p&gt;Many users end up doing stage-wise processing of data where data is consumed from topics of raw data and then aggregated, enriched, or otherwise transformed into new Kafka topics for further consumption. For example a processing flow for article recommendation might crawl article content from RSS feeds and publish it to an “articles” topic; further processing might help normalize or deduplicate this content to a topic of cleaned article content; a final stage might attempt to match this content to users. This creates a graph of real-time data flow out of the individual topics. &lt;a href=&quot;https://github.com/nathanmarz/storm&quot;&gt;Storm&lt;/a&gt; and &lt;a href=&quot;http://samza.incubator.apache.org/&quot;&gt;Samza&lt;/a&gt; are popular frameworks for implementing these kinds of transformations.
+（在Stream Processing中，Kafka担当data存储功能，即，raw data存储到Kafka中，consumer处理后的结果存储到new kafka topics中）&lt;/p&gt;
+
+&lt;h4 id=&quot;event-sourcing&quot;&gt;Event Sourcing&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://martinfowler.com/eaaDev/EventSourcing.html&quot;&gt;Event sourcing&lt;/a&gt; is a style of application design where state changes are logged as a time-ordered sequence of records. Kafka’s support for very large stored log data makes it an excellent backend for an application built in this style.
+（Event sourcing，事件溯源，记录不同时间点的应用状态变化，通常log数据很大，Kafka满足此需求）&lt;/p&gt;
+
+&lt;h4 id=&quot;commit-log&quot;&gt;Commit Log&lt;/h4&gt;
+
+&lt;p&gt;Kafka can serve as a kind of external commit-log for a distributed system. The log helps replicate data between nodes and acts as a re-syncing mechanism for failed nodes to restore their data. The &lt;a href=&quot;http://kafka.apache.org/documentation.html#compaction&quot;&gt;log compaction&lt;/a&gt; feature in Kafka helps support this usage. In this usage Kafka is similar to Apache BookKeeper project.&lt;/p&gt;
+
+&lt;h3 id=&quot;quick-start&quot;&gt;1.3 Quick Start&lt;/h3&gt;
+
+&lt;p&gt;This tutorial assumes you are starting fresh and have no existing Kafka or ZooKeeper data.
+（新手入门，对Kafka、Zookeeper一知半解的人，看这儿就对了）&lt;/p&gt;
+
+&lt;h4 id=&quot;step-1-download-the-code&quot;&gt;Step 1: Download the code&lt;/h4&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://www.apache.org/dyn/closer.cgi?path=/kafka/0.8.1.1/kafka_2.9.2-0.8.1.1.tgz&quot;&gt;Download&lt;/a&gt; the 0.8.1.1 release and un-tar it.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; tar -xzf kafka_2.9.2-0.8.1.1.tgz
+&amp;gt; cd kafka_2.9.2-0.8.1.1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&quot;step-2-start-the-server&quot;&gt;Step 2: Start the server&lt;/h4&gt;
+
+&lt;p&gt;Kafka uses ZooKeeper so you need to first start a ZooKeeper server if you don’t already have one. You can use the convenience script packaged with kafka to get a quick-and-dirty single-node ZooKeeper instance.
+（kafka自带了ZooKeeper，不推荐使用）&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; bin/zookeeper-server-start.sh config/zookeeper.properties
+[2013-04-22 15:01:37,495] INFO Reading configuration from: config/zookeeper.properties (org.apache.zookeeper.server.quorum.QuorumPeerConfig)
+...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now start the Kafka server:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; bin/kafka-server-start.sh config/server.properties
+[2013-04-22 15:01:47,028] INFO Verifying properties (kafka.utils.VerifiableProperties)
+[2013-04-22 15:01:47,051] INFO Property socket.send.buffer.bytes is overridden to 1048576 (kafka.utils.VerifiableProperties)
+...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&quot;step-3-create-a-topic&quot;&gt;Step 3: Create a topic&lt;/h4&gt;
+
+&lt;p&gt;Let’s create a topic named “test” with a single partition and only one replica:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 1 --partitions 1 --topic test
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;We can now see that topic if we run the list topic command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; bin/kafka-topics.sh --list --zookeeper localhost:2181
+test
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Alternatively, instead of manually creating topics you can also configure your brokers to auto-create topics when a non-existent topic is published to.
+（可通过配置文件，让broker自动创建topic）&lt;/p&gt;
+
+&lt;h4 id=&quot;step-4-send-some-messages&quot;&gt;Step 4: Send some messages&lt;/h4&gt;
+
+&lt;p&gt;Kafka comes with a command line client that will take input from a file or from standard input and send it out as messages to the Kafka cluster. By default each line will be sent as a separate message.
+（kafka自带了一个工具，能够将file或者standard input作为输入，按行传送到kafka cluster中。）&lt;/p&gt;
+
+&lt;p&gt;Run the producer and then type a few messages into the console to send to the server.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; bin/kafka-console-producer.sh --broker-list localhost:9092 --topic test 
+This is a message
+This is another message
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&quot;step-5-start-a-consumer&quot;&gt;Step 5: Start a consumer&lt;/h4&gt;
+
+&lt;p&gt;Kafka also has a command line consumer that will dump out messages to standard output.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic test --from-beginning
+This is a message
+This is another message
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;If you have each of the above commands running in a different terminal then you should now be able to type messages into the producer terminal and see them appear in the consumer terminal.&lt;/p&gt;
+
+&lt;p&gt;All of the command line tools have additional options; running the command with no arguments will display usage information documenting them in more detail.
+（所有命令行，不夹带参数启动时，会自动弹出usage info）&lt;/p&gt;
+
+&lt;h4 id=&quot;step-6-setting-up-a-multi-broker-cluster&quot;&gt;Step 6: Setting up a multi-broker cluster&lt;/h4&gt;
+
+&lt;p&gt;So far we have been running against a single broker, but that’s no fun. For Kafka, a single broker is just a cluster of size one, so nothing much changes other than starting a few more broker instances. But just to get feel for it, let’s expand our cluster to three nodes (still all on our local machine).
+（上述例子中，只启动了一个broker，其最多能够启动几个broker instances。下面说一下如何启动多个broker，构造cluster）&lt;/p&gt;
+
+&lt;p&gt;First we make a config file for each of the brokers:（为每个broker，设定属性）&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; cp config/server.properties config/server-1.properties 
+&amp;gt; cp config/server.properties config/server-2.properties
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now edit these new files and set the following properties:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;config/server-1.properties:
+	broker.id=1
+	port=9093
+	log.dir=/tmp/kafka-logs-1
+ 
+config/server-2.properties:
+	broker.id=2
+	port=9094
+	log.dir=/tmp/kafka-logs-2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;broker.id&lt;/code&gt; property is the unique and permanent name of each node in the cluster. We have to override the port and log directory only because we are running these all on the same machine and we want to keep the brokers from all trying to register on the same port or overwrite each others data.
+（不同的broker，应该设置不同的&lt;code&gt;port&lt;/code&gt;和&lt;code&gt;log.dir&lt;/code&gt;，否则，broker的数据会相互覆盖。）&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：同一台物理主机上，可以启动多个node，每个node通过&lt;code&gt;broker.id&lt;/code&gt;唯一标识。&lt;/p&gt;
+
+&lt;p&gt;We already have Zookeeper and our single node started, so we just need to start the two new nodes:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; bin/kafka-server-start.sh config/server-1.properties &amp;amp;
+...
+&amp;gt; bin/kafka-server-start.sh config/server-2.properties &amp;amp;
+...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now create a new topic with a replication factor of three:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; bin/kafka-topics.sh --create --zookeeper localhost:2181 --replication-factor 3 --partitions 1 --topic my-replicated-topic
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Okay but now that we have a cluster how can we know which broker is doing what? To see that run the &lt;code&gt;describe topics&lt;/code&gt; command:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; bin/kafka-topics.sh --describe --zookeeper localhost:2181 --topic my-replicated-topic
+Topic:my-replicated-topic	PartitionCount:1	ReplicationFactor:3	Configs:
+	Topic: my-replicated-topic	Partition: 0	Leader: 1	Replicas: 1,2,0	Isr: 1,2,0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Here is an explanation of output. The first line gives a summary of all the partitions, each additional line gives information about one partition. Since we have only one partition for this topic there is only one line.
+（&lt;code&gt;describe topics&lt;/code&gt;命令的输出结果说明：first line，partition的汇总信息；remaining lines 分别说明每个partition的详细信息）&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;leader&lt;/strong&gt; is the node responsible for all reads and writes for the given partition. Each node will be the leader for a randomly selected portion of the partitions.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;replicas&lt;/strong&gt; is the list of nodes that replicate the log for this partition regardless of whether they are the leader or even if they are currently alive. （备份当前partition的node列表，包含当前已经不再存活的node）&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;isr&lt;/strong&gt; is the set of “in-sync” replicas. This is the subset of the replicas list that is currently alive and caught-up to the leader.（&lt;code&gt;replicas&lt;/code&gt;内的node中，存活的node列表）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：&lt;code&gt;leader&lt;/code&gt;后的数字&lt;code&gt;1&lt;/code&gt;，对应的含义？leader是怎么标识的？node怎么标识的？&lt;/p&gt;
+
+&lt;p&gt;Note that in my example node 1 is the leader for the only partition of the topic.
+We can run the same command on the original topic we created to see where it is:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; bin/kafka-topics.sh --describe --zookeeper localhost:2181 --topic test
+Topic:test	PartitionCount:1	ReplicationFactor:1	Configs:
+	Topic: test	Partition: 0	Leader: 0	Replicas: 0	Isr: 0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;So there is no surprise there—the original topic has no replicas and is on server 0, the only server in our cluster when we created it.&lt;/p&gt;
+
+&lt;p&gt;Let’s publish a few messages to our new topic:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; bin/kafka-console-producer.sh --broker-list localhost:9092 --topic my-replicated-topic
+...
+my test message 1
+my test message 2
+^C 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now let’s consume these messages:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; bin/kafka-console-consumer.sh --zookeeper localhost:2181 --from-beginning --topic my-replicated-topic
+...
+my test message 1
+my test message 2
+^C
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Now let’s test out fault-tolerance. Broker 1 was acting as the leader so let’s kill it:（验证kafka的容错性：kill leader）&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; ps | grep server-1.properties
+7564 ttys002    0:15.91 /System/Library/Frameworks/JavaVM.framework/Versions/1.6/Home/bin/java...
+&amp;gt; kill -9 7564
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Leadership has switched to one of the slaves and node 1 is no longer in the in-sync replica set:（leader终止后，slave自动升级为leader）&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; bin/kafka-topics.sh --describe --zookeeper localhost:2181 --topic my-replicated-topic
+Topic:my-replicated-topic	PartitionCount:1	ReplicationFactor:3	Configs:
+	Topic: my-replicated-topic	Partition: 0	Leader: 2	Replicas: 1,2,0	Isr: 2,0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;But the messages are still be available for consumption even though the leader that took the writes originally is down:（新选出的leader，对用户是透明的，consumer感觉不到异常）&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;gt; bin/kafka-console-consumer.sh --zookeeper localhost:2181 --from-beginning --topic my-replicated-topic
+...
+my test message 1
+my test message 2
+^C
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;ecosystem&quot;&gt;1.4 Ecosystem&lt;/h3&gt;
+
+&lt;p&gt;There are a plethora of tools that integrate with Kafka outside the main distribution. The &lt;a href=&quot;https://cwiki.apache.org/confluence/display/KAFKA/Ecosystem&quot;&gt;ecosystem page&lt;/a&gt; lists many of these, including stream processing systems, Hadoop integration, monitoring, and deployment tools.
+（有很多工具与Kafka集成，参考&lt;a href=&quot;https://cwiki.apache.org/confluence/display/KAFKA/Ecosystem&quot;&gt;页面&lt;/a&gt;）&lt;/p&gt;
+
+&lt;h3 id=&quot;upgrading-from-previous-versions&quot;&gt;1.5 Upgrading From Previous Versions&lt;/h3&gt;
+
+&lt;h4 id=&quot;upgrading-from-080-to-081&quot;&gt;Upgrading from 0.8.0 to 0.8.1&lt;/h4&gt;
+
+&lt;p&gt;0.8.1 is fully compatible with 0.8. The upgrade can be done one broker at a time by simply bringing it down, updating the code, and restarting it.&lt;/p&gt;
+
+&lt;h4 id=&quot;upgrading-from-07&quot;&gt;Upgrading from 0.7&lt;/h4&gt;
+
+&lt;p&gt;0.8, the release in which added replication, was our first backwards-incompatible release: major changes were made to the API, ZooKeeper data structures, and protocol, and configuration. The upgrade from 0.7 to 0.8.x requires a &lt;a href=&quot;https://cwiki.apache.org/confluence/display/KAFKA/Migrating+from+0.7+to+0.8&quot;&gt;special tool&lt;/a&gt; for migration. This migration can be done without downtime.&lt;/p&gt;
+
+&lt;h2 id=&quot;api&quot;&gt;2. API&lt;/h2&gt;
+
+&lt;h3 id=&quot;producer-api&quot;&gt;2.1 Producer API&lt;/h3&gt;
+
+&lt;p&gt;(todo)&lt;/p&gt;
+
+&lt;h3 id=&quot;high-level-consumer-api&quot;&gt;2.2 High Level Consumer API&lt;/h3&gt;
+
+&lt;p&gt;(todo)&lt;/p&gt;
+
+&lt;h3 id=&quot;simple-consumer-api&quot;&gt;2.3 Simple Consumer API&lt;/h3&gt;
+
+&lt;p&gt;(todo)&lt;/p&gt;
+
+&lt;h3 id=&quot;kafka-hadoop-consumer-api&quot;&gt;2.4 Kafka Hadoop Consumer API&lt;/h3&gt;
+
+&lt;p&gt;Providing a horizontally scalable solution for aggregating and loading data into Hadoop was one of our basic use cases. To support this use case, we provide a Hadoop-based consumer which spawns off many map tasks to pull data from the Kafka cluster in parallel. This provides extremely fast pull-based Hadoop data load capabilities (we were able to fully saturate the network with only a handful of Kafka servers).
+（Hadoop-based consumer，并行的从Kafka cluster中pull data，速度很快）&lt;/p&gt;
+
+&lt;p&gt;Usage information on the hadoop consumer can be found &lt;a href=&quot;https://github.com/linkedin/camus/tree/camus-kafka-0.8/&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;configuration&quot;&gt;3. Configuration&lt;/h2&gt;
+
+&lt;p&gt;Kafka uses key-value pairs in the &lt;a href=&quot;http://en.wikipedia.org/wiki/.properties&quot;&gt;property file format&lt;/a&gt; for configuration. These values can be supplied either from a file or programmatically.&lt;/p&gt;
+
+&lt;h3 id=&quot;broker-configs&quot;&gt;3.1 Broker Configs&lt;/h3&gt;
+
+&lt;p&gt;The essential configurations are the following:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;broker.id&lt;/li&gt;
+  &lt;li&gt;log.dirs&lt;/li&gt;
+  &lt;li&gt;zookeeper.connect&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;详细信息，请参考官网：&lt;a href=&quot;http://kafka.apache.org/documentation.html#brokerconfigs&quot;&gt;Broker Configs&lt;/a&gt;。&lt;/p&gt;
+
+&lt;h3 id=&quot;consumer-configs&quot;&gt;3.2 Consumer Configs&lt;/h3&gt;
+
+&lt;p&gt;The essential consumer configurations are the following:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;group.id&lt;/li&gt;
+  &lt;li&gt;zookeeper.connect&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;详细信息，请参考官网：&lt;a href=&quot;http://kafka.apache.org/documentation.html#consumerconfigs&quot;&gt;Consumer Configs&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;producer-configs&quot;&gt;3.3 Producer Configs&lt;/h3&gt;
+
+&lt;p&gt;Essential configuration properties for the producer include:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;metadata.broker.list&lt;/li&gt;
+  &lt;li&gt;request.required.acks&lt;/li&gt;
+  &lt;li&gt;producer.type&lt;/li&gt;
+  &lt;li&gt;serializer.class&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;详细信息，请参考官网：&lt;a href=&quot;http://kafka.apache.org/documentation.html#producerconfigs&quot;&gt;Producer Configs&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;new-producer-configs&quot;&gt;3.4 New Producer Configs&lt;/h3&gt;
+
+&lt;p&gt;We are working on a replacement for our existing producer. The code is available in trunk now and can be considered beta quality. Below is the configuration for the new producer.&lt;/p&gt;
+
+&lt;p&gt;详细信息，请参考官网：&lt;a href=&quot;http://kafka.apache.org/documentation.html#newproducerconfigs&quot;&gt;New Producer Configs&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;参考来源&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://kafka.apache.org/documentation.html&quot;&gt;Kafka Documentation&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+   </entry>
    
    <entry>
      <title>Flume 1.5.0.1 User Guide：Flume Sources</title>
@@ -793,7 +1239,7 @@ a1.sources.r1.channels = c1&lt;/p&gt;
    </entry>
    
    <entry>
-     <title>Flume 1.5.0.1 User Guide</title>
+     <title>Flume 1.5.0.1 User Guide：introduction</title>
      <link href="http://ningg.github.com/flume-user-guide"/>
      <updated>2014-10-17T00:00:00+08:00</updated>
      <id>http://ningg.github.com/flume-user-guide</id>
@@ -1355,25 +1801,27 @@ character_set_server=utf8
 ERROR 1010 (HY000): Error dropping database (can&#39;t rmdir &#39;./test&#39;, errno: 39)
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;解决办法：到MySQL存放数据的路径下（/var/lib/mysql/），将shcourt数据库对应目录（./shcourt）下内容清空，再删除shcourt数据库即可。&lt;/p&gt;
+&lt;p&gt;解决办法：到MySQL存放数据的路径下（/var/lib/mysql/），将test数据库对应目录（./test）下内容清空，再删除test数据库即可。&lt;/p&gt;
 
 &lt;h2 id=&quot;table&quot;&gt;找不到table&lt;/h2&gt;
 
+&lt;p&gt;MySQL无法连接，提示表格不存在，设置table名称不区分大小写：&lt;/p&gt;
+
 &lt;ol&gt;
-  &lt;li&gt;MySQL无法连接问题；设置对table名称不区分大小写；
-http://www.cnblogs.com/jifeng/archive/2010/08/29/1811879.html 
-思考：字段是否区分大小写？数据库不区分大小写。&lt;/li&gt;
+  &lt;li&gt;用ROOT登录，修改&lt;code&gt;my.cnf&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;在&lt;code&gt;[mysqld]&lt;/code&gt;下加入一行：&lt;code&gt;lower_case_table_names=1&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;重新启动数据库即可;&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;1.用ROOT登录，修改/etc/my.cnf
-　　2.在[mysqld]下加入一行：lower_case_table_names=1
-　　3.重新启动数据库即可&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;思考&lt;/strong&gt;：字段是否区分大小写？数据库还有其他大小写敏感的地方吗？&lt;/p&gt;
 
 &lt;h2 id=&quot;section-3&quot;&gt;参考来源&lt;/h2&gt;
 
-&lt;p&gt;&lt;a href=&quot;http://dev.mysql.com/doc/&quot;&gt;MySQL官方文档&lt;/a&gt;
-&lt;a href=&quot;http://dev.mysql.com/doc/refman/5.6/en/installing.html&quot;&gt;Installing and Upgrading MySQL&lt;/a&gt;
-&lt;a href=&quot;http://dev.mysql.com/doc/refman/5.6/en/server-administration.html&quot;&gt;MySQL Server Administration&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://dev.mysql.com/doc/&quot;&gt;MySQL官方文档&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://dev.mysql.com/doc/refman/5.6/en/installing.html&quot;&gt;Installing and Upgrading MySQL&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://dev.mysql.com/doc/refman/5.6/en/server-administration.html&quot;&gt;MySQL Server Administration&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
 </content>
    </entry>
@@ -1385,7 +1833,7 @@ http://www.cnblogs.com/jifeng/archive/2010/08/29/1811879.html
      <id>http://ningg.github.com/how-to-contribute-open-source-project</id>
      <content type="html">&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
 
-&lt;p&gt;本来今天晚上想浏览一下flume官网的，不过突然看到How to Get Involved，再看看哪些提交了代码的名单，很是羡慕，我这个人爱吹牛，如果我也在名单中，那岂不又能吹牛一把？哈哈~想想都能笑出声。另一方面，用过的开源工具不少，但是如何参与到开源项目中，我还真不知道，碰巧在看flume官网，那就看看如何参与到flume这个开源项目中去吧。&lt;/p&gt;
+&lt;p&gt;本来今天晚上想浏览一下flume官网的，不过突然看到How to Get Involved，再看看那些贡献了代码的名单，很是羡慕，我这个人爱吹牛，如果我也在名单中，那岂不又能吹牛一把？哈哈~想想都能笑出声。另一方面，用过的开源工具不少，但是如何参与到开源项目中，我还真不知道，碰巧在看flume官网，那就看看如何参与到flume这个开源项目中去吧。&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;官方原文地址：&lt;a href=&quot;https://cwiki.apache.org/confluence/display/FLUME/How+to+Contribute&quot;&gt;How to Contribute&lt;/a&gt;，本文使用&lt;code&gt;英文原文+中文注释&lt;/code&gt;方式来写。&lt;/p&gt;
@@ -1410,7 +1858,7 @@ http://www.cnblogs.com/jifeng/archive/2010/08/29/1811879.html
   &lt;li&gt;&lt;strong&gt;Provide Patches&lt;/strong&gt;: We encourage you to assign the relevant JIRA issue to yourself and supply a patch for it. The patch you provide can be code, documentation, build changes, or any combination of these. More information on this is available in the following sections.（通过JIRA，提交代码-patch补丁，可以是代码、文档、编译细节等）&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;strong&gt;notes(ningg)：邮件列表、JIRA，我都没有关注过，也不会使用；patch文件了解一点。&lt;/strong&gt;&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;notes(ningg)：邮件列表、JIRA，我都没有关注过，也不知道具体怎么用，打算学一下；patch文件了解一点。&lt;/strong&gt;&lt;/p&gt;
 
 &lt;h2 id=&quot;providing-patches&quot;&gt;Providing Patches&lt;/h2&gt;
 
@@ -1501,7 +1949,51 @@ $ patch -p1 &amp;lt; FLUME-1234.patch
 
 &lt;h2 id=&quot;reviewing-code&quot;&gt;Reviewing Code&lt;/h2&gt;
 
-&lt;p&gt;（doing…）&lt;/p&gt;
+&lt;p&gt;Flume uses the &lt;a href=&quot;https://reviews.apache.org/groups/Flume&quot;&gt;Apache Review Board&lt;/a&gt; for doing code reviews. In order for a change to be reviewed, it should be either posted on the review board or attached to the JIRA. If the change is a minor change affecting only few lines and does not seem to impact main logic of the affected sources, it need not be posted on the review board. However, if the code change is large or otherwise impacting the core logic of the affected sources, it should be posted on the review board. Feel free to comment on the JIRA requesting the assignee to post the patch for review on review board.（小改动的patch，贴在JIRA上就好了；涉及核心代码的patch，应同时在JIRA和review board上贴出来。）&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: Not all patches attached to a JIRA are ready for review. Sometimes the patches are attached just to solicit early feedback regarding the implementation direction. Feel free to look it over and give your feedback in the JIRA as necessary. Patches are considered ready for review either when the patch has been posted on review board, or the JIRA status has been changed to ‘Patch Available’. Find here a &lt;a href=&quot;https://issues.apache.org/jira/issues/?jql=project%20%3D%20flume%20AND%20status%20%3D%20%22Patch%20Available%22&quot;&gt;list of Flume JIRAs marked Patch Available&lt;/a&gt;. （patch有时候are not ready for review，只是为了征求意见，看看实现的方向对不对）&lt;/p&gt;
+
+&lt;h3 id=&quot;goals-for-code-reviews&quot;&gt;Goals for Code Reviews&lt;/h3&gt;
+
+&lt;p&gt;The net outcome from the review should be the same - which is to ensure the following:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Bugs/Omissions/Regressions are caught before the change is committed to the source control.（问题已解决）&lt;/li&gt;
+  &lt;li&gt;The change is subjected to keeping the quality of code high so as to make the overall system sustainable. The implementation of the change should be easily readable, documented where necessary, and must favor simplicity of implementation.（高质量的代码与可正常运行的系统，同等重要。代码质量包括：可读性、文档、实现简洁）&lt;/li&gt;
+  &lt;li&gt;Changes are evaluated from the perspective of a consumer (the reviewer) as opposed to the developer, which often brings out subtleties in the implementation that otherwise go unnoticed.（reviewer通常能为代码实现，提供细微改动的建议）&lt;/li&gt;
+  &lt;li&gt;The change should be backward compatible and not require extensive work on existing installations in order for it to be consumed. There are exceptions to this in some cases like when work is done on a major release, but otherwise backward compatibility should be upheld at all times. If you are not clear, raise it is as a concern to be clarified during the review.（change保证，后向兼容，即，原来已有的应用代码部分，不需要大改动；如果不确定是否后向兼容，则，说明一下）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;code-review-guidelines&quot;&gt;Code review guidelines&lt;/h3&gt;
+
+&lt;p&gt;Following are some guidelines on how to do a code review. You may use any other approach instead as long as the above stated goals are met. That said, here is an approach that works fine generally:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Understand the problem being solved&lt;/strong&gt;: This often requires going through the JIRA comments and/or mailing list threads where the discussion around the problem has happened in the past. Look for key aspects of the problem such as how it has impacted the users and what, if any, is the suggested way to solve it. You may not find enough information regarding the problem in some cases, in which case - feel free to ask for clarification from the developer contributing the change.（广泛查询，弄清问题）&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Think about how you would solve the problem&lt;/strong&gt;: There are many ways to solve any code problem, with different ways having different merits. Before proceeding to review the change, think through how you would solve the problem if you were the one implementing the solution. Note the various aspects of the problem that your solution might have. Some such aspects to think about are - impact on backward compatibility, overall usability of the system, any impact on performance etc.（制定详细的解决方案，考虑几点：后向兼容、系统全局可用、性能影响）&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Evaluate the proposed change in contrast to your solution&lt;/strong&gt;: Unless the change is obvious, it is likely that the implementation of the change you are reviewing is very different from the solution you would go for. Evaluate this change on the various aspects that you evaluated your solution on in the previous step. See how it measures up and give feedback where you think it could be improved.（review代码时，与自己的方案多方面对比）&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Look for typical pitfalls&lt;/strong&gt;: Read through the implementation to see if: it needs to be documented at places where the intention is not clear; if all the boundary conditions are being addressed; if the code is defensive enough; if any bad idioms have leaked in such as double check locking etc. In short, check for things that a developer is likely to miss in their own code which are otherwise obvious to someone trying to read and understand the code.（全面检查配套方面：文档中描述是否清晰、边界条件是否考虑、代码安全性怎么样、是否包含bad idioms；总之，站在非developer的角度，看看哪些潜在问题）&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;See if the change is complete&lt;/strong&gt;: Check if the change is such that it affects the user interface. If it does, then the documentation should likely be updated. What about testing - does it have enough test coverage or not? What about other aspects like license headers, copyright statements etc. How about checkstyle and findbugs - did they generate new warnings? How about compiler warnings?（代码层面上，修改全面了吗？是否测试了、warning信息）&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Test the change&lt;/strong&gt;: It is very easy to test the change if you have the development environment setup. Run as many tests as you want with the patch. Manually test the change for functionality that you think is not fully covered via the associated tests. If you find a problem, report it.（全面测试、必要的地方手动测）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;how-to-give-feedback&quot;&gt;How to give feedback&lt;/h3&gt;
+
+&lt;p&gt;Once you have collected your comments/concerns/feedback you need to send it to back to the contributor. In doing so, please be as courteous as possible and ensure the following:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Your feedback should be clear and actionable. Giving subjective/vague feedback does not add any value or facilitate a constructive dialog.（feedback要清晰、可操作）&lt;/li&gt;
+  &lt;li&gt;Where possible, suggest how your concern can be addressed. For example if your testing revealed that a certain use-case is not satisfied, it is acceptable to state that as is, but it would be even better if you could suggest how the developer can address it. Present your suggestion as a possible solution rather than the solution.（对如何解决问题，提出自己的建议）&lt;/li&gt;
+  &lt;li&gt;If you do not understand part of the change, or for some reason were not able to review part of the change, state it explicitly so as to encourage other reviewers to jump in and help.（如果读不懂代码，请明确说出来，以方便其他reviewer给予帮助）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Once you have provided your feedback, wait for the developer to respond. It is possible that the developer may need further clarification on your feedback, in which case you should promptly provide it where necessary. In general, the dialog between the reviewer and developer should lead to finding a reasonable middle ground where key concerns are satisfied and the goals of the review have been met.&lt;/p&gt;
+
+&lt;p&gt;If a change has met all your criteria for review, please +1 the change to indicate that you are happy with it.（如果代码让你满意，请点击+1）&lt;/p&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;闲谈&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://cwiki.apache.org/confluence/display/FLUME/How+to+Contribute&quot;&gt;How to contribute&lt;/a&gt;中提到了各种规范、细节，这些就是参与开源项目的基本准则，大家都按照这个准则来操作，才能保证开源项目的顺利进行。想到了&lt;a href=&quot;http://robbinfan.com/&quot;&gt;Robbin&lt;/a&gt;的一句话：Small is beautiful, constraint is liberty.&lt;/p&gt;
 
 </content>
    </entry>
@@ -2147,231 +2639,6 @@ RE：新建一条记录，或者将&lt;code&gt;user=root&lt;/code&gt;的记录�
 &lt;h2 id=&quot;section-3&quot;&gt;闲谈&lt;/h2&gt;
 
 &lt;p&gt;我写blog，大都是分要点，列一个1、2、3，调理还算清晰，但，我总感觉我blog读起来味道怪怪的，相反，读Fenng、caoz、haoel的文章，能感觉到有平铺直叙、娓娓道来，很有味道。写blog，不仅要内容有用，而且，让人读起来也要舒服，这一点，我需要学习改进。&lt;/p&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>线框图工具：mockups</title>
-     <link href="http://ningg.github.com/mockups-intro"/>
-     <updated>2014-09-29T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/mockups-intro</id>
-     <content type="html">&lt;h2 id=&quot;mockups&quot;&gt;mockups的特点&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;快：提供常用的元素，通过简单托、拉、拽等动作，即可完成线框图绘制；&lt;/li&gt;
-  &lt;li&gt;手绘风格：展示效果，朴素、简洁，能够突出内容、层次结构、业务流程；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;基础用法&lt;/h2&gt;
-
-&lt;p&gt;简单的托、拉、拽内置的组件，就能够达到如下的效果：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/mockups-intro/simple-operate.jpg&quot; alt=&quot;简单的鼠标操作&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;section-1&quot;&gt;高效用法&lt;/h2&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;操作&lt;/th&gt;
-      &lt;th&gt;说明&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code&gt;/&lt;/code&gt;/&lt;code&gt;+&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;快速定位到&lt;code&gt;Quick Add&lt;/code&gt;输入框，在其中输入控件名字，即可自动添加一个元素&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code&gt;Enter&lt;/code&gt;/&lt;code&gt;F2&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;编辑&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code&gt;Ctrl+2&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;锁定&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code&gt;Ctrl+Up&lt;/code&gt;/&lt;code&gt;Ctrl+Down&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;上移、下移一层&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code&gt;Ctrl+D&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;复制并粘贴，相当于&lt;code&gt;Ctrl+C&lt;/code&gt; + &lt;code&gt;Ctrl+V&lt;/code&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;几点补充：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;官方提供一些现有的UI模版：&lt;a href=&quot;http://support.balsamiq.com/customer/portal/articles/1311316-how-to-download-from-mockups-to-go&quot;&gt;Mockups To Go&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;通过点击，可实现mockups一个页面跳转到同一目录下的另一个页面；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;（官方网站内容还没有看完，doing…）&lt;/p&gt;
-
-&lt;h2 id=&quot;section-2&quot;&gt;参考来源&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://support.balsamiq.com/#support-documentation&quot;&gt;Mockups官网文档&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://support.balsamiq.com/customer/portal/topics/49503-tutorials&quot;&gt;Mockups官网Tutorial&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section-3&quot;&gt;闲谈&lt;/h2&gt;
-
-&lt;p&gt;扯一点小事：写这篇文章关于mockups操作的文章，起初是无意间受到&lt;code&gt;1-2-3&lt;/code&gt;的博客《&lt;a href=&quot;http://www.cnblogs.com/1-2-3/archive/2009/08/17/Balsamiq-Mockups-Introduction.html&quot;&gt;我喜欢Balsamiq Mockups的三大理由&lt;/a&gt;》和《&lt;a href=&quot;http://www.cnblogs.com/1-2-3/archive/2009/06/30/Balsamiq-Mockups-tips.html&quot;&gt;Balsamiq Mockups 小技巧&lt;/a&gt;》 启发，不过自己当时冷静了一下，脑海里闪烁一个疑问：&lt;code&gt;1-2-3&lt;/code&gt;关于mockups的知识是从哪获取的？哦，官网，最初的知识传播，肯定是某人比较认真，读了官网，然后知识就散播开了，OK，为避免知识在传播过程中有损伤、误解，我直接找根源好了，这样的做法在普通人看来笨拙，却是真正捷径，最简洁、省时、省力的方法。&lt;/p&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>产品设计：线框图</title>
-     <link href="http://ningg.github.com/wireframe"/>
-     <updated>2014-09-28T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/wireframe</id>
-     <content type="html">&lt;blockquote&gt;
-  &lt;p&gt;题记：从网上找了一份材料：&lt;a href=&quot;/download/wireframe/wireframe-learning.pptx&quot;&gt;Wireframes.ppt&lt;/a&gt;，下面的内容基本都是从其中整理出来的。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;项目流程&lt;/h2&gt;
-
-&lt;p&gt;直接贴一张图片：项目流程（中大型产品），这张图片来自于&lt;a href=&quot;/download/wireframe/wireframe-learning.pptx&quot;&gt;Wireframes.ppt&lt;/a&gt;。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/wireframe/project-process.png&quot; alt=&quot;project-process.png&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;说明一点：线框图产生于项目前期，对应到上面的流程中，就是&lt;code&gt;交互设计初稿&lt;/code&gt;的阶段。&lt;/p&gt;
-
-&lt;p&gt;总结一下上面图片中展示的项目流程，一个中大型产品的开发基本过程是：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;需求分析&lt;/li&gt;
-  &lt;li&gt;需求确定&lt;/li&gt;
-  &lt;li&gt;交互设计稿&lt;em&gt;（线框图）&lt;/em&gt;&lt;/li&gt;
-  &lt;li&gt;视觉设计稿&lt;em&gt;（线框图）&lt;/em&gt;&lt;/li&gt;
-  &lt;li&gt;项目计划，包括：
-    &lt;ul&gt;
-      &lt;li&gt;功能需求分析&lt;/li&gt;
-      &lt;li&gt;开发设计&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;产品开发，包括：
-    &lt;ul&gt;
-      &lt;li&gt;前端程序开发&lt;/li&gt;
-      &lt;li&gt;后端程序开发&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;测试&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section-1&quot;&gt;线框图&lt;/h2&gt;
-
-&lt;p&gt;线框图，就是几张骨架图，两点：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;线框、简单的线条，来表现内容；&lt;/li&gt;
-  &lt;li&gt;不关心视觉效果和细节；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;要做一个用户展示界面的，有几个方面需要考虑：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;需要展示什么内容？&lt;/li&gt;
-  &lt;li&gt;这些内容的重要程度怎么划分？&lt;/li&gt;
-  &lt;li&gt;内容之间的层次关系？&lt;/li&gt;
-  &lt;li&gt;同一页面上，不同内容的位置？&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;上面前两点，需要通过需求分析来确定；后两点，在线框图上能够体现出来。&lt;/p&gt;
-
-&lt;h3 id=&quot;section-2&quot;&gt;线框图的意义&lt;/h3&gt;
-
-&lt;p&gt;线框图在产品的设计过程中，具有不可替代的优势：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;快速创建：设计师不需要考虑太多细节；&lt;/li&gt;
-  &lt;li&gt;直观呈现，帮助聚焦：项目前期，去除视觉和细节干扰，确保讨论中，大家将注意力集中在：需求是什么？需要放啥东西？需要怎么样与用户交互？这些内容的层次如何划分？&lt;/li&gt;
-  &lt;li&gt;方便修改：轻松修改设计、甚至放弃某一设计；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;section-3&quot;&gt;几点理论&lt;/h3&gt;
-
-&lt;p&gt;关于线框图，有几点要说明的：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;每个阶段的线框图都有其特定的价值，并不是精美细致的就是好的；&lt;/li&gt;
-  &lt;li&gt;从最简单的设计开始，逐渐添加细节；&lt;/li&gt;
-  &lt;li&gt;线框图的最大价值在于讨论和优化；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;通常用户进行产品设计时，绘制产品原型的过程，分为：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;草图&lt;/li&gt;
-  &lt;li&gt;粗略线框图&lt;/li&gt;
-  &lt;li&gt;详细线框图&lt;/li&gt;
-  &lt;li&gt;交互说明图&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;section-4&quot;&gt;线框图分类&lt;/h3&gt;
-
-&lt;p&gt;当前不同人员都会使用线框图，主要的有3类设计师：PD、交互、视觉。他们使用线框图的侧重有所不同：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;PD：关注，功能、内容、业务流程；&lt;/li&gt;
-  &lt;li&gt;交互：关注，业务流程、页面布局、层次结构；&lt;/li&gt;
-  &lt;li&gt;视觉：关注，整体风格/气质、颜色、质感，以及其他精细的视觉元素；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;总结一下，对于中小工程，应该一个工程师搞定所有、一切。&lt;/p&gt;
-
-&lt;h2 id=&quot;section-5&quot;&gt;画线框图的工具&lt;/h2&gt;
-
-&lt;p&gt;选取工具有几个依据：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;保证线框图本身的优势不缺失：快速创建、帮助聚焦、方便修改；&lt;/li&gt;
-  &lt;li&gt;工具制作的输出文档要易用：例如，保存为多种形式；&lt;/li&gt;
-  &lt;li&gt;想法不受工具的束缚；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;更详细一点，产品设计时，选取工具要考虑如下几点：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Design更容易：线框图、流程图、架构图&lt;/li&gt;
-  &lt;li&gt;Present更方便：策划文档、规格书&lt;/li&gt;
-  &lt;li&gt;Experience更交互：体验原型、交互设计&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;说两个工具：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Mockups&lt;/li&gt;
-  &lt;li&gt;Axure&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section-6&quot;&gt;小结&lt;/h2&gt;
-
-&lt;p&gt;工具能够提升做事的效率，但归根结底，进行设计的时候，是需要想法、需要思考的，工具只是表达；具体在使用线框图时，说两点：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;从最简单的开始，在迭代中逐步增加细节；&lt;/li&gt;
-  &lt;li&gt;留下会议纪要、修改纪要；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;嗳，刚刚回头看了一下上面对线框图的说明，我x，是我故意把事情说复杂了吧，线框图存在的意义，其实，就几点：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;把想法写出来；&lt;em&gt;（借助工具）&lt;/em&gt;&lt;/li&gt;
-  &lt;li&gt;从其他人那里得到反馈意见；&lt;/li&gt;
-  &lt;li&gt;修改至定稿；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section-7&quot;&gt;参考来源&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;/download/wireframe/wireframe-learning.pptx&quot;&gt;Wireframes.ppt&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
 
 </content>
    </entry>
