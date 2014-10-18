@@ -23,7 +23,7 @@ First let's review some basic messaging terminology:（几个messaging概念）
 
 So, at a high level, producers send messages over the network to the Kafka cluster which in turn serves them up to consumers like this:（producer向kafka集群写入message，consumer从kafka集群中读取message）
 
-![](/images/kafa-documentation/producer_consumer.png)
+![](/images/kafka-documentation/producer_consumer.png)
 
 Communication between the clients and the servers is done with a simple, high-performance, language agnostic [TCP protocol](https://cwiki.apache.org/confluence/display/KAFKA/A+Guide+To+The+Kafka+Protocol). We provide a Java client for Kafka, but clients are available in [many languages](https://cwiki.apache.org/confluence/display/KAFKA/Clients).（client与server之间通过TCP协议通信，默认为kafka提供了java client，当然也可以用其他语言实现client）
 
