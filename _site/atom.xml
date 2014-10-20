@@ -4,13 +4,529 @@
    <title>NingG.github.com</title>
    <link href="http://ningg.github.com/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://ningg.github.com" rel="alternate" type="text/html" />
-   <updated>2014-10-18T23:26:33+08:00</updated>
+   <updated>2014-10-20T23:18:13+08:00</updated>
    <id>http://ningg.github.com</id>
    <author>
      <name></name>
      <email></email>
    </author>
 
+   
+   <entry>
+     <title>Storm：setting up a development environment</title>
+     <link href="http://ningg.github.com/storm-setting-up-dev-env"/>
+     <updated>2014-10-21T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/storm-setting-up-dev-env</id>
+     <content type="html">&lt;blockquote&gt;
+  &lt;p&gt;原文地址：&lt;a href=&quot;http://storm.apache.org/documentation/Setting-up-development-environment.html&quot;&gt;Setting up a development environment&lt;/a&gt;，本文使用&lt;code&gt;英文原文+中文注释&lt;/code&gt;方式来写。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;This page outlines what you need to do to get a Storm development environment set up. In summary, the steps are:
+（本文重点：set up a Storm dev env。概括一下，基本步骤如下）&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Download a &lt;a href=&quot;http://storm.apache.org//downloads.html&quot;&gt;Storm release&lt;/a&gt; , unpack it, and put the unpacked &lt;code&gt;bin/&lt;/code&gt; directory on your &lt;code&gt;PATH&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;To be able to start and stop topologies on a remote cluster, put the cluster information in &lt;code&gt;~/.storm/storm.yaml&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;More detail on each of these steps is below.&lt;/p&gt;
+
+&lt;h2 id=&quot;what-is-a-development-environment&quot;&gt;What is a development environment?&lt;/h2&gt;
+
+&lt;p&gt;Storm has two modes of operation: &lt;code&gt;local mode&lt;/code&gt; and &lt;code&gt;remote mode&lt;/code&gt;. In local mode, you can develop and test topologies completely in process on your local machine. In remote mode, you submit topologies for execution on a cluster of machines.
+（两种mode：local mode，develop和test topologies；remote mode，真正执行时，submit topologies到cluster）&lt;/p&gt;
+
+&lt;p&gt;A Storm development environment has everything installed so that you can develop and test Storm topologies in local mode, package topologies for execution on a remote cluster, and submit/kill topologies on a remote cluster.&lt;/p&gt;
+
+&lt;p&gt;Let’s quickly go over the relationship between your machine and a remote cluster. A Storm cluster is managed by a master node called “Nimbus”. Your machine communicates with Nimbus to submit code (packaged as a jar) and topologies for execution on the cluster, and Nimbus will take care of distributing that code around the cluster and assigning workers to run your topology. Your machine uses a command line client called storm to communicate with Nimbus. The storm client is only used for remote mode; it is not used for developing and testing topologies in local mode.
+（master node，called &lt;code&gt;Nimbus&lt;/code&gt;，管理整个cluster，提交的code（jar包）、topologies都是交给&lt;code&gt;Nimbus&lt;/code&gt;负责接收的；之后，&lt;code&gt;Nimbus&lt;/code&gt;负责distribute code、assign worker to run topologies；本地提交topologies的机器，通过调用 storm client来通知storm与&lt;code&gt;Nimbus&lt;/code&gt;通信。）&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：distribute code？与assign worker to run topologies有区别吗？&lt;/p&gt;
+
+&lt;h2 id=&quot;installing-a-storm-release-locally&quot;&gt;Installing a Storm release locally&lt;/h2&gt;
+
+&lt;p&gt;If you want to be able to submit topologies to a remote cluster from your machine, you should install a Storm release locally. Installing a Storm release will give you the &lt;code&gt;storm&lt;/code&gt; client that you can use to interact with remote clusters. To install Storm locally, download a release &lt;a href=&quot;https://github.com/apache/incubator-storm/downloads&quot;&gt;from here&lt;/a&gt; and unzip it somewhere on your computer. Then add the unpacked &lt;code&gt;bin/&lt;/code&gt; directory onto your &lt;code&gt;PATH&lt;/code&gt; and make sure the &lt;code&gt;bin/storm&lt;/code&gt; script is executable.
+（本地安装的Storm，也可以作为与remote cluster交互的client；安装办法：下载、解压、添加bin到PATH）&lt;/p&gt;
+
+&lt;p&gt;Installing a Storm release locally is only for interacting with remote clusters. For developing and testing topologies in local mode, it is recommended that you use Maven to include Storm as a dev dependency for your project. You can read more about using Maven for this purpose on &lt;a href=&quot;http://storm.apache.org/documentation/Maven.html&quot;&gt;Maven&lt;/a&gt;.
+（本地安装Storm唯一目标：interact with remote cluster；如果想利用local mode来进行develop、test，建议使用Maven将Storm作为依赖导入。）&lt;/p&gt;
+
+&lt;h2 id=&quot;starting-and-stopping-topologies-on-a-remote-cluster&quot;&gt;Starting and stopping topologies on a remote cluster&lt;/h2&gt;
+
+&lt;p&gt;The previous step installed the &lt;code&gt;storm&lt;/code&gt; client on your machine which is used to communicate with remote Storm clusters. Now all you have to do is tell the client which Storm cluster to talk to. To do this, all you have to do is put the host address of the master in the &lt;code&gt;~/.storm/storm.yaml&lt;/code&gt; file. It should look something like this:
+（在本地安装storm实质是为了interact with remote cluster，这就需要告诉本地storm：remote cluster的位置。）&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;nimbus.host: &quot;123.45.678.890&quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Alternatively, if you use the &lt;a href=&quot;https://github.com/nathanmarz/storm-deploy&quot;&gt;storm-deploy&lt;/a&gt; project to provision Storm clusters on AWS, it will automatically set up your ~/.storm/storm.yaml file. You can manually attach to a Storm cluster (or switch between multiple clusters) using the “attach” command, like so:
+（还有一种方法：如果Storm部署在AWS上，可直接使用 “attach” command）&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;lein run :deploy --attach --name mystormcluster
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;More information is on the storm-deploy &lt;a href=&quot;https://github.com/nathanmarz/storm-deploy/wiki&quot;&gt;wiki&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;参考来源&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://storm.apache.org/&quot;&gt;Apache Storm&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://storm.apache.org/documentation/Rationale.html&quot;&gt;Apache Storm: Documentation Rationale&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+   </entry>
+   
+   <entry>
+     <title>Storm：Tutorial</title>
+     <link href="http://ningg.github.com/storm-tutorial"/>
+     <updated>2014-10-20T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/storm-tutorial</id>
+     <content type="html">&lt;blockquote&gt;
+  &lt;p&gt;原文地址：&lt;a href=&quot;http://storm.apache.org/documentation/Tutorial.html&quot;&gt;Storm Tutorial&lt;/a&gt;，本文使用&lt;code&gt;英文原文+中文注释&lt;/code&gt;方式来写。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;In this tutorial, you’ll learn how to create Storm topologies and deploy them to a Storm cluster. Java will be the main language used, but a few examples will use Python to illustrate Storm’s multi-language capabilities.
+（这个tutorial中，着重说明：如何创建Storm topologies，如何将Storm topologies部署到Storm cluster中。）&lt;/p&gt;
+
+&lt;h2 id=&quot;preliminaries&quot;&gt;Preliminaries&lt;/h2&gt;
+
+&lt;p&gt;This tutorial uses examples from the &lt;a href=&quot;http://github.com/nathanmarz/storm-starter&quot;&gt;storm-starter&lt;/a&gt; project. It’s recommended that you clone the project and follow along with the examples. Read &lt;a href=&quot;http://storm.apache.org/documentation/Setting-up-development-environment.html&quot;&gt;Setting up a development environment&lt;/a&gt; and &lt;a href=&quot;http://storm.apache.org/documentation/Creating-a-new-Storm-project.html&quot;&gt;Creating a new Storm project&lt;/a&gt; to get your machine set up.
+（example都是来自&lt;a href=&quot;http://github.com/nathanmarz/storm-starter&quot;&gt;storm-starter&lt;/a&gt; project，建议clone一份，跟着例子操作一把。在此之前，需要参考&lt;a href=&quot;http://storm.apache.org/documentation/Setting-up-development-environment.html&quot;&gt;Setting up a development environment&lt;/a&gt; 和 &lt;a href=&quot;http://storm.apache.org/documentation/Creating-a-new-Storm-project.html&quot;&gt;Creating a new Storm project&lt;/a&gt;来配置一下环境）&lt;/p&gt;
+
+&lt;h2 id=&quot;components-of-a-storm-cluster&quot;&gt;Components of a Storm cluster&lt;/h2&gt;
+
+&lt;p&gt;A Storm cluster is superficially similar to a Hadoop cluster. Whereas on Hadoop you run “MapReduce jobs”, on Storm you run “topologies”. “Jobs” and “topologies” themselves are very different – one key difference is that a MapReduce job eventually finishes, whereas a topology processes messages forever (or until you kill it).
+（Storm cluster与Hadoop cluster类似，Hadoop中运行&lt;code&gt;MapReduce jobs&lt;/code&gt;，Storm中运行&lt;code&gt;topologies&lt;/code&gt;。）&lt;/p&gt;
+
+&lt;p&gt;There are two kinds of nodes on a Storm cluster: the master node and the worker nodes. The master node runs a daemon called “Nimbus” that is similar to Hadoop’s “JobTracker”. Nimbus is responsible for distributing code around the cluster, assigning tasks to machines, and monitoring for failures.
+（Storm cluster中两类node：master node、worker node；master上运行一个daemon——&lt;code&gt;Nimbus&lt;/code&gt;，其负责：distribute code，assign task，monitor failures）&lt;/p&gt;
+
+&lt;p&gt;Each worker node runs a daemon called the “Supervisor”. The supervisor listens for work assigned to its machine and starts and stops worker processes as necessary based on what Nimbus has assigned to it. Each worker process executes a subset of a topology; a running topology consists of many worker processes spread across many machines.
+（worker上运行daemon——&lt;code&gt;Supervisor&lt;/code&gt;，监听来自&lt;code&gt;Nimbus&lt;/code&gt;的任务，并starts或stop worker process。每个worker上执行topology的一部分，也就是说，a running topology 包含很多分布在不同机器上的worker process。）&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/storm-tutorial/storm-cluster.png&quot; alt=&quot;Storm cluster&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;All coordination between Nimbus and the Supervisors is done through a &lt;a href=&quot;http://zookeeper.apache.org/&quot;&gt;Zookeeper&lt;/a&gt; cluster. Additionally, the Nimbus daemon and Supervisor daemons are fail-fast and stateless; all state is kept in Zookeeper or on local disk. This means you can kill -9 Nimbus or the Supervisors and they’ll start back up like nothing happened. This design leads to Storm clusters being incredibly stable.
+（Zookeeper cluster负责&lt;code&gt;Nimbus&lt;/code&gt;和&lt;code&gt;Supervisor&lt;/code&gt;之间的协调；Nimbus和Supervisor deamon是fail-fast和stateless的，所有的状态都存储在Zookeeper or local disk；即，通过&lt;code&gt;kill -9 Nimbus/Supervisor&lt;/code&gt;，然后重启进程，对于用户基本是透明的）&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：&lt;a href=&quot;http://en.wikipedia.org/wiki/Fail-fast&quot;&gt;fail-fast&lt;/a&gt;，表示如果输入有误，或者其他异常，则系统立刻停止运行。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;举例说明一下&lt;code&gt;fail-fast&lt;/code&gt;：在并发的时候，如果线程A正遍历一个collection(List, Map, Set etc.)，这时另外一个线程B却修改了该collection的size，线程A就会抛出一个错：ConcurrentModificationException，表明：我正读取的内容被修改掉了，你是否需要重新遍历？或是做其它处理？这就是fail-fast的含义。 &lt;/p&gt;
+
+  &lt;p&gt;Fail-fast是并发中乐观(optimistic)策略的具体应用，它允许线程自由竞争，但在出现冲突的情况下假设你能应对，即你能判断出问题何在，并且给出解决办法。悲观(pessimistic)策略就正好相反，它总是预先设置足够的限制，通常是采用锁(lock)，来保证程序进行过程中的无错，付出的代价是其它线程的等待开销&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;topologies&quot;&gt;Topologies&lt;/h2&gt;
+
+&lt;p&gt;To do realtime computation on Storm, you create what are called “topologies”. A topology is a graph of computation. Each node in a topology contains processing logic, and links between nodes indicate how data should be passed around between nodes.
+（topology中每个node都包含了相应的processing logic）&lt;/p&gt;
+
+&lt;p&gt;Running a topology is straightforward. First, you package all your code and dependencies into a single jar. Then, you run a command like the following:（执行 a topology：将your code和dependencies都放到一个jar中）&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;storm jar all-my-code.jar backtype.storm.MyTopology arg1 arg2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This runs the class &lt;code&gt;backtype.storm.MyTopology&lt;/code&gt; with the arguments &lt;code&gt;arg1&lt;/code&gt; and &lt;code&gt;arg2&lt;/code&gt;. The main function of the class defines the topology and submits it to Nimbus. The &lt;code&gt;storm jar&lt;/code&gt; part takes care of connecting to Nimbus and uploading the jar.
+（&lt;code&gt;storm jar&lt;/code&gt;负责connecting to Nimbus，以及uploading the jar）&lt;/p&gt;
+
+&lt;p&gt;Since topology definitions are just Thrift structs, and Nimbus is a Thrift service, you can create and submit topologies using any programming language. The above example is the easiest way to do it from a JVM-based language. See &lt;a href=&quot;http://storm.apache.org/documentation/Running-topologies-on-a-production-cluster.html&quot;&gt;Running topologies on a production cluster&lt;/a&gt; for more information on starting and stopping topologies.
+（利用Thrift structs，来定义topology，并且，Nimbus是Thrift service，因此，可以使用任何编程语言。）&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：Thrift structs? Thrift service?&lt;/p&gt;
+
+&lt;h2 id=&quot;streams&quot;&gt;Streams&lt;/h2&gt;
+
+&lt;p&gt;The core abstraction in Storm is the “stream”. A stream is an unbounded sequence of tuples. Storm provides the primitives for transforming a stream into a new stream in a distributed and reliable way. For example, you may transform a stream of tweets into a stream of trending topics.
+（Storm的核心是&lt;code&gt;Stream&lt;/code&gt;，Storm提供一种分布式的、可靠的数据流转换方式，将原始数据流处理后，转换为其他的数据流）&lt;/p&gt;
+
+&lt;p&gt;The basic primitives Storm provides for doing stream transformations are “spouts” and “bolts”. Spouts and bolts have interfaces that you implement to run your application-specific logic.
+（Storm通过&lt;code&gt;spouts&lt;/code&gt;和&lt;code&gt;bolts&lt;/code&gt;来实现stream transformation）&lt;/p&gt;
+
+&lt;p&gt;A spout is a source of streams. For example, a spout may read tuples off of a Kestrel queue and emit them as a stream. Or a spout may connect to the Twitter API and emit a stream of tweets.
+（spout是a source of streams）&lt;/p&gt;
+
+&lt;p&gt;A bolt consumes any number of input streams, does some processing, and possibly emits new streams. Complex stream transformations, like computing a stream of trending topics from a stream of tweets, require multiple steps and thus multiple bolts. Bolts can do anything from run functions, filter tuples, do streaming aggregations, do streaming joins, talk to databases, and more.
+（bolt负责处理input stream，也可能产生new stream；bolt通过run functions，filter tuples，do streaming aggregations，do streaming joins，talk to database，etc…来做任何事情）&lt;/p&gt;
+
+&lt;p&gt;Networks of spouts and bolts are packaged into a “topology” which is the top-level abstraction that you submit to Storm clusters for execution. A topology is a graph of stream transformations where each node is a spout or bolt. Edges in the graph indicate which bolts are subscribing to which streams. When a spout or bolt emits a tuple to a stream, it sends the tuple to every bolt that subscribed to that stream.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/storm-tutorial/topology.png&quot; alt=&quot;A Storm topology&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Links between nodes in your topology indicate how tuples should be passed around. For example, if there is a link between Spout A and Bolt B, a link from Spout A to Bolt C, and a link from Bolt B to Bolt C, then everytime Spout A emits a tuple, it will send the tuple to both Bolt B and Bolt C. All of Bolt B’s output tuples will go to Bolt C as well.&lt;/p&gt;
+
+&lt;p&gt;Each node in a Storm topology executes in parallel. In your topology, you can specify how much parallelism you want for each node, and then Storm will spawn that number of threads across the cluster to do the execution.
+（topology中所有node都是并发运行的，可以配置每个node的并发数。）&lt;/p&gt;
+
+&lt;p&gt;A topology runs forever, or until you kill it. Storm will automatically reassign any failed tasks. Additionally, Storm guarantees that there will be no data loss, even if machines go down and messages are dropped.
+（topology会自动重启失败的任务，并且run forever——因为是stream processing；即使node机器崩溃并且message丢失，Storm也能保证no data loss）&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：Storm如何保证node崩溃后，no data loss的？&lt;/p&gt;
+
+&lt;h2 id=&quot;data-model&quot;&gt;Data model&lt;/h2&gt;
+
+&lt;p&gt;Storm uses tuples as its data model. A tuple is a named list of values, and a field in a tuple can be an object of any type. Out of the box, Storm supports all the primitive types, strings, and byte arrays as tuple field values. To use an object of another type, you just need to implement &lt;a href=&quot;http://storm.apache.org/documentation/Serialization.html&quot;&gt;a serializer&lt;/a&gt; for the type.
+（Storm中用&lt;code&gt;tuple&lt;/code&gt;结构来存储数据，tuple中的field可以是任何类型的object，自定义的类型，需要实现&lt;a href=&quot;http://storm.apache.org/documentation/Serialization.html&quot;&gt;a serializer&lt;/a&gt;接口）&lt;/p&gt;
+
+&lt;p&gt;Every node in a topology must declare the output fields for the tuples it emits. For example, this bolt declares that it emits 2-tuples with the fields “double” and “triple”:
+（每个node都要定义输出的tuple的结构）&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;java public class DoubleAndTripleBolt extends BaseRichBolt { 
+
+   private OutputCollectorBase _collector;
+   
+   @Override
+   public void prepare(Map conf, TopologyContext context, OutputCollectorBase collector) {
+	   _collector = collector;
+   }
+   
+   @Override
+   public void execute(Tuple input) {
+	   int val = input.getInteger(0);        
+	   _collector.emit(input, new Values(val*2, val*3));
+	   _collector.ack(input);
+   }
+   
+   @Override
+   public void declareOutputFields(OutputFieldsDeclarer declarer) {
+	   declarer.declare(new Fields(&quot;double&quot;, &quot;triple&quot;));
+   }     
+
+} 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The declareOutputFields function declares the output fields &lt;code&gt;[&quot;double&quot;, &quot;triple&quot;]&lt;/code&gt; for the component. The rest of the bolt will be explained in the upcoming sections.&lt;/p&gt;
+
+&lt;h2 id=&quot;a-simple-topology&quot;&gt;A simple topology&lt;/h2&gt;
+
+&lt;p&gt;Let’s take a look at a simple topology to explore the concepts more and see how the code shapes up. Let’s look at the &lt;code&gt;ExclamationTopology&lt;/code&gt; definition from storm-starter:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;// java
+TopologyBuilder builder = new TopologyBuilder(); 
+builder.setSpout(&quot;words&quot;, new TestWordSpout(), 10); 
+builder.setBolt(&quot;exclaim1&quot;, new ExclamationBolt(), 3).shuffleGrouping(&quot;words&quot;); 
+builder.setBolt(&quot;exclaim2&quot;, new ExclamationBolt(), 2).shuffleGrouping(&quot;exclaim1&quot;);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This topology contains a spout and two bolts. The spout emits words, and each bolt appends the string “!!!” to its input. The nodes are arranged in a line: the spout emits to the first bolt which then emits to the second bolt. If the spout emits the tuples “bob” and “john”, then the second bolt will emit the words “bob!!!!!!” and “john!!!!!!”.&lt;/p&gt;
+
+&lt;p&gt;This code defines the nodes using the &lt;code&gt;setSpout&lt;/code&gt; and &lt;code&gt;setBolt&lt;/code&gt; methods. These methods take as input a user-specified id, an object containing the processing logic, and the amount of parallelism you want for the node. In this example, the spout is given id “words” and the bolts are given ids “exclaim1” and “exclaim2”.
+（两个方法&lt;code&gt;setSpout&lt;/code&gt;`setBolt`，参数的含义：node id、processing logic、amount of parallelism。）&lt;/p&gt;
+
+&lt;p&gt;The object containing the processing logic implements the &lt;a href=&quot;http://storm.apache.org/apidocs/backtype/storm/topology/IRichSpout.html&quot;&gt;IRichSpout&lt;/a&gt; interface for spouts and the &lt;a href=&quot;http://storm.apache.org/apidocs/backtype/storm/topology/IRichBolt.html&quot;&gt;IRichBolt&lt;/a&gt; interface for bolts.
+（包含processing logic的object需要实现IRichSpout\IRichBolt）&lt;/p&gt;
+
+&lt;p&gt;The last parameter, how much parallelism you want for the node, is optional. It indicates how many threads should execute that component across the cluster. If you omit it, Storm will only allocate one thread for that node.
+（如果不设置 amount of parallelism的，系统默认自启动一个thread）&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;setBolt&lt;/code&gt; returns an &lt;a href=&quot;http://storm.apache.org/apidocs/backtype/storm/topology/InputDeclarer.html&quot;&gt;InputDeclarer&lt;/a&gt; object that is used to define the inputs to the Bolt. Here, component “exclaim1” declares that it wants to read all the tuples emitted by component “words” using a shuffle grouping, and component “exclaim2” declares that it wants to read all the tuples emitted by component “exclaim1” using a shuffle grouping. “shuffle grouping” means that tuples should be randomly distributed from the input tasks to the bolt’s tasks. There are many ways to group data between components. These will be explained in a few sections.
+（&lt;code&gt;shuffle grouping&lt;/code&gt;，随机分发tuple）&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：Storm是流式处理，需要保证tuple的顺序执行吗？还有tuple需要顺序执行吗？&lt;/p&gt;
+
+&lt;p&gt;If you wanted component “exclaim2” to read all the tuples emitted by both component “words” and component “exclaim1”, you would write component “exclaim2”’s definition like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;// java 
+builder.setBolt(&quot;exclaim2&quot;, new ExclamationBolt(), 5) .shuffleGrouping(&quot;words&quot;) .shuffleGrouping(&quot;exclaim1&quot;);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As you can see, input declarations can be chained to specify multiple sources for the Bolt.&lt;/p&gt;
+
+&lt;p&gt;Let’s dig into the implementations of the spouts and bolts in this topology. Spouts are responsible for emitting new messages into the topology. &lt;code&gt;TestWordSpout&lt;/code&gt; in this topology emits a random word from the list &lt;code&gt;[“nathan”, “mike”, “jackson”, “golda”, “bertels”]&lt;/code&gt; as a 1-tuple every 100ms. The implementation of &lt;code&gt;nextTuple()&lt;/code&gt; in TestWordSpout looks like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;// java 
+public void nextTuple() { 
+    Utils.sleep(100); 
+    final String[] words = new String[] {&quot;nathan&quot;, &quot;mike&quot;, &quot;jackson&quot;, &quot;golda&quot;, &quot;bertels&quot;}; 
+    final Random rand = new Random(); 
+    final String word = words[rand.nextInt(words.length)]; 
+    _collector.emit(new Values(word)); 
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As you can see, the implementation is very straightforward.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;ExclamationBolt&lt;/code&gt; appends the string “!!!” to its input. Let’s take a look at the full implementation for &lt;code&gt;ExclamationBolt&lt;/code&gt;:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;// java 
+public static class ExclamationBolt implements IRichBolt { OutputCollector _collector;
+   
+   public void prepare(Map conf, TopologyContext context, OutputCollector collector) {
+	   _collector = collector;
+   }
+   
+   public void execute(Tuple tuple) {
+	   _collector.emit(tuple, new Values(tuple.getString(0) + &quot;!!!&quot;));
+	   _collector.ack(tuple);
+   }
+   
+   public void cleanup() {
+   }
+   
+   public void declareOutputFields(OutputFieldsDeclarer declarer) {
+	   declarer.declare(new Fields(&quot;word&quot;));
+   }
+   
+   public Map getComponentConfiguration() {
+	   return null;
+   } 
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;code&gt;prepare&lt;/code&gt; method provides the bolt with an &lt;code&gt;OutputCollector&lt;/code&gt; that is used for emitting tuples from this bolt. Tuples can be emitted at anytime from the bolt – in the &lt;code&gt;prepare&lt;/code&gt;, &lt;code&gt;execute&lt;/code&gt;, or &lt;code&gt;cleanup&lt;/code&gt; methods, or even asynchronously in another thread. This &lt;code&gt;prepare&lt;/code&gt; implementation simply saves the &lt;code&gt;OutputCollector&lt;/code&gt; as an instance variable to be used later on in the &lt;code&gt;execute&lt;/code&gt; method.&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;execute&lt;/code&gt; method receives a tuple from one of the bolt’s inputs. The &lt;code&gt;ExclamationBolt&lt;/code&gt; grabs the first field from the tuple and emits a new tuple with the string “!!!” appended to it. If you implement a bolt that subscribes to multiple input sources, you can find out which component the Tuple came from by using the &lt;code&gt;Tuple#getSourceComponent&lt;/code&gt; method.&lt;/p&gt;
+
+&lt;p&gt;There’s a few other things going in in the &lt;code&gt;execute&lt;/code&gt; method, namely that the input tuple is passed as the first argument to &lt;code&gt;emit&lt;/code&gt; and the input tuple is acked on the final line. These are part of Storm’s reliability API for guaranteeing no data loss and will be explained later in this tutorial.
+（在&lt;code&gt;execute&lt;/code&gt;方法中，最后一行进行&lt;code&gt;ack&lt;/code&gt;）&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：&lt;code&gt;ack&lt;/code&gt;方法的作用？如何实现的？&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;cleanup&lt;/code&gt; method is called when a Bolt is being shutdown and should cleanup any resources that were opened. There’s no guarantee that this method will be called on the cluster: for example, if the machine the task is running on blows up, there’s no way to invoke the method. The &lt;code&gt;cleanup&lt;/code&gt; method is intended for when you run topologies in &lt;a href=&quot;http://storm.apache.org/documentation/Local-mode.html&quot;&gt;local mode&lt;/a&gt; (where a Storm cluster is simulated in process), and you want to be able to run and kill many topologies without suffering any resource leaks.
+（&lt;code&gt;cleanup&lt;/code&gt;的一个用途：local mode中运行Storm时，可以释放资源，防止资源泄漏。）&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;declareOutputFields&lt;/code&gt; method declares that the &lt;code&gt;ExclamationBolt&lt;/code&gt; emits 1-tuples with one field called “word”.&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;getComponentConfiguration&lt;/code&gt; method allows you to configure various aspects of how this component runs. This is a more advanced topic that is explained further on &lt;a href=&quot;http://storm.apache.org/documentation/Local-mode.html&quot;&gt;Configuration&lt;/a&gt;.
+（component中很多方面的属性都可进行设置）&lt;/p&gt;
+
+&lt;p&gt;Methods like cleanup and getComponentConfiguration are often not needed in a bolt implementation. You can define bolts more succinctly by using a base class that provides default implementations where appropriate. ExclamationBolt can be written more succinctly by extending BaseRichBolt, like so:
+（通常，bolt并不需要实现cleanup和getComponentConfiguration；建议：为多个功能相似的bolt创建一个base类，然后所有的实现都继承base类）&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;// java
+public static class ExclamationBolt extends BaseRichBolt { OutputCollector _collector;
+   
+   public void prepare(Map conf, TopologyContext context, OutputCollector collector) {
+	   _collector = collector;
+   }
+   
+   public void execute(Tuple tuple) {
+	   _collector.emit(tuple, new Values(tuple.getString(0) + &quot;!!!&quot;));
+	   _collector.ack(tuple);
+   }
+   
+   public void declareOutputFields(OutputFieldsDeclarer declarer) {
+	   declarer.declare(new Fields(&quot;word&quot;));
+   }     
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;running-exclamationtopology-in-local-mode&quot;&gt;Running ExclamationTopology in local mode&lt;/h2&gt;
+
+&lt;p&gt;Let’s see how to run the ExclamationTopology in local mode and see that it’s working.&lt;/p&gt;
+
+&lt;p&gt;Storm has two modes of operation: local mode and distributed mode. In local mode, Storm executes completely in process by simulating worker nodes with threads. Local mode is useful for testing and development of topologies. When you run the topologies in storm-starter, they’ll run in local mode and you’ll be able to see what messages each component is emitting. You can read more about running topologies in local mode on &lt;a href=&quot;http://storm.apache.org/documentation/Local-mode.html&quot;&gt;Local mode&lt;/a&gt;.
+（local mode，用于testing和development，因为，其可以查看到component发出的所有message）&lt;/p&gt;
+
+&lt;p&gt;In distributed mode, Storm operates as a cluster of machines. When you submit a topology to the master, you also submit all the code necessary to run the topology. The master will take care of distributing your code and allocating workers to run your topology. If workers go down, the master will reassign them somewhere else. You can read more about running topologies on a cluster on &lt;a href=&quot;http://storm.apache.org/documentation/Running-topologies-on-a-production-cluster.html&quot;&gt;Running topologies on a production cluster&lt;/a&gt;.
+（distributed mode，用户需要向master提交topology，以及运行这个topology所需要的所有code，详细信息推荐&lt;a href=&quot;http://storm.apache.org/documentation/Running-topologies-on-a-production-cluster.html&quot;&gt;阅读&lt;/a&gt;）&lt;/p&gt;
+
+&lt;p&gt;Here’s the code that runs &lt;code&gt;ExclamationTopology&lt;/code&gt; in local mode:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;// java 
+Config conf = new Config(); 
+conf.setDebug(true); 
+conf.setNumWorkers(2);
+
+LocalCluster cluster = new LocalCluster(); 
+cluster.submitTopology(“test”, conf, builder.createTopology()); 
+
+Utils.sleep(10000); 
+
+cluster.killTopology(“test”); 
+cluster.shutdown();
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;First, the code defines an in-process cluster by creating a &lt;code&gt;LocalCluster&lt;/code&gt; object. Submitting topologies to this virtual cluster is identical to submitting topologies to distributed clusters. It submits a topology to the &lt;code&gt;LocalCluster&lt;/code&gt; by calling &lt;code&gt;submitTopology&lt;/code&gt;, which takes as arguments a name for the running topology, a configuration for the topology, and then the topology itself.
+（为topology指定一个唯一标识的名字）&lt;/p&gt;
+
+&lt;p&gt;The name is used to identify the topology so that you can kill it later on. A topology will run indefinitely until you kill it.
+（除非kill掉topology，否则，其永久的运行下去，因为是stream processing嘛，自然是endless）&lt;/p&gt;
+
+&lt;p&gt;The configuration is used to tune various aspects of the running topology. The two configurations specified here are very common:
+（有两个参数，重点说一下）&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;TOPOLOGY_WORKERS&lt;/strong&gt; (set with &lt;code&gt;setNumWorkers&lt;/code&gt;) specifies how many &lt;code&gt;processes&lt;/code&gt; you want allocated around the cluster to execute the topology. Each component in the topology will execute as many &lt;code&gt;threads&lt;/code&gt;. The number of threads allocated to a given component is configured through the &lt;code&gt;setBolt&lt;/code&gt; and &lt;code&gt;setSpout&lt;/code&gt; methods. Those threads exist within worker processes. Each &lt;code&gt;worker process&lt;/code&gt; contains within it some number of threads for some number of components. For instance, you may have 300 threads specified across all your components and 50 worker processes specified in your config. Each worker process will execute 6 threads, each of which of could belong to a different component. You tune the performance of Storm topologies by tweaking the parallelism for each component and the number of worker processes those threads should run within.（每个component都会启动几个thread，这些Thread都是包含在worker process中的，每个worker process都会包含来自一些components的一些thread。）&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;TOPOLOGY_DEBUG&lt;/strong&gt; (set with &lt;code&gt;setDebug&lt;/code&gt;), when set to true, tells Storm to log every message every emitted by a component. This is useful in local mode when testing topologies, but you probably want to keep this turned off when running topologies on the cluster.（设置Debug模式启动后，component emit的所有message都会被记录下来）&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;There’s many other configurations you can set for the topology. The various configurations are detailed on &lt;a href=&quot;http://storm.apache.org/apidocs/backtype/storm/Config.html&quot;&gt;the Javadoc for Config&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：worker process、thread、component之间什么关系？worker process只是作为支撑component与thread间的映射关系？&lt;/p&gt;
+
+&lt;p&gt;To learn about how to set up your development environment so that you can run topologies in local mode (such as in Eclipse), see &lt;a href=&quot;http://storm.apache.org/documentation/Creating-a-new-Storm-project.html&quot;&gt;Creating a new Storm project&lt;/a&gt;.
+（设置本地的开发环境，这样就可以在Eclipse等中进行调试开发）	&lt;/p&gt;
+
+&lt;h2 id=&quot;stream-groupings&quot;&gt;Stream groupings&lt;/h2&gt;
+
+&lt;p&gt;A stream grouping tells a topology how to send tuples between two components. Remember, spouts and bolts execute in parallel as many tasks across the cluster. If you look at how a topology is executing at the task level, it looks something like this:
+（stream grouping负责一个topology中tuples在components间的传递；）&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/storm-tutorial/topology-tasks.png&quot; alt=&quot;Tasks in a topology&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;When a task for Bolt A emits a tuple to Bolt B, which task should it send the tuple to?
+（从Bolt A发出的tuple，发送给Bolt B的那一个task？）&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：tuple与task之间什么关系？&lt;/p&gt;
+
+&lt;p&gt;A “stream grouping” answers this question by telling Storm how to send tuples between sets of tasks. Before we dig into the different kinds of stream groupings, let’s take a look at another topology from &lt;a href=&quot;http://github.com/nathanmarz/storm-starter&quot;&gt;storm-starter&lt;/a&gt;. This &lt;a href=&quot;https://github.com/nathanmarz/storm-starter/blob/master/src/jvm/storm/starter/WordCountTopology.java&quot;&gt;WordCountTopology&lt;/a&gt; reads sentences off of a spout and streams out of &lt;code&gt;WordCountBolt&lt;/code&gt; the total number of times it has seen that word before:
+（stream grouping，负责分配tuple到task中去；）&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;// java
+TopologyBuilder builder = new TopologyBuilder();
+
+builder.setSpout(“sentences”, new RandomSentenceSpout(), 5); 
+builder.setBolt(“split”, new SplitSentence(), 8) .shuffleGrouping(“sentences”); 
+builder.setBolt(“count”, new WordCount(), 12) .fieldsGrouping(“split”, new Fields(“word”));
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;code&gt;SplitSentence&lt;/code&gt; emits a tuple for each word in each sentence it receives, and WordCount keeps a map in memory from word to count. Each time WordCount receives a word, it updates its state and emits the new word count.&lt;/p&gt;
+
+&lt;p&gt;There’s a few different kinds of stream groupings.&lt;/p&gt;
+
+&lt;p&gt;The simplest kind of grouping is called a “shuffle grouping” which sends the tuple to a random task. A shuffle grouping is used in the &lt;code&gt;WordCountTopology&lt;/code&gt; to send tuples from RandomSentenceSpout to the SplitSentence bolt. It has the effect of evenly distributing the work of processing the tuples across all of SplitSentence bolt’s tasks.
+（shuffle grouping，随机分发tuple到所有的bolt）&lt;/p&gt;
+
+&lt;p&gt;A more interesting kind of grouping is the “fields grouping”. A fields grouping is used between the SplitSentence bolt and the WordCount bolt. It is critical for the functioning of the WordCount bolt that the same word always go to the same task. Otherwise, more than one task will see the same word, and they’ll each emit incorrect values for the count since each has incomplete information. A fields grouping lets you group a stream by a subset of its fields. This causes equal values for that subset of fields to go to the same task. Since &lt;code&gt;WordCount&lt;/code&gt; subscribes to SplitSentence’s output stream using a fields grouping on the “word” field, the same word always goes to the same task and the bolt produces the correct output.
+（fields grouping，根据给定的fields进行group操作）&lt;/p&gt;
+
+&lt;p&gt;Fields groupings are the basis of implementing streaming joins and streaming aggregations as well as a plethora of other use cases. Underneath the hood, fields groupings are implemented using mod hashing.
+（fields grouping，应用很广泛，本质上，其使用mod hashing方式实现）&lt;/p&gt;
+
+&lt;p&gt;There’s a few other kinds of stream groupings. You can read more about them on &lt;a href=&quot;http://storm.apache.org/documentation/Concepts.html&quot;&gt;Concepts&lt;/a&gt;.
+（关于stream grouping的更多内容，参考&lt;a href=&quot;http://storm.apache.org/documentation/Concepts.html&quot;&gt;Concepts&lt;/a&gt;）&lt;/p&gt;
+
+&lt;h2 id=&quot;defining-bolts-in-other-languages&quot;&gt;Defining Bolts in other languages&lt;/h2&gt;
+
+&lt;p&gt;Bolts can be defined in any language. Bolts written in another language are executed as subprocesses, and Storm communicates with those subprocesses with JSON messages over stdin/stdout. The communication protocol just requires an ~100 line adapter library, and Storm ships with adapter libraries for Ruby, Python, and Fancy.
+（bolt可以使用其他语言实现，本质上其他语言编写的bolt都是subprocess，Storm通过stdin/stdout上的JSON串来与其进行通讯）&lt;/p&gt;
+
+&lt;p&gt;Here’s the definition of the SplitSentence bolt from WordCountTopology:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;// java
+public static class SplitSentence extends ShellBolt implements IRichBolt { 
+   public SplitSentence() { 
+       super(“python”, “splitsentence.py”); 
+   }
+   
+   public void declareOutputFields(OutputFieldsDeclarer declarer) {
+	   declarer.declare(new Fields(&quot;word&quot;));
+   } 
+} 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;SplitSentence overrides ShellBolt and declares it as running using python with the arguments splitsentence.py. Here’s the implementation of splitsentence.py:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;// python 
+import storm
+
+class SplitSentenceBolt(storm.BasicBolt): 
+	def process(self, tup): 
+		words = tup.values[0].split(“ “) 
+		for word in words: 
+			storm.emit([word])
+
+SplitSentenceBolt().run()
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For more information on writing spouts and bolts in other languages, and to learn about how to create topologies in other languages (and avoid the JVM completely), see &lt;a href=&quot;http://storm.apache.org/documentation/Using-non-JVM-languages-with-Storm.html&quot;&gt;Using non-JVM languages with Storm&lt;/a&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;guaranteeing-message-processing&quot;&gt;Guaranteeing message processing&lt;/h2&gt;
+
+&lt;p&gt;Earlier on in this tutorial, we skipped over a few aspects of how tuples are emitted. Those aspects were part of Storm’s reliability API: how Storm guarantees that every message coming off a spout will be fully processed. See &lt;a href=&quot;http://storm.apache.org/documentation/Guaranteeing-message-processing.html&quot;&gt;Guaranteeing message processing&lt;/a&gt; for information on how this works and what you have to do as a user to take advantage of Storm’s reliability capabilities.
+（本文中，并没有深入介绍how tuples are emitted，其中涉及一个关键问题：如何保证spout提供的message一定会被成功处理，详细信息可参考&lt;a href=&quot;http://storm.apache.org/documentation/Guaranteeing-message-processing.html&quot;&gt;Guaranteeing message processing&lt;/a&gt;）&lt;/p&gt;
+
+&lt;h2 id=&quot;transactional-topologies&quot;&gt;Transactional topologies&lt;/h2&gt;
+
+&lt;p&gt;Storm guarantees that every message will be played through the topology at least once. A common question asked is “how do you do things like counting on top of Storm? Won’t you overcount?” Storm has a feature called transactional topologies that let you achieve exactly-once messaging semantics for most computations. Read more about transactional topologies &lt;a href=&quot;http://storm.apache.org/documentation/Transactional-topologies.html&quot;&gt;here&lt;/a&gt;.
+（如何保证message只被处理一次，而不被重复处理？Storm提供了transactional topologies来保证只执行一次）&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：message到底是什么？tuple？task？&lt;/p&gt;
+
+&lt;h2 id=&quot;distributed-rpc&quot;&gt;Distributed RPC&lt;/h2&gt;
+
+&lt;p&gt;This tutorial showed how to do basic stream processing on top of Storm. There’s lots more things you can do with Storm’s primitives. One of the most interesting applications of Storm is Distributed RPC, where you parallelize the computation of intense functions on the fly. Read more about Distributed RPC &lt;a href=&quot;http://storm.apache.org/documentation/Distributed-RPC.html&quot;&gt;here&lt;/a&gt;.
+（Distribute RPC很有意思的，能够parallelize the computation of intense functions on the fly。）&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;This tutorial gave a broad overview of developing, testing, and deploying Storm topologies. The rest of the documentation dives deeper into all the aspects of using Storm.&lt;/p&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;参考来源&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://storm.apache.org/documentation/Tutorial.html&quot;&gt;Storm Tutorial&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+   </entry>
+   
+   <entry>
+     <title>Storm：Rationale</title>
+     <link href="http://ningg.github.com/storm-documentation-rationale"/>
+     <updated>2014-10-20T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/storm-documentation-rationale</id>
+     <content type="html">&lt;blockquote&gt;
+  &lt;p&gt;原文地址：&lt;a href=&quot;http://storm.apache.org/documentation/Rationale.html&quot;&gt;Storm Rationale&lt;/a&gt;，本文使用&lt;code&gt;英文原文+中文注释&lt;/code&gt;方式来写。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;background&quot;&gt;Background&lt;/h2&gt;
+
+&lt;p&gt;The past decade has seen a revolution in data processing. MapReduce, Hadoop, and related technologies have made it possible to store and process data at scales previously unthinkable. Unfortunately, these data processing technologies are not realtime systems, nor are they meant to be. There’s no hack that will turn Hadoop into a realtime system; realtime data processing has a fundamentally different set of requirements than batch processing.
+（Hadoop的相关技术已经很多，大规模数据处理方面很强，但realtime processing却不行）&lt;/p&gt;
+
+&lt;p&gt;However, realtime data processing at massive scale is becoming more and more of a requirement for businesses. The lack of a “Hadoop of realtime” has become the biggest hole in the data processing ecosystem.&lt;/p&gt;
+
+&lt;p&gt;Storm fills that hole.
+（Storm将解决大规模数据的实时处理问题。）&lt;/p&gt;
+
+&lt;p&gt;Before Storm, you would typically have to manually build a network of queues and workers to do realtime processing. Workers would process messages off a queue, update databases, and send new messages to other queues for further processing. Unfortunately, this approach has serious limitations:
+（在Storm之前，需要手动创建queues和workers，其中，worker从queue中取出message，并进行处理；不幸呐，这种方式有很严重的限制）&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Tedious&lt;/strong&gt;: You spend most of your development time configuring where to send messages, deploying workers, and deploying intermediate queues. The realtime processing logic that you care about corresponds to a relatively small percentage of your codebase.（重复劳动：花费大量时间来配置和部署）&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Brittle&lt;/strong&gt;: There’s little fault-tolerance. You’re responsible for keeping each worker and queue up.（系统很脆弱：需要不停地检测并保证worker、queue都是存活的）&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Painful to scale&lt;/strong&gt;: When the message throughput get too high for a single worker or queue, you need to partition how the data is spread around. You need to reconfigure the other workers to know the new locations to send messages. This introduces moving parts and new pieces that can fail.（扩展困难：流量上升后，添加worker、queue，需要重新进行处理逻辑配置，并且由于结构变得复杂，系统可靠性会降低）&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Although the queues and workers paradigm breaks down for large numbers of messages, message processing is clearly the fundamental paradigm for realtime computation. The question is: how do you do it in a way that doesn’t lose data, scales to huge volumes of messages, and is dead-simple to use and operate?
+（&lt;strong&gt;问题是：能否实现一个方案，满足：不丢数据、易于扩展、使用和操作极其简单？&lt;/strong&gt;）&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：paradigm? break down? fundamental paradigm?什么含义？&lt;/p&gt;
+
+&lt;p&gt;Storm satisfies these goals.
+（Storm就是这么一个方案）&lt;/p&gt;
+
+&lt;h2 id=&quot;why-storm-is-important&quot;&gt;Why Storm is important&lt;/h2&gt;
+
+&lt;p&gt;Storm exposes a set of primitives for doing realtime computation. Like how MapReduce greatly eases the writing of parallel batch processing, Storm’s primitives greatly ease the writing of parallel realtime computation.
+（Storm暴漏了a set of primitives/原语，来进行realtime computation。就像MapReduce极大改善了parallel batch processing一样，Storm改善了parallel realtime computation）&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：primitives？对于一个software，primitives什么含义？&lt;/p&gt;
+
+&lt;p&gt;The key properties of Storm are:
+（Storm的关键特性如下）&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Extremely broad set of use cases&lt;/strong&gt;: Storm can be used for processing messages and updating databases (stream processing), doing a continuous query on data streams and streaming the results into clients (continuous computation), parallelizing an intense query like a search query on the fly (distributed RPC), and more. Storm’s small set of primitives satisfy a stunning number of use cases.（广泛的应用场景）&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Scalable&lt;/strong&gt;: Storm scales to massive numbers of messages per second. To scale a topology, all you have to do is add machines and increase the parallelism settings of the topology. As an example of Storm’s scale, one of Storm’s initial applications processed 1,000,000 messages per second on a 10 node cluster, including hundreds of database calls per second as part of the topology. Storm’s usage of Zookeeper for cluster coordination makes it scale to much larger cluster sizes.（易于扩展：增加机器，配置并发数；备注：这跟使用zookeeper进行cluster管理相关。）&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Guarantees no data loss&lt;/strong&gt;: A realtime system must have strong guarantees about data being successfully processed. A system that drops data has a very limited set of use cases. Storm guarantees that every message will be processed, and this is in direct contrast with other systems like S4.（数据不丢失：Storm保证every message will be prcessed，而S4不行）&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Extremely robust&lt;/strong&gt;: Unlike systems like Hadoop, which are notorious for being difficult to manage, Storm clusters just work. It is an explicit goal of the Storm project to make the user experience of managing Storm clusters as painless as possible.（极其健壮：Storm Cluster非常易于管理，这也是其设计的初衷。）&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Fault-tolerant&lt;/strong&gt;: If there are faults during execution of your computation, Storm will reassign tasks as necessary. Storm makes sure that a computation can run forever (or until you kill the computation).（容错性：出错后，storm会reassign task。）&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Programming language agnostic&lt;/strong&gt;: Robust and scalable realtime processing shouldn’t be limited to a single platform. Storm topologies and processing components can be defined in any language, making Storm accessible to nearly anyone.（语言无关性：Storm topologies、processing components可使用多种语言实现）&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;参考来源&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://storm.apache.org/&quot;&gt;Apache Storm&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://storm.apache.org/documentation/Rationale.html&quot;&gt;Apache Storm: Documentation Rationale&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+   </entry>
    
    <entry>
      <title>Kafka 0.8.1 Documentation：Design</title>
@@ -51,7 +567,7 @@ What does all that mean?&lt;/p&gt;
 
 &lt;p&gt;So, at a high level, producers send messages over the network to the Kafka cluster which in turn serves them up to consumers like this:（producer向kafka集群写入message，consumer从kafka集群中读取message）&lt;/p&gt;
 
-&lt;p&gt;![/images/kafa-documentation/producer_consumer.png]&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/kafka-documentation/producer_consumer.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;p&gt;Communication between the clients and the servers is done with a simple, high-performance, language agnostic &lt;a href=&quot;https://cwiki.apache.org/confluence/display/KAFKA/A+Guide+To+The+Kafka+Protocol&quot;&gt;TCP protocol&lt;/a&gt;. We provide a Java client for Kafka, but clients are available in &lt;a href=&quot;https://cwiki.apache.org/confluence/display/KAFKA/Clients&quot;&gt;many languages&lt;/a&gt;.（client与server之间通过TCP协议通信，默认为kafka提供了java client，当然也可以用其他语言实现client）&lt;/p&gt;
 
@@ -2273,372 +2789,6 @@ Hive are based on staged MapReduce with materialization of the intermediate stat
 &lt;h2 id=&quot;section&quot;&gt;杂谈&lt;/h2&gt;
 
 &lt;p&gt;这次看到dirtysalt的文章：&lt;a href=&quot;http://dirlt.com/in-stream-big-data-processing.html&quot;&gt;In-stream-big-data-processing（英文版+中文注释）&lt;/a&gt;，顿时解决了困扰自己的一个问题，英文的好文章，如何做记录？直接翻译中文？直接转载中文？NO，最佳方式当然是在原文基础上，添加自己的注释，OK，作者dirtysalt已经在做了，今后我也这么办。&lt;/p&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>MySQL安装</title>
-     <link href="http://ningg.github.com/install-mysql"/>
-     <updated>2014-10-13T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/install-mysql</id>
-     <content type="html">&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
-
-&lt;p&gt;“在服务器上装个MySQL，我要用。”“OK，稍等。”这么一稍等，就等了40mins，而且，自己之前整理的MySQL安装步骤，并不完整，借这次安装的机会，整理一下吧。&lt;/p&gt;
-
-&lt;h2 id=&quot;mysql&quot;&gt;安装MySQL&lt;/h2&gt;
-
-&lt;p&gt;通常安装MySQL分为几个基本步骤：本地安装MySQL、设置MySQL的root密码、开启MySQL允许远程访问。&lt;/p&gt;
-
-&lt;h3 id=&quot;mysql-1&quot;&gt;本地安装MySQL&lt;/h3&gt;
-
-&lt;p&gt;Linux环境下安装MySQL，有两种方式：rpm包方式、yum源方式（暂不考虑编译源代码方式）。&lt;/p&gt;
-
-&lt;h4 id=&quot;rpm&quot;&gt;rpm包方式&lt;/h4&gt;
-
-&lt;p&gt;到MySQL官网，下载MySQL社区开源版本，详细版本号为：MySQL-5.6.21-1.linux_glibc2.5.x86_64.rpm-bundle.tar。这是一个集合，包含了如下组件：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;MySQL-server&lt;/li&gt;
-  &lt;li&gt;MySQL-client&lt;/li&gt;
-  &lt;li&gt;MySQL-embedded&lt;/li&gt;
-  &lt;li&gt;MySQL-shared&lt;/li&gt;
-  &lt;li&gt;MySQL-shared-compat&lt;/li&gt;
-  &lt;li&gt;MySQL-test&lt;/li&gt;
-  &lt;li&gt;MySQL-devel&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h5 id=&quot;mysql-2&quot;&gt;1.解压MySQL安装包&lt;/h5&gt;
-
-&lt;p&gt;执行如下命令：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;[root@ningg mysql]#tar -xf MySQL-5.6.21-1.linux_glibc2.5.x86_64.rpm-bundle.tar
-[root@ningg mysql]#ls
-	MySQL-server-5.6.20-1.el6.x86_64.rpm
-	MySQL-client-5.6.20-1.el6.x86_64.rpm      
-	MySQL-shared-5.6.20-1.el6.x86_64.rpm
-	MySQL-devel-5.6.20-1.el6.x86_64.rpm       
-	MySQL-shared-compat-5.6.20-1.el6.x86_64.rpm
-	MySQL-embedded-5.6.20-1.el6.x86_64.rpm    
-	MySQL-test-5.6.20-1.el6.x86_64.rpm
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h5 id=&quot;mysql-3&quot;&gt;2.创建MySQL系统管理员&lt;/h5&gt;
-
-&lt;p&gt;执行如下命令：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;[root@ningg mysql]#groupadd mysql
-[root@ningg mysql]#useradd -g mysql mysql
-[root@ningg mysql]#id mysql
-	uid=27(mysql) gid=27(mysql) groups=27(mysql)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h5 id=&quot;mysql-rpm&quot;&gt;3.安装MySQL rpm包&lt;/h5&gt;
-
-&lt;p&gt;执行命令如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;[root@ningg mysql]#rpm -ivh &quot;*.rpm&quot;
-Preparing...              ########### [100%]
-   1:MySQL-devel          ########### [ 14%]
-   2:MySQL-client         ########### [ 29%]
-   3:MySQL-test           ########### [ 43%]
-   4:MySQL-embedded       ########### [ 57%]
-   5:MySQL-shared-compat  ########### [ 71%]
-   6:MySQL-shared         ########### [ 86%]
-   7:MySQL-server         ########### [100%]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;补充一下，如果安装出现意外，希望卸载MySQL组件，则，卸载顺序如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;[root@ningg ~]# rpm -e MySQL-server-5.5.24-1.rhel5
-[root@ningg ~]# rpm -e MySQL-embedded-5.5.24-1.rhel5
-[root@ningg ~]# rpm -e MySQL-shared-5.5.24-1.rhel5
-[root@ningg ~]# rpm -e MySQL-devel-5.5.24-1.rhel5
-[root@ningg ~]# rpm -e MySQL-test-5.5.24-1.rhel5
-[root@ningg ~]# rpm -e MySQL-client-5.5.24-1.rhel5
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;思考：如何保证是mysql用户启动的MySQL？如果使用root运行MySQL，一旦MySQL进程被Hacker控制，Hacker就拥有了root权限？&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h4 id=&quot;yum&quot;&gt;yum源方式&lt;/h4&gt;
-
-&lt;p&gt;（doing…）&lt;/p&gt;
-
-&lt;h3 id=&quot;mysqlroot&quot;&gt;设置MySQL的root密码&lt;/h3&gt;
-
-&lt;p&gt;更详细内容参考&lt;a href=&quot;http://dev.mysql.com/doc/mysql-security-excerpt/5.6/en/user-account-management.html&quot;&gt;MySQL 5.6 Manual: User account management&lt;/a&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;mysql-4&quot;&gt;1.修改MySQL启动配置&lt;/h4&gt;
-
-&lt;p&gt;查找&lt;code&gt;my.cnf&lt;/code&gt;文件位置，两个命令：&lt;code&gt;locate &quot;my.cnf&quot;&lt;/code&gt;和&lt;code&gt;find / -name &quot;my.cnf&quot;&lt;/code&gt;（备注：两个命令有差异，具体参考&lt;a href=&quot;http://312788172.iteye.com/blog/730280&quot;&gt;文章&lt;/a&gt;）。
-通常文件位置&lt;code&gt;/etc/my.cnf&lt;/code&gt;或者&lt;code&gt;/usr/my.cnf&lt;/code&gt;，依具体情况行事，在其中设置不启用授权表：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;[root@ningg mysql]# vim /usr/my.cnf
-# For advice on how to change settings please see
-# http://dev.mysql.com/doc/refman/5.6/en/server-configuration-defaults.html
-
-[mysqld]
-# 新增加下面一行，含义：设置不启用授权表
-skip-grant-tables
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&quot;root&quot;&gt;2.重置root密码&lt;/h4&gt;
-
-&lt;p&gt;重新启动MySQL：&lt;code&gt;service mysql restart&lt;/code&gt;，然后进行如下操作：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;[root@ningg mysql]# mysql
-
-mysql&amp;gt; use mysql
-mysql&amp;gt; update user set Password=PASSWORD(&#39;1234&#39;) where User=&#39;root&#39;;
-mysql&amp;gt; flush privileges;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;之后，修改&lt;code&gt;my.cnf&lt;/code&gt;文件，注释掉&lt;code&gt;skip-grant-tables&lt;/code&gt;；然后，重启MySQL：&lt;code&gt;service mysql restart&lt;/code&gt;。&lt;/p&gt;
-
-&lt;h4 id=&quot;section-1&quot;&gt;3.补充说明&lt;/h4&gt;
-
-&lt;p&gt;针对msyql数据库下的user表，说明几点：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;mysql&amp;gt; use mysql
-#使用下面命令查看表格当前记录
-mysql&amp;gt; select * from user \G;
-#查看user表格的字段类型
-mysql&amp;gt; describe user;
-#查看Host\User\Password字段；
-mysql&amp;gt; select host,user,password from user;
-+-----------+------+---------------+
-| host      | user | password      |
-+-----------+------+---------------+
-| %         | root | *81B936FD50F6 |
-| cib02167  | root | *81B936FD50F6 |
-| 127.0.0.1 | root | *81B936FD50F6 |
-| ::1       | root | *81B936FD50F6 |
-+-----------+------+---------------+
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;具体：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;user表：用户信息、用户权限、密码、可以登录访问的远端主机等。&lt;/li&gt;
-  &lt;li&gt;host字段：表示登录MySQL的主机，可以是IP、主机名，如果为&lt;code&gt;%&lt;/code&gt;则表示任何客户端主机都能登录，建议开发时，设置为&lt;code&gt;%&lt;/code&gt;。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;命令SET PASSWORD&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;#设置用户在不同主机环境下的登录密码
-SET PASSWORD FOR &#39;root&#39;@&#39;%&#39; = PASSWORD(&#39;newpass&#39;);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;命令UPDATE&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# 可修改user表格内容（MySQL不区分大小写）
-update user set password=password(&#39;new-pw&#39;) where user=&#39;root&#39; and host=&#39;%&#39;;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;更新授权表&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# 修改用户信息等，务必flush
-flush privileges
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;mysql-5&quot;&gt;开启MySQL允许远程访问&lt;/h3&gt;
-
-&lt;p&gt;在user表中，添加一条&lt;code&gt;user=root&lt;/code&gt;且&lt;code&gt;host=%&lt;/code&gt;的记录，并且通过SET PASSWORD命令重置密码即可。host字段取值&lt;code&gt;%&lt;/code&gt;，即表示任何客户端机器，涵盖远程访问的机器。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# 可修改user表格内容（MySQL不区分大小写）
-update user set password=password(&#39;new-pw&#39;) where user=&#39;root&#39; and host=&#39;%&#39;;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;疑问：如果没有&lt;code&gt;user=root&lt;/code&gt;且&lt;code&gt;host=%&lt;/code&gt;的记录怎么办？
-RE：新建一条记录，或者将&lt;code&gt;user=root&lt;/code&gt;的记录，利用update命令修改为&lt;code&gt;host=%&lt;/code&gt;。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;section-2&quot;&gt;常见问题&lt;/h2&gt;
-
-&lt;p&gt;&lt;strong&gt;问题1&lt;/strong&gt;：You must SET PASSWORD before executing this statement&lt;/p&gt;
-
-&lt;p&gt;解决办法：根据提示直接使用set password命令重置密码即可，如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;mysql&amp;gt; set password=password(&#39;new-pw&#39;);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;strong&gt;问题2&lt;/strong&gt;：这个本质上是不是MySQL的管理问题？有哪些用户，哪些用户可以远程登录？&lt;/p&gt;
-
-&lt;p&gt;回应：是的，你很用心在思考，官方文档有很多细节，很有意思的，可以看一下，具体：&lt;code&gt;MySQL Manual&lt;/code&gt;–&lt;code&gt;Security in MySQL&lt;/code&gt;–&lt;code&gt;User Account Management&lt;/code&gt;，有详尽的说明。&lt;/p&gt;
-
-&lt;h2 id=&quot;section-3&quot;&gt;参考来源&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://dev.mysql.com/doc/mysql-security-excerpt/5.6/en/grant-table-structure.html&quot;&gt;MySQL 5.6 Manual: Privilege system grant tables&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://dev.mysql.com/doc/mysql-security-excerpt/5.6/en/user-account-management.html&quot;&gt;MySQL 5.6 Manual: User account management&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://dev.mysql.com/downloads/mysql/&quot;&gt;MySQL开源社区版本下载地址&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://dev.mysql.com/doc/&quot;&gt;MySQL官方文档下载地址&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://312788172.iteye.com/blog/730280&quot;&gt;linux下which、whereis、locate、find 命令的区别&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section-4&quot;&gt;闲谈&lt;/h2&gt;
-
-&lt;p&gt;这篇文章，写的都是小问题，如果读过MySQL的官方文档，就知道&lt;code&gt;User Account Management&lt;/code&gt;的基本知识了，也不用遇到什么问题就蒙圈了，用一个东西，先浏览学习一下官方文档很必要的，看似浪费时间，其实是捷径。当然，一个个小问题折磨自己，才让我意识到读一遍MySQL官方文档的好处。&lt;/p&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>消息队列（Message Queue）基本概念</title>
-     <link href="http://ningg.github.com/message-queue-intro"/>
-     <updated>2014-10-08T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/message-queue-intro</id>
-     <content type="html">&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
-
-&lt;p&gt;之前做日志收集模块时，用到flume，另外也有的方案，集成kafaka来提升系统可扩展性，其中涉及到&lt;code&gt;消息队列&lt;/code&gt;，当时自己并不清楚为什么要使用&lt;code&gt;消息队列&lt;/code&gt;，而在我自己提出的原始日志采集方案中不适用&lt;code&gt;消息队列&lt;/code&gt;时，有几个基本问题：1.日志文件上传过程，有个基本的&lt;code&gt;生产者-消费者&lt;/code&gt;问题；2.另外系统崩溃时，数据丢失的处理问题。&lt;/p&gt;
-
-&lt;p&gt;今天，几位同事再次谈到&lt;code&gt;消息队列&lt;/code&gt;这么个东西，很NB的样子，我也想弄清楚，OK，搞起。&lt;/p&gt;
-
-&lt;h2 id=&quot;section-1&quot;&gt;什么是消息队列&lt;/h2&gt;
-
-&lt;p&gt;消息队列（Message Queue，简称MQ），从字面意思上看，本质是个队列，FIFO先入先出，只不过队列中存放的内容是&lt;code&gt;message&lt;/code&gt;而已。其主要用途：不同进程Process/线程Thread之间通信。为什么会产生&lt;code&gt;消息队列&lt;/code&gt;？这个问题问的好，我大概查了一下，没有查到最初产生消息队列的背景，但我猜测可能几个原因：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;不同进程（process）之间传递消息时，两个进程之间耦合程度过高，改动一个进程，引发必须修改另一个进程，为了隔离这两个进程，在两进程间抽离出一层（一个模块），所有两进程之间传递的消息，都必须通过&lt;code&gt;消息队列&lt;/code&gt;来传递，单独修改某一个进程，不会影响另一个；&lt;/li&gt;
-  &lt;li&gt;不同进程（process）之间传递消息时，为了实现标准化，将消息的格式规范化了，并且，某一个进程接受的消息太多，一下子无法处理完，并且也有先后顺序，必须对收到的消息进行排队，因此诞生了事实上的&lt;code&gt;消息队列&lt;/code&gt;；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;不管到底是什么原因催生了&lt;code&gt;消息队列&lt;/code&gt;，总之，上面两个猜测是其实际应用的典型场景。&lt;/p&gt;
-
-&lt;h2 id=&quot;section-2&quot;&gt;为什么要用&lt;/h2&gt;
-
-&lt;p&gt;切合前一部分猜测的&lt;code&gt;消息队列&lt;/code&gt;产生背景，其主要解决两个问题：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;系统解耦：项目开始时，无法确定最终需求，不同进程间，添加一层，实现解耦，方便今后的扩展。&lt;/li&gt;
-  &lt;li&gt;消息缓存：系统中，不同进程处理消息速度不同，MQ，可以实现不同Process之间的缓冲，即，写入MQ的速度可以尽可能地快，而处理消息的速度可以适当调整（或快、或慢）。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;下面针对&lt;strong&gt;系统解耦&lt;/strong&gt;、&lt;strong&gt;消息缓存&lt;/strong&gt;两点，来分析实际应用&lt;code&gt;消息队列&lt;/code&gt;过程中，可能遇到的问题。虚拟场景：Process_A通过消息队列MQ_1向Process_B传递消息，几个问题：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;针对MQ_1中一条消息message_1，如何确保Process_B从MQ_1中只取一次message_1，不会重复多次取出message_1？&lt;/li&gt;
-  &lt;li&gt;如果MQ_1中message_1已经被Process_B取出，正在处理的关键时刻，Process_B崩溃了，哭啊，我的问题是，如果重启Process_B，是否会丢失message_1？&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;不要着急，阅读了下面的简要介绍后，水到渠成，上面几个问题就可以解决了。
-消息队列有如下几个好处，这大都是由其&lt;strong&gt;系统解耦&lt;/strong&gt;和&lt;strong&gt;消息缓存&lt;/strong&gt;两点扩展而来的：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;提升系统可靠性：
-    &lt;ul&gt;
-      &lt;li&gt;冗余：Process_B崩溃之后，数据并不会丢失，因为MQ多采用&lt;code&gt;put-get-delete&lt;/code&gt;模式，即，仅当确认message被完成处理之后，才从MQ中移除message；&lt;/li&gt;
-      &lt;li&gt;可恢复：MQ实现解耦，部分进程崩溃，不会拖累整个系统瘫痪，例，Process_B崩溃之后，Process_A仍可向MQ中添加message，并等待Process_B恢复；&lt;/li&gt;
-      &lt;li&gt;可伸缩：有较强的峰值处理能力，通常应用会有突发的访问流量上升情况，使用足够的硬件资源时刻待命，空闲时刻较长，资源浪费，而&lt;code&gt;消息队列&lt;/code&gt;却能够平滑峰值流量，缓解系统组件的峰值压力；&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;提升系统可扩展性：
-    &lt;ul&gt;
-      &lt;li&gt;调整模块：由于实现解耦，可以很容易调整，消息入队速率、消息处理速率、增加新的Process；&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;其他：
-    &lt;ul&gt;
-      &lt;li&gt;单次送达：保证MQ中一个message被处理一次，并且只被处理一次，本质：get获取一个message后，这一message即被预定，同一进程不会再次获取这一message，当且仅当进程处理完这一message后，MQ中会delete这个message，否则，过一段时间后，这一message自动解除被预订状态，进程能够重新预定这个message；&lt;/li&gt;
-      &lt;li&gt;排序保证：即，满足队列的FIFO，先入先出策略；&lt;/li&gt;
-      &lt;li&gt;异步通信：很多场景下，不会立即处理消息，这是，可以在MQ中存储message，并在某一时刻再进行处理；&lt;/li&gt;
-      &lt;li&gt;数据流的阶段性能定位：获取用户某一操作的各个阶段（通过message来标识），捕获不同阶段的耗时，可用于定位系统瓶颈。&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section-3&quot;&gt;常用的消息队列&lt;/h2&gt;
-
-&lt;p&gt;（doing…）&lt;/p&gt;
-
-&lt;h2 id=&quot;section-4&quot;&gt;小结&lt;/h2&gt;
-
-&lt;p&gt;&lt;code&gt;消息队列&lt;/code&gt;实现了进程间通信的升级，如下图所示：&lt;/p&gt;
-
-&lt;h2 id=&quot;section-5&quot;&gt;参考来源&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;top 10 uses for message queue：&lt;a href=&quot;http://blog.iron.io/2012/12/top-10-uses-for-message-queue.html&quot;&gt;英文原文&lt;/a&gt;、&lt;a href=&quot;/download/message-queue-intro/top-10-mq.pdf&quot;&gt;pdf版本&lt;/a&gt;、&lt;a href=&quot;http://www.oschina.net/translate/top-10-uses-for-message-queue&quot;&gt;中文译文&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://en.wikipedia.org/wiki/Message_queue&quot;&gt;Message Queue wiki&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://bbs.csdn.net/topics/110160741&quot;&gt;http://bbs.csdn.net/topics/110160741&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.cnblogs.com/yuanyi_wang/archive/2009/12/30/1636178.html&quot;&gt;http://www.cnblogs.com/yuanyi_wang/archive/2009/12/30/1636178.html&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.php1.cn/article/9865.html&quot;&gt;http://www.php1.cn/article/9865.html&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>想和自己谈一谈</title>
-     <link href="http://ningg.github.com/personal-think"/>
-     <updated>2014-09-30T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/personal-think</id>
-     <content type="html">&lt;p&gt;今天读了&lt;code&gt;***&lt;/code&gt;的博客，特别是每年的个人总结，基本上2004–2013的都看了，希望能从中窥探一点前辈工作十余年的体会，同时也想看看有没有能够借鉴的，万幸，读的较为认真，我也产生了一点想法，借这个时机，我想和自己谈一谈。&lt;/p&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;有个打算，有点追求&lt;/h2&gt;
-
-&lt;p&gt;整体上，我需要有些时间较长的总结、计划，比如一年、6个月、3个月的打算；每次打算，需要要涵盖3个方面：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;前一段，我做了什么？有什么可以积累的地方、有什么改进的地方；&lt;/li&gt;
-  &lt;li&gt;接下来我需要做什么？计划怎么行动？&lt;/li&gt;
-  &lt;li&gt;做这些事情，有一个基本的理念，有吗？&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;说到较长时间的打算，我在学校读书的最后一年，曾有过3个月的打算，其实打算开始之前，已经陆续铺垫有3个多月，事后总结，最初的打算完成了60%，当时获得了很大的信心，那种幸福、自信的感觉为自己今后的一些决定带来了内心的支撑，特别是，当出现争议的时候，自己能够在自己进行深入分析后做决断。&lt;/p&gt;
-
-&lt;p&gt;自己做事情，脑袋里有一个基本的理念吗？理念还是有的，整体上几个点：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;知识、认识方面的&lt;strong&gt;分享&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;多人一起做事时的&lt;strong&gt;协作&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;所用基础工具的&lt;strong&gt;开源&lt;/strong&gt;&lt;/li&gt;
-  &lt;li&gt;团队、个人核心在于&lt;strong&gt;成长&lt;/strong&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;从上述理念出发，更能得到自己的共鸣，不要怕对外开放、交流之后，技术上被超越，即使被超越了，对整个社会的进步也是好的。&lt;em&gt;（如果公司对于某些技术有保密要求，这就绝不能对外分享，但是整体的框架，一些设计理念上的东西，也可以在交流中成长）&lt;/em&gt;&lt;/p&gt;
-
-&lt;p&gt;能够随身携带的技能，如果可以预见的时间内会用到，那就尽多获取、提早准备，例如，驾驶、外语、急救措施、生活中安全措施。当然，其中最重要是：身体。&lt;/p&gt;
-
-&lt;h2 id=&quot;section-1&quot;&gt;视野放开，保持敏感&lt;/h2&gt;
-
-&lt;p&gt;要将视野放开，保持与时代相接触，对于自己所处行业，需要有自己的认识，这个认识可以是错误的，分享出去，自然会有人忍不住来指正，关注国内和国外最新的科技动态，包括产品、生活、行业；主要途径：业内顶尖人才、顶尖公司动向，领域内主流媒体的动向。&lt;/p&gt;
-
-&lt;p&gt;前沿媒体：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;www.36kr.com&quot;&gt;36Kr&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;www.infoq.com&quot;&gt;InfoQ&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;www.valleytalk.org&quot;&gt;弯曲评论&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;个人博客、微信：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;coolshell.cn&quot;&gt;酷壳coolshell&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;www.williamlong.info&quot;&gt;月光博客&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;陈利人：&lt;a href=&quot;http://weibo.com/lirenchen&quot;&gt;微博&lt;/a&gt;、&lt;code&gt;微信号：daiziguizhongren&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;梁斌：&lt;a href=&quot;http://weibo.com/pennyliang&quot;&gt;微博&lt;/a&gt;、&lt;code&gt;微信号：pennyjob&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;Fenng：&lt;a href=&quot;http://hutu.me/&quot;&gt;小道消息&lt;/a&gt;、&lt;a href=&quot;http://news.dbanotes.net/&quot;&gt;Startup News&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;新兴的潮流网站：对一些如同爆炸性出现的新技术、网站、观点，保持敏感度，进行简要学习其基本规律，了解轮廓。&lt;/p&gt;
-
-&lt;h2 id=&quot;section-2&quot;&gt;小结&lt;/h2&gt;
-
-&lt;p&gt;上面说了两点，其实就是一个意思：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;有个打算，有点追求：做事情，集中精力，一件一件解决掉；&lt;/li&gt;
-  &lt;li&gt;视野放开，保持敏感：做事情，看趋势，3~5年、20年；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section-3&quot;&gt;闲谈&lt;/h2&gt;
-
-&lt;p&gt;我写blog，大都是分要点，列一个1、2、3，调理还算清晰，但，我总感觉我blog读起来味道怪怪的，相反，读Fenng、caoz、haoel的文章，能感觉到有平铺直叙、娓娓道来，很有味道。写blog，不仅要内容有用，而且，让人读起来也要舒服，这一点，我需要学习改进。&lt;/p&gt;
 
 </content>
    </entry>
