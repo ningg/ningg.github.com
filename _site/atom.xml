@@ -4,13 +4,153 @@
    <title>NingG.github.com</title>
    <link href="http://ningg.github.com/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://ningg.github.com" rel="alternate" type="text/html" />
-   <updated>2014-10-20T23:18:13+08:00</updated>
+   <updated>2014-10-21T23:06:38+08:00</updated>
    <id>http://ningg.github.com</id>
    <author>
      <name></name>
      <email></email>
    </author>
 
+   
+   <entry>
+     <title>win下搭建Storm topology的开发调试环境</title>
+     <link href="http://ningg.github.com/storm-dev-env-with-eclipse"/>
+     <updated>2014-10-23T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/storm-dev-env-with-eclipse</id>
+     <content type="html">&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
+
+&lt;p&gt;Storm topologies，支撑multilang，不同通常使用java来编写，这样我就想在Eclipse下来编写Storm topologies，毕竟IDE能够加快开发效率。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;下面的内容，基本都是从官网看的，使用自己语言重新写了一遍，建议有追求的Coder/Engineer/Scientist，还是去看官网吧，看官网才是捷径。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;系统环境&lt;/h2&gt;
+
+&lt;p&gt;今天要进行Storm topology开发的系统，基本环境：win xp(x86)操作系统；更详细的编译环境信息，通过如下方式查看：&lt;code&gt;CMD&lt;/code&gt;–&lt;code&gt;systeminfo&lt;/code&gt;，这个命令执行需要时间，10~40s，稍等一会儿，得到如下信息：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;C:\Documents and Settings\ningg&amp;gt;systeminfo
+
+OS 名称:      Microsoft Windows XP Professional
+OS 版本:      5.1.2600 Service Pack 3 Build 2600
+OS 制造商:    Microsoft Corporation
+OS 构件类型:  Multiprocessor Free
+系统制造商:   LENOVO
+系统型号:     ThinkCentre M6400t-N000
+系统类型:     X86-based PC
+处理器:       安装了 1 个处理器。
+       [01]: x86 Family 6 Model 58 Stepping 9 GenuineIntel ~3392 Mhz
+BIOS 版本:    LENOVO - 14f0
+物理内存总量: 3,546 MB
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;eclipsestorm-start&quot;&gt;eclipse下查看storm-start工程&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/apache/storm/tree/master/examples/storm-starter&quot;&gt;storm-starter&lt;/a&gt;是Storm官网提供的一个例子，简要介绍了storm topology的编写，在&lt;a href=&quot;http://storm.apache.org/documentation/Tutorial.html&quot;&gt;storm Tutorial&lt;/a&gt;中重点讲解了这个例子；总之，一点：&lt;a href=&quot;https://github.com/apache/storm/tree/master/examples/storm-starter&quot;&gt;storm-starter&lt;/a&gt;是入门学习的典型例子。OK，我准备在Eclipse下查看&lt;a href=&quot;https://github.com/apache/storm/tree/master/examples/storm-starter&quot;&gt;storm-starter&lt;/a&gt;工程。&lt;/p&gt;
+
+&lt;p&gt;说一下我在Eclipse下的操作步骤：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;下载storm发行版本的源代码：&lt;a href=&quot;http://storm.apache.org/downloads.html&quot;&gt;apache-storm-0.9.2-incubating-src.zip&lt;/a&gt;，并解压；&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;File&lt;/code&gt;–&lt;code&gt;Import&lt;/code&gt;–&lt;code&gt;Existing Maven Projects&lt;/code&gt;；&lt;/li&gt;
+  &lt;li&gt;选择storm源代码的&lt;code&gt;examples\storm-starter&lt;/code&gt;目录，对，然后一路next下去；&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;好了，中间可能提示maven项目有错误，不要管，一直往下走。接下来说一下如何解决maven项目的bug，我导入storm-starter工程后，&lt;code&gt;pom.xml&lt;/code&gt;文件上冒了个&lt;span style=&quot;color:red&quot;&gt;红色的X&lt;/span&gt;，找到相应位置，按下&lt;code&gt;F2&lt;/code&gt;，显示出错信息：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Plugin execution not covered by lifecycle configuration: 
+com.theoryinpractise:clojure-maven-plugin:1.3.18:compile 
+(execution: compile, phase: compile)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/storm-dev-env-with-eclipse/pom-error.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;OK，不要管这个，直接在storm-starter工程上，&lt;code&gt;右键&lt;/code&gt;–&lt;code&gt;Run As&lt;/code&gt;–&lt;code&gt;Maven build&lt;/code&gt;，输入参数：&lt;code&gt;clean install -DskipTests=true&lt;/code&gt;；然后，&lt;code&gt;Run&lt;/code&gt;；至此，打完收工，妥妥的，结果如下图所示：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/storm-dev-env-with-eclipse/build-finished.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;到这一步，就可以参照&lt;a href=&quot;http://storm.apache.org/documentation/Tutorial.html&quot;&gt;storm Tutorial&lt;/a&gt;、&lt;a href=&quot;https://github.com/apache/storm/tree/master/examples/storm-starter&quot;&gt;storm-starter&lt;/a&gt;中的说明进行一步步的操作，来熟悉Storm topology。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;疑问&lt;/strong&gt;：Eclipse下就可以直接开发、调试topology了吗？
+&lt;strong&gt;RE&lt;/strong&gt;：是的，直接开发，&lt;a href=&quot;http://storm.apache.org/documentation/Tutorial.html&quot;&gt;storm Tutorial&lt;/a&gt;中的例子就是这样。&lt;/p&gt;
+
+&lt;h2 id=&quot;storm&quot;&gt;本地安装Storm&lt;/h2&gt;
+
+&lt;p&gt;下载&lt;a href=&quot;http://storm.apache.org/downloads.html&quot;&gt;Storm的binary版本&lt;/a&gt;，就两点：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;把 Storm的&lt;code&gt;bin&lt;/code&gt;目录添加到&lt;code&gt;PATH&lt;/code&gt;中；&lt;/li&gt;
+  &lt;li&gt;验证是否安装成功：执行&lt;code&gt;storm&lt;/code&gt;命令，查看是否提示出错；&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;疑问&lt;/strong&gt;：如果只是开发Storm topology，需要在本地win xp系统上安装Storm？
+&lt;strong&gt;RE&lt;/strong&gt;：我来告诉你吧，本地安装Storm，核心用途是：充当client，向远端Storm cluster提交编写好的topology。重新来理一下，eclipse下新建工程，maven添加storm的依赖，即可进行topology的开发；然后通过本地安装的storm，可以进行本地的test、develop；最终，通过本地安装的storm充当client，可以向storm cluster提交topology。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;疑问：上面已经可以进行Storm topology的开发了，但如果希望查看Storm源代码，特别是Clojure编写的那部分，怎么办？&lt;/p&gt;
+
+  &lt;p&gt;关于这个问题，官网有提示：&lt;a href=&quot;http://storm.apache.org/documentation/Creating-a-new-Storm-project.html&quot;&gt;Creating a new Storm project&lt;/a&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;参考来源&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/apache/incubator-storm/tree/master/examples/storm-starter&quot;&gt;Storm Example: storm-starter&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://storm.apache.org/documentation/Setting-up-development-environment.html&quot;&gt;Storm: Setting up development environment&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://storm.apache.org/documentation/Creating-a-new-Storm-project.html&quot;&gt;Storm: Creating a new Storm project&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+   </entry>
+   
+   <entry>
+     <title>Storm：Creating a new Storm project</title>
+     <link href="http://ningg.github.com/storm-creating-a-new-strom-project"/>
+     <updated>2014-10-22T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/storm-creating-a-new-strom-project</id>
+     <content type="html">&lt;blockquote&gt;
+  &lt;p&gt;原文地址：&lt;a href=&quot;http://storm.apache.org/documentation/Creating-a-new-Storm-project.html&quot;&gt;Creating a new Storm project&lt;/a&gt;，本文使用&lt;code&gt;英文原文+中文注释&lt;/code&gt;方式来写。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;This page outlines how to set up a Storm project for development. The steps are:
+（本文重点：介绍如何设置一个Storm project用于开发。）&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Add Storm jars to classpath（把storm的jar添加到classpath中）&lt;/li&gt;
+  &lt;li&gt;If using multilang, add multilang dir to classpath（如果用了multilang，将dir添加到classpath中）&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Follow along to see how to set up the &lt;a href=&quot;http://github.com/nathanmarz/storm-starter&quot;&gt;storm-starter&lt;/a&gt; project in Eclipse.&lt;/p&gt;
+
+&lt;h2 id=&quot;add-storm-jars-to-classpath&quot;&gt;Add Storm jars to classpath&lt;/h2&gt;
+
+&lt;p&gt;You’ll need the Storm jars on your classpath to develop Storm topologies. Using &lt;a href=&quot;http://storm.apache.org/documentation/Maven.html&quot;&gt;Maven&lt;/a&gt; is highly recommended. &lt;a href=&quot;https://github.com/nathanmarz/storm-starter/blob/master/m2-pom.xml&quot;&gt;Here’s an example&lt;/a&gt; of how to setup your pom.xml for a Storm project. If you don’t want to use Maven, you can include the jars from the Storm release on your classpath.
+（推荐使用Maven方式，将Storm的jar包添加到classpath中）&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://github.com/nathanmarz/storm-starter&quot;&gt;storm-starter&lt;/a&gt; uses &lt;a href=&quot;http://github.com/technomancy/leiningen&quot;&gt;Leiningen&lt;/a&gt; for build and dependency resolution. You can install leiningen by downloading &lt;a href=&quot;https://raw.github.com/technomancy/leiningen/stable/bin/lein&quot;&gt;this script&lt;/a&gt;, placing it on your path, and making it executable. To retrieve the dependencies for Storm, simply run &lt;code&gt;lein deps&lt;/code&gt; in the project root.
+（storm-starter project用了Leiningen来构建和进行依赖管理的，因此，下载Leiningen到本地，保证其可以执行，然后到project的根目录，执行&lt;code&gt;lein deps&lt;/code&gt;命令，来获取Storm的依赖）&lt;/p&gt;
+
+&lt;p&gt;To set up the classpath in Eclipse, create a new Java project, include &lt;code&gt;src/jvm/&lt;/code&gt; as a source path, and make sure all the jars in &lt;code&gt;lib/&lt;/code&gt; and &lt;code&gt;lib/dev/&lt;/code&gt; are in the Referenced Libraries section of the project.
+（创建java project，将&lt;code&gt;src/jvm/&lt;/code&gt;设置为source path，并将&lt;code&gt;lib/&lt;/code&gt;和&lt;code&gt;lib/dev/&lt;/code&gt;添加到build path中）&lt;/p&gt;
+
+&lt;h2 id=&quot;if-using-multilang-add-multilang-dir-to-classpath&quot;&gt;If using multilang, add multilang dir to classpath&lt;/h2&gt;
+
+&lt;p&gt;If you implement spouts or bolts in languages other than Java, then those implementations should be under the &lt;code&gt;multilang/resources/&lt;/code&gt; directory of the project. For Storm to find these files in local mode, the &lt;code&gt;resources/&lt;/code&gt; dir needs to be on the classpath. You can do this in Eclipse by adding &lt;code&gt;multilang/&lt;/code&gt; as a source folder. You may also need to add &lt;code&gt;multilang/resources&lt;/code&gt; as a source directory.
+（使用multilang编写spout和bolt时，需要将实际的源代码放在&lt;code&gt;multilang/resources/&lt;/code&gt;目录）&lt;/p&gt;
+
+&lt;p&gt;For more information on writing topologies in other languages, see &lt;a href=&quot;http://storm.apache.org/documentation/Using-non-JVM-languages-with-Storm.html&quot;&gt;Using non-JVM languages with Storm&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;To test that everything is working in Eclipse, you should now be able to &lt;code&gt;Run&lt;/code&gt; the &lt;code&gt;WordCountTopology.java&lt;/code&gt; file. You will see messages being emitted at the console for 10 seconds.&lt;/p&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;参考来源&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://storm.apache.org/&quot;&gt;Apache Storm&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://storm.apache.org/documentation/Rationale.html&quot;&gt;Apache Storm: Documentation Rationale&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+   </entry>
    
    <entry>
      <title>Storm：setting up a development environment</title>
@@ -172,7 +312,8 @@
 &lt;p&gt;Every node in a topology must declare the output fields for the tuples it emits. For example, this bolt declares that it emits 2-tuples with the fields “double” and “triple”:
 （每个node都要定义输出的tuple的结构）&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;java public class DoubleAndTripleBolt extends BaseRichBolt { 
+&lt;pre&gt;&lt;code&gt;// java 
+public class DoubleAndTripleBolt extends BaseRichBolt { 
 
    private OutputCollectorBase _collector;
    
@@ -2338,457 +2479,6 @@ ERROR 1010 (HY000): Error dropping database (can&#39;t rmdir &#39;./test&#39;, e
   &lt;li&gt;&lt;a href=&quot;http://dev.mysql.com/doc/refman/5.6/en/installing.html&quot;&gt;Installing and Upgrading MySQL&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://dev.mysql.com/doc/refman/5.6/en/server-administration.html&quot;&gt;MySQL Server Administration&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>如何参与开源项目</title>
-     <link href="http://ningg.github.com/how-to-contribute-open-source-project"/>
-     <updated>2014-10-15T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/how-to-contribute-open-source-project</id>
-     <content type="html">&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
-
-&lt;p&gt;本来今天晚上想浏览一下flume官网的，不过突然看到How to Get Involved，再看看那些贡献了代码的名单，很是羡慕，我这个人爱吹牛，如果我也在名单中，那岂不又能吹牛一把？哈哈~想想都能笑出声。另一方面，用过的开源工具不少，但是如何参与到开源项目中，我还真不知道，碰巧在看flume官网，那就看看如何参与到flume这个开源项目中去吧。&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;官方原文地址：&lt;a href=&quot;https://cwiki.apache.org/confluence/display/FLUME/How+to+Contribute&quot;&gt;How to Contribute&lt;/a&gt;，本文使用&lt;code&gt;英文原文+中文注释&lt;/code&gt;方式来写。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;preface&quot;&gt;Preface&lt;/h2&gt;
-
-&lt;p&gt;Welcome contributors! We strive to include everyone’s contributions. This page provides necessary guidelines on how to contribute effectively towards furthering the development and evolution of Flume. You should also read the guide on setting up &lt;a href=&quot;https://cwiki.apache.org/confluence/display/FLUME/Development+Environment&quot;&gt;Development Environment&lt;/a&gt; where you will find details on how to checkout, build and test Flume.
-（如何下载源码、编译源码、测试源码，需要先阅读&lt;a href=&quot;https://cwiki.apache.org/confluence/display/FLUME/Development+Environment&quot;&gt;Development Environment&lt;/a&gt;。）&lt;/p&gt;
-
-&lt;p&gt;Note: This guide applies to general contributors. If you are a committer, please read the &lt;a href=&quot;https://cwiki.apache.org/confluence/display/FLUME/How+to+Commit&quot;&gt;How to Commit&lt;/a&gt; as well.
-（committer还需阅读&lt;a href=&quot;https://cwiki.apache.org/confluence/display/FLUME/How+to+Commit&quot;&gt;How to Commit&lt;/a&gt;）&lt;/p&gt;
-
-&lt;h2 id=&quot;what-can-be-contributed&quot;&gt;What can be contributed?&lt;/h2&gt;
-
-&lt;p&gt;There are many ways you can contribute towards the project. A few of these are:（参与方式，有如下几种）&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Jump in on discussions&lt;/strong&gt;: It is possible that someone initiates a thread on the mailing list describing a problem that you have dealt with in the past. You can help the project by chiming in on that thread and guiding that user to overcome or workaround that problem or limitation.（查看邮件列表，参与讨论，帮助他人解决问题）&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;File Bugs&lt;/strong&gt;: If you notice a problem and are sure it is a bug, then go ahead and file a JIRA. If however, you are not very sure that it is a bug, you should first confirm it by discussing it on the Mailing Lists.（通过JIRA，提交bug；如果不确定，通过邮件列表提问，确认是否为bug）&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Review Code&lt;/strong&gt;: If you see that a JIRA ticket has a “Patch Available” status, go ahead and review it. It cannot be stressed enough that you must be kind in your review and explain the rationale for your feedback and suggestions. Also note that not all review feedback is accepted - often times it is a compromise between the contributor and reviewer. If you are happy with the change and do not spot any major issues, then +1 it. More information on this is available in the following sections.（通过JIRA，检查代码-Patch补丁，提出反馈意见）&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Provide Patches&lt;/strong&gt;: We encourage you to assign the relevant JIRA issue to yourself and supply a patch for it. The patch you provide can be code, documentation, build changes, or any combination of these. More information on this is available in the following sections.（通过JIRA，提交代码-patch补丁，可以是代码、文档、编译细节等）&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;notes(ningg)：邮件列表、JIRA，我都没有关注过，也不知道具体怎么用，打算学一下；patch文件了解一点。&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;providing-patches&quot;&gt;Providing Patches&lt;/h2&gt;
-
-&lt;p&gt;In order to provide patches, follow these guidelines:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Make sure there is a JIRA&lt;/strong&gt;:
-    &lt;ol&gt;
-      &lt;li&gt;If you are working on fixing a problem that already has an associated JIRA, then go ahead and assign it to yourself. （JIRA上找到问题，并指派给自己）&lt;/li&gt;
-      &lt;li&gt;If it is already assigned to someone else, check with the current assignee before moving it over to your queue.（跟正在解决这个问题的人商量下）&lt;/li&gt;
-      &lt;li&gt;If the current assignee has already worked out some part of the fix, suggest that you can take that change over from them and complete the remaining parts.（如果有人已经修复bug的一部分，你可以接手，把余下的做完）&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Attach the patches as you go through development&lt;/strong&gt;:
-    &lt;ol&gt;
-      &lt;li&gt;While small fixes are easily done in a single patch, it is preferable that you attach patches to the JIRA as you go along. This serves as an early feedback mechanism where interested folks can look it over and suggest changes where necessary. It also ensures that if for some reason you are not able to find the time to complete the change, someone else can take up your initial patches and drive them to completion.（本地开发环境测试通过，就提交patch，即使是small fixes）&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Before you submit your patch&lt;/strong&gt;:
-    &lt;ol&gt;
-      &lt;li&gt;Your change should be well-formatted and readable. Please use two spaces for indentation (no tabs).（保证patch的well-formatted和readable，使用2个space，避免tab）&lt;/li&gt;
-      &lt;li&gt;Carefully consider whether you have handled all boundary conditions and have provided sufficiently defensive code where necessary.（代码的边界条件、异常捕获）&lt;/li&gt;
-      &lt;li&gt;Add one or more unit tests, if your change is not covered by existing automated tests.（添加单元测试）&lt;/li&gt;
-      &lt;li&gt;Insert javadocs and code comments where appropriate.（添加javadocs和comments）&lt;/li&gt;
-      &lt;li&gt;Update the &lt;a href=&quot;http://flume.apache.org/FlumeUserGuide.html&quot;&gt;Flume User Guide&lt;/a&gt; (&lt;a href=&quot;https://git-wip-us.apache.org/repos/asf?p=flume.git;a=blob;f=flume-ng-doc/sphinx/FlumeUserGuide.rst;hb=trunk&quot;&gt;source&lt;/a&gt;) if your change affects the Flume config file or any user interface. Include those changes in your patch.（修改文档）&lt;/li&gt;
-      &lt;li&gt;Make sure you update the relevant developer documentation, wiki pages, etc. if your change affects the development environment.（修改开发手册）&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Test your changes before submitting a review&lt;/strong&gt;:
-    &lt;ol&gt;
-      &lt;li&gt;Before you make the JIRA status as “Patch Available”, please test your changes thoroughly. Try any new feature or fix out for yourself, and make sure that it works.（测试充分）&lt;/li&gt;
-      &lt;li&gt;Make sure that all unit/integration tests are passing, and that the functionality you have worked on is tested through existing or new tests.（unit/integration测试）&lt;/li&gt;
-      &lt;li&gt;You can run all the tests by going to the root level of the source tree and typing &lt;code&gt;mvn clean install&lt;/code&gt;.（mvn clean install，执行测试）&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;How to create a patch file&lt;/strong&gt;:
-    &lt;ul&gt;
-      &lt;li&gt;The preferred naming convention for Flume patches is &lt;code&gt;FLUME-12345.patch&lt;/code&gt;, or &lt;code&gt;FLUME-12345-0.patch&lt;/code&gt; where 12345 is the JIRA number. You might want to name successive versions of the patch something like &lt;code&gt;FLUME-12345-1.patch&lt;/code&gt;, &lt;code&gt;FLUME-12345-2.patch&lt;/code&gt;, etc. as you iterate on your changes based on review feedback and re-submit them.（patch命名方式）&lt;/li&gt;
-      &lt;li&gt;The command to generate the patch is &lt;code&gt;git diff&lt;/code&gt;. Example:&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;pre&gt;&lt;code&gt;$ git diff &amp;gt; /path/to/FLUME-1234-0.patch
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;How to apply someone else’s patch file&lt;/strong&gt;:
-    &lt;ul&gt;
-      &lt;li&gt;You can apply someone else’s patch with the GNU patch tool. Example:&lt;/li&gt;
-      &lt;li&gt;Contributors may variously submit patches in a couple of different formats. If you get some dialog from the patch tool asking which file you want to patch, try variously the “-p1” or “-p0” flags to patch. Without any additional arguments, git diff generates patches that are applied using patch &lt;code&gt;-p1&lt;/code&gt;. If you use git diff &lt;code&gt;--no-prefix&lt;/code&gt; to generate your patch, you have to apply it using patch &lt;code&gt;-p0&lt;/code&gt;. The ReviewBoard tool understands both formats and is able to apply both types automatically.（&lt;code&gt;patch&lt;/code&gt;命令的选项）&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;hr /&gt;
-
-&lt;pre&gt;&lt;code&gt;$ cd ~/src/flume # or wherever you keep the root of your Flume source tree
-$ patch -p1 &amp;lt; FLUME-1234.patch
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Submitting your patch for review&lt;/strong&gt;:
-    &lt;ol&gt;
-      &lt;li&gt;To submit a patch, attach the patch file to the JIRA and change the status of the JIRA to “Patch Available”.（JIRA上，提交patch，修改状态）&lt;/li&gt;
-      &lt;li&gt;If the change is non-trivial, please also post it for review on the Review Board. Use the Repository “flume-git” on Review Board.（关键的bug，需要在Review Board上标记一下）&lt;/li&gt;
-      &lt;li&gt;Link the JIRA to the Review Board review. JIRA has a feature you can use for this by going to More Actions &amp;gt; Link &amp;gt; Web Link when logged into JIRA.（Review Board上添加JIRA的链接）&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Identify a reviewer&lt;/strong&gt;:
-    &lt;ol&gt;
-      &lt;li&gt;When posting on review board (repository: “flume-git”), always add the Group “Flume” to the list of reviewers.（添加&lt;code&gt;Flume&lt;/code&gt;到reviewers列表）&lt;/li&gt;
-      &lt;li&gt;Optionally, you may also add a specific reviewer to the review. You can pick any of the project committers for review. Note that identifying a reviewer does not stop others from reviewing your change. Be prepared for having your change reviewed by others at any time.（可以指定committer作为reviewer，但其他人仍可以review）&lt;/li&gt;
-      &lt;li&gt;If you have posted your change for review and no one has had a chance to review it yet, you can gently remind everyone by dropping a note on the developer mailing list with a link to the review.（可在mailing list中添加一个JIRA链接，告知别人来review代码）&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Work with reviewers to get your change fleshed out&lt;/strong&gt;:
-    &lt;ol&gt;
-      &lt;li&gt;When your change is reviewed, please engage with the reviewer via JIRA or review board to get necessary clarifications and work out other details.（及时给reviewer反馈，多交流）&lt;/li&gt;
-      &lt;li&gt;The goal is to ensure that the final state of your change is acceptable to the reviewer so that they can +1 it.（经过数次交流，reviewer确认代码可用了，会点击+1的）&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;notes(ningg)：代码中添加javadocs，集成测试是什么，我还不清楚。&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;reviewing-code&quot;&gt;Reviewing Code&lt;/h2&gt;
-
-&lt;p&gt;Flume uses the &lt;a href=&quot;https://reviews.apache.org/groups/Flume&quot;&gt;Apache Review Board&lt;/a&gt; for doing code reviews. In order for a change to be reviewed, it should be either posted on the review board or attached to the JIRA. If the change is a minor change affecting only few lines and does not seem to impact main logic of the affected sources, it need not be posted on the review board. However, if the code change is large or otherwise impacting the core logic of the affected sources, it should be posted on the review board. Feel free to comment on the JIRA requesting the assignee to post the patch for review on review board.（小改动的patch，贴在JIRA上就好了；涉及核心代码的patch，应同时在JIRA和review board上贴出来。）&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: Not all patches attached to a JIRA are ready for review. Sometimes the patches are attached just to solicit early feedback regarding the implementation direction. Feel free to look it over and give your feedback in the JIRA as necessary. Patches are considered ready for review either when the patch has been posted on review board, or the JIRA status has been changed to ‘Patch Available’. Find here a &lt;a href=&quot;https://issues.apache.org/jira/issues/?jql=project%20%3D%20flume%20AND%20status%20%3D%20%22Patch%20Available%22&quot;&gt;list of Flume JIRAs marked Patch Available&lt;/a&gt;. （patch有时候are not ready for review，只是为了征求意见，看看实现的方向对不对）&lt;/p&gt;
-
-&lt;h3 id=&quot;goals-for-code-reviews&quot;&gt;Goals for Code Reviews&lt;/h3&gt;
-
-&lt;p&gt;The net outcome from the review should be the same - which is to ensure the following:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Bugs/Omissions/Regressions are caught before the change is committed to the source control.（问题已解决）&lt;/li&gt;
-  &lt;li&gt;The change is subjected to keeping the quality of code high so as to make the overall system sustainable. The implementation of the change should be easily readable, documented where necessary, and must favor simplicity of implementation.（高质量的代码与可正常运行的系统，同等重要。代码质量包括：可读性、文档、实现简洁）&lt;/li&gt;
-  &lt;li&gt;Changes are evaluated from the perspective of a consumer (the reviewer) as opposed to the developer, which often brings out subtleties in the implementation that otherwise go unnoticed.（reviewer通常能为代码实现，提供细微改动的建议）&lt;/li&gt;
-  &lt;li&gt;The change should be backward compatible and not require extensive work on existing installations in order for it to be consumed. There are exceptions to this in some cases like when work is done on a major release, but otherwise backward compatibility should be upheld at all times. If you are not clear, raise it is as a concern to be clarified during the review.（change保证，后向兼容，即，原来已有的应用代码部分，不需要大改动；如果不确定是否后向兼容，则，说明一下）&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;code-review-guidelines&quot;&gt;Code review guidelines&lt;/h3&gt;
-
-&lt;p&gt;Following are some guidelines on how to do a code review. You may use any other approach instead as long as the above stated goals are met. That said, here is an approach that works fine generally:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Understand the problem being solved&lt;/strong&gt;: This often requires going through the JIRA comments and/or mailing list threads where the discussion around the problem has happened in the past. Look for key aspects of the problem such as how it has impacted the users and what, if any, is the suggested way to solve it. You may not find enough information regarding the problem in some cases, in which case - feel free to ask for clarification from the developer contributing the change.（广泛查询，弄清问题）&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Think about how you would solve the problem&lt;/strong&gt;: There are many ways to solve any code problem, with different ways having different merits. Before proceeding to review the change, think through how you would solve the problem if you were the one implementing the solution. Note the various aspects of the problem that your solution might have. Some such aspects to think about are - impact on backward compatibility, overall usability of the system, any impact on performance etc.（制定详细的解决方案，考虑几点：后向兼容、系统全局可用、性能影响）&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Evaluate the proposed change in contrast to your solution&lt;/strong&gt;: Unless the change is obvious, it is likely that the implementation of the change you are reviewing is very different from the solution you would go for. Evaluate this change on the various aspects that you evaluated your solution on in the previous step. See how it measures up and give feedback where you think it could be improved.（review代码时，与自己的方案多方面对比）&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Look for typical pitfalls&lt;/strong&gt;: Read through the implementation to see if: it needs to be documented at places where the intention is not clear; if all the boundary conditions are being addressed; if the code is defensive enough; if any bad idioms have leaked in such as double check locking etc. In short, check for things that a developer is likely to miss in their own code which are otherwise obvious to someone trying to read and understand the code.（全面检查配套方面：文档中描述是否清晰、边界条件是否考虑、代码安全性怎么样、是否包含bad idioms；总之，站在非developer的角度，看看哪些潜在问题）&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;See if the change is complete&lt;/strong&gt;: Check if the change is such that it affects the user interface. If it does, then the documentation should likely be updated. What about testing - does it have enough test coverage or not? What about other aspects like license headers, copyright statements etc. How about checkstyle and findbugs - did they generate new warnings? How about compiler warnings?（代码层面上，修改全面了吗？是否测试了、warning信息）&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Test the change&lt;/strong&gt;: It is very easy to test the change if you have the development environment setup. Run as many tests as you want with the patch. Manually test the change for functionality that you think is not fully covered via the associated tests. If you find a problem, report it.（全面测试、必要的地方手动测）&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;how-to-give-feedback&quot;&gt;How to give feedback&lt;/h3&gt;
-
-&lt;p&gt;Once you have collected your comments/concerns/feedback you need to send it to back to the contributor. In doing so, please be as courteous as possible and ensure the following:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Your feedback should be clear and actionable. Giving subjective/vague feedback does not add any value or facilitate a constructive dialog.（feedback要清晰、可操作）&lt;/li&gt;
-  &lt;li&gt;Where possible, suggest how your concern can be addressed. For example if your testing revealed that a certain use-case is not satisfied, it is acceptable to state that as is, but it would be even better if you could suggest how the developer can address it. Present your suggestion as a possible solution rather than the solution.（对如何解决问题，提出自己的建议）&lt;/li&gt;
-  &lt;li&gt;If you do not understand part of the change, or for some reason were not able to review part of the change, state it explicitly so as to encourage other reviewers to jump in and help.（如果读不懂代码，请明确说出来，以方便其他reviewer给予帮助）&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Once you have provided your feedback, wait for the developer to respond. It is possible that the developer may need further clarification on your feedback, in which case you should promptly provide it where necessary. In general, the dialog between the reviewer and developer should lead to finding a reasonable middle ground where key concerns are satisfied and the goals of the review have been met.&lt;/p&gt;
-
-&lt;p&gt;If a change has met all your criteria for review, please +1 the change to indicate that you are happy with it.（如果代码让你满意，请点击+1）&lt;/p&gt;
-
-&lt;h2 id=&quot;section-1&quot;&gt;闲谈&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://cwiki.apache.org/confluence/display/FLUME/How+to+Contribute&quot;&gt;How to contribute&lt;/a&gt;中提到了各种规范、细节，这些就是参与开源项目的基本准则，大家都按照这个准则来操作，才能保证开源项目的顺利进行。想到了&lt;a href=&quot;http://robbinfan.com/&quot;&gt;Robbin&lt;/a&gt;的一句话：Small is beautiful, constraint is liberty.&lt;/p&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>In-Stream Big Data Processing</title>
-     <link href="http://ningg.github.com/in-stream-big-data-processing"/>
-     <updated>2014-10-14T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/in-stream-big-data-processing</id>
-     <content type="html">&lt;blockquote&gt;
-  &lt;p&gt;英文原文：&lt;a href=&quot;http://highlyscalable.wordpress.com/2013/08/20/in-stream-big-data-processing/&quot;&gt;In-Stream-big-data-processing&lt;/a&gt;，有人翻译了&lt;a href=&quot;http://blog.csdn.net/idontwantobe/article/details/25938511&quot;&gt;中文版&lt;/a&gt;，也有直接&lt;a href=&quot;http://dirlt.com/in-stream-big-data-processing.html&quot;&gt;中文注释英文版&lt;/a&gt;。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;The shortcomings and drawbacks of batch-oriented data processing were widely recognized by the Big Data community quite a long time ago. It became clear that real-time query processing and in-stream processing is the immediate need in many practical applications. In recent years, this idea got a lot of traction and a whole bunch of solutions like Twitter’s Storm, Yahoo’s S4, Cloudera’s Impala, Apache Spark, and Apache Tez appeared and joined the army of Big Data and NoSQL systems. This article is an effort to explore techniques used by developers of in-stream data processing systems, trace the connections of these techniques to massive batch processing and OLTP/OLAP databases, and discuss how one unified query engine can support in-stream, batch, and OLAP processing at the same time.&lt;/p&gt;
-
-&lt;p&gt;At Grid Dynamics, we recently faced a necessity to build an in-stream data processing system that aimed to crunch about 8 billion events daily providing fault-tolerance and strict transactioanlity i.e. none of these events can be lost or duplicated. This system has been designed to supplement and succeed the existing Hadoop-based system that had too high latency of data processing and too high maintenance costs. The requirements and the system itself were so generic and typical that we describe it below as a canonical model, just like an abstract problem statement.&lt;/p&gt;
-
-&lt;p&gt;A high-level overview of the environment we worked with is shown in the figure below:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/in-stream-big-data-processing/cover-2.png&quot; alt=&quot;cover-2&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;One can see that this environment is a typical Big Data installation: there is a set of applications that produce the raw data in multiple datacenters, the data is shipped by means of Data Collection subsystem to HDFS located in the central facility, then the raw data is aggregated and analyzed using the standard Hadoop stack (MapReduce, Pig, Hive) and the aggregated results are stored in HDFS and NoSQL, imported to the OLAP database and accessed by custom user applications. Our goal was to equip all facilities with a new in-stream engine (shown in the bottom of the figure) that processes most intensive data flows and ships the pre-aggregated data to the central facility, thus decreasing the amount of raw data and heavy batch jobs in Hadoop. The design of the in-stream processing engine itself was driven by the following requirements:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;SQL-like functionality&lt;/strong&gt;. The engine has to evaluate SQL-like queries continuously, including joins over time windows and different aggregation functions that implement quite complex custom business logic. The engine can also involve relatively static data (admixtures) loaded from the stores of Aggregated Data. Complex multi-pass data mining algorithms are beyond the immediate goals.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Modularity and flexibility&lt;/strong&gt;. It is not to say that one can simply issue a SQL-like query and the corresponding pipeline will be created and deployed automatically, but it should be relatively easy to assemble quite complex data processing chains by linking one block to another.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Fault-tolerance&lt;/strong&gt;. Strict fault-tolerance is a principal requirement for the engine. As it sketched in the bottom part of the figure, one possible design of the engine is to use distributed data processing pipelines that implement operations like joins and aggregations or chains of such operations, and connect these pipelines by means of fault-tolerant persistent buffers. These buffers also improve modularity of the system by enabling publish/subscribe communication style and easy addition/removal of the pipelines. The pipelines can be stateful and the engine’s middleware should provide a persistent storage to enable state checkpointing. All these topics will be discussed in the later sections of the article.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Interoperability with Hadoop&lt;/strong&gt;. The engine should be able to ingest both streaming data and data from Hadoop i.e. serve as a custom query engine atop of HDFS.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;High performance and mobility&lt;/strong&gt;. The system should deliver performance of tens of thousands messages per second even on clusters of minimal size. The engine should be compact and efficient, so one can deploy it in multiple datacenters on small clusters.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;To find out how such a system can be implemented, we discuss the following topics in the rest of the article:&lt;/p&gt;
-
-&lt;p&gt;First, we explore relations between in-stream data processing systems, massive batch processing systems, and relational query engines to understand how in-stream processing can leverage a huge number of techniques that were devised for other classes of systems.&lt;/p&gt;
-
-&lt;p&gt;Second, we describe a number of patterns and techniques that are frequently used in building of in-stream processing frameworks and systems. In addition, we survey the current and emerging technologies and provide a few implementation tips.&lt;/p&gt;
-
-&lt;p&gt;The article is based on a research project developed at Grid Dynamics Labs. Much of the credit goes to Alexey Kharlamov and Rafael Bagmanov who led the project and other contributors: Dmitry Suslov, Konstantine Golikov, Evelina Stepanova, Anatoly Vinogradov, Roman Belous, and Varvara Strizhkova.&lt;/p&gt;
-
-&lt;h2 id=&quot;basics-of-distributed-query-processing&quot;&gt;Basics of Distributed Query Processing&lt;/h2&gt;
-
-&lt;p&gt;It is clear that distributed in-stream data processing has something to do with query processing in distributed relational databases. Many standard query processing techniques can be employed by in-stream processing engine, so it is extremely useful to understand classical algorithms of distributed query processing and see how it all relates to in-stream processing and other popular paradigms like MapReduce.&lt;/p&gt;
-
-&lt;p&gt;Distributed query processing is a very large area of knowledge that was under development for decades, so we start with a brief overview of the main techniques just to provide a context for further discussion.&lt;/p&gt;
-
-&lt;h3 id=&quot;partitioning-and-shuffling&quot;&gt;Partitioning and Shuffling&lt;/h3&gt;
-
-&lt;p&gt;Distributed and parallel query processing heavily relies on data partitioning to break down a large data set into multiple pieces that can be processed by independent processors. Query processing could consist of multiple steps and each step could require its own partitioning strategy, so data shuffling is an operation frequently performed by distributed databases.&lt;/p&gt;
-
-&lt;p&gt;Although optimal partitioning for selection and projection operations can be tricky (e.g. for range queries), we can assume that for in-stream data filtering it is practically enough to distribute data among the processors using a hash-based partitioning.&lt;/p&gt;
-
-&lt;p&gt;Processing of distributed joins is not so easy and requires a more thorough examination. In distributed environments, parallelism of join processing is achieved through data partitioning, i.e. the data is distributed among processors and each processor employs a serial join algorithm (e.g. nested-loop join or sort-merge join or hash-based join) to process its part of the data. The final results are consolidated from the results obtained from different processors.&lt;/p&gt;
-
-&lt;p&gt;There are two main data partitioning techniques that can be employed by distributed join processing:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Disjoint data partitioning&lt;/li&gt;
-  &lt;li&gt;Divide and broadcast join&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Disjoint data partitioning technique shuffles the data into several partitions in such a way that join keys in different partitions do not overlap. Each processor performs the join operation on each of these partitions and the final result is obtained as a simple concatenation of the results obtained from different processors.  Consider an example where relation R is joined with relation S on a numerical key k and a simple modulo-based hash function is used to produce the partitions (it is assumes that the data initially distributed among the processors based on some other policy):&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/in-stream-big-data-processing/disjoint-partitioning.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;The divide and broadcast join algorithm is illustrated in the figure below. This method divides the first data set into multiple disjoint partitions (R1, R2, and R3 in the figure) and replicates the second data set to all processors. In a distributed database, division typically is not a part of the query processing itself because data sets are initially distributed among multiple nodes.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/in-stream-big-data-processing/broadcast-join.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;This strategy is applicable for joining of a large relation with a small relation or two small relations. In-stream data processing systems can employ this technique for stream enrichment i.e. joining a static data (admixture) to a data stream.&lt;/p&gt;
-
-&lt;p&gt;Processing of GroupBy queries also relies on shuffling and fundamentally similar to the MapReduce paradigm in its pure form.  Consider an example where the data is grouped by a string key and sum of the numerical values is computed in each group:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/in-stream-big-data-processing/group-by-query.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;In this example, computation consists of two steps: local aggregation and global aggregation. These steps basically correspond to Map and Reduce operations. Local aggregation is optional and raw records can be emitted, shuffled, and aggregated on a global aggregation phase.&lt;/p&gt;
-
-&lt;p&gt;The whole point of this section is that all the algorithms above can be naturally implemented using a message passing architectural style i.e. the query execution engine can be considered as a distributed network of nodes connected by the messaging queues. It is conceptually similar to the in-stream processing pipelines.&lt;/p&gt;
-
-&lt;h3 id=&quot;pipelining&quot;&gt;Pipelining&lt;/h3&gt;
-
-&lt;p&gt;In the previous section, we noted that many distributed query processing algorithms resemble message passing networks. However, it is not enough to organize efficient in-stream processing: all operators in a query should be chained in such a way that the data flows smoothly through the entire pipeline i.e. neither operation should block processing by waiting for a large piece of input data without producing any output or by writing intermediate results on disk. Some operations like sorting are inherently incompatible with this concept (obviously, a sorting block cannot produce any output until the entire input is ingested), but in many cases pipelining algorithms are applicable.  A typical example of pipelining is shown below:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/in-stream-big-data-processing/join-pipeline.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;In this example, the hash join algorithm is employed to join four relations: R1, S1, S2, and S3 using 3 processors. The idea is to build hash tables for S1, S2 and S3 in parallel and then stream R1 tuples one by one though the pipeline that joins them with S1, S2 and S3 by looking up matches in the hash tables. In-stream processing naturally employs this technique to join a data stream with the static data (admixtures).&lt;/p&gt;
-
-&lt;p&gt;In relational databases, join operation can take advantage of pipelining by using the symmetric hash join algorithm or some of its advanced variants [1,2]. Symmetric hash join is a generalization of hash join. Whereas a normal hash join requires at least one of its inputs to be completely available to produce first results (the input is needed to build a hash table), symmetric hash join is able to produce first results immediately. In contrast to the normal hash join, it maintains hash tables for both inputs and populates these tables as tuples arrive:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/in-stream-big-data-processing/symmetric-join.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;As a tuple comes in, the joiner first looks it up in the hash table of the other stream. If match is found, an output tuple is produced. Then the tuple is inserted in its own hash table.&lt;/p&gt;
-
-&lt;p&gt;However, it does not make a lot of sense to perform a complete join of infinite streams. In many cases join is performed on a finite time window or other type of buffer e.g. LFU cache that contains most frequent tuples in the stream. Symmetric hash join can be employed if the buffer is large comparing to the stream rate or buffer is flushed frequently according to some application logic or buffer eviction strategy is not predictable. In other cases, simple hash join is often sufficient since the buffer is constantly full and does not block the processing:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/in-stream-big-data-processing/stream-join.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;It is worth noting that in-stream processing often deals with sophisticated stream correlation algorithms where records are matched based on scoring metrics, not on field equality condition. A more complex system of buffers can be required for both streams in such cases.&lt;/p&gt;
-
-&lt;h2 id=&quot;in-stream-processing-patterns&quot;&gt;In-Stream Processing Patterns&lt;/h2&gt;
-
-&lt;p&gt;In the previous section, we discussed a number of standard query processing techniques that can be used in massively parallel stream processing. Thus, on a conceptual level, an efficient query engine in a distributed database can act as a stream processing system and vice versa, a stream processing system can act as a distributed database query engine. Shuffling and pipelining are the key techniques of distributed query processing and message passing networks can naturally implement them. However, things are not so simple. In a contrast to database query engines where reliability is not critical because a read-only query can always be restarted, streaming systems should pay a lot of attention to reliable events processing. In this section, we discuss a number of techniques that are used by streaming systems to provide message delivery guarantees and some other patterns that are not typical for standard query processing.&lt;/p&gt;
-
-&lt;h3 id=&quot;stream-replay&quot;&gt;Stream Replay&lt;/h3&gt;
-
-&lt;p&gt;Ability to rewind data stream back in time and replay the data is very important for in-stream processing systems because of the following reasons:
-This is the only way to guarantee correct data processing. Even if data processing pipeline is fault-tolerant, it is very problematic to guarantee that the deployed processing logic is defect-free. One can always face a necessity to fix and redeploy the system and replay the data on a new version of the pipeline.&lt;/p&gt;
-
-&lt;p&gt;Issue investigation could require ad hoc queries. If something goes wrong, one could need to rerun the system on the problematic data with better logging or with code alternations.&lt;/p&gt;
-
-&lt;p&gt;Although it is not always the case, the in-stream processing system can be designed in such a way that it re-reads individual messages from the source in case of processing errors and local failures, even if the system in general is fault-tolerant.&lt;/p&gt;
-
-&lt;p&gt;As a result, the input data typically goes from the data source to the in-stream pipeline via a persistent buffer that allows clients to move their reading pointers back and forth.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/in-stream-big-data-processing/replay-buffer.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Kafka messaging queue is well known implementation of such a buffer that also supports scalable distributed deployments, fault-tolerance, and provides high performance.
-As a bottom line, Stream Replay technique imposes the following requirements of the system design:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;The system is able to store the raw input data for a preconfigured period time.&lt;/li&gt;
-  &lt;li&gt;The system is able to revoke a part of the produced results, replay the corresponding input data and produce a new version of the results.&lt;/li&gt;
-  &lt;li&gt;The system should work fast enough to rewind the data back in time, replay them, and then catch up with the constantly arriving data stream.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;lineage-tracking&quot;&gt;Lineage Tracking&lt;/h3&gt;
-
-&lt;p&gt;In a streaming system, events flow through a chain of processors until the result reaches the final destination (like an external database). Each input event produces a directed graph of descendant events (lineage) that ends by the final results. To guarantee reliable data processing, it is necessary to ensure that the entire graph was processed successfully and to restart processing in case of failures.&lt;/p&gt;
-
-&lt;p&gt;Efficient lineage tracking is not a trivial problem. Let us first consider how Twitter’s Storm tracks the messages to guarantee at-least-once delivery semantics (see the diagram below):&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;All events that emitted by the sources (first nodes in the data processing graph) are marked by a random ID. For each source, the framework maintains a set of pairs [event ID -&amp;gt; signature] for each initial event. The signature is initially initialized by the event ID.&lt;/li&gt;
-  &lt;li&gt;Downstream nodes can generate zero or more events based on the received initial event. Each event carries its own random ID and the ID of the initial event.&lt;/li&gt;
-  &lt;li&gt;If the event is successfully received and processed by the next node in the graph, this node updates the signature of the corresponding initial event by XORing the signature with (a) ID of the incoming event and (b) IDs of all events produced based on the incoming event. In the part 2 of diagram below, event 01111 produces events 01100, 10010, and 00010, so the signature for event 01111 becomes 11100 (= 01111 (initial value) xor 01111 xor 01100 xor 10010 xor 00010).&lt;/li&gt;
-  &lt;li&gt;An event can be produced based on more than one incoming event. In this case, it is attached several initial event and carries more than one initial IDs downstream (yellow-black event in the part 3 of the figure below).&lt;/li&gt;
-  &lt;li&gt;The event considered to be successfully processed as soon as its signature turns into zero i.e. the final node acknowledged that the last event in the graph was processed successfully and no events were emitted downstream. The framework sends a commit message to the source node (see part 3 in the diagram below).&lt;/li&gt;
-  &lt;li&gt;The framework traverses a table of the initial events periodically looking for old uncommitted events (events with non-zero signature). Such events are considered as failed and the framework asks the source nodes to replay them.&lt;/li&gt;
-  &lt;li&gt;It is important to note that the order of signature updates is not important due to commutative nature of the XOR operation. In the figure below, acknowledgements depicted in the part 2 can arrive after acknowledgements depicted in the part 3. This enables fully asynchronous processing.&lt;/li&gt;
-  &lt;li&gt;One can note that the algorithm above is not strictly reliable – the signature could turn into zero accidentally due to unfortunate combination of IDs. However, 64-bit IDs are sufficient to guarantee a very low probability of error, about 2^(-64), that is acceptable in almost all practical applications. As result, the table of signatures could have a small memory footprint.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/in-stream-big-data-processing/lineage-tracking-storm1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;The described approach is elegant due to its decentrilized nature: nodes act independently sending acknowledgement messages, there is no cental entity that tracks all lineages explicitly. However, it could be difficult to manage transactional processing in this way for flows that maintain sliding windows or other buffers. For example, processing on a sliding window can involve hundreds of thousands events at each moment of time, so it becomes difficult to manage acknowledgements because many events stay uncommitted or computational state should be persisted frequently.&lt;/p&gt;
-
-&lt;p&gt;An alternative approach is used in Apache Spark [3]. The idea is to consider the final result as a function of the incoming data. To simplify lineage tracking, the framework processes events in batches, so the result is a sequence of batches where each batch is a function of the input batches. Resulting batches can be computed in parallel and if some computation fails, the framework simply reruns it. Consider an example:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/in-stream-big-data-processing/stream-join-microbatching-tx.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;In this example, the framework joins two streams on a sliding window and then the result passes through one more processing stage. The framework considers the incoming streams not as streams, but as set of batches. Each batch has an ID and the framework can fetch it by the ID at any moment of time. So, stream processing can be represented as a bunch of transactions where each transaction takes a group of input batches, transforms them using a processing function, and persists a result. In the figure above, one of such transactions is highlighted in red. If the transaction fails, the framework simply reruns it. It is important that transactions can be executed in parallel.&lt;/p&gt;
-
-&lt;p&gt;This simple but powerful paradigm enables centralized transaction management and inherently provides exactly-once message processing semantics. It is worth noting that this technique can be used both for batch processing and for stream processing because it treats the input data as a set of batches regardless to their streaming of static nature.&lt;/p&gt;
-
-&lt;h3 id=&quot;state-checkpointing&quot;&gt;State Checkpointing&lt;/h3&gt;
-
-&lt;p&gt;In the previous section we have considered the lineage tracking algorithm that uses signatures (checksums) to provide at-least-one message delivery semantics. This technique improves reliability of the system, but it leaves at least two major open questions:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;In many cases, exactly-once processing semantics is required. For example, the pipeline that counts events can produce incorrect results if some messages will be delivered twice.&lt;/li&gt;
-  &lt;li&gt;Nodes in the pipeline can have a computational state that is updated as the messages processed. This state can be lost in case of node failure, so it is necessary to persist or replicate it.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Twitter’s Storm addresses these issues by using the following protocol:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Events are grouped into batches and each batch is associated with a transaction ID. A transaction ID is a monotonically growing numerical value (e.g. the first batch has ID 1, the second ID 2, and so on). If the pipeline fails to process a batch, this batch is re-emitted with the same transaction ID.&lt;/li&gt;
-  &lt;li&gt;First, the framework announces to the nodes in the pipeline that a new transaction attempt is started. Second, the framework to sends the batch through the pipeline. Finally, the framework announces that transaction attempt if completed and all nodes can commit their state e.g. update it in the external database.&lt;/li&gt;
-  &lt;li&gt;The framework guarantees that commit phases are globally ordered across all transactions i.e. the transaction 2 can never be committed before the transaction 1. This guarantee enables processing nodes to use following logic of persistent state updates:
-    &lt;ul&gt;
-      &lt;li&gt;The latest transaction ID is persisted along with the state.&lt;/li&gt;
-      &lt;li&gt;If the framework requests to commit the current transaction with the ID that differs from the ID value persisted in the database, the state can be updated e.g. a counter in the database can be incremented. Assuming a strong ordering of transactions, such update will happen exactly one for each batch.&lt;/li&gt;
-      &lt;li&gt;If the current transaction ID equals to the value persisted in the storage, the node skips the commit because this is a batch replay. The node must have processed the batch earlier and updated the state accordingly, but the transaction failed due to an error somewhere else in the pipeline.&lt;/li&gt;
-      &lt;li&gt;Strong order of commits is important to achieve exactly-once processing semantics. However, strictly sequential processing of transactions is not feasible because first nodes in the pipeline will often be idle waiting until processing on the downstream nodes is completed. This issues can be alleviated by allowing parallel processing of transactions but serialization of commit steps only, as it shown in the figure below:&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/in-stream-big-data-processing/pipelining-commits-2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;This technique allows one to achieve exactly-once processing semantics assuming that data sources are fault-tolerant and can be replayed. However, persistent state updates can cause serious performance degradation even if large batches are used. By this reason, the intermediate computational state should be minimized or avoided whenever possible.&lt;/p&gt;
-
-&lt;p&gt;As a footnote, it is worth mentioning that state writing can be implemented in different ways. The most straightforward approach is to dump in-memory state to the persistent store as part of the transaction commit process. This does not work well for large states (sliding windows an so on). An alternative is to write a kind of transaction log i.e. a sequence of operations that transform the old state into the new one (for a sliding window it can be a set of added and evicted events). This approach complicates crash recovery because the state has to be reconstructed from the log, but can provide performance benefits in a variety of cases.&lt;/p&gt;
-
-&lt;h3 id=&quot;additive-state-and-sketches&quot;&gt;Additive State and Sketches&lt;/h3&gt;
-
-&lt;p&gt;Additivity of intermediate and final computational results is an important property that drastically simplifies design, implementation, maintenance, and recovery of in-stream data processing systems. Additivity means that the computational result for a larger time range or a larger data partition can be calculated as a combination of results for smaller time ranges or smaller partitions. For example, a daily number of page views can be calculated as a sum of hourly numbers of page views. Additive state allows one to split processing of a stream into processing of batches that can be computed and re-computed independently and, as we discussed in the previous sections, this helps to simplify lineage tracking and reduce complexity of state maintenance.&lt;/p&gt;
-
-&lt;p&gt;It is not always trivial to achieve additivity:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;In many cases, additivity is indeed trivial. For example, simple counters are additive.&lt;/li&gt;
-  &lt;li&gt;In some cases, it is possible to achieve additivity by storing a small amount of additional information. For example, consider a system that calculates average purchase value in the internet shop for each hour. Daily average cannot be obtained from 24 hourly average values. However, the system can easily store a number of transactions along with each hourly average and it is enough to calculate the daily average value.&lt;/li&gt;
-  &lt;li&gt;In many cases, it is very difficult or impossible to achieve additivity. For example, consider a system that counts unique visitors on some internet site. If 100 unique users visited the site yesterday and 100 unique user visited the site today, the total number of unique user for two days can be from 100 to 200 depends on how many users visited the site both yesterday and today. One have to maintain lists of user IDs to achieve additivity through intersection/union of the ID lists. Size and processing complexity for these lists can be comparable to the size and processing complexity of the raw data.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Sketches is a very efficient way to transform non-additive values into additive. In the previous example, lists of ID can be replaced by compact additive statistical counters. These counters provide approximations instead of precise result, but it is acceptable for many practical applications. Sketches are very popular in certain areas like internet advertising and can be considered as an independent pattern of in-stream processing. A thorough overview of the sketching techniques can be found in [5].&lt;/p&gt;
-
-&lt;h3 id=&quot;logical-time-tracking&quot;&gt;Logical Time Tracking&lt;/h3&gt;
-
-&lt;p&gt;It is very common for in-stream computations to depend on time: aggregations and joins are often performed on sliding time windows; processing logic often depends on a time interval between events and so on. Obviously, the in-stream processing system should have a notion of application’s view of time, instead of CPU wall-clock. However, proper time tracking is not trivial because data streams and particular events can be replayed in case of failures. It is often a good idea to have a notion of global logical time that can be implemented as follows:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;All events should be marked with a timestamp generated by the original application.&lt;/li&gt;
-  &lt;li&gt;Each processor in a pipeline tracks the maximal timestamp it has seen in a stream and updates a global persistent clock by this timestamp if the global clock is behind. All other processors synchronize their time with the global clock.&lt;/li&gt;
-  &lt;li&gt;Global clock can be reset in case of data replay.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;aggregation-in-a-persistent-store&quot;&gt;Aggregation in a Persistent Store&lt;/h3&gt;
-
-&lt;p&gt;We already have discussed that persistent store can be used for state checkpointing. However, it not the only way to employ an external store for in-stream processing. Let us consider an example that employs Cassandra to join multiple data streams over a time window. Instead of maintaining in-memory event buffers, one can simply save all incoming events from all data streams to Casandra using a join key as row key, as it shown in the figure below:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/in-stream-big-data-processing/cassandra-join.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;On the other side, the second process traverses the records periodically, assembles and emits joined events, and evicts the events that fell out of the time window. Cassandra even can facilitate this activity by sorting events according to their timestamps.
-It is important to understand that such techniques can defeat the whole purpose of in-stream data processing if implemented incorrectly – writing individual events to the data store can introduce a serious performance bottleneck even for fast stores like Cassandra or Redis. On the other hand, this approach provides perfect persistence of the computational state and different performance optimizations – say, batch writes – can help to achieve acceptable performance in many use cases.&lt;/p&gt;
-
-&lt;h3 id=&quot;aggregation-on-a-sliding-window&quot;&gt;Aggregation on a Sliding Window&lt;/h3&gt;
-
-&lt;p&gt;In-stream data processing frequently deals with queries like “What is the sum of the values in the stream over last 10 minutes?” i.e. with continuous queries on a sliding time window. A straightforward approach to processing of such queries is to compute the aggregation function like sum for each instance of the time window independently. It is clear that this approach is not optimal because of the high similarity between two sequential instances of the time window. If the window at the time T contains samples {s(0), s(1), s(2), …, s(T-1), s(T)}, then the window at the time T+1 contains samples {s(1), s(2), s(3), …, s(T), s(T+1)}. This observation suggests that incremental processing might be used.&lt;/p&gt;
-
-&lt;p&gt;Incremental computations over sliding windows is a group of techniques that are widely used in digital signal processing, in both software and hardware. A typical example is a computation of the sum function. If the sum over the current time window is known, then the sum over the next time window can be computed by adding a new sample and subtracting the eldest sample in the window:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/in-stream-big-data-processing/inremental-aggregation.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Similar techniques exist not only for simple aggregations like sums or products, but also for more complex transformations. For example, the SDFT (Sliding Discreet Fourier Transform) algorithm [4] is a computationally efficient alternative to per-window calculation of the FFT (Fast Fourier Transform) algorithm.&lt;/p&gt;
-
-&lt;h2 id=&quot;query-processing-pipeline-storm-cassandra-kafka&quot;&gt;Query Processing Pipeline: Storm, Cassandra, Kafka&lt;/h2&gt;
-
-&lt;p&gt;Now let us return to the practical problem that was stated in the beginning of this article. We have designed and implemented our in-stream data processing system on top of Storm, Kafka, and Cassandra adopting the techniques described earlier in this article. Here we provide just a very brief overview of the solution – a detailed description of all implementation pitfalls and tricks is too large and probably requires a separate article.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/in-stream-big-data-processing/storm-kafka-cassandra-system.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;The system naturally uses Kafka 0.8 as a partitioned fault-tolerant event buffer to enable stream replay and improve system extensibility by easy addition of new event producers and consumers. Kafka’s ability to rewind read pointers also enables random access to the incoming batches and, consequently, Spark-style lineage tracking. It is also possible to point the system input to HDFS to process the historical data.&lt;/p&gt;
-
-&lt;p&gt;Cassandra is employed for state checkpointing and in-store aggregation, as described earlier. In many use cases, it also stores the final results.&lt;/p&gt;
-
-&lt;p&gt;Twitter’s Storm is a backbone of the system. All active query processing is performed in Storm’s topologies that interact with Kafka and Cassandra. Some data flows are simple and straightforward: the data arrives to Kafka; Storm reads and processes it and persist the results to Cassandra or other destination. Other flows are more sophisticated: one Storm topology can pass the data to another topology via Kafka or Cassandra. Two examples of such flows are shown in the figure above (red and blue curved arrows).&lt;/p&gt;
-
-&lt;h2 id=&quot;towards-unified-big-data-processing&quot;&gt;Towards Unified Big Data Processing&lt;/h2&gt;
-
-&lt;p&gt;It is great that the existing technologies like Hive, Storm, and Impala enable us to crunch Big Data using both batch processing for complex analytics and machine learning, and real-time query processing for online analytics, and in-stream processing for continuous querying. Moreover, techniques like Lambda Architecture [6, 7] were developed and adopted to combine these solutions efficiently. This brings us to the question of how all these technologies and approaches could converge to a solid solution in the future.  In this section, we discuss the striking similarity between distributed relational query processing, batch processing, and in-stream query processing to figure out the technologies that could cover all these use cases and, consequently, have the highest potential in this area.&lt;/p&gt;
-
-&lt;p&gt;The key observation is that relational query processing, MapReduce, and in-stream processing could be implemented using exactly the same concepts and techniques like shuffling and pipelining. At the same time:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;In-stream processing could require strict data delivery guarantees and persistence of the intermediate state. These properties are not crucial for batch processing where computations can be easily restarted.&lt;/li&gt;
-  &lt;li&gt;In-stream processing is inseparable from pipelining. For batch processing, pipelining is not so crucial and even inapplicable in certain cases. Systems like Apache 
-Hive are based on staged MapReduce with materialization of the intermediate state and do not take full advantage of pipelining.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;The two statement above imply that tunable persistence (in-memory message passing versus on-disk materialization) and reliability are the distinctive features of the imaginary query engine that provides a set of processing primitives and interfaces to the high-level frameworks:&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/in-stream-big-data-processing/unified-engine.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Among the emerging technologies, the following two are especially notable in the context of this discussion:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Apache Tez [8], a part of the Stinger Initiative [9]. Apache Tez is designed to succeed the MapReduce framework introducing a set of fine-grained query processing primitives. The goal is to enable frameworks like Apache Pig and Apache Hive to decompose their queries and scripts into efficient query processing pipelines instead of sequences of MapReduce jobs that are generally slow due to materialization of intermediate results.&lt;/li&gt;
-  &lt;li&gt;Apache Spark [10]. This project is probably the most advanced and promising technology for unified Big Data processing that already includes a batch processing framework, SQL query engine, and a stream processing framework.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;references&quot;&gt;References&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;A. Wilschut and P. Apers, “Dataflow Query Execution in a Parallel Main-Memory Environment “&lt;/li&gt;
-  &lt;li&gt;T. Urhan and M. Franklin, “XJoin: A Reactively-Scheduled Pipelined Join Operator“&lt;/li&gt;
-  &lt;li&gt;M. Zaharia, T. Das, H. Li, S. Shenker, and I. Stoica, “Discretized Streams: An Efﬁcient and Fault-Tolerant Model for Stream Processing on Large Clusters”&lt;/li&gt;
-  &lt;li&gt;E. Jacobsen and R. Lyons, &lt;a href=&quot;http://www.ingelec.uns.edu.ar/pds2803/materiales/articulos/slidingdft_bw.pdf&quot;&gt;“The Sliding DFT“&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;A. Elmagarmid, Data Streams Models and Algorithms&lt;/li&gt;
-  &lt;li&gt;N. Marz, &lt;a href=&quot;http://www.databasetube.com/database/big-data-lambda-architecture/&quot;&gt;“Big Data Lambda Architecture”&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;J. Kinley, &lt;a href=&quot;http://jameskinley.tumblr.com/post/37398560534/the-lambda-architecture-principles-for-architecting&quot;&gt;“The Lambda architecture: principles for architecting realtime Big Data systems”&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://hortonworks.com/hadoop/tez/&quot;&gt;http://hortonworks.com/hadoop/tez/&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://hortonworks.com/stinger/&quot;&gt;http://hortonworks.com/stinger/&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://spark-project.org/&quot;&gt;http://spark-project.org/&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;杂谈&lt;/h2&gt;
-
-&lt;p&gt;这次看到dirtysalt的文章：&lt;a href=&quot;http://dirlt.com/in-stream-big-data-processing.html&quot;&gt;In-stream-big-data-processing（英文版+中文注释）&lt;/a&gt;，顿时解决了困扰自己的一个问题，英文的好文章，如何做记录？直接翻译中文？直接转载中文？NO，最佳方式当然是在原文基础上，添加自己的注释，OK，作者dirtysalt已经在做了，今后我也这么办。&lt;/p&gt;
 
 </content>
    </entry>
