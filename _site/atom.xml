@@ -4,13 +4,139 @@
    <title>NingG.github.com</title>
    <link href="http://ningg.github.com/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://ningg.github.com" rel="alternate" type="text/html" />
-   <updated>2014-10-21T23:06:38+08:00</updated>
+   <updated>2014-10-22T21:22:31+08:00</updated>
    <id>http://ningg.github.com</id>
    <author>
      <name></name>
      <email></email>
    </author>
 
+   
+   <entry>
+     <title>JSON简介以及JAVA API</title>
+     <link href="http://ningg.github.com/json-java-api"/>
+     <updated>2014-10-24T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/json-java-api</id>
+     <content type="html">&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
+
+&lt;p&gt;最近做个数据采集的东西，初步决定使用JSON作为数据交换格式，OK，学习整理一下。&lt;/p&gt;
+
+&lt;h2 id=&quot;json&quot;&gt;JSON简介&lt;/h2&gt;
+
+&lt;p&gt;JSON（JavaScript Object Notation），轻量级的数据交换格式，易于阅读和编写，同时机器也很容易输出JSON格式、解析JSON格式。JSON是完全独立于语言的文本格式，这使其成为理想的数据交换语言。&lt;/p&gt;
+
+&lt;p&gt;JSON中两类基本结构：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code&gt;key:value&lt;/code&gt;：键-值对，通过key来标识value；&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;array&lt;/code&gt;：有序的数组；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;JSON利用上述的两类基本结构，实现了集中基本数据类型：&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Object&lt;/strong&gt;：An object is an unordered set of name/value pairs. An object begins with { (left brace) and ends with } (right brace). Each name is followed by : (colon) and the name/value pairs are separated by , (comma).
+（无序的key-value对，以&lt;code&gt;{&lt;/code&gt;开头，以&lt;code&gt;}&lt;/code&gt;结尾，其内部以&lt;code&gt;,&lt;/code&gt;逗号分隔）&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/json-java-api/object.gif&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Array&lt;/strong&gt;：An array is an ordered collection of values. An array begins with &lt;code&gt;[&lt;/code&gt; (left bracket) and ends with &lt;code&gt;]&lt;/code&gt; (right bracket). Values are separated by , (comma).
+（有序的value序列，以&lt;code&gt;[&lt;/code&gt;开头，以&lt;code&gt;]&lt;/code&gt;结尾，其内部以&lt;code&gt;,&lt;/code&gt;逗号分隔）&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/json-java-api/array.gif&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Value&lt;/strong&gt;：A value can be a string in double quotes, or a number, or true or false or null, or an object or an array. These structures can be nested.
+（Value表示的内容比较广，既可以是”“包含起来的String，也可以是数字，或者&lt;code&gt;true&lt;/code&gt;`false&lt;code&gt;；另一方面，也可以是&lt;/code&gt;Object`或者array）&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/json-java-api/value.gif&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;String&lt;/strong&gt;：A string is a sequence of zero or more Unicode characters, wrapped in double quotes, using backslash escapes. A character is represented as a single character string. A string is very much like a C or Java string.
+（&lt;code&gt;&quot;&quot;&lt;/code&gt;双引号包含起来的Unicode 字符，其中可以使用&lt;code&gt;backslash&lt;/code&gt;来标识转义字符）&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/json-java-api/string.gif&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Number&lt;/strong&gt;：A number is very much like a C or Java number, except that the octal and hexadecimal formats are not used.
+（不支持octal和hexadecimal formats）&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/json-java-api/number.gif&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Whitespace can be inserted between any pair of tokens. Excepting a few encoding details, that completely describes the language.
+（任何符号之间都可插入空格&lt;code&gt;whitespace&lt;/code&gt;）&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：JSON中&lt;code&gt;key&lt;/code&gt;能否重复？&lt;/p&gt;
+
+&lt;h2 id=&quot;jsonjava-api&quot;&gt;处理JSON的JAVA API&lt;/h2&gt;
+
+&lt;p&gt;处理JSON格式数据，无非两条路：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;JDK 自带的 Java API；（官方）&lt;/li&gt;
+  &lt;li&gt;第三方jar包提供的java API；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;特别说明&lt;/strong&gt;：&lt;a href=&quot;https://jcp.org/en/jsr/detail?id=353&quot;&gt;JSR 353&lt;/a&gt;指出，今后的Java SE 6以及Java EE 7中要添加API来支持JSON格式数据的解析和转换。当前个人查证，在JDK6u30中没有java API来解析JSON；Java EE 7中，已经提供了&lt;code&gt;javax.json&lt;/code&gt;包来支持解析JSON。&lt;/p&gt;
+
+&lt;p&gt;当前项目需求，在JDK5以及之上的版本都能进行JSON字符串与JSON对象之间的转换，OK，那直接上第三方jar包得了。&lt;/p&gt;
+
+&lt;h3 id=&quot;javajsonjar&quot;&gt;java解析JSON的第三方jar包&lt;/h3&gt;
+
+&lt;p&gt;从[JSON 主页][介绍 JSON]可知，当前，有很多的第三方jar包：org.json、org.json.me、jsonp、&lt;a href=&quot;http://jackson.codehaus.org/&quot;&gt;Jackson Json Processor&lt;/a&gt;、&lt;a href=&quot;http://code.google.com/p/google-gson/&quot;&gt;google-gson&lt;/a&gt;、Json-lib…，有点多呀，到底选哪个呢？当前初步考虑在如下两个中选：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Spring中使用的是&lt;a href=&quot;http://jackson.codehaus.org/&quot;&gt;org.codehaus.jackson&lt;/a&gt;详细版本号&lt;code&gt;1.9.13&lt;/code&gt;（后来Spring 3.2中已经支持Jackson2了）&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://code.google.com/p/google-gson/&quot;&gt;google-gson&lt;/a&gt;的官方网站打不开，不过在maven中央仓库找到了gson的&lt;a href=&quot;http://repo1.maven.org/maven2/com/google/code/gson/gson/2.2.3/&quot;&gt;jar包&lt;/a&gt;，虽然无法查看官网的文档，不过maven中央仓库的javadoc、source文件也可以用来学习。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;最终决定采用gson，其基本的JSON操作，参考：&lt;a href=&quot;http://blog.csdn.net/lk_blog/article/details/7685169&quot;&gt;JSON转换利器:Gson&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;json-1&quot;&gt;解析JSON字符串的效率问题&lt;/h2&gt;
+
+&lt;p&gt;&lt;a href=&quot;http://ifeve.com/json-java-api/&quot;&gt;处理JSON的Java API ：JSON的简介&lt;/a&gt;中提到解析JSON的API分为两类：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;对象模型API&lt;/li&gt;
+  &lt;li&gt;流API&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;这两种方式在原理、效率上都有差异，TODO&lt;/p&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;参考来源&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.json.org/json-zh.html&quot;&gt;介绍 JSON&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://ifeve.com/json-java-api/&quot;&gt;处理JSON的Java API ：JSON的简介&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://jcp.org/en/jsr/detail?id=353&quot;&gt;JSR 353&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://blog.csdn.net/lk_blog/article/details/7685169&quot;&gt;JSON转换利器:Gson&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+   </entry>
+   
+   <entry>
+     <title>Flume 1.5.0.1：如何将flume聚合的数据送入Kafka</title>
+     <link href="http://ningg.github.com/flume-with-kafka"/>
+     <updated>2014-10-24T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/flume-with-kafka</id>
+     <content type="html">&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
+
+&lt;p&gt;Flume收集分布在不同机器上的日志信息，聚合之后，将信息送入Kafka消息队列，问题来了：如何将Flume输出的信息送入Kafka中？&lt;/p&gt;
+
+&lt;h1 id=&quot;section-1&quot;&gt;#&lt;/h1&gt;
+
+&lt;h2 id=&quot;flume&quot;&gt;Flume复习&lt;/h2&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;几个概念&lt;/h3&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Flume event: a unit of data flow, having a byte payload and an optional set of string attributes.（event中包含了，payload和attributes）&lt;/li&gt;
+  &lt;li&gt;Flume agent: a (JVM) process, that hosts the components through which events flow from an external source to the next destination(hop).（agent对应JVM process）&lt;/li&gt;
+  &lt;li&gt;Channel:  passive store, keeps the event until it’s consumded by a Flume Sink.（Channel不会主动消费event，其等待Sink来取数据，会在本地备份Event）&lt;/li&gt;
+  &lt;li&gt;Sink: remove the event from the channel and put it into external repository.（Sink主动从Channel中取出event）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/flume-user-guide/UserGuide_image00.png&quot; alt=&quot;&quot; /&gt; &lt;/p&gt;
+
+</content>
+   </entry>
    
    <entry>
      <title>win下搭建Storm topology的开发调试环境</title>
@@ -71,8 +197,9 @@ com.theoryinpractise:clojure-maven-plugin:1.3.18:compile
 
 &lt;p&gt;到这一步，就可以参照&lt;a href=&quot;http://storm.apache.org/documentation/Tutorial.html&quot;&gt;storm Tutorial&lt;/a&gt;、&lt;a href=&quot;https://github.com/apache/storm/tree/master/examples/storm-starter&quot;&gt;storm-starter&lt;/a&gt;中的说明进行一步步的操作，来熟悉Storm topology。&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;疑问&lt;/strong&gt;：Eclipse下就可以直接开发、调试topology了吗？
-&lt;strong&gt;RE&lt;/strong&gt;：是的，直接开发，&lt;a href=&quot;http://storm.apache.org/documentation/Tutorial.html&quot;&gt;storm Tutorial&lt;/a&gt;中的例子就是这样。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;疑问&lt;/strong&gt;：Eclipse下就可以直接开发、调试topology了吗？&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;RE&lt;/strong&gt;：是的，直接开发，&lt;a href=&quot;http://storm.apache.org/documentation/Tutorial.html&quot;&gt;storm Tutorial&lt;/a&gt;中的例子就是这样。&lt;/p&gt;
 
 &lt;h2 id=&quot;storm&quot;&gt;本地安装Storm&lt;/h2&gt;
 
@@ -83,8 +210,9 @@ com.theoryinpractise:clojure-maven-plugin:1.3.18:compile
   &lt;li&gt;验证是否安装成功：执行&lt;code&gt;storm&lt;/code&gt;命令，查看是否提示出错；&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;&lt;strong&gt;疑问&lt;/strong&gt;：如果只是开发Storm topology，需要在本地win xp系统上安装Storm？
-&lt;strong&gt;RE&lt;/strong&gt;：我来告诉你吧，本地安装Storm，核心用途是：充当client，向远端Storm cluster提交编写好的topology。重新来理一下，eclipse下新建工程，maven添加storm的依赖，即可进行topology的开发；然后通过本地安装的storm，可以进行本地的test、develop；最终，通过本地安装的storm充当client，可以向storm cluster提交topology。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;疑问&lt;/strong&gt;：如果只是开发Storm topology，需要在本地win xp系统上安装Storm？&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;RE&lt;/strong&gt;：我来告诉你吧，本地安装Storm，核心用途是：充当client，向远端Storm cluster提交编写好的topology。重新来理一下，eclipse下新建工程，maven添加storm的依赖，即可进行topology的开发；然后通过本地安装的storm，可以进行本地的test、develop；最终，通过本地安装的storm充当client，可以向storm cluster提交topology。&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;疑问：上面已经可以进行Storm topology的开发了，但如果希望查看Storm源代码，特别是Clojure编写的那部分，怎么办？&lt;/p&gt;
@@ -1890,594 +2018,6 @@ a1.sources.r1.channels = c1&lt;/p&gt;
 
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;http://flume.apache.org/FlumeUserGuide.html&quot;&gt;Flume User Guide 1.5.0.1&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>Flume 1.5.0.1 User Guide：introduction</title>
-     <link href="http://ningg.github.com/flume-user-guide"/>
-     <updated>2014-10-17T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/flume-user-guide</id>
-     <content type="html">&lt;h2 id=&quot;introduction&quot;&gt;Introduction&lt;/h2&gt;
-
-&lt;h3 id=&quot;overview&quot;&gt;Overview&lt;/h3&gt;
-
-&lt;p&gt;Apache Flume is a distributed, reliable, and available system for efficiently collecting, aggregating and moving large amounts of log data from many different sources to a centralized data store.&lt;/p&gt;
-
-&lt;p&gt;The use of Apache Flume is not only restricted to log data aggregation. Since data sources are customizable, Flume can be used to transport massive quantities of event data including but not limited to network traffic data, social-media-generated data, email messages and pretty much any data source possible.（数据源：网络流量数据、社交媒体产生的数据、email数据、其他数据，Flume都能收集）&lt;/p&gt;
-
-&lt;p&gt;Apache Flume is a top level project at the Apache Software Foundation.&lt;/p&gt;
-
-&lt;p&gt;There are currently two release code lines available, versions 0.9.x and 1.x.&lt;/p&gt;
-
-&lt;p&gt;Documentation for the 0.9.x track is available at the &lt;a href=&quot;http://archive.cloudera.com/cdh/3/flume/UserGuide/&quot;&gt;Flume 0.9.x User Guide&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;This documentation applies to the 1.4.x track.&lt;/p&gt;
-
-&lt;p&gt;New and existing users are encouraged to use the 1.x releases so as to leverage the performance improvements and configuration flexibilities available in the latest architecture.（推荐使用Flume 1.x版本：性能有改善、配置方便，使用了最新架构）&lt;/p&gt;
-
-&lt;h3 id=&quot;system-requirements&quot;&gt;System Requirements&lt;/h3&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Java Runtime Environment - Java 1.6 or later (Java 1.7 Recommended) （运行环境：JRE 1.6+，推荐JRE1.7）&lt;/li&gt;
-  &lt;li&gt;Memory - Sufficient memory for configurations used by sources, channels or sinks&lt;/li&gt;
-  &lt;li&gt;Disk Space - Sufficient disk space for configurations used by channels or sinks&lt;/li&gt;
-  &lt;li&gt;Directory Permissions - Read/Write permissions for directories used by agent （agent需要R/W权限）&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h3 id=&quot;architecture&quot;&gt;Architecture&lt;/h3&gt;
-
-&lt;h4 id=&quot;data-flow-model&quot;&gt;Data flow model&lt;/h4&gt;
-
-&lt;p&gt;A Flume event is defined as a unit of data flow having a byte payload and an optional set of string attributes. A Flume agent is a (JVM) process that hosts the components through which events flow from an external source to the next destination (hop).（Flume Event是a unit of data flow having a byte payload 和几个属性集合；Flume Agent是JVM进程，将events flow从一端送到另一端）&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/flume-user-guide/UserGuide_image00.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;A Flume source consumes events delivered to it by an external source like a web server. The external source sends events to Flume in a format that is recognized by the target Flume source. For example, an Avro Flume source can be used to receive Avro events from Avro clients or other Flume agents in the flow that send events from an Avro sink. A similar flow can be defined using a Thrift Flume Source to receive events from a Thrift Sink or a Flume Thrift Rpc Client or Thrift clients written in any language generated from the Flume thrift protocol.When a Flume source receives an event, it stores it into one or more channels. The channel is a passive store that keeps the event until it’s consumed by a Flume sink. The file channel is one example – it is backed by the local filesystem. The sink removes the event from the channel and puts it into an external repository like HDFS (via Flume HDFS sink) or forwards it to the Flume source of the next Flume agent (next hop) in the flow. The source and sink within the given agent run asynchronously with the events staged in the channel.（Source，接收外部data source的数据；Channel，被动接收Source的数据；Sink主动从Channel读取数据，并将其传递出去；利用Channel机制，Source、Sink实现异步处理）&lt;/p&gt;
-
-&lt;h4 id=&quot;complex-flows&quot;&gt;Complex flows&lt;/h4&gt;
-
-&lt;p&gt;Flume allows a user to build multi-hop flows where events travel through multiple agents before reaching the final destination. It also allows fan-in and fan-out flows, contextual routing and backup routes (fail-over) for failed hops.（Flume内flows支持fan-in、fan-out——多入多出，contextual touting和backup routes(fail-over)）&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;notes(ningg)：contextual routing 和 backup routes的含义？&lt;/strong&gt;&lt;/p&gt;
-
-&lt;h4 id=&quot;reliability&quot;&gt;Reliability&lt;/h4&gt;
-
-&lt;p&gt;The events are staged in a channel on each agent. The events are then delivered to the next agent or terminal repository (like HDFS) in the flow. The events are removed from a channel only after they are stored in the channel of next agent or in the terminal repository. This is a how the single-hop message delivery semantics in Flume provide end-to-end reliability of the flow.（&lt;strong&gt;single-hop message delivery semantics&lt;/strong&gt;：Channel中的event仅在被成功处理之后，才从Channel中删掉。）&lt;/p&gt;
-
-&lt;p&gt;Flume uses a transactional approach to guarantee the reliable delivery of the events. The sources and sinks encapsulate in a transaction the storage/retrieval, respectively, of the events placed in or provided by a transaction provided by the channel. This ensures that the set of events are reliably passed from point to point in the flow. In the case of a multi-hop flow, the sink from the previous hop and the source from the next hop both have their transactions running to ensure that the data is safely stored in the channel of the next hop.（&lt;strong&gt;multi-hop&lt;/strong&gt;：）&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：Flume如何保证事物操作？没看懂&lt;/p&gt;
-
-&lt;h4 id=&quot;recoverability&quot;&gt;Recoverability&lt;/h4&gt;
-
-&lt;p&gt;The events are staged in the channel, which manages recovery from failure. Flume supports a durable file channel which is backed by the local file system. There’s also a memory channel which simply stores the events in an in-memory queue, which is faster but any events still left in the memory channel when an agent process dies can’t be recovered.（Channel需保证崩溃后，能恢复events，具体：本地FS上保存durable file channel，另，占用一个in-memory queue，Channel进程崩溃后，能加快恢复速度；但，如果agent进程崩溃，将导致内存泄漏：无法回收这一内存）&lt;/p&gt;
-
-&lt;h2 id=&quot;setup&quot;&gt;Setup&lt;/h2&gt;
-
-&lt;h3 id=&quot;setting-up-an-agent&quot;&gt;Setting up an agent&lt;/h3&gt;
-
-&lt;p&gt;Flume agent configuration is stored in a local configuration file. This is a text file that follows the Java properties file format. Configurations for one or more agents can be specified in the same configuration file. The configuration file includes properties of each source, sink and channel in an agent and how they are wired together to form data flows.（Agent利用config file设置：source、channel、sink的属性，以及不同Agent之间前后联系）&lt;/p&gt;
-
-&lt;h4 id=&quot;configuring-individual-components&quot;&gt;Configuring individual components&lt;/h4&gt;
-
-&lt;p&gt;Each component (source, sink or channel) in the flow has a name, type, and set of properties that are specific to the type and instantiation. For example, an Avro source needs a hostname (or IP address) and a port number to receive data from. A memory channel can have max queue size (“capacity”), and an HDFS sink needs to know the file system URI, path to create files, frequency of file rotation (“hdfs.rollInterval”) etc. All such attributes of a component needs to be set in the properties file of the hosting Flume agent.（设置Component的属性）&lt;/p&gt;
-
-&lt;h4 id=&quot;wiring-the-pieces-together&quot;&gt;Wiring the pieces together&lt;/h4&gt;
-
-&lt;p&gt;The agent needs to know what individual components to load and how they are connected in order to constitute the flow. This is done by listing the names of each of the sources, sinks and channels in the agent, and then specifying the connecting channel for each sink and source. For example, an agent flows events from an Avro source called avroWeb to HDFS sink hdfs-cluster1 via a file channel called file-channel. The configuration file will contain names of these components and file-channel as a shared channel for both avroWeb source and hdfs-cluster1 sink.（设置不同agent构成的topologies）&lt;/p&gt;
-
-&lt;h4 id=&quot;starting-an-agent&quot;&gt;Starting an agent&lt;/h4&gt;
-
-&lt;p&gt;An agent is started using a shell script called flume-ng which is located in the bin directory of the Flume distribution. You need to specify the agent name, the config directory, and the config file on the command line:（启动agent，需要指定参数：agent name、config dir、config file。）&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ bin/flume-ng agent -n $agent_name -c conf -f conf/flume-conf.properties.template
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Now the agent will start running source and sinks configured in the given properties file.&lt;/p&gt;
-
-&lt;h4 id=&quot;a-simple-example&quot;&gt;A simple example&lt;/h4&gt;
-
-&lt;p&gt;Here, we give an example configuration file, describing a single-node Flume deployment. This configuration lets a user generate events and subsequently logs them to the console.（场景：single-node模式，user产生events并且将其输出到控制台）&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# example.conf: A single-node Flume configuration
-
-# Name the components on this agent
-a1.sources = r1
-a1.sinks = k1
-a1.channels = c1
-
-# Describe/configure the source
-a1.sources.r1.type = netcat
-a1.sources.r1.bind = localhost
-a1.sources.r1.port = 44444
-
-# Describe the sink
-a1.sinks.k1.type = logger
-
-# Use a channel which buffers events in memory
-a1.channels.c1.type = memory
-a1.channels.c1.capacity = 1000
-a1.channels.c1.transactionCapacity = 100
-
-# Bind the source and sink to the channel
-a1.sources.r1.channels = c1
-a1.sinks.k1.channel = c1
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This configuration defines a single agent named a1. a1 has a source that listens for data on port 44444, a channel that buffers event data in memory, and a sink that logs event data to the console. The configuration file names the various components, then describes their types and configuration parameters. A given configuration file might define several named agents; when a given Flume process is launched a flag is passed telling it which named agent to manifest.（一个配置文件中，可设定多个agents，Flume进程启动时，会指定agent运行）&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：配置文件中，具体参数配置：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/flume-user-guide/flume-config-tree.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Given this configuration file, we can start Flume as follows:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ bin/flume-ng agent --conf conf --conf-file example.conf --name a1 -Dflume.root.logger=INFO,console
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Note that in a full deployment we would typically include one more option: –conf=&lt;conf-dir&gt;. The &lt;conf-dir&gt; directory would include a shell script flume-env.sh and potentially a log4j properties file. In this example, we pass a Java option to force Flume to log to the console and we go without a custom environment script.（实际开发场景下，通过`--conf=&lt;conf-dir&gt;`传入`&lt;conf-dir&gt;`，通常这一目录下应包含flume-env.sh文件和log4j的配置文件）&lt;/conf-dir&gt;&lt;/conf-dir&gt;&lt;/conf-dir&gt;&lt;/conf-dir&gt;&lt;/p&gt;
-
-&lt;p&gt;From a separate terminal, we can then telnet port 44444 and send Flume an event:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ telnet localhost 44444
-Trying 127.0.0.1...
-Connected to localhost.localdomain (127.0.0.1).
-Escape character is &#39;^]&#39;.
-Hello world! &amp;lt;ENTER&amp;gt;
-OK
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The original Flume terminal will output the event in a log message.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;12/06/19 15:32:19 INFO source.NetcatSource: Source starting
-12/06/19 15:32:19 INFO source.NetcatSource: Created serverSocket:sun.nio.ch.ServerSocketChannelImpl[/127.0.0.1:44444]
-12/06/19 15:32:34 INFO sink.LoggerSink: Event: { headers:{} body: 48 65 6C 6C 6F 20 77 6F 72 6C 64 21 0D          Hello world!. }
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Congratulations - you’ve successfully configured and deployed a Flume agent! Subsequent sections cover agent configuration in much more detail.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：telnet通过命令行方式，能够发送字符？那么能与服务器交互吗？telnet命令方式下，典型应用场景有哪些？&lt;/p&gt;
-
-&lt;h4 id=&quot;installing-third-party-plugins&quot;&gt;Installing third-party plugins&lt;/h4&gt;
-
-&lt;p&gt;Flume has a fully plugin-based architecture. While Flume ships with many out-of-the-box sources, channels, sinks, serializers, and the like, many implementations exist which ship separately from Flume.&lt;/p&gt;
-
-&lt;p&gt;While it has always been possible to include custom Flume components by adding their jars to the FLUME_CLASSPATH variable in the flume-env.sh file, Flume now supports a special directory called plugins.d which automatically picks up plugins that are packaged in a specific format. This allows for easier management of plugin packaging issues as well as simpler debugging and troubleshooting of several classes of issues, especially library dependency conflicts.（在flume-env.sh中向FLUME_CLASSPATH中添加plugin的位置；另一种方式，向&lt;code&gt;plugins.d&lt;/code&gt;目录下添加plugin，即可自动安装。）&lt;/p&gt;
-
-&lt;h5 id=&quot;the-pluginsd-directory&quot;&gt;The plugins.d directory&lt;/h5&gt;
-
-&lt;p&gt;The &lt;code&gt;plugins.d&lt;/code&gt; directory is located at &lt;code&gt;$FLUME_HOME/plugins.d&lt;/code&gt;. At startup time, the flume-ng start script looks in the &lt;code&gt;plugins.d&lt;/code&gt; directory for plugins that conform to the below format and includes them in proper paths when starting up &lt;code&gt;java&lt;/code&gt;.（系统其中前，自动预处理plugins.d下的plugin）&lt;/p&gt;
-
-&lt;h5 id=&quot;directory-layout-for-plugins&quot;&gt;Directory layout for plugins&lt;/h5&gt;
-
-&lt;p&gt;Each plugin (subdirectory) within plugins.d can have up to three sub-directories:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;lib - the plugin’s jar(s)&lt;/li&gt;
-  &lt;li&gt;libext - the plugin’s dependency jar(s)&lt;/li&gt;
-  &lt;li&gt;native - any required native libraries, such as .so files&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Example of two plugins within the plugins.d directory:（&lt;code&gt;plugins.d&lt;/code&gt;目录下，plugin的目录结构如下）&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;plugins.d/
-plugins.d/custom-source-1/
-plugins.d/custom-source-1/lib/my-source.jar
-plugins.d/custom-source-1/libext/spring-core-2.5.6.jar
-plugins.d/custom-source-2/
-plugins.d/custom-source-2/lib/custom.jar
-plugins.d/custom-source-2/native/gettext.so
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;data-ingestion&quot;&gt;Data ingestion&lt;/h3&gt;
-
-&lt;p&gt;Flume supports a number of mechanisms to ingest data from external sources.（从外部 sources 获取数据，Flume有多种方式）&lt;/p&gt;
-
-&lt;h4 id=&quot;rpc&quot;&gt;RPC&lt;/h4&gt;
-
-&lt;p&gt;An Avro client included in the Flume distribution can send a given file to Flume Avro source using avro RPC mechanism:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ bin/flume-ng avro-client -H localhost -p 41414 -F /usr/logs/log.10
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The above command will send the contents of &lt;code&gt;/usr/logs/log.10&lt;/code&gt; to to the Flume source listening on that ports.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：什么含义？以Avro方式，向localhost:41414发送文件？仅仅是Data Source？有一个单独的Flume Source在localhost:41414监听？&lt;/p&gt;
-
-&lt;h4 id=&quot;executing-commands&quot;&gt;Executing commands&lt;/h4&gt;
-
-&lt;p&gt;There’s an exec source that executes a given command and consumes the output. A single ‘line’ of output ie. text followed by carriage return (‘\r’) or line feed (‘\n’) or both together.（exec source，执行command并将output按行发送至Channel）&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Note&lt;/strong&gt;: Flume does not support &lt;code&gt;tail&lt;/code&gt; as a source. One can wrap the &lt;code&gt;tail&lt;/code&gt; command in an exec source to stream the file.（无法直接使用tail，需要包装在exec source中。）&lt;/p&gt;
-
-&lt;h4 id=&quot;network-streams&quot;&gt;Network streams&lt;/h4&gt;
-
-&lt;p&gt;Flume supports the following mechanisms to read data from popular log stream types, such as:（下述方式支持从log system中读取stream）&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Avro&lt;/li&gt;
-  &lt;li&gt;Thrift&lt;/li&gt;
-  &lt;li&gt;Syslog&lt;/li&gt;
-  &lt;li&gt;Netcat&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：上面都是什么呐？&lt;/p&gt;
-
-&lt;h3 id=&quot;setting-multi-agent-flow&quot;&gt;Setting multi-agent flow&lt;/h3&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/flume-user-guide/UserGuide_image03.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;In order to flow the data across multiple agents or hops, the sink of the previous agent and source of the current hop need to be avro type with the sink pointing to the hostname (or IP address) and port of the source.（multiple agents时，previous agent中sink、current agent中source都应为avro类型，对应到相同的&lt;code&gt;IP:port&lt;/code&gt;）&lt;/p&gt;
-
-&lt;h3 id=&quot;consolidation&quot;&gt;Consolidation&lt;/h3&gt;
-
-&lt;p&gt;A very common scenario in log collection is a large number of log producing clients sending data to a few consumer agents that are attached to the storage subsystem. For example, logs collected from hundreds of web servers sent to a dozen of agents that write to HDFS cluster.（一个常见场景：大量client收集数据，写入一个集中系统）&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/flume-user-guide/UserGuide_image02.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;This can be achieved in Flume by configuring a number of first tier agents with an avro sink, all pointing to an avro source of single agent (Again you could use the thrift sources/sinks/clients in such a scenario). This source on the second tier agent consolidates the received events into a single channel which is consumed by a sink to its final destination.（解决办法：为每个client分配一个agent，再第二层，使用一个agent进行合并，然后写入最后的集中存储系统；不适用single-agent中的multi-sources，因为multi-sources，要求sources必须与channel在同一物理机器上，即，一个agent必须在一个物理机器上）&lt;/p&gt;
-
-&lt;h3 id=&quot;multiplexing-the-flow&quot;&gt;Multiplexing the flow&lt;/h3&gt;
-
-&lt;p&gt;Flume supports multiplexing the event flow to one or more destinations. This is achieved by defining a flow multiplexer that can replicate or selectively route an event to one or more channels.（对agent扩展，定义多个channel，实现fan-out）&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/flume-user-guide/UserGuide_image01.png&quot; alt=&quot;A fan-out flow using a (multiplexing) channel selector&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;The above example shows a source from agent “foo” fanning out the flow to three different channels. This fan out can be replicating or multiplexing. In case of replicating flow, each event is sent to all three channels. For the multiplexing case, an event is delivered to a subset of available channels when an event’s attribute matches a preconfigured value. For example, if an event attribute called “txnType” is set to “customer”, then it should go to channel1 and channel3, if it’s “vendor” then it should go to channel2, otherwise channel3. The mapping can be set in the agent’s configuration file.（两种fan-out方式，replicating\multiplexing，即，复制和多路复用；replicating，输入复制到每个channel中一份；multiplexing，输入仅复制到匹配的channel中，相当于channel前加了个filter）&lt;/p&gt;
-
-&lt;h2 id=&quot;configuration&quot;&gt;Configuration&lt;/h2&gt;
-
-&lt;p&gt;As mentioned in the earlier section, Flume agent configuration is read from a file that resembles a Java property file format with hierarchical property settings.（hierarchical property settings？）&lt;/p&gt;
-
-&lt;h3 id=&quot;defining-the-flow&quot;&gt;Defining the flow&lt;/h3&gt;
-
-&lt;p&gt;To define the flow within a single agent, you need to link the sources and sinks via a channel. （定义single-agent内的flow时，几点：）&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;列出agent对应的sources、sinks、channels；&lt;/li&gt;
-  &lt;li&gt;指定与source对应的channels，指定与sink对应的channel；&lt;/li&gt;
-  &lt;li&gt;一个source可对应多个channel，一个sink只能对应一个channel； &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;The format is as follows:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# list the sources, sinks and channels for the agent
-&amp;lt;Agent&amp;gt;.sources = &amp;lt;Source&amp;gt;
-&amp;lt;Agent&amp;gt;.sinks = &amp;lt;Sink&amp;gt;
-&amp;lt;Agent&amp;gt;.channels = &amp;lt;Channel1&amp;gt; &amp;lt;Channel2&amp;gt;
-
-# set channel for source
-&amp;lt;Agent&amp;gt;.sources.&amp;lt;Source&amp;gt;.channels = &amp;lt;Channel1&amp;gt; &amp;lt;Channel2&amp;gt; ...
-
-# set channel for sink
-&amp;lt;Agent&amp;gt;.sinks.&amp;lt;Sink&amp;gt;.channel = &amp;lt;Channel1&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：source绑定&lt;span style=&quot;color:red&quot;&gt;channels&lt;/span&gt;、sink绑定&lt;span style=&quot;color:red&quot;&gt;channel&lt;/span&gt;。疑问：单个agent中source只能有一个吗？如果single-agent中有多个source，那么是否也可以实现fan-in？&lt;/p&gt;
-
-&lt;p&gt;For example, an agent named agent_foo is reading data from an external avro client and sending it to HDFS via a memory channel. The config file weblog.config could look like:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# list the sources, sinks and channels for the agent
-agent_foo.sources = avro-appserver-src-1
-agent_foo.sinks = hdfs-sink-1
-agent_foo.channels = mem-channel-1
-
-# set channel for source
-agent_foo.sources.avro-appserver-src-1.channels = mem-channel-1
-
-# set channel for sink
-agent_foo.sinks.hdfs-sink-1.channel = mem-channel-1
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This will make the events flow from avro-AppSrv-source to hdfs-Cluster1-sink through the memory channel mem-channel-1. When the agent is started with the weblog.config as its config file, it will instantiate that flow.&lt;/p&gt;
-
-&lt;h3 id=&quot;configuring-individual-components-1&quot;&gt;Configuring individual components&lt;/h3&gt;
-
-&lt;p&gt;After defining the flow, you need to set properties of each source, sink and channel. This is done in the same hierarchical namespace fashion where you set the component type and other values for the properties specific to each component:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# properties for sources
-&amp;lt;Agent&amp;gt;.sources.&amp;lt;Source&amp;gt;.&amp;lt;someProperty&amp;gt; = &amp;lt;someValue&amp;gt;
-
-# properties for channels
-&amp;lt;Agent&amp;gt;.channel.&amp;lt;Channel&amp;gt;.&amp;lt;someProperty&amp;gt; = &amp;lt;someValue&amp;gt;
-
-# properties for sinks
-&amp;lt;Agent&amp;gt;.sources.&amp;lt;Sink&amp;gt;.&amp;lt;someProperty&amp;gt; = &amp;lt;someValue&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The property &lt;code&gt;type&lt;/code&gt; needs to be set for each component for Flume to understand what kind of object it needs to be. Each source, sink and channel type has its own set of properties required for it to function as intended. All those need to be set as needed. In the previous example, we have a flow from avro-AppSrv-source to hdfs-Cluster1-sink through the memory channel mem-channel-1. Here’s an example that shows configuration of each of those components:（不同的组件有不同的property，但都有&lt;code&gt;type&lt;/code&gt;属性）&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;agent_foo.sources = avro-AppSrv-source
-agent_foo.sinks = hdfs-Cluster1-sink
-agent_foo.channels = mem-channel-1
-
-# set channel for sources, sinks
-
-# properties of avro-AppSrv-source
-agent_foo.sources.avro-AppSrv-source.type = avro
-agent_foo.sources.avro-AppSrv-source.bind = localhost
-agent_foo.sources.avro-AppSrv-source.port = 10000
-
-# properties of mem-channel-1
-agent_foo.channels.mem-channel-1.type = memory
-agent_foo.channels.mem-channel-1.capacity = 1000
-agent_foo.channels.mem-channel-1.transactionCapacity = 100
-
-# properties of hdfs-Cluster1-sink
-agent_foo.sinks.hdfs-Cluster1-sink.type = hdfs
-agent_foo.sinks.hdfs-Cluster1-sink.hdfs.path = hdfs://namenode/flume/webdata
-
-#...
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;adding-multiple-flows-in-an-agent&quot;&gt;Adding multiple flows in an agent&lt;/h3&gt;
-
-&lt;p&gt;A single Flume agent can contain several independent flows. You can list multiple sources, sinks and channels in a config. These components can be linked to form multiple flows:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# list the sources, sinks and channels for the agent
-&amp;lt;Agent&amp;gt;.sources = &amp;lt;Source1&amp;gt; &amp;lt;Source2&amp;gt;
-&amp;lt;Agent&amp;gt;.sinks = &amp;lt;Sink1&amp;gt; &amp;lt;Sink2&amp;gt;
-&amp;lt;Agent&amp;gt;.channels = &amp;lt;Channel1&amp;gt; &amp;lt;Channel2&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：关于single-agent说几点：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;可包含多个sources、sinks、channels；&lt;/li&gt;
-  &lt;li&gt;定义多个sources时，&lt;code&gt;source1&lt;/code&gt;和&lt;code&gt;source2&lt;/code&gt;间，空格间隔；&lt;/li&gt;
-  &lt;li&gt;&lt;span style=&quot;color:red&quot;&gt;sink与channel一一对应吗&lt;/span&gt;？&lt;/li&gt;
-  &lt;li&gt;可包含多个相互独立的flow；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;疑问：source、channel、sink之间对应关系？&lt;code&gt;1：1&lt;/code&gt;？&lt;code&gt;1：n&lt;/code&gt;？&lt;code&gt;n：1&lt;/code&gt;？&lt;code&gt;n：n&lt;/code&gt;？&lt;/p&gt;
-
-&lt;p&gt;Then you can link the sources and sinks to their corresponding channels (for sources) of channel (for sinks) to setup two different flows. For example, if you need to setup two flows in an agent, one going from an external avro client to external HDFS and another from output of a tail to avro sink, then here’s a config to do that:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# list the sources, sinks and channels in the agent
-agent_foo.sources = avro-AppSrv-source1 exec-tail-source2
-agent_foo.sinks = hdfs-Cluster1-sink1 avro-forward-sink2
-agent_foo.channels = mem-channel-1 file-channel-2
-
-# flow #1 configuration
-agent_foo.sources.avro-AppSrv-source1.channels = mem-channel-1
-agent_foo.sinks.hdfs-Cluster1-sink1.channel = mem-channel-1
-
-# flow #2 configuration
-agent_foo.sources.exec-tail-source2.channels = file-channel-2
-agent_foo.sinks.avro-forward-sink2.channel = file-channel-2	
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;configuring-a-multi-agent-flow&quot;&gt;Configuring a multi agent flow&lt;/h3&gt;
-
-&lt;p&gt;To setup a multi-tier flow, you need to have an avro/thrift sink of first hop pointing to avro/thrift source of the next hop. This will result in the first Flume agent forwarding events to the next Flume agent. For example, if you are periodically sending files (1 file per event) using avro client to a local Flume agent, then this local agent can forward it to another agent that has the mounted for storage.（multi-agent之间通过avro、thrift方式进行连接，通过&lt;code&gt;IP:port&lt;/code&gt;来交互）&lt;/p&gt;
-
-&lt;p&gt;Weblog agent config:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# list sources, sinks and channels in the agent
-agent_foo.sources = avro-AppSrv-source
-agent_foo.sinks = avro-forward-sink
-agent_foo.channels = file-channel
-
-# define the flow
-agent_foo.sources.avro-AppSrv-source.channels = file-channel
-agent_foo.sinks.avro-forward-sink.channel = file-channel
-
-# avro sink properties
-agent_foo.sources.avro-forward-sink.type = avro
-agent_foo.sources.avro-forward-sink.hostname = 10.1.1.100
-agent_foo.sources.avro-forward-sink.port = 10000
-
-# configure other pieces
-#...
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;HDFS agent config:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# list sources, sinks and channels in the agent
-agent_foo.sources = avro-collection-source
-agent_foo.sinks = hdfs-sink
-agent_foo.channels = mem-channel
-
-# define the flow
-agent_foo.sources.avro-collection-source.channels = mem-channel
-agent_foo.sinks.hdfs-sink.channel = mem-channel
-
-# avro sink properties
-agent_foo.sources.avro-collection-source.type = avro
-agent_foo.sources.avro-collection-source.bind = 10.1.1.100
-agent_foo.sources.avro-collection-source.port = 10000
-
-# configure other pieces
-#...
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Here we link the avro-forward-sink from the weblog agent to the avro-collection-source of the hdfs agent. This will result in the events coming from the external appserver source eventually getting stored in HDFS.&lt;/p&gt;
-
-&lt;h3 id=&quot;fan-out-flow&quot;&gt;Fan out flow&lt;/h3&gt;
-
-&lt;p&gt;As discussed in previous section, Flume supports fanning out the flow from one source to multiple channels. There are two modes of fan out, replicating and multiplexing. In the replicating flow, the event is sent to all the configured channels. In case of multiplexing, the event is sent to only a subset of qualifying channels. To fan out the flow, one needs to specify a list of channels for a source and the policy for the fanning it out. This is done by adding a channel “selector” that can be replicating or multiplexing. Then further specify the selection rules if it’s a multiplexer. If you don’t specify a selector, then by default it’s replicating:（fan-out，两种实现方式：replicating、multiplexing；replicating，发送给所有channel；multiplexing，发送给满足条件的channel。具体，设置&lt;code&gt;selector&lt;/code&gt;，并指定规则；默认是replicating）&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# List the sources, sinks and channels for the agent
-&amp;lt;Agent&amp;gt;.sources = &amp;lt;Source1&amp;gt;
-&amp;lt;Agent&amp;gt;.sinks = &amp;lt;Sink1&amp;gt; &amp;lt;Sink2&amp;gt;
-&amp;lt;Agent&amp;gt;.channels = &amp;lt;Channel1&amp;gt; &amp;lt;Channel2&amp;gt;
-
-# set list of channels for source (separated by space)
-&amp;lt;Agent&amp;gt;.sources.&amp;lt;Source1&amp;gt;.channels = &amp;lt;Channel1&amp;gt; &amp;lt;Channel2&amp;gt;
-
-# set channel for sinks
-&amp;lt;Agent&amp;gt;.sinks.&amp;lt;Sink1&amp;gt;.channel = &amp;lt;Channel1&amp;gt;
-&amp;lt;Agent&amp;gt;.sinks.&amp;lt;Sink2&amp;gt;.channel = &amp;lt;Channel2&amp;gt;
-
-# set selector.type = replicating
-&amp;lt;Agent&amp;gt;.sources.&amp;lt;Source1&amp;gt;.selector.type = replicating
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The multiplexing select has a further set of properties to bifurcate the flow. This requires specifying a mapping of an event attribute to a set for channel. The selector checks for each configured attribute in the event header. If it matches the specified value, then that event is sent to all the channels mapped to that value. If there’s no match, then the event is sent to set of channels configured as default:（multiplexing方式时，设置header属性，根据header取值不同，分发到相应的channel；都不匹配的，分发到default）&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：header的值，是谁设置的？在哪设置的？难道是event中自带的？&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# Mapping for multiplexing selector
-&amp;lt;Agent&amp;gt;.sources.&amp;lt;Source1&amp;gt;.selector.type = multiplexing
-&amp;lt;Agent&amp;gt;.sources.&amp;lt;Source1&amp;gt;.selector.header = &amp;lt;someHeader&amp;gt;
-&amp;lt;Agent&amp;gt;.sources.&amp;lt;Source1&amp;gt;.selector.mapping.&amp;lt;Value1&amp;gt; = &amp;lt;Channel1&amp;gt;
-&amp;lt;Agent&amp;gt;.sources.&amp;lt;Source1&amp;gt;.selector.mapping.&amp;lt;Value2&amp;gt; = &amp;lt;Channel1&amp;gt; &amp;lt;Channel2&amp;gt;
-&amp;lt;Agent&amp;gt;.sources.&amp;lt;Source1&amp;gt;.selector.mapping.&amp;lt;Value3&amp;gt; = &amp;lt;Channel2&amp;gt;
-#...
-
-&amp;lt;Agent&amp;gt;.sources.&amp;lt;Source1&amp;gt;.selector.default = &amp;lt;Channel2&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The mapping allows overlapping the channels for each value.（不同header取值对应的channel，可以重复）&lt;/p&gt;
-
-&lt;p&gt;The following example has a single flow that multiplexed to two paths. The agent named agent_foo has a single avro source and two channels linked to two sinks:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# list the sources, sinks and channels in the agent
-agent_foo.sources = avro-AppSrv-source1
-agent_foo.sinks = hdfs-Cluster1-sink1 avro-forward-sink2
-agent_foo.channels = mem-channel-1 file-channel-2
-
-# set channels for source
-agent_foo.sources.avro-AppSrv-source1.channels = mem-channel-1 file-channel-2
-
-# set channel for sinks
-agent_foo.sinks.hdfs-Cluster1-sink1.channel = mem-channel-1
-agent_foo.sinks.avro-forward-sink2.channel = file-channel-2
-
-# channel selector configuration
-agent_foo.sources.avro-AppSrv-source1.selector.type = multiplexing
-agent_foo.sources.avro-AppSrv-source1.selector.header = State
-agent_foo.sources.avro-AppSrv-source1.selector.mapping.CA = mem-channel-1
-agent_foo.sources.avro-AppSrv-source1.selector.mapping.AZ = file-channel-2
-agent_foo.sources.avro-AppSrv-source1.selector.mapping.NY = mem-channel-1 file-channel-2
-agent_foo.sources.avro-AppSrv-source1.selector.default = mem-channel-1
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The selector checks for a header called “State”. If the value is “CA” then its sent to mem-channel-1, if its “AZ” then it goes to file-channel-2 or if its “NY” then both. If the “State” header is not set or doesn’t match any of the three, then it goes to mem-channel-1 which is designated as ‘default’.&lt;/p&gt;
-
-&lt;p&gt;The selector also supports optional channels. To specify optional channels for a header, the config parameter ‘optional’ is used in the following way:&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：optional channels，要解决什么问题？RE：仅当required channel中event运行失败，才有可能涉及optional channel。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# channel selector configuration
-agent_foo.sources.avro-AppSrv-source1.selector.type = multiplexing
-agent_foo.sources.avro-AppSrv-source1.selector.header = State
-agent_foo.sources.avro-AppSrv-source1.selector.mapping.CA = mem-channel-1
-agent_foo.sources.avro-AppSrv-source1.selector.mapping.AZ = file-channel-2
-agent_foo.sources.avro-AppSrv-source1.selector.mapping.NY = mem-channel-1 file-channel-2
-agent_foo.sources.avro-AppSrv-source1.selector.optional.CA = mem-channel-1 file-channel-2
-agent_foo.sources.avro-AppSrv-source1.selector.mapping.AZ = file-channel-2
-agent_foo.sources.avro-AppSrv-source1.selector.default = mem-channel-1
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The selector will attempt to write to the required channels first and will fail the transaction if even one of these channels fails to consume the events. The transaction is reattempted on all of the channels. Once all required channels have consumed the events, then the selector will attempt to write to the optional channels. A failure by any of the optional channels to consume the event is simply ignored and not retried.（运行异常的事务，会尝试在所有required channels中重新运行，如果重新运行成功，则将event写入optional channels内。）&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：transaction、event是怎么划分的？到底什么是transaction？&lt;/p&gt;
-
-&lt;p&gt;If there is an overlap between the optional channels and required channels for a specific header, the channel is considered to be required, and a failure in the channel will cause the entire set of required channels to be retried. For instance, in the above example, for the header “CA” mem-channel-1 is considered to be a required channel even though it is marked both as required and optional, and a failure to write to this channel will cause that event to be retried on all channels configured for the selector.（如果一个channel既是required channel，又是optional channel，则强制认定channel为required channel）&lt;/p&gt;
-
-&lt;p&gt;Note that if a header does not have any required channels, then the event will be written to the default channels and will be attempted to be written to the optional channels for that header. Specifying optional channels will still cause the event to be written to the default channels, if no required channels are specified. If no channels are designated as default and there are no required, the selector will attempt to write the events to the optional channels. Any failures are simply ignored in that case.（如果event，没有任何对应的required channel，则尝试写入default channel，并且尝试写入对应的optional channel；如果没有default channel，则，也会写入optional channel中。）&lt;/p&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;参考来源&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://flume.apache.org/FlumeUserGuide.html&quot;&gt;Flume User Guide 1.5.0.1&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>MySQL字符编码和大小写敏感问题</title>
-     <link href="http://ningg.github.com/mysql-charset-and-table-name-lower-case"/>
-     <updated>2014-10-16T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/mysql-charset-and-table-name-lower-case</id>
-     <content type="html">&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
-
-&lt;p&gt;关于MySQL，遇到几个问题，列一下：&lt;/p&gt;
-
-&lt;p&gt;乱码问题：字符集不统一；
-无法启动：查看错误日志；
-无法删除database：先在数据存储目录清理；
-table找不到：table区分大小写；&lt;/p&gt;
-
-&lt;p&gt;MySQL版本：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;[devp@localhost ~]$ mysql -V
-mysql  Ver 14.14 Distrib 5.6.20, for Linux (x86_64) using  EditLine wrapper
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&quot;section-1&quot;&gt;乱码问题&lt;/h2&gt;
-
-&lt;p&gt;看官网，mysql的refman（reference manual，参考手册）中，globalization –&amp;gt; character set configuration，其中提到：
-system、server、client的charset不一致时，会产生乱码。&lt;/p&gt;
-
-&lt;p&gt;通过如下命令查看一下，当前mysql各个组件的字符集详情：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;mysql&amp;gt; show variables like &quot;character%&quot;;
-+--------------------------+----------------------------+
-| Variable_name            | Value                      |
-+--------------------------+----------------------------+
-| character_set_client     | utf8                       |
-| character_set_connection | utf8                       |
-| character_set_database   | latin1                     |
-| character_set_filesystem | binary                     |
-| character_set_results    | utf8                       |
-| character_set_server     | latin1                     |
-| character_set_system     | utf8                       |
-| character_sets_dir       | /usr/share/mysql/charsets/ |
-+--------------------------+----------------------------+
-8 rows in set (0.00 sec)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;通过命令：show collation，查看当前MySQL支持的字符集。从上面查询结果可知，server的字符集与system、client不同，则，在my.cnf文件中设定server的字符集即可。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# /usr/my.cnf
-character_set_server=utf8
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;重新启动MySQL，OK（根据&lt;a href=&quot;http://dev.mysql.com/doc/refman/5.6/en/server-system-variables.html#sysvar_character_set_server&quot;&gt;官网解释&lt;/a&gt;，不需要向数据库重新插入数据）。database的编码方式，不要手动调整，其始终与default database保持一致，若没有default database，则由server的编码方式决定。&lt;/p&gt;
-
-&lt;h2 id=&quot;section-2&quot;&gt;无法启动&lt;/h2&gt;
-
-&lt;p&gt;通过service mysql start，无法启动MySQL，提示出错，略焦躁，不要着急，有错误日志，查看即可。错误日志位置：/var/lib/mysql/*.err，出错信息：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;[ERROR] /usr/sbin/mysqld: unknown variable &#39;default-character-set=utf-8&#39;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;原来是在my.cnf文件中添加了一个变量，MySQL无法识别，从my.cnf删除即可。官方文档中&lt;a href=&quot;http://dev.mysql.com/doc/refman/5.6/en/server-administration.html&quot;&gt;MySQL Server Administration&lt;/a&gt;，有查看错误日志的详细信息，另外，错误日志位置参考&lt;a href=&quot;http://dev.mysql.com/doc/refman/5.6/en/installing.html&quot;&gt;Installing and Upgrading MySQL&lt;/a&gt;中提到的安装目录结构。&lt;/p&gt;
-
-&lt;h2 id=&quot;database&quot;&gt;无法删除Database&lt;/h2&gt;
-
-&lt;p&gt;删除database时，出错：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;mysql&amp;gt; drop database test;
-ERROR 1010 (HY000): Error dropping database (can&#39;t rmdir &#39;./test&#39;, errno: 39)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;解决办法：到MySQL存放数据的路径下（/var/lib/mysql/），将test数据库对应目录（./test）下内容清空，再删除test数据库即可。&lt;/p&gt;
-
-&lt;h2 id=&quot;table&quot;&gt;找不到table&lt;/h2&gt;
-
-&lt;p&gt;MySQL无法连接，提示表格不存在，设置table名称不区分大小写：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;用ROOT登录，修改&lt;code&gt;my.cnf&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;在&lt;code&gt;[mysqld]&lt;/code&gt;下加入一行：&lt;code&gt;lower_case_table_names=1&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;重新启动数据库即可;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;strong&gt;思考&lt;/strong&gt;：字段是否区分大小写？数据库还有其他大小写敏感的地方吗？&lt;/p&gt;
-
-&lt;h2 id=&quot;section-3&quot;&gt;参考来源&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://dev.mysql.com/doc/&quot;&gt;MySQL官方文档&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://dev.mysql.com/doc/refman/5.6/en/installing.html&quot;&gt;Installing and Upgrading MySQL&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://dev.mysql.com/doc/refman/5.6/en/server-administration.html&quot;&gt;MySQL Server Administration&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 </content>
