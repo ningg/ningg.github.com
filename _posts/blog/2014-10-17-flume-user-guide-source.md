@@ -8,9 +8,11 @@ categories: flume big-data
 
 ##Avro Source
 
-Listens on Avro port and receives events from external Avro client streams. When paired with the built-in Avro Sink on another (previous hop) Flume agent, it can create tiered collection topologies. Required properties are in bold.（必须属性加黑了）
+Listens on Avro port and receives events from external Avro client streams. When paired with the built-in Avro Sink on another (previous hop) Flume agent, it can create tiered collection topologies. Required properties are in bold.
+（Avro sink与Avro source可以构成tiered collection topologies；必须属性加黑了）
 
 |Property Name|Default|Description|
+|--|--|--|
 |**channels**|–| |	 
 |**type**|	–|	The component type name, needs to be `avro`|
 |**bind**|	–|	hostname or IP address to listen on|
@@ -37,7 +39,7 @@ Example for agent named a1:
 	a1.sources.r1.bind = 0.0.0.0
 	a1.sources.r1.port = 4141
 
-Example of ipFilter.rules
+Example of `ipFilter.rules`
 
 ipFilter.rules defines N netty ipFilters separated by a comma(`,`) a pattern rule must be in this format.
 
@@ -59,8 +61,10 @@ Note that the first rule to match will apply as the example below shows from a c
 ##Thrift Source
 
 Listens on Thrift port and receives events from external Thrift client streams. When paired with the built-in ThriftSink on another (previous hop) Flume agent, it can create tiered collection topologies. Required properties are in bold.
+（通过Thrift sink和Thrift source，可以构成tired collection topologies；必要的属性都已加黑）
 
 |Property Name|	Default	|Description|
+|--|--|--|
 |**channels**|	–	 | |
 |**type**| – |	The component type name, needs to be thrift|
 |**bind**| – |hostname or IP address to listen on|
@@ -87,6 +91,7 @@ Exec source runs a given Unix command on start-up and expects that process to co
 Required properties are in bold.
 
 |Property Name|	Default|	Description|
+|--|--|--|
 |**channels**|	–|	 |
 |**type**|	–	|The component type name, needs to be exec|
 |**command**|	–|	The command to execute|
@@ -123,11 +128,13 @@ The ‘shell’ config is used to invoke the ‘command’ through a command she
 	
 ##JMS Source
 
-JMS Source reads messages from a JMS destination such as a queue or topic. Being a JMS application it should work with any JMS provider but has only been tested with ActiveMQ. The JMS source provides configurable batch size, message selector, user/pass, and message to flume event converter. Note that the vendor provided JMS jars should be included in the Flume classpath using plugins.d directory (preferred), –classpath on command line, or via FLUME_CLASSPATH variable in flume-env.sh.
+JMS Source reads messages from a JMS destination such as a queue or topic. Being a JMS application it should work with any JMS provider but has only been tested with ActiveMQ. The JMS source provides configurable batch size, message selector, user/pass, and message to flume event converter. Note that the vendor provided JMS jars should be included in the Flume classpath using `plugins.d` directory (preferred), –classpath on command line, or via `FLUME_CLASSPATH` variable in `flume-env.sh`.
+（JMS从JMS destination中读取message，例如：a queue、topic；）
 
 Required properties are in bold.
 
 |Property Name|	Default|	Description|
+|--|--|--|
 |**channels**|–	| |
 |**type**|	–	|The component type name, needs to be jms|
 |**initialContextFactory**|	–	|Inital Context Factory, e.g: org.apache.activemq.jndi.ActiveMQInitialContextFactory|
