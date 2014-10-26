@@ -8,7 +8,6 @@ category: computer system
 ##背景
 
 最近在服务器间传送文件，需要监控磁盘IO和网络IO，确定哪一个是瓶颈，并且找出服务器之间`高效传输文件`的方案。
-
 更细节一些的：例如，提高磁盘的转速、改进磁盘接口，当前环境下，哪个有效？
 
 ##磁盘
@@ -94,25 +93,25 @@ category: computer system
 
 ###查看磁盘详情
 
-（查看步骤）
+（Linux命令，磁盘容量多少？接口是什么？有几块磁盘？用什么命令来查看，具体步骤）
+
+（能否通过命令，查看磁盘的生产厂家？磁盘型号？目标：到官网查看给出的IO速度标准）
 
 ###读写磁盘耗时
 
 读写磁盘所需时间，较为专业的称呼是`磁盘访问时间`，其主要分为：寻道时间、旋转时间、传送时间，具体如下：
 
-1. 寻道时间，`seek time`：机械手臂摆动，将磁头定位到目标扇区所在的磁道上，其耗时是ms级的；
-2. 旋转时间，`rotational time`：磁头定位到磁道后，需要等待目标扇区的第一个bit旋转到磁头下；
-3. 传送时间，`transfer time`：磁头从目标扇区第一个bit扫描到最后一个bit所需时间；
+1. 寻道时间(`seek time`)：机械手臂摆动，将磁头定位到目标扇区所在磁道上，其耗时是ms级；
+2. 旋转时间(`rotational time`)：磁头定位到磁道后，需要等待目标扇区的第一个bit旋转到磁头下；
+3. 传送时间(`transfer time`)：磁头从目标扇区第一个bit扫描到最后一个bit所需时间；
 
 备注：旋转磁盘的访问时间是ms级别的。
 
-###查询磁盘参数
 
-（出厂参数）
 
 ###磁盘IO的基本过程
 
-（DMA）
+（DMA，已经制作过visio图片了）
 
 
 ###测试磁盘读写速度
@@ -166,7 +165,9 @@ Block是不是越大越好？不是，因为一个Block最多仅能容纳一个�
 补充一下：每块磁盘的第一个扇区都是最重要的扇区，其内存储了两个重要信息：
 
 * MBR（`Master Boot Record`，主启动区）：指定当前区块中内容分布（什么意思？不明白），系统启动后会主动读取MBR，446 Bytes；
-* 分区表（`Partation Table`）：磁盘的分区详细信息，64 Bytes；
+* 分区表（`Partation Table`）：磁盘的分区详细信息，64 Bytes；*（其后面还有2字节，是MBR的结束标志`55AA`）*
+
+![](/images/computer-system-disk/fig2.gif)
 
 分区表，有几点：
 
@@ -182,13 +183,41 @@ Block是不是越大越好？不是，因为一个Block最多仅能容纳一个�
 
 思考：一个操作系统下，有多块磁盘，如何分区？每块磁盘最多划分为4个分区？一块磁盘最少划分为一个分区？多块磁盘能否构成一个分区？
 
+初步结论*（详细信息[参考阅读Linux Partition HOWTO](http://www.tldp.org/HOWTO/Partition/index.html)）*：
 
+1. 磁盘作为系统引导盘时，至少有一个primary partition、至少一个swap partition；
+2. 非系统引导盘，可以有0个或0个以上的primary partition、logical partition、swap partition；
+3. boot partition，最好选为primary partition*（技术手段上，不要求一定要primary partition，logical partition也可以）*
+
+
+> **特别说明**：生产服务器上，务必将数据单独分区存放，这样及时系统出问题时，也能保证数据的完整性。
+
+备注：分区表，除了上面提到的MBR，还有一种GPT来解决大硬盘问题：MBR分区表，一个分区最大容量为2T。疑问：如何确定系统是否是GPT分区表？
 
 ###磁盘格式化
 
 
+##系统开机过程
+
+系统开机/重启时，会经历几个基本过程：
+
+1. 系统启动：CPU加载BIOS（Basic Input Output System，主板上ROM中固化的程序）：设置系统信息、开机后系统自检。特别要说明的是：BIOS运行时，会按照COMS（记录时间、启动设置等信息的芯片）中设置的顺序，来搜索处于活动状态并且可以引导的设备；设备可以是CD/DVD、磁盘上的某个分区、U盘、甚至是网络上的某个设备。通常，Linux是从硬盘上引导的，硬盘上MBR包含了主引导加载程序，当MBR被加载到内存后，BIOS就将控制权转交给MBR；
+2. 第一阶段BootLoader：对于磁盘加载来说，就是磁盘的第一扇区，包含了MBR和分区表；这一阶段目标：从分区表中，查找唯一的活动分区，*（是否要求一定是活动分区，由引导程序定），*将活动分区的引导记录读取RAM，并执行。
+3. 第二阶段BootLoader：启动内核映像，转交控制权；
+4. 内核：内核映像并不是可执行的内核，而是压缩过的映像，通常为zImage/bzImage；一个进程对映像解压之后，开始启动内核；
+5. Init：用户自己的应用环境；
+
+
+
+![](/images/computer-system-disk/fig1.gif)
+
 
 ##文件系统
+
+（doing...）
+
+
+
 
 
 ##参考资料
@@ -197,6 +226,17 @@ Block是不是越大越好？不是，因为一个Block最多仅能容纳一个�
 2. 鸟哥私房菜（基础篇）第三版
 3. Disk formatting wiki: [http://en.wikipedia.org/wiki/Disk_formatting](http://en.wikipedia.org/wiki/Disk_formatting)
 4. 南非蚂蚁的[逻辑区块的介绍](http://linux.chinaunix.net/techdoc/beginner/2009/07/15/1124345.shtml)
+5. [MBR（wiki）](http://zh.wikipedia.org/zh/%E4%B8%BB%E5%BC%95%E5%AF%BC%E8%AE%B0%E5%BD%95)
+6. [Linux引导过程内幕](https://www.ibm.com/developerworks/cn/linux/l-linuxboot/#ibm-pcon)
+7. [磁盘格式化](http://zh.wikipedia.org/wiki/%E6%A0%BC%E5%BC%8F%E5%8C%96)
+8. [GPT Partition Table](http://en.wikipedia.org/wiki/GUID_Partition_Table)
+9. [Linux Partition HOWTO](http://www.tldp.org/HOWTO/Partition/requirements.html)
+
+
+##杂谈
+
+维基百科，自由的百科全书，对于我这类的科技工作者，很有用；因为，我查询知识的时候，总希望能够找到知识的源头，说白了，我更希望从知识的源头看起，希望能够自己去品味、理解；而百度百科、国内科技博客，很少说明参考资料来源，唯有维基百科，不仅针对某个知识进行说明，而且提供了详尽的参考资料，这很美妙。如果你也有类似的需求，请用维基百科吧。
+
 
 
 [NingG]:    http://ningg.github.com  "NingG"
