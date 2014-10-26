@@ -284,6 +284,8 @@ Property Name	Default	Description
 deserializer	–	The FQCN of this class: org.apache.flume.sink.solr.morphline.BlobDeserializer$Builder
 deserializer.maxBlobLength	100000000	The maximum number of bytes to read and buffer for a given request
 
+
+
 ##NetCat Source
 
 A netcat-like source that listens on a given port and turns each line of text into an event. Acts like `nc -k -l [host] [port]`. In other words, it opens a specified port and listens for data. The expectation is that the supplied data is newline separated text. Each line of text is turned into a Flume event and sent via the connected channel.
@@ -314,6 +316,7 @@ Example for agent named a1:
 
 ##Sequence Generator Source
 
+
 A simple sequence generator that continuously generates events with a counter that starts from 0 and increments by 1. Useful mainly for testing. Required properties are in bold.
 （持续不断的generate event，从0开始、每次加1，主要用于testing）
 
@@ -332,6 +335,7 @@ Example for agent named a1:
 	a1.channels = c1
 	a1.sources.r1.type = seq
 	a1.sources.r1.channels = c1
+
 
 ##Syslog Sources
 
@@ -366,6 +370,7 @@ For example, a syslog TCP source for agent named a1:
 	a1.sources.r1.host = localhost
 	a1.sources.r1.channels = c1
 
+
 ###Multiport Syslog TCP Source
 
 This is a newer, faster, multi-port capable version of the Syslog TCP source. Note that the ports configuration setting has replaced port. Multi-port capability means that it can listen on many ports at once in an efficient manner. This source uses the Apache Mina library to do that. Provides support for RFC-3164 and many common RFC-5424 formatted messages. Also provides the capability to configure the character set used on a per-port basis.
@@ -391,6 +396,7 @@ interceptors.*
 	 
 For example, a multiport syslog TCP source for agent named a1:
 
+
 	a1.sources = r1
 	a1.channels = c1
 	a1.sources.r1.type = multiport_syslogtcp
@@ -398,6 +404,7 @@ For example, a multiport syslog TCP source for agent named a1:
 	a1.sources.r1.host = 0.0.0.0
 	a1.sources.r1.ports = 10001 10002 10003
 	a1.sources.r1.portHeader = port
+
 
 ###Syslog UDP Source
 
@@ -420,6 +427,7 @@ For example, a syslog UDP source for agent named a1:
 	a1.sources.r1.port = 5140
 	a1.sources.r1.host = localhost
 	a1.sources.r1.channels = c1
+
 
 ##HTTP Source
 
@@ -453,6 +461,7 @@ For example, a http source for agent named a1:
 	a1.sources.r1.handler = org.example.rest.RestHandler
 	a1.sources.r1.handler.nickname = random props
 
+
 ###JSONHandler
 
 A handler is provided out of the box which can handle events represented in JSON format, and supports UTF-8, UTF-16 and UTF-32 character sets. The handler accepts an array of events (even if there is only one event, the event has to be sent in an array) and converts them to a Flume event based on the encoding specified in the request. If no encoding is specified, UTF-8 is assumed. The JSON handler supports UTF-8, UTF-16 and UTF-32. Events are represented as follows.
@@ -480,6 +489,7 @@ One way to create an event in the format expected by this handler is to use `JSO
 （利用JSON字符串来创建event时，通常要用到Flume SDK提供的`JSONEvent`以及`Google Gson#fromJson`）
 
 	Type type = new TypeToken<List<JSONEvent>>() {}.getType();
+
 
 ###BlobHandler
 
@@ -575,6 +585,7 @@ port	1499	Port that Scribe should be connected
 workerThreads	5	Handing threads number in Thrift
 selector.type	 	 
 selector.*
+
 
 Example for agent named a1:
 
