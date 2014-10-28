@@ -79,8 +79,9 @@ Flume收集分布在不同机器上的日志信息，聚合之后，将信息送
 
 1. logger类型的sink，遇到`[`字符就结束？
 2. logger类型的sink，有字符长度的限制吗？
+3. channel有长度限制？channel中存储的event是什么形式存储的？
 
-通过`vim access_log`，向文件最后添加一行内容，发现应该是logger类型的sink，对于event的长度有限制。
+通过`vim access_log`，向文件最后添加一行内容，发现应该是logger类型的sink，对于event的长度有限制；或者，memory类型的channel对于存储的event有限制。
 
 
 

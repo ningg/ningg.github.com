@@ -73,34 +73,41 @@ hdfs.closeTries	0	Number of times the sink must try to close a file. If set to 1
 hdfs.retryInterval	180	Time in seconds between consecutive attempts to close a file. Each close call costs multiple RPC round-trips to the Namenode, so setting this too low can cause a lot of load on the name node. If set to 0 or less, the sink will not attempt to close the file if the first attempt fails, and may leave the file open or with a ”.tmp” extension.
 serializer	TEXT	Other possible options include avro_event or the fully-qualified class name of an implementation of the EventSerializer.Builder interface.
 serializer.*	 	 
+
 Example for agent named a1:
 
-a1.channels = c1
-a1.sinks = k1
-a1.sinks.k1.type = hdfs
-a1.sinks.k1.channel = c1
-a1.sinks.k1.hdfs.path = /flume/events/%y-%m-%d/%H%M/%S
-a1.sinks.k1.hdfs.filePrefix = events-
-a1.sinks.k1.hdfs.round = true
-a1.sinks.k1.hdfs.roundValue = 10
-a1.sinks.k1.hdfs.roundUnit = minute
+	a1.channels = c1
+	a1.sinks = k1
+	a1.sinks.k1.type = hdfs
+	a1.sinks.k1.channel = c1
+	a1.sinks.k1.hdfs.path = /flume/events/%y-%m-%d/%H%M/%S
+	a1.sinks.k1.hdfs.filePrefix = events-
+	a1.sinks.k1.hdfs.round = true
+	a1.sinks.k1.hdfs.roundValue = 10
+	a1.sinks.k1.hdfs.roundUnit = minute
+	
 The above configuration will round down the timestamp to the last 10th minute. For example, an event with timestamp 11:54:34 AM, June 12, 2012 will cause the hdfs path to become /flume/events/2012-06-12/1150/00.
 
 
 
 ##Logger Sink
 
-Logs event at INFO level. Typically useful for testing/debugging purpose. Required properties are in bold.
+Logs event at INFO level. Typically useful for `testing`/`debugging` purpose. Required properties are in bold.
+（将INFO以上几倍的event都记录下来，Logger Sink主要用于test和dubug）
 
-Property Name	Default	Description
-channel	–	 
-type	–	The component type name, needs to be logger
+|Property Name	|Default	|Description|
+|--|--|--|
+|channel	|–	| |
+|type	|–	|The component type name, needs to be `logger`|
+
 Example for agent named a1:
 
-a1.channels = c1
-a1.sinks = k1
-a1.sinks.k1.type = logger
-a1.sinks.k1.channel = c1
+	a1.channels = c1
+	a1.sinks = k1
+	a1.sinks.k1.type = logger
+	a1.sinks.k1.channel = c1
+
+**notes(ningg)**：`logger`类型的Sink，有长度限制吗？
 
 ##Avro Sink
 
@@ -186,61 +193,73 @@ a1.sinks.k1.chan = #flume
 ##File Roll Sink
 
 Stores events on the local filesystem. Required properties are in bold.
+（将event存储到local FS上）
 
-Property Name	Default	Description
-channel	–	 
-type	–	The component type name, needs to be file_roll.
-sink.directory	–	The directory where files will be stored
-sink.rollInterval	30	Roll the file every 30 seconds. Specifying 0 will disable rolling and cause all events to be written to a single file.
-sink.serializer	TEXT	Other possible options include avro_event or the FQCN of an implementation of EventSerializer.Builder interface.
-batchSize	100	 
+|Property Name|	Default|	Description|
+|--|--|--|
+|**channel**|	–	| |
+|**type**|	–|	The component type name, needs to be `file_roll`.|
+|**sink.directory**|	–|	The directory where files will be stored|
+|sink.rollInterval|	30|	Roll the file every 30 seconds. Specifying 0 will disable rolling and cause all events to be written to a single file.|
+|sink.serializer|	TEXT|	Other possible options include `avro_event` or the FQCN of an implementation of `EventSerializer.Builder` interface.|
+|batchSize|	100	| |
+
+**notes(ningg)**：FQCN: Fully-Qualified Class Name，全限定类名，包含package的class名称；txn：Transaction，事务。下面几个疑问：
+
+* roll the file？是指对文件重命名存储吗？生成新文件？可以通过源代码进行学习；
+* `sink.serializer`什么含义？
+* `batchSize`什么含义？
 
 Example for agent named a1:
 
-a1.channels = c1
-a1.sinks = k1
-a1.sinks.k1.type = file_roll
-a1.sinks.k1.channel = c1
-a1.sinks.k1.sink.directory = /var/log/flume
+	a1.channels = c1
+	a1.sinks = k1
+	a1.sinks.k1.type = file_roll
+	a1.sinks.k1.channel = c1
+	a1.sinks.k1.sink.directory = /var/log/flume
 
 ##Null Sink
 
 Discards all events it receives from the channel. Required properties are in bold.
+（丢弃所有event）
 
-Property Name	Default	Description
-channel	–	 
-type	–	The component type name, needs to be null.
-batchSize	100	 
+|Property Name|	Default|	Description|
+|--|--|--|
+|channel|	–|	 |
+|type	|–	|The component type name, needs to be `null`.|
+|batchSize	|100|	| 
+
 Example for agent named a1:
 
-a1.channels = c1
-a1.sinks = k1
-a1.sinks.k1.type = null
-a1.sinks.k1.channel = c1
+	a1.channels = c1
+	a1.sinks = k1
+	a1.sinks.k1.type = null
+	a1.sinks.k1.channel = c1
 
 ##HBaseSinks
 
-
+（todo）
 
 ##MorphlineSolrSink
 
-
+（todo）
 
 
 ##ElasticSearchSink
 
-
+（todo）
 
 ##Custom Sink
 
-A custom sink is your own implementation of the Sink interface. A custom sink’s class and its dependencies must be included in the agent’s classpath when starting the Flume agent. The type of the custom sink is its FQCN. Required properties are in bold.
+A custom sink is your own implementation of the `Sink` interface. A custom sink’s class and its dependencies must be included in the agent’s classpath when starting the Flume agent. The type of the custom sink is its FQCN. Required properties are in bold.
 （通过实现Sink接口，可以定制自己的custom；需要在启动Flume agent时，将自定义的Sink和其depedencies添加到classpath中）
 
-Property Name	Default	Description
-channel	–	 
-type	–	The component type name, needs to be your FQCN
+|Property Name|	Default|	Description|
+|--|--|--|
+|channel|	–|	 |
+|type|	–|	The component type name, needs to be your `FQCN`|
 
-**notes(ningg)**：FQCN是什么？
+**notes(ningg)**：FQCN是什么？Fully-Qualified Class Name，全限定类名。
 
 Example for agent named a1:
 
@@ -248,13 +267,5 @@ Example for agent named a1:
 	a1.sinks = k1
 	a1.sinks.k1.type = org.example.MySink
 	a1.sinks.k1.channel = c1
-
-
-
-
-
-
-
-
 
 
