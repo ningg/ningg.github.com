@@ -4,7 +4,7 @@
    <title>NingG.github.com</title>
    <link href="http://ningg.github.com/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://ningg.github.com" rel="alternate" type="text/html" />
-   <updated>2014-10-30T00:55:06+08:00</updated>
+   <updated>2014-10-30T23:49:27+08:00</updated>
    <id>http://ningg.github.com</id>
    <author>
      <name></name>
@@ -19,13 +19,15 @@
      <id>http://ningg.github.com/use-lvm</id>
      <content type="html">&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
 
-&lt;p&gt;系统有9块盘，每个320GB，之前服务器（CentOS 6.3）上磁盘分配情况：选取一块盘作为系统盘，划分&lt;code&gt;/boot&lt;/code&gt;、&lt;code&gt;swap&lt;/code&gt;、&lt;code&gt;/&lt;/code&gt;、&lt;code&gt;/home&lt;/code&gt;；然后将剩余的8块盘，逐个格式化，并且挂在到系统盘的某个目录下。现在的问题是：某个收集分析数据的系统要上线，需要一个足够大的空间来存储数据，如果使用上述的方案，每个目录最大的存储空间都只有320GB，还是不够大，今后可能面临分区扩容的问题，而使用静态分区，扩容本来就有些麻烦。而LVM（Logical Volume Management，逻辑卷管理）能够将多个磁盘/分区组合在一起，抽象为一个逻辑上的分区，这样利用LVM技术，8块盘就组成了一个2.5T大小的分区，这样问题就解决了。&lt;/p&gt;
+&lt;p&gt;系统有9块盘，每个320GB，之前服务器（CentOS 6.3）上磁盘分配情况：选取一块盘作为系统盘，划分&lt;code&gt;/boot&lt;/code&gt;、&lt;code&gt;swap&lt;/code&gt;、&lt;code&gt;/&lt;/code&gt;、&lt;code&gt;/home&lt;/code&gt;；然后，将剩余的8块盘，逐个格式化，并mount到系统盘的某个目录下。现在的问题是：某系统要上线，需要一个足够大的空间来存储数据，如果使用上述的方案，每个目录最大的存储空间都只有320GB，还是不够大，今后可能面临分区扩容的问题，使用静态分区，扩容有些麻烦。而LVM（Logical Volume Management，逻辑卷管理）能够将多个磁盘/分区组合在一起，抽象为一个逻辑上的分区，即，利用LVM技术，8块盘可以组成一个2.5T大小的分区，这样问题就解决了。&lt;/p&gt;
 
 &lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;：上面利用LVM来管理8块盘的方案，只是初步想法，不是最终方案。&lt;/p&gt;
 
 &lt;h2 id=&quot;lvm&quot;&gt;LVM是什么&lt;/h2&gt;
 
 &lt;p&gt;LVM(Logical Volume Management，逻辑卷管理)，一大核心功能是：对磁盘分区进行动态管理。当前无论在Linux、类Unix以及其他Windowns操作系统上，都存在LVM管理软件。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/use-lvm/lvm-arch.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 &lt;h3 id=&quot;lvm-1&quot;&gt;LVM要解决的问题&lt;/h3&gt;
 
@@ -95,7 +97,7 @@
 
 &lt;h3 id=&quot;vgda&quot;&gt;VGDA&lt;/h3&gt;
 
-&lt;p&gt;和非LVM系统将包含分区信息的元数据保存在位于分区的起始位置的分区表中一样，逻辑卷以及卷组相关的元数据也是保存在位于物理卷起始处的卷组描述符区域（Volume Group Descriptor Area, VGDA）中。VGDA包括以下内容：PV描述符、VG描述符、LV描述符、和一些PE描述符。图2-3描述了它们之间的关系。&lt;/p&gt;
+&lt;p&gt;和非LVM系统将包含分区信息的元数据保存在位于分区的起始位置的分区表中一样，逻辑卷以及卷组相关的元数据也是保存在位于物理卷起始处的卷组描述符区域（Volume Group Descriptor Area, VGDA）中。VGDA包括以下内容：PV描述符、VG描述符、LV描述符、和一些PE描述符。&lt;/p&gt;
 
 &lt;p&gt;注意：/boot分区不能位于卷组中，因为引导装载程序无法从逻辑卷中读取。如果你想把/分区放在逻辑卷上，必须创建一个与卷组分离的/boot分区。&lt;/p&gt;
 
@@ -113,18 +115,16 @@
   &lt;li&gt;LV的扩充缩减实际上就是增加或减少组成该LV的PE数量，其过程不会丢失原始数据&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：在创建PV时，需要物理磁盘/物理分区提前进行格式化吗？&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：在创建PV时，需要物理磁盘/物理分区提前进行格式化吗？&lt;strong&gt;RE&lt;/strong&gt;：不需要格式化的，直接创建PV就行。&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/images/use-lvm/pv-vg-lv.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;centos&quot;&gt;CentOS的推荐配置&lt;/h2&gt;
+&lt;h2 id=&quot;centosdoing&quot;&gt;CentOS的推荐配置doing..&lt;/h2&gt;
 
 &lt;p&gt;使用LVM来管理磁盘时，CentOS有没有推荐的配置？&lt;/p&gt;
 
 &lt;p&gt;LVM只有优点吗？
 LVM有没有副作用？降低磁盘IO？耗费一定的磁盘空间？LVM管理时，有没有CPU、磁盘资源的浪费？&lt;/p&gt;
-
-&lt;p&gt;缺点：&lt;/p&gt;
 
 &lt;p&gt;（下面还没有修改，参考来源：&lt;a href=&quot;http://hily.me/blog/2008/10/understanding-lvm/&quot;&gt;理解 LVM (Logical Volume Manager)&lt;/a&gt;）&lt;/p&gt;
 
@@ -189,7 +189,7 @@ LVM有没有副作用？降低磁盘IO？耗费一定的磁盘空间？LVM管理
       &lt;td&gt;创建PV&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
-      &lt;td&gt;&lt;code&gt;pvdisplay&lt;/code&gt;`pvs`&lt;/td&gt;
+      &lt;td&gt;&lt;code&gt;pvdisplay&lt;/code&gt;/&lt;code&gt;pvs&lt;/code&gt;&lt;/td&gt;
       &lt;td&gt;查询PV详情&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
@@ -201,7 +201,7 @@ LVM有没有副作用？降低磁盘IO？耗费一定的磁盘空间？LVM管理
       &lt;td&gt;创建VG&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
-      &lt;td&gt;&lt;code&gt;vgdisplay&lt;/code&gt;`vgs`&lt;/td&gt;
+      &lt;td&gt;&lt;code&gt;vgdisplay&lt;/code&gt;/&lt;code&gt;vgs&lt;/code&gt;&lt;/td&gt;
       &lt;td&gt;查询VG详情&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
@@ -213,7 +213,7 @@ LVM有没有副作用？降低磁盘IO？耗费一定的磁盘空间？LVM管理
       &lt;td&gt;基于VG创建LV&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
-      &lt;td&gt;&lt;code&gt;lvdisplay&lt;/code&gt;`lvs`&lt;/td&gt;
+      &lt;td&gt;&lt;code&gt;lvdisplay&lt;/code&gt;/&lt;code&gt;lvs&lt;/code&gt;&lt;/td&gt;
       &lt;td&gt;查询LV详情&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
@@ -311,49 +311,399 @@ LVM有没有副作用？降低磁盘IO？耗费一定的磁盘空间？LVM管理
      <link href="http://ningg.github.com/centos-installation"/>
      <updated>2014-10-26T00:00:00+08:00</updated>
      <id>http://ningg.github.com/centos-installation</id>
-     <content type="html">&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
+     <content type="html">&lt;h2 id=&quot;section&quot;&gt;1. 简介&lt;/h2&gt;
 
-&lt;p&gt;最近十几台服务器要重装系统了，在师兄带领下，自己预装了一台，虽然之前有几十次的装机经历，但这次心里仍然有些不踏实，因为这次的机器是生产上用的，系统规划的好坏直接影响到今后的应用。&lt;/p&gt;
-
-&lt;h2 id=&quot;centos&quot;&gt;CentOS简介&lt;/h2&gt;
-
-&lt;p&gt;从&lt;a href=&quot;http://www.centos.org/about/&quot;&gt;CentOS官网&lt;/a&gt;可知，CentOS是编译Red Hat Enterprise Linux（RHEL）源代码得到的开源Linux发行版本，CentOS的版本号与RHEL版本号基本上一一对应。&lt;/p&gt;
-
-&lt;p&gt;此次安装CentOS系统，整体上有如下几个问题：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;磁盘需要分区吗？（primary partition、logical partition）&lt;/li&gt;
-  &lt;li&gt;分为几个区？每个分区的作用？分区的大小？&lt;/li&gt;
-  &lt;li&gt;多块磁盘怎么分区？&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;此次使用是CentOS发行版，CentOS官网得知：CentOS的docs与RHEL类似，因此，不单独提供docs；既然这样，我就直接找RHEL的docs好了。
-本文主要参考&lt;a href=&quot;https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Installation_Guide/index.html&quot;&gt;RHEL 6: Installation Guide&lt;/a&gt;，这个文档我只看了&lt;a href=&quot;https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Installation_Guide/s1-diskpartsetup-x86.html&quot;&gt;分区&lt;/a&gt;部分，需要好好看看。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;分区&lt;/h3&gt;
-
-&lt;p&gt;参考&lt;a href=&quot;https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Installation_Guide/s2-diskpartrecommend-x86.html&quot;&gt;RHEL 6: Recommended Partitioning Scheme&lt;/a&gt;，系统需要设置如下几个分区：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code&gt;swap&lt;/code&gt;分区：作为virtual memory，当内存空间不足时，将其中的数据放入&lt;code&gt;swap&lt;/code&gt;分区；swap&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;/boot&lt;/code&gt;分区：&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;/&lt;/code&gt;分区：&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;home&lt;/code&gt;分区：&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;section-2&quot;&gt;网络配置&lt;/h3&gt;
-
-&lt;h2 id=&quot;section-3&quot;&gt;参考资料&lt;/h2&gt;
+&lt;p&gt;CentOS（Community Enterprise Operating System，企业社区操作系统）是Linux发行版本之一。Red Hat Enterpris Linux（RHEL，红帽企业级Linux）依照开放源码规定，开源了每个RHEL版本的源代码，CentOS正是基于RHEL的源代码重新编译而成的[1]，并且在RHEL基础上修复了一些已知的bug，相对与其他Linux发行版本，CentOS稳定性值得信赖。当前，很多企业都在服务器上安装CentOS系统，来支撑线上应用。
+CentOS与RHEL的最大区别在于：&lt;/p&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Installation_Guide/index.html&quot;&gt;RHEL 6: Installation Guide&lt;/a&gt; &lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Installation_Guide/ch-partitions-x86.html#tb-partitions-types-x86&quot;&gt;An Introduction to Disk Partitions&lt;/a&gt; （需要阅读学习）&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Installation_Guide/s1-diskpartsetup-x86.html&quot;&gt;RHEL 6: Disk Partitioning Setup&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Installation_Guide/s2-diskpartrecommend-x86.html&quot;&gt;RHEL 6: Recommended Partitioning Scheme&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://lists.centos.org/pipermail/centos/2012-November/130123.html&quot;&gt;CentOS 6 docs?&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;RHEL中包含了部分封闭源码的工具，而CentOS包含的所有工具都是开源的；&lt;/li&gt;
+  &lt;li&gt;RHEL提供技术服务，以此来收费；&lt;/li&gt;
 &lt;/ol&gt;
+
+&lt;p&gt;值得注意的是，2014年初，CentOS宣布加入Red Hat[2]。&lt;/p&gt;
+
+&lt;p&gt;备注：CentOS的版本与RHEL版本基本一一对应，举例，CentOS 6.4对应RHEL 6.4的源代码。&lt;/p&gt;
+
+&lt;h2 id=&quot;centos-6&quot;&gt;2. 安装CentOS 6&lt;/h2&gt;
+
+&lt;p&gt;说到安装Linux系统，不要着急，官网肯定有操作手册来说明这个事，嗯，CentOS应用这么广泛，帮助手册总该有吧，要不然与其身份也不相符合。很不幸，&lt;a href=&quot;http://www.centos.org/docs/&quot;&gt;CentOS的官网&lt;/a&gt;中，并没有CentOS 6的操作手册，欧，赶快查查什么原因：CentOS完全基于RHEL源码编译而来，并且版本基本一一对应，因此，直接使用RHEL的官网文档即可[3]。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;特别说明&lt;/strong&gt;：本文所有安装CentOS 6的步骤、配置，都参考自RHEL 6官方文档[5]。&lt;/p&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;2.1.	基本设置&lt;/h3&gt;
+
+&lt;p&gt;这一部分，主要演示几点：如何通过CD/DVD光驱来重装系统。&lt;/p&gt;
+
+&lt;p&gt;步骤 1. 	重启系统，出现图1界面时，点击”F11”按钮，目的：设置Boot Menu。
+说明：当点击完”F11”按钮之后，如图1界面最下端所示，”F11”按钮背景由黑色变为白色。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/centos-installation/001.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;步骤 2. 	当出现图2所示界面时，选择”1”，目标：从光驱中加载系统。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/centos-installation/002.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;稍等一会儿，有可能出现图3所示界面，不要管他，等一段时间即可
+备注：如果长时间停留在图3界面，则敲击Enter。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/centos-installation/003.png&quot; alt=&quot;图 3&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;步骤 3. 	出现如图4时，选择“Install sytem with basic video driver”（第二项），目标：重装系统。
+备注：也可选择“Install or upgrade an existing system”（第一项），但，有可能显示器画面出现倾斜异常（显卡驱动问题），因此推荐 “Install sytem with basic video driver”（第二项）。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/centos-installation/004.png&quot; alt=&quot;&quot; /&gt;
+图 4&lt;/p&gt;
+
+&lt;p&gt;步骤 4. 	出现如图5所示界面后，通过”Tab”键，选择“Skip”选项，并使用“Space”键来确认即可。目标：在安装之前，不进行磁盘、网卡、内存等硬件设备的测试。（因为太浪费时间了）&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/centos-installation/005.png&quot; alt=&quot;&quot; /&gt;
+图 5&lt;/p&gt;
+
+&lt;p&gt;选择”Skip”之后，可能会出现图6所示界面，稍等一会儿，会自动跳入下个页面（如图7）。等待时间：几十秒~几分钟。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/centos-installation/006.png&quot; alt=&quot;&quot; /&gt; 
+图 6&lt;/p&gt;
+
+&lt;p&gt;步骤 5. 	出现如图7所示页面后，点击”Next”。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/centos-installation/007.png&quot; alt=&quot;&quot; /&gt;
+图 7&lt;/p&gt;
+
+&lt;p&gt;步骤 6. 	在如图8所示界面，选择安装CentOS过程中，页面的显示语言，当安装服务器时，建议选择“English（English）”。
+备注：这一步选定哪种语言，貌似对安装系统没有影响，而实际测试发现，有些细微差异，例如，安装完系统后，系统环境变量LANG会有细微差异。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/centos-installation/008.png&quot; alt=&quot;&quot; /&gt;
+图 8&lt;/p&gt;
+
+&lt;p&gt;步骤 7. 	参照下图9~15，一步步安装下去即可。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/centos-installation/009.png&quot; alt=&quot;&quot; /&gt;
+图 9&lt;/p&gt;
+
+&lt;p&gt;图9：选择系统键盘语言，选“U.S. English”即可。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/centos-installation/010.png&quot; alt=&quot;&quot; /&gt;
+图 10&lt;/p&gt;
+
+&lt;p&gt;图10：选择系统安装的磁盘，选“Basic Storage Devices”。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/centos-installation/011.png&quot; alt=&quot;&quot; /&gt; 
+图 11&lt;/p&gt;
+
+&lt;p&gt;特别说明：有可能会出现图11界面，如果没有出现，则忽略图11。&lt;/p&gt;
+
+&lt;p&gt;图11：是否覆盖掉所有系统数据，如果是重装系统，数据已经做过备份，则直接选“Fresh Installation”。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/centos-installation/012.png&quot; alt=&quot;&quot; /&gt;
+图 12&lt;/p&gt;
+
+&lt;p&gt;图12：设定主机名（hostname），按照要求进行设置即可。&lt;/p&gt;
+
+&lt;p&gt;备注：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;在图11页面的左下角，也可以通过“配置网络”按钮来设定网络，但不建议在此通过页面来配置网络（因为可能碰到乱七八糟的问题），而建议安装完系统后，通过简单命令来配置网络。&lt;/li&gt;
+  &lt;li&gt;也可以安装完系统后，打开文件”/etc/sysconfig/network”，修改其中HOSTNAME字段。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/centos-installation/013.png&quot; alt=&quot;&quot; /&gt;
+图 13&lt;/p&gt;
+
+&lt;p&gt;图13：选定时区，选定“Asia/Shanghai”即可。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/centos-installation/014.png&quot; alt=&quot;&quot; /&gt; 
+图 14&lt;/p&gt;
+
+&lt;p&gt;图14：设定root密码&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/centos-installation/015.png&quot; alt=&quot;&quot; /&gt; 
+图 15：选“Use Anyway”&lt;/p&gt;
+
+&lt;p&gt;图15：提示密码不够安全，直接点击“Use Anyway”（无论如何都使用）即可。&lt;/p&gt;
+
+&lt;p&gt;特别说明：至此，安装并没有结束，下面“2.2磁盘分区”部分才是重点。&lt;/p&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;2.2.	磁盘分区&lt;/h3&gt;
+
+&lt;p&gt;从图16开始，我们将进行磁盘分区，这一部分有些配置的东西，需要认真看了。&lt;/p&gt;
+
+&lt;p&gt;备注：在此之前，需要补充一点理论知识：&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;1.	为什么要进行磁盘分区？&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;磁盘分区两点考虑，也就是说两个好处：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;数据安全：不同磁盘分区之间相互独立，某个分区损坏，不会影响其他分区内的数据；&lt;/li&gt;
+  &lt;li&gt;读写性能：读写数据时，磁盘分区对应一段连续的磁柱，由于磁柱集中，提升数据的读写效率；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;2.	磁盘分区要分为几个区？&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;磁盘分区方案，官网建议[7]，应该包含如下几个分区：&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;分区&lt;/th&gt;
+      &lt;th&gt;作用&lt;/th&gt;
+      &lt;th&gt;官方建议大小&lt;/th&gt;
+      &lt;th&gt;此次安装使用&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;/boot&lt;/td&gt;
+      &lt;td&gt;存放OS kernel，以及系统bootstrap过程要使用的其他文件&lt;/td&gt;
+      &lt;td&gt;&amp;gt;250MB&lt;/td&gt;
+      &lt;td&gt;500MB&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;swap&lt;/td&gt;
+      &lt;td&gt;虚拟内存：当内存空间不足时使用此空间&lt;/td&gt;
+      &lt;td&gt;至少4GB，推荐为内存的1~2倍&lt;/td&gt;
+      &lt;td&gt;128GB （系统内存64GB）&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;/&lt;/td&gt;
+      &lt;td&gt;存放：系统安装文件&lt;/td&gt;
+      &lt;td&gt;3~5GB&lt;/td&gt;
+      &lt;td&gt;60GB&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;/home&lt;/td&gt;
+      &lt;td&gt;存放：user data \n单独分区的目标：将user data与系统文件隔离&lt;/td&gt;
+      &lt;td&gt;没有&lt;/td&gt;
+      &lt;td&gt;100GB（实际是sda磁盘的剩余空间）&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;步骤 8. 	在图16界面，选择“Use All Space”，同时，勾选左下的“Review and modify partitioning layout”，目标：进入磁盘分区设置页面，调整磁盘分区。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/centos-installation/016.png&quot; alt=&quot;&quot; /&gt;
+图 16：选“Use All Space”和勾选“Review and modify partitioning layout”&lt;/p&gt;
+
+&lt;p&gt;中间可能要等待一段时间&lt;/p&gt;
+
+&lt;p&gt;步骤 9. 	在图17所示页面，选择要进行分区的的磁盘，通常将“Data Storage Devicess”中所有磁盘都添加到“Install Target Devices”中，添加结果如图18所示。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/centos-installation/017.png&quot; alt=&quot;&quot; /&gt; 
+图 17&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/centos-installation/018.png&quot; alt=&quot;&quot; /&gt; 
+图 18&lt;/p&gt;
+
+&lt;p&gt;图18：将“Data Storage Devicess”中所有磁盘都添加到“Install Target Devices”后的结果。 &lt;/p&gt;
+
+&lt;p&gt;步骤 10. 	在图19所示页面，删除磁盘sda默认的分区：LVM Volume groups下的vg_cib61、sda下sda1和sda2；删除结果如图20所示。&lt;/p&gt;
+
+&lt;p&gt;特别说明：要删除sda2分区，需要先删除LVM Volume groups下的vg_cib61。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/centos-installation/019.png&quot; alt=&quot;&quot; /&gt; 
+图 19&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/centos-installation/020.png&quot; alt=&quot;&quot; /&gt;
+图 20&lt;/p&gt;
+
+&lt;p&gt;图20：删除sda上所有分区之后的结果。 &lt;/p&gt;
+
+&lt;p&gt;步骤 11. 	在图20页面，按照提前规划的分区方案，在sda磁盘的Free空间上，依次划分/boot、swap、/、/home共计4个分区。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/centos-installation/021.png&quot; alt=&quot;&quot; /&gt; 
+图 21&lt;/p&gt;
+
+&lt;p&gt;图21：选择sda下Free空间，” Create” “Standard Partition”，即可进行创建分区，具体“/boot、swap、/、/home”的分区操作，依次参考图22、图23、图24、图25。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/centos-installation/022.png&quot; alt=&quot;&quot; /&gt; 
+图 22&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/centos-installation/023.png&quot; alt=&quot;&quot; /&gt;
+图 23&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/centos-installation/024.png&quot; alt=&quot;&quot; /&gt;
+图 24&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/centos-installation/025.png&quot; alt=&quot;&quot; /&gt;
+图 25&lt;/p&gt;
+
+&lt;p&gt;步骤 12. 	这一步是进行LVM设置，如果没有LVM创建LV的需要，请直接跳过这一步，直接参考“步骤13”。 &lt;/p&gt;
+
+&lt;p&gt;在此之前，补充一点LVM相关的理论知识：&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;1.	为什么要用LVM？&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;LVM要解决的典型问题&lt;/strong&gt;：一块磁盘的空间160GB，其存满数据后，需要扩容，怎么办？传统静态分区时，需要将磁盘中近160GB的数据复制到1TB的磁盘上，然后，使用1TB的磁盘替换掉原来160GB的磁盘。（这个是传统扩容的基本原理，还有其他的原理吗？）&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;LVM基本原理&lt;/strong&gt;：要解决上面磁盘空间不足时，磁盘的扩容问题，LVM提供了一个基本思路：LVM将底层的磁盘封装抽象为逻辑卷（logical volume），上层应用不直接从物理磁盘分区中读数据，而是从逻辑卷中读数据；LVM负责底层磁盘到逻辑卷的映射和管理；增加底层磁盘时，通过LVM可以为逻辑卷动态扩充容量，而这对上层应用是无影响的（透明的）。&lt;/p&gt;
+
+&lt;p&gt;说这么多，总结一点：LVM能够将多个小磁盘抽象为一个大逻辑卷，并且支持磁盘的动态扩容，提高了磁盘管理的灵活性。&lt;/p&gt;
+
+&lt;p&gt;图26、图27、图28、图29：展示了在sdb1、sdc1、sdd1上创建一个大小约为850GB大小的VG（命名为vg_cib61），并且在这一VG上创建一个500GB大小的LV（lv_00）的基本过程。脑袋疼，不想多说，请自行查找其他资料。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/centos-installation/026.png&quot; alt=&quot;&quot; /&gt; 
+图 26&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/centos-installation/027.png&quot; alt=&quot;&quot; /&gt;
+图 27&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/centos-installation/028.png&quot; alt=&quot;&quot; /&gt;
+图 28&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/centos-installation/029.png&quot; alt=&quot;&quot; /&gt;
+图 29&lt;/p&gt;
+
+&lt;p&gt;图29：创建Logical Volume时，并没有设置Mount Point，因为当前并不能确定挂载目录，装完系统之后，可以通过命令进行挂载。&lt;/p&gt;
+
+&lt;p&gt;步骤 13. 	设置完磁盘分区后，到达图30所示界面，直接点击“Next”。&lt;/p&gt;
+
+&lt;p&gt;特别说明：如果没有在步骤12中设置LVM，则没有图30中的“LVM Volume Groups”部分。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/centos-installation/030.png&quot; alt=&quot;&quot; /&gt;
+图 30&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/centos-installation/031.png&quot; alt=&quot;&quot; /&gt;
+图 31：选“Write changes to disk”&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/centos-installation/032.png&quot; alt=&quot;&quot; /&gt;
+图 32&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/centos-installation/033.png&quot; alt=&quot;&quot; /&gt;
+图 33&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/centos-installation/034.png&quot; alt=&quot;&quot; /&gt;
+图 34：选“Basic Server”&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/centos-installation/035.png&quot; alt=&quot;&quot; /&gt;
+图 35&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/centos-installation/036.png&quot; alt=&quot;&quot; /&gt;
+图 36&lt;/p&gt;
+
+&lt;h2 id=&quot;section-3&quot;&gt;3.	配置网络&lt;/h2&gt;
+
+&lt;p&gt;安装完系统之后，需要进行网络配置，目标：保证机器能够入网。&lt;/p&gt;
+
+&lt;p&gt;通常直接修改/etc/sysconfig/network-scripts/ifcfg-eth0文件即可，此次使用的是静态配置IP方式，因此需要进行如下修改（保持ifcfg-eth0文件中其他字段不变）：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ONBOOT=yes
+BOOTPROTO=static
+IPADDR=168.7.2.111
+NETMASK=255.255.255.0
+GATEWAY=168.7.2.126
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;特别说明：服务器上有eth0–eth5，共计6个网口，需要根据具体情况，修改配置文件，上例中修改的是ifcfg-eth0文件，而在其他服务器上，如果网线插在eth3口，则需要修改ifcfg-eth3文件。&lt;/p&gt;
+
+&lt;p&gt;有个小问题，值得说一下：服务器通常带有eth0–eth5多个网口，如何将eth0~5与实际的物理网口对应起来？&lt;/p&gt;
+
+&lt;p&gt;RE：需要借助工具：ethtool，执行命令&lt;code&gt;ethtool -p eth0&lt;/code&gt;，再去看看那排网口，会有发现的~执行Ctrl + C，即可终止此命令。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-4&quot;&gt;4.	格式化磁盘并挂载&lt;/h2&gt;
+
+&lt;p&gt;场景 1.	格式化单个磁盘，并进行挂载，命令如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# 格式化磁盘
+mkfs -t ext3 /dev/sdb1
+# 新建挂载点
+mkdir -p /srv/hadoop/data1
+# 挂载磁盘
+mount /dev/sdb1 /srv/hadoop/data1
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;场景 2.	批量格式化多个磁盘，并进行挂载，本质上就是重复“场景1”，只不过使用shell脚本来实现，脚本如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;for i in {b..k}; do mkfs -t ext3 /dev/sd${i}1; done
+
+for i in {1..10}; do mkdir -p /srv/hadoop/data${i}; done
+
+array=(b c d e f g h i j k)
+for((i=0;i&amp;lt;${#array[@]};i++)); do mount /dev/sd${array[i]}1 /srv/hadoop/data$(($i+1)); done
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;场景 3.	设置开机自动挂载磁盘&lt;/p&gt;
+
+&lt;p&gt;上面两个场景中，都涉及到mount磁盘到某个目录，但如果系统一不小心重启了，这些磁盘就需要重新挂载。解决办法：在fstab文件中设置开机自动挂载磁盘。
+通过命令：man  fstab就可以查看fstab文件每列的含义：&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;1&lt;/th&gt;
+      &lt;th&gt;2&lt;/th&gt;
+      &lt;th&gt;3&lt;/th&gt;
+      &lt;th&gt;4&lt;/th&gt;
+      &lt;th&gt;5&lt;/th&gt;
+      &lt;th&gt;6&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code&gt;&amp;lt;special device&amp;gt;&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code&gt;&amp;lt;mount point&amp;gt;&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code&gt;&amp;lt;fs type&amp;gt;&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code&gt;&amp;lt;mount options&amp;gt;&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code&gt;&amp;lt;dump&amp;gt;&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;code&gt;&amp;lt;fsck&amp;gt;&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;上述/etc/fstab文件每行数据，都有6个字段，如上图所示，简要说明几点：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;间隔符号：不同字段之间使用 ”空格” 或者 “Tab” 键来间隔&lt;/li&gt;
+  &lt;li&gt;special device：要挂载的设备，例如：/dev/sdb1;&lt;/li&gt;
+  &lt;li&gt;mount point：设备挂载的目标目录；&lt;/li&gt;
+  &lt;li&gt;fs type：要挂载的设备上文件系统的类型；&lt;/li&gt;
+  &lt;li&gt;options：mount命令进行挂载时，输入的参数；&lt;/li&gt;
+  &lt;li&gt;dump：是否要对此文件系统进行备份，0代表不做dump备份，1代表需要dump备份，2代表也需要dump备份，但2的重要程度低于1；&lt;/li&gt;
+  &lt;li&gt;fsck：系统启动时，是否检测文件系统的完整性，0代表不检测，根目录/需要设置为1，其他需要开机扫描的文件系统设置为2；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;来个fstab文件的样例，朝着这个格式来做就可以：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;/dev/sdb1  /srv/hadoop/data1  ext3  defaults  0  0
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;配置完fstab文件，一定要来一条命令：&lt;code&gt;mount -a&lt;/code&gt;
+含义：&lt;code&gt;Mount all filesystems (of the given types) mentioned in fstab.&lt;/code&gt;
+这一命令可用于检查fstab文件中的配置是否正确。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-5&quot;&gt;5.	参考来源&lt;/h2&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.centos.org/about/&quot;&gt;CentOS简介&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.redhat.com/en/about/press-releases/red-hat-and-centos-join-forces&quot;&gt;Red Hat and CentOS Project Join Forces to Speed Open Source Innovation&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://lists.centos.org/pipermail/centos/2012-November/130123.html&quot;&gt;CentOS 6 docs参考RHEL 6即可&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/&quot;&gt;RHEL官方文档&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Installation_Guide/index.html&quot;&gt;RHEL 6官文文档“Installation Guide”&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Installation_Guide/s1-x86-bootloader.html&quot;&gt;设定bootloader&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Installation_Guide/s2-diskpartrecommend-x86.html&quot;&gt;Recommended Partitioning Schema&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;section-6&quot;&gt;6.	附录&lt;/h2&gt;
+
+&lt;p&gt;几个有用的命令：&lt;/p&gt;
+
+&lt;p&gt;命令 1. 	&lt;code&gt;dmidecode -t 1&lt;/code&gt;，查看当前服务器的序列号。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[root@localhost ~]# dmidecode -t 1
+# dmidecode 2.11
+SMBIOS 2.7 present.
+
+Handle 0x0100, DMI type 1, 27 bytes
+System Information
+		Manufacturer: HP
+		Product Name: ProLiant ********
+		Version: Not Specified
+		Serial Number: ********
+		UUID: ****-****-****-****-****
+		Wake-up Type: Power Switch
+		SKU Number: ****-****
+		Family: ProLiant
+&lt;/code&gt;&lt;/pre&gt;
 
 </content>
    </entry>
