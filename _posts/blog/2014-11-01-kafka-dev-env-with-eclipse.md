@@ -12,11 +12,69 @@ categories: kafka big-data
 * [Kafka Developer Setup][Kafka Developer Setup]
 
 
+##编译环境
+
+查看自己机器的环境：我用笔记本来编译的，是win 7（x64）操作系统；更详细的编译环境信息通过如下方式查看：`CMD`-->`systeminfo`，这个命令收集系统信息，需要花费40s，稍等一会儿，得到如下信息：
+
+	C:\Users\Administrator>systeminfo
+
+	OS 名称:          Microsoft Windows 7 旗舰版
+	OS 版本:          6.1.7601 Service Pack 1 Build 7601
+
+	系统类型:         x64-based PC
+	处理器:           安装了 1 个处理器。
+		 [01]: Intel64 Family 6 Model 23 Stepping 6 GenuineIntel ~785 Mhz
+
+	物理内存总量:     2,968 MB
+	可用的物理内存:   819 MB
+	虚拟内存: 最大值: 5,934 MB
+	虚拟内存: 可用:   2,196 MB
+	虚拟内存: 使用中: 3,738 MB
+
+
+##开始编译
+
+需要提前下载几个东西：
+
+* Kafka源码包：[kafka-0.8.1.1-src.tgz](http://kafka.apache.org/downloads.html)
+* Eclipse下的Scala 2.10.x IDE plugin：[For Scala 2.10.4](http://scala-ide.org/download/current.html)
+* Eclipse下的IvyIDE plugin：[ apache-ivyde-2.2.0.final-201311091524-RELEASE.zip](http://ant.apache.org/ivy/ivyde/download.cgi)
+
+###Eclipse下安装插件
+
+基本步骤：打开Eclipse--Help--Install new Software，具体见下图：
+
+![](/images/kafka-dev-env-with-eclipse/install-new-software.png)
+
+![](/images/kafka-dev-env-with-eclipse/install-plugins.jpg)
+
+
+对于IvyDE，如果上述办法添加插件出错，则，进行如下操作：
+
+* IvyDE features `features/org.apache.ivyde.*.jar` to put in your `$ECLIPSE_HOME/features`
+* IvyDE plugins `plugins/org.apache.ivyde.*.jar` to put in your `$ECLIPSE_HOME/plugins`
+
+
+###生成Eclipse project file
+
+由于我的电脑是Windowns 7，因此安装了Cygwin，下面的操作都是在Cygwin下进行的，具体是，到Kafka源码包的路径下，执行如下命令：
+
+	cd $KAFKA_SRC_HOME
+	./gradlew eclipse
+
+
+###kafka工程导入Eclipse
+
+将上一步生成的project导入到Eclipse中，具体：`File` -> `Import` -> `General` -> `Existing Projects into Workspace`，结果如下图：
+
+![](/images/kafka-dev-env-with-eclipse/kafka-src.jpg)
 
 
 
 
+##杂谈
 
+今天在公司，折腾一下午，网络问题，脑袋都大了，回来后，不到30mins就搞定了，顺便还整理了下，形成了此文；没有稳定的网络，对于有追求的工程师，就如同拿着锄头的特战队员，能力再牛，照样被拿微冲的小白恐吓。
 
 
 [Kafka Developer Setup]:		https://cwiki.apache.org/confluence/display/KAFKA/Developer+Setup

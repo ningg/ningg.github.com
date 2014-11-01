@@ -4,7 +4,7 @@
    <title>NingG.github.com</title>
    <link href="http://ningg.github.com/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://ningg.github.com" rel="alternate" type="text/html" />
-   <updated>2014-11-01T23:51:06+08:00</updated>
+   <updated>2014-11-02T01:05:17+08:00</updated>
    <id>http://ningg.github.com</id>
    <author>
      <name></name>
@@ -24,6 +24,69 @@
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;https://cwiki.apache.org/confluence/display/KAFKA/Developer+Setup&quot;&gt;Kafka Developer Setup&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;编译环境&lt;/h2&gt;
+
+&lt;p&gt;查看自己机器的环境：我用笔记本来编译的，是win 7（x64）操作系统；更详细的编译环境信息通过如下方式查看：&lt;code&gt;CMD&lt;/code&gt;–&amp;gt;&lt;code&gt;systeminfo&lt;/code&gt;，这个命令收集系统信息，需要花费40s，稍等一会儿，得到如下信息：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;C:\Users\Administrator&amp;gt;systeminfo
+
+OS 名称:          Microsoft Windows 7 旗舰版
+OS 版本:          6.1.7601 Service Pack 1 Build 7601
+
+系统类型:         x64-based PC
+处理器:           安装了 1 个处理器。
+	 [01]: Intel64 Family 6 Model 23 Stepping 6 GenuineIntel ~785 Mhz
+
+物理内存总量:     2,968 MB
+可用的物理内存:   819 MB
+虚拟内存: 最大值: 5,934 MB
+虚拟内存: 可用:   2,196 MB
+虚拟内存: 使用中: 3,738 MB
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;开始编译&lt;/h2&gt;
+
+&lt;p&gt;需要提前下载几个东西：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Kafka源码包：&lt;a href=&quot;http://kafka.apache.org/downloads.html&quot;&gt;kafka-0.8.1.1-src.tgz&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Eclipse下的Scala 2.10.x IDE plugin：&lt;a href=&quot;http://scala-ide.org/download/current.html&quot;&gt;For Scala 2.10.4&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Eclipse下的IvyIDE plugin：&lt;a href=&quot;http://ant.apache.org/ivy/ivyde/download.cgi&quot;&gt; apache-ivyde-2.2.0.final-201311091524-RELEASE.zip&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;eclipse&quot;&gt;Eclipse下安装插件&lt;/h3&gt;
+
+&lt;p&gt;基本步骤：打开Eclipse–Help–Install new Software，具体见下图：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/kafka-dev-env-with-eclipse/install-new-software.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/kafka-dev-env-with-eclipse/install-plugins.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;对于IvyDE，如果上述办法添加插件出错，则，进行如下操作：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;IvyDE features &lt;code&gt;features/org.apache.ivyde.*.jar&lt;/code&gt; to put in your &lt;code&gt;$ECLIPSE_HOME/features&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;IvyDE plugins &lt;code&gt;plugins/org.apache.ivyde.*.jar&lt;/code&gt; to put in your &lt;code&gt;$ECLIPSE_HOME/plugins&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;eclipse-project-file&quot;&gt;生成Eclipse project file&lt;/h3&gt;
+
+&lt;p&gt;由于我的电脑是Windowns 7，因此安装了Cygwin，下面的操作都是在Cygwin下进行的，具体是，到Kafka源码包的路径下，执行如下命令：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cd $KAFKA_SRC_HOME
+./gradlew eclipse
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;kafkaeclipse&quot;&gt;kafka工程导入Eclipse&lt;/h3&gt;
+
+&lt;p&gt;将上一步生成的project导入到Eclipse中，具体：&lt;code&gt;File&lt;/code&gt; -&amp;gt; &lt;code&gt;Import&lt;/code&gt; -&amp;gt; &lt;code&gt;General&lt;/code&gt; -&amp;gt; &lt;code&gt;Existing Projects into Workspace&lt;/code&gt;，结果如下图：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/kafka-dev-env-with-eclipse/kafka-src.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;section-3&quot;&gt;杂谈&lt;/h2&gt;
+
+&lt;p&gt;今天在公司，折腾一下午，网络问题，脑袋都大了，回来后，不到30mins就搞定了，顺便还整理了下，形成了此文；没有稳定的网络，对于有追求的工程师，就如同拿着锄头的特战队员，能力再牛，照样被拿微冲的小白恐吓。&lt;/p&gt;
 
 </content>
    </entry>
