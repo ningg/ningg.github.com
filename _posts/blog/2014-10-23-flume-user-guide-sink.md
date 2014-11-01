@@ -93,21 +93,21 @@ The above configuration will round down the timestamp to the last 10th minute. F
 ##Logger Sink
 
 Logs event at INFO level. Typically useful for `testing`/`debugging` purpose. Required properties are in bold.
-（将INFO以上几倍的event都记录下来，Logger Sink主要用于test和dubug）
+（将INFO以上级别的event都记录下来，Logger Sink主要用于test和debugging）
 
 |Property Name	|Default	|Description|
 |--|--|--|
-|channel	|–	| |
-|type	|–	|The component type name, needs to be `logger`|
+|**channel**|–	| |
+|**type**|–	|The component type name, needs to be `logger`|
 
-Example for agent named a1:
+Example for agent named `a1`:
 
 	a1.channels = c1
 	a1.sinks = k1
 	a1.sinks.k1.type = logger
 	a1.sinks.k1.channel = c1
 
-**notes(ningg)**：`logger`类型的Sink，有长度限制吗？
+**notes(ningg)**：`logger`类型的Sink，有长度限制吗？其输出的event的body在stdout中只显示
 
 ##Avro Sink
 
@@ -225,8 +225,8 @@ Discards all events it receives from the channel. Required properties are in bol
 
 |Property Name|	Default|	Description|
 |--|--|--|
-|channel|	–|	 |
-|type	|–	|The component type name, needs to be `null`.|
+|**channel**|	–|	 |
+|**type**	|–	|The component type name, needs to be `null`.|
 |batchSize	|100|	| 
 
 Example for agent named a1:
@@ -267,5 +267,4 @@ Example for agent named a1:
 	a1.sinks = k1
 	a1.sinks.k1.type = org.example.MySink
 	a1.sinks.k1.channel = c1
-
 

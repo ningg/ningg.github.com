@@ -7,7 +7,7 @@ categories: storm big-data
 
 ##背景
 
-Storm topologies，支撑multilang，不同通常使用java来编写，这样我就想在Eclipse下来编写Storm topologies，毕竟IDE能够加快开发效率。
+Storm topologies，支撑multilang，不过通常使用java来编写，这样我就想在Eclipse下来编写Storm topologies，毕竟IDE能够加快开发效率。
 
 > 下面的内容，基本都是从官网看的，使用自己语言重新写了一遍，建议有追求的Coder/Engineer/Scientist，还是去看官网吧，看官网才是捷径。
 

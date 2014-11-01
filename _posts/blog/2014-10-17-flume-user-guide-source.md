@@ -291,19 +291,20 @@ deserializer.maxBlobLength	100000000	The maximum number of bytes to read and buf
 A netcat-like source that listens on a given port and turns each line of text into an event. Acts like `nc -k -l [host] [port]`. In other words, it opens a specified port and listens for data. The expectation is that the supplied data is newline separated text. Each line of text is turned into a Flume event and sent via the connected channel.
 （NetCat Source监听`[host] [port]`，并将数据按行构造为Flume event）
 
-Required properties are in bold.
+Required properties are in **bold**.
 
-Property Name	Default	Description
-channels	–	 
-type	–	The component type name, needs to be netcat
-bind	–	Host name or IP address to bind to
-port	–	Port # to bind to
-max-line-length	512	Max line length per event body (in bytes)
-ack-every-event	true	Respond with an “OK” for every event received
-selector.type	replicating	replicating or multiplexing
-selector.*	 	Depends on the selector.type value
-interceptors	–	Space-separated list of interceptors
-interceptors.*	 	 
+|Property Name|	Default|	Description|
+|--|--|--|
+|**channels**|	– |  |
+|**type**|	–|	The component type name, needs to be `netcat`|
+|**bind**|	–|	Host name or IP address to bind to|
+|**port**|	–|	Port # to bind to|
+|max-line-length|	512	|Max line length per event body (in bytes)|
+|ack-every-event|	true	|Respond with an “OK” for every event received|
+|selector.type|	replicating|	replicating or multiplexing|
+|selector.*|	 	|Depends on the selector.type value|
+|interceptors|	–|	Space-separated list of interceptors|
+|interceptors.*| |	 	 |
 
 Example for agent named a1:
 
@@ -311,7 +312,7 @@ Example for agent named a1:
 	a1.channels = c1
 	a1.sources.r1.type = netcat
 	a1.sources.r1.bind = 0.0.0.0
-	a1.sources.r1.bind = 6666
+	a1.sources.r1.port = 6666
 	a1.sources.r1.channels = c1
 
 ##Sequence Generator Source

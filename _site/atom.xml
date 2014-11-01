@@ -4,13 +4,220 @@
    <title>NingG.github.com</title>
    <link href="http://ningg.github.com/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://ningg.github.com" rel="alternate" type="text/html" />
-   <updated>2014-10-30T23:49:27+08:00</updated>
+   <updated>2014-11-01T23:51:06+08:00</updated>
    <id>http://ningg.github.com</id>
    <author>
      <name></name>
      <email></email>
    </author>
 
+   
+   <entry>
+     <title>Eclipse下搭建Kafka的开发环境</title>
+     <link href="http://ningg.github.com/kafka-dev-env-with-eclipse"/>
+     <updated>2014-11-01T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/kafka-dev-env-with-eclipse</id>
+     <content type="html">&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
+
+&lt;p&gt;最近要进行Kafka开发，在&lt;a href=&quot;http://kafka.apache.org/code.html&quot;&gt;官网&lt;/a&gt;看到可以在IDE下开发，赶紧点进去看了看，并且在本地Eclipse下搭建了个Kafka的开发环境，主要参考来源：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cwiki.apache.org/confluence/display/KAFKA/Developer+Setup&quot;&gt;Kafka Developer Setup&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+   </entry>
+   
+   <entry>
+     <title>Flume下插件方式实现Advanced Logger Sink</title>
+     <link href="http://ningg.github.com/flume-advance-logger-sink"/>
+     <updated>2014-10-31T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/flume-advance-logger-sink</id>
+     <content type="html">&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
+
+&lt;p&gt;Flume自带的Logger sink常用于直接在console上输出event的header和body，这对test和debug很重要，但body默认只truncate 16B，无法全部展示，这对test造成很大影响，怎么办？自己实现一个Adavanced Logger sink：完全输出整个event，这样就便利多了。&lt;/p&gt;
+
+&lt;h2 id=&quot;flumelogger-sink&quot;&gt;Flume中Logger Sink&lt;/h2&gt;
+
+&lt;p&gt;在&lt;a href=&quot;/build-flume&quot;&gt;编译flume：使用eclipse查看flume源码&lt;/a&gt;中，已经介绍了如何在Eclipse下查看Flume的源代码，通过查看&lt;code&gt;LoggerSink&lt;/code&gt;源码发现：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;// LoggerSink.java
+logger.info(&quot;Event: &quot; + EventHelper.dumpEvent(event));
+...
+
+// EventHelper.java
+private static final int DEFAULT_MAX_BYTES = 16;
+
+public static String dumpEvent(Event event) {
+	return dumpEvent(event, DEFAULT_MAX_BYTES);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;通过上面的Flume源码片段可知，Logger Sink默认限制了event的大小为16字节，这样，只需要实现一个与Logger Sink基本一致，但不对event设限制的sink就好了。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：编译flume时，直接将源码当作existing maven project导入，行不行？Flume的源码全是java写的吗？还有个问题：如果使用eclipse来进行源代码的开发，最终通过git方式向repository中提交代码时，会夹带.class文件吗？&lt;/p&gt;
+
+&lt;h2 id=&quot;sink&quot;&gt;自定义Sink&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/flume-advance-logger-sink/advanced-logger-sink.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;在&lt;code&gt;flume-ng-core&lt;/code&gt;工程的&lt;code&gt;src/main/java&lt;/code&gt;目录下，新建package：&lt;code&gt;com.github.ningg&lt;/code&gt;，然后新建class：&lt;code&gt;AdvancedLoggerSink&lt;/code&gt;，内容如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;package com.github.ningg;
+
+import org.apache.flume.Channel;
+import org.apache.flume.Context;
+import org.apache.flume.Event;
+import org.apache.flume.EventDeliveryException;
+import org.apache.flume.Transaction;
+import org.apache.flume.conf.Configurable;
+import org.apache.flume.event.EventHelper;
+import org.apache.flume.sink.AbstractSink;
+import org.apache.flume.sink.LoggerSink;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public class AdvancedLoggerSink extends AbstractSink implements Configurable {
+
+	private static final Logger logger = LoggerFactory
+			.getLogger(LoggerSink.class);
+
+	private static final int DEFAULT_MAX_BYTES = 16;
+	private int maxBytes = DEFAULT_MAX_BYTES;
+	
+	@Override
+	public void configure(Context context) {
+		maxBytes = context.getInteger(&quot;maxBytes&quot;, DEFAULT_MAX_BYTES);
+		logger.debug(this.getName() + &quot; maximum bytes set to &quot; + String.valueOf(maxBytes));
+	}
+	
+	@Override
+	public Status process() throws EventDeliveryException {
+		Status result = Status.READY;
+		Channel channel = getChannel();
+		Transaction transaction = channel.getTransaction();
+		Event event = null;
+
+		try {
+			transaction.begin();
+			event = channel.take();
+
+			if (event != null) {
+				if (logger.isInfoEnabled()) {
+					// edit this line, so you can change the output formater.
+					logger.info(&quot;Event: &quot; + EventHelper.dumpEvent(event, maxBytes));
+				}
+			} else {
+				// No event found, request back-off semantics from the sink
+				// runner
+				result = Status.BACKOFF;
+			}
+			transaction.commit();
+		} catch (Exception ex) {
+			transaction.rollback();
+			throw new EventDeliveryException(&quot;Failed to log event: &quot; + event,
+					ex);
+		} finally {
+			transaction.close();
+		}
+
+		return result;
+	}
+
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;接下来，将整个&lt;code&gt;com.github.ningg&lt;/code&gt;package导出为jar包：&lt;code&gt;advancedLoggerSink.jar&lt;/code&gt;；根据Flume官网的建议，将此jar包上传到&lt;code&gt;$FLUME_HOME/plugins.d&lt;/code&gt;目录下，具体：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;plugins.d/advanced-logger-sink/lib/advancedLoggerSink.jar
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;为了测试效果，在&lt;code&gt;$FLUME_HOME/conf&lt;/code&gt;下新建&lt;code&gt;advancedLoggerSink.conf&lt;/code&gt;文件:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;agent.sources = net
+agent.sinks = loggerSink
+agent.channels = memoryChannel
+
+# For each one of the sources, the type is defined
+agent.sources.net.type = netcat
+agent.sources.net.bind = localhost
+agent.sources.net.port = 44444
+
+# Each sink&#39;s type must be defined
+agent.sinks.loggerSink.type = com.github.ningg.AdvancedLoggerSink
+agent.sinks.loggerSink.maxBytes = 100
+
+# Each channel&#39;s type is defined.
+agent.channels.memoryChannel.type = memory
+agent.channels.memoryChannel.capacity = 100
+
+
+agent.sources.net.channels = memoryChannel
+agent.sinks.loggerSink.channel = memoryChannel
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;回到&lt;code&gt;$FLUME_HOME&lt;/code&gt;目录下，执行如下命令：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;bin/flume-ng agent --conf conf --conf-file conf/advancedLoggerSink.conf --name agent -Dflume.root.logger=INFO,console
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;当页面显示如下字样，表示flume启动成功：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Created serverSocket:sun.nio.ch.ServerSocketChannelImpl[/127.0.0.1:44444]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;另开一个窗口，在当前服务器上，执行命令：&lt;code&gt;telnet localhost 44444&lt;/code&gt;，并且输入如下内容：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Now I&#39;m testing the Advanced Logger Sink
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;则，AdavancedSinkLogger的输出内容如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[INFO - com.github.ningg.AdvancedLoggerSink.process(AdvancedLoggerSink.java:44)] Event: { headers:{} 
+   body: 4E 6F 77 20 49 27 6D 20 74 65 73 74 69 6E 67 20 Now I&#39;m testing
+00000010 74 68 65 20 41 64 76 61 6E 63 65 64 20 4C 6F 67 the Advanced Log
+00000020 67 65 72 20 53 69 6E 6B 0D                      ger Sink. }
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;AdvancedLoggerSink的输出格式：每行输出16个byte，左侧是字母对应的ASCII码，右侧是字母本身。备注：如果希望定制上述的输出格式，可以直接新建类来替代&lt;code&gt;EventHelper.dumpEvent(event, maxBytes)&lt;/code&gt;。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;参考来源&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://stackoverflow.com/questions/20189437/flume-is-truncating-characters-when-i-use-the-source-type-as-logger-it-just-s&quot;&gt;Logger Sink truncate Event body&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://issues.apache.org/jira/browse/FLUME-2246&quot;&gt;FLUME-2246&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;杂谈&lt;/h2&gt;
+
+&lt;p&gt;本文写完之后，我发现了：&lt;a href=&quot;https://issues.apache.org/jira/browse/FLUME-2246&quot;&gt;FLUME-2246&lt;/a&gt;，Ou，已经有人在Flume官网上讨论并解决了这个问题，看来不会使用Flume官网不行呀，之前自己阅读标记过&lt;a href=&quot;/how-to-contribute-open-source-project&quot;&gt;如何参与开源项目&lt;/a&gt;， 但是没有实际尝试参与。个人心里一个想法：玩开源的东西，要参与到开源社区中，你的问题开源社区早已涉及，只不过有些扩展功能重要程度低，虽然已解决，但并没有并入发行版本中。&lt;/p&gt;
+
+&lt;p&gt;另，说明一点啊：遇到问题，自己先想思路，再去社区找答案，也是个好方法。&lt;/p&gt;
+
+</content>
+   </entry>
+   
+   <entry>
+     <title>整合Flume、Kafka、Storm</title>
+     <link href="http://ningg.github.com/combine-flume-kafka-storm"/>
+     <updated>2014-10-31T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/combine-flume-kafka-storm</id>
+     <content type="html">&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
+
+&lt;p&gt;之前研读了&lt;a href=&quot;&quot;&gt;In-Stream Big Data Processing&lt;/a&gt;，组里将基于此实现一个实时的数据分析系统，基本选定三个组件：Flume、Kafka、Storm，其中，Flume负责数据采集，Kafka是一个MQ:负责数据采集与数据分析之间解耦，Storm负责进行流式处理。&lt;/p&gt;
+
+&lt;p&gt;把这3个东西串起来，可以吗？可以，官网有说明&lt;/p&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;系统环境&lt;/h2&gt;
+
+&lt;h2 id=&quot;flume&quot;&gt;Flume设置&lt;/h2&gt;
+
+&lt;h2 id=&quot;kafka&quot;&gt;Kafka设置&lt;/h2&gt;
+
+&lt;h2 id=&quot;storm&quot;&gt;Storm设置&lt;/h2&gt;
+
+</content>
+   </entry>
    
    <entry>
      <title>CentOS 6.4下LVM的使用</title>
@@ -1161,7 +1368,7 @@ a1.sinks.k1.channel = c1
 &lt;pre&gt;&lt;code&gt;# Flume上logger类型sink的输出
 Event: { headers:{} body: 31 36 38 2E 35 2E 31 33 30 2E 31 37 35 20 2D 20 168.5.130.175 -  }
 
-# access_log原始文件上的新增内容
+# access_log原始文件上的新增内容（长度超过上面logger sink的输出）
 168.5.130.175 - - [23/Oct/2014:16:34:59 +0800] &quot;GET /...&quot;
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -1173,517 +1380,103 @@ Event: { headers:{} body: 31 36 38 2E 35 2E 31 33 30 2E 31 37 35 20 2D 20 168.5.
   &lt;li&gt;channel有长度限制？channel中存储的event是什么形式存储的？&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;p&gt;通过&lt;code&gt;vim access_log&lt;/code&gt;，向文件最后添加一行内容，发现应该是logger类型的sink，对于event的长度有限制；或者，memory类型的channel对于存储的event有限制。&lt;/p&gt;
+&lt;p&gt;通过&lt;code&gt;vim access_log&lt;/code&gt;，向文件最后添加一行内容，发现应该是logger类型的sink，对于event的长度有限制；或者，memory类型的channel对于存储的event有限制。
+&lt;strong&gt;RE&lt;/strong&gt;：上述问题已经解决，Logger sink输出内容不完整，详情可参考&lt;a href=&quot;/flume-advance-logger-sink&quot;&gt;Advanced Logger Sink&lt;/a&gt;。&lt;/p&gt;
 
-&lt;h2 id=&quot;section-5&quot;&gt;参考来源&lt;/h2&gt;
+&lt;h2 id=&quot;kafka&quot;&gt;Kafka复习&lt;/h2&gt;
+
+&lt;p&gt;下面Kafka的相关总结都参考自：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://kafka.apache.org/documentation.html&quot;&gt;Kafka 0.8.1 Documentation&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;section-5&quot;&gt;几个概念&lt;/h3&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/kafka-documentation/producer_consumer.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;消息队列&lt;/strong&gt;：Kafka充当消息队列，producer将message放入Kafka集群，consumer从Kafka集群中读取message；&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;内部结构&lt;/strong&gt;：按照topic来存放message，每个topic对应一个partitioned log，其中包含多个partition，每个都是一个有序的、message队列；&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;消息存活时间&lt;/strong&gt;：在设定的时间内，kafka始终保存所有的message，即使message已经被consume；&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;consume message&lt;/strong&gt;：每个consumer，只需保存在log中的offset，并且这个offset完全由consumer控制，可自由调整；鉴于此，cousumer之间相互基本没有影响；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/kafka-documentation/log_anatomy.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;针对上面每个topic对应的partitioned log，其中包含了多个partition，这样设计有什么好处？&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;single server上，单个log的大小由文件系统限制，而采用多partition模式，虽然单个partition也受限，但partition的个数不受限制；&lt;/li&gt;
+  &lt;li&gt;多个partition时，每个partition都可作为一个unit，以此来支撑并发处理；&lt;/li&gt;
+  &lt;li&gt;partition是分布式存储的，即，某个server上的partition可能也存在其他的server上，两点好处：
+    &lt;ul&gt;
+      &lt;li&gt;方便不同server之间的partition共享；&lt;/li&gt;
+      &lt;li&gt;配置每个partition的复制份数，提升系统可靠性；&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;partition对应的server，分为两个角色：&lt;code&gt;leader&lt;/code&gt;和&lt;code&gt;follower&lt;/code&gt;：
+    &lt;ul&gt;
+      &lt;li&gt;每个partition都对应一个server担当&lt;code&gt;leader&lt;/code&gt;角色：负责所有的read、write；&lt;/li&gt;
+      &lt;li&gt;其他server担&lt;code&gt;follower&lt;/code&gt;角色：重复&lt;code&gt;leader&lt;/code&gt;的操作；&lt;/li&gt;
+      &lt;li&gt;如果&lt;code&gt;leader&lt;/code&gt;崩溃，则自动推选一个&lt;code&gt;follower&lt;/code&gt;升级为&lt;code&gt;leader&lt;/code&gt;；&lt;/li&gt;
+      &lt;li&gt;server只对其上的部分partition担当&lt;code&gt;leader&lt;/code&gt;角色，方便cluster的均衡；&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Producer产生的数据放到topic的哪个partition下？集中方式：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;轮询：保证每个partition以均等的机会存储message，均衡负载；&lt;/li&gt;
+  &lt;li&gt;函数：根据key in the message来确定partition；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Consumer读取message有两种模式：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;queueing：多个consumer构成一个pool，然后，每个message只被其中一个consumer处理；&lt;/li&gt;
+  &lt;li&gt;publish-subscribe：向所有的consumer广播message；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Kafka中通过将consumer泛化为consumer group来实现，来支持上述两种模式，关于此，详细说一下：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;consumer都标记有consumer group name，每个message都发送给对应consumer group中的一个consumer instance，consumer instance可以是不同的进程，也可以分布在不同的物理机器上；&lt;/li&gt;
+  &lt;li&gt;若所有的consumer instances都属于同一个consume group，则为queuing轮询的均衡负载；&lt;/li&gt;
+  &lt;li&gt;若所有的consumer instances都属于不同的consume group，则为publish-subscribe，message广播到所有的consumer；&lt;/li&gt;
+  &lt;li&gt;实际场景下，topic对应为数不多的几个consumer group，即，consumer group类似&lt;code&gt;logical subscriber&lt;/code&gt;；每个group中有多个consumer，目的是提升可扩展性和容错能力。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/kafka-documentation/consumer-groups.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：几个问题：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;consumer group是与topic对应的？还是partition对应？&lt;/li&gt;
+  &lt;li&gt;consumer group方式能够提升可扩展性和容错能力？&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Ordering guarantee，Kafka保证message按序处理，同时也保证并行处理，几点：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;单个partition中的message保证按序处理，同时一个partition只能对应一个consumer instance；&lt;/li&gt;
+  &lt;li&gt;不同partition之间，不保证顺序处理，多个partition实现了并行处理；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：同一个partition中的message，当其中一个message A被指派给一个consumer instance后，在message A被处理完之前，message B是否会被指派出去？&lt;/p&gt;
+
+&lt;h3 id=&quot;section-6&quot;&gt;小结&lt;/h3&gt;
+
+&lt;p&gt;Kafka通过 partition data by key 和 pre-partition ordering，满足了大部分需求。如果要保证所有message都顺序处理，则将topic设置为only one partition，此时，变为串行处理。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：单个partition是以什么形式存储在server上的？纯粹的文档文件？&lt;/p&gt;
+
+&lt;h2 id=&quot;section-7&quot;&gt;参考来源&lt;/h2&gt;
 
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;http://flume.apache.org/documentation.html&quot;&gt;Flume Documentation&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;Book: &lt;a href=&quot;http://files.hii-tech.com/Book/Hadoop/PacktPub.Apache.Flume.Distributed.Log.Collection.for.Hadoop.Jul.2013.pdf&quot;&gt;apache-flume-distributed-log-collection-hadoop&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>win下搭建Storm topology的开发调试环境</title>
-     <link href="http://ningg.github.com/storm-dev-env-with-eclipse"/>
-     <updated>2014-10-23T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/storm-dev-env-with-eclipse</id>
-     <content type="html">&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
-
-&lt;p&gt;Storm topologies，支撑multilang，不同通常使用java来编写，这样我就想在Eclipse下来编写Storm topologies，毕竟IDE能够加快开发效率。&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;下面的内容，基本都是从官网看的，使用自己语言重新写了一遍，建议有追求的Coder/Engineer/Scientist，还是去看官网吧，看官网才是捷径。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;section-1&quot;&gt;系统环境&lt;/h2&gt;
-
-&lt;p&gt;今天要进行Storm topology开发的系统，基本环境：win xp(x86)操作系统；更详细的编译环境信息，通过如下方式查看：&lt;code&gt;CMD&lt;/code&gt;–&lt;code&gt;systeminfo&lt;/code&gt;，这个命令执行需要时间，10~40s，稍等一会儿，得到如下信息：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;C:\Documents and Settings\ningg&amp;gt;systeminfo
-
-OS 名称:      Microsoft Windows XP Professional
-OS 版本:      5.1.2600 Service Pack 3 Build 2600
-OS 制造商:    Microsoft Corporation
-OS 构件类型:  Multiprocessor Free
-系统制造商:   LENOVO
-系统型号:     ThinkCentre M6400t-N000
-系统类型:     X86-based PC
-处理器:       安装了 1 个处理器。
-       [01]: x86 Family 6 Model 58 Stepping 9 GenuineIntel ~3392 Mhz
-BIOS 版本:    LENOVO - 14f0
-物理内存总量: 3,546 MB
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&quot;eclipsestorm-start&quot;&gt;eclipse下查看storm-start工程&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&quot;https://github.com/apache/storm/tree/master/examples/storm-starter&quot;&gt;storm-starter&lt;/a&gt;是Storm官网提供的一个例子，简要介绍了storm topology的编写，在&lt;a href=&quot;http://storm.apache.org/documentation/Tutorial.html&quot;&gt;storm Tutorial&lt;/a&gt;中重点讲解了这个例子；总之，一点：&lt;a href=&quot;https://github.com/apache/storm/tree/master/examples/storm-starter&quot;&gt;storm-starter&lt;/a&gt;是入门学习的典型例子。OK，我准备在Eclipse下查看&lt;a href=&quot;https://github.com/apache/storm/tree/master/examples/storm-starter&quot;&gt;storm-starter&lt;/a&gt;工程。&lt;/p&gt;
-
-&lt;p&gt;说一下我在Eclipse下的操作步骤：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;下载storm发行版本的源代码：&lt;a href=&quot;http://storm.apache.org/downloads.html&quot;&gt;apache-storm-0.9.2-incubating-src.zip&lt;/a&gt;，并解压；&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;File&lt;/code&gt;–&lt;code&gt;Import&lt;/code&gt;–&lt;code&gt;Existing Maven Projects&lt;/code&gt;；&lt;/li&gt;
-  &lt;li&gt;选择storm源代码的&lt;code&gt;examples\storm-starter&lt;/code&gt;目录，对，然后一路next下去；&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;好了，中间可能提示maven项目有错误，不要管，一直往下走。接下来说一下如何解决maven项目的bug，我导入storm-starter工程后，&lt;code&gt;pom.xml&lt;/code&gt;文件上冒了个&lt;span style=&quot;color:red&quot;&gt;红色的X&lt;/span&gt;，找到相应位置，按下&lt;code&gt;F2&lt;/code&gt;，显示出错信息：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;Plugin execution not covered by lifecycle configuration: 
-com.theoryinpractise:clojure-maven-plugin:1.3.18:compile 
-(execution: compile, phase: compile)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/storm-dev-env-with-eclipse/pom-error.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;OK，不要管这个，直接在storm-starter工程上，&lt;code&gt;右键&lt;/code&gt;–&lt;code&gt;Run As&lt;/code&gt;–&lt;code&gt;Maven build&lt;/code&gt;，输入参数：&lt;code&gt;clean install -DskipTests=true&lt;/code&gt;；然后，&lt;code&gt;Run&lt;/code&gt;；至此，打完收工，妥妥的，结果如下图所示：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/storm-dev-env-with-eclipse/build-finished.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;到这一步，就可以参照&lt;a href=&quot;http://storm.apache.org/documentation/Tutorial.html&quot;&gt;storm Tutorial&lt;/a&gt;、&lt;a href=&quot;https://github.com/apache/storm/tree/master/examples/storm-starter&quot;&gt;storm-starter&lt;/a&gt;中的说明进行一步步的操作，来熟悉Storm topology。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;疑问&lt;/strong&gt;：Eclipse下就可以直接开发、调试topology了吗？&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;RE&lt;/strong&gt;：是的，直接开发，&lt;a href=&quot;http://storm.apache.org/documentation/Tutorial.html&quot;&gt;storm Tutorial&lt;/a&gt;中的例子就是这样。&lt;/p&gt;
-
-&lt;h2 id=&quot;storm&quot;&gt;本地安装Storm&lt;/h2&gt;
-
-&lt;p&gt;下载&lt;a href=&quot;http://storm.apache.org/downloads.html&quot;&gt;Storm的binary版本&lt;/a&gt;，就两点：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;把 Storm的&lt;code&gt;bin&lt;/code&gt;目录添加到&lt;code&gt;PATH&lt;/code&gt;中；&lt;/li&gt;
-  &lt;li&gt;验证是否安装成功：执行&lt;code&gt;storm&lt;/code&gt;命令，查看是否提示出错；&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;strong&gt;疑问&lt;/strong&gt;：如果只是开发Storm topology，需要在本地win xp系统上安装Storm？&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;RE&lt;/strong&gt;：我来告诉你吧，本地安装Storm，核心用途是：充当client，向远端Storm cluster提交编写好的topology。重新来理一下，eclipse下新建工程，maven添加storm的依赖，即可进行topology的开发；然后通过本地安装的storm，可以进行本地的test、develop；最终，通过本地安装的storm充当client，可以向storm cluster提交topology。&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;疑问：上面已经可以进行Storm topology的开发了，但如果希望查看Storm源代码，特别是Clojure编写的那部分，怎么办？&lt;/p&gt;
-
-  &lt;p&gt;关于这个问题，官网有提示：&lt;a href=&quot;http://storm.apache.org/documentation/Creating-a-new-Storm-project.html&quot;&gt;Creating a new Storm project&lt;/a&gt;。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;section-2&quot;&gt;参考来源&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/apache/incubator-storm/tree/master/examples/storm-starter&quot;&gt;Storm Example: storm-starter&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://storm.apache.org/documentation/Setting-up-development-environment.html&quot;&gt;Storm: Setting up development environment&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://storm.apache.org/documentation/Creating-a-new-Storm-project.html&quot;&gt;Storm: Creating a new Storm project&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>Flume 1.5.0.1 User Guide：Flume Sinks</title>
-     <link href="http://ningg.github.com/flume-user-guide-sink"/>
-     <updated>2014-10-23T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/flume-user-guide-sink</id>
-     <content type="html">&lt;h2 id=&quot;hdfs-sink&quot;&gt;HDFS Sink&lt;/h2&gt;
-
-&lt;p&gt;This sink writes events into the Hadoop Distributed File System (HDFS). It currently supports creating text and sequence files. It supports compression in both file types. The files can be rolled (close current file and create a new one) periodically based on the elapsed time or size of data or number of events. It also buckets/partitions data by attributes like timestamp or machine where the event originated. The HDFS directory path may contain formatting escape sequences that will replaced by the HDFS sink to generate a directory/file name to store the events. Using this sink requires hadoop to be installed so that Flume can use the Hadoop jars to communicate with the HDFS cluster. Note that a version of Hadoop that supports the sync() call is required.
-（将events写到HDFS上，当前支持text和sequence file，同时也支持两种类型文件的压缩；支持根据time、size、event number来roll file——close current file并且create a new one；）&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：text？sequence file？什么含义？&lt;/p&gt;
-
-&lt;p&gt;The following are the escape sequences supported:&lt;/p&gt;
-
-&lt;p&gt;Alias	Description
-%{host}	Substitute value of event header named “host”. Arbitrary header names are supported.
-%t	Unix time in milliseconds
-%a	locale’s short weekday name (Mon, Tue, …)
-%A	locale’s full weekday name (Monday, Tuesday, …)
-%b	locale’s short month name (Jan, Feb, …)
-%B	locale’s long month name (January, February, …)
-%c	locale’s date and time (Thu Mar 3 23:05:25 2005)
-%d	day of month (01)
-%D	date; same as %m/%d/%y
-%H	hour (00..23)
-%I	hour (01..12)
-%j	day of year (001..366)
-%k	hour ( 0..23)
-%m	month (01..12)
-%M	minute (00..59)
-%p	locale’s equivalent of am or pm
-%s	seconds since 1970-01-01 00:00:00 UTC
-%S	second (00..59)
-%y	last two digits of year (00..99)
-%Y	year (2010)
-%z	+hhmm numeric timezone (for example, -0400)
-The file in use will have the name mangled to include ”.tmp” at the end. Once the file is closed, this extension is removed. This allows excluding partially complete files in the directory. Required properties are in bold.&lt;/p&gt;
-
-&lt;p&gt;Note For all of the time related escape sequences, a header with the key “timestamp” must exist among the headers of the event (unless hdfs.useLocalTimeStamp is set to true). One way to add this automatically is to use the TimestampInterceptor.
-Name	Default	Description
-channel	–	 
-type	–	The component type name, needs to be hdfs
-hdfs.path	–	HDFS directory path (eg hdfs://namenode/flume/webdata/)
-hdfs.filePrefix	FlumeData	Name prefixed to files created by Flume in hdfs directory
-hdfs.fileSuffix	–	Suffix to append to file (eg .avro - NOTE: period is not automatically added)
-hdfs.inUsePrefix	–	Prefix that is used for temporal files that flume actively writes into
-hdfs.inUseSuffix	.tmp	Suffix that is used for temporal files that flume actively writes into
-hdfs.rollInterval	30	Number of seconds to wait before rolling current file (0 = never roll based on time interval)
-hdfs.rollSize	1024	File size to trigger roll, in bytes (0: never roll based on file size)
-hdfs.rollCount	10	Number of events written to file before it rolled (0 = never roll based on number of events)
-hdfs.idleTimeout	0	Timeout after which inactive files get closed (0 = disable automatic closing of idle files)
-hdfs.batchSize	100	number of events written to file before it is flushed to HDFS
-hdfs.codeC	–	Compression codec. one of following : gzip, bzip2, lzo, lzop, snappy
-hdfs.fileType	SequenceFile	File format: currently SequenceFile, DataStream or CompressedStream (1)DataStream will not compress output file and please don’t set codeC (2)CompressedStream requires set hdfs.codeC with an available codeC
-hdfs.maxOpenFiles	5000	Allow only this number of open files. If this number is exceeded, the oldest file is closed.
-hdfs.minBlockReplicas	–	Specify minimum number of replicas per HDFS block. If not specified, it comes from the default Hadoop config in the classpath.
-hdfs.writeFormat	–	Format for sequence file records. One of “Text” or “Writable” (the default).
-hdfs.callTimeout	10000	Number of milliseconds allowed for HDFS operations, such as open, write, flush, close. This number should be increased if many HDFS timeout operations are occurring.
-hdfs.threadsPoolSize	10	Number of threads per HDFS sink for HDFS IO ops (open, write, etc.)
-hdfs.rollTimerPoolSize	1	Number of threads per HDFS sink for scheduling timed file rolling
-hdfs.kerberosPrincipal	–	Kerberos user principal for accessing secure HDFS
-hdfs.kerberosKeytab	–	Kerberos keytab for accessing secure HDFS
-hdfs.proxyUser	 	 
-hdfs.round	false	Should the timestamp be rounded down (if true, affects all time based escape sequences except %t)
-hdfs.roundValue	1	Rounded down to the highest multiple of this (in the unit configured using hdfs.roundUnit), less than current time.
-hdfs.roundUnit	second	The unit of the round down value - second, minute or hour.
-hdfs.timeZone	Local Time	Name of the timezone that should be used for resolving the directory path, e.g. America/Los_Angeles.
-hdfs.useLocalTimeStamp	false	Use the local time (instead of the timestamp from the event header) while replacing the escape sequences.
-hdfs.closeTries	0	Number of times the sink must try to close a file. If set to 1, this sink will not re-try a failed close (due to, for example, NameNode or DataNode failure), and may leave the file in an open state with a .tmp extension. If set to 0, the sink will try to close the file until the file is eventually closed (there is no limit on the number of times it would try).
-hdfs.retryInterval	180	Time in seconds between consecutive attempts to close a file. Each close call costs multiple RPC round-trips to the Namenode, so setting this too low can cause a lot of load on the name node. If set to 0 or less, the sink will not attempt to close the file if the first attempt fails, and may leave the file open or with a ”.tmp” extension.
-serializer	TEXT	Other possible options include avro_event or the fully-qualified class name of an implementation of the EventSerializer.Builder interface.
-serializer.*	 	 &lt;/p&gt;
-
-&lt;p&gt;Example for agent named a1:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;a1.channels = c1
-a1.sinks = k1
-a1.sinks.k1.type = hdfs
-a1.sinks.k1.channel = c1
-a1.sinks.k1.hdfs.path = /flume/events/%y-%m-%d/%H%M/%S
-a1.sinks.k1.hdfs.filePrefix = events-
-a1.sinks.k1.hdfs.round = true
-a1.sinks.k1.hdfs.roundValue = 10
-a1.sinks.k1.hdfs.roundUnit = minute
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The above configuration will round down the timestamp to the last 10th minute. For example, an event with timestamp 11:54:34 AM, June 12, 2012 will cause the hdfs path to become /flume/events/2012-06-12/1150/00.&lt;/p&gt;
-
-&lt;h2 id=&quot;logger-sink&quot;&gt;Logger Sink&lt;/h2&gt;
-
-&lt;p&gt;Logs event at INFO level. Typically useful for &lt;code&gt;testing&lt;/code&gt;/&lt;code&gt;debugging&lt;/code&gt; purpose. Required properties are in bold.
-（将INFO以上几倍的event都记录下来，Logger Sink主要用于test和dubug）&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Property Name&lt;/th&gt;
-      &lt;th&gt;Default&lt;/th&gt;
-      &lt;th&gt;Description&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;channel&lt;/td&gt;
-      &lt;td&gt;–&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;type&lt;/td&gt;
-      &lt;td&gt;–&lt;/td&gt;
-      &lt;td&gt;The component type name, needs to be &lt;code&gt;logger&lt;/code&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;Example for agent named a1:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;a1.channels = c1
-a1.sinks = k1
-a1.sinks.k1.type = logger
-a1.sinks.k1.channel = c1
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：&lt;code&gt;logger&lt;/code&gt;类型的Sink，有长度限制吗？&lt;/p&gt;
-
-&lt;h2 id=&quot;avro-sink&quot;&gt;Avro Sink&lt;/h2&gt;
-
-&lt;p&gt;This sink forms one half of Flume’s tiered collection support. Flume events sent to this sink are turned into Avro events and sent to the configured hostname / port pair. The events are taken from the configured Channel in batches of the configured batch size. Required properties are in bold.&lt;/p&gt;
-
-&lt;p&gt;Property Name	Default Description	 
-channel	–	 
-type	–	The component type name, needs to be avro.
-hostname	–	The hostname or IP address to bind to.
-port	–	The port # to listen on.
-batch-size	100	number of event to batch together for send.
-connect-timeout	20000	Amount of time (ms) to allow for the first (handshake) request.
-request-timeout	20000	Amount of time (ms) to allow for requests after the first.
-reset-connection-interval	none	Amount of time (s) before the connection to the next hop is reset. This will force the Avro Sink to reconnect to the next hop. This will allow the sink to connect to hosts behind a hardware load-balancer when news hosts are added without having to restart the agent.
-compression-type	none	This can be “none” or “deflate”. The compression-type must match the compression-type of matching AvroSource
-compression-level	6	The level of compression to compress event. 0 = no compression and 1-9 is compression. The higher the number the more compression
-ssl	false	Set to true to enable SSL for this AvroSink. When configuring SSL, you can optionally set a “truststore”, “truststore-password”, “truststore-type”, and specify whether to “trust-all-certs”.
-trust-all-certs	false	If this is set to true, SSL server certificates for remote servers (Avro Sources) will not be checked. This should NOT be used in production because it makes it easier for an attacker to execute a man-in-the-middle attack and “listen in” on the encrypted connection.
-truststore	–	The path to a custom Java truststore file. Flume uses the certificate authority information in this file to determine whether the remote Avro Source’s SSL authentication credentials should be trusted. If not specified, the default Java JSSE certificate authority files (typically “jssecacerts” or “cacerts” in the Oracle JRE) will be used.
-truststore-password	–	The password for the specified truststore.
-truststore-type	JKS	The type of the Java truststore. This can be “JKS” or other supported Java truststore type.
-maxIoWorkers	2 * the number of available processors in the machine	The maximum number of I/O worker threads. This is configured on the NettyAvroRpcClient NioClientSocketChannelFactory.&lt;/p&gt;
-
-&lt;p&gt;Example for agent named a1:&lt;/p&gt;
-
-&lt;p&gt;a1.channels = c1
-a1.sinks = k1
-a1.sinks.k1.type = avro
-a1.sinks.k1.channel = c1
-a1.sinks.k1.hostname = 10.10.10.10
-a1.sinks.k1.port = 4545&lt;/p&gt;
-
-&lt;h2 id=&quot;thrift-sink&quot;&gt;Thrift Sink&lt;/h2&gt;
-
-&lt;p&gt;This sink forms one half of Flume’s tiered collection support. Flume events sent to this sink are turned into Thrift events and sent to the configured hostname / port pair. The events are taken from the configured Channel in batches of the configured batch size. Required properties are in bold.&lt;/p&gt;
-
-&lt;p&gt;Property Name	Default	Description
-channel	–	 
-type	–	The component type name, needs to be thrift.
-hostname	–	The hostname or IP address to bind to.
-port	–	The port # to listen on.
-batch-size	100	number of event to batch together for send.
-connect-timeout	20000	Amount of time (ms) to allow for the first (handshake) request.
-request-timeout	20000	Amount of time (ms) to allow for requests after the first.
-connection-reset-interval	none	Amount of time (s) before the connection to the next hop is reset. This will force the Thrift Sink to reconnect to the next hop. This will allow the sink to connect to hosts behind a hardware load-balancer when news hosts are added without having to restart the agent.&lt;/p&gt;
-
-&lt;p&gt;Example for agent named a1:&lt;/p&gt;
-
-&lt;p&gt;a1.channels = c1
-a1.sinks = k1
-a1.sinks.k1.type = thrift
-a1.sinks.k1.channel = c1
-a1.sinks.k1.hostname = 10.10.10.10
-a1.sinks.k1.port = 4545&lt;/p&gt;
-
-&lt;h2 id=&quot;irc-sink&quot;&gt;IRC Sink&lt;/h2&gt;
-
-&lt;p&gt;The IRC sink takes messages from attached channel and relays those to configured IRC destinations. Required properties are in bold.&lt;/p&gt;
-
-&lt;p&gt;Property Name	Default	Description
-channel	–	 
-type	–	The component type name, needs to be irc
-hostname	–	The hostname or IP address to connect to
-port	6667	The port number of remote host to connect
-nick	–	Nick name
-user	–	User name
-password	–	User password
-chan	–	channel
-name	 	 
-splitlines	–	(boolean)
-splitchars	n	line separator (if you were to enter the default value into the config file, then you would need to escape the backslash, like this: “\n”)&lt;/p&gt;
-
-&lt;p&gt;Example for agent named a1:&lt;/p&gt;
-
-&lt;p&gt;a1.channels = c1
-a1.sinks = k1
-a1.sinks.k1.type = irc
-a1.sinks.k1.channel = c1
-a1.sinks.k1.hostname = irc.yourdomain.com
-a1.sinks.k1.nick = flume
-a1.sinks.k1.chan = #flume&lt;/p&gt;
-
-&lt;h2 id=&quot;file-roll-sink&quot;&gt;File Roll Sink&lt;/h2&gt;
-
-&lt;p&gt;Stores events on the local filesystem. Required properties are in bold.
-（将event存储到local FS上）&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Property Name&lt;/th&gt;
-      &lt;th&gt;Default&lt;/th&gt;
-      &lt;th&gt;Description&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;strong&gt;channel&lt;/strong&gt;&lt;/td&gt;
-      &lt;td&gt;–&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;strong&gt;type&lt;/strong&gt;&lt;/td&gt;
-      &lt;td&gt;–&lt;/td&gt;
-      &lt;td&gt;The component type name, needs to be &lt;code&gt;file_roll&lt;/code&gt;.&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;strong&gt;sink.directory&lt;/strong&gt;&lt;/td&gt;
-      &lt;td&gt;–&lt;/td&gt;
-      &lt;td&gt;The directory where files will be stored&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;sink.rollInterval&lt;/td&gt;
-      &lt;td&gt;30&lt;/td&gt;
-      &lt;td&gt;Roll the file every 30 seconds. Specifying 0 will disable rolling and cause all events to be written to a single file.&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;sink.serializer&lt;/td&gt;
-      &lt;td&gt;TEXT&lt;/td&gt;
-      &lt;td&gt;Other possible options include &lt;code&gt;avro_event&lt;/code&gt; or the FQCN of an implementation of &lt;code&gt;EventSerializer.Builder&lt;/code&gt; interface.&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;batchSize&lt;/td&gt;
-      &lt;td&gt;100&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：FQCN: Fully-Qualified Class Name，全限定类名，包含package的class名称；txn：Transaction，事务。下面几个疑问：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;roll the file？是指对文件重命名存储吗？生成新文件？可以通过源代码进行学习；&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;sink.serializer&lt;/code&gt;什么含义？&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;batchSize&lt;/code&gt;什么含义？&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Example for agent named a1:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;a1.channels = c1
-a1.sinks = k1
-a1.sinks.k1.type = file_roll
-a1.sinks.k1.channel = c1
-a1.sinks.k1.sink.directory = /var/log/flume
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&quot;null-sink&quot;&gt;Null Sink&lt;/h2&gt;
-
-&lt;p&gt;Discards all events it receives from the channel. Required properties are in bold.
-（丢弃所有event）&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Property Name&lt;/th&gt;
-      &lt;th&gt;Default&lt;/th&gt;
-      &lt;th&gt;Description&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;channel&lt;/td&gt;
-      &lt;td&gt;–&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;type&lt;/td&gt;
-      &lt;td&gt;–&lt;/td&gt;
-      &lt;td&gt;The component type name, needs to be &lt;code&gt;null&lt;/code&gt;.&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;batchSize&lt;/td&gt;
-      &lt;td&gt;100&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;Example for agent named a1:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;a1.channels = c1
-a1.sinks = k1
-a1.sinks.k1.type = null
-a1.sinks.k1.channel = c1
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&quot;hbasesinks&quot;&gt;HBaseSinks&lt;/h2&gt;
-
-&lt;p&gt;（todo）&lt;/p&gt;
-
-&lt;h2 id=&quot;morphlinesolrsink&quot;&gt;MorphlineSolrSink&lt;/h2&gt;
-
-&lt;p&gt;（todo）&lt;/p&gt;
-
-&lt;h2 id=&quot;elasticsearchsink&quot;&gt;ElasticSearchSink&lt;/h2&gt;
-
-&lt;p&gt;（todo）&lt;/p&gt;
-
-&lt;h2 id=&quot;custom-sink&quot;&gt;Custom Sink&lt;/h2&gt;
-
-&lt;p&gt;A custom sink is your own implementation of the &lt;code&gt;Sink&lt;/code&gt; interface. A custom sink’s class and its dependencies must be included in the agent’s classpath when starting the Flume agent. The type of the custom sink is its FQCN. Required properties are in bold.
-（通过实现Sink接口，可以定制自己的custom；需要在启动Flume agent时，将自定义的Sink和其depedencies添加到classpath中）&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Property Name&lt;/th&gt;
-      &lt;th&gt;Default&lt;/th&gt;
-      &lt;th&gt;Description&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;channel&lt;/td&gt;
-      &lt;td&gt;–&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;type&lt;/td&gt;
-      &lt;td&gt;–&lt;/td&gt;
-      &lt;td&gt;The component type name, needs to be your &lt;code&gt;FQCN&lt;/code&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：FQCN是什么？Fully-Qualified Class Name，全限定类名。&lt;/p&gt;
-
-&lt;p&gt;Example for agent named a1:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;a1.channels = c1
-a1.sinks = k1
-a1.sinks.k1.type = org.example.MySink
-a1.sinks.k1.channel = c1
-&lt;/code&gt;&lt;/pre&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>Storm：Creating a new Storm project</title>
-     <link href="http://ningg.github.com/storm-creating-a-new-strom-project"/>
-     <updated>2014-10-22T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/storm-creating-a-new-strom-project</id>
-     <content type="html">&lt;blockquote&gt;
-  &lt;p&gt;原文地址：&lt;a href=&quot;http://storm.apache.org/documentation/Creating-a-new-Storm-project.html&quot;&gt;Creating a new Storm project&lt;/a&gt;，本文使用&lt;code&gt;英文原文+中文注释&lt;/code&gt;方式来写。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;This page outlines how to set up a Storm project for development. The steps are:
-（本文重点：介绍如何设置一个Storm project用于开发。）&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Add Storm jars to classpath（把storm的jar添加到classpath中）&lt;/li&gt;
-  &lt;li&gt;If using multilang, add multilang dir to classpath（如果用了multilang，将dir添加到classpath中）&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Follow along to see how to set up the &lt;a href=&quot;http://github.com/nathanmarz/storm-starter&quot;&gt;storm-starter&lt;/a&gt; project in Eclipse.&lt;/p&gt;
-
-&lt;h2 id=&quot;add-storm-jars-to-classpath&quot;&gt;Add Storm jars to classpath&lt;/h2&gt;
-
-&lt;p&gt;You’ll need the Storm jars on your classpath to develop Storm topologies. Using &lt;a href=&quot;http://storm.apache.org/documentation/Maven.html&quot;&gt;Maven&lt;/a&gt; is highly recommended. &lt;a href=&quot;https://github.com/nathanmarz/storm-starter/blob/master/m2-pom.xml&quot;&gt;Here’s an example&lt;/a&gt; of how to setup your pom.xml for a Storm project. If you don’t want to use Maven, you can include the jars from the Storm release on your classpath.
-（推荐使用Maven方式，将Storm的jar包添加到classpath中）&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://github.com/nathanmarz/storm-starter&quot;&gt;storm-starter&lt;/a&gt; uses &lt;a href=&quot;http://github.com/technomancy/leiningen&quot;&gt;Leiningen&lt;/a&gt; for build and dependency resolution. You can install leiningen by downloading &lt;a href=&quot;https://raw.github.com/technomancy/leiningen/stable/bin/lein&quot;&gt;this script&lt;/a&gt;, placing it on your path, and making it executable. To retrieve the dependencies for Storm, simply run &lt;code&gt;lein deps&lt;/code&gt; in the project root.
-（storm-starter project用了Leiningen来构建和进行依赖管理的，因此，下载Leiningen到本地，保证其可以执行，然后到project的根目录，执行&lt;code&gt;lein deps&lt;/code&gt;命令，来获取Storm的依赖）&lt;/p&gt;
-
-&lt;p&gt;To set up the classpath in Eclipse, create a new Java project, include &lt;code&gt;src/jvm/&lt;/code&gt; as a source path, and make sure all the jars in &lt;code&gt;lib/&lt;/code&gt; and &lt;code&gt;lib/dev/&lt;/code&gt; are in the Referenced Libraries section of the project.
-（创建java project，将&lt;code&gt;src/jvm/&lt;/code&gt;设置为source path，并将&lt;code&gt;lib/&lt;/code&gt;和&lt;code&gt;lib/dev/&lt;/code&gt;添加到build path中）&lt;/p&gt;
-
-&lt;h2 id=&quot;if-using-multilang-add-multilang-dir-to-classpath&quot;&gt;If using multilang, add multilang dir to classpath&lt;/h2&gt;
-
-&lt;p&gt;If you implement spouts or bolts in languages other than Java, then those implementations should be under the &lt;code&gt;multilang/resources/&lt;/code&gt; directory of the project. For Storm to find these files in local mode, the &lt;code&gt;resources/&lt;/code&gt; dir needs to be on the classpath. You can do this in Eclipse by adding &lt;code&gt;multilang/&lt;/code&gt; as a source folder. You may also need to add &lt;code&gt;multilang/resources&lt;/code&gt; as a source directory.
-（使用multilang编写spout和bolt时，需要将实际的源代码放在&lt;code&gt;multilang/resources/&lt;/code&gt;目录）&lt;/p&gt;
-
-&lt;p&gt;For more information on writing topologies in other languages, see &lt;a href=&quot;http://storm.apache.org/documentation/Using-non-JVM-languages-with-Storm.html&quot;&gt;Using non-JVM languages with Storm&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;To test that everything is working in Eclipse, you should now be able to &lt;code&gt;Run&lt;/code&gt; the &lt;code&gt;WordCountTopology.java&lt;/code&gt; file. You will see messages being emitted at the console for 10 seconds.&lt;/p&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;参考来源&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://storm.apache.org/&quot;&gt;Apache Storm&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://storm.apache.org/documentation/Rationale.html&quot;&gt;Apache Storm: Documentation Rationale&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 </content>

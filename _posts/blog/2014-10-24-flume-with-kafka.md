@@ -72,7 +72,7 @@ Flume收集分布在不同机器上的日志信息，聚合之后，将信息送
 	# Flume上logger类型sink的输出
 	Event: { headers:{} body: 31 36 38 2E 35 2E 31 33 30 2E 31 37 35 20 2D 20 168.5.130.175 -  }
 
-	# access_log原始文件上的新增内容
+	# access_log原始文件上的新增内容（长度超过上面logger sink的输出）
 	168.5.130.175 - - [23/Oct/2014:16:34:59 +0800] "GET /..."
 
 思考：
@@ -82,10 +82,92 @@ Flume收集分布在不同机器上的日志信息，聚合之后，将信息送
 3. channel有长度限制？channel中存储的event是什么形式存储的？
 
 通过`vim access_log`，向文件最后添加一行内容，发现应该是logger类型的sink，对于event的长度有限制；或者，memory类型的channel对于存储的event有限制。
+**RE**：上述问题已经解决，Logger sink输出内容不完整，详情可参考[Advanced Logger Sink](/flume-advance-logger-sink)。
+
+##Kafka复习
+
+下面Kafka的相关总结都参考自：
+
+* [Kafka 0.8.1 Documentation][Kafka 0.8.1 Documentation]
+
+###几个概念
+
+![](/images/kafka-documentation/producer_consumer.png)
+
+* **消息队列**：Kafka充当消息队列，producer将message放入Kafka集群，consumer从Kafka集群中读取message；
+* **内部结构**：按照topic来存放message，每个topic对应一个partitioned log，其中包含多个partition，每个都是一个有序的、message队列；
+* **消息存活时间**：在设定的时间内，kafka始终保存所有的message，即使message已经被consume；
+* **consume message**：每个consumer，只需保存在log中的offset，并且这个offset完全由consumer控制，可自由调整；鉴于此，cousumer之间相互基本没有影响；
+
+![](/images/kafka-documentation/log_anatomy.png)
+
+针对上面每个topic对应的partitioned log，其中包含了多个partition，这样设计有什么好处？
+
+* single server上，单个log的大小由文件系统限制，而采用多partition模式，虽然单个partition也受限，但partition的个数不受限制；
+* 多个partition时，每个partition都可作为一个unit，以此来支撑并发处理；
+* partition是分布式存储的，即，某个server上的partition可能也存在其他的server上，两点好处：
+	* 方便不同server之间的partition共享；
+	* 配置每个partition的复制份数，提升系统可靠性；
+* partition对应的server，分为两个角色：`leader`和`follower`：
+	* 每个partition都对应一个server担当`leader`角色：负责所有的read、write；
+	* 其他server担`follower`角色：重复`leader`的操作；
+	* 如果`leader`崩溃，则自动推选一个`follower`升级为`leader`；
+	* server只对其上的部分partition担当`leader`角色，方便cluster的均衡；
+
+Producer产生的数据放到topic的哪个partition下？集中方式：
+
+* 轮询：保证每个partition以均等的机会存储message，均衡负载；
+* 函数：根据key in the message来确定partition；
+
+Consumer读取message有两种模式：
+
+* queueing：多个consumer构成一个pool，然后，每个message只被其中一个consumer处理；
+* publish-subscribe：向所有的consumer广播message；
+
+Kafka中通过将consumer泛化为consumer group来实现，来支持上述两种模式，关于此，详细说一下：
+
+* consumer都标记有consumer group name，每个message都发送给对应consumer group中的一个consumer instance，consumer instance可以是不同的进程，也可以分布在不同的物理机器上；
+* 若所有的consumer instances都属于同一个consume group，则为queuing轮询的均衡负载；
+* 若所有的consumer instances都属于不同的consume group，则为publish-subscribe，message广播到所有的consumer；
+* 实际场景下，topic对应为数不多的几个consumer group，即，consumer group类似`logical subscriber`；每个group中有多个consumer，目的是提升可扩展性和容错能力。
+
+
+![](/images/kafka-documentation/consumer-groups.png)
+
+
+**notes(ningg)**：几个问题：
+
+* consumer group是与topic对应的？还是partition对应？
+* consumer group方式能够提升可扩展性和容错能力？
+
+Ordering guarantee，Kafka保证message按序处理，同时也保证并行处理，几点：
+
+* 单个partition中的message保证按序处理，同时一个partition只能对应一个consumer instance；
+* 不同partition之间，不保证顺序处理，多个partition实现了并行处理；
+
+**notes(ningg)**：同一个partition中的message，当其中一个message A被指派给一个consumer instance后，在message A被处理完之前，message B是否会被指派出去？
+
+###小结
+
+Kafka通过 partition data by key 和 pre-partition ordering，满足了大部分需求。如果要保证所有message都顺序处理，则将topic设置为only one partition，此时，变为串行处理。
 
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+	
+	
+**notes(ningg)**：单个partition是以什么形式存储在server上的？纯粹的文档文件？
 
 ##参考来源
 
@@ -102,6 +184,5 @@ Flume收集分布在不同机器上的日志信息，聚合之后，将信息送
 
 [Flume Documentation]:	http://flume.apache.org/documentation.html
 [apache-flume-distributed-log-collection-hadoop]:	http://files.hii-tech.com/Book/Hadoop/PacktPub.Apache.Flume.Distributed.Log.Collection.for.Hadoop.Jul.2013.pdf
-
-
+[Kafka 0.8.1 Documentation]:		http://kafka.apache.org/documentation.html
 
