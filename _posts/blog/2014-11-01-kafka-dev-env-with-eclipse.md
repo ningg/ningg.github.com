@@ -86,7 +86,11 @@ categories: kafka big-data
 
 	kafka.utils.nonthreadsafe  required: scala.annotation.Annotation
 
-解决办法：打开core工程下`Annotations_2.8.scala`文件，添加`import scala.annotation.StaticAnnotation`，clean一下core工程，OK，这次总算搞定了，开始开发吧。
+解决办法：打开core工程下`Annotations_2.8.scala`文件，添加一行代码：
+
+	import scala.annotation.StaticAnnotation
+
+clean一下core工程，OK，这次总算搞定了，开始开发吧。
 
 
 ##杂谈
