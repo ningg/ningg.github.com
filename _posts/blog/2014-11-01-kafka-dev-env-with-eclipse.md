@@ -71,6 +71,23 @@ categories: kafka big-data
 
 
 
+###几个问题
+
+上述kafka工程导入Eclipse后，实质是几个工程：perf、examples、core、contrib、clients；其中perf、core工程是scala工程，其余为java工程；但是examples工程中提示多个问题，列出一个看一下：
+
+	# The import kafka.consumer cannot be resolved
+	import kafka.consumer.ConsumerConfig;
+
+上述问题，在网上搜了一圈，最终StackOverFlow上找到了：[Eclipse scala.object cannot be resolved](http://stackoverflow.com/questions/22102257/eclipse-scala-object-cannot-be-resolved)，不过，上面的提示对于当前的问题，好像没有用；因为，examples工程以调用的是core工程的核心代码，而不是scala-library中的代码；并且，examples工程在`Java Build Path`--`Projects`(Required projects on the build path)中已经添加了core工程：
+
+![](/images/kafka-dev-evn-with-eclipse/examples-core-build-path.jpg)
+
+怎么还是有错？奥，core工程是scala工程，而examples工程是java工程，并且在examples中引用的core中代码也都是*.scala代码，OK，将examples工程也转换为scala工程吧：点击examples工程，`右键`--`Configure`--`add Scala Nature`，clean一下examples工程，OK，examples工程的错误没啦。不过core工程仍然还有错误，大意如下:
+
+	kafka.utils.nonthreadsafe  required: scala.annotation.Annotation
+
+解决办法：打开core工程下`Annotations_2.8.scala`文件，添加`import scala.annotation.StaticAnnotation`，clean一下core工程，OK，这次总算搞定了，开始开发吧。
+
 
 ##杂谈
 
