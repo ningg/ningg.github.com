@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Storm：Tutorial
+title: Storm 0.9.2：Tutorial
 description: Storm官方文档的阅读和笔记
 categories: storm big-data
 ---
@@ -133,7 +133,7 @@ This topology contains a spout and two bolts. The spout emits words, and each bo
 
 
 This code defines the nodes using the `setSpout` and `setBolt` methods. These methods take as input a user-specified id, an object containing the processing logic, and the amount of parallelism you want for the node. In this example, the spout is given id “words” and the bolts are given ids “exclaim1” and “exclaim2”.
-（两个方法`setSpout`\`setBolt`，参数的含义：node id、processing logic、amount of parallelism。）
+（两个方法`setSpout` / `setBolt`，参数的含义：node id、processing logic、amount of parallelism。）
 
 The object containing the processing logic implements the [IRichSpout](http://storm.apache.org/apidocs/backtype/storm/topology/IRichSpout.html) interface for spouts and the [IRichBolt](http://storm.apache.org/apidocs/backtype/storm/topology/IRichBolt.html) interface for bolts.
 （包含processing logic的object需要实现IRichSpout\IRichBolt）
@@ -147,6 +147,7 @@ The last parameter, how much parallelism you want for the node, is optional. It 
 **notes(ningg)**：Storm是流式处理，需要保证tuple的顺序执行吗？还有tuple需要顺序执行吗？
 
 If you wanted component “exclaim2” to read all the tuples emitted by both component “words” and component “exclaim1”, you would write component “exclaim2”’s definition like this:
+（连续的使用`.shuffleGrouping()`，则当前bolt将读取所有shuffleGroup对应的source）
 
 	// java 
 	builder.setBolt("exclaim2", new ExclamationBolt(), 5) .shuffleGrouping("words") .shuffleGrouping("exclaim1");
@@ -158,9 +159,10 @@ Let’s dig into the implementations of the spouts and bolts in this topology. S
 	// java 
 	public void nextTuple() { 
 	    Utils.sleep(100); 
-	    final String[] words = new String[] {"nathan", "mike", "jackson", "golda", "bertels"}; 
-	    final Random rand = new Random(); 
-	    final String word = words[rand.nextInt(words.length)]; 
+	    final String[] words 
+		     = new String[] {"nathan", "mike", "jackson", "golda", "bertels"};
+	    final Random rand = new Random();
+	    final String word = words[rand.nextInt(words.length)];
 	    _collector.emit(new Values(word)); 
 	}
 
@@ -169,9 +171,11 @@ As you can see, the implementation is very straightforward.
 `ExclamationBolt` appends the string “!!!” to its input. Let’s take a look at the full implementation for `ExclamationBolt`:
 
 	// java 
-	public static class ExclamationBolt implements IRichBolt { OutputCollector _collector;
+	public static class ExclamationBolt implements IRichBolt { 
+	   OutputCollector _collector;
 	   
-	   public void prepare(Map conf, TopologyContext context, OutputCollector collector) {
+	   public void prepare(Map conf, TopologyContext context,
+		                      OutputCollector collector) {
 		   _collector = collector;
 	   }
 	   
@@ -189,16 +193,18 @@ As you can see, the implementation is very straightforward.
 	   
 	   public Map getComponentConfiguration() {
 		   return null;
-	   } 
+	   }
 	}
 
 
 The `prepare` method provides the bolt with an `OutputCollector` that is used for emitting tuples from this bolt. Tuples can be emitted at anytime from the bolt – in the `prepare`, `execute`, or `cleanup` methods, or even asynchronously in another thread. This `prepare` implementation simply saves the `OutputCollector` as an instance variable to be used later on in the `execute` method.
+（`prepare` method主要目标，提供一个`OutputCollector`，从bolt发送tuple。）
 
 The `execute` method receives a tuple from one of the bolt’s inputs. The `ExclamationBolt` grabs the first field from the tuple and emits a new tuple with the string “!!!” appended to it. If you implement a bolt that subscribes to multiple input sources, you can find out which component the Tuple came from by using the `Tuple#getSourceComponent` method.
+（`execute`method主要从bolt的input中获取一个tuple；如果bolt对应有多个input，则可以通过`Tuple#getSourceComponent`获取tuple的来源）
 
 There’s a few other things going in in the `execute` method, namely that the input tuple is passed as the first argument to `emit` and the input tuple is acked on the final line. These are part of Storm’s reliability API for guaranteeing no data loss and will be explained later in this tutorial.
-（在`execute`方法中，最后一行进行`ack`）
+（在`execute`方法中，最后一行进行`ack`；ack机制，用于保证Storm中no data loss；在[In-stream Big Data Processing](/in-stream-big-data-processing)中提到过Storm的可靠性机制。）
 
 **notes(ningg)**：`ack`方法的作用？如何实现的？
 
@@ -210,11 +216,13 @@ The `declareOutputFields` method declares that the `ExclamationBolt` emits 1-tup
 The `getComponentConfiguration` method allows you to configure various aspects of how this component runs. This is a more advanced topic that is explained further on [Configuration](http://storm.apache.org/documentation/Local-mode.html).
 （component中很多方面的属性都可进行设置）
 
-Methods like cleanup and getComponentConfiguration are often not needed in a bolt implementation. You can define bolts more succinctly by using a base class that provides default implementations where appropriate. ExclamationBolt can be written more succinctly by extending BaseRichBolt, like so:
+Methods like `cleanup` and `getComponentConfiguration` are often not needed in a bolt implementation. You can define bolts more succinctly by using a `base class` that provides default implementations where appropriate. `ExclamationBolt` can be written more succinctly by extending `BaseRichBolt`, like so:
 （通常，bolt并不需要实现cleanup和getComponentConfiguration；建议：为多个功能相似的bolt创建一个base类，然后所有的实现都继承base类）
 
 	// java
-	public static class ExclamationBolt extends BaseRichBolt { OutputCollector _collector;
+	public static class ExclamationBolt extends BaseRichBolt { 
+	
+	   OutputCollector _collector;
 	   
 	   public void prepare(Map conf, TopologyContext context, OutputCollector collector) {
 		   _collector = collector;
@@ -237,8 +245,12 @@ Let’s see how to run the ExclamationTopology in local mode and see that it’s
 Storm has two modes of operation: local mode and distributed mode. In local mode, Storm executes completely in process by simulating worker nodes with threads. Local mode is useful for testing and development of topologies. When you run the topologies in storm-starter, they’ll run in local mode and you’ll be able to see what messages each component is emitting. You can read more about running topologies in local mode on [Local mode](http://storm.apache.org/documentation/Local-mode.html).
 （local mode，用于testing和development，因为，其可以查看到component发出的所有message）
 
+**notes(ningg)**：[Local mode](http://storm.apache.org/documentation/Local-mode.html) 的详细信息我还没有看。
+
 In distributed mode, Storm operates as a cluster of machines. When you submit a topology to the master, you also submit all the code necessary to run the topology. The master will take care of distributing your code and allocating workers to run your topology. If workers go down, the master will reassign them somewhere else. You can read more about running topologies on a cluster on [Running topologies on a production cluster](http://storm.apache.org/documentation/Running-topologies-on-a-production-cluster.html).
 （distributed mode，用户需要向master提交topology，以及运行这个topology所需要的所有code，详细信息推荐[阅读](http://storm.apache.org/documentation/Running-topologies-on-a-production-cluster.html)）
+
+**notes(ningg)**：[Running topologies on a production cluster](http://storm.apache.org/documentation/Running-topologies-on-a-production-cluster.html) 是distributed mode，详细信息还没看。
 
 Here’s the code that runs `ExclamationTopology` in local mode:
 
@@ -247,6 +259,7 @@ Here’s the code that runs `ExclamationTopology` in local mode:
 	conf.setDebug(true); 
 	conf.setNumWorkers(2);
 
+	// LocalCluster：local mode
 	LocalCluster cluster = new LocalCluster(); 
 	cluster.submitTopology(“test”, conf, builder.createTopology()); 
 
@@ -265,12 +278,14 @@ The name is used to identify the topology so that you can kill it later on. A to
 The configuration is used to tune various aspects of the running topology. The two configurations specified here are very common:
 （有两个参数，重点说一下）
 
-1. **TOPOLOGY_WORKERS** (set with `setNumWorkers`) specifies how many `processes` you want allocated around the cluster to execute the topology. Each component in the topology will execute as many `threads`. The number of threads allocated to a given component is configured through the `setBolt` and `setSpout` methods. Those threads exist within worker processes. Each `worker process` contains within it some number of threads for some number of components. For instance, you may have 300 threads specified across all your components and 50 worker processes specified in your config. Each worker process will execute 6 threads, each of which of could belong to a different component. You tune the performance of Storm topologies by tweaking the parallelism for each component and the number of worker processes those threads should run within.（每个component都会启动几个thread，这些Thread都是包含在worker process中的，每个worker process都会包含来自一些components的一些thread。）
+1. **TOPOLOGY_WORKERS** (set with `setNumWorkers`) specifies how many `processes` you want allocated around the cluster to execute the topology. Each component in the topology will execute as many `threads`. The number of threads allocated to a given component is configured through the `setBolt` and `setSpout` methods. Those threads exist within worker processes. Each `worker process` contains within it some number of threads for some number of components. For instance, you may have 300 threads specified across all your components and 50 worker processes specified in your config. Each worker process will execute 6 threads, each of which of could belong to a different component. You tune the performance of Storm topologies by tweaking the parallelism for each component and the number of worker processes those threads should run within.（每个component：spout、bolt，都会启动几个thread，这些Thread都运行在worker process中，每个worker process都会包含来自一部分components的一些thread。）
 1. **TOPOLOGY_DEBUG** (set with `setDebug`), when set to true, tells Storm to log every message every emitted by a component. This is useful in local mode when testing topologies, but you probably want to keep this turned off when running topologies on the cluster.（设置Debug模式启动后，component emit的所有message都会被记录下来）
 
 There’s many other configurations you can set for the topology. The various configurations are detailed on [the Javadoc for Config](http://storm.apache.org/apidocs/backtype/storm/Config.html).
+（topology对应的详细设置信息：spout、bolt、link，参考[资料](http://storm.apache.org/apidocs/backtype/storm/Config.html)）
 
 **notes(ningg)**：worker process、thread、component之间什么关系？worker process只是作为支撑component与thread间的映射关系？
+**RE**：component指的是spout、bolt，每个spout、bolt都可设置并发执行数，每个spout、bolt的每个并发都对应单个thread，这些thread构成了topology的所有threads；worker负责提供worker process，worker process支撑所有thread执行，可以认为所有thread均匀散布在这些worker process上。
 
 To learn about how to set up your development environment so that you can run topologies in local mode (such as in Eclipse), see [Creating a new Storm project](http://storm.apache.org/documentation/Creating-a-new-Storm-project.html).
 （设置本地的开发环境，这样就可以在Eclipse等中进行调试开发）	
@@ -285,7 +300,7 @@ A stream grouping tells a topology how to send tuples between two components. Re
 When a task for Bolt A emits a tuple to Bolt B, which task should it send the tuple to?
 （从Bolt A发出的tuple，发送给Bolt B的那一个task？）
 
-**notes(ningg)**：tuple与task之间什么关系？
+**notes(ningg)**：tuple与task之间什么关系？此处的task本质是spout、bolt对应的thread，task获取tuple并在处理之后生产tuple。
 
 A “stream grouping” answers this question by telling Storm how to send tuples between sets of tasks. Before we dig into the different kinds of stream groupings, let’s take a look at another topology from [storm-starter](http://github.com/nathanmarz/storm-starter). This [WordCountTopology](https://github.com/nathanmarz/storm-starter/blob/master/src/jvm/storm/starter/WordCountTopology.java) reads sentences off of a spout and streams out of `WordCountBolt` the total number of times it has seen that word before:
 （stream grouping，负责分配tuple到task中去；）
@@ -297,7 +312,7 @@ A “stream grouping” answers this question by telling Storm how to send tuple
 	builder.setBolt(“split”, new SplitSentence(), 8) .shuffleGrouping(“sentences”); 
 	builder.setBolt(“count”, new WordCount(), 12) .fieldsGrouping(“split”, new Fields(“word”));
 
-`SplitSentence` emits a tuple for each word in each sentence it receives, and WordCount keeps a map in memory from word to count. Each time WordCount receives a word, it updates its state and emits the new word count.
+`SplitSentence` emits a tuple for each word in each sentence it receives, and `WordCount` keeps a map in memory from word to count. Each time WordCount receives a word, it updates its state and emits the new word count.
 
 There’s a few different kinds of stream groupings.
 

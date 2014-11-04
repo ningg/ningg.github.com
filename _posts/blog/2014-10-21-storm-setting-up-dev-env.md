@@ -22,11 +22,26 @@ Storm has two modes of operation: `local mode` and `remote mode`. In local mode,
 
 A Storm development environment has everything installed so that you can develop and test Storm topologies in local mode, package topologies for execution on a remote cluster, and submit/kill topologies on a remote cluster.
 
+**notes(ningg)**：`storm devp env`要做三件事情：
 
-Let’s quickly go over the relationship between your machine and a remote cluster. A Storm cluster is managed by a master node called “Nimbus”. Your machine communicates with Nimbus to submit code (packaged as a jar) and topologies for execution on the cluster, and Nimbus will take care of distributing that code around the cluster and assigning workers to run your topology. Your machine uses a command line client called storm to communicate with Nimbus. The storm client is only used for remote mode; it is not used for developing and testing topologies in local mode.
-（master node，called `Nimbus`，管理整个cluster，提交的code（jar包）、topologies都是交给`Nimbus`负责接收的；之后，`Nimbus`负责distribute code、assign worker to run topologies；本地提交topologies的机器，通过调用 storm client来通知storm与`Nimbus`通信。）
+* 在local mode下，develop和test topology；
+* package topology for execution on a remote cluster；
+* shubmit/kill topology on a remote cluster;
+
+
+Let’s quickly go over the relationship between your machine and a remote cluster. A Storm cluster is managed by a master node called “Nimbus”. Your machine communicates with Nimbus to submit code (packaged as a jar) and topologies for execution on the cluster, and Nimbus will take care of distributing that code around the cluster and assigning workers to run your topology. Your machine uses a command line client called `storm` to communicate with Nimbus. The `storm` client is only used for remote mode; it is not used for developing and testing topologies in local mode.
+
+**notes(ningg)**：梳理一下your machine与remote cluster的交互流程：
+
+* storm cluster由master来管理，master node又称为`Nimbus`；
+* your machine向`Nimbus`提交代码（打包为jar包）、提交topology；
+* `Nimbus`将jar包分发到worker node，并且分配worker来run topology；
+* your machine通过command line client `storm` 与 `Nimbus` 交互，`storm`命令只用于与remote storm cluster交互，不用于 testing and testing topology；
+
 
 **notes(ningg)**：distribute code？与assign worker to run topologies有区别吗？
+**RE**：distribute code到物理上的node？assign worker to run topologies针对的是不同物理主机上的worker process；（这个理解对吗？）
+
 
 ##Installing a Storm release locally
 
@@ -34,7 +49,11 @@ If you want to be able to submit topologies to a remote cluster from your machin
 （本地安装的Storm，也可以作为与remote cluster交互的client；安装办法：下载、解压、添加bin到PATH）
 
 Installing a Storm release locally is only for interacting with remote clusters. For developing and testing topologies in local mode, it is recommended that you use Maven to include Storm as a dev dependency for your project. You can read more about using Maven for this purpose on [Maven](http://storm.apache.org/documentation/Maven.html).
-（本地安装Storm唯一目标：interact with remote cluster；如果想利用local mode来进行develop、test，建议使用Maven将Storm作为依赖导入。）
+
+特别说明两点：
+
+* 本地安装Storm唯一目标：interact with remote cluster；
+* 如果想利用local mode来进行develop、test，建议使用Maven将Storm作为依赖导入；
 
 ##Starting and stopping topologies on a remote cluster
 

@@ -145,12 +145,47 @@ Ordering guarantee，Kafka保证message按序处理，同时也保证并行处�
 * 单个partition中的message保证按序处理，同时一个partition只能对应一个consumer instance；
 * 不同partition之间，不保证顺序处理，多个partition实现了并行处理；
 
-**notes(ningg)**：同一个partition中的message，当其中一个message A被指派给一个consumer instance后，在message A被处理完之前，message B是否会被指派出去？
+**notes(ningg)**：同一个partition中的message，当其中一个message A被指派给一个consumer instance后，在message A被处理完之前，message B是否会被指派出去？**RE**：细节还没看，具当前的理解，应该是串行处理的，即，一个处理完后，才会发送另一个。
 
 ###小结
 
 Kafka通过 partition data by key 和 pre-partition ordering，满足了大部分需求。如果要保证所有message都顺序处理，则将topic设置为only one partition，此时，变为串行处理。
 
+**notes(ningg)**：单个partition是以什么形式存储在server上的？纯粹的文档文件？Flume的fan-in、fan-out什么含义？fan-in针对的是agent之间，fan-out针对agent内部source--channel之间？
+
+##Flume的Kafka sink
+
+Flume中数据送入Kafka，本质上就是一个Kafka sink。很多人都有这个需求，甚至有的还需要将Flume来读取Kafka中的数据（Kafka source）。本次使用的Flume和Kafka的详细版本信息如下：
+
+* Flume：apache-flume-1.5.0.1-bin.tar.gz
+* Kafka：kafka_2.9.2-0.8.1.1.tgz
+
+###前人的工作
+
+Flume中Kafka source和Kafka sink都有人在做，整体来说有几个进展：
+
+* 唯品会的工程师Frank Yao，提供了一个[针对Kafka 0.7.2的实现版本](https://github.com/baniuyao/flume-kafka)；
+* Github上用户thilinamb提供了一个[Kafka 0.8.1.1的实现版本](https://github.com/thilinamb/flume-ng-kafka-sink)
+* Flume官网提到，将[在Flume 1.6版本中提供对Kafka的支持](https://issues.apache.org/jira/browse/FLUME-2242)； 
+
+现在，怎么做？打算学习thilinamb的版本，并且用起来，必要时，形成自己的版本。
+
+**notes(ningg)**：Flume官网虽然还没有发布 1.6 版本，但作为开源软件，能够提前查看针对Kafka source和sink部分的代码吗？JIRA上能不能看？
+
+
+###具体实现
+
+直接参考thilinamb的[Kafka 0.8.1.1的实现版本](https://github.com/thilinamb/flume-ng-kafka-sink)中的README。 说明：thilinamb的工程是用Maven进行管理的，可以作为`Existing Maven Project`直接导入，然后`mvn clean instal`即可。
+
+![](/images/flume-with-kafka/kafka-sink-src.png)
+
+**notes(ningg)**：thilinamb的[工程](https://github.com/thilinamb/flume-ng-kafka-sink)，使用maven进行管理，结构好像挺合理的，有一个parent的project，需要认真学习一下。
+
+###Flume Kafka sink原理
+
+在上一部分，虽然实现了Flume中数据送入Kafka，但具体原理是什么？需要深入学习一下。
+
+（TODO）
 
 
 
@@ -165,9 +200,9 @@ Kafka通过 partition data by key 和 pre-partition ordering，满足了大部�
 
 
 
-	
-	
-**notes(ningg)**：单个partition是以什么形式存储在server上的？纯粹的文档文件？
+
+
+
 
 ##参考来源
 
@@ -185,4 +220,3 @@ Kafka通过 partition data by key 和 pre-partition ordering，满足了大部�
 [Flume Documentation]:	http://flume.apache.org/documentation.html
 [apache-flume-distributed-log-collection-hadoop]:	http://files.hii-tech.com/Book/Hadoop/PacktPub.Apache.Flume.Distributed.Log.Collection.for.Hadoop.Jul.2013.pdf
 [Kafka 0.8.1 Documentation]:		http://kafka.apache.org/documentation.html
-
