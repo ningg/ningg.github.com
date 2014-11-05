@@ -10,7 +10,7 @@ categories: kafka storm big-data
 之前研读了[In-Stream Big Data Processing](/in-stream-big-data-processing)，组里将基于此实现一个实时的数据分析系统，基本选定三个组件：Flume、Kafka、Storm，其中，Flume负责数据采集，Kafka是一个MQ:负责数据采集与数据分析之间解耦，Storm负责进行流式处理。
 
 把这3个东西串起来，可以吗？可以的，之前整理了[Flume与Kafka整合](/flume-with-kafka)的文章，那Storm能够与Kafka整合吗？Storm官网有介绍：
-[Storm Integrates](http://storm.apache.org/about/integrates.html)，其中给出了Storm与Kafka集成的[方案](https://github.com/apache/incubator-storm/tree/master/external/storm-kafka)。
+[Storm Integrates][Storm Integrates]，其中给出了Storm与Kafka集成的[方案][storm-kafka]。
 
 
 ##回顾Storm
@@ -59,25 +59,98 @@ Storm有两种执行模式，`local mode`和`distributed mode`，补充几点：
 ![](/images/storm-tutorial/topology-tasks.png)
 
 
+##Strom整合Kafka
+
+###版本信息
+
+Storm与Kafka的版本信息：
+
+* Storm：apache-storm-0.9.2-incubating
+* Kafka：kafka_2.9.2-0.8.1.1.tgz
+
+###基础知识
+
+实现Storm读取Kafka中的数据，参考[官网介绍][Storm Integrates]， 本部分主要参考自[storm-kafka][storm-kafka]的README。
+
+Strom从Kafka中读取数据，本质：实现一个Storm中的Spout，来读取Kafka中的数据；这个Spout，可以称为Kafka Spout。实现一个Kafka Spout有两条路：
+
+* core storm spout；
+* Trident spout；
+
+无论用哪种方式实现Kafka Spout，都分为两步走：
+
+* 实现BrokerHost接口：用于记录Kafka broker host与partition之间的映射关系；具体两种实现方式：
+	* ZkHosts类：从zookeeper中动态的获取kafka broker与partition之间的映射关系；初始化时，需要配置zookeeper的`ip:port`；默认，每60s从zookeeper中请求一次映射关系；
+	* StaticHosts类：当broker--partition之间的映射关系是静态时，常使用此方法；
+* 继承KafkaConfig类：用于存储Kafka相关的参数；将上面实例的BrokerHost对象，作为参数传入KafkaConfig，例，Kafka的一个构造方法为`KafkaConfig(BrokerHosts hosts, String topic)`；当前其实现方式有两个：
+	* SpoutConfig：Core KafkaSpout只接受此配置方式；
+	* TridentKafkaConfig：TridentKafkaEmitter只接受此配置方式；
+
+KafkaConfig类中涉及到的配置参数默认值如下：
+
+	public int fetchSizeBytes = 1024 * 1024;
+    public int socketTimeoutMs = 10000;
+    public int fetchMaxWait = 10000;
+    public int bufferSizeBytes = 1024 * 1024;
+    public MultiScheme scheme = new RawMultiScheme();
+    public boolean forceFromStart = false;
+    public long startOffsetTime = kafka.api.OffsetRequest.EarliestTime();
+    public long maxOffsetBehind = Long.MAX_VALUE;
+    public boolean useStartOffsetTimeIfOffsetOutOfRange = true;
+    public int metricsTimeBucketSizeInSecs = 60;
+
+上面的MultiScheme类型的参数shceme，其负责：将Kafka中取出的byte[]转换为storm所需的tuple，这是一个扩展点，默认是原文输出。两种实现：`SchemeAsMultiScheme`和`KeyValueSchemeAsMultiScheme`可将读取的byte[]转换为String。
+
+
+**notes(ningg)**：几个疑问，列在下面了
+
+* `ZkHosts`类的一个构造方法`ZkHosts(String brokerZkStr, String brokerZkPath)`，其中`brokerZkPath`的含义，原始给出的说法是："rokerZkPath is the root directory under which all the topics and partition information is stored. by Default this is `/brokers` which is what default kafka implementation uses."
+* `SpoutConfig(BrokerHosts hosts, String topic, String zkRoot, String id)`，其中，`zkRoot`是一个root目录，用于存储consumer的offset；那这个`zkRoot`对应的目录物理上在哪台机器？
+
+###配置实例
+
+####Core Kafka Spout
+
+本质是设置一个读取Kafka中数据的Kafka Spout，然后，将从替换原始local mode下，topology中的Spout即可。下面是一个已经验证过的实例
+
+	TopologyBuilder builder = new TopologyBuilder();
+	
+	BrokerHosts hosts = new ZkHosts("121.7.2.12:2181");
+	SpoutConfig spoutConfig = new SpoutConfig(hosts, "ningg", "/" + "ningg", UUID.randomUUID().toString());
+	spoutConfig.scheme = new SchemeAsMultiScheme(new StringScheme());
+	KafkaSpout kafkaSpout = new KafkaSpout(spoutConfig);
+	
+	// set Spout.
+	builder.setSpout("word", kafkaSpout, 3);
+	builder.setBolt("result", new ExclamationBolt(), 3).shuffleGrouping("word");
+	
+	Config conf = new Config();
+	conf.setDebug(true);
+
+	// submit topology in local mode
+	LocalCluster cluster = new LocalCluster();
+	cluster.submitTopology("test", conf, builder.createTopology());
+
+###Trident Kafka Spout（todo）
+
+todo
+
+下面的样例并还没验证：
+
+	TridentTopology topology = new TridentTopology();
+	BrokerHosts zk = new ZkHosts("localhost");
+	TridentKafkaConfig spoutConf = new TridentKafkaConfig(zk, "test-topic");
+	spoutConf.scheme = new SchemeAsMultiScheme(new StringScheme());
+	OpaqueTridentKafkaSpout spout = new OpaqueTridentKafkaSpout(spoutConf);
 
 
 
 
+##参考来源
+
+* [Storm Integrates][Storm Integrates]
+* [storm-kafka][storm-kafka]
 
 
 
-
-
-
-
-
-##Flume设置
-
-
-
-##Kafka设置
-
-
-##Storm设置
-
-
+[Storm Integrates]:		http://storm.apache.org/about/integrates.html[storm-kafka]:			https://github.com/apache/incubator-storm/tree/master/external/storm-kafk
