@@ -4,13 +4,322 @@
    <title>NingG.github.com</title>
    <link href="http://ningg.github.com/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://ningg.github.com" rel="alternate" type="text/html" />
-   <updated>2014-11-04T21:22:11+08:00</updated>
+   <updated>2014-11-06T21:35:30+08:00</updated>
    <id>http://ningg.github.com</id>
    <author>
      <name></name>
      <email></email>
    </author>
 
+   
+   <entry>
+     <title>Storm 0.9.2：Trident</title>
+     <link href="http://ningg.github.com/storm-trident"/>
+     <updated>2014-11-06T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/storm-trident</id>
+     <content type="html">&lt;blockquote&gt;
+  &lt;p&gt;原文地址：&lt;a href=&quot;http://storm.apache.org/documentation/Trident-tutorial.html&quot;&gt;Trident tutorial&lt;/a&gt;，本文采用&lt;code&gt;英文原文+中文批注&lt;/code&gt;方式。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Trident is a high-level abstraction for doing realtime computing on top of Storm. It allows you to seamlessly intermix high throughput (millions of messages per second), stateful stream processing with low latency distributed querying. If you’re familiar with high level batch processing tools like &lt;code&gt;Pig&lt;/code&gt; or &lt;code&gt;Cascading&lt;/code&gt;, the concepts of &lt;code&gt;Trident&lt;/code&gt; will be very familiar – Trident has &lt;strong&gt;joins&lt;/strong&gt;, &lt;strong&gt;aggregations&lt;/strong&gt;, &lt;strong&gt;grouping&lt;/strong&gt;, &lt;strong&gt;functions&lt;/strong&gt;, and &lt;strong&gt;filters&lt;/strong&gt;. In addition to these, Trident adds primitives for doing stateful, incremental processing on top of any database or persistence store. Trident has consistent, exactly-once semantics, so it is easy to reason about Trident topologies.&lt;/p&gt;
+
+&lt;p&gt;Trident，说几点：&lt;/p&gt;
+
+&lt;p&gt;能够支撑高吞吐量、有状态stream的低延迟分布式查询；
+与批量处理工具类似&lt;code&gt;Pig&lt;/code&gt;、&lt;code&gt;Cascading&lt;/code&gt;，Trident包含：&lt;strong&gt;joins&lt;/strong&gt;, &lt;strong&gt;aggregations&lt;/strong&gt;, &lt;strong&gt;grouping&lt;/strong&gt;, &lt;strong&gt;functions&lt;/strong&gt;, and &lt;strong&gt;filters&lt;/strong&gt;一系列操作；
+Trident能够支撑stateful、incremental processing；
+Trident支撑consistent、exactly-once semantics；&lt;/p&gt;
+
+&lt;h2 id=&quot;illustrative-example&quot;&gt;Illustrative example&lt;/h2&gt;
+
+&lt;p&gt;Let’s look at an illustrative example of Trident. This example will do two things:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Compute streaming word count from an input stream of sentences&lt;/li&gt;
+  &lt;li&gt;Implement queries to get the sum of the counts for a list of words&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;例子做两件事：&lt;/p&gt;
+
+&lt;p&gt;统计一个输入stream中的word；
+查询一组输入word的统计结果；&lt;/p&gt;
+
+&lt;p&gt;For the purposes of illustration, this example will read an infinite stream of sentences from the following source:
+（从如下source中读取数据，进行处理）&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;// java 
+FixedBatchSpout spout = new FixedBatchSpout(new Fields(&quot;sentence&quot;), 3, 
+					new Values(&quot;the cow jumped over the moon&quot;), 
+					new Values(&quot;the man went to the store and bought some candy&quot;), 
+					new Values(&quot;four score and seven years ago&quot;), 
+					new Values(&quot;how many apples can you eat&quot;));
+
+spout.setCycle(true);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：spout中&lt;code&gt;setCycle()&lt;/code&gt;的含义。&lt;/p&gt;
+
+&lt;p&gt;This spout cycles through that set of sentences over and over to produce the sentence stream. Here’s the code to do the streaming word count part of the computation:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;// java 
+TridentTopology topology = new TridentTopology(); 
+TridentState wordCounts = topology.newStream(&quot;spout1&quot;, spout)
+				.each(new Fields(&quot;sentence&quot;), new Split(), new Fields(&quot;word&quot;))
+				.groupBy(new Fields(&quot;word&quot;))
+				.persistentAggregate(new MemoryMapState.Factory(), new Count(), new Fields(&quot;count&quot;))
+				.parallelismHint(6);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Let’s go through the code line by line. First a TridentTopology object is created, which exposes the interface for constructing Trident computations. TridentTopology has a method called newStream that creates a new stream of data in the topology reading from an input source. In this case, the input source is just the FixedBatchSpout defined from before. Input sources can also be queue brokers like Kestrel or Kafka. Trident keeps track of a small amount of state for each input source (metadata about what it has consumed) in Zookeeper, and the “spout1” string here specifies the node in Zookeeper where Trident should keep that metadata.&lt;/p&gt;
+
+&lt;p&gt;几个点：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;TridentTopology类：提供构造Trident computation的接口；&lt;/li&gt;
+  &lt;li&gt;newStream()方法：从一个Spout中读取数据，构造Stream；
+    &lt;ul&gt;
+      &lt;li&gt;上述例子中，使用FixedBatchSpout作为数据源(Source);&lt;/li&gt;
+      &lt;li&gt;上面Spout也可使用queue broker代替，例，Kestrel、Kafka；&lt;/li&gt;
+      &lt;li&gt;&lt;code&gt;newStream(&quot;spout1&quot;, spout)&lt;/code&gt;，其中&lt;code&gt;spout1&lt;/code&gt;标识了在zookeeper中当前spout存储&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Trident在Zookeeper中记录了每个Spout的处理状态数据（metadata：Spout中数据处理进展）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Trident processes the stream as small batches of tuples. For example, the incoming stream of sentences might be divided into batches like so:&lt;/p&gt;
+
+&lt;p&gt;Trident将Stream中的tuple分割为一些小的batch，按照batch来进行处理。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/storm-trident/batched-stream.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Generally the size of those small batches will be on the order of thousands or millions of tuples, depending on your incoming throughput. 
+（通常，将相邻的tuple组合成一个batch，通过调整tuple的输入Storm顺序，可实现将类似的tuple放入相同的batch）&lt;/p&gt;
+
+&lt;p&gt;Trident provides a fully fledged batch processing API to process those small batches. The API is very similar to what you see in high level abstractions for Hadoop like Pig or Cascading: you can do group by’s, joins, aggregations, run functions, run filters, and so on. Of course, processing each small batch in isolation isn’t that interesting, so Trident provides functions for doing aggregations across batches and persistently storing those aggregations – whether in memory, in Memcached, in Cassandra, or some other store. Finally, Trident has first-class functions for querying sources of realtime state. That state could be updated by Trident (like in this example), or it could be an independent source of state.
+（Trident提供了处理batch的API，这些API与Pig、Cascading的处理类似）&lt;/p&gt;
+
+&lt;p&gt;Back to the example, the spout emits a stream containing one field called “sentence”. The next line of the topology definition applies the Split function to each tuple in the stream, taking the “sentence” field and splitting it into words. Each sentence tuple creates potentially many word tuples – for instance, the sentence “the cow jumped over the moon” creates six “word” tuples. Here’s the definition of &lt;code&gt;Split&lt;/code&gt;:&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：通过&lt;code&gt;TridentTopology#newStream()&lt;/code&gt;将Spout中tuple构造为stream时，也可以进行干预（定制），即，将Spout中读取的原始tuple转换为其他格式的tuple。&lt;/p&gt;
+
+&lt;p&gt;// java 
+public class Split extends BaseFunction { &lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public void execute(TridentTuple tuple, TridentCollector collector) { 
+	String sentence = tuple.getString(0);
+	for(String word: sentence.split(&quot; &quot;)) { 
+		collector.emit(new Values(word)); 
+	} 
+} 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;}&lt;/p&gt;
+
+&lt;p&gt;As you can see, it’s really simple. It simply grabs the sentence, splits it on whitespace, and emits a tuple for each word.&lt;/p&gt;
+
+&lt;p&gt;The rest of the topology computes word count and keeps the results persistently stored. First the stream is grouped by the “word” field. Then, each group is persistently aggregated using the Count aggregator. The &lt;code&gt;persistentAggregate&lt;/code&gt; function knows how to store and update the results of the aggregation in a source of state. In this example, the word counts are kept in memory, but this can be trivially swapped to use Memcached, Cassandra, or any other persistent store. Swapping this topology to store counts in Memcached is as simple as replacing the persistentAggregate line with this (using &lt;a href=&quot;https://github.com/nathanmarz/trident-memcached&quot;&gt;trident-memcached&lt;/a&gt;), where the “serverLocations” is a list of host/ports for the Memcached cluster:
+（&lt;code&gt;persistentAggregate&lt;/code&gt;函数，负责存储和更新aggregation result，其中&lt;code&gt;MemoryMapState.Factory()&lt;/code&gt;表示利用内存存储，也可以使用Memcached、Cassandra以及其他的持久化数据库）&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;// MemcachedState.transactional()
+.persistentAggregate(MemcachedState.transactional(serverLocations), new Count(), new Fields(&quot;count&quot;)) 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The values stored by persistentAggregate represents the aggregation of all batches ever emitted by the stream.&lt;/p&gt;
+
+&lt;p&gt;One of the cool things about Trident is that it has fully fault-tolerant, exactly-once processing semantics. This makes it easy to reason about your realtime processing. Trident persists state in a way so that if failures occur and retries are necessary, it won’t perform multiple updates to the database for the same source data.
+（Trident最迷人的一点：fully fault-tolerant、exactly-once processing semantics）&lt;/p&gt;
+
+&lt;p&gt;The &lt;code&gt;persistentAggregate&lt;/code&gt; method transforms a &lt;code&gt;Stream&lt;/code&gt; into a &lt;code&gt;TridentState object&lt;/code&gt;. In this case the TridentState object represents all the word counts. We will use this TridentState object to implement the distributed query portion of the computation.
+（&lt;code&gt;persistentAggregate&lt;/code&gt;方法将Stream转换为TridentState Object，其用于实现distributed query）&lt;/p&gt;
+
+&lt;p&gt;The next part of the topology implements a low latency distributed query on the word counts. The query takes as input a whitespace separated list of words and return the sum of the counts for those words. These queries are executed just like normal RPC calls, except they are parallelized in the background. Here’s an example of how you might invoke one of these queries:
+（topology的next part实现了一个low latency、distributed query：接收输入的word，并返回这些word的统计次数。实际上，这些query看起来就是normal RPC calls，只是他们在背后是并行执行的。下面是调用query的方法）&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;// java
+DRPCClient client = new DRPCClient(&quot;drpc.server.location&quot;, 3772); 
+// prints the JSON-encoded result, e.g.: &quot;[[5078]]&quot;
+System.out.println(client.execute(&quot;words&quot;, &quot;cat dog the man&quot;); 
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;As you can see, it looks just like a regular remote procedure call (RPC), except it’s executing in parallel across a Storm cluster. The latency for small queries like this are typically around 10ms. More intense DRPC queries can take longer of course, although the latency largely depends on how many resources you have allocated for the computation.&lt;/p&gt;
+
+&lt;p&gt;The implementation of the distributed query portion of the topology looks like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;// java
+topology.newDRPCStream(&quot;words&quot;)
+	   .each(new Fields(&quot;args&quot;), new Split(), new Fields(&quot;word&quot;)) 
+	   .groupBy(new Fields(&quot;word&quot;)) 
+	   .stateQuery(wordCounts, new Fields(&quot;word&quot;), new MapGet(), new Fields(&quot;count&quot;)) 
+	   .each(new Fields(&quot;count&quot;), new FilterNull()) 
+	   .aggregate(new Fields(&quot;count&quot;), new Sum(), new Fields(&quot;sum&quot;));
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The same TridentTopology object is used to create the DRPC stream, and the function is named “words”. The function name corresponds to the function name given in the first argument of execute when using a DRPCClient.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：DRPC，distributed RPC？&lt;/p&gt;
+
+&lt;p&gt;Each DRPC request is treated as its own little batch processing job that takes as input a single tuple representing the request. The tuple contains one field called “args” that contains the argument provided by the client. In this case, the argument is a whitespace separated list of words.&lt;/p&gt;
+
+&lt;p&gt;First, the Split function is used to split the arguments for the request into its constituent words. The stream is grouped by “word”, and the stateQuery operator is used to query the TridentState object that the first part of the topology generated. stateQuery takes in a source of state – in this case, the word counts computed by the other portion of the topology – and a function for querying that state. In this case, the MapGet function is invoked, which gets the count for each word. Since the DRPC stream is grouped the exact same way as the TridentState was (by the “word” field), each word query is routed to the exact partition of the TridentState object that manages updates for that word.&lt;/p&gt;
+
+&lt;p&gt;Next, words that didn’t have a count are filtered out via the FilterNull filter and the counts are summed using the Sum aggregator to get the result. Then, Trident automatically sends the result back to the waiting client.&lt;/p&gt;
+
+&lt;p&gt;Trident is intelligent about how it executes a topology to maximize performance. There’s two interesting things happening automatically in this topology:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Operations that read from or write to state (like persistentAggregate and stateQuery) automatically batch operations to that state. So if there’s 20 updates that need to be made to the database for the current batch of processing, rather than do 20 read requests and 20 writes requests to the database, Trident will automatically batch up the reads and writes, doing only 1 read request and 1 write request (and in many cases, you can use caching in your State implementation to eliminate the read request). So you get the best of both words of convenience – being able to express your computation in terms of what should be done with each tuple – and performance.&lt;/li&gt;
+  &lt;li&gt;Trident aggregators are heavily optimized. Rather than transfer all tuples for a group to the same machine and then run the aggregator, Trident will do partial aggregations when possible before sending tuples over the network. For example, the Count aggregator computes the count on each partition, sends the partial count over the network, and then sums together all the partial counts to get the total count. This technique is similar to the use of combiners in MapReduce.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Let’s look at another example of Trident.&lt;/p&gt;
+
+&lt;h2 id=&quot;reach&quot;&gt;Reach&lt;/h2&gt;
+
+&lt;p&gt;The next example is a pure DRPC topology that computes the reach of a URL on demand. Reach is the number of unique people exposed to a URL on Twitter. To compute reach, you need to fetch all the people who ever tweeted a URL, fetch all the followers of all those people, unique that set of followers, and that count that uniqued set. Computing reach is too intense for a single machine – it can require thousands of database calls and tens of millions of tuples. With Storm and Trident, you can parallelize the computation of each step across a cluster.&lt;/p&gt;
+
+&lt;p&gt;This topology will read from two sources of state. One database maps URLs to a list of people who tweeted that URL. The other database maps a person to a list of followers for that person. The topology definition looks like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;TridentState urlToTweeters = topology.newStaticState(getUrlToTweetersState()); 
+TridentState tweetersToFollowers = topology.newStaticState(getTweeterToFollowersState());
+
+topology.newDRPCStream(“reach”) 
+		.stateQuery(urlToTweeters, new Fields(“args”), new MapGet(), new Fields(“tweeters”)) 
+		.each(new Fields(“tweeters”), new ExpandList(), new Fields(“tweeter”)) 
+		.shuffle() 
+		.stateQuery(tweetersToFollowers, new Fields(“tweeter”), new MapGet(), new Fields(“followers”)) 
+		.parallelismHint(200) 
+		.each(new Fields(“followers”), new ExpandList(), new Fields(“follower”)) 
+		.groupBy(new Fields(“follower”)) 
+		.aggregate(new One(), new Fields(“one”)) 
+		.parallelismHint(20) 
+		.aggregate(new Count(), new Fields(“reach”));
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The topology creates TridentState objects representing each external database using the newStaticState method. These can then be queried in the topology. Like all sources of state, queries to these databases will be automatically batched for maximum efficiency.&lt;/p&gt;
+
+&lt;p&gt;The topology definition is straightforward – it’s just a simple batch processing job. First, the urlToTweeters database is queried to get the list of people who tweeted the URL for this request. That returns a list, so the ExpandList function is invoked to create a tuple for each tweeter.&lt;/p&gt;
+
+&lt;p&gt;Next, the followers for each tweeter must be fetched. It’s important that this step be parallelized, so shuffle is invoked to evenly distribute the tweeters among all workers for the topology. Then, the followers database is queried to get the list of followers for each tweeter. You can see that this portion of the topology is given a large parallelism since this is the most intense portion of the computation.&lt;/p&gt;
+
+&lt;p&gt;Next, the set of followers is uniqued and counted. This is done in two steps. First a “group by” is done on the batch by “follower”, running the “One” aggregator on each group. The “One” aggregator simply emits a single tuple containing the number one for each group. Then, the ones are summed together to get the unique count of the followers set. Here’s the definition of the “One” aggregator:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public class One implements CombinerAggregator { 
+
+	public Integer init(TridentTuple tuple) { 
+		return 1; 
+	}
+
+	public Integer combine(Integer val1, Integer val2) { 
+		return 1; 
+	}
+
+	public Integer zero() { return 1; } 
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This is a “combiner aggregator”, which knows how to do partial aggregations before transferring tuples over the network to maximize efficiency. Sum is also defined as a combiner aggregator, so the global sum done at the end of the topology will be very efficient.&lt;/p&gt;
+
+&lt;p&gt;Let’s now look at Trident in more detail.&lt;/p&gt;
+
+&lt;h2 id=&quot;fields-and-tuples&quot;&gt;Fields and tuples&lt;/h2&gt;
+
+&lt;p&gt;The Trident data model is the TridentTuple which is a named list of values. During a topology, tuples are incrementally built up through a sequence of operations. Operations generally take in a set of input fields and emit a set of “function fields”. The input fields are used to select a subset of the tuple as input to the operation, while the “function fields” name the fields the operation emits.&lt;/p&gt;
+
+&lt;p&gt;Consider this example. Suppose you have a stream called “stream” that contains the fields “x”, “y”, and “z”. To run a filter MyFilter that takes in “y” as input, you would say:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;stream.each(new Fields(&quot;y&quot;), new MyFilter())
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Suppose the implementation of MyFilter is this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public class MyFilter extends BaseFilter { 
+
+	public boolean isKeep(TridentTuple tuple){ 
+		return tuple.getInteger(0) &amp;lt; 10; 
+	} 
+
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This will keep all tuples whose “y” field is less than 10. The TridentTuple given as input to MyFilter will only contain the “y” field. Note that Trident is able to project a subset of a tuple extremely efficiently when selecting the input fields: the projection is essentially free.&lt;/p&gt;
+
+&lt;p&gt;Let’s now look at how “function fields” work. Suppose you had this function:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public class AddAndMultiply extends BaseFunction { 
+	public void execute(TridentTuple tuple, TridentCollector collector) {
+		int i1 = tuple.getInteger(0); 
+		int i2 = tuple.getInteger(1); 
+		collector.emit(new Values(i1 + i2, i1 * i2)); 
+	}
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;This function takes two numbers as input and emits two new values: the addition of the numbers and the multiplication of the numbers. Suppose you had a stream with the fields “x”, “y”, and “z”. You would use this function like this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;stream.each(new Fields(&quot;x&quot;, &quot;y&quot;), new AddAndMultiply(), new Fields(&quot;added&quot;, &quot;multiplied&quot;));
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The output of functions is additive: the fields are added to the input tuple. So the output of this each call would contain tuples with the five fields “x”, “y”, “z”, “added”, and “multiplied”. “added” corresponds to the first value emitted by AddAndMultiply, while “multiplied” corresponds to the second value.&lt;/p&gt;
+
+&lt;p&gt;With aggregators, on the other hand, the function fields replace the input tuples. So if you had a stream containing the fields “val1” and “val2”, and you did this:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;stream.aggregate(new Fields(&quot;val2&quot;), new Sum(), new Fields(&quot;sum&quot;))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The output stream would only contain a single tuple with a single field called “sum”, representing the sum of all “val2” fields in that batch.&lt;/p&gt;
+
+&lt;p&gt;With grouped streams, the output will contain the grouping fields followed by the fields emitted by the aggregator. For example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;stream.groupBy(new Fields(&quot;val1&quot;)) .aggregate(new Fields(&quot;val2&quot;), new Sum(), new Fields(&quot;sum&quot;))
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In this example, the output will contain the fields “val1” and “sum”.&lt;/p&gt;
+
+&lt;h2 id=&quot;state&quot;&gt;State&lt;/h2&gt;
+
+&lt;p&gt;A key problem to solve with realtime computation is how to manage state so that updates are idempotent in the face of failures and retries. It’s impossible to eliminate failures, so when a node dies or something else goes wrong, batches need to be retried. The question is – how do you do state updates (whether external databases or state internal to the topology) so that it’s like each message was only processed only once?&lt;/p&gt;
+
+&lt;p&gt;This is a tricky problem, and can be illustrated with the following example. Suppose that you’re doing a count aggregation of your stream and want to store the running count in a database. If you store only the count in the database and it’s time to apply a state update for a batch, there’s no way to know if you applied that state update before. The batch could have been attempted before, succeeded in updating the database, and then failed at a later step. Or the batch could have been attempted before and failed to update the database. You just don’t know.&lt;/p&gt;
+
+&lt;p&gt;Trident solves this problem by doing two things:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Each batch is given a unique id called the “transaction id”. If a batch is retried it will have the exact same transaction id.&lt;/li&gt;
+  &lt;li&gt;State updates are ordered among batches. That is, the state updates for batch 3 won’t be applied until the state updates for batch 2 have succeeded.&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;With these two primitives, you can achieve exactly-once semantics with your state updates. Rather than store just the count in the database, what you can do instead is store the transaction id with the count in the database as an atomic value. Then, when updating the count, you can just compare the transaction id in the database with the transaction id for the current batch. If they’re the same, you skip the update – because of the strong ordering, you know for sure that the value in the database incorporates the current batch. If they’re different, you increment the count.&lt;/p&gt;
+
+&lt;p&gt;Of course, you don’t have to do this logic manually in your topologies. This logic is wrapped by the State abstraction and done automatically. Nor is your State object required to implement the transaction id trick: if you don’t want to pay the cost of storing the transaction id in the database, you don’t have to. In that case the State will have at-least-once-processing semantics in the case of failures (which may be fine for your application). You can read more about how to implement a State and the various fault-tolerance tradeoffs possible &lt;a href=&quot;http://storm.apache.org/documentation/Trident-state&quot;&gt;in this doc&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;A State is allowed to use whatever strategy it wants to store state. So it could store state in an external database or it could keep the state in-memory but backed by HDFS (like how HBase works). State’s are not required to hold onto state forever. For example, you could have an in-memory State implementation that only keeps the last X hours of data available and drops anything older. Take a look at the implementation of the &lt;a href=&quot;https://github.com/nathanmarz/trident-memcached/blob/master/src/jvm/trident/memcached/MemcachedState.java&quot;&gt;Memcached integration&lt;/a&gt; for an example State implementation.&lt;/p&gt;
+
+&lt;h2 id=&quot;execution-of-trident-topologies&quot;&gt;Execution of Trident topologies&lt;/h2&gt;
+
+&lt;p&gt;Trident topologies compile down into as efficient of a Storm topology as possible. Tuples are only sent over the network when a repartitioning of the data is required, such as if you do a groupBy or a shuffle. So if you had this Trident topology:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/storm-trident/trident-to-storm1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;It would compile into Storm spouts/bolts like this:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/storm-trident/trident-to-storm2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;conclusion&quot;&gt;Conclusion&lt;/h2&gt;
+
+&lt;p&gt;Trident makes realtime computation elegant. You’ve seen how high throughput stream processing, state manipulation, and low-latency querying can be seamlessly intermixed via Trident’s API. Trident lets you express your realtime computations in a natural way while still getting maximal performance.&lt;/p&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;参考来源&lt;/h2&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;杂谈&lt;/h2&gt;
+
+&lt;p&gt;今天几个人讨论某事，说来是鸡毛蒜皮的小事，不过也大小是个活动，通过及时通讯软件进行讨论，参与人员基本上都装死，很冷清，大部分人都是在看消息，不过内心里，大家都是愿意参加这么个活动的，这样只有一个人积极发言，没有交互、讨论，内心还是挺凄凉的，这种情况怎么办？时势造英雄，需要一个人花点时间整理一下活动的方方面面细则：时间、地点、人员、路线、内容、费用、事项（每项的负责人），然后出一个基本稿，发到群中，针对基本稿进行讨论，就有目标了；讨论结束再来个总结，算是定稿，妥妥的。&lt;/p&gt;
+
+&lt;p&gt;说起这个，又想起今天早上一起去装机的事情了，&lt;code&gt;**&lt;/code&gt;去重装服务器，回来后说：已经装完了，并且测试外网能够访问。OK，他是个有良好习惯的人，不仅把事情做了，而且做了验证(测试)，确保事情做好了。想想之前我去重装系统，也是这么操作的，并且旁边站了2位同事，其中就有&lt;code&gt;**&lt;/code&gt;，当时安装完系统后，我要测试一下是否完成配置，他们两位没有说话，我想他们应该是支持花费时间进行测试的，因为他们并没有反对测试，我想在我要花时间测试的时候，肯定有一种人会说：都已经安装、配置好了，还测试什么，浪费时间，走吧。说了这么多，其实是想说一件事：人是有差异的，有优秀的人，有的就平庸，有的就是需要剔除的坏因素；识别优秀的人，亲近他们，疏离除此之外的任何人，年轻成长的时候，更是要如此。&lt;/p&gt;
+
+&lt;p&gt;把事情做成，并测试事情是否已经做成，以此来确保已经把事情做成，这只是起步，往上还有空间：把事做成，确保做成，把事做好，确保做好。&lt;/p&gt;
+
+</content>
+   </entry>
    
    <entry>
      <title>Eclipse下搭建Kafka的开发环境</title>
@@ -127,7 +436,7 @@ BIOS 版本:    LENOVO - 14f0
 物理内存总量: 3,546 MB
 &lt;/code&gt;&lt;/pre&gt;
 
-&lt;p&gt;&lt;a href=&quot;#编译环境(代理)&quot;&gt;编译环境(代理)&lt;/a&gt;与&lt;a href=&quot;编译环境(非代理)&quot;&gt;编译环境(非代理)&lt;/a&gt;基本一致，不过需要配置一下代理，仅此而已，下面只列出两者有差异的地方。&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;编译环境(代理)&lt;/strong&gt;与&lt;strong&gt;编译环境(非代理)&lt;/strong&gt;基本一致，不过需要配置一下代理，仅此而已，下面只列出两者有差异的地方。&lt;/p&gt;
 
 &lt;h3 id=&quot;eclipse-project-file-1&quot;&gt;生成Eclipse project file&lt;/h3&gt;
 
@@ -170,13 +479,185 @@ systemProp.http.nonProxyHosts=*.nonproxyrepos.com|localhost
 
 &lt;p&gt;今天在公司，折腾一下午，网络问题，脑袋都大了，回来后，不到30mins就搞定了，顺便还整理了下，形成了此文；没有稳定的网络，对于有追求的工程师，就如同拿着锄头的特战队员，能力再牛，照样被拿微冲的小白恐吓。&lt;/p&gt;
 
-&lt;p&gt;补充：今天（2014-11-03）到公司，还是不死心，重新尝试了一下在代理环境中编译Kafka源码；具体参考上面&lt;a href=&quot;#编译环境(代理)&quot;&gt;编译环境(代理)&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;补充：今天（2014-11-03）到公司，还是不死心，重新尝试了一下在代理环境中编译Kafka源码；具体参考上面&lt;strong&gt;编译环境(代理)&lt;/strong&gt;。&lt;/p&gt;
 
 &lt;p&gt;今天无意间看到某句话，贴出来，算是勉励自己：&lt;/p&gt;
 
 &lt;blockquote&gt;
   &lt;p&gt;大部分事情，多用心、多用时间，都是可以超过大部分人的。人做事其实是习惯，只有这样的人，才是优秀的。人生里，要识别出这样的人，和优秀者接近，远离平庸。不要急，多练多体会，水平会逐步提高。我每次都是搜索菜谱，然后用心比较，选择正确的步骤整合。&lt;/p&gt;
 &lt;/blockquote&gt;
+
+</content>
+   </entry>
+   
+   <entry>
+     <title>Storm 0.9.2：如何从Kafka读取数据</title>
+     <link href="http://ningg.github.com/storm-with-kafka"/>
+     <updated>2014-10-31T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/storm-with-kafka</id>
+     <content type="html">&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
+
+&lt;p&gt;之前研读了&lt;a href=&quot;/in-stream-big-data-processing&quot;&gt;In-Stream Big Data Processing&lt;/a&gt;，组里将基于此实现一个实时的数据分析系统，基本选定三个组件：Flume、Kafka、Storm，其中，Flume负责数据采集，Kafka是一个MQ:负责数据采集与数据分析之间解耦，Storm负责进行流式处理。&lt;/p&gt;
+
+&lt;p&gt;把这3个东西串起来，可以吗？可以的，之前整理了&lt;a href=&quot;/flume-with-kafka&quot;&gt;Flume与Kafka整合&lt;/a&gt;的文章，那Storm能够与Kafka整合吗？Storm官网有介绍：
+&lt;a href=&quot;http://storm.apache.org/about/integrates.html&quot;&gt;Storm Integrates&lt;/a&gt;，其中给出了Storm与Kafka集成的&lt;a href=&quot;https://github.com/apache/incubator-storm/tree/master/external/storm-kafk&quot;&gt;方案&lt;/a&gt;。&lt;/p&gt;
+
+&lt;h2 id=&quot;storm&quot;&gt;回顾Storm&lt;/h2&gt;
+
+&lt;p&gt;之前都是以原文+注释方式，来阅读Storm的官方文档，现在集中整理一下。Storm集群的构成：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;包含两种节点：master和worker；&lt;/li&gt;
+  &lt;li&gt;master上运行&lt;code&gt;Nimbus&lt;/code&gt;，负责：distribute code、assign task、monitor failutes；&lt;/li&gt;
+  &lt;li&gt;worker上运行&lt;code&gt;Supervisor&lt;/code&gt;，负责：监听&lt;code&gt;Nimbus&lt;/code&gt;分配的任务，并启停worker precess；&lt;/li&gt;
+  &lt;li&gt;zookeeper负责协调&lt;code&gt;Nimbus&lt;/code&gt;和&lt;code&gt;Supervisor&lt;/code&gt;之间的关系，所有状态信息都存储在zookeeper or local host；因此，重启Nimbus or Supervisor进程，对用户来说无影响；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/storm-tutorial/storm-cluster.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;关于 spout 和 bolt ，说几点：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;spout（龙卷风、气旋）： source of stream，向topology中拉入数据的原点；&lt;/li&gt;
+  &lt;li&gt;bolt（闪电）：处理 stream，通过run functions、filter tuples、do streaming aggregations、do streaming join、talk to database… 来做任何事情；&lt;/li&gt;
+  &lt;li&gt;topology：由spout、bolt以及他们之间的关系构成，是client提交给Storm cluster执行的基本单元；&lt;/li&gt;
+  &lt;li&gt;topology中所有node都是并发运行的，可以配置每个node的并发数；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/storm-tutorial/topology.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：topology中node是什么概念？spout、bolt？master、worker？jvm process？thread？
+&lt;strong&gt;RE&lt;/strong&gt;：master、worker对应Storm的node，master负责控制，worker负责具体执行；spout、bolt是逻辑上的，并且分布在不同的worker上；每个spout、bolt可配置并发数，这个并发数对应启动的thread；不同的spout、bolt对应不同的thread，thread间不能共用；这些所有的thread由所有的worker process来执行，举例，累计300个thread，启动了30个worker，则平均每个worker process对应执行10个thread（前面的说法对吗？哈哈）&lt;/p&gt;
+
+&lt;p&gt;关于数据模型，即数据的结构，说几点：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Storm中，使用tuple结构来存储数据，tuple由fields构成，field可以为任意类型；&lt;/li&gt;
+  &lt;li&gt;topology中spout、bolt必须声明其emit的tuple格式：&lt;code&gt;declareOutputFields()&lt;/code&gt;；&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;setSpout&lt;/code&gt;/&lt;code&gt;setBolt&lt;/code&gt;用于定义spout和bolt，输入参数：node id、processing logic、amount of parallelism；&lt;/li&gt;
+  &lt;li&gt;processing logic对应类spout/bolt，需要implement &lt;code&gt;IRichSpout&lt;/code&gt;/&lt;code&gt;IRichBolt&lt;/code&gt;；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Storm有两种执行模式，&lt;code&gt;local mode&lt;/code&gt;和&lt;code&gt;distributed mode&lt;/code&gt;，补充几点：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;local mode，在本地的process中通过thread模拟worker，多用于testing和development topology；更多参考&lt;a href=&quot;http://storm.apache.org/documentation/Local-mode.html&quot;&gt;资料&lt;/a&gt;；&lt;/li&gt;
+  &lt;li&gt;distributed mode，用户向master提交topology以及运行topology所需的所有code；master向worker分发topology；更多参考&lt;a href=&quot;http://storm.apache.org/documentation/Running-topologies-on-a-production-cluster.html&quot;&gt;资料&lt;/a&gt;；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;关于Stream groupings，几点：&lt;/p&gt;
+
+&lt;p&gt;*　stream grouping解决的问题：多个执行spout逻辑的thread都输出tuple，这些tuple要发送给bolt对应的多个thread，问题来了，tuple发给bolt的哪个thread？即，stream grouping解决：tuple在不同task之间传递关系；
+*　shuffle grouping，随机分发；field grouping，根据给定的field进行分发；更多&lt;a href=&quot;http://storm.apache.org/documentation/Concepts.html&quot;&gt;参考&lt;/a&gt;；&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/storm-tutorial/topology-tasks.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;stromkafka&quot;&gt;Strom整合Kafka&lt;/h2&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;版本信息&lt;/h3&gt;
+
+&lt;p&gt;Storm与Kafka的版本信息：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Storm：apache-storm-0.9.2-incubating&lt;/li&gt;
+  &lt;li&gt;Kafka：kafka_2.9.2-0.8.1.1.tgz&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;基础知识&lt;/h3&gt;
+
+&lt;p&gt;实现Storm读取Kafka中的数据，参考&lt;a href=&quot;http://storm.apache.org/about/integrates.html&quot;&gt;官网介绍&lt;/a&gt;， 本部分主要参考自&lt;a href=&quot;https://github.com/apache/incubator-storm/tree/master/external/storm-kafk&quot;&gt;storm-kafka&lt;/a&gt;的README。&lt;/p&gt;
+
+&lt;p&gt;Strom从Kafka中读取数据，本质：实现一个Storm中的Spout，来读取Kafka中的数据；这个Spout，可以称为Kafka Spout。实现一个Kafka Spout有两条路：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;core storm spout；&lt;/li&gt;
+  &lt;li&gt;Trident spout；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;无论用哪种方式实现Kafka Spout，都分为两步走：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;实现BrokerHost接口：用于记录Kafka broker host与partition之间的映射关系；具体两种实现方式：
+    &lt;ul&gt;
+      &lt;li&gt;ZkHosts类：从zookeeper中动态的获取kafka broker与partition之间的映射关系；初始化时，需要配置zookeeper的&lt;code&gt;ip:port&lt;/code&gt;；默认，每60s从zookeeper中请求一次映射关系；&lt;/li&gt;
+      &lt;li&gt;StaticHosts类：当broker–partition之间的映射关系是静态时，常使用此方法；&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;继承KafkaConfig类：用于存储Kafka相关的参数；将上面实例的BrokerHost对象，作为参数传入KafkaConfig，例，Kafka的一个构造方法为&lt;code&gt;KafkaConfig(BrokerHosts hosts, String topic)&lt;/code&gt;；当前其实现方式有两个：
+    &lt;ul&gt;
+      &lt;li&gt;SpoutConfig：Core KafkaSpout只接受此配置方式；&lt;/li&gt;
+      &lt;li&gt;TridentKafkaConfig：TridentKafkaEmitter只接受此配置方式；&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;KafkaConfig类中涉及到的配置参数默认值如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public int fetchSizeBytes = 1024 * 1024;
+public int socketTimeoutMs = 10000;
+public int fetchMaxWait = 10000;
+public int bufferSizeBytes = 1024 * 1024;
+public MultiScheme scheme = new RawMultiScheme();
+public boolean forceFromStart = false;
+public long startOffsetTime = kafka.api.OffsetRequest.EarliestTime();
+public long maxOffsetBehind = Long.MAX_VALUE;
+public boolean useStartOffsetTimeIfOffsetOutOfRange = true;
+public int metricsTimeBucketSizeInSecs = 60;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;上面的MultiScheme类型的参数shceme，其负责：将Kafka中取出的byte[]转换为storm所需的tuple，这是一个扩展点，默认是原文输出。两种实现：&lt;code&gt;SchemeAsMultiScheme&lt;/code&gt;和&lt;code&gt;KeyValueSchemeAsMultiScheme&lt;/code&gt;可将读取的byte[]转换为String。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：几个疑问，列在下面了&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code&gt;ZkHosts&lt;/code&gt;类的一个构造方法&lt;code&gt;ZkHosts(String brokerZkStr, String brokerZkPath)&lt;/code&gt;，其中&lt;code&gt;brokerZkPath&lt;/code&gt;的含义，原始给出的说法是：”rokerZkPath is the root directory under which all the topics and partition information is stored. by Default this is &lt;code&gt;/brokers&lt;/code&gt; which is what default kafka implementation uses.”&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;SpoutConfig(BrokerHosts hosts, String topic, String zkRoot, String id)&lt;/code&gt;，其中，&lt;code&gt;zkRoot&lt;/code&gt;是一个root目录，用于存储consumer的offset；那这个&lt;code&gt;zkRoot&lt;/code&gt;对应的目录物理上在哪台机器？&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;section-3&quot;&gt;配置实例&lt;/h3&gt;
+
+&lt;h4 id=&quot;core-kafka-spout&quot;&gt;Core Kafka Spout&lt;/h4&gt;
+
+&lt;p&gt;本质是设置一个读取Kafka中数据的Kafka Spout，然后，将从替换原始local mode下，topology中的Spout即可。下面是一个已经验证过的实例&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;TopologyBuilder builder = new TopologyBuilder();
+
+BrokerHosts hosts = new ZkHosts(&quot;121.7.2.12:2181&quot;);
+SpoutConfig spoutConfig = new SpoutConfig(hosts, &quot;ningg&quot;, &quot;/&quot; + &quot;ningg&quot;, UUID.randomUUID().toString());
+spoutConfig.scheme = new SchemeAsMultiScheme(new StringScheme());
+KafkaSpout kafkaSpout = new KafkaSpout(spoutConfig);
+
+// set Spout.
+builder.setSpout(&quot;word&quot;, kafkaSpout, 3);
+builder.setBolt(&quot;result&quot;, new ExclamationBolt(), 3).shuffleGrouping(&quot;word&quot;);
+
+Config conf = new Config();
+conf.setDebug(true);
+
+// submit topology in local mode
+LocalCluster cluster = new LocalCluster();
+cluster.submitTopology(&quot;test&quot;, conf, builder.createTopology());
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;trident-kafka-spouttodo&quot;&gt;Trident Kafka Spout（todo）&lt;/h3&gt;
+
+&lt;p&gt;todo&lt;/p&gt;
+
+&lt;p&gt;下面的样例并还没验证：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;TridentTopology topology = new TridentTopology();
+BrokerHosts zk = new ZkHosts(&quot;localhost&quot;);
+TridentKafkaConfig spoutConf = new TridentKafkaConfig(zk, &quot;test-topic&quot;);
+spoutConf.scheme = new SchemeAsMultiScheme(new StringScheme());
+OpaqueTridentKafkaSpout spout = new OpaqueTridentKafkaSpout(spoutConf);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;section-4&quot;&gt;参考来源&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://storm.apache.org/about/integrates.html&quot;&gt;Storm Integrates&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/apache/incubator-storm/tree/master/external/storm-kafk&quot;&gt;storm-kafka&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
 </content>
    </entry>
@@ -346,79 +827,6 @@ agent.sinks.loggerSink.channel = memoryChannel
 &lt;p&gt;本文写完之后，我发现了：&lt;a href=&quot;https://issues.apache.org/jira/browse/FLUME-2246&quot;&gt;FLUME-2246&lt;/a&gt;，Ou，已经有人在Flume官网上讨论并解决了这个问题，看来不会使用Flume官网不行呀，之前自己阅读标记过&lt;a href=&quot;/how-to-contribute-open-source-project&quot;&gt;如何参与开源项目&lt;/a&gt;， 但是没有实际尝试参与。个人心里一个想法：玩开源的东西，要参与到开源社区中，你的问题开源社区早已涉及，只不过有些扩展功能重要程度低，虽然已解决，但并没有并入发行版本中。&lt;/p&gt;
 
 &lt;p&gt;另，说明一点啊：遇到问题，自己先想思路，再去社区找答案，也是个好方法。&lt;/p&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>Storm 0.9.2：如何从Kafka读取数据</title>
-     <link href="http://ningg.github.com/combine-flume-kafka-storm"/>
-     <updated>2014-10-31T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/combine-flume-kafka-storm</id>
-     <content type="html">&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
-
-&lt;p&gt;之前研读了&lt;a href=&quot;/in-stream-big-data-processing&quot;&gt;In-Stream Big Data Processing&lt;/a&gt;，组里将基于此实现一个实时的数据分析系统，基本选定三个组件：Flume、Kafka、Storm，其中，Flume负责数据采集，Kafka是一个MQ:负责数据采集与数据分析之间解耦，Storm负责进行流式处理。&lt;/p&gt;
-
-&lt;p&gt;把这3个东西串起来，可以吗？可以的，之前整理了&lt;a href=&quot;/flume-with-kafka&quot;&gt;Flume与Kafka整合&lt;/a&gt;的文章，那Storm能够与Kafka整合吗？Storm官网有介绍：
-&lt;a href=&quot;http://storm.apache.org/about/integrates.html&quot;&gt;Storm Integrates&lt;/a&gt;，其中给出了Storm与Kafka集成的&lt;a href=&quot;https://github.com/apache/incubator-storm/tree/master/external/storm-kafka&quot;&gt;方案&lt;/a&gt;。&lt;/p&gt;
-
-&lt;h2 id=&quot;storm&quot;&gt;回顾Storm&lt;/h2&gt;
-
-&lt;p&gt;之前都是以原文+注释方式，来阅读Storm的官方文档，现在集中整理一下。Storm集群的构成：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;包含两种节点：master和worker；&lt;/li&gt;
-  &lt;li&gt;master上运行&lt;code&gt;Nimbus&lt;/code&gt;，负责：distribute code、assign task、monitor failutes；&lt;/li&gt;
-  &lt;li&gt;worker上运行&lt;code&gt;Supervisor&lt;/code&gt;，负责：监听&lt;code&gt;Nimbus&lt;/code&gt;分配的任务，并启停worker precess；&lt;/li&gt;
-  &lt;li&gt;zookeeper负责协调&lt;code&gt;Nimbus&lt;/code&gt;和&lt;code&gt;Supervisor&lt;/code&gt;之间的关系，所有状态信息都存储在zookeeper or local host；因此，重启Nimbus or Supervisor进程，对用户来说无影响；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/storm-tutorial/storm-cluster.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;关于 spout 和 bolt ，说几点：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;spout（龙卷风、气旋）： source of stream，向topology中拉入数据的原点；&lt;/li&gt;
-  &lt;li&gt;bolt（闪电）：处理 stream，通过run functions、filter tuples、do streaming aggregations、do streaming join、talk to database… 来做任何事情；&lt;/li&gt;
-  &lt;li&gt;topology：由spout、bolt以及他们之间的关系构成，是client提交给Storm cluster执行的基本单元；&lt;/li&gt;
-  &lt;li&gt;topology中所有node都是并发运行的，可以配置每个node的并发数；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/storm-tutorial/topology.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：topology中node是什么概念？spout、bolt？master、worker？jvm process？thread？
-&lt;strong&gt;RE&lt;/strong&gt;：master、worker对应Storm的node，master负责控制，worker负责具体执行；spout、bolt是逻辑上的，并且分布在不同的worker上；每个spout、bolt可配置并发数，这个并发数对应启动的thread；不同的spout、bolt对应不同的thread，thread间不能共用；这些所有的thread由所有的worker process来执行，举例，累计300个thread，启动了30个worker，则平均每个worker process对应执行10个thread（前面的说法对吗？哈哈）&lt;/p&gt;
-
-&lt;p&gt;关于数据模型，即数据的结构，说几点：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Storm中，使用tuple结构来存储数据，tuple由fields构成，field可以为任意类型；&lt;/li&gt;
-  &lt;li&gt;topology中spout、bolt必须声明其emit的tuple格式：&lt;code&gt;declareOutputFields()&lt;/code&gt;；&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;setSpout&lt;/code&gt;/&lt;code&gt;setBolt&lt;/code&gt;用于定义spout和bolt，输入参数：node id、processing logic、amount of parallelism；&lt;/li&gt;
-  &lt;li&gt;processing logic对应类spout/bolt，需要implement &lt;code&gt;IRichSpout&lt;/code&gt;/&lt;code&gt;IRichBolt&lt;/code&gt;；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Storm有两种执行模式，&lt;code&gt;local mode&lt;/code&gt;和&lt;code&gt;distributed mode&lt;/code&gt;，补充几点：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;local mode，在本地的process中通过thread模拟worker，多用于testing和development topology；更多参考&lt;a href=&quot;http://storm.apache.org/documentation/Local-mode.html&quot;&gt;资料&lt;/a&gt;；&lt;/li&gt;
-  &lt;li&gt;distributed mode，用户向master提交topology以及运行topology所需的所有code；master向worker分发topology；更多参考&lt;a href=&quot;http://storm.apache.org/documentation/Running-topologies-on-a-production-cluster.html&quot;&gt;资料&lt;/a&gt;；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;关于Stream groupings，几点：&lt;/p&gt;
-
-&lt;p&gt;*　stream grouping解决的问题：多个执行spout逻辑的thread都输出tuple，这些tuple要发送给bolt对应的多个thread，问题来了，tuple发给bolt的哪个thread？即，stream grouping解决：tuple在不同task之间传递关系；
-*　shuffle grouping，随机分发；field grouping，根据给定的field进行分发；更多&lt;a href=&quot;http://storm.apache.org/documentation/Concepts.html&quot;&gt;参考&lt;/a&gt;；&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/storm-tutorial/topology-tasks.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/storm-tutorial/topology-tasks.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;flume&quot;&gt;Flume设置&lt;/h2&gt;
-
-&lt;h2 id=&quot;kafka&quot;&gt;Kafka设置&lt;/h2&gt;
-
-&lt;h2 id=&quot;storm-1&quot;&gt;Storm设置&lt;/h2&gt;
 
 </content>
    </entry>
@@ -1491,233 +1899,6 @@ a1.channels.c1.type = org.example.MyChannel
   &lt;li&gt;&lt;a href=&quot;http://ifeve.com/json-java-api/&quot;&gt;处理JSON的Java API ：JSON的简介&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://jcp.org/en/jsr/detail?id=353&quot;&gt;JSR 353&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://blog.csdn.net/lk_blog/article/details/7685169&quot;&gt;JSON转换利器:Gson&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>Flume 1.5.0.1：如何将flume聚合的数据送入Kafka</title>
-     <link href="http://ningg.github.com/flume-with-kafka"/>
-     <updated>2014-10-24T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/flume-with-kafka</id>
-     <content type="html">&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
-
-&lt;p&gt;Flume收集分布在不同机器上的日志信息，聚合之后，将信息送入Kafka消息队列，问题来了：如何将Flume输出的信息送入Kafka中？&lt;/p&gt;
-
-&lt;p&gt;定一个场景：flume读取apache的访问日志，然后送入Kafka中，最终消息从Kafka中取出，显示在终端屏幕上（stdout）。&lt;/p&gt;
-
-&lt;h2 id=&quot;flume&quot;&gt;Flume复习&lt;/h2&gt;
-
-&lt;p&gt;整理一下Flume的基本知识，参考来源有两个：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://flume.apache.org/documentation.html&quot;&gt;Flume Documentation&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Book: &lt;a href=&quot;http://files.hii-tech.com/Book/Hadoop/PacktPub.Apache.Flume.Distributed.Log.Collection.for.Hadoop.Jul.2013.pdf&quot;&gt;apache-flume-distributed-log-collection-hadoop&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;几个概念&lt;/h3&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Flume &lt;strong&gt;event&lt;/strong&gt;: a unit of data flow, having a byte payload and an optional set of string attributes.（event中包含了，payload和attributes）&lt;/li&gt;
-  &lt;li&gt;Flume &lt;strong&gt;agent&lt;/strong&gt;: a (JVM) process, that hosts the components through which events flow from an external source to the next destination(hop).（agent对应JVM process）&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Channel&lt;/strong&gt;:  passive store, keeps the event until it’s consumded by a Flume Sink.（Channel不会主动消费event，其等待Sink来取数据，会在本地备份Event）&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Sink&lt;/strong&gt;: remove the event from the channel and put it into external repository.（Sink主动从Channel中取出event）&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/flume-user-guide/UserGuide_image00.png&quot; alt=&quot;&quot; /&gt; &lt;/p&gt;
-
-&lt;h3 id=&quot;section-2&quot;&gt;练习&lt;/h3&gt;
-
-&lt;p&gt;&lt;strong&gt;场景&lt;/strong&gt;：Flume收集apache访问日志，然后，在标准终端（stdout）显示。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;分析&lt;/strong&gt;：Flume官方文档中，已经给出了一个demo，flume从&lt;code&gt;localhost:port&lt;/code&gt;收集数据，并在标准终端上显示。基于这一场景，只需要修改Source即可。&lt;/p&gt;
-
-&lt;h4 id=&quot;section-3&quot;&gt;构造实例&lt;/h4&gt;
-
-&lt;p&gt;通过参阅Flume官网，得知&lt;code&gt;ExecSource&lt;/code&gt;可用于捕获命令的输出，并将输出结果按行构造event，&lt;code&gt;tail -F [local file]&lt;/code&gt;命令用于查阅文件&lt;code&gt;[local file]&lt;/code&gt;的新增内容；在&lt;code&gt;$FLUME_HOME/conf&lt;/code&gt;目录下，新建文件&lt;code&gt;apache_log_scan.log&lt;/code&gt;，内容如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;a1.sources = r1
-a1.sinks = k1
-a1.channels = c1
-
-a1.sources.r1.type = exec
-a1.sources.r1.command = tail -F /var/log/httpd/access_log
-
-a1.sinks.k1.type = logger
-
-a1.channels.c1.type = memory
-a1.channels.c1.capacity = 1000
-a1.channels.c1.transactionCapacity = 100
-
-a1.sources.r1.channels = c1
-a1.sinks.k1.channel = c1
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;启动Flume agent，命令如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;[ningg@localhost flume]$ cd conf
-[ningg@localhost  conf]$ sudo ../bin/flume-ng agent --conf ../conf --conf-file example.conf --name a1 -Dflume.root.logger=INFO,console
-...
-...
- Component type: SOURCE, name: r1 started
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;然后访问一下Apache承载的网站，可以看到上面的窗口也在输出信息，即，已经在捕获Apache访问日志&lt;code&gt;access_log&lt;/code&gt;的增量了。（可以另起一个窗口，通过&lt;code&gt;tail -F access_log&lt;/code&gt;查看日志的实际内容）&lt;/p&gt;
-
-&lt;h4 id=&quot;section-4&quot;&gt;存在的问题&lt;/h4&gt;
-
-&lt;p&gt;通过比较Flume上sink的输出、&lt;code&gt;tail -F access_log&lt;/code&gt;命令的输出，发现输出有差异：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# Flume上logger类型sink的输出
-Event: { headers:{} body: 31 36 38 2E 35 2E 31 33 30 2E 31 37 35 20 2D 20 168.5.130.175 -  }
-
-# access_log原始文件上的新增内容（长度超过上面logger sink的输出）
-168.5.130.175 - - [23/Oct/2014:16:34:59 +0800] &quot;GET /...&quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;思考：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;logger类型的sink，遇到&lt;code&gt;[&lt;/code&gt;字符就结束？&lt;/li&gt;
-  &lt;li&gt;logger类型的sink，有字符长度的限制吗？&lt;/li&gt;
-  &lt;li&gt;channel有长度限制？channel中存储的event是什么形式存储的？&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;通过&lt;code&gt;vim access_log&lt;/code&gt;，向文件最后添加一行内容，发现应该是logger类型的sink，对于event的长度有限制；或者，memory类型的channel对于存储的event有限制。
-&lt;strong&gt;RE&lt;/strong&gt;：上述问题已经解决，Logger sink输出内容不完整，详情可参考&lt;a href=&quot;/flume-advance-logger-sink&quot;&gt;Advanced Logger Sink&lt;/a&gt;。&lt;/p&gt;
-
-&lt;h2 id=&quot;kafka&quot;&gt;Kafka复习&lt;/h2&gt;
-
-&lt;p&gt;下面Kafka的相关总结都参考自：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://kafka.apache.org/documentation.html&quot;&gt;Kafka 0.8.1 Documentation&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;section-5&quot;&gt;几个概念&lt;/h3&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/kafka-documentation/producer_consumer.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;消息队列&lt;/strong&gt;：Kafka充当消息队列，producer将message放入Kafka集群，consumer从Kafka集群中读取message；&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;内部结构&lt;/strong&gt;：按照topic来存放message，每个topic对应一个partitioned log，其中包含多个partition，每个都是一个有序的、message队列；&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;消息存活时间&lt;/strong&gt;：在设定的时间内，kafka始终保存所有的message，即使message已经被consume；&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;consume message&lt;/strong&gt;：每个consumer，只需保存在log中的offset，并且这个offset完全由consumer控制，可自由调整；鉴于此，cousumer之间相互基本没有影响；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/kafka-documentation/log_anatomy.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;针对上面每个topic对应的partitioned log，其中包含了多个partition，这样设计有什么好处？&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;single server上，单个log的大小由文件系统限制，而采用多partition模式，虽然单个partition也受限，但partition的个数不受限制；&lt;/li&gt;
-  &lt;li&gt;多个partition时，每个partition都可作为一个unit，以此来支撑并发处理；&lt;/li&gt;
-  &lt;li&gt;partition是分布式存储的，即，某个server上的partition可能也存在其他的server上，两点好处：
-    &lt;ul&gt;
-      &lt;li&gt;方便不同server之间的partition共享；&lt;/li&gt;
-      &lt;li&gt;配置每个partition的复制份数，提升系统可靠性；&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;partition对应的server，分为两个角色：&lt;code&gt;leader&lt;/code&gt;和&lt;code&gt;follower&lt;/code&gt;：
-    &lt;ul&gt;
-      &lt;li&gt;每个partition都对应一个server担当&lt;code&gt;leader&lt;/code&gt;角色：负责所有的read、write；&lt;/li&gt;
-      &lt;li&gt;其他server担&lt;code&gt;follower&lt;/code&gt;角色：重复&lt;code&gt;leader&lt;/code&gt;的操作；&lt;/li&gt;
-      &lt;li&gt;如果&lt;code&gt;leader&lt;/code&gt;崩溃，则自动推选一个&lt;code&gt;follower&lt;/code&gt;升级为&lt;code&gt;leader&lt;/code&gt;；&lt;/li&gt;
-      &lt;li&gt;server只对其上的部分partition担当&lt;code&gt;leader&lt;/code&gt;角色，方便cluster的均衡；&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Producer产生的数据放到topic的哪个partition下？集中方式：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;轮询：保证每个partition以均等的机会存储message，均衡负载；&lt;/li&gt;
-  &lt;li&gt;函数：根据key in the message来确定partition；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Consumer读取message有两种模式：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;queueing：多个consumer构成一个pool，然后，每个message只被其中一个consumer处理；&lt;/li&gt;
-  &lt;li&gt;publish-subscribe：向所有的consumer广播message；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Kafka中通过将consumer泛化为consumer group来实现，来支持上述两种模式，关于此，详细说一下：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;consumer都标记有consumer group name，每个message都发送给对应consumer group中的一个consumer instance，consumer instance可以是不同的进程，也可以分布在不同的物理机器上；&lt;/li&gt;
-  &lt;li&gt;若所有的consumer instances都属于同一个consume group，则为queuing轮询的均衡负载；&lt;/li&gt;
-  &lt;li&gt;若所有的consumer instances都属于不同的consume group，则为publish-subscribe，message广播到所有的consumer；&lt;/li&gt;
-  &lt;li&gt;实际场景下，topic对应为数不多的几个consumer group，即，consumer group类似&lt;code&gt;logical subscriber&lt;/code&gt;；每个group中有多个consumer，目的是提升可扩展性和容错能力。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/kafka-documentation/consumer-groups.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：几个问题：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;consumer group是与topic对应的？还是partition对应？&lt;/li&gt;
-  &lt;li&gt;consumer group方式能够提升可扩展性和容错能力？&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;Ordering guarantee，Kafka保证message按序处理，同时也保证并行处理，几点：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;单个partition中的message保证按序处理，同时一个partition只能对应一个consumer instance；&lt;/li&gt;
-  &lt;li&gt;不同partition之间，不保证顺序处理，多个partition实现了并行处理；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：同一个partition中的message，当其中一个message A被指派给一个consumer instance后，在message A被处理完之前，message B是否会被指派出去？&lt;strong&gt;RE&lt;/strong&gt;：细节还没看，具当前的理解，应该是串行处理的，即，一个处理完后，才会发送另一个。&lt;/p&gt;
-
-&lt;h3 id=&quot;section-6&quot;&gt;小结&lt;/h3&gt;
-
-&lt;p&gt;Kafka通过 partition data by key 和 pre-partition ordering，满足了大部分需求。如果要保证所有message都顺序处理，则将topic设置为only one partition，此时，变为串行处理。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：单个partition是以什么形式存储在server上的？纯粹的文档文件？Flume的fan-in、fan-out什么含义？fan-in针对的是agent之间，fan-out针对agent内部source–channel之间？&lt;/p&gt;
-
-&lt;h2 id=&quot;flumekafka-sink&quot;&gt;Flume的Kafka sink&lt;/h2&gt;
-
-&lt;p&gt;Flume中数据送入Kafka，本质上就是一个Kafka sink。很多人都有这个需求，甚至有的还需要将Flume来读取Kafka中的数据（Kafka source）。本次使用的Flume和Kafka的详细版本信息如下：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Flume：apache-flume-1.5.0.1-bin.tar.gz&lt;/li&gt;
-  &lt;li&gt;Kafka：kafka_2.9.2-0.8.1.1.tgz&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;section-7&quot;&gt;前人的工作&lt;/h3&gt;
-
-&lt;p&gt;Flume中Kafka source和Kafka sink都有人在做，整体来说有几个进展：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;唯品会的工程师Frank Yao，提供了一个&lt;a href=&quot;https://github.com/baniuyao/flume-kafka&quot;&gt;针对Kafka 0.7.2的实现版本&lt;/a&gt;；&lt;/li&gt;
-  &lt;li&gt;Github上用户thilinamb提供了一个&lt;a href=&quot;https://github.com/thilinamb/flume-ng-kafka-sink&quot;&gt;Kafka 0.8.1.1的实现版本&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Flume官网提到，将&lt;a href=&quot;https://issues.apache.org/jira/browse/FLUME-2242&quot;&gt;在Flume 1.6版本中提供对Kafka的支持&lt;/a&gt;； &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;现在，怎么做？打算学习thilinamb的版本，并且用起来，必要时，形成自己的版本。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：Flume官网虽然还没有发布 1.6 版本，但作为开源软件，能够提前查看针对Kafka source和sink部分的代码吗？JIRA上能不能看？&lt;/p&gt;
-
-&lt;h3 id=&quot;section-8&quot;&gt;具体实现&lt;/h3&gt;
-
-&lt;p&gt;直接参考thilinamb的&lt;a href=&quot;https://github.com/thilinamb/flume-ng-kafka-sink&quot;&gt;Kafka 0.8.1.1的实现版本&lt;/a&gt;中的README。 说明：thilinamb的工程是用Maven进行管理的，可以作为&lt;code&gt;Existing Maven Project&lt;/code&gt;直接导入，然后&lt;code&gt;mvn clean instal&lt;/code&gt;即可。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/flume-with-kafka/kafka-sink-src.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：thilinamb的&lt;a href=&quot;https://github.com/thilinamb/flume-ng-kafka-sink&quot;&gt;工程&lt;/a&gt;，使用maven进行管理，结构好像挺合理的，有一个parent的project，需要认真学习一下。&lt;/p&gt;
-
-&lt;h3 id=&quot;flume-kafka-sink&quot;&gt;Flume Kafka sink原理&lt;/h3&gt;
-
-&lt;p&gt;在上一部分，虽然实现了Flume中数据送入Kafka，但具体原理是什么？需要深入学习一下。&lt;/p&gt;
-
-&lt;p&gt;（TODO）&lt;/p&gt;
-
-&lt;h2 id=&quot;section-9&quot;&gt;参考来源&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://flume.apache.org/documentation.html&quot;&gt;Flume Documentation&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;Book: &lt;a href=&quot;http://files.hii-tech.com/Book/Hadoop/PacktPub.Apache.Flume.Distributed.Log.Collection.for.Hadoop.Jul.2013.pdf&quot;&gt;apache-flume-distributed-log-collection-hadoop&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 </content>
