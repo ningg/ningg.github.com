@@ -4,13 +4,448 @@
    <title>NingG.github.com</title>
    <link href="http://ningg.github.com/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://ningg.github.com" rel="alternate" type="text/html" />
-   <updated>2014-11-06T21:35:30+08:00</updated>
+   <updated>2014-11-09T11:19:00+08:00</updated>
    <id>http://ningg.github.com</id>
    <author>
      <name></name>
      <email></email>
    </author>
 
+   
+   <entry>
+     <title>Kafka 0.8.1：Producer API and Producer Configs</title>
+     <link href="http://ningg.github.com/kafka-api-producer"/>
+     <updated>2014-11-07T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/kafka-api-producer</id>
+     <content type="html">&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
+
+&lt;p&gt;最近在做Flume与Kafka的整合，其中用到了一个工程：&lt;a href=&quot;https://github.com/thilinamb/flume-ng-kafka-sink&quot;&gt;flume-ng-kafka-sink&lt;/a&gt;，本质上就是Flume的一个插件：Kafka sink。遇到一个问题：Kafka sink通过设置kafak broker的&lt;code&gt;ip:port&lt;/code&gt;来寻找broker，那就有一个问题，如果设置连接的kafka broker 宕掉了，flume的数据是不是就送不出去了？&lt;/p&gt;
+
+&lt;h2 id=&quot;producer&quot;&gt;Producer&lt;/h2&gt;
+
+&lt;p&gt;开始介绍Producer之前，说个小问题：上面&lt;strong&gt;背景&lt;/strong&gt;中一直在说Flume的Sink：Kafka Sink，那与Kafka producer什么关系呢？为什么这次标题是&lt;strong&gt;Kafka Producer&lt;/strong&gt;，而丝毫未提&lt;strong&gt;Flume Sink&lt;/strong&gt;？这个问题很好，说明读者在思考，大概说几点：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Flume架构中有Sink，是用来将Flume收集到的数据送出去的；Flume下的Kafka Sink插件，在Flume看来，就是个Sink；&lt;/li&gt;
+  &lt;li&gt;Kafka架构中有Producer，是用来向Kafka broker中送入数据的；Flume下的Kafka Sink插件，在Kafka看来，就是个Producer；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;此次，主要站在Kafka的角度来看一个Producer可以进行的配置。&lt;/p&gt;
+
+&lt;h3 id=&quot;kafka-producer-api&quot;&gt;Kafka Producer API&lt;/h3&gt;
+
+&lt;p&gt;下面是&lt;code&gt;kafka.javaapi.producer.Producer&lt;/code&gt;类的java API，实际上这个类是scala编写的，&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;/**
+ *  V: type of the message
+ *  K: type of the optional key associated with the message
+ */
+ 
+class kafka.javaapi.producer.Producer&amp;lt;K,V&amp;gt; {
+
+  public Producer(ProducerConfig config);
+
+  /**
+   * Sends the data to a single topic, partitioned by key, using either the
+   * synchronous or the asynchronous producer
+   * @param message the producer data object that encapsulates the topic, key and message data
+   */
+  public void send(KeyedMessage&amp;lt;K,V&amp;gt; message);
+
+  /**
+   * Use this API to send data to multiple topics
+   * @param messages list of producer data objects that encapsulate the topic, key and message data
+   */
+  public void send(List&amp;lt;KeyedMessage&amp;lt;K,V&amp;gt;&amp;gt; messages);
+
+  /**
+   * Close API to close the producer pool connections to all Kafka brokers.
+   */
+  public void close();
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;具体如何使用上述Producer API，可参考&lt;a href=&quot;https://cwiki.apache.org/confluence/display/KAFKA/0.8.0+Producer+Example&quot;&gt;0.8.0 Producer Example&lt;/a&gt;。&lt;/p&gt;
+
+&lt;h3 id=&quot;producer-example&quot;&gt;0.8.0 Producer Example&lt;/h3&gt;
+
+&lt;p&gt;研究要深入，上面提到的&lt;a href=&quot;https://cwiki.apache.org/confluence/display/KAFKA/0.8.0+Producer+Example&quot;&gt;0.8.0 Producer Example&lt;/a&gt;，下面简要介绍一下。&lt;/p&gt;
+
+&lt;p&gt;The Producer class is used to create new messages for a specific Topic and optional Partition.&lt;/p&gt;
+
+&lt;p&gt;If using Java you need to include a few packages for the Producer and supporting classes:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;import kafka.javaapi.producer.Producer;
+import kafka.producer.KeyedMessage;
+import kafka.producer.ProducerConfig;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The first step in your code is to define properties for how the Producer finds the cluster, serializes the messages and if appropriate directs the message to a specific Partition.&lt;/p&gt;
+
+&lt;p&gt;代码本质体现的是逻辑，首先需要确定几个问题：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Producer如何找到Kafka Cluster；&lt;/li&gt;
+  &lt;li&gt;message传输的格式；（serialize，序列化）&lt;/li&gt;
+  &lt;li&gt;如何将message存入指定的Partition中；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;These properties are defined in the standard Java Properties object:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Properties props = new Properties();
+ 
+props.put(&quot;metadata.broker.list&quot;, &quot;broker1:9092,broker2:9092&quot;);
+props.put(&quot;serializer.class&quot;, &quot;kafka.serializer.StringEncoder&quot;);
+props.put(&quot;partitioner.class&quot;, &quot;example.producer.SimplePartitioner&quot;);
+props.put(&quot;request.required.acks&quot;, &quot;1&quot;);
+ 
+ProducerConfig config = new ProducerConfig(props);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The first property, “metadata.broker.list” defines where the Producer can find a one or more Brokers to determine the Leader for each topic. This does not need to be the full set of Brokers in your cluster but should include at least two in case the first Broker is not available. No need to worry about figuring out which Broker is the leader for the topic (and partition), the Producer knows how to connect to the Broker and ask for the meta data then connect to the correct Broker.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;第一项参数&lt;/strong&gt;&lt;code&gt;metadata.broker.list&lt;/code&gt;，用于配置可用的broker列表，可以只配置一个broker，不过建议最好至少配置2个broker，这样即使有一个broker宕机了，另一个也能及时接替工作；这些broker中，也不用指定不同topic的leader，因为Producer会主动连接Broker并且请求到meta数据，然后连接到topic的leader。&lt;/p&gt;
+
+&lt;p&gt;The second property “serializer.class” defines what Serializer to use when preparing the message for transmission to the Broker. In our example we use a simple String encoder provided as part of Kafka. Note that the encoder must accept the same type as defined in the KeyedMessage object in the next step.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;第二项参数&lt;/strong&gt;&lt;code&gt;serializer.class&lt;/code&gt;，设定了将message从Producer发送到Broker的序列化方式。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：“Note that the encoder must accept the same type as defined in the KeyedMessage object in the next step.” 什么含义？ &lt;code&gt;KeyedMessage&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;It is possible to change the Serializer for the Key (see below) of the message by defining “key.serializer.class” appropriately. By default it is set to the same value as “serializer.class”.&lt;/p&gt;
+
+&lt;p&gt;参数&lt;code&gt;key.serializer.class&lt;/code&gt;用于设置key序列化的方法，key将在序列化之后，与message一同从Producer发送到Broker；&lt;code&gt;key.serializer.class&lt;/code&gt;的默认值与&lt;code&gt;serializer.class&lt;/code&gt;相同。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：Kafka是按照key进行partition的，每个message绑定的key也是需要传输到broker的，传输过程中也需要进行序列化，&lt;/p&gt;
+
+&lt;p&gt;The third property  “partitioner.class” defines what class to use to determine which Partition in the Topic the message is to be sent to. This is optional, but for any non-trivial implementation you are going to want to implement a partitioning scheme. More about the implementation of this class later. If you include a value for the key but haven’t defined a partitioner.class Kafka will use the default partitioner. If the key is null, then the Producer will assign the message to a random Partition.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;第三项参数&lt;/strong&gt;&lt;code&gt;partitioner.class&lt;/code&gt;用于设定message与Partition的映射关系，简单来说，每个message都发送给broker的某个对应的Topic，但message真正存储对应的是Topic下的partition，那么，参数&lt;code&gt;partitioner.class&lt;/code&gt;就是用于设定message–partition之间映射关系的。&lt;/p&gt;
+
+&lt;p&gt;The last property “request.required.acks” tells Kafka that you want your Producer to require an acknowledgement from the Broker that the message was received. Without this setting the Producer will ‘fire and forget’ possibly leading to data loss. Additional information can be found &lt;a href=&quot;http://kafka.apache.org/08/configuration.html&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;最后一项参数&lt;/strong&gt;&lt;code&gt;request.required.acks&lt;/code&gt;，设定Broker在接收到message之后，是否返回一个确认信息（ack）。如果没有这个信息，那么很有可能&lt;code&gt;fire and forget&lt;/code&gt;并且丢失数据。更多Kafka的相关配置信息，参考：&lt;a href=&quot;http://kafka.apache.org/08/configuration.html&quot;&gt;Kafka Configuration&lt;/a&gt;。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：有个问题，即使Broker在接收到message之后，返回了ack信息，那Producer提供了重发机制吗？还是Producer只是进行登记？&lt;/p&gt;
+
+&lt;p&gt;Next you define the Producer object itself:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Producer&amp;lt;String, String&amp;gt; producer = new Producer&amp;lt;String, String&amp;gt;(config);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Note that the Producer is a Java Generic and you need to tell it the type of two parameters. The first is the type of the Partition key, the second the type of the message. In this example they are both Strings, which also matches to what we defined in the Properties above.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;Producer&lt;/code&gt;是一个Java Generic（泛型），需要输入两个参数，&lt;code&gt;&amp;lt;String, String&amp;gt;&lt;/code&gt;，第一个参数是Partition key的类型，第二个是message的类型&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：java中Generic的用法、注意事项有哪些？上面说的Partition key，到底指什么？是properties中的属性和属性值吗？不是的，查看源代码，Partition key就是按照key进行partition的key。&lt;/p&gt;
+
+&lt;p&gt;Now build your message:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Random rnd = new Random();
+long runtime = new Date().getTime();
+String ip = “192.168.2.” + rnd.nextInt(255);
+String msg = runtime + “,www.example.com,” + ip;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;In this example we are faking a message for a website visit by IP address. First part of the comma-separated message is the timestamp of the event, the second is the website and the third is the IP address of the requester. We use the Java Random class here to make the last octet of the IP vary so we can see how Partitioning works.（上面&lt;code&gt;msg&lt;/code&gt;中是伪造的一个网站访问记录）&lt;/p&gt;
+
+&lt;p&gt;Finally write the message to the Broker:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;KeyedMessage&amp;lt;String, String&amp;gt; data = new KeyedMessage&amp;lt;String, String&amp;gt;(&quot;page_visits&quot;, ip, msg);
+ 
+producer.send(data);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The “page_visits” is the Topic to write to. Here we are passing the IP as the partition key. Note that if you do not include a key, even if you’ve defined a partitioner class, Kafka will assign the message to a random partition.&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;KeyedMessage&amp;lt;String, String&amp;gt;(topic, message)&lt;/code&gt;或者&lt;code&gt;KeyedMessage&amp;lt;String, String&amp;gt;(topic, key, message)&lt;/code&gt;，如果没输入key，那么即使设定了&lt;code&gt;partitioner.class&lt;/code&gt;也不会对message分发到相应partition的，原因很简单，因为真的没有key。&lt;/p&gt;
+
+&lt;p&gt;Full Source:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;import java.util.*;
+ 
+import kafka.javaapi.producer.Producer;
+import kafka.producer.KeyedMessage;
+import kafka.producer.ProducerConfig;
+ 
+public class TestProducer {
+	public static void main(String[] args) {
+		long events = Long.parseLong(args[0]);
+		Random rnd = new Random();
+ 
+		Properties props = new Properties();
+		props.put(&quot;metadata.broker.list&quot;, &quot;broker1:9092,broker2:9092 &quot;);
+		props.put(&quot;serializer.class&quot;, &quot;kafka.serializer.StringEncoder&quot;);
+		props.put(&quot;partitioner.class&quot;, &quot;example.producer.SimplePartitioner&quot;);
+		props.put(&quot;request.required.acks&quot;, &quot;1&quot;);
+ 
+		ProducerConfig config = new ProducerConfig(props);
+ 
+		Producer&amp;lt;String, String&amp;gt; producer = new Producer&amp;lt;String, String&amp;gt;(config);
+ 
+		for (long nEvents = 0; nEvents &amp;lt; events; nEvents++) { 
+			   long runtime = new Date().getTime();  
+			   String ip = “192.168.2.” + rnd.nextInt(255); 
+			   String msg = runtime + “,www.example.com,” + ip; 
+			   KeyedMessage&amp;lt;String, String&amp;gt; data = new KeyedMessage&amp;lt;String, String&amp;gt;(&quot;page_visits&quot;, ip, msg);
+			   producer.send(data);
+		}
+		producer.close();
+	}
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Partitioning Code:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;import kafka.producer.Partitioner;
+import kafka.utils.VerifiableProperties;
+ 
+public class SimplePartitioner implements Partitioner {
+	public SimplePartitioner (VerifiableProperties props) {
+ 
+	}
+ 
+	public int partition(Object key, int a_numPartitions) {
+		int partition = 0;
+		String stringKey = (String) key;
+		int offset = stringKey.lastIndexOf(&#39;.&#39;);
+		if (offset &amp;gt; 0) {
+		   partition = Integer.parseInt( stringKey.substring(offset+1)) % a_numPartitions;
+		}
+	   return partition;
+  }
+ 
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The logic takes the key, which we expect to be the IP address, finds the last octet and does a modulo operation on the number of partitions defined within Kafka for the topic. The benefit of this partitioning logic is all web visits from the same source IP end up in the same Partition. Of course so do other IPs, but your consumer logic will need to know how to handle that.
+（将有时间顺序的message放到同一个partition中）&lt;/p&gt;
+
+&lt;p&gt;Before running this, make sure you have created the Topic page_visits. From the command line:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;bin/kafka-create-topic.sh --topic page_visits --replica 3 --zookeeper localhost:2181 --partition 5
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Make sure you include a &lt;code&gt;--partition&lt;/code&gt; option so you create more than one.
+（要使用&lt;code&gt;--partition&lt;/code&gt;来创建多个partition，否则可能只有一个）&lt;/p&gt;
+
+&lt;p&gt;Now compile and run your Producer and data will be written to Kafka.&lt;/p&gt;
+
+&lt;p&gt;To confirm you have data, use the command line tool to see what was written:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;bin/kafka-console-consumer.sh --zookeeper localhost:2181 --topic page_visits --from-beginning
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;利用Maven进行Producer开发时，需要添加的POM配置如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;dependency&amp;gt;
+  &amp;lt;groupId&amp;gt;org.apache.kafka&amp;lt;/groupId&amp;gt;
+  &amp;lt;artifactId&amp;gt;kafka_2.9.2&amp;lt;/artifactId&amp;gt;
+  &amp;lt;version&amp;gt;0.8.1.1&amp;lt;/version&amp;gt;
+  &amp;lt;scope&amp;gt;compile&amp;lt;/scope&amp;gt;
+  &amp;lt;exclusions&amp;gt;
+	&amp;lt;exclusion&amp;gt;
+	  &amp;lt;artifactId&amp;gt;jmxri&amp;lt;/artifactId&amp;gt;
+	  &amp;lt;groupId&amp;gt;com.sun.jmx&amp;lt;/groupId&amp;gt;
+	&amp;lt;/exclusion&amp;gt;
+	&amp;lt;exclusion&amp;gt;
+	  &amp;lt;artifactId&amp;gt;jms&amp;lt;/artifactId&amp;gt;
+	  &amp;lt;groupId&amp;gt;javax.jms&amp;lt;/groupId&amp;gt;
+	&amp;lt;/exclusion&amp;gt;
+	&amp;lt;exclusion&amp;gt;
+	  &amp;lt;artifactId&amp;gt;jmxtools&amp;lt;/artifactId&amp;gt;
+	  &amp;lt;groupId&amp;gt;com.sun.jdmk&amp;lt;/groupId&amp;gt;
+	&amp;lt;/exclusion&amp;gt;
+  &amp;lt;/exclusions&amp;gt;
+&amp;lt;/dependency&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;几个情况&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;思考1&lt;/strong&gt;：Kafka 0.7.2版本中，直接在Producer中配置Zookeeper，Producer通过Zookeeper来获知Broker的位置，简单来说，应用与Kafka之间是解耦的，可以在不修改Producer信息的情况下，动态增减Broker。&lt;/p&gt;
+
+&lt;p&gt;当前，通过&lt;code&gt;metadata.broker.list&lt;/code&gt;来设置broker的列表，有几个问题，稍微梳理一下：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;如果只在&lt;code&gt;metadata.broker.list&lt;/code&gt;中配置一个broker，那么Producer能够识别出其他broker吗？&lt;/li&gt;
+  &lt;li&gt;如果能够识别出未配置的broker，那么，只配置一个broker不就行了吗？&lt;/li&gt;
+  &lt;li&gt;如果不能识别出未配置的broker，那Kafka集群中动态增加了broker，岂不是需要重新启动flume？（因为&lt;code&gt;metadata.broker.list&lt;/code&gt;实际上是flume的配置，要更新这一参数配置，就需要重启flume）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;思考2&lt;/strong&gt;：如果network interrupt，producer会如何动作？记录log？还是抛出异常？&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;思考3&lt;/strong&gt;：如果某一个flume挂了，能否能自动重启？&lt;/p&gt;
+
+&lt;h2 id=&quot;producer-1&quot;&gt;Producer配置的详细参数&lt;/h2&gt;
+
+&lt;p&gt;针对Kafka 0.8.1版本，这一部分介绍的Producer配置信息，主要参考两个地方：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://kafka.apache.org/08/configuration.html&quot;&gt;Kafka Configuration&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://kafka.apache.org/documentation.html#producerconfigs&quot;&gt;Kafka Producer Config&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Essential configuration properties for the producer include:（Producer必须的参数有几个，如下）&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;metadata.broker.list，broker列表；&lt;/li&gt;
+  &lt;li&gt;request.required.acks，broker收到producer发来的message后，是否ack？&lt;/li&gt;
+  &lt;li&gt;producer.type，这个什么滴干活？&lt;/li&gt;
+  &lt;li&gt;serializer.class，message从producer发往broker的过程中，需要序列化；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;具体参数如下：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Property
+    &lt;ul&gt;
+      &lt;li&gt;Default&lt;/li&gt;
+      &lt;li&gt;Description&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;metadata.broker.list
+    &lt;ul&gt;
+      &lt;li&gt;null&lt;/li&gt;
+      &lt;li&gt;This is for bootstrapping and the producer will only use it for getting metadata (topics, partitions and replicas). The socket connections for sending the actual data will be established based on the broker information returned in the metadata. The format is host1:port1,host2:port2, and the list can be a subset of brokers or a VIP pointing to a subset of brokers.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;request.required.acks
+    &lt;ul&gt;
+      &lt;li&gt;0	&lt;/li&gt;
+      &lt;li&gt;This value controls when a produce request is considered completed. Specifically, how many other brokers must have committed the data to their log and acknowledged this to the leader? Typical values are&lt;/li&gt;
+      &lt;li&gt;0, which means that the producer never waits for an acknowledgement from the broker (the same behavior as 0.7). This option provides the lowest latency but the weakest durability guarantees (some data will be lost when a server fails).（不等待ack信息）&lt;/li&gt;
+      &lt;li&gt;1, which means that the producer gets an acknowledgement after the leader replica has received the data. This option provides better durability as the client waits until the server acknowledges the request as successful (only messages that were written to the now-dead leader but not yet replicated will be lost).（leader完成数据写入）&lt;/li&gt;
+      &lt;li&gt;-1, which means that the producer gets an acknowledgement after all in-sync replicas have received the data. This option provides the best durability, we guarantee that no messages will be lost as long as at least one in sync replica remains.（所有replica都完成数据写入）&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;request.timeout.ms
+    &lt;ul&gt;
+      &lt;li&gt;10000&lt;/li&gt;
+      &lt;li&gt;The amount of time the broker will wait trying to meet the &lt;code&gt;request.required.acks&lt;/code&gt; requirement before sending back an error to the client.（broker收到producer发来的message后，如果需要返回ack信息，那这个参数设定了broker返回ack信息的时间限制，如果超过这个时间，）&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;producer.type	
+    &lt;ul&gt;
+      &lt;li&gt;sync&lt;/li&gt;
+      &lt;li&gt;This parameter specifies whether the messages are sent asynchronously in a background thread. Valid values are (1) async for asynchronous send and (2) sync for synchronous send. By setting the producer to async we allow batching together of requests (which is great for throughput) but open the possibility of a failure of the client machine dropping unsent data.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;serializer.class	
+    &lt;ul&gt;
+      &lt;li&gt;kafka.serializer.DefaultEncoder	The serializer class for messages. The default encoder takes a byte[] and returns the same byte[].
+key.serializer.class		The serializer class for keys (defaults to the same as for messages if nothing is given).
+partitioner.class	kafka.producer.DefaultPartitioner	The partitioner class for partitioning messages amongst sub-topics. The default partitioner is based on the hash of the key.
+compression.codec	none	
+This parameter allows you to specify the compression codec for all data generated by this producer. Valid values are “none”, “gzip” and “snappy”.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;compressed.topics	null	
+This parameter allows you to set whether compression should be turned on for particular topics. If the compression codec is anything other than NoCompressionCodec, enable compression only for specified topics if any. If the list of compressed topics is empty, then enable the specified compression codec for all topics. If the compression codec is NoCompressionCodec, compression is disabled for all topics&lt;/p&gt;
+
+&lt;p&gt;message.send.max.retries	3	
+This property will cause the producer to automatically retry a failed send request. This property specifies the number of retries when such failures occur. Note that setting a non-zero value here can lead to duplicates in the case of network errors that cause a message to be sent but the acknowledgement to be lost.&lt;/p&gt;
+
+&lt;p&gt;retry.backoff.ms	100	
+Before each retry, the producer refreshes the metadata of relevant topics to see if a new leader has been elected. Since leader election takes a bit of time, this property specifies the amount of time that the producer waits before refreshing the metadata.&lt;/p&gt;
+
+&lt;p&gt;topic.metadata.refresh.interval.ms	600 * 1000	
+The producer generally refreshes the topic metadata from brokers when there is a failure (partition missing, leader not available…). It will also poll regularly (default: every 10min so 600000ms). If you set this to a negative value, metadata will only get refreshed on failure. If you set this to zero, the metadata will get refreshed after each message sent (not recommended). Important note: the refresh happen only AFTER the message is sent, so if the producer never sends a message the metadata is never refreshed&lt;/p&gt;
+
+&lt;p&gt;queue.buffering.max.ms	5000	Maximum time to buffer data when using async mode. For example a setting of 100 will try to batch together 100ms of messages to send at once. This will improve throughput but adds message delivery latency due to the buffering.
+queue.buffering.max.messages	10000	The maximum number of unsent messages that can be queued up the producer when using async mode before either the producer must be blocked or data must be dropped.
+queue.enqueue.timeout.ms	-1	
+The amount of time to block before dropping messages when running in async mode and the buffer has reached queue.buffering.max.messages. If set to 0 events will be enqueued immediately or dropped if the queue is full (the producer send call will never block). If set to -1 the producer will block indefinitely and never willingly drop a send.&lt;/p&gt;
+
+&lt;p&gt;batch.num.messages	200	The number of messages to send in one batch when using async mode. The producer will wait until either this number of messages are ready to send or queue.buffer.max.ms is reached.
+send.buffer.bytes	100 * 1024	Socket write buffer size
+client.id	“”	The client id is a user-specified string sent in each request to help trace calls. It should logically identify the application making the request.&lt;/p&gt;
+
+&lt;p&gt;More details about producer configuration can be found in the scala class &lt;code&gt;kafka.producer.ProducerConfig&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：几个新的理解：&lt;/p&gt;
+
+&lt;p&gt;metadata.broker.list：本质是从一些broker中请求metadata（topic、partition、replicas），而真正的socket链接，是根据收到的metadata来进行的；因此，可以只配置一部分的broker，或者说只配置部分VIP broker，必要时，探查此深层的原因；&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;疑问&lt;/strong&gt;：突然想到一个问题，记录一下：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Server上，有进程监听port后，在服务器上无法再启动一个进程来监听这一port；&lt;/li&gt;
+  &lt;li&gt;在远端通过telnet能够与server上这一port建立连接，并且，多个client都能与server上这一port建立连接；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;这个问题，我不知到深层原因，归根结底是对socket建立的底层原因不清晰。&lt;/p&gt;
+
+&lt;p&gt;3.4 New Producer Configs&lt;/p&gt;
+
+&lt;p&gt;We are working on a replacement for our existing producer. The code is available in trunk now and can be considered beta quality. Below is the configuration for the new producer.
+Name	Type	Default	Importance	Description
+bootstrap.servers	list		high	A list of host/port pairs to use for establishing the initial connection to the Kafka cluster. Data will be load balanced over all servers irrespective of which servers are specified here for bootstrapping—this list only impacts the initial hosts used to discover the full set of servers. This list should be in the form host1:port1,host2:port2,…. Since these servers are just used for the initial connection to discover the full cluster membership (which may change dynamically), this list need not contain the full set of servers (you may want more than one, though, in case a server is down). If no server in this list is available sending data will fail until on becomes available.
+acks	string	1	high	The number of acknowledgments the producer requires the leader to have received before considering a request complete. This controls the durability of records that are sent. The following settings are common:
+acks=0 If set to zero then the producer will not wait for any acknowledgment from the server at all. The record will be immediately added to the socket buffer and considered sent. No guarantee can be made that the server has received the record in this case, and the retries configuration will not take effect (as the client won’t generally know of any failures). The offset given back for each record will always be set to -1.
+acks=1 This will mean the leader will write the record to its local log but will respond without awaiting full acknowledgement from all followers. In this case should the leader fail immediately after acknowledging the record but before the followers have replicated it then the record will be lost.
+acks=all This means the leader will wait for the full set of in-sync replicas to acknowledge the record. This guarantees that the record will not be lost as long as at least one in-sync replica remains alive. This is the strongest available guarantee.
+Other settings such as acks=2 are also possible, and will require the given number of acknowledgements but this is generally less useful.
+buffer.memory	long	33554432	high	The total bytes of memory the producer can use to buffer records waiting to be sent to the server. If records are sent faster than they can be delivered to the server the producer will either block or throw an exception based on the preference specified by block.on.buffer.full.
+This setting should correspond roughly to the total memory the producer will use, but is not a hard bound since not all memory the producer uses is used for buffering. Some additional memory will be used for compression (if compression is enabled) as well as for maintaining in-flight requests.&lt;/p&gt;
+
+&lt;p&gt;compression.type	string	none	high	The compression type for all data generated by the producer. The default is none (i.e. no compression). Valid values are none, gzip, or snappy. Compression is of full batches of data, so the efficacy of batching will also impact the compression ratio (more batching means better compression).
+retries	int	0	high	Setting a value greater than zero will cause the client to resend any record whose send fails with a potentially transient error. Note that this retry is no different than if the client resent the record upon receiving the error. Allowing retries will potentially change the ordering of records because if two records are sent to a single partition, and the first fails and is retried but the second succeeds, then the second record may appear first.
+batch.size	int	16384	medium	The producer will attempt to batch records together into fewer requests whenever multiple records are being sent to the same partition. This helps performance on both the client and the server. This configuration controls the default batch size in bytes.
+No attempt will be made to batch records larger than this size.&lt;/p&gt;
+
+&lt;p&gt;Requests sent to brokers will contain multiple batches, one for each partition with data available to be sent.&lt;/p&gt;
+
+&lt;p&gt;A small batch size will make batching less common and may reduce throughput (a batch size of zero will disable batching entirely). A very large batch size may use memory a bit more wastefully as we will always allocate a buffer of the specified batch size in anticipation of additional records.&lt;/p&gt;
+
+&lt;p&gt;client.id	string		medium	The id string to pass to the server when making requests. The purpose of this is to be able to track the source of requests beyond just ip/port by allowing a logical application name to be included with the request. The application can set any string it wants as this has no functional purpose other than in logging and metrics.
+linger.ms	long	0	medium	The producer groups together any records that arrive in between request transmissions into a single batched request. Normally this occurs only under load when records arrive faster than they can be sent out. However in some circumstances the client may want to reduce the number of requests even under moderate load. This setting accomplishes this by adding a small amount of artificial delay—that is, rather than immediately sending out a record the producer will wait for up to the given delay to allow other records to be sent so that the sends can be batched together. This can be thought of as analogous to Nagle’s algorithm in TCP. This setting gives the upper bound on the delay for batching: once we get batch.size worth of records for a partition it will be sent immediately regardless of this setting, however if we have fewer than this many bytes accumulated for this partition we will ‘linger’ for the specified time waiting for more records to show up. This setting defaults to 0 (i.e. no delay). Setting linger.ms=5, for example, would have the effect of reducing the number of requests sent but would add up to 5ms of latency to records sent in the absense of load.
+max.request.size	int	1048576	medium	The maximum size of a request. This is also effectively a cap on the maximum record size. Note that the server has its own cap on record size which may be different from this. This setting will limit the number of record batches the producer will send in a single request to avoid sending huge requests.
+receive.buffer.bytes	int	32768	medium	The size of the TCP receive buffer to use when reading data
+send.buffer.bytes	int	131072	medium	The size of the TCP send buffer to use when sending data
+timeout.ms	int	30000	medium	The configuration controls the maximum amount of time the server will wait for acknowledgments from followers to meet the acknowledgment requirements the producer has specified with the acks configuration. If the requested number of acknowledgments are not met when the timeout elapses an error will be returned. This timeout is measured on the server side and does not include the network latency of the request.
+block.on.buffer.full	boolean	true	low	When our memory buffer is exhausted we must either stop accepting new records (block) or throw errors. By default this setting is true and we block, however in some scenarios blocking is not desirable and it is better to immediately give an error. Setting this to false will accomplish that: the producer will throw a BufferExhaustedException if a recrord is sent and the buffer space is full.
+metadata.fetch.timeout.ms	long	60000	low	The first time data is sent to a topic we must fetch metadata about that topic to know which servers host the topic’s partitions. This configuration controls the maximum amount of time we will block waiting for the metadata fetch to succeed before throwing an exception back to the client.
+metadata.max.age.ms	long	300000	low	The period of time in milliseconds after which we force a refresh of metadata even if we haven’t seen any partition leadership changes to proactively discover any new brokers or partitions.
+metric.reporters	list	[]	low	A list of classes to use as metrics reporters. Implementing the MetricReporter interface allows plugging in classes that will be notified of new metric creation. The JmxReporter is always included to register JMX statistics.
+metrics.num.samples	int	2	low	The number of samples maintained to compute metrics.
+metrics.sample.window.ms	long	30000	low	The metrics system maintains a configurable number of samples over a fixed window size. This configuration controls the size of the window. For example we might maintain two samples each measured over a 30 second period. When a window expires we erase and overwrite the oldest window.
+reconnect.backoff.ms	long	10	low	The amount of time to wait before attempting to reconnect to a given host when a connection fails. This avoids a scenario where the client repeatedly attempts to connect to a host in a tight loop.
+retry.backoff.ms	long	100	low	The amount of time to wait before attempting to retry a failed produce request to a given topic partition. This avoids repeated sending-and-failing in a tight loop.&lt;/p&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;参考来源&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/thilinamb/flume-ng-kafka-sink&quot;&gt;flume-ng-kafka-sink&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cwiki.apache.org/confluence/display/KAFKA/0.8.0+Producer+Example&quot;&gt;0.8.0 Producer Example&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://kafka.apache.org/08/configuration.html&quot;&gt;Kafka Configuration&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section-3&quot;&gt;杂谈&lt;/h2&gt;
+
+&lt;p&gt;人是有差异的，特别是视野上的差异，有些东西，如果一个人没有见识过，同时想象力也不行，或者说胆小如鼠不敢想象，这样的人脑袋不行、胆子也不行，要疏远；另，信任是金子，别人对我的绝对信任，我对别人的绝对信任，都是很难建立，要如同珍惜脑袋一样，珍惜这些信任。（注：绝对信任：无论做什么事，都相信是在做一件值得做的事，无论速度、计划怎样，都是信任，甚至当有流言蜚语产生时，都能力排众议对其信任。这种信任，大都是建立在对人格的熟知上。）&lt;/p&gt;
+
+&lt;p&gt;整理东西，突然想到：做一件事，怎样才能做成？做事情需要几个条件：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;做事的方向对不对？&lt;/li&gt;
+  &lt;li&gt;做事的人脑袋是否灵光？&lt;/li&gt;
+  &lt;li&gt;做事的人，是否投入了足够的时间？&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;针对上面的几点，大概说一下：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;做事的方向对不对&lt;/strong&gt;，只要针对做的事情，当前能够达到基本一致，方向基本确定，而不是一团乱麻，那就可以开始做下去了，而在后期的过程中，可能会涉及到多次调整、迭代，这些都是可以预见的；&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;做事的人脑袋是否灵光&lt;/strong&gt;，事情是由人来做的，做的人脑袋行不行？基础理论、基本操作技能，基本的世界观：劳动创造价值，获得报酬；还是，跟着大牛有肉吃？（这本质是希望拿牛人的劳动价值，换取自己的报酬）&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;做事的人时间投入&lt;/strong&gt;，天资尚可的人就行了，团队高低档次的人都需要，但是，有一点，如果不投入时间，或者时间很少，那又如何保证产出？特别是针对以前就没有涉足的领域，需要不畏艰险、持续的投入时间，才能有所理解、有所深入；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;今天突然想起一件事，几年前，跟某位好友一起走路，无意间说起坚韧这种性格，我就问道：如果要在午门城墙上打一个洞，如何才能做到？谈到锲而不舍，如果一个人没有这种精神，那遇到困难的事情，就难办了；后来又说起，今后工作的打算，我们基本达成一致：精挑细选公司，一旦入门后，就当自己是公司的创始人，然后，返老还童，恢复到20多岁年轻小伙儿的年纪 ，只不过，返老还童的代价是放弃对于公司的所有权、职务等，以这种心态去工作，重塑自己的公司、再造辉煌，可以说想象还是比较大胆的；基于这种定位，每次做事，都是创始人心态，全力做好。&lt;/p&gt;
+
+</content>
+   </entry>
    
    <entry>
      <title>Storm 0.9.2：Trident</title>
@@ -1801,105 +2236,6 @@ Required properties are in bold.
 &lt;pre&gt;&lt;code&gt;a1.channels = c1
 a1.channels.c1.type = org.example.MyChannel
 &lt;/code&gt;&lt;/pre&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>JSON简介以及JAVA API</title>
-     <link href="http://ningg.github.com/json-java-api"/>
-     <updated>2014-10-24T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/json-java-api</id>
-     <content type="html">&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
-
-&lt;p&gt;最近做个数据采集的东西，初步决定使用JSON作为数据交换格式，OK，学习整理一下。&lt;/p&gt;
-
-&lt;h2 id=&quot;json&quot;&gt;JSON简介&lt;/h2&gt;
-
-&lt;p&gt;JSON（JavaScript Object Notation），轻量级的数据交换格式，易于阅读和编写，同时机器也很容易输出JSON格式、解析JSON格式。JSON是完全独立于语言的文本格式，这使其成为理想的数据交换语言。&lt;/p&gt;
-
-&lt;p&gt;JSON中两类基本结构：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code&gt;key:value&lt;/code&gt;：键-值对，通过key来标识value；&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;array&lt;/code&gt;：有序的数组；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;JSON利用上述的两类基本结构，实现了集中基本数据类型：&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Object&lt;/strong&gt;：An object is an unordered set of name/value pairs. An object begins with { (left brace) and ends with } (right brace). Each name is followed by : (colon) and the name/value pairs are separated by , (comma).
-（无序的key-value对，以&lt;code&gt;{&lt;/code&gt;开头，以&lt;code&gt;}&lt;/code&gt;结尾，其内部以&lt;code&gt;,&lt;/code&gt;逗号分隔）&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/json-java-api/object.gif&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Array&lt;/strong&gt;：An array is an ordered collection of values. An array begins with &lt;code&gt;[&lt;/code&gt; (left bracket) and ends with &lt;code&gt;]&lt;/code&gt; (right bracket). Values are separated by , (comma).
-（有序的value序列，以&lt;code&gt;[&lt;/code&gt;开头，以&lt;code&gt;]&lt;/code&gt;结尾，其内部以&lt;code&gt;,&lt;/code&gt;逗号分隔）&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/json-java-api/array.gif&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Value&lt;/strong&gt;：A value can be a string in double quotes, or a number, or true or false or null, or an object or an array. These structures can be nested.
-（Value表示的内容比较广，既可以是”“包含起来的String，也可以是数字，或者&lt;code&gt;true&lt;/code&gt;`false&lt;code&gt;；另一方面，也可以是&lt;/code&gt;Object`或者array）&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/json-java-api/value.gif&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;String&lt;/strong&gt;：A string is a sequence of zero or more Unicode characters, wrapped in double quotes, using backslash escapes. A character is represented as a single character string. A string is very much like a C or Java string.
-（&lt;code&gt;&quot;&quot;&lt;/code&gt;双引号包含起来的Unicode 字符，其中可以使用&lt;code&gt;backslash&lt;/code&gt;来标识转义字符）&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/json-java-api/string.gif&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Number&lt;/strong&gt;：A number is very much like a C or Java number, except that the octal and hexadecimal formats are not used.
-（不支持octal和hexadecimal formats）&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/json-java-api/number.gif&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;Whitespace can be inserted between any pair of tokens. Excepting a few encoding details, that completely describes the language.
-（任何符号之间都可插入空格&lt;code&gt;whitespace&lt;/code&gt;）&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：JSON中&lt;code&gt;key&lt;/code&gt;能否重复？&lt;/p&gt;
-
-&lt;h2 id=&quot;jsonjava-api&quot;&gt;处理JSON的JAVA API&lt;/h2&gt;
-
-&lt;p&gt;处理JSON格式数据，无非两条路：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;JDK 自带的 Java API；（官方）&lt;/li&gt;
-  &lt;li&gt;第三方jar包提供的java API；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;特别说明&lt;/strong&gt;：&lt;a href=&quot;https://jcp.org/en/jsr/detail?id=353&quot;&gt;JSR 353&lt;/a&gt;指出，今后的Java SE 6以及Java EE 7中要添加API来支持JSON格式数据的解析和转换。当前个人查证，在JDK6u30中没有java API来解析JSON；Java EE 7中，已经提供了&lt;code&gt;javax.json&lt;/code&gt;包来支持解析JSON。&lt;/p&gt;
-
-&lt;p&gt;当前项目需求，在JDK5以及之上的版本都能进行JSON字符串与JSON对象之间的转换，OK，那直接上第三方jar包得了。&lt;/p&gt;
-
-&lt;h3 id=&quot;javajsonjar&quot;&gt;java解析JSON的第三方jar包&lt;/h3&gt;
-
-&lt;p&gt;从[JSON 主页][介绍 JSON]可知，当前，有很多的第三方jar包：org.json、org.json.me、jsonp、&lt;a href=&quot;http://jackson.codehaus.org/&quot;&gt;Jackson Json Processor&lt;/a&gt;、&lt;a href=&quot;http://code.google.com/p/google-gson/&quot;&gt;google-gson&lt;/a&gt;、Json-lib…，有点多呀，到底选哪个呢？当前初步考虑在如下两个中选：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Spring中使用的是&lt;a href=&quot;http://jackson.codehaus.org/&quot;&gt;org.codehaus.jackson&lt;/a&gt;详细版本号&lt;code&gt;1.9.13&lt;/code&gt;（后来Spring 3.2中已经支持Jackson2了）&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://code.google.com/p/google-gson/&quot;&gt;google-gson&lt;/a&gt;的官方网站打不开，不过在maven中央仓库找到了gson的&lt;a href=&quot;http://repo1.maven.org/maven2/com/google/code/gson/gson/2.2.3/&quot;&gt;jar包&lt;/a&gt;，虽然无法查看官网的文档，不过maven中央仓库的javadoc、source文件也可以用来学习。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;最终决定采用gson，其基本的JSON操作，参考：&lt;a href=&quot;http://blog.csdn.net/lk_blog/article/details/7685169&quot;&gt;JSON转换利器:Gson&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;json-1&quot;&gt;解析JSON字符串的效率问题&lt;/h2&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://ifeve.com/json-java-api/&quot;&gt;处理JSON的Java API ：JSON的简介&lt;/a&gt;中提到解析JSON的API分为两类：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;对象模型API&lt;/li&gt;
-  &lt;li&gt;流API&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;这两种方式在原理、效率上都有差异，TODO&lt;/p&gt;
-
-&lt;h2 id=&quot;section-1&quot;&gt;参考来源&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.json.org/json-zh.html&quot;&gt;介绍 JSON&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://ifeve.com/json-java-api/&quot;&gt;处理JSON的Java API ：JSON的简介&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://jcp.org/en/jsr/detail?id=353&quot;&gt;JSR 353&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://blog.csdn.net/lk_blog/article/details/7685169&quot;&gt;JSON转换利器:Gson&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
 
 </content>
    </entry>
