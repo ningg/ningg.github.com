@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Kafka 0.8.1£ºConsumer API and Consumer Configs
-description: KafkaÊÇÒ»¸öÏûÏ¢¶ÓÁĞ£¬ÄÇ¾ÍÒªÔÊĞí´ÓÆäÖĞ¶ÁÈ¡Êı¾İ£¬¶ÁÈ¡Êı¾İµÄÕâ¸öÊµÌå£¬¾ÍÊÇKafkaµÄConsumer
+title: Kafka 0.8.1ï¼šConsumer API and Consumer Configs
+description: Kafkaæ˜¯ä¸€ä¸ªæ¶ˆæ¯é˜Ÿåˆ—ï¼Œé‚£å°±è¦å…è®¸ä»å…¶ä¸­è¯»å–æ•°æ®ï¼Œè¯»å–æ•°æ®çš„è¿™ä¸ªå®ä½“ï¼Œå°±æ˜¯Kafkaçš„Consumer
 category: kafka
 ---
 
@@ -10,11 +10,11 @@ category: kafka
 
 ##Consumer API
 
-ÈçºÎ´ÓKafkaÖĞ¶ÁÈ¡Êı¾İ£¿ÈıÖÖ·½Ê½£º
+å¦‚ä½•ä»Kafkaä¸­è¯»å–æ•°æ®ï¼Ÿä¸‰ç§æ–¹å¼ï¼š
 
-* High Level Consumer API£»
-* Simple Consumer API£»
-* Kafka Hadoop Consumer API£»
+* High Level Consumer APIï¼›
+* Simple Consumer APIï¼›
+* Kafka Hadoop Consumer APIï¼›
 
 ###High Level Consumer API
 
@@ -144,7 +144,7 @@ The essential consumer configurations are the following:
 * zookeeper.connect
 
 
-ÏÂÎÄ½«ÏêÏ¸½éÉÜÕâĞ©²ÎÊı£º
+ä¸‹æ–‡å°†è¯¦ç»†ä»‹ç»è¿™äº›å‚æ•°ï¼š
 
 * Property
 	* Default
@@ -154,14 +154,14 @@ The essential consumer configurations are the following:
 	* null
 	* A string that uniquely identifies the group of consumer processes to which this consumer belongs. By setting the same group id multiple processes indicate that they are all part of the same consumer group.
 
-**notes(ningg)**£ºconsumer group£¿¸´Ï°Ò»ÏÂ£¬ÎªÊ²Ã´ÓĞÕâ¸ö£¿±¾ÖÊ£ºKafkaÖĞÒ»Ìõmessage£¬·¢ËÍµ½ÄÄĞ©µØ·½ÄØ£¿Ò»ÖÖÊÇÈº·¢¸øConsumer£¬Ò»ÖÖÊÇÖ»·¢ËÍ¸øÄ³Ò»¸öÂú×ãÌõ¼şµÄConsumer£»Í¬Ê±messageÒªÇóÔÚÍ¬Ò»¸öConsumerÖĞ±£Ö¤messageµÄ´¦ÀíË³Ğò£¬ÔÚÂú×ãÕâÒ»¹¦ÄÜĞèÇóµÄÇé¿öÏÂ£¬Í¬Ê±ÎªÁË¸ÄÉÆĞÔÄÜ£¬Ôö¼ÓÁËÒ»¸ö¸ÅÄî£ºconsumer group£¬Í¬Ò»¸ögroupÏÂ¿ÉÒÔ°üº¬¶à¸öconsumer£¬Ã¿´Îgroup½ÓÊÕµ½message£¬¾ÍÊµÀı»¯ÆäÄÚ²¿µÄÒ»¸öconsumer£¬Èç¹ûÒ»¸öpartitionÖĞµÄmessage¾Í·¢ËÍ¸øÒ»¸ögroup£¬ÔòË³Ğò´¦Àí£»·ñÔò¾ÍÊÇ²¢·¢´¦Àí¡£ÒÉÎÊ£ºÒ»¸öconsumer groupÖĞÖ»°üº¬Ò»¸öconsumer¾ÍÄÜ¹»ÊµÏÖ´®ĞĞË³Ğò´¦ÀíÁË£¬ÎªÊ²Ã´»¹Òª·ÅÖÃ¶à¸öconsumer£¿
+**notes(ningg)**ï¼šconsumer groupï¼Ÿå¤ä¹ ä¸€ä¸‹ï¼Œä¸ºä»€ä¹ˆæœ‰è¿™ä¸ªï¼Ÿæœ¬è´¨ï¼šKafkaä¸­ä¸€æ¡messageï¼Œå‘é€åˆ°å“ªäº›åœ°æ–¹å‘¢ï¼Ÿä¸€ç§æ˜¯ç¾¤å‘ç»™Consumerï¼Œä¸€ç§æ˜¯åªå‘é€ç»™æŸä¸€ä¸ªæ»¡è¶³æ¡ä»¶çš„Consumerï¼›åŒæ—¶messageè¦æ±‚åœ¨åŒä¸€ä¸ªConsumerä¸­ä¿è¯messageçš„å¤„ç†é¡ºåºï¼Œåœ¨æ»¡è¶³è¿™ä¸€åŠŸèƒ½éœ€æ±‚çš„æƒ…å†µä¸‹ï¼ŒåŒæ—¶ä¸ºäº†æ”¹å–„æ€§èƒ½ï¼Œå¢åŠ äº†ä¸€ä¸ªæ¦‚å¿µï¼šconsumer groupï¼ŒåŒä¸€ä¸ªgroupä¸‹å¯ä»¥åŒ…å«å¤šä¸ªconsumerï¼Œæ¯æ¬¡groupæ¥æ”¶åˆ°messageï¼Œå°±å®ä¾‹åŒ–å…¶å†…éƒ¨çš„ä¸€ä¸ªconsumerï¼Œå¦‚æœä¸€ä¸ªpartitionä¸­çš„messageå°±å‘é€ç»™ä¸€ä¸ªgroupï¼Œåˆ™é¡ºåºå¤„ç†ï¼›å¦åˆ™å°±æ˜¯å¹¶å‘å¤„ç†ã€‚ç–‘é—®ï¼šä¸€ä¸ªconsumer groupä¸­åªåŒ…å«ä¸€ä¸ªconsumerå°±èƒ½å¤Ÿå®ç°ä¸²è¡Œé¡ºåºå¤„ç†äº†ï¼Œä¸ºä»€ä¹ˆè¿˜è¦æ”¾ç½®å¤šä¸ªconsumerï¼Ÿ
 
 * zookeeper.connect
 	* null
 	* Specifies the ZooKeeper connection string in the form `hostname:port` where host and port are the host and port of a ZooKeeper server. To allow connecting through other ZooKeeper nodes when that ZooKeeper machine is down you can also specify multiple hosts in the form `hostname1:port1,hostname2:port2,hostname3:port3`.
 	* The server may also have a ZooKeeper `chroot` path as part of it's ZooKeeper connection string which puts its data under some path in the global ZooKeeper namespace. If so the consumer should use the same chroot path in its connection string. For example to give a chroot path of `/chroot/path` you would give the connection string as `hostname1:port1,hostname2:port2,hostname3:port3/chroot/path`.
 
-**notes(ningg)**£ºÔÚÉèÖÃ`zookeeper.connect`Ê±£¬¿ÉÒÔÉèÖÃzookeeperµÄ`chroot`£¬`chroot`µÄº¬Òå£º¸Ä±äÔªÊı¾İÔÚglobal Zookeeper namespaceÖĞµÄ´æ´¢Î»ÖÃ£»Ò»µ©ĞŞ¸ÄÁË`chroot`£¬¾ÍĞèÒªÔÚÁ´½ÓZookeeperÊ±£¬Ò²ÓÃÉÏ`chroot`£¬¾ßÌåĞÎÊ½£º`hostname1:port1,hostname2:port2,hostname3:port3/chroot/path`¡££¨µ±Ç°Àí½â£¬Ç°ÃæµÄ`/chroot/path`¶Ô`hostname1:port1`Ò²ÊÇÓĞĞ§µÄ£©
+**notes(ningg)**ï¼šåœ¨è®¾ç½®`zookeeper.connect`æ—¶ï¼Œå¯ä»¥è®¾ç½®zookeeperçš„`chroot`ï¼Œ`chroot`çš„å«ä¹‰ï¼šæ”¹å˜å…ƒæ•°æ®åœ¨global Zookeeper namespaceä¸­çš„å­˜å‚¨ä½ç½®ï¼›ä¸€æ—¦ä¿®æ”¹äº†`chroot`ï¼Œå°±éœ€è¦åœ¨é“¾æ¥Zookeeperæ—¶ï¼Œä¹Ÿç”¨ä¸Š`chroot`ï¼Œå…·ä½“å½¢å¼ï¼š`hostname1:port1,hostname2:port2,hostname3:port3/chroot/path`ã€‚ï¼ˆå½“å‰ç†è§£ï¼Œå‰é¢çš„`/chroot/path`å¯¹`hostname1:port1`ä¹Ÿæ˜¯æœ‰æ•ˆçš„ï¼‰
 
 * consumer.id
 	* null	
@@ -169,7 +169,7 @@ The essential consumer configurations are the following:
 
 * socket.timeout.ms
 	* 30 * 1000
-	* The socket timeout for network requests. The actual timeout set will be `max.fetch.wait` + `socket.timeout.ms`.£¨µÈ´ımessageµÄÊ±¼ä£©
+	* The socket timeout for network requests. The actual timeout set will be `max.fetch.wait` + `socket.timeout.ms`.ï¼ˆç­‰å¾…messageçš„æ—¶é—´ï¼‰
 
 * socket.receive.buffer.bytes
 	* 64 * 1024
@@ -177,78 +177,78 @@ The essential consumer configurations are the following:
 
 * fetch.message.max.bytes
 	* 1024 * 1024
-	* The number of byes of messages to attempt to fetch for each topic-partition in each fetch request. These bytes will be read into memory for each partition, so this helps control the memory used by the consumer. The fetch request size must be at least as large as the maximum message size the server allows or else it is possible for the producer to send messages larger than the consumer can fetch.£¨consumerµ¥´ÎÇëÇómessagesÊ±£¬×î´ó×Ö½ÚÊı£»Í¨³£ÒªÇó`fetch.message.max.bytes`ÖÁÉÙÎªmaximum message size£©
+	* The number of byes of messages to attempt to fetch for each topic-partition in each fetch request. These bytes will be read into memory for each partition, so this helps control the memory used by the consumer. The fetch request size must be at least as large as the maximum message size the server allows or else it is possible for the producer to send messages larger than the consumer can fetch.ï¼ˆconsumerå•æ¬¡è¯·æ±‚messagesæ—¶ï¼Œæœ€å¤§å­—èŠ‚æ•°ï¼›é€šå¸¸è¦æ±‚`fetch.message.max.bytes`è‡³å°‘ä¸ºmaximum message sizeï¼‰
 
 * auto.commit.enable
 	* true
-	* If true, periodically commit to ZooKeeper the offset of messages already fetched by the consumer. This committed offset will be used when the process fails as the position from which the new consumer will begin.£¨Ä¬ÈÏ`true`£¬±íÊ¾µ±Consumer³É¹¦»ñÈ¡messageºó£¬Ïòzookeeper·¢ËÍmessageµÄoffset±íÊ¾commit£»committed offsetµÄ×÷ÓÃ£ºµ±consumer processÊ§°Üºó£¬ĞÂµÄconsumer´ÓÕâÒ»offset£¬ÖØĞÂ¿ªÊ¼´¦Àí£©
+	* If true, periodically commit to ZooKeeper the offset of messages already fetched by the consumer. This committed offset will be used when the process fails as the position from which the new consumer will begin.ï¼ˆé»˜è®¤`true`ï¼Œè¡¨ç¤ºå½“ConsumeræˆåŠŸè·å–messageåï¼Œå‘zookeeperå‘é€messageçš„offsetè¡¨ç¤ºcommitï¼›committed offsetçš„ä½œç”¨ï¼šå½“consumer processå¤±è´¥åï¼Œæ–°çš„consumerä»è¿™ä¸€offsetï¼Œé‡æ–°å¼€å§‹å¤„ç†ï¼‰
 
 * auto.commit.interval.ms
 	* 60 * 1000
-	* The frequency in ms that the consumer offsets are committed to zookeeper.£¨Consumer¶à³¤Ê±¼äÌá½»Ò»´Îoffset£©
+	* The frequency in ms that the consumer offsets are committed to zookeeper.ï¼ˆConsumerå¤šé•¿æ—¶é—´æäº¤ä¸€æ¬¡offsetï¼‰
 
-**notes(ningg)**£ºÄÑµÀ²»ÊÇconsumerÃ¿³É¹¦fetchÒ»¸ömessage£¬¾ÍcommitÒ»´Îoffset£¿
+**notes(ningg)**ï¼šéš¾é“ä¸æ˜¯consumeræ¯æˆåŠŸfetchä¸€ä¸ªmessageï¼Œå°±commitä¸€æ¬¡offsetï¼Ÿ
 
 * queued.max.message.chunks
 	* 10
-	* Max number of message chunks buffered for consumption. Each chunk can be up to `fetch.message.max.bytes`.£¨ÔÊĞí»º´æµÄmessage chunkµÄ¸öÊı£©
+	* Max number of message chunks buffered for consumption. Each chunk can be up to `fetch.message.max.bytes`.ï¼ˆå…è®¸ç¼“å­˜çš„message chunkçš„ä¸ªæ•°ï¼‰
 
-**notes(ningg)**£ºmessage chunkÊ²Ã´ÒâË¼£¿ÓĞÓÃÂğ£¿
+**notes(ningg)**ï¼šmessage chunkä»€ä¹ˆæ„æ€ï¼Ÿæœ‰ç”¨å—ï¼Ÿ
 
 * rebalance.max.retries
 	* 4
-	* When a new consumer joins a consumer group the set of consumers attempt to "rebalance" the load to assign partitions to each consumer. If the set of consumers changes while this assignment is taking place the rebalance will fail and retry. This setting controls the maximum number of attempts before giving up.£¨ĞÂµÄconsumer¼ÓÈëµ½consumer groupºó£¬Õæ¸öconsumer group³Ğµ£µÄËùÓĞpartition»á½øĞĞÔÙ·ÖÅä£¬Èç¹û·ÖÅä¹ı³ÌÖĞ£¬ÕâĞ©consumer setÓÒ·¢Éú±ä»¯£¬Ôò»á³¢ÊÔÖØĞÂÖ´ĞĞ£¬´Ë²ÎÊı£¬±íÊ¾³¢ÊÔµÄ´ÎÊı¡££©
+	* When a new consumer joins a consumer group the set of consumers attempt to "rebalance" the load to assign partitions to each consumer. If the set of consumers changes while this assignment is taking place the rebalance will fail and retry. This setting controls the maximum number of attempts before giving up.ï¼ˆæ–°çš„consumeråŠ å…¥åˆ°consumer groupåï¼ŒçœŸä¸ªconsumer groupæ‰¿æ‹…çš„æ‰€æœ‰partitionä¼šè¿›è¡Œå†åˆ†é…ï¼Œå¦‚æœåˆ†é…è¿‡ç¨‹ä¸­ï¼Œè¿™äº›consumer setå³å‘ç”Ÿå˜åŒ–ï¼Œåˆ™ä¼šå°è¯•é‡æ–°æ‰§è¡Œï¼Œæ­¤å‚æ•°ï¼Œè¡¨ç¤ºå°è¯•çš„æ¬¡æ•°ã€‚ï¼‰
 
 * fetch.min.bytes
 	* 1
-	* The minimum amount of data the server should return for a fetch request. If insufficient data is available the request will wait for that much data to accumulate before answering the request.£¨serverÏòfetch request·µ»ØµÄ×îĞ¡×Ö½ÚÊı£¬Èç¹ûdata²»×ã£¬Ôò»áµÈ´ıÀÛ»ı×ã¹»µÄÊı¾İÖ®ºó£¬ÔÙ½øĞĞÏìÓ¦¡££©
+	* The minimum amount of data the server should return for a fetch request. If insufficient data is available the request will wait for that much data to accumulate before answering the request.ï¼ˆserverå‘fetch requestè¿”å›çš„æœ€å°å­—èŠ‚æ•°ï¼Œå¦‚æœdataä¸è¶³ï¼Œåˆ™ä¼šç­‰å¾…ç´¯ç§¯è¶³å¤Ÿçš„æ•°æ®ä¹‹åï¼Œå†è¿›è¡Œå“åº”ã€‚ï¼‰
 
 * fetch.wait.max.ms
 	* 100
-	* The maximum amount of time the server will block before answering the fetch request if there isn't sufficient data to immediately satisfy `fetch.min.bytes`£¨Éè¶¨ÁË`fetch.min.bytes`£¬Èç¹ûÃ»ÓĞ×ã¹»Êı¾İ£¬Ôò£¬×î³¤µÈ´ıÊ±¼ä£©
+	* The maximum amount of time the server will block before answering the fetch request if there isn't sufficient data to immediately satisfy `fetch.min.bytes`ï¼ˆè®¾å®šäº†`fetch.min.bytes`ï¼Œå¦‚æœæ²¡æœ‰è¶³å¤Ÿæ•°æ®ï¼Œåˆ™ï¼Œæœ€é•¿ç­‰å¾…æ—¶é—´ï¼‰
 
 * rebalance.backoff.ms
 	* 2000
-	* Backoff time between retries during rebalance.£¨reblalanceÊ±£¬²»Í¬µÄretryÖ®¼äµÄÍË±ÜÊ±³¤£¬¼´£¬Á½´ÎretryÖ®¼äµÄ¼ä¸ôÊ±¼ä£©
+	* Backoff time between retries during rebalance.ï¼ˆreblalanceæ—¶ï¼Œä¸åŒçš„retryä¹‹é—´çš„é€€é¿æ—¶é•¿ï¼Œå³ï¼Œä¸¤æ¬¡retryä¹‹é—´çš„é—´éš”æ—¶é—´ï¼‰
 
 * refresh.leader.backoff.ms
 	* 200
-	* Backoff time to wait before trying to determine the leader of a partition that has just lost its leader.£¨Ê§È¥leaderºó£¬ÔÙ´ÎÇëÇóleaderµÄÍË±ÜÊ±¼ä£©
+	* Backoff time to wait before trying to determine the leader of a partition that has just lost its leader.ï¼ˆå¤±å»leaderåï¼Œå†æ¬¡è¯·æ±‚leaderçš„é€€é¿æ—¶é—´ï¼‰
 
 * auto.offset.reset
 	* largest
-	* What to do when there is no initial offset in ZooKeeper or if an offset is out of range:£¨µ±ZookeeperÖĞÃ»ÓĞinitial offset»òÕßoffset³¬³ö·¶Î§Ê±£¬ÈçºÎ×Ô¶¯ÉèÖÃoffset£¿£©
+	* What to do when there is no initial offset in ZooKeeper or if an offset is out of range:ï¼ˆå½“Zookeeperä¸­æ²¡æœ‰initial offsetæˆ–è€…offsetè¶…å‡ºèŒƒå›´æ—¶ï¼Œå¦‚ä½•è‡ªåŠ¨è®¾ç½®offsetï¼Ÿï¼‰
 		* smallest : automatically reset the offset to the smallest offset
 		* largest : automatically reset the offset to the largest offset
 		* anything else: throw exception to the consumer
 
 * consumer.timeout.ms
 	* -1
-	* Throw a timeout exception to the consumer if no message is available for consumption after the specified interval£¨Èç¹ûÃ»ÓĞconsumer¿ÉÓÃµÄmessage£¬µÈ´ı¶à³¤Ê±¼äºó£¬ÏµÍ³Å×³öÒì³££©
+	* Throw a timeout exception to the consumer if no message is available for consumption after the specified intervalï¼ˆå¦‚æœæ²¡æœ‰consumerå¯ç”¨çš„messageï¼Œç­‰å¾…å¤šé•¿æ—¶é—´åï¼Œç³»ç»ŸæŠ›å‡ºå¼‚å¸¸ï¼‰
 
 * client.id
 	* group id value
-	* The client id is a user-specified string sent in each request to help trace calls. It should logically identify the application making the request.£¨ÓÃÓÚ×·×Ùµ÷ÓÃ¹ı³Ì£©
+	* The client id is a user-specified string sent in each request to help trace calls. It should logically identify the application making the request.ï¼ˆç”¨äºè¿½è¸ªè°ƒç”¨è¿‡ç¨‹ï¼‰
 
 * zookeeper.session.timeout.ms
  	* 6000
-	* ZooKeeper session timeout. If the consumer fails to heartbeat to ZooKeeper for this period of time it is considered dead and a rebalance will occur.£¨Ò»¶ÎÊ±¼äÄÚconsumerÈç¹ûÊ§È¥ÓëZookeeperÖ®¼äµÄĞÄÌø£¬¾ÍÈÏ¶¨consumerÒÑ¾­¶ªÊ§£¬»áÔÚconsumer groupÄÚ½øĞĞrebalance£©
+	* ZooKeeper session timeout. If the consumer fails to heartbeat to ZooKeeper for this period of time it is considered dead and a rebalance will occur.ï¼ˆä¸€æ®µæ—¶é—´å†…consumerå¦‚æœå¤±å»ä¸Zookeeperä¹‹é—´çš„å¿ƒè·³ï¼Œå°±è®¤å®šconsumerå·²ç»ä¸¢å¤±ï¼Œä¼šåœ¨consumer groupå†…è¿›è¡Œrebalanceï¼‰
 
-**notes(ningg)**£º²ÎÊı`zookeeper.session.timeout.ms`Óë²ÎÊı`auto.commit.interval.ms`Ö®¼äµÄ¹ØÏµ£¬Ç°ÕßºâÁ¿µÄÊÇheartbeat£¬¶øºóÕß¸ºÔğµÄÊÇoffset commit¡£
+**notes(ningg)**ï¼šå‚æ•°`zookeeper.session.timeout.ms`ä¸å‚æ•°`auto.commit.interval.ms`ä¹‹é—´çš„å…³ç³»ï¼Œå‰è€…è¡¡é‡çš„æ˜¯heartbeatï¼Œè€Œåè€…è´Ÿè´£çš„æ˜¯offset commitã€‚
 
 * zookeeper.connection.timeout.ms
 	* 6000
-	* The max time that the client waits while establishing a connection to zookeeper.£¨clientÓëzookeeper±£³ÖÁ¬½ÓµÄÊ±¼ä£¬³¬¹ıÕâÒ»Ê±¼ä£¬×Ô¶¯ÊÍ·Å£©
+	* The max time that the client waits while establishing a connection to zookeeper.ï¼ˆclientä¸zookeeperä¿æŒè¿æ¥çš„æ—¶é—´ï¼Œè¶…è¿‡è¿™ä¸€æ—¶é—´ï¼Œè‡ªåŠ¨é‡Šæ”¾ï¼‰
 
 * zookeeper.sync.time.ms
  	* 2000
-	* How far a ZK follower can be behind a ZK leader£¨**Ê²Ã´ÒâË¼**£¿£©
+	* How far a ZK follower can be behind a ZK leaderï¼ˆ**ä»€ä¹ˆæ„æ€**ï¼Ÿï¼‰
 
 More details about consumer configuration can be found in the scala class `kafka.consumer.ConsumerConfig`.
 
 
 
-##²Î¿¼À´Ô´
+##å‚è€ƒæ¥æº
 
 * [Consumer Group Example][Consumer Group Example]
 * [Simple Consumer Example][Simple Consumer Example]
