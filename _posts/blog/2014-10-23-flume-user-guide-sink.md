@@ -111,34 +111,36 @@ Example for agent named `a1`:
 
 ##Avro Sink
 
-This sink forms one half of Flume’s tiered collection support. Flume events sent to this sink are turned into Avro events and sent to the configured hostname / port pair. The events are taken from the configured Channel in batches of the configured batch size. Required properties are in bold.
+This sink forms one half of Flume’s tiered collection support. Flume events sent to this sink are turned into Avro events and sent to the configured hostname / port pair. The events are taken from the configured Channel in batches of the configured batch size. Required properties are in **bold**.
+（Avro Sink常用于构建分级的Flume topology，通过Avro sink，event就变为Avro event了，Avro Sink中可配置参数`batch-size`，Avro Sink按照这一参数从Channel以batch为单位，来获取数据。）
 
-Property Name	Default Description	 
-channel	–	 
-type	–	The component type name, needs to be avro.
-hostname	–	The hostname or IP address to bind to.
-port	–	The port # to listen on.
-batch-size	100	number of event to batch together for send.
-connect-timeout	20000	Amount of time (ms) to allow for the first (handshake) request.
-request-timeout	20000	Amount of time (ms) to allow for requests after the first.
-reset-connection-interval	none	Amount of time (s) before the connection to the next hop is reset. This will force the Avro Sink to reconnect to the next hop. This will allow the sink to connect to hosts behind a hardware load-balancer when news hosts are added without having to restart the agent.
-compression-type	none	This can be “none” or “deflate”. The compression-type must match the compression-type of matching AvroSource
-compression-level	6	The level of compression to compress event. 0 = no compression and 1-9 is compression. The higher the number the more compression
-ssl	false	Set to true to enable SSL for this AvroSink. When configuring SSL, you can optionally set a “truststore”, “truststore-password”, “truststore-type”, and specify whether to “trust-all-certs”.
-trust-all-certs	false	If this is set to true, SSL server certificates for remote servers (Avro Sources) will not be checked. This should NOT be used in production because it makes it easier for an attacker to execute a man-in-the-middle attack and “listen in” on the encrypted connection.
-truststore	–	The path to a custom Java truststore file. Flume uses the certificate authority information in this file to determine whether the remote Avro Source’s SSL authentication credentials should be trusted. If not specified, the default Java JSSE certificate authority files (typically “jssecacerts” or “cacerts” in the Oracle JRE) will be used.
-truststore-password	–	The password for the specified truststore.
-truststore-type	JKS	The type of the Java truststore. This can be “JKS” or other supported Java truststore type.
-maxIoWorkers	2 * the number of available processors in the machine	The maximum number of I/O worker threads. This is configured on the NettyAvroRpcClient NioClientSocketChannelFactory.
+|Property Name|	Default| Description	|
+|--|--|--| 
+|**channel**|	–|	 | 
+|**type**| –|	The component type name, needs to be avro.|
+|**hostname**|	–	|The hostname or IP address to bind to.|
+|**port**|	–|	The port # to listen on.|
+|batch-size|	100|	number of event to batch together for send.|
+|connect-timeout|	20000|	Amount of time (ms) to allow for the first (handshake) request.|
+|request-timeout|	20000|	Amount of time (ms) to allow for requests after the first.|
+|reset-connection-interval	|none|	Amount of time (s) before the connection to the next hop is reset. This will force the Avro Sink to reconnect to the next hop. This will allow the sink to connect to hosts behind a hardware load-balancer when news hosts are added without having to restart the agent.（当系统采用硬件方式实现负载均衡时，avro sink重新连接到next hop，如此，能够在不重启flume agent的情况下，利用上新添加的机器）|
+|compression-type	|none	|This can be “none” or “deflate”. The compression-type must match the compression-type of matching `AvroSource`（需要与Avro Source的设置相同）|
+|compression-level|	6	|The level of compression to compress event. 0 = no compression and 1-9 is compression. The higher the number the more compression|
+|ssl	|false|	Set to true to enable SSL for this AvroSink. When configuring SSL, you can optionally set a “truststore”, “truststore-password”, “truststore-type”, and specify whether to “trust-all-certs”.|
+|trust-all-certs|	false	|If this is set to true, SSL server certificates for remote servers (Avro Sources) will not be checked. This should NOT be used in production because it makes it easier for an attacker to execute a man-in-the-middle attack and “listen in” on the encrypted connection.|
+|truststore	|–|	The path to a custom Java truststore file. Flume uses the certificate authority information in this file to determine whether the remote Avro Source’s SSL authentication credentials should be trusted. If not specified, the default Java JSSE certificate authority files (typically “jssecacerts” or “cacerts” in the Oracle JRE) will be used.|
+|truststore-password	|–|	The password for the specified truststore.|
+|truststore-type|	JKS	|The type of the Java truststore. This can be “JKS” or other supported Java truststore type.|
+|maxIoWorkers	|2 * the number of available processors in the machine|	The maximum number of I/O worker threads. This is configured on the `NettyAvroRpcClient` `NioClientSocketChannelFactory`.|
 
-Example for agent named a1:
+Example for agent named `a1`:
 
-a1.channels = c1
-a1.sinks = k1
-a1.sinks.k1.type = avro
-a1.sinks.k1.channel = c1
-a1.sinks.k1.hostname = 10.10.10.10
-a1.sinks.k1.port = 4545
+	a1.channels = c1
+	a1.sinks = k1
+	a1.sinks.k1.type = avro
+	a1.sinks.k1.channel = c1
+	a1.sinks.k1.hostname = 10.10.10.10
+	a1.sinks.k1.port = 4545
 
 ##Thrift Sink
 
@@ -267,4 +269,3 @@ Example for agent named a1:
 	a1.sinks = k1
 	a1.sinks.k1.type = org.example.MySink
 	a1.sinks.k1.channel = c1
-

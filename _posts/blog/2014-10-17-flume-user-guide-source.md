@@ -9,7 +9,7 @@ categories: flume big-data
 ##Avro Source
 
 Listens on Avro port and receives events from external Avro client streams. When paired with the built-in Avro Sink on another (previous hop) Flume agent, it can create tiered collection topologies. Required properties are in bold.
-（Avro sink与Avro source可以构成tiered collection topologies；必须属性加黑了）
+（Avro sink与Avro source可以构成tiered collection topologies；下表中，必须属性**加黑**了）
 
 |Property Name|Default|Description|
 |--|--|--|
@@ -22,7 +22,7 @@ Listens on Avro port and receives events from external Avro client streams. When
 |selector.*| |	| 
 |interceptors|	–|	Space-separated list of interceptors|
 |interceptors.*	| | | 	 
-|compression-type|	none|	This can be “none” or “deflate”. The compression-type must match the compression-type of matching AvroSource|
+|compression-type|	none|	This can be “none” or “deflate”. The compression-type must match the compression-type of matching `AvroSink`|
 |ssl|	false|	Set this to true to enable SSL encryption. You must also specify a “keystore” and a “keystore-password”.|
 |keystore|	–|	This is the path to a Java keystore file. Required for SSL.|
 |keystore-password|	–	|The password for the Java keystore. Required for SSL.|
@@ -58,6 +58,36 @@ Note that the first rule to match will apply as the example below shows from a c
 	ipFilter.rules = deny:name:localhost,allow:ip:
 
 
+**notes(ningg)**：
+
+* Avro Source提供了属性`threads`，标识能够启动并保持的worker thread的数目；
+* 默认情况下，不设置`threads`属性时，worker thread的个数在`[0~infinite]`，并且默认，当worker thread空闲60s后，自动销毁，因此，如果上一级的是一个 Avro Sink，则可能发送 Avro Source 空闲时间过长，所有的worker thread被回收，因此，当上一级的agent（其中包含了 Avro Sink）接收到大量的events时，可能由于当前Avro Source中woker thread不足，导致Channel中event堆积，最终导致agent异常。
+* 为避免不设置`threads`属性时，所有的Avro Source的worker thread被回收的情况，有2中解决办法：
+	* 设置`threads`属性，但：`threads`取值为多少？因为worker只能启动并保持这些thread；另一个问题：如何测量/监控当前的avro source启动了几个thread？**最佳的设计**是，设置一个thread个数的下限，上线不设限制，具体thread个数根据需要进行动态的创建和销毁；
+	* 自定义advanced Avro Source，实现上述**最佳的设计**，*（基于当前对flume的了解，难度很小）*；
+* 上述的worker线程回收的问题，是不是也可能是Avro Sink产生的？Avro Sink与下一层的Avro Source之间什么关系？经查询利用的是Netty NIO机制，那什么是NIO？
+* 在最远端的Exec Source、Netcat Source实现慢启动？
+	
+	# 设置 threads 属性
+	ThreadPoolExecutor(nThreads, nThreads,
+					   0L, TimeUnit.MILLISECONDS,
+					   new LinkedBlockingQueue<Runnable>(),
+					   threadFactory);
+
+	# 使用默认 threads 属性
+	ThreadPoolExecutor(0, Integer.MAX_VALUE,
+					   60L, TimeUnit.SECONDS,
+					   new SynchronousQueue<Runnable>(),
+					   threadFactory);
+
+
+
+
+
+									
+
+
+	
 ##Thrift Source
 
 Listens on Thrift port and receives events from external Thrift client streams. When paired with the built-in ThriftSink on another (previous hop) Flume agent, it can create tiered collection topologies. Required properties are in bold.
@@ -95,11 +125,12 @@ Required properties are in bold.
 |**channels**|	–|	 |
 |**type**|	–	|The component type name, needs to be exec|
 |**command**|	–|	The command to execute|
-|shell|	–|	A shell invocation used to run the command. e.g. /bin/sh -c. Required only for commands relying on shell features like wildcards, back ticks, pipes etc.|
+|shell|	–|	A shell invocation used to run the command. e.g. `/bin/sh -c`. Required only for commands relying on shell features like wildcards, back ticks, pipes etc.|
 |restartThrottle|	10000|	Amount of time (in millis) to wait before attempting a restart|
 |restart|	false|	Whether the executed cmd should be restarted if it dies|
 |logStdErr|	false|	Whether the command’s stderr should be logged|
 |batchSize|	20	|The max number of lines to read and send to the channel at a time|
+|batchTimeout|3000|Amount of time(ms) to wait, if the buffer size was not reached, before to data is pushed downstream|
 |selector.type|	replicating|	replicating or multiplexing|
 |selector.*|	| 	Depends on the selector.type value|
 |interceptors|	–|	Space-separated list of interceptors|

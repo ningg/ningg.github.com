@@ -118,7 +118,7 @@ Given this configuration file, we can start Flume as follows:
 
 	$ bin/flume-ng agent --conf conf --conf-file example.conf --name a1 -Dflume.root.logger=INFO,console
 	
-Note that in a full deployment we would typically include one more option: --conf=<conf-dir>. The <conf-dir> directory would include a shell script flume-env.sh and potentially a log4j properties file. In this example, we pass a Java option to force Flume to log to the console and we go without a custom environment script.（实际开发场景下，通过`--conf=<conf-dir>`传入`<conf-dir>`，通常这一目录下应包含flume-env.sh文件和log4j的配置文件）
+Note that in a full deployment we would typically include one more option: `--conf=<conf-dir>`. The `<conf-dir>` directory would include a shell script `flume-env.sh` and potentially `a log4j properties` file. In this example, we pass a Java option to force Flume to log to the console and we go without a custom environment script.（实际开发场景下，通过`--conf=<conf-dir>`传入`<conf-dir>`，通常这一目录下应包含flume-env.sh文件和log4j的配置文件）
 
 From a separate terminal, we can then telnet port 44444 and send Flume an event:
 
@@ -143,7 +143,7 @@ Congratulations - you’ve successfully configured and deployed a Flume agent! S
 
 Flume has a fully plugin-based architecture. While Flume ships with many out-of-the-box sources, channels, sinks, serializers, and the like, many implementations exist which ship separately from Flume.
 
-While it has always been possible to include custom Flume components by adding their jars to the FLUME_CLASSPATH variable in the flume-env.sh file, Flume now supports a special directory called plugins.d which automatically picks up plugins that are packaged in a specific format. This allows for easier management of plugin packaging issues as well as simpler debugging and troubleshooting of several classes of issues, especially library dependency conflicts.（在flume-env.sh中向FLUME_CLASSPATH中添加plugin的位置；另一种方式，向`plugins.d`目录下添加plugin，即可自动安装。）
+While it has always been possible to include custom Flume components by adding their jars to the `FLUME_CLASSPATH` variable in the flume-env.sh file, Flume now supports a special directory called plugins.d which automatically picks up plugins that are packaged in a specific format. This allows for easier management of plugin packaging issues as well as simpler debugging and troubleshooting of several classes of issues, especially library dependency conflicts.（在`flume-env.sh`中向`FLUME_CLASSPATH`中添加plugin的位置；另一种方式，向`plugins.d`目录下添加plugin，即可自动安装。）
 
 #####The plugins.d directory
 
@@ -183,7 +183,7 @@ The above command will send the contents of `/usr/logs/log.10` to to the Flume s
 
 ####Executing commands
 
-There’s an exec source that executes a given command and consumes the output. A single ‘line’ of output ie. text followed by carriage return (‘\r’) or line feed (‘\n’) or both together.（exec source，执行command并将output按行发送至Channel）
+There’s an exec source that executes a given command and consumes the output. A single ‘line’ of output ie. text followed by carriage return (`\r`) or line feed (`\n`) or both together.（exec source，执行command并将output按行发送至Channel）
 
 **Note**: Flume does not support `tail` as a source. One can wrap the `tail` command in an exec source to stream the file.（无法直接使用tail，需要包装在exec source中。）
 
@@ -249,7 +249,7 @@ The format is as follows:
 
 **notes(ningg)**：source绑定<span style="color:red">channels</span>、sink绑定<span style="color:red">channel</span>。疑问：单个agent中source只能有一个吗？如果single-agent中有多个source，那么是否也可以实现fan-in？
 	
-For example, an agent named agent_foo is reading data from an external avro client and sending it to HDFS via a memory channel. The config file weblog.config could look like:
+For example, an agent named agent_foo is reading data from an external avro client and sending it to HDFS via a memory channel. The config file `weblog.config` could look like:
 
 	# list the sources, sinks and channels for the agent
 	agent_foo.sources = avro-appserver-src-1
@@ -262,7 +262,7 @@ For example, an agent named agent_foo is reading data from an external avro clie
 	# set channel for sink
 	agent_foo.sinks.hdfs-sink-1.channel = mem-channel-1
 
-This will make the events flow from avro-AppSrv-source to hdfs-Cluster1-sink through the memory channel mem-channel-1. When the agent is started with the weblog.config as its config file, it will instantiate that flow.
+This will make the events flow from `avro-AppSrv-source` to `hdfs-Cluster1-sink` through the memory channel `mem-channel-1`. When the agent is started with the `weblog.config` as its config file, it will instantiate that flow.
 
 ###Configuring individual components
 
@@ -272,7 +272,7 @@ After defining the flow, you need to set properties of each source, sink and cha
 	<Agent>.sources.<Source>.<someProperty> = <someValue>
 
 	# properties for channels
-	<Agent>.channel.<Channel>.<someProperty> = <someValue>
+	<Agent>.channels.<Channel>.<someProperty> = <someValue>
 
 	# properties for sinks
 	<Agent>.sources.<Sink>.<someProperty> = <someValue>
@@ -315,7 +315,7 @@ A single Flume agent can contain several independent flows. You can list multipl
 **notes(ningg)**：关于single-agent说几点：
 
 * 可包含多个sources、sinks、channels；
-* 定义多个sources时，`source1`和`source2`间，空格间隔；
+* 定义多个sources时，`source1`和`source2`间，空格` `间隔；
 * <span style="color:red">sink与channel一一对应吗</span>？
 * 可包含多个相互独立的flow；
 
@@ -352,9 +352,9 @@ Weblog agent config:
 	agent_foo.sinks.avro-forward-sink.channel = file-channel
 
 	# avro sink properties
-	agent_foo.sources.avro-forward-sink.type = avro
-	agent_foo.sources.avro-forward-sink.hostname = 10.1.1.100
-	agent_foo.sources.avro-forward-sink.port = 10000
+	agent_foo.sinks.avro-forward-sink.type = avro
+	agent_foo.sinks.avro-forward-sink.hostname = 10.1.1.100
+	agent_foo.sinks.avro-forward-sink.port = 10000
 
 	# configure other pieces
 	#...

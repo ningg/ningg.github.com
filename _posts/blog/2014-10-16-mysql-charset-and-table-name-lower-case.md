@@ -42,11 +42,19 @@ system、server、client的charset不一致时，会产生乱码。
 	+--------------------------+----------------------------+
 	8 rows in set (0.00 sec)
 
-通过命令：show collation，查看当前MySQL支持的字符集。从上面查询结果可知，server的字符集与system、client不同，则，在my.cnf文件中设定server的字符集即可。
+通过命令：show collation，查看当前MySQL支持的字符集。从上面查询结果可知，server的字符集与system、client不同，则，在my.cnf文件中`[mysqld]`下，设定server的字符集即可。
 
 	# /usr/my.cnf
+	[mysqld]
 	character_set_server=utf8
+	
+**特别说明**：如果client的编码格式不为utf8，则，需要在`my.cnf`文件中添加如下配置（参考[charset connection][charset connection]）：
 
+	# /usr/my.cnf
+	[mysql]
+	default-character-set=utf8
+	
+	
 重新启动MySQL，OK（根据[官网解释](http://dev.mysql.com/doc/refman/5.6/en/server-system-variables.html#sysvar_character_set_server)，不需要向数据库重新插入数据）。database的编码方式，不要手动调整，其始终与default database保持一致，若没有default database，则由server的编码方式决定。
 
 ##无法启动
@@ -89,6 +97,6 @@ MySQL无法连接，提示表格不存在，设置table名称不区分大小写�
 
 
 
-
+[charset connection]:			http://dev.mysql.com/doc/refman/5.6/en/charset-connection.html
 
 [NingG]:    http://ningg.github.com  "NingG"

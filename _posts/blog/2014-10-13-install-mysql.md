@@ -166,7 +166,8 @@ Linux环境下安装MySQL，有两种方式：rpm包方式、yum源方式（暂�
 	update user set password=password('new-pw') where user='root' and host='%';
 
 > 疑问：如果没有`user=root`且`host=%`的记录怎么办？
-> RE：新建一条记录，或者将`user=root`的记录，利用update命令修改为`host=%`。
+> 
+> RE：新建一条记录，或者将`user=root`的记录，利用update命令修改为`host=%`，比较官方的做法，添加一个用户root@%即可；参考官网：[adding users][adding users]
 	
 ##常见问题
 
@@ -179,6 +180,24 @@ Linux环境下安装MySQL，有两种方式：rpm包方式、yum源方式（暂�
 **问题2**：这个本质上是不是MySQL的管理问题？有哪些用户，哪些用户可以远程登录？
 
 回应：是的，你很用心在思考，官方文档有很多细节，很有意思的，可以看一下，具体：`MySQL Manual`--`Security in MySQL`--`User Account Management`，有详尽的说明。
+
+**问题3**：MySQL上如何新增/删除用户？参考[adding users][adding users]和[removing users][removing users]
+	
+	-- 先刷新一下权限（避免问题发生）
+	flush privileges;
+
+	-- 创建用户 test:passwd
+	create user 'test'@'%' identified by 'passwd';
+
+	-- 为用户分配权限
+	grant all privileges on *.* to 'test'@'%' with grant option;
+
+	-- 查看用户权限
+	show grants for 'test'@'%';
+
+	-- 删除用户
+	drop user 'test'@'%';
+
 
 ##参考来源
 
@@ -196,3 +215,6 @@ Linux环境下安装MySQL，有两种方式：rpm包方式、yum源方式（暂�
 
 
 [NingG]:    http://ningg.github.com  "NingG"
+
+[adding users]:		http://dev.mysql.com/doc/mysql-security-excerpt/5.6/en/adding-users.html
+[removing users]:			http://dev.mysql.com/doc/mysql-security-excerpt/5.6/en/removing-users.html
