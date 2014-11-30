@@ -4,13 +4,1926 @@
    <title>NingG.github.com</title>
    <link href="http://ningg.github.com/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://ningg.github.com" rel="alternate" type="text/html" />
-   <updated>2014-11-09T23:06:22+08:00</updated>
+   <updated>2014-11-30T21:48:01+08:00</updated>
    <id>http://ningg.github.com</id>
    <author>
      <name></name>
      <email></email>
    </author>
 
+   
+   <entry>
+     <title>Ganglia 3.6.1：Ganglia Monitoring Daemon v3.6.1 Configuration</title>
+     <link href="http://ningg.github.com/ganglia-gmond-conf"/>
+     <updated>2014-11-22T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/ganglia-gmond-conf</id>
+     <content type="html">&lt;blockquote&gt;
+  &lt;p&gt;原文地址：&lt;a href=&quot;http://sourceforge.net/projects/ganglia/files/&quot;&gt;ganglia-3.6.1(ganglia monitoring core)&lt;/a&gt;，其源码包中gmond/gmond.conf.html文件。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;name&quot;&gt;NAME&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;gmond.conf&lt;/strong&gt; - configuration file for ganglia monitoring daemon (&lt;strong&gt;gmond&lt;/strong&gt;)&lt;/p&gt;
+
+&lt;h2 id=&quot;description&quot;&gt;DESCRIPTION&lt;/h2&gt;
+
+&lt;p&gt;The gmond.conf file is used to configure the ganglia monitoring daemon (gmond) which is part of the** Ganglia Distributed Monitoring System**.&lt;/p&gt;
+
+&lt;h2 id=&quot;sections-and-attributes&quot;&gt;SECTIONS AND ATTRIBUTES&lt;/h2&gt;
+
+&lt;p&gt;All sections and attributes are case-insensitive. For example, &lt;strong&gt;name&lt;/strong&gt; or &lt;strong&gt;NAME&lt;/strong&gt; or &lt;strong&gt;Name&lt;/strong&gt; or &lt;strong&gt;NaMe&lt;/strong&gt; are all equivalent.&lt;/p&gt;
+
+&lt;p&gt;Some sections can be included in the configuration file &lt;strong&gt;multiple&lt;/strong&gt; times and some sections are &lt;strong&gt;singular&lt;/strong&gt;. For example, you can have only one &lt;strong&gt;cluster&lt;/strong&gt; section to define the attributes of the cluster being monitored; however, you can have multiple &lt;strong&gt;udp_recv_channel&lt;/strong&gt; sections to allow gmond to receive message on multiple UDP channels.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：gmond.conf配置文件，说几点：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;整个配置文件，分为：多个section，每个section下有多个attribute&lt;/li&gt;
+  &lt;li&gt;section和attribute是case-insensitive的&lt;/li&gt;
+  &lt;li&gt;在整个配置文件中，有的section只能有一个，有的就可以有多个&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;cluster&quot;&gt;cluster&lt;/h3&gt;
+
+&lt;p&gt;There should &lt;strong&gt;only be one cluster section&lt;/strong&gt; defined. This section controls how gmond reports the attributes of the cluster that it is part of.&lt;/p&gt;
+
+&lt;p&gt;The cluster section has four attributes: &lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;name&lt;/li&gt;
+  &lt;li&gt;owner&lt;/li&gt;
+  &lt;li&gt;latlong&lt;/li&gt;
+  &lt;li&gt;url&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;For example,&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cluster {
+    name = &quot;Millennium Cluster&quot;
+    owner = &quot;UC Berkeley CS Dept.&quot;
+    latlong = &quot;N37.37 W122.23&quot;
+    url = &quot;http://www.millennium.berkeley.edu/&quot;;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The &lt;strong&gt;name&lt;/strong&gt; attributes specifies the name of the cluster of machines. &lt;/li&gt;
+  &lt;li&gt;The &lt;strong&gt;owner&lt;/strong&gt; tag specifies the administrators of the cluster. 
+    &lt;ul&gt;
+      &lt;li&gt;The pair &lt;strong&gt;name/owner&lt;/strong&gt; should be unique to all clusters in the world.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;The &lt;strong&gt;latlong&lt;/strong&gt; attribute is the latitude and longitude GPS coordinates of this cluster on earth. Specified to 1 mile accuracy with two decimal places per axis in decimal.&lt;/li&gt;
+  &lt;li&gt;The &lt;strong&gt;url&lt;/strong&gt; for more information on the cluster. Intended to give purpose, owner, administration, and account details for this cluster.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;There directives directly control the XML output of gmond. For example, the cluster configuration example above would translate into the following XML.&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;CLUSTER NAME=&quot;Millennium Cluster&quot; OWNER=&quot;UC Berkeley CS Dept.&quot;
+	   LATLONG=&quot;N37.37 W122.23&quot; URL=&quot;http://www.millennium.berkeley.edu/&quot;&amp;gt;
+...
+&amp;lt;/CLUSTER&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;host&quot;&gt;host&lt;/h3&gt;
+
+&lt;p&gt;The host section provides information about the host running this instance of gmond. Currently only the &lt;strong&gt;location&lt;/strong&gt; string attribute is supported. Example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;host {
+    location = &quot;1,2,3&quot;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The numbers represent &lt;strong&gt;Rack&lt;/strong&gt;, &lt;strong&gt;Rank&lt;/strong&gt; and &lt;strong&gt;Plane&lt;/strong&gt; respectively.&lt;/p&gt;
+
+&lt;h3 id=&quot;globals&quot;&gt;globals&lt;/h3&gt;
+
+&lt;p&gt;The &lt;strong&gt;globals&lt;/strong&gt; section controls general characteristics of &lt;strong&gt;gmond&lt;/strong&gt; such as whether is should daemonize, what user it should run as, whether is should send/receive date and such. The globals section has the following attributes: &lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;daemonize&lt;/li&gt;
+  &lt;li&gt;setuid&lt;/li&gt;
+  &lt;li&gt;user&lt;/li&gt;
+  &lt;li&gt;debug_level&lt;/li&gt;
+  &lt;li&gt;mute&lt;/li&gt;
+  &lt;li&gt;deaf&lt;/li&gt;
+  &lt;li&gt;allow_extra_data&lt;/li&gt;
+  &lt;li&gt;host_dmax&lt;/li&gt;
+  &lt;li&gt;host_tmax&lt;/li&gt;
+  &lt;li&gt;cleanup_threshold&lt;/li&gt;
+  &lt;li&gt;gexec&lt;/li&gt;
+  &lt;li&gt;send_metadata_interval&lt;/li&gt;
+  &lt;li&gt;module_dir&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;For example,&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;globals {
+    daemonize = true
+    setuid = true
+    user = nobody
+    host_dmax = 3600
+    host_tmax = 40
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The &lt;strong&gt;daemonize&lt;/strong&gt; attribute is a &lt;strong&gt;boolean&lt;/strong&gt;. 
+    &lt;ul&gt;
+      &lt;li&gt;When &lt;strong&gt;true&lt;/strong&gt;, gmond will daemonize. &lt;/li&gt;
+      &lt;li&gt;When &lt;strong&gt;false&lt;/strong&gt;, gmond will run in the foreground.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;The &lt;strong&gt;setuid&lt;/strong&gt; attribute is a &lt;strong&gt;boolean&lt;/strong&gt;. 
+    &lt;ul&gt;
+      &lt;li&gt;When &lt;strong&gt;true&lt;/strong&gt;, gmond will set its effective UID to the uid of the user specified by the &lt;strong&gt;user&lt;/strong&gt; attribute. &lt;/li&gt;
+      &lt;li&gt;When &lt;strong&gt;false&lt;/strong&gt;, gmond will not change its effective user.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;The &lt;strong&gt;debug_level&lt;/strong&gt; is an &lt;strong&gt;integer&lt;/strong&gt; value. 
+    &lt;ul&gt;
+      &lt;li&gt;When set to &lt;strong&gt;zero&lt;/strong&gt; (0), gmond will run normally. &lt;/li&gt;
+      &lt;li&gt;A &lt;strong&gt;debug_level&lt;/strong&gt; greater than zero will result in gmond running in the foreground and outputting debugging information. &lt;/li&gt;
+      &lt;li&gt;The higher the &lt;strong&gt;debug_level&lt;/strong&gt; the more verbose the output.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;The &lt;strong&gt;mute&lt;/strong&gt; attribute is a &lt;strong&gt;boolean&lt;/strong&gt;. 
+    &lt;ul&gt;
+      &lt;li&gt;When &lt;strong&gt;true&lt;/strong&gt;, gmond will &lt;strong&gt;not send&lt;/strong&gt; data regardless of any other configuration directives.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;The &lt;strong&gt;deaf&lt;/strong&gt; attribute is a &lt;strong&gt;boolean&lt;/strong&gt;. 
+    &lt;ul&gt;
+      &lt;li&gt;When &lt;strong&gt;true&lt;/strong&gt;, gmond will &lt;strong&gt;not receive&lt;/strong&gt; data regardless of any other configuration directives.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;The &lt;strong&gt;allow_extra_data&lt;/strong&gt; attribute is a &lt;strong&gt;boolean&lt;/strong&gt;. 
+    &lt;ul&gt;
+      &lt;li&gt;When &lt;strong&gt;false&lt;/strong&gt;, gmond will not send out the &lt;strong&gt;EXTRA_ELEMENT&lt;/strong&gt; and &lt;strong&gt;EXTRA_DATA&lt;/strong&gt; parts of the XML. &lt;/li&gt;
+      &lt;li&gt;This might be useful if you are using your own frontend to the metric data and will like to save some bandwith.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：&lt;strong&gt;EXTRA_ELEMENT&lt;/strong&gt; and &lt;strong&gt;EXTRA_DATA&lt;/strong&gt;中存储了哪些信息？&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The &lt;strong&gt;host_dmax&lt;/strong&gt; value is an &lt;strong&gt;integer&lt;/strong&gt; with units in seconds. 
+    &lt;ul&gt;
+      &lt;li&gt;When set to &lt;strong&gt;zero&lt;/strong&gt; (0), gmond will never delete a host from its list even when a remote host has stopped reporting. &lt;/li&gt;
+      &lt;li&gt;If host_dmax is set to a positive number then gmond will flush a host after it has not heard from it for &lt;strong&gt;host_dmax&lt;/strong&gt; seconds. By the way, dmax means &lt;strong&gt;delete max&lt;/strong&gt;.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：从list中删除某个host的有什么影响？gmond接收不到某个host的report信息，那留着他有什么用？如果有新增的host，gmond能够自动识别出来吗？&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The &lt;strong&gt;host_tmax&lt;/strong&gt; value is an &lt;strong&gt;integer&lt;/strong&gt; with units in seconds. 
+    &lt;ul&gt;
+      &lt;li&gt;This value represents the maximum amount of time that gmond should wait between updates from a host. &lt;/li&gt;
+      &lt;li&gt;As messages may get lost in the network, gmond will consider the host as being down if it has not received any messages from it after &lt;strong&gt;4 times&lt;/strong&gt; this value. &lt;/li&gt;
+      &lt;li&gt;For example, if host_tmax is set to 20, the host will appear as down after 80 seconds with no messages from it. By the way, tmax means &lt;strong&gt;timeout max&lt;/strong&gt;.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：此处的&lt;strong&gt;host_tmax&lt;/strong&gt;超过这一时间，认为host down，与上面的 delete host from list有什么区别？&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;The &lt;strong&gt;cleanup_threshold&lt;/strong&gt; is the minimum amount of time before gmond will cleanup any hosts or metrics where tn &amp;gt; dmax a.k.a. expired data.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The &lt;strong&gt;gexec&lt;/strong&gt; boolean allows you to specify whether gmond will announce the hosts availability to run gexec jobs. &lt;strong&gt;Note&lt;/strong&gt;: this requires that &lt;strong&gt;gexecd&lt;/strong&gt; is running on the host and the proper keys have been installed.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The &lt;strong&gt;send_metadata_interval&lt;/strong&gt; establishes an interval in which gmond will send or resend the metadata packets that describe each enabled metric. &lt;/p&gt;
+    &lt;ul&gt;
+      &lt;li&gt;This directive by default is set to &lt;strong&gt;0&lt;/strong&gt; which means that gmond will only send the metadata packets at startup and upon request from other gmond nodes running remotely. &lt;/li&gt;
+      &lt;li&gt;If a new machine running gmond is added to a cluster, it needs to announce itself and inform all other nodes of the metrics that it currently supports. &lt;/li&gt;
+      &lt;li&gt;In &lt;strong&gt;multicast&lt;/strong&gt; mode, this isn’t a problem because any node can request the metadata of all other nodes in the cluster. &lt;/li&gt;
+      &lt;li&gt;However in &lt;strong&gt;unicast&lt;/strong&gt; mode, a resend interval must be established. The interval value is the minimum number of seconds between resends.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：为什么&lt;strong&gt;multicast&lt;/strong&gt;和&lt;strong&gt;unicast&lt;/strong&gt;（组播与单播）方式有差异？&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;The &lt;strong&gt;override_hostname&lt;/strong&gt; and &lt;strong&gt;override_ip&lt;/strong&gt; parameters allow an arbitrary hostname and/or IP (hostname can be optionally specified without IP) to use when identifying metrics coming from this host.&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;The &lt;strong&gt;module_dir&lt;/strong&gt; is an &lt;strong&gt;optional&lt;/strong&gt; parameter indicating the directory where the &lt;strong&gt;DSO&lt;/strong&gt; modules are to be located. &lt;/p&gt;
+    &lt;ul&gt;
+      &lt;li&gt;If &lt;strong&gt;absent&lt;/strong&gt;, the value to use is set at configure time with the &lt;strong&gt;–with-moduledir&lt;/strong&gt; option which will default if omitted to the a subdirectory named “ganglia” in the directory where libganglia will be installed.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;For example, in a 32-bit Intel compatible Linux host that is usually:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;/usr/lib/ganglia
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：&lt;strong&gt;DSO&lt;/strong&gt; modules是什么？&lt;/p&gt;
+
+&lt;h3 id=&quot;udpsendchannel&quot;&gt;udp_send_channel&lt;/h3&gt;
+
+&lt;p&gt;You can define as many &lt;strong&gt;udp_send_channel&lt;/strong&gt; sections as you like within the limitations of memory and file descriptors. If &lt;strong&gt;gmond&lt;/strong&gt; is configured as &lt;strong&gt;mute&lt;/strong&gt; this section will be ignored.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：说几点：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code&gt;udp_send_channel&lt;/code&gt; section，可以设置多个；&lt;/li&gt;
+  &lt;li&gt;如果&lt;code&gt;mute&lt;/code&gt;属性设置为true，则，&lt;code&gt;udp_send_channel&lt;/code&gt;配置信息不会启用；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The &lt;strong&gt;udp_send_channel&lt;/strong&gt; has a total of seven attributes: &lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;mcast_join&lt;/li&gt;
+  &lt;li&gt;mcast_if&lt;/li&gt;
+  &lt;li&gt;host&lt;/li&gt;
+  &lt;li&gt;port&lt;/li&gt;
+  &lt;li&gt;ttl&lt;/li&gt;
+  &lt;li&gt;bind&lt;/li&gt;
+  &lt;li&gt;bind_hostname&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;bind&lt;/strong&gt; and &lt;strong&gt;bind_hostname&lt;/strong&gt; are mutually exclusive.（两个属性&lt;code&gt;bind&lt;/code&gt;和&lt;code&gt;bind_hostname&lt;/code&gt;互斥，只需配置一个）&lt;/p&gt;
+
+&lt;p&gt;For example, the 2.5.x version gmond would send on the following single channel by default…&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;udp_send_channel {
+    mcast_join = 239.2.11.71
+    port       = 8649
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;The &lt;strong&gt;mcast_join&lt;/strong&gt; and &lt;strong&gt;mcast_if&lt;/strong&gt; attributes are &lt;strong&gt;optional&lt;/strong&gt;. When specified &lt;strong&gt;gmond&lt;/strong&gt; will create the UDP socket and join the &lt;strong&gt;mcast_join&lt;/strong&gt; multicast group and send data out the interface specified by &lt;strong&gt;mcast_if&lt;/strong&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：几个疑问：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;mcast_join用来标识一个multicast group，必须是IP吗？这个IP的用途是什么？IP必须是cluster中某个node吗？&lt;/li&gt;
+  &lt;li&gt;设置了mcast_join之后，还能设置host吗？&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;You can use the &lt;strong&gt;bind&lt;/strong&gt; attribute to bind to a particular local address to be used as the source for the multicast packets sent or let gmond resolve the default hostname if &lt;code&gt;bind_hostname = yes&lt;/code&gt;.&lt;/p&gt;
+
+&lt;p&gt;If only a &lt;strong&gt;host&lt;/strong&gt; and &lt;strong&gt;port&lt;/strong&gt; are specified then gmond will send &lt;strong&gt;unicast&lt;/strong&gt; UDP messages to the hosts specified.&lt;/p&gt;
+
+&lt;p&gt;You could specify &lt;strong&gt;multiple&lt;/strong&gt; &lt;strong&gt;unicast&lt;/strong&gt; hosts for redundancy as &lt;strong&gt;gmond&lt;/strong&gt; will send UDP messages to &lt;strong&gt;all&lt;/strong&gt; UDP channels.&lt;/p&gt;
+
+&lt;p&gt;Be careful though not to mix &lt;strong&gt;multicast&lt;/strong&gt; and &lt;strong&gt;unicast&lt;/strong&gt; attributes in the same &lt;strong&gt;udp_send_channel&lt;/strong&gt; definition.&lt;/p&gt;
+
+&lt;p&gt;For example…&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;udp_send_channel {
+    host = host.foo.com
+    port = 2389
+}
+  
+udp_send_channel {
+    host = 192.168.3.4
+    port = 2344
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;would configure gmond to send messages to two hosts. The &lt;strong&gt;host&lt;/strong&gt; specification can be an IPv4/IPv6 address or a resolvable hostname.&lt;/p&gt;
+
+&lt;p&gt;The &lt;strong&gt;ttl&lt;/strong&gt; attribute lets you modify the Time-To-Live (TTL) of outgoing messages (unicast or multicast).&lt;/p&gt;
+
+&lt;h3 id=&quot;udprecvchannel&quot;&gt;udp_recv_channel&lt;/h3&gt;
+
+&lt;p&gt;You can specify as many udp_recv_channel sections as you like within the limits of memory and file descriptors. If gmond is configured deaf this attribute will be ignored.&lt;/p&gt;
+
+&lt;p&gt;The udp_recv_channel section has following attributes: mcast_join, bind, port, mcast_if, family, retry_bind and buffer. The udp_recv_channel can also have an acl definition (see ACCESS CONTROL LISTS below).&lt;/p&gt;
+
+&lt;p&gt;For example, the 2.5.x gmond ran with a single udp receive channel…&lt;/p&gt;
+
+&lt;p&gt;udp_recv_channel {
+    mcast_join = 239.2.11.71
+    bind       = 239.2.11.71
+    port       = 8649
+  }
+The mcast_join and mcast_if should only be used if you want to have this UDP channel receive multicast packets the multicast group mcast_join on interface mcast_if. If you do not specify multicast attributes then gmond will simply create a UDP server on the specified port.&lt;/p&gt;
+
+&lt;p&gt;You can use the bind attribute to bind to a particular local address.&lt;/p&gt;
+
+&lt;p&gt;The family address is set to inet4 by default. If you want to bind the port to an inet6 port, you need to specify that in the family attribute. Ganglia will not allow IPV6=&amp;gt;IPV4 mapping (for portability and security reasons). If you want to listen on both inet4 and inet6 for a particular port, explicitly state it with the following:&lt;/p&gt;
+
+&lt;p&gt;udp_recv_channel {
+    port = 8666
+    family = inet4
+  }
+  udp_recv_channel {
+    port = 8666
+    family = inet6
+  }
+If you specify a bind address, the family of that address takes precedence. f your IPv6 stack doesn’t support IPV6_V6ONLY, a warning will be issued but gmond will continue working (this should rarely happen).&lt;/p&gt;
+
+&lt;p&gt;Multicast Note: for multicast, specifying a bind address with the same value used for mcast_join will prevent unicast UDP messages to the same port from being processed.&lt;/p&gt;
+
+&lt;p&gt;The sFlow protocol (see http://www.sflow.org) can be used to collect a standard set of performance metrics from servers. For servers that don’t include embedded sFlow agents, an open source sFlow agent is available on SourceForge (see http://host-sflow.sourceforge.net).&lt;/p&gt;
+
+&lt;p&gt;To configure gmond to receive sFlow datagrams, simply add a udp_recv_channel with the port set to 6343 (the IANA registered port for sFlow):&lt;/p&gt;
+
+&lt;p&gt;udp_recv_channel {
+    port = 6343
+  }
+Note: sFlow is unicast protocol, so don’t include mcast_join join. Note: To use some other port for sFlow, set it here and then specify the port in an sflow section (see below).&lt;/p&gt;
+
+&lt;p&gt;gmond will fail to run if it can’t bind to all defined udp_recv_channels. Sometimes, on machines configured by DHCP, for example, the gmond daemon starts before a network address is assigned to the interface. Consequently, the bind fails and the gmond daemon does not run. To assist in this situation, the boolean parameter retry_bind can be set to the value true and then the daemon will not abort on failure, it will enter a loop and repeat the bind attempt every 60 seconds:&lt;/p&gt;
+
+&lt;p&gt;udp_recv_channel {
+    port = 6343
+    retry_bind = true
+  }
+If you have a large system with lots of metrics, you might experience UDP drops. This happens when gmond is not able to process the UDP fast enough from the network. In this case you might consider changing your setup into a more distributed setup using aggregator gmond hosts. Alternatively you can choose to create a bigger receive buffer:&lt;/p&gt;
+
+&lt;p&gt;udp_recv_channel {
+    port = 6343
+    buffer = 10485760
+  }
+B&lt;buffer&gt; is specified in bytes, i.e.: 10485760 will allow 10MB UDP 
+to be buffered in memory.
+Note: increasing buffer size will increase memory usage by gmond&lt;/buffer&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;tcpacceptchannel&quot;&gt;tcp_accept_channel&lt;/h3&gt;
+
+&lt;p&gt;You can specify as many tcp_accept_channel sections as you like within the limitations of memory and file descriptors. If gmond is configured to be mute, then these sections are ignored.&lt;/p&gt;
+
+&lt;p&gt;The tcp_accept_channel has the following attributes: bind, port, interface, family and timeout. A tcp_accept_channel may also have an acl section specified (see ACCESS CONTROL LISTS below).&lt;/p&gt;
+
+&lt;p&gt;For example, 2.5.x gmond would accept connections on a single TCP channel.&lt;/p&gt;
+
+&lt;p&gt;tcp_accept_channel {
+    port = 8649
+  }
+The bind address is optional and allows you to specify which local address gmond will bind to for this channel.&lt;/p&gt;
+
+&lt;p&gt;The port is an integer than specifies which port to answer requests for data.&lt;/p&gt;
+
+&lt;p&gt;The family address is set to inet4 by default. If you want to bind the port to an inet6 port, you need to specify that in the family attribute. Ganglia will not allow IPV6=&amp;gt;IPV4 mapping (for portability and security reasons). If you want to listen on both inet4 and inet6 for a particular port, explicitly state it with the following:&lt;/p&gt;
+
+&lt;p&gt;tcp_accept_channel {
+    port = 8666
+    family = inet4
+  }
+  tcp_accept_channel {
+    port = 8666
+    family = inet6
+  }
+If you specify a bind address, the family of that address takes precedence. If your IPv6 stack doesn’t support IPV6_V6ONLY, a warning will be issued but gmond will continue working (this should rarely happen).&lt;/p&gt;
+
+&lt;p&gt;The timeout attribute allows you to specify how many microseconds to block before closing a connection to a client. The default is set to -1 (blocking IO) and will never abort a connection regardless of how slow the client is in fetching the report data.&lt;/p&gt;
+
+&lt;p&gt;The interface is not implemented at this time (use bind).&lt;/p&gt;
+
+&lt;h3 id=&quot;collectiongroup&quot;&gt;collection_group&lt;/h3&gt;
+
+&lt;p&gt;You can specify as many collection_group section as you like within the limitations of memory. A collection_group has the following attributes: collect_once, collect_every and time_threshold. A collection_group must also contain one or more metric sections.&lt;/p&gt;
+
+&lt;p&gt;The metric section has the following attributes: (one of name or name_match; name_match is only permitted if pcre support is compiled in), value_threshold and title. For a list of available metric names, run the following command:&lt;/p&gt;
+
+&lt;p&gt;% gmond -m
+Here is an example of a collection group for a static metric…&lt;/p&gt;
+
+&lt;p&gt;collection_group {
+    collect_once   = yes
+    time_threshold = 1800
+    metric {
+     name = “cpu_num”
+     title = “Number of CPUs”
+    }
+  }
+This collection_group entry would cause gmond to collect the cpu_num metric once at startup (since the number of CPUs will not change between reboots). The metric cpu_num would be send every 1/2 hour (1800 seconds). The default value for the time_threshold is 3600 seconds if no time_threshold is specified.&lt;/p&gt;
+
+&lt;p&gt;The time_threshold is the maximum amount of time that can pass before gmond sends all metrics specified in the collection_group to all configured udp_send_channels. A metric may be sent before this time_threshold is met if during collection the value surpasses the value_threshold (explained below).&lt;/p&gt;
+
+&lt;p&gt;Here is an example of a collection group for a volatile metric…&lt;/p&gt;
+
+&lt;p&gt;collection_group {
+    collect_every = 60
+    time_threshold = 300
+    metric {
+      name = “cpu_user”
+      value_threshold = 5.0
+      title = “CPU User”
+    }
+    metric {
+      name = “cpu_idle”
+      value_threshold = 10.0
+      title = “CPU Idle”
+    }
+  }
+This collection group would collect the cpu_user and cpu_idle metrics every 60 seconds (specified in collect_every). If cpu_user varies by 5.0% or cpu_idle varies by 10.0%, then the entire collection_group is sent. If no value_threshold is triggered within time_threshold seconds (in this case 300), the entire collection_group is sent.&lt;/p&gt;
+
+&lt;p&gt;Each time the metric value is collected the new value is compared with the old value collected. If the difference between the last value and the current value is greater than the value_threshold, the entire collection group is send to the udp_send_channels defined.&lt;/p&gt;
+
+&lt;p&gt;It’s important to note that all metrics in a collection group are sent even when only a single value_threshold is surpassed.&lt;/p&gt;
+
+&lt;p&gt;In addition a user friendly title can be substituted for the metric name by including a title within the metric section.&lt;/p&gt;
+
+&lt;p&gt;By using the name_match parameter instead of name, it is possible to use a single definition to configure multiple metrics that match a regular expression. The perl compatible regular expression (pcre) syntax is used. This approach is particularly useful for a series of metrics that may vary in number between reboots (e.g. metric names that are generated for each individual NIC or CPU core).&lt;/p&gt;
+
+&lt;p&gt;Here is an example of using the name_match directive to enable the multicpu metrics:&lt;/p&gt;
+
+&lt;p&gt;metric {
+    name_match = “multicpu_([a-z]+)([0-9]+)”
+    value_threshold = 1.0
+    title = “CPU-\2 \1”
+  }
+Note that in the example above, there are two matches: the alphabetical match matches the variations of the metric name (e.g. idle, system) while the numeric match matches the CPU core number. The second thing to note is the use of substitutions within the argument to title.&lt;/p&gt;
+
+&lt;p&gt;If both name and name_match are specified, then name is ignored.&lt;/p&gt;
+
+&lt;h3 id=&quot;modules&quot;&gt;Modules&lt;/h3&gt;
+
+&lt;p&gt;A modules section contains the parameters that are necessary to load a metric module. A metric module is a dynamically loadable module that extends the available metrics that gmond is able to collect. Each modules section contains at least one module section. Within a module section are the directives name, language, enabled, path and params. The module name is the name of the module as determined by the module structure if the module was developed in C/C++. Alternatively, the name can be the name of the source file if the module has been implemented in a interpreted language such as python. A language designation must be specified as a string value for each module. The language directive must correspond to the source code language in which the module was implemented (ex. language = “python”). If a language directive does not exist for the module, the assumed language will be “C/C++”. The enabled directive allows a metric module to be easily enabled or disabled through the configuration file. If the enabled directive is not included in the module configuration, the enabled state will default to “yes”. One thing to note is that if a module has been disabled yet the metric which that module implements is still listed as part of a collection group, gmond will produce a warning message. However gmond will continue to function normally by simply ignoring the metric. The path is the path from which gmond is expected to load the module (C/C++ compiled dynamically loadable module only). The params directive can be used to pass a single string parameter directly to the module initialization function (C/C++ module only). Multiple parameters can be passed to the module’s initialization function by including one or more param sections. Each param section must be named and contain a value directive. Once a module has been loaded, the additional metrics can be discovered by invoking gmond -m.&lt;/p&gt;
+
+&lt;p&gt;modules {
+     module {
+       name = “example_module”
+       language = “C/C++”
+       enabled = yes
+       path = “modexample.so”
+       params = “An extra raw parameter”
+       param RandomMax {
+         value = 75
+       }
+       param ConstantValue {
+         value = 25
+       }
+     }
+   }&lt;/p&gt;
+
+&lt;h3 id=&quot;sflow&quot;&gt;sFlow&lt;/h3&gt;
+
+&lt;p&gt;The sflow group is optional and has the following optional attributes: udp_port, accept_vm_metrics, accept_http_metrics, accept_memcache_metrics, accept_jvm_metrics, multiple_http_instances,multiple_memcache_instances, multiple_jvm_instances. By default, a udp_recv_channel on port 6343 (the IANA registered port for sFlow) is all that is required to accept and process sFlow datagrams. To receive sFlow on some other port requires both a udp_recv_channel for the other port and a udp_port setting here. For example:&lt;/p&gt;
+
+&lt;p&gt;udp_recv_channel {
+     port = 7343
+   }
+   sflow {
+     udp_port = 7343
+   }
+An sFlow agent running on a hypervisor may also be sending metrics for its local virtual machines. By default these metrics are ignored, but the accept_vm_metrics flag can be used to accept those metrics too, and prefix them with an identifier for each virtual machine.&lt;/p&gt;
+
+&lt;p&gt;sflow {
+     accept_vm_metrics = yes
+   }
+The sFlow feed may also contain metrics sent from HTTP or memcached servers, or from Java VMs. Extra options can be used to ignore or accept these metrics, and to indicate that there may be multiple instances per host. For example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sflow {
+  accept_http_metrics = yes
+  multiple_http_instances = yes
+} will allow the HTTP metrics, and also mark them with a distinguishing identifier so that each instance can be trended separately. (If multiple instances are reporting and this flag is not set, the results are likely to be garbled.)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;include&quot;&gt;Include&lt;/h3&gt;
+
+&lt;p&gt;This directive allows the user to include additional configuration files rather than having to add all gmond configuration directives to the gmond.conf file. The following example includes any file with the extension of .conf contained in the directory conf.d as if the contents of the included configuration files were part of the original gmond.conf file. This allows the user to modularize their configuration file. One usage example might be to load individual metric modules by including module specific .conf files.&lt;/p&gt;
+
+&lt;p&gt;include (‘/etc/ganglia/conf.d/*.conf’)&lt;/p&gt;
+
+&lt;h2 id=&quot;access-control&quot;&gt;ACCESS CONTROL&lt;/h2&gt;
+
+&lt;p&gt;The udp_recv_channel and tcp_accept_channel directives can contain an Access Control List (ACL). This ACL allows you to specify exactly which hosts gmond process data from.&lt;/p&gt;
+
+&lt;p&gt;An example of an acl entry looks like&lt;/p&gt;
+
+&lt;p&gt;acl {
+    default = “deny”
+    access {
+      ip = 192.168.0.4
+      mask = 32
+      action = “allow”
+    }
+  }
+This ACL will by default reject all traffic that is not specifically from host 192.168.0.4 (the mask size for an IPv4 address is 32, the mask size for an IPv6 address is 128 to represent a single host).&lt;/p&gt;
+
+&lt;p&gt;Here is another example&lt;/p&gt;
+
+&lt;p&gt;acl {
+    default = “allow”
+    access {
+      ip = 192.168.0.0
+      mask = 24
+      action = “deny”
+    }
+    access {
+      ip = ::ff:1.2.3.0
+      mask = 120
+      action = “deny”
+    }
+  }
+This ACL will by default allow all traffic unless it comes from the two subnets specified with action = “deny”.&lt;/p&gt;
+
+&lt;h2 id=&quot;example&quot;&gt;EXAMPLE&lt;/h2&gt;
+
+&lt;p&gt;The default behavior for a 2.5.x gmond would be specified as…&lt;/p&gt;
+
+&lt;p&gt;udp_recv_channel {
+    mcast_join = 239.2.11.71
+    bind       = 239.2.11.71
+    port       = 8649
+  }
+  udp_send_channel {
+    mcast_join = 239.2.11.71
+    port       = 8649
+  }
+  tcp_accept_channel {
+    port       = 8649
+  }
+To see the complete default configuration for gmond simply run:&lt;/p&gt;
+
+&lt;p&gt;% gmond -t
+gmond will print out its default behavior in a configuration file and then exit. Capturing this output to a file can serve as a useful starting point for creating your own custom configuration.&lt;/p&gt;
+
+&lt;p&gt;% gmond -t &amp;gt; custom.conf
+edit custom.conf to taste and then&lt;/p&gt;
+
+&lt;p&gt;% gmond -c ./custom.conf&lt;/p&gt;
+
+&lt;h2 id=&quot;see-also&quot;&gt;SEE ALSO&lt;/h2&gt;
+
+&lt;p&gt;gmond(1).&lt;/p&gt;
+
+&lt;h2 id=&quot;notes&quot;&gt;NOTES&lt;/h2&gt;
+
+&lt;p&gt;The ganglia web site is at http://ganglia.info/.&lt;/p&gt;
+
+&lt;h2 id=&quot;copyright&quot;&gt;COPYRIGHT&lt;/h2&gt;
+
+&lt;p&gt;Copyright (c) 2005 The University of California, Berkeley&lt;/p&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;参考来源&lt;/h2&gt;
+
+</content>
+   </entry>
+   
+   <entry>
+     <title>Ganglia 3.6.1：User Guide</title>
+     <link href="http://ningg.github.com/ganglia-manual"/>
+     <updated>2014-11-21T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/ganglia-manual</id>
+     <content type="html">&lt;blockquote&gt;
+  &lt;p&gt;原文地址：&lt;a href=&quot;http://sourceforge.net/projects/ganglia/files/&quot;&gt;ganglia-3.6.1(ganglia monitoring core)&lt;/a&gt;，其源码包中ganglia.html文件。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;name&quot;&gt;Name&lt;/h2&gt;
+
+&lt;p&gt;ganglia - distributed monitoring system&lt;/p&gt;
+
+&lt;h2 id=&quot;version&quot;&gt;Version&lt;/h2&gt;
+
+&lt;p&gt;ganglia 3.6.1&lt;/p&gt;
+
+&lt;p&gt;The latest version of this software and document will always be found at http://ganglia.sourceforge.net/.&lt;/p&gt;
+
+&lt;h2 id=&quot;synopsis&quot;&gt;Synopsis&lt;/h2&gt;
+
+&lt;pre&gt;&lt;code&gt;	 ______                  ___
+	/ ____/___ _____  ____ _/ (_)___ _
+   / / __/ __ `/ __ \/ __ `/ / / __ `/
+  / /_/ / /_/ / / / / /_/ / / / /_/ /
+  \____/\__,_/_/ /_/\__, /_/_/\__,_/
+				   /____/ Distributed Monitoring System 
+
+`__
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;Ganglia is a scalable distributed monitoring system for high-performance computing systems such as clusters and Grids. It is based on a hierarchical design targeted at federations of clusters. It relies on a multicast-based listen/announce protocol to monitor state within clusters and uses a tree of point-to-point connections amongst representative cluster nodes to federate clusters and aggregate their state. It leverages widely used technologies such as XML for data representation, XDR for compact, portable data transport, and RRDtool for data storage and visualization. It uses carefully engineered data structures and algorithms to achieve very low per-node overheads and high concurrency. The implementation is robust, has been ported to an extensive set of operating systems and processor architectures, and is currently in use on over 500 clusters around the world. It has been used to link clusters across university campuses and around the world and can scale to handle clusters with 2000 nodes.&lt;/p&gt;
+
+&lt;p&gt;The ganglia system is comprised of two unique daemons, a PHP-based web frontend and a few other small utility programs.&lt;/p&gt;
+
+&lt;h3 id=&quot;ganglia-monitoring-daemon-gmond&quot;&gt;Ganglia Monitoring Daemon (gmond)&lt;/h3&gt;
+
+&lt;p&gt;Gmond is a multi-threaded daemon which runs on each cluster node you want to monitor. Installation is easy. You don’t have to have a common NFS filesystem or a database backend, install special accounts, maintain configuration files or other annoying hassles.&lt;/p&gt;
+
+&lt;p&gt;Gmond has four main responsibilities: monitor changes in host state, announce relevant changes, listen to the state of all other ganglia nodes via a unicast or multicast channel and answer requests for an XML description of the cluster state.&lt;/p&gt;
+
+&lt;p&gt;Each gmond transmits in information in two different ways: unicasting/multicasting host state in external data representation (XDR) format using UDP messages or sending XML over a TCP connection.&lt;/p&gt;
+
+&lt;h3 id=&quot;ganglia-meta-daemon-gmetad&quot;&gt;Ganglia Meta Daemon (gmetad)&lt;/h3&gt;
+
+&lt;p&gt;Federation in Ganglia is achieved using a tree of point-to-point connections amongst representative cluster nodes to aggregate the state of multiple clusters. At each node in the tree, a Ganglia Meta Daemon (gmetad) periodically polls a collection of child data sources, parses the collected XML, saves all numeric, volatile metrics to round-robin databases and exports the aggregated XML over a TCP sockets to clients. Data sources may be either gmond daemons, representing specific clusters, or other gmetad daemons, representing sets of clusters. Data sources use source IP addresses for access control and can be specified using multiple IP addresses for failover. The latter capability is natural for aggregating data from clusters since each gmond daemon contains the entire state of its cluster.&lt;/p&gt;
+
+&lt;h3 id=&quot;ganglia-php-web-frontend&quot;&gt;Ganglia PHP Web Frontend&lt;/h3&gt;
+
+&lt;p&gt;The Ganglia web frontend provides a view of the gathered information via real-time dynamic web pages. Most importantly, it displays Ganglia data in a meaningful way for system administrators and computer users. Although the web frontend to ganglia started as a simple HTML view of the XML tree, it has evolved into a system that keeps a colorful history of all collected data.&lt;/p&gt;
+
+&lt;p&gt;The Ganglia web frontend caters to system administrators and users. For example, one can view the CPU utilization over the past hour, day, week, month, or year. The web frontend shows similar graphs for Memory usage, disk usage, network statistics, number of running processes, and all other Ganglia metrics.&lt;/p&gt;
+
+&lt;p&gt;The web frontend depends on the existence of the gmetad which provides it with data from several Ganglia sources. Specifically, the web frontend will open the local port 8651 (by default) and expects to receive a Ganglia XML tree. The web pages themselves are highly dynamic; any change to the Ganglia data appears immediately on the site. This behavior leads to a very responsive site, but requires that the full XML tree be parsed on every page access. Therefore, the Ganglia web frontend should run on a fairly powerful, dedicated machine if it presents a large amount of data.&lt;/p&gt;
+
+&lt;p&gt;The Ganglia web frontend is written in the PHP scripting language, and uses graphs generated by gmetad to display history information. It has been tested on many flavours of Unix (primarily Linux) with the Apache webserver and the PHP module (5.0.0 or later). The GD graphics library for PHP is used to generate pie charts in the frontend and needs to be installed separately. On RPM-based system, it is usually provided by the php-gd package.&lt;/p&gt;
+
+&lt;h2 id=&quot;installation&quot;&gt;Installation&lt;/h2&gt;
+
+&lt;p&gt;The latest version of all ganglia software can always be downloaded from http://ganglia.info/&lt;/p&gt;
+
+&lt;p&gt;Ganglia runs on Linux (i386, x86_64, ia64, sparc, alpha, powerpc, m68k, mips, arm, hppa, s390), FreeBSD, NetBSD, OpenBSD, DragonflyBSD, MacOS X, Solaris, AIX, IRIX, Tru64, HPUX and Windows NT/XP/2000/2003/2008 making it as portable as it is scalable.&lt;/p&gt;
+
+&lt;h3 id=&quot;monitoring-core-installation&quot;&gt;Monitoring Core Installation&lt;/h3&gt;
+
+&lt;p&gt;If you use the Linux RPMs provided on the ganglia web site, you can skip to the end of this section.&lt;/p&gt;
+
+&lt;p&gt;Ganglia uses the GNU autoconf so compilation and installation of the monitoring core is basically&lt;/p&gt;
+
+&lt;p&gt;% ./configure
+  % make
+  % make install
+but there are some issues that you need to take a look at first.&lt;/p&gt;
+
+&lt;p&gt;Kernel multicast support
+If you use the ganglia multicast support, you must have a kernel that supports multicast. The vast majority of machines have multicast support by default. If you have problems with ganglia this is a core issue.&lt;/p&gt;
+
+&lt;p&gt;Gmetad is not installed by default
+Since gmetad relies on the Round-Robin Database Tool ( see http://www.rrdtool.org/ ) it will not be compiled unless you explicit request it by using a –with-gmetad flag.&lt;/p&gt;
+
+&lt;p&gt;% ./configure –with-gmetad
+The configure script will fail if it cannot find the rrdtool library and header files. By default, it expects to find them at /usr/include/rrd.h and /usr/lib/librrd.so. If you installed them in different locations then you need to instruct configure where to find them using:&lt;/p&gt;
+
+&lt;p&gt;% ./configure –with-librrd=/rrd/path –with-gmetad
+Of course, you need to substitute /rrd/path with the real location of the rrd tool directory where the header file can be located inside an include subdirectory and the library can be located inside a lib subdirectory. As an alternative you could set “-L” in LDFLAGS, and “-I” in CFLAGS and CPPFLAGS for the library path and the header path respectively.&lt;/p&gt;
+
+&lt;p&gt;AIX should not be compiled with shared libraries
+You must add the –disable-shared configure flags if you are running on AIX. For more details refer to the README.AIX file&lt;/p&gt;
+
+&lt;p&gt;% ./configure –disable-shared
+Solaris dependencies could be problematic
+Not really a Solaris specific problem, but since Solaris has several different package repositories, all of them unofficial, it is difficult to be sure that all possible permutations have been confirmed to work reliably.&lt;/p&gt;
+
+&lt;p&gt;Be sure to have all dependencies covered, as explained in the INSTALL file and to use GNU make and a gcc compiler that builds 32bit binaries with all other libraries matching that ISA.&lt;/p&gt;
+
+&lt;p&gt;When in doubt, build the problematic dependency from source and remember to distribute it together with your ganglia build as everything is dynamically linked by default.&lt;/p&gt;
+
+&lt;p&gt;Be particularly careful with libConfuse, especially if using the old 2.5 version. LibConfuse 2.5 is known to be incorrectly packaged and to compile by default as a static library which will fail to link with ganglia.&lt;/p&gt;
+
+&lt;p&gt;Propietary *NIX systems might not work at all
+The good news is that the libmetrics code that used to work before 3.1 is still most likely working fine and so there is nothing fundamentally broken about it.&lt;/p&gt;
+
+&lt;p&gt;But the bad news is that in order to add the dynamic metric functionality, the build system and the way gmond used to locate its metrics had to be changed significantly. Therefore getting gmond to build and work again required fixes to be implemented for all platforms.&lt;/p&gt;
+
+&lt;p&gt;Since none of the developers had access to HPUX, IRIX, Tru64 (OSF/1), or Darwin (MacOS X) those platforms might not be able to build or run a 3.1 gmond yet. If you have access to any of these platforms and want to run ganglia 3.1, feel free to drop by the ganglia-developers list with suggestions, or even better patches.&lt;/p&gt;
+
+&lt;p&gt;GEXEC confusion
+GEXEC is a scalable cluster remote execution system which provides fast, RSA authenticated remote execution of parallel and distributed jobs. It provides transparent forwarding of stdin, stdout, stderr, and signals to and from remote processes, provides local environment propagation, and is designed to be robust and to scale to systems over 1000 nodes. Internally, GEXEC operates by building an n-ary tree of TCP sockets and threads between gexec daemons and propagating control information up and down the tree. By using hierarchical control, GEXEC distributes both the work and resource usage associated with massive amounts of parallelism across multiple nodes, thereby eliminating problems associated with single node resource limits (e.g., limits on the number of file descriptors on front-end nodes). (from http://www.theether.org/gexec )&lt;/p&gt;
+
+&lt;p&gt;gexec is a great cluster execution tool but integrating it with ganglia is a bit clumsy. GEXEC can run standalone without access to a ganglia gmond. In standalone mode gexec will use the hosts listed in your GEXEC_SVRS variable to run on. For example, say I want to run hostname on three machines in my cluster: host1, host2 and host3. I use the following command line.&lt;/p&gt;
+
+&lt;p&gt;% GEXEC_SVRS=”host1 host2 host3” gexec -n 3 hostname
+and gexec would build an n-ary tree (binary tree by default) of TCP sockets to those machines and run the command hostname&lt;/p&gt;
+
+&lt;p&gt;As an added feature, you can have gexec pull a host list from a locally running gmond and use that as the host list instead of GEXEC_SVRS. The list is load balanced and gexec will start the job on the n least-loaded machines.&lt;/p&gt;
+
+&lt;p&gt;For example..&lt;/p&gt;
+
+&lt;p&gt;% gexec -n 5 hostname
+will run the command hostname on the five least-loaded machines in a cluster.&lt;/p&gt;
+
+&lt;p&gt;To turn on the gexec feature in ganglia you must configure ganglia with the –enable-gexec flag&lt;/p&gt;
+
+&lt;p&gt;% ./configure –enable-gexec
+Enabling gexec means that by default any host running gmond will send a special message announcing that gexec is installed on it and open for requests.&lt;/p&gt;
+
+&lt;p&gt;Now the question is, what if I don’t want gexec to run on every host in my cluster? For example, you may not want to have gexec run jobs on your cluster frontend nodes.&lt;/p&gt;
+
+&lt;p&gt;You simply add the following line to your gmond configuration file (/etc/ganglia/gmond.conf by default)&lt;/p&gt;
+
+&lt;p&gt;no_gexec on
+Simple huh? I know the configuration file option, no_gexec, seems crazy (and it is). Why have an option that says “yes to no gexec”? The early versions of gmond didn’t use a configuration file but instead commandline options. One of the commandline options was simply –no-gexec and the default was to announce gexec as on.&lt;/p&gt;
+
+&lt;p&gt;Once you have successfully run&lt;/p&gt;
+
+&lt;p&gt;% ./configure &lt;options&gt;
+  % make
+  % make install
+you should find the following files installed in /usr (by default).&lt;/options&gt;&lt;/p&gt;
+
+&lt;p&gt;/usr/bin/gstat
+  /usr/bin/gmetric
+  /usr/sbin/gmond
+  /usr/sbin/gmetad
+If you installed ganglia using RPMs then these files will be installed when you install the RPM. The RPM is installed simply by running&lt;/p&gt;
+
+&lt;p&gt;% rpm -Uvh ganglia-gmond-3.6.1.i386.rpm
+  % rpm -Uvh ganglia-gmetad-3.6.1.i386.rpm
+Once you have the necessary binaries installed, you can test your installation by running&lt;/p&gt;
+
+&lt;p&gt;% ./gmond
+This will start the ganglia monitoring daemon. You should then be able to run&lt;/p&gt;
+
+&lt;p&gt;% telnet localhost 8649
+And get an XML description of the state of your machine (and any other hosts running gmond at the time).&lt;/p&gt;
+
+&lt;p&gt;If you are installing by source on Linux, scripts are provided to start gmetad and gmond at system startup. They are easy to install from the source root.&lt;/p&gt;
+
+&lt;p&gt;% cp ./gmond/gmond.init /etc/rc.d/init.d/gmond
+   % chkconfig –add gmond
+   % chkconfig –list gmond
+     gmond              0:off   1:off   2:on    3:on    4:on    5:on    6:off
+   % /etc/rc.d/init.d/gmond start
+     Starting GANGLIA gmond:                                    [  OK  ]
+Repeat this step with gmetad.&lt;/p&gt;
+
+&lt;h3 id=&quot;php-web-frontend-installation&quot;&gt;PHP Web Frontend Installation&lt;/h3&gt;
+
+&lt;p&gt;The ./web directory of the ganglia distribution contains all the necessary PHP files for running your web frontend. Copy those files to /var/www/html, however look for the variable DocumentRoot in your Apache configuration files to be sure. All the PHP script files use relative URLs in their links, so you may place the ganglia/ directory anywhere convenient.&lt;/p&gt;
+
+&lt;p&gt;Ensure your webserver understands how to process PHP script files. Currently, the web frontend contains certain php language that requires PHP version 5 or greater. Processing PHP script files usually requires a webserver module, such as the mod_php for the popular Apache webserver. In RedHat Linux, the RPM package that provides this module is called simply “php”.&lt;/p&gt;
+
+&lt;p&gt;For Apache, mod_php module must be enabled. The following lines should appear somewhere in Apache’s *conf files. This example applies to Red Hat Linux (and clones). The actual filenames may vary on your system. If you installed the php module using an RPM package, this work will have been done automatically.&lt;/p&gt;
+
+&lt;p&gt;LoadModule php5_module modules/libphp5.so
+  AddHandler php5-script .php
+  AddType text/html .php
+The webfrontend requires the existance of the gmetad package on the webserver. Follow the installation instructions on the gmetad page. Specifically, the webfrontend requires the rrdtool and the rrds/ directory from gmetad. If you are a power user, you may use NFS to simulate the local existance of the rrds.&lt;/p&gt;
+
+&lt;p&gt;Test your installation. Visit the URL:&lt;/p&gt;
+
+&lt;p&gt;http://localhost/ganglia/
+With a web-browser, where localhost is the address of your webserver.&lt;/p&gt;
+
+&lt;p&gt;Installation of the web frontend is simplified on Linux by using rpm.&lt;/p&gt;
+
+&lt;p&gt;% rpm -Uvh ganglia-web-3.6.1-1.noarch.rpm
+  Preparing…                ########################################### [100%]
+     1:ganglia-web            ########################################### [100%]&lt;/p&gt;
+
+&lt;h2 id=&quot;configuration&quot;&gt;Configuration&lt;/h2&gt;
+
+&lt;h3 id=&quot;gmond-configuration&quot;&gt;Gmond Configuration&lt;/h3&gt;
+
+&lt;p&gt;The configuration file format has changed between gmond version 2.5.x and version 3.x. The change was necessary in order to allow more complex configuration options.&lt;/p&gt;
+
+&lt;p&gt;Gmond has a default configuration it will use if it does not find the default configuration file /etc/ganglia/gmond.conf. To see the default configuration simply run the command:&lt;/p&gt;
+
+&lt;p&gt;% gmond –default_config
+and gmond will output its default configuration to stdout. This default configuration can serve as a good starting place for building a more custom configuration.&lt;/p&gt;
+
+&lt;p&gt;% gmond –default_config &amp;gt; gmond.conf
+would create a file gmond.conf which you can then edit to taste and copy to /etc/ganglia/gmond.conf or elsewhere.&lt;/p&gt;
+
+&lt;p&gt;To start gmond with a configuration file other then /etc/ganglia/gmond.conf, simply specify the configuration file location by running&lt;/p&gt;
+
+&lt;p&gt;% gmond –config /my/ganglia/configs/custom.conf
+If you want to convert a 2.5.x configuration file to 3.x file format, run the following command&lt;/p&gt;
+
+&lt;p&gt;% gmond –convert ./old_25_config.conf
+and gmond with output the equivalent 3.x configuration file to stdout. You can then redirect that output to a new configuration file which can serve as a starting point for your configuration.&lt;/p&gt;
+
+&lt;p&gt;% gmond –convert ./old_25_config.conf &amp;gt; ./new_26_config.conf
+For details about gmond configuration options, simply run&lt;/p&gt;
+
+&lt;p&gt;% man gmond.conf
+for a complete listing of options with detailed explanations.&lt;/p&gt;
+
+&lt;h3 id=&quot;gmetad-configuration&quot;&gt;Gmetad Configuration&lt;/h3&gt;
+
+&lt;p&gt;The behavior of the Ganglia Meta Daemon is completely controlled by a single configuration file which is by default /etc/ganglia/gmetad.conf. For gmetad to do anything useful you much specify at least one data_source in the configuration. The format of the data_source line is as follows&lt;/p&gt;
+
+&lt;p&gt;data_source “Cluster A” 127.0.0.1  1.2.3.4:8655  1.2.3.5:8625
+  data_source “Cluster B” 1.2.4.4:8655
+In this example, there are two unique data sources: “Cluster A” and “Cluster B”. The Cluster A data source has three redundant sources. If gmetad cannot pull the data from the first source, it will continue trying the other sources in order.&lt;/p&gt;
+
+&lt;p&gt;If you do not specify a port number, gmetad will assume the default ganglia port which is 8649 (U&lt;em&gt;N&lt;/em&gt;I*X on a phone key pad)&lt;/p&gt;
+
+&lt;p&gt;For a sample gmetad configuration file with comments, look at the gmetad.conf file provided as part of the distribution package in the gmetad directory&lt;/p&gt;
+
+&lt;p&gt;gmetad has a –conf option to allow you to specify alternate configuration files&lt;/p&gt;
+
+&lt;p&gt;% ./gmetad -conf=/tmp/my_custom_config.conf&lt;/p&gt;
+
+&lt;h3 id=&quot;php-web-frontend-configuration&quot;&gt;PHP Web Frontend Configuration&lt;/h3&gt;
+
+&lt;p&gt;Most configuration parameters reside in the ganglia/conf.php file. Here you may alter the template, gmetad location, RRDtool location, and set the default time range and metrics for graphs.&lt;/p&gt;
+
+&lt;p&gt;The static portions of the Ganglia website are themable. This means you can alter elements such as section lables, some links, and images to suit your individual tastes and environment. The template_name variable names a directory containing the current theme. Ganglia uses TemplatePower to implement themes. A user-defined skin must conform to the template interface as defined by the default theme. Essentially, the variable names and START/END blocks in a custom theme must remain the same as the default, but all other HTML elements may be changed.&lt;/p&gt;
+
+&lt;p&gt;Other configuration variables in conf.php specify the location of gmetad’s files, and where to find the rrdtool program. These locations need only be changed if you do not run gmetad on the webserver. Otherwise the default locations should work fine. The default_range variable specifies what range of time to show on the graphs by default, with possible values of hour, day, week, month, year. The default_metric parameter specifies which metric to show on the cluster view page by default.&lt;/p&gt;
+
+&lt;h2 id=&quot;commandline-tools&quot;&gt;Commandline Tools&lt;/h2&gt;
+
+&lt;p&gt;There are two commandline tools that work with gmond to add custom metrics and query the current state of a cluster: gmetric and gstat respectively.&lt;/p&gt;
+
+&lt;h3 id=&quot;gmetric&quot;&gt;Gmetric&lt;/h3&gt;
+
+&lt;p&gt;The Ganglia Metric Tool (gmetric) allows you to easily monitor any arbitrary host metrics that you like expanding on the core metrics that gmond measures by default.&lt;/p&gt;
+
+&lt;p&gt;If you want help with the gmetric sytax, simply use the “help” commandline option&lt;/p&gt;
+
+&lt;p&gt;% gmetric –help
+  gmetric 3.6.1
+  Purpose:
+    The Ganglia Metric Client (gmetric) announces a metric
+    on the list of defined send channels defined in a configuration file
+  Usage: gmetric [OPTIONS]…
+    -h, –help          Print help and exit
+    -V, –version       Print version and exit
+    -c, –conf=STRING   The configuration file to use for finding send channels
+                        (default=&lt;code&gt;/etc/ganglia/gmond.conf&#39;)
+    -n, --name=STRING   Name of the metric
+    -v, --value=STRING  Value of the metric
+    -t, --type=STRING   Either
+                        string|int8|uint8|int16|uint16|int32|uint32|float|double
+    -u, --units=STRING  Unit of measure for the value e.g. Kilobytes, Celcius
+                        (default=&lt;/code&gt;’)
+    -s, –slope=STRING  Either zero|positive|negative|both  (default=&lt;code&gt;both&#39;)
+    -x, --tmax=INT      The maximum time in seconds between gmetric calls
+                        (default=&lt;/code&gt;60’)
+    -d, –dmax=INT      The lifetime in seconds of this metric  (default=`0’)
+    -S, –spoof=STRING  IP address and name of host/device (colon separated) we
+                          are spoofing  (default=’’)
+    -H, –heartbeat     spoof a heartbeat message (use with spoof option)&lt;/p&gt;
+
+&lt;p&gt;Gmetric sends the metric specified on the commandline to all udp_send_channels specified in the configuration file /etc/ganglia/gmond.conf by default. If you want to send metric to alternate udp_send_channels, you can specify a different configuration file as such:&lt;/p&gt;
+
+&lt;p&gt;% gmetric –conf=./custom.conf -n “wow” -v “it works” -t “string”
+All metrics in ganglia have a name, value, type and optionally units. For example, say I wanted to measure the temperature of my CPU (something gmond doesn’t do by default) then I could send this metric with name=”temperature”, value=”63”, type=”int16” and units=”Celcius”.&lt;/p&gt;
+
+&lt;p&gt;Assume I have a program called cputemp which outputs in text the temperature of the CPU&lt;/p&gt;
+
+&lt;p&gt;% cputemp
+  63
+I could easily send this data to all listening gmonds by running&lt;/p&gt;
+
+&lt;p&gt;% gmetric –name temperature –value &lt;code&gt;cputemp&lt;/code&gt; –type int16 –units Celcius
+Check the exit value of gmetric to see if it successfully sent the data: 0 on success and -1 on failure.&lt;/p&gt;
+
+&lt;p&gt;To constantly sample this temperature metric, you just need too add this command to your cron table.&lt;/p&gt;
+
+&lt;h3 id=&quot;gstat&quot;&gt;Gstat&lt;/h3&gt;
+
+&lt;p&gt;The Ganglia Cluster Status Tool (gstat) is a commandline utility that allows you to get status report for your cluster.&lt;/p&gt;
+
+&lt;p&gt;To get help with the commandline options, simply pass gstat the –help option&lt;/p&gt;
+
+&lt;p&gt;% gstat –help
+  gstat 3.6.1
+  Purpose:
+    The Ganglia Status Client (gstat) connects with a
+    Ganglia Monitoring Daemon (gmond) and output a load-balanced list
+    of cluster hosts
+  Usage: gstat [OPTIONS]…
+     -h         –help             Print help and exit
+     -V         –version          Print version and exit
+     -a         –all              List all hosts.  Not just hosts running gexec (default=off)
+     -d         –dead             Print only the hosts which are dead (default=off)
+     -m         –mpifile          Print a load-balanced mpifile (default=off)
+     -1         –single_line      Print host and information all on one line (default=off)
+     -l         –list             Print ONLY the host list (default=off)
+     -n         –numeric          Print numeric addresses instead of hostnames (default=off)
+     -iSTRING   –gmond_ip=STRING  Specify the ip address of the gmond to query (default=’127.0.0.1’)
+     -pINT      –gmond_port=INT   Specify the gmond port to query (default=8649)
+Note: gstat with no option will only show gexec-enabled hosts. To see all hosts that are UP (regardless of their gexec state) you need to add the –all flag.&lt;/p&gt;
+
+&lt;p&gt;% gstat –all&lt;/p&gt;
+
+&lt;h2 id=&quot;extending-ganglia-through-metric-modules&quot;&gt;Extending Ganglia through metric modules&lt;/h2&gt;
+
+&lt;p&gt;There are currently two ways in which metric modules can be written and plugged into Gmond in order to extend the types of metrics that Ganglia is able to monitor. As of Ganglia 3.1, a pluggable interface has been added to allow the Gmond metric gathering agent to collect any type of metric that can be acquired through programatic means. The primary metric module interface is C with a secondary python interface. This means that pluggable modules can either be written and compiled into dynamically loadable C based language modules or written and deployed as python pluggable modules.&lt;/p&gt;
+
+&lt;p&gt;The basic steps when writting a pluggable module either in C or in python, is as follows:&lt;/p&gt;
+
+&lt;p&gt;Create a module definition structure that contains callback data and metric information
+Implement 3 callback functions that will serve as the links between the Gmond metric gathering agent and the metric module. These callback functions include module initialization, metric handler and module cleanup.
+There are simple metric module examples for both a C based and a python based module under the gmond/modules and gmond/python_modules source code sub-trees. Please see these module examples for more details.&lt;/p&gt;
+
+&lt;h2 id=&quot;frequently-asked-questions-faq&quot;&gt;Frequently Asked Questions (FAQ)&lt;/h2&gt;
+
+&lt;p&gt;What metrics does ganglia collect on platform x?
+To see a complete list of the metrics that a particular gmond supports, run the command:&lt;/p&gt;
+
+&lt;p&gt;% gmond -m
+and gmond will output all the metrics that it is capable of collecting and sending.&lt;/p&gt;
+
+&lt;p&gt;This table describes all the metrics that ganglia collects and shows what platforms the metric are supported on. (The following table is only partially complete).&lt;/p&gt;
+
+&lt;p&gt;Metric Name    Description                             Platforms
+  ———————————————————————–
+  boottime      System boot timestamp                    l,f
+  bread_sec
+  bwrite_sec
+  bytes_in      Number of bytes in per second            l,f
+  bytes_out     Number of bytes out per second           l,f
+  cpu_aidle     Percent of time since boot idle CPU      l
+  cpu_arm
+  cpu_avm
+  cpu_idle      Percent CPU idle                         l,f
+  cpu_intr
+  cpu_nice      Percent CPU nice                         l,f
+  cpu_num       Number of CPUs                           l,f
+  cpu_rm
+  cpu_speed     Speed in MHz of CPU                      l,f
+  cpu_ssys
+  cpu_system    Percent CPU system                       l,f
+  cpu_user      Percent CPU user                         l,f
+  cpu_vm
+  cpu_wait
+  cpu_wio
+  disk_free     Total free disk space                    l,f
+  disk_total    Total available disk space               l,f
+  load_fifteen  Fifteen minute load average              l,f
+  load_five     Five minute load average                 l,f
+  load_one      One minute load average                  l,f
+  location      GPS coordinates for host                 e
+  lread_sec
+  lwrite_sec
+  machine_type
+  mem_buffers   Amount of buffered memory                l,f
+  mem_cached    Amount of cached memory                  l,f
+  mem_free      Amount of available memory               l,f
+  mem_shared    Amount of shared memory                  l,f
+  mem_sreclaimable    Amount of slab reclaimable memory  l (kernel &amp;gt;= 2.6.19)
+  mem_total     Amount of available memory               l,f
+  mtu           Network maximum transmission unit        l,f
+  os_name       Operating system name                    l,f
+  os_release    Operating system release (version)       l,f
+  part_max_used Maximum percent used for all partitions  l,f
+  phread_sec
+  phwrite_sec
+  pkts_in       Packets in per second                    l,f
+  pkts_out      Packets out per second                   l,f
+  proc_run      Total number of running processes        l,f
+  proc_total    Total number of processes                l,f
+  rcache
+  swap_free     Amount of available swap memory          l,f
+  swap_total    Total amount of swap memory              l,f
+  sys_clock     Current time on host                     l,f
+  wcache
+  Platform key:
+  l = Linux, f = FreeBSD, a = AIX, c = Cygwin
+  m = MacOS, i = IRIX, h = HPUX,  t = Tru64
+  e = Every Platform
+If you are interested in how the metrics are collected, just take a look in directory ./libmetrics in the source distribution. There is a directory for each platform that is supported.&lt;/p&gt;
+
+&lt;p&gt;What does the error “Process XML (x): XML_ParseBuffer() error at line x: not well-formed”
+This is an error that occurs when a ganglia components reads data from another ganglia component and finds that the XML is not well-formed. The most common time this is a problem is when the PHP web frontend tries to read the XML stream from gmetad.&lt;/p&gt;
+
+&lt;p&gt;To troubleshoot this problem, capture an XML from the ganglia component in question (gmetad/gmond). This is easy to do if you have telnet installed. Simply login to the machine running the component and run.&lt;/p&gt;
+
+&lt;p&gt;% telnet localhost 8651
+By default, gmetad exports its XML on port 8651 and gmond exports its XML on port 8649. Modify the port number above to suite your configuration.&lt;/p&gt;
+
+&lt;p&gt;When you connect to the port you should get an XML stream. If not, look in the process table on the machine to ensure that the component is actually running.&lt;/p&gt;
+
+&lt;p&gt;Once you are getting an XML stream, capture it to a file by running.&lt;/p&gt;
+
+&lt;p&gt;% telnet localhost 8651 &amp;gt; XML.txt
+  Connection closed by foreign host.
+If you open the file XML.txt, you will see the captured XML stream. You will need to remove the first three lines of the XML.txt which will read…&lt;/p&gt;
+
+&lt;p&gt;Trying 127.0.0.1…
+  Connected to localhost.
+  Escape character is ‘^]’.
+Those lines are output from telnet and not the ganglia component (I wish telnet would send those messages to stderr but they are send to stdout).&lt;/p&gt;
+
+&lt;p&gt;There are many ways that XML can be misformed. The great tool for validating XML is xmllint. xmllint will read the file and find the line containing the error.&lt;/p&gt;
+
+&lt;p&gt;% xmllint –valid –noout XML.txt
+will read your captured XML stream, validate it against the ganglia DTD and check that it is well-formed XML. xmllint will quiet exit if there are no errors. If there are errors they will be reported with line numbers. For example…&lt;/p&gt;
+
+&lt;p&gt;/tmp/XML.txt:3393: error: Opening and ending tag mismatch: HOST and CLUSTER
+  &amp;lt;/CLUSTER&amp;gt;
+         ^
+  /tmp/XML.txt:3394: error: Opening and ending tag mismatch: CLUSTER and GANGLIA_XML
+  &amp;lt;/GANGLIA_XML&amp;gt;
+             ^
+  /tmp/XML.txt:3395: error: Premature end of data in tag GANGLIA_XML
+If you get errors, open XML.txt and go to the line numbers in question. See if you can understand based on your configuration how these errors could occur. If you cannot fix the problem yourself, please email your XML.txt and output from xmllint to ganglia-developers@lists.sourceforge.net. Please include information about the version of each component in question along with the operating system they are running on. The more details we have about your configuration the more likely it is we will be able to help you. Also, all mailing to ganglia-developers is archiving and available to read on the web. You may want to modify XML.txt to remove any sensitive information.&lt;/p&gt;
+
+&lt;p&gt;How do I remove a host from the list?
+A common problem that people have is not being able to remove a host from the ganglia web frontend.&lt;/p&gt;
+
+&lt;p&gt;Here is a common scenario&lt;/p&gt;
+
+&lt;p&gt;All hosts in a cluster are send on the ganglia udp_send_channels.
+One of the hosts fails or is moved for whatever reason.
+All the hosts in the cluster report that the host is “dead” or “expired”.
+The sysadmin wants to removed this host from the “dead” list.
+Unfortunately there is currently no nice way to remove a single dead host from the list. All data in gmond is soft state so you will need to restart all gmond and gmetad processes. It is important to note that ALL dead hosts will be flushed from the record by restarting the processes (since they have to hear the host at least once to know it is expired).&lt;/p&gt;
+
+&lt;p&gt;If you add the line&lt;/p&gt;
+
+&lt;p&gt;globals {
+    host_dmax = 3600
+  }
+then hosts will be removed from host tables when they haven’t been heard from in 3600 seconds. See man gmond.conf for details.&lt;/p&gt;
+
+&lt;p&gt;How good is Solaris, IRIX, Tru64 support?
+Here is an email from Steve Wagner about the state of the ganglia on Solaris, IRIX and Tru64. Steve is to thank for porting ganglia to Solaris and Tru64. He also helped with the IRIX port.&lt;/p&gt;
+
+&lt;p&gt;State of the IRIX port:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;CPU percentage stuff hasn’t improved despite my efforts.  I fear there
+may be a flaw in the way I’m summing counters for all the CPUs.&lt;/li&gt;
+  &lt;li&gt;Auto-detection of network interfaces apparently segfaults.&lt;/li&gt;
+  &lt;li&gt;Memory and load reporting appear to be running properly.&lt;/li&gt;
+  &lt;li&gt;CPU speed is not being reported properly on multi-proc machines.&lt;/li&gt;
+  &lt;li&gt;Total/running processes are not reported.&lt;/li&gt;
+  &lt;li&gt;gmetad untested.&lt;/li&gt;
+  &lt;li&gt;Monitoring core apparently stable in foreground, background being tested
+   (had a segfault earlier).&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;State of the Tru64 port:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;CPU percentage stuff here works perfectly.&lt;/li&gt;
+  &lt;li&gt;Memory and swap usage stats are suspected to be inaccurate.&lt;/li&gt;
+  &lt;li&gt;Total/running processes are not reported.&lt;/li&gt;
+  &lt;li&gt;gmetad untested.&lt;/li&gt;
+  &lt;li&gt;Monitoring core apparently stable in foreground and background.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;State of the Solaris port:
+   *  CPU percentages are slightly off, but correct enough for trending
+      purposes.
+   *  Load, ncpus, CPU speed, breads/writes, lreads/writes, phreads/writes,
+      and rcache/wcache are all accurate.
+   *  Memory/swap statistics are suspiciously flat, but local stats bear
+      this out (and they &lt;em&gt;are&lt;/em&gt; being updated) so I haven’t investigated
+      further.
+   *  Total processes are counted, but not running ones.
+   *  gmetad appears stable&lt;/p&gt;
+
+&lt;p&gt;Anyway, all three ports I’ve been messing with are usable and fairly
+   stable.  Although there are areas for improvement I think we really can’t
+   keep hogging all this good stuff - what I’m looking at is ready for
+   release.
+Where are the debian packages?
+Debian packages for 2.5 are available from the main Debian archive for all releases.&lt;/p&gt;
+
+&lt;p&gt;There was never an oficial Debian package for 3.0 and so if you need to use that branch you will need to build your own binaries.&lt;/p&gt;
+
+&lt;p&gt;Packages for 3.1 are available from Debian (and therefore derivative distributions like Ubuntu) standard repositories.&lt;/p&gt;
+
+&lt;p&gt;How should I configure multihomed machines?
+Various issues arise when a multihomed machine is running the gmond agent.&lt;/p&gt;
+
+&lt;p&gt;Sending multicast packets out on the right interface: the mcast_if option can be declared in the udp_send_channel to force outgoing multicast packets to use a particular interface. The system administrator may also be able to make other platform-specific configuration settings through the OS to achieve the desired behaviour.&lt;/p&gt;
+
+&lt;p&gt;Ensuring that outgoing metric packets are always sent with the same source address: the bind and bind_hostname parameters are the solution. Either (but not both) of these can be specified in the udp_send_channel if required. See the gmond.conf man page for details.&lt;/p&gt;
+
+&lt;p&gt;Previous advice given in this document suggested adding a route like so:&lt;/p&gt;
+
+&lt;p&gt;route add -host 239.2.11.71 dev eth1&lt;/p&gt;
+
+&lt;p&gt;and this method is still valid, but it will be over-ridden by the bind or bind_hostname setting.&lt;/p&gt;
+
+&lt;p&gt;How should I configure my Cisco Catalyst Switches?
+Perhaps information regarding gmond on networks set up through cisco catalyst switches should be mentioned in the ganglia documentation. I think by default multicast traffic on the catalyst will flood all devices unless configured properly. Here is a relavent snipet from a message forum, with a link to cisco document.&lt;/p&gt;
+
+&lt;p&gt;If what you are trying to do, is minimizing the impact on your network due to a multicast application, this link may describe what you want to do: http://www.cisco.com/warp/public/473/38.html&lt;/p&gt;
+
+&lt;p&gt;We set up our switches according to this after a consultant came in and installed an application multicasting several hundred packets per second. This made the network functional again.&lt;/p&gt;
+
+&lt;h2 id=&quot;getting-support&quot;&gt;Getting Support&lt;/h2&gt;
+
+&lt;p&gt;The tired and thirsty prospector threw himself down at the edge of the 
+  watering hole and started to drink. But then he looked around and saw 
+  skulls and bones everywhere. “Uh-oh,” he thought. “This watering hole 
+  is reserved for skeletons.” –Jack Handey
+There are three mailing lists available to you: ganglia-general, ganglia-developers and ganglia-announce. You can join these lists or read their archives by visiting https://sourceforge.net/mail/?group_id=43021&lt;/p&gt;
+
+&lt;p&gt;All of the ganglia mailing lists are closed. That means that in order to post to the lists, you must be subscribed to the list. We’re sorry for the inconvenience however it is very easy to subscribe and unsubscribe from the lists. We had to close the mailing lists because of SPAM problems.&lt;/p&gt;
+
+&lt;p&gt;When you need help please follow these steps until your problem is resolved.&lt;/p&gt;
+
+&lt;p&gt;completely read the documentation&lt;/p&gt;
+
+&lt;p&gt;check the ganglia-general archive to see if other people have had the same problem&lt;/p&gt;
+
+&lt;p&gt;post your support request to the ganglia-general mailing list&lt;/p&gt;
+
+&lt;p&gt;check the ganglia-developers archive&lt;/p&gt;
+
+&lt;p&gt;post your question to the ganglia-developers list&lt;/p&gt;
+
+&lt;p&gt;please send all bugs, patches, and feature requests to the ganglia-developers list after you have checked the ganglia-developers archive to see if the question has already been asked and answered.&lt;/p&gt;
+
+&lt;h2 id=&quot;copyright&quot;&gt;Copyright&lt;/h2&gt;
+
+&lt;p&gt;Copyright (C) 2002,2003 University of California, Berkeley&lt;/p&gt;
+
+&lt;h2 id=&quot;authors&quot;&gt;Authors&lt;/h2&gt;
+
+&lt;p&gt;The Ganglia Development Team…&lt;/p&gt;
+
+&lt;p&gt;Bas van der Vlies      basv               Developer    basv at users.sourceforge.net 
+ Neil T. Spring         bluehal            Developer    bluehal at users.sourceforge.net
+ Brooks Davis           brooks_en_davis    Developer    brooks_en_davis at users.sourceforge.net
+ Eric Fraser            fraze              Developer    fraze at users.sourceforge.net 
+ greg bruno             gregbruno          Developer    gregbruno at users.sourceforge.net
+ Jeff Layton            laytonjb        Developer       laytonjb at users.sourceforge.net     &lt;br /&gt;
+ Doc Schneider          maddocbuddha    Developer       maddocbuddha at users.sourceforge.net 
+ Mason Katz             masonkatz       Developer       masonkatz at users.sourceforge.net    &lt;br /&gt;
+ Mike Howard            mhoward         Developer       mhoward at users.sourceforge.net      &lt;br /&gt;
+ Matt Massie            massie          Project Admin   massie at users.sourceforge.net
+ Oliver Mössinger      olivpass        Developer       olivpass at users.sourceforge.net     &lt;br /&gt;
+ Preston Smith          pmsmith         Developer       pmsmith at users.sourceforge.net      &lt;br /&gt;
+ Federico David Sacerdoti sacerdoti     Developer       sacerdoti at users.sourceforge.net    &lt;br /&gt;
+ Tim Cera               timcera         Developer       timcera at users.sourceforge.net      &lt;br /&gt;
+ Mathew Benson          wintermute11    Developer       wintermute11 at users.sourceforge.net &lt;br /&gt;
+ Brad Nicholes          bnicholes       Developer       bnicholes at users.sourceforge.net
+ Carlo Arenas           carenas         Developer       carenas at users.sourceforge.net&lt;/p&gt;
+
+&lt;h2 id=&quot;contributors&quot;&gt;Contributors&lt;/h2&gt;
+
+&lt;p&gt;There have been dozens of contributors who have provided patches and helpful bug reports. We need to list them here later.&lt;/p&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;参考来源&lt;/h2&gt;
+
+</content>
+   </entry>
+   
+   <entry>
+     <title>Ganglia简介与安装</title>
+     <link href="http://ningg.github.com/install-ganglia"/>
+     <updated>2014-11-20T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/install-ganglia</id>
+     <content type="html">&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
+
+&lt;p&gt;准备监控整个Flume、Kafka、Storm框架运行状态，不想重复造轮子，初步查询官网发现这个几个东西都可以跟Ganglia结合。初步查了一下Ganglia的应用很广泛，上Ganglia，走起。&lt;/p&gt;
+
+&lt;h2 id=&quot;ganglia&quot;&gt;Ganglia基本知识&lt;/h2&gt;
+
+&lt;p&gt;[Ganglia官网]提供了较为简介的介绍，整理一下有几点：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Ganglia是一个可扩展性不错的分布式监控系统；&lt;/li&gt;
+  &lt;li&gt;监控对象：集群，这个集群上可以有分布式系统，也可以只是单独的集群；&lt;/li&gt;
+  &lt;li&gt;Ganglia本身就是分布式的集群，那就有集群结构，Ganglia集群采用分层结构；&lt;/li&gt;
+  &lt;li&gt;Ganglia利用了一些现有的技术，列几个：
+    &lt;ul&gt;
+      &lt;li&gt;XML for data representation;&lt;/li&gt;
+      &lt;li&gt;XDR for compact, portable data transport;&lt;/li&gt;
+      &lt;li&gt;RDDtool for data storage and visualization;&lt;/li&gt;
+      &lt;li&gt;data structures and algorithms to achieve very low per-node overheads and high concurrency;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;软件版本信息&lt;/h3&gt;
+
+&lt;p&gt;此次采用最新的Ganglia版本，具体：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://sourceforge.net/projects/ganglia/files/&quot;&gt;ganglia-3.6.1(ganglia monitoring core)&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;[ganglia-3.6.1(ganglia-web)][ganglia-3.6.1(ganglia-web)]&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;当前（2014-11-20），Ganglia由以下几个组件构成：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;2个 unique daemons：&lt;code&gt;gmond&lt;/code&gt;、&lt;code&gt;gmetad&lt;/code&gt;;&lt;/li&gt;
+  &lt;li&gt;1个 PHP-based web frontend;&lt;/li&gt;
+  &lt;li&gt;几个 small utility programs;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;特别说明&lt;/strong&gt;：下面针对Ganglia组件的介绍，完全参考自ganglia-3.6.1:ganglia monitoring core源码压缩包中的ganglia.html文件。&lt;/p&gt;
+
+&lt;h3 id=&quot;ganglia-monitoring-daemon-gmond&quot;&gt;Ganglia Monitoring Daemon (gmond)&lt;/h3&gt;
+
+&lt;p&gt;Gmond is a multi-threaded daemon which runs on each cluster node you want to monitor. Installation is easy. You don’t have to have a common NFS filesystem or a database backend, install special accounts, maintain configuration files or other annoying hassles.&lt;/p&gt;
+
+&lt;p&gt;Gmond has four main responsibilities: monitor changes in host state, announce relevant changes, listen to the state of all other ganglia nodes via a unicast or multicast channel and answer requests for an XML description of the cluster state.&lt;/p&gt;
+
+&lt;p&gt;Each gmond transmits in information in two different ways: unicasting/multicasting host state in external data representation (XDR) format using UDP messages or sending XML over a TCP connection.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：关于&lt;code&gt;gmond&lt;/code&gt;daemon说几点：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;gmond部署位置：每一个需要监控的node；&lt;/li&gt;
+  &lt;li&gt;gmond需要的配置：安装简便，不依赖数据库；&lt;/li&gt;
+  &lt;li&gt;gmond进程的作用：
+    &lt;ul&gt;
+      &lt;li&gt;monitor changes in host state&lt;/li&gt;
+      &lt;li&gt;announce relevant changes&lt;/li&gt;
+      &lt;li&gt;listen to the state of all other ganglia nodes via a unicast or multicast channel&lt;/li&gt;
+      &lt;li&gt;answer requests for an XML description of the cluster state&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;gmond进程向其他节点发送信息（unicasting or multicasting）有两种方式：
+    &lt;ul&gt;
+      &lt;li&gt;UDP：external data representation（XDR）；&lt;/li&gt;
+      &lt;li&gt;TCP：XML；&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;ganglia-meta-daemon-gmetad&quot;&gt;Ganglia Meta Daemon (gmetad)&lt;/h3&gt;
+
+&lt;p&gt;Federation in Ganglia is achieved using a tree of point-to-point connections amongst representative cluster nodes to aggregate the state of multiple clusters. At each node in the tree, a Ganglia Meta Daemon (gmetad) periodically polls a collection of child data sources, parses the collected XML, saves all numeric, volatile metrics to round-robin databases and exports the aggregated XML over a TCP sockets to clients. Data sources may be either gmond daemons, representing specific clusters, or other gmetad daemons, representing sets of clusters. Data sources use source IP addresses for access control and can be specified using multiple IP addresses for failover. The latter capability is natural for aggregating data from clusters since each gmond daemon contains the entire state of its cluster.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：关于gmetad说几点：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Ganglia也是集群，那就有集群的结构，Ganglia：树状结构；&lt;/li&gt;
+  &lt;li&gt;gmetad部署位置：树的每个node上；&lt;/li&gt;
+  &lt;li&gt;gmetad进程的作用：
+    &lt;ul&gt;
+      &lt;li&gt;periodically polls a collection of child data sources&lt;/li&gt;
+      &lt;li&gt;parses the collected XML&lt;/li&gt;
+      &lt;li&gt;saves all numeric, volatile metrics to round-robin databases&lt;/li&gt;
+      &lt;li&gt;exports the aggregated XML over a TCP sockets to clients&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;gmetad进程从child data source收集数据，data source是指：
+    &lt;ul&gt;
+      &lt;li&gt;gmond daemons, representing specific clusters&lt;/li&gt;
+      &lt;li&gt;other gmetad daemons, representing sets of clusters&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;data source有几个区分点：
+    &lt;ul&gt;
+      &lt;li&gt;use source IP addresses for access control&lt;/li&gt;
+      &lt;li&gt;using multiple IP addresses for failover（失效备援）&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;ganglia-php-web-frontend&quot;&gt;Ganglia PHP Web Frontend&lt;/h3&gt;
+
+&lt;p&gt;The Ganglia web frontend provides a view of the gathered information via real-time dynamic web pages. Most importantly, it displays Ganglia data in a meaningful way for system administrators and computer users. Although the web frontend to ganglia started as a simple HTML view of the XML tree, it has evolved into a system that keeps a colorful history of all collected data.&lt;/p&gt;
+
+&lt;p&gt;The Ganglia web frontend caters to system administrators and users. For example, one can view the CPU utilization over the past hour, day, week, month, or year. The web frontend shows similar graphs for Memory usage, disk usage, network statistics, number of running processes, and all other Ganglia metrics.&lt;/p&gt;
+
+&lt;p&gt;The web frontend depends on the existence of the &lt;code&gt;gmetad&lt;/code&gt; which provides it with data from several Ganglia sources. Specifically, the web frontend will open the local port &lt;code&gt;8651&lt;/code&gt; (by default) and expects to receive a Ganglia XML tree. The web pages themselves are highly dynamic; any change to the Ganglia data appears immediately on the site. This behavior leads to a very responsive site, but requires that the full XML tree be parsed on every page access. Therefore, the Ganglia web frontend should run on a fairly powerful, dedicated machine if it presents a large amount of data.&lt;/p&gt;
+
+&lt;p&gt;The Ganglia web frontend is written in the PHP scripting language, and uses graphs generated by gmetad to display history information. It has been tested on many flavours of Unix (primarily Linux) with the Apache webserver and the PHP module (5.0.0 or later). The GD graphics library for PHP is used to generate pie charts in the frontend and needs to be installed separately. On RPM-based system, it is usually provided by the php-gd package.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：关于PHP Web Frontend说几点：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;提供real-time dynamic web pages；这个实时的动态页面信息是如何获得的呢？
+    &lt;ul&gt;
+      &lt;li&gt;每个web page都需要解析整个XML tree；&lt;/li&gt;
+      &lt;li&gt;如果data的量比较大，则建议web frontend运行在一个专用的主机上；&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;能够提供的监控数据：
+    &lt;ul&gt;
+      &lt;li&gt;CPU利用率&lt;/li&gt;
+      &lt;li&gt;Memory usage&lt;/li&gt;
+      &lt;li&gt;disk usage&lt;/li&gt;
+      &lt;li&gt;network statistics&lt;/li&gt;
+      &lt;li&gt;number of running processes等等；&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;时间维度上：hour、day、week、month、year；&lt;/li&gt;
+  &lt;li&gt;Web Frontend依赖于&lt;code&gt;gmetad&lt;/code&gt;进程，gmetad进程负责从Ganglia sources中获取data并提供给web frontend；&lt;/li&gt;
+  &lt;li&gt;Web Frontend默认开启&lt;code&gt;8651&lt;/code&gt;端口，来接收Ganglia XML tree数据；&lt;/li&gt;
+  &lt;li&gt;Ganglia Web Frontend是PHP语言实现的，并且通过安装GD graphics library（php）可展现饼状图；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：疑问，Web Frontend 只能读取其运行的服务器上&lt;code&gt;gmetad&lt;/code&gt;提供的数据？这就是说，要求web frontend必须运行在整个Ganglia集群的树状结构的根节点？&lt;/p&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;配置基础环境&lt;/h2&gt;
+
+&lt;p&gt;当前服务器基本环境（CentOS 6.4 x86_64）：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[root@localhost html]# lsb_release -a
+LSB Version:    :base-4.0-amd64:base-4.0-noarch:core-4.0-amd64:core-4.0-noarch:graphics-4.0-amd64:graphics-4.0-noarch:printing-4.0-amd64:printing-4.0-noarch
+Distributor ID: CentOS
+Description:    CentOS release 6.4 (Final)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-3&quot;&gt;新增用户和组&lt;/h3&gt;
+
+&lt;p&gt;为方便所有操作，以及进行权限管理，新建用户ganglia：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;useradd ganglia
+# 默认，创建user：ganglia时，也创建了group：ganglia
+# groupadd ganglia
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;如何卸载gweb？（make uninstall）&lt;/p&gt;
+
+&lt;h3 id=&quot;section-4&quot;&gt;几个基本组件&lt;/h3&gt;
+
+&lt;p&gt;&lt;code&gt;gmetad&lt;/code&gt;进程需要去&lt;a href=&quot;http://www.rrdtool.org/&quot;&gt;rrdtool&lt;/a&gt;，同时如果要同时在node上安装&lt;code&gt;gmetad&lt;/code&gt;和&lt;code&gt;gmond&lt;/code&gt;，则需要提前安装：apr&lt;em&gt;、pcre&lt;/em&gt;、zlib*，具体：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#rrdtool
+yum install rrdtool
+yum install rrdtool-devel
+
+#apr
+yum install apr
+yum install apr-devel
+
+#libpcre
+yum install pcre
+yum install pcre-devel
+
+#zlib-devel
+yum install zlib
+yum install zlib-devel
+
+#python-devel
+yum install python
+yum install python-devel
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;libconfuse&quot;&gt;libconfuse&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;# 出错信息
+libconfuse not found
+
+... can not be used when making a shared object; recompile with -fPIC
+/usr/local/confuse/lib/libconfuse.a: could not read symbols: Bad value
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;具体版本信息：confuse-2.7.tar.gz，下载来源：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.nongnu.org/confuse/&quot;&gt;libconfuse&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/martinh/libconfuse&quot;&gt;libconfuse(GitHub)&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;下载之后，直接安装即可。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;tar -zxvf confuse-2.7.tar.gz
+cd confuse-2.7
+
+./configure CFLAGS=-fPIC --disable-nls
+make
+make install
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;libexpat&quot;&gt;libexpat&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;# 出错信息
+libexpat not found
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;具体版本信息：expat-2.1.0.tar.gz，下载来源：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.libexpat.org/&quot;&gt;libexpat&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/LuaDist/libexpat&quot;&gt;libexpat(GitHub)&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;下载之后，直接安装即可。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;tar -zxvf expat-2.1.0.tar.gz
+cd expat-2.1.0
+
+./configure
+make
+make install
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;ganglia-1&quot;&gt;安装Ganglia&lt;/h2&gt;
+
+&lt;p&gt;安装Ganglia有几种方式：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;rpm包：rpm -Uvh ganglia-*.rpm&lt;/li&gt;
+  &lt;li&gt;yum源：yum install ganglia*&lt;/li&gt;
+  &lt;li&gt;本地编译源代码：make &amp;amp;&amp;amp; make install&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;由于在&lt;a href=&quot;http://sourceforge.net/projects/ganglia/files/&quot;&gt;Ganglia官网&lt;/a&gt;上没有找到最新的rpm包，并且本地配置的yum源没有提供ganglia组件，因此本次采用编译源代码方式。&lt;/p&gt;
+
+&lt;p&gt;在前面配置好基础环境之后，这一部分简要说一下，如何安装、启动Ganglia，具体包括：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;gmond&lt;/li&gt;
+  &lt;li&gt;gmetad&lt;/li&gt;
+  &lt;li&gt;web frontend&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;gmondgmetad&quot;&gt;gmond和gmetad&lt;/h3&gt;
+
+&lt;p&gt;此次安装版本为：&lt;a href=&quot;http://sourceforge.net/projects/ganglia/files/&quot;&gt;ganglia-3.6.1(ganglia monitoring core)&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;安装命令：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;tar -zxvf ganglia-3.6.1.tar.gz
+cd ganglia-3.6.1
+
+# ./configure默认安装 gmond
+# 利用 --with-gmetad选项，同时安装 gmetad
+./configure --with-gmetad --enable-gexec
+make
+make install
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&quot;gmetad&quot;&gt;配置gmetad&lt;/h4&gt;
+
+&lt;p&gt;由于gmetad依赖rrdtool，需要设置两个东西：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;设置datasource和UID，具体：&lt;/p&gt;
+
+    &lt;p&gt;vim /usr/local/etc/gmetad.conf
+  data_source “RT-SYS” localhost
+  setuid_username “apache”&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;设置rrdtool的数据目录，具体命令：&lt;/p&gt;
+
+    &lt;p&gt;mkdir -p /var/lib/ganglia/rrds
+  chown -R apache:apache /var/lib/ganglia/rrds&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;上述&lt;code&gt;chown&lt;/code&gt;时，利用的用户UID与gmetad.conf中&lt;code&gt;setuid_username&lt;/code&gt;的配置保持一致；另外，安装配置好之后，可通过命令&lt;code&gt;gmetad -d 2&lt;/code&gt;来在前台运行gmetad进程，以方便查看其运行状态。&lt;/p&gt;
+
+&lt;h4 id=&quot;gmond&quot;&gt;配置gmond&lt;/h4&gt;
+
+&lt;p&gt;利用gmond的默认配置生成配置文件：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;gmond -t &amp;gt; /usr/local/etc/gmond.conf
+
+vim /usr/local/etc/gmond.conf
+cluster {  
+	name=&quot;RT-SYS&quot;   //和gmetad.conf配置文件对应  
+	owner=&quot;apache&quot;   //和gmetad.conf配置文件对应  
+	latlong=&quot;unspecified&quot;  
+	url=&quot;unspecified&quot;  
+}  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;备注&lt;/strong&gt;：&lt;code&gt;whereis&lt;/code&gt;命令的用途？例如下面怎么解释&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[root@localhost html]# whereis gmond
+gmond: /usr/local/sbin/gmond /usr/local/etc/gmond.conf
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;gmond的详细信息，可以通过命令&lt;code&gt;man gmond&lt;/code&gt;和&lt;code&gt;man gmond.conf&lt;/code&gt;来查看。&lt;/p&gt;
+
+&lt;h3 id=&quot;gmondgmetad-1&quot;&gt;添加服务：gmond、gmetad&lt;/h3&gt;
+
+&lt;p&gt;通过上述安装步骤，服务器上应该已经安装了以下文件：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;/usr/local/bin/gstat&lt;/li&gt;
+  &lt;li&gt;/usr/local/bin/gmetric&lt;/li&gt;
+  &lt;li&gt;/usr/local/sbin/gmond&lt;/li&gt;
+  &lt;li&gt;/usr/local/sbin/gmetad&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;备注&lt;/strong&gt;：本地实测是上面的位置，与官方源码自带文档ganglia-3.6.1/ganglia.html的说法有差异。&lt;/p&gt;
+
+&lt;p&gt;在Linux上按照上述步骤，通过编译源码方式安装的的Ganglia，那可以将&lt;code&gt;gmond&lt;/code&gt;和&lt;code&gt;gmetad&lt;/code&gt;添加到sys service中，并且配置是否开机启动。
+配置gmetad服务步骤如下（gmond同理）：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[root@cib02166 ganglia-3.6.1]# cd gmetad
+[root@localhost gmetad]# cp gmetad.init /etc/rc.d/init.d/gmetad
+
+# 修改/etc/init.d/gmetad中 GMETAD=/usr/local/sbin/gmetad
+[root@localhost gmetad]# vim /etc/init.d/gmetad
+
+[root@localhost gmetad]# chkconfig --add gmetad
+[root@localhost gmetad]# chkconfig --list gmetad
+gmetad          0:off   1:off   2:on    3:on    4:on    5:on    6:off
+
+[root@localhost gmetad]# service gmetad start
+Starting GANGLIA gmetad:                                   [  OK  ]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;思考&lt;/strong&gt;：如何验证gmond、gmetad已经正常安装并成功启动？
+&lt;strong&gt;RE&lt;/strong&gt;：两种方法，方法1：通过命令&lt;code&gt;netstat -tpnl | grep &quot;gmond&quot;&lt;/code&gt;即可查看是否启动，当然也可以通过&lt;code&gt;service gmond status&lt;/code&gt;查看；方法2：通过&lt;code&gt;gmond -d 5&lt;/code&gt;在前台启动进程，并查看输出信息。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;思考&lt;/strong&gt;：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;不添加service，怎么启动gmond、gmeta？&lt;/li&gt;
+  &lt;li&gt;为什么要有gmetad.init？&lt;/li&gt;
+  &lt;li&gt;/etc/rc.d/init.d/目录又是干什么的？&lt;/li&gt;
+  &lt;li&gt;chkconfig命令的含义？&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;web-frontend&quot;&gt;web frontend&lt;/h3&gt;
+
+&lt;h4 id=&quot;section-5&quot;&gt;安装前准备&lt;/h4&gt;
+
+&lt;p&gt;此次安装版本为：&lt;a href=&quot;http://sourceforge.net/projects/ganglia/files/&quot;&gt;ganglia-3.6.2(ganglia-web)&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;：提前说几点：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;运行web frontend的节点，需要提前安装gmetad进程；&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;ganglia-web-3.6.2/conf.php&lt;/code&gt;文件包含了大部分的配置信息：
+    &lt;ul&gt;
+      &lt;li&gt;template&lt;/li&gt;
+      &lt;li&gt;gmetad location&lt;/li&gt;
+      &lt;li&gt;RRDtool location&lt;/li&gt;
+      &lt;li&gt;set the default time range and metrics for graphs&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;提前安装配置Apache服务器，具体安装命令：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# 安装apache服务器，以及PHP支持的组件
+yum install php-common php-cli php php-gd httpd
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&quot;web-frontend-1&quot;&gt;安装web frontend（推荐）&lt;/h4&gt;
+
+&lt;p&gt;在ganglia web的解压文件中能够看到一个文件&lt;code&gt;Makefile&lt;/code&gt;，通过对其进行设置就可以实现web frontend的快捷安装，具体要配置的参数如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# Location where gweb should be installed to (excluding conf, dwoo dirs).
+GDESTDIR = /usr/share/ganglia-webfrontend
+
+# Location where default apache configuration should be installed to.
+GCONFDIR = /etc/ganglia-web
+
+# Gweb statedir (where conf dir and Dwoo templates dir are stored)
+GWEB_STATEDIR = /var/lib/ganglia-web
+
+# Gmetad rootdir (parent location of rrd folder)
+GMETAD_ROOTDIR = /var/lib/ganglia
+
+APACHE_USER = www-data
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;将对上面可配置的参数进行简要介绍：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;GDESTDIR：Location where gweb should be installed to (excluding conf, dwoo dirs)，要与Apache服务器的配置文件&lt;code&gt;http.conf&lt;/code&gt;中&lt;code&gt;$DocumentRoot&lt;/code&gt;保持一致，通常命名为&lt;code&gt;$DocumentRoot/ganglia&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;GCONFDIR：Location where default apache configuration should be installed to.&lt;em&gt;（什么含义？）&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;GWEB_STATEDIR：Gweb statedir (where conf dir and Dwoo templates dir are stored)&lt;/li&gt;
+  &lt;li&gt;GMETAD_ROOTDIR：gmetad rootdir，parrent localtion of rrd folder&lt;/li&gt;
+  &lt;li&gt;APACHE_USER：设置Apache服务器的UID，具体，与Apache服务器配置文件&lt;code&gt;http.conf&lt;/code&gt;中&lt;code&gt;$User&lt;/code&gt;保持一致&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;配置完&lt;code&gt;Makefile&lt;/code&gt;文件后，直接运行如下命令：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cd ganglia-web-3.6.2
+make install
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;打开浏览器，查看[http://locahost/ganglia]&lt;/p&gt;
+
+&lt;p&gt;（疑问：makefile的作用？单纯的命令集合吗？）&lt;/p&gt;
+
+&lt;h4 id=&quot;web-frontend-2&quot;&gt;安装web frontend（弃用）&lt;/h4&gt;
+
+&lt;pre&gt;&lt;code&gt;tar -zxvf ganglia-web-3.6.2.tar.gz
+cd ganglia-web-3.6.2
+
+# 将整个文件夹ganglia-web-3.6.2复制到apache服务器的DocumentRoot所指定的目录下
+cp -a -f ganglia-web-3.6.2 /var/www/html/
+ln -s /var/www/html/ganglia-web-3.6.2 /var/www/html/ganglia
+
+service httpd restart
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后通过：[http://locahost/ganglia]即可访问。如果[http://locahost/ganglia]显示如下页面：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/install-ganglia/web-frontend-error.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;大意是说无法创建目录以及文件，OK，估计是权限问题，在后台，手动创建一个根目录，并将owner更改为apache（是启动httpd的用户）：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;mkdir -p /var/lib/ganglia-web/conf
+mkdir -p /var/lib/ganglia-web/dwoo/cache
+mkdir -p /var/lib/ganglia-web/dwoo/compiled
+chown -R apache:apache /var/lib/ganglia-web
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;section-6&quot;&gt;遇到的错误以及解决办法&lt;/h2&gt;
+
+&lt;h3 id=&quot;section-7&quot;&gt;错误1&lt;/h3&gt;
+
+&lt;pre&gt;&lt;code&gt;# service gmond start时，出现错误：
+error while loading shared libraries: libconfuse.so.0: cannot open shared object file: No such file or directory
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;解决办法：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cd /usr/local/lib
+ln -s libconfuse.so.0 libconfuse.so.0.0.0
+cp libconfuse.so.0 ../lib64/
+service gmond start
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-8&quot;&gt;错误2&lt;/h3&gt;
+
+&lt;p&gt;启动gmetad之后，通过命令&lt;code&gt;service gmetad status&lt;/code&gt;查询出现：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;gmetad dead but subsys locked
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;分析：上述错误没有见过呀，&lt;code&gt;subsys locked&lt;/code&gt;很眼熟，应该是进程已被锁定，但有这一点信息还不够，遇到问题时，基本思路：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;收集详细的错误信息，来分析错误；&lt;/li&gt;
+  &lt;li&gt;根据上述分析，采取处理对策；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;解决办法：&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;gmetad&lt;/code&gt;进程的启动日志在哪？文件&lt;code&gt;/var/log/messages&lt;/code&gt;；&lt;em&gt;（启动信息输出到messages中，这是在哪设置的？）&lt;/em&gt;通过如下命令来查看具体信息：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[root@localhost log]# tail -f messages
+/usr/local/sbin/gmetad[9510]: Please make sure that /var/lib/ganglia/rrds exists: No such file or directory
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;奥，原来gmetad进程存储数据的目录&lt;code&gt;/var/lib/ganglia/rrds&lt;/code&gt;没有创建，抓紧创建一下（命令：&lt;code&gt;mkdir -p /var/lib/ganglia/rrds&lt;/code&gt;），再次启动gmetad，还是不行，查看错误信息：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[root@localhost log]# tail -f messages
+/usr/local/sbin/gmetad[11701]: Please make sure that /var/lib/ganglia/rrds is owned by nobody
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;gmetad在启动之后，会自动归指定UID接管，具体在&lt;code&gt;/usr/local/etc/gmetad.conf&lt;/code&gt;中配置&lt;code&gt;setuid_username&lt;/code&gt;：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;#-------------------------------------------------------------------------------
+# If you don&#39;t want gmetad to setuid then set this to off
+# default: on
+# setuid off
+#
+#-------------------------------------------------------------------------------
+# User gmetad will setuid to (defaults to &quot;nobody&quot;)
+# default: &quot;nobody&quot;
+setuid_username &quot;storm&quot;
+#
+#-------------------------------------------------------------------------------
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后，修改目录&lt;code&gt;/var/lib/ganglia/rrds&lt;/code&gt;的所属用户和组（与上述设置保持一致）：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;chown -R storm:storm /var/lib/ganglia/rrds
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;OK，再次启动gmetad，成功启动。&lt;/p&gt;
+
+&lt;h3 id=&quot;section-9&quot;&gt;错误3&lt;/h3&gt;
+
+&lt;p&gt;通过rpm包或者yum源方式安装web frontend时，默认web frontend会被安装在&lt;code&gt;/usr/share/ganglia-webfrontend&lt;/code&gt;目录下，这样通过[http://locahost/ganglia]就无法进行访问。&lt;/p&gt;
+
+&lt;p&gt;解决办法：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# 利用符号链接
+ln -s /usr/share/ganglia-webfrontend /var/www/html/ganglia
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-10&quot;&gt;补充思考&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;疑问&lt;/strong&gt;：本文中实际是直接编译源码来安装组件的，即：&lt;code&gt;./configure&lt;/code&gt;以及&lt;code&gt;make install&lt;/code&gt;方式，那有个问题：在安装成功后，删掉安装时使用的源码文件，会影响安装的组件吗？&lt;em&gt;（个人感觉应该不影响才是基本需求）&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;RE&lt;/strong&gt;：要弄清上面的问题，需要弄清楚&lt;code&gt;./configure&lt;/code&gt;以及&lt;code&gt;make install&lt;/code&gt;执行过程中，导致进行了哪些操作？即：如何将软件安装到哪了？配置文件在哪？&lt;/p&gt;
+
+&lt;h2 id=&quot;ganglia-2&quot;&gt;配置Ganglia集群的拓扑&lt;/h2&gt;
+
+&lt;p&gt;上面主要说的是一个目标：在一台服务器上安装Ganglia的组件：gmond、gmetad、web frontend；这些都是针对单个服务器（single ganglia node）来说的。那如何将多个Ganglia node构成一个Ganglia cluster呢？之前我们简单提到：Ganglia是按照树状结构来组织的，下面将说一下细节。&lt;/p&gt;
+
+&lt;p&gt;构成拓扑的有几个概念：node、cluster、grid，什么含义？&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;疑问&lt;/strong&gt;：同一台服务器上，能够部署多个gmond吗？有个问题是：我在3台服务器上，同时部署了3个集群：Flume Cluster、Kafka Cluster、Storm Cluster，希望能够在3个页面上分别监控每个集群的情况。这就涉及一个问题：Ganglia监控的基本单元是物理服务器？还是逻辑上的一个节点？在应用层，Ganglia监控服务情况如何？&lt;/p&gt;
+
+&lt;p&gt;（doing…）&lt;/p&gt;
+
+&lt;h2 id=&quot;ganglia-3&quot;&gt;与Ganglia集成&lt;/h2&gt;
+
+&lt;p&gt;（通过Ganglia来监控Flume、Kafka、Storm的运行状态，不仅仅是OS层面的，更重要的是具体应用及其组件的运行状态）&lt;/p&gt;
+
+&lt;p&gt;（doing…）&lt;/p&gt;
+
+&lt;h2 id=&quot;section-11&quot;&gt;回顾与总结&lt;/h2&gt;
+
+&lt;p&gt;Ganglia用于监测分布式系统的运行状态，如何把Ganglia集群用起来？&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;安装Ganglia：
+    &lt;ul&gt;
+      &lt;li&gt;Ganglia本身也是集群；&lt;/li&gt;
+      &lt;li&gt;Ganglia集群拓扑是树状结构；&lt;/li&gt;
+      &lt;li&gt;在Ganglia集群的所有node上安装Ganglia组件；&lt;/li&gt;
+      &lt;li&gt;配置Ganglia集群的拓扑结构；&lt;/li&gt;
+      &lt;li&gt;在某个服务器上，汇总并实时刷新监控数据；&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;定制Ganglia来监控应用系统：
+    &lt;ul&gt;
+      &lt;li&gt;（如何定制？下面是随便说的）&lt;/li&gt;
+      &lt;li&gt;在Flume、Kafka、Storm运行的服务器上都安装Ganglia的client；&lt;/li&gt;
+      &lt;li&gt;Ganglia client收集应用的运行状态数据，并汇总到Ganglia的某个node；&lt;/li&gt;
+      &lt;li&gt;疑问：在Ganglia集群外的某个服务器上，可以安装、使用web frontend吗？&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section-12&quot;&gt;参考来源&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.cnblogs.com/yuki-lau/p/3201110.html&quot;&gt;分布式监控工具Ganglia介绍与集群部署&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://blog.csdn.net/shenlan211314/article/details/7421758&quot;&gt;GangLia简介&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/ganglia&quot;&gt;Ganglia(GitHub)&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/LuaDist/libexpat&quot;&gt;libexpat(GitHub)&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/martinh/libconfuse&quot;&gt;libconfuse(GitHub)&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://blog.csdn.net/xqj198404/article/details/9447211&quot;&gt;编译出错 recompile with -fPIC&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://sourceforge.net/p/ganglia/mailman/message/19414944/&quot;&gt;Problems compiling ganglia 3.1&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://sourceforge.net/p/ganglia/mailman/ganglia-general/thread/A526454B-CDD5-4B0F-9805-68A92B9459E9@crackpot.org/&quot;&gt;gmetad dead but subsys locked&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://sachinsharm.wordpress.com/2013/08/17/setup-and-configure-ganglia-3-6-on-centosrhel-6-3/&quot;&gt;Setup and configure Ganglia-3.6 on CentOS/RHEL 6.3&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://yaoweibin2008.blog.163.com/blog/static/11031392008763256465/&quot;&gt;Ganglia 体系结构及功能介绍&lt;/a&gt;（力荐）&lt;/li&gt;
+  &lt;li&gt;Massie M L, Chun B N, Culler D E. &lt;a href=&quot;/download/ganglia/The-Ganglia-Distributed-Monitoring-System.pdf&quot;&gt;The ganglia distributed monitoring system: design, implementation, and experience&lt;/a&gt; Journal. Parallel Computing, 2004, 30(7): 817-840.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：关于gmond的配置信息，官方参考来源有几个：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;ganglia-3.6.1:ganglia monitoring core源码中ganglia.html文件有Configuration介绍；&lt;/li&gt;
+  &lt;li&gt;ganglia-3.6.1:ganglia monitoring core源码中gmond/gmond.conf.html文件有详尽的说明；&lt;/li&gt;
+  &lt;li&gt;安装完gmond之后，&lt;code&gt;man gmond&lt;/code&gt;可查看gmond命令的基本信息，&lt;code&gt;man gmond.conf&lt;/code&gt;可以参看gmond详细的配置信息；&lt;/li&gt;
+  &lt;li&gt;sourceforge上的&lt;a href=&quot;http://sourceforge.net/p/ganglia/mailman/&quot;&gt;Ganglia Mailing Lists&lt;/a&gt;，可以直接搜索；&lt;em&gt;（Ganglia跟之前接触的Apache开源项目不同，其在sourceforge上进行讨论，因此通过Mailing Lists搜索问题，是获取信息的关键途径）&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;/download/ganglia/monitoring_with_ganglia.pdf&quot;&gt;Monitoring with Ganglia&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;特别推荐参考来源&lt;/strong&gt;：又有新发现，GitHub上有wiki：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/ganglia/monitor-core/wiki&quot;&gt;Ganglia core(GitHub) WIKI&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/ganglia/ganglia-web/wiki&quot;&gt;Ganglia web(GitHub) WIKI&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section-13&quot;&gt;闲谈&lt;/h2&gt;
+
+&lt;p&gt;今天无意间看到&lt;code&gt;YUKI小糖&lt;/code&gt;的&lt;a href=&quot;http://www.cnblogs.com/yuki-lau/p/3201110.html&quot;&gt;Ganglia集群部署文章&lt;/a&gt;，看到其也会在博文中唠叨几句；突然相当，我x，难道这是工程师的共同习性吗？莫不是因为一天到晚跟机器接触太久了，没有人说话，就通过博客来唠叨了吧~~啊哈哈~~&lt;em&gt;（平静一下心情，细想想，还是挺凄凉的…）&lt;/em&gt;&lt;/p&gt;
+
+</content>
+   </entry>
+   
+   <entry>
+     <title>Flume、Kafka、Storm小结</title>
+     <link href="http://ningg.github.com/flume-kafka-storm-summary"/>
+     <updated>2014-11-10T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/flume-kafka-storm-summary</id>
+     <content type="html">&lt;h2 id=&quot;flume&quot;&gt;Flume&lt;/h2&gt;
+
+&lt;h3 id=&quot;section&quot;&gt;可靠性和可恢复性&lt;/h3&gt;
+
+&lt;h4 id=&quot;reliability&quot;&gt;Reliability&lt;/h4&gt;
+
+&lt;p&gt;The events are staged in a channel on each agent. The events are then delivered to the next agent or terminal repository (like HDFS) in the flow. The events are removed from a channel only after they are stored in the channel of next agent or in the terminal repository. This is a how the single-hop message delivery semantics in Flume provide end-to-end reliability of the flow.（&lt;strong&gt;single-hop message delivery semantics&lt;/strong&gt;：Channel中的event仅在被成功处理之后，才从Channel中删掉。）&lt;/p&gt;
+
+&lt;p&gt;Flume uses a transactional approach to guarantee the reliable delivery of the events. The sources and sinks encapsulate in a transaction the storage/retrieval, respectively, of the events placed in or provided by a transaction provided by the channel. This ensures that the set of events are reliably passed from point to point in the flow. In the case of a multi-hop flow, the sink from the previous hop and the source from the next hop both have their transactions running to ensure that the data is safely stored in the channel of the next hop.（&lt;strong&gt;multi-hop&lt;/strong&gt;：）&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：Flume如何保证事物操作？没看懂&lt;/p&gt;
+
+&lt;h4 id=&quot;recoverability&quot;&gt;Recoverability&lt;/h4&gt;
+
+&lt;p&gt;The events are staged in the channel, which manages recovery from failure. Flume supports a durable file channel which is backed by the local file system. There’s also a memory channel which simply stores the events in an in-memory queue, which is faster but any events still left in the memory channel when an agent process dies can’t be recovered.（Channel需保证崩溃后，能恢复events，具体：本地FS上保存durable file channel，另，占用一个in-memory queue，Channel进程崩溃后，能加快恢复速度；但，如果agent进程崩溃，将导致内存泄漏：无法回收这一内存）&lt;/p&gt;
+
+&lt;h2 id=&quot;kafka&quot;&gt;Kafka&lt;/h2&gt;
+
+&lt;p&gt;（TODO List）&lt;/p&gt;
+
+&lt;p&gt;（Kafka集群涉及到的可扩展性和可靠性）&lt;/p&gt;
+
+&lt;h2 id=&quot;storm&quot;&gt;Storm&lt;/h2&gt;
+
+&lt;p&gt;（TODO List）&lt;/p&gt;
+
+&lt;p&gt;（Storm集群相关的可扩展性和可靠性）&lt;/p&gt;
+
+&lt;h2 id=&quot;flumekafkastorm&quot;&gt;Flume/Kafka/Storm框架性能测试&lt;/h2&gt;
+
+&lt;p&gt;简要说一下，性能测试的目标：弄清楚整个框架的承载能力，到底能处理多达流量的数据。&lt;/p&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;前期问题&lt;/h3&gt;
+
+&lt;p&gt;几个搭建测试环境相关的问题：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Flume集群与Kafka集群之间&lt;/strong&gt;，&lt;strong&gt;是否要走网络&lt;/strong&gt;？简要来说，Flume集群的最后一个聚合的Agent是否要放置到Kafka即群里？
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;RE&lt;/strong&gt;：Flume的最后一个负责聚合的Agent即使放置在某个Kafka broker上，仍然是要走网络的，因为Kafka本身就是一个集群，Flume的Kafka Sink与其他Kafka broker连接时，走的也是网络；&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Flume收集的数据源&lt;/strong&gt;，&lt;strong&gt;是否同时包含IP:port和日志&lt;/strong&gt;？Flume提供了从这两种source收集数据的能力，测试的时候要覆盖到。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;搭建测试环境步骤&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;实现Flume集群；
+    &lt;ul&gt;
+      &lt;li&gt;165、166收集数据，并以avro方式汇聚到167；&lt;/li&gt;
+      &lt;li&gt;167上以logger方式将收到的message输出到stdout；&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;实现Kafka集群；
+    &lt;ul&gt;
+      &lt;li&gt;配置每一个 Kafka broker 的 id 以及 zookeeper 集群；&lt;/li&gt;
+      &lt;li&gt;将167上Flume agent的sink修改为Flume Kafka Sink；&lt;/li&gt;
+      &lt;li&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;section-3&quot;&gt;测试方案列表&lt;/h3&gt;
+
+&lt;h4 id=&quot;zookeeper&quot;&gt;zookeeper集群&lt;/h4&gt;
+
+&lt;p&gt;当前使用的是CDH中自带的zookeeper：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;节点位置：
+    &lt;ul&gt;
+      &lt;li&gt;168.7.1.68:2181&lt;/li&gt;
+      &lt;li&gt;168.7.1.69:2181&lt;/li&gt;
+      &lt;li&gt;168.7.1.70:2181&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：zookeeper集群的基本原理，如何监控其性能？&lt;/p&gt;
+
+&lt;h4 id=&quot;flume-1&quot;&gt;Flume集群&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;节点位置：
+    &lt;ul&gt;
+      &lt;li&gt;168.7.2.165: 21811&lt;/li&gt;
+      &lt;li&gt;168.7.2.166: 21811&lt;/li&gt;
+      &lt;li&gt;168.7.2.167: 21811（作为聚合的Agent）&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;下载路径和版本信息：
+    &lt;ul&gt;
+      &lt;li&gt;下载路径：http://flume.apache.org/download.html&lt;/li&gt;
+      &lt;li&gt;版本信息：apache-flume-1.5.0.1-bin&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Flume的配置文件需要考虑几点：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;source包含两个：Exec Source、NetCat Source、avro Source；&lt;/li&gt;
+  &lt;li&gt;Sink包含：logger Sink、avro Sink、Flume Kafka Sink；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：一个问题，使用Exec Source来进行收集数据时，有一种情况，如果&lt;code&gt;tail -F&lt;/code&gt;命令意外终止了，Flume无法自动重启这一命令，原因：Flume无法确定是文件没有新增信息，还是tail命令意外终止；为解决这一问题，官网有两个建议：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;使用Spooling Directory Source，不过这个Source也有一个问题，他要求将文件添加到一个固定目录，这就会造成信息传递的实时性降低；&lt;/li&gt;
+  &lt;li&gt;通过JDK直接与Flume集成；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;个人想法&lt;/strong&gt;：官网给出的信息很权威，不过可以到官网的JIRA上看看，其他人也遇到这个问题，应该会有其他思路。&lt;/p&gt;
+
+&lt;h4 id=&quot;kafka-1&quot;&gt;Kafka集群&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;节点位置：
+    &lt;ul&gt;
+      &lt;li&gt;168.7.2.165:9091&lt;/li&gt;
+      &lt;li&gt;168.7.2.166:9091&lt;/li&gt;
+      &lt;li&gt;168.7.2.167:9091&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;下载路径和版本信息：
+    &lt;ul&gt;
+      &lt;li&gt;下载路径：http://kafka.apache.org/downloads.html&lt;/li&gt;
+      &lt;li&gt;版本信息：kafka_2.9.2-0.8.1.1&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：有几个疑问：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;如何确定当前Kafka集群中broker存活状态？&lt;/li&gt;
+  &lt;li&gt;Kafka运行过程中，可定制的输出日志有哪些？输出日志位置？&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;storm-1&quot;&gt;Storm集群&lt;/h4&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;节点位置：
+    &lt;ul&gt;
+      &lt;li&gt;168.7.1.68:2181&lt;/li&gt;
+      &lt;li&gt;168.7.1.69:2181&lt;/li&gt;
+      &lt;li&gt;168.7.1.70:2181&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：如何构建Storm集群？&lt;/p&gt;
+
+&lt;h2 id=&quot;section-4&quot;&gt;问题汇总&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Flume、Kafka、Storm构成框架，如何监控每个模块的存活状态和性能？如何确定系统处理的瓶颈位置？&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section-5&quot;&gt;参考来源&lt;/h2&gt;
+
+</content>
+   </entry>
    
    <entry>
      <title>Kafka 0.8.1：broker config（doing）</title>
@@ -1827,871 +3740,6 @@ OpaqueTridentKafkaSpout spout = new OpaqueTridentKafkaSpout(spoutConf);
   &lt;li&gt;&lt;a href=&quot;http://storm.apache.org/about/integrates.html&quot;&gt;Storm Integrates&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://github.com/apache/incubator-storm/tree/master/external/storm-kafk&quot;&gt;storm-kafka&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>Flume下插件方式实现Advanced Logger Sink</title>
-     <link href="http://ningg.github.com/flume-advance-logger-sink"/>
-     <updated>2014-10-31T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/flume-advance-logger-sink</id>
-     <content type="html">&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
-
-&lt;p&gt;Flume自带的Logger sink常用于直接在console上输出event的header和body，这对test和debug很重要，但body默认只truncate 16B，无法全部展示，这对test造成很大影响，怎么办？自己实现一个Adavanced Logger sink：完全输出整个event，这样就便利多了。&lt;/p&gt;
-
-&lt;h2 id=&quot;flumelogger-sink&quot;&gt;Flume中Logger Sink&lt;/h2&gt;
-
-&lt;p&gt;在&lt;a href=&quot;/build-flume&quot;&gt;编译flume：使用eclipse查看flume源码&lt;/a&gt;中，已经介绍了如何在Eclipse下查看Flume的源代码，通过查看&lt;code&gt;LoggerSink&lt;/code&gt;源码发现：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;// LoggerSink.java
-logger.info(&quot;Event: &quot; + EventHelper.dumpEvent(event));
-...
-
-// EventHelper.java
-private static final int DEFAULT_MAX_BYTES = 16;
-
-public static String dumpEvent(Event event) {
-	return dumpEvent(event, DEFAULT_MAX_BYTES);
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;通过上面的Flume源码片段可知，Logger Sink默认限制了event的大小为16字节，这样，只需要实现一个与Logger Sink基本一致，但不对event设限制的sink就好了。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：编译flume时，直接将源码当作existing maven project导入，行不行？Flume的源码全是java写的吗？还有个问题：如果使用eclipse来进行源代码的开发，最终通过git方式向repository中提交代码时，会夹带.class文件吗？&lt;/p&gt;
-
-&lt;h2 id=&quot;sink&quot;&gt;自定义Sink&lt;/h2&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/flume-advance-logger-sink/advanced-logger-sink.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;在&lt;code&gt;flume-ng-core&lt;/code&gt;工程的&lt;code&gt;src/main/java&lt;/code&gt;目录下，新建package：&lt;code&gt;com.github.ningg&lt;/code&gt;，然后新建class：&lt;code&gt;AdvancedLoggerSink&lt;/code&gt;，内容如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;package com.github.ningg;
-
-import org.apache.flume.Channel;
-import org.apache.flume.Context;
-import org.apache.flume.Event;
-import org.apache.flume.EventDeliveryException;
-import org.apache.flume.Transaction;
-import org.apache.flume.conf.Configurable;
-import org.apache.flume.event.EventHelper;
-import org.apache.flume.sink.AbstractSink;
-import org.apache.flume.sink.LoggerSink;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-
-public class AdvancedLoggerSink extends AbstractSink implements Configurable {
-
-	private static final Logger logger = LoggerFactory
-			.getLogger(LoggerSink.class);
-
-	private static final int DEFAULT_MAX_BYTES = 16;
-	private int maxBytes = DEFAULT_MAX_BYTES;
-	
-	@Override
-	public void configure(Context context) {
-		maxBytes = context.getInteger(&quot;maxBytes&quot;, DEFAULT_MAX_BYTES);
-		logger.debug(this.getName() + &quot; maximum bytes set to &quot; + String.valueOf(maxBytes));
-	}
-	
-	@Override
-	public Status process() throws EventDeliveryException {
-		Status result = Status.READY;
-		Channel channel = getChannel();
-		Transaction transaction = channel.getTransaction();
-		Event event = null;
-
-		try {
-			transaction.begin();
-			event = channel.take();
-
-			if (event != null) {
-				if (logger.isInfoEnabled()) {
-					// edit this line, so you can change the output formater.
-					logger.info(&quot;Event: &quot; + EventHelper.dumpEvent(event, maxBytes));
-				}
-			} else {
-				// No event found, request back-off semantics from the sink
-				// runner
-				result = Status.BACKOFF;
-			}
-			transaction.commit();
-		} catch (Exception ex) {
-			transaction.rollback();
-			throw new EventDeliveryException(&quot;Failed to log event: &quot; + event,
-					ex);
-		} finally {
-			transaction.close();
-		}
-
-		return result;
-	}
-
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;接下来，将整个&lt;code&gt;com.github.ningg&lt;/code&gt;package导出为jar包：&lt;code&gt;advancedLoggerSink.jar&lt;/code&gt;；根据Flume官网的建议，将此jar包上传到&lt;code&gt;$FLUME_HOME/plugins.d&lt;/code&gt;目录下，具体：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;plugins.d/advanced-logger-sink/lib/advancedLoggerSink.jar
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;为了测试效果，在&lt;code&gt;$FLUME_HOME/conf&lt;/code&gt;下新建&lt;code&gt;advancedLoggerSink.conf&lt;/code&gt;文件:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;agent.sources = net
-agent.sinks = loggerSink
-agent.channels = memoryChannel
-
-# For each one of the sources, the type is defined
-agent.sources.net.type = netcat
-agent.sources.net.bind = localhost
-agent.sources.net.port = 44444
-
-# Each sink&#39;s type must be defined
-agent.sinks.loggerSink.type = com.github.ningg.AdvancedLoggerSink
-agent.sinks.loggerSink.maxBytes = 100
-
-# Each channel&#39;s type is defined.
-agent.channels.memoryChannel.type = memory
-agent.channels.memoryChannel.capacity = 100
-
-
-agent.sources.net.channels = memoryChannel
-agent.sinks.loggerSink.channel = memoryChannel
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;回到&lt;code&gt;$FLUME_HOME&lt;/code&gt;目录下，执行如下命令：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;bin/flume-ng agent --conf conf --conf-file conf/advancedLoggerSink.conf --name agent -Dflume.root.logger=INFO,console
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;当页面显示如下字样，表示flume启动成功：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;Created serverSocket:sun.nio.ch.ServerSocketChannelImpl[/127.0.0.1:44444]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;另开一个窗口，在当前服务器上，执行命令：&lt;code&gt;telnet localhost 44444&lt;/code&gt;，并且输入如下内容：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;Now I&#39;m testing the Advanced Logger Sink
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;则，AdavancedSinkLogger的输出内容如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;[INFO - com.github.ningg.AdvancedLoggerSink.process(AdvancedLoggerSink.java:44)] Event: { headers:{} 
-   body: 4E 6F 77 20 49 27 6D 20 74 65 73 74 69 6E 67 20 Now I&#39;m testing
-00000010 74 68 65 20 41 64 76 61 6E 63 65 64 20 4C 6F 67 the Advanced Log
-00000020 67 65 72 20 53 69 6E 6B 0D                      ger Sink. }
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;AdvancedLoggerSink的输出格式：每行输出16个byte，左侧是字母对应的ASCII码，右侧是字母本身。备注：如果希望定制上述的输出格式，可以直接新建类来替代&lt;code&gt;EventHelper.dumpEvent(event, maxBytes)&lt;/code&gt;。&lt;/p&gt;
-
-&lt;h2 id=&quot;section-1&quot;&gt;参考来源&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://stackoverflow.com/questions/20189437/flume-is-truncating-characters-when-i-use-the-source-type-as-logger-it-just-s&quot;&gt;Logger Sink truncate Event body&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://issues.apache.org/jira/browse/FLUME-2246&quot;&gt;FLUME-2246&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section-2&quot;&gt;杂谈&lt;/h2&gt;
-
-&lt;p&gt;本文写完之后，我发现了：&lt;a href=&quot;https://issues.apache.org/jira/browse/FLUME-2246&quot;&gt;FLUME-2246&lt;/a&gt;，Ou，已经有人在Flume官网上讨论并解决了这个问题，看来不会使用Flume官网不行呀，之前自己阅读标记过&lt;a href=&quot;/how-to-contribute-open-source-project&quot;&gt;如何参与开源项目&lt;/a&gt;， 但是没有实际尝试参与。个人心里一个想法：玩开源的东西，要参与到开源社区中，你的问题开源社区早已涉及，只不过有些扩展功能重要程度低，虽然已解决，但并没有并入发行版本中。&lt;/p&gt;
-
-&lt;p&gt;另，说明一点啊：遇到问题，自己先想思路，再去社区找答案，也是个好方法。&lt;/p&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>CentOS 6.4下LVM的使用</title>
-     <link href="http://ningg.github.com/use-lvm"/>
-     <updated>2014-10-29T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/use-lvm</id>
-     <content type="html">&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
-
-&lt;p&gt;系统有9块盘，每个320GB，之前服务器（CentOS 6.3）上磁盘分配情况：选取一块盘作为系统盘，划分&lt;code&gt;/boot&lt;/code&gt;、&lt;code&gt;swap&lt;/code&gt;、&lt;code&gt;/&lt;/code&gt;、&lt;code&gt;/home&lt;/code&gt;；然后，将剩余的8块盘，逐个格式化，并mount到系统盘的某个目录下。现在的问题是：某系统要上线，需要一个足够大的空间来存储数据，如果使用上述的方案，每个目录最大的存储空间都只有320GB，还是不够大，今后可能面临分区扩容的问题，使用静态分区，扩容有些麻烦。而LVM（Logical Volume Management，逻辑卷管理）能够将多个磁盘/分区组合在一起，抽象为一个逻辑上的分区，即，利用LVM技术，8块盘可以组成一个2.5T大小的分区，这样问题就解决了。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;：上面利用LVM来管理8块盘的方案，只是初步想法，不是最终方案。&lt;/p&gt;
-
-&lt;h2 id=&quot;lvm&quot;&gt;LVM是什么&lt;/h2&gt;
-
-&lt;p&gt;LVM(Logical Volume Management，逻辑卷管理)，一大核心功能是：对磁盘分区进行动态管理。当前无论在Linux、类Unix以及其他Windowns操作系统上，都存在LVM管理软件。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/use-lvm/lvm-arch.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;lvm-1&quot;&gt;LVM要解决的问题&lt;/h3&gt;
-
-&lt;p&gt;LVM要解决的典型问题：一块磁盘的空间160GB，其存满数据后，需要扩容，怎么办？传统静态分区时，需要将磁盘中近160GB的数据复制到1TB的磁盘上，然后，使用1TB的磁盘替换掉原来160GB的磁盘即可（替换：只要是挂载点替换一下就可以了）。LVM有更好的思路，来解决这个问题吗？&lt;/p&gt;
-
-&lt;h3 id=&quot;lvm-2&quot;&gt;LVM原理简介&lt;/h3&gt;
-
-&lt;p&gt;要解决上面磁盘空间不足时，磁盘的扩容问题，LVM提供了一个基本思路：LVM将底层的磁盘封装抽象为逻辑卷（logical volume），上层应用不直接从物理磁盘分区中读数据，而是从逻辑卷中读数据；LVM负责底层磁盘到逻辑卷的映射和管理；增加底层磁盘时，通过LVM可以为逻辑卷动态扩充容量，而这对上层应用是无影响的（透明的）。说这么多，总结一点：LVM提高了磁盘管理的灵活性。&lt;/p&gt;
-
-&lt;h2 id=&quot;lvm-3&quot;&gt;LVM原理详解&lt;/h2&gt;
-
-&lt;p&gt;上面简要说了一点点LVM的基本原理，吃饭要吃饱、做事要做好，OK，把LVM的原理好好理解一下。有几个概念要好好说一说。&lt;/p&gt;
-
-&lt;h3 id=&quot;pv-physical-volume&quot;&gt;PV: Physical Volume&lt;/h3&gt;
-
-&lt;p&gt;PV（Physical Volume），物理卷&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;物理卷在LVM系统中处于最底层。&lt;/li&gt;
-  &lt;li&gt;物理卷可以是整个硬盘、硬盘上的分区或从逻辑上与磁盘分区具有同样功能的设备（如：RAID）。&lt;/li&gt;
-  &lt;li&gt;物理卷是LVM的基本存储逻辑块，但和基本的物理存储介质（如分区、磁盘等）比较，却包含有与LVM相关的管理参数。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：为什么要有PV？直接使用物理分区不行吗？&lt;/p&gt;
-
-&lt;h3 id=&quot;vg-volume-group&quot;&gt;VG: Volume Group&lt;/h3&gt;
-
-&lt;p&gt;VG（Volume Group），卷组&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;卷组建立在物理卷之上，它由一个或多个物理卷组成。&lt;/li&gt;
-  &lt;li&gt;卷组创建之后，可以动态地添加物理卷到卷组中，在卷组上可以创建一个或多个“LVM分区”（逻辑卷）。&lt;/li&gt;
-  &lt;li&gt;一个LVM系统中可以只有一个卷组，也可以包含多个卷组。&lt;/li&gt;
-  &lt;li&gt;LVM的卷组类似于非LVM系统中的物理硬盘。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;lg-logical-volume&quot;&gt;LG: Logical Volume&lt;/h3&gt;
-
-&lt;p&gt;LG（Logical Volume），逻辑卷&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;逻辑卷建立在卷组之上，它是从卷组中“切出”的一块空间。&lt;/li&gt;
-  &lt;li&gt;逻辑卷创建之后，其大小可以伸缩。&lt;/li&gt;
-  &lt;li&gt;LVM的逻辑卷类似于非LVM系统中的硬盘分区，在逻辑卷之上可以建立文件系统（比如，/home或者/usr等）。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;pe-physical-extent&quot;&gt;PE: Physical Extent&lt;/h3&gt;
-
-&lt;p&gt;PE（Physical Extent），物理区域，&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;每一个物理卷被划分为基本单元（称为PE），具有唯一编号的PE是可以被LVM寻址的最小存储单元。&lt;/li&gt;
-  &lt;li&gt;PE的大小可根据实际情况在创建物理卷时指定，默认为4 MB。&lt;/li&gt;
-  &lt;li&gt;PE的大小一旦确定将不能改变，同一个卷组中的所有物理卷的PE的大小需要一致。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;le-logical-extent&quot;&gt;LE: Logical Extent&lt;/h3&gt;
-
-&lt;p&gt;LE（Logical Extent），逻辑区域&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;逻辑区域也被划分为可被寻址的基本单位（称为LE）。&lt;/li&gt;
-  &lt;li&gt;在同一个卷组中，LE的大小和PE是相同的，并且一一对应。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：PE、LE，是否与文件系统中block（逻辑块）类似？而block大，能够提升磁盘IO速度；但block过大，造成磁盘空间的浪费？&lt;/p&gt;
-
-&lt;h3 id=&quot;vgda&quot;&gt;VGDA&lt;/h3&gt;
-
-&lt;p&gt;和非LVM系统将包含分区信息的元数据保存在位于分区的起始位置的分区表中一样，逻辑卷以及卷组相关的元数据也是保存在位于物理卷起始处的卷组描述符区域（Volume Group Descriptor Area, VGDA）中。VGDA包括以下内容：PV描述符、VG描述符、LV描述符、和一些PE描述符。&lt;/p&gt;
-
-&lt;p&gt;注意：/boot分区不能位于卷组中，因为引导装载程序无法从逻辑卷中读取。如果你想把/分区放在逻辑卷上，必须创建一个与卷组分离的/boot分区。&lt;/p&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;小结&lt;/h3&gt;
-
-&lt;p&gt;我们在创建好LV以后，我们会在 /dev 目录下看到我们的LV信息，例如 /dev/vgname/lvname， 我们每创建一个VG，其会在/dev目录下创建一个以该VG名字命名的文件夹，在该VG的基础上创建好LV以后，我们会在这个VG目录下多出一个以LV名字命名的逻辑卷。&lt;/p&gt;
-
-&lt;p&gt;下面我们来对整个LVM的工作原理进行一个总结：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;物理磁盘/物理分区，被格式化为PV，本质：空间被划分为一个个的PE&lt;/li&gt;
-  &lt;li&gt;不同的PV加入到同一个VG中，不同PV的PE全部进入到了VG的PE池内&lt;/li&gt;
-  &lt;li&gt;LV基于PE创建，大小为PE的整数倍，组成LV的PE可能来自不同的物理磁盘&lt;/li&gt;
-  &lt;li&gt;LV现在就直接可以格式化后挂载使用了&lt;/li&gt;
-  &lt;li&gt;LV的扩充缩减实际上就是增加或减少组成该LV的PE数量，其过程不会丢失原始数据&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：在创建PV时，需要物理磁盘/物理分区提前进行格式化吗？&lt;strong&gt;RE&lt;/strong&gt;：不需要格式化的，直接创建PV就行。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/use-lvm/pv-vg-lv.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;centosdoing&quot;&gt;CentOS的推荐配置doing..&lt;/h2&gt;
-
-&lt;p&gt;使用LVM来管理磁盘时，CentOS有没有推荐的配置？&lt;/p&gt;
-
-&lt;p&gt;LVM只有优点吗？
-LVM有没有副作用？降低磁盘IO？耗费一定的磁盘空间？LVM管理时，有没有CPU、磁盘资源的浪费？&lt;/p&gt;
-
-&lt;p&gt;（下面还没有修改，参考来源：&lt;a href=&quot;http://hily.me/blog/2008/10/understanding-lvm/&quot;&gt;理解 LVM (Logical Volume Manager)&lt;/a&gt;）&lt;/p&gt;
-
-&lt;p&gt;是否使用 LVM？&lt;/p&gt;
-
-&lt;p&gt;在决定是否使用 LVM 前请先了解下 LVM 的优缺点。&lt;/p&gt;
-
-&lt;p&gt;使用 LVM 的优势：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;文件系统可以跨多个磁盘，因此大小不会受物理磁盘的限制。&lt;/li&gt;
-  &lt;li&gt;可以在系统运行状态下动态地扩展文件系统大小。&lt;/li&gt;
-  &lt;li&gt;可以增加新磁盘到 LVM 的存储池中。&lt;/li&gt;
-  &lt;li&gt;可以以镜像的方式冗余重要数据到多个物理磁盘上。&lt;/li&gt;
-  &lt;li&gt;可以很方便地导出整个卷组，并导入到另外一台机器上。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;使用 LVM 的限制：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;系统、文件系统出现问题时，LVM处理起来麻烦，关键要看处理者的能力&lt;/li&gt;
-  &lt;li&gt;在从卷组中移除一个磁盘时必须使用 reducevg，否则会出问题。&lt;/li&gt;
-  &lt;li&gt;当卷组中的一个磁盘损坏时，整个卷组都会受影响。&lt;/li&gt;
-  &lt;li&gt;不能减小文件系统大小（受文件系统类型限制）。&lt;/li&gt;
-  &lt;li&gt;因为加入了额外的操作，存储性能会受影响（使用 Stripe 的情况另当别论）。&lt;/li&gt;
-  &lt;li&gt;使用 LVM 将获得更好的可扩展性和可操作性，但却损失了可靠性和存储性能，总的说来就是在这两者间选择。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;使用要点&lt;/p&gt;
-
-&lt;p&gt;按需分配文件系统大小，不要一次性分配太大的空间给文件系统，剩余的空间可以放在存储池中，在需要时再扩充到文件系统中。
-把不同的数据放在不同的卷组中，这样在做系统升级或数据迁移操作时会比较方便。&lt;/p&gt;
-
-&lt;h2 id=&quot;linuxlvm&quot;&gt;Linux下LVM命令&lt;/h2&gt;
-
-&lt;p&gt;LVM要实现的如下几个功能：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;创建PV、VG、LV&lt;/li&gt;
-  &lt;li&gt;向VG中增加新的PV&lt;/li&gt;
-  &lt;li&gt;从VG中移除PV&lt;/li&gt;
-  &lt;li&gt;动态调整LV容量&lt;/li&gt;
-  &lt;li&gt;删除PV、VG、LV&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：LV本质由PE组成的，那一个LV对应的所有PE是均匀分布在PV上吗？有什么策略？&lt;/p&gt;
-
-&lt;h3 id=&quot;pvvglv&quot;&gt;PV\VG\LV的创建、删除&lt;/h3&gt;
-
-&lt;p&gt;来个表格吧：&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;命令&lt;/th&gt;
-      &lt;th&gt;说明&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code&gt;pvcreate&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;创建PV&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code&gt;pvdisplay&lt;/code&gt;/&lt;code&gt;pvs&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;查询PV详情&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code&gt;pvremove&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;删除PV&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code&gt;vgcreate&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;创建VG&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code&gt;vgdisplay&lt;/code&gt;/&lt;code&gt;vgs&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;查询VG详情&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code&gt;vgremove&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;删除VG&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code&gt;lvcreate&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;基于VG创建LV&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code&gt;lvdisplay&lt;/code&gt;/&lt;code&gt;lvs&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;查询LV详情&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code&gt;lvremove&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;删除LV&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code&gt;mkfs&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;格式化LV&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code&gt;mount&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;挂载LV&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code&gt;umount&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;卸载LV&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;&lt;strong&gt;注意&lt;/strong&gt;：先删除LV，再删除VG，最后删除PV。&lt;/p&gt;
-
-&lt;h3 id=&quot;lvdoing&quot;&gt;LV的动态调整doing…&lt;/h3&gt;
-
-&lt;p&gt;LV的动态调整：参考&lt;a href=&quot;http://www.cnblogs.com/xiaoluo501395377/archive/2013/05/24/3097785.html&quot;&gt;LVM逻辑卷的拉伸及缩减&lt;/a&gt;，&lt;a href=&quot;http://labs.chinamobile.com/mblog/854855_181800&quot;&gt;简单理解LVM(Logical Volume Manager)的基本原理&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;section-2&quot;&gt;参考资料&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://blog.csdn.net/jimmy_zjw/article/details/8598219&quot;&gt;什么是LVM?（CentOS 5）&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.cnblogs.com/xiaoluo501395377/archive/2013/05/22/3093405.html&quot;&gt;LVM逻辑卷基本概念及LVM的工作原理&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://labs.chinamobile.com/mblog/854855_181800&quot;&gt;简单理解LVM(Logical Volume Manager)的基本原理&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section-3&quot;&gt;杂谈&lt;/h2&gt;
-
-&lt;p&gt;我一直坚持读第一手的资料，因此，这次我直接就想到了CentOS官网的文章；不过读起来还是有些羞涩的，第一次接触LVM，很多东西云里雾里，相反查到的几篇blog还是不错的，有配图、有简洁的表述；因此，个人感觉，对于很生疏的东西，查看网上的blog反倒是入门的好方法；有了简单的入门知识，又希望深入理解的，那再去查第一手的资料就好了。&lt;/p&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>Understanding LVM</title>
-     <link href="http://ningg.github.com/understanding-lvm"/>
-     <updated>2014-10-28T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/understanding-lvm</id>
-     <content type="html">&lt;blockquote&gt;
-  &lt;p&gt;原文地址：&lt;a href=&quot;https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Installation_Guide/sn-partitioning-lvm.html&quot;&gt;Understanding LVM&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;LVM (Logical Volume Management) partitions provide a number of advantages over standard partitions. （LVM，Logical Volume Management，逻辑卷管理）：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;One or more physical volumes are combined to form a volume group. （n个physical volume，组成一个volume group）&lt;/li&gt;
-  &lt;li&gt;Each volume group’s total storage is then divided into one or more logical volumes.（volume group被分割为n个logical volume）&lt;/li&gt;
-  &lt;li&gt;The logical volumes function much like standard partitions. （在user看来，logical volume跟standard partition一样）&lt;/li&gt;
-  &lt;li&gt;LVM partitions are formatted as physical volumes. They have a file system type, such as &lt;code&gt;ext4&lt;/code&gt;, and a mount point.（logical volume有自己的file system type，以及mount point）&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;The /boot Partition and LVM&lt;/strong&gt;&lt;/p&gt;
-
-  &lt;p&gt;On most architectures, the boot loader cannot read LVM volumes. You must make a standard, non-LVM disk partition for your &lt;code&gt;/boot&lt;/code&gt; partition.（绝大多数architecture下，boot loader不能读取LVM volume；因此，需要为&lt;code&gt;/boot&lt;/code&gt;单独分区，并指定一个non-LVM的分区）&lt;/p&gt;
-
-  &lt;p&gt;However, on System z, the &lt;code&gt;zipl&lt;/code&gt; boot loader supports &lt;code&gt;/boot&lt;/code&gt; on LVM logical volumes with linear mapping.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;To understand LVM better, imagine the physical volume as a pile of &lt;code&gt;blocks&lt;/code&gt;. A block is simply a storage unit used to store data. Several piles of blocks can be combined to make a much larger pile, just as physical volumes are combined to make a volume group. The resulting pile can be subdivided into several smaller piles of arbitrary size, just as a volume group is allocated to several logical volumes.&lt;/p&gt;
-
-&lt;p&gt;An administrator may grow or shrink logical volumes without destroying data, unlike standard disk partitions. If the physical volumes in a volume group are on separate drives or RAID arrays then administrators may also spread a logical volume across the storage devices.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：LVM有两个优点：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;动态调整logical volume&lt;/strong&gt;：动态的grow or shrink Logical volume，数据不会损坏；&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;并发写drives&lt;/strong&gt;：如果physical volume是多个drives 或者 RAID arrays，则 a logical volume能够横跨这些storage devices，带来一个好处，向某一目录写数据时，能够向多个磁盘并发写，加快写数据的速度；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;You may lose data if you shrink a logical volume to a smaller capacity than the data on the volume requires. To ensure maximum flexibility, create logical volumes to meet your current needs, and leave excess storage capacity unallocated. You may safely grow logical volumes to use unallocated space, as your needs dictate.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：当将logical volume大小调整为小于其所存储数据的大小时，会丢失数据；通常，按照当前需求分配logical volume大小，其余的存储空间不分配，今后根据需要动态的增加logical volume的大小。&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;LVM and the Default Partition Layout&lt;/strong&gt;&lt;/p&gt;
-
-  &lt;p&gt;By default, the installation process creates &lt;code&gt;/&lt;/code&gt; and &lt;code&gt;swap&lt;/code&gt; partitions within LVM volumes, with a separate &lt;code&gt;/boot&lt;/code&gt; partition.&lt;/p&gt;
-&lt;/blockquote&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>安装CentOS 6.4</title>
-     <link href="http://ningg.github.com/centos-installation"/>
-     <updated>2014-10-26T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/centos-installation</id>
-     <content type="html">&lt;h2 id=&quot;section&quot;&gt;1. 简介&lt;/h2&gt;
-
-&lt;p&gt;CentOS（Community Enterprise Operating System，企业社区操作系统）是Linux发行版本之一。Red Hat Enterpris Linux（RHEL，红帽企业级Linux）依照开放源码规定，开源了每个RHEL版本的源代码，CentOS正是基于RHEL的源代码重新编译而成的[1]，并且在RHEL基础上修复了一些已知的bug，相对与其他Linux发行版本，CentOS稳定性值得信赖。当前，很多企业都在服务器上安装CentOS系统，来支撑线上应用。
-CentOS与RHEL的最大区别在于：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;RHEL中包含了部分封闭源码的工具，而CentOS包含的所有工具都是开源的；&lt;/li&gt;
-  &lt;li&gt;RHEL提供技术服务，以此来收费；&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;值得注意的是，2014年初，CentOS宣布加入Red Hat[2]。&lt;/p&gt;
-
-&lt;p&gt;备注：CentOS的版本与RHEL版本基本一一对应，举例，CentOS 6.4对应RHEL 6.4的源代码。&lt;/p&gt;
-
-&lt;h2 id=&quot;centos-6&quot;&gt;2. 安装CentOS 6&lt;/h2&gt;
-
-&lt;p&gt;说到安装Linux系统，不要着急，官网肯定有操作手册来说明这个事，嗯，CentOS应用这么广泛，帮助手册总该有吧，要不然与其身份也不相符合。很不幸，&lt;a href=&quot;http://www.centos.org/docs/&quot;&gt;CentOS的官网&lt;/a&gt;中，并没有CentOS 6的操作手册，欧，赶快查查什么原因：CentOS完全基于RHEL源码编译而来，并且版本基本一一对应，因此，直接使用RHEL的官网文档即可[3]。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;特别说明&lt;/strong&gt;：本文所有安装CentOS 6的步骤、配置，都参考自RHEL 6官方文档[5]。&lt;/p&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;2.1.	基本设置&lt;/h3&gt;
-
-&lt;p&gt;这一部分，主要演示几点：如何通过CD/DVD光驱来重装系统。&lt;/p&gt;
-
-&lt;p&gt;步骤 1. 	重启系统，出现图1界面时，点击”F11”按钮，目的：设置Boot Menu。
-说明：当点击完”F11”按钮之后，如图1界面最下端所示，”F11”按钮背景由黑色变为白色。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/centos-installation/001.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;步骤 2. 	当出现图2所示界面时，选择”1”，目标：从光驱中加载系统。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/centos-installation/002.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;稍等一会儿，有可能出现图3所示界面，不要管他，等一段时间即可
-备注：如果长时间停留在图3界面，则敲击Enter。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/centos-installation/003.png&quot; alt=&quot;图 3&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;步骤 3. 	出现如图4时，选择“Install sytem with basic video driver”（第二项），目标：重装系统。
-备注：也可选择“Install or upgrade an existing system”（第一项），但，有可能显示器画面出现倾斜异常（显卡驱动问题），因此推荐 “Install sytem with basic video driver”（第二项）。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/centos-installation/004.png&quot; alt=&quot;&quot; /&gt;
-图 4&lt;/p&gt;
-
-&lt;p&gt;步骤 4. 	出现如图5所示界面后，通过”Tab”键，选择“Skip”选项，并使用“Space”键来确认即可。目标：在安装之前，不进行磁盘、网卡、内存等硬件设备的测试。（因为太浪费时间了）&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/centos-installation/005.png&quot; alt=&quot;&quot; /&gt;
-图 5&lt;/p&gt;
-
-&lt;p&gt;选择”Skip”之后，可能会出现图6所示界面，稍等一会儿，会自动跳入下个页面（如图7）。等待时间：几十秒~几分钟。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/centos-installation/006.png&quot; alt=&quot;&quot; /&gt; 
-图 6&lt;/p&gt;
-
-&lt;p&gt;步骤 5. 	出现如图7所示页面后，点击”Next”。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/centos-installation/007.png&quot; alt=&quot;&quot; /&gt;
-图 7&lt;/p&gt;
-
-&lt;p&gt;步骤 6. 	在如图8所示界面，选择安装CentOS过程中，页面的显示语言，当安装服务器时，建议选择“English（English）”。
-备注：这一步选定哪种语言，貌似对安装系统没有影响，而实际测试发现，有些细微差异，例如，安装完系统后，系统环境变量LANG会有细微差异。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/centos-installation/008.png&quot; alt=&quot;&quot; /&gt;
-图 8&lt;/p&gt;
-
-&lt;p&gt;步骤 7. 	参照下图9~15，一步步安装下去即可。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/centos-installation/009.png&quot; alt=&quot;&quot; /&gt;
-图 9&lt;/p&gt;
-
-&lt;p&gt;图9：选择系统键盘语言，选“U.S. English”即可。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/centos-installation/010.png&quot; alt=&quot;&quot; /&gt;
-图 10&lt;/p&gt;
-
-&lt;p&gt;图10：选择系统安装的磁盘，选“Basic Storage Devices”。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/centos-installation/011.png&quot; alt=&quot;&quot; /&gt; 
-图 11&lt;/p&gt;
-
-&lt;p&gt;特别说明：有可能会出现图11界面，如果没有出现，则忽略图11。&lt;/p&gt;
-
-&lt;p&gt;图11：是否覆盖掉所有系统数据，如果是重装系统，数据已经做过备份，则直接选“Fresh Installation”。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/centos-installation/012.png&quot; alt=&quot;&quot; /&gt;
-图 12&lt;/p&gt;
-
-&lt;p&gt;图12：设定主机名（hostname），按照要求进行设置即可。&lt;/p&gt;
-
-&lt;p&gt;备注：&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;在图11页面的左下角，也可以通过“配置网络”按钮来设定网络，但不建议在此通过页面来配置网络（因为可能碰到乱七八糟的问题），而建议安装完系统后，通过简单命令来配置网络。&lt;/li&gt;
-  &lt;li&gt;也可以安装完系统后，打开文件”/etc/sysconfig/network”，修改其中HOSTNAME字段。&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/centos-installation/013.png&quot; alt=&quot;&quot; /&gt;
-图 13&lt;/p&gt;
-
-&lt;p&gt;图13：选定时区，选定“Asia/Shanghai”即可。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/centos-installation/014.png&quot; alt=&quot;&quot; /&gt; 
-图 14&lt;/p&gt;
-
-&lt;p&gt;图14：设定root密码&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/centos-installation/015.png&quot; alt=&quot;&quot; /&gt; 
-图 15：选“Use Anyway”&lt;/p&gt;
-
-&lt;p&gt;图15：提示密码不够安全，直接点击“Use Anyway”（无论如何都使用）即可。&lt;/p&gt;
-
-&lt;p&gt;特别说明：至此，安装并没有结束，下面“2.2磁盘分区”部分才是重点。&lt;/p&gt;
-
-&lt;h3 id=&quot;section-2&quot;&gt;2.2.	磁盘分区&lt;/h3&gt;
-
-&lt;p&gt;从图16开始，我们将进行磁盘分区，这一部分有些配置的东西，需要认真看了。&lt;/p&gt;
-
-&lt;p&gt;备注：在此之前，需要补充一点理论知识：&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;1.	为什么要进行磁盘分区？&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;磁盘分区两点考虑，也就是说两个好处：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;数据安全：不同磁盘分区之间相互独立，某个分区损坏，不会影响其他分区内的数据；&lt;/li&gt;
-  &lt;li&gt;读写性能：读写数据时，磁盘分区对应一段连续的磁柱，由于磁柱集中，提升数据的读写效率；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;2.	磁盘分区要分为几个区？&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;磁盘分区方案，官网建议[7]，应该包含如下几个分区：&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;分区&lt;/th&gt;
-      &lt;th&gt;作用&lt;/th&gt;
-      &lt;th&gt;官方建议大小&lt;/th&gt;
-      &lt;th&gt;此次安装使用&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;/boot&lt;/td&gt;
-      &lt;td&gt;存放OS kernel，以及系统bootstrap过程要使用的其他文件&lt;/td&gt;
-      &lt;td&gt;&amp;gt;250MB&lt;/td&gt;
-      &lt;td&gt;500MB&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;swap&lt;/td&gt;
-      &lt;td&gt;虚拟内存：当内存空间不足时使用此空间&lt;/td&gt;
-      &lt;td&gt;至少4GB，推荐为内存的1~2倍&lt;/td&gt;
-      &lt;td&gt;128GB （系统内存64GB）&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;/&lt;/td&gt;
-      &lt;td&gt;存放：系统安装文件&lt;/td&gt;
-      &lt;td&gt;3~5GB&lt;/td&gt;
-      &lt;td&gt;60GB&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;/home&lt;/td&gt;
-      &lt;td&gt;存放：user data \n单独分区的目标：将user data与系统文件隔离&lt;/td&gt;
-      &lt;td&gt;没有&lt;/td&gt;
-      &lt;td&gt;100GB（实际是sda磁盘的剩余空间）&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;步骤 8. 	在图16界面，选择“Use All Space”，同时，勾选左下的“Review and modify partitioning layout”，目标：进入磁盘分区设置页面，调整磁盘分区。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/centos-installation/016.png&quot; alt=&quot;&quot; /&gt;
-图 16：选“Use All Space”和勾选“Review and modify partitioning layout”&lt;/p&gt;
-
-&lt;p&gt;中间可能要等待一段时间&lt;/p&gt;
-
-&lt;p&gt;步骤 9. 	在图17所示页面，选择要进行分区的的磁盘，通常将“Data Storage Devicess”中所有磁盘都添加到“Install Target Devices”中，添加结果如图18所示。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/centos-installation/017.png&quot; alt=&quot;&quot; /&gt; 
-图 17&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/centos-installation/018.png&quot; alt=&quot;&quot; /&gt; 
-图 18&lt;/p&gt;
-
-&lt;p&gt;图18：将“Data Storage Devicess”中所有磁盘都添加到“Install Target Devices”后的结果。 &lt;/p&gt;
-
-&lt;p&gt;步骤 10. 	在图19所示页面，删除磁盘sda默认的分区：LVM Volume groups下的vg_cib61、sda下sda1和sda2；删除结果如图20所示。&lt;/p&gt;
-
-&lt;p&gt;特别说明：要删除sda2分区，需要先删除LVM Volume groups下的vg_cib61。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/centos-installation/019.png&quot; alt=&quot;&quot; /&gt; 
-图 19&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/centos-installation/020.png&quot; alt=&quot;&quot; /&gt;
-图 20&lt;/p&gt;
-
-&lt;p&gt;图20：删除sda上所有分区之后的结果。 &lt;/p&gt;
-
-&lt;p&gt;步骤 11. 	在图20页面，按照提前规划的分区方案，在sda磁盘的Free空间上，依次划分/boot、swap、/、/home共计4个分区。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/centos-installation/021.png&quot; alt=&quot;&quot; /&gt; 
-图 21&lt;/p&gt;
-
-&lt;p&gt;图21：选择sda下Free空间，” Create” “Standard Partition”，即可进行创建分区，具体“/boot、swap、/、/home”的分区操作，依次参考图22、图23、图24、图25。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/centos-installation/022.png&quot; alt=&quot;&quot; /&gt; 
-图 22&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/centos-installation/023.png&quot; alt=&quot;&quot; /&gt;
-图 23&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/centos-installation/024.png&quot; alt=&quot;&quot; /&gt;
-图 24&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/centos-installation/025.png&quot; alt=&quot;&quot; /&gt;
-图 25&lt;/p&gt;
-
-&lt;p&gt;步骤 12. 	这一步是进行LVM设置，如果没有LVM创建LV的需要，请直接跳过这一步，直接参考“步骤13”。 &lt;/p&gt;
-
-&lt;p&gt;在此之前，补充一点LVM相关的理论知识：&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;1.	为什么要用LVM？&lt;/strong&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;LVM要解决的典型问题&lt;/strong&gt;：一块磁盘的空间160GB，其存满数据后，需要扩容，怎么办？传统静态分区时，需要将磁盘中近160GB的数据复制到1TB的磁盘上，然后，使用1TB的磁盘替换掉原来160GB的磁盘。（这个是传统扩容的基本原理，还有其他的原理吗？）&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;LVM基本原理&lt;/strong&gt;：要解决上面磁盘空间不足时，磁盘的扩容问题，LVM提供了一个基本思路：LVM将底层的磁盘封装抽象为逻辑卷（logical volume），上层应用不直接从物理磁盘分区中读数据，而是从逻辑卷中读数据；LVM负责底层磁盘到逻辑卷的映射和管理；增加底层磁盘时，通过LVM可以为逻辑卷动态扩充容量，而这对上层应用是无影响的（透明的）。&lt;/p&gt;
-
-&lt;p&gt;说这么多，总结一点：LVM能够将多个小磁盘抽象为一个大逻辑卷，并且支持磁盘的动态扩容，提高了磁盘管理的灵活性。&lt;/p&gt;
-
-&lt;p&gt;图26、图27、图28、图29：展示了在sdb1、sdc1、sdd1上创建一个大小约为850GB大小的VG（命名为vg_cib61），并且在这一VG上创建一个500GB大小的LV（lv_00）的基本过程。脑袋疼，不想多说，请自行查找其他资料。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/centos-installation/026.png&quot; alt=&quot;&quot; /&gt; 
-图 26&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/centos-installation/027.png&quot; alt=&quot;&quot; /&gt;
-图 27&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/centos-installation/028.png&quot; alt=&quot;&quot; /&gt;
-图 28&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/centos-installation/029.png&quot; alt=&quot;&quot; /&gt;
-图 29&lt;/p&gt;
-
-&lt;p&gt;图29：创建Logical Volume时，并没有设置Mount Point，因为当前并不能确定挂载目录，装完系统之后，可以通过命令进行挂载。&lt;/p&gt;
-
-&lt;p&gt;步骤 13. 	设置完磁盘分区后，到达图30所示界面，直接点击“Next”。&lt;/p&gt;
-
-&lt;p&gt;特别说明：如果没有在步骤12中设置LVM，则没有图30中的“LVM Volume Groups”部分。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/centos-installation/030.png&quot; alt=&quot;&quot; /&gt;
-图 30&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/centos-installation/031.png&quot; alt=&quot;&quot; /&gt;
-图 31：选“Write changes to disk”&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/centos-installation/032.png&quot; alt=&quot;&quot; /&gt;
-图 32&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/centos-installation/033.png&quot; alt=&quot;&quot; /&gt;
-图 33&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/centos-installation/034.png&quot; alt=&quot;&quot; /&gt;
-图 34：选“Basic Server”&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/centos-installation/035.png&quot; alt=&quot;&quot; /&gt;
-图 35&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/centos-installation/036.png&quot; alt=&quot;&quot; /&gt;
-图 36&lt;/p&gt;
-
-&lt;h2 id=&quot;section-3&quot;&gt;3.	配置网络&lt;/h2&gt;
-
-&lt;p&gt;安装完系统之后，需要进行网络配置，目标：保证机器能够入网。&lt;/p&gt;
-
-&lt;p&gt;通常直接修改/etc/sysconfig/network-scripts/ifcfg-eth0文件即可，此次使用的是静态配置IP方式，因此需要进行如下修改（保持ifcfg-eth0文件中其他字段不变）：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;ONBOOT=yes
-BOOTPROTO=static
-IPADDR=168.7.2.111
-NETMASK=255.255.255.0
-GATEWAY=168.7.2.126
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;特别说明：服务器上有eth0–eth5，共计6个网口，需要根据具体情况，修改配置文件，上例中修改的是ifcfg-eth0文件，而在其他服务器上，如果网线插在eth3口，则需要修改ifcfg-eth3文件。&lt;/p&gt;
-
-&lt;p&gt;有个小问题，值得说一下：服务器通常带有eth0–eth5多个网口，如何将eth0~5与实际的物理网口对应起来？&lt;/p&gt;
-
-&lt;p&gt;RE：需要借助工具：ethtool，执行命令&lt;code&gt;ethtool -p eth0&lt;/code&gt;，再去看看那排网口，会有发现的~执行Ctrl + C，即可终止此命令。&lt;/p&gt;
-
-&lt;h2 id=&quot;section-4&quot;&gt;4.	格式化磁盘并挂载&lt;/h2&gt;
-
-&lt;p&gt;场景 1.	格式化单个磁盘，并进行挂载，命令如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# 格式化磁盘
-mkfs -t ext3 /dev/sdb1
-# 新建挂载点
-mkdir -p /srv/hadoop/data1
-# 挂载磁盘
-mount /dev/sdb1 /srv/hadoop/data1
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;场景 2.	批量格式化多个磁盘，并进行挂载，本质上就是重复“场景1”，只不过使用shell脚本来实现，脚本如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;for i in {b..k}; do mkfs -t ext3 /dev/sd${i}1; done
-
-for i in {1..10}; do mkdir -p /srv/hadoop/data${i}; done
-
-array=(b c d e f g h i j k)
-for((i=0;i&amp;lt;${#array[@]};i++)); do mount /dev/sd${array[i]}1 /srv/hadoop/data$(($i+1)); done
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;场景 3.	设置开机自动挂载磁盘&lt;/p&gt;
-
-&lt;p&gt;上面两个场景中，都涉及到mount磁盘到某个目录，但如果系统一不小心重启了，这些磁盘就需要重新挂载。解决办法：在fstab文件中设置开机自动挂载磁盘。
-通过命令：man  fstab就可以查看fstab文件每列的含义：&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;1&lt;/th&gt;
-      &lt;th&gt;2&lt;/th&gt;
-      &lt;th&gt;3&lt;/th&gt;
-      &lt;th&gt;4&lt;/th&gt;
-      &lt;th&gt;5&lt;/th&gt;
-      &lt;th&gt;6&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code&gt;&amp;lt;special device&amp;gt;&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code&gt;&amp;lt;mount point&amp;gt;&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code&gt;&amp;lt;fs type&amp;gt;&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code&gt;&amp;lt;mount options&amp;gt;&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code&gt;&amp;lt;dump&amp;gt;&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;code&gt;&amp;lt;fsck&amp;gt;&lt;/code&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;上述/etc/fstab文件每行数据，都有6个字段，如上图所示，简要说明几点：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;间隔符号：不同字段之间使用 ”空格” 或者 “Tab” 键来间隔&lt;/li&gt;
-  &lt;li&gt;special device：要挂载的设备，例如：/dev/sdb1;&lt;/li&gt;
-  &lt;li&gt;mount point：设备挂载的目标目录；&lt;/li&gt;
-  &lt;li&gt;fs type：要挂载的设备上文件系统的类型；&lt;/li&gt;
-  &lt;li&gt;options：mount命令进行挂载时，输入的参数；&lt;/li&gt;
-  &lt;li&gt;dump：是否要对此文件系统进行备份，0代表不做dump备份，1代表需要dump备份，2代表也需要dump备份，但2的重要程度低于1；&lt;/li&gt;
-  &lt;li&gt;fsck：系统启动时，是否检测文件系统的完整性，0代表不检测，根目录/需要设置为1，其他需要开机扫描的文件系统设置为2；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;来个fstab文件的样例，朝着这个格式来做就可以：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;/dev/sdb1  /srv/hadoop/data1  ext3  defaults  0  0
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;配置完fstab文件，一定要来一条命令：&lt;code&gt;mount -a&lt;/code&gt;
-含义：&lt;code&gt;Mount all filesystems (of the given types) mentioned in fstab.&lt;/code&gt;
-这一命令可用于检查fstab文件中的配置是否正确。&lt;/p&gt;
-
-&lt;h2 id=&quot;section-5&quot;&gt;5.	参考来源&lt;/h2&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.centos.org/about/&quot;&gt;CentOS简介&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.redhat.com/en/about/press-releases/red-hat-and-centos-join-forces&quot;&gt;Red Hat and CentOS Project Join Forces to Speed Open Source Innovation&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://lists.centos.org/pipermail/centos/2012-November/130123.html&quot;&gt;CentOS 6 docs参考RHEL 6即可&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/&quot;&gt;RHEL官方文档&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Installation_Guide/index.html&quot;&gt;RHEL 6官文文档“Installation Guide”&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Installation_Guide/s1-x86-bootloader.html&quot;&gt;设定bootloader&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Installation_Guide/s2-diskpartrecommend-x86.html&quot;&gt;Recommended Partitioning Schema&lt;/a&gt;&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;section-6&quot;&gt;6.	附录&lt;/h2&gt;
-
-&lt;p&gt;几个有用的命令：&lt;/p&gt;
-
-&lt;p&gt;命令 1. 	&lt;code&gt;dmidecode -t 1&lt;/code&gt;，查看当前服务器的序列号。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;[root@localhost ~]# dmidecode -t 1
-# dmidecode 2.11
-SMBIOS 2.7 present.
-
-Handle 0x0100, DMI type 1, 27 bytes
-System Information
-		Manufacturer: HP
-		Product Name: ProLiant ********
-		Version: Not Specified
-		Serial Number: ********
-		UUID: ****-****-****-****-****
-		Wake-up Type: Power Switch
-		SKU Number: ****-****
-		Family: ProLiant
-&lt;/code&gt;&lt;/pre&gt;
 
 </content>
    </entry>

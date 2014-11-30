@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Flume(apache-flume-1.5.0.1)、Kafka()、Storm()小结
-description: 这三个东西都研究一段时间了，做个阶段性小结
+title: Flume、Kafka、Storm小结
+description: Flume(apache-flume-1.5.0.1)、Kafka()、Storm()这三个东西都研究一段时间了，做个阶段性小结
 categories: flume kafka storm big-data
 ---
 
