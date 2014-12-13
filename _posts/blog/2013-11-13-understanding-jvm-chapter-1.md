@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Understanding the JVM——Chapter 1：走进Java
+title: Understanding the JVM——走进Java
 description: 
 category: jvm
 ---

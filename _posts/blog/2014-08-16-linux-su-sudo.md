@@ -81,11 +81,10 @@ Linux下，进行身份变换这一功能，有必要吗？公认的原因有几
 		   A mere - implies -l.   If USER not given, assume root.
 
 
-需要额外说明的一点：
+**特别说明**：命令`su - root`与`su root`命令差异很大：
 
->	命令`su root`与`su - root`命令差异很大：
->	* `su root`：使用login shell方式登录；
->	* `su - root`：使用non-login shell方式登录；
+* `su - root`：使用login shell方式登录；
+* `su root`：使用non-login shell方式登录；
 
 （疑问：login shell 和 non-login shell之间有什么差异？）
 
@@ -216,7 +215,7 @@ sudo执行流程：
 现在dev用户就可以执行sudo命令了，按照下面操作试一试：
 
 	[dev@localhost /]$ head -n 1 /etc/shadow
-	head: cannot open `/etc/shadow' for reading: Permission denied
+	head: cannot open '/etc/shadow' for reading: Permission denied
 	[dev@localhost /]$ sudo head -n 1 /etc/shadow
 	[sudo] password for devp:
 	root:$6$2t1NiW.e$SM0:16296:0:99999:7:::

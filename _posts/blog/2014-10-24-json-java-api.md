@@ -20,7 +20,7 @@ JSON中两类基本结构：
 
 JSON利用上述的两类基本结构，实现了集中基本数据类型：
 
-**Object**：An object is an unordered set of name/value pairs. An object begins with { (left brace) and ends with } (right brace). Each name is followed by : (colon) and the name/value pairs are separated by , (comma).
+**Object**：An object is an unordered set of name/value pairs. An object begins with { (left brace) and ends with } (right brace). Each name is followed by : (colon) and the name/value pairs are separated by `,` (comma).
 （无序的key-value对，以`{`开头，以`}`结尾，其内部以`,`逗号分隔）
 
 ![](/images/json-java-api/object.gif)
@@ -85,16 +85,17 @@ Whitespace can be inserted between any pair of tokens. Excepting a few encoding 
 
 ##参考来源
 
-* [介绍 JSON](http://www.json.org/json-zh.html)
+* [介绍 JSON][介绍 JSON]
 * [处理JSON的Java API ：JSON的简介][处理JSON的Java API ：JSON的简介]
 * [JSR 353][JSR 353]
 * [JSON转换利器:Gson][JSON转换利器:Gson]
 
 
-[NingG]:    http://ningg.github.com  "NingG"
-[JSR 353]:	https://jcp.org/en/jsr/detail?id=353
-[Jackson Json Processor]:	http://jackson.codehaus.org/
-[JSON转换利器:Gson]:		http://blog.csdn.net/lk_blog/article/details/7685169
-[google-gson]:				http://code.google.com/p/google-gson/
-[google-gson-maven]:		http://repo1.maven.org/maven2/com/google/code/gson/gson/2.2.3/
+[NingG]:  								http://ningg.github.com  "NingG"
+[JSR 353]:								https://jcp.org/en/jsr/detail?id=353
+[Jackson Json Processor]:				http://jackson.codehaus.org/
+[JSON转换利器:Gson]:					http://blog.csdn.net/lk_blog/article/details/7685169
+[google-gson]:							http://code.google.com/p/google-gson/
+[google-gson-maven]:					http://repo1.maven.org/maven2/com/google/code/gson/gson/2.2.3/
 [处理JSON的Java API ：JSON的简介]:		http://ifeve.com/json-java-api/
+[介绍 JSON]:							http://www.json.org/json-zh.html

@@ -130,11 +130,15 @@ JDK 1.4 引入NIO（New Input/Output）类，引入基于通道（channel）和�
 
 如何访问对象实例呢？也就是说，如何找到对象实例？两种方式：
 
+*（[insideJVM ed 2-Chapter 5](http://www.artima.com/insidejvm/ed2/jvm6.html)）有详细的配图和介绍，还没有细看*
+
 ####使用句柄
 
 ![](/images/understanding-jvm/reference-pool.jpg)
 
 一个对象实例，需要对象的类型数据、对象的实例数据，两类数据共同实现一个对象实例。
+
+**疑问**：对象引用、对象句柄，是什么？
 
 ####直接指针
 

@@ -20,14 +20,6 @@ The latest version of this software and document will always be found at http://
 
 ##Synopsis
 
-		 ______                  ___
-		/ ____/___ _____  ____ _/ (_)___ _
-	   / / __/ __ `/ __ \/ __ `/ / / __ `/
-	  / /_/ / /_/ / / / / /_/ / / / /_/ /
-	  \____/\__,_/_/ /_/\__, /_/_/\__,_/
-					   /____/ Distributed Monitoring System 
-	
-	`__
 
 
 Ganglia is a scalable distributed monitoring system for high-performance computing systems such as clusters and Grids. It is based on a hierarchical design targeted at federations of clusters. It relies on a multicast-based listen/announce protocol to monitor state within clusters and uses a tree of point-to-point connections amongst representative cluster nodes to federate clusters and aggregate their state. It leverages widely used technologies such as XML for data representation, XDR for compact, portable data transport, and RRDtool for data storage and visualization. It uses carefully engineered data structures and algorithms to achieve very low per-node overheads and high concurrency. The implementation is robust, has been ported to an extensive set of operating systems and processor architectures, and is currently in use on over 500 clusters around the world. It has been used to link clusters across university campuses and around the world and can scale to handle clusters with 2000 nodes.
@@ -68,9 +60,10 @@ If you use the Linux RPMs provided on the ganglia web site, you can skip to the 
 
 Ganglia uses the GNU autoconf so compilation and installation of the monitoring core is basically
 
-  % ./configure
-  % make
-  % make install
+	% ./configure
+	% make
+	% make install
+	
 but there are some issues that you need to take a look at first.
 
 Kernel multicast support
@@ -79,16 +72,19 @@ If you use the ganglia multicast support, you must have a kernel that supports m
 Gmetad is not installed by default
 Since gmetad relies on the Round-Robin Database Tool ( see http://www.rrdtool.org/ ) it will not be compiled unless you explicit request it by using a --with-gmetad flag.
 
-  % ./configure --with-gmetad
+    % ./configure --with-gmetad
+  
 The configure script will fail if it cannot find the rrdtool library and header files. By default, it expects to find them at /usr/include/rrd.h and /usr/lib/librrd.so. If you installed them in different locations then you need to instruct configure where to find them using:
 
-  % ./configure --with-librrd=/rrd/path --with-gmetad
+    % ./configure --with-librrd=/rrd/path --with-gmetad
+	
 Of course, you need to substitute /rrd/path with the real location of the rrd tool directory where the header file can be located inside an include subdirectory and the library can be located inside a lib subdirectory. As an alternative you could set "-L" in LDFLAGS, and "-I" in CFLAGS and CPPFLAGS for the library path and the header path respectively.
 
 AIX should not be compiled with shared libraries
 You must add the --disable-shared configure flags if you are running on AIX. For more details refer to the README.AIX file
 
-  % ./configure --disable-shared
+    % ./configure --disable-shared
+  
 Solaris dependencies could be problematic
 Not really a Solaris specific problem, but since Solaris has several different package repositories, all of them unofficial, it is difficult to be sure that all possible permutations have been confirmed to work reliably.
 
@@ -106,63 +102,74 @@ But the bad news is that in order to add the dynamic metric functionality, the b
 Since none of the developers had access to HPUX, IRIX, Tru64 (OSF/1), or Darwin (MacOS X) those platforms might not be able to build or run a 3.1 gmond yet. If you have access to any of these platforms and want to run ganglia 3.1, feel free to drop by the ganglia-developers list with suggestions, or even better patches.
 
 GEXEC confusion
+
 GEXEC is a scalable cluster remote execution system which provides fast, RSA authenticated remote execution of parallel and distributed jobs. It provides transparent forwarding of stdin, stdout, stderr, and signals to and from remote processes, provides local environment propagation, and is designed to be robust and to scale to systems over 1000 nodes. Internally, GEXEC operates by building an n-ary tree of TCP sockets and threads between gexec daemons and propagating control information up and down the tree. By using hierarchical control, GEXEC distributes both the work and resource usage associated with massive amounts of parallelism across multiple nodes, thereby eliminating problems associated with single node resource limits (e.g., limits on the number of file descriptors on front-end nodes). (from http://www.theether.org/gexec )
 
 gexec is a great cluster execution tool but integrating it with ganglia is a bit clumsy. GEXEC can run standalone without access to a ganglia gmond. In standalone mode gexec will use the hosts listed in your GEXEC_SVRS variable to run on. For example, say I want to run hostname on three machines in my cluster: host1, host2 and host3. I use the following command line.
 
-  % GEXEC_SVRS="host1 host2 host3" gexec -n 3 hostname
+	% GEXEC_SVRS="host1 host2 host3" gexec -n 3 hostname
+  
 and gexec would build an n-ary tree (binary tree by default) of TCP sockets to those machines and run the command hostname
 
 As an added feature, you can have gexec pull a host list from a locally running gmond and use that as the host list instead of GEXEC_SVRS. The list is load balanced and gexec will start the job on the n least-loaded machines.
 
 For example..
 
-  % gexec -n 5 hostname
+	% gexec -n 5 hostname
+	
 will run the command hostname on the five least-loaded machines in a cluster.
 
 To turn on the gexec feature in ganglia you must configure ganglia with the --enable-gexec flag
 
-  % ./configure --enable-gexec
+	% ./configure --enable-gexec
+	
 Enabling gexec means that by default any host running gmond will send a special message announcing that gexec is installed on it and open for requests.
 
 Now the question is, what if I don't want gexec to run on every host in my cluster? For example, you may not want to have gexec run jobs on your cluster frontend nodes.
 
 You simply add the following line to your gmond configuration file (/etc/ganglia/gmond.conf by default)
 
-  no_gexec on
+	no_gexec on
+  
 Simple huh? I know the configuration file option, no_gexec, seems crazy (and it is). Why have an option that says "yes to no gexec"? The early versions of gmond didn't use a configuration file but instead commandline options. One of the commandline options was simply --no-gexec and the default was to announce gexec as on.
 
 Once you have successfully run
 
-  % ./configure <options>
-  % make
-  % make install
+	% ./configure <options>
+	% make
+	% make install
+	
 you should find the following files installed in /usr (by default).
 
-  /usr/bin/gstat
-  /usr/bin/gmetric
-  /usr/sbin/gmond
-  /usr/sbin/gmetad
+	/usr/bin/gstat
+	/usr/bin/gmetric
+	/usr/sbin/gmond
+	/usr/sbin/gmetad
+	
 If you installed ganglia using RPMs then these files will be installed when you install the RPM. The RPM is installed simply by running
 
-  % rpm -Uvh ganglia-gmond-3.6.1.i386.rpm
-  % rpm -Uvh ganglia-gmetad-3.6.1.i386.rpm
+	% rpm -Uvh ganglia-gmond-3.6.1.i386.rpm
+	% rpm -Uvh ganglia-gmetad-3.6.1.i386.rpm
+	
 Once you have the necessary binaries installed, you can test your installation by running
 
-   % ./gmond
+	% ./gmond
+	
 This will start the ganglia monitoring daemon. You should then be able to run
 
-   % telnet localhost 8649
+	% telnet localhost 8649
+	
 And get an XML description of the state of your machine (and any other hosts running gmond at the time).
 
 If you are installing by source on Linux, scripts are provided to start gmetad and gmond at system startup. They are easy to install from the source root.
 
-   % cp ./gmond/gmond.init /etc/rc.d/init.d/gmond
-   % chkconfig --add gmond
-   % chkconfig --list gmond
-     gmond              0:off   1:off   2:on    3:on    4:on    5:on    6:off
-   % /etc/rc.d/init.d/gmond start
-     Starting GANGLIA gmond:                                    [  OK  ]
+	% cp ./gmond/gmond.init /etc/rc.d/init.d/gmond
+	% chkconfig --add gmond
+	% chkconfig --list gmond
+	 gmond              0:off   1:off   2:on    3:on    4:on    5:on    6:off
+	% /etc/rc.d/init.d/gmond start
+	 Starting GANGLIA gmond:                                    [  OK  ]
+	 
 Repeat this step with gmetad.
 
 ###PHP Web Frontend Installation
@@ -173,9 +180,10 @@ Ensure your webserver understands how to process PHP script files. Currently, th
 
 For Apache, mod_php module must be enabled. The following lines should appear somewhere in Apache's *conf files. This example applies to Red Hat Linux (and clones). The actual filenames may vary on your system. If you installed the php module using an RPM package, this work will have been done automatically.
 
-  LoadModule php5_module modules/libphp5.so
-  AddHandler php5-script .php
-  AddType text/html .php
+	LoadModule php5_module modules/libphp5.so
+	AddHandler php5-script .php
+	AddType text/html .php
+	
 The webfrontend requires the existance of the gmetad package on the webserver. Follow the installation instructions on the gmetad page. Specifically, the webfrontend requires the rrdtool and the rrds/ directory from gmetad. If you are a power user, you may use NFS to simulate the local existance of the rrds.
 
 Test your installation. Visit the URL:
@@ -185,9 +193,9 @@ With a web-browser, where localhost is the address of your webserver.
 
 Installation of the web frontend is simplified on Linux by using rpm.
 
-  % rpm -Uvh ganglia-web-3.6.1-1.noarch.rpm
-  Preparing...                ########################################### [100%]
-     1:ganglia-web            ########################################### [100%]
+	% rpm -Uvh ganglia-web-3.6.1-1.noarch.rpm
+	Preparing...                ########################################### [100%]
+	 1:ganglia-web            ########################################### [100%]
 
 ##Configuration
 
@@ -197,41 +205,49 @@ The configuration file format has changed between gmond version 2.5.x and versio
 
 Gmond has a default configuration it will use if it does not find the default configuration file /etc/ganglia/gmond.conf. To see the default configuration simply run the command:
 
-  % gmond --default_config
+	% gmond --default_config
+	
 and gmond will output its default configuration to stdout. This default configuration can serve as a good starting place for building a more custom configuration.
 
-  % gmond --default_config > gmond.conf
+	% gmond --default_config > gmond.conf
+	
 would create a file gmond.conf which you can then edit to taste and copy to /etc/ganglia/gmond.conf or elsewhere.
 
 To start gmond with a configuration file other then /etc/ganglia/gmond.conf, simply specify the configuration file location by running
 
-  % gmond --config /my/ganglia/configs/custom.conf
+	% gmond --config /my/ganglia/configs/custom.conf
+	
 If you want to convert a 2.5.x configuration file to 3.x file format, run the following command
 
-  % gmond --convert ./old_25_config.conf
+	% gmond --convert ./old_25_config.conf
+	
 and gmond with output the equivalent 3.x configuration file to stdout. You can then redirect that output to a new configuration file which can serve as a starting point for your configuration.
 
-  % gmond --convert ./old_25_config.conf > ./new_26_config.conf
+	% gmond --convert ./old_25_config.conf > ./new_26_config.conf
+	
 For details about gmond configuration options, simply run
 
-  % man gmond.conf
+	% man gmond.conf
+	
 for a complete listing of options with detailed explanations.
 
 ###Gmetad Configuration
 
-The behavior of the Ganglia Meta Daemon is completely controlled by a single configuration file which is by default /etc/ganglia/gmetad.conf. For gmetad to do anything useful you much specify at least one data_source in the configuration. The format of the data_source line is as follows
+The behavior of the Ganglia Meta Daemon is completely controlled by a single configuration file which is by default `/etc/ganglia/gmetad.conf`*（也有可能在`/usr/local/etc/gmetad.conf`）*. For gmetad to do anything useful you much specify at least one data_source in the configuration. The format of the data_source line is as follows
 
-  data_source "Cluster A" 127.0.0.1  1.2.3.4:8655  1.2.3.5:8625
-  data_source "Cluster B" 1.2.4.4:8655
+	data_source "Cluster A" 127.0.0.1  1.2.3.4:8655  1.2.3.5:8625
+	data_source "Cluster B" 1.2.4.4:8655
+	
 In this example, there are two unique data sources: "Cluster A" and "Cluster B". The Cluster A data source has three redundant sources. If gmetad cannot pull the data from the first source, it will continue trying the other sources in order.
+*（仅当第一个cluster中某个ip:port无效时，gmetad才会从备选ip:port获取metric）*
 
-If you do not specify a port number, gmetad will assume the default ganglia port which is 8649 (U*N*I*X on a phone key pad)
+If you do not specify a port number, gmetad will assume the default ganglia port which is `8649` (U*N*I*X on a phone key pad)
 
 For a sample gmetad configuration file with comments, look at the gmetad.conf file provided as part of the distribution package in the gmetad directory
 
-gmetad has a --conf option to allow you to specify alternate configuration files
+gmetad has a `--conf` option to allow you to specify alternate configuration files
 
-  % ./gmetad -conf=/tmp/my_custom_config.conf
+	% ./gmetad --conf=/tmp/my_custom_config.conf
 
 ###PHP Web Frontend Configuration
 
@@ -251,42 +267,45 @@ The Ganglia Metric Tool (gmetric) allows you to easily monitor any arbitrary hos
 
 If you want help with the gmetric sytax, simply use the "help" commandline option
 
-  % gmetric --help
-  gmetric 3.6.1
-  Purpose:
-    The Ganglia Metric Client (gmetric) announces a metric
-    on the list of defined send channels defined in a configuration file
-  Usage: gmetric [OPTIONS]...
-    -h, --help          Print help and exit
-    -V, --version       Print version and exit
-    -c, --conf=STRING   The configuration file to use for finding send channels
-                        (default=`/etc/ganglia/gmond.conf')
-    -n, --name=STRING   Name of the metric
-    -v, --value=STRING  Value of the metric
-    -t, --type=STRING   Either
-                        string|int8|uint8|int16|uint16|int32|uint32|float|double
-    -u, --units=STRING  Unit of measure for the value e.g. Kilobytes, Celcius
-                        (default=`')
-    -s, --slope=STRING  Either zero|positive|negative|both  (default=`both')
-    -x, --tmax=INT      The maximum time in seconds between gmetric calls
-                        (default=`60')
-    -d, --dmax=INT      The lifetime in seconds of this metric  (default=`0')
-    -S, --spoof=STRING  IP address and name of host/device (colon separated) we
-                          are spoofing  (default='')
-    -H, --heartbeat     spoof a heartbeat message (use with spoof option)
+	% gmetric --help
+	gmetric 3.6.1
+	Purpose:
+	The Ganglia Metric Client (gmetric) announces a metric
+	on the list of defined send channels defined in a configuration file
+	Usage: gmetric [OPTIONS]...
+	-h, --help          Print help and exit
+	-V, --version       Print version and exit
+	-c, --conf=STRING   The configuration file to use for finding send channels
+						(default='/etc/ganglia/gmond.conf')
+	-n, --name=STRING   Name of the metric
+	-v, --value=STRING  Value of the metric
+	-t, --type=STRING   Either
+						string|int8|uint8|int16|uint16|int32|uint32|float|double
+	-u, --units=STRING  Unit of measure for the value e.g. Kilobytes, Celcius
+						(default='')
+	-s, --slope=STRING  Either zero|positive|negative|both  (default='both')
+	-x, --tmax=INT      The maximum time in seconds between gmetric calls
+						(default='60')
+	-d, --dmax=INT      The lifetime in seconds of this metric  (default='0')
+	-S, --spoof=STRING  IP address and name of host/device (colon separated) we
+						  are spoofing  (default='')
+	-H, --heartbeat     spoof a heartbeat message (use with spoof option)
 	
 Gmetric sends the metric specified on the commandline to all udp_send_channels specified in the configuration file /etc/ganglia/gmond.conf by default. If you want to send metric to alternate udp_send_channels, you can specify a different configuration file as such:
 
-  % gmetric --conf=./custom.conf -n "wow" -v "it works" -t "string"
+	% gmetric --conf=./custom.conf -n "wow" -v "it works" -t "string"
+  
 All metrics in ganglia have a name, value, type and optionally units. For example, say I wanted to measure the temperature of my CPU (something gmond doesn't do by default) then I could send this metric with name="temperature", value="63", type="int16" and units="Celcius".
 
 Assume I have a program called cputemp which outputs in text the temperature of the CPU
 
-  % cputemp
-  63
+	% cputemp
+	63
+	
 I could easily send this data to all listening gmonds by running
 
-  % gmetric --name temperature --value `cputemp` --type int16 --units Celcius
+	% gmetric --name temperature --value `cputemp` --type int16 --units Celcius
+	
 Check the exit value of gmetric to see if it successfully sent the data: 0 on success and -1 on failure.
 
 To constantly sample this temperature metric, you just need too add this command to your cron table.
@@ -297,26 +316,27 @@ The Ganglia Cluster Status Tool (gstat) is a commandline utility that allows you
 
 To get help with the commandline options, simply pass gstat the --help option
 
-  % gstat --help
-  gstat 3.6.1
-  Purpose:
-    The Ganglia Status Client (gstat) connects with a
-    Ganglia Monitoring Daemon (gmond) and output a load-balanced list
-    of cluster hosts
-  Usage: gstat [OPTIONS]...
-     -h         --help             Print help and exit
-     -V         --version          Print version and exit
-     -a         --all              List all hosts.  Not just hosts running gexec (default=off)
-     -d         --dead             Print only the hosts which are dead (default=off)
-     -m         --mpifile          Print a load-balanced mpifile (default=off)
-     -1         --single_line      Print host and information all on one line (default=off)
-     -l         --list             Print ONLY the host list (default=off)
-     -n         --numeric          Print numeric addresses instead of hostnames (default=off)
-     -iSTRING   --gmond_ip=STRING  Specify the ip address of the gmond to query (default='127.0.0.1')
-     -pINT      --gmond_port=INT   Specify the gmond port to query (default=8649)
+	% gstat --help
+	gstat 3.6.1
+	Purpose:
+	The Ganglia Status Client (gstat) connects with a
+	Ganglia Monitoring Daemon (gmond) and output a load-balanced list
+	of cluster hosts
+	Usage: gstat [OPTIONS]...
+	 -h         --help             Print help and exit
+	 -V         --version          Print version and exit
+	 -a         --all              List all hosts.  Not just hosts running gexec (default=off)
+	 -d         --dead             Print only the hosts which are dead (default=off)
+	 -m         --mpifile          Print a load-balanced mpifile (default=off)
+	 -1         --single_line      Print host and information all on one line (default=off)
+	 -l         --list             Print ONLY the host list (default=off)
+	 -n         --numeric          Print numeric addresses instead of hostnames (default=off)
+	 -iSTRING   --gmond_ip=STRING  Specify the ip address of the gmond to query (default='127.0.0.1')
+	 -pINT      --gmond_port=INT   Specify the gmond port to query (default=8649)
+	 
 Note: gstat with no option will only show gexec-enabled hosts. To see all hosts that are UP (regardless of their gexec state) you need to add the --all flag.
 
-  % gstat --all
+	% gstat --all
 
 ##Extending Ganglia through metric modules
 
@@ -338,62 +358,63 @@ and gmond will output all the metrics that it is capable of collecting and sendi
 
 This table describes all the metrics that ganglia collects and shows what platforms the metric are supported on. (The following table is only partially complete).
 
-  Metric Name    Description                             Platforms
-  -----------------------------------------------------------------------
-  boottime      System boot timestamp                    l,f
-  bread_sec
-  bwrite_sec
-  bytes_in      Number of bytes in per second            l,f
-  bytes_out     Number of bytes out per second           l,f
-  cpu_aidle     Percent of time since boot idle CPU      l
-  cpu_arm
-  cpu_avm
-  cpu_idle      Percent CPU idle                         l,f
-  cpu_intr
-  cpu_nice      Percent CPU nice                         l,f
-  cpu_num       Number of CPUs                           l,f
-  cpu_rm
-  cpu_speed     Speed in MHz of CPU                      l,f
-  cpu_ssys
-  cpu_system    Percent CPU system                       l,f
-  cpu_user      Percent CPU user                         l,f
-  cpu_vm
-  cpu_wait
-  cpu_wio
-  disk_free     Total free disk space                    l,f
-  disk_total    Total available disk space               l,f
-  load_fifteen  Fifteen minute load average              l,f
-  load_five     Five minute load average                 l,f
-  load_one      One minute load average                  l,f
-  location      GPS coordinates for host                 e
-  lread_sec
-  lwrite_sec
-  machine_type
-  mem_buffers   Amount of buffered memory                l,f
-  mem_cached    Amount of cached memory                  l,f
-  mem_free      Amount of available memory               l,f
-  mem_shared    Amount of shared memory                  l,f
-  mem_sreclaimable    Amount of slab reclaimable memory  l (kernel >= 2.6.19)
-  mem_total     Amount of available memory               l,f
-  mtu           Network maximum transmission unit        l,f
-  os_name       Operating system name                    l,f
-  os_release    Operating system release (version)       l,f
-  part_max_used Maximum percent used for all partitions  l,f
-  phread_sec
-  phwrite_sec
-  pkts_in       Packets in per second                    l,f
-  pkts_out      Packets out per second                   l,f
-  proc_run      Total number of running processes        l,f
-  proc_total    Total number of processes                l,f
-  rcache
-  swap_free     Amount of available swap memory          l,f
-  swap_total    Total amount of swap memory              l,f
-  sys_clock     Current time on host                     l,f
-  wcache
-  Platform key:
-  l = Linux, f = FreeBSD, a = AIX, c = Cygwin
-  m = MacOS, i = IRIX, h = HPUX,  t = Tru64
-  e = Every Platform
+	Metric Name    Description                             Platforms
+	-----------------------------------------------------------------------
+	boottime      System boot timestamp                    l,f
+	bread_sec
+	bwrite_sec
+	bytes_in      Number of bytes in per second            l,f
+	bytes_out     Number of bytes out per second           l,f
+	cpu_aidle     Percent of time since boot idle CPU      l
+	cpu_arm
+	cpu_avm
+	cpu_idle      Percent CPU idle                         l,f
+	cpu_intr
+	cpu_nice      Percent CPU nice                         l,f
+	cpu_num       Number of CPUs                           l,f
+	cpu_rm
+	cpu_speed     Speed in MHz of CPU                      l,f
+	cpu_ssys
+	cpu_system    Percent CPU system                       l,f
+	cpu_user      Percent CPU user                         l,f
+	cpu_vm
+	cpu_wait
+	cpu_wio
+	disk_free     Total free disk space                    l,f
+	disk_total    Total available disk space               l,f
+	load_fifteen  Fifteen minute load average              l,f
+	load_five     Five minute load average                 l,f
+	load_one      One minute load average                  l,f
+	location      GPS coordinates for host                 e
+	lread_sec
+	lwrite_sec
+	machine_type
+	mem_buffers   Amount of buffered memory                l,f
+	mem_cached    Amount of cached memory                  l,f
+	mem_free      Amount of available memory               l,f
+	mem_shared    Amount of shared memory                  l,f
+	mem_sreclaimable    Amount of slab reclaimable memory  l (kernel >= 2.6.19)
+	mem_total     Amount of available memory               l,f
+	mtu           Network maximum transmission unit        l,f
+	os_name       Operating system name                    l,f
+	os_release    Operating system release (version)       l,f
+	part_max_used Maximum percent used for all partitions  l,f
+	phread_sec
+	phwrite_sec
+	pkts_in       Packets in per second                    l,f
+	pkts_out      Packets out per second                   l,f
+	proc_run      Total number of running processes        l,f
+	proc_total    Total number of processes                l,f
+	rcache
+	swap_free     Amount of available swap memory          l,f
+	swap_total    Total amount of swap memory              l,f
+	sys_clock     Current time on host                     l,f
+	wcache
+	Platform key:
+	l = Linux, f = FreeBSD, a = AIX, c = Cygwin
+	m = MacOS, i = IRIX, h = HPUX,  t = Tru64
+	e = Every Platform
+	
 If you are interested in how the metrics are collected, just take a look in directory ./libmetrics in the source distribution. There is a directory for each platform that is supported.
 
 What does the error "Process XML (x): XML_ParseBuffer() error at line x: not well-formed"
@@ -401,34 +422,39 @@ This is an error that occurs when a ganglia components reads data from another g
 
 To troubleshoot this problem, capture an XML from the ganglia component in question (gmetad/gmond). This is easy to do if you have telnet installed. Simply login to the machine running the component and run.
 
-  % telnet localhost 8651
+	% telnet localhost 8651
+  
 By default, gmetad exports its XML on port 8651 and gmond exports its XML on port 8649. Modify the port number above to suite your configuration.
 
 When you connect to the port you should get an XML stream. If not, look in the process table on the machine to ensure that the component is actually running.
 
 Once you are getting an XML stream, capture it to a file by running.
 
-  % telnet localhost 8651 > XML.txt
+	% telnet localhost 8651 > XML.txt
+	
   Connection closed by foreign host.
 If you open the file XML.txt, you will see the captured XML stream. You will need to remove the first three lines of the XML.txt which will read...
 
-  Trying 127.0.0.1...
-  Connected to localhost.
-  Escape character is '^]'.
+	Trying 127.0.0.1...
+	Connected to localhost.
+	Escape character is '^]'.
+	
 Those lines are output from telnet and not the ganglia component (I wish telnet would send those messages to stderr but they are send to stdout).
 
 There are many ways that XML can be misformed. The great tool for validating XML is xmllint. xmllint will read the file and find the line containing the error.
 
-  % xmllint --valid --noout XML.txt
+	% xmllint --valid --noout XML.txt
+	
 will read your captured XML stream, validate it against the ganglia DTD and check that it is well-formed XML. xmllint will quiet exit if there are no errors. If there are errors they will be reported with line numbers. For example...
 
-  /tmp/XML.txt:3393: error: Opening and ending tag mismatch: HOST and CLUSTER
-  </CLUSTER>
-         ^
-  /tmp/XML.txt:3394: error: Opening and ending tag mismatch: CLUSTER and GANGLIA_XML
-  </GANGLIA_XML>
-             ^
-  /tmp/XML.txt:3395: error: Premature end of data in tag GANGLIA_XML
+	/tmp/XML.txt:3393: error: Opening and ending tag mismatch: HOST and CLUSTER
+	</CLUSTER>
+		 ^
+	/tmp/XML.txt:3394: error: Opening and ending tag mismatch: CLUSTER and GANGLIA_XML
+	</GANGLIA_XML>
+			 ^
+	/tmp/XML.txt:3395: error: Premature end of data in tag GANGLIA_XML
+	
 If you get errors, open XML.txt and go to the line numbers in question. See if you can understand based on your configuration how these errors could occur. If you cannot fix the problem yourself, please email your XML.txt and output from xmllint to ganglia-developers@lists.sourceforge.net. Please include information about the version of each component in question along with the operating system they are running on. The more details we have about your configuration the more likely it is we will be able to help you. Also, all mailing to ganglia-developers is archiving and available to read on the web. You may want to modify XML.txt to remove any sensitive information.
 
 How do I remove a host from the list?
@@ -444,9 +470,10 @@ Unfortunately there is currently no nice way to remove a single dead host from t
 
 If you add the line
 
-  globals {
-    host_dmax = 3600
-  }
+	globals {
+	    host_dmax = 3600
+	}
+	
 then hosts will be removed from host tables when they haven't been heard from in 3600 seconds. See man gmond.conf for details.
 
 How good is Solaris, IRIX, Tru64 support?
@@ -546,23 +573,24 @@ please send all bugs, patches, and feature requests to the ganglia-developers li
 
 The Ganglia Development Team...
 
- Bas van der Vlies      basv               Developer    basv at users.sourceforge.net 
- Neil T. Spring         bluehal            Developer    bluehal at users.sourceforge.net
- Brooks Davis           brooks_en_davis    Developer    brooks_en_davis at users.sourceforge.net
- Eric Fraser            fraze              Developer    fraze at users.sourceforge.net 
- greg bruno             gregbruno          Developer    gregbruno at users.sourceforge.net
- Jeff Layton            laytonjb        Developer       laytonjb at users.sourceforge.net       
- Doc Schneider          maddocbuddha    Developer       maddocbuddha at users.sourceforge.net 
- Mason Katz             masonkatz       Developer       masonkatz at users.sourceforge.net      
- Mike Howard            mhoward         Developer       mhoward at users.sourceforge.net        
- Matt Massie            massie          Project Admin   massie at users.sourceforge.net
- Oliver Mössinger      olivpass        Developer       olivpass at users.sourceforge.net       
- Preston Smith          pmsmith         Developer       pmsmith at users.sourceforge.net        
- Federico David Sacerdoti sacerdoti     Developer       sacerdoti at users.sourceforge.net      
- Tim Cera               timcera         Developer       timcera at users.sourceforge.net        
- Mathew Benson          wintermute11    Developer       wintermute11 at users.sourceforge.net   
- Brad Nicholes          bnicholes       Developer       bnicholes at users.sourceforge.net
- Carlo Arenas           carenas         Developer       carenas at users.sourceforge.net
+| Bas van der Vlies      |basv               |Developer    |basv at users.sourceforge.net           |
+| Neil T. Spring         |bluehal            |Developer    |bluehal at users.sourceforge.net        |
+| Brooks Davis           |brooks_en_davis    |Developer    |brooks_en_davis at users.sourceforge.net|
+| Eric Fraser            |fraze              |Developer    |fraze at users.sourceforge.net          |
+| greg bruno             |gregbruno          |Developer    |gregbruno at users.sourceforge.net      |
+| Jeff Layton            |laytonjb        |Developer       |laytonjb at users.sourceforge.net       |
+| Doc Schneider          |maddocbuddha    |Developer       |maddocbuddha at users.sourceforge.net   |
+| Mason Katz             |masonkatz       |Developer       |masonkatz at users.sourceforge.net      |
+| Mike Howard            |mhoward         |Developer       |mhoward at users.sourceforge.net        |
+| Matt Massie            |massie          |Project Admin   |massie at users.sourceforge.net         |
+| Oliver Mössinger       |olivpass        |Developer       |olivpass at users.sourceforge.net       |
+| Preston Smith          |pmsmith         |Developer       |pmsmith at users.sourceforge.net        |
+| Federico David Sacerdoti|sacerdoti      |Developer       |sacerdoti at users.sourceforge.net      |
+| Tim Cera               |timcera         |Developer       |timcera at users.sourceforge.net        |
+| Mathew Benson          |wintermute11    |Developer       |wintermute11 at users.sourceforge.net   |
+| Brad Nicholes          |bnicholes       |Developer       |bnicholes at users.sourceforge.net      |
+| Carlo Arenas           |carenas         |Developer       |carenas at users.sourceforge.net        |
+ 
  
 ##Contributors
 

@@ -482,6 +482,8 @@ OK，再次启动gmetad，成功启动。
 
 
 
+
+
 ##回顾与总结
 
 Ganglia用于监测分布式系统的运行状态，如何把Ganglia集群用起来？
@@ -559,9 +561,9 @@ Ganglia用于监测分布式系统的运行状态，如何把Ganglia集群用起
 [Ganglia Mailing Lists]:					http://sourceforge.net/p/ganglia/mailman/
 [CentOS安装配置ganglia]:					http://blog.csdn.net/wsgzg1991/article/details/9496907
 
-[Monitoring with Ganglia]:					/download/ganglia/monitoring_with_ganglia.pdf
+[Monitoring with Ganglia]:					/monitoring_with_ganglia.zip
 [Ganglia 体系结构及功能介绍]:				http://yaoweibin2008.blog.163.com/blog/static/11031392008763256465/
 
-[The ganglia distributed monitoring system: design, implementation, and experience]:		/download/ganglia/The-Ganglia-Distributed-Monitoring-System.pdf
+[The ganglia distributed monitoring system: design, implementation, and experience]:		The-Ganglia-Distributed-Monitoring-System.pdf
 [Setup and configure Ganglia-3.6 on CentOS/RHEL 6.3]:		https://sachinsharm.wordpress.com/2013/08/17/setup-and-configure-ganglia-3-6-on-centosrhel-6-3/
 [gmetad dead but subsys locked]:			http://sourceforge.net/p/ganglia/mailman/ganglia-general/thread/A526454B-CDD5-4B0F-9805-68A92B9459E9@crackpot.org/

@@ -55,7 +55,7 @@ system、server、client的charset不一致时，会产生乱码。
 	default-character-set=utf8
 	
 	
-重新启动MySQL，OK（根据[官网解释](http://dev.mysql.com/doc/refman/5.6/en/server-system-variables.html#sysvar_character_set_server)，不需要向数据库重新插入数据）。database的编码方式，不要手动调整，其始终与default database保持一致，若没有default database，则由server的编码方式决定。
+重新启动MySQL，OK（根据[官网解释](http://dev.mysql.com/doc/refman/5.6/en/server-system-variables.html#sysvar_character_set_server)， 不需要向数据库重新插入数据）。database的编码方式，不要手动调整，其始终与default database保持一致，若没有default database，则由server的编码方式决定。
 
 ##无法启动
 
@@ -73,7 +73,10 @@ system、server、client的charset不一致时，会产生乱码。
 	mysql> drop database test;
 	ERROR 1010 (HY000): Error dropping database (can't rmdir './test', errno: 39)
 	
-解决办法：到MySQL存放数据的路径下（/var/lib/mysql/），将test数据库对应目录（./test）下内容清空，再删除test数据库即可。
+**解决办法**：
+
+* 无法删除数据库或者表格，通常是由于有client还在访问数据库中的某张表，导致无法删除，通常重启mysql服务后再去删除即可，具体命令`mysql service restart`；
+* 如果重启MySQL服务后，仍然无法删除，则，停掉MySQL服务，然后，到MySQL存放数据的路径下（/var/lib/mysql/），将test数据库对应目录（./test）下内容清空，再删除test数据库即可；
 
 
 ##找不到table

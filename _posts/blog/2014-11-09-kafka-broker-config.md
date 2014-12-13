@@ -25,65 +25,67 @@ The essential configurations are the following:（必要的配置如下）
 
 Topic-level configurations and defaults are discussed in [more detail below](http://kafka.apache.org/documentation.html#topic-config).
 
-**notes(ningg)**：什么叫作**Topic-level configuration**？
+**notes(ningg)**：什么叫作**Topic-level configuration**？是指与`topic`相关的配置。
+
+下文针对各个属性的介绍将以如下形式进行：
 
 * Property
 	* Default
 	* Description
 
-* broker.id
-	* null(non-negative integer id)
-	* Each broker is uniquely identified by a non-negative integer id. This id serves as the broker's "name" and allows the broker to be moved to a different host/port without confusing consumers. You can choose any number you like so long as it is unique.（唯一标识broker，目的：当broker移动到另一个`host:port`后，不会对consumer造成影响）
+###broker.id
+* null(non-negative integer id)
+* Each broker is uniquely identified by a non-negative integer id. This id serves as the broker's "name" and allows the broker to be moved to a different host/port without confusing consumers. You can choose any number you like so long as it is unique.（唯一标识broker，目的：当broker移动到另一个`host:port`后，不会对consumer造成影响）
 
-* log.dirs
-	* /tmp/kafka-logs
-	* A comma-separated list of one or more directories in which Kafka data is stored. Each new partition that is created will be placed in the directory which currently has the fewest partitions.（以逗号`,`分割，Kafka data的存储位置；新建的partition将会被放置在当前partition数最小的目录下）
+###log.dirs
+* /tmp/kafka-logs
+* A comma-separated list of one or more directories in which Kafka data is stored. Each new partition that is created will be placed in the directory which currently has the fewest partitions.（以逗号`,`分割，Kafka data的存储位置；新建的partition将会被放置在当前partition数最小的目录下）
 
-* port
-	* 6667
-	* The port on which the server accepts client connections.
+###port
+* 6667
+* The port on which the server accepts client connections.
 
-* zookeeper.connect
-	* null
-	* Specifies the ZooKeeper connection string in the form `hostname:port`, where hostname and port are the host and port for a node in your ZooKeeper cluster. To allow connecting through other ZooKeeper nodes when that host is down you can also specify multiple hosts in the form `hostname1:port1,hostname2:port2,hostname3:port3`.
-	* ZooKeeper also allows you to add a "chroot" path which will make all kafka data for this cluster appear under a particular path. This is a way to setup multiple Kafka clusters or other applications on the same ZooKeeper cluster. To do this give a connection string in the form `hostname1:port1,hostname2:port2,hostname3:port3/chroot/path` which would put all this cluster's data under the path `/chroot/path`. Note that you must create this path yourself prior to starting the broker and consumers must use the same connection string.
+###zookeeper.connect
+* null
+* Specifies the ZooKeeper connection string in the form `hostname:port`, where hostname and port are the host and port for a node in your ZooKeeper cluster. To allow connecting through other ZooKeeper nodes when that host is down you can also specify multiple hosts in the form `hostname1:port1,hostname2:port2,hostname3:port3`.
+* ZooKeeper also allows you to add a "chroot" path which will make all kafka data for this cluster appear under a particular path. This is a way to setup multiple Kafka clusters or other applications on the same ZooKeeper cluster. To do this give a connection string in the form `hostname1:port1,hostname2:port2,hostname3:port3/chroot/path` which would put all this cluster's data under the path `/chroot/path`. Note that you must create this path yourself prior to starting the broker and consumers must use the same connection string.
 
 **notes(ningg)**：关于`zookeeper`参数，几个问题：
 
 * Kafka集群需要借助Zookeeper来进行管理，因此，需要设定Zookeeper集群的位置，可以只设置一个Zookeeper，也可以设置一个列表，疑问：设置一个zookeeper与一个zookeeper列表有差异吗？当只设置一个zookeeper服务器时，是否会自动获取zookeeper列表？
 * 可以设置`chroot`目录，用于存储kafka集群相关数据，这么做的原因：方便同一个zookeeper集群，管理多个应用（例如，kafka集群）；但需要在启动broker之前，提前创建`chroot`目录，并且consumer需要使用相同的`zookeeper.connect`作为connection string。
 
-* message.max.bytes
-	* 1000000
-	* The maximum size of a message that the server can receive. It is important that this property be in sync with the maximum fetch size your consumers use or else an unruly producer will be able to publish messages too large for consumers to consume.
+###message.max.bytes
+* 1000000
+* The maximum size of a message that the server can receive. It is important that this property be in sync with the maximum fetch size your consumers use or else an unruly producer will be able to publish messages too large for consumers to consume.
 
-* num.network.threads
-	* 3
-	* The number of network threads that the server uses for handling network requests. You probably don't need to change this.（处理网络请求所设定的线程数，通常不用调整这个参数）
+###num.network.threads
+* 3
+* The number of network threads that the server uses for handling network requests. You probably don't need to change this.（处理网络请求所设定的线程数，通常不用调整这个参数）
 
-* num.io.threads
-	* 8
-	* The number of I/O threads that the server uses for executing requests. You should have at least as many threads as you have disks.（server执行request时，启动的I/O线程数目，建议与磁盘个数相同）
+###num.io.threads
+* 8
+* The number of I/O threads that the server uses for executing requests. You should have at least as many threads as you have disks.（server执行request时，启动的I/O线程数目，建议与磁盘个数相同）
 
-* background.threads
-	* 4
-	* The number of threads to use for various background processing tasks such as file deletion. You should not need to change this.
+###background.threads
+* 4
+* The number of threads to use for various background processing tasks such as file deletion. You should not need to change this.
 
-* queued.max.requests
-	* 500
-	* The number of requests that can be queued up for processing by the I/O threads before the network threads stop reading in new requests.
+###queued.max.requests
+* 500
+* The number of requests that can be queued up for processing by the I/O threads before the network threads stop reading in new requests.
 
-* host.name
-	* null	
-	* Hostname of broker. If this is set, it will only bind to this address. If this is not set, it will bind to all interfaces, and publish one to ZK.
+###host.name
+* null	
+* Hostname of broker. If this is set, it will only bind to this address. If this is not set, it will bind to all interfaces, and publish one to ZK.
 
-* advertised.host.name
-	* null	
-	* If this is set this is the hostname that will be given out to producers, consumers, and other brokers to connect to.
+###advertised.host.name
+* null	
+* If this is set this is the hostname that will be given out to producers, consumers, and other brokers to connect to.
 
-* advertised.port
-	* null	
-	* The port to give out to producers, consumers, and other brokers to use in establishing connections. This only needs to be set if this port is different from the port the server should bind to.
+###advertised.port
+* null	
+* The port to give out to producers, consumers, and other brokers to use in establishing connections. This only needs to be set if this port is different from the port the server should bind to.
 
 * socket.send.buffer.bytes	100 * 1024	The SO_SNDBUFF buffer the server prefers for socket connections.
 * socket.receive.buffer.bytes	100 * 1024	The SO_RCVBUFF buffer the server prefers for socket connections.
@@ -141,7 +143,7 @@ Topic-level configurations and defaults are discussed in [more detail below](htt
 
 More details about broker configuration can be found in the scala class `kafka.server.KafkaConfig`.
 
-Topic-level configuration
+##Topic-level configuration
 
 Configurations pertinent to topics have both a global default as well an optional per-topic override. If no per-topic configuration is given the global default is used. The override can be set at topic creation time by giving one or more --config options. This example creates a topic named my-topic with a custom max message size and flush rate:
  > bin/kafka-topics.sh --zookeeper localhost:2181 --create --topic my-topic --partitions 1 

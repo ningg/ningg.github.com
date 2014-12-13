@@ -61,7 +61,7 @@ Producers publish data to the topics of their choice. The producer is responsibl
 ####Consumers
 
 Messaging traditionally has two models: [queuing](http://en.wikipedia.org/wiki/Message_queue) and [publish-subscribe](http://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern). In a queue, a pool of consumers may read from a server and each message goes to one of them; in publish-subscribe the message is broadcast to all consumers. Kafka offers a single consumer abstraction that generalizes both of these—the consumer group.
-（messaging，消息发送，由两种方式：queuing、publish-subscribe。Queuing，message发送到某一个consumer；publish-subscribe，message广播到所有的consumers。Kafka，通过将consumer泛化为consumer group，来支持这两种方式）
+（messaging，消息发送，有两种方式：queuing、publish-subscribe。Queuing，message发送到某一个consumer；publish-subscribe，message广播到所有的consumers。Kafka，通过将consumer泛化为consumer group，来支持这两种方式）
 
 **notes(ningg)**：publish-subscribe，发布-订阅模式的含义？
 
@@ -91,13 +91,13 @@ A traditional queue retains messages in-order on the server, and if multiple con
 Kafka does it better. By having a notion of parallelism—the partition—within the topics, Kafka is able to provide both ordering guarantees and load balancing over a pool of consumer processes. This is achieved by assigning the partitions in the topic to the consumers in the consumer group so that each partition is consumed by exactly one consumer in the group. By doing this we ensure that the consumer is the only reader of that partition and consumes the data in order. Since there are many partitions this still balances the load over many consumer instances. Note however that there cannot be more consumer instances than partitions.
 （Kafka，采用`partition`的方式解决上述问题：每个partition被指定给topic对应的consumer group中的特定的consumer，这样能保证一点：一个partition中的message被顺序处理。由于有多个partition，并且对应多个consumer instance来处理，从而实现负载均衡；特别注意：consumer instance个数不能多于partitions个数）
 
-**notes(ningg)**：message是怎么分配到topic对应的partition中的？consumer instance为什么不能多于partition个数？
+**notes(ningg)**：message是怎么分配到topic对应的partition中的？*（这是有Producer决定的，常用方式：轮询、函数）*consumer instance为什么不能多于partition个数？
 
 Kafka only provides a total order over messages within a partition, not between different partitions in a topic. Per-partition ordering combined with the ability to partition data by key is sufficient for most applications. However, if you require a total order over messages this can be achieved with a topic that has only one partition, though this will mean only one consumer process.
 （Kafka只保证partition内mesaage的顺序处理，不保证partition之间的处理顺序。per-partition ordering和partition data by key，满足了大部分需求。如果要保证所有message顺序处理，则，将topic设置为only one partition，此时，变为串行处理。）
 
 
-**notes(ningg)**：producer、consumer属于kafka吗？外部的message怎么进来的？怎么出去的？flume+kafka+storm模式到底什么情况？
+**notes(ningg)**：producer、consumer属于kafka吗？*（Kafka主要负责按Topic进行message的存储，同时提供Producer\Consumer API，本质上Kafka不包含producer和consumer；）*外部的message怎么进来的？怎么出去的？flume+kafka+storm模式到底什么情况？*（外部应用通过调用Kafka的Producer API向Kafka中存入message；同时，外部应用也可以通过调用Kafka的Consumer API来读取Kafka中的message；flume+kafka+storm，就是flume中添加了一个实现Kafka Producer API的kafka sink，storm中添加了一个实现了Kafka Consumer API的kafka spout）*
 
 ####Guarantees
 

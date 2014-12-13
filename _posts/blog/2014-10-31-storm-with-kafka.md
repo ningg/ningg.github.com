@@ -153,4 +153,4 @@ todo
 
 
 
-[Storm Integrates]:		http://storm.apache.org/about/integrates.html[storm-kafka]:			https://github.com/apache/incubator-storm/tree/master/external/storm-kafk
+[Storm Integrates]:		http://storm.apache.org/about/integrates.html[storm-kafka]:			https://github.com/apache/incubator-storm/tree/master/external/storm-kafka
