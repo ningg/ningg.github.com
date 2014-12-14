@@ -103,19 +103,19 @@ Ant like variables could be used in json files since v239, so you could avoid ha
 
 	{
 	  "servers" : [ {
-		"port" : "1099",
-		"host" : "w2",
-		"queries" : [ {
-		  "obj" : "java.lang:type=Memory",
-		  "attr" : [ "HeapMemoryUsage", "NonHeapMemoryUsage" ],
-		  "outputWriters" : [ {
-			"@class" : "com.googlecode.jmxtrans.model.output.GraphiteWriter",
-			"settings" : {
-			  "port" : 2003,
-			  "host" : "192.168.192.133"
-			}
-		  } ]
-		} ]
+	    "port" : "1099",
+	    "host" : "w2",
+	    "queries" : [ {
+	      "obj" : "java.lang:type=Memory",
+	      "attr" : [ "HeapMemoryUsage", "NonHeapMemoryUsage" ],
+	      "outputWriters" : [ {
+	        "@class" : "com.googlecode.jmxtrans.model.output.GraphiteWriter",
+	        "settings" : {
+	          "port" : 2003,
+	          "host" : "192.168.192.133"
+	        }
+	      } ]
+	    } ]
 	  } ]
 	}
 
@@ -123,19 +123,19 @@ Ant like variables could be used in json files since v239, so you could avoid ha
 
 	{
 	  "servers" : [ {
-		"port" : "${myserverport}",
-		"host" : "${myserverhost}",
-		"queries" : [ {
-		  "obj" : "java.lang:type=Memory",
-		  "attr" : [ "HeapMemoryUsage", "NonHeapMemoryUsage" ],
-		  "outputWriters" : [ {
-			"@class" : "com.googlecode.jmxtrans.model.output.GraphiteWriter",
-			"settings" : {
-			  "port" : "${mygraphiteport}",
-			  "host" : "${mygraphitehost}"
-			}
-		  } ]
-		} ]
+	    "port" : "${myserverport}",
+	    "host" : "${myserverhost}",
+	    "queries" : [ {
+	      "obj" : "java.lang:type=Memory",
+	      "attr" : [ "HeapMemoryUsage", "NonHeapMemoryUsage" ],
+	      "outputWriters" : [ {
+	        "@class" : "com.googlecode.jmxtrans.model.output.GraphiteWriter",
+	        "settings" : {
+	          "port" : "${mygraphiteport}",
+	          "host" : "${mygraphitehost}"
+	        }
+	      } ]
+	    } ]
 	  } ]
 	}
 
@@ -145,7 +145,7 @@ Double-quotes (`"`) should be using even when providing int values, like port, i
 
 Variables should be provided via `-D` for example via `JMXTRANS_OPTS` in `jmxtrans.conf` :
 
-	JMXTRANS_OPTS="-Dmyserverport=1099 -Dmyserverhost=w2 -Dmygraphiteport=2003 -D
+	JMXTRANS_OPTS="-Dmyserverport=1099 -Dmyserverhost=w2 -Dmygraphiteport=2003 -Dmygraphitehost=192.168.192.133"
 
 
 

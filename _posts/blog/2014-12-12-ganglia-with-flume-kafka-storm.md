@@ -155,88 +155,88 @@ bridge between Storm and Ganglia.
 
 
 	{
-		"servers": [
-			{
-				"port": "12346", 
-				"host": "IP_OF_SUPERVISOR_MACHINE", 
-				"queries": [
-					{
-						"outputWriters": [
-							{
-								"@class": "com.googlecode.jmxtrans.model.output.GangliaWriter", 
-								"settings": {
-									"groupName": "supervisor", 
-									"host": "IP_OF_GANGLIA_GMOND_SERVER", 
-									"port": "8649"
-								}
-							}
-						], 
-						"obj": "java.lang:type=Memory", 
-						"resultAlias": "supervisor", 
-						"attr": [
-							"ObjectPendingFinalizationCount"
-						]
-					}, 
-					{
-						"outputWriters": [
-							{
-								"@class": "com.googlecode.jmxtrans.model.output.GangliaWriter", 
-								"settings": {
-									"groupName": " supervisor ", 
-									"host": "IP_OF_GANGLIA_GMOND_SERVER", 
-									"port": "8649"
-								}
-							}
-						], 
-						"obj": "java.lang:name=Copy,type=GarbageCollector", 
-						"resultAlias": " supervisor ", 
-						"attr": [
-							"CollectionCount", 
-							"CollectionTime"
-						]
-					}, 
-					{
-						"outputWriters": [
-							{
-								"@class": "com.googlecode.jmxtrans.model.output.GangliaWriter", 
-								"settings": {
-									"groupName": "supervisor ", 
-									"host": "IP_OF_GANGLIA_GMOND_SERVER", 
-									"port": "8649"
-								}
-							}
-						], 
-						"obj": "java.lang:name=Code Cache,type=MemoryPool", 
-						"resultAlias": "supervisor ", 
-						"attr": [
-							"CollectionUsageThreshold", 
-							"CollectionUsageThresholdCount", 
-							"UsageThreshold", 
-							"UsageThresholdCount"
-						]
-					}, 
-					{
-						"outputWriters": [
-							{
-								"@class": "com.googlecode.jmxtrans.model.output.GangliaWriter", 
-								"settings": {
-									"groupName": "supervisor ", 
-									"host": "IP_OF_GANGLIA_GMOND_SERVER", 
-									"port": "8649"
-								}
-							}
-						], 
-						"obj": "java.lang:type=Runtime", 
-						"resultAlias": "supervisor", 
-						"attr": [
-							"StartTime", 
-							"Uptime"
-						]
-					}
-				], 
-				"numQueryThreads": 2
-			}
-		]
+	  "servers": [
+	    {
+		  "port": "12346", 
+		  "host": "IP_OF_SUPERVISOR_MACHINE", 
+		  "queries": [
+		  	{
+		  	  "outputWriters": [
+		  	  	{
+		  	  	  "@class": "com.googlecode.jmxtrans.model.output.GangliaWriter", 
+		  	  	  "settings": {
+		  	  	  	"groupName": "supervisor", 
+		  	  	  	"host": "IP_OF_GANGLIA_GMOND_SERVER", 
+		  	  	  	"port": "8649"
+		  	  	  }
+		  	  	}
+		  	  ], 
+		  	  "obj": "java.lang:type=Memory", 
+		  	  "resultAlias": "supervisor", 
+		  	  "attr": [
+		  	  	"ObjectPendingFinalizationCount"
+		  	  ]
+		  	}, 
+		  	{
+		  	  "outputWriters": [
+		  	  	{
+		  	  	  "@class": "com.googlecode.jmxtrans.model.output.GangliaWriter", 
+		  	  	  "settings": {
+		  	  	  	"groupName": " supervisor ", 
+		  	  	  	"host": "IP_OF_GANGLIA_GMOND_SERVER", 
+		  	  	  	"port": "8649"
+		  	  	  }
+		  	  	}
+		  	  ], 
+		  	  "obj": "java.lang:name=Copy,type=GarbageCollector", 
+		  	  "resultAlias": " supervisor ", 
+		  	  "attr": [
+		  	  	"CollectionCount", 
+		  	  	"CollectionTime"
+		  	  ]
+		  	}, 
+		  	{
+		  	  "outputWriters": [
+		  	  	{
+		  	  	  "@class": "com.googlecode.jmxtrans.model.output.GangliaWriter", 
+		  	  	  "settings": {
+		  	  	  	"groupName": "supervisor ", 
+		  	  	  	"host": "IP_OF_GANGLIA_GMOND_SERVER", 
+		  	  	  	"port": "8649"
+		  	  	  }
+		  	  	}
+		  	  ], 
+		  	  "obj": "java.lang:name=Code Cache,type=MemoryPool", 
+		  	  "resultAlias": "supervisor ", 
+		  	  "attr": [
+		  	  	"CollectionUsageThreshold", 
+		  	  	"CollectionUsageThresholdCount", 
+		  	  	"UsageThreshold", 
+		  	  	"UsageThresholdCount"
+		  	  ]
+		  	}, 
+		  	{
+		  	  "outputWriters": [
+		  	  	{
+		  	  	  "@class": "com.googlecode.jmxtrans.model.output.GangliaWriter", 
+		  	  	  "settings": {
+		  	  	  	"groupName": "supervisor ", 
+		  	  	  	"host": "IP_OF_GANGLIA_GMOND_SERVER", 
+		  	  	  	"port": "8649"
+		  	  	  }
+		  	  	}
+		  	  ], 
+		  	  "obj": "java.lang:type=Runtime", 
+		  	  "resultAlias": "supervisor", 
+		  	  "attr": [
+		  	  	"StartTime", 
+		  	  	"Uptime"
+		  	  ]
+		  	}
+		  ], 
+		  "numQueryThreads": 2
+	    }
+	  ]
 	}
 
 

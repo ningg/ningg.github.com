@@ -4,7 +4,7 @@
    <title>NingG.github.com</title>
    <link href="http://ningg.github.com/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://ningg.github.com" rel="alternate" type="text/html" />
-   <updated>2014-12-14T00:59:01+08:00</updated>
+   <updated>2014-12-14T18:16:27+08:00</updated>
    <id>http://ningg.github.com</id>
    <author>
      <name></name>
@@ -317,19 +317,19 @@ Starting jmxtrans:                           [  OK  ]
 
 &lt;pre&gt;&lt;code&gt;{
   &quot;servers&quot; : [ {
-	&quot;port&quot; : &quot;1099&quot;,
-	&quot;host&quot; : &quot;w2&quot;,
-	&quot;queries&quot; : [ {
-	  &quot;obj&quot; : &quot;java.lang:type=Memory&quot;,
-	  &quot;attr&quot; : [ &quot;HeapMemoryUsage&quot;, &quot;NonHeapMemoryUsage&quot; ],
-	  &quot;outputWriters&quot; : [ {
-		&quot;@class&quot; : &quot;com.googlecode.jmxtrans.model.output.GraphiteWriter&quot;,
-		&quot;settings&quot; : {
-		  &quot;port&quot; : 2003,
-		  &quot;host&quot; : &quot;192.168.192.133&quot;
-		}
-	  } ]
-	} ]
+    &quot;port&quot; : &quot;1099&quot;,
+    &quot;host&quot; : &quot;w2&quot;,
+    &quot;queries&quot; : [ {
+      &quot;obj&quot; : &quot;java.lang:type=Memory&quot;,
+      &quot;attr&quot; : [ &quot;HeapMemoryUsage&quot;, &quot;NonHeapMemoryUsage&quot; ],
+      &quot;outputWriters&quot; : [ {
+        &quot;@class&quot; : &quot;com.googlecode.jmxtrans.model.output.GraphiteWriter&quot;,
+        &quot;settings&quot; : {
+          &quot;port&quot; : 2003,
+          &quot;host&quot; : &quot;192.168.192.133&quot;
+        }
+      } ]
+    } ]
   } ]
 }
 &lt;/code&gt;&lt;/pre&gt;
@@ -338,19 +338,19 @@ Starting jmxtrans:                           [  OK  ]
 
 &lt;pre&gt;&lt;code&gt;{
   &quot;servers&quot; : [ {
-	&quot;port&quot; : &quot;${myserverport}&quot;,
-	&quot;host&quot; : &quot;${myserverhost}&quot;,
-	&quot;queries&quot; : [ {
-	  &quot;obj&quot; : &quot;java.lang:type=Memory&quot;,
-	  &quot;attr&quot; : [ &quot;HeapMemoryUsage&quot;, &quot;NonHeapMemoryUsage&quot; ],
-	  &quot;outputWriters&quot; : [ {
-		&quot;@class&quot; : &quot;com.googlecode.jmxtrans.model.output.GraphiteWriter&quot;,
-		&quot;settings&quot; : {
-		  &quot;port&quot; : &quot;${mygraphiteport}&quot;,
-		  &quot;host&quot; : &quot;${mygraphitehost}&quot;
-		}
-	  } ]
-	} ]
+    &quot;port&quot; : &quot;${myserverport}&quot;,
+    &quot;host&quot; : &quot;${myserverhost}&quot;,
+    &quot;queries&quot; : [ {
+      &quot;obj&quot; : &quot;java.lang:type=Memory&quot;,
+      &quot;attr&quot; : [ &quot;HeapMemoryUsage&quot;, &quot;NonHeapMemoryUsage&quot; ],
+      &quot;outputWriters&quot; : [ {
+        &quot;@class&quot; : &quot;com.googlecode.jmxtrans.model.output.GraphiteWriter&quot;,
+        &quot;settings&quot; : {
+          &quot;port&quot; : &quot;${mygraphiteport}&quot;,
+          &quot;host&quot; : &quot;${mygraphitehost}&quot;
+        }
+      } ]
+    } ]
   } ]
 }
 &lt;/code&gt;&lt;/pre&gt;
@@ -361,7 +361,7 @@ Starting jmxtrans:                           [  OK  ]
 
 &lt;p&gt;Variables should be provided via &lt;code&gt;-D&lt;/code&gt; for example via &lt;code&gt;JMXTRANS_OPTS&lt;/code&gt; in &lt;code&gt;jmxtrans.conf&lt;/code&gt; :&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;JMXTRANS_OPTS=&quot;-Dmyserverport=1099 -Dmyserverhost=w2 -Dmygraphiteport=2003 -D
+&lt;pre&gt;&lt;code&gt;JMXTRANS_OPTS=&quot;-Dmyserverport=1099 -Dmyserverhost=w2 -Dmygraphiteport=2003 -Dmygraphitehost=192.168.192.133&quot;
 &lt;/code&gt;&lt;/pre&gt;
 
 </content>
@@ -558,88 +558,88 @@ bridge between Storm and Ganglia.&lt;/p&gt;
 &lt;h4 id=&quot;supervisorjson&quot;&gt;supervisor.json&lt;/h4&gt;
 
 &lt;pre&gt;&lt;code&gt;{
-	&quot;servers&quot;: [
-		{
-			&quot;port&quot;: &quot;12346&quot;, 
-			&quot;host&quot;: &quot;IP_OF_SUPERVISOR_MACHINE&quot;, 
-			&quot;queries&quot;: [
-				{
-					&quot;outputWriters&quot;: [
-						{
-							&quot;@class&quot;: &quot;com.googlecode.jmxtrans.model.output.GangliaWriter&quot;, 
-							&quot;settings&quot;: {
-								&quot;groupName&quot;: &quot;supervisor&quot;, 
-								&quot;host&quot;: &quot;IP_OF_GANGLIA_GMOND_SERVER&quot;, 
-								&quot;port&quot;: &quot;8649&quot;
-							}
-						}
-					], 
-					&quot;obj&quot;: &quot;java.lang:type=Memory&quot;, 
-					&quot;resultAlias&quot;: &quot;supervisor&quot;, 
-					&quot;attr&quot;: [
-						&quot;ObjectPendingFinalizationCount&quot;
-					]
-				}, 
-				{
-					&quot;outputWriters&quot;: [
-						{
-							&quot;@class&quot;: &quot;com.googlecode.jmxtrans.model.output.GangliaWriter&quot;, 
-							&quot;settings&quot;: {
-								&quot;groupName&quot;: &quot; supervisor &quot;, 
-								&quot;host&quot;: &quot;IP_OF_GANGLIA_GMOND_SERVER&quot;, 
-								&quot;port&quot;: &quot;8649&quot;
-							}
-						}
-					], 
-					&quot;obj&quot;: &quot;java.lang:name=Copy,type=GarbageCollector&quot;, 
-					&quot;resultAlias&quot;: &quot; supervisor &quot;, 
-					&quot;attr&quot;: [
-						&quot;CollectionCount&quot;, 
-						&quot;CollectionTime&quot;
-					]
-				}, 
-				{
-					&quot;outputWriters&quot;: [
-						{
-							&quot;@class&quot;: &quot;com.googlecode.jmxtrans.model.output.GangliaWriter&quot;, 
-							&quot;settings&quot;: {
-								&quot;groupName&quot;: &quot;supervisor &quot;, 
-								&quot;host&quot;: &quot;IP_OF_GANGLIA_GMOND_SERVER&quot;, 
-								&quot;port&quot;: &quot;8649&quot;
-							}
-						}
-					], 
-					&quot;obj&quot;: &quot;java.lang:name=Code Cache,type=MemoryPool&quot;, 
-					&quot;resultAlias&quot;: &quot;supervisor &quot;, 
-					&quot;attr&quot;: [
-						&quot;CollectionUsageThreshold&quot;, 
-						&quot;CollectionUsageThresholdCount&quot;, 
-						&quot;UsageThreshold&quot;, 
-						&quot;UsageThresholdCount&quot;
-					]
-				}, 
-				{
-					&quot;outputWriters&quot;: [
-						{
-							&quot;@class&quot;: &quot;com.googlecode.jmxtrans.model.output.GangliaWriter&quot;, 
-							&quot;settings&quot;: {
-								&quot;groupName&quot;: &quot;supervisor &quot;, 
-								&quot;host&quot;: &quot;IP_OF_GANGLIA_GMOND_SERVER&quot;, 
-								&quot;port&quot;: &quot;8649&quot;
-							}
-						}
-					], 
-					&quot;obj&quot;: &quot;java.lang:type=Runtime&quot;, 
-					&quot;resultAlias&quot;: &quot;supervisor&quot;, 
-					&quot;attr&quot;: [
-						&quot;StartTime&quot;, 
-						&quot;Uptime&quot;
-					]
-				}
-			], 
-			&quot;numQueryThreads&quot;: 2
-		}
-	]
+  &quot;servers&quot;: [
+    {
+	  &quot;port&quot;: &quot;12346&quot;, 
+	  &quot;host&quot;: &quot;IP_OF_SUPERVISOR_MACHINE&quot;, 
+	  &quot;queries&quot;: [
+	  	{
+	  	  &quot;outputWriters&quot;: [
+	  	  	{
+	  	  	  &quot;@class&quot;: &quot;com.googlecode.jmxtrans.model.output.GangliaWriter&quot;, 
+	  	  	  &quot;settings&quot;: {
+	  	  	  	&quot;groupName&quot;: &quot;supervisor&quot;, 
+	  	  	  	&quot;host&quot;: &quot;IP_OF_GANGLIA_GMOND_SERVER&quot;, 
+	  	  	  	&quot;port&quot;: &quot;8649&quot;
+	  	  	  }
+	  	  	}
+	  	  ], 
+	  	  &quot;obj&quot;: &quot;java.lang:type=Memory&quot;, 
+	  	  &quot;resultAlias&quot;: &quot;supervisor&quot;, 
+	  	  &quot;attr&quot;: [
+	  	  	&quot;ObjectPendingFinalizationCount&quot;
+	  	  ]
+	  	}, 
+	  	{
+	  	  &quot;outputWriters&quot;: [
+	  	  	{
+	  	  	  &quot;@class&quot;: &quot;com.googlecode.jmxtrans.model.output.GangliaWriter&quot;, 
+	  	  	  &quot;settings&quot;: {
+	  	  	  	&quot;groupName&quot;: &quot; supervisor &quot;, 
+	  	  	  	&quot;host&quot;: &quot;IP_OF_GANGLIA_GMOND_SERVER&quot;, 
+	  	  	  	&quot;port&quot;: &quot;8649&quot;
+	  	  	  }
+	  	  	}
+	  	  ], 
+	  	  &quot;obj&quot;: &quot;java.lang:name=Copy,type=GarbageCollector&quot;, 
+	  	  &quot;resultAlias&quot;: &quot; supervisor &quot;, 
+	  	  &quot;attr&quot;: [
+	  	  	&quot;CollectionCount&quot;, 
+	  	  	&quot;CollectionTime&quot;
+	  	  ]
+	  	}, 
+	  	{
+	  	  &quot;outputWriters&quot;: [
+	  	  	{
+	  	  	  &quot;@class&quot;: &quot;com.googlecode.jmxtrans.model.output.GangliaWriter&quot;, 
+	  	  	  &quot;settings&quot;: {
+	  	  	  	&quot;groupName&quot;: &quot;supervisor &quot;, 
+	  	  	  	&quot;host&quot;: &quot;IP_OF_GANGLIA_GMOND_SERVER&quot;, 
+	  	  	  	&quot;port&quot;: &quot;8649&quot;
+	  	  	  }
+	  	  	}
+	  	  ], 
+	  	  &quot;obj&quot;: &quot;java.lang:name=Code Cache,type=MemoryPool&quot;, 
+	  	  &quot;resultAlias&quot;: &quot;supervisor &quot;, 
+	  	  &quot;attr&quot;: [
+	  	  	&quot;CollectionUsageThreshold&quot;, 
+	  	  	&quot;CollectionUsageThresholdCount&quot;, 
+	  	  	&quot;UsageThreshold&quot;, 
+	  	  	&quot;UsageThresholdCount&quot;
+	  	  ]
+	  	}, 
+	  	{
+	  	  &quot;outputWriters&quot;: [
+	  	  	{
+	  	  	  &quot;@class&quot;: &quot;com.googlecode.jmxtrans.model.output.GangliaWriter&quot;, 
+	  	  	  &quot;settings&quot;: {
+	  	  	  	&quot;groupName&quot;: &quot;supervisor &quot;, 
+	  	  	  	&quot;host&quot;: &quot;IP_OF_GANGLIA_GMOND_SERVER&quot;, 
+	  	  	  	&quot;port&quot;: &quot;8649&quot;
+	  	  	  }
+	  	  	}
+	  	  ], 
+	  	  &quot;obj&quot;: &quot;java.lang:type=Runtime&quot;, 
+	  	  &quot;resultAlias&quot;: &quot;supervisor&quot;, 
+	  	  &quot;attr&quot;: [
+	  	  	&quot;StartTime&quot;, 
+	  	  	&quot;Uptime&quot;
+	  	  ]
+	  	}
+	  ], 
+	  &quot;numQueryThreads&quot;: 2
+    }
+  ]
 }
 &lt;/code&gt;&lt;/pre&gt;
 
@@ -1180,7 +1180,7 @@ io.github.ningg.timer.LearnTimer:
      <updated>2014-12-09T00:00:00+08:00</updated>
      <id>http://ningg.github.com/kafka-monitoring-config</id>
      <content type="html">&lt;blockquote&gt;
-  &lt;p&gt;本文原文来自&lt;a href=&quot;http://kafka.apache.org/documentation.html#monitoring&quot;&gt;Kafka 0.8.* Monitoring&lt;/a&gt;&lt;/p&gt;
+  &lt;p&gt;本文原文来自[Kafka 0.8.x Monitoring][Kafka 0.8.x Monitoring]&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;p&gt;Kafka uses &lt;code&gt;Yammer Metrics&lt;/code&gt; for metrics reporting in both the server and the client. This can be configured to report stats using pluggable stats reporters to hook up to your monitoring system.&lt;/p&gt;
@@ -1190,230 +1190,127 @@ io.github.ningg.timer.LearnTimer:
 &lt;p&gt;We pay particular we do graphing and alerting on the following metrics:&lt;/p&gt;
 
 &lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;Description&lt;/th&gt;
+      &lt;th&gt;Mbean name&lt;/th&gt;
+      &lt;th&gt;Normal value&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
   &lt;tbody&gt;
     &lt;tr&gt;
-      &lt;td&gt;Description&lt;/td&gt;
-      &lt;td&gt;Mbean name&lt;/td&gt;
-      &lt;td&gt;Normal value&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;–&lt;/td&gt;
-      &lt;td&gt;–&lt;/td&gt;
-      &lt;td&gt;–&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
       &lt;td&gt;Message in rate&lt;/td&gt;
-      &lt;td&gt;“kafka.server”:name=”AllTopicsMessagesInPerSec”,type=”BrokerTopicMetrics”&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;“kafka.server”: name=”AllTopicsMessagesInPerSec”, type=”BrokerTopicMetrics”&lt;/td&gt;
       &lt;td&gt; &lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;Byte in rate&lt;/td&gt;
-      &lt;td&gt;“kafka.server”:name=”AllTopicsBytesInPerSec”,type=”BrokerTopicMetrics”&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;“kafka.server”: name=”AllTopicsBytesInPerSec”, type=”BrokerTopicMetrics”&lt;/td&gt;
       &lt;td&gt; &lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;Request rate&lt;/td&gt;
-      &lt;td&gt;“kafka.network”:name=”{Produce&lt;code&gt;|&lt;/code&gt;Fetch-consumer&lt;code&gt;|&lt;/code&gt;Fetch-follower}-RequestsPerSec”,type=”RequestMetrics”&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;“kafka.network”: name=”{Produce&lt;code&gt;|&lt;/code&gt;Fetch-consumer&lt;code&gt;|&lt;/code&gt;Fetch-follower}-RequestsPerSec”, type=”RequestMetrics”&lt;/td&gt;
       &lt;td&gt; &lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;Byte out rate&lt;/td&gt;
-      &lt;td&gt;“kafka.server”:name=”AllTopicsBytesOutPerSec”,type=”BrokerTopicMetrics”&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;“kafka.server”: name=”AllTopicsBytesOutPerSec”, type=”BrokerTopicMetrics”&lt;/td&gt;
       &lt;td&gt; &lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;Log flush rate and time&lt;/td&gt;
-      &lt;td&gt;“kafka.log”:name=”LogFlushRateAndTimeMs”,type=”LogFlushStats”&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;“kafka.log”: name=”LogFlushRateAndTimeMs”, type=”LogFlushStats”&lt;/td&gt;
       &lt;td&gt; &lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
-      &lt;td&gt;# of under replicated partition&lt;/td&gt;
-      &lt;td&gt;s (&lt;/td&gt;
-      &lt;td&gt;ISR&lt;/td&gt;
-      &lt;td&gt;&amp;lt;&lt;/td&gt;
-      &lt;td&gt;all replicas&lt;/td&gt;
-      &lt;td&gt;)	“kafka.server”:name=”UnderReplicatedPartitions”,type=”ReplicaManager”&lt;/td&gt;
+      &lt;td&gt;# of under replicated partitions&lt;/td&gt;
+      &lt;td&gt;(&lt;code&gt;|ISR| &amp;lt; |all replicas|&lt;/code&gt;) “kafka.server”: name=”UnderReplicatedPartitions”, type=”ReplicaManager”&lt;/td&gt;
       &lt;td&gt;0&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;Is controller active on broker&lt;/td&gt;
-      &lt;td&gt;“kafka.controller”:name=”ActiveControllerCount”,type=”KafkaController”&lt;/td&gt;
+      &lt;td&gt;“kafka.controller”: name=”ActiveControllerCount”, type=”KafkaController”&lt;/td&gt;
       &lt;td&gt;only one broker in the cluster should have 1&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;Leader election rate&lt;/td&gt;
-      &lt;td&gt;“kafka.controller”:name=”LeaderElectionRateAndTimeMs”,type=”ControllerStats”&lt;/td&gt;
+      &lt;td&gt;“kafka.controller”: name=”LeaderElectionRateAndTimeMs”, type=”ControllerStats”&lt;/td&gt;
       &lt;td&gt;non-zero when there are broker failures&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;Unclean leader election rate&lt;/td&gt;
-      &lt;td&gt;“kafka.controller”:name=”UncleanLeaderElectionsPerSec”,type=”ControllerStats”&lt;/td&gt;
+      &lt;td&gt;“kafka.controller”: name=”UncleanLeaderElectionsPerSec”, type=”ControllerStats”&lt;/td&gt;
       &lt;td&gt;0&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;Partition counts&lt;/td&gt;
-      &lt;td&gt;“kafka.server”:name=”PartitionCount”,type=”ReplicaManager”&lt;/td&gt;
+      &lt;td&gt;“kafka.server”: name=”PartitionCount”, type=”ReplicaManager”&lt;/td&gt;
       &lt;td&gt;mostly even across brokers&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;Leader replica counts&lt;/td&gt;
-      &lt;td&gt;“kafka.server”:name=”LeaderCount”,type=”ReplicaManager”&lt;/td&gt;
+      &lt;td&gt;“kafka.server”: name=”LeaderCount”, type=”ReplicaManager”&lt;/td&gt;
       &lt;td&gt;mostly even across brokers&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;ISR shrink rate&lt;/td&gt;
-      &lt;td&gt;“kafka.server”:name=”ISRShrinksPerSec”,type=”ReplicaManager”&lt;/td&gt;
+      &lt;td&gt;“kafka.server”: name=”ISRShrinksPerSec”, type=”ReplicaManager”&lt;/td&gt;
       &lt;td&gt;If a broker goes down, ISR for some of the partitions will shrink. When that broker is up again, ISR will be expanded once the replicas are fully caught up. Other than that, the expected value for both ISR shrink rate and expansion rate is 0.&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;ISR expansion rate&lt;/td&gt;
-      &lt;td&gt;“kafka.server”:name=”ISRExpandsPerSec”,type=”ReplicaManager”&lt;/td&gt;
+      &lt;td&gt;“kafka.server”: name=”ISRExpandsPerSec”, type=”ReplicaManager”&lt;/td&gt;
       &lt;td&gt;See above&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;Max lag in messages btw follower and leader replicas&lt;/td&gt;
-      &lt;td&gt;“kafka.server”:name=”([-.\w]+)-MaxLag”,type=”ReplicaFetcherManager”&lt;/td&gt;
+      &lt;td&gt;“kafka.server”: name=”([-.\w]+)-MaxLag”, type=”ReplicaFetcherManager”&lt;/td&gt;
       &lt;td&gt;&amp;lt; replica.lag.max.messages&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;Lag in messages per follower replica&lt;/td&gt;
-      &lt;td&gt;“kafka.server”:name=”([-.\w]+)-ConsumerLag”,type=”FetcherLagMetrics”&lt;/td&gt;
+      &lt;td&gt;“kafka.server”: name=”([-.\w]+)-ConsumerLag”, type=”FetcherLagMetrics”&lt;/td&gt;
       &lt;td&gt;&amp;lt; replica.lag.max.messages&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;Requests waiting in the producer purgatory&lt;/td&gt;
-      &lt;td&gt;“kafka.server”:name=”PurgatorySize”,type=”ProducerRequestPurgatory”&lt;/td&gt;
+      &lt;td&gt;“kafka.server”: name=”PurgatorySize”, type=”ProducerRequestPurgatory”&lt;/td&gt;
       &lt;td&gt;non-zero if ack=-1 is used&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;Requests waiting in the fetch purgatory&lt;/td&gt;
-      &lt;td&gt;“kafka.server”:name=”PurgatorySize”,type=”FetchRequestPurgatory”&lt;/td&gt;
+      &lt;td&gt;“kafka.server”: name=”PurgatorySize”, type=”FetchRequestPurgatory”&lt;/td&gt;
       &lt;td&gt;size depends on fetch.wait.max.ms in the consumer&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;Request total time&lt;/td&gt;
-      &lt;td&gt;“kafka.network”:name=”{Produce&lt;code&gt;|&lt;/code&gt;Fetch-Consumer&lt;code&gt;|&lt;/code&gt;Fetch-Follower}-TotalTimeMs”,type=”RequestMetrics”&lt;/td&gt;
+      &lt;td&gt;“kafka.network”: name=”{Produce&lt;code&gt;|&lt;/code&gt;Fetch-Consumer&lt;code&gt;|&lt;/code&gt;Fetch-Follower}-TotalTimeMs”,type=”RequestMetrics”&lt;/td&gt;
       &lt;td&gt;broken into queue, local, remote and response send time&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;Time the request waiting in the request queue&lt;/td&gt;
-      &lt;td&gt;“kafka.network”:name=”{Produce&lt;code&gt;|&lt;/code&gt;Fetch-Consumer&lt;code&gt;|&lt;/code&gt;Fetch-Follower}-QueueTimeMs”,type=”RequestMetrics”&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;“kafka.network”: name=”{Produce&lt;code&gt;|&lt;/code&gt;Fetch-Consumer&lt;code&gt;|&lt;/code&gt;Fetch-Follower}-QueueTimeMs”, type=”RequestMetrics”&lt;/td&gt;
       &lt;td&gt; &lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;Time the request being processed at the leader&lt;/td&gt;
-      &lt;td&gt;“kafka.network”:name=”{Produce&lt;code&gt;|&lt;/code&gt;Fetch-Consumer&lt;code&gt;|&lt;/code&gt;Fetch-Follower}-LocalTimeMs”,type=”RequestMetrics”&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;“kafka.network”: name=”{Produce&lt;code&gt;|&lt;/code&gt;Fetch-Consumer&lt;code&gt;|&lt;/code&gt;Fetch-Follower}-LocalTimeMs”, type=”RequestMetrics”&lt;/td&gt;
       &lt;td&gt; &lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;Time the request waits for the follower&lt;/td&gt;
-      &lt;td&gt;“kafka.network”:name=”{Produce&lt;code&gt;|&lt;/code&gt;Fetch-Consumer&lt;code&gt;|&lt;/code&gt;Fetch-Follower}-RemoteTimeMs”,type=”RequestMetrics”&lt;/td&gt;
+      &lt;td&gt;“kafka.network”: name=”{Produce&lt;code&gt;|&lt;/code&gt;Fetch-Consumer&lt;code&gt;|&lt;/code&gt;Fetch-Follower}-RemoteTimeMs”, type=”RequestMetrics”&lt;/td&gt;
       &lt;td&gt;non-zero for produce requests when ack=-1&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;Time to send the response&lt;/td&gt;
-      &lt;td&gt;“kafka.network”:name=”{Produce&lt;code&gt;|&lt;/code&gt;Fetch-Consumer&lt;code&gt;|&lt;/code&gt;Fetch-Follower}-ResponseSendTimeMs”,type=”RequestMetrics”&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;“kafka.network”: name=”{Produce&lt;code&gt;|&lt;/code&gt;Fetch-Consumer&lt;code&gt;|&lt;/code&gt;Fetch-Follower}-ResponseSendTimeMs”, type=”RequestMetrics”&lt;/td&gt;
       &lt;td&gt; &lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
       &lt;td&gt;Number of messages the consumer lags behind the producer by&lt;/td&gt;
-      &lt;td&gt;“kafka.consumer”:name=”([-.\w]+)-MaxLag”,type=”ConsumerFetcherManager”&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;“kafka.consumer”: name=”([-.\w]+)-MaxLag”, type=”ConsumerFetcherManager”&lt;/td&gt;
       &lt;td&gt; &lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
