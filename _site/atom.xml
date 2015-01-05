@@ -4,13 +4,179 @@
    <title>NingG.github.com</title>
    <link href="http://ningg.github.com/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://ningg.github.com" rel="alternate" type="text/html" />
-   <updated>2014-12-14T18:16:27+08:00</updated>
+   <updated>2015-01-05T21:51:15+08:00</updated>
    <id>http://ningg.github.com</id>
    <author>
      <name></name>
      <email></email>
    </author>
 
+   
+   <entry>
+     <title>存在感</title>
+     <link href="http://ningg.github.com/natural-law"/>
+     <updated>2015-01-03T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/natural-law</id>
+     <content type="html">&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
+
+&lt;p&gt;最近看来一个现实咋骗案例：&lt;a href=&quot;http://video.sina.com.cn/p/news/s/v/2015-01-03/232964466971.html&quot;&gt;团伙冒充国防部诈骗 办公室豪华惊呆民警&lt;/a&gt;，&lt;/p&gt;
+
+&lt;div&gt;&lt;object id=&quot;ssss&quot; width=&quot;480&quot; height=&quot;370&quot;&gt;&lt;param name=&quot;allowScriptAccess&quot; value=&quot;always&quot; /&gt;&lt;embed pluginspage=&quot;http://www.macromedia.com/go/getflashplayer&quot; src=&quot;http://you.video.sina.com.cn/api/sinawebApi/outplayrefer.php/video_id=249210699/s.swf&quot; type=&quot;application/x-shockwave-flash&quot; name=&quot;ssss&quot; allowfullscreen=&quot;true&quot; allowscriptaccess=&quot;always&quot; width=&quot;480&quot; height=&quot;370&quot; /&gt;&lt;/object&gt;&lt;/div&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;几点回顾&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;事出反常，必为妖：利润超出常理，高普通利润2~20倍；&lt;/li&gt;
+  &lt;li&gt;假作真时，真亦假：假的东西，精心准备之后，比真的更真；&lt;/li&gt;
+  &lt;li&gt;几个基本心理特点：
+    &lt;ul&gt;
+      &lt;li&gt;突发情况的警惕：保持警惕，认为不可能的事情，特别是凭空出来的好运、好机会，保持警惕，及时拒绝进一步了解这一“好运”；&lt;/li&gt;
+      &lt;li&gt;观点的坚持：选择动作发生后，通常会因为选择而坚持，无法随着条件的变化，重新客观的审视问题；&lt;/li&gt;
+      &lt;li&gt;以貌取人：涉及利润时，一定排除因为身份、装扮带来的信任感；&lt;/li&gt;
+      &lt;li&gt;利令智昏：利润达到一定程度时，无法客观思考，或者倾向性思考，总向好的方面打算；而，真正应该做的是：往最坏的方面思考和打算；&lt;/li&gt;
+      &lt;li&gt;时机：错过的不是机会，机会不会错过，宁愿放弃机会，也不在稀里糊涂中做决定；&lt;/li&gt;
+      &lt;li&gt;自我认识：通常一个人会高估自己、低估他人，当高估自己时，会产生自己掌控全局的幻想，此时，更易被利用；&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;意识到人共有的心里特点，并在做决断时，提醒自己有这些因素，可能导致一些结果。&lt;/p&gt;
+
+&lt;p&gt;突然想起来，某人说：做事情先看人，人是否值得信任，人对了，才考虑接下来的事情；否则，基本不考虑。&lt;/p&gt;
+
+</content>
+   </entry>
+   
+   <entry>
+     <title>IntelliJ IDEA</title>
+     <link href="http://ningg.github.com/intellij-idea"/>
+     <updated>2014-12-30T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/intellij-idea</id>
+     <content type="html">&lt;h2 id=&quot;section&quot;&gt;显示帮助信息&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code&gt;alt + h&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;显示帮助列表&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;通过&lt;code&gt;alt + h&lt;/code&gt;快捷操作显示出的帮助列表，很重要，下面给个截图：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/intellij-idea/help-menu.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Help Topics：完整的帮助文档，分为不同的topics，各种各样的帮助内容；&lt;/li&gt;
+  &lt;li&gt;Tip of the Day：很多快捷操作，值得每天一看；&lt;/li&gt;
+  &lt;li&gt;Productivity Guide：根据具体的操作，以及操作对应的频率，给出改进建议；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;首次登录，几个窗口&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;快捷操作&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;说明&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;alt + 1&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Open Project View&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;ctrl + -&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;双击&lt;code&gt;shift&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;search everywhere&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;ctrl + shift + N&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;open a file by name&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;ctrl + shift + A&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Find Action（什么意思？）&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;ctrl + E&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;open recent files&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;alt + Home&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;open Navigation Bar&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;alt + F4&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;关闭窗口&lt;em&gt;（Windows 系统自带）&lt;/em&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;ESC&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;光标聚焦，返回到Edit窗口&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;shift + ESC&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;光标聚焦返回到Edit窗口，同时关闭其他窗口&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;shift + F10&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;运行 main&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;shift + F9&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Debug方式运行main&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;alt + Enter&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;显示出错信息的提示&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;alt + Right/Left&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;左右切换当前Edit View中的窗口&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;ctrl + alt + U&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;show Diagram&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;ctrl + alt + shift + U&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;show Diagram popup&lt;em&gt;(新窗口中打开Diagram关系图)&lt;/em&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;几点疑问：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;如何在编辑窗口中，关闭一个打开的java文件；&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;ctrl + n&lt;/code&gt;和&lt;code&gt;ctrl + shift + n&lt;/code&gt;两个命令都能按照name来查找class，有什么区别？&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;几点情况：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;打开Project Structure，两种方式：
+    &lt;ul&gt;
+      &lt;li&gt;Projcet View中&lt;code&gt;F4&lt;/code&gt;；&lt;/li&gt;
+      &lt;li&gt;&lt;code&gt;ctrl + alt + shift + S&lt;/code&gt;；&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;创建class、package、Directory等，快捷操作：
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code&gt;alt + Insert&lt;/code&gt;；&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;特别说明&lt;/strong&gt;：IntelliJ IDEA中只要有list列表，就可以直接输入查询&lt;/p&gt;
+
+</content>
+   </entry>
    
    <entry>
      <title>Storm：Setting up a Storm cluster</title>
@@ -1656,312 +1822,6 @@ ase_sensitive_hostnames 0&lt;/p&gt;
  memcached_parameters “–SERVER=127.0.0.1”&lt;/p&gt;
 
 &lt;h2 id=&quot;section&quot;&gt;参考来源&lt;/h2&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>Flume 1.5.0.1 User Guide：Monitoring</title>
-     <link href="http://ningg.github.com/flume-user-guide-monitoring"/>
-     <updated>2014-12-03T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/flume-user-guide-monitoring</id>
-     <content type="html">&lt;p&gt;Monitoring in Flume is still a work in progress. Changes can happen very often. Several Flume components report metrics to the JMX platform MBean server. These metrics can be queried using Jconsole.
-（当前Flume的Monitoring最终方案没有敲定，期间会多次改版，注意关注JIRA；另，几个Flume components会向JMX platform MBean server提交运行参数，可以通过JMX获取这几个Flume components的运行状态。）&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：JVM上两个东西，什么用途？&lt;strong&gt;JMX platform&lt;/strong&gt;、&lt;strong&gt;MBean server&lt;/strong&gt;。&lt;/p&gt;
-
-&lt;h2 id=&quot;ganglia-reporting&quot;&gt;Ganglia Reporting&lt;/h2&gt;
-
-&lt;p&gt;Flume can also report these metrics to Ganglia 3 or Ganglia 3.1 metanodes. To report metrics to Ganglia, a flume agent must be started with this support. The Flume agent has to be started by passing in the following parameters as system properties prefixed by flume.monitoring., and can be specified in the &lt;code&gt;flume-env.sh&lt;/code&gt;:&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Property Name&lt;/th&gt;
-      &lt;th&gt;Default&lt;/th&gt;
-      &lt;th&gt;Description&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;strong&gt;type&lt;/strong&gt;&lt;/td&gt;
-      &lt;td&gt;–&lt;/td&gt;
-      &lt;td&gt;The component type name, has to be &lt;code&gt;ganglia&lt;/code&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;strong&gt;hosts&lt;/strong&gt;&lt;/td&gt;
-      &lt;td&gt;–&lt;/td&gt;
-      &lt;td&gt;Comma-separated list of &lt;code&gt;hostname:port&lt;/code&gt; of Ganglia servers&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;pollFrequency&lt;/td&gt;
-      &lt;td&gt;60&lt;/td&gt;
-      &lt;td&gt;Time, in seconds, between consecutive reporting to Ganglia server&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;isGanglia3&lt;/td&gt;
-      &lt;td&gt;false&lt;/td&gt;
-      &lt;td&gt;Ganglia server version is 3. By default, Flume sends in Ganglia 3.1 format&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;We can start Flume with Ganglia support as follows:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ bin/flume-ng agent --conf-file example.conf --name a1 -Dflume.monitoring.type=ganglia -Dflume.monitoring.hosts=com.example:1234,com.example2:5455
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：在&lt;code&gt;conf/flume-env.sh&lt;/code&gt;文件中配置Ganglia监控，具体配置选项：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# Flume Monitoring: Ganglia Monitoring
-JAVA_OPTS=&quot;-Dflume.monitoring.type=ganglia -Dflume.monitoring.hosts=239.2.11.166:8649&quot;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&quot;json-reporting&quot;&gt;JSON Reporting&lt;/h2&gt;
-
-&lt;p&gt;Flume can also report metrics in a JSON format. To enable reporting in JSON format, Flume hosts a Web server on a configurable port. Flume reports metrics in the following JSON format:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;{
-&quot;typeName1.componentName1&quot; : {&quot;metric1&quot; : &quot;metricValue1&quot;, &quot;metric2&quot; : &quot;metricValue2&quot;},
-&quot;typeName2.componentName2&quot; : {&quot;metric3&quot; : &quot;metricValue3&quot;, &quot;metric4&quot; : &quot;metricValue4&quot;}
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Here is an example:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;{
-&quot;CHANNEL.fileChannel&quot;:{&quot;EventPutSuccessCount&quot;:&quot;468085&quot;,
-					  &quot;Type&quot;:&quot;CHANNEL&quot;,
-					  &quot;StopTime&quot;:&quot;0&quot;,
-					  &quot;EventPutAttemptCount&quot;:&quot;468086&quot;,
-					  &quot;ChannelSize&quot;:&quot;233428&quot;,
-					  &quot;StartTime&quot;:&quot;1344882233070&quot;,
-					  &quot;EventTakeSuccessCount&quot;:&quot;458200&quot;,
-					  &quot;ChannelCapacity&quot;:&quot;600000&quot;,
-					  &quot;EventTakeAttemptCount&quot;:&quot;458288&quot;},
-&quot;CHANNEL.memChannel&quot;:{&quot;EventPutSuccessCount&quot;:&quot;22948908&quot;,
-				   &quot;Type&quot;:&quot;CHANNEL&quot;,
-				   &quot;StopTime&quot;:&quot;0&quot;,
-				   &quot;EventPutAttemptCount&quot;:&quot;22948908&quot;,
-				   &quot;ChannelSize&quot;:&quot;5&quot;,
-				   &quot;StartTime&quot;:&quot;1344882209413&quot;,
-				   &quot;EventTakeSuccessCount&quot;:&quot;22948900&quot;,
-				   &quot;ChannelCapacity&quot;:&quot;100&quot;,
-				   &quot;EventTakeAttemptCount&quot;:&quot;22948908&quot;}
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Property Name&lt;/th&gt;
-      &lt;th&gt;Default&lt;/th&gt;
-      &lt;th&gt;Description&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;strong&gt;type&lt;/strong&gt;&lt;/td&gt;
-      &lt;td&gt;–&lt;/td&gt;
-      &lt;td&gt;The component type name, has to be &lt;code&gt;http&lt;/code&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;port&lt;/td&gt;
-      &lt;td&gt;41414&lt;/td&gt;
-      &lt;td&gt;The port to start the server on.&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;We can start Flume with JSON Reporting support as follows:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ bin/flume-ng agent --conf-file example.conf --name a1 -Dflume.monitoring.type=http -Dflume.monitoring.port=34545
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Metrics will then be available at &lt;code&gt;http://&amp;lt;hostname&amp;gt;:&amp;lt;port&amp;gt;/metrics&lt;/code&gt; webpage. Custom components can report metrics as mentioned in the Ganglia section above.&lt;/p&gt;
-
-&lt;h2 id=&quot;custom-reporting&quot;&gt;Custom Reporting&lt;/h2&gt;
-
-&lt;p&gt;It is possible to report metrics to other systems by writing servers that do the reporting. Any reporting class has to implement the interface, &lt;code&gt;org.apache.flume.instrumentation.MonitorService&lt;/code&gt;. Such a class can be used the same way the &lt;code&gt;GangliaServer&lt;/code&gt; is used for reporting. They can poll the platform mbean server to poll the mbeans for metrics. For example, if an HTTP monitoring service called &lt;code&gt;HTTPReporting&lt;/code&gt; can be used as follows:&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：MBean是什么？其中可以获取metrics？&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$ bin/flume-ng agent --conf-file example.conf --name a1 \
--Dflume.monitoring.type=com.example.reporting.HTTPReporting \
--Dflume.monitoring.node=com.example:332
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Property Name&lt;/th&gt;
-      &lt;th&gt;Default	Description&lt;/th&gt;
-      &lt;th&gt; &lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;type&lt;/td&gt;
-      &lt;td&gt;–&lt;/td&gt;
-      &lt;td&gt;The component type name, has to be FQCN&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h2 id=&quot;reporting-metrics-from-custom-components&quot;&gt;Reporting metrics from custom components&lt;/h2&gt;
-
-&lt;p&gt;Any custom flume components should inherit from the &lt;code&gt;org.apache.flume.instrumentation.MonitoredCounterGroup&lt;/code&gt; class. The class should then provide &lt;code&gt;getter methods&lt;/code&gt; for each of the metrics it exposes. See the code below. The MonitoredCounterGroup expects a list of attributes whose metrics are exposed by this class. As of now, this class only supports exposing metrics as long values.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;public class SinkCounter extends MonitoredCounterGroup implements
-	SinkCounterMBean {
-
-  private static final String COUNTER_CONNECTION_CREATED =
-	&quot;sink.connection.creation.count&quot;;
-
-  private static final String COUNTER_CONNECTION_CLOSED =
-	&quot;sink.connection.closed.count&quot;;
-
-  private static final String COUNTER_CONNECTION_FAILED =
-	&quot;sink.connection.failed.count&quot;;
-
-  private static final String COUNTER_BATCH_EMPTY =
-	&quot;sink.batch.empty&quot;;
-
-  private static final String COUNTER_BATCH_UNDERFLOW =
-	  &quot;sink.batch.underflow&quot;;
-
-  private static final String COUNTER_BATCH_COMPLETE =
-	&quot;sink.batch.complete&quot;;
-
-  private static final String COUNTER_EVENT_DRAIN_ATTEMPT =
-	&quot;sink.event.drain.attempt&quot;;
-
-  private static final String COUNTER_EVENT_DRAIN_SUCCESS =
-	&quot;sink.event.drain.sucess&quot;;
-
-  private static final String[] ATTRIBUTES = {
-	COUNTER_CONNECTION_CREATED, COUNTER_CONNECTION_CLOSED,
-	COUNTER_CONNECTION_FAILED, COUNTER_BATCH_EMPTY,
-	COUNTER_BATCH_UNDERFLOW, COUNTER_BATCH_COMPLETE,
-	COUNTER_EVENT_DRAIN_ATTEMPT, COUNTER_EVENT_DRAIN_SUCCESS
-  };
-
-
-  public SinkCounter(String name) {
-	super(MonitoredCounterGroup.Type.SINK, name, ATTRIBUTES);
-  }
-
-  @Override
-  public long getConnectionCreatedCount() {
-	return get(COUNTER_CONNECTION_CREATED);
-  }
-
-  public long incrementConnectionCreatedCount() {
-	return increment(COUNTER_CONNECTION_CREATED);
-  }
-
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>Windows下常用命令</title>
-     <link href="http://ningg.github.com/windows-normal-cmd"/>
-     <updated>2014-12-01T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/windows-normal-cmd</id>
-     <content type="html">&lt;blockquote&gt;
-  &lt;p&gt;说实话，之前在技术上很排斥windows，经过这段时间打磨，基本有个观点：倾向使用Linux，但环境限制需要解决windows下的某些情况时，本质就是问题，用心去解决。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;查看端口占用&lt;/h2&gt;
-
-&lt;p&gt;Windows下，CMD中，通过如下命令查看端口占用情况：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;// netstat -h查看命令详情
-C:\Documents and Settings\ningg&amp;gt;  netstat -ano
-
-Active Connections
-
-  Proto  Local Address          Foreign Address        State           PID
-  TCP    0.0.0.0:135            0.0.0.0:0              LISTENING       1160
-  TCP    0.0.0.0:445            0.0.0.0:0              LISTENING       4
-  TCP    0.0.0.0:3389           0.0.0.0:0              LISTENING       1076
-  TCP    0.0.0.0:5140           0.0.0.0:0              LISTENING       4472
-  TCP    0.0.0.0:8081           0.0.0.0:0              LISTENING       1416
-  TCP    0.0.0.0:8197           0.0.0.0:0              LISTENING       5092
-  TCP    0.0.0.0:17866          0.0.0.0:0              LISTENING       1848
-  TCP    127.0.0.1:1028         0.0.0.0:0              LISTENING       780
-  TCP    127.0.0.1:1033         127.0.0.1:1034         ESTABLISHED     1116
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;现在希望终结占用5140端口的进程，上面查询可知PID=4472的进程占用此端口，如何终止这个进程呢？打开&lt;code&gt;任务管理器&lt;/code&gt;，在&lt;code&gt;查看(V)&lt;/code&gt;–&amp;gt;&lt;code&gt;选择列(S)...&lt;/code&gt;–&amp;gt;勾选&lt;code&gt;PID（进程标识符）&lt;/code&gt;，然后在任务管理器中&lt;code&gt;进程&lt;/code&gt;页面，即可看到每个进程对应的PID号，终止掉对应PID的进程即可。下图为查询到的进程。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/windows-normal-cmd/pid-windows-manager.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;cmd&quot;&gt;更改CMD的编码方式&lt;/h2&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;背景&lt;/h3&gt;
-
-&lt;p&gt;最近通过&lt;a href=&quot;http://sourceforge.net/projects/unxutils/&quot;&gt;UNXutils&lt;/a&gt;来实现windows下的tail命令时，如果log是&lt;code&gt;ANSI&lt;/code&gt;格式编码，则CMD窗口能够正常显示；但如果log是&lt;code&gt;UTF-8&lt;/code&gt;格式，则CMD窗口显示乱码。&lt;/p&gt;
-
-&lt;h3 id=&quot;section-2&quot;&gt;分析&lt;/h3&gt;
-
-&lt;p&gt;本地文件的乱码问题，无非关注几个点：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;原始文件的编码；&lt;/li&gt;
-  &lt;li&gt;显示窗口的编码（解码方式）；&lt;/li&gt;
-  &lt;li&gt;传输过程中的编码方式；&lt;em&gt;（对利用网络传输的内容有效）&lt;/em&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;windows下，通过Notepad++编辑器，能够很容易查看当前log的编码方式，同时，利用Notepad++也能很方便地对log进行编码方式的转换。总结一下：能够完全掌握原始文件的编码。现在问题焦点就是显示窗口的编码方式了，如何查看？窗口是有属性的吧，对，就在CMD窗口的&lt;code&gt;属性&lt;/code&gt;中，有两个相关项：&lt;code&gt;当前代码页&lt;/code&gt;和&lt;code&gt;字体&lt;/code&gt;。&lt;/p&gt;
-
-&lt;p&gt;再往下，不说了思考的细节了，直接说解决办法：&lt;/p&gt;
-
-&lt;h4 id=&quot;section-3&quot;&gt;1. 修改当前代码页的编码方式&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code&gt;// 当前代码页修改为65001：UTF-8
-chcp 65001
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;补充：代码页默认936：ANSI/OEM - 简体中文（GBK）&lt;/p&gt;
-
-&lt;h4 id=&quot;cmd-1&quot;&gt;2. 修改CMD窗口的字体&lt;/h4&gt;
-
-&lt;p&gt;选择字体为：Lucida Console&lt;/p&gt;
-
-&lt;p&gt;OK，确定对当前窗口生效。&lt;/p&gt;
-
-&lt;h2 id=&quot;java&quot;&gt;Java常见问题&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code&gt;...
-java.lang.IllegalArgumentException: Malformed \uxxxx encoding.
-...
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;通常是properties配置文件中，路径中包含&lt;code&gt;\\&lt;/code&gt;，则出现上述错误，需要将其替换为&lt;code&gt;/&lt;/code&gt;即可。&lt;/p&gt;
-
-&lt;h2 id=&quot;winbatpath&quot;&gt;win下bat脚本中设置path&lt;/h2&gt;
-
-&lt;pre&gt;&lt;code&gt;set Path=%Path%;d:/
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&quot;windowstail&quot;&gt;windows下tail命令&lt;/h2&gt;
-
-&lt;p&gt;整体上有两种方式，一种直接利用第三方的开源实现，另一种，利用windows下的powershell环境。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://sourceforge.net/projects/unxutils/&quot;&gt;UNXutils&lt;/a&gt;，直接下载后，在环境变量中配置之后，即可使用，推荐XP环境下使用；&lt;/li&gt;
-  &lt;li&gt;利用powershell命令：&lt;code&gt;get-content mylog.log -wait&lt;/code&gt;，更多参考：&lt;a href=&quot;http://www.stackify.com/11-ways-to-tail-a-log-file-on-windows-unix/&quot;&gt;11 ways to tail a log on windows&lt;/a&gt;；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section-4&quot;&gt;参考来源&lt;/h2&gt;
-
-&lt;h2 id=&quot;section-5&quot;&gt;杂谈&lt;/h2&gt;
-
-&lt;p&gt;乐于分享，我算是这么一类人，有时候心想：把经验分享出去，会不会导致被别人反超？但转念又一想：即使有人花费一点点时间就学会了，自己花费挺长时间才总结积累的经验，那对我可能不利，但对整个社会、对民族总是好的，能作为社会向前的垫脚石，也算是有点用。&lt;/p&gt;
 
 </content>
    </entry>
