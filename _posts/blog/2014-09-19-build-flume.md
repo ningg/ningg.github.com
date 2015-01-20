@@ -170,9 +170,9 @@ ok，重新执行命令`mvn install -DskipTests`，欧NO，又出错了，得到
 
 **疑问**：
 
-* 使用maven管理的代码，为什么不作为maven项目Import到eclipse下？而是先运行命令`mvn eclipse:eclipse`，然后将项目作为普通的java project导入到eclipse？
+* 使用maven管理的代码，为什么不作为maven项目Import到eclipse下？而是先运行命令`mvn eclipse:eclipse`，然后将项目作为普通的java project导入到eclipse？**RE**：两种方式是等价的，只不过利用`mvn eclipse:eclipse`命令，下载jar，感觉稍微快一点，可以先通过mvn命令进行编译，然后，重新打开一个新的src文件夹，并将其作为maven项目import到eclipse下*（需要调整一些，build path）*；
 * 使用eclipse来查看、调试flume源码，那如何对外发布源码？
-* 总结一下，就是一个问题`mvn eclipse:eclipse`过程中到底执行了什么？为什么要这么做？
+* 总结一下，就是一个问题`mvn eclipse:eclipse`过程中到底执行了什么？为什么要这么做？避免了，eclipse下安装m2eclipse插件，不过一般eclipse都默认安装了m2eclipse插件。
 
 
 

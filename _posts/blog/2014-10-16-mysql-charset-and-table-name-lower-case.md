@@ -9,10 +9,10 @@ category: mysql
 
 关于MySQL，遇到几个问题，列一下：
 
-乱码问题：字符集不统一；
-无法启动：查看错误日志；
-无法删除database：先在数据存储目录清理；
-table找不到：table区分大小写；
+* 乱码问题：字符集不统一；
+* 无法启动：查看错误日志；
+* 无法删除database：先在数据存储目录清理；
+* table找不到：table区分大小写；
 
 MySQL版本：
 
@@ -22,7 +22,7 @@ MySQL版本：
 
 ##乱码问题
 
-看官网，mysql的refman（reference manual，参考手册）中，globalization --> character set configuration，其中提到：
+看官网，mysql的refman（reference manual，参考手册）中，`globalization` --> `character set configuration`，其中提到：
 system、server、client的charset不一致时，会产生乱码。
 
 通过如下命令查看一下，当前mysql各个组件的字符集详情：
@@ -57,9 +57,16 @@ system、server、client的charset不一致时，会产生乱码。
 	
 重新启动MySQL，OK（根据[官网解释](http://dev.mysql.com/doc/refman/5.6/en/server-system-variables.html#sysvar_character_set_server)， 不需要向数据库重新插入数据）。database的编码方式，不要手动调整，其始终与default database保持一致，若没有default database，则由server的编码方式决定。
 
+
+**补充**：在windows环境下，与Linux有几点差异：
+
+* 没有`my.cnf`文件，此时修改`my.ini`文件，即可完成环境变量的配置；
+* 通常情况下，如果没有找到`my.ini`文件，则将`my-default.ini`文件复制之后重命名为`my.ini`文件；
+
+
 ##无法启动
 
-通过service mysql start，无法启动MySQL，提示出错，略焦躁，不要着急，有错误日志，查看即可。错误日志位置：/var/lib/mysql/*.err，出错信息：
+通过`service mysql start`，无法启动MySQL，提示出错，略焦躁，不要着急，有错误日志，查看即可。错误日志位置：/var/lib/mysql/*.err，出错信息：
 
 	[ERROR] /usr/sbin/mysqld: unknown variable 'default-character-set=utf-8'
 	

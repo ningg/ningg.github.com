@@ -6,14 +6,18 @@ categories: ganglia linux ops
 ---
 
 
+
 ##背景
+
+（当前文档仍然需要再梳理一遍）
+
 
 准备监控整个Flume、Kafka、Storm框架运行状态，不想重复造轮子，初步查询官网发现这个几个东西都可以跟Ganglia结合。初步查了一下Ganglia的应用很广泛，上Ganglia，走起。
 
 
 ##Ganglia基本知识
 
-[Ganglia官网]提供了较为简介的介绍，整理一下有几点：
+[Ganglia官网][Ganglia]提供了较为简介的介绍，整理一下有几点：
 
 * Ganglia是一个可扩展性不错的分布式监控系统；
 * 监控对象：集群，这个集群上可以有分布式系统，也可以只是单独的集群；
@@ -30,7 +34,7 @@ categories: ganglia linux ops
 此次采用最新的Ganglia版本，具体：
 
 * [ganglia-3.6.1(ganglia monitoring core)][ganglia-3.6.1(ganglia monitoring core)]
-* [ganglia-3.6.1(ganglia-web)][ganglia-3.6.1(ganglia-web)]
+* [ganglia-3.6.2(ganglia-web)][ganglia-3.6.2(ganglia-web)]
 	
 当前（2014-11-20），Ganglia由以下几个组件构成：
 
@@ -49,7 +53,7 @@ Gmond has four main responsibilities: monitor changes in host state, announce re
 
 Each gmond transmits in information in two different ways: unicasting/multicasting host state in external data representation (XDR) format using UDP messages or sending XML over a TCP connection.
 
-**notes(ningg)**：关于`gmond`daemon说几点：
+**notes(ningg)**：关于`gmond` daemon说几点：
 
 * gmond部署位置：每一个需要监控的node；
 * gmond需要的配置：安装简便，不依赖数据库；
@@ -135,8 +139,11 @@ The Ganglia web frontend is written in the PHP scripting language, and uses grap
 	
 ###几个基本组件
 
-`gmetad`进程需要去[rrdtool][rrdtool]，同时如果要同时在node上安装`gmetad`和`gmond`，则需要提前安装：apr*、pcre*、zlib*，具体：
+`gmetad`进程需要去[rrdtool][rrdtool]，同时如果要同时在node上安装`gmetad`和`gmond`，则需要提前安装：`apr*`、`pcre*`、`zlib*`，具体：
 
+	#gcc
+	yum install gcc
+	
 	#rrdtool
 	yum install rrdtool
 	yum install rrdtool-devel
@@ -156,6 +163,13 @@ The Ganglia web frontend is written in the PHP scripting language, and uses grap
 	#python-devel
 	yum install python
 	yum install python-devel
+	
+	#gperf
+	yum install gperf
+	
+上面这么多组件，也可以运行一条命令完成安装：
+
+	sudo yum install gcc rrdtool rrdtool-devel apr apr-devel pcre pcre-devel zlib zlib-devel pyton python-devel gperf
 	
 ###libconfuse
 
@@ -203,7 +217,7 @@ The Ganglia web frontend is written in the PHP scripting language, and uses grap
 
 安装Ganglia有几种方式：
 
-* rpm包：rpm -Uvh ganglia-*.rpm
+* rpm包：rpm -Uvh ganglia-*.rpm *（http://dl.fedoraproject.org/pub/epel/6/x86_64/ 中有ganglia 3.1相关的rpm包）*
 * yum源：yum install ganglia*
 * 本地编译源代码：make && make install
 
@@ -357,6 +371,9 @@ gmond的详细信息，可以通过命令`man gmond`和`man gmond.conf`来查看
 
 	cd ganglia-web-3.6.2
 	make install
+	
+	service httpd start
+	service gmetad start
 
 打开浏览器，查看[http://locahost/ganglia]
 	
@@ -446,12 +463,58 @@ OK，再次启动gmetad，成功启动。
 
 ###错误3
 
-通过rpm包或者yum源方式安装web frontend时，默认web frontend会被安装在`/usr/share/ganglia-webfrontend`目录下，这样通过[http://locahost/ganglia]就无法进行访问。
+通过rpm包或者yum源方式安装web frontend时，默认web frontend会被安装在`/usr/share/ganglia-webfrontend`目录下，这样通过[http://locahost/ganglia]()就无法进行访问。
 
 解决办法：
 
 	# 利用符号链接
 	ln -s /usr/share/ganglia-webfrontend /var/www/html/ganglia
+
+###错误4：
+
+通过浏览器访问[http://locahost/ganglia]()时，出现如下错误信息：
+
+	There was an error collecting ganglia data (127.0.0.1:8652):fsockopen error: Permission denied 解决方法
+
+解决办法：
+
+	setenforce 0
+
+附：
+
+* setenforce 1 设置SELinux 成为enforcing模式
+* setenforce 0 设置SELinux 成为permissive模式
+	
+	
+**疑问**：Linux下SELinux是什么安全机制？`setenforce 0`的含义是什么？
+	
+###错误5
+
+在一批新服务器上，安装的Linux版本与上文提到的一致；
+按照本文前一部分的步骤来安装Ganglia时，当执行`./configure --with-gmetad --enable-gexec`之后，再执行`make`命令时，具体出错信息如下：
+
+	libtool: link: gcc -std=gnu99 -I../lib -I../gmond -I../include -D_LARGEFILE64_SOURCE -g -O2 -fno-strict-aliasing -Wall -D_REENTRANT -o .libs/gmetad gmetad.o cmdline.o data_thread.o server.o process_xml.o rrd_helpers.o export_helpers.o conf.o type_hash.o xml_hash.o cleanup.o daemon_init.o  /usr/lib64/libapr-1.so ../lib/.libs/libganglia.so -lrrd -lm -ldl -lnsl -lz -lpcre -lexpat -lconfuse -lpthread -pthread -Wl,-rpath -Wl,/usr/lib64 -Wl,-rpath -Wl,/usr/local/lib64
+	gmetad.o: In function 'write_root_summary':
+	/home/storm/goodjob/ganglia/ganglia-3.6.1/gmetad/gmetad.c:239: undefined reference to 'in_type_list'
+	gmetad.o: In function 'sum_metrics':
+	/home/storm/goodjob/ganglia/ganglia-3.6.1/gmetad/gmetad.c:157: undefined reference to 'in_type_list'
+	server.o: In function 'metric_summary':
+	/home/storm/goodjob/ganglia/ganglia-3.6.1/gmetad/server.c:76: undefined reference to 'in_type_list'
+	process_xml.o: In function 'finish_processing_source':
+	/home/storm/goodjob/ganglia/ganglia-3.6.1/gmetad/process_xml.c:1084: undefined reference to 'in_type_list'
+	process_xml.o: In function 'fillmetric':
+	/home/storm/goodjob/ganglia/ganglia-3.6.1/gmetad/process_xml.c:97: undefined reference to 'in_type_list'
+	process_xml.o:/home/storm/goodjob/ganglia/ganglia-3.6.1/gmetad/process_xml.c:627: more undefined references to 'in_type_list' follow
+	collect2: ld returned 1 exit status
+	make[2]: *** [gmetad] Error 1
+	make[2]: Leaving directory '/home/storm/goodjob/ganglia/ganglia-3.6.1/gmetad'
+	make[1]: *** [all-recursive] Error 1
+	make[1]: Leaving directory '/home/storm/goodjob/ganglia/ganglia-3.6.1'
+	make: * [all] Error 2
+
+在网上一顿乱收，没有找到解决方案，倒过头来，看看上面的出错信息，貌似是gmetad安装过程出的错，OK，那只安装gmond就可以了吧，试试`./configure --enable-gexec`命令，OK，可以了。
+
+
 
 
 
@@ -517,6 +580,8 @@ Ganglia用于监测分布式系统的运行状态，如何把Ganglia集群用起
 * [Setup and configure Ganglia-3.6 on CentOS/RHEL 6.3][Setup and configure Ganglia-3.6 on CentOS/RHEL 6.3]
 * [Ganglia 体系结构及功能介绍][Ganglia 体系结构及功能介绍]（力荐）
 * Massie M L, Chun B N, Culler D E. [The ganglia distributed monitoring system: design, implementation, and experience][The ganglia distributed monitoring system: design, implementation, and experience] Journal. Parallel Computing, 2004, 30(7): 817-840.
+* [Ganglia安装过程][Ganglia安装过程]
+
 
 **notes(ningg)**：关于gmond的配置信息，官方参考来源有几个：
 
@@ -563,6 +628,11 @@ Ganglia用于监测分布式系统的运行状态，如何把Ganglia集群用起
 
 [Monitoring with Ganglia]:					/monitoring_with_ganglia.zip
 [Ganglia 体系结构及功能介绍]:				http://yaoweibin2008.blog.163.com/blog/static/11031392008763256465/
+
+[Ganglia安装过程]:							http://blog.csdn.net/xxd851116/article/details/21527055
+
+
+
 
 [The ganglia distributed monitoring system: design, implementation, and experience]:		The-Ganglia-Distributed-Monitoring-System.pdf
 [Setup and configure Ganglia-3.6 on CentOS/RHEL 6.3]:		https://sachinsharm.wordpress.com/2013/08/17/setup-and-configure-ganglia-3-6-on-centosrhel-6-3/

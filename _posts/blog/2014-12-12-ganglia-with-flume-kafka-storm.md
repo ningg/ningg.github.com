@@ -150,6 +150,8 @@ bridge between Storm and Ganglia.
 
 （自己有一篇单独介绍jmxtrans的博客，给个链接）
 
+####开启jvm的jmx功能
+
 
 ####supervisor.json
 

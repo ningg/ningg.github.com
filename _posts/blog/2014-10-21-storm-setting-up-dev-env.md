@@ -26,7 +26,7 @@ A Storm development environment has everything installed so that you can develop
 
 * 在local mode下，develop和test topology；
 * package topology for execution on a remote cluster；
-* shubmit/kill topology on a remote cluster;
+* submit/kill topology on a remote cluster;
 
 
 Let’s quickly go over the relationship between your machine and a remote cluster. A Storm cluster is managed by a master node called “Nimbus”. Your machine communicates with Nimbus to submit code (packaged as a jar) and topologies for execution on the cluster, and Nimbus will take care of distributing that code around the cluster and assigning workers to run your topology. Your machine uses a command line client called `storm` to communicate with Nimbus. The `storm` client is only used for remote mode; it is not used for developing and testing topologies in local mode.

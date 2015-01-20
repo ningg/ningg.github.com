@@ -58,6 +58,86 @@ OK，不要管这个，直接在storm-starter工程上，`右键`--`Run As`--`Ma
 
 **RE**：是的，直接开发，[storm Tutorial][storm Tutorial]中的例子就是这样。
 
+##Maven方式构建工程
+
+如果希望新建工程，并在其内进行Storm的开发，则，推荐新建Maven工程，并在其`pom.xml`下，添加如下配置：
+
+	<dependency>
+      <groupId>org.apache.storm</groupId>
+      <artifactId>storm-core</artifactId>
+      <version>0.9.3</version>
+      <!-- keep storm out of the jar-with-dependencies -->
+      <scope>provided</scope>
+    </dependency>
+
+在实际场景中，我编写的Storm topol程序，从Kafka中读取数据，具体`pom.xml`为：
+
+	<dependencies>
+        <dependency>
+            <groupId>org.apache.kafka</groupId>
+            <artifactId>kafka_2.9.2</artifactId>
+            <version>0.8.1.1</version>
+            <!-- use provided scope, so users can 
+			pull in whichever scala version they choose -->
+            <scope>provided</scope>
+            <exclusions>
+                <exclusion>
+                    <groupId>org.apache.zookeeper</groupId>
+                    <artifactId>zookeeper</artifactId>
+                </exclusion>
+                <exclusion>
+                    <groupId>log4j</groupId>
+                    <artifactId>log4j</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        
+        <dependency>
+          <groupId>org.apache.storm</groupId>
+          <artifactId>storm-core</artifactId>
+          <version>0.9.3</version>
+          <!-- keep storm out of the jar-with-dependencies -->
+          <scope>provided</scope>
+        </dependency>
+        
+        <dependency>
+        	<groupId>org.apache.storm</groupId>
+        	<artifactId>storm-kafka</artifactId>
+            <version>0.9.3</version>
+        </dependency>
+        
+    
+	</dependencies>
+  
+	<build>
+	    <plugins>
+	        <plugin>
+	           <artifactId>maven-assembly-plugin</artifactId>
+	           <configuration>
+	             <descriptorRefs>
+	           	   <descriptorRef>jar-with-dependencies</descriptorRef>
+	             </descriptorRefs>
+	             <archive>
+	           	   <manifest>
+	           	      <mainClass></mainClass>
+	           	   </manifest>
+	             </archive>
+	           </configuration>
+	           <executions>
+	             <execution>
+	           	   <id>make-assembly</id>
+	           	   <phase>package</phase>
+	           	   <goals>
+	           	     <goal>single</goal>
+	           	   </goals>
+	             </execution>
+	           </executions>
+	        </plugin>
+	    </plugins>
+	</build>
+	
+**注**：如果pom.xml一直提示出错，则update project(Maven)，或者close project之后再打开也可以。
+	
 ##本地安装Storm
 
 下载[Storm的binary版本][storm downloads]，就两点：
@@ -66,12 +146,20 @@ OK，不要管这个，直接在storm-starter工程上，`右键`--`Run As`--`Ma
 2. 验证是否安装成功：执行`storm`命令，查看是否提示出错；
 
 **疑问**：如果只是开发Storm topology，需要在本地win xp系统上安装Storm？
+**RE**：我来告诉你吧，本地安装Storm，核心用途是：充当client，向远端Storm cluster提交编写好的topology。重新来理一下，eclipse下新建工程，maven添加storm的依赖，即可进行topology的开发；然后通过本地安装的storm，可以进行本地的test、develop；最终，通过本地安装的storm充当client，可以向storm cluster提交topology。在实际使用过程中，发现无法在windows下的CMD中运行`storm jar`命令，因此，我在windows下安装了Cygwin（其中需要安装Python），在其中运行`storm jar`命令向远端的storm集群提交topol。更多细节参考[Storm：Running topologies on a production cluster][Storm：Running topologies on a production cluster]。
 
-**RE**：我来告诉你吧，本地安装Storm，核心用途是：充当client，向远端Storm cluster提交编写好的topology。重新来理一下，eclipse下新建工程，maven添加storm的依赖，即可进行topology的开发；然后通过本地安装的storm，可以进行本地的test、develop；最终，通过本地安装的storm充当client，可以向storm cluster提交topology。
+**疑问**：上面已经可以进行Storm topology的开发了，但如果希望查看Storm源代码，特别是Clojure编写的那部分，怎么办？
+**RE**：关于这个问题，官网有提示：[Creating a new Storm project][Storm: Creating a new Storm project]。
 
-> 疑问：上面已经可以进行Storm topology的开发了，但如果希望查看Storm源代码，特别是Clojure编写的那部分，怎么办？
->
-> 关于这个问题，官网有提示：[Creating a new Storm project][Storm: Creating a new Storm project]。
+##特别说明
+
+进行Storm开发的详细过程：
+
+* Eclipse下编写Storm topol；
+* 将Storm topol运行代码打包发布；
+* 通过本地Storm client向远端Storm cluster提交Storm topol及其依赖的jar；
+
+具体参考博客：[Storm：Running topologies on a production cluster][Storm：Running topologies on a production cluster]。
 
 
 ##参考来源
@@ -79,6 +167,7 @@ OK，不要管这个，直接在storm-starter工程上，`右键`--`Run As`--`Ma
 * [Storm Example: storm-starter](https://github.com/apache/incubator-storm/tree/master/examples/storm-starter)
 * [Storm: Setting up development environment](http://storm.apache.org/documentation/Setting-up-development-environment.html)
 * [Storm: Creating a new Storm project](http://storm.apache.org/documentation/Creating-a-new-Storm-project.html)
+* [Running topologies on a production cluster][Running topologies on a production cluster]
 
 
 
@@ -87,3 +176,5 @@ OK，不要管这个，直接在storm-starter工程上，`右键`--`Run As`--`Ma
 [storm Tutorial]:	http://storm.apache.org/documentation/Tutorial.html
 [storm downloads]:	http://storm.apache.org/downloads.html
 [Storm: Creating a new Storm project]:	http://storm.apache.org/documentation/Creating-a-new-Storm-project.html
+[Storm：Running topologies on a production cluster]:			/running-topol-on-a-prod-cluster/
+[Running topologies on a production cluster]:	http://storm.apache.org/documentation/Running-topologies-on-a-production-cluster.html
