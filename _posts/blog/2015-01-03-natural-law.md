@@ -1,13 +1,13 @@
 ---
 layout: post
 title: 人的几个心理特点
-description: 行为是受思维指导的，警惕一些心理特点，干预自己做出客观公正的决定
+description: 行为是受思维指导的，有一些常见的思维，会干预自己做出客观公正的决定
 category: blog
 ---
 
 ##背景
 
-最近看来一个现实咋骗案例：[团伙冒充国防部诈骗 办公室豪华惊呆民警][团伙冒充国防部诈骗 办公室豪华惊呆民警]，
+看了一个现实诈骗案例：[团伙冒充国防部诈骗 办公室豪华惊呆民警][团伙冒充国防部诈骗 办公室豪华惊呆民警]，
 
 <div align="center"><object id="ssss" width="480" height="370" ><param name="allowScriptAccess" value="always" /><embed pluginspage="http://www.macromedia.com/go/getflashplayer" src="http://you.video.sina.com.cn/api/sinawebApi/outplayrefer.php/video_id=249210699/s.swf" type="application/x-shockwave-flash" name="ssss" allowFullScreen="true" allowScriptAccess="always" width="480" height="370"></embed></object></div>
 
