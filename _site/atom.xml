@@ -4,7 +4,7 @@
    <title>NingG.github.com</title>
    <link href="http://ningg.github.com/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://ningg.github.com" rel="alternate" type="text/html" />
-   <updated>2015-01-05T21:51:15+08:00</updated>
+   <updated>2015-01-20T21:26:56+08:00</updated>
    <id>http://ningg.github.com</id>
    <author>
      <name></name>
@@ -13,17 +13,39 @@
 
    
    <entry>
-     <title>存在感</title>
+     <title>visio的使用入门及快捷操作</title>
+     <link href="http://ningg.github.com/learn-visio"/>
+     <updated>2015-01-12T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/learn-visio</id>
+     <content type="html">&lt;p&gt;几个问题：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;如何调整画布大小？
+    &lt;ul&gt;
+      &lt;li&gt;操作：&lt;code&gt;Ctrl&lt;/code&gt; + 鼠标左键点击，拖动即可&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;如何调整画布背景颜色？&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;word中&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+   </entry>
+   
+   <entry>
+     <title>人的几个心理特点</title>
      <link href="http://ningg.github.com/natural-law"/>
      <updated>2015-01-03T00:00:00+08:00</updated>
      <id>http://ningg.github.com/natural-law</id>
      <content type="html">&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
 
-&lt;p&gt;最近看来一个现实咋骗案例：&lt;a href=&quot;http://video.sina.com.cn/p/news/s/v/2015-01-03/232964466971.html&quot;&gt;团伙冒充国防部诈骗 办公室豪华惊呆民警&lt;/a&gt;，&lt;/p&gt;
+&lt;p&gt;看了一个现实诈骗案例：&lt;a href=&quot;http://video.sina.com.cn/p/news/s/v/2015-01-03/232964466971.html&quot;&gt;团伙冒充国防部诈骗 办公室豪华惊呆民警&lt;/a&gt;，&lt;/p&gt;
 
-&lt;div&gt;&lt;object id=&quot;ssss&quot; width=&quot;480&quot; height=&quot;370&quot;&gt;&lt;param name=&quot;allowScriptAccess&quot; value=&quot;always&quot; /&gt;&lt;embed pluginspage=&quot;http://www.macromedia.com/go/getflashplayer&quot; src=&quot;http://you.video.sina.com.cn/api/sinawebApi/outplayrefer.php/video_id=249210699/s.swf&quot; type=&quot;application/x-shockwave-flash&quot; name=&quot;ssss&quot; allowfullscreen=&quot;true&quot; allowscriptaccess=&quot;always&quot; width=&quot;480&quot; height=&quot;370&quot; /&gt;&lt;/object&gt;&lt;/div&gt;
+&lt;div align=&quot;center&quot;&gt;&lt;object id=&quot;ssss&quot; width=&quot;480&quot; height=&quot;370&quot;&gt;&lt;param name=&quot;allowScriptAccess&quot; value=&quot;always&quot; /&gt;&lt;embed pluginspage=&quot;http://www.macromedia.com/go/getflashplayer&quot; src=&quot;http://you.video.sina.com.cn/api/sinawebApi/outplayrefer.php/video_id=249210699/s.swf&quot; type=&quot;application/x-shockwave-flash&quot; name=&quot;ssss&quot; allowfullscreen=&quot;true&quot; allowscriptaccess=&quot;always&quot; width=&quot;480&quot; height=&quot;370&quot; /&gt;&lt;/object&gt;&lt;/div&gt;
 
-&lt;h2 id=&quot;section-1&quot;&gt;几点回顾&lt;/h2&gt;
+&lt;h2 id=&quot;section-1&quot;&gt;几点思考&lt;/h2&gt;
 
 &lt;ul&gt;
   &lt;li&gt;事出反常，必为妖：利润超出常理，高普通利润2~20倍；&lt;/li&gt;
@@ -40,7 +62,7 @@
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;意识到人共有的心里特点，并在做决断时，提醒自己有这些因素，可能导致一些结果。&lt;/p&gt;
+&lt;p&gt;意识到人共有的心里特点，并在做决断时，提醒自己有这些因素，可能导致一些结果。警惕这些心理特点，干预自己做出客观公正的决定。&lt;/p&gt;
 
 &lt;p&gt;突然想起来，某人说：做事情先看人，人是否值得信任，人对了，才考虑接下来的事情；否则，基本不考虑。&lt;/p&gt;
 
@@ -179,6 +201,205 @@
    </entry>
    
    <entry>
+     <title>Linux命令：chkconfig</title>
+     <link href="http://ningg.github.com/linux-cmd-chkconfig"/>
+     <updated>2014-12-17T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/linux-cmd-chkconfig</id>
+     <content type="html">&lt;p&gt;（未完成整理）&lt;/p&gt;
+
+&lt;p&gt;关注几个小问题：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;如何添加系统服务？&lt;/li&gt;
+  &lt;li&gt;如何设置系统服务，开机自启动？&lt;/li&gt;
+  &lt;li&gt;如何删除系统服务？&lt;/li&gt;
+  &lt;li&gt;如何查看当前系统服务，以及对应服务的开机启动状态？&lt;/li&gt;
+  &lt;li&gt;如果系统服务已经存在，如何重新添加系统服务？即，要覆盖掉之前系统服务的配置？&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;chkconfig&quot;&gt;chkconfig&lt;/h2&gt;
+
+&lt;p&gt;通过man查询chkconfig的基本用法：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;chkconfig [--list] [--type type][name]
+chkconfig --add name
+chkconfig --del name
+chkconfig --override name
+chkconfig [--level levels] [--type type] name &amp;lt;on|off|reset|resetpriorities&amp;gt;
+chkconfig [--level levels] [--type type] name
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;列举几个例子：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# 添加服务jmxtrans
+chkconfig --add jmxtrans
+
+# 设置服务jmxtrans启动级别
+chkconfig --level 2345 jmxtrans on
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;runlevel&quot;&gt;系统服务runlevel&lt;/h2&gt;
+
+&lt;p&gt;（doing…）&lt;/p&gt;
+
+&lt;p&gt;系统的runlevel到底什么用途？什么含义？&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# 查看当前系统的运行级别
+runlevel
+
+# 查看当前系统运行级别
+who -r
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;下面草草列一点别人的总结：&lt;/p&gt;
+
+&lt;p&gt;首先了解linux的运行级别有哪些？6个运行级别：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# 0 - 停机（千万不要把initdefault设置为0 ）
+# 1 - 单用户模式
+# 2 - 多用户，但是没有NFS
+# 3 - 完全多用户模式
+# 4 - 没有用到
+# 5 - X11
+# 6 - 重新启动（千万不要把initdefault设置为6 ）
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;对各个运行级的详细解释：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code&gt;0&lt;/code&gt;：为停机，机器关闭。&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;1&lt;/code&gt;：为单用户模式，就像Win9x下的安全模式类似。&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;2&lt;/code&gt;：为多用户模式，但是没有NFS支持。&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;3&lt;/code&gt;：为完整的多用户模式，是标准的运行级。&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;4&lt;/code&gt;：一般不用，在一些特殊情况下可以用它来做一些事情。例如在笔记本电脑的电池用尽时，可以切换到这个模式来做一些设置。&lt;/li&gt;
+  &lt;li&gt;&lt;code&gt;5&lt;/code&gt;：就是X11，进到X Window系统了。&lt;/li&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;code&gt;6&lt;/code&gt;：为重启，运行init 6机器就会重启。&lt;/p&gt;
+
+    &lt;p&gt;#修改级别
+  vi /etc/inittab
+  把id:3:initdefault:中的3改为相应的级别&lt;/p&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;每次系统开机的时候，都会根据不同的runlevel级别启动不同的服务。运行&lt;code&gt;chkconfig --list&lt;/code&gt;可以查看所有服务在不同运行级别下的启动状况。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;疑问&lt;/strong&gt;：几个疑问，写一下：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;如何查看当前系统runlevel？&lt;/li&gt;
+  &lt;li&gt;如何更换当前系统的runlevel？&lt;/li&gt;
+  &lt;li&gt;更换runlevel时，需要重启吗？&lt;/li&gt;
+  &lt;li&gt;服务器一旦启动，则runlevel就固定了？&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;特别说明&lt;/strong&gt;：Linux下的run level很重要，要分析其产生原因、使用方式。&lt;/p&gt;
+
+&lt;h2 id=&quot;linux&quot;&gt;Linux下系统服务的含义？&lt;/h2&gt;
+
+&lt;p&gt;（doing…）&lt;/p&gt;
+
+&lt;p&gt;（可以单独开一篇文章）&lt;/p&gt;
+
+&lt;p&gt;鸟哥私房菜（第三版）–第18章 认识系统服务（deamons）&lt;/p&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;参考来源&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://blog.csdn.net/youyu_buzai/article/details/3956845&quot;&gt;chkconfig命令&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.oracle.com/cd/E37670_01/E41138/html/ol_runlevels.html&quot;&gt;About run levels&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.cnblogs.com/qmfsun/p/3847459.html&quot;&gt;chkconfig命令（集合）&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+   </entry>
+   
+   <entry>
+     <title>JMX简介</title>
+     <link href="http://ningg.github.com/intro-jmx"/>
+     <updated>2014-12-17T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/intro-jmx</id>
+     <content type="html">&lt;p&gt;JMX是干什么的？为什么有JMX？
+JMX怎么用？
+Jconsole怎么配合？
+怎么与Jmxtrans配合？（本质就是使用Jmxtrans的作用，如何安装、使用）&lt;/p&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;分析&lt;/h2&gt;
+
+&lt;p&gt;本段大概说一下，面对JMX这一JDK中重要的一个模块，自己认为较为高效的学习思路。上&lt;a href=&quot;http://www.oracle.com/technetwork/java/javase/documentation/index.html&quot;&gt;官网&lt;/a&gt;，再到&lt;a href=&quot;http://docs.oracle.com/javase/8/&quot;&gt;Java SE Technical Documentation&lt;/a&gt;，再到&lt;a href=&quot;http://docs.oracle.com/javase/tutorial/tutorialLearningPaths.html&quot;&gt;Tutorial&lt;/a&gt;中找到JMX的教程；同时，也可以在&lt;a href=&quot;http://docs.oracle.com/javase/8/docs/&quot;&gt;Java SE Documentation&lt;/a&gt;中直接点击&lt;a href=&quot;http://docs.oracle.com/javase/8/docs/technotes/guides/jmx/index.html&quot;&gt;JMX&lt;/a&gt;即可。当然，上面锁定jmx信息源的方法并不唯一，最简单的方法，直接在google上检索JMX关键字也可以找到官网对JMX的&lt;a href=&quot;http://www.oracle.com/technetwork/java/javase/tech/javamanagement-140525.html&quot;&gt;详细介绍&lt;/a&gt;。&lt;/p&gt;
+
+&lt;h2 id=&quot;jmx&quot;&gt;JMX是做什么的？&lt;/h2&gt;
+
+&lt;p&gt;The JMX technology provides the tools for building distributed, Web-based, modular and dynamic solutions for managing and monitoring devices, applications, and service-driven networks. By design, this standard is suitable for adapting legacy systems, implementing new management and monitoring solutions, and plugging into those of the future. &lt;/p&gt;
+
+&lt;p&gt;Starting with the J2SE platform 5.0, JMX technology is included in the Java SE platform. Please see the JMX documentation for the J2SE 5.0 and Java SE 6 platforms.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：JMX（Java Management eXtensions）用于监控系统运行状态。&lt;/p&gt;
+
+&lt;h2 id=&quot;jmx-1&quot;&gt;JMX怎么用？&lt;/h2&gt;
+
+&lt;p&gt;JMX（Java Management eXtensions），涉及几个术语：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;MBeans：&lt;/li&gt;
+  &lt;li&gt;ObjectName：MBean name，或者是a pattern（用于匹配多个MBean name）；&lt;/li&gt;
+  &lt;li&gt;JMX agent：其中包含JMX connector；&lt;/li&gt;
+  &lt;li&gt;Remote Management：&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;mbeans&quot;&gt;MBeans&lt;/h3&gt;
+
+&lt;h3 id=&quot;objectname&quot;&gt;ObjectName&lt;/h3&gt;
+
+&lt;p&gt;参考来源：&lt;a href=&quot;http://www.oracle.com/technetwork/java/javase/tech/best-practices-jsp-136021.html&quot;&gt;http://www.oracle.com/technetwork/java/javase/tech/best-practices-jsp-136021.html&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;格式：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;domain: key-property-list
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;For example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;com.sun.someapp:type=Whatsit,name=25
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;简要说几点注意事项：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;空格是有含义的：Spaces are significant everywhere in an Object Name. Do not write type=Thread, name=DGC (with a space after the comma) because it will be interpreted as having a key called “  name”, with a leading space in the name.&lt;/li&gt;
+  &lt;li&gt;大小写敏感的：Object Names are case sensitive.&lt;/li&gt;
+  &lt;li&gt;properties顺序无关性：The order of key properties is not significant. &lt;/li&gt;
+  &lt;li&gt;key命名约束：The set of characters in a key is limited. It is recommended to stick to legal Java identifiers.&lt;/li&gt;
+  &lt;li&gt;value是否使用引号：The set of characters in a value is also limited. If special characters may occur, it is recommended that the value be quoted, using &lt;code&gt;ObjectName.quote&lt;/code&gt;.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;In a pattern, the key-property-list can have the same form as just described; or it can be a single &lt;code&gt;*&lt;/code&gt;; or it can be &lt;code&gt;empty&lt;/code&gt; (equivalent to a &lt;code&gt;*&lt;/code&gt;); or it can be a list followed by &lt;code&gt;,*&lt;/code&gt;. These forms match Object Names that have the exact key properties given (if any) plus any arbitrary other key properties. For example, &lt;code&gt;*:type=Thread,*&lt;/code&gt; matches &lt;code&gt;somedomain:type=Thread&lt;/code&gt; and &lt;code&gt;somedomain:type=Thread,name=DGC&lt;/code&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;jmx-2&quot;&gt;JMX基本原理&lt;/h2&gt;
+
+&lt;p&gt;JMX的基本原理，基本框架图，有没有？这个让我费了一番精力，最后发现JMX的官方specification中有最权威的插图，言简意赅、深入浅出，看来今后也要关注官网的Specification。&lt;/p&gt;
+
+&lt;p&gt;JMX 1.2 specification：&lt;a href=&quot;http://jcp.org/en/jsr/detail?id=003&quot;&gt;http://jcp.org/en/jsr/detail?id=003&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/intro-jmx/jmx-agent-arch.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;JMX agent的作用是什么？其与JMX有什么关系？&lt;/p&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;参考来源&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://docs.oracle.com/javase/8/docs/&quot;&gt;Java Platform Standard Edition 8 Documentation&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://docs.oracle.com/javase/8/&quot;&gt;Java Platform Standard Edition (Java SE) 8&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;闲谈&lt;/h2&gt;
+
+&lt;p&gt;使用Java有几年了，开始的时候看Java SE API，后来看一些经典的书籍，但是一直没有沉下心来去读一下Java官网的文档，这个才是信息源，借这个机会看了一点，今后遇到问题，还是要多到官网上看看。&lt;/p&gt;
+
+</content>
+   </entry>
+   
+   <entry>
      <title>Storm：Setting up a Storm cluster</title>
      <link href="http://ningg.github.com/setting-up-a-storm-cluster"/>
      <updated>2014-12-14T00:00:00+08:00</updated>
@@ -227,39 +448,33 @@
 
 &lt;p&gt;The Storm release contains a file at &lt;code&gt;conf/storm.yaml&lt;/code&gt; that configures the Storm daemons. You can see the default configuration values &lt;a href=&quot;https://github.com/apache/incubator-storm/blob/master/conf/defaults.yaml&quot;&gt;here&lt;/a&gt;. &lt;code&gt;storm.yaml&lt;/code&gt; overrides anything in &lt;code&gt;defaults.yaml&lt;/code&gt;. There’s a few configurations that are mandatory to get a working cluster:&lt;/p&gt;
 
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;storm.zookeeper.servers&lt;/strong&gt;: This is a list of the hosts in the Zookeeper cluster for your Storm cluster. It should look something like:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;storm.zookeeper.servers&lt;/strong&gt;: This is a list of the hosts in the Zookeeper cluster for your Storm cluster. It should look something like:&lt;/p&gt;
 
-    &lt;p&gt;storm.zookeeper.servers:
-   - “111.222.333.444”
-   - “555.666.777.888”&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;storm.zookeeper.servers:
+  - &quot;111.222.333.444&quot;
+  - &quot;555.666.777.888&quot;
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;If the &lt;strong&gt;port&lt;/strong&gt; that your Zookeeper cluster uses is different than the default, you should set &lt;strong&gt;storm.zookeeper.port&lt;/strong&gt; as well.&lt;/p&gt;
 
-&lt;ol&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;storm.local.dir&lt;/strong&gt;: The Nimbus and Supervisor daemons require a directory on the local disk to store small amounts of state (like jars, confs, and things like that). You should create that directory on each machine, give it proper permissions, and then fill in the directory location using this config. For example:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;storm.local.dir&lt;/strong&gt;: The Nimbus and Supervisor daemons require a directory on the local disk to store small amounts of state (like jars, confs, and things like that). You should create that directory on each machine, give it proper permissions, and then fill in the directory location using this config. For example:&lt;/p&gt;
 
-    &lt;p&gt;storm.local.dir: “/mnt/storm”&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;nimbus.host&lt;/strong&gt;: The worker nodes need to know which machine is the master in order to download topology jars and confs. For example:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;storm.local.dir: &quot;/mnt/storm&quot;
+&lt;/code&gt;&lt;/pre&gt;
 
-    &lt;p&gt;nimbus.host: “111.222.333.44”&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;strong&gt;supervisor.slots.ports&lt;/strong&gt;: For each worker machine, you configure how many workers run on that machine with this config. Each worker uses a single port for receiving messages, and this setting defines which ports are open for use. If you define five ports here, then Storm will allocate up to five workers to run on this machine. If you define three ports, Storm will only run up to three. By default, this setting is configured to run 4 workers on the ports &lt;code&gt;6700&lt;/code&gt;, &lt;code&gt;6701&lt;/code&gt;, &lt;code&gt;6702&lt;/code&gt;, and &lt;code&gt;6703&lt;/code&gt;. For example:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;nimbus.host&lt;/strong&gt;: The worker nodes need to know which machine is the master in order to download topology jars and confs. For example:&lt;/p&gt;
 
-    &lt;p&gt;supervisor.slots.ports:
-     - 6700
-     - 6701
-     - 6702
-     - 6703&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ol&gt;
+&lt;pre&gt;&lt;code&gt;nimbus.host: &quot;111.222.333.44&quot;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;supervisor.slots.ports&lt;/strong&gt;: For each worker machine, you configure how many workers run on that machine with this config. Each worker uses a single port for receiving messages, and this setting defines which ports are open for use. If you define five ports here, then Storm will allocate up to five workers to run on this machine. If you define three ports, Storm will only run up to three. By default, this setting is configured to run 4 workers on the ports &lt;code&gt;6700&lt;/code&gt;, &lt;code&gt;6701&lt;/code&gt;, &lt;code&gt;6702&lt;/code&gt;, and &lt;code&gt;6703&lt;/code&gt;. For example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;supervisor.slots.ports:
+	- 6700
+	- 6701
+	- 6702
+	- 6703
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;h2 id=&quot;launch-daemons-under-supervision-using-storm-script-and-a-supervisor-of-your-choice&quot;&gt;Launch daemons under supervision using “storm” script and a supervisor of your choice&lt;/h2&gt;
 
@@ -285,18 +500,17 @@
      <id>http://ningg.github.com/running-topol-on-a-prod-cluster</id>
      <content type="html">&lt;p&gt;Running topologies on a production cluster is similar to running in &lt;a href=&quot;http://storm.apache.org/documentation/Local-mode.html&quot;&gt;Local mode&lt;/a&gt;. Here are the steps:&lt;/p&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;Define the topology (Use &lt;a href=&quot;http://storm.apache.org/apidocs/backtype/storm/topology/TopologyBuilder.html&quot;&gt;TopologyBuilder&lt;/a&gt; if defining using Java)&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;Use &lt;a href=&quot;http://storm.apache.org/apidocs/backtype/storm/StormSubmitter.html&quot;&gt;StormSubmitter&lt;/a&gt; to submit the topology to the cluster. &lt;code&gt;StormSubmitter&lt;/code&gt; takes as input the &lt;code&gt;name&lt;/code&gt; of the topology, a &lt;code&gt;configuration&lt;/code&gt; for the topology, and the topology itself. For example:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Define the topology&lt;/strong&gt; (Use &lt;a href=&quot;http://storm.apache.org/apidocs/backtype/storm/topology/TopologyBuilder.html&quot;&gt;TopologyBuilder&lt;/a&gt; if defining using Java)&lt;/p&gt;
 
-    &lt;p&gt;Config conf = new Config();
-  conf.setNumWorkers(20);
-  conf.setMaxSpoutPending(5000);
-  StormSubmitter.submitTopology(“mytopology”, conf, topology);&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Create a &lt;code&gt;jar&lt;/code&gt; containing your code and all the dependencies of your code (except for Storm – the Storm jars will be added to the classpath on the worker nodes).&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;Use &lt;a href=&quot;http://storm.apache.org/apidocs/backtype/storm/StormSubmitter.html&quot;&gt;StormSubmitter&lt;/a&gt; to submit the topology to the cluster&lt;/strong&gt;. &lt;code&gt;StormSubmitter&lt;/code&gt; takes as input the &lt;code&gt;name&lt;/code&gt; of the topology, a &lt;code&gt;configuration&lt;/code&gt; for the topology, and the topology itself. For example:&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Config conf = new Config();
+conf.setNumWorkers(20);
+conf.setMaxSpoutPending(5000);
+StormSubmitter.submitTopology(&quot;mytopology&quot;, conf, topology);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;Create a &lt;code&gt;jar&lt;/code&gt;&lt;/strong&gt; containing your code and all the dependencies of your code (except for Storm – the Storm jars will be added to the classpath on the worker nodes).&lt;/p&gt;
 
 &lt;p&gt;If you’re using Maven, the &lt;a href=&quot;http://maven.apache.org/plugins/maven-assembly-plugin/&quot;&gt;Maven Assembly Plugin&lt;/a&gt; can do the packaging for you. Just add this to your &lt;code&gt;pom.xml&lt;/code&gt;:&lt;/p&gt;
 
@@ -317,28 +531,32 @@
 
 &lt;p&gt;Then run &lt;code&gt;mvn assembly:assembly&lt;/code&gt; to get an appropriately packaged jar. Make sure you &lt;a href=&quot;http://maven.apache.org/plugins/maven-assembly-plugin/examples/single/including-and-excluding-artifacts.html&quot;&gt;exclude&lt;/a&gt; the Storm jars since the cluster already has Storm on the classpath.&lt;/p&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;
-    &lt;p&gt;Submit the topology to the cluster using the &lt;code&gt;storm&lt;/code&gt; client, specifying the path to your jar, the classname to run, and any arguments it will use:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Submit the topology&lt;/strong&gt; to the cluster using the &lt;code&gt;storm&lt;/code&gt; client, specifying the path to your jar, the classname to run, and any arguments it will use:&lt;/p&gt;
 
-    &lt;p&gt;storm jar path/to/allmycode.jar org.me.MyTopology arg1 arg2 arg3&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
+&lt;pre&gt;&lt;code&gt;storm jar path/to/allmycode.jar org.me.MyTopology arg1 arg2 arg3
+&lt;/code&gt;&lt;/pre&gt;
 
 &lt;p&gt;&lt;code&gt;storm jar&lt;/code&gt; will submit the jar to the cluster and configure the &lt;code&gt;StormSubmitter&lt;/code&gt; class to talk to the right cluster. In this example, after uploading the jar, &lt;code&gt;storm jar&lt;/code&gt; calls the main function on &lt;code&gt;org.me.MyTopology&lt;/code&gt; with the arguments “arg1”, “arg2”, and “arg3”.&lt;/p&gt;
 
 &lt;p&gt;You can find out how to configure your &lt;code&gt;storm&lt;/code&gt; client to talk to a Storm cluster on &lt;a href=&quot;http://storm.apache.org/documentation/Setting-up-development-environment.html&quot;&gt;Setting up development environment&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：说两点：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;本地Storm充当client向远端cluster提交topol时，只需要在本地Storm的&lt;code&gt;storm.yaml&lt;/code&gt;文件中配置&lt;code&gt;nimbus.host:123.45.678.890&lt;/code&gt;即可，具体参考：&lt;a href=&quot;/storm-setting-up-dev-env/&quot;&gt;Storm：setting up a development environment&lt;/a&gt;；&lt;/li&gt;
+  &lt;li&gt;具体在windows的CMD下，我无法正确执行&lt;code&gt;storm jar&lt;/code&gt;命令，转而，我在windows下安装了Cygwin，并在其中执行&lt;code&gt;storm jar ...&lt;/code&gt;命令，向远端的Storm cluster提交topol以及依赖的代码；&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;h2 id=&quot;common-configurations&quot;&gt;Common configurations&lt;/h2&gt;
 
 &lt;p&gt;There are a variety of configurations you can set per topology. A list of all the configurations you can set can be found here. The ones prefixed with “TOPOLOGY” can be overridden on a topology-specific basis (the other ones are cluster configurations and cannot be overridden). Here are some common ones that are set for a topology:&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;&lt;code&gt;Config.TOPOLOGY_WORKERS&lt;/code&gt;: This sets the number of worker processes to use to execute the topology. For example, if you set this to 25, there will be 25 Java processes across the cluster executing all the tasks. If you had a combined 150 parallelism across all components in the topology, each worker process will have 6 tasks running within it as threads.&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;Config.TOPOLOGY_ACKERS&lt;/code&gt;: This sets the number of tasks that will track tuple trees and detect when a spout tuple has been fully processed. Ackers are an integral part of Storm’s reliability model and you can read more about them on &lt;a href=&quot;http://storm.apache.org/documentation/Guaranteeing-message-processing.html&quot;&gt;Guaranteeing message processing&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;Config.TOPOLOGY_MAX_SPOUT_PENDING&lt;/code&gt;: This sets the maximum number of spout tuples that can be pending on a single spout task at once (pending means the tuple has not been acked or failed yet). It is highly recommended you set this config to prevent queue explosion.&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;Config.TOPOLOGY_MESSAGE_TIMEOUT_SECS&lt;/code&gt;: This is the maximum amount of time a spout tuple has to be fully completed before it is considered failed. This value defaults to 30 seconds, which is sufficient for most topologies. See &lt;a href=&quot;http://storm.apache.org/documentation/Guaranteeing-message-processing.html&quot;&gt;Guaranteeing message processing&lt;/a&gt; for more information on how Storm’s reliability model works.&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;Config.TOPOLOGY_SERIALIZATIONS&lt;/code&gt;: You can register more serializers to Storm using this config so that you can use custom types within tuples.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Config.TOPOLOGY_WORKERS&lt;/strong&gt;: This sets the number of worker processes to use to execute the topology. For example, if you set this to 25, there will be 25 Java processes across the cluster executing all the tasks. If you had a combined 150 parallelism across all components in the topology, each worker process will have 6 tasks running within it as threads.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Config.TOPOLOGY_ACKERS&lt;/strong&gt;: This sets the number of tasks that will track tuple trees and detect when a spout tuple has been fully processed. Ackers are an integral part of Storm’s reliability model and you can read more about them on &lt;a href=&quot;http://storm.apache.org/documentation/Guaranteeing-message-processing.html&quot;&gt;Guaranteeing message processing&lt;/a&gt;.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Config.TOPOLOGY_MAX_SPOUT_PENDING&lt;/strong&gt;: This sets the maximum number of spout tuples that can be pending on a single spout task at once (pending means the tuple has not been acked or failed yet). It is highly recommended you set this config to prevent queue explosion.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Config.TOPOLOGY_MESSAGE_TIMEOUT_SECS&lt;/strong&gt;: This is the maximum amount of time a spout tuple has to be fully completed before it is considered failed. This value defaults to 30 seconds, which is sufficient for most topologies. See &lt;a href=&quot;http://storm.apache.org/documentation/Guaranteeing-message-processing.html&quot;&gt;Guaranteeing message processing&lt;/a&gt; for more information on how Storm’s reliability model works.&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Config.TOPOLOGY_SERIALIZATIONS&lt;/strong&gt;: You can register more serializers to Storm using this config so that you can use custom types within tuples.&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;killing-a-topology&quot;&gt;Killing a topology&lt;/h2&gt;
@@ -720,6 +938,8 @@ bridge between Storm and Ganglia.&lt;/p&gt;
 &lt;p&gt;需要在Storm运行的节点上安装jmxtrans：&lt;/p&gt;
 
 &lt;p&gt;（自己有一篇单独介绍jmxtrans的博客，给个链接）&lt;/p&gt;
+
+&lt;h4 id=&quot;jvmjmx&quot;&gt;开启jvm的jmx功能&lt;/h4&gt;
 
 &lt;h4 id=&quot;supervisorjson&quot;&gt;supervisor.json&lt;/h4&gt;
 
@@ -1336,492 +1556,6 @@ io.github.ningg.timer.LearnTimer:
   &lt;li&gt;&lt;a href=&quot;http://dropwizard.io/index.html&quot;&gt;Dropwizard&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://www.infoq.com/cn/articles/zhenye-talk-java-develop/&quot;&gt;郑晔谈Java开发：新工具、新框架、新思维&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>Kafka 0.8.1：Monitoring</title>
-     <link href="http://ningg.github.com/kafka-monitoring-config"/>
-     <updated>2014-12-09T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/kafka-monitoring-config</id>
-     <content type="html">&lt;blockquote&gt;
-  &lt;p&gt;本文原文来自[Kafka 0.8.x Monitoring][Kafka 0.8.x Monitoring]&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Kafka uses &lt;code&gt;Yammer Metrics&lt;/code&gt; for metrics reporting in both the server and the client. This can be configured to report stats using pluggable stats reporters to hook up to your monitoring system.&lt;/p&gt;
-
-&lt;p&gt;The easiest way to see the available metrics to fire up jconsole and point it at a running kafka client or server; this will all browsing all metrics with JMX.&lt;/p&gt;
-
-&lt;p&gt;We pay particular we do graphing and alerting on the following metrics:&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;Description&lt;/th&gt;
-      &lt;th&gt;Mbean name&lt;/th&gt;
-      &lt;th&gt;Normal value&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Message in rate&lt;/td&gt;
-      &lt;td&gt;“kafka.server”: name=”AllTopicsMessagesInPerSec”, type=”BrokerTopicMetrics”&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Byte in rate&lt;/td&gt;
-      &lt;td&gt;“kafka.server”: name=”AllTopicsBytesInPerSec”, type=”BrokerTopicMetrics”&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Request rate&lt;/td&gt;
-      &lt;td&gt;“kafka.network”: name=”{Produce&lt;code&gt;|&lt;/code&gt;Fetch-consumer&lt;code&gt;|&lt;/code&gt;Fetch-follower}-RequestsPerSec”, type=”RequestMetrics”&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Byte out rate&lt;/td&gt;
-      &lt;td&gt;“kafka.server”: name=”AllTopicsBytesOutPerSec”, type=”BrokerTopicMetrics”&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Log flush rate and time&lt;/td&gt;
-      &lt;td&gt;“kafka.log”: name=”LogFlushRateAndTimeMs”, type=”LogFlushStats”&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;# of under replicated partitions&lt;/td&gt;
-      &lt;td&gt;(&lt;code&gt;|ISR| &amp;lt; |all replicas|&lt;/code&gt;) “kafka.server”: name=”UnderReplicatedPartitions”, type=”ReplicaManager”&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Is controller active on broker&lt;/td&gt;
-      &lt;td&gt;“kafka.controller”: name=”ActiveControllerCount”, type=”KafkaController”&lt;/td&gt;
-      &lt;td&gt;only one broker in the cluster should have 1&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Leader election rate&lt;/td&gt;
-      &lt;td&gt;“kafka.controller”: name=”LeaderElectionRateAndTimeMs”, type=”ControllerStats”&lt;/td&gt;
-      &lt;td&gt;non-zero when there are broker failures&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Unclean leader election rate&lt;/td&gt;
-      &lt;td&gt;“kafka.controller”: name=”UncleanLeaderElectionsPerSec”, type=”ControllerStats”&lt;/td&gt;
-      &lt;td&gt;0&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Partition counts&lt;/td&gt;
-      &lt;td&gt;“kafka.server”: name=”PartitionCount”, type=”ReplicaManager”&lt;/td&gt;
-      &lt;td&gt;mostly even across brokers&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Leader replica counts&lt;/td&gt;
-      &lt;td&gt;“kafka.server”: name=”LeaderCount”, type=”ReplicaManager”&lt;/td&gt;
-      &lt;td&gt;mostly even across brokers&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;ISR shrink rate&lt;/td&gt;
-      &lt;td&gt;“kafka.server”: name=”ISRShrinksPerSec”, type=”ReplicaManager”&lt;/td&gt;
-      &lt;td&gt;If a broker goes down, ISR for some of the partitions will shrink. When that broker is up again, ISR will be expanded once the replicas are fully caught up. Other than that, the expected value for both ISR shrink rate and expansion rate is 0.&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;ISR expansion rate&lt;/td&gt;
-      &lt;td&gt;“kafka.server”: name=”ISRExpandsPerSec”, type=”ReplicaManager”&lt;/td&gt;
-      &lt;td&gt;See above&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Max lag in messages btw follower and leader replicas&lt;/td&gt;
-      &lt;td&gt;“kafka.server”: name=”([-.\w]+)-MaxLag”, type=”ReplicaFetcherManager”&lt;/td&gt;
-      &lt;td&gt;&amp;lt; replica.lag.max.messages&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Lag in messages per follower replica&lt;/td&gt;
-      &lt;td&gt;“kafka.server”: name=”([-.\w]+)-ConsumerLag”, type=”FetcherLagMetrics”&lt;/td&gt;
-      &lt;td&gt;&amp;lt; replica.lag.max.messages&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Requests waiting in the producer purgatory&lt;/td&gt;
-      &lt;td&gt;“kafka.server”: name=”PurgatorySize”, type=”ProducerRequestPurgatory”&lt;/td&gt;
-      &lt;td&gt;non-zero if ack=-1 is used&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Requests waiting in the fetch purgatory&lt;/td&gt;
-      &lt;td&gt;“kafka.server”: name=”PurgatorySize”, type=”FetchRequestPurgatory”&lt;/td&gt;
-      &lt;td&gt;size depends on fetch.wait.max.ms in the consumer&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Request total time&lt;/td&gt;
-      &lt;td&gt;“kafka.network”: name=”{Produce&lt;code&gt;|&lt;/code&gt;Fetch-Consumer&lt;code&gt;|&lt;/code&gt;Fetch-Follower}-TotalTimeMs”,type=”RequestMetrics”&lt;/td&gt;
-      &lt;td&gt;broken into queue, local, remote and response send time&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Time the request waiting in the request queue&lt;/td&gt;
-      &lt;td&gt;“kafka.network”: name=”{Produce&lt;code&gt;|&lt;/code&gt;Fetch-Consumer&lt;code&gt;|&lt;/code&gt;Fetch-Follower}-QueueTimeMs”, type=”RequestMetrics”&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Time the request being processed at the leader&lt;/td&gt;
-      &lt;td&gt;“kafka.network”: name=”{Produce&lt;code&gt;|&lt;/code&gt;Fetch-Consumer&lt;code&gt;|&lt;/code&gt;Fetch-Follower}-LocalTimeMs”, type=”RequestMetrics”&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Time the request waits for the follower&lt;/td&gt;
-      &lt;td&gt;“kafka.network”: name=”{Produce&lt;code&gt;|&lt;/code&gt;Fetch-Consumer&lt;code&gt;|&lt;/code&gt;Fetch-Follower}-RemoteTimeMs”, type=”RequestMetrics”&lt;/td&gt;
-      &lt;td&gt;non-zero for produce requests when ack=-1&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Time to send the response&lt;/td&gt;
-      &lt;td&gt;“kafka.network”: name=”{Produce&lt;code&gt;|&lt;/code&gt;Fetch-Consumer&lt;code&gt;|&lt;/code&gt;Fetch-Follower}-ResponseSendTimeMs”, type=”RequestMetrics”&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Number of messages the consumer lags behind the producer by&lt;/td&gt;
-      &lt;td&gt;“kafka.consumer”: name=”([-.\w]+)-MaxLag”, type=”ConsumerFetcherManager”&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;We recommend monitor GC time and other stats and various server stats such as CPU utilization, I/O service time, etc. On the client side, we recommend monitor the message/byte rate (global and per topic), request rate/size/time, and on the consumer side, max lag in messages among all partitions and min fetch request rate. For a consumer to keep up, max lag needs to be less than a threshold and min fetch rate needs to be larger than 0.
-Audit&lt;/p&gt;
-
-&lt;p&gt;The final alerting we do is on the correctness of the data delivery. We audit that every message that is sent is consumed by all consumers and measure the lag for this to occur. For important topics we alert if a certain completeness is not achieved in a certain time period. The details of this are discussed in KAFKA-260.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;note(ningg)&lt;/strong&gt;：Kafka中controller，MBean，两个名词的含义？&lt;/p&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;参考来源&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://kafka.apache.org/documentation.html&quot;&gt;Kafka 0.8.* Documentation&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>Linux下禁止用户远程登录</title>
-     <link href="http://ningg.github.com/linux-ctrl-user-login"/>
-     <updated>2014-12-08T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/linux-ctrl-user-login</id>
-     <content type="html">&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
-
-&lt;p&gt;有些用户不安份，能不能禁止用户登录（锁定用户）？&lt;/p&gt;
-
-&lt;h2 id=&quot;section-1&quot;&gt;分析&lt;/h2&gt;
-
-&lt;p&gt;说实话，这个问题很小，不过思路不能丢，要禁止用户登录，涉及几个问题：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;如何操作，会锁定用户，使其无法登录？&lt;/li&gt;
-  &lt;li&gt;如何判断哪些用户已经被锁定？&lt;/li&gt;
-  &lt;li&gt;如何解锁用户，允许其登录？&lt;/li&gt;
-  &lt;li&gt;有没有批量锁定用户的命令？&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;吹个牛，上面的几个点，就跟实际做事情的要点是一样的，即：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;如何把事情做成？&lt;/li&gt;
-  &lt;li&gt;如何验证事情已经做成？&lt;/li&gt;
-  &lt;li&gt;如果出现差错，如何消除事情的影响？&lt;/li&gt;
-  &lt;li&gt;如何又快又好的把事情做成？&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section-2&quot;&gt;锁定用户和解锁用户&lt;/h2&gt;
-
-&lt;p&gt;通过命令&lt;code&gt;usermod&lt;/code&gt;即可完成对用户的锁定和解锁：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;// Lock a user´s password. This puts a ´!´ in front of the
-// encrypted password, effectively disabling the password. 
-[root@ningg ~]# usermod -L ningg
-
-// Unlock a user´s password. This removes the ´!´ in front 
-// of the encrypted password. 
-[root@ningg ~]# usermod -U ningg
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;也可以设定用户的自动解锁时间，具体参考&lt;code&gt;man usermod&lt;/code&gt;。需要说明一点，通过&lt;code&gt;usermod -L [login]&lt;/code&gt;锁定用户&lt;code&gt;[login]&lt;/code&gt;，则，当用户尝试登录时，会提示：”incorrect password”；而root用户，则可以通过&lt;code&gt;su - ningg&lt;/code&gt;直接转换为用户ningg的身份。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;备注&lt;/strong&gt;：命令&lt;code&gt;passwd&lt;/code&gt;也可以进行用户的锁定和解锁：&lt;code&gt;passwd -l [login]&lt;/code&gt;和&lt;code&gt;passwd -u [login]&lt;/code&gt;两个命令。&lt;/p&gt;
-
-&lt;h2 id=&quot;section-3&quot;&gt;查看是否锁定用户&lt;/h2&gt;
-
-&lt;p&gt;查看&lt;code&gt;/etc/shadow&lt;/code&gt;文件，以&lt;code&gt;:&lt;/code&gt;分割的第二行，如果以&lt;code&gt;!&lt;/code&gt;或者&lt;code&gt;*&lt;/code&gt;开头，则表示当前用户无法远程登录，只能通过root用户以su命令切换身份而来，具体，看下面的示例：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;[root@ningg ~]# vim /etc/shadow
-root:$6$t(省略...):16407:0:99999:7:::
-bin:*:15628:0:99999:7:::
-daemon:*:15628:0:99999:7:::
-ftp:*:15628:0:99999:7:::
-nobody:*:15628:0:99999:7:::
-ningg:$6$t(省略...):16374:0:99999:7:::
-flume:!!:16380::::::
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;strong&gt;疑问&lt;/strong&gt;：以&lt;code&gt;!&lt;/code&gt;与&lt;code&gt;*&lt;/code&gt;开头，有没有差异？&lt;/p&gt;
-
-&lt;h2 id=&quot;shell&quot;&gt;修改shell类型&lt;/h2&gt;
-
-&lt;p&gt;通过修改用户登录之后的shell类型实现禁止用户登录，具体命令如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;// chsh - change your login shell
-chsh -s /sbin/nologin ningg
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;用户登录，提示信息：This account is currently not available.&lt;/p&gt;
-
-&lt;h3 id=&quot;shellsbinnologin&quot;&gt;特殊的shell：/sbin/nologin&lt;/h3&gt;
-
-&lt;p&gt;&lt;code&gt;/sbin/nologin&lt;/code&gt;本质是用户的login shell，不过这个nologin shell有些特殊，需要说一说。&lt;code&gt;/sbin/nologin&lt;/code&gt;使用户无法登录，本质是：用户无法使用bash或其他shell来登入系统，这个账户仍然可以使用其他系统资源，例如：www服务由帐号apache管理，其可以进行系统程序的工作，但是无法登入主机；&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;疑问&lt;/strong&gt;：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;用户登入系统、获取shell，只是获取shell时，被拒绝；那如果不去获取shell，是否可以登录？&lt;/li&gt;
-  &lt;li&gt;用户的login shell是&lt;code&gt;/sbin/nologin&lt;/code&gt;，那么，这类用户如何使用其他系统资源呢？其本质还得使用shell吧，只不过这个shell不是login shell；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;当用户的login shell被设置为&lt;code&gt;/sbin/nologin&lt;/code&gt;时，用户登录时，会被拒绝，并且提示信息：This account is currently not available；这个提示信息是可以定制的，具体定制方法：新建&lt;code&gt;/etc/nologin.txt&lt;/code&gt;，并在其中写入提示信息即可。&lt;/p&gt;
-
-&lt;h3 id=&quot;section-4&quot;&gt;禁止所有用户登录&lt;/h3&gt;
-
-&lt;p&gt;如果因为系统维护升级等原因，希望禁止所有用户登录，则按照上面的方式，一个一个禁用用户，很无聊，而且容易出错，一种下面是简便的解决方法：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;##在/etc目录下建立一个nologin文档
-touch /etc/nologin ##如果该文件存在，那么Linux上的所有用户（除了root以外）都无法登录
-##在/etc/nologin（注意：这可不是3中的nologin.txt啊！）写点什么，告诉用户为何无法登录
-
-##cat /etc/nologin
-9：00－10：00 系统升级，所有用户都禁止登录！
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;解禁帐号也简单，直接将&lt;code&gt;/etc/nologin&lt;/code&gt;删除就行了！&lt;/p&gt;
-
-&lt;h2 id=&quot;section-5&quot;&gt;比较两种方式&lt;/h2&gt;
-
-&lt;p&gt;整理上面两种禁止用户登录的方式，其出发思路不同：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;禁用用户登录密码：&lt;code&gt;usermod -L [login]&lt;/code&gt;
-    &lt;ul&gt;
-      &lt;li&gt;此时，root用户通过&lt;code&gt;su - [login]&lt;/code&gt;仍可以切换为&lt;code&gt;login&lt;/code&gt;用户身份；&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;禁用用户的login shell：&lt;code&gt;chsh -s /sbin/nologin [login]&lt;/code&gt;
-    &lt;ul&gt;
-      &lt;li&gt;此时，root用户无法通过&lt;code&gt;su&lt;/code&gt;命令切换为&lt;code&gt;[login]&lt;/code&gt;用户身份；&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;重要遗留问题&lt;/strong&gt;：当设置为&lt;code&gt;/sbin/nologin&lt;/code&gt;时，这一用户如何才能调用其他系统资源？&lt;/p&gt;
-
-&lt;h2 id=&quot;section-6&quot;&gt;参考来源&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.cnblogs.com/zero1665/archive/2010/06/06/1752492.html&quot;&gt;Linux如何禁止用户登录&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://ningg.github.io/linux-user-and-group/&quot;&gt;Linux下用户和组管理&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;鸟哥的Linux私房菜（第三版） 第14章 Linux帐号管理与ACL权限设定&lt;/li&gt;
-&lt;/ul&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>Ganglia 3.6.1：Ganglia Meta Daemon v3.6.1 Configuration</title>
-     <link href="http://ningg.github.com/ganglia-gmetad-conf"/>
-     <updated>2014-12-06T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/ganglia-gmetad-conf</id>
-     <content type="html">&lt;p&gt;This is an example of a Ganglia Meta Daemon configuration file
-                http://ganglia.sourceforge.net/&lt;/p&gt;
-
-&lt;hr /&gt;
-&lt;p&gt;##debug_level&lt;/p&gt;
-
-&lt;p&gt;Setting the debug_level to 1 will keep daemon in the forground and
- show only error messages. Setting this value higher than 1 will make
- gmetad output debugging information and stay in the foreground.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;#default: 0
-debug_level 10
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;hr /&gt;
-&lt;p&gt;What to monitor. The most important section of this file.&lt;/p&gt;
-
-&lt;p&gt;The data_source tag specifies either a cluster or a grid to
- monitor. If we detect the source is a cluster, we will maintain a complete
- set of RRD databases for it, which can be used to create historical
- graphs of the metrics. If the source is a grid (it comes from another gmetad),
- we will only maintain summary RRDs for it.&lt;/p&gt;
-
-&lt;p&gt;Format:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;data_source &quot;my cluster&quot; [polling interval] address1:port addreses2:port ...
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;The keyword ‘data_source’ must immediately be followed by a unique
- string which identifies the source, then an optional &lt;code&gt;polling interval&lt;/code&gt; in
- seconds. The source will be polled at this interval on average.
- If the polling interval is omitted, &lt;code&gt;15sec&lt;/code&gt; is asssumed.&lt;/p&gt;
-
-&lt;p&gt;If you choose to set the polling interval to something other than the default,
- note that the web frontend determines a host as down if its TN value is less
- than 4 * TMAX (20sec by default).  Therefore, if you set the polling interval
- to something around or greater than 80sec, this will cause the frontend to
- incorrectly display hosts as down even though they are not.&lt;/p&gt;
-
-&lt;p&gt;A list of machines which service the data source follows, in the
- format ip:port, or name:port. If a port is not specified then 8649
- (the default gmond port) is assumed.
- default: There is no default value&lt;/p&gt;
-
-&lt;p&gt;data_source “my cluster” 10 localhost  my.machine.edu:8649  1.2.3.5:8655
- data_source “my grid” 50 1.3.4.7:8655 grid.org:8651 grid-backup.org:8651
- data_source “another source” 1.3.4.7:8655  1.3.4.8&lt;/p&gt;
-
-&lt;p&gt;data_source “RT-SYS” localhost&lt;/p&gt;
-
-&lt;p&gt;Round-Robin Archives
- You can specify custom Round-Robin archives here (defaults are listed below)&lt;/p&gt;
-
-&lt;p&gt;Old Default RRA: Keep 1 hour of metrics at 15 second resolution. 1 day at 6 minute
- RRAs “RRA:AVERAGE:0.5:1:244” “RRA:AVERAGE:0.5:24:244” “RRA:AVERAGE:0.5:168:244” “RRA:AVERAGE:0.5:672:244” \
-      “RRA:AVERAGE:0.5:5760:374”
- New Default RRA
- Keep 5856 data points at 15 second resolution assuming 15 second (default) polling. That’s 1 day
- Two weeks of data points at 1 minute resolution (average)
-RRAs “RRA:AVERAGE:0.5:1:5856” “RRA:AVERAGE:0.5:4:20160” “RRA:AVERAGE:0.5:40:52704”&lt;/p&gt;
-
-&lt;hr /&gt;
-&lt;p&gt;Scalability mode. If on, we summarize over downstream grids, and respect
- authority tags. If off, we take on 2.5.0-era behavior: we do not wrap our output
- in &lt;grid&gt;&lt;/grid&gt; tags, we ignore all &lt;grid&gt; tags we see, and always assume
- we are the &quot;authority&quot; on data source feeds. This approach does not scale to
- large groups of clusters, but is provided for backwards compatibility.
- default: on
- scalable off&lt;/grid&gt;&lt;/p&gt;
-
-&lt;hr /&gt;
-&lt;p&gt;The name of this Grid. All the data sources above will be wrapped in a GRID
- tag with this name.
- default: unspecified
- gridname “MyGrid”&lt;/p&gt;
-
-&lt;hr /&gt;
-&lt;p&gt;The authority URL for this grid. Used by other gmetads to locate graphs
- for our data sources. Generally points to a ganglia/
- website on this machine.
- default: “http://hostname/ganglia/”,
-   where hostname is the name of this machine, as defined by gethostname().
- authority “http://mycluster.org/newprefix/”&lt;/p&gt;
-
-&lt;hr /&gt;
-&lt;p&gt;List of machines this gmetad will share XML with. Localhost
- is always trusted.
- default: There is no default value
- trusted_hosts 127.0.0.1 169.229.50.165 my.gmetad.org&lt;/p&gt;
-
-&lt;hr /&gt;
-&lt;p&gt;If you want any host which connects to the gmetad XML to receive
- data, then set this value to “on”
- default: off
- all_trusted on&lt;/p&gt;
-
-&lt;hr /&gt;
-&lt;p&gt;If you don’t want gmetad to setuid then set this to off
- default: on
- setuid off&lt;/p&gt;
-
-&lt;hr /&gt;
-&lt;p&gt;User gmetad will setuid to (defaults to “nobody”)
- default: “nobody”
-etuid_username “ganglia”&lt;/p&gt;
-
-&lt;hr /&gt;
-&lt;p&gt;Umask to apply to created rrd files and grid directory structure
- default: 0 (files are public)
- umask 022&lt;/p&gt;
-
-&lt;hr /&gt;
-&lt;p&gt;The port gmetad will answer requests for XML
- default: 8651
- xml_port 8651&lt;/p&gt;
-
-&lt;hr /&gt;
-&lt;p&gt;The port gmetad will answer queries for XML. This facility allows
- simple subtree and summation views of the XML tree.
- default: 8652
- interactive_port 8652&lt;/p&gt;
-
-&lt;hr /&gt;
-&lt;p&gt;The number of threads answering XML requests
- default: 4
- server_threads 10&lt;/p&gt;
-
-&lt;hr /&gt;
-&lt;p&gt;Where gmetad stores its round-robin databases
- default: “/var/lib/ganglia/rrds”
- rrd_rootdir “/some/other/place”&lt;/p&gt;
-
-&lt;hr /&gt;
-&lt;p&gt;List of metric prefixes this gmetad will not summarize at cluster or grid level.
- default: There is no default value
- unsummarized_metrics diskstat CPU&lt;/p&gt;
-
-&lt;hr /&gt;
-&lt;p&gt;In earlier versions of gmetad, hostnames were handled in a case
- sensitive manner
- If your hostname directories have been renamed to lower case,
- set this option to 0 to disable backward compatibility.
- From version 3.2, backwards compatibility will be disabled by default.
- default: 1   (for gmetad &amp;lt; 3.2)
- default: 0   (for gmetad &amp;gt;= 3.2)
-ase_sensitive_hostnames 0&lt;/p&gt;
-
-&lt;hr /&gt;
-&lt;p&gt;It is now possible to export all the metrics collected by gmetad directly to
- graphite by setting the following attributes.&lt;/p&gt;
-
-&lt;p&gt;The hostname or IP address of the Graphite server
- default: unspecified
- carbon_server “my.graphite.box”&lt;/p&gt;
-
-&lt;p&gt;The port and protocol on which Graphite is listening
- default: 2003
- carbon_port 2003&lt;/p&gt;
-
-&lt;p&gt;default: tcp
- carbon_protocol udp&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Deprecated in favor of graphite_path&lt;/strong&gt; A prefix to prepend to the
- metric names exported by gmetad. Graphite uses dot-
- separated paths to organize and refer to metrics.
- default: unspecified
- graphite_prefix “datacenter1.gmetad”&lt;/p&gt;
-
-&lt;p&gt;A user-definable graphite path. Graphite uses dot-
- separated paths to organize and refer to metrics.
- For reverse compatibility graphite_prefix will be prepended to this
- path, but this behavior should be considered deprecated.
- This path may include 3 variables that will be replaced accordingly:
- %s -&amp;gt; source (cluster name)
- %h -&amp;gt; host (host name)
- %m -&amp;gt; metric (metric name)
- default: graphite_prefix.%s.%h.%m
- graphite_path “datacenter1.gmetad.%s.%h.%m&lt;/p&gt;
-
-&lt;p&gt;Number of milliseconds gmetad will wait for a response from the graphite server
- default: 500
- carbon_timeout 500&lt;/p&gt;
-
-&lt;hr /&gt;
-&lt;p&gt;Memcached configuration (if it has been compiled in)
- Format documentation at http://docs.libmemcached.org/libmemcached_configuration.html
- default: “”
- memcached_parameters “–SERVER=127.0.0.1”&lt;/p&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;参考来源&lt;/h2&gt;
 
 </content>
    </entry>
