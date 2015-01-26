@@ -55,8 +55,8 @@ category: flume
 
 	::@echo off
 
-	::USAGE: 	apache-flume-1.5.0.1-bin>call bin/flume-win.bat
-	::AUTHOER:	Ning Guo
+	::USAGE: 	apache-flume-1.5.0.1-bin>call bin/flume-win*.bat
+	::AUTHOER:	Ning Guo of CIB
 	::TIME:		2014/11/28  12:55
 
 	::set java home
@@ -68,32 +68,99 @@ category: flume
 	::set agent name 
 	set AGENT_NAME=agent
 
+
 	::retrieve the parent directory
 	setlocal
 	for %%i in ("%~dp0..") do set "folder=%%~fi"
 	set FLUME_HOME="%folder%"
 
-	%JAVA_HOME%\bin\java.exe 
-	-Xms128m -Xmx512m 
-	-Dflume.monitoring.type=ganglia 
-	-Dflume.monitoring.hosts=168.7.2.165:8649
-	-Dlog4j.configuration=file:///%FLUME_HOME%\conf\log4j.properties 
-	-cp %FLUME_HOME%\lib\* 
-	org.apache.flume.node.Application 
-	-f %FLUME_HOME%\conf\%CONF_FILE% 
-	-n %AGENT_NAME%
+
+	%JAVA_HOME%\bin\java.exe -Xms128m -Xmx512m -Dflume.monitoring.type=ganglia -Dflume.monitoring.hosts=168.7.2.165:8649 -Dlog4j.configuration=file:///%FLUME_HOME%\conf\log4j.properties -cp %FLUME_HOME%\lib\* org.apache.flume.node.Application -f %FLUME_HOME%\conf\%CONF_FILE% -n %AGENT_NAME%
 
 	pause
+	
+	
 
+上述涉及flume的配置文件`logToKafka.properties`，其内容如下：
+
+
+	############################################################## COMPONENTS
+	# The configuration file needs to define the sources, 
+	# the channels and the sinks.
+	# Sources, channels and sinks are defined per agent, 
+	# in this case called 'agent'
+
+	agent.sources = seqGenSrc
+	agent.channels = memoryChannel
+	agent.sinks = loggerSink
+
+
+	############################################################## SOURCES
+	# For each one of the sources, the type is defined
+
+
+	# Exec Source For Flume agent on Win XP(UnxUtils).
+	agent.sources.seqGenSrc.type = exec
+	agent.sources.seqGenSrc.command = E:\reference\svn-new-doc\flume\UnxUtils\usr\local\wbin\tail.exe --follow=name --retry E:/1.log
+	agent.sources.seqGenSrc.restart = true
+	agent.sources.seqGenSrc.restartThrottle = 1000
+	agent.sources.seqGenSrc.batchSize = 100
+	#agent.sources.seqGenSrc.charset = GBK
+
+
+	# Exec Source For Flume agent on Win Server 2008.
+	#agent.sources.seqGenSrc.type = exec
+	#agent.sources.seqGenSrc.command = get-content d:/flume/1.log -wait
+	#agent.sources.seqGenSrc.shell = powershell
+	#agent.sources.seqGenSrc.restart = true
+	#agent.sources.seqGenSrc.restartThrottle = 1000
+	#agent.sources.seqGenSrc.batchSize = 100
+	#agent.sources.seqGenSrc.charset = GBK
+
+
+	############################################################## SINKS
+
+	agent.sinks.loggerSink.type = com.thilinamb.flume.sink.KafkaSink 
+	#agent.sinks.loggerSink.topic = goodjob
+	agent.sinks.loggerSink.topic = good
+	#agent.sinks.loggerSink.charset = GBK
+	agent.sinks.loggerSink.kafka.metadata.broker.list = 168.7.1.67:9091,168.7.1.68:9091,168.7.1.69:9091,168.7.1.70:9091
+	agent.sinks.loggerSink.kafka.serializer.class = kafka.serializer.StringEncoder
+	agent.sinks.loggerSink.kafka.request.required.acks = 1
+
+
+	############################################################## CHANNELS
+	# Each channel's type is defined.
+	agent.channels.memoryChannel.type = memory
+	agent.channels.memoryChannel.capacity = 100000
+
+	
+	############################################################## RELATIONS
+	# The channel can be defined as follows.
+	agent.sources.seqGenSrc.channels = memoryChannel
+
+	#Specify the channel the sink should use
+	agent.sinks.loggerSink.channel = memoryChannel
+
+	
+	
 **补充说明**：此次启动的Flume Agent通过本地tail命令收集日志内容，并通过KafkaSink将信息送入Kafka中，具体涉及几点：
 
-* Flume的插件`plugins.d`，在重写的`flume-win.bat`脚本中，并没有去扫描插件目录`plugins.d`，并且在`-cp`选项后通过`:`添加路径的目录，将导致`flume-win.bat`
+* Flume的插件`plugins.d`，在重写的`flume-win.bat`脚本中，并没有去扫描插件目录`plugins.d`，并且在`-cp`选项后通过`:`添加路径的目录，将导致`flume-win.bat`；
+
+
 
 
 	
 ##Windows Server 2008
 
-Windows Server 2008 与Windows XP基本相同；
+Windows Server 2008 与Windows XP基本相同，只需要调整一下`logToKafka.properties`脚本中sources部分，将command由`tail`（UnxUtils）替换为`get-content`（powershell），因为UnxUtils下的`tail`命令，在Windows Server 2008环境下，在Flume的source中时，无法捕获日志内容。**（很奇怪，原因不明）**
+
+
+
+
+
+
 
 
 

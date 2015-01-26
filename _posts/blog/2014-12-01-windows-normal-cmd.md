@@ -73,6 +73,7 @@ OK，确定对当前窗口生效。
 
 ##win下bat脚本中设置path
 
+
 	set Path=%Path%;d:/
 
 
@@ -83,8 +84,11 @@ OK，确定对当前窗口生效。
 * [UNXutils][UNXutils]，直接下载后，在环境变量中配置之后，即可使用，推荐XP环境下使用；
 * 利用powershell命令：`get-content mylog.log -wait`，更多参考：[11 ways to tail a log on windows][11 ways to tail a log on windows]；
 
+注：powershell v1.0版本中，`get-content mylog.log -wait` 可以实现tail命令功能，但在powershell v2.0版本中，`get-content`命令可能有差异，具体参考：[更多阅读][windows powershell get-content]
 
+##win下名词
 
+* Win32：Windows 95, 98, ME, NT, 2000, XP, 2003, Vista
 
 
 
@@ -101,10 +105,16 @@ OK，确定对当前窗口生效。
 
 ##参考来源
 
+* [UNXutils][UNXutils]
+* [11 ways to tail a log on windows][11 ways to tail a log on windows]
+* [windows powershell get-content][windows powershell get-content]
+
+
 
 [NingG]:    							http://ningg.github.com  "NingG"
 [UNXutils]:								http://sourceforge.net/projects/unxutils/
 [11 ways to tail a log on windows]:		http://www.stackify.com/11-ways-to-tail-a-log-file-on-windows-unix/
+[windows powershell get-content]:			http://stackoverflow.com/questions/4426442/unix-tail-equivalent-command-in-windows-powershell
 
 
 ##杂谈
