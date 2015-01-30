@@ -72,7 +72,7 @@ ok，搞定。
 
 瞬间转到`hadoop`的安装路径，搞定；但是重启之后，此`alias`设置将失效，为保证长期有效，修改`/etc/bashrc`，在文件最后加上：
 
-	`alias GO_hadoop=’cd /home/hadoop/hadoop-1.0.4′
+	alias GO_hadoop=’cd /home/hadoop/hadoop-1.0.4′
 
 __补充__：
 

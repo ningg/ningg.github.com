@@ -35,7 +35,7 @@ category: Linux
 
 ###简介
 
-变量的作用范围一般是某个进程（正在运行的程序）之内，如果希望多个进程共享这个变量，也是可以的，将这个变量设置为`环境变量`即可。
+变量的作用范围一般是某个进程（正在运行的程序）之内，如果希望多个进程共享这个变量，也是可以的，将这个变量设置为`环境变量`即可，环境变量也称为，全局变量，共享变量；在child shell和child process中，可以继续使用此环境变量。
 
 上面可以看出：环境变量是在某个进程中设置的，而且，目标是希望其他进程共享。
 
@@ -63,9 +63,37 @@ category: Linux
 
 （详解：各个文件加载过程？以及各个文件的用途，为什么要分这么多文件/层次来加载？等待补充）
 
+**解决办法**：`man bash`，在bash的帮助文档中，有详细说明：
+
+
+
+
+
+TODO:
+
+* [理解Linux环境变量及配置文件执行顺序][理解Linux环境变量及配置文件执行顺序]
+* [Bash: about .bashrc, .bash_profile, .profile, /etc/profile, etc/bash.bashrc and others][Bash: about .bashrc, .bash_profile, .profile, /etc/profile, etc/bash.bashrc and others]
+
+
+
+
+
+
 ##参考来源
 
 * 《鸟哥私房菜（第三版）》 第11章 认识和学习BASH
+
+
+
+
+
+
+
+
+[理解Linux环境变量及配置文件执行顺序]:															http://liuzhijun.iteye.com/blog/1744465
+[Bash: about .bashrc, .bash_profile, .profile, /etc/profile, etc/bash.bashrc and others]:		http://stefaanlippens.net/bashrc_and_others
+[What's the difference between .bashrc, .bash_profile, and .environment?]:						http://stackoverflow.com/questions/415403/whats-the-difference-between-bashrc-bash-profile-and-environment
+
 
 
 
