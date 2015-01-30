@@ -44,7 +44,7 @@ link文件有两种：hard link（硬链接）和symbolic link（符号链接，
 
 下图为创建hard link和symbolic link时，文件系统中具体的结构：
 
-![](/images/symbolic-and-hard-link.png)
+![](/images/symbolic-and-hard-link/symbolic-and-hard-link.png)
 
 
 ###hard link
