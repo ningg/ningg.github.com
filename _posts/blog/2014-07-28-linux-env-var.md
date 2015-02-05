@@ -63,7 +63,10 @@ category: Linux
 
 （详解：各个文件加载过程？以及各个文件的用途，为什么要分这么多文件/层次来加载？等待补充）
 
-**解决办法**：`man bash`，在bash的帮助文档中，有详细说明：
+**解决办法**：`man bash`，在bash的帮助文档中，有详细说明，不过有点乱，当前自己简单的办法是：
+
+* 树立，不同地方设置环境变量作用范围不同，的意思；
+* 尝试设置的优先级：`~/.bashrc` > `~/.profile` > `~/.bash_profile`
 
 
 
@@ -73,6 +76,7 @@ TODO:
 
 * [理解Linux环境变量及配置文件执行顺序][理解Linux环境变量及配置文件执行顺序]
 * [Bash: about .bashrc, .bash_profile, .profile, /etc/profile, etc/bash.bashrc and others][Bash: about .bashrc, .bash_profile, .profile, /etc/profile, etc/bash.bashrc and others]
+* [What's the difference between .bashrc, .bash_profile, and .environment?][What's the difference between .bashrc, .bash_profile, and .environment?]
 
 
 

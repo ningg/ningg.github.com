@@ -36,6 +36,17 @@ categories: linux tool
 
 上面理解可能有误，需要参考[Vim Tutorial From Official website][Vim Tutorial From Official website] 进行校验。
 
+
+###高亮检查结果
+
+在`~/.vimrc`中进行如下设置：
+
+	" 设置搜索结果的高亮显示
+	set hlsearch
+	
+
+
+
 ###批量注释
 
 
@@ -91,6 +102,10 @@ TODO：参考 Vdisk.weibo.com/github/vim-editor下内容。
 * [Vim Tutorial From Official website][Vim Tutorial From Official website] （TODO）
 * [Vim实现批量注释的方法][Vim实现批量注释的方法]
 * [Vim下查看历史命令][Vim下查看历史命令]
+* [Vim实用命令行][Vim实用命令行]
+
+
+
 
 **备注**：鸟哥中有对vim进行深入介绍（todo）
 
@@ -110,7 +125,7 @@ TODO：参考 Vdisk.weibo.com/github/vim-editor下内容。
 [Vim Tutorial From Official website]:			/download/vim-editor		"on Vdisk.weibo.com/github/vim-editor"
 [Vim实现批量注释的方法]:						http://be-evil.org/vim-how-to-comment-multi-line-code.html
 [Vim下查看历史命令]:							http://www.douban.com/group/topic/7502081/
-
+[Vim实用命令行]:								http://www.haodaima.net/art/2774935
 
 
 

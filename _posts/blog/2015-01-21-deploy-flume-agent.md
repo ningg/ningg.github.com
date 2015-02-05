@@ -156,6 +156,8 @@ category: flume
 
 Windows Server 2008 与Windows XP基本相同，只需要调整一下`logToKafka.properties`脚本中sources部分，将command由`tail`（UnxUtils）替换为`get-content`（powershell），因为UnxUtils下的`tail`命令，在Windows Server 2008环境下，在Flume的source中时，无法捕获日志内容。**（很奇怪，原因不明）**
 
+**原因定位**：在windows下，`tail -f`命令无法使用的原因，初步确定是因为，`tail -f`进程没有及时向Flume agent进程返回数据，而是在`tail`命令执行结束时，才将所有的内容一起返回；具体，可以监控`tail`命令，会出现内容已经发到Flume agent的现象。
+
 
 
 
