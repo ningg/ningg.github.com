@@ -79,7 +79,8 @@ category: linux
 
 	# 统计文件个数
 	ls -al | grep "^-" | wc -l
-	
+
+
 
 ##统计文件的行数：find、xargs和wc命令
 
