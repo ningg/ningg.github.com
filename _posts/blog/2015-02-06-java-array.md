@@ -78,6 +78,10 @@ category: java
 直接调用`Arrays.binarySearch`方法即可，但要求，调用此方法之前，必须对整个Array进行排序，即`Arrays.sort()`方法，否则，得到的结果可能有错；
 
 
+###清零
+
+`Arrays.fill(char[] charArray, char singleChar)`：将整个charArray中所有内容填充为singleChar，通常char：`\0`表示为空。
+
 
 
 ##对象的数组
