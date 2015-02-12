@@ -555,9 +555,72 @@ Hello World项目中有一些Maven的约定：
 
 
 
-[《Maven实战（迷你版）》]:	/download/maven/Maven+in+action.pdf
+##附录
+
+###中央仓库查找jar包
+
+基本步骤：
+
+* [The Central Repository - Maven(Search Engine)][The Central Repository - Maven(Search Engine)]上查找jar包的groupId\artifactId\version；
+* 通过Maven中添加`dependency`即可自动下载jar包以及源码；
+* 迫不得已时，需要上[中央仓库][The Central Repository - Maven]查看具体jar是否存在等情况；
+
+###强制添加依赖
+
+
+如果在pom中强制添加`<dependency>`，则，通过`assembly:assembly`生成的jar包中，会包含此依赖吗？还是会自动剔除未使用的jar包？
+
+（todo...）
+
+todo list：（需要详细学习）
+
+* [<maven权威指南>学习笔记][<maven权威指南>学习笔记]
 
 
 
+
+
+
+##参考来源
+
+* [《Maven实战（迷你版）》][《Maven实战（迷你版）》]
+* [The Central Repository - Maven(Search Engine)][The Central Repository - Maven(Search Engine)]
+* [The Central Repository - Maven][The Central Repository - Maven]
+* [<maven权威指南>学习笔记][<maven权威指南>学习笔记]
+
+
+
+##杂谈
+
+系统梳理一个常用的工具或者概念，应该有几点：
+
+* 整个系统的基本思路，来龙去脉：
+	* 什么情况下，怎么来的？
+	* 怎么解决的？
+	* 上述原理、思路，如何简单表述？*（便于记忆、分享）*
+* 若是工具，则，掌握：
+	* 基本原理
+	* 基本用法/命令
+	* 问题定位思路
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[《Maven实战（迷你版）》]:											/download/maven/Maven+in+action.pdf
+[The Central Repository - Maven(Search Engine)]:					http://search.maven.org/
+[The Central Repository - Maven]:									http://repo1.maven.org/maven2/org/
+[<maven权威指南>学习笔记]:											http://macrochen.iteye.com/blog/531437
 
 
