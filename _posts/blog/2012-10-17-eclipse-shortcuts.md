@@ -39,6 +39,12 @@ __代码查看__
 |`ctrl + w`|关闭当前源代码窗口|
 |`ctrl + shift + w`|关闭所有打开的源代码窗口|
 |`alt + 1`|显示Eclipse下的错误或警告信息，以及Eclipse给出的备选解决方案|
+|`ctrl + shift + e`|切换Edit窗口|
+|`F12`|光标定位Edit窗口|
+|`ctrl + F6`|切换Edit窗口|
+|`ctrl + L`|光标定位到指定行|
+
+
 
 
 __代码编辑__

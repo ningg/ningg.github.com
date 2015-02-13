@@ -43,9 +43,14 @@ categories: flume hadoop
 
 * maven子模块`flume-dataset-sink`有错误，暂时未解决，close 此模块即可；
 * `flume-ng-core`模块的pom.xml文档，提示出错：Plugin execution not covered by lifecycle configuration: org.codehaus.mojo:build-helper-maven-plugin:1.7:add-source (execution: add-source, phase: generate-sources)，暂时不管这一错误，整个工程也能正常运行；
-	
 
-##开始编译（废弃）
+
+下面附一张，将Flume source 以 Maven工程导入Eclipse的效果：
+
+![](/images/build-flume/flume-maven-src.png)
+
+	
+##开始编译（<span style="color:red">废弃</span>）
 
 **备注**：不必再通过mvn命令，将原始的flume源码编译为Eclipse工程了，直接将原始的flume源码作为maven工程导入即可，具体，参考前一部分**Eclipse下查看Flume的源码（推荐）**。
 

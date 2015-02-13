@@ -136,6 +136,8 @@ Required properties are in bold.
 |interceptors|	–|	Space-separated list of interceptors|
 |interceptors.*	| |	 |
 
+**补充参数**：通过查看源代码，可知：Exec Source还有一个设置参数 `charset`，可以设定读取信息的byte--char--byte之间映射时的编码方式（默认UTF-8），例如，原始日志文档为GBK编码，这只需添加`charset=GBK`即可解决Flume在Source端的乱码问题；不过，如果只是单纯的解决编码问题，可以在Exec Source端设置`charset`，同时，在Sink端以相同的`charset`读取channel中信息即可*（这一方式，没有干预Source，而是在Sink端进行干预，通常情况下，这一做法的难度较小；当然，实际上，在Source、Sink端，进行干预，来解决编码问题，原理上都是可以的，具体场景，具体分析）*
+
 > **Warning**： The problem with ExecSource and other asynchronous sources is that the source can not guarantee that if there is a failure to put the event into the Channel the client knows about it. In such cases, the data will be lost. As a for instance, one of the most commonly requested features is the `tail -F [file]`-like use case where an application writes to a log file on disk and Flume tails the file, sending each line as an event. While this is possible, there’s an obvious problem; what happens if the channel fills up and Flume can’t send an event? Flume has no way of indicating to the application writing the log file that it needs to retain the log or that the event hasn’t been sent, for some reason. If this doesn’t make sense, you need only know this: Your application can never guarantee data has been received when using a unidirectional asynchronous interface such as ExecSource! As an extension of this warning - and to be completely clear - there is absolutely zero guarantee of event delivery when using this source. For stronger reliability guarantees, consider the Spooling Directory Source or direct integration with Flume via the SDK.
 
 **notes(ningg)**：ExecSource方式，当command异常退出后，会丢失数据。解决办法：考虑Spooling Directory Source或者通过SDK直接与Flume集成。
@@ -156,7 +158,9 @@ The ‘shell’ config is used to invoke the ‘command’ through a command she
 	agent_foo.sources.tailsource-1.type = exec
 	agent_foo.sources.tailsource-1.shell = /bin/bash -c
 	agent_foo.sources.tailsource-1.command = for i in /path/*.txt; do cat $i; done
-	
+
+
+
 ##JMS Source
 
 JMS Source reads messages from a JMS destination such as a queue or topic. Being a JMS application it should work with any JMS provider but has only been tested with ActiveMQ. The JMS source provides configurable batch size, message selector, user/pass, and message to flume event converter. Note that the vendor provided JMS jars should be included in the Flume classpath using `plugins.d` directory (preferred), –classpath on command line, or via `FLUME_CLASSPATH` variable in `flume-env.sh`.
@@ -221,31 +225,47 @@ To avoid the above issues, it may be useful to add a unique identifier (such as 
 Despite the reliability guarantees of this source, there are still cases in which events may be duplicated if certain downstream failures occur. This is consistent with the guarantees offered by other Flume components.
 （这一source有可靠性保证，不过可能引发event重复发送问题；其他有可靠性保证的source，也会有类似情况）
 
-Property Name	Default	Description
-channels	–	 
-type	–	The component type name, needs to be spooldir.
-spoolDir	–	The directory from which to read files from.
-fileSuffix	.COMPLETED	Suffix to append to completely ingested files
-deletePolicy	never	When to delete completed files: never or immediate
-fileHeader	false	Whether to add a header storing the absolute path filename.
-fileHeaderKey	file	Header key to use when appending absolute path filename to event header.
-basenameHeader	false	Whether to add a header storing the basename of the file.
-basenameHeaderKey	basename	Header Key to use when appending basename of file to event header.
-ignorePattern	^$	Regular expression specifying which files to ignore (skip)
-trackerDir	.flumespool	Directory to store metadata related to processing of files. If this path is not an absolute path, then it is interpreted as relative to the spoolDir.
-consumeOrder	oldest	In which order files in the spooling directory will be consumed oldest, youngest and random. In case of oldest and youngest, the last modified time of the files will be used to compare the files. In case of a tie, the file with smallest laxicographical order will be consumed first. In case of random any file will be picked randomly. When using oldest and youngest the whole directory will be scanned to pick the oldest/youngest file, which might be slow if there are a large number of files, while using random may cause old files to be consumed very late if new files keep coming in the spooling directory.
-maxBackoff	4000	The maximum time (in millis) to wait between consecutive attempts to write to the channel(s) if the channel is full. The source will start at a low backoff and increase it exponentially each time the channel throws a ChannelException, upto the value specified by this parameter.
-batchSize	100	Granularity at which to batch transfer to the channel
-inputCharset	UTF-8	Character set used by deserializers that treat the input file as text.
-decodeErrorPolicy	FAIL	What to do when we see a non-decodable character in the input file. FAIL: Throw an exception and fail to parse the file. REPLACE: Replace the unparseable character with the “replacement character” char, typically Unicode U+FFFD. IGNORE: Drop the unparseable character sequence.
-deserializer	LINE	Specify the deserializer used to parse the file into events. Defaults to parsing each line as an event. The class specified must implement EventDeserializer.Builder.
-deserializer.*	 	Varies per event deserializer.
-bufferMaxLines	–	(Obselete) This option is now ignored.
-bufferMaxLineLength	5000	(Deprecated) Maximum length of a line in the commit buffer. Use deserializer.maxLineLength instead.
-selector.type	replicating	replicating or multiplexing
-selector.*	 	Depends on the selector.type value
-interceptors	–	Space-separated list of interceptors
-interceptors.*	 
+|Property Name|	Default|	Description|
+|--|--|--|
+|**channels**|	–	 |  |
+|**type**|	–	|The component type name, needs to be `spooldir`.|
+|**spoolDir**|	–	|The directory from which to read files from.|
+|fileSuffix|	.COMPLETED|	Suffix to append to completely ingested files|
+|deletePolicy|	`never`|	When to delete completed files: `never` or `immediate`|
+|fileHeader|	false|	Whether to add a header storing the absolute path filename.|
+|fileHeaderKey|	file|	Header key to use when appending absolute path filename to event header.|
+|basenameHeader|	false|	Whether to add a header storing the basename of the file.|
+|basenameHeaderKey|	basename|	Header Key to use when appending basename of file to event header.|
+|ignorePattern|	^$	|Regular expression specifying which files to ignore (skip)|
+|trackerDir|	.flumespool|	Directory to store metadata related to processing of files. If this path is not an absolute path, then it is interpreted as relative to the spoolDir.|
+|consumeOrder|	oldest	|In which order files in the spooling directory will be consumed `oldest`, `youngest` and `random`. In case of `oldest` and `youngest`, the last modified time of the files will be used to compare the files. In case of a tie, the file with smallest laxicographical order will be consumed first. In case of `random` any file will be picked randomly. When using `oldest` and `youngest` the whole directory will be scanned to pick the oldest/youngest file, which might be slow if there are a large number of files, while using random may cause old files to be consumed very late if new files keep coming in the spooling directory.|
+|maxBackoff	|4000	|The maximum time (in millis) to wait between consecutive attempts to write to the channel(s) if the channel is full. The source will start at a low backoff and increase it exponentially each time the channel throws a ChannelException, upto the value specified by this parameter.|
+|batchSize	|100|	Granularity at which to batch transfer to the channel|
+|inputCharset|	UTF-8|	Character set used by deserializers that treat the input file as text.|
+|decodeErrorPolicy|	`FAIL`|	What to do when we see a non-decodable character in the input file. `FAIL`: Throw an exception and fail to parse the file. `REPLACE`: Replace the unparseable character with the “replacement character” char, typically Unicode `U+FFFD`. `IGNORE`: Drop the unparseable character sequence.|
+|deserializer|	`LINE`|	Specify the deserializer used to parse the file into events. Defaults to parsing each line as an event. The class specified must implement `EventDeserializer.Builder`.|
+|deserializer.*	| 	|Varies per event deserializer.*(设置每个deseralizer的实现类，对应的配置参数)*|
+|bufferMaxLines|	–	|(Obselete) This option is now ignored.|
+|bufferMaxLineLength|	5000|	(Deprecated) Maximum length of a line in the commit buffer. Use `deserializer.maxLineLength` instead.|
+|selector.type|	`replicating`|	`replicating` or `multiplexing`|
+|selector.*	| 	|Depends on the `selector.type` value|
+|interceptors|	–	|Space-separated list of interceptors|
+|interceptors.*	|  |  |
+
+**notes(ningg)**：上述配置中提到向Flume event添加Header的情况，那一个event到底是什么构成的呢？Header、Key、EventBody？这些的用途是什么？
+
+**RE**：Event，`org.apache.flume.Event`实际为`Interface`，其向外提供两个属性：
+
+* Headers：`Map<String, String>`，即，一组key-value对；
+* Body：`byte[]`，即，字节数组；
+
+**额外补充**：关于Body对应的`byte[]`，有两点要强调一下：
+
+* 通常原始信息是`String`类型，将其转换为`byte[]`，通常需要指定`charset`，常用方法`String.getBytes(String charset)`；
+* 具体如何将`byte[]`转换为人可以识别的`char[]`，其中需要设定`charset`，常用方法`new String(byte[], String charset)`；
+* 如果上述过程中指定的`charset`不合适，会产生乱码；
+
+
 
 Example for an agent named agent-1:
 
