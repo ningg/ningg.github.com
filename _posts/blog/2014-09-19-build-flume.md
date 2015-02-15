@@ -49,6 +49,29 @@ categories: flume hadoop
 
 ![](/images/build-flume/flume-maven-src.png)
 
+
+
+###Flume源码的Debug
+
+本质上Flume是启动一个JVM实例，具体启动参数，可以参考`/bin/flume-ng`脚本的最终启动命令。列几个启动脚本的常量，就是JVM实例的main class：
+
+	FLUME_AGENT_CLASS="org.apache.flume.node.Application"
+	FLUME_AVRO_CLIENT_CLASS="org.apache.flume.client.avro.AvroCLIClient"
+	FLUME_VERSION_CLASS="org.apache.flume.tools.VersionInfo"
+	FLUME_TOOLS_CLASS="org.apache.flume.tools.FlumeToolsMain"
+
+
+
+
+TODO：
+
+* 在本地开发Flume的组件；
+* 本地启动Eclipse下的Flume工程（从入口类），
+
+
+
+
+
 	
 ##开始编译（<span style="color:red">废弃</span>）
 

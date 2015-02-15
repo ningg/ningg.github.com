@@ -252,6 +252,13 @@ Despite the reliability guarantees of this source, there are still cases in whic
 |interceptors|	–	|Space-separated list of interceptors|
 |interceptors.*	|  |  |
 
+**notes(ningg)**：关于Spooling Directory Source的配置参数，几点：
+
+* `fileHeader`、`basenameHeader`设定Event Header（`Map<Stirng, String>`）中是否添加两个key：默认为`file`和`basename`；
+* `trackerDir`：什么用？是处理file所需的metadata？当前查看，在处理每个文件过程中都会产生metadata，这个metadata上保存什么内容？用于保证：处理单个文件时，程序重启，不会产生数据重发或者丢失吗？
+* 
+
+
 **notes(ningg)**：上述配置中提到向Flume event添加Header的情况，那一个event到底是什么构成的呢？Header、Key、EventBody？这些的用途是什么？
 
 **RE**：Event，`org.apache.flume.Event`实际为`Interface`，其向外提供两个属性：

@@ -235,6 +235,7 @@ java中，对String进行编码、解码的基本过程，见下图；简要解�
 ASCII：American Standard Code for Information Interchange（信息交换，美国标准码）；简单说几点：
 
 `US-ASCII`：原始的ASCII
+
 * 1963年
 * 7-bit（128个字符）
 * letters、numerals、symbols、device control code
@@ -247,6 +248,7 @@ ASCII：American Standard Code for Information Interchange（信息交换，美�
 * ISO 8859-2，东欧常用语言（Eastern European Language）的扩展；
 
 一个byte，8 bit，并不能满足所有character encodings的需要，因此出现了multi-byte character encodings，整体上两类：
+
 * Extended ASCII：多字节编码时，ASCII已经表示的字符，仍用ASCII的8-bit表示：
 	* 保留`0x00-0x7F`来标识原始的ASCII；
 	* 启用`0x80--0xFF`来标识多字节的字符；
@@ -541,7 +543,7 @@ Huffman coding，霍夫曼编码：
 
 
 
-**推荐**：此次编码相关的中文wiki内容，推荐；
+**推荐**：此次编码相关的**中文wiki**内容；
 
 
 
