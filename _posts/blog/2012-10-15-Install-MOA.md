@@ -186,14 +186,8 @@ __注意__ ：`moa`的`2012.08`版本中，使用`junit4`进行的单元测试�
 __解决办法__ ：点击上面的“Attach Source”按钮，并添加`weka-src.jar`包即可。
 
 
-[MOA]: http://moa.cs.waikato.ac.nz "Massive Online Analysis"
-[weka官网]: http://www.cs.waikato.ac.nz/ml/weka/ "Waikato Environment for Knowledge Analysis"
-[weka]: http://www.cs.waikato.ac.nz/ml/weka/ "Waikato Environment for Knowledge Analysis"
-[google]: http://www.google.com/ncr "google search engine"
-[baidu]: http://www.baidu.com "baidu search engine"
-[weka-FAQ]: http://weka.wikispaces.com/Frequently+Asked+Questions "weka Frequently Asked Questions"
-[Manual.pdf]: http://heanet.dl.sourceforge.net/project/moa-datastream/documentation/Manual.pdf "MOA Manual Documentation"
-[MOA download]: http://moa.cms.waikato.ac.nz/downloads/ "MOA download site"
+
+
 
 $$
 \begin{align*}
@@ -211,4 +205,29 @@ $$
     \end{array} \right)
 \end{align*}
 $$
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+[MOA]: http://moa.cs.waikato.ac.nz "Massive Online Analysis"
+[weka官网]: http://www.cs.waikato.ac.nz/ml/weka/ "Waikato Environment for Knowledge Analysis"
+[weka]: http://www.cs.waikato.ac.nz/ml/weka/ "Waikato Environment for Knowledge Analysis"
+[google]: http://www.google.com/ncr "google search engine"
+[baidu]: http://www.baidu.com "baidu search engine"
+[weka-FAQ]: http://weka.wikispaces.com/Frequently+Asked+Questions "weka Frequently Asked Questions"
+[Manual.pdf]: http://heanet.dl.sourceforge.net/project/moa-datastream/documentation/Manual.pdf "MOA Manual Documentation"
+[MOA download]: http://moa.cms.waikato.ac.nz/downloads/ "MOA download site"
+
+
+
 
