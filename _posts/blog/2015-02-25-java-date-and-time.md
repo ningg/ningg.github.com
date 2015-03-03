@@ -49,11 +49,18 @@ category: java
 利用DateFormat可以实现String与Date之间的相互转换，`SimpleDateFormat`使用的更为广泛，示例代码如下：
 
 
-	String datePattern = "yyyy-MM-dd";
+	String datePattern = "yyyy-MM-dd HH:mm:ss";
 	SimpleDateFormat simpleDateFormat = new SimpleDateFormat(datePattern);
 	
+	// Date -> String
 	System.out.println(simpleDateFormat.format(new Date()));
+	
+	
+	// String -> Date
+	String dateString = "2014-01-19 08:15:45";
+	Date date = simpleDateFormat.parse(dateString);
 
+	
 
 强调几点：
 
@@ -114,7 +121,7 @@ category: java
 
 [NingG]:    								http://ningg.github.com  "NingG"
 [simpleDateFormat]:							http://docs.oracle.com/javase/tutorial/i18n/format/simpleDateFormat.html
-
+[JavaSE 7 API-SimpleDateFormat]:			http://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html
 
 
 

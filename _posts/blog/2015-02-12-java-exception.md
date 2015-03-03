@@ -32,7 +32,38 @@ java中异常处理机制：
 * service？
 
 
+主动抛出异常，示例代码：
 
+	...
+	} catch (IOException ioe) {
+      throw new FlumeException("Error instantiating spooling event parser",
+          ioe);
+    }
+
+`FlumeException.java`源文件：
+
+	package org.apache.flume;
+
+	/**
+	 * Base class of all flume exceptions.
+	 */
+	public class FlumeException extends RuntimeException {
+
+	  private static final long serialVersionUID = 1L;
+
+	  public FlumeException(String msg) {
+		super(msg);
+	  }
+
+	  public FlumeException(String msg, Throwable th) {
+		super(msg, th);
+	  }
+
+	  public FlumeException(Throwable th) {
+		super(th);
+	  }
+
+	}
 
 
 

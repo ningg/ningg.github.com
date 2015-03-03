@@ -58,7 +58,10 @@ category: open-source
 * 如何设置git的`.gitignore`？
 
 
-**解决办法**：对于Eclipse创建的Maven工程，直接在`.gitignore`文件中，添加如下内容：
+如何创建`.gitignore`文件，因为，在WIN环境下，OS一直提示"必须键入文件名"。
+	* 直接执行命令`touch .gitignore`即可。
+
+对于Eclipse创建的Maven工程，直接在`.gitignore`文件中，添加如下内容：
 
 	# Eclipse
 	.classpath
@@ -68,9 +71,102 @@ category: open-source
 	target/
 
 
-**参考**：
+**参考**：[Git ignores and Maven targets][Git ignores and Maven targets]
 
-* [Git ignores and Maven targets][Git ignores and Maven targets]
+
+
+
+
+###Eclipse下进行source的format
+
+几点：
+
+* 如何定制source的format？
+* 如何快捷进行source的format？
+
+
+###Eclipse下创建的java文件，自动添加头部注释信息
+
+（todo）
+
+
+
+###maven导出jar包
+
+背景：当前自己都是eclipse的`Export`--`Jar file`/`Runnable Jar file`，如何利用maven直接生成jar包？
+
+命令：`maven clean package`
+
+
+
+###maven打包时，指定源文件编码方式
+
+
+
+###maven打包时，如何将当前jar包以及其依赖包都导出？
+
+
+参考[thilinamb flume kafka sink][https://github.com/thilinamb/flume-ng-kafka-sink]
+
+
+
+
+##编程相关
+
+
+###判断参数是否输入有误
+
+（TODO：专门学习一下）
+
+用到`guava-11.0.2.jar`包，示例代码如下：
+
+	...
+	Preconditions.checkState(spoolDirectory != null, "Configuration must specify a spooling directory");
+	...
+	Preconditions.checkNotNull(spoolDirectory);
+
+###判断对象是否为null
+
+（TODO：专门学习一下）
+
+用到`guava-11.0.2.jar`包，示例代码如下：
+
+	...
+	private Optional<FileInfo> currentFile = Optional.absent();
+	...
+
+**思考**：使用上述`Optional<T>`有什么好处？
+
+
+
+###过滤文件
+
+利用java.io.FileFilter，示例代码如下：
+
+	FileFilter filter = new FileFilter() {
+      public boolean accept(File candidate) {
+        String fileName = candidate.getName();
+        if ((candidate.isDirectory()) ||
+            (fileName.endsWith(completedSuffix)) ||
+            (fileName.startsWith(".")) ||
+            ignorePattern.matcher(fileName).matches()) {
+          return false;
+        }
+        return true;
+      }
+    };
+	List<File> candidateFiles = Arrays.asList(spoolDirectory.listFiles(filter));
+
+
+
+
+
+
+
+
+
+
+
 
 
 

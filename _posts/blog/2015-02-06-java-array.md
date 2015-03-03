@@ -33,6 +33,7 @@ category: java
 * 排序
 * 查找
 * 清零
+* 转换为`List`
 
 **特别说明**：这些操作大都已经作为基本的操作，封装在`java.util.Arrays`类中了。
 
@@ -82,6 +83,12 @@ category: java
 
 `Arrays.fill(char[] charArray, char singleChar)`：将整个charArray中所有内容填充为singleChar，通常char：`\0`表示为空。
 
+
+###转换为List
+
+`List<T> Arrays.asList(T... a)`，将数组`a`转换为List；
+
+**疑问**：如何将List转换为List？`List.toArray();`
 
 
 ##对象的数组

@@ -107,7 +107,7 @@ Example for agent named `a1`:
 	a1.sinks.k1.type = logger
 	a1.sinks.k1.channel = c1
 
-**notes(ningg)**：`logger`类型的Sink，有长度限制吗？其输出的event的body在stdout中只显示
+**notes(ningg)**：`logger`类型的Sink，有长度限制吗？其输出的event的body在stdout中只显示16字节；
 
 ##Avro Sink
 

@@ -19,10 +19,22 @@ category: java
 
 
 
+##java.util.concurrent
+
+
+（todo：基本用法）
+
+其核心为：Executor，屏蔽很多细节。
 
 
 
 
+
+**疑问**：在flume的spooling directory source中，用法的含义？
+
+	...
+	while (!Thread.interrupted()) {
+	...
 
 
 
