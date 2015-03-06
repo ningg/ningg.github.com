@@ -44,7 +44,7 @@ java中异常处理机制：
 
 	package org.apache.flume;
 
-	/**
+	/*
 	 * Base class of all flume exceptions.
 	 */
 	public class FlumeException extends RuntimeException {
@@ -66,14 +66,33 @@ java中异常处理机制：
 	}
 
 
+连续多个`catch(Exception exception)`动作，什么作用？
+
+	try {
+		...
+	} catch (FlumeException ex){
+		transaction.rollback();
+	} catch (Exception ex){
+		transaction.rollback();
+		String errorMsg = "Failed to publish event: " + event ;
+		logger.error(errorMsg);
+		throw new EventDeliveryException(errorMsg, ex);
+	} finally {
+		transaction.close();
+	}
 
 
 
+##参考来源
+
+* [Java Tutorial--Lesson: Exceptions][Java Tutorial--Lesson: Exceptions]
+
+	
 
 
 
 [NingG]:    http://ningg.github.com  "NingG"
 
 
-
+[Java Tutorial--Lesson: Exceptions]:			http://docs.oracle.com/javase/tutorial/essential/exceptions/
 

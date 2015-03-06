@@ -10,7 +10,7 @@ categories: log java
 
 * 在程序中插入，输出log的代码；
 * 配置最终log文件的生成策略；
-* 
+
 
 
 ##slf4j
