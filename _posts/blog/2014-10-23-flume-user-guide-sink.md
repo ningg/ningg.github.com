@@ -249,7 +249,65 @@ Example for agent named a1:
 
 ##ElasticSearchSink
 
-（todo）
+This sink writes data to an [ElasticSearch][ElasticSearch] cluster. By default, events will be written so that the [Kibana][Kibana] graphical interface can display them - just as if [logstash][logstash] wrote them.
+
+The elasticsearch and lucene-core jars required for your environment must be placed in the lib directory of the Apache Flume installation. Elasticsearch requires that the major version of the client JAR match that of the server and that both are running the same minor version of the JVM. SerializationExceptions will appear if this is incorrect. To select the required version first determine the version of elasticsearch and the JVM version the target cluster is running. Then select an elasticsearch client library which matches the major version. A 0.19.x client can talk to a 0.19.x cluster; 0.20.x can talk to 0.20.x and 0.90.x can talk to 0.90.x. Once the elasticsearch version has been determined then read the pom.xml file to determine the correct lucene-core JAR version to use. The Flume agent which is running the ElasticSearchSink should also match the JVM the target cluster is running down to the minor version.
+
+**notes(ningg)**：使用ElasticSearchSink时，几点：
+
+* 依赖的jar包：elasticsearch jar、lucene-core jar、client jar；
+* JVM：flume agent与ElasticSearch运行的JVM minor version一致；
+
+如果上述几点不满足，则可能出现`SerializationExceptions`；为解决这一问题，通用步骤：
+
+* determine the version of elasticsearch and JVM version the target cluster is running;
+* select an elasticsearch client library which matches the major version;
+* read the pom.xml of elasticsearch to determine the correct lucene-core JAR version
+
+
+Events will be written to a new index every day. The name will be `<indexName>-yyyy-MM-dd` where `<indexName>` is the indexName parameter. The sink will start writing to a new index at midnight UTC.
+
+Events are serialized for elasticsearch by the `ElasticSearchLogStashEventSerializer` by default. This behaviour can be overridden with the `serializer` parameter. This parameter accepts implementations of `org.apache.flume.sink.elasticsearch.ElasticSearchEventSerializer` or `org.apache.flume.sink.elasticsearch.ElasticSearchIndexRequestBuilderFactory`. Implementing `ElasticSearchEventSerializer` is deprecated in favour of the more powerful `ElasticSearchIndexRequestBuilderFactory`.
+
+The type is the `FQCN`: `org.apache.flume.sink.elasticsearch.ElasticSearchSink`
+
+Required properties are in **bold**.
+
+
+|Property Name|	Default	|Description|
+|-----|-----|-----|
+|**channel**|	–|	 |
+|**type**|	–|	The component type name, needs to be `org.apache.flume.sink.elasticsearch.ElasticSearchSink`|
+|**hostNames**|	–	|Comma separated list of `hostname:port`, if the port is not present the default port ‘9300’ will be used|
+|indexName|	flume|	The name of the index which the date will be appended to. Example `flume` -> `flume-yyyy-MM-dd`|
+|indexType|	logs|	The type to index the document to, defaults to `log`|
+|clusterName|	elasticsearch|	Name of the ElasticSearch cluster to connect to|
+|batchSize|	100|	Number of events to be written per txn.|
+|ttl|	–	|TTL in `days`, when set will cause the expired documents to be deleted automatically, if not set documents will never be automatically deleted. TTL is accepted both in the earlier form of integer only e.g. a1.sinks.k1.ttl = 5 and also with a qualifier ms (millisecond), s (second), m (minute), h (hour), d (day) and w (week). Example a1.sinks.k1.ttl = 5d will set TTL to 5 days. Follow [ttl field][ttl field] for more information.|
+|serializer|	`org.apache.flume.sink.elasticsearch.ElasticSearchLogStashEventSerializer`|	The `ElasticSearchIndexRequestBuilderFactory` or `ElasticSearchEventSerializer` to use. Implementations of either class are accepted but `ElasticSearchIndexRequestBuilderFactory` is preferred.|
+|serializer.*|	–	|Properties to be passed to the serializer.|
+
+
+Example for agent named a1:
+
+
+	a1.channels = c1
+	a1.sinks = k1
+	a1.sinks.k1.type = elasticsearch
+	a1.sinks.k1.hostNames = 127.0.0.1:9200,127.0.0.2:9300
+	a1.sinks.k1.indexName = foo_index
+	a1.sinks.k1.indexType = bar_type
+	a1.sinks.k1.clusterName = foobar_cluster
+	a1.sinks.k1.batchSize = 500
+	a1.sinks.k1.ttl = 5d
+	a1.sinks.k1.serializer = org.apache.flume.sink.elasticsearch.ElasticSearchDynamicSerializer
+	a1.sinks.k1.channel = c1
+
+
+
+
+
+
 
 ##Custom Sink
 
@@ -269,3 +327,14 @@ Example for agent named a1:
 	a1.sinks = k1
 	a1.sinks.k1.type = org.example.MySink
 	a1.sinks.k1.channel = c1
+
+	
+	
+[logstash]:						https://logstash.net/
+[Kibana]:						http://kibana.org/
+[ElasticSearch]:				http://www.elasticsearch.org
+[ttl field]:					http://www.elasticsearch.org/guide/reference/mapping/ttl-field/
+
+
+
+
