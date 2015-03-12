@@ -82,6 +82,16 @@ java中异常处理机制：
 	}
 
 
+下面代码的含义：
+
+	e.printStackTrace();
+	Throwables.propagate(e);
+
+
+
+
+
+
 
 ##参考来源
 

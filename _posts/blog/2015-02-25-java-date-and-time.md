@@ -6,6 +6,8 @@ category: java
 ---
 
 
+##JDK自带类
+
 ###获取年月日
 
 常用两种方式：
@@ -71,13 +73,54 @@ category: java
 
 
 
+##借助第三方包
 
 
+###commons-long-2.5.jar
+
+`pom.xml`片段：
+
+	<groupId>org.apache.commons</groupId>
+	<artifactId>commons-lang</artifactId>
+	<version>2.5</version>
 
 
+示例代码：
+
+	FastDateFormat fastDateFormat = FastDateFormat.getInstance("yyyy-MM-dd",
+		TimeZone.getTimeZone("Etc/UTC"));
+
+API中解释：
+
+> FastDateFormat is a fast and thread-safe version of java.text.SimpleDateFormat.
+> 
+> This class can be used as a direct replacement to SimpleDateFormat in most formatting situations. This class is especially useful in multi-threaded server environments. SimpleDateFormat is not thread-safe in any JDK version, nor will it be as Sun have closed the bug/RFE. 
 
 
+疑问：时区中`Etc/UTC`的含义？
 
+个人理解：使用时区，方便程序进行国际化，不过，要求，生成日期的Server与解释日期的Server在Time Zone上要设置正确，即，每个操作系统的Time Zone要设置正确。
+
+自己测试现象：下面两者等价
+
+* March 11th 2015, 12:58:55.901--Etc/GMT-8
+* 2015-03-11T04:58:55.901Z--Etc/UTC
+
+可借助[Time zone converter][Time zone converter]进行查询。
+
+
+###joda
+
+`pom.xml`片段：
+
+	<groupId>joda-time</groupId>
+	<artifactId>joda-time</artifactId>
+	<version>2.1</version>
+
+
+示例代码如下：
+
+	DateTimeFormatter defaultDatePrinter = ISODateTimeFormat.dateTime().withZone(DateTimeZone.UTC);
 
 
 
@@ -122,7 +165,7 @@ category: java
 [NingG]:    								http://ningg.github.com  "NingG"
 [simpleDateFormat]:							http://docs.oracle.com/javase/tutorial/i18n/format/simpleDateFormat.html
 [JavaSE 7 API-SimpleDateFormat]:			http://docs.oracle.com/javase/7/docs/api/java/text/SimpleDateFormat.html
-
+[Time zone converter]:						http://www.timezoneconverter.com/cgi-bin/zoneinfo.tzc
 
 
 
