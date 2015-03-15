@@ -11,7 +11,7 @@ categories: trello tool
 
 * [New Stuff][New Stuff]
 * [Help Page][Help Page]
-* 搜索 `shortcut` 关键字
+* 搜索 `shortcuts` 关键字
 * 哈哈，找到：[Using keyboard shortcuts in Trello][Using keyboard shortcuts in Trello]
 
 ##shortcuts
@@ -54,11 +54,11 @@ Trello内部结构：
 			|--List
 				|
 				|--Card
-				|--Card(`f`\`x`)
+				|--Card(`f`|`x`)
 					|
 					|--edit Title (`t`)
 					|--Edit description (`e`)
-					|--选中相邻的Card(`j`\`k`)
+					|--选中相邻的Card(`j`|`k`)
 
 
 
