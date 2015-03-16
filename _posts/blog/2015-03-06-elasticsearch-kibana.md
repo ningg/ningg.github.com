@@ -43,7 +43,7 @@ categories: kafka elasticsearch kibana
 * github上别人开源的Flume-ng-kafka-source
 * flume 1.6.0分支的代码中flume-ng-kafka-source
 
-初步选定Flume 1.6.0分支中的flume-ng-kafka-source部分，
+初步选定Flume 1.6.0分支中的flume-ng-kafka-source部分，具体步骤，参考：[Flume实现将Kafka中数据传入ElasticSearch中][Flume实现将Kafka中数据传入ElasticSearch中]
 
 
 
@@ -72,11 +72,11 @@ categories: kafka elasticsearch kibana
 
 [NingG]:    http://ningg.github.com  "NingG"
 
-[ElasticSearch中文发行版]:			https://github.com/medcl/elasticsearch-rtf
-[ElasticSearche权威指南]:			http://fuxiaopang.gitbooks.io/learnelasticsearch/
-[精通 ElasticSearch]:				http://shgy.gitbooks.io/mastering-elasticsearch/
-[Kibana中文指南]:					http://kibana.logstash.es/
-
+[ElasticSearch中文发行版]:							https://github.com/medcl/elasticsearch-rtf
+[ElasticSearche权威指南]:							http://fuxiaopang.gitbooks.io/learnelasticsearch/
+[精通 ElasticSearch]:								http://shgy.gitbooks.io/mastering-elasticsearch/
+[Kibana中文指南]:									http://kibana.logstash.es/
+[Flume实现将Kafka中数据传入ElasticSearch中]:		/flume-kafka-source-elasticsearch-sink
 
 
 

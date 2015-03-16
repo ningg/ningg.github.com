@@ -89,6 +89,22 @@ ElasticSearchSink中新的配置参数：
 	* 其他选项：org.apache.flume.sink.elasticsearch.ElasticSearchDynamicSerializer，其直接将body、header构造为一个JSON字符串，添加到ElasticSearch中。
 
 
+##重启
+
+如果终止Flume Agent，然后重启。疑问：
+
+* Kafka中的数据，是否会重复发送到ElasticSearch？
+* Kafka中的数据，是否有遗漏，没有发送到ElasticSearch？
+
+思考，几个情况：
+
+* Kafka对应的Consumer有offset
+* Kafka中数据，周期性的清理，例如默认3天
+
+需要详细思考Flume Agent的重启场景。
+
+
+
 
 
 
@@ -103,6 +119,11 @@ ElasticSearchSink中新的配置参数：
 
 [NingG]:    						http://ningg.github.com  "NingG"
 [flume-ng-extends-source]:			https://github.com/ningg/flume-ng-extends-source
+
+
+
+
+
 
 
 
