@@ -422,6 +422,11 @@ So I'm going to pause here, we'll pick back up with the rest of this on Thursday
 
 But yeah, Sam asked me to talk about why you should start a startup. There's a bunch of common reasons that people have, that I hear all the time for why you might start a startup. Its important to know what reason is yours, because some of them only make sense in certain contexts, some of them will actually, like, lead you astray. You may have been mislead by the way that Hollywood or the press likes to romanticize entrepreneurship, so I want to try to illuminate some of those potential fallacies, so you guys can make the decision in a clear way. And then I'll talk about the reason I like best for actually starting a startup, its very related to a lot of what Sam just talked about. But surprisingly, I don't think its the most common reason. Usually people have one of these other reasons, or, you know, they just want to start a company for the sake of starting a company.
 
+很多原因：
+
+* 在一些场景下，
+
+
 So the 4 common reasons, just to enumerate them, are it's glamorous, you'll get to be the boss, you'll have flexibility, especially over your schedule, and you'll have the chance to have bigger impact and make more money then you might by joining a later stage company.
 
 So you guys are probably pretty familiar this concept, when I wrote the Medium post, which a lot of you guys read a year ago, I felt like the story in the press was a little more unbalanced, entrepreneurship got romanticized quite a bit. The movie The Social Network came out, it had a lot of like bad aspects of what it like to be an entrepreneur, but mainly it painted this picture of like, there's a lot of partying and you just kind of move from like one brilliant insight to another brilliant insight, and really made it seem like this really cool thing to do.
