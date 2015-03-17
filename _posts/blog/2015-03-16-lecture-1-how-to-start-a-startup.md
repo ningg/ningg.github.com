@@ -203,67 +203,222 @@ There are a lot of different ways to talk about the right kind of market. For ex
 
 So think about where this is happening in the world. You need this sort of tailwind to make a startup successful.
 
+找准 market 才是顺势而为。
+
+
 The exciting thing is the there are probably more of these tailwinds now then ever before. As Marc Andreessen says, software is eating the world. Its just everywhere, there are so many great ideas out there. You just have to pick one, and find one that you really care about.
+
+几点：
+
+* software is eating the world.
+* There are many great ideas, just take the one you really care about.
 
 Another version of this, that gets down to the same idea, is Sequoia's famous question: Why now? Why is this the perfect time for this particular idea, and to start this particular company. Why couldn't it be done two years ago, and why will two years in the future be two late? For the most successful startups we've been involved with, they've all had a great idea and a great answer to this question. And if you don't you should be at least somewhat suspicious about it.
 
+思考、分析、推理一个问题：为什么是现在？早两年、晚两年不可以吗？对此问题应有一个坚定的回答。*（还可以问：为什么是你来做？）*
+
 In general, its best if you're building something that you yourself need. You'll understand it much better than if you have to understand it by talking to a customer to build the very first version. If you don't need it yourself, and you're building something someone else needs, realize that you're at a big disadvantage, and get very very close to your customers. Try to work in their office, if you can, and if not, talk to them multiple times a day.
+
+解决自己的需求，要更为容易一些，因为解决别人的需求，需要你不断的与真正用户进行沟通，这中间可能会错失一些信息。如果你要解决的是他人的需求，请记住几点：
+
+* 这对你来说个劣势；
+* 你最好跟真正的用户，在一起工作，甚至住在一起；
+* 或者，跟真正的用户待得近一些，每天都接触接触；
 
 Another somewhat counterintuitive thing about good startup ideas is that they're almost always very easy to explain and very easy to understand. If it takes more then a sentence to explain what you're doing, that's almost always a sign that its too complicated. It should be a clearly articulated vision with a small number of words. And the best ideas are usually very different from existing companies, [either] in one important way, like Google being a search engine that worked just really well, and none of the other stuff of the portals, or totally new, like SpaceX. Any company that's a clone of something else, that already exists, with some small or made up differentiator—like X, beautiful design, or Y for people that like red wine instead—that usually fails.
 
+对idea的阐述，尽力简洁明了，通常 best ideas 比较革新的。
+
 So as I mentioned, one of the great things about being a student is that you've got a very good perspective on new technology. And learning to have good ideas takes a while, so start working on that right now. That's one thing we hear from people all the time, that they wish they had done more of as a student.
+
+作为student有一个很好的优势：对新技术很敏感，对时代年轻人的需求把握较准确。在此，基础上，花时间学习如何找出一个好的 idea，然后立即行动；大部分人都希望 student 在其优势的基础上，承担更多的工作。
+
 
 The other is meeting potential cofounders. You have no idea how good of an environment you're in right now, for meeting people you can start a company with down the road. And the one thing that we always tell college students is that more important then any particular startup is getting to know potential cofounders.
 
+
+留意潜在的 cofounder，这个对 college student 很重要。*（cofounder 是可以寻找的吗？偶遇？）*
+
+
+
 So I want to finish this section of my talk with a quote from 50 Cent. This is from when he was asked about Vitamin Water. I won't read it, it's up there, but it's about the importance of thinking about what customers want, and thinking about the demands of the market. Most people don't do this—most students especially don't do this. If you can just do this one thing, if you can just learn to think about the market first, you'll have a big leg up on most people starting startups. And this is probably the thing we see wrong with Y Combinator apps most frequently, is that people have not thought about the market first, and what people want first.
+
+先思考market，再思考customer demands，几点：
+
+* It's up there.
+* It's about the importance of thinking about what custormers want,
+* think about the demands of the market.
+
+###Product
+
+
 
 So for the next section, I'm going to talk about building a great product. And here, again, I'm going to use a very broad definition of product. It includes customer support, the copy you write explaining the product, anything involved in your customer's interaction in what you built for them.
 
+definition of product：
+
+* customer support*（用户支持？客服？）*
+* the copy you write explaining the product*（对产品的表述、定位？）*
+* 与用户交互（互动）过程中，涉及到的各方面内容*（有例子吗？）*
+
+
+
+
 To build a really great company, you first have to turn a great idea into a great product. This is really hard, but its crucially important, and fortunately its pretty fun. Although great products are always new to the world, and its hard to give you advice about what to build, there are enough commonalities that we can give you a lot of advice about how to build it.
+
+将 idea 转变为 product，这个过程很重要，也很有趣。
 
 One of the most important tasks for a founder is to make sure that the company builds a great product. Until you build a great product, nothing else matters. When really successful startup founders tell the story of their early days its almost always sitting in front of the computer working on their product, or talking to their customers. That's pretty much all the time. They do very little else, and you should be very skeptical if your time allocation is much different. Most other problems that founders are trying to solve, raising money, getting more press, hiring, business development, et cetera, these are significantly easier when you have a great product. Its really important to take care of that first. Step one is to build something that users love. At YC, we tell founders to work on their product, talk to users, exercise, eat and sleep, and very little else. All the other stuff I just mentioned—PR, conferences, recruiting advisers, doing partnerships—you should ignore all of that, and just build a product and get it as good as possible by talking to your users.
 
+founder第一步要做的是 build a great product，这很重要，一个好的 product 会使得后面的问题变得简单：
+
+* trying to solve *（什么含义？）*
+* raising money *（筹集资金）*
+* getting more press *（获得更多的新闻关注）*
+* hiring
+* business development
+
+当你有一个 great product 时，这些问题都会容易的多。在 YC，我们建议 founder 做几件事：
+
+* work on their product
+* talk to users
+* exercise
+* eat
+* sleep
+* Nothing else.
+
+而不少其他地方，founder 却在进行下面几项工作：
+
+* PR *（pulbic relation）*
+* conferences
+* recruiting advisers *（招聘顾问）*
+* doing partnerships *（开展伙伴计划）*
+
+我们的建议是，这些都不要管，专注自己的产品，不断与 user 沟通，把他做得足够好。
+
 Your job is to build something that users love. Very few companies that go on to be super successful get there without first doing this. A lot of good-on-paper startups fail because they merely make something that people like. Making something that people want, but only a medium amount, is a great way to fail, and not understand why you're failing. So these are the two jobs
+
+首先要做的就是把 product 变得足够好，很多人在这一步犯错，因此，两部一定要做完：
+
+* understand what users really want or need
+* then build it
+
+在 BML，他们的建议是：run fast, cheap tests on users, get honest feedback and observe user behavior, analyze and then iterate.*（小成本反复测试、快速升级）*
+
 
 Something that we say at YC a lot is that its better to build something that a small number of users love, then a large number of users like. Of course, it would be best to build something that a small number of users love, but opportunities to do that for v1 are rare, and they're usually not available to startups. So in practice you end up choosing the gray of the orange. You make something that a lot of users like a little bit, or something that a small number of users love a lot. This is a very important piece of advice. Build something that a small number of users love. It is much easier to expand from something that small number of people love, to something that a lot of people love, then from something that a lot of people like to a lot of people love. If you get right, you can get a lot of other things wrong. If you don't get this right, you can get everything else right, and you'll probably still fail. So when you start on the startup, this is the only thing you need to care about until its working.
 
+在 YC 我们给出的建议是：做一个小众喜爱的产品，做精细，然后再做较大众的产品。不过大多数情况下，小众的产品，很难大众化，此时就不适合startup。在尝试的过程中，两种选择：
+
+* a lot of users like a little bit;
+* a small number of users love a lot; *（倾向推荐）*
+
+这一步很重要，这一步做对，才有后面的机会；这一步错了，其他地方再正确，也极可能 fail。
+
 [Audience member]: Can you go over that slide again?
 
-So you have a choice in a startup. The best thing of all worlds is to build a product that a lot of people really love. In practice, you can't usually do that, because if there's an opportunity like that, Google or Facebook will do it. So there's like a limit to the area under the curve, of what you can build. So you can build something that a large number of users like a little bit, or a small number of users love a lot. So like the total amount of love is the same, its just a question of how its distributed. [audience laughter] And there's like this law of conservation of how much happiness you can put in the world, with the first product of a startup.
+So you have a choice in a startup. The best thing of all worlds is to build a product that a lot of people really love. In practice, you can't usually do that, because if there's an opportunity like that, Google or Facebook will do it. So there's like a limit to the area under the curve, of what you can build. So you can build something that a large number of users like a little bit, or a small number of users love a lot. So like the total amount of love is the same, its just a question of how its distributed. [audience laughter] And there's like this law of conservation of how much happiness you can put in the world, with the first product of a startup.*（最后一句，什么意思？）*
+
+最佳的startup是做一个大众喜爱的product，但，实际操作中，一个startup最好冷静一下，因为，大众喜爱的产品，Google、Facebook这类大家伙多已经或者准备在做了。因此，选择做一个小众喜爱的产品和做一个大众轻微喜欢的产品，是一个不错的选择，这两个看起来整体的love是一致的，只不过分布不同。
 
 And so startups always struggle, with which of those two they should go. And they seem equal, right? Because the area under the curve is the same. But we've seen this time and again, that they're not. And that it's so much easier to expand, once you've got something that some people love, you can expand that into something that a lot of other people love. But if you start with ambivalence, or weak enthusiasm, and try to expand that, you'll never get up to a lot of people loving it. So the advice is: find a small group of users, and make them love what you're doing
 
+上述两种选择，看起来一样，但通过我们的反复观察，实践经验指出：先做小众喜爱的产品，更容易在大众化过程中获得生存。
+
 One way that you know when this is working, is that you'll get growth by word of mouth. If you get something people love, people will tell their friends about it. This works for consumer product and enterprise products as well. When people really love something, they'll tell their friends about it, and you'll see organic growth.
+
+如何确认，小众产品做的效果？通过口口相传的方式在grow。后面的原因是：如果有人真的喜爱你的product，他们会告诉朋友，这样的增长是组织性的。这个规律，对个人产品和企业产品都有效。
 
 If you find yourself talking about how it's okay that you're not growing—because there's a big partnership that's going to come save you or something like that—its almost always a sign of real trouble. Sales and marketing are really important, and we're going to have two classes on them later. A great product is the secret to long term growth hacking. You should get that right before anything else. It doesn't get easier to put off making a great product. If you try to build a growth machine before you have a product that some people really love, you're almost certainly going to waste your time. Breakout companies almost always have a product that's so good, it grows by word of mouth. Over the long run, great product win. Don't worry about your competitors raising a lot of money, or what they might do in the future. They probably aren't very good anyway. Very few startups die from competition. Most die because they themselves fail to make something users love, they spend their time on other things. So worry about this about all else.
 
+如果用户没有增长，不过，依托一个大的合作伙伴，能够保证产品的持续运营；此时，如果你侃侃而谈产品不错，那真正的麻烦就不远了。销售和市场，确实很重要，未来会专门介绍。但一个 great product 的 secret 是 long term growth hacking。在做后续工作之前，一定要保证这一点。说明几点：
+
+* 只有有人十分喜爱的产品，才有可能growth；
+* 没人喜爱的产品，去追求growth，注定跪地；
+* 通过口碑而存活的product，随着时间迁移，注定做成；
+* 不要刻意看重competitor募集了大量资金或者有大动作；
+* 很少startup是在竞争中死去的；
+* 大部分startup是因为没有做出用户足够喜爱的产品才倒下的，或者他们将精力分散到其他事情上了；
+
 Another piece of advice to make something that users love: start with something simple. Its much much easier to make a great product if you have something simple. Even if your eventual plans are super complex, and hopefully they are, you can almost always start with a smaller subset of the problem then you think is the smallest, and its hard to build a great product, so you want to start with as little surface area as possible. Think about the really successful companies, and what they started with, think about products you really love. They're generally incredibly simple to use, and especially to get started using. The first version of Facebook was almost comically simple. The first version of Google was just a webpage with a textbox and two buttons; but it returned the best results, and that's why users loved it. The iPhone is far simpler to use then any smartphone that ever came before it, and it was the first one users really loved.
+
+做用户喜爱的product，一个建议：从简单开始。*（产品简单？操作简单？定位简单？）* 简单才能孕育出 great product。即使最初的定位是很庞大、完美的，但也可以从较小的地方着手，尽可能的简单。
 
 Another reason that simple's good is because it forces you to do one thing extremely well and you have to do that to make something that people love.
 
+从简单出着手，有两个好处：促使将现有事情做极致，促使将注意力放在用户真正喜爱的地方。
+
 The word fanatical comes up again and again when you listen to successful founders talk about how they think about their product. Founders talk about being fanatical in how they care about the quality of the small details. Fanatical in getting the copy that they use to explain the product just right. and fanatical in the way that they think about customer support. In fact, one thing that correlates with success among the YC companies is the founders that hook up Pagerduty to their ticketing system, so that even if the user emails in the middle of the night when the founder's asleep, they still get a response within an hour. Companies actually do this in the early days. Their founders feel physical pain when the product sucks and they want to wake up and fix it. They don't ship crap, and if they do, they fix it very very quickly. And it definitely takes some level of fanaticism to build great products.
+
+做精做细，有几点：
+
+* small details
+* copy that used to explain the product just right
+* customer support *（快速响应）*
+* founder 与product感同身受，want to wake up and fix it.
+
 
 You need some users to help with the feedback cycle, but the way you should get those users is manually—you should go recruit them by hand. Don't do things like buy Google ads in the early days, to get initial users. You don't need very many, you just need ones that will give you feedback everyday, and eventually love your product. So instead of trying to get them on Google Adwords, just the few people, in the world, that would be good users. Recruit them by hand.
 
+feedback cycle 中，需要 user 的参与，主动去获取这些 users，甚至招募获取。*（这样的理解对吗？）*早期，不要去 google ads上购买初始用户。注意：此时，不需要太多的user，而应关注那些会给出反馈意见的user，通常他们是喜爱这一product的用户。
+
+疑问：
+
+* feedback cycle，收集用户的反馈意见？
+* recruit them by hand，什么含义？
+
 Ben Silbermann, when everyone thought Pinterest was a joke, recruited the initial Pinterest users by chatting up strangers in coffee shops. He really did, he just walked around Palo Alto and said "Will you please use my product?" He also used to run around the Apple store in Palo Alto, and he would like set all the browsers to the Pinterest homepage real quick, before they caught him and kicked him out, (laughter) and so that when people walked in they were like "Oh, what's this?". This is an important example of doing things that don't scale. If you haven't read Paul Graham's essay on that topic, you definitely should.
+
+以Pinterest为例，初始用户是在coffee shop中通过聊天获得的，甚至，还去 Apple 体验店，将体验笔记本的主页都设置为 Pinterest。 *（Paul Graham essay on this topic，值得一读）*
+
 
 So get users manually and remember that the goal is to get a small group of them to love you. Understand that group extremely well, get extremely close to them. Listen to them and you'll almost always find out that they're very willing to give you feedback. Even if you're building the product for yourself, listen to outside users, and they'll tell you how to make a product they'll pay for. Do whatever you need to make them love you, and make them know what you're doing. Because they'll also be the advocates that help you get your next users.
 
+获取初始用户时，要用点心，基本目标：get a small group of them to love you. 要充分的理解这个 group，并且与这一 group 保持紧密的联系，不要太远。乐于倾听 group 内的声音，你会发现，他们很乐意给你反馈。即使做一个自己用的产品，也要倾听外面的声音，去倾听他们愿意为什么样的产品付费。认真对待他们的反馈，并且让他们知道你在用心的做。*（让初始用户知道他们的反馈得到认真对待，很重要）*要知道，通过初始用户的口碑传播，你也能获得不少用户。
+
 You want to build an engine in the company that transforms feedback from users into product decisions. Then get it back in from of the users and repeat. Ask them what the like and don't like, and watch them use it. Ask them what they'd pay for. Ask them if they'd be really bummed if your company went away. Ask them what would make them recommend the product to their friends, and ask them if they'd recommended it to any yet.
+
+
+保证用户反馈途径畅通，同时，保证反馈意见能够及时得到响应。主动询问，他们对product有什么喜欢的地方、不喜欢的地方，他们愿意付费的地方。*（思考：向开源软件讨论区 JIRA 那样，列出用户的反馈意见，同时提供讨论和投票？小米、魅族怎么做的？不同阶段应该是不同的）*
+
 
 You should make this feedback loop as tight as possible. If your product gets 10 percent better every week, that compounds really quickly. One of the advantages of software startups is just how short you can make the feedback loop. It can be measured in hours, and the best companies usually have the tightest feedback loop. You should try to keep this going for all of your company's life, but its really important in the early days.
 
+如何管理feedback loop？几点：
+
+* 只要 company 存在，就保持追踪 feedback 的收集、处理情况；
+* 以 hour 为单位，来计算 feedback 的处理时间；
+* 在早期，feedback loop 的效率很重要；
+* 让 feedback loop 有质量的、快速的转起来；
+
 The good news is that all this is doable. Its hard, it takes a lot of effort, but there's no magic. The plan is at least is straightforward, and you will eventually get to a great product.
+
+几点：
+
+* 上面的几点都是可操作的；*（哪几点？整理一下）*
+* 没有捷径，需要认真、踏实；
+* 规划要保持直观、简洁；
+
+
 
 Great founders don't put anyone between themselves and their users. The founders of these companies do things like sales and customer support themselves in the early days. Its critical to get this loop embedded in the culture. In fact, a specific problem we always see with Stanford startups, for some reason, is that the students try to hire sales and customer support people right away, and you've got to do this yourself, its the only way.
 
+几点：
+
+* great founders 在早期，自己担当 sales、customer support；
+* 将上面这一点嵌入到 culture 中；
+* student 常犯的一个错误做法：招聘 sales、customer support 人员，这是不妥的，这两个职位，还得自己来做，需要自己理清其中的规律，这是唯一的办法；
+
+
 You really need to use metrics to keep yourself honest on this. It really is true that the company will build whatever the CEO decides to measure. If you're building an Internet service, ignore things like total registrations—don't talk about them, don't let anyone in the company talk about them—and look at growth and active users, activity levels, cohort retention, revenue, net promoter scores, these things that matter. And then be brutally honest if they're not going in the right direction. Startups live on growth, its the indicator of a great product.
+
+使用一些测量指标，来客观评价 startup，一个客观规律：company will build whatever the CETO decides to measure *（考核什么样的指标，就得到什么样的公司）*. 在互联网公司，不要考虑`注册用户数` *（甚至不准任何人讨论）* ，而要关注，`活跃用户数`、`活跃程度`、`浏览时长`等等。要正视这些数据。
 
 So this about wraps up the overview on building a great product. I want to emphasize again, that if you don't get this right, nothing else we talk about in the class will matter. You can basically ignore everything else in the class until this is working well. On the positive side, this is one of the most fun parts of building a startup.
 
 So I'm going to pause here, we'll pick back up with the rest of this on Thursday, and now Dustin is going to talk about why you should start a startup. Thank you for coming, Dustin.
 
-Why To Start A Startup
+##Why To Start A Startup
 
 But yeah, Sam asked me to talk about why you should start a startup. There's a bunch of common reasons that people have, that I hear all the time for why you might start a startup. Its important to know what reason is yours, because some of them only make sense in certain contexts, some of them will actually, like, lead you astray. You may have been mislead by the way that Hollywood or the press likes to romanticize entrepreneurship, so I want to try to illuminate some of those potential fallacies, so you guys can make the decision in a clear way. And then I'll talk about the reason I like best for actually starting a startup, its very related to a lot of what Sam just talked about. But surprisingly, I don't think its the most common reason. Usually people have one of these other reasons, or, you know, they just want to start a company for the sake of starting a company.
 
