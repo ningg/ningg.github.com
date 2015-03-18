@@ -128,55 +128,130 @@ Airbnb 招第一个员工时，花费 5 个月时间来面试；第一年，总�
 
 These hires really matter, these people are what go on to define your company, and so you need people that believe in it almost as much as you do. And it sounds like a crazy thing to ask, but he's gotten this culture of extremely dedicated people that come together when the company faces a crisis. And when the company faced a big crisis early on, everyone lived in the office, and they shipped product every day until the crisis was over. One of the remarkable observations about Airbnb is that if you talk to any of the first forty or so employees, they all feel like they were a part of the founding of the company.
 
+按上述情况，严格招聘员工确实很重要，因为员工将最终定义公司，需要确定这些员工与你的理念一致。这些理念，有助于当公司出现危机时，大家能够一条心坚持度过难关。一个有趣的现象是：一个公司的前 40 名员工，会感觉是他们参与创建了这家公司。
+
 But by having an extremely high bar, by hiring slowly ensures that everyone believes in the mission, you can get that. So let's say, you listened to the warning about not hiring unless you absolutely have too. When you're in this hiring mode, it should be your number one priority to get the best people. Just like when you're in product mode that should be your number one priority. And when you're in fundraising mode, fundraising is your number one priority.
+
+谨慎的进行招聘，来确保每个员工都有相似的使命感，通常这将会使得招聘周期变得很长。*（最后一句什么含义？不明白）*
 
 On thing that founders always underestimate is how hard it is to recruit. You think you have this great idea and everyone's going to join. But that's not how it works. To get the very best people, they have a lot of great options and so it can easily take a year to recruit someone. It's this long process and so you have to convince them that your mission is the most important of anything that they're looking at. This is another case of why it's really important to get the product right before looking at anything else. The best people know that they should join a rocketship.
 
+创始人，通常会低估招聘的难度。期间，founder需要让candidate确认公司的使命是值得投入时间的，这反方面说明了深思熟虑定位一个有用的产品的重要性。因为最优秀的人，知道他们应该搭上火箭一起前进。
+
 By the way, that's my number one piece of advice if you're going to join a startup, is pick a rocketship. Pick a company that's already working and that not everyone yet realizes that, but you know because you're paying attention, that it's going to be huge. And again, you can usually identify these. But good people know this, and so good people will wait, to see that you're on this trajectory before they join.
+
+我的第一个建议：去快速发展的公司，去一家已经在运行、并且前景开阔*（市场规模、开展市场机遇）*、发展迅速的公司，但并不是所有人都知道，你知道只是因为你关注了。优秀的人知道这个，他们也愿意观察这家公司是否已经步入快车道，然后加入进去。
 
 One question that people asked online this morning was how much time you should be spending on hiring. The answer is zero or twenty-five percent. You're either not hiring at all or it's probably your single biggest block of time. In practice, all these books on management say you should spend fifty percent of your time hiring, but the people that give that advice, it's rare for them to even spend ten percent themselves. Twenty-five percent is still a huge amount of time, but that's really how much you should be doing once you're in hiring mode.
 
+在招聘上花费多长时间？ 0~25%的时间，这个时间上线已经很高了。
+
 If you compromise and hire someone mediocre you will always regret it. We like to warn founders of this but no one really feels it until they make the mistake the first time, but it can poison the culture. Mediocre people at huge companies will cause some problems, but it won't kill the company. A single mediocre hire within the first five will often in fact kill a startup.
+
+如果招来的职工，资质平平，保证你会很后悔*（原因是：这个人会破坏团队文化、价值观）*。这都是血泪的教训，在大公司，一个平庸的人，不会导致公司倒闭；但一家小公司，如果前5个团队成员，有一个平庸的，将导致队伍覆灭。*（卧槽，好吓人）*
 
 A friend of mine has a sign up in the conference room that he uses for interviews and he positions the sign that the candidate is looking at it during the interview and it says that mediocre engineers do not build great companies. Yeah that's true, it’s really true. You can get away with it in a big company because people just sort of fall through the cracks but every person at a startup sets the tone. So if you compromise in the first five, ten hires it might kill the company. And you can think about that for everyone you hire: will I bet the future of this company on this single hire? And that's a tough bar. At some point in the company, when you're bigger, you will compromise on a hire. There will be some pressing deadline or something like that you will still regret. But this is the difference between theory and practice we're going to have later speakers talk about what to do when this happens. But in the early days you just can't screw it up.
 
+注：mediocre engineers do not build great companies. 在前 5~ 10 个员工中，一定不要出现平庸者，招人时，你可以问自己：愿意把公司的未来寄托在这个人身上吗？但大公司情况不同，可以放宽招聘条件。*（今后会说这个问题）*
+
 Sources of candidates. This is another thing that students get wrong a lot. The best source for hiring by far is people that you already know and people that other employees in the company already know. Most great companies in text have been built by personal referrals for the first hundred employees and often many more. Most founders feel awkward but calling anyone good that they've ever met and asking their employees to do the same. But she'll notice if you go to work at Facebook or Google one of the things they do in your first few weeks is an HR person sits you down and beat out of you every smart person you’ve ever met to be able to recruit them.
+
+从哪些人中找员工？最佳的来源是：你和公司内其他员工都了解的人。great company通常前100名员工都是通过熟人推荐而来的。大部分 founder 会从他们已经知道的优秀的人中，去发掘员工。*（最后一句，什么含义？）*
 
 These personal referrals really are the trick to hiring. Another tip is to look outside the valley. It is brutally competitive to hire engineers here but you probably know people elsewhere in the world that would like to work with you.
 
+靠员工推荐方式来招人，很有效；另一个办法是：去热门地区之外招人，因为当地招人太激烈了，如果你知道其他地方有优秀的人，请出发吧。
+
 Another question that founders ask us a lot about his experience and how much that matters. The short version here is that experience matters for some roles and not for others. When you're hiring someone that is going to run a large part of your organization experience probably matters a lot. For most of the early hires that you make at a startup, experience probably doesn't matter that much and you should go for aptitude and belief in what you’re doing. Most of the best hires that I've made in my entire life have never done that thing before. So it's really worth thinking, is this a role where I care about experience or not. And you'll often find to don’t, especially in the early days.
+
+另一个问题是：candidate 的经验和报酬*（？）*。通用说法是：某些情况下，经验很重要，而其他情况下，经验无关紧要。几个例子：
+
+* candidate 需要负责整个组织的很大一部分工作，此时，经验很重要；
+* startup进行早期招聘时，经验相对不重要，应该着重关注：资质和信念 *（价值观）*
 
 There are three things I look for in a hire. Are they smart? Do they get things done? Do I want to spend a lot of time around them? And if I get an answer, if I can say yes to all three of these, I never regret it, it's almost always worked out. You can learn a lot about all three of these things in an interview but the very best way is working together, so ideally someone you've worked together with in the past and in that case you probably don't even need an interview. If you haven't, then I think it's way better to work with someone on a project for a day or two before hiring them. You'll both learn a lot they will too and most first-time founders are very bad interviewers but very good at evaluating someone after they've worked together.
 
+我在招聘中看重 3 点：
+
+* Are they smart? *（脑袋行不行？）*
+* Do they get things done?  *（自律吗？守信吗？）*
+* Do I want to spend a lot of time around them? *（愿意培养吗？）* 
+
+通常你对一起工作过的同事，在这方面的理解还是有的，因此，大都不需要面试，就能直接入职；但如果之前没有接触过，那最好花几天时间，一起工作，然后再决定是否要拉他入伙。
+
 So one of the pieces of advice that we give at YC is try to work on a project together instead of an interview. If you are going to interview, which you probably will, you should ask specifically about projects that someone worked on in the past. You'll learn a lot more than you will with brainteasers. For some reason, young technical cofounders love to ask brainteasers rather than just ask what someone has done. Really dig in to projects people have worked on. And call references. That is another thing that first time founders like to skip. You want to call some people that these people have worked with in the past. And when you do, you don't just want to ask, How was so-and-so, you really want to dig in. Is this person in the top five percent of people you've ever worked with? What specifically did they do? Would you hire them again? Why aren't you trying to hire them again? You really have to press on these reference calls.
+
+招人时，我们的建议是：尽量尝试在一起工作，而不仅仅是面试。面试过程中，尽量问一些，他们在实际项目中遇到的问题，这比脑筋急转弯要好得多。不知什么原因，年轻的合伙人，倾向于问脑筋急转弯，而不是过往的工作细节。首次面试的founder，经常会忘记询问candidate过去的工作细节。你在面试的过程中，不仅要发问，而且要对问题挖得深一点。最后，回顾几点：
+
+* Is this person in the top five percent of people you've ever worked with? *（聪明、敏捷吗？）*
+* What specifically did they do? *（做过什么特别的事？）*
+* Would you hire them again? *（会再次招聘他吗？）*
+* Why aren't you trying to hire them again? 
 
 Another thing that I have noticed from talking to YC companies is that good communication skills tend to correlate with hires that work out. I used to not pay attention to this. We’re going to talk more about why communication is so important in an early startup. If someone is difficult to talk to, if someone cannot communicate clearly, it's a real problem in terms of their likelihood to work out. Also. for early employees you want someone that has somewhat of a risk-taking attitude. You generally get this, otherwise they wouldn't be interested in a startup, but now that startups are sort of more in fashion, you want people that actually sort of like a little bit of risk. If someone is choosing between joining McKinsey or your startup it's very unlikely they're going to work out at the startup.
 
+我发现一件事情，良好的沟通技巧/方式，增加了录用的机会，而之前我对此并不在意。在早期startup中，沟通很重要：如果一个人无法清晰的沟通、很难交谈，则，他很难锻炼成长。冒险精神，startup需要这个，员工应该有这个。*（最后什么含义？麦肯锡是冒险意识太强，还是太弱？）*
+
+思考：沟通技巧/方式，有哪些呢？尊重、互惠、分享荣誉、借用别人的话？
+
 You also want people who are maniacally determined and that is slightly different than having a risk tolerant attitude. So you really should be looking for both. By the way, people are welcome to interrupt me with questions as stuff comes up.
+
+既要有冒险者，也要有承担风险者。*（完全不懂，什么意思？）*
 
 There is a famous test from Paul Graham called the animal test. The idea here is that you should be able to describe any employee as an animal at what they do. I don't think that translates out of English very well but you need unstoppable people. You want people that are just going to get it done. Founders who usually end up being very happy with their early hires usually end up describing these people as the very best in the world at what they do.
 
+著名测试：Animal test，将工作的队员看作 animal*（是这样理解吗？）*。需要一往无前的队友，坚韧的队友，他们通常确保将事情做成。
+
 Mark Zuckerberg once said that he tries to hire people that A. he'd be comfortable hanging with socially and B. he’d be comfortable reporting to if the roles were reversed. This strikes me as a very good framework. You don't have to be friends with everybody, but you should at least enjoy working with them. And if you don't have that, you should at least deeply respect them. But again, if you don't want to spend a lot of time around people you should trust your instincts about that.
+
+Zuckerberg 说他招人，两个要点：
+
+* he'd be comfortable hanging with socially *（他相处起来比较容易，应该是价值观相近）*
+* he’d be comfortable reporting to if the roles were reversed *（如果角色反转，也能很舒服地进行工作，这是要有对一件事整体的掌控力和谋略？）*
+
+你不必与每一个人都成为朋友，但至少，你应该与每个人都能愉快的工作，即使不能这样，你也至少尊重他们 *（尊重他们的工作方式，和工作成果）*。 另一方面，如果你不能与他们长时间待在一起，你至少需要相信你的直觉是正确的。 *（理解对吗？感觉有偏差）*
 
 While I'm on this topic of hiring, I want to talk about employee equity. Founders screw this up all the time. I think as a rough estimate, you should aim to give about ten percent of the company to the first ten employees.
 
+员工报酬上，初略估算，目标是：给前 10 名队友 10% 的股份。
+
 They have to earn it over four years anyway, and if they're successful, they're going to contribute way more than that. They're going to increase the value of the company way more than that, and if they don't then they won't be around anyway.
 
+如果幸运，他们至少要等 4 年才能拿到这些酬劳，而他们的贡献远超这些，他们为公司增加的市值也远超这些。
+
 For whatever reason founders are usually very stingy with equity to employees and very generous with equity for investors. I think this is totally backwards. I think this is one of the things founders screw up the most often. Employees will only add more value over time. Investors will usually write the check and then, despite a lot of promises, don't usually do that much. Sometimes they do, but your employees are really the ones that build the company over years and years.
+
+不知道什么原因，创始人给投资人股份时，很大方；而给员工股份时，很小气，我认为他们本末倒置了。员工真正创造并定义的公司，投资人的帮助很有限，他们大都是定期的查看公司的运行情况，尽管他们承诺了很多。
 
 So I believe in fighting with investors to reduce the amount of equity they get and then being as generous as you possibly can with employees. The YC companies that have done this well, the YC companies that have been super generous with their equity to early employees, in general, are the most successful ones that we've funded.
 
 One thing that founders forget is that after they hire employees, they have to retain them. I'm not going to go into full detail here because we're going to have a lecture on this later, but I do want to talk about it a little bit because founders get this wrong so often. You have to make sure your employees are happy and feel valued. This is one of the reasons that equity grants are so important. People in the excitement of joining a startup don't think about it much, but as they come in day after day, year after year, if they feel they have been treated unfairly that will really start to grate on them and resentment will build.
 
+还有一个方面：现金报酬方面；创始人通常会有疏忽，针对这个今后会专门说明，但是我强调一点：让你的员工感到高兴，并且让他们感到有价值的。
+
 But more than that, learning just a little bit of management skills, which first-time CEOs are usually terrible at, goes a long way. One of the speakers at YC this summer, who is now extremely successful, struggled early on and had his team turn over a few times. Someone asked him what his biggest struggle was and he said, turns out you shouldn't tell your employees they're fucking up every day unless you want them all to leave because they will.
+
+学习一点管理技巧，帮助公司走的更远，经验不足的 CEO 这一点经常忽略。一条重要经验：不要告诉员工，他们每天的工作多糟糕，这样他们都会离去。*（因为startup追求把事情做好，而大多数员工没能做好？）*
 
 But as a founder, this is a very natural instinct. You think you can do everything the best and it’s easy to tell people when they’re not doing it well. So learning just a little bit here will prevent this massive team churn. It also doesn't come naturally to most founders to really praise their team. It took me a little while to learn this too. You have to let your team take credit for all the good stuff that happens, and you take responsibility for the bad stuff.
 
+这可能是自然的本能：你希望把事情做好，当队友没有把事情好时，你很容以喷他们。还有一个问题，founder 没能很巧当的称赞他们的队伍；在这方面，我也花了一点时间学习，才掌握的。很重要的：让你的队伍获得办事周到的荣誉和奖励，你来承担那些做砸了得事情。*（是这样？）*
+
 You have to not micromanage. You have to continually give people small areas of responsibility. These are not the things that founders think about. I think the best thing you can do as a first-time founder is to be aware that you will be a very bad manager and try to overcompensate for that. Dan Pink talks about these three things that motivate people to do great work: autonomy, mastery, and purpose. I never thought about that when I was running my company but I've thought about since and I think that’s actually right. I think it's worth trying to think about that. It also took me a while to learn to do things like one on one and to give clear feedback.
+
+细微的地方，不要干预，在员工力所能及的范围给出足够的信任、持续的支持，让他们放手去做，这些不是founder考虑的范围*（不要说不是自己的职责，而应说信任、重托）*。对于第一次当 founder 的人，最好的建议是：请意识到，你们是一个 bad manager，并努力克服这点。激发人们开展高效率工作，有 3 点：
+
+* 自主性 *（主动做，内心有意愿，也可以潜移默化引导）*
+* 掌控 *（对此有想法，有基本路线/步骤）*
+* 目标 *（目标很明确，不模糊，随时可以想起来）*
+
+我也花了一些时间，养成了事情一件一件处理，每件都有明确答复/结果的习惯。
 
 All of these things are things first time CEO don't normally do, and maybe I can save you from not doing that.
 
 The last part on the team section is about firing people when it's not working. No matter what I say here is not going to prevent anyone from doing it wrong and the reason that I say that is that firing people is one of the worst parts of running a company. Actually in my own experience, I'd say it is the very worst part. Every first time founder waits too long, everyone hopes that an employee will turn around. But the right answer is to fire fast when it's not working. It's better for the company, it's also better for the employee. But it's so painful and so awful, that everyone gets it wrong the first few times.
+
+最后，如何解雇一个员工？
 
 In addition to firing people who are doing bad at their job, you also wanna fire people who are a) creating office politics, and b) who are persistently negative. The rest of the company is always aware of employees doing things like this, and it's just this huge drag - it's completely toxic to the company. Again, this is an example of something that might work OK in a big company, although I'm still skeptical, but will kill a startup. So that you need to watch out for people that are ifs.
 
