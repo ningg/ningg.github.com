@@ -422,7 +422,7 @@ So I'm going to pause here, we'll pick back up with the rest of this on Thursday
 
 But yeah, Sam asked me to talk about why you should start a startup. There's a bunch of common reasons that people have, that I hear all the time for why you might start a startup. Its important to know what reason is yours, because some of them only make sense in certain contexts, some of them will actually, like, lead you astray. You may have been mislead by the way that Hollywood or the press likes to romanticize entrepreneurship, so I want to try to illuminate some of those potential fallacies, so you guys can make the decision in a clear way. And then I'll talk about the reason I like best for actually starting a startup, its very related to a lot of what Sam just talked about. But surprisingly, I don't think its the most common reason. Usually people have one of these other reasons, or, you know, they just want to start a company for the sake of starting a company.
 
-知道自己 start a startup 的原因很重要，几点：
+start a startup 的原因很重要，几点：
 
 * 有些原因，在一些特定情况下，才能较好发挥作用，而其他情况下，注定了就是悲剧；
 * Hollywood、新闻媒体，大部分时候，将创业进行美化、浪漫化；
@@ -632,12 +632,12 @@ The second way to interpret this is that the world needs you to do it. You're ac
 
 So drawing this back to my own experience at Asana, Justin and I were reluctant entrepreneurs before we founded Asana, we were working at Facebook and we were working on a great problem. We would basically work all day long on our normal projects and then at night we would keep working on this internal task manager that was used internally at the company and it was just because we were so passionate about the idea, it was so clearly valuable that we couldn't do anything else.
 
-And at some point we had to have the hard conversation of okay what does it mean if we don't actually start this company. We could see the impact it was having at Facebook, we were convinced it was valuable to the world. We were also convinced no one else was going to build it, the problem had been around a long time and we just kept seeing incremental solutions to it and so we believed if we didn't come out with the solution we thought was best, there would be a lot of value left on the table. We couldn't stop working on it and literally the idea was beating itself out of our chests and forcing itself out into the world. And I think that's really the feeling you should be looking for when you start a company, that's how you know you have the right idea.
-
+And at some point we had to have the hard conversation of okay what does it mean if we don't actually start this company. We could see the impact it was having at Facebook, we were convinced it was valuable to the world. We were also convinced no one else was going to build it, the problem had been around a long time and we just kept seeing incremental solutions to it and so we believed if we didn't come out with the solution we thought was best, there would be a lot of value left on the table. We couldn't stop working on it and literally the idea was beating itself out of our chests and forcing itself out into the world. And I think that's really the feeling
 I'll go ahead and stop there. I'll put some recommended books up here.
 
 Thank you.
 
+ you should be looking for when you start a company, that's how you know you have the right idea.
 
 
 

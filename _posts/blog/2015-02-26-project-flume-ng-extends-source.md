@@ -37,7 +37,39 @@ category: open-source
 	git push origin master
 	
 **思考**：上述命令：git push origin master 中`origin`和`master`是什么含义？
-	
+
+
+###git出现错误
+
+错误信息，如下：
+
+	error: Your local changes to the following files would be overwritten by merge:
+			README.md
+	Please, commit your changes or stash them before you can merge.
+
+分析：上述错误信息表示，从本地文件已经修改过了，但没有提交，如果强行从git服务器下载此文件，则文件内容将被覆盖；建议先提交本地文件改动的地方，或者直接放弃本地修改的内容。
+
+解决办法：
+
+####方法一：希望保存本地改动的文件，但不想与git服务器上版本合并（merge）
+
+操作如下：
+
+	git stash
+	git pull
+	git stash pop
+	git diff -w +文件名		// 查看文件的合并情况
+
+
+####方法二：放弃本地修改的内容，直接放弃本地文件
+
+操作如下：
+
+	git reset --hard
+	git pull
+
+
+详细参考：[Git冲突常见解决办法][Git冲突常见解决办法]
 	
 ###在指定目录创建maven工程
 	
@@ -177,7 +209,7 @@ category: open-source
 
 * [Git ignores and Maven targets][Git ignores and Maven targets]
 * [A .gitignore file for Intellij and Eclipse with Maven][A .gitignore file for Intellij and Eclipse with Maven]
-
+* [Git冲突常见解决办法][Git冲突常见解决办法]
 
 
 
@@ -195,6 +227,8 @@ category: open-source
 
 [Git ignores and Maven targets]:							http://stackoverflow.com/questions/991801/git-ignores-and-maven-targets
 [A .gitignore file for Intellij and Eclipse with Maven]:	http://gary-rowe.com/agilestack/2012/10/12/a-gitignore-file-for-intellij-and-eclipse-with-maven/
+[Git冲突常见解决办法]:										http://blog.csdn.net/iefreer/article/details/7679631
+
 
 
 
