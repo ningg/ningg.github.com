@@ -481,7 +481,7 @@ One thing I almost never hear people talk about is you're much more committed. S
 
 I should say, I've had a lot of this stress in my own life, especially in the early years of Facebook, I got really unhealthy, I wasn't exercising, I had a lot of anxiety actually throughout my back, like almost every six months, when I was twenty-one or twenty-two, which is pretty crazy. So if you do start a company, be aware that you're going to deal with this. You're going to have to actually manage this, it's one of your core responsibilities. Ben Horowitz likes to say the number one role of a CEO is managing your own psychology, it's absolutely true, make sure you do it.
 
-上面是演讲者描述的自己参与创建Facebook时，自己的状态，简直难以想象。founder 的一个重要职责，管理自己的心态。*（心态、人生、哲学思考）*
+上面是演讲者描述的自己参与创建Facebook时，自己的状态，简直难以想象。founder 的一个重要职责，管理自己的心态。*（心态、人生、哲学思考）*个人感觉，这种状态的概率很大，但不是必要的，通过准备、锻炼，可以极大改善。
 
 Another reason, especially if you're had another job at another company, you start to develop this narrative, like the people running this company are idiots, they're making all these decisions and spending all their time in these stupid ways, I'm gonna start a company and I'm going to do it better. I'm going to set all the rules.
 
