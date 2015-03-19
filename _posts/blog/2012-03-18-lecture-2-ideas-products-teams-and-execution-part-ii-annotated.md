@@ -424,33 +424,60 @@ best founder 在看起来很小的事情上，快速推进*（seem small的事�
 
 So you have to pick these right size projects. Even if you're building this crazy synthetic biology company and you say well I have to go away for a year, there's no way to do this incrementally, you can still usually break it into smaller projects.
 
+每年都安排适当大小的project作为目标，如果项目太大，就拆分为小的，方便渐进式的解决问题。
+
 So speed is this huge premium. The best founders usually respond to e-mail the most quickly, make decisions most quickly, they're generally quick in all of these ways. And they had this do what ever it takes attitude.
+
+startup中speed会产生巨大的溢价*（相对同类产品来说，速度带来巨大的价值）*。best founder通常很快就回复 E-mail，这样会传播他认真及时的工作态度，影响其他队员，也构成溢价。*（？）*
 
 They also show up a lot.
 
 They come to meetings, they come in, they meet us in person. One piece of advice that I have that’s always worked for me: they get on planes in marginal situations. I’ll tell a quick story here.
 
+不放过任何的可能，即使是已经确定要发生，但还没有发生的时候。*（这么上赶着，真有必要吗？公司生死存亡了吗？如果真需要这么做，那需要有提前备案和准备的。）*
+
 When I was running my own company, we found out we were about to lose a deal. It was sort of this critical deal from the first big customer in the space. And it was going to go to this company that had been around for year before we were. And they had this like all locked up. And we called and said “we have this better product you have to meet with us” and they said “well we’re signing this deal tomorrow. sorry.” We drove to the airport, we got on a plane, we were at their office at 6am the next morning. We just sat there, they told us to go away, we just kept sitting there. Finally once of the junior guys decided to meet with us, after that, finally one of the senior guys decided to meet with us. They ended up ripping up the contract with the other company, and we closed the deal with them about a week later. And I’m sure, that had we not gotten on a plane, had we not shown up in person, that would not have worked out.
+
 
 And so, you just sort of show and and do these things, when people say get on plane in marginal situations, they actually mean it, but they don’t mean it literally. But I actually think it’s good, literal advice.
 
 So I mentioned this momentum and growth earlier. Once more: the momentum and growth are the lifeblood of startups. This is probably in the top three secrets of executing well. You want a company to be winning all the time. If you ever take your foot off the gas pedal, things will spiral out of control, snowball downwards. A winning team feels good and keeps winning. A team that hasn’t won in a while gets demotivated and keeps losing. So always keep momentum, it’s this prime directive for managing a startup. If I can only tell founders one thing about how to run a company, it would be this.
 
+发展和势头，是 startup 的命脉*（甚至是良好执行的关键因素之一，怎么理解？）*。要保持势头，及时偶尔碰壁，屡屡碰壁也要开次荤。*（反思，推演）*
+
 For most software startups, this translates to keep growing. For hardware startups it translates to: don’t let your ship dates slip. This is what we tell people during YC, and they usually listen and everything is good. What happens at the end of YC is that they get distracted on other things, and then growth slows down. And somehow, after that happens, people start getting unhappy and quitting and everything falls apart. It’s hard to figure out a growth engine because most companies grow in new ways, but there’s this thing: if you build a good product it will grow. So getting this product right at the beginning is the best way not to lose momentum later.
+
+发展和势头下降的常见原因是：他们分心去做其他事情了，很大可能导致growth下降，unhappy，quit，everything falls apart。实际上，很难明确认定一个增长引擎，因为很多时候都是新的模式驱动的*（即，具体增长的方式无法确定）*，但有一点，如果你做的是一个 good product*（idea好，同时product做的也好）*，那他自然会增长。
 
 If you do lose momentum, most founders try to get it back in the wrong way. They give these long speeches about vision for the company and try to rally the troops with speeches. But employees in a company where momentum has sagged, don’t want to hear that. You have to save the vision speeches for when the company is winning. When you’re not winning, you just have to get momentum back in small wins. A board member of mine used to say that sales fix everything in a startup. And that is really true. So you figure out where you can get these small wins and you get that done. And then you’ll be amazed at how all the other problems in a startup disappear.
 
+如果势头有变，出现衰落迹象，大部分founder以错误的方式来挽回。例如：发表长篇大论，来描述公司的愿景；尝试把大家聚集起来，并进行公开演讲。然而，此时，身处其中的员工，切身体会到势头的变化，他们此刻并不想听公司的愿景。因此，你应该在公司获取阶段成长时，再去发表愿景的演讲；而当还没有进步时，一心去获取小的增长势头。身边很多同事都坚持这个观点：销售解决一切 *（是这样理解吗？）*。 因此，找到哪些可以往前推进的地方，向前推进，你会发现所有的问题都会慢慢消失掉。
+
 Another thing that you’ll notice if you have momentum sag, is that everyone starts disagreeing about what to do. Fights come out when a company loses momentum. And so a framework for that that I think works is that when there’s disagreement among the team about what to do, then you ask your users and you do whatever your users tell you. And you have to remind people: “hey, stuff’s not working right now we don’t actually hate each other, we just need to get back on track and everything will work.” If you just call it out, if you just acknowledge that, you’ll find that things get way better.
+
+另一个势头开始下降的现象是：所有人都开始怀疑所做的事情。一旦势头下降，内部就会产生激烈的争论。避免这一问题的一个办法是：当怀疑产生的时候，不要过多争论，而去问你的用户，看看他们的意见*（通过什么途径？能从用户哪儿得到明确的意见？）*。
 
 To use a Facebook example again, when Facebook’s growth slowed in 2008, mark instituted a “growth group.” They worked on very small things to make Facebook grow faster. All of these by themselves seemed really small, but they got the curve of Facebook back up. It quickly became the most prestigious group there. Mark has said that it’s been one of Facebook’s best innovations. According to friends of mine that worked at Facebook at the time, it really turned around the dynamic of the company. And it went from this thing where everyone was feeling bad, and momentum was gone, back to a place that was winning.
 
+上面Facebook的`growth group`是什么含义？
+
 So a good way to keep momentum is to establish an operating rhythm at the company early. Where you ship product and launch new features on a regular basis. Where you’re reviewing metrics every week with the entire company. This is actually one of the best things your board can do for you. Boards add value to business strategy only rarely. But very frequently you can use them as a forcing function to get the company to care about metrics and milestones.
+
+在公司早期，就找到事情推进的规律，这个有助于保持势头。*（后面几句，什么意思？）*
 
 One thing that often disrupts momentum and really shouldn’t is competitors. Competitors making noise in the press I think probably crushes a company’s momentum more often than any other external factor.
 
+竞争对手在媒体上的一些言论，是扰动startup势头的最常见外部原因。
+
 So here’s a good rule of thumb: don’t worry about a competitor at all, until they’re actually beating you with a real, shipped product. Press releases are easier to write than code, and that is still easier than making a great product. So remind your company of this, and this is sort of a founder’s role, is not to let the company get down because of the competitors in the press.
 
+面对竞争对手，有一个好的经验结论：不要担心你的竞争对手，他们只能通过实际的product打击到你；媒体的报道比实际研发product容易得多。提醒你的团队这个现实情况，这是founder的职责，而不是让竞争对手在媒体上的报道影响队员的士气。
+
 This great quote from Henry Ford that I love: “The competitor to be feared is one who never bothers about you at all, but goes on making his own business better all the time.”
+
+关于竞争对手在媒体上的报道，这件事情，下面这个态度，是实际情况。
+
+> The competitor to be feared is one who never bothers about you at all, but goes on making his own business better all the time.
 
 These are almost never the companies that put out a lot of press releases. And they bum people out.
 
