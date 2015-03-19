@@ -251,69 +251,176 @@ All of these things are things first time CEO don't normally do, and maybe I can
 
 The last part on the team section is about firing people when it's not working. No matter what I say here is not going to prevent anyone from doing it wrong and the reason that I say that is that firing people is one of the worst parts of running a company. Actually in my own experience, I'd say it is the very worst part. Every first time founder waits too long, everyone hopes that an employee will turn around. But the right answer is to fire fast when it's not working. It's better for the company, it's also better for the employee. But it's so painful and so awful, that everyone gets it wrong the first few times.
 
-最后，如何解雇一个员工？
+最后，如何 fire 一个队员？无论什么原因 fire 队员绝对是很糟糕的一件事。founder 为了队员回心转意，等待太久。而正确的做法是，如果不合适，尽快 fire；这对 company 和 employee 都好 *（如何安抚现有的其他队员情绪波动？）*。 这个过程很痛苦、很糟糕，很多人第一次都会做得不恰当。*（不恰当在什么地方？怎么才能恰当？能来点例子吗？）*
 
 In addition to firing people who are doing bad at their job, you also wanna fire people who are a) creating office politics, and b) who are persistently negative. The rest of the company is always aware of employees doing things like this, and it's just this huge drag - it's completely toxic to the company. Again, this is an example of something that might work OK in a big company, although I'm still skeptical, but will kill a startup. So that you need to watch out for people that are ifs.
 
+几类：
+
+* do bad at their job;
+* create office politics; *（拉帮结派？以立场判断对错，罔顾客观事实）*
+* persistently nagative; *（持续悲观、消极，悲观能引发谨慎就是好的，但一味悲观，看不到一点希望，就很糟糕）*
+
+其他队员，通常都会注意到这些人的行为，这将持续毒害团队文化。上述情况，在 big company 可能还能维持，但会导致 startup 覆灭。
+
+
 So, the question is, how do you balance firing people fast and making early employees feel secure? The answer is that when an employee's not working, it's not like they screw up once or twice. Anyone will screw up once or twice, or more times than that, and you know you should be like very loving, not take it out on them, like, be a team, work together.
+
+关键问题是：如何 fire fast 的同时，让 early employees 感到安全？每个人都有懈怠的时候，一次、两次或者更多，这些都不是问题，团队要一起向前走，这些都是可以预料到的。
 
 If someone is getting every decision wrong, that's when you need to act, and at that point it'll be painfully aware to everyone. It's not a case of a few screw-ups, it's a case where every time someone does something, you would have done the opposite yourself. You don't get to make their decisions but you do get to choose the decision-makers. And, if someone's doing everything wrong, just like a consistent thing over like a period of many weeks or a month, you'll be aware of it.
 
+如果某队员，每次都采取相反的行为、观点，特别是，需要真正做事情的时候，这将导致所有人都很痛苦。这不只出现一两次，而是，基本上每次你都需要做与他相反的事情*（团队的凝聚力，受到很大影响，损耗了战斗力）*。你不需要帮队员做出正确的决定，你只需要找出那些做正确决定的人，并成为队友即可。如果有人，持续不断的拖延事情的进度，数周或者一个月，你会感觉到的。
+
 This is one of those cases where in theory, it sounds complicated to be sure what you're talking about, and in practice there's almost never any doubt. It's the difference between someone making one or two mistakes and just constantly screwing everything up, or causing problems, or making everyone unhappy, is painfully obvious the first time you see it.
 
-When should co-founders decide on the equity split?
+注意区分偶尔犯错误一两次与持续错误的情况。
+
+When should co-founders decide on the equity split? 
+
+什么时候，进行 equity split？*（股权划分）*
 
 For some reason, I've never really been sure why this is, a lot of founders, a lot of co-founders like to leave this off for a very long time. You know, they'll even sign the incorporation documents in some crazy way so that they can wait to have this discussion.
 
+出于种种原因，founder\co-founder 冲动之下签订合作协议，而不讨论 equity spilt 的问题，留作今后再讨论。
+
 This is not a discussion that gets easier with time, you wanna set this ideally very soon after you start working together. And it should be near-equal. If you're not willing to give someone - your co-founder - you know, like an equal share of the equity, I think that should make you think hard about whether or not you want them as a co-founder. But in any case, you should try to have the ink dry on this before the company gets too far along. Like, certainly in the first number of weeks.
+
+往后推延 equity split 的讨论，并不会是问题简化，应该开始协作之前，尽快讨论并敲定好，在前几周，最好就能敲定。一个基本原则，给出合理的份额，这样才能一起走得更远。
 
 So the question is - I said that inexperience is OK - how do you know if someone's gonna scale past, not scale up to a role, as things go on and later become crippling. People that are really smart and that can learn new things can almost always find a role in the company as time goes on. You may have to move them into something else, something other than where they started. You know, it may be that you hire someone to lead the engineering team that over time can't scale as you get up to 50 people, and you give them a different role. Really good people that can almost find some great place in the company, I have not seen that be a problem too often.
 
+优秀的人，随着公司成长，能够适应并热爱岗位的变化。
+
 So the question is what happens when your relationship with your cofounder falls apart. We're gonna have a session on mechanics later on in the course, but here is the most important thing that founders screw up. Which is, every cofounder, you yourself of course, has to have vesting. Basically what you're doing with cofounder vesting is you're pre-negotiating what happens if one of you leaves. And so the normal stance on this in Silicon Valley is that it takes four years, let's say you split the equity fifty-fifty, is that it takes four years to earn all of that. And the clock doesn't start until one year in. So if you leave after one year, you keep twenty-five percent of the equity, and if you leave after two years, fifty, and on and on like that.
+
+另一件事：如果 cofounder 关系破裂怎么办？今后将专门对此介绍，在这儿简要说几点：
+
+* 每个人都有退出的权利，包括你自己；
+* 对此情况，你需要提前预判，事情的影响；
+* 通常的处理方式：equity 分阶段获取，例如，4年，每年25%，任何时候离去，都递推equity即可；
 
 If you don't do that and if you have a huge fallout and one founder leaves early on with half the company, you have this deadweight on your equity table, and it's very hard to get investors to fund you or to do anything else. So number one piece of advice to prevent that is to have vesting on the equity. We pretty much won't fund a company now where the founders don't have vested equity because it's just that bad. The other thing that comes up in the relationship between the cofounders, which happens to some degree in every company, is talk about it early, don't let it sit there and fester.
 
+记得将 vest 考虑到 equity 中，这样才能规避风险。尽早讨论这个问题，越早也好，避免问题变糟糕。
+
 If you have to choose between hiring a sub-optimal employee and losing your customers to a competitor, what do you do? If it's going to be one of the first five employees at a company I would lose those customers. The damage that it does to the company- it's better to lose some customers than to kill the company. Later on, I might have a slightly different opinion, but it's really hard to say in the general case.
+
+在招募次优的队员和损失客户，两个方面选择时，你选哪个？*（次优队员，会降低招募难度，短期内反倒增加客户；同时，能力、价值观问题，导致事情不是最优，长远会损失客户；是这样理解吗？）*通常说法，前 5 个早期队员的招聘过程中，可以不惜短期损失客户，一定要招最优的队员，因为，不能为了增加客户，导致增加公司覆灭的风险。此后，具体情况，具体对待。
+
+疑问：队员/员工这样的态度和表述，哪一种相对合适一些？
 
 I am going to get to that later. The question is: what about cofounders that aren't working in the same location? The answer is, don't do it. I am skeptical of remote teams in general but in the early days of a startup, when communication and speed outweigh everything else, for some reason video conferencing calls just don't work that well. The data on this is look at say the 30 successful software companies of all time and try to point to a single example where the cofounders were in different locations. It's really really tough.
 
+一个问题：cofounder 不在同一地点，怎么办？我的建议是：那就不要一起做。我个人对远程协助办公，持怀疑态度，但在 early days of startup，沟通和推进速度是第一位的，视频会议的效果并不好。
+
+
+##Execution
+
 Alright, so now we're going to talk about execution. Execution for most founders is not the most fun part of running the company, but it is the most critical. Many cofounders think they're just signing up to this beautiful idea and then they're going to go be on magazine covers and go to parties. But really what it’s about more than anything else, what being a cofounder really means, is signing up for this years long grind on execution and you can’t outsource this.
+
+执行，不是最有趣的*（相比于 idea、product）*，但却是最重要的。成为cofounder就意味着，要持续数年的投入和执行。
 
 The way to have a company that executes well is you have to execute well yourself. Every thing at a startup gets modeled after the founders. Whatever the founders do becomes the culture. So if you want a culture where people work hard, pay attention to detail, manage the customers, are frugal, you have to do it yourself. There is no other way. You cannot hire a COO to do that while you go off to conferences. The company just needs to see you as this maniacal execution machine. As I said in the first lecture, there’s at least a hundred times more people with great ideas than people who are willing to put in the effort to execute them well. Ideas by themselves are not worth anything, only executing well is what adds and creates value.
 
+company中事务执行怎么样，要看founder自己的执行情况，其他员工都会受founder的影响，founder就是典范，绝大多数人都会效仿他，并形成文化。因此，如果你希望文化是：努力工作、注重细节、贴近客户*（不要与客户失连）*、节俭朴素，那你就这样带好头*（不必告诉所有人都要想你一样，但要恰当时机表达出你的心情，例如，舍不得浪费打印纸的另一面，工作没做完内心无法平息。）*。除此之外，没有其他途径。有 great ideas 的人中，只有 1% 的人会付诸行动，idea 并不产生价值，只有认真的去执行才会产生影响。
+
 A big part of execution is just putting in the effort, but there is a lot you can learn about how to be good at it. And so we’re going to have three classes that just talk about this.
+
+执行的一个要点是努力地去做；但可以通过学习，掌握如何更好地去做。*（我们将花费3节课，来说明这个问题。）*
 
 The CEO, people ask me all the time about the jobs of the CEO. There are probably more than five, here are five that come up a lot in the early days. The first four everyone thinks of as CEO jobs: set the vision, raise money, evangelize the mission to people you’re trying to recruit, executives, partners, press, everybody, hire and manage the team. But the fifth one is setting the execution bar and this is not the one that most founders get excited about or envision themselves doing but I think it is actually one of the critical CEO roles and no one but the CEO can do this.
 
+CEO 的职责有很多，早期的时候，主要有 5 个：
+
+* set the vision *（愿景，对未来的想象；目标？）*
+* raise money
+* evangelize the mission to people you’re trying to recruit, executives, partners, press, everybody *（与vision的区别？）*
+* hire and manage the team
+* set the execution bar *（指定执行计划）路线图？大部分CEO不喜欢？*
+
+
 Execution gets divided into two key questions. One, can you figure out what to do and two, can you get it done. So I want to talk about two parts of getting it done, assuming that you’ve already figured out what to do. And those are focus and intensity. So focus is critical. One of my favorite questions to ask founders about what they’re spending their time and their money on. This reveals almost everything about what founders think is important.
 
+执行，可以细分为两个问题：
+
+* 能通过分析，确定每个阶段需要做什么吗？
+* 能够把这阶段，做成吗？
+	* focus *（专注）*
+	* intensity *（强度？长时间投入？）*
+
+通过观察、询问：如何安排自己的时间和钱？能够得知一个人看重哪些事情。*（对看重的事情的一个排序；疑问：通常有哪些事情？大部分人的排序是怎么样的？）*
+	
 One of the hardest parts about being a founder is that there are a hundred important things competing for your attention every day. And you have to identify the right two or three, work on those, and then ignore, delegate, or defer the rest. And a lot of these things that founders think are important, interviewing a lot at different law firms, going to conferences, recruiting advisers, whatever, they just don’t matter. What really does matter varies with time, but it’s an important piece of advice. You need to figure out what the one or two most important things are, and then just do those.
+
+founder最难的事情是：从近百个待做的事情中，选出 2-3个关键的，然后当天完成，其余的事情，忽略、授权、推迟处理。很多founder认为重要的事情，实际上，并不重要：了解不同的律师事务所、参加会议、招募顾问。而且重要的事情，随着时间的推移，处境的不同，也在发生变化。
 
 And you can only have two or three things every day, because everything else will just come at you. There will be fires every day and if you don't get good at setting what those two or three things are, you'll never be good at getting stuff done. This is really hard for founders. Founders get excited about starting new things.
 
+每天完成 2-3 件事，每天都有太多的事情去做，你需要善于完成这2-3件事情，以此来保证做事情有始有终*（这样理解？）*。这点很重要，因为founder通常对发起新的事情很兴奋，而在有始有终上比较疏忽，而这一点缺失很重要的，至少这 2-3 件事情上，是这样。
+
 Unfortunately the trick to great execution is to say no a lot. You’re saying no ninety-seven times out of a hundred, and most founders find they have to make a very conscious effort to do this. Most startups are nowhere near focused enough. They work really hard-maybe-but they don’t work really hard at the right things, so they'll still fail. One of the great and terrible things about starting a start up is that you get no credit for trying. You only get points when you make something the market wants. So if you work really hard on the wrong things, no one will care.
+
+great execution的关键在于 say no，100次询问中可能要说97次；有不少 startup 很勤奋，但他们没有专注在正确的事情上，注定是徒劳；一个重要的点是：先把确定的市场需求满足了，再去尝试不确定的需求。在错误的事情上，努力付出，没有人会在意你的工作的。
 
 So then there's this question of how do you figure out what to focus on each day. Each day it's really important to have goals. Most good founders I know have a set of small overarching goals for the company that everybody in the company knows. You know it could be something like ship a product by this date, get this certain growth rate, get this engagement rate, hire for these key roles, those are some of them but everyone in the company can tell you each week what are our key goals. And then everybody executes based off of that.
 
+应该专注哪些事情？每天都有 goals，company 应该有一些总体目标，而且每个员工都能知道*（清晰、简介、通俗、易懂）*。例如：
+
+* 在某个日期，完成这个产品；
+* 获得多少的增长率；
+* 获得多少活跃用户；
+* 招募指定角色的队员；
+* 等等
+
+力争每个人都知道当前的 key goals，只有如此，大家的才会基于这些 goals 来开展工作。
+
 The founders really set the focus. Whatever the founders care about, whatever the founders focus on, that's going to set the goals for the whole company. The best founders repeat these goals over and over, far more often than they think they should need to. They put them up on the walls they talk about them in one on ones and at all-hands meetings each week. And it keeps the company focus. One of the keys to focus, and why I said cofounders that aren't friends really struggle, is that you can't be focused without good communication. Even if you have only four or five people at a company, a small communication breakdown is enough for people to be working on slightly different things. And then you lose focus and the company just scrambles.
+
+有意或无意，founder 会凝聚注意力。founder 关注的、努力去做的事情，都会被认为是整个公司的 goal。好的 founder 一遍遍的重复公司的 goal *（不仅仅是口头的，也可能是身体力行的，墙上的海报）*， 这可能比预想的频率还要高，这加强了整个公司的关注度*（此处强调的是goal，如果具体的操作方案有争议怎么办？）*。这个也很能说明一个相互熟知的cofounder很重要，因为，你需要天气与cofounder关于focus形成一直*（基于信任或者基于理解，基于服从呢？）*，如果在其他队员面前，多次暴漏几个cofounder之间的分歧，将导致company无法聚焦关注在重要事情上，最终将导致company 覆灭。*（很吓人呀）*
 
 I'm going to talk about this a little bit later, but growth and momentum are something you can never lose focus on. Growth and momentum are what a startup lives on and you always have to focus on maintaining these. You should always know how you're doing against your metrics, you should have a weekly review meeting every week, and you should be extremely suspicious if you’re ever talking about, we’re not focused on growth right now, we’re not growing that well right now but we're doing this other thing, we don't have a timeline for when we are going to ship this because we're focused on this other thing, we’re doing a re-brand, whatever, almost always a disaster.
 
+startup 生存的根本是：增长和势头；这是必须聚焦关注的，要时刻提醒自己，有时，需要拨开数据，看到本质，短暂的数据下降并不会影响太大，反倒应该关注势头。
+
 So you want to have the right metrics and you want to be focused on growing those metrics and having momentum. Don't let the company get distracted or excited about other things. A common mistake is that companies get excited by their own PR. It's really easy to get PR with no results and it actually feels like you're really cool. But in a year you'll have nothing, and at that point you won't be cool anymore, and you'll just be talking about these articles from a year ago that, Oh you know these Stanford students start a new start up, it's going to be the next big thing and now you have nothing and that sucks.
+
+找到合适的指标，来保证大家聚焦在关键的事情上。一个常见的错误是：company特别关注自己的 PR，实际上，很低成本就可以获得较好的 PR，这通常会迷惑自己，误认为自己很 cool，而实际上，一年之后，你会发现什么进展都没有，新的公司和 PR 将替代你。
 
 As I mentioned already, be in the same space. I think this is pretty much a nonstarter. Remote confounding teams is just really really hard. It slows down the cycle time more than anybody ever thinks it's going to.
 
+###intensity
+
 The other piece besides focus for execution is intensity. Startups only work at a fairly intense level. A friend of mine says the secret to start up success is extreme focus and extreme dedication. You can have a startup and one other thing, you can have a family, but you probably can't have many other things. Startups are not the best choice for work life balance and that's sort of just the sad reality. There's a lot of great things about a startup, but this is not one of them. Startups are all-consuming in a way that is generally difficult to explain. You basically need to be willing to outwork your competitors.
+
+focus 的另一个关键点是：intensity。*（强度？工作强度？脑袋不断强化信念的强度？完全的投入，是时间）*。一个朋友曾说，start up sucess的秘诀是：极尽专注、全身心的投入。startup期间，很难保证工作和生活的平衡，这是不可避免的。
 
 The good news here is that a small amount of extra work on the right thing makes a huge difference. One example that I like to give is thinking about the viral coefficient for a consumer web product. How many new users each existing user brings in. If it's .99 the company will eventually flatline and die. And if it's 1.01 you'll be in this happy place of exponential growth forever.
 
+有一点：在正确事情上的，额外的投入，将产生很大的差异。举例：`viral coefficient` 维里系数，如果日复一日的0.99，将最终变为无穷下，而日复一日的1.01，将获得指数级的增长。
+
 So this is one concrete example of where a tiny extra bit of work is the difference between success and failure. When we talk to successful founders they tell stories like this all the time. Just outworking their competitors by a little bit was what made them successful.
+
+要不 competitor 多做一些工作，做的专注、做的细致。
 
 So you have to be really intense. This only comes from the CEO, this only comes from the founders. One of the biggest advantages that start ups have is execution speed and you have to have this relentless operating rhythm. Facebook has this famous poster that says move fast and break things. But at the same time they manage to be obsessed with quality. And this is why it's hard. It's easy to move fast or be obsessed with quality, but the trick is to do both at a startup. You need to have a culture where the company has really high standards for everything everyone does, but you still move quickly.
 
+保持全身心的投入*（努力是给自己看的，而不是看起来很努力）*。startup的一大优势就是执行速度，需要拥有这种无情的工作节奏。Facebook推崇的理念：move fast、break things，同时，manage to be obwessed with quality。需要一种公司文化：每个人都高标准地完成每一件事情，然后，尽力去提高速度。*（质量是第一位的，然后才是速度）*
+
 Apple, Google, and Facebook have each done this extremely well. It's not about the product, it's about everything they do. They move fast and they break things, they're frugal in the right places, but they care about quality everywhere. You don't buy people shitty computers if you don't want them to write shitty code. You have to set a quality bar that runs through the entire company. Related to this is that you have to be decisive. Indecisiveness is a startup killer. Mediocre founders spend a lot of time talking about grand plans, but they never make a decision. They're talking about you know I could do this thing, or I could do that other thing, and they're going back and forth and they never act. And what you actually need is this bias towards action.
 
+Apple, Google, Facebook 做得很极致，不是说他们的 product，而是关于他们做的所有事情*（执行，专注细节？）*；他们有几点：
+
+* move fast
+* break things
+* 在正确的地方节俭 *（什么含义？）*
+* 注重任何地方的质量 *（质量跟踪表）*
+* 行事果断 *（犹豫不决，非常可怕）*
+* 平庸的founder到处说宏伟的计划，但很少果断的做决定，很少行动起来去做
+
 The best founders work on things that seem small but they move really quickly. But they get things done really quickly. Every time you talk to the best founders they've gotten new things done. In fact, this is the one thing that we learned best predicts a success of founders in YC. If every time we talk to a team they've gotten new things done, that's the best predictor we have that a company will be successful. Part of this is that you can do huge things in incremental pieces. If you keep knocking down small chunks one at a time, in a year you look back and you've done this amazing thing. On the other hand, if you disappear for a year and you expect to come back with something amazing all at once, it usually never happens.
+
+best founder 在看起来很小的事情上，快速推进*（seem small的事情？）*。每次用心观察，总会发现，他们已经又完成了一些事情。这点，是识别best founder的重要指标。如果每次跟一个团队接触，总能发现他们已经完成了一件事，这说明这个team十分难的，因为，他们在很短的时间间隔内完成了大量的工作。只有每次都完成一点，才能实现一年内整体上有个台阶的跨越。
 
 So you have to pick these right size projects. Even if you're building this crazy synthetic biology company and you say well I have to go away for a year, there's no way to do this incrementally, you can still usually break it into smaller projects.
 
