@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Lecture 3 -- Counterintuitive Parts of Startups, and How to Have Ideas
+title: Lecture 3--Counterintuitive Parts of Startups, and How to Have Ideas
 description: 阅读原文
 category: YCombinator
 ---
@@ -79,6 +79,11 @@ Though, in a sense, it's bad news that gaming the system stops working now, in t
 明确耍小技巧不是万能的，甚至一些情境下，他的作用微乎其微。*（想表达什么意思？）*
 
 That brings us to our fourth counterintuitive point, startups are all consuming. If you start a startup, it will take over your life to a degree that you cannot imagine and if it succeeds it will take over your life for a long time; for several years, at the very least, maybe a decade, maybe the rest of your working life. So there is a real opportunity cost here. It may seem to you that Larry Page has an enviable life, but there are parts of it that are defiantly unenviable. The way the world looks to him is that he started running as fast as he could, at age twenty-five, and he has not stopped to catch his breath since. Every day shit happens within the Google empire that only the emperor can deal with and he, as the emperor, has to deal with it. If he goes on vacation for even a week, a whole backlog of shit accumulates, and he has to bear this, uncomplaining, because: number one, as the company’s daddy, he cannot show fear or weakness; and number two, if you’re a billionaire, you get zero, actually less than zero sympathy, if you complain about having a difficult life.
+
+第四点：startup 意味着消费*（怎么理解？）*。如果很幸运，运行的很好，他将花费大量的时间，至少数年，甚至近十年，这意味着机会成本。有令人羡慕的一面，必然对应大量不让人羡慕的一面。很多的问题，他不能抱怨，而需要默默地接受、行动起来去解决，因为他是领头的，他的动作和行为会在队伍中扩大，并且如此做的收益是小于零的*（也不能把这些东西带回家，如何倾诉呢？还是不倾诉？）*。详细说，两个原因：
+
+* number one, as the company’s daddy, he cannot show fear or weakness;
+* number two, if you’re a billionaire, you get zero, actually less than zero sympathy, if you complain about having a difficult life.
 
 Which has this strange side effect that the difficulty of being a successful startup founder is concealed from almost everyone who has done it. People who win the one-hundred meter in the Olympics, you walk up to them and they're out of breath. Larry Page is doing that too, but you never get to see it.
 
