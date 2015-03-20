@@ -20,6 +20,8 @@ Startups are as unnatural as skiing and there is a similar list of stuff you hav
 
 The first thing on it is the fact I just mentioned: startups are so weird that if you follow your instincts they will lead you astray. If you remember nothing more than that, when you're about to make a mistake, you can pause before making it. When I was running Y Combinator we used to joke that our function was to tell founders things they would ignore, and it's really true. Batch after batch the YC partners warned founders about mistakes they were about to make and the founders ignored them, and they came back a year later and said, "I wish we'd listened." But that dude is in their cap table and there is nothing they can do.
 
+##不能按照直觉/本能，来做决定
+
 第一，按照直觉/本能做事，startup注定悲剧。
 
 Q: Why do founders persistently ignore the partner’s advice?
@@ -32,9 +34,11 @@ There is this specific sub-case in business, especially if you come from an engi
 
 进行判断之前，多问一下自己判断的依据是什么？直觉？直觉的依据是什么？再来详细分析一下，判断的依据是否存在。
 
+##不需要对创业这件事很专业
+
 The second counterintuitive point, this might come as a little bit of a disappointment, but what you need to succeed in a startup is not expertise in startups. That makes this class different from most other classes you take. You take a French class, at the end of it you've learned how to speech French. You do the work, you may not sound exactly like a French person, but pretty close, right? This class can teach you about startups, but that is not what you need to know. What you need to know to succeed in a startup is not expertise in startups, what you need is expertise in your own users.
 
-要把一个startup做成，并不需要你在startup方面很专业。你只需要在了解、满足你的用户方面很专业就好了。
+要把一个startup做成，并不需要你在startup方面很专业*（此处指教授别人startup）*。你只需要在了解、满足你的用户方面很专业就好了。
 
 Mark Zuckerberg did not succeed at Facebook because he was an expert in startups, he succeeded despite being a complete noob at startups; I mean Facebook was first incorporated as a Florida LLC. Even you guys know better than that. He succeeded despite being a complete noob at startups because he understood his users very well. Most of you don't know the mechanics of raising an angel round, right? If you feel bad about that, don't, because I can tell you Mark Zuckerberg probably doesn't know the mechanics of raising an angel round either; if he was even paying attention when Ron Conway wrote him the big check, he probably has forgotten about it by now.
 
@@ -42,7 +46,7 @@ Zuckerberg在startup方面是个菜鸟，但他做成了Facebook，因为他十�
 
 In fact, I worry it's not merely unnecessary for people to learn in detail about the mechanics of starting a startup, but possibly somewhat dangerous because another characteristic mistake of young founders starting startups is to go through the motions of starting a startup. They come up with some plausible sounding idea, they raise funding to get a nice valuation, then the next step is they rent a nice office in SoMa and hire a bunch of their friends, until they gradually realize how completely fucked they are because while imitating all the outward forms of starting a startup, they have neglected the one thing that is actually essential, which is to make something people want. By the way that's the only use of that swear word, except for the initial one, that was involuntary and I did check with Sam if it would be okay; he said he had done it several times, I mean use the word.
 
-导致一个startup覆灭的原因中，我更担心，年轻的founder敷衍了事的态度、模仿外在形式和流程的做法。实际上，startup的核心是：做出用户需要的product。
+导致一个startup覆灭的原因中，有几点很常见：年轻的founder敷衍了事的态度、模仿外在形式和流程的做法。实际上，startup的核心是：做出用户需要的product。
 
 We saw this happen so often, people going through the motion of starting a startup, that we made up a name for it: "Playing House." Eventually I realized why it was happening, the reason young founders go though the motions of starting a startup is because that is what they have been trained to do, their whole life, up to this point. Think about what it takes to get into college: extracurricular activities? Check. Even in college classes most of the work you do is as artificial as running laps, and I'm not attacking the educational system for being this way, inevitably the work that you do to learn something is going to have some amount of fakeness to it. And if you measure people’s performance they will inevitably exploit the difference to the degree that what you’re measuring is largely an artifact of the fakeness.
 
@@ -62,9 +66,12 @@ So many of the conversations the YC partners have with the founders begin with t
 
 YC partner 与 founder之间谈论 startup 时的用语，通常很繁琐，我想了很久，认为产生这种情况的原因是：他们都在找捷径、找诀窍，他们的说话方式是经过训练的。*（应该直接点表达？）*
 
+
+##认真做事情，不要耍小聪明
+
 So, this is the third counterintuitive thing to remember about startups: starting a startup is where gaming the system stops working. Gaming the system may continue to work, if you go to work for a big company, depending on how broken the company is, you may be able to succeed by sucking up to the right person; Giving the impression of productivity by sending emails late at night, or if you're smart enough changing the clock on your computer, cause who's going to check the headers, right? I like an audience I can tell jokes to and they laugh. Over in the business school: "headers?" Okay, God this thing is being recorded, I just realized that.
 
-记住这点：startup就是游戏系统停止工作*（什么含义？停止使用小伎俩？停止寻找捷径？踏实认真的去做事情？）*。
+记住这点：startup中，小聪明、投机取巧，是没有用的*（什么含义？停止使用小伎俩？停止寻找捷径？踏实认真的去做事情？）*。
 
 Alright for now on we are sticking strictly to the script. But, in startups, that does not work. There is no boss to trick, how can you trick people, when there is nobody to trick? There are only users and all users care about is whether your software does what they want, right? They're like sharks, sharks are too stupid to fool, you can't wave a red flag and fool it, it's like meat or no meat. You have to have what people want and you only prosper to the extent that you do. The dangerous thing is, especially for you guys, the dangerous thing is that faking does work to some extent with investors.
 
@@ -76,7 +83,9 @@ If you’re really good at knowing what you’re talking about, you can fool inv
 
 Though, in a sense, it's bad news that gaming the system stops working now, in the sense that you're deprived of your most powerful weapons and, after all, you spent twenty years mastering them. I find it very exciting that there even exist parts of the world where gaming the system is not how you win. I would have been really excited in college if I explicitly realized that there are parts of the world where gaming the system matters less than others, and some where it hardly matters at all. But there are, and this is one of the most important thing to think about when planning your future. How do you win at each type of work, and what do you want to win by doing it?
 
-明确耍小技巧不是万能的，甚至一些情境下，他的作用微乎其微。*（想表达什么意思？）*
+明确一点：耍小技巧不是万能的，甚至一些情境下，他的作用微乎其微。*（想表达什么意思？）*
+
+##startup意味着付出：数年无怨言的付出
 
 That brings us to our fourth counterintuitive point, startups are all consuming. If you start a startup, it will take over your life to a degree that you cannot imagine and if it succeeds it will take over your life for a long time; for several years, at the very least, maybe a decade, maybe the rest of your working life. So there is a real opportunity cost here. It may seem to you that Larry Page has an enviable life, but there are parts of it that are defiantly unenviable. The way the world looks to him is that he started running as fast as he could, at age twenty-five, and he has not stopped to catch his breath since. Every day shit happens within the Google empire that only the emperor can deal with and he, as the emperor, has to deal with it. If he goes on vacation for even a week, a whole backlog of shit accumulates, and he has to bear this, uncomplaining, because: number one, as the company’s daddy, he cannot show fear or weakness; and number two, if you’re a billionaire, you get zero, actually less than zero sympathy, if you complain about having a difficult life.
 
@@ -87,15 +96,25 @@ That brings us to our fourth counterintuitive point, startups are all consuming.
 
 Which has this strange side effect that the difficulty of being a successful startup founder is concealed from almost everyone who has done it. People who win the one-hundred meter in the Olympics, you walk up to them and they're out of breath. Larry Page is doing that too, but you never get to see it.
 
+还有一点，强调一下：要充分调研类似的product，避免做无用的事情。*（有充分的把握能做得更好，当然可以继续做）*
+
 Y Combinator has now funded several companies that could be called big successes and in every single case the founder says the same thing, "It never gets any easier." The nature of the problems change, so you're maybe worrying about more glamorous problems like construction delays in your new London offices rather than the broken air conditioner in your studio apartment, but the total volume of worry never decreases. If anything, it increases.
 
 Starting a successful startup is similar to having kids; it's like a button you press and it changes your life irrevocably. While it's honestly the best thing—having kids—if you take away one thing from this lecture, remember this: There are a lot of things that are easier to do before you have kids than after, many of which will make you a better parent when you do have kids. In rich countries, most people delay pushing the button for a while and I'm sure you are all intimately familiar with that procedure.
 
+startup就如同孩子一样，在生孩子之前，你可以提前准备，做很多的事情，startup也是如此；不过，很多人都不会提前准备。
+
 Yet when it comes to starting startups a lot of people seem to think they are supposed to start them in college. Are you crazy? What are the universities thinking – they go out of their way to ensure that their students are well supplied with contraceptives, and yet they are starting up entrepreneurship programs and startup incubators left and right.
+
+*（什么含义？）*
 
 To be fair, the universities have their hand forced here. A lot of incoming students are interested in start-ups. Universities are at least de-facto supposed to prepare you for your career, and so if you're interested in startups, it seems like universities are supposed to teach you about startups and if they don't maybe they lose applicants to universities that do claim to do that. So can universities teach you about startups? Well, if not, what are we doing here? Yes and no, as I've explained to you about start-ups. Essentially, if you want to learn French, universities can teach you linguistics. That is what this is. This is linguistics: we're teaching you how to learn languages and what you need to know is how a particular language.
 
+学校并不会教给你startup方面的内容，他们的目标是为你的career负责。
+
 What you need to know are the needs of your own users. You can't learn those until you actually start the company, which means that starting a startup is something you can intrinsically only learn by doing it. You can't do that in college for the reason I just explained. Startups take over your entire life. If you start a startup in college, if you start a startup as a student, you can't start a startup as a student because if you start a startup you’re not a student anymore. You may be nominally a student but you won't even be that for very much longer. Given this dichotomy: which of the two paths should you take?
+
+你需要知道自己的user的需求。startup只能边学边做。做student也是开启的startup，如果你想再开启一个startup，那你就无法全身心做student了，因为你需要一心付出在新的startup上。
 
 Be a real student and not start a startup or start a real startup and not be a student. Well, I can answer that one for you. I'm talking to my own kids here. Do not start a startup in college. I hope I'm not disappointing anyone seriously. Starting a startup could be a good component of a good life for a lot of ambitious people. This is just a part of a much bigger problem that you are trying to solve. How to have a good life, right. Those that are starting a startup could be a good thing to do at some point. Twenty is not the optimal time to do it.
 
@@ -105,31 +124,57 @@ For unambitious people your thing can be the dreaded failure to launch. For the 
 
 Mark Zuckerberg will never get to bum around a foreign country. If he goes to a foreign county, it's either as a de-facto state visit or like he's hiding out incognito at George V in Paris. He's never going to just like backpack around Thailand if that’s still what people do. Do people still backpack around Thailand? That's the first real enthusiasm I've ever seen from this class. Should have given this talk in Thailand. He can do things you can't do, like charter jets to fly him to foreign countries. Really big jets. But success has taken a lot of the serendipity out of his life. Facebook is running him as much as he's running Facebook.
 
+*（公司会占用个人的绝大多数时间）*
+
 While it can be really cool to be in the grip of some project you consider your life's work, there are advantages to serendipity. Among other things, it gives you more options to choose your life's work from. There's not even a trade off here. You’re not sacrificing anything if you forgo starting a start up at twenty because you will be more likely to succeed if you wait. In the astronomically unlikely case that you are twenty and you have some side project that takes off like Facebook did, then you face a choice to either be running with it or not and maybe it’s reasonable to run with it. Usually the way that start ups take off is for the founders to make them take off. It's gratuitously stupid to do that at twenty.
+
+二十岁时没有创业，你也不会损失什么，因为往后推迟几年，创业成功的几率更大。
 
 Should you do it at any age? Starting a startup may sound kind of hard, if I haven't made that clear let me try again. Starting a startup is really hard. If it’s too hard, what if you are not up to this challenge?
 
+##You can't tell 
+
+*（什么意思？没理解）*
+
 The answer is the fifth counter intuitive point. You can't tell. Your life so far has given you some idea of what your prospects might be if you wanted to become a mathematician or a professional football player. Boy, it’s not every audience you can say that to. Unless you have had a very strange life indeed you have not done much that’s like starting a startup. Meaning starting a startup will change you a lot if it works out. So what you’re trying to estimate is not just what you are, but what you could become. And who can do that? Well, not me. for the last nine years it was my job to try to guess (I wrote "predict" in here and it came out as "guess"—that’s a very informative Freudian slip). Seriously it’s easy to tell how smart people are in ten minutes. Hit a few tennis balls over the net, and do they hit them back at you or into the net? The hard part and the most important part was predicting how tough and ambitious they would become.
+
+投资人看startup，会看几点：smart，tough，ambitious*（特别是后两样）*
 
 There may be no one at this point who has more experience than me in doing this. I can tell you how much an expert can know about that. The answer is not much. I learned from experience to keep completely open mind about which start ups in each batch would turn out to be the stars. The founders sometimes thought they knew. Some arrived feeling confident that they would ace Y Combinator just as they had aced every one of the few easy artificial tests they had faced in life so far. Others arrived wondering what mistake had caused them to be admitted and hoping that no one discover it.
 
 There is little to no correlation between these attitudes and how things turn out. I've read the same is true in the military. The swaggering recruits are no more than likely to turn out to be really tough than the quiet ones and probably for the same reason. The tests are so different from tests in people’s previous lives. If you are absolutely terrified of starting a startup you probably shouldn’t do it. Unless you are one of those people who gets off on doing things you're afraid of. Otherwise if you are merely unsure of whether you are going to be able to do it, the only way to find out is to try, just not now.
 
-So if you want to start a startup one day, what do you do now in college? There are only two things you need initially, an idea and cofounders. The MO for getting both of those is the same which leads to our sixth and last counterintuitive point.
+事情的成败，与态度之间没有太大关系*（提前准备、反复推演，都不属于做事过程中的态度）*。创业者，好像：会去做自己害怕的事情*（是这样吗？还是翻译有误？）*。
+
+So if you want to start a startup one day, what do you do now in college? There are only two things you need initially, an idea and cofounders. The MO for getting both of those is the same which leads to our sixth and last counterintuitive point.*（什么意思？）*
 
 The way to get start up ideas is not to try to think of startup ideas. I have written a whole essay on this and I am not going to repeat the whole thing here. But the short version is that if you make a conscious effort to try to think of startup ideas, you will think of ideas that are not only bad but bad and plausible sounding. Meaning you and everybody else will be fooled by them. You'll waste a lot of time before realizing they're no good. The way to come up with good startup ideas is to take a step back. Instead of trying to make a conscious effort to think of startup ideas, turn your brain into the type that has startup ideas unconsciously. In fact, so unconsciously that you don't even realize at first that they're startup ideas. This is not only possible: Yahoo, Google, Facebook, Apple all got started this way. None of these companies were supposed to be companies at first, they were all just side projects. The very best ideas almost always have to start as side projects because they're always such outliers that your conscious mind would reject them as ideas for companies.
 
-How do you turn your mind into the kind that has startup ideas unconsciously? One, learn about a lot of things that matter. Two, work on problems that interest you. Three, with people you like and or respect. That's the third part incidentally, is how you get cofounders at the same time as the idea. The first time I wrote that paragraph, instead of learn a lot about things that matter, I wrote become good at some technology. But that prescription is too narrow.
+不要用尽心思为了想idea而去想idea，不妨退一步，等待idea不经意间出现，Yahoo, Google, Facebook, Apple 刚开始的时候就是边缘项目；大部分好项目刚开始的时候就是side project，因为刚开始的时候，你会感到他们太离群了，不是大众喜爱的东西。
+
+How do you turn your mind into the kind that has startup ideas unconsciously? One, learn about a lot of things that matter. Two, work on problems that interest you. Three, with people you like and or respect. That's the third part incidentally, is how you get cofounders at the same time as the idea. The first time I wrote that paragraph, instead of learn a lot about things that matter, I wrote become good at some technology. But that prescription is too narrow. *（最后一句，什么含义？）*
+
+如何才能不经意间获得idea呢？几点：
+
+* 多学一些相关的知识；*（开阔眼界，广度）*
+* 专注于自己感兴趣的内容；*（专注解决，深度）*
+* 能不能在无意间获得idea时，顺带找到一个cofounder呢？*（搭档）*
 
 What was special about Brain Chesky and Joe Gebbia from Airbnb was not that they were experts in technology. They went to art school, they were experts in design. Perhaps more importantly they were really good at organizing people in getting projects done. So you don't have to work on technology per se, so long as you work on things that stretch you.
+
+在某一方面要专注，有自己的见解和把握*（通常是自己感兴趣的方面）*，善于组织人把事情做成*（可能不是说说笑笑就能把事情做成的）*
 
 What kinds of things are those? Now that is very hard to answer in the general case. History is full of examples of young people who were working on problems that no one else at the time thought were important. In particular that their parents didn't think were important. On the other hand, history is even fuller of examples of parents that thought their kids were wasting their time and who were right.
 
 How do you know if you’re working on real stuff? I mean when Twitch TV switched from being Justin.tv to Twitch TV and they were going to broadcast people playing video games, I was like, "What?" But it turned out to be a good business. I know how I know real problems are interesting, and I am self-indulgent: I always like working on anything interesting things even if no one cares about them. I find it very hard to make myself work on boring things even if they're supposed to be important. My life is full of case after case where I worked on things just because I was interested and they turned out to be useful later in some worldly way.
 
+做自己感兴趣的事情，就是正确的事情，但是有一点，你需要能够把事情做好的潜力和韧力。
+
 Y Combinator itself is something I only did because it seemed interesting. I seem to have some internal compass that helps me out. This is for you not me and I don't know what you have in your heads. Maybe if I think more about it I can come up some heuristics for recognizing genuinely interesting ideas. For now all I can give you is the hopelessly question begging advice. Incidentally this is the actual meaning of the phrase begging the question. The hopelessly question begging advice that if you’re interested in generally interesting problems, gratifying your interest energetically is the best way to prepare yourself for a startup and probably best way to live.
 
 Although I can't explain in the general case what counts as an interesting problem I can tell you about a large subset of them. If you think of technology as something that’s spreading like a sort of fractal stain, every point on the edge represents an interesting problem. Steam engine not so much maybe you never know. One guaranteed way to turn your mind into the type to start up ideas for them unconsciously. Is to get yourself to the leading edge of some technology. To, as Paul Buchheit put it, "Live in the future." And when you get there, ideas that seem uncannily prescient to other people will seem obvious to you. You may not realize they're start up ideas, but you will know they are something that ought to exist.
+
+live in the future，这有助于不经意间发现idea，你可能不认为他们应该是 idea，但你却会确信，他们就是未来。
 
 For example back at Harvard in the mid 90s. A fellow grad student of my friends Robert and Trevor wrote his own voice over IP software. It wasn't meant to be a startup, he never tried to turn it into one. He just wanted to talk to his girlfriend in Taiwan without paying for long distance calls. Since he was an expert on networks, it seemed obvious to him that thing to do was to turn the sound into packets and ship them over the internet for free. Why didn't everybody do this? They were not good at writing this type of software. He never did anything with this. He never tried to turn this into a startup. That is how the best startups tend to happen.
 
