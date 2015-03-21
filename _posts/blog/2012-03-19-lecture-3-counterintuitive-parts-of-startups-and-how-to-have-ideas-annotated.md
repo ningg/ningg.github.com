@@ -5,6 +5,8 @@ description: 阅读原文
 category: YCombinator
 ---
 
+> 原文地址：[Counterintuitive Parts of Startups, and How to Have Ideas ][Counterintuitive Parts of Startups, and How to Have Ideas ]
+
 One of the advantages of having kids is that when you have to give advice to people you can ask yourself, "what would I tell my own kids?", and actually you'll find this really focuses you. So even though my kids are little, my two year old today, when asked what he'll be after two, said "a bat." The correct answer was three, but "a bat" is so much more interesting. So even though my kids are little, I already know what I would tell them about startups, if they were in college, so that is what I'm going to tell you. You're literally going to get what I would tell my own kids, since most of you are young enough to be my own kids.
 
 我将把准备告诉孩子的想法，告诉你们。
@@ -282,7 +284,7 @@ Alright you guys thank you.
 
 [NingG]:    http://ningg.github.com  "NingG"
 
-
+[Counterintuitive Parts of Startups, and How to Have Ideas ]:				http://genius.com/Paul-graham-lecture-3-counterintuitive-parts-of-startups-and-how-to-have-ideas-annotated
 
 
 
