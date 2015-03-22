@@ -44,7 +44,7 @@ So say you have a problem and you are able to state it, where do you start and h
 
 One is to really become a cog in that industry for a little bit. And so it might seem a little counterintuitive to do this because most people say that if you really want to disrupt an industry you should really not be a player in it. Someone who spent 20 or 30 years in an industry is probably set in their ways and is just used to the way things work and really can't think about what the inefficiencies are or the things that you can "disrupt". However, as a newbie coming into the industry you really should take one or two months to just really understand what all of the little bits and pieces of the industry are and how it works. Because it's when you get into the details, that's when you start seeing things that you can be exploiting and things that are really inefficient and may provide a huge overhead cost that you may be able to cut down.
 
-第一中办法：进入这个行业、市场，当一个无足轻重的小人物，这点可能是与人的直觉是相反的。有个常识：行业现状都是被外来者打破的*（如果想改变一个行业，就不要进入这个行业）*。实际上，仔细想一下，那些在一个行业中待了20~30年的从业人员，他们的做事和思维方式都是行业固有的方式，他们几乎从不思考为什么这么做，哪些地方的效率可以提升。*（他们没有太多的精力关注新的东西，可能这些新的东西，正式改变行业的引爆点）*。作为一个行业的新手，花1~2个月，来理解行业内的运行方式、整体轮廓*（内部运作和对外接口）*。这个有助于自己在改变这一行业时，思考哪些是必要的、哪些是可以去掉以提升效率的。
+第一种办法：进入这个行业、市场，当一个无足轻重的小人物，这点可能是与人的直觉是相反的。有个常识：行业现状都是被外来者打破的*（如果想改变一个行业，就不要进入这个行业）*。实际上，仔细想一下，那些在一个行业中待了20~30年的从业人员，他们的做事和思维方式都是行业固有的方式，他们几乎从不思考为什么这么做，哪些地方的效率可以提升。*（他们没有太多的精力关注新的东西，可能这些新的东西，正式改变行业的引爆点）*。作为一个行业的新手，花1~2个月，来理解行业内的运行方式、整体轮廓*（内部运作和对外接口）*。这个有助于自己在改变这一行业时，思考哪些是必要的、哪些是可以去掉以提升效率的。
 
 So an example of this is that when we started Homejoy, we started with the cleaning industry, and when we started we were the cleaners ourselves. We started to clean houses and we found out really quickly that we were very bad cleaners. As a result, we said okay, we have to learn more about this and we went to buy books. We bought books about how to clean, which helped maybe a little bit. We learned a little more about cleaning supplies but it is sort of like basketball, you can read and learn about basketball but you're not going to get better at it if you don't actually train and throw a basketball into the net.
 
@@ -150,13 +150,19 @@ I hate to keep harping on it but these are things that I see today with founders
 
 So say you have something that you feel ready to get lots of users on. So what do you do at this point? I will go over various types of growth in the next slides, but the one thing to note here early on when it is just you, your cofounder, and a couple of other people building, you aren't creating a team just for growth. It is going to be one person and one person only. You really need to focus and you are going to be tempted to try five different strategies at one time.
 
-现在你可能会觉得，将会获得很多用户。但，你应该怎么做呢？我将说几种用户增长方式，需要先说明的是：团队不仅仅是为用户增长而建立的*（理解对吗？）*。
+现在你可能会觉得，将会获得很多用户。但，你应该怎么做呢？我将说几种用户增长方式，需要先说明的是：团队不仅仅是为用户增长而建立的*（理解对吗？）*。用户的增长通常是缓慢的一个接一个，此时，你应该专注起来，并且可以尝试5种不同的策略。
 
 But really what you should do is take one channel and really execute on it for an entire week and just focus on that. And if that works continue executing on it until it caps out. If it doesn't work then just move on. By doing this you will feel more certain that the channel you were working on is wrong and your initial hypothesis is wrong than if you only spent a third of your time on it over the course of a few weeks. So learn one channel at a time.
 
+一周只专注一个点*（一个点，什么含义？）*。如果这一周的工作起作用了，那就持续下去，直到达到一个初步极限；如果不起作用，继续专研，这样你就能知道是不是在这个点上做错了，或者是不是当初的假设出错了*（理解对吗？）*。
+
 Second, when you find one channel at a time and strategies that work, always be iterating on it. You can potentially create a playbook and give it to someone else to iterate on it but these channels always change. Anything from Facebook ads to Google ads, the distribution channels, the environments that you don't control change all of the time and you should always be iterating and optimizing for that. And lastly, in the beginning when you see a channel that fails just to get rid of it and go on there are lots of other things to try. But over time go back to that channel and look at it again.
 
+然后，你每次将发现一个点或者策略，是起作用的，那就去迭代改进。当有更重要的事情的时候，就先去解决更重要的问题，然后过段时间再回过头来看看这个改进的点。
+
 An example is that in the beginning at Homejoy we had no money so when we tried to buy Google ads to get users in the door quickly - what we found was that all of these national companies had more money than us, they were making a lot more money on the job than us. So they were able to acquire users at a much higher cost than us. So we couldn't afford that and we had to go through another channel. But today we make more money on the job, and we are better at some things. So we should probably revisit the idea of buying Google ads. That's what I mean by that.
+
+是说渠道的问题？上面我都理解错了？
 
 And the key to all of this is creativity. Performance marketing, or marketing and growth in general can be very technical but, it is actually technical, and you have to be creative because if it was really easy and bland then everyone would be growing right now. So you always have to find that little thing that no one else is doing and do that to the extreme.
 
