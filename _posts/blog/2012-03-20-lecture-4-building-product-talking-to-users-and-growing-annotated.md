@@ -174,45 +174,79 @@ So there are three types of growth. Sticky, viral, and paid growth. Sticky growt
 
 The central theme that I'm going to go through is sustainability. By sustainable growth I mean you are basically not a leaky bucket. The money you put in has a good return investment on it. So sticky growth is, like I said, trying to get your existing users to come back and buy stuff. The only thing that really matters here is that you deliver a good experience. Right? If you deliver a good experience people are going to want to keep using you. If you deliver an addictive experience people are going to want to keep using you. And the way to measure this and to really look at this and how you are doing over time with whether you are providing good sticky growth is to look at the CLV and retention cohort analysis.
 
-下一个主题：可持续发展。可持续发展，就是不要当漏水桶，只出不进，注定消亡；投入的钱，需要有一个合理的回报。因此，回头客方式的增长，就是力争使现有的用户再次消费。有个核心就是你需要使自己的用户有一个良好的体验，最最基本的是：满足客户基本需求，解决他们头疼的事情。如果在此基础上，在多做一些，用户会回来的。一个查看用户回头率的指标就是：按照不同群组顾客，来统计回头率。
+下一个主题：可持续发展。可持续发展，就是不要当漏水桶，只出不进，注定消亡；投入的钱，需要有一个合理的回报。因此，回头客方式的增长，就是力争使现有的用户再次消费。有个核心就是你需要使自己的用户有一个良好的体验，最最基本的是：满足客户基本需求，解决他们头疼的事情。如果在此基础上，在多做一些，用户会回来的。一个查看用户回头率的指标就是：按照不同群组顾客，来统计回头率。*(CLV\retention cohort指标什么含义？)*
 
 CLV, some people call it TLV, is a customer's lifetime. It is basically the net revenue that a customer brings in the door over a period of time. So a 12 month CLV is how much net revenue does a customer give you over 12 months. And sometimes people will do the month and six months and so forth. So when I say cohort basically what you are looking at is, this is time, and this is percent of the users coming back to you. So at period zero you are at 100%.
 
+CLV指标，也称TLV，用户通过网络在你的product上花费的时间，而cohort指标，会显示这段时间内，用户在哪些地方花费时间了。
+
 So cohort is another name for customer segments. For example you might look at the female versus male cohorts or people in Atlanta, Georgia versus people in Sacramento, California cohorts. The most common one is by month. So cohort equals month and let's just say for this exercise we are looking at March 2012. So in March 2012, 100% of the people are using your product. Now, one month later 50% of the people might come back. Now, in the second month how many people that came in March are coming back two months later? That might be down. So over time you will have a curve that looks like this. There is always some initial drop off. The reasons that people don't stay after first use could be that it wasn't worth it or they had a bad experience, or something like that. And then over time what you want is for your curve to flatten out. These over here become your core customers. These are the ones that will stay with you over time.
+
+cohort针对细分客户的另一种表述，例如：2012年3月，一些人使用了产品，在下个月，可能有50%的人会再次使用这个产品，再过一个月，查看这些用户中还有多少会继续使用*（对老用户的追踪）*。用户第一次使用之后，不再使用，说明：产品对用户没有价值、或者他们的体验很不好，就是类似的原因。你的目标是，使这个cohort曲线变得平滑，即，使用户变为长期用户，核心用户。
 
 Say we are at one year later and you have built a bunch of stuff. You graph out the same thing and hopefully what you see is that you have a curve like this. That is, that even in the first period more than 50% of the people came back to you and more and more people are sticking with you. A really bad retention curve looks like this - which is after the first use they just hate you so much that no one even comes back. I don't know what kind of business that is, it is obviously a shitty business. I can't explain a good business that has a retention curve like that. Over time as you are thinking of strategies to increase this curve and to keep making it go up and up and up you want to keep looking at this analysis over time to see if that strategy is working for you.
 
+做到这一步，差不多会花费一年的时间，同时，你也有了一堆product实物。你期望看到的cohort曲线，是平滑的。
+
 The second kind of growth is viral growth. Like sticky growth you also need to deliver a good experience. But on top of that you need to deliver a really, really good experience. What is going to make these people shout out loud on Twitter or on Facebook or whatever and tell all their friends and email all of their family about you. You have to really deliver a good experience. Combined with that is you have to have really good mechanics for the referral program itself. You have 100 customers who really want to talk about you. Now how are they going to talk about you?
 
+第二种是病毒式的用户增长。这种情况下，你需要提供一种非常好的用户体验，只有这样，他们才会在Twitter、Facebook上说，并且告诉他们的朋友、家人。这种情况下，你需要一个引导方案，人太多了，让他们第一次来就会使用。假设，你拥有100用户，特别想对别人推荐你的产品，那他们应该如何推荐？*（口号？定位？类似30块，就能让人把房间手机干净？）*
+
 So in that sense the viral growth strategy is all about building a good experience, but if you have that, how do you build a good referral program. I have listed the three main parts of that. One is the customer touch points which is where are people learning that they can refer other people? That might be after they book or after they sign up. A better one is after they use the product for a while and you see that they are highly engaged, then you show them that link and get them to send it out to everyone. Another one is if you are doing more of a platform type play - for Homejoy we actually go inside their home. So another customer touch point is when the cleaning professional is inside the home they can have a leave behind and we can show them something there too as well. You want to basically put the customer touch points and the actual link to however they are going to refer their friends at a point in time where they are highly engaged and you know that they are loving you.
+
+referral program该如何做？*（什么含义？）*。关于此，我听别人说起，主要包含3 部分：
+
+* 用户向其他人分享这个产品时，能够非常方便分享的途径，可能就是一个按键；有可能这个分享的链接，或这按钮，只有在注册登录之后才能看到；而实际上，另一种比较好的方式是：如果你感觉到用户对你的产品非常感兴趣，就在他们用完产品之后，向他们提供分享产品的链接，让他们很方便的将这个产品分享出去*（要避免对用户的过度干扰）*；
+* 另一个是program mechanics，最常见的方式是，如果你邀请到一个用户，你和被你邀请的用户都将获得$10 *（数额，依照具体情况而定）*；
+* 一旦有用户通过分享链接过来使用产品，你需要注意，这类用户的访问路径，他们需要特别谨慎对待；
 
 The second is program mechanics. The most common thing I have seen is $10 for $10. You get $10 if you invite your friends and they use it and they get $10. And so you should try different types of mechanics in that sense and try to optimize for whatever works for you. It could be 25 for 25 or it could be 10 for 10, it could be any of these things. And lastly, when your friend clicks on your referral link, when they come back to the site it is really important to optimize that conversion flow of how they are going to sign up. Sometimes you need to sell them in a different manner or up-sell that a friend suggested that you use this and so forth. So with all of these combined, you will really need to play around with them in different dimensions and come up with a good referral program.
 
 And lastly is paid growth. Some examples of paid growth are this right here. And these are some of the most obvious ones and I'm sure that you guys can think of more. Paid growth is you happen to have money you can spend - you may have credit cards or whatever - but you can spend something to get users. So the correct way to think about paid growth is that you are going to risk putting money out there so that are you going to get a return. The simple way to think about it - is your CLV, your customer's lifetime - is it more than your CAC. And your CAC is an abbreviation for customer acquisition costs. So an example is - say you run a bunch of ads over 12 months and the customer is worth $300 to you. Each one of these ads, when you click on it the CPC costs different types of money, and then when they click on your ad they have to come to the site and sign up or buy something.
 
+最后一种是付费方式获得用户增长；这是最常见的方式，这种方式，你特别应该关注自己的CLV，而不是CAC（客户获取成本）；通过广告方式，用户点击和不点击的费用是不同的。
+
 And the conversion rates are different for all of these ads. The CAC is calculated by the CPC divided by the conversion. So you see that there are different acquisition costs for different types of ads. To determine whether or not that is a good or bad ad all you have to do is CLV minus the CAC. If it is more than zero you are earning a profit. So you see that despite the CLV remaining the same and the conversions being higher or lower sometimes some ads that might seem good actually don't seem so good at the end of the day.
 
+不同渠道付费获取用户，每个渠道的收入是 CLV 减去 CAC，如果大于0表示，没亏钱，通过这个差值来衡量优先选择哪种渠道。
+
 You can look at this for your whole entire customer base, aggregating all of your customers together, but the better way of looking at it is to break it down by customer segments. If you are building a marketplace for country music the CLVs of someone in Nashville, Tennessee is going to be much larger than the CLVs of someone in Czechoslovakia. I just assume that is the case anyway.
+
+通常你可以汇总的查看CLV数据，但更好的方式是，按照年龄、地域等维度对用户进行细分之后，再来查看这些指标，方便发现未知的信息。
 
 You will want to make sure that when you are buying ads for these different types of cohorts that you know what the differences are and you don't want to mix everything together. The last point on payback and sustainability - I think a lot of businesses get in trouble and they turn into bad businesses when they start spending beyond their means. And it has a lot to do with risk tolerance or how much risk you are willing to take on.
 
 So when you look at these CLVs, which is suppose you get a customer that is worth $300 after 12 months. In the first month they are worth $100. If you wait until the 12 month period then they give you the other $200. But if in the first period you are actually paying $200 for them then you are in the hole for $100 until the end of the 12 month period. That's when you start to get into potentially unsustainable growth. Something could happen at the end of the 12 months where you don't actually get the $200 from the customer and you end up in a very bad situation. Essentially, at the end of the day you could be running out of money. And if you are doing this with credit cards you will definitely find that you are going to have to declare bankruptcy very soon.
 
+第1个月，频繁用户的价值是 $100 ，而12个月的频繁用户是 $300，也就是说，如果招待好这些用户，他们在一段时间将额外创造 $200 的价值，不要过度挥霍手上的资金，要可持续发展。
+
 So again, payback time is very important. Safe time to go with is three months. If you are very risk loving then maybe 12 months is better. Beyond 12 months is very much unsafe territory.
+
+可以承担 3 个月的回报风险，而 12 个月就太久了，对入乐于冒险的人也可以；再久就太危险了。
 
 The art of pivoting - Homejoy in its current concept was literally the 13th idea we fully built out and tried to execute on and tried to get customers for. And so a lot of the questions I get are," How do you even get to that 13th idea, and how did you decide when to move on?" The best guidance that I can give on that is the kind of look at these three criteria, which is once you realize that you can't grow, and despite building out all of these great features and talking to all of these users none of them stick, or the economics of the business just don't make sense - then once you make that realization you just need to move on.
 
+使用杠杆的艺术*（融资？）*。有个不错的建议，如果满足三个指标，就放弃：你意识到即使添加上所有的新功能，用户仍增长乏力；或者告知用户你们遇到困难，没有用户会坚持；或者，没有商业价值。
+
 I think the trickiest one is probably the growth one because there are so many stories out there where the founders stuck with the idea and then after three years all of a sudden it started growing. So the trick here is what you really should do is have a growth plan when you start out. What is an optimistic but realistic way to grow this business? it might look something like this. In week one you just want one user, in week two you want maybe two users and so forth. And you can keep doubling up and up.
+
+有一种很棘手的情况，创始人坚持三年，突然有一天用户开始增长。这种情况下，最佳的方式就是，在开始的时候，就制定一个长期的增长计划。思考哪种是最好的，并且是可行的方式。可能是这样的方式，第一周，你希望拥有一个用户，第二周，你希望两个用户，然后保持double下去。
 
 In week one you should basically build as much as possible to get that one user. And then a week to build as much to get two users. If you have a product that people want you should be able to maintain this growth curve pretty easily by just walking around and manually finding people. It is when you get to 100 users a week when you need these growth strategies to start working. What I tell people is usually if you are fully executing on your product, and you are working really hard, then if you go three or four weeks in a row of no growth or backwards growth, then it is time to maybe consider a pivot.
 
+为了第一周获取一个用户，你需要尽可能的打磨产品。第二周，努力不能停。等到每周新增用户在100以上时，就可以尝试融资了。
+
 Maybe not in the sense that you completely come up with a new idea but you are probably fundamentally doing something wrong because at that early stage a startup should always be growing. This is optimistically what it looks like and this is the kind of growth curve that I set forth and put out when I started Homejoy, but really what it looks like is like this. So you want to make sure that when you are in a lull you don't stop. And that is what you should wait 2 to 3 weeks. As long as you don't stop working hard you'll eventually get back here and you'll see a trend like this over time.
+
+如果产品的数据并不好看，不要着急，乐观些，沉住气，努力分析原因，坚持2·3周，再看看。
 
 I can take questions at this time.
 
 Q: So one question online was if your users already have a product that they are already comfortable with how do you get them to switch to yours?
 
 A: There is always a switchover cost. I will tell you the example of Homejoy. We were actually creating a new market in the sense that a lot of our initial users had never had cleanings before so it was pretty simple to get them on board. And a lot of people who have cleaners already really trust their cleaner. To get them to come and use something else is probably the most difficult task in the world. When you are building things and trying to get people to switch over to you what you really need to do is find the moments where your product or what you are offering is much better or very much differentiated from the existing solution they have.
+
+开拓眼界，多接触、多思考。
 
 So an example is someone who had a regular cleaner and maybe had a party one day and they needed a cleaning almost the next day. Because Homejoy in most areas has next-day availability they would just come to Homejoy and use it because they knew they couldn't get their regular cleaner. And once they start using the product, then that is when they start realizing the little advantages of using Homejoy, which adds up to a big advantage. Realizing that leaving cash out or using checks was really annoying so being able to do all of your payments online was more convenient. Being able to cancel or reschedule according to your own schedule was very convenient.
 
