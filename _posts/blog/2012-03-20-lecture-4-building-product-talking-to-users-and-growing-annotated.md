@@ -166,9 +166,15 @@ An example is that in the beginning at Homejoy we had no money so when we tried 
 
 And the key to all of this is creativity. Performance marketing, or marketing and growth in general can be very technical but, it is actually technical, and you have to be creative because if it was really easy and bland then everyone would be growing right now. So you always have to find that little thing that no one else is doing and do that to the extreme.
 
+另一个关键是创造力；市场营销是技术层面的工作，如果真的有一个空白、容易做的市场，会有很多人一拥而入的，因此，你需要做的是，将一个潜在的市场做到极致，当然创造力是必要的。
+
 So there are three types of growth. Sticky, viral, and paid growth. Sticky growth is trying to get your existing users to come back and pay you more or use you more. Viral growth is when people talk about you. So you use a product, you really like it and you tell ten other friends, and they like it. That's viral growth. And the third is paid growth. If you happen to have money in the bank you're going to be able to use part of that money to buy growth.
 
+有3种，用户增长方式：回头客、病毒式扩张、付费增长。回头客，是粘性用户，应该努力让他们更多的使用产品，或者付更多的费用。病毒式增长，用户使用了你的产品，非常喜欢，口口相传，一传十，十传百，用户飞速增长。付费增长，是你花些钱，通过广告等方式，购买一些用户。
+
 The central theme that I'm going to go through is sustainability. By sustainable growth I mean you are basically not a leaky bucket. The money you put in has a good return investment on it. So sticky growth is, like I said, trying to get your existing users to come back and buy stuff. The only thing that really matters here is that you deliver a good experience. Right? If you deliver a good experience people are going to want to keep using you. If you deliver an addictive experience people are going to want to keep using you. And the way to measure this and to really look at this and how you are doing over time with whether you are providing good sticky growth is to look at the CLV and retention cohort analysis.
+
+下一个主题：可持续发展。可持续发展，就是不要当漏水桶，只出不进，注定消亡；投入的钱，需要有一个合理的回报。因此，回头客方式的增长，就是力争使现有的用户再次消费。有个核心就是你需要使自己的用户有一个良好的体验，最最基本的是：满足客户基本需求，解决他们头疼的事情。如果在此基础上，在多做一些，用户会回来的。一个查看用户回头率的指标就是：按照不同群组顾客，来统计回头率。
 
 CLV, some people call it TLV, is a customer's lifetime. It is basically the net revenue that a customer brings in the door over a period of time. So a 12 month CLV is how much net revenue does a customer give you over 12 months. And sometimes people will do the month and six months and so forth. So when I say cohort basically what you are looking at is, this is time, and this is percent of the users coming back to you. So at period zero you are at 100%.
 
