@@ -7,6 +7,13 @@ category: tool
 
 > 题记：[《Maven实战（迷你版）》](http://www.infoq.com/cn/minibooks/maven-in-action)这本书写的太好了，我忍不住把其中的内容又敲一遍。
 
+
+**特别说明**： 当前新的构建工具 gradle 已经流行起来了，当前形势要求一定要熟悉、尝试，具体参考：
+
+* [Gradle，构建工具的未来？][Gradle，构建工具的未来？]
+* [Why Build Your Java Projects with Gradle Rather than Ant or Maven?][Why Build Your Java Projects with Gradle Rather than Ant or Maven?]
+* [Java构建工具：Ant vs Maven vs Gradle][Java构建工具：Ant vs Maven vs Gradle]
+
 ##0. 背景
 
 今天在GitHub上找了一个java语言编写的HDFS client，其使用Maven来进行工程的管理和构建；作为Maven工程导入Eclipse，提示pom.xml相关错误近10条。
@@ -617,10 +624,13 @@ todo list：（需要详细学习）
 
 
 
-
 [《Maven实战（迷你版）》]:											/download/maven/Maven+in+action.pdf
 [The Central Repository - Maven(Search Engine)]:					http://search.maven.org/
 [The Central Repository - Maven]:									http://repo1.maven.org/maven2/org/
 [<maven权威指南>学习笔记]:											http://macrochen.iteye.com/blog/531437
+
+[Gradle，构建工具的未来？]:										http://www.infoq.com/cn/news/2011/04/xxb-maven-6-gradle
+[Why Build Your Java Projects with Gradle Rather than Ant or Maven?]:	http://www.drdobbs.com/jvm/why-build-your-java-projects-with-gradle/240168608
+[Java构建工具：Ant vs Maven vs Gradle]:								http://blog.csdn.net/napolunyishi/article/details/39345995
 
 
