@@ -166,14 +166,19 @@ And then I think there is something about software itself that's very powerful. 
 
 软件相关的商业，潜力更大。几点：市场规模极其大，边际成本很低。
 
-
-
-
 What I would suggest that we will leave you with is there are these different rationalizations people give for why certain things work and why certain things don't work, and I think these rationalizations always obscure this question on creating "X" dollars in value and capturing "Y" percent of "X." So, the science rationalization we’re always told is that the scientists aren’t interested in making money. They’re doing it for charitable reasons and that you're not a good scientist if you’re motivated by money. I'm not even saying people should always be motivated by money or something like this, but I think we should wish to be a little bit more critical of this as a rationalization. We should ask is this a rationalization to obscure the fact that "Y" equals zero percent and the scientists are operating in this sort of world where all the innovation is effectively competed away and they can’t capture any of it directly.
 
 The software distortion that often happens is because people are making such vast fortunes in software, we infer that this is the most valuable thing in the world being done full stop. And so people at Twitter make billions of dollars, it must be that Twitter is worth far more than anything Einstein did. What that realization tends to obscure, is again that "X" and "Y" are independent variables and that there are these businesses where you capture a lot of X and others where you don't. So I do think the history of innovation has been this history where the microeconomics, the structure of these industries has mattered a tremendous amount and there is sort of this story where some people made vast fortunes because they worked in industries with the right structure and other people made nothing at all because they were in these very competitive things.
 
+应该明白一个普遍现象：不少人赚了很多钱，是因为他们处于一个实质的垄断行业中恰当的位置，而其他人赚钱很少，是因为他们所处的行业充分竞争，利润降得很低。
+
 We shouldn't just rationalize that way. I think it's worth understanding this better. Then finally, let me come back to this sort of overarching theme for this talk, this competition is for losers idea, which is always a provocative way to title things because we always think of the losers as the people who are not good at competing. We think of losers as the people who are slow on the track team in high school or do a little less well on standardized tests, and don't get into the right schools. So we always think of losers as people who can't compete and I want us to really rethink and re-value this and consider whether it's possible the competition itself is off.
+
+说一下此次的重点内容：
+
+* 竞争是说给loser听的，竞争就如同兴奋剂，因为人们普遍认为loser是不善于竞争，才成为loser的；
+
+（后面没有读懂）
 
 It's not just the case we don't understand this monopoly-competition dichotomy intellectually. So we’ve been talking about why you wouldn’t understand it intellectually, because people lie about it, it’s distorted, the history of innovation rationalizes it in all these very strange ways. I think it's more than just an intellectual blind spot, but also a psychological blind spot, where we find ourselves very attracted to competition and in one form or another we find it reassuring if other people do things. The word ape, already in the time of Shakespeare, meant both primate and imitate and that is something about human nature, it's deeply imitative, ape like, sheep like and this is very problematic thing that we need to always think through and try to overcome.
 
