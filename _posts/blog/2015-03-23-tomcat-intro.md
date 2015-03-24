@@ -56,6 +56,12 @@ Apache Tomcat，开源软件*（这句是废话）*，支持Java Servlet和JavaS
 
 ##Tomcat基本原理
 
+推荐资料：
+
+* [Tomcat/Apache 6][Tomcat/Apache 6]
+* [Apache Tomcat 7-more about the cat][Apache Tomcat 7-more about the cat]
+* [How to Install Apache Tomcat and Get Started with Java Servlet Programming][How to Install Apache Tomcat and Get Started with Java Servlet Programming]
+
 疑问：tomcat运行时，是一个Process，那在tomcat容器中部署的web应用，是作为process启动的？还是直接thread？
 
 
@@ -75,8 +81,8 @@ Apache Tomcat，开源软件*（这句是废话）*，支持Java Servlet和JavaS
 ##参考来源
 
 * [Apache Tomcat][Apache Tomcat]
-
-
+* [Apache Tomcat 7-more about the cat][Apache Tomcat 7-more about the cat]
+* [How to Install Apache Tomcat and Get Started with Java Servlet Programming][How to Install Apache Tomcat and Get Started with Java Servlet Programming]
 
 
 
@@ -96,8 +102,10 @@ Apache Tomcat，开源软件*（这句是废话）*，支持Java Servlet和JavaS
 [NingG]:    http://ningg.github.com  "NingG"
 
 
-[Apache Tomcat]:		http://tomcat.apache.org/
-
+[Apache Tomcat]:								http://tomcat.apache.org/
+[Apache Tomcat 7-more about the cat]:			http://www.ntu.edu.sg/home/ehchua/programming/howto/Tomcat_More.html
+[How to Install Apache Tomcat and Get Started with Java Servlet Programming]:	http://www.ntu.edu.sg/home/ehchua/programming/howto/Tomcat_HowTo.html
+[Tomcat/Apache 6]:								http://www.datadisk.co.uk/html_docs/java_app/tomcat6/tomcat6.htm
 
 
 
