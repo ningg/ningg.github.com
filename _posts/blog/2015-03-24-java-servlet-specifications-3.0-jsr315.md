@@ -55,7 +55,7 @@ categories: web java
 [NingG]:    http://ningg.github.com  "NingG"
 
 [Tomcat - Specifications]:				http://wiki.apache.org/tomcat/Specifications
-[JSR315]:								
+[JSR315]:								http://jcp.org/aboutJava/communityprocess/final/jsr315/index.html
 [JSR315-final-overview]:				http://jcp.org/aboutJava/communityprocess/final/jsr315/index.html
 [JSR315-final-download]:				http://download.oracle.com/otndocs/jcp/servlet-3.0-fr-eval-oth-JSpec/
 [JSR315-maintenance-overview]:			http://jcp.org/aboutJava/communityprocess/mrel/jsr315/index.html
