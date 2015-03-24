@@ -56,7 +56,7 @@ Apache Tomcat，开源软件*（这句是废话）*，支持Java Servlet和JavaS
 
 ##Tomcat基本原理
 
-
+疑问：tomcat运行时，是一个Process，那在tomcat容器中部署的web应用，是作为process启动的？还是直接thread？
 
 
 
