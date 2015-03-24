@@ -120,19 +120,128 @@ So even if the market starts small, you can grow your business quickly enough to
 
 And one way to think of this last mover value is this idea that most of the value in these companies exists far in the future. If you do a discounted cash flow analysis of the business, you'll look at all these profit streams, you have a growth rate, the growth rate’s much higher that the discount rate and so most of the value exists far in the future. I did this exercise at Pay Pal in March of 2001 we'd been in business for about twenty seven months and the growth rate was a hundred percent a year, we were discounting future cash flows by thirty percent, and it turned out that about three quarters of the value of the business as of 2001 came from cash flows in years 2011 and beyond.
 
-
+打折的现金流分析，利润流，你将会看到一个增长率，增长率比折扣率要高得多，因此，将会有长久的利润。*（？）*
 
 And whenever you do the math on any of these tech companies, you get to an answer that is something like that. So if you are trying to analyze any of the tech companies in Silicon Valley, AirBnB, Twitter, Facebook, any emerging Internet companies, all the ones in Y Combinator, the math tells you that three quarters, eighty-five percent of the value is coming from cash flows in years 2024 and beyond. It's very far in the future and so one of the things that we always over value in Silicon Valley is growth rates and we undervalue durability.
 
+很久才能通过现金流来盈利？
+
 Growth is something you can measure in the here and now, you can always track that very precisely. The question of whether a company will be around a decade from now, that’s actually what dominates the value equation and that’s a much more qualitative sort of a thing. And so if we went back to this idea of these characteristics of monopoly, the proprietary technology, network effects, economies of scale, you can think of these characteristics as ones that exist at a moment in time where you capture a market and take it over but you also want to think about, are these things going to last over time. So there’s a time dimension to all these characteristics. So networks in fact often have a great time element where as the network scales, network effects actually get more robust, and so if you have a network business it's often one that can become a bigger and stronger monopoly over time.
+
+增长速度是可以精确测量出来的，关键问题是，公司能否生存十年以上，这直接影响了价值等式，而且是个定性的问题*（因为前期又投入，需要较长时间的盈利，才能保证收回成本？）*。现在重新来看这几个因素：专有技术、互联网助力、市场规模，这些都是你在开拓市场时，应该考虑的因素，这些因素，随着时间的推移是否有变化？因此，这些所有因素中，需要添加一个时间维度。*（最后一句，什么含义？）*
 
 Proprietary technology is always a little bit of a tricky one, so you want something that is an order of magnitude better than the state of the art in the world today. That's how you get people's attention, that's how you initially break through. But then you don't want to be superseded by somebody else. So there are all these areas of innovation where there was tremendous innovation, but no one made any money. So disk drive manufacturing in the 1980's, you could build a better disk drive than anybody else, you could take over the whole world and two years later someone else would come along and replace yours. In the course of fifteen years, you got vastly improved disk drives, so had a great benefit to consumers, but it didn't actually help the people who started these companies.
 
+拥有专有技术，是很困难的，这要求你的专有技术，要超过当前世上最好的技术；如果你通过专有技术，获得了初步成果，你应该也不想再被别人颠覆，而这是很困难的；另一方面，即使一致保有专有技术，你要知道，世上有很多伟大的创新*（专有技术）*，他们都没能赚钱。
+
 There's always this question about having a huge breakthrough in technology, but then also being able to explain why yours will be the last breakthrough or at least the last breakthrough for a long time or if you make a breakthrough, then you can keep improving on it at quick enough pace that no one can ever catch up. So if you have a structure of the future where there's a lot of innovation and other people will come up with new things and the thing you're working on, that's great for society. It's actually not that good for your business typically. And then economies of scale we’ve already about. I think this last mover thing is very critical. I’m always tempted, I don't want to overdo chess analogies, but the first mover in chess is someone who plays white, white is about a one-third of a pawn advantage, so there is a small advantage to going first. You want to be the last mover who wins the game, so there’s always world chess champion Capablanca line, “You must begin by studying the end game.” I wouldn't say that’s the only thing you should study, I think perspective of asking these questions, why will this still be the leading company in ten, fifteen, twenty years from now, is a really critical one to try to think through.
 
-I want to go in two slightly other directions with this the monopoly versus competition idea. I think this is the central idea on my mind for business, for starting a business, for thinking about them. There are some very interesting perspectives, I think it gives, on the whole history of innovation in technology and science. We've lived through 300 years of incredible technological progress in many many different domains. Steam engines to railways, the telephone, refrigeration, household appliances, the computer revolution, aviation, all different areas of technological innovation. Then there's sort of an analogous thing to say about science where we've lived through centuries of enormous amounts of innovation in science as well.
+需要把视野放开，看得长远一些，未来10~25年的事情，要有个预估。
 
 The thing that I think people always miss when they think about these things, is that because "X" and "Y" are independent variables, some of these things can be extremely valuable innovations, but the people who invent them, who come up with them, do not get rewarded for this. Certainly if you go back to you need to create X dollars in value and you capture Y percent of X, I would suggest that the history of science has generally been one where Y is zero percent across the board, the scientists never make any money. They’re always deluded into thinking that they live in a just universe that will reward them for their work and for their inventions. This is probably the fundamental delusion that scientists tend to suffer from in our society. Even in technology there are sort of many different areas of technology where there were great innovations that created tremendous value for society, but people did not actually capture much of the value. So I think there is a whole history of science and technology that can be told from the perspective of how much value was actually captured. Certainly there are entire sectors where people didn't capture anything.
+
+纵观科学史，纯粹的科学家并不赚钱，那是因为在价值等式中，`Y`约等于0，实际上，科学家创造的价值很大，为此他们获得一些表彰和荣誉，不过这部分价值，他们占有的却很少。
+
+You're the smartest physicist of the twentieth century, you come up with special relativity, you come up with general relativity, you don't get to be a billionaire, you don't even get to be a millionaire. It just somehow doesn't work that way. The railroads were incredibly valuable, they mostly just went bankrupt because there was too much competition. Wright brothers, you fly the first plane, you don't make any money. So I think there is a structure to these industries that’s very important.
+
+在技术上突破后，自己投身其中去商业化的，很大比例都失败了，两个原因：1. 新技术出现后，处于活跃期，不断有突破；2. 商业中，除了技术之外，还有很多因素；
+
+I think the thing that's actually rare are the success cases. So if you really think about the history in this and this two hundred fifty years sweep, why is almost always zero percent, it's always zero in science, it's almost always in technology. It's very rare where people made money. You know in the late eighteenth, early nineteenth century, the first industrial revolution was the textile mills, you got the steam engine, you sort of automated things. You had these relentless improvements that people improved efficiency of textile factories, of manufacturing generally, at a clip of five to seven percent every year, year after year, decade after decade. You had sixty, seventy years of tremendous improvement from 1780 to 1850. Even in 1850, most of the wealth in Britain was still held by the landed aristocracy and the workers didn't make that much. The capitalists didn't make that much either, it was all competed away. There were hundreds of people running textile factories, it was an industry where the structure of the competition prevented people from making any money.
+
+商业做成的，是很少见的。过去的250年中，人类科技进步了数次，但仍然只有极少数的人赚钱；特别是十八世纪到十九世纪，生产效率以平均每年 5~7%的速度提升，但仍然只有资本家在聚集财富，工人很少拥有资本的*（基本工资上的改善还是有的）*，当然，随着时间推进，由于竞争逐渐激烈，导致资本家的财富积累也在减少；可以说，竞争导致人们无法赚取更多的钱。
+
+There are, in my mind, probably only two broad categories in the entire history of the last two hundred and fifty years where people actually came up with new things and made money doing so. One is these sort of vertically integrated complex monopolies which people did build in the second industrial revolution at the end of the nineteenth and start of the twentieth century. This is like Ford, it was the vertically integrated oil companies like Standard Oil, and what these vertically integrated monopolies typically required was a very complex coordination, you've got a lot of pieces to fit together in just the right way, and when you assemble that you had a tremendous advantage. This is actually done surprisingly little today and so I think this is sort of a business form that when people can pull it off, is very valuable.
+
+过去250年中，人们创造新的东西，并且赚钱的只有两类：1. 复杂协作的集成垄断，例如福特公司与Standard Oil公司之间形成的垄断关系，当前，很难再产生这种方式了，而如果人们能够摆脱这种方式，将是很有价值的；这种方式，可以认为是资本密集型的；
+
+It's typically fairly capital intensive, we live in a culture where it's very hard to get people to buy into anything that's super complicated and takes very long to build. When I think of my colleague and friend Elon from PayPal success with Tesla and SpaceX, I think the key to these companies was the complex vertically integrated monopoly structure they had. If you look at Tesla or SpaceX and you ask, was there sort of a single breakthrough, I mean they certainly innovated on a law of dimensions, but I don't think there was a single 10X breakthrough on battery storage, they may be working on some things in rocketry, but there was no sort of single massive breakthrough. But what was really impressive was integrating all these pieces together and doing it in a way that was more vertically integrated than most other competitors.
+
+Tesla、SpaceX，都是复杂而集成的垄断体系，这些公司并不是因为掌握某一项专有技术，而是利用现有的很多技术，进行垂直整合，超越其他竞争者。
+
+So Tesla also integrated the car distributors so they wouldn't steal all the money as has happened with the rest of the car industry in the US. Or SpaceX, basically, you pulled in all subcontractors where most of the large aerospace companies have single sourced subcontractors that are able to charge monopoly profits and make it very hard for the integrated aerospace companies to make money. And so vertical integration I think is sort of a very under explored modality of technological progress that people would do well to look at more.
+
+（Tesla是如何与潜在竞争者整合的，以此来避免竞争？）
+
+And then I think there is something about software itself that's very powerful. Software has these incredible economies of scale, these low marginal costs, and there is something about the world of bits, as opposed to the world of atoms, where you can often get very fast adoption and fast adoption is critical to capturing and taking over markets because even if you have a small market, if adoption rate is too slow, there will be enough time for other people to enter that market and compete with you. Whereas if you have a small to midsize market, have the fast adoption rate, you can now take over this market. So I think this is one of the reasons Silicon Valley has done so well and why software has been this phenomenal industry.
+
+软件相关的商业，潜力更大。几点：市场规模极其大，边际成本很低。
+
+
+
+
+What I would suggest that we will leave you with is there are these different rationalizations people give for why certain things work and why certain things don't work, and I think these rationalizations always obscure this question on creating "X" dollars in value and capturing "Y" percent of "X." So, the science rationalization we’re always told is that the scientists aren’t interested in making money. They’re doing it for charitable reasons and that you're not a good scientist if you’re motivated by money. I'm not even saying people should always be motivated by money or something like this, but I think we should wish to be a little bit more critical of this as a rationalization. We should ask is this a rationalization to obscure the fact that "Y" equals zero percent and the scientists are operating in this sort of world where all the innovation is effectively competed away and they can’t capture any of it directly.
+
+The software distortion that often happens is because people are making such vast fortunes in software, we infer that this is the most valuable thing in the world being done full stop. And so people at Twitter make billions of dollars, it must be that Twitter is worth far more than anything Einstein did. What that realization tends to obscure, is again that "X" and "Y" are independent variables and that there are these businesses where you capture a lot of X and others where you don't. So I do think the history of innovation has been this history where the microeconomics, the structure of these industries has mattered a tremendous amount and there is sort of this story where some people made vast fortunes because they worked in industries with the right structure and other people made nothing at all because they were in these very competitive things.
+
+We shouldn't just rationalize that way. I think it's worth understanding this better. Then finally, let me come back to this sort of overarching theme for this talk, this competition is for losers idea, which is always a provocative way to title things because we always think of the losers as the people who are not good at competing. We think of losers as the people who are slow on the track team in high school or do a little less well on standardized tests, and don't get into the right schools. So we always think of losers as people who can't compete and I want us to really rethink and re-value this and consider whether it's possible the competition itself is off.
+
+It's not just the case we don't understand this monopoly-competition dichotomy intellectually. So we’ve been talking about why you wouldn’t understand it intellectually, because people lie about it, it’s distorted, the history of innovation rationalizes it in all these very strange ways. I think it's more than just an intellectual blind spot, but also a psychological blind spot, where we find ourselves very attracted to competition and in one form or another we find it reassuring if other people do things. The word ape, already in the time of Shakespeare, meant both primate and imitate and that is something about human nature, it's deeply imitative, ape like, sheep like and this is very problematic thing that we need to always think through and try to overcome.
+
+There is always this question about competition as a form of validation, where we go for things that lots of other people are going for. It's not that there is wisdom of crowds, it's not that lots of people trying to do something is the best proof of that being valuable. I think it's when lots of people are trying to do something, that is often proof of insanity. There are twenty thousand people a year who move to Los Angeles to become movie stars, about twenty of them make it. I think the Olympics are a little bit better because you have, you can sort of figure out pretty quickly whether you’re good or not, so there's little less of a deadweight loss to society. You know the sort of educational experience that at a place, the pre-Stanford educational experience, there is always sort of a non-competitive characterization. I think most of the people in this room had machine guns and they were competing with people with bows and arrows, so it wasn’t exactly a parallel competition when you were in junior high school, in high school. There is always the question: does the tournament make sense as you keep going?
+
+There is always this question if people going on to grad school or post doctoral educations, does the intensity of the competition really make sense. There is the classic Henry Kissinger line describing his fellow faculty at Harvard, “The battles were so ferocious because the stakes were so small,” describing academia and you sort of think on one level this is a description of insanity. Why would people fight like crazy when the stakes are so small, but it's also, I think, simply a function of the logic of a situation. When it's been really hard to differentiate yourself from other people, when the differences are, when the objectives differences really are small, you have to compete ferociously to maintain a difference of one sort or another. That's often more imaginary than real. There is always sort of a personal version of this I tell, where I was sort of hypertracked. In my eighth grade junior high school yearbook one my friends wrote, I know you’re going to get into Stanford. Four years later, I went to Stanford Law School, ended up at a big law firm in New York where from the outside everybody wanted to get in and on the inside everybody wanted to leave and it was this very strange dynamic where I realized, this was maybe not the best idea, and I left after seven months and three days.
+
+Other people down the hall told me, it's really reassuring to see you leave, Peter, I had no idea that it was possible to escape from Alcatraz, which of course all you had do was go out the front door and not come back. But so much of people's identities got wrapped up in winning these competitions that they somehow lost sight of what was important, what was valuable. Competition does make you better at whatever it is that you're competing at because when you're competing you're comparing yourself with the people around you. I’m figuring out how to beat the people next to me, how do I do somewhat better than whatever it is they're doing and you will get better at that. I'm not questioning that, I'm not denying that, but there often comes this tremendous price that you stop asking some bigger questions about what's truly important and truly valuable. Don't always go through the tiny little door that everyone's trying to rush through, maybe go around the corner and go through the vast gate that nobody is taking.
+
+Q: Do you have any ways to determine the difference [between a monopoly and a non monopoly] when looking at an idea or thinking about your own idea?
+
+A: I would say the question I always focus on is what is the actual market? So not what's the narrative of the market, because you can always tell a fictional story about a market: it's much bigger much or smaller, but what is the real objective market. So you always try to figure it out, and you realize people have incentives to powerfully distort these things.
+
+Q: So which of the aspects, of all these you mentioned, you would you say is applicable to Google?
+
+A: Well, they have they have network effects with the ad network, they had proprietary technology that gave them the initial lead because they had the page rank algorithm, which was an order of magnitude better than any other search engine. They had economies of scale up because of the need to store all these different sites, and at this point you have brand, so Google has all four. Maybe the proprietary technology is somewhat weaker at this point but definitely it had all four, and maybe three and a half out of four now.
+
+Q: How does this apply to Palantir and Square?
+
+A: That's sort of a set of companies that are doing different copycat payment systems, on mobile phones, there's Square, there's PayPal, they have different shapes that's how they differentiate themselves, one is a triangle, one is a square. Maybe at one point the apes run out of shapes or something like that, but at Palantir we started with a focus on the intelligence community, which is a small submarket. We had a proprietary technology that used a very different approach where it was focused on the human computer synthesis, rather than the substitution, which I think is the dominant paradigm. So, there is a whole set of things, I would say, on the market approach and on the proprietary technology.
+
+Q: What do you think about lean startups?
+
+A: So the question is what do I think about lean startups and iterative thinking where you get feedback from people versus complexity that may not work.
+
+I'm personally quite skeptical of all the lean startup methodology. I think the really great companies did something that was somewhat more of a quantum improvement that really differentiated them from everybody else. They typically did not do massive customer surveys, the people who ran these companies sometimes, not always, suffered from mild forms of Aspergers, so they were not actually that influenced, not that easily deterred, by what other people told them to do. I do think we're way too focused on iteration as a modality and not enough on trying to have a virtual ESP link with the public and figuring it out ourselves.
+
+I would say the risk question is always a very tricky one, because it's often the case that you don't have enough time to really mitigate risk. If you're going to take enough time to figure out what people want, you often will have missed the boat by then. And then of course there is always the risk of doing something that's not that significant or meaningful. You could say that a track in law school is a low risk track from one perspective, but it may still be a very high risk track in the sense that maybe you have a high risk of not doing something meaningful with your life. We have to think about risk in these very complicated ways. I think risk is this complicated concept.
+
+Q: Doesn't the last mover advantage already imply that there's competition to begin with?
+
+A: Yes, there's always a terminology thing. I would say that there are categories in which people sort of are bundled together. The monopoly business, I think they really were a big first mover. In some sense you can say Google was not the first search engine, there were search engines before. But on one dimension they were dramatically better than everybody else. They were the first one with page rank, with an automated approach. Facebook was not the first of social networking site. My friend, Reid Hoffman, started one in 1997, they called it Social Net, so they already had the name social networking in the name of their company seven years before Facebook. Their idea was that it going to be this virtual cyberspace were I'd be a dog and you'd be a cat and we'd have all these different rules about how we interact with each other in this virtual alternate reality. Facebook was the first one to get real identity, so I hope Facebook will be the last social networking site. It was the first one in a very important dimension, people often would not think of it as the first because they sort of lump all these things together.
+
+Q: If someone worked at Goldman Sachs out of college and left after six months and is now studying CS at Stanford, how would you recommend rethinking their competitive advantage?
+
+A: I am not great at the psychotherapy stuff, so I don't quite know how to solve this. There are these very odd studies they have done on people who go to business school, this one was done at the Harvard Business School where it's sort of the anti-Asbergers personality, where people are super extroverted, generally have low convictions, few ideas and you have sort of a hothouse environment you put all these people and for two years and at the end of it, they systematically end up, the largest cohort systematically ends up doing the wrong thing, they try to catch the last wave. in 1999 everyone tried to work with Mike Milken, this was a few years before he went to jail for all the junk bond stuff.
+
+They were never interested in Silicon Valley or tech except for 1999, 2000 when they timed the dotcom bubble peaking perfectly. 2005 to 2007 was housing, private equity, stuff like this. This tendency for us to see competition as validation is very deep, I don't think there's some easy psychological formula to avoid this. I don't quite know how what sort of therapy to recommend.
+
+My first starting point, which is only going to be maybe ten percent of the way, is to never underestimate how big a problem it is. We always think that this is something that afflicts other people. We always point to people in business school, people at Harvard or people on Wall Street, but it actually does afflict all of us to a very profound degree. We always think of advertising as this thing that works on other people, for all the stupid people who follow ads on TV, but they obviously work to some extent and they work to the disturbing extent on all of us and it's something we must work to overcome.
+
+Thank you very much.
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
