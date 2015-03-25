@@ -21,19 +21,44 @@ category: java
 
 ##乱码
 
-java中，对String进行编码、解码的基本过程，见下图；简要解释一下：
-
-* 编码解码，`String`通过`charsetIn`字符集映射为`byte[]`，然后`byte[]`再依照`charsetOut`映射为`String`的过程；
-* `String`是`char[]`；
-* 编码解码，本质是：`char[]`通过`charsetIn`字符集映射为`byte[]`，然后`byte[]`再依照`charsetOut`映射为`char[]`的过程；
-
-**疑问**：`charset`字符集，对应于编码方式吗？
-
 
 ![](/images/java-encode-byte-char-string/encode-process.png)
 
 
+java中，对String进行编码、解码的基本过程，见上图；简要解释一下：
 
+* 编码解码，`String`通过`charsetIn`字符集映射为`byte[]`，然后`byte[]`再依照`charsetOut`映射为`String`的过程；
+* `String`是`char[]`；
+* 编码解码，本质是：`char[]`通过`charsetIn`字符集映射为`byte[]`，然后`byte[]`再依照`charsetOut`映射为`char[]`的过程；
+* `charset`字符集，对应编码方式，通俗说，就是一张映射表，既可以将char映射为byte，也可以将byte映射为char。
+
+
+###编码的基本解释
+
+![](/images/java-encode-byte-char-string/general-explain.png)
+
+几点：
+
+* 编码方式，字符集，都是针对 `byte[]` 来说的，即，针对机器上存储的原始二进制字节；
+* 无论什么编码方式，在 `char[]` 上是统一的；
+
+
+### java 中 String 的编解码
+
+
+![](/images/java-encode-byte-char-string/java-string-encode.png)
+
+
+
+### java 中 File 的编解码
+
+
+![](/images/java-encode-byte-char-string/java-file-encode.png)
+
+java 读写 file，有两种方式：
+
+* 按照 byte 读取，此为文件的镜像，不涉及文件编码问题；
+* 按照 char 读取，此过程中，涉及两处编码字符集：读取文件、写入文件；
 
 ###何时出现乱码？如何解决？
 

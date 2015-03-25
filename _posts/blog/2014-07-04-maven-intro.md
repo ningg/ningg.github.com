@@ -185,9 +185,18 @@ Eclipse下，配置Maven：`Windows`--`Preferences`--`Maven`--`Installations`。
 
 如果命令行方式下，使用`mvn`的命令编译没有问题，而使用Eclipse时，`mvn install`等出现问题，则，解决办法：在pom.xml中指定`<project> <build> <plugins>`内添加`<plugin>`，设置成与命令行条件下`mvn`调用的`<plugin>`保持一致。[参考1](http://blog.csdn.net/imlmy/article/details/8268293)、[参考2](http://blog.csdn.net/huang86411/article/details/17548481)，当然还有另一种办法：[手动下载jar和pom](http://central.maven.org/maven2/org/apache/maven/plugins/).
 
+
+####1.6.3 新建或重新打开 Maven Project，出现错误
+
+错误详情：
+
+> An error occurred while filtering resources
+
+解决办法：`Maven`--`Update project...` （快捷键：`alt + F5`），参考来源[StackOverflow][http://stackoverflow.com/questions/22785748/how-to-remove-error-eclipse-project-indicator-if-i-dont-have-any-error]。
+
 **疑问**：在POM中 `<project> <dependencies>` 下添加 `<dependency>`元素 和 `<project> <build> <plugins>` 下添加 `<plugin>` 元素，有差异吗？有什么差异？（备注：当前调试结果，可得有差异）。
 
-如果当前使用了代理等方式导致网络连接局部受限，造成命令行方式 `mvn`能够正常下载依赖的jar包，但在Eclipse环境下，无法下载所需的项目的依赖包，可以在命令行方式下，先进行下载，然后，在Eclipse下进行更新、运行即可。（命令行方式为主）
+如果当前使用了代理等方式导致网络连接局部受限，造成命令行方式 `mvn`能够正常下载依赖的jar包，但在Eclipse环境下，无法下载所需的项目的依赖包，可以在命令行方式下，先进行下载，然后，在Eclipse下进行更新、运行即可。（命令行方式为主，因为进程独占，而在Eclipse下分配给mvn的线程时间有限）
 
 **思考**：Maven已经在settings.xml中配置了代理，那么，在Eclipse中开发调试Maven工程时，需要再配置Eclipse的代理吗？RE：不需要，只需要在Maven的配置中指定代理即可。
 

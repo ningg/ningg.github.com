@@ -41,9 +41,13 @@ category: tool
 |`ctrl + shift + U`|`形状`--`取消组合`（UnGroup）|
 |`ctrl + shift + F`|`形状`--`置顶`（Front）|
 |`ctrl + shift + B`|`形状`--`置底`（Below）|
+|`ctrl + shift + R`|右对齐|
+|`ctrl + shift + C`|居中|
+|`ctrl + shift + L`|左对齐|
 |`ctrl + H`|`形状`--`翻转`--`水平翻转`（Horizontal）|
 |`ctrl + J`|`形状`--`翻转`--`垂直翻转`（Vertical）|
 |`F8`|`形状`--`对齐形状`|
+|`F2`|编辑文字|
 |`shift + 箭头`|微小移动|
 
 
