@@ -2,7 +2,7 @@
 layout: post
 title: 编译flume：使用eclipse查看flume源码
 description: flume是开源的分布式日志采集系统，深入使用flume，编译查看flume源码是正道
-categories: flume hadoop
+categories: flume
 ---
 
 ##背景

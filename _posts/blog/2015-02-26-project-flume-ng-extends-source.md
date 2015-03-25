@@ -2,7 +2,7 @@
 layout: post
 title: 工程Flume NG extends source辅助记录
 description: 工程开发细节
-category: open-source
+categories: open-source git flume
 ---
 
 
@@ -101,6 +101,19 @@ category: open-source
 	.settings/
 	# Maven
 	target/
+
+
+**疑问**：如何设置下一级目录中的.gitignore？
+
+可以将 `.gitignore` 文件放置到工作树（working tree）下的其他目录，这将对当前目录以及子目录生效。
+
+
+
+
+
+
+
+
 
 
 **参考**：[Git ignores and Maven targets][Git ignores and Maven targets]
