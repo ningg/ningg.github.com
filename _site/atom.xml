@@ -4,7 +4,7 @@
    <title>NingG.github.com</title>
    <link href="http://ningg.github.com/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://ningg.github.com" rel="alternate" type="text/html" />
-   <updated>2015-01-20T21:26:56+08:00</updated>
+   <updated>2015-03-26T00:02:43+08:00</updated>
    <id>http://ningg.github.com</id>
    <author>
      <name></name>
@@ -13,1548 +13,876 @@
 
    
    <entry>
-     <title>visio的使用入门及快捷操作</title>
-     <link href="http://ningg.github.com/learn-visio"/>
-     <updated>2015-01-12T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/learn-visio</id>
-     <content type="html">&lt;p&gt;几个问题：&lt;/p&gt;
+     <title>Git入门</title>
+     <link href="http://ningg.github.com/git-intro"/>
+     <updated>2015-03-25T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/git-intro</id>
+     <content type="html">&lt;h2 id=&quot;section&quot;&gt;立意&lt;/h2&gt;
+
+&lt;p&gt;几点想法：&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;如何调整画布大小？
+  &lt;li&gt;Git的常用操作&lt;/li&gt;
+  &lt;li&gt;Git的基本原理，操作是附属于原理的，对原理的把握，两点好处：方便记忆Git的操作，方便快速定位问题；&lt;/li&gt;
+  &lt;li&gt;典型场景下Git的使用
     &lt;ul&gt;
-      &lt;li&gt;操作：&lt;code&gt;Ctrl&lt;/code&gt; + 鼠标左键点击，拖动即可&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;如何调整画布背景颜色？&lt;/p&gt;
-  &lt;/li&gt;
-  &lt;li&gt;word中&lt;/li&gt;
-&lt;/ul&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>人的几个心理特点</title>
-     <link href="http://ningg.github.com/natural-law"/>
-     <updated>2015-01-03T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/natural-law</id>
-     <content type="html">&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
-
-&lt;p&gt;看了一个现实诈骗案例：&lt;a href=&quot;http://video.sina.com.cn/p/news/s/v/2015-01-03/232964466971.html&quot;&gt;团伙冒充国防部诈骗 办公室豪华惊呆民警&lt;/a&gt;，&lt;/p&gt;
-
-&lt;div align=&quot;center&quot;&gt;&lt;object id=&quot;ssss&quot; width=&quot;480&quot; height=&quot;370&quot;&gt;&lt;param name=&quot;allowScriptAccess&quot; value=&quot;always&quot; /&gt;&lt;embed pluginspage=&quot;http://www.macromedia.com/go/getflashplayer&quot; src=&quot;http://you.video.sina.com.cn/api/sinawebApi/outplayrefer.php/video_id=249210699/s.swf&quot; type=&quot;application/x-shockwave-flash&quot; name=&quot;ssss&quot; allowfullscreen=&quot;true&quot; allowscriptaccess=&quot;always&quot; width=&quot;480&quot; height=&quot;370&quot; /&gt;&lt;/object&gt;&lt;/div&gt;
-
-&lt;h2 id=&quot;section-1&quot;&gt;几点思考&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;事出反常，必为妖：利润超出常理，高普通利润2~20倍；&lt;/li&gt;
-  &lt;li&gt;假作真时，真亦假：假的东西，精心准备之后，比真的更真；&lt;/li&gt;
-  &lt;li&gt;几个基本心理特点：
-    &lt;ul&gt;
-      &lt;li&gt;突发情况的警惕：保持警惕，认为不可能的事情，特别是凭空出来的好运、好机会，保持警惕，及时拒绝进一步了解这一“好运”；&lt;/li&gt;
-      &lt;li&gt;观点的坚持：选择动作发生后，通常会因为选择而坚持，无法随着条件的变化，重新客观的审视问题；&lt;/li&gt;
-      &lt;li&gt;以貌取人：涉及利润时，一定排除因为身份、装扮带来的信任感；&lt;/li&gt;
-      &lt;li&gt;利令智昏：利润达到一定程度时，无法客观思考，或者倾向性思考，总向好的方面打算；而，真正应该做的是：往最坏的方面思考和打算；&lt;/li&gt;
-      &lt;li&gt;时机：错过的不是机会，机会不会错过，宁愿放弃机会，也不在稀里糊涂中做决定；&lt;/li&gt;
-      &lt;li&gt;自我认识：通常一个人会高估自己、低估他人，当高估自己时，会产生自己掌控全局的幻想，此时，更易被利用；&lt;/li&gt;
+      &lt;li&gt;dev、prod等多个分支如何组织？&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;意识到人共有的心里特点，并在做决断时，提醒自己有这些因素，可能导致一些结果。警惕这些心理特点，干预自己做出客观公正的决定。&lt;/p&gt;
-
-&lt;p&gt;突然想起来，某人说：做事情先看人，人是否值得信任，人对了，才考虑接下来的事情；否则，基本不考虑。&lt;/p&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>IntelliJ IDEA</title>
-     <link href="http://ningg.github.com/intellij-idea"/>
-     <updated>2014-12-30T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/intellij-idea</id>
-     <content type="html">&lt;h2 id=&quot;section&quot;&gt;显示帮助信息&lt;/h2&gt;
-
-&lt;table&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code&gt;alt + h&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;显示帮助列表&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;通过&lt;code&gt;alt + h&lt;/code&gt;快捷操作显示出的帮助列表，很重要，下面给个截图：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/intellij-idea/help-menu.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;基本思路：整体上，系统参考几个内容：&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;Help Topics：完整的帮助文档，分为不同的topics，各种各样的帮助内容；&lt;/li&gt;
-  &lt;li&gt;Tip of the Day：很多快捷操作，值得每天一看；&lt;/li&gt;
-  &lt;li&gt;Productivity Guide：根据具体的操作，以及操作对应的频率，给出改进建议；&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://git-scm.com/book/zh/v1&quot;&gt;Pro Git&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://rogerdudler.github.io/git-guide/index.zh.html&quot;&gt;git - 简明指南&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://marklodato.github.io/visual-git-guide/index-zh-cn.html&quot;&gt;图解Git&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.cnblogs.com/lookenwu/p/3925308.html&quot;&gt;快学Git&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;section-1&quot;&gt;首次登录，几个窗口&lt;/h2&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th style=&quot;text-align: left&quot;&gt;快捷操作&lt;/th&gt;
-      &lt;th style=&quot;text-align: left&quot;&gt;说明&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;alt + 1&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;Open Project View&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;ctrl + -&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt; &lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;双击&lt;code&gt;shift&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;search everywhere&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;ctrl + shift + N&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;open a file by name&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;ctrl + shift + A&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;Find Action（什么意思？）&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;ctrl + E&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;open recent files&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;alt + Home&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;open Navigation Bar&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;alt + F4&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;关闭窗口&lt;em&gt;（Windows 系统自带）&lt;/em&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;ESC&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;光标聚焦，返回到Edit窗口&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;shift + ESC&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;光标聚焦返回到Edit窗口，同时关闭其他窗口&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;shift + F10&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;运行 main&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;shift + F9&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;Debug方式运行main&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;alt + Enter&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;显示出错信息的提示&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;alt + Right/Left&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;左右切换当前Edit View中的窗口&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;ctrl + alt + U&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;show Diagram&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;&lt;code&gt;ctrl + alt + shift + U&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;show Diagram popup&lt;em&gt;(新窗口中打开Diagram关系图)&lt;/em&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;几点疑问：&lt;/p&gt;
+&lt;p&gt;几个结果：&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;如何在编辑窗口中，关闭一个打开的java文件；&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;ctrl + n&lt;/code&gt;和&lt;code&gt;ctrl + shift + n&lt;/code&gt;两个命令都能按照name来查找class，有什么区别？&lt;/li&gt;
+  &lt;li&gt;快学Git：git相关的基本操作，不涉及过多原理；&lt;/li&gt;
+  &lt;li&gt;详细整理Git：侧重Git的原理，以及常见场景下，Git的用法；&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;几点情况：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;打开Project Structure，两种方式：
-    &lt;ul&gt;
-      &lt;li&gt;Projcet View中&lt;code&gt;F4&lt;/code&gt;；&lt;/li&gt;
-      &lt;li&gt;&lt;code&gt;ctrl + alt + shift + S&lt;/code&gt;；&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;创建class、package、Directory等，快捷操作：
-    &lt;ul&gt;
-      &lt;li&gt;&lt;code&gt;alt + Insert&lt;/code&gt;；&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;特别说明&lt;/strong&gt;：IntelliJ IDEA中只要有list列表，就可以直接输入查询&lt;/p&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>Linux命令：chkconfig</title>
-     <link href="http://ningg.github.com/linux-cmd-chkconfig"/>
-     <updated>2014-12-17T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/linux-cmd-chkconfig</id>
-     <content type="html">&lt;p&gt;（未完成整理）&lt;/p&gt;
-
-&lt;p&gt;关注几个小问题：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;如何添加系统服务？&lt;/li&gt;
-  &lt;li&gt;如何设置系统服务，开机自启动？&lt;/li&gt;
-  &lt;li&gt;如何删除系统服务？&lt;/li&gt;
-  &lt;li&gt;如何查看当前系统服务，以及对应服务的开机启动状态？&lt;/li&gt;
-  &lt;li&gt;如果系统服务已经存在，如何重新添加系统服务？即，要覆盖掉之前系统服务的配置？&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;chkconfig&quot;&gt;chkconfig&lt;/h2&gt;
-
-&lt;p&gt;通过man查询chkconfig的基本用法：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;chkconfig [--list] [--type type][name]
-chkconfig --add name
-chkconfig --del name
-chkconfig --override name
-chkconfig [--level levels] [--type type] name &amp;lt;on|off|reset|resetpriorities&amp;gt;
-chkconfig [--level levels] [--type type] name
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;列举几个例子：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# 添加服务jmxtrans
-chkconfig --add jmxtrans
-
-# 设置服务jmxtrans启动级别
-chkconfig --level 2345 jmxtrans on
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&quot;runlevel&quot;&gt;系统服务runlevel&lt;/h2&gt;
-
-&lt;p&gt;（doing…）&lt;/p&gt;
-
-&lt;p&gt;系统的runlevel到底什么用途？什么含义？&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# 查看当前系统的运行级别
-runlevel
-
-# 查看当前系统运行级别
-who -r
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;下面草草列一点别人的总结：&lt;/p&gt;
-
-&lt;p&gt;首先了解linux的运行级别有哪些？6个运行级别：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# 0 - 停机（千万不要把initdefault设置为0 ）
-# 1 - 单用户模式
-# 2 - 多用户，但是没有NFS
-# 3 - 完全多用户模式
-# 4 - 没有用到
-# 5 - X11
-# 6 - 重新启动（千万不要把initdefault设置为6 ）
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;对各个运行级的详细解释：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code&gt;0&lt;/code&gt;：为停机，机器关闭。&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;1&lt;/code&gt;：为单用户模式，就像Win9x下的安全模式类似。&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;2&lt;/code&gt;：为多用户模式，但是没有NFS支持。&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;3&lt;/code&gt;：为完整的多用户模式，是标准的运行级。&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;4&lt;/code&gt;：一般不用，在一些特殊情况下可以用它来做一些事情。例如在笔记本电脑的电池用尽时，可以切换到这个模式来做一些设置。&lt;/li&gt;
-  &lt;li&gt;&lt;code&gt;5&lt;/code&gt;：就是X11，进到X Window系统了。&lt;/li&gt;
-  &lt;li&gt;
-    &lt;p&gt;&lt;code&gt;6&lt;/code&gt;：为重启，运行init 6机器就会重启。&lt;/p&gt;
-
-    &lt;p&gt;#修改级别
-  vi /etc/inittab
-  把id:3:initdefault:中的3改为相应的级别&lt;/p&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;每次系统开机的时候，都会根据不同的runlevel级别启动不同的服务。运行&lt;code&gt;chkconfig --list&lt;/code&gt;可以查看所有服务在不同运行级别下的启动状况。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;疑问&lt;/strong&gt;：几个疑问，写一下：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;如何查看当前系统runlevel？&lt;/li&gt;
-  &lt;li&gt;如何更换当前系统的runlevel？&lt;/li&gt;
-  &lt;li&gt;更换runlevel时，需要重启吗？&lt;/li&gt;
-  &lt;li&gt;服务器一旦启动，则runlevel就固定了？&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;特别说明&lt;/strong&gt;：Linux下的run level很重要，要分析其产生原因、使用方式。&lt;/p&gt;
-
-&lt;h2 id=&quot;linux&quot;&gt;Linux下系统服务的含义？&lt;/h2&gt;
-
-&lt;p&gt;（doing…）&lt;/p&gt;
-
-&lt;p&gt;（可以单独开一篇文章）&lt;/p&gt;
-
-&lt;p&gt;鸟哥私房菜（第三版）–第18章 认识系统服务（deamons）&lt;/p&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;参考来源&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://blog.csdn.net/youyu_buzai/article/details/3956845&quot;&gt;chkconfig命令&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://docs.oracle.com/cd/E37670_01/E41138/html/ol_runlevels.html&quot;&gt;About run levels&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.cnblogs.com/qmfsun/p/3847459.html&quot;&gt;chkconfig命令（集合）&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>JMX简介</title>
-     <link href="http://ningg.github.com/intro-jmx"/>
-     <updated>2014-12-17T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/intro-jmx</id>
-     <content type="html">&lt;p&gt;JMX是干什么的？为什么有JMX？
-JMX怎么用？
-Jconsole怎么配合？
-怎么与Jmxtrans配合？（本质就是使用Jmxtrans的作用，如何安装、使用）&lt;/p&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;分析&lt;/h2&gt;
-
-&lt;p&gt;本段大概说一下，面对JMX这一JDK中重要的一个模块，自己认为较为高效的学习思路。上&lt;a href=&quot;http://www.oracle.com/technetwork/java/javase/documentation/index.html&quot;&gt;官网&lt;/a&gt;，再到&lt;a href=&quot;http://docs.oracle.com/javase/8/&quot;&gt;Java SE Technical Documentation&lt;/a&gt;，再到&lt;a href=&quot;http://docs.oracle.com/javase/tutorial/tutorialLearningPaths.html&quot;&gt;Tutorial&lt;/a&gt;中找到JMX的教程；同时，也可以在&lt;a href=&quot;http://docs.oracle.com/javase/8/docs/&quot;&gt;Java SE Documentation&lt;/a&gt;中直接点击&lt;a href=&quot;http://docs.oracle.com/javase/8/docs/technotes/guides/jmx/index.html&quot;&gt;JMX&lt;/a&gt;即可。当然，上面锁定jmx信息源的方法并不唯一，最简单的方法，直接在google上检索JMX关键字也可以找到官网对JMX的&lt;a href=&quot;http://www.oracle.com/technetwork/java/javase/tech/javamanagement-140525.html&quot;&gt;详细介绍&lt;/a&gt;。&lt;/p&gt;
-
-&lt;h2 id=&quot;jmx&quot;&gt;JMX是做什么的？&lt;/h2&gt;
-
-&lt;p&gt;The JMX technology provides the tools for building distributed, Web-based, modular and dynamic solutions for managing and monitoring devices, applications, and service-driven networks. By design, this standard is suitable for adapting legacy systems, implementing new management and monitoring solutions, and plugging into those of the future. &lt;/p&gt;
-
-&lt;p&gt;Starting with the J2SE platform 5.0, JMX technology is included in the Java SE platform. Please see the JMX documentation for the J2SE 5.0 and Java SE 6 platforms.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：JMX（Java Management eXtensions）用于监控系统运行状态。&lt;/p&gt;
-
-&lt;h2 id=&quot;jmx-1&quot;&gt;JMX怎么用？&lt;/h2&gt;
-
-&lt;p&gt;JMX（Java Management eXtensions），涉及几个术语：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;MBeans：&lt;/li&gt;
-  &lt;li&gt;ObjectName：MBean name，或者是a pattern（用于匹配多个MBean name）；&lt;/li&gt;
-  &lt;li&gt;JMX agent：其中包含JMX connector；&lt;/li&gt;
-  &lt;li&gt;Remote Management：&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;mbeans&quot;&gt;MBeans&lt;/h3&gt;
-
-&lt;h3 id=&quot;objectname&quot;&gt;ObjectName&lt;/h3&gt;
-
-&lt;p&gt;参考来源：&lt;a href=&quot;http://www.oracle.com/technetwork/java/javase/tech/best-practices-jsp-136021.html&quot;&gt;http://www.oracle.com/technetwork/java/javase/tech/best-practices-jsp-136021.html&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;格式：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;domain: key-property-list
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;For example:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;com.sun.someapp:type=Whatsit,name=25
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;简要说几点注意事项：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;空格是有含义的：Spaces are significant everywhere in an Object Name. Do not write type=Thread, name=DGC (with a space after the comma) because it will be interpreted as having a key called “  name”, with a leading space in the name.&lt;/li&gt;
-  &lt;li&gt;大小写敏感的：Object Names are case sensitive.&lt;/li&gt;
-  &lt;li&gt;properties顺序无关性：The order of key properties is not significant. &lt;/li&gt;
-  &lt;li&gt;key命名约束：The set of characters in a key is limited. It is recommended to stick to legal Java identifiers.&lt;/li&gt;
-  &lt;li&gt;value是否使用引号：The set of characters in a value is also limited. If special characters may occur, it is recommended that the value be quoted, using &lt;code&gt;ObjectName.quote&lt;/code&gt;.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;In a pattern, the key-property-list can have the same form as just described; or it can be a single &lt;code&gt;*&lt;/code&gt;; or it can be &lt;code&gt;empty&lt;/code&gt; (equivalent to a &lt;code&gt;*&lt;/code&gt;); or it can be a list followed by &lt;code&gt;,*&lt;/code&gt;. These forms match Object Names that have the exact key properties given (if any) plus any arbitrary other key properties. For example, &lt;code&gt;*:type=Thread,*&lt;/code&gt; matches &lt;code&gt;somedomain:type=Thread&lt;/code&gt; and &lt;code&gt;somedomain:type=Thread,name=DGC&lt;/code&gt;.&lt;/p&gt;
-
-&lt;h2 id=&quot;jmx-2&quot;&gt;JMX基本原理&lt;/h2&gt;
-
-&lt;p&gt;JMX的基本原理，基本框架图，有没有？这个让我费了一番精力，最后发现JMX的官方specification中有最权威的插图，言简意赅、深入浅出，看来今后也要关注官网的Specification。&lt;/p&gt;
-
-&lt;p&gt;JMX 1.2 specification：&lt;a href=&quot;http://jcp.org/en/jsr/detail?id=003&quot;&gt;http://jcp.org/en/jsr/detail?id=003&lt;/a&gt;&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/intro-jmx/jmx-agent-arch.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;JMX agent的作用是什么？其与JMX有什么关系？&lt;/p&gt;
+&lt;p&gt;注：在之前的&lt;a href=&quot;/project-flume-ng-extends-source&quot;&gt;一篇文章&lt;/a&gt;中也涉及过Git的使用。&lt;/p&gt;
 
 &lt;h2 id=&quot;section-1&quot;&gt;参考来源&lt;/h2&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://docs.oracle.com/javase/8/docs/&quot;&gt;Java Platform Standard Edition 8 Documentation&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://docs.oracle.com/javase/8/&quot;&gt;Java Platform Standard Edition (Java SE) 8&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://git-scm.com/book/zh/v1&quot;&gt;Pro Git&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://rogerdudler.github.io/git-guide/index.zh.html&quot;&gt;git - 简明指南&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://marklodato.github.io/visual-git-guide/index-zh-cn.html&quot;&gt;图解Git&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.cnblogs.com/lookenwu/p/3925308.html&quot;&gt;快学Git&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;h2 id=&quot;section-2&quot;&gt;闲谈&lt;/h2&gt;
 
-&lt;p&gt;使用Java有几年了，开始的时候看Java SE API，后来看一些经典的书籍，但是一直没有沉下心来去读一下Java官网的文档，这个才是信息源，借这个机会看了一点，今后遇到问题，还是要多到官网上看看。&lt;/p&gt;
+&lt;p&gt;前一段时间得知消息 &lt;code&gt;**&lt;/code&gt; 队伍，逐渐兵强马壮，并且被邀请上了一个山头，做起了事业；细看他们的做法，他们队长在开始的时候，相信 &lt;code&gt;人生要独辟蹊径&lt;/code&gt; 这么个说法，然后，在做事情的时候，他们战略立意为：时间紧迫，做好事情，抓住机会，成立队伍，把事情做好、做丰富，合适机会出现的时候，就做事业。实际上一年半之前，我们队伍与 &lt;code&gt;**&lt;/code&gt; 队伍做的事情是相似的，但我们战略上没有定位，基本想法是：有事情做就把事情做好，一起做事，一起吃肉。最后，毕业了，我们的小队伍，散伙，各自谋生。当然，我认为造成当前与 &lt;code&gt;**&lt;/code&gt; 队伍巨大差异的原因有很多，但我们战略立意太低了，没有战略定位，到头来，就成了混日子，能偷懒的时候，都偷懒了，一年回头一看，啥事情都没做成。我作为队伍的大佬之一，对此反思，下次有机会跟当时队伍大佬 &lt;code&gt;2W&lt;/code&gt; 见面了，好好扯扯这个事。&lt;/p&gt;
+
+&lt;p&gt;上面为什么提到这个战略定位呢？是想说无论事情大小，都要有个清晰、适当的战略目标，以此避免因为短期视野局限，迷失方向，浪费精力；时间太宝贵了，关键不可逆啊。&lt;/p&gt;
 
 </content>
    </entry>
    
    <entry>
-     <title>Storm：Setting up a Storm cluster</title>
-     <link href="http://ningg.github.com/setting-up-a-storm-cluster"/>
-     <updated>2014-12-14T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/setting-up-a-storm-cluster</id>
-     <content type="html">&lt;p&gt;This page outlines the steps for getting a Storm cluster up and running. If you’re on AWS, you should check out the &lt;a href=&quot;https://github.com/nathanmarz/storm-deploy/wiki&quot;&gt;storm-deploy&lt;/a&gt; project. &lt;a href=&quot;https://github.com/nathanmarz/storm-deploy/wiki&quot;&gt;storm-deploy&lt;/a&gt; completely automates the provisioning, configuration, and installation of Storm clusters on EC2. It also sets up Ganglia for you so you can monitor CPU, disk, and network usage.&lt;/p&gt;
+     <title>产品分析、设计基本流程</title>
+     <link href="http://ningg.github.com/create-effective-product-protype"/>
+     <updated>2015-03-25T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/create-effective-product-protype</id>
+     <content type="html">&lt;blockquote&gt;
+  &lt;p&gt;原文地址：&lt;a href=&quot;http://ued.taobao.org/blog/2014/05/%E9%AB%98%E6%95%88%E8%BE%93%E5%87%BA%E7%A7%BB%E5%8A%A8app%E4%BA%A7%E5%93%81%E5%8E%9F%E5%9E%8B/&quot;&gt;高效输出移动app产品原型&lt;/a&gt;。本文在原文基础上，进行适当的调整，添加了自己的理解。&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;p&gt;If you run into difficulties with your Storm cluster, first check for a solution is in the &lt;a href=&quot;http://storm.apache.org/documentation/Troubleshooting.html&quot;&gt;Troubleshooting&lt;/a&gt; page. Otherwise, email the mailing list.&lt;/p&gt;
+&lt;p&gt;目标：输出移动 app 产品原型，高效的实现这个目标。&lt;/p&gt;
 
-&lt;p&gt;Here’s a summary of the steps for setting up a Storm cluster:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;Set up a Zookeeper cluster&lt;/li&gt;
-  &lt;li&gt;Install dependencies on Nimbus and worker machines&lt;/li&gt;
-  &lt;li&gt;Download and extract a Storm release to Nimbus and worker machines&lt;/li&gt;
-  &lt;li&gt;Fill in mandatory configurations into &lt;code&gt;storm.yaml&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;Launch daemons under supervision using “storm” script and a supervisor of your choice&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;set-up-a-zookeeper-cluster&quot;&gt;Set up a Zookeeper cluster&lt;/h2&gt;
-
-&lt;p&gt;Storm uses Zookeeper for coordinating the cluster. Zookeeper &lt;strong&gt;is not&lt;/strong&gt; used for message passing, so the load Storm places on Zookeeper is quite low. Single node Zookeeper clusters should be sufficient for most cases, but if you want failover or are deploying large Storm clusters you may want larger Zookeeper clusters. Instructions for deploying Zookeeper are &lt;a href=&quot;http://zookeeper.apache.org/doc/r3.3.3/zookeeperAdmin.html&quot;&gt;here&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;A few notes about Zookeeper deployment:&lt;/p&gt;
-
-&lt;ol&gt;
-  &lt;li&gt;It’s critical that you run Zookeeper under supervision, since Zookeeper is fail-fast and will exit the process if it encounters any error case. See &lt;a href=&quot;http://zookeeper.apache.org/doc/r3.3.3/zookeeperAdmin.html#sc_supervision&quot;&gt;here&lt;/a&gt; for more details.&lt;/li&gt;
-  &lt;li&gt;It’s critical that you set up a cron to compact Zookeeper’s data and transaction logs. The Zookeeper daemon does not do this on its own, and if you don’t set up a cron, Zookeeper will quickly run out of disk space. See &lt;a href=&quot;http://zookeeper.apache.org/doc/r3.3.3/zookeeperAdmin.html#sc_maintenance&quot;&gt;here&lt;/a&gt; for more details.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;h2 id=&quot;install-dependencies-on-nimbus-and-worker-machines&quot;&gt;Install dependencies on Nimbus and worker machines&lt;/h2&gt;
-
-&lt;p&gt;Next you need to install Storm’s dependencies on Nimbus and the worker machines. These are:&lt;/p&gt;
+&lt;p&gt;几个特点：&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;Java 6&lt;/li&gt;
-  &lt;li&gt;Python 2.6.6&lt;/li&gt;
+  &lt;li&gt;产品思路，清晰&lt;/li&gt;
+  &lt;li&gt;协同合作，顺畅&lt;/li&gt;
+  &lt;li&gt;素材元素，齐备&lt;/li&gt;
+  &lt;li&gt;体验感受，真实 &lt;em&gt;（做出的原型）&lt;/em&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;These are the versions of the dependencies that have been tested with Storm. Storm may or may not work with different versions of Java and/or Python.&lt;/p&gt;
+&lt;p&gt;具体操作步骤：&lt;/p&gt;
 
-&lt;h2 id=&quot;download-and-extract-a-storm-release-to-nimbus-and-worker-machines&quot;&gt;Download and extract a Storm release to Nimbus and worker machines&lt;/h2&gt;
+&lt;ul&gt;
+  &lt;li&gt;产品流程图，界面为单位&lt;/li&gt;
+  &lt;li&gt;基础原型控件，可修改&lt;/li&gt;
+  &lt;li&gt;动态原型，可点击&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;Next, download a Storm release and extract the zip file somewhere on Nimbus and each of the worker machines. The Storm releases can be downloaded &lt;a href=&quot;http://storm.apache.org/downloads.html&quot;&gt;from here&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;下文将分开来说上面的 3 个操作步骤。&lt;/p&gt;
 
-&lt;h2 id=&quot;fill-in-mandatory-configurations-into-stormyaml&quot;&gt;Fill in mandatory configurations into storm.yaml&lt;/h2&gt;
+&lt;h2 id=&quot;section&quot;&gt;产品流程图，界面为单位&lt;/h2&gt;
 
-&lt;p&gt;The Storm release contains a file at &lt;code&gt;conf/storm.yaml&lt;/code&gt; that configures the Storm daemons. You can see the default configuration values &lt;a href=&quot;https://github.com/apache/incubator-storm/blob/master/conf/defaults.yaml&quot;&gt;here&lt;/a&gt;. &lt;code&gt;storm.yaml&lt;/code&gt; overrides anything in &lt;code&gt;defaults.yaml&lt;/code&gt;. There’s a few configurations that are mandatory to get a working cluster:&lt;/p&gt;
+&lt;p&gt;高校输出，首先要保证产品的整体思路要正确，这点可以从产品流程中体现出来。移动产品需要做到聚焦，因为手机界面的大小，用户的碎片化使用等等，所以一个界面上必然不可能出现太多的内容和行动点，这就保证了我们可以用最简洁的方式来画流程。以界面为单位，定义 &lt;code&gt;界面标题&lt;/code&gt; 和 &lt;code&gt;主要内容&lt;/code&gt;，如下图所示：&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;storm.zookeeper.servers&lt;/strong&gt;: This is a list of the hosts in the Zookeeper cluster for your Storm cluster. It should look something like:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/create-effective-product-protype/single-element.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;storm.zookeeper.servers:
-  - &quot;111.222.333.444&quot;
-  - &quot;555.666.777.888&quot;
-&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;以上述页面为单位，来画流程，下面以一个app的登录注册为例：&lt;/p&gt;
 
-&lt;p&gt;If the &lt;strong&gt;port&lt;/strong&gt; that your Zookeeper cluster uses is different than the default, you should set &lt;strong&gt;storm.zookeeper.port&lt;/strong&gt; as well.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/create-effective-product-protype/complete-flow-chart.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;storm.local.dir&lt;/strong&gt;: The Nimbus and Supervisor daemons require a directory on the local disk to store small amounts of state (like jars, confs, and things like that). You should create that directory on each machine, give it proper permissions, and then fill in the directory location using this config. For example:&lt;/p&gt;
+&lt;p&gt;上述的产品流程图，有几个目的：&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;storm.local.dir: &quot;/mnt/storm&quot;
-&lt;/code&gt;&lt;/pre&gt;
+&lt;ul&gt;
+  &lt;li&gt;快速了解产品有多少页面；&lt;/li&gt;
+  &lt;li&gt;检验用户路径是否太长；&lt;/li&gt;
+  &lt;li&gt;形式简单，方便讨论修改；&lt;em&gt;（visio中能够批注吗？留下痕迹）&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;&lt;strong&gt;nimbus.host&lt;/strong&gt;: The worker nodes need to know which machine is the master in order to download topology jars and confs. For example:&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;疑问&lt;/strong&gt;：手机界面小，需要聚焦，因此以 &lt;code&gt;界面&lt;/code&gt; 为单位，绘制最简洁的流程；那 PC 端的产品流程图，如何画？&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;nimbus.host: &quot;111.222.333.44&quot;
-&lt;/code&gt;&lt;/pre&gt;
+&lt;h2 id=&quot;section-1&quot;&gt;基础原型控件，可修改&lt;/h2&gt;
 
-&lt;p&gt;&lt;strong&gt;supervisor.slots.ports&lt;/strong&gt;: For each worker machine, you configure how many workers run on that machine with this config. Each worker uses a single port for receiving messages, and this setting defines which ports are open for use. If you define five ports here, then Storm will allocate up to five workers to run on this machine. If you define three ports, Storm will only run up to three. By default, this setting is configured to run 4 workers on the ports &lt;code&gt;6700&lt;/code&gt;, &lt;code&gt;6701&lt;/code&gt;, &lt;code&gt;6702&lt;/code&gt;, and &lt;code&gt;6703&lt;/code&gt;. For example:&lt;/p&gt;
+&lt;p&gt;如何快速产出高保真原型？一套备用的基础原型控件，必不可少。大部分设计师一般利用axure来完成产品原型，所以从协同合作的角度，本文专门在axure里制作了整套最常用的移动产品组控件。设计师只要改文字，改颜色，摆位置就可以完成简单的高保真原型。基础组控件截图如下：&lt;a href=&quot;http://pan.baidu.com/s/1kTjy1Xd&quot;&gt;下载地址&lt;/a&gt;&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;supervisor.slots.ports:
-	- 6700
-	- 6701
-	- 6702
-	- 6703
-&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;img src=&quot;/images/create-effective-product-protype/gbz03.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;h2 id=&quot;launch-daemons-under-supervision-using-storm-script-and-a-supervisor-of-your-choice&quot;&gt;Launch daemons under supervision using “storm” script and a supervisor of your choice&lt;/h2&gt;
+&lt;p&gt;以此控件为例子，在之前提到的app登录注册例子，快速组件高保真原型，如下图：&lt;/p&gt;
 
-&lt;p&gt;The last step is to launch all the Storm daemons. It is critical that you run each of these daemons under supervision. Storm is a &lt;strong&gt;fail-fast&lt;/strong&gt; system which means the processes will halt whenever an unexpected error is encountered. Storm is designed so that it can safely halt at any point and recover correctly when the process is restarted. This is why Storm keeps no state in-process – if Nimbus or the Supervisors restart, the running topologies are unaffected. Here’s how to run the Storm daemons:&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/create-effective-product-protype/gbz04.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;ol&gt;
-  &lt;li&gt;&lt;strong&gt;Nimbus&lt;/strong&gt;: Run the command &lt;code&gt;bin/storm nimbus&lt;/code&gt; under supervision on the master machine.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Supervisor&lt;/strong&gt;: Run the command &lt;code&gt;bin/storm supervisor&lt;/code&gt; under supervision on each worker machine. The supervisor daemon is responsible for starting and stopping worker processes on that machine.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;UI&lt;/strong&gt;: Run the Storm UI (a site you can access from the browser that gives diagnostics on the cluster and topologies) by running the command &lt;code&gt;bin/storm ui&lt;/code&gt; under supervision. The UI can be accessed by navigating your web browser to &lt;code&gt;http://{nimbus host}:8080&lt;/code&gt;.&lt;/li&gt;
-&lt;/ol&gt;
+&lt;p&gt;关于设计上很多细节，大家可以查考书籍&lt;a href=&quot;http://product.dangdang.com/23434009.html&quot;&gt;方寸指间——移动设计实战手册&lt;/a&gt;，里面涉及到很多最基本的移动设计知识。&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：上述启动Storm UI时，需要在nimbus上启动吗？还是在supervisor上也可以？&lt;strong&gt;RE&lt;/strong&gt;：只要是Storm cluster内的节点，执行&lt;code&gt;bin/storm ui&lt;/code&gt;就可以在当前节点上启动Storm UI。&lt;/p&gt;
+&lt;h2 id=&quot;section-2&quot;&gt;动态原型，可点击&lt;/h2&gt;
 
-&lt;p&gt;As you can see, running the daemons is very straightforward. The daemons will log to the &lt;code&gt;logs/&lt;/code&gt; directory in wherever you extracted the Storm release.&lt;/p&gt;
+&lt;p&gt;完成高保真原型，根据流程图，可以很方便制作出在手机上可体验的动态效果，让产品人员或用户真实感受app实际的效果。这里推荐一个特别简单的方法，登录&lt;a href=&quot;https://www.flinto.com/&quot;&gt;Flinto&lt;/a&gt;，完成注册，将高保真原型以图片的方式导入，通过链接和专长方式选择，就可以很方便地在手机上查看。网站提供的指导比较具体，大家可以直接查看。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/create-effective-product-protype/gbz06.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
 </content>
    </entry>
    
    <entry>
-     <title>Storm：Running topologies on a production cluster</title>
-     <link href="http://ningg.github.com/running-topol-on-a-prod-cluster"/>
-     <updated>2014-12-13T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/running-topol-on-a-prod-cluster</id>
-     <content type="html">&lt;p&gt;Running topologies on a production cluster is similar to running in &lt;a href=&quot;http://storm.apache.org/documentation/Local-mode.html&quot;&gt;Local mode&lt;/a&gt;. Here are the steps:&lt;/p&gt;
+     <title>Web相关的Specifications</title>
+     <link href="http://ningg.github.com/web-application-specifications"/>
+     <updated>2015-03-24T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/web-application-specifications</id>
+     <content type="html">&lt;blockquote&gt;
+  &lt;p&gt;原文地址：&lt;a href=&quot;http://wiki.apache.org/tomcat/Specifications&quot;&gt;Tomcat - Specifications&lt;/a&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;p&gt;&lt;strong&gt;Define the topology&lt;/strong&gt; (Use &lt;a href=&quot;http://storm.apache.org/apidocs/backtype/storm/topology/TopologyBuilder.html&quot;&gt;TopologyBuilder&lt;/a&gt; if defining using Java)&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Use &lt;a href=&quot;http://storm.apache.org/apidocs/backtype/storm/StormSubmitter.html&quot;&gt;StormSubmitter&lt;/a&gt; to submit the topology to the cluster&lt;/strong&gt;. &lt;code&gt;StormSubmitter&lt;/code&gt; takes as input the &lt;code&gt;name&lt;/code&gt; of the topology, a &lt;code&gt;configuration&lt;/code&gt; for the topology, and the topology itself. For example:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;Config conf = new Config();
-conf.setNumWorkers(20);
-conf.setMaxSpoutPending(5000);
-StormSubmitter.submitTopology(&quot;mytopology&quot;, conf, topology);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;strong&gt;Create a &lt;code&gt;jar&lt;/code&gt;&lt;/strong&gt; containing your code and all the dependencies of your code (except for Storm – the Storm jars will be added to the classpath on the worker nodes).&lt;/p&gt;
-
-&lt;p&gt;If you’re using Maven, the &lt;a href=&quot;http://maven.apache.org/plugins/maven-assembly-plugin/&quot;&gt;Maven Assembly Plugin&lt;/a&gt; can do the packaging for you. Just add this to your &lt;code&gt;pom.xml&lt;/code&gt;:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;  &amp;lt;plugin&amp;gt;
-	&amp;lt;artifactId&amp;gt;maven-assembly-plugin&amp;lt;/artifactId&amp;gt;
-	&amp;lt;configuration&amp;gt;
-	  &amp;lt;descriptorRefs&amp;gt;  
-		&amp;lt;descriptorRef&amp;gt;jar-with-dependencies&amp;lt;/descriptorRef&amp;gt;
-	  &amp;lt;/descriptorRefs&amp;gt;
-	  &amp;lt;archive&amp;gt;
-		&amp;lt;manifest&amp;gt;
-		  &amp;lt;mainClass&amp;gt;com.path.to.main.Class&amp;lt;/mainClass&amp;gt;
-		&amp;lt;/manifest&amp;gt;
-	  &amp;lt;/archive&amp;gt;
-	&amp;lt;/configuration&amp;gt;
-  &amp;lt;/plugin&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Then run &lt;code&gt;mvn assembly:assembly&lt;/code&gt; to get an appropriately packaged jar. Make sure you &lt;a href=&quot;http://maven.apache.org/plugins/maven-assembly-plugin/examples/single/including-and-excluding-artifacts.html&quot;&gt;exclude&lt;/a&gt; the Storm jars since the cluster already has Storm on the classpath.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;Submit the topology&lt;/strong&gt; to the cluster using the &lt;code&gt;storm&lt;/code&gt; client, specifying the path to your jar, the classname to run, and any arguments it will use:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;storm jar path/to/allmycode.jar org.me.MyTopology arg1 arg2 arg3
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;code&gt;storm jar&lt;/code&gt; will submit the jar to the cluster and configure the &lt;code&gt;StormSubmitter&lt;/code&gt; class to talk to the right cluster. In this example, after uploading the jar, &lt;code&gt;storm jar&lt;/code&gt; calls the main function on &lt;code&gt;org.me.MyTopology&lt;/code&gt; with the arguments “arg1”, “arg2”, and “arg3”.&lt;/p&gt;
-
-&lt;p&gt;You can find out how to configure your &lt;code&gt;storm&lt;/code&gt; client to talk to a Storm cluster on &lt;a href=&quot;http://storm.apache.org/documentation/Setting-up-development-environment.html&quot;&gt;Setting up development environment&lt;/a&gt;.&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;notes(ningg)&lt;/strong&gt;：说两点：&lt;/p&gt;
+&lt;p&gt;列一下目录：&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;本地Storm充当client向远端cluster提交topol时，只需要在本地Storm的&lt;code&gt;storm.yaml&lt;/code&gt;文件中配置&lt;code&gt;nimbus.host:123.45.678.890&lt;/code&gt;即可，具体参考：&lt;a href=&quot;/storm-setting-up-dev-env/&quot;&gt;Storm：setting up a development environment&lt;/a&gt;；&lt;/li&gt;
-  &lt;li&gt;具体在windows的CMD下，我无法正确执行&lt;code&gt;storm jar&lt;/code&gt;命令，转而，我在windows下安装了Cygwin，并在其中执行&lt;code&gt;storm jar ...&lt;/code&gt;命令，向远端的Storm cluster提交topol以及依赖的代码；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;common-configurations&quot;&gt;Common configurations&lt;/h2&gt;
-
-&lt;p&gt;There are a variety of configurations you can set per topology. A list of all the configurations you can set can be found here. The ones prefixed with “TOPOLOGY” can be overridden on a topology-specific basis (the other ones are cluster configurations and cannot be overridden). Here are some common ones that are set for a topology:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Config.TOPOLOGY_WORKERS&lt;/strong&gt;: This sets the number of worker processes to use to execute the topology. For example, if you set this to 25, there will be 25 Java processes across the cluster executing all the tasks. If you had a combined 150 parallelism across all components in the topology, each worker process will have 6 tasks running within it as threads.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Config.TOPOLOGY_ACKERS&lt;/strong&gt;: This sets the number of tasks that will track tuple trees and detect when a spout tuple has been fully processed. Ackers are an integral part of Storm’s reliability model and you can read more about them on &lt;a href=&quot;http://storm.apache.org/documentation/Guaranteeing-message-processing.html&quot;&gt;Guaranteeing message processing&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Config.TOPOLOGY_MAX_SPOUT_PENDING&lt;/strong&gt;: This sets the maximum number of spout tuples that can be pending on a single spout task at once (pending means the tuple has not been acked or failed yet). It is highly recommended you set this config to prevent queue explosion.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Config.TOPOLOGY_MESSAGE_TIMEOUT_SECS&lt;/strong&gt;: This is the maximum amount of time a spout tuple has to be fully completed before it is considered failed. This value defaults to 30 seconds, which is sufficient for most topologies. See &lt;a href=&quot;http://storm.apache.org/documentation/Guaranteeing-message-processing.html&quot;&gt;Guaranteeing message processing&lt;/a&gt; for more information on how Storm’s reliability model works.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Config.TOPOLOGY_SERIALIZATIONS&lt;/strong&gt;: You can register more serializers to Storm using this config so that you can use custom types within tuples.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;killing-a-topology&quot;&gt;Killing a topology&lt;/h2&gt;
-
-&lt;p&gt;To kill a topology, simply run:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;storm kill {stormname}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Give the same name to &lt;code&gt;storm kill&lt;/code&gt; as you used when submitting the topology.&lt;/p&gt;
-
-&lt;p&gt;Storm won’t kill the topology immediately. Instead, it deactivates all the spouts so that they don’t emit any more tuples, and then Storm waits &lt;code&gt;Config.TOPOLOGY_MESSAGE_TIMEOUT_SECS&lt;/code&gt; seconds before destroying all the workers. This gives the topology enough time to complete any tuples it was processing when it got killed.&lt;/p&gt;
-
-&lt;h2 id=&quot;updating-a-running-topology&quot;&gt;Updating a running topology&lt;/h2&gt;
-
-&lt;p&gt;To update a running topology, the only option currently is to kill the current topology and resubmit a new one. A planned feature is to implement a &lt;code&gt;storm swap&lt;/code&gt; command that swaps a running topology with a new one, ensuring minimal downtime and no chance of both topologies processing tuples at the same time.&lt;/p&gt;
-
-&lt;h2 id=&quot;monitoring-topologies&quot;&gt;Monitoring topologies&lt;/h2&gt;
-
-&lt;p&gt;The best place to monitor a topology is using the &lt;code&gt;Storm UI&lt;/code&gt;. The Storm UI provides information about errors happening in tasks and fine-grained stats on the throughput and latency performance of each component of each running topology.&lt;/p&gt;
-
-&lt;p&gt;You can also look at the worker logs on the cluster machines.&lt;/p&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>jmxtrans入门</title>
-     <link href="http://ningg.github.com/intro-to-jmxtrans"/>
-     <updated>2014-12-12T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/intro-to-jmxtrans</id>
-     <content type="html">&lt;p&gt;（doing…）&lt;/p&gt;
-
-&lt;p&gt;几个方面：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;jmxtrans有什么作用？&lt;/li&gt;
-  &lt;li&gt;如何安装？
+  &lt;li&gt;Web Application Specifications
     &lt;ul&gt;
-      &lt;li&gt;从&lt;a href=&quot;https://github.com/jmxtrans/jmxtrans/downloads&quot;&gt;jmxtrans download&lt;/a&gt;下载了一个rpm包，下文将参考&lt;a href=&quot;https://github.com/jmxtrans/jmxtrans/wiki/Installation&quot;&gt;jmxtrans Installation&lt;/a&gt;来安装jmxtrans；&lt;/li&gt;
-      &lt;li&gt;&lt;/li&gt;
+      &lt;li&gt;Overview&lt;/li&gt;
+      &lt;li&gt;Java Servlet Specifications&lt;/li&gt;
+      &lt;li&gt;JavaServer Pages and Expression Language Specifications&lt;/li&gt;
+      &lt;li&gt;Java API for WebSocket&lt;/li&gt;
+      &lt;li&gt;See Also&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-  &lt;li&gt;基本使用？（通过jmxtrans向Ganglia发送数据）
+  &lt;li&gt;Protocol Specifications
     &lt;ul&gt;
-      &lt;li&gt;基本原理&lt;/li&gt;
-      &lt;li&gt;jmxtrans涉及的配置&lt;/li&gt;
+      &lt;li&gt;HTTP
+        &lt;ul&gt;
+          &lt;li&gt;Related Specifications&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;AJP&lt;/li&gt;
+      &lt;li&gt;SPDY&lt;/li&gt;
+      &lt;li&gt;HTTP/2&lt;/li&gt;
+      &lt;li&gt;WebSocket&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;installing-the-rpm&quot;&gt;Installing the RPM&lt;/h2&gt;
+</content>
+   </entry>
+   
+   <entry>
+     <title>Java Servlet Specifications 3.0 - JSR315</title>
+     <link href="http://ningg.github.com/java-servlet-specifications-3.0-jsr315"/>
+     <updated>2015-03-24T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/java-servlet-specifications-3.0-jsr315</id>
+     <content type="html">&lt;p&gt;参考&lt;a href=&quot;http://wiki.apache.org/tomcat/Specifications&quot;&gt;Tomcat - Specifications&lt;/a&gt;中整理的内容，直接对Servlet 3.0先来一个整体的概述：&lt;/p&gt;
 
-&lt;p&gt;There is a &lt;code&gt;.rpm&lt;/code&gt; file which you can download and install on an Fedora/CentOS/RHEL machine. This makes setting up the application trivial and is highly recommended. It also makes upgrades painless as well.&lt;/p&gt;
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Spec versions&lt;/td&gt;
+      &lt;td&gt;Servlet 3.0&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Main page&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;http://jcp.org/aboutJava/communityprocess/final/jsr315/index.html&quot;&gt;JSR315&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Online Javadoc&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;http://docs.oracle.com/javaee/6/api/&quot;&gt;Java EE 6 API&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
 
-&lt;p&gt;To install it:&lt;/p&gt;
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Stable:&lt;/td&gt;
+      &lt;td&gt;Final Release&lt;/td&gt;
+      &lt;td&gt;Maintenance Release (Version 3.0 Rev a)&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Date:&lt;/td&gt;
+      &lt;td&gt;10 Dec, 2009&lt;/td&gt;
+      &lt;td&gt;6 Feb, 2011&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Download Page:&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;http://jcp.org/aboutJava/communityprocess/final/jsr315/index.html&quot;&gt;Overview&lt;/a&gt;，&lt;a href=&quot;http://download.oracle.com/otndocs/jcp/servlet-3.0-fr-eval-oth-JSpec/&quot;&gt;Direct Download&lt;/a&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;http://jcp.org/aboutJava/communityprocess/mrel/jsr315/index.html&quot;&gt;Overview&lt;/a&gt;，&lt;a href=&quot;http://download.oracle.com/otndocs/jcp/servlet-3.0-mrel-eval-oth-JSpec/&quot;&gt;Direct Download&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
 
-&lt;ol&gt;
-  &lt;li&gt;Download the &lt;a href=&quot;https://github.com/jmxtrans/jmxtrans/downloads&quot;&gt;.rpm package&lt;/a&gt;.&lt;/li&gt;
-  &lt;li&gt;As root: &lt;code&gt;rpm -i jmxtrans_239-0.noarch.rpm&lt;/code&gt; (replace the version number)&lt;/li&gt;
-  &lt;li&gt;Enter in the JVM heap size you want: &lt;code&gt;512 (megs)&lt;/code&gt; is the default. The more JVM’s you need to monitor, the more memory you will probably need. If you are getting OutOfMemoryError’s, then increase this value by editing &lt;code&gt;/etc/sysconfig/jmxtrans&lt;/code&gt;.&lt;/li&gt;
-&lt;/ol&gt;
-
-&lt;p&gt;Notes:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;The application is installed in: &lt;code&gt;/usr/share/jmxtrans&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;Configuration options are stored in: &lt;code&gt;/etc/sysconfig/jmxtrans&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;There is an init script in: &lt;code&gt;/etc/init.d/jmxtrans&lt;/code&gt; (this wraps the &lt;code&gt;jmxtrans.sh&lt;/code&gt; discussed below)&lt;/li&gt;
-  &lt;li&gt;Put your .json files into: &lt;code&gt;/var/lib/jmxtrans&lt;/code&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;running-jmx-transformer&quot;&gt;Running Jmx Transformer&lt;/h2&gt;
-
-&lt;p&gt;There is a &lt;code&gt;jmxtrans.sh&lt;/code&gt; script included with the distribution. This should be used to start the application running. If you read through the script, you will see that all of the options are customizable by exporting environment variables without having to edit the &lt;code&gt;.sh&lt;/code&gt; script. You can even create a &lt;code&gt;jmxtrans.conf&lt;/code&gt; file to put the options into so that you don’t need to setup environment variables yourself.&lt;/p&gt;
-
-&lt;p&gt;To run jmxtrans:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;./jmxtrans.sh start [optional path to one json file]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;To stop jmxtrans:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;./jmxtrans.sh stop
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Options you may want to configure:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;JSON_DIR - Location of your .json files. Defaults to ‘.’&lt;/li&gt;
-  &lt;li&gt;LOG_DIR - Location of where the log files get written. Defaults to ‘.’&lt;/li&gt;
-  &lt;li&gt;SECONDS_BETWEEN_RUNS - How often jobs run. Defaults to 60.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;上面这些参数都可以在&lt;code&gt;/etc/sysconfig/jmxtrans&lt;/code&gt;中进行配置；另外，上面通过shell方式启动jmxtrans没有问题，为了方便可以，可以将jmxtrans加入到系统服务，具体如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;[root@ningg ~]# chkconfig --add jmxtrans
-[root@ningg ~]# service start jmxtrans
-Starting jmxtrans: Cannot execute /usr/bin/jps -l!
-[root@ningg ~]# which jps
-/usr/java/default/bin/jps
-[root@ningg ~]# vim /etc/sysconfig/jmxtrans
-#增加JAVA_HOME的配置(与上面jps的位置对应)
-export JAVA_HOME=/usr/java/default
-[root@ningg ~]# service jmxtrans start
-Starting jmxtrans:                           [  OK  ]
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&quot;enabling-jmx-for-a-jvm&quot;&gt;Enabling JMX for a JVM&lt;/h2&gt;
-
-&lt;p&gt;In order to use jmxtrans, you must first enable Java Management Extensions (JMX) on your Java Virtual Machine (JVM). We recommend that you connect to Java 6 (or greater) JVM’s because there are improvements to the JMX protocol that we can take advantage of, such as wildcard (&lt;code&gt;*&lt;/code&gt;) queries.&lt;/p&gt;
-
-&lt;p&gt;For applications behind a firewall that do not need security, add these arguments to the startup of the JVM in order to enable remote JMX connections:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;-Dcom.sun.management.jmxremote.port=1105 \
--Dcom.sun.management.jmxremote.authenticate=false \
--Dcom.sun.management.jmxremote.ssl=false
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;You should set the port number to any free port number on your machine that is above 1024.&lt;/p&gt;
-
-&lt;p&gt;For more details on enabling the agent, please read:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://download.oracle.com/javase/6/docs/technotes/guides/management/agent.html&quot;&gt;JMX Agent Configuration&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://download.oracle.com/javase/6/docs/technotes/guides/management/&quot;&gt;Monitoring and Management&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;jconsole&quot;&gt;JConsole&lt;/h2&gt;
-
-&lt;p&gt;If you are going to use jmxtrans, it is helpful to gain an understanding of JConsole. This is a good visual tool for viewing attributes in a JVM. Using this tool will help you write your jmxtrans queries.&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://download.oracle.com/javase/6/docs/technotes/guides/management/jconsole.html&quot;&gt;JConsole Documentation&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;using-ant-vars&quot;&gt;Using Ant Vars&lt;/h2&gt;
-
-&lt;p&gt;Ant like variables could be used in json files since v239, so you could avoid hardcoding some values, like graphite servers.&lt;/p&gt;
-
-&lt;h3 id=&quot;before&quot;&gt;Before&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;{
-  &quot;servers&quot; : [ {
-    &quot;port&quot; : &quot;1099&quot;,
-    &quot;host&quot; : &quot;w2&quot;,
-    &quot;queries&quot; : [ {
-      &quot;obj&quot; : &quot;java.lang:type=Memory&quot;,
-      &quot;attr&quot; : [ &quot;HeapMemoryUsage&quot;, &quot;NonHeapMemoryUsage&quot; ],
-      &quot;outputWriters&quot; : [ {
-        &quot;@class&quot; : &quot;com.googlecode.jmxtrans.model.output.GraphiteWriter&quot;,
-        &quot;settings&quot; : {
-          &quot;port&quot; : 2003,
-          &quot;host&quot; : &quot;192.168.192.133&quot;
-        }
-      } ]
-    } ]
-  } ]
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;now&quot;&gt;Now&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;{
-  &quot;servers&quot; : [ {
-    &quot;port&quot; : &quot;${myserverport}&quot;,
-    &quot;host&quot; : &quot;${myserverhost}&quot;,
-    &quot;queries&quot; : [ {
-      &quot;obj&quot; : &quot;java.lang:type=Memory&quot;,
-      &quot;attr&quot; : [ &quot;HeapMemoryUsage&quot;, &quot;NonHeapMemoryUsage&quot; ],
-      &quot;outputWriters&quot; : [ {
-        &quot;@class&quot; : &quot;com.googlecode.jmxtrans.model.output.GraphiteWriter&quot;,
-        &quot;settings&quot; : {
-          &quot;port&quot; : &quot;${mygraphiteport}&quot;,
-          &quot;host&quot; : &quot;${mygraphitehost}&quot;
-        }
-      } ]
-    } ]
-  } ]
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;notice&quot;&gt;Notice&lt;/h3&gt;
-
-&lt;p&gt;Double-quotes (&lt;code&gt;&quot;&lt;/code&gt;) should be using even when providing int values, like port, it’s mandatory for StringResolver, String to Int conversion will be done internally.&lt;/p&gt;
-
-&lt;p&gt;Variables should be provided via &lt;code&gt;-D&lt;/code&gt; for example via &lt;code&gt;JMXTRANS_OPTS&lt;/code&gt; in &lt;code&gt;jmxtrans.conf&lt;/code&gt; :&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;JMXTRANS_OPTS=&quot;-Dmyserverport=1099 -Dmyserverhost=w2 -Dmygraphiteport=2003 -Dmygraphitehost=192.168.192.133&quot;
-&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;strong&gt;疑问&lt;/strong&gt;：JSR的两个版本&lt;code&gt;Final Release&lt;/code&gt;和&lt;code&gt;Maintenance Release&lt;/code&gt;什么区别？
+&lt;strong&gt;RE&lt;/strong&gt;：JCP 正式发布的规范称为 &lt;code&gt;Final Release&lt;/code&gt;，如果进行修改、升级，则重新发布为 &lt;code&gt;Maintenance Release&lt;/code&gt;。&lt;/p&gt;
 
 </content>
    </entry>
    
    <entry>
-     <title>Ganglia监控Flume、Kafka、Storm</title>
-     <link href="http://ningg.github.com/ganglia-with-flume-kafka-storm"/>
-     <updated>2014-12-12T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/ganglia-with-flume-kafka-storm</id>
-     <content type="html">&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
-
-&lt;p&gt;通常利用Flume、Kafka、Storm来搭建实时的日志分析系统，那如何对这一系统运行状态进行监控呢？赶快调研一下，看看业内其他人怎么做的监控，当前能够查到的唯品会工程师&lt;code&gt;Yaobaniu&lt;/code&gt;对外分享的实时日志分析平台材料，初步可以推断其使用Zabbix进行的监控，因为&lt;code&gt;baniu&lt;/code&gt;在PPTV工作时，主要工作就是专注利用Zabbix进行集群监控，并且在&lt;code&gt;baniu&lt;/code&gt;的其他分享资料中，见到过Zabbix监控界面的截图，so，初步推断是Zabbix。不过，本文将采用Ganglia来进行监控，原因很简单：&lt;/p&gt;
+     <title>Tomcat 入门</title>
+     <link href="http://ningg.github.com/tomcat-intro"/>
+     <updated>2015-03-23T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/tomcat-intro</id>
+     <content type="html">&lt;p&gt;几点：&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;没有Zabbix的使用经验；&lt;/li&gt;
-  &lt;li&gt;Flume官网中有利用Ganglia监控Flume运行状态的介绍；&lt;/li&gt;
-  &lt;li&gt;Kafka、Storm的ecosystem中也见到了与Ganglia结合的身影；&lt;/li&gt;
+  &lt;li&gt;如何安装、启动Tomcat？&lt;/li&gt;
+  &lt;li&gt;Tomcat中常用的配置，以及含义？&lt;/li&gt;
+  &lt;li&gt;Tomcat的基本原理？
+    &lt;ul&gt;
+      &lt;li&gt;Tomcat的运行机制；&lt;/li&gt;
+      &lt;li&gt;web在Tomcat中的处理过程；&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;section-1&quot;&gt;前期准备&lt;/h2&gt;
+&lt;h2 id=&quot;section&quot;&gt;简介&lt;/h2&gt;
 
-&lt;p&gt;在阅读本文之前，要求对Ganglia的安装配置有一个基本的了解，具体要了解几点：&lt;/p&gt;
+&lt;p&gt;Apache Tomcat，开源软件&lt;em&gt;（这句是废话）&lt;/em&gt;，支持Java Servlet和JavaServer Pages（JSP）的实现，具体Java Servlet和JavaServer Pages specification是由JCP（Java Community Process）主导制定。&lt;/p&gt;
+
+&lt;h2 id=&quot;tomcat&quot;&gt;安装、启动Tomcat&lt;/h2&gt;
+
+&lt;p&gt;几个步骤：&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;安装Ganglia集群；&lt;/li&gt;
-  &lt;li&gt;gmond的配置文件&lt;code&gt;gmond.conf&lt;/code&gt;；&lt;/li&gt;
-  &lt;li&gt;gmetad的配置文件&lt;code&gt;gmetad.conf&lt;/code&gt;；&lt;/li&gt;
+  &lt;li&gt;到&lt;a href=&quot;http://tomcat.apache.org/&quot;&gt;Apache Tomcat&lt;/a&gt;下载Tomcat 7.0.59；&lt;/li&gt;
+  &lt;li&gt;解压；&lt;/li&gt;
+  &lt;li&gt;执行&lt;code&gt;$APACHE_HOMT/bin/startup.bat&lt;/code&gt;；&lt;/li&gt;
+  &lt;li&gt;通过浏览器访问：&lt;code&gt;http://localhost:8080&lt;/code&gt;即可看到Tomcat主页面；&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;上面的内容，可以参考自己之前的几篇博文：&lt;/p&gt;
+&lt;p&gt;实际上，执行&lt;code&gt;$APACHE_HOMT/bin/startup.bat&lt;/code&gt;后，会出现如下信息：&lt;/p&gt;
 
-&lt;p&gt;（ganglia的整个系列）&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;2015-3-23 16:51:55 org.apache.coyote.AbstractProtocol start
+信息: Starting ProtocolHandler [&quot;http-apr-8080&quot;]
+2015-3-23 16:51:55 org.apache.coyote.AbstractProtocol start
+信息: Starting ProtocolHandler [&quot;ajp-apr-8009&quot;]
+2015-3-23 16:51:55 org.apache.catalina.startup.Catalina start
+信息: Server startup in 691 ms
+&lt;/code&gt;&lt;/pre&gt;
 
-&lt;h2 id=&quot;section-2&quot;&gt;软件版本&lt;/h2&gt;
+&lt;p&gt;上述信息中，出现的两个数字&lt;code&gt;8080&lt;/code&gt;、&lt;code&gt;8009&lt;/code&gt;为Tomcat默认监听的端口。&lt;/p&gt;
+
+&lt;h2 id=&quot;tomcat-1&quot;&gt;Tomcat常用配置&lt;/h2&gt;
+
+&lt;p&gt;（常用场景）&lt;/p&gt;
+
+&lt;h2 id=&quot;tomcat-2&quot;&gt;Tomcat基本原理&lt;/h2&gt;
+
+&lt;p&gt;推荐资料：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.datadisk.co.uk/html_docs/java_app/tomcat6/tomcat6.htm&quot;&gt;Tomcat/Apache 6&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.ntu.edu.sg/home/ehchua/programming/howto/Tomcat_More.html&quot;&gt;Apache Tomcat 7-more about the cat&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.ntu.edu.sg/home/ehchua/programming/howto/Tomcat_HowTo.html&quot;&gt;How to Install Apache Tomcat and Get Started with Java Servlet Programming&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;疑问：tomcat运行时，是一个Process，那在tomcat容器中部署的web应用，是作为process启动的？还是直接thread？&lt;/p&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;参考来源&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://tomcat.apache.org/&quot;&gt;Apache Tomcat&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.ntu.edu.sg/home/ehchua/programming/howto/Tomcat_More.html&quot;&gt;Apache Tomcat 7-more about the cat&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.ntu.edu.sg/home/ehchua/programming/howto/Tomcat_HowTo.html&quot;&gt;How to Install Apache Tomcat and Get Started with Java Servlet Programming&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;杂谈&lt;/h2&gt;
+
+&lt;p&gt;重走web路，一年多没碰web的东西，该忘的都忘了，用到的时候，需要重新查阅，现在只有解决问题的基本思路，索性借着这次重新使用java web的机会把整体的内容再过一遍。&lt;/p&gt;
+
+</content>
+   </entry>
+   
+   <entry>
+     <title>面向对象设计原则</title>
+     <link href="http://ningg.github.com/object-oriented-design-principles"/>
+     <updated>2015-03-23T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/object-oriented-design-principles</id>
+     <content type="html">&lt;p&gt;SOLID是面向对象设计和编程（OOD&amp;amp;OOP）中的重要编码原则：&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;SRP&lt;/td&gt;
+      &lt;td&gt;The Single Responsibility Principle&lt;/td&gt;
+      &lt;td&gt;单一责任&lt;/td&gt;
+      &lt;td&gt;一个类，有且只有一个更改的原因&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;OCP&lt;/td&gt;
+      &lt;td&gt;The Open Closed Principle&lt;/td&gt;
+      &lt;td&gt;开放封闭&lt;/td&gt;
+      &lt;td&gt;不能修改类，可以扩展类&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;LSP&lt;/td&gt;
+      &lt;td&gt;The Liskov Substitution Principle&lt;/td&gt;
+      &lt;td&gt;里氏替换&lt;/td&gt;
+      &lt;td&gt;子类，可以替换基类&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;ISP&lt;/td&gt;
+      &lt;td&gt;The Interface Segregation Principle&lt;/td&gt;
+      &lt;td&gt;接口分离&lt;/td&gt;
+      &lt;td&gt;细粒度的接口&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;DIP&lt;/td&gt;
+      &lt;td&gt;The Dependency Inversion Principle&lt;/td&gt;
+      &lt;td&gt;依赖反转&lt;/td&gt;
+      &lt;td&gt;依赖抽象而不是具体实现&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;额外说几点：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;SOLID原则是 class 级别的，与测试工具一起，更能发挥效力；&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.codeproject.com/Articles/567768/Object-Oriented-Design-Principles&quot;&gt;Object Oriented Design Principles&lt;/a&gt;和&lt;a href=&quot;http://www.importnew.com/10656.html&quot;&gt;面向对象设计原则和创建SOLID应用的5个方法&lt;/a&gt;中有详细的例子，说明代码的书写规范。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;代码腐坏的几个现象：&lt;/h2&gt;
+
+&lt;p&gt;代码变质，有几个现象：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;僵化：小的变化，导致整个系统重建；&lt;/li&gt;
+  &lt;li&gt;脆弱：一个模块的变化，导致其他不不相关的模块异常。例如，汽车系统中，调整电台会影响到窗户的使用；&lt;/li&gt;
+  &lt;li&gt;固定：一个模块，无法被抽取，并且在新环境中重用，例如登录模块，这是由于各个模块之间的耦合和依赖造成的额，改进策略是，从底层细节，比如特定数据库、UI实现、特殊框架等解耦核心对象；&lt;/li&gt;
+  &lt;li&gt;粘性：代码构建、测试要花费很长时间；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;一个软件项目，满足当前功能，是最基本的要求；而实际上，良好实现的软件项目，能在满足当前功能基础上，满足未来二次开发、维护的需要。软件项目的完整成本分为：开发成本、二次开发成本、维护成本。&lt;/p&gt;
+
+&lt;h2 id=&quot;single-responsibility&quot;&gt;单一责任（Single Responsibility）&lt;/h2&gt;
+
+&lt;p&gt;一个类只做一种类型的责任，当需要承担其他类型责任时，分解这个类。&lt;/p&gt;
+
+&lt;p&gt;下面的代码有多少职责？&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;class Employee {
+  public Pay calculatePay() {...}
+  public void save() {...}
+  public String describeEmployee() {...}
+}  
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;正确答案是3个。&lt;/p&gt;
+
+&lt;p&gt;在一个类中混合了：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;支付的计算逻辑&lt;/li&gt;
+  &lt;li&gt;数据库逻辑&lt;/li&gt;
+  &lt;li&gt;描述逻辑&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;如果你将多个职责结合在一个类中，可能很难实现修改一部分时不会破坏其他部分。混合职责也使这个类难以理解，测试，降低了内聚性。修改它的最简单方法是将这个类分割为三个不同的相互分离的类，每个类仅仅有一个职责：数据库访问，支付计算和描述。&lt;/p&gt;
+
+&lt;h2 id=&quot;open-closed&quot;&gt;开放封闭（Open Closed）&lt;/h2&gt;
+
+&lt;p&gt;对继承、扩展，是开放的；对修改，是封闭的。使用抽象类和接口。&lt;/p&gt;
+
+&lt;p&gt;为依赖关系使用接口的另一个作用是减少耦合和增加灵活性。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;void checkOut(Receipt receipt) {
+  Money total = Money.zero;
+  for (item : items) {
+	total += item.getPrice();
+	receipt.addItem(item);
+  }
+  Payment p = acceptCash(total);
+  receipt.addPayment(p);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;那么增加信用卡支持该怎么做？你可能像下面的增加if语句，但这违反OCP原则。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Payment p;
+if (credit)
+  p = acceptCredit(total);
+else
+  p = acceptCash(total);
+receipt.addPayment(p);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;更好的解决方案是：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public interface PaymentMethod {void acceptPayment(Money total);}
+  
+void checkOut(Receipt receipt, PaymentMethod pm) {
+  Money total = Money.zero;
+  for (item : items) {
+	total += item.getPrice();
+	receipt.addItem(item);
+  }
+  Payment p = pm.acceptPayment(total);
+  receipt.addPayment(p);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;这儿有一个小秘密：OCP仅仅用于未来变化可预见的情况，当未来变化发生时，采用OCP。因此，需要准确地预见将来的变化。
+这意味着等待用户做出改变，然后使用抽象应对将来的类似变化。&lt;/p&gt;
+
+&lt;p&gt;个人理解：通过抽象类、接口，实现，对扩展、新增开放，对修改关闭。&lt;/p&gt;
+
+&lt;h2 id=&quot;liskov-substitution&quot;&gt;里氏替换（Liskov Substitution）&lt;/h2&gt;
+
+&lt;p&gt;子类的对象实例，应该能够替换任何其超类的实例，即，子类必须符合父类的预期行为&lt;em&gt;（隐含的行为约束）&lt;/em&gt;。&lt;/p&gt;
+
+&lt;p&gt;下面几种情况，违反了LSP原则：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;子类抛出父类没有抛出的异常；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;一个违反LSP的典型例子是Square类派生于Rectangle类。Square类总是假定宽度与高度相等。如果一个正方形对象用于期望一个长方形的上下文中，可能会出现意外行为，因为一个正方形的宽高不能(或者说不应该)被独立修改。&lt;/p&gt;
+
+&lt;p&gt;解决这个问题并不容易：如果修改Square类的setter方法，使它们保持正方形不变(即保持宽高相等)，那么这些方法将弱化(违反)Rectangle类setter方法，在长方形中宽高可以单独修改。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public class Rectangle {
+  private double height;
+  private double width;
+  
+  public double area();
+  
+  public void setHeight(double height);
+  public void setWidth(double width);
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;以上代码违反了LSP。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public class Square extends Rectangle {  
+  public void setHeight(double height) {
+	super.setHeight(height);
+	super.setWidth(height);
+  }
+  
+  public void setWidth(double width) {
+	setHeight(width);
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;违反LSP导致不明确的行为。不明确的行为意味着它在开发过程中运行良好但在产品中出现问题，或者要花费几个星期调试每天只出现一次的bug，或者不得不查阅数百兆日志找出什么地方发生错误。&lt;/p&gt;
+
+&lt;p&gt;个人理解：子类可以替换父类。&lt;/p&gt;
+
+&lt;h2 id=&quot;interface-segregation&quot;&gt;接口分离（Interface Segregation）&lt;/h2&gt;
+
+&lt;p&gt;不能强迫用户去依赖那些他们不适用的接口。换句话说，使用多个专门的接口，比使用单一的总接口要好。&lt;/p&gt;
+
+&lt;p&gt;想象一个ATM取款机，通过一个屏幕显示我们想要的不同信息。你会如何解决显示不同信息的问题？我们使用SRP,OCP和LSP想出一个方案，但是这个系统仍然很难维护。这是为什么？&lt;/p&gt;
+
+&lt;p&gt;想象ATM的所有者想要添加仅在取款功能出现的一条信息，“ATM机将在您取款时收取一些费用，您同意吗”。你会如何解决？&lt;/p&gt;
+
+&lt;p&gt;可能你会给Messenger接口增加一个方法并使用这个方法完成。但是这会导致重新编译这个接口的所有使用者，几乎所有的系统需要重新部署，这直接违反了OCP。让代码腐坏开始了！&lt;/p&gt;
+
+&lt;p&gt;这里出现了这样的情形：对于取款功能的改变导致其他全部非相关功能也变化，我们现在知道这并不是我们想要的。这是怎么回事？&lt;/p&gt;
+
+&lt;p&gt;其实，这里是向后依赖在作怪，使用了该Messenger接口每个功能依赖了它不需要，但是被其他功能需要的方法，这正是我们想要避免的。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public interface Messenger {
+  askForCard();
+  tellInvalidCard();
+  askForPin();
+  tellInvalidPin();
+  tellCardWasSiezed();
+  askForAccount();
+  tellNotEnoughMoneyInAccount();
+  tellAmountDeposited();
+  tellBalance();
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;相反，将Messenger接口分割，不同的ATM功能依赖于分离的Messenger。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public interface LoginMessenger {
+  askForCard();
+  tellInvalidCard();
+  askForPin();
+  tellInvalidPin(); 
+}
+  
+public interface WithdrawalMessenger {
+  tellNotEnoughMoneyInAccount();
+  askForFeeConfirmation();
+}
+  
+publc class EnglishMessenger implements LoginMessenger, WithdrawalMessenger {
+  ...   
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;个人理解：接口功能单一，多接口之间隔离；避免单一的总接口。&lt;/p&gt;
+
+&lt;h2 id=&quot;dependency-inversion&quot;&gt;依赖反转（Dependency Inversion）&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;高层模块，不应依赖于底层模块，二者都应依赖于抽象；&lt;/li&gt;
+  &lt;li&gt;抽象不应该依赖于细节，细节应该依赖于抽象；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;例子：一个程序依赖于Reader和Writer接口，Keyboard和Printer作为依赖于这些抽象的细节实现了这些接口。CharCopier是依赖于Reader和Writer实现类的低层细节，可以传入任何实现了Reader和Writer接口的设备正确地工作。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public interface Reader { char getchar(); }
+public interface Writer { void putchar(char c)}
+  
+class CharCopier {
+  
+  void copy(Reader reader, Writer writer) {
+	int c;
+	while ((c = reader.getchar()) != EOF) {
+	  writer.putchar();
+	}
+  }
+}
+  
+public Keyboard implements Reader {...}
+public Printer implements Writer {...}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;个人理解：通过接口，实现上下层之间的隔离。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;参考来源&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://butunclebob.com/ArticleS.UncleBob.PrinciplesOfOod&quot;&gt;the principles of OOD&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.importnew.com/10656.html&quot;&gt;面向对象设计原则和创建SOLID应用的5个方法&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.codeproject.com/Articles/567768/Object-Oriented-Design-Principles&quot;&gt;Object Oriented Design Principles&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+   </entry>
+   
+   <entry>
+     <title>Spring搭建 java web 的基本架子</title>
+     <link href="http://ningg.github.com/java-web"/>
+     <updated>2015-03-23T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/java-web</id>
+     <content type="html">&lt;p&gt;目标：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;搭建一个基本的java web架子，包括：
+    &lt;ul&gt;
+      &lt;li&gt;前端数据发送、接收；&lt;/li&gt;
+      &lt;li&gt;后端数据处理；&lt;/li&gt;
+      &lt;li&gt;数据存储；&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;整理使用Spring搭建架子的基本过程，以及注意事项；&lt;/li&gt;
+  &lt;li&gt;重新熟悉Spring思路，整理这一基本思路；&lt;em&gt;（关键）&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;补充：Spring涵盖的内容很广，此次主要涉及Spring web部分知识。&lt;/p&gt;
+
+&lt;p&gt;利用spring，搭建java web架子，整体分为几点：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;基本的后端处理架子
+    &lt;ul&gt;
+      &lt;li&gt;Spring&lt;/li&gt;
+      &lt;li&gt;Hibernate + Spring jdbc&lt;/li&gt;
+      &lt;li&gt;MyBatis &lt;em&gt;（尚未熟悉）&lt;/em&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;基本的前端展示架子&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;工具&lt;/h2&gt;
 
 &lt;table&gt;
   &lt;thead&gt;
     &lt;tr&gt;
-      &lt;th&gt;软件&lt;/th&gt;
+      &lt;th&gt;工具&lt;/th&gt;
+      &lt;th&gt;版本&lt;/th&gt;
+      &lt;th&gt;说明&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;MyEclipse&lt;/td&gt;
+      &lt;td&gt;2014&lt;/td&gt;
+      &lt;td&gt;java web IDE&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;后端架子&lt;/h2&gt;
+
+&lt;h3 id=&quot;spring&quot;&gt;Spring&lt;/h3&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;常见问题&lt;/h2&gt;
+
+&lt;h3 id=&quot;myeclipse&quot;&gt;MyEclipse的环境配置&lt;/h3&gt;
+
+&lt;p&gt;在使用MyEclipse时，需要进行的前期配置：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;JDK&lt;/li&gt;
+  &lt;li&gt;Maven
+    &lt;ul&gt;
+      &lt;li&gt;Maven的JDK&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;myeclipsemavenjava-web&quot;&gt;MyEclipse下，maven管理java web工程&lt;/h3&gt;
+
+&lt;p&gt;在Myeclipse下，创建web project时，选中&lt;code&gt;Add maven support&lt;/code&gt;，一路点击&lt;code&gt;Next&lt;/code&gt;，后面有两个选项：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;MyEclipse JEE project structure：标准Java EE结构；&lt;/li&gt;
+  &lt;li&gt;Standard Maven JEE project structure &lt;em&gt;（推荐）&lt;/em&gt;：Maven的标准结构；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;UPDATE：20150325，分两步，从简单的来，先用&lt;code&gt;MyEclipse JEE project structure&lt;/code&gt;，后期再尝试新建工程，使用&lt;code&gt;Standard Maven JEE project structure&lt;/code&gt;。&lt;/p&gt;
+
+&lt;h3 id=&quot;todo&quot;&gt;TODO&lt;/h3&gt;
+
+&lt;p&gt;几个问题：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;java web上如何登记对数据库的修改&lt;/li&gt;
+  &lt;li&gt;maven管理的java web如何发布？如何debug测试？
+    &lt;ul&gt;
+      &lt;li&gt;直接在server下进行deploy就可以了吗？&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section-3&quot;&gt;参考来源&lt;/h2&gt;
+
+</content>
+   </entry>
+   
+   <entry>
+     <title>Java WAR包的格式</title>
+     <link href="http://ningg.github.com/java-war-format"/>
+     <updated>2015-03-23T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/java-war-format</id>
+     <content type="html">&lt;h2 id=&quot;section&quot;&gt;简介&lt;/h2&gt;
+
+&lt;p&gt;java web 工程，包含几部分：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;web components &lt;em&gt;（是什么？）&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;web resources，例如静态图片等；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;关于 java web，几点：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;需要符合 Java Servlet specification；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;war&quot;&gt;WAR格式&lt;/h2&gt;
+
+&lt;p&gt;WAR格式，就是部署java web的目录组织结构。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/java-war-format/web-module-structure.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;关于目录结构，几点：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Assembly Root，整个java web的根目录；&lt;/li&gt;
+  &lt;li&gt;WEB-INF，核心处理逻辑的位置；
+    &lt;ul&gt;
+      &lt;li&gt;web.xml，web资源表述文件；&lt;/li&gt;
+      &lt;li&gt;classes目录，核心处理逻辑代码；&lt;/li&gt;
+      &lt;li&gt;lib目录，依赖的jar包；&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Web pages，展示页面所需要的资源，通常也需要如下几个目录：&lt;/li&gt;
+  &lt;li&gt;img目录 &lt;em&gt;（可选）&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;css目录 &lt;em&gt;（可选）&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;js目录 &lt;em&gt;（可选）&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;META-INF &lt;em&gt;（可选）&lt;/em&gt; ，打包为war的元信息数据；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;mavenjava-web&quot;&gt;Maven构建时，java web目录结构&lt;/h2&gt;
+
+&lt;p&gt;本部分将着重开发过程中，Maven构建时，java web目录结构。注意，使用Maven管理的java project与java web project，基本类似：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;pom.xml，maven的工程对象模型（Project Object Module）&lt;/li&gt;
+  &lt;li&gt;src/main/java，项目类&lt;/li&gt;
+  &lt;li&gt;src/main/resources，项目资源&lt;/li&gt;
+  &lt;li&gt;src/test/java，测试类&lt;/li&gt;
+  &lt;li&gt;src/test/resources，测试资源&lt;/li&gt;
+  &lt;li&gt;src/main/webapp，web资源的目录&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;（下面给出一个截图）&lt;/p&gt;
+
+&lt;p&gt;疑问：JSTL的作用？JSP Standard Tag Library，JSP标准标签库。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;参考来源&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.oracle.com/javaee/7/tutorial/packaging003.htm&quot;&gt;Java EE 7 Tutorial - Packaging Web Archives&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://docs.oracle.com/javaee/7/index.html&quot;&gt;Java Platform, Enterprise Edition (Java EE) 7&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://en.wikipedia.org/wiki/WAR_%28file_format%29&quot;&gt;wiki：war file format&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;闲谈&lt;/h2&gt;
+
+&lt;p&gt;WAR，对应查看Java EE 的帮助文档；JAR，对应查看Java SE 的帮助文档。需要花时间浏览一遍Java EE Tutorial。&lt;/p&gt;
+
+</content>
+   </entry>
+   
+   <entry>
+     <title>Kibana入门操作</title>
+     <link href="http://ningg.github.com/kibana-intro"/>
+     <updated>2015-03-16T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/kibana-intro</id>
+     <content type="html">&lt;p&gt;当前使用组件的版本：&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;组件&lt;/th&gt;
       &lt;th&gt;版本&lt;/th&gt;
     &lt;/tr&gt;
   &lt;/thead&gt;
   &lt;tbody&gt;
     &lt;tr&gt;
-      &lt;td&gt;Flume&lt;/td&gt;
-      &lt;td&gt;apache-flume-1.5.0.1-bin.tar.gz&lt;/td&gt;
+      &lt;td&gt;ElasticSearch&lt;/td&gt;
+      &lt;td&gt;&lt;code&gt;1.4.4&lt;/code&gt;&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
-      &lt;td&gt;Kafka&lt;/td&gt;
-      &lt;td&gt;kafka_2.9.2-0.8.1.1.tgz&lt;/td&gt;
+      &lt;td&gt;Java&lt;/td&gt;
+      &lt;td&gt;&lt;code&gt;1.7.0_67&lt;/code&gt; HotSpot(64) 64-Bit&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
-      &lt;td&gt;Storm&lt;/td&gt;
-      &lt;td&gt;apache-storm-0.9.2-incubating.tar.gz&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Ganglia&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
+      &lt;td&gt;Kibana&lt;/td&gt;
+      &lt;td&gt;&lt;code&gt;kibana-4.0.1-linux-x64&lt;/code&gt;&lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;h2 id=&quot;ganglia-with-flume&quot;&gt;Ganglia with Flume&lt;/h2&gt;
+&lt;h2 id=&quot;section&quot;&gt;启动&lt;/h2&gt;
 
-&lt;p&gt;Flume的官网上&lt;a href=&quot;https://flume.apache.org/FlumeUserGuide.html#monitoring&quot;&gt;Monitoring&lt;/a&gt;部分，显示通过简单配置，即可完成Ganglia对Flume的监控，关于具体细节，参考阅读&lt;a href=&quot;/flume-user-guide-monitoring&quot;&gt;Flume user-guide-monitoring&lt;/a&gt;。&lt;/p&gt;
-
-&lt;p&gt;同时Flume的监控问题，在JIRA上也有较广泛的讨论，为开拓思路，也可以看看&lt;a href=&quot;https://issues.apache.org/jira/browse/FLUME&quot;&gt;jira Flume&lt;/a&gt;。&lt;/p&gt;
-
-&lt;h2 id=&quot;ganglia-with-kafka&quot;&gt;Ganglia with Kafka&lt;/h2&gt;
-
-&lt;p&gt;本文将描述一下，围绕“利用Ganglia监控Kafka”这一问题，如何思考、如何分析、如何搜索解决方案。&lt;/p&gt;
-
-&lt;h3 id=&quot;section-3&quot;&gt;分析&lt;/h3&gt;
-
-&lt;p&gt;直接列一下，分析、查找途径：&lt;/p&gt;
+&lt;p&gt;Kibana本质就是一个Web工程，启动命令：&lt;code&gt;bin/kibana&lt;/code&gt;，具体查看启动脚本，发现最终启动的是NodeJS相关的服务：&lt;code&gt;bin/../node/bin/node bin/../src/bin/kibana.js&lt;/code&gt;，NodeJS我不懂，具体没看明白。几个疑问：&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;查看Kafka的&lt;a href=&quot;http://kafka.apache.org/documentation.html#monitoring&quot;&gt;官方文档&lt;/a&gt;其中提到了Monitoring，是利用&lt;code&gt;Yammer Metrics&lt;/code&gt;来收集数据的，并且列出了一些需要着重关注的指标；&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://cwiki.apache.org/confluence/display/KAFKA/Ecosystem&quot;&gt;Kafka ecosystem&lt;/a&gt;中查看到&lt;a href=&quot;https://github.com/adambarthelson/kafka-ganglia&quot;&gt;Ganglia Integration&lt;/a&gt;；&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://cwiki.apache.org/confluence/display/KAFKA/Index&quot;&gt;Ganglia cwiki&lt;/a&gt;中查看到&lt;a href=&quot;https://cwiki.apache.org/confluence/display/KAFKA/JMX+Reporters&quot;&gt;JMX reporters&lt;/a&gt;，并在其下查看到&lt;a href=&quot;https://github.com/criteo/kafka-ganglia&quot;&gt;kafka-ganglia&lt;/a&gt;；&lt;/li&gt;
-  &lt;li&gt;浏览&lt;a href=&quot;https://issues.apache.org/jira/browse/KAFKA&quot;&gt;jira Kafka&lt;/a&gt;，大部分涉及到Kafka Ganglia的内容为bug修复，版本升级；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;上面是对整个Kafka官网的初步查询结果，从中可以看到，已经有利用Ganglia监控Kafka的监控方案了，具体有两个：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/adambarthelson/kafka-ganglia&quot;&gt;Ganglia Integration&lt;/a&gt;；
+  &lt;li&gt;如何后台启动Kibana？
     &lt;ul&gt;
-      &lt;li&gt;利用JMXTrans来收集Kafka运行状态；&lt;/li&gt;
-      &lt;li&gt;通过Json来配置，收集指定的Kafka运行状态数据；&lt;/li&gt;
-      &lt;li&gt;调整gweb页面；&lt;/li&gt;
-      &lt;li&gt;最后更新时间：2013.06&lt;/li&gt;
+      &lt;li&gt;&lt;code&gt;nohup bin/kibana &amp;amp;&lt;/code&gt;&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/criteo/kafka-ganglia&quot;&gt;kafka-ganglia&lt;/a&gt;；
-    &lt;ul&gt;
-      &lt;li&gt;利用Kafka官网提到的Yammer Metrics收集到的数据；&lt;/li&gt;
-      &lt;li&gt;利用metrics-ganglia.jar将Yammer Metrics收集的数据发送到Ganglia展示；&lt;/li&gt;
-      &lt;li&gt;最后更新时间：2014.01&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
+  &lt;li&gt;Kibana运行日志位置？&lt;/li&gt;
+  &lt;li&gt;如何监控Kibana运行状态？&lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;h3 id=&quot;kafka-gangliacriteo&quot;&gt;kafka-ganglia(criteo)&lt;/h3&gt;
-
-&lt;p&gt;由于最新工程对当前版本兼容性可能更好，以及与Kafka利用Yammer Metrics机制保持一致，初步决定采用&lt;a href=&quot;https://github.com/criteo/kafka-ganglia&quot;&gt;kafka-ganglia&lt;/a&gt;工程。拿到这一工程后，利用Maven对其进行构建，不过我本地测试需要调整一下&lt;code&gt;artifactId=scalatest_2.9.2&lt;/code&gt;的版本：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;lt;dependency&amp;gt;
-  &amp;lt;groupId&amp;gt;org.scalatest&amp;lt;/groupId&amp;gt;
-  &amp;lt;artifactId&amp;gt;scalatest_2.9.2&amp;lt;/artifactId&amp;gt;
-  &amp;lt;version&amp;gt;1.7.2&amp;lt;/version&amp;gt;
-  &amp;lt;scope&amp;gt;test&amp;lt;/scope&amp;gt;
-&amp;lt;/dependency&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;不过其中涉及到一个情况：ganglia web上显示收集到的Kafka指标过多，近&lt;code&gt;1k+&lt;/code&gt;，过于臃肿，需要进行定制和过滤；&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;筛选出能够反映Kafka集群运行状态的关键指标；&lt;/li&gt;
-  &lt;li&gt;如果指标为Yammer metrics中的meter类别，针对单个指标分析需要过滤的项，并定制进行过滤，不要显示在ganglia web上；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;经过自己简单分析，上面两个问题都有解决的办法：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;依照官网&lt;a href=&quot;http://kafka.apache.org/documentation.html#monitoring&quot;&gt;Kafka doc：Monitoring&lt;/a&gt;中提到的特别需要关注的参数，进行提炼之后，借助&lt;a href=&quot;https://github.com/criteo/kafka-ganglia&quot;&gt;kafka-ganglia&lt;/a&gt;中的&lt;code&gt;exclude.regex&lt;/code&gt;机制来过滤掉不需要的参数，另外，需要特别注意criteo在实现的时候，利用的是&lt;code&gt;matcher.matches()&lt;/code&gt;方法，其尝试匹配整个Metric name；&lt;em&gt;（利用matcher.find()方法时，匹配的是是否找到这一参数）&lt;/em&gt;&lt;/li&gt;
-  &lt;li&gt;定制&lt;a href=&quot;https://github.com/criteo/kafka-ganglia&quot;&gt;kafka-ganglia&lt;/a&gt;中的&lt;code&gt;exclude.regex&lt;/code&gt;机制，如果需要监控的参数很少，则实现&lt;code&gt;include&lt;/code&gt;机制，可以利用Regular Exp，也可以使用Set机制；&lt;/li&gt;
-  &lt;li&gt;对于筛选出的特定参数，如果其是Yammer Metrics中的meter类型，则其中包含了&lt;code&gt;count&lt;/code&gt;、&lt;code&gt;mean rate&lt;/code&gt;、&lt;code&gt;1-min rate&lt;/code&gt;、&lt;code&gt;5-min rate&lt;/code&gt;、&lt;code&gt;15-min rate&lt;/code&gt;共计5个指标，那这些指标是有些重复的，原因是Ganglia提供了对一个参数的长期监控，例如&lt;code&gt;1-min rate&lt;/code&gt;就可以推测出&lt;code&gt;5-min rate&lt;/code&gt;等。通过初步分析，认为保留&lt;code&gt;count&lt;/code&gt;和&lt;code&gt;1-min rate&lt;/code&gt;指标即可。那代码上如何实现？初步分析，认为重写&lt;code&gt;metrics-ganglia-2.2.0.jar&lt;/code&gt;中的&lt;code&gt;com.yammer.metrics.reporting&lt;/code&gt;包内的&lt;code&gt;GangliaReporter&lt;/code&gt;类即可。&lt;em&gt;（此想法只是指出方向，并未进行实际验证）&lt;/em&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;ganglia-integrationadambarthelson&quot;&gt;Ganglia Integration(adambarthelson)&lt;/h3&gt;
-
-&lt;p&gt;（doing…）&lt;/p&gt;
-
-&lt;p&gt;从上以部分发现，如果利用&lt;code&gt;metrics-ganglia-2.2.0.jar&lt;/code&gt;来实现Ganglia对Kafka的监控，有几个方面需要定制，涉及到一些定制的工作量。而&lt;a href=&quot;https://github.com/adambarthelson/kafka-ganglia&quot;&gt;Ganglia Integration&lt;/a&gt;好像可以直接通过Json文件来指定收集特定的参数，涉及到的定制可能会较少。&lt;/p&gt;
-
-&lt;p&gt;（doing…）&lt;/p&gt;
-
-&lt;p&gt;初步计划，在配置完Ganglia对Storm的监控时，学习一下jmxtrans的基本知识，然后回过头来，再来尝试一下&lt;a href=&quot;https://github.com/adambarthelson/kafka-ganglia&quot;&gt;Ganglia Integration&lt;/a&gt;。&lt;/p&gt;
-
-&lt;h2 id=&quot;ganglia-with-storm&quot;&gt;Ganglia with Storm&lt;/h2&gt;
-
-&lt;p&gt;如何找到Ganglia监控Storm的方法？找到方法后，具体如何进行操作？&lt;/p&gt;
-
-&lt;h3 id=&quot;section-4&quot;&gt;分析&lt;/h3&gt;
-
-&lt;p&gt;对于ASF（Apache Software Foundation，Apache软件基金会）下的opensource项目，我个人认为有几个信息源：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;open-source项目的官网：&lt;code&gt;http://***.apache.org&lt;/code&gt;；&lt;/li&gt;
-  &lt;li&gt;Apache的Confluence网站：&lt;code&gt;http://cwiki.apache.org/&lt;/code&gt;；&lt;/li&gt;
-  &lt;li&gt;Apache在Jira上进行的问题讨论：&lt;code&gt;https://issues.apache.org/&lt;/code&gt;；&lt;/li&gt;
-  &lt;li&gt;google search；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;此次查询如何利用Ganglia来监控Storm，还按照这几个信息源来查询：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;官网中，只找到如下几个来源，monitoring Storm相关：
-    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;http://storm.apache.org/documentation/Setting-up-a-Storm-cluster.html&quot;&gt;setup a storm cluster&lt;/a&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;http://storm.apache.org/documentation/Running-topologies-on-a-production-cluster.html&quot;&gt;running topol on prod cluster&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;google查到相关内容如下：
-    &lt;ul&gt;
-      &lt;li&gt;&lt;a href=&quot;https://www.safaribooksonline.com/library/view/learning-storm/9781783981328/&quot;&gt;BOOK-Learning Storm&lt;/a&gt;&lt;em&gt;（通过某种合法方式，拿到了这本书的草稿版）&lt;/em&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;a href=&quot;https://blog.relateiq.com/monitoring-storm/&quot;&gt;Monitoring Storm&lt;/a&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;其中&lt;a href=&quot;https://www.safaribooksonline.com/library/view/learning-storm/9781783981328/&quot;&gt;BOOK-Learning Storm&lt;/a&gt;详细介绍了Ganglia监控Storm的具体操作步骤，其基本原理是利用jmxtrans&lt;em&gt;（从哪收集的运行数据？谁负责发送给Ganglia？）&lt;/em&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;gangliastorm&quot;&gt;Ganglia监控Storm&lt;/h3&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;这一部分参考自&lt;a href=&quot;https://www.safaribooksonline.com/library/view/learning-storm/9781783981328/&quot;&gt;BOOK-Learning Storm&lt;/a&gt;，细微的地方做出调整。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;Storm doesn’t have built-in support to monitor the Storm cluster using Ganglia. However, with
-jmxtrans, you can enable Storm monitoring using Ganglia. The &lt;code&gt;jmxtrans&lt;/code&gt; tool allows you to
-connect to any JVM and fetches its JVM metrics without writing a single line of code. The JVM
-metrics exposed via JMX can be displayed on Ganglia using jmxtrans. Hence, jmxtrans acts as a
-bridge between Storm and Ganglia.&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/learning-storm/jmxtrans-ganglia.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;需要在Storm运行的节点上安装jmxtrans：&lt;/p&gt;
-
-&lt;p&gt;（自己有一篇单独介绍jmxtrans的博客，给个链接）&lt;/p&gt;
-
-&lt;h4 id=&quot;jvmjmx&quot;&gt;开启jvm的jmx功能&lt;/h4&gt;
-
-&lt;h4 id=&quot;supervisorjson&quot;&gt;supervisor.json&lt;/h4&gt;
-
-&lt;pre&gt;&lt;code&gt;{
-  &quot;servers&quot;: [
-    {
-	  &quot;port&quot;: &quot;12346&quot;, 
-	  &quot;host&quot;: &quot;IP_OF_SUPERVISOR_MACHINE&quot;, 
-	  &quot;queries&quot;: [
-	  	{
-	  	  &quot;outputWriters&quot;: [
-	  	  	{
-	  	  	  &quot;@class&quot;: &quot;com.googlecode.jmxtrans.model.output.GangliaWriter&quot;, 
-	  	  	  &quot;settings&quot;: {
-	  	  	  	&quot;groupName&quot;: &quot;supervisor&quot;, 
-	  	  	  	&quot;host&quot;: &quot;IP_OF_GANGLIA_GMOND_SERVER&quot;, 
-	  	  	  	&quot;port&quot;: &quot;8649&quot;
-	  	  	  }
-	  	  	}
-	  	  ], 
-	  	  &quot;obj&quot;: &quot;java.lang:type=Memory&quot;, 
-	  	  &quot;resultAlias&quot;: &quot;supervisor&quot;, 
-	  	  &quot;attr&quot;: [
-	  	  	&quot;ObjectPendingFinalizationCount&quot;
-	  	  ]
-	  	}, 
-	  	{
-	  	  &quot;outputWriters&quot;: [
-	  	  	{
-	  	  	  &quot;@class&quot;: &quot;com.googlecode.jmxtrans.model.output.GangliaWriter&quot;, 
-	  	  	  &quot;settings&quot;: {
-	  	  	  	&quot;groupName&quot;: &quot; supervisor &quot;, 
-	  	  	  	&quot;host&quot;: &quot;IP_OF_GANGLIA_GMOND_SERVER&quot;, 
-	  	  	  	&quot;port&quot;: &quot;8649&quot;
-	  	  	  }
-	  	  	}
-	  	  ], 
-	  	  &quot;obj&quot;: &quot;java.lang:name=Copy,type=GarbageCollector&quot;, 
-	  	  &quot;resultAlias&quot;: &quot; supervisor &quot;, 
-	  	  &quot;attr&quot;: [
-	  	  	&quot;CollectionCount&quot;, 
-	  	  	&quot;CollectionTime&quot;
-	  	  ]
-	  	}, 
-	  	{
-	  	  &quot;outputWriters&quot;: [
-	  	  	{
-	  	  	  &quot;@class&quot;: &quot;com.googlecode.jmxtrans.model.output.GangliaWriter&quot;, 
-	  	  	  &quot;settings&quot;: {
-	  	  	  	&quot;groupName&quot;: &quot;supervisor &quot;, 
-	  	  	  	&quot;host&quot;: &quot;IP_OF_GANGLIA_GMOND_SERVER&quot;, 
-	  	  	  	&quot;port&quot;: &quot;8649&quot;
-	  	  	  }
-	  	  	}
-	  	  ], 
-	  	  &quot;obj&quot;: &quot;java.lang:name=Code Cache,type=MemoryPool&quot;, 
-	  	  &quot;resultAlias&quot;: &quot;supervisor &quot;, 
-	  	  &quot;attr&quot;: [
-	  	  	&quot;CollectionUsageThreshold&quot;, 
-	  	  	&quot;CollectionUsageThresholdCount&quot;, 
-	  	  	&quot;UsageThreshold&quot;, 
-	  	  	&quot;UsageThresholdCount&quot;
-	  	  ]
-	  	}, 
-	  	{
-	  	  &quot;outputWriters&quot;: [
-	  	  	{
-	  	  	  &quot;@class&quot;: &quot;com.googlecode.jmxtrans.model.output.GangliaWriter&quot;, 
-	  	  	  &quot;settings&quot;: {
-	  	  	  	&quot;groupName&quot;: &quot;supervisor &quot;, 
-	  	  	  	&quot;host&quot;: &quot;IP_OF_GANGLIA_GMOND_SERVER&quot;, 
-	  	  	  	&quot;port&quot;: &quot;8649&quot;
-	  	  	  }
-	  	  	}
-	  	  ], 
-	  	  &quot;obj&quot;: &quot;java.lang:type=Runtime&quot;, 
-	  	  &quot;resultAlias&quot;: &quot;supervisor&quot;, 
-	  	  &quot;attr&quot;: [
-	  	  	&quot;StartTime&quot;, 
-	  	  	&quot;Uptime&quot;
-	  	  ]
-	  	}
-	  ], 
-	  &quot;numQueryThreads&quot;: 2
-    }
-  ]
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&quot;section-5&quot;&gt;杂谈&lt;/h2&gt;
-
-&lt;p&gt;“见自己，见天地，见众生”，突然想到这句话，说是排rank大多是年轻人的想法，而实际上绝大部分有点成绩的人最后都殊途同归：见众生；做对众生有用、有益的事情。&lt;/p&gt;
 
 </content>
    </entry>
    
    <entry>
-     <title>Yammer Metrics的使用</title>
-     <link href="http://ningg.github.com/yammer-metrics"/>
-     <updated>2014-12-09T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/yammer-metrics</id>
-     <content type="html">&lt;h2 id=&quot;yammer-metrics&quot;&gt;Yammer Metrics简介&lt;/h2&gt;
-
-&lt;p&gt;最近用到的某个框架，其官网提到利用Yammer Metrics来测量系统运行状态，需要对其统计的具体参数有个基本的了解，OK，那就需要弄清几个简单的问题：&lt;/p&gt;
+     <title>Trello快捷操作</title>
+     <link href="http://ningg.github.com/trello-shortcuts"/>
+     <updated>2015-03-15T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/trello-shortcuts</id>
+     <content type="html">&lt;p&gt;用鼠标点来点去，效率有点低，内心略感焦急，有没有快捷键？赶快找一下，基本思路还是寻找官方的引导和帮助文档，下面列一下我寻找shortcuts的基本路线吧：&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;Yammer Metrics是什么？&lt;/li&gt;
-  &lt;li&gt;Yammer Metrics收集哪些数据？&lt;/li&gt;
-  &lt;li&gt;Yammer Metrics收集数据的基本过程、原理？&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://trello.com/yourway&quot;&gt;New Stuff&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://help.trello.com/&quot;&gt;Help Page&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;搜索 &lt;code&gt;shortcuts&lt;/code&gt; 关键字&lt;/li&gt;
+  &lt;li&gt;哈哈，找到：&lt;a href=&quot;http://help.trello.com/article/798-using-keyboard-shortcuts-in-trello&quot;&gt;Using keyboard shortcuts in Trello&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&quot;yammer-metrics-1&quot;&gt;Yammer Metrics的官网&lt;/h3&gt;
+&lt;h2 id=&quot;shortcuts&quot;&gt;shortcuts&lt;/h2&gt;
 
-&lt;p&gt;上述列了几个问题，但有个最基本的问题：官网地址在哪？为什么说这个最基础、最重要，因为这是信息源，其他所有的网络信息都是以此为基础的。
-在google中输入&lt;code&gt;yammer metrics wiki&lt;/code&gt;没有搜到类似一个明显的官网，到时找到了github上的两个工程：&lt;/p&gt;
+&lt;p&gt;You can also press &lt;code&gt;?&lt;/code&gt; on your keyboard while in Trello to view a list of shortcuts.&lt;/p&gt;
+
+&lt;p&gt;Here are some of the highlights:&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/dropwizard/metrics&quot;&gt;dropwizard/metrics&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/codahale/metrics&quot;&gt;codahale/metrics&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;The “b” shortcut which opens the boards menu and lets you search for boards instantly. Press “b”, type the first few letters of the board you’re looking for, press enter, and you’re there. It’s the fastest way to switch boards.&lt;/li&gt;
+  &lt;li&gt;“f” opens the card filter while on a board. You can instantly start searching for cards by title. The filter will also suggest members and labels, so you can start typing “da” and it will suggest Daniel. Press enter to see cards assigned to him. Press “x” to clear a filter.&lt;/li&gt;
+  &lt;li&gt;“t” will edit the card title and “e” will edit the card description. You can press it while on the card back, or hover over a card, press either one, and the card will open up and then begin editing the chosen field.&lt;/li&gt;
+  &lt;li&gt;“j” and “k” select the card above or below the current card. So do the up and down arrows.&lt;/li&gt;
+  &lt;li&gt;Press “n” while hovering over any card to open the card composer right below the selected card.&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;一时间有点蒙，赶紧去查看了一下当前Eclipse下使用的metrics-core-2.2.0.jar包，主要是其jar内的META-INF信息，查询得知jar包为coda在2012年编译的，再到google上一查，大部分人都在使用metrics 2.2.0版本，再理一下上面两个github工程的关系，初步肯定：&lt;a href=&quot;https://github.com/codahale/metrics&quot;&gt;codahale/metrics&lt;/a&gt;是较早之前的版本，而且现在已经变为metrics的go语言实现版本，同时&lt;a href=&quot;https://github.com/codahale/metrics&quot;&gt;codahale/metrics&lt;/a&gt;也指出java实现的metrics已经移到&lt;a href=&quot;https://github.com/dropwizard/metrics&quot;&gt;dropwizard/metrics&lt;/a&gt;。当前算是找到yammer metrics的官方地址了，赶快打开看一下，发现其已经是3.1.0版本了，心里有个小疑问，会不会有很多东西与2.2.0版本不同？不用担心，&lt;a href=&quot;https://dropwizard.github.io/metrics/3.1.0/&quot;&gt;Metrics doc 3.x&lt;/a&gt;的URL上，修改一下版本的位置，即可看到2.2.0版本的官方文档&lt;a href=&quot;http://dropwizard.github.io/metrics/2.2.0/&quot;&gt;Metrics doc 2.x&lt;/a&gt;。&lt;/p&gt;
+&lt;p&gt;为方便自己记忆，简单总结一下：&lt;/p&gt;
 
-&lt;p&gt;&lt;strong&gt;备注&lt;/strong&gt;：maven central repo中yammer metrics的两个位置：&lt;/p&gt;
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;快捷键&lt;/th&gt;
+      &lt;th&gt;说明&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code&gt;?&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;查询快捷键列表&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code&gt;b&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;打开Board面板&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code&gt;f&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;过滤Board下List下，不同Label的Card&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code&gt;x&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;与上述&lt;code&gt;f&lt;/code&gt;操作对应，取消过滤&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code&gt;t&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;在Card内，编辑title&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code&gt;e&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;在Card内，编辑description&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;&lt;code&gt;w&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;显示\隐藏 sidebar&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;Trello内部结构：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;Trello（ROOT）
+	|
+	|--Board
+	|--Board(`b`)
+		|
+		|--List
+		|--List
+			|
+			|--Card
+			|--Card(`f`|`x`)
+				|
+				|--edit Title (`t`)
+				|--Edit description (`e`)
+				|--选中相邻的Card(`j`|`k`)
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;参考资料&lt;/h2&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://repo1.maven.org/maven2/com/yammer/metrics/&quot;&gt;repo: yammer metrics 2.x&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://repo1.maven.org/maven2/io/dropwizard/metrics/&quot;&gt;repo: yammer metrics 3.x&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;yammer-metrics-2&quot;&gt;Yammer metrics的作用&lt;/h3&gt;
-
-&lt;p&gt;为什么要用Metrics？&lt;a href=&quot;https://dropwizard.github.io/metrics/3.1.0/&quot;&gt;Metrics doc 3.x&lt;/a&gt;中有句话很经典：&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;Metrics is a Java library which gives you unparalleled insight into what your code does in production.（注：unparalleled，空前的、无与伦比的）&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;h2 id=&quot;yammer-metrics-3&quot;&gt;Yammer Metrics相关术语&lt;/h2&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;&lt;strong&gt;特别说明&lt;/strong&gt;：从&lt;a href=&quot;https://dropwizard.github.io/metrics/3.1.0/&quot;&gt;Yammer metrics官网&lt;/a&gt;可知，当前为3.1.0版本，但是当前在项目中广泛使用的是2.2.0版本，因此，本文将主要关注&lt;a href=&quot;http://dropwizard.github.io/metrics/2.2.0/&quot;&gt;http://dropwizard.github.io/metrics/2.2.0/&lt;/a&gt;。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://www.javacodegeeks.com/2012/12/yammer-metrics-a-new-way-to-monitor-your-application.html&quot;&gt;intro to yammer metrics&lt;/a&gt;中有个基本的总结：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;Gauges&lt;/strong&gt;: an instantaneous measurement of a discrete value.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Counters&lt;/strong&gt;: a value that can be incremented and decremented. Can be used in queues to monitorize the remaining number of pending jobs.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Meters&lt;/strong&gt;: measure the rate of events over time. You can specify the rate unit, the scope of events or event type.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Histograms&lt;/strong&gt;: measure the statistical distribution of values in a stream of data.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Timers&lt;/strong&gt;: measure the amount of time it takes to execute a piece of code and the distribution of its duration.&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;Healthy checks&lt;/strong&gt;: as his name suggests, it centralize our service’s healthy checks of external systems.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;gauges&quot;&gt;Gauges&lt;/h3&gt;
-
-&lt;p&gt;A gauge is an instantaneous measurement of a value. For example, we may want to measure the number of pending jobs in a queue:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;Metrics.newGauge(QueueManager.class, &quot;pending-jobs&quot;, new Gauge&amp;lt;Integer&amp;gt;() {
-	@Override
-	public Integer value() {
-		return queue.size();
-	}
-});
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Every time this gauge is measured, it will return the number of jobs in the queue.&lt;/p&gt;
-
-&lt;p&gt;For most queue and queue-like structures, you won’t want to simply return &lt;code&gt;queue.size()&lt;/code&gt;. Most of &lt;code&gt;java.util&lt;/code&gt; and &lt;code&gt;java.util.concurrent&lt;/code&gt; have implementations of &lt;code&gt;#size()&lt;/code&gt; which are &lt;code&gt;O(n)&lt;/code&gt;, which means your gauge will be slow (potentially while holding a lock).&lt;/p&gt;
-
-&lt;h3 id=&quot;counters&quot;&gt;Counters&lt;/h3&gt;
-
-&lt;p&gt;A counter is just a gauge for an &lt;code&gt;AtomicLong&lt;/code&gt; instance. You can increment or decrement its value. For example, we may want a more efficient way of measuring the pending job in a queue:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;private final Counter pendingJobs = Metrics.newCounter(QueueManager.class, &quot;pending-jobs&quot;);
-
-public void addJob(Job job) {
-	pendingJobs.inc();
-	queue.offer(job);
-}
-
-public Job takeJob() {
-	pendingJobs.dec();
-	return queue.take();
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Every time this counter is measured, it will return the number of jobs in the queue.&lt;/p&gt;
-
-&lt;h3 id=&quot;meters&quot;&gt;Meters&lt;/h3&gt;
-
-&lt;p&gt;A meter measures the rate of events over time (e.g., “requests per second”). In addition to the mean rate, meters also track &lt;code&gt;1-&lt;/code&gt;, &lt;code&gt;5-&lt;/code&gt;, and &lt;code&gt;15-&lt;/code&gt;minute moving averages.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;private final Meter requests = Metrics.newMeter(RequestHandler.class, &quot;requests&quot;, &quot;requests&quot;, TimeUnit.SECONDS);
-
-public void handleRequest(Request request, Response response) {
-	requests.mark();
-	// etc
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This meter will measure the rate of requests in requests per second.&lt;/p&gt;
-
-&lt;h3 id=&quot;histograms&quot;&gt;Histograms&lt;/h3&gt;
-
-&lt;p&gt;A histogram measures the statistical distribution of values in a stream of data. In addition to minimum, maximum, mean, etc., it also measures median, 75th, 90th, 95th, 98th, 99th, and 99.9th percentiles.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;private final Histogram responseSizes = Metrics.newHistogram(RequestHandler.class, &quot;response-sizes&quot;);
-
-public void handleRequest(Request request, Response response) {
-	// etc
-	responseSizes.update(response.getContent().length);
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This histogram will measure the size of responses in bytes.&lt;/p&gt;
-
-&lt;h3 id=&quot;timers&quot;&gt;Timers&lt;/h3&gt;
-
-&lt;p&gt;A timer measures both the rate that a particular piece of code is called and the distribution of its duration.&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;private final Timer responses = Metrics.newTimer(RequestHandler.class, &quot;responses&quot;, TimeUnit.MILLISECONDS, TimeUnit.SECONDS);
-
-public String handleRequest(Request request, Response response) {
-	final TimerContext context = responses.time();
-	try {
-		// etc;
-		return &quot;OK&quot;;
-	} finally {
-		context.stop();
-	}
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;This timer will measure the amount of time it takes to process each request in milliseconds and provide a rate of requests in requests per second.&lt;/p&gt;
-
-&lt;h3 id=&quot;health-checks&quot;&gt;Health Checks&lt;/h3&gt;
-
-&lt;p&gt;Metrics also has the ability to centralize your service’s health checks. First, implement a &lt;code&gt;HealthCheck&lt;/code&gt; instance:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;import com.yammer.metrics.core.HealthCheck.Result;
-
-public class DatabaseHealthCheck extends HealthCheck {
-	private final Database database;
-
-	public DatabaseHealthCheck(Database database) {
-		super(&quot;database&quot;);
-		this.database = database;
-	}
-
-	@Override
-	public Result check() throws Exception {
-		if (database.isConnected()) {
-			return Result.healthy();
-		} else {
-			return Result.unhealthy(&quot;Cannot connect to &quot; + database.getUrl());
-		}
-	}
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Then register an instance of it with Metrics:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;HealthChecks.register(new DatabaseHealthCheck(database));
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;To run all of the registered health checks:&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;final Map&amp;lt;String, Result&amp;gt; results = HealthChecks.runHealthChecks();
-for (Entry&amp;lt;String, Result&amp;gt; entry : results.entrySet()) {
-	if (entry.getValue().isHealthy()) {
-		System.out.println(entry.getKey() + &quot; is healthy&quot;);
-	} else {
-		System.err.println(entry.getKey() + &quot; is UNHEALTHY: &quot; + entry.getValue().getMessage());
-		final Throwable e = entry.getValue().getError();
-		if (e != null) {
-			e.printStackTrace();
-		}
-	}
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;Metrics comes with a pre-built health check: &lt;code&gt;DeadlockHealthCheck&lt;/code&gt;, which uses Java 1.6’s built-in thread deadlock detection to determine if any threads are deadlocked.&lt;/p&gt;
-
-&lt;h2 id=&quot;yammer-metrics-4&quot;&gt;Yammer metrics原理与具体用法&lt;/h2&gt;
-
-&lt;p&gt;（doing…）&lt;/p&gt;
-
-&lt;p&gt;进一步的内容将参考：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://dropwizard.github.io/metrics/2.2.0/&quot;&gt;Metrics doc 2.x&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://blog.csdn.net/scutshuxue/article/details/8350135&quot;&gt;JAVA Metrics度量工具的使用&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;下面将针对java中Yammer Metrics的用法进行简要介绍，此次我使用的是Maven来管理的java工程，具体pom.xml中的配置：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;lt;dependency&amp;gt;
-  		&amp;lt;groupId&amp;gt;com.yammer.metrics&amp;lt;/groupId&amp;gt;
-  		&amp;lt;artifactId&amp;gt;metrics-core&amp;lt;/artifactId&amp;gt;
-  		&amp;lt;version&amp;gt;2.2.0&amp;lt;/version&amp;gt;
-  	&amp;lt;/dependency&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;给一个工程的截图：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/yammer-metrics/learn-metrics.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;gauge&quot;&gt;gauge&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;package io.github.ningg.gauge;
-
-import java.util.LinkedList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import com.yammer.metrics.Metrics;
-import com.yammer.metrics.core.Gauge;
-import com.yammer.metrics.reporting.ConsoleReporter;
-
-public class LearnGauge {
-	
-	private List&amp;lt;String&amp;gt; stringList = new LinkedList&amp;lt;String&amp;gt;();
-	
-	Gauge&amp;lt;Integer&amp;gt; gauge = Metrics.newGauge(LearnGauge.class, &quot;list-size-gauge&quot;, new Gauge&amp;lt;Integer&amp;gt;() {
-		@Override
-		public Integer value() {
-			return stringList.size();
-		}
-	});
-	
-	public void inputElement(String input){
-		stringList.add(input);
-	}
-	
-	
-	public static void main(String[] args) throws InterruptedException{
-
-		// periodically report all registered metrics to the console
-		ConsoleReporter.enable(1,TimeUnit.SECONDS);
-		LearnGauge learnGauge = new LearnGauge();
-		
-		for(int i = 0; i &amp;lt; 10; i++){
-			learnGauge.inputElement(String.valueOf(i));
-			Thread.sleep(1000);
-		}
-		
-	}
-	
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;运行结果：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;14-12-10 19:35:27 ==============================================================
-io.github.ningg.gauge.LearnGauge:
-  list-size-gauge:
-	value = 3
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;counter&quot;&gt;counter&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;package io.github.ningg.counter;
-
-import java.util.LinkedList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import com.yammer.metrics.Metrics;
-import com.yammer.metrics.core.Counter;
-import com.yammer.metrics.reporting.ConsoleReporter;
-
-public class LearnCounter {
-
-	private List&amp;lt;String&amp;gt; stringList = new LinkedList&amp;lt;String&amp;gt;();
-	
-	private Counter listSizeCounter = Metrics.newCounter(LearnCounter.class, &quot;string-list-counter&quot;);
-	
-	private void push(String input){
-		listSizeCounter.inc();
-		stringList.add(input);
-	}
-	
-	private void pop(String output){
-		listSizeCounter.dec();
-		stringList.remove(output);
-	}
-	
-	
-	public static void main(String[] args) throws InterruptedException{
-		
-		ConsoleReporter.enable(1, TimeUnit.SECONDS);
-		LearnCounter learnCounter = new LearnCounter();
-		
-		for(int times = 0; times &amp;lt; 5; times++){
-			learnCounter.push(String.valueOf(times));
-			Thread.sleep(1000);
-		}
-		
-		for(int times = 0; times &amp;lt; 5; times++){
-			learnCounter.pop(String.valueOf(times));
-			Thread.sleep(1000);
-		}
-		
-	}
-	
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;运行结果：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;14-12-10 19:49:02 ==============================================================
-io.github.ningg.counter.LearnCounter:
-  string-list-counter:
-	count = 3
-
-
-
-14-12-10 19:49:03 ==============================================================
-io.github.ningg.counter.LearnCounter:
-  string-list-counter:
-	count = 2
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;meter&quot;&gt;meter&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;package io.github.ningg.meter;
-
-import java.util.concurrent.TimeUnit;
-
-import com.yammer.metrics.Metrics;
-import com.yammer.metrics.core.Meter;
-import com.yammer.metrics.reporting.ConsoleReporter;
-
-public class LearnMeter {
-	
-	private Meter meter = Metrics.newMeter(LearnMeter.class, &quot;meter-event&quot;, &quot;request&quot;, TimeUnit.SECONDS);
-
-	public void handleRequest(){
-		meter.mark();
-	}
-	
-	
-	public static void main(String[] args) throws InterruptedException{
-		ConsoleReporter.enable(1, TimeUnit.SECONDS);
-		
-		LearnMeter learnMeter = new LearnMeter();
-		
-		for(int times = 0; times &amp;lt; 200; times++){
-			learnMeter.handleRequest();
-			Thread.sleep(100);
-		}
-	}
-	
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;运行结果：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;14-12-10 19:49:53 ==============================================================
-io.github.ningg.meter.LearnMeter:
-  meter-event:
-			 count = 20
-		 mean rate = 9.95 request/s
-	 1-minute rate = 0.00 request/s
-	 5-minute rate = 0.00 request/s
-	15-minute rate = 0.00 request/s
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;histogram&quot;&gt;histogram&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;package io.github.ningg.histogram;
-
-import java.util.LinkedList;
-import java.util.List;
-import java.util.concurrent.TimeUnit;
-
-import com.yammer.metrics.Metrics;
-import com.yammer.metrics.core.Histogram;
-import com.yammer.metrics.reporting.ConsoleReporter;
-
-public class LearnHistogram {
-
-	private List&amp;lt;String&amp;gt; stringList = new LinkedList&amp;lt;String&amp;gt;();
-	
-	private Histogram histogram = Metrics.newHistogram(LearnHistogram.class, &quot;size-histogram&quot;);
-	
-	public void push(String input){
-		stringList.add(input);
-	}
-	
-	public void pop(String output){
-		stringList.remove(output);
-	}
-	
-	public void updateHisto(){
-		histogram.update(stringList.size());
-	}
-	
-	
-	public static void main(String[] args) throws InterruptedException{
-		ConsoleReporter.enable(1, TimeUnit.SECONDS);
-		LearnHistogram learnHistogram = new LearnHistogram();
-		
-		for(int time = 0 ; time &amp;lt; 100000 ; time++){
-			learnHistogram.push(String.valueOf(time));
-			
-			if(time%10 == 0){
-				learnHistogram.updateHisto();
-			}
-			
-			if(time%2 == 2){
-				learnHistogram.pop(String.valueOf(time));
-			}
-			Thread.sleep(1);
-			
-		}
-	}
-	
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;运行结果：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;14-12-10 19:50:46 ==============================================================
-io.github.ningg.histogram.LearnHistogram:
-  size-histogram:
-			   min = 1.00
-			   max = 991.00
-			  mean = 496.00
-			stddev = 290.11
-			median = 496.00
-			  75% &amp;lt;= 748.50
-			  95% &amp;lt;= 950.50
-			  98% &amp;lt;= 980.80
-			  99% &amp;lt;= 990.90
-			99.9% &amp;lt;= 991.00
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;timer&quot;&gt;timer&lt;/h3&gt;
-
-&lt;pre&gt;&lt;code&gt;package io.github.ningg.timer;
-
-import java.util.concurrent.TimeUnit;
-
-import com.yammer.metrics.Metrics;
-import com.yammer.metrics.core.Timer;
-import com.yammer.metrics.core.TimerContext;
-import com.yammer.metrics.reporting.ConsoleReporter;
-
-public class LearnTimer {
-	
-	private Timer timer = Metrics.newTimer(LearnTimer.class, &quot;response-timer&quot;, TimeUnit.MILLISECONDS, TimeUnit.SECONDS);
-	
-	public void handleRequest() throws InterruptedException{
-		TimerContext context = timer.time();
-		for(int i = 0 ; i &amp;lt; 2 ; i++){
-			Thread.sleep(1);
-		}
-		context.stop();
-	}
-	
-	public static void main(String[] args) throws InterruptedException{
-		ConsoleReporter.enable(1, TimeUnit.SECONDS);
-		LearnTimer learnTimer = new LearnTimer();
-		
-		for(int time = 0 ; time &amp;lt; 10000 ; time++){
-			learnTimer.handleRequest();
-		}
-		Thread.sleep(10000);
-	}
-
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;运行结果：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;14-12-10 19:51:24 ==============================================================
-io.github.ningg.timer.LearnTimer:
-  response-timer:
-			 count = 504
-		 mean rate = 254.23 calls/s
-	 1-minute rate = 0.00 calls/s
-	 5-minute rate = 0.00 calls/s
-	15-minute rate = 0.00 calls/s
-			   min = 3.71ms
-			   max = 3.98ms
-			  mean = 3.86ms
-			stddev = 0.03ms
-			median = 3.86ms
-			  75% &amp;lt;= 3.87ms
-			  95% &amp;lt;= 3.92ms
-			  98% &amp;lt;= 3.93ms
-			  99% &amp;lt;= 3.94ms
-			99.9% &amp;lt;= 3.98ms
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;section&quot;&gt;小结&lt;/h3&gt;
-
-&lt;p&gt;上面可知，在Java工程中使用Yammer Metrics的gauge、counter、meter、histogram、timer时，本质上就是创建一个Metrics的Gauge、Counter、Meter、Histogram、Timer对象，然后在特定的地点触发对象，即可实现对应用状态的监控。		&lt;/p&gt;
-
-&lt;h2 id=&quot;section-1&quot;&gt;参考来源&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://dropwizard.github.io/metrics/3.1.0/&quot;&gt;Metrics doc 3.x&lt;/a&gt;&lt;em&gt;（官方文档简洁明了，推荐阅读；唯一需要注意的是，现在官网已经是3.x版本了，而很多项目使用过2.x版本，需要留意其差异）&lt;/em&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section-2&quot;&gt;杂谈&lt;/h2&gt;
-
-&lt;p&gt;刚看到的一个几个东西，感觉时代在进步呀，没有仔细看，看来需要不断学习、整理一些新的东西：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://dropwizard.io/index.html&quot;&gt;Dropwizard&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.infoq.com/cn/articles/zhenye-talk-java-develop/&quot;&gt;郑晔谈Java开发：新工具、新框架、新思维&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://help.trello.com/&quot;&gt;Help Page&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://trello.com/yourway&quot;&gt;New Stuff&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 </content>
