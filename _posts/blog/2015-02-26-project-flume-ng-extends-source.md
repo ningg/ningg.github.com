@@ -151,7 +151,7 @@ categories: open-source git flume
 ###maven打包时，如何将当前jar包以及其依赖包都导出？
 
 
-参考[thilinamb flume kafka sink][https://github.com/thilinamb/flume-ng-kafka-sink]
+参考[thilinamb flume kafka sink](https://github.com/thilinamb/flume-ng-kafka-sink)
 
 
 
