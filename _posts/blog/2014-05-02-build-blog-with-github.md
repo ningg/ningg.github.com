@@ -66,6 +66,14 @@ GitHub上对于个人博客的支持，实质是利用GitHub Pages功能来实�
 
 先膜拜一下上面两个博客模板，*光彩夺目，亮瞎一双狗眼，*好了，我能不能也搭建一个类似的博客？途径有一个：深入学习一下[Jekyll的官方文档][jekyll]，补充：[中文版本][jekyllcn]。*（基于jekyll，如何定制博客，我将写一篇详细的介绍，敬请期待）*
 
+###3.5绑定域名
+
+几点：
+
+* 购买域名
+* GitHub上绑定域名：
+	* 
+
 ##4.FAQ
 
 ###4.1使用google analytics来统计网站访问情况
@@ -112,7 +120,7 @@ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorM
 原文链接：[Using MathJax with Jekyll](http://stackoverflow.com/questions/10987992/using-mathjax-with-jekyll)
 
 
-###4.3遇到的问题&解决办法？
+###4.4遇到的问题&解决办法？
 
 1. [执行Git命令时，出错提示：（fatal: remote origin already exists.）](http://blog.csdn.net/dengjianqiang2011/article/details/9260435)
 2. [GitHub上markdown的解析引擎不同，会造成最终页面效果的差异](https://help.github.com/articles/migrating-your-pages-site-from-maruku)

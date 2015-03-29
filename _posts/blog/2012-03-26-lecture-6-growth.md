@@ -107,7 +107,7 @@ Think about what the magic moment is for your product, and get people connected 
 
 绝大多数人，都将他们做的事情变得难以置信的复杂，实际上，本来事情是很简单的*（是对产品的解释，让人无法直接理解？直接本能的理解？）*，就如同，你在Facebook上看到第一张朋友分享的照片后，本能的喊出：这就是Facebook，就是他*（简单、可理解）*。Facebook之类的社交媒体网站，第一要务就是链接你的社交关系，否则，社交网站上空空如也，注定覆灭。
 
-对于Facebook，什么才是关键时刻呢？就是，你看到朋友的照片的那一刻，如果你去留意Linkedin、Twitter、WhatsApp他们的注册流程，你会发现，这些应用都会先展示那些你想follow、connect to以及send message to的人，然后，尽快弹出注册提示/页面，后面Brian会专门将这个关键时刻，他经验丰富，到时候，大家可以好好的问下他。
+对于Facebook，什么才是关键时刻呢？就是，你看到朋友的照片的那一刻，如果你去留意Linkedin、Twitter、WhatsApp他们的注册流程，你会发现，这些应用都会先展示那些你想follow、connect to以及send message to的人，然后，尽快弹出注册提示/页面，后面Brian会专门讲这个关键时刻，他经验丰富，到时候，大家可以好好的问下他。
 
 认真的考虑一下，你的产品的关键时刻，然后，让用户尽可能快的到达这个关键时刻；这将促使你的retention ratio快速的趋平，如果你在找到满足用户需求的点，加强之后，将会大大提升产品粘性。
 
@@ -121,13 +121,119 @@ What you need to focus on is the marginal user. The one person who doesn’t get
 
 So for operating for growth, what you really need to think about, is what is the North star of your company: What is that one metric, where if everyone in your company is thinking about it and driving their product towards that metric and their actions towards moving that metric up, you know in the long-run your company will be successful. By the way, they’re all probably all correlated to each other, so it’s probably fine to pick almost any metric, whichever one you feel the best about, that aligns with your mission and your values - probably go for that one. But realistically, daily active users fairly correlate to monthly active users; we could have gone with either one. Amount of content shared, also correlates with how many users there are, because guess what? You add a user, they share content. So a lot of things end up being correlated. Pick the one that fits with you and know that you’re going to stick with for a long time. Just have a North Star, and know the magic moment that you know when a user experiences that, they will deliver on that metric for you on the North Star, and then think about the marginal user, don’t think about yourself. Those are, I think, the most important points when operating for growth. Everything has to come from the top.
 
+当操作进行growth时，要找到公司的North star指标：这个指标通常是你经过详细分析之后，选定的，所有的员工都会将此指标牢记于心，并且会影响他们的决定，你需要确定这个指标是能将公司带向长期成功的真正启明星。不过，有众多的指标，他们之间是相互关联、相互影响的，那你需要详细分析之后，找出那个能反映价值观、使命感的指标。事实上，用户的日活个数与用户的月活个数，是一致的，这两个指标，选取哪个都可以。分享内容的数量和注册用户数，也是相关的，每个新用户注册都会分享内容。这几个例子说明，很多指标都是相关的，此时如何决策？选取那个你会坚持很久的指标。总结几点：
+
+* 选取一个长期遵循的 North Star 指标；
+* 详细分析找出用户在使用产品时的关键时刻*（用户会进行注册等操作）*，什么是关键时刻？哪些用户有可能进行一些特定的行为，例如注册帐号等，而这些行为，能够体现在 North Star 指标；
+* 认真的考虑边缘用户*（新用户、复活用户、流失用户）*，努力将其变为活跃用户；
+* 认真考虑用户的需求，而不是你的需求，不要想当然的去进行优化*（用户中，边缘用户是重点，因为能够反映在 North Star 指标上）*；
+
 So the last area is tactics. So let’s say you’ve found your niche market that you’re going to have a monopoly on inside the mousetrap market. It’s a silenced mousetrap fir sitting under beds, so if that the mice come to your bed overnight, they can be killed without waking you up. That’s your niche market. Your mousetrap is better than anybody else for that market. What typically happens in Silicon Valley is, everyone thinks marketers are useless. I thought marketers were useless when I was a Physics student, so I’m sure that you guys as Engineering students you must think that we’re awful people who aren’t useful to have around.
 
 ‘Build it and they will come.’ That is something that is very much the mantra in the Valley, and I don’t believe it’s true; I believe you actually have to work. There’s a good article in the lecture page from interviewing Ben Silverman. We talked about how the growth of Pinterest was driven by marketing. I’m biased of course.
 
+最后说一下战术*（具体操作？）*。通过前面的分析，你已经找到了自己的细分市场，并且计划获取这个市场上的垄断地位。你可能认为自己相对其他人有天然的优势，只需默默做事，就能获得收获。这是硅谷很多人的典型思维，他们认为市场营销人员没有用。“酒香不怕巷子深”，是一个很流行的口头禅，但并不是正确的，在宣传上，也需要行动Ben有一个很好的文章，说的就是Pinterest如何在市场的驱动下发展的。
+
 The first tactic I want to talk about is internationalization. Facebook internationalized too late. Sheryl said it broadly in public and I definitely agree with that.
 
-（TODO）
+One of the biggest barriers to our long-term growth, and one of the biggest things we had to deal with, was all the countries where there were clones. Famously ? (23:55) had Fakebook.css in their HTML, and there were a ton of sites like that out there, whether it was ?, a clear clone, Mixie, Cyworld, Orkut; they were all these different social networks around the world that grew up when Facebook was focused around the U.S. Internationalizing was an important barrier we needed to knock down, and knocking down barriers is often important to think about for growth. Facebook started out as college-only, so every college that it was launched in was knocking down a barrier. When Facebook expanded beyond colleges to high schools, I wasn’t at the company, but that was a company-shaking moment where people questioned whether or not Facebook would survive,if the culture of the site could survive.
+
+Then after, expanding from high schools to everyone - that was just before I joined - it was a shocking moment; that’s what spurred the growth up to 50 million, and then we hit a brick wall. When we hit that brick wall, that was when a lot of existential questions were being asked inside Facebook whether any social network could ever get to more than 100 million users. It sounds stupid now, but at that time, no one had ever achieved it. Everyone had tapped out between 50 and 100 million users, and we were worried that it wasn’t possible. That was the point at which the growth team got set up; Chamath brought a bunch of us together. He said very publicly he wanted to fire me on multiple occasions. Without Chamath, I think none of us would have stayed at the company; we were a really weird bunch of people - but it worked out. The two things we did, I think that really drove growth initially was, 1) We focused on that 10 friends in 14 days 2) Getting users to the magic moment. That was something that Zuck drove because we were all stuck in analysis paralysis and, ‘Is it causation? Is it correlation?’ Zuck would say ‘You really think that if no one gets a friend, that they’ll be active on Facebook? Are you crazy?’
+
+第一个具体操作点：开展国际化*（如何开展？）*；Sheryl在公开场合提到Facebook开展国际化太晚了，我完全同意他的看法。
+
+为了长期发展，要考虑的第一个问题就是：如何在不同的国家进行产品的复制。Facebook采用了 fakebook.css 来解决这个问题，当然，这是一种流行的方法。而在Facebook专注美国市场的时候，已经有很多同类软件进行了国际化。开始的时候Facebook只专注高校市场，后来开展其他国家的高校市场的时候，就需要与对手进行竞争，将市场扩展到中学市场时，也是如此。在竞争的过程中，很多人都会怀疑Facebook是否能够胜出、是否能够存货下去。
+
+Facebook内部推动增长是，采取了两个措施：在初期的14天内，专注服务那仅有的10个朋友*（14天内，创造条件让用户获得10个朋友）*；引导用户的关键时刻*（用户会希望注册的时刻）*。这些多是Zuck来推动的，因为我们都沉溺于数据分析，并且一直问：“这是原因吗？这是相关的吗？”，Zuck此时会说：“你们认为用户在Facebook上没有朋友的话，他们会活跃在Facebook上吗？你疯了吗？还是他们疯啦？”
+
+The second thing was internationalization - knocking down another barrier. When we launched it, I think there were two things we did really well: 1) Even though we were late (and stressed about being late) we took the time to build it in a scalable way; we moved slow to move fast. You can actually view the full story from Naomi on one of the video links from the lecture page. What we did was draw all the strings on the site in FBT, which is our translation extraction script and then, we created the community translation platform, so we didn’t have just professional translators translating the site, but we could have all our users translating the site. We got French translated in 12 hours. We managed to get, to this day, 104 languages translated by Facebook for Facebook, 70 of those are translated by the community. We took the time to build something, that would enable us to scale.
+
+The other thing is that we prioritized the right languages. Back then, the four main languages were French, Italian, German, and Spanish (and Chinese, but we are blocked in China). Now look at that list - that’s today’s distribution of languages. Italian isn’t on the list anymore; French and German are about to fall off. In the last year we quadrupled the number of people on Facebook in Hindi. Building for what the world is today is an easy mistake to make, and it’s a lot of what the other social networks did. We built a scalable translation infrastructure that actually enabled us to attack all of the languages, so we could be ready for where the future is going to be. You’ll probably be able to see some of our Internet.org summit in India about where we want to go with language translations.
+
+These are the tactics I want to go through now: Virality, SEO, ESPN, SEM, Affiliates/referral programs. I think there are two ways to look at virality. There’s a great book by Adam L. Penenberg called the Viral Loop that goes through a bunch of case studies of companies that have grown through viral marketing. I strongly encourage you to read this book if you’re interested in viral marketing, as well as advertising. I think Ogilvy on Advertising is great as well because in the chapter 7 you can't think of anything else stick a car to billboard with super glue and people will buy the super glue. He has some really great creative tips. So virality. Sean Parker has this really great model that he told us about when I joined Facebook, which is to think about virality about a product, in terms of three things. First, is payload - so how many people can you hit with any given viral blast. Second, is conversion rate, and third is frequency. This gives you a fundamental idea of how viral a product is.
+
+Hotmail is the canonical example of brilliant viral marketing. Back when Hotmail launched, there were a bunch of mail companies that had been funded and were throwing huge amounts of money at traditional advertising. Back in that time, people couldn’t get free email clients; they had to be tied to their ISP. Hotmail and a couple other companies launched, and their clients were available wherever you went. You could log-in via library internet or school internet, and be able to get access to that. It was a really big value proposition for anyone who wanted to access it. Most of the companies went out there and did big TV campaigns, billboard campaigns, or newspaper campaigns; however, the Hotmail team didn’t have much funding as they did, so they had to scramble around to figure out how to do it. What they did was add that little link at the bottom of every email that said, ‘Sent from Hotmail. Get your free email here.’
+
+The interesting thing was that it meant that the payload was low: You email one person at a time, you’re not necessarily going to have a big payload. Maybe you send around one of those spam emails, but I’m not sure I’d click on your link. The frequency is high though, because you’re emailing the same people over and over, which means you’re going to hit those people once, twice, three times a day and really bring up the impressions. The conversion rate was also really high because people didn’t like being tied to their ISP email. So Hotmail ended up being extremely viral because it had high frequency and high conversion rates.
+
+Another example is Paypal. Paypal is interesting because there are two sides to it, the buyer and the seller side. The other thing that is interesting is that its mechanism for viral growth is eBay. So you can use a lot of things for virality that may not look necessarily obviously viral. If you said to a seller that you were going to send them money - I can’t think of a higher conversion rate. Frequency was low, and payload was low. But Paypal did this thing where they gave away money when you got your friends to sign up, and that’s how they went viral on the consumer side. They didn’t have to do that for sellers, because if I said ‘I am going to send you money via this,’ you will take that. And even on the consumer side they went viral because if someone says ‘Sign up for this thing and you’ll get ten bucks.’ Why wouldn’t you? So they were able to go viral because their conversion rate was high on the buyer and the seller side, not because their payload and frequency was high. Make sense?
+
+This is a really good way to look at virality if you want to say, ‘Is this product viral?’ Facebook was not viral via email sharing or anything like that. Facebook was purely viral via word of mouth. The interesting thing about Paypal and Hotmail, is to use them, the first person has to send an email to a person who wasn’t on the service. With Facebook, there is no native way to contact people who aren’t on the service. Everyone thinks that Facebook is a viral marketing success, but that’s actually not how it grew. It was word of mouth virality because it was an awesome product you wanted to tell your friends about.
+
+在国际化过程中，我们做了非常漂亮的两件事：
+
+* 尽管我们已经意识到我们国际化起步晚了，我们采取一种快速的方式来推进国际化，我们大战略的推进很慢，但行动很敏捷。例如，我们进行网站翻译的时候，我们创建了一个翻译平台\社区，这样，就不必去找专业的翻译来做这件事情了，但我们可以发动所有的用户来进行翻译，这样的速度是惊人的，例如，我们在12小时内，就获得了完整的法语版本；截至今天我们已经有了 140个版本的Facebook，其中 70 个都是从翻译社区获得的。我们花时间去做一些基础的事情，这使得我们后面做事的速度发生飞速提升。
+* 在众多语言中，选定出优先的语言版本：法语、德语、意大利语、西班牙语、中文。现在回过头来看一下，这几个语言是当今世界上的主流语言。
+
+还有一些其他的战术操作：病毒式营销、SEO（搜索引擎优化）、ESPN（美国的娱乐与体育节目）、SEM（搜索引擎营销）、会员机制、推荐机制；
+
+病毒式营销：书《the Viral Loop》强烈推荐读一读，对病毒营销以及广告的理解很有用；还有一本《Ogilvy on Advertising》；Sean找的了这个model，这个模型中可以看出，一个产品的病毒式传播有三个要素：*（下面三要素，没有理解）*
+
+* payload：不给用户太大压力，没有网络带宽的过多损耗，你可以点击这个营销，也可以忽略；
+* conversion rate：转化率，这个东西是否出现在用户需要的地方？
+* frequency：频率，适当的频率出现在用户的视野内；
+
+Paypal和Hotmail能够区分哪些是目标用户*（哪些用户在使用类似服务，但还没有在使用他们的服务）*，因此发邮件的方式就很好，不会打扰现有用户；但Facebook就无法区分哪些是目标用户，因此，Facebook使用的方式是：口口相传，简称口碑。
+
+Q: In the first round, it makes sense for there to be a low payload. Will the payload increase in later rounds as the campaign grows and people send more and more e-mails?
+
+A: First and foremost, I think you only send emails to a small number of people. So compared to the massive viral engines that exist today, where you import someone’s entire contact book and send them all an e-mail, or where you post to everyone’s friends on Facebook, the actual payloads are still very small even if it’s everyone that you e-mail on a frequent basis you hit. I’m also thinking per email sent out, how many people are on it. But it’s a fair point that as more people get on Hotmail, they’ll send more emails, and as more people use email, the product grows more and more successfully.
+
+Q: Does a point of conversion matter as well?
+
+A: On Hotmail you click to sign up, but on a billboard you have to remember the URL, go to the website, type it in, find the registration button, click register and sign up. Anything you can do to move friction out of the flow, do it. Going from a billboard ad to an online ad removes huge amounts of friction from the flow.
+
+Q: Are frequency and conversation rate related?
+
+A: Absolutely. If you hit someone with the same email over and over again, or the same banner ad, the same rules apply to every channel. The more times you hit someone with the same Facebook ad, the less they’ll click. That’s why we have to, like creative exhaustion, rotate creatives on Facebook. Same with banner ads and news feed stories. The fiftieth time you see that IQ story on your news feed, you are not going to want to click on it. The same is true with these emails. So if you send the same email to people over and over again with an invite, you will get a lower conversion rate. ‘The more you hit someone with the same message, the less they convert’ is fundamental across every online marketing channel.
+
+Second way to look at virality, which I think is awesome, is by this guy Ed. Ed runs the growth team at Uber now; he was at the growth team at Facebook. He was a Stanford MBA student, and did a class similar to this where they talked about virality and built viral products. The interesting thing is, if you look at Uber, they’re incredibly focused on drivers. It’s a two-sided market place, so they need drivers. It’s a huge part of their focus as a team, even though they’ve got probably the best viral guy in the world at the company.
+
+So with virality, you get someone to contact import (35:12) let's say. Then the question is, how many of those people do you get to send imports? Then, to how many people? Then, how many click? How many sign up? And then how many of those import. So essentially you want people to sign up to your site to import their contacts. You want to then get them to send an invite to all of those contacts - ideally all of those contacts, not just some of them. Then you want a percentage of those to click and sign up. If you multiply all the percentages/numbers in every point in between the steps, this is essentially how you get to the point of ‘What is the K factor?’ For example, let’s says 100 people get an invite per person who imports, then of those, 10% click, and 50% sign up, and of those only 10 to 20% import, you’re going to be at 0.5 - 1.0 K factor, and you’re not going to be viral. A lot of things like Viddy were very good at pumping up stories. They got the factor over 1, which is perfectly doable. But if you’ve got something that doesn’t have high retention on the backend, it doesn’t really matter. You should look at your invite flow and say ‘okay, what is my equivalent to import, how many people per import are invites sent to, how many of those receive clicks, how many of those convert to my site, how many of those then import,’ in order to get an idea of you K factor. The real important thing is still to think about retention, not so much virality, and only do this after you have a large number of people retained on your product per person who signs up.
+
+A couple more things we are going to touch on: SEO, emails, SMS, and push notifications.
+
+In SEO, there are three things you need to think about. First one is keyword research. People do this badly all the time. So I launched this cocktail site I told you about, I spend a year optimizing it to rank for the word cocktail making, but it turns out in the UK, no one searches for cocktail making- about 500 a month; I dominated that search, it was awesome! 400 visitors a month, it was amazing. Everyone searches for cocktail recipes, and in the U.S., everyone searches for drink recipes. So I optimized for the wrong word. You have to do your research first about what you’re going to go after.
+
+Research consists of, what do people search for that’s related to your site, how many people search for it, how many other people are ranking for it, and how valuable is it for you? Supply, demand, and value. So, do your keyword research to figure out which keyword you want to rank for. There are many great tools out there. Honestly the best one is still Google AdWords keyword planner tool.
+
+Once you’ve done that, the next most important thing is links. Page ranks is essentially how all SEO is driven, and Google is based on authority. Now there’s a lot of other things in Google’s algorithm now, like, do people search for your website, there's a lot of stuff about what the distribution of what the anchor text is that’s sent to your site, so that if you abuse it or spam it, they can pop out with spam. White text on a white background five pages below the fold doesn't work anymore.
+
+But the single most important thing is to get valuable links from high authority websites for you to rank in Google. Then you need to distribute that love inside your site by internally linking effectively. We launched SEO in September 2007; I joined Facebook November 2007. When we launched it, but we were getting no traffic from the pages we had launched, public user profiles. So when I went in and looked at it, the only way you could get into any public user profile was to click on the foot of the page for the about link, then click on the blog articles, then click on one of the authors, and then spider out through their friends to get all their friends.
+
+Turns out that Google was like, ‘They bury these pages, they’re not very valuable. I’m not going to rank them.’ We made one change: We added a directory so that Google could quickly get to every page on the site, and we 100Xed SEO traffic. Very simple change drove a lot of upside by distributing the link love internally.
+
+The last thing is that there’s a whole bunch of table stakes stuff for XML sitemaps, and making sure you have the right headers; it’s all covered really well online for you.
+
+Email is dead for people under 25 in my opinion. Young people don’t use email. They use WhatsApp, SMS, SnapChat, Facebook; they don’t use email. If you’re targeting an older audience, email is still pretty successful. Email still works for distribution, but realistically, email is not great for teenagers - even people at universities. You know how much you use instant messaging apps, and how little you use emails. And you guys are probably on the high scale for email because you’re in Silicon Valley. That being said, on email the things to think about: Email, SMS, and Push Notifications all behave the same way. They all have questions of deliverability, so to finish to finish first, first you have to finish. Your email has to get to someone’s inbox. So if you send a lot of spam, end up with dirty IPs, or send email from shared servers where other people are sending spam from, you are going to end up being put in the spam folder consistently and your email will fail completely. You may end up being blocked and have your email bounce. There’s a lot of stuff around email where you have to look when you receive feedback from the servers you are sending emails to, 500 series errors versus 400 series errors; you have to be respectful how those are handled. If someone gives you a hard bounce, retry once or twice and then stop trying because if you are someone who abuses people’s inboxes, the email companies spam folder you, and it’s very hard to get out. If you get caught in a spam house link, or anything like that, it’s very hard to get out. It’s really important with email that you are a high class citizen, and that you do good work with email because you want to have deliverability for the long run.
+
+Email对于上了年纪的人还有吸引力，但当前年轻人的基本不用Email，他们更倾向于 WhatsApp，SMS，SnapChat，Facebook。如果真的要使用Email，要注意避免发送邮件不合规，会被邮件服务器列入垃圾邮件列表，一旦进入这个列表，就很难再出来了。
+
+That counts for push notifications and SMS, too. With SMS, you can go buy SMS traffic via grey routes with people who are having phones strung up attached to a computer and pumping out SMSs. That works for a time, but it always gets shut down. I’ve seen so many companies make these mistakes where they think they’re going to grow by using these kinds of tactics. If you can’t get your email, SMS, or Push Notification delivered, you will never get any success from these. You actually spam your power users and give them notifications they don’t care about, making it really hard for them to opt out. Well, they start blocking you, and you can never push them once they’ve opted out of your Push Notifications. And it’s very hard to prompt them to turn them on once they’ve turned them off.
+
+So number one thing to think about regarding email, SMS, and Push Notifications is, you have to get them delivered. Beyond that, it’s a question of open rate, click rate. So what is the compelling subject line you can put there so the people can open your email, and how can you get them to click when they visit?
+
+Everyone focuses towards doing marketing emails that are just spam in my opinion. Newsletters are stupid. Don’t do newsletters because you’ll send the same newsletter to everyone on your site. Someone who signed up to your site yesterday versus someone who’s been using your product for three years - do they need the same message? No.
+
+The most effective email you can do is notifications. So what are you sending? What should you be notifying people of? This is a great place where we’re in the wrong mindset. As a Facebook user, I don’t want Facebook to email me about every ‘like’ I receive, because I receive a lot of them since I have a lot of Facebook friends. But as a new Facebook user, that first ‘like’ you receive is a magic moment. Turning on notifications throughout all of our channels, increased on our emails, SMS, and Push Notifications, but we only turned it on for low-engaged users who weren’t coming back to the site, so it wouldn’t be spamming for them.
+
+So it was a great experience to think about that. The first thing you need to think about when sending emails, SMS, and Push Notifications is what notifications should we be sending. The second thing you need to be thinking about is how can you create great triggered marketing campaigns. When someone created their first cross-border trade transaction was one of the best email campaigns I was ever part of at eBay in terms of click through rate. It was awesome because it was really timely, and really in context - the right thing to do for the user.
+
+单纯的广告邮件，大部分用户会将其直接列入垃圾邮件，谨慎的发送这类文件。*（思考：如何通知和推广用户？）*
+
+
+I’d say make sure you have deliverability. Focus on notifications and triggered based emails, SMS, and Push Notifications.
+
+There’s one thing I wanted to finish with, which is my favorite quote by General Patton. It’s so cliche; it’s crazy, but it’s awesome.
+
+“A good plan, violently executed today, is better than a perfect plan tomorrow.”
+
+And one other thing that Chamath instills in us and Mark still instills across the whole of Facebook is move fast and don’t be afraid to break stuff. If you can run more experiments than the next guy, if you can be hungry for growth, if you can fight and die for every extra user and you stay up late at night to get those extra users, to run those experiments, to get the data, and do it over and over and over again, you will grow faster.
+
+Mark has said he thinks we won because we wanted it more, and I really believe that. We just worked really hard. It’s not like we’re crazy smart, or we’ve all done these crazy things before. We just worked really really hard, and we executed fast. I strongly encourage you to do that. Growth is optional.
+
+有了计划，尽快实现，好过明天的完美计划。当然，此处侧重于计划差不多就要行动起来，不要求一再的细节上去打磨完美计划，而不是只进行粗糙的计划。不要怕犯错误，如果你比下一个人更早的犯错误，那也正是你的优势。
+
 
 
 
