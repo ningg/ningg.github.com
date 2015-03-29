@@ -115,6 +115,32 @@ The second thing to think about, that everyone in the Valley gets wrong is, we o
 
 What you need to focus on is the marginal user. The one person who doesn’t get a notification in a given day, month, or year. Building an awesome product is all about think about the power user, right? Building an incredible product is definitely optimizing it for the people who use your product the most, but when it comes to driving growth, people who are already using your product are not the ones you have to worry about. So in this Danny Ferante video there’s also talk about our growth accounting framework that we use to think about for growth. We looked at new users, resurrected users (people who weren’t on Facebook for 30 days and came back) and churned users. The resurrected and churned numbers for pretty much every product I’ve ever seen dominate the new user account once you reach a sensible point of growth a few years in. And all those users who are churning and resurrecting, had low friend counts, and didn’t find their friends so weren’t connected to the great stuff that was going on on Facebook. So the number one thing we needed to focus on, was getting them to those 10 friends, or whatever number of friends they needed. So think about the user on the margin; don’t think about where yourself (21:08), when you’re thinking about growth.
 
+另一件事情，基本每一个人都会出错：我们想当然地开展优化*（？）*。我们自己感觉网站的通知信息太多了，要对通知内容进行大规模的改进和优化。但事实上，网站的核心用户是因为通知太多才离开这个网站的吗？不是的，那为什么还有优化通知信息？
+
+我们应该关注边缘用户*（那些有可能放弃使用，也有可能继续使用网站的用户）*。那些很长时间都收不到一个通知的用户。做一个awesome product*（很棒的产品？）*，需要关注power user；做一个 incredible product，需要为那些活跃用户，来一直改进产品；当为了产品的用户增长时，哪些已经在以一定频率使用你的产品的用户，就不是重点了。Danny在视频中也谈到了：为获取用户增长时，应该关注 growth accounting framework *（具体是什么？）*。 关注那些用户：新用户、复活用户（30天没有登录，后来又重新登录的用户）、流失用户。很多产品的复活用户、流失用户都很多，我们仔细观察这个现象，找到了原因：这些用户在网站上没有什么朋友，或者说关注的人，实质就是人际关系不在这个网站上。因此，首要的事情是：让新用户获得 10 个以上的朋友，或者说 10 个以上的关注对象。总结一下：在考虑growth时，关注边缘用户，不要一直想自己的感受。
+
+So for operating for growth, what you really need to think about, is what is the North star of your company: What is that one metric, where if everyone in your company is thinking about it and driving their product towards that metric and their actions towards moving that metric up, you know in the long-run your company will be successful. By the way, they’re all probably all correlated to each other, so it’s probably fine to pick almost any metric, whichever one you feel the best about, that aligns with your mission and your values - probably go for that one. But realistically, daily active users fairly correlate to monthly active users; we could have gone with either one. Amount of content shared, also correlates with how many users there are, because guess what? You add a user, they share content. So a lot of things end up being correlated. Pick the one that fits with you and know that you’re going to stick with for a long time. Just have a North Star, and know the magic moment that you know when a user experiences that, they will deliver on that metric for you on the North Star, and then think about the marginal user, don’t think about yourself. Those are, I think, the most important points when operating for growth. Everything has to come from the top.
+
+So the last area is tactics. So let’s say you’ve found your niche market that you’re going to have a monopoly on inside the mousetrap market. It’s a silenced mousetrap fir sitting under beds, so if that the mice come to your bed overnight, they can be killed without waking you up. That’s your niche market. Your mousetrap is better than anybody else for that market. What typically happens in Silicon Valley is, everyone thinks marketers are useless. I thought marketers were useless when I was a Physics student, so I’m sure that you guys as Engineering students you must think that we’re awful people who aren’t useful to have around.
+
+‘Build it and they will come.’ That is something that is very much the mantra in the Valley, and I don’t believe it’s true; I believe you actually have to work. There’s a good article in the lecture page from interviewing Ben Silverman. We talked about how the growth of Pinterest was driven by marketing. I’m biased of course.
+
+The first tactic I want to talk about is internationalization. Facebook internationalized too late. Sheryl said it broadly in public and I definitely agree with that.
+
+（TODO）
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

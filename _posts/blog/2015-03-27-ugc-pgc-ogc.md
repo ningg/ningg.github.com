@@ -9,24 +9,23 @@ category: product
 ##简介
 
 
-![](/images/ugc-pgc-ogc/relation.jpg)
-
-
 
 UGC\PGC\OGC的定义如下：
 
-* UGC，User-Generated Content，`用户`生产内容；
-	* 又称UCC，User-Created Content。
-* PGC，Professionally-generated Content，`专业`生产内容；
-	* 又称PPC，Professionally-produced Content。
+* UGC，User-Generated Content，`用户`生产内容；又称UCC，User-Created Content。
+* PGC，Professionally-generated Content，`专业`生产内容；又称PPC，Professionally-produced Content。
 * OGC，Occupationally-Generated Content，`职业`生产内容。
+
+
+![](/images/ugc-pgc-ogc/relation.jpg)
+
 
 
 为什么会有UGC\PGC\OGC的划分？先看一下当前的趋势：
 
 * Web 2.0（论坛、博客为代表）大兴之后，Web 3.0（社交平台、微博为代表）兴起；
 * 移动互联网快速扩张，信息量太大，有一个需求：有限的时间内，获得尽可能多的准确信息，这就是专业信息的需求；
-* 在垂直领域，内容创作又被细分PGC和UGC，他们能产生专业的内容；
+* 在垂直领域，内容创作又被细分PGC和UGC，PGC对应专业的内容；
 
 UGC\PGC\OGC之间的区别：
 
@@ -54,20 +53,16 @@ PGC将会长久把握话语权，大部分用户，通过PGC获得相对专业�
 
 * 过去、现在、将来，都是`专家意见获得主流话语权`；
 * PGC只是UGC的一部分；
-* UGC带来的变化，不是话语权的转变，而是`专家认真过程`的转变；
-	* 之前照片拍的好不好，是由垄断的杂志社编辑们说的算，他们认可，你才是摄影专家；
-	* Flickr出现后，摄影师，只要获得最终用户（读者）的认可，就可以直接办摄影展；
+* UGC带来的变化，不是话语权的转变，而是`专家认证过程`的转变；举例：之前照片拍的好不好，是由垄断的杂志社编辑们说的算，他们认可，你才是摄影专家；Flickr出现后，摄影师，只要获得最终用户（读者）的认可，就可以直接办摄影展；
 * 互联网的本质：脱媒，最小化中间环节。（运营商，或者编辑们）
 
-UGC存在的必要性，几点：
+UGC存在的**必要性**，几点：
 
 * 用户除了获取专业、可靠的信息，还有两方面需求：互动、个性化；
-* 互动：熟人之间互动频繁；
-	* 互联网使得这些互动，随时随地都可以发生，成本很低；
-* 个性化：
-	* 交通台的路况信息；
+* 互动：熟人之间互动频繁；互联网使得这些互动，随时随地都可以发生，成本很低；
+* 个性化：交通台的路况信息；
 
-新媒体要解决几个问题：
+新媒体要解决**几个问题**：
 
 * 内容：好内容永远稀缺，PGC永远占有一席之地；
 * 互动：用户交流的价值巨大；
