@@ -72,7 +72,14 @@ GitHub上对于个人博客的支持，实质是利用GitHub Pages功能来实�
 
 * 购买域名
 * GitHub上绑定域名：
-	* 
+	* 创建CNAME
+	* 从[GitHub Help](https://help.github.com/) 上搜索 `custom domain`
+
+**TODO**：整理GitHub上域名配置的基本原理：
+
+* 整理A、C域名的区别
+* ...
+
 
 ##4.FAQ
 

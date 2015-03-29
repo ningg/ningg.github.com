@@ -11,13 +11,17 @@ pygments: true
 permalink: /:title
 
 
-title: NingG.github.com
+# title: NingG.github.com
+title: ningg.top
 
 # page中head部分的meta元素
 keywords: keywords
 description: NingG's Blog
 
-url: http://ningg.github.com
+# url: http://ningg.github.com
+url: http://ningg.top
+
 feed: /atom.xml
 atom_path : /atom.xml
-author_info: <a href="http://ningg.github.com/">NingG</a>
+# author_info: <a href="http://ningg.github.com/">NingG</a>
+author_info: <a href="http://ningg.top/">NingG</a>
