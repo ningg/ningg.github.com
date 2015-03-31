@@ -2,7 +2,7 @@
 layout: post
 title: Flume下插件方式实现Advanced Logger Sink
 description: Flume自带的Logger sink常用于直接在console上输出event的header和body，这对test和debug很重要，但body默认只truncate 16B，无法全部展示
-categories: flume big-data
+categories: flume
 ---
 
 ##背景

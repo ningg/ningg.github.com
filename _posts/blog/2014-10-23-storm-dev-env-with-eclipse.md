@@ -1,8 +1,8 @@
 ---
 layout: post
-title: win下搭建Storm topology的开发调试环境
+title: Win下搭建Storm topology的开发调试环境
 description: Storm官方文档的阅读和笔记
-categories: storm big-data
+categories: storm
 ---
 
 ##背景

@@ -2,7 +2,7 @@
 layout: post
 title: Storm 0.9.2：Tutorial
 description: Storm官方文档的阅读和笔记
-categories: storm big-data
+categories: storm
 ---
 
 > 原文地址：[Storm Tutorial][Storm Tutorial]，本文使用`英文原文+中文注释`方式来写。

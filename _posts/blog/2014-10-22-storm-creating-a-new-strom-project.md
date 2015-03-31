@@ -2,7 +2,7 @@
 layout: post
 title: Storm：Creating a new Storm project
 description: Storm官方文档的阅读和笔记
-categories: storm big-data
+categories: storm
 ---
 
 > 原文地址：[Creating a new Storm project](http://storm.apache.org/documentation/Creating-a-new-Storm-project.html)，本文使用`英文原文+中文注释`方式来写。

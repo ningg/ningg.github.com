@@ -2,7 +2,7 @@
 layout: post
 title: Eclipse下搭建Kafka的开发环境
 description: 使用Kafka，先要搭建一个开发环境，这属于基础设施
-categories: kafka big-data
+categories: kafka
 ---
 
 ##背景

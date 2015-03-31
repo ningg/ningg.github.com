@@ -2,7 +2,7 @@
 layout: post
 title: Flume 1.5.0.1 User Guide：Flume Channels
 description: Flume中重要组件channel的详细介绍
-categories: flume big-data
+categories: flume
 ---
 
 Channels are the repositories where the events are staged on a agent. Source adds the events and Sink removes it.

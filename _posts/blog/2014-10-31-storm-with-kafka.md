@@ -2,7 +2,7 @@
 layout: post
 title: Storm 0.9.2：如何从Kafka读取数据
 description: Kafka可以作为消息队列，实现写数据采集与数据分析之间的解耦，Storm如何读取Kafka中的数据呢？
-categories: kafka storm big-data
+categories: kafka storm
 ---
 
 ##背景

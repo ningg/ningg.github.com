@@ -2,7 +2,7 @@
 layout: post
 title: Flume 1.5.0.1 User Guide：Monitoring
 description: Flume中Monitoring部分的详细介绍
-categories: flume big-data
+categories: flume
 ---
 
 Monitoring in Flume is still a work in progress. Changes can happen very often. Several Flume components report metrics to the JMX platform MBean server. These metrics can be queried using Jconsole.

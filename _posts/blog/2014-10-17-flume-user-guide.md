@@ -2,7 +2,7 @@
 layout: post
 title: Flume 1.5.0.1 User Guide：introduction
 description: Flume简介，基本的安装配置
-categories: flume big-data
+categories: flume
 ---
 
 ##Introduction

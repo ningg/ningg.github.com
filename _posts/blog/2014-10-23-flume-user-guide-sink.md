@@ -2,7 +2,7 @@
 layout: post
 title: Flume 1.5.0.1 User Guide：Flume Sinks
 description: Flume中重要组件sink的详细介绍
-categories: flume big-data
+categories: flume
 ---
 
 

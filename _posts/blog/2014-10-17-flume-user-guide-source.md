@@ -2,7 +2,7 @@
 layout: post
 title: Flume 1.5.0.1 User Guide：Flume Sources
 description: Flume中重要组件source的详细介绍
-categories: flume big-data
+categories: flume
 ---
 
 

@@ -2,7 +2,7 @@
 layout: post
 title: Storm：setting up a development environment
 description: Storm官方文档的阅读和笔记
-categories: storm big-data
+categories: storm
 ---
 
 > 原文地址：[Setting up a development environment](http://storm.apache.org/documentation/Setting-up-development-environment.html)，本文使用`英文原文+中文注释`方式来写。

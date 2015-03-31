@@ -2,7 +2,7 @@
 layout: post
 title: Kafka 0.8.1：broker config（doing）
 description: Kafka构建的消息队列中，真正进行message存储的是broker
-categories: kafka big-data
+categories: kafka
 ---
 
 

@@ -2,10 +2,10 @@
 layout: post
 title: Kafka 0.8.1：Monitoring
 description: Kafka构建的消息队列中，需要对其运行状态进行监控
-categories: kafka big-data
+categories: kafka 
 ---
 
-> 本文原文来自[Kafka 0.8.x Monitoring][Kafka 0.8.x Monitoring]
+> 本文原文来自[Kafka 0.8.* Monitoring][Kafka 0.8.* Monitoring]
 
 
 

@@ -2,7 +2,7 @@
 layout: post
 title: Storm：Rationale
 description: Storm官方文档的阅读和笔记
-categories: storm big-data
+categories: storm
 ---
 
 > 原文地址：[Storm Rationale](http://storm.apache.org/documentation/Rationale.html)，本文使用`英文原文+中文注释`方式来写。

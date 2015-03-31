@@ -2,7 +2,7 @@
 layout: post
 title: Flume 1.5.0.1：如何将flume聚合的数据送入Kafka
 description: Flume负责数据聚合，Kafka作为消息队列，需要接收Flume发来的消息
-categories: flume kafka big-data
+categories: flume kafka
 ---
 
 ##背景

@@ -2,7 +2,7 @@
 layout: post
 title: Flume 1.5.0.1 User Guide：Event Serializers
 description: Flume中重要组件Event Serializers的详细介绍
-categories: flume big-data
+categories: flume
 ---
 
 
