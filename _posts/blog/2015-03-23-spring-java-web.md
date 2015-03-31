@@ -82,6 +82,23 @@ category: web
 
 UPDATE：20150325，分两步，从简单的来，先用`MyEclipse JEE project structure`，后期再尝试新建工程，使用`Standard Maven JEE project structure`。
 
+###数据库操作脚本
+
+（TODO）
+
+在web工程中，添加目录：SQLScript，其下，添加*.sql脚本，要求脚本文件命名为：ddl_timestamp.sql；要求，具体sql语句中，每个字段都必须添加comment？其他人有没有类似经验。
+
+###java代码规范
+
+java代码规范，几点：
+
+* java代码规范（变量命名）；
+* java web中MVC相关的代码规范；
+	* DAO层的命令：Dao？DAO？
+	* 包名：dao\dao.impl\service\service.impl\web\vo ？
+
+
+
 ###TODO
 
 几个问题：
