@@ -172,11 +172,10 @@ category: MySQL
 
 常用的操作：
 
-
-> * 执行存储过程：`CALL procedure_name(params);`
-> * 删除存储过程：`DROP PROCEDURE procedure_name;`（`DROP PROCEDURE IF EXISTS procedure_name;`）
-> * 显示所有正在运行的存储过程：`SHOW PROCEDURE STATUS`;其中包含了`procedure`的名称、创建时间、修改时间等;
-> * 显示存储过程的创建语句：`SHOW CREATE PROCEDURE procedure_name`;
+* 执行存储过程：`CALL procedure_name(params);`
+* 删除存储过程：`DROP PROCEDURE procedure_name;`（`DROP PROCEDURE IF EXISTS procedure_name;`）
+* 显示所有正在运行的存储过程：`SHOW PROCEDURE STATUS`;其中包含了`procedure`的名称、创建时间、修改时间等;
+* 显示存储过程的创建语句：`SHOW CREATE PROCEDURE procedure_name`;
 
 ###6.数据备份（操作）
 
@@ -189,6 +188,26 @@ category: MySQL
 ###8.(万佛归宗)Mysql整体框架，内部线程机制，语句执行效率
 
 (doing…)
+ 
+ 
+##常见问题
+
+
+###查看Table的建表语句
+
+执行如下SQL语句即可：
+
+	> show create table student;
+	>
+	| student | CREATE TABLE `student` (
+	  `studentzj` varchar(11) NOT NULL COMMENT '主键',
+	  `studentid` varchar(5) NOT NULL,
+	  `name` varchar(20) NOT NULL,
+	  `gender` char(1) DEFAULT NULL,
+	  `birthday` date DEFAULT NULL,
+	  PRIMARY KEY (`studentzj`)
+	) ENGINE=InnoDB DEFAULT CHARSET=utf8   |
+
  
 ##参考来源
 

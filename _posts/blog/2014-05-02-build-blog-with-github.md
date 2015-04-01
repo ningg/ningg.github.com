@@ -91,6 +91,17 @@ GitHub上对于个人博客的支持，实质是利用GitHub Pages功能来实�
 
 具体设置细节：请查看[官方文档](http://www.google.com/intl/zh-CN_ALL/analytics/learn/index.html)。
 
+####TODO：使用百度统计，替代google analytics
+
+TODO：单独写一篇文章，关注几点：如何配置、基本原理。
+
+参考资料：
+
+* http://www.williamlong.info/archives/2214.html
+* http://lusongsong.com/reed/548.html
+
+
+
 ###4.2如何DISCUS作为评论插件？
 
 1. 注册[DISQUS]账户；

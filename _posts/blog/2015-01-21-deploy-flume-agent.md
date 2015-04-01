@@ -146,7 +146,7 @@ category: flume
 	
 **补充说明**：此次启动的Flume Agent通过本地tail命令收集日志内容，并通过KafkaSink将信息送入Kafka中，具体涉及几点：
 
-* Flume的插件`plugins.d`，在重写的`flume-win.bat`脚本中，并没有去扫描插件目录`plugins.d`，并且在`-cp`选项后通过`:`添加路径的目录，将导致`flume-win.bat`；
+* Flume的插件`plugins.d`，在重写的`flume-win.bat`脚本中，并没有去扫描插件目录`plugins.d`，并且在`-cp`选项后通过`:`添加路径的目录，将导致`flume-win.bat`找不到Class，而直接使用`-cp %FLUME_HOME%\lib\*`*（集中目录）* 就能够找到class。**RE**：Win下应该`-cp`选项应该使用`;`分隔，无论是Win的CMD环境，还是Cygwin环境，都应用`;`来分隔jar包；Linux下`-cp`选项，需要使用`:`来分隔jar包。
 
 
 
