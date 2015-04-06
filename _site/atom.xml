@@ -1,16 +1,428 @@
 <?xml version="1.0" encoding="utf-8"?>
 <feed xmlns="http://www.w3.org/2005/Atom">
  
-   <title>NingG.github.com</title>
-   <link href="http://ningg.github.com/atom.xml" rel="self" type="application/atom+xml"/>
-   <link href="http://ningg.github.com" rel="alternate" type="text/html" />
-   <updated>2015-03-26T00:02:43+08:00</updated>
-   <id>http://ningg.github.com</id>
+   <title>ningg.top</title>
+   <link href="http://ningg.top/atom.xml" rel="self" type="application/atom+xml"/>
+   <link href="http://ningg.top" rel="alternate" type="text/html" />
+   <updated>2015-04-06T09:39:08+08:00</updated>
+   <id>http://ningg.top</id>
    <author>
      <name></name>
      <email></email>
    </author>
 
+   
+   <entry>
+     <title>Maven中pom文件如何编写</title>
+     <link href="http://ningg.github.com/maven-pom-file"/>
+     <updated>2015-04-05T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/maven-pom-file</id>
+     <content type="html">&lt;h2 id=&quot;properties&quot;&gt;properties定义与调用&lt;/h2&gt;
+
+&lt;p&gt;定义，典型的xml定义属性的方式：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;properties&amp;gt;
+	&amp;lt;spring.version&amp;gt;4.1.6.RELEASE&amp;lt;/spring.version&amp;gt;
+&amp;lt;properties&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;调用，与shell中调用变量一致：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;version&amp;gt;${spring.version}&amp;lt;/version&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;疑问：xml变量的定义，有规范吗？&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;sysout.println();
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;dependencyscope&quot;&gt;dependency的内scope的含义&lt;/h2&gt;
+
+&lt;p&gt;几点：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;scope的含义；&lt;/li&gt;
+  &lt;li&gt;scope都有哪些取值；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;如何注释？&lt;/h2&gt;
+
+&lt;p&gt;xml中如何注释？&lt;/p&gt;
+
+&lt;p&gt;&lt;code&gt;&amp;lt;!- -&amp;gt;&lt;/code&gt;&lt;/p&gt;
+
+</content>
+   </entry>
+   
+   <entry>
+     <title>Kafka 0.8.2.0 删除Topic</title>
+     <link href="http://ningg.github.com/kafka-delete-topic"/>
+     <updated>2015-04-01T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/kafka-delete-topic</id>
+     <content type="html">&lt;p&gt;几点：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;修改Kafka的配置文件，Kafka节点会自动生效吗？&lt;/li&gt;
+  &lt;li&gt;逐个修改Kafka节点，并逐个重启Kafka节点，是否可以？&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;修改Kafka配置文件，增加可删除Topic的设置：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;delete.topic.enable=true
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后，逐个重启Kafka节点，即可。逐个重启Kafka节点，而对其他系统没有影响，是因为之前已经设置每个数据备份两份：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# The default replication factor for automatically created topics.
+default.replication.factor=2
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;上述，开启可删除topic标识之后，可以删除Topic，操作如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;bin/kafka-topics.sh --zookeeper zk_host:port/chroot --delete --topic my_topic_name
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;然后，通过如下命令可以查看topic状态：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$ bin/kafka-topics.sh --zookeeper 168.7.2.165 --list
+fdiy - marked for deletion
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;疑问：为什么topic：fdiy还存在？并且还被标记上&lt;code&gt;marked for deletion&lt;/code&gt;?&lt;/p&gt;
+
+&lt;p&gt;（TODO）&lt;/p&gt;
+
+&lt;p&gt;关于上述&lt;code&gt;marked for deletion&lt;/code&gt;的现象，当前并不能确定原因，todo&lt;/p&gt;
+
+&lt;p&gt;参考来源：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://cwiki.apache.org/confluence/display/KAFKA/Kafka+Command+Line+and+Related+Improvements&quot;&gt;Kafka Command Line and Related Improvements&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://comments.gmane.org/gmane.comp.apache.kafka.user/6686&quot;&gt;Problem deleting topics in 0.8.2?&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;参考来源&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://kafka.apache.org/documentation.html&quot;&gt;Kafka 0.8.2 Documentation&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://stackoverflow.com/questions/16284399/purge-kafka-queue&quot;&gt;Purge Kafka Queue&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://stackoverflow.com/questions/17730905/is-there-a-way-to-delete-all-the-data-from-a-topic-or-delete-the-topic-before-ev&quot;&gt;Is there a way to delete all the data from a topic or delete the topic before every run?&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+   </entry>
+   
+   <entry>
+     <title>JQuery EasyUI入门简介</title>
+     <link href="http://ningg.github.com/easyui-intro"/>
+     <updated>2015-04-01T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/easyui-intro</id>
+     <content type="html">&lt;h2 id=&quot;section&quot;&gt;参考来源&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.cnblogs.com/wuhuacong/p/3281103.html&quot;&gt;基于MVC4+EasyUI的Web开发框架形成之旅–总体介绍&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.jeasyui.net/&quot;&gt;JQuery EasyUI中文网站&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://echarts.baidu.com/&quot;&gt;Echarts&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+   </entry>
+   
+   <entry>
+     <title>SQL语言中DDL、DML、DCL、TCL简介</title>
+     <link href="http://ningg.github.com/sql-language-ddl-dml-dcl-tcl"/>
+     <updated>2015-03-31T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/sql-language-ddl-dml-dcl-tcl</id>
+     <content type="html">&lt;p&gt;SQL（Structured Query Language，结构化查询语言），是操作RDBMS（relational database management system，关系型数据库管理系统）的专用语言。
+SQL的众多命令，例如，create、drop、insert、grant等，可以被分为4类：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;DDL，Data Definition Language，定义数据库结构、表结构；&lt;/li&gt;
+  &lt;li&gt;DML，Data Manipulation Language，操作具体数据；&lt;/li&gt;
+  &lt;li&gt;DCL，Data Control Language，数据库控制语言，授权、角色控制；&lt;/li&gt;
+  &lt;li&gt;TCL，Transaction Control Language，事务控制语言&lt;em&gt;（有的SQL实现支持，有的不支持）&lt;/em&gt;；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;ddl&quot;&gt;DDL&lt;/h2&gt;
+
+&lt;p&gt;定义数据库的三级结构，包括外模式、概念模式、内模式以及相互之间的映像，定义数据的完整性、安全控制等约束。&lt;em&gt;（有安全控制？）&lt;/em&gt;
+DDL，不需要commit。&lt;/p&gt;
+
+&lt;p&gt;思考：DDL，不需要commit？commit的作用是什么？&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;CREATE – to create objects in the database&lt;/li&gt;
+  &lt;li&gt;ALTER – alters the structure of the database&lt;/li&gt;
+  &lt;li&gt;DROP – delete objects from the database&lt;/li&gt;
+  &lt;li&gt;TRUNCATE – remove all records from a table, including all spaces allocated for the records are removed&lt;/li&gt;
+  &lt;li&gt;COMMENT – add comments to the data dictionary&lt;/li&gt;
+  &lt;li&gt;RENAME – rename an object&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;dml&quot;&gt;DML&lt;/h2&gt;
+
+&lt;p&gt;对应数据库的增删改查（CRUD）操作。DML分为交互型DML和嵌入型DML两类。依据语言级别，DML又可分为过程性DML和非过程性DML两种。需要commit。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;SELECT – retrieve data from the a database&lt;/li&gt;
+  &lt;li&gt;INSERT – insert data into a table&lt;/li&gt;
+  &lt;li&gt;UPDATE – updates existing data within a table&lt;/li&gt;
+  &lt;li&gt;DELETE – Delete all records from a database table&lt;/li&gt;
+  &lt;li&gt;MERGE – UPSERT operation (insert or update)&lt;/li&gt;
+  &lt;li&gt;CALL – call a PL/SQL or Java subprogram&lt;/li&gt;
+  &lt;li&gt;EXPLAIN PLAN – interpretation of the data access path&lt;/li&gt;
+  &lt;li&gt;LOCK TABLE – concurrency Control&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;dcl&quot;&gt;DCL&lt;/h2&gt;
+
+&lt;p&gt;数据库控制语言，授权、角色控制等&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;GRANT – allow users access privileges to database&lt;/li&gt;
+  &lt;li&gt;REVOKE – withdraw users access privileges given by using the GRANT command&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;tcl&quot;&gt;TCL&lt;/h2&gt;
+
+&lt;p&gt;设置事务控制&lt;em&gt;（不同SQL的实现方式，支持程度不同）&lt;/em&gt;，通常针对DML语句。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;SAVEPOINT 设置保存点&lt;/li&gt;
+  &lt;li&gt;ROLLBACK  回滚&lt;/li&gt;
+  &lt;li&gt;SET TRANSACTION&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;小结&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;数据定义，（SQL DDL）用于定义SQL模式、基本表、视图和索引的创建和撤消操作；&lt;/li&gt;
+  &lt;li&gt;数据操作，（SQL DML）数据操纵分成数据查询和数据更新两类。数据更新又分成插入、删除、和修改三种操作；&lt;/li&gt;
+  &lt;li&gt;数据控制，包括对基本表和视图的授权，完整性规则的描述，事务控制等内容。&lt;/li&gt;
+  &lt;li&gt;嵌入式SQL的使用规定。涉及到SQL语句嵌入在宿主语言程序中使用的规则。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;sqlddldmldcltcl&quot;&gt;为什么将SQL，细分为DDL\DML\DCL\TCL？&lt;/h2&gt;
+
+&lt;p&gt;将SQL的操作，细分为4类：DDL\DML\DCL\TCL的作用，方便进行分类控制，例如：金融、税务等系统，禁止进行DDL操作。&lt;/p&gt;
+
+&lt;p&gt;思考：上述的权限控制，是否能够只针对单个SQL命令，例如INSERT\UPDATE等？即，更细粒度的权限控制。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;参考来源&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.cnblogs.com/henryhappier/archive/2010/07/05/1771295.html&quot;&gt;SQL四种语言：DDL,DML,DCL,TCL&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.w3schools.in/mysql/ddl-dml-dcl/&quot;&gt;What is DDL, DML and DCL&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://stackoverflow.com/questions/12803047/why-are-sql-statements-divided-into-ddl-dml-dcl-and-tcl-statements&quot;&gt;Why are SQL statements divided into DDL, DML, DCL and TCL statements&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+   </entry>
+   
+   <entry>
+     <title>Navicat for MySQL 常用操作</title>
+     <link href="http://ningg.github.com/navicat-intro"/>
+     <updated>2015-03-31T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/navicat-intro</id>
+     <content type="html">&lt;p&gt;（TODO）&lt;/p&gt;
+
+&lt;p&gt;参考：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Navicat for MySQL的自带帮助文档（&lt;code&gt;F1&lt;/code&gt;）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;特别说明：之前整理的《SQL必知必会(第3版)》，内容没有整理完，当前的形态应该是ppt。&lt;/p&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;常见问题&lt;/h2&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;导出建表语句&lt;/h3&gt;
+
+&lt;p&gt;目标：查看表格的DDL信息&lt;/p&gt;
+
+&lt;p&gt;具体操作：表格 &amp;gt; 右键 &amp;gt; 对象信息 &amp;gt; DDL&lt;/p&gt;
+
+&lt;p&gt;补充：DDL （Data Definition Language，数据定义语言），用于定义数据库的结构；&lt;/p&gt;
+
+</content>
+   </entry>
+   
+   <entry>
+     <title>几个概念：UGC\PGC\OGC</title>
+     <link href="http://ningg.github.com/ugc-pgc-ogc"/>
+     <updated>2015-03-27T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/ugc-pgc-ogc</id>
+     <content type="html">&lt;h2 id=&quot;section&quot;&gt;简介&lt;/h2&gt;
+
+&lt;p&gt;UGC\PGC\OGC的定义如下：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;UGC，User-Generated Content，&lt;code&gt;用户&lt;/code&gt;生产内容；又称UCC，User-Created Content。&lt;/li&gt;
+  &lt;li&gt;PGC，Professionally-generated Content，&lt;code&gt;专业&lt;/code&gt;生产内容；又称PPC，Professionally-produced Content。&lt;/li&gt;
+  &lt;li&gt;OGC，Occupationally-Generated Content，&lt;code&gt;职业&lt;/code&gt;生产内容。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/ugc-pgc-ogc/relation.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;为什么会有UGC\PGC\OGC的划分？先看一下当前的趋势：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Web 2.0（论坛、博客为代表）大兴之后，Web 3.0（社交平台、微博为代表）兴起；&lt;/li&gt;
+  &lt;li&gt;移动互联网快速扩张，信息量太大，有一个需求：有限的时间内，获得尽可能多的准确信息，这就是专业信息的需求；&lt;/li&gt;
+  &lt;li&gt;在垂直领域，内容创作又被细分PGC和UGC，PGC对应专业的内容；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;UGC\PGC\OGC之间的区别：&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;维度&lt;/th&gt;
+      &lt;th style=&quot;text-align: right&quot;&gt;UGC&lt;/th&gt;
+      &lt;th style=&quot;text-align: right&quot;&gt;PGC&lt;/th&gt;
+      &lt;th style=&quot;text-align: right&quot;&gt;OGC&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;专业知识背景&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;&lt;code&gt;N&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;&lt;code&gt;Y&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;&lt;code&gt;Y&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;付费&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;&lt;code&gt;N&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;&lt;code&gt;N&lt;/code&gt;&lt;/td&gt;
+      &lt;td style=&quot;text-align: right&quot;&gt;&lt;code&gt;Y&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;简介几点：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;UGC代表：论坛、博客、微博，内容由用户自行创作，管理人员只是协调和维护秩序；&lt;/li&gt;
+  &lt;li&gt;OGC代表：各大新闻站点、视频网站，其内容均有内部自行创造和从外部花钱购入版权；&lt;/li&gt;
+  &lt;li&gt;PGC是UGC、OGC都欢迎的对象，因为其既能产生专业的内容，又不需要付费；&lt;/li&gt;
+  &lt;li&gt;实际上，PGC只是一种错觉，根本上看来，PGC是UGC的一部分，只是这部分相当专业和精彩；&lt;/li&gt;
+  &lt;li&gt;互联网内容供应，仍是泾渭分明的UGC和OGC；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;趋势&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;备注：下面是整理的自己比较认同的别人的观点。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;PGC将会长久把握话语权，大部分用户，通过PGC获得相对专业、可靠的信息，几点：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;过去、现在、将来，都是&lt;code&gt;专家意见获得主流话语权&lt;/code&gt;；&lt;/li&gt;
+  &lt;li&gt;PGC只是UGC的一部分；&lt;/li&gt;
+  &lt;li&gt;UGC带来的变化，不是话语权的转变，而是&lt;code&gt;专家认证过程&lt;/code&gt;的转变；举例：之前照片拍的好不好，是由垄断的杂志社编辑们说的算，他们认可，你才是摄影专家；Flickr出现后，摄影师，只要获得最终用户（读者）的认可，就可以直接办摄影展；&lt;/li&gt;
+  &lt;li&gt;互联网的本质：脱媒，最小化中间环节。（运营商，或者编辑们）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;UGC存在的&lt;strong&gt;必要性&lt;/strong&gt;，几点：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;用户除了获取专业、可靠的信息，还有两方面需求：互动、个性化；&lt;/li&gt;
+  &lt;li&gt;互动：熟人之间互动频繁；互联网使得这些互动，随时随地都可以发生，成本很低；&lt;/li&gt;
+  &lt;li&gt;个性化：交通台的路况信息；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;新媒体要解决&lt;strong&gt;几个问题&lt;/strong&gt;：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;内容：好内容永远稀缺，PGC永远占有一席之地；&lt;/li&gt;
+  &lt;li&gt;互动：用户交流的价值巨大；&lt;/li&gt;
+  &lt;li&gt;高效率分发：例如，新浪微博的关注机制的定制功能；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;参考来源&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://yjy.people.com.cn/n/2014/0120/c245079-24169402.html&quot;&gt;浅析UGC、PGC、OGC&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.zhihu.com/question/19863075&quot;&gt;UGC\PGC谁会成为主流？&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+   </entry>
+   
+   <entry>
+     <title>MySQL的命名规范</title>
+     <link href="http://ningg.github.com/mysql-name-conventions"/>
+     <updated>2015-03-27T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/mysql-name-conventions</id>
+     <content type="html">&lt;p&gt;数据库、表、字段，如何命名？这可是个大事：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;命名可理解&lt;/li&gt;
+  &lt;li&gt;团队协作&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;上面起名起的好，能够减少大量的沟通成本，避免一些错误操作。&lt;/p&gt;
+
+&lt;p&gt;如何去找这些命名规范？初步想了一下，两个途径：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.jb51.net/article/47617.htm&quot;&gt;MySQL的官方文档&lt;/a&gt;；&lt;/li&gt;
+  &lt;li&gt;行业内通用的规范；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;找了一下，行业内通用规范，看到了nettedfish的&lt;a href=&quot;http://vdisk.weibo.com/s/dR8G_5nKajgp&quot;&gt;去哪儿MySQL开发规范.pdf&lt;/a&gt;，规范太多，就这个了。&lt;/p&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;常用规范简介&lt;/h2&gt;
+
+&lt;p&gt;（todo）&lt;/p&gt;
+
+&lt;p&gt;准备整理一点记得住的规范，要简洁一点。&lt;/p&gt;
+
+&lt;p&gt;详细参考下面几个文档：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.jb51.net/article/47617.htm&quot;&gt;MySQL数据库命名规范及约定&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://vdisk.weibo.com/s/dR8G_5nKajgp&quot;&gt;去哪儿MySQL开发规范.pdf&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;参考来源&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://dev.mysql.com/doc/refman/5.6/en/index.html&quot;&gt;MySQL 5.6 Reference Manual&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.jb51.net/article/47617.htm&quot;&gt;MySQL数据库命名规范及约定&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://vdisk.weibo.com/s/dR8G_5nKajgp&quot;&gt;去哪儿MySQL开发规范.pdf&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+   </entry>
+   
+   <entry>
+     <title>流程图 and 线框图</title>
+     <link href="http://ningg.github.com/flow-chart-and-line-diagram"/>
+     <updated>2015-03-26T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/flow-chart-and-line-diagram</id>
+     <content type="html">&lt;p&gt;提示：本篇是杂谈，没有太多系统的干货。&lt;/p&gt;
+
+&lt;p&gt;在产品需求确定之后，下面的工作如何开展？梳理流程图？开启线框图？流程图看起来有点复杂、琐碎，不直观，因为无法直观看到页面；相反，线框图画起来很快的，托拉拽，效果也直观的很。额外说一点，线框图最终成型是以界面为单位，而在实际绘制过程中，可以先梳理人的行为，最后严格梳理界面。&lt;/p&gt;
+
+&lt;p&gt;好了，上面关于流程图和线框图的争论，先不说。下面说一下，需求确定后需要考虑的几个问题：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;用户要获取哪些信息？&lt;em&gt;（用户的目的）&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;什么流程，比较合理？&lt;em&gt;（操作过程）&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;上述流程怎么页面化？以页面为单元进行分割；&lt;/li&gt;
+  &lt;li&gt;当前页面，有哪些信息需要展示？如何布局？&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;上面是按照线性逻辑，在思考问题，直觉上，感觉是合理的；但事实上，不一定是合理的，具体要从操作层面来看。&lt;/p&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;杂谈&lt;/h2&gt;
+
+&lt;p&gt;每天都有系统整理，这个基本是不可能的，因为一天时间太短了，只有24h，而且要睡觉6h；吃饭、间歇休息、上下班路上时间消耗掉4h。剩下的时间…不多说了&lt;/p&gt;
+
+</content>
+   </entry>
    
    <entry>
      <title>Git入门</title>
@@ -49,7 +461,28 @@
 
 &lt;p&gt;注：在之前的&lt;a href=&quot;/project-flume-ng-extends-source&quot;&gt;一篇文章&lt;/a&gt;中也涉及过Git的使用。&lt;/p&gt;
 
-&lt;h2 id=&quot;section-1&quot;&gt;参考来源&lt;/h2&gt;
+&lt;h2 id=&quot;section-1&quot;&gt;常见问题&lt;/h2&gt;
+
+&lt;h3 id=&quot;git-commitgit-push&quot;&gt;git commit之后，git push之前，如何进行回滚&lt;/h3&gt;
+
+&lt;p&gt;git commit之后，发现有的文件不详添加到git server中，希望回滚，该如何做？&lt;/p&gt;
+
+&lt;p&gt;思路：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;将文件git push之后，再添加.gitignore文件；&lt;/li&gt;
+  &lt;li&gt;直接回滚处理git commit，然后，添加.gitignore，重新git commit；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;（TODO）&lt;/p&gt;
+
+&lt;p&gt;如何解决？thinking…&lt;/p&gt;
+
+&lt;h3 id=&quot;gitignore&quot;&gt;设置.gitignore对多级目录都有效？&lt;/h3&gt;
+
+&lt;p&gt;直接在顶级目录中设置.gitignore？&lt;/p&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;参考来源&lt;/h2&gt;
 
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;http://git-scm.com/book/zh/v1&quot;&gt;Pro Git&lt;/a&gt;&lt;/li&gt;
@@ -58,9 +491,9 @@
   &lt;li&gt;&lt;a href=&quot;http://www.cnblogs.com/lookenwu/p/3925308.html&quot;&gt;快学Git&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;section-2&quot;&gt;闲谈&lt;/h2&gt;
+&lt;h2 id=&quot;section-3&quot;&gt;闲谈&lt;/h2&gt;
 
-&lt;p&gt;前一段时间得知消息 &lt;code&gt;**&lt;/code&gt; 队伍，逐渐兵强马壮，并且被邀请上了一个山头，做起了事业；细看他们的做法，他们队长在开始的时候，相信 &lt;code&gt;人生要独辟蹊径&lt;/code&gt; 这么个说法，然后，在做事情的时候，他们战略立意为：时间紧迫，做好事情，抓住机会，成立队伍，把事情做好、做丰富，合适机会出现的时候，就做事业。实际上一年半之前，我们队伍与 &lt;code&gt;**&lt;/code&gt; 队伍做的事情是相似的，但我们战略上没有定位，基本想法是：有事情做就把事情做好，一起做事，一起吃肉。最后，毕业了，我们的小队伍，散伙，各自谋生。当然，我认为造成当前与 &lt;code&gt;**&lt;/code&gt; 队伍巨大差异的原因有很多，但我们战略立意太低了，没有战略定位，到头来，就成了混日子，能偷懒的时候，都偷懒了，一年回头一看，啥事情都没做成。我作为队伍的大佬之一，对此反思，下次有机会跟当时队伍大佬 &lt;code&gt;2W&lt;/code&gt; 见面了，好好扯扯这个事。&lt;/p&gt;
+&lt;p&gt;前一段时间得知消息 &lt;code&gt;**&lt;/code&gt; 队伍，逐渐兵强马壮，并且被邀请上了一个山头，做起了事业；细看他们的做法，他们队长在开始的时候，相信 &lt;code&gt;人生要独辟蹊径&lt;/code&gt; 这么个说法，然后，在做事情的时候，他们战略立意为：时间紧迫，做好事情，抓住机会，成立队伍，把事情做好、做丰富，合适机会出现的时候，就做事业。实际上在2年之前，我们队伍与 &lt;code&gt;**&lt;/code&gt; 队伍做的事情是相似的，但我们战略上没有定位，基本想法是：有事情做就把事情做好，一起做事，一起吃肉。最后，毕业了，我们的小队伍，散伙，各自谋生。当然，我认为造成当前与 &lt;code&gt;**&lt;/code&gt; 队伍巨大差异的原因有很多，但我们战略立意太低了，没有战略定位，到头来，就成了混日子，能偷懒的时候，都偷懒了，1年回头一看，啥事情都没做成。我作为队伍的大佬之一，对此反思，下次有机会到北京，跟当时队伍大佬 &lt;code&gt;2W&lt;/code&gt; 见面了，好好扯扯这个事。&lt;/p&gt;
 
 &lt;p&gt;上面为什么提到这个战略定位呢？是想说无论事情大小，都要有个清晰、适当的战略目标，以此避免因为短期视野局限，迷失方向，浪费精力；时间太宝贵了，关键不可逆啊。&lt;/p&gt;
 
@@ -135,755 +568,7 @@
 
 &lt;p&gt;&lt;img src=&quot;/images/create-effective-product-protype/gbz06.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-</content>
-   </entry>
-   
-   <entry>
-     <title>Web相关的Specifications</title>
-     <link href="http://ningg.github.com/web-application-specifications"/>
-     <updated>2015-03-24T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/web-application-specifications</id>
-     <content type="html">&lt;blockquote&gt;
-  &lt;p&gt;原文地址：&lt;a href=&quot;http://wiki.apache.org/tomcat/Specifications&quot;&gt;Tomcat - Specifications&lt;/a&gt;&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;列一下目录：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Web Application Specifications
-    &lt;ul&gt;
-      &lt;li&gt;Overview&lt;/li&gt;
-      &lt;li&gt;Java Servlet Specifications&lt;/li&gt;
-      &lt;li&gt;JavaServer Pages and Expression Language Specifications&lt;/li&gt;
-      &lt;li&gt;Java API for WebSocket&lt;/li&gt;
-      &lt;li&gt;See Also&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Protocol Specifications
-    &lt;ul&gt;
-      &lt;li&gt;HTTP
-        &lt;ul&gt;
-          &lt;li&gt;Related Specifications&lt;/li&gt;
-        &lt;/ul&gt;
-      &lt;/li&gt;
-      &lt;li&gt;AJP&lt;/li&gt;
-      &lt;li&gt;SPDY&lt;/li&gt;
-      &lt;li&gt;HTTP/2&lt;/li&gt;
-      &lt;li&gt;WebSocket&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>Java Servlet Specifications 3.0 - JSR315</title>
-     <link href="http://ningg.github.com/java-servlet-specifications-3.0-jsr315"/>
-     <updated>2015-03-24T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/java-servlet-specifications-3.0-jsr315</id>
-     <content type="html">&lt;p&gt;参考&lt;a href=&quot;http://wiki.apache.org/tomcat/Specifications&quot;&gt;Tomcat - Specifications&lt;/a&gt;中整理的内容，直接对Servlet 3.0先来一个整体的概述：&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Spec versions&lt;/td&gt;
-      &lt;td&gt;Servlet 3.0&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Main page&lt;/td&gt;
-      &lt;td&gt;&lt;a href=&quot;http://jcp.org/aboutJava/communityprocess/final/jsr315/index.html&quot;&gt;JSR315&lt;/a&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Online Javadoc&lt;/td&gt;
-      &lt;td&gt;&lt;a href=&quot;http://docs.oracle.com/javaee/6/api/&quot;&gt;Java EE 6 API&lt;/a&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;table&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Stable:&lt;/td&gt;
-      &lt;td&gt;Final Release&lt;/td&gt;
-      &lt;td&gt;Maintenance Release (Version 3.0 Rev a)&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Date:&lt;/td&gt;
-      &lt;td&gt;10 Dec, 2009&lt;/td&gt;
-      &lt;td&gt;6 Feb, 2011&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Download Page:&lt;/td&gt;
-      &lt;td&gt;&lt;a href=&quot;http://jcp.org/aboutJava/communityprocess/final/jsr315/index.html&quot;&gt;Overview&lt;/a&gt;，&lt;a href=&quot;http://download.oracle.com/otndocs/jcp/servlet-3.0-fr-eval-oth-JSpec/&quot;&gt;Direct Download&lt;/a&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;a href=&quot;http://jcp.org/aboutJava/communityprocess/mrel/jsr315/index.html&quot;&gt;Overview&lt;/a&gt;，&lt;a href=&quot;http://download.oracle.com/otndocs/jcp/servlet-3.0-mrel-eval-oth-JSpec/&quot;&gt;Direct Download&lt;/a&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;&lt;strong&gt;疑问&lt;/strong&gt;：JSR的两个版本&lt;code&gt;Final Release&lt;/code&gt;和&lt;code&gt;Maintenance Release&lt;/code&gt;什么区别？
-&lt;strong&gt;RE&lt;/strong&gt;：JCP 正式发布的规范称为 &lt;code&gt;Final Release&lt;/code&gt;，如果进行修改、升级，则重新发布为 &lt;code&gt;Maintenance Release&lt;/code&gt;。&lt;/p&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>Tomcat 入门</title>
-     <link href="http://ningg.github.com/tomcat-intro"/>
-     <updated>2015-03-23T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/tomcat-intro</id>
-     <content type="html">&lt;p&gt;几点：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;如何安装、启动Tomcat？&lt;/li&gt;
-  &lt;li&gt;Tomcat中常用的配置，以及含义？&lt;/li&gt;
-  &lt;li&gt;Tomcat的基本原理？
-    &lt;ul&gt;
-      &lt;li&gt;Tomcat的运行机制；&lt;/li&gt;
-      &lt;li&gt;web在Tomcat中的处理过程；&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;简介&lt;/h2&gt;
-
-&lt;p&gt;Apache Tomcat，开源软件&lt;em&gt;（这句是废话）&lt;/em&gt;，支持Java Servlet和JavaServer Pages（JSP）的实现，具体Java Servlet和JavaServer Pages specification是由JCP（Java Community Process）主导制定。&lt;/p&gt;
-
-&lt;h2 id=&quot;tomcat&quot;&gt;安装、启动Tomcat&lt;/h2&gt;
-
-&lt;p&gt;几个步骤：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;到&lt;a href=&quot;http://tomcat.apache.org/&quot;&gt;Apache Tomcat&lt;/a&gt;下载Tomcat 7.0.59；&lt;/li&gt;
-  &lt;li&gt;解压；&lt;/li&gt;
-  &lt;li&gt;执行&lt;code&gt;$APACHE_HOMT/bin/startup.bat&lt;/code&gt;；&lt;/li&gt;
-  &lt;li&gt;通过浏览器访问：&lt;code&gt;http://localhost:8080&lt;/code&gt;即可看到Tomcat主页面；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;实际上，执行&lt;code&gt;$APACHE_HOMT/bin/startup.bat&lt;/code&gt;后，会出现如下信息：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;2015-3-23 16:51:55 org.apache.coyote.AbstractProtocol start
-信息: Starting ProtocolHandler [&quot;http-apr-8080&quot;]
-2015-3-23 16:51:55 org.apache.coyote.AbstractProtocol start
-信息: Starting ProtocolHandler [&quot;ajp-apr-8009&quot;]
-2015-3-23 16:51:55 org.apache.catalina.startup.Catalina start
-信息: Server startup in 691 ms
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;上述信息中，出现的两个数字&lt;code&gt;8080&lt;/code&gt;、&lt;code&gt;8009&lt;/code&gt;为Tomcat默认监听的端口。&lt;/p&gt;
-
-&lt;h2 id=&quot;tomcat-1&quot;&gt;Tomcat常用配置&lt;/h2&gt;
-
-&lt;p&gt;（常用场景）&lt;/p&gt;
-
-&lt;h2 id=&quot;tomcat-2&quot;&gt;Tomcat基本原理&lt;/h2&gt;
-
-&lt;p&gt;推荐资料：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.datadisk.co.uk/html_docs/java_app/tomcat6/tomcat6.htm&quot;&gt;Tomcat/Apache 6&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.ntu.edu.sg/home/ehchua/programming/howto/Tomcat_More.html&quot;&gt;Apache Tomcat 7-more about the cat&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.ntu.edu.sg/home/ehchua/programming/howto/Tomcat_HowTo.html&quot;&gt;How to Install Apache Tomcat and Get Started with Java Servlet Programming&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;疑问：tomcat运行时，是一个Process，那在tomcat容器中部署的web应用，是作为process启动的？还是直接thread？&lt;/p&gt;
-
-&lt;h2 id=&quot;section-1&quot;&gt;参考来源&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://tomcat.apache.org/&quot;&gt;Apache Tomcat&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.ntu.edu.sg/home/ehchua/programming/howto/Tomcat_More.html&quot;&gt;Apache Tomcat 7-more about the cat&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.ntu.edu.sg/home/ehchua/programming/howto/Tomcat_HowTo.html&quot;&gt;How to Install Apache Tomcat and Get Started with Java Servlet Programming&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section-2&quot;&gt;杂谈&lt;/h2&gt;
-
-&lt;p&gt;重走web路，一年多没碰web的东西，该忘的都忘了，用到的时候，需要重新查阅，现在只有解决问题的基本思路，索性借着这次重新使用java web的机会把整体的内容再过一遍。&lt;/p&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>面向对象设计原则</title>
-     <link href="http://ningg.github.com/object-oriented-design-principles"/>
-     <updated>2015-03-23T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/object-oriented-design-principles</id>
-     <content type="html">&lt;p&gt;SOLID是面向对象设计和编程（OOD&amp;amp;OOP）中的重要编码原则：&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;SRP&lt;/td&gt;
-      &lt;td&gt;The Single Responsibility Principle&lt;/td&gt;
-      &lt;td&gt;单一责任&lt;/td&gt;
-      &lt;td&gt;一个类，有且只有一个更改的原因&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;OCP&lt;/td&gt;
-      &lt;td&gt;The Open Closed Principle&lt;/td&gt;
-      &lt;td&gt;开放封闭&lt;/td&gt;
-      &lt;td&gt;不能修改类，可以扩展类&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;LSP&lt;/td&gt;
-      &lt;td&gt;The Liskov Substitution Principle&lt;/td&gt;
-      &lt;td&gt;里氏替换&lt;/td&gt;
-      &lt;td&gt;子类，可以替换基类&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;ISP&lt;/td&gt;
-      &lt;td&gt;The Interface Segregation Principle&lt;/td&gt;
-      &lt;td&gt;接口分离&lt;/td&gt;
-      &lt;td&gt;细粒度的接口&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;DIP&lt;/td&gt;
-      &lt;td&gt;The Dependency Inversion Principle&lt;/td&gt;
-      &lt;td&gt;依赖反转&lt;/td&gt;
-      &lt;td&gt;依赖抽象而不是具体实现&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;额外说几点：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;SOLID原则是 class 级别的，与测试工具一起，更能发挥效力；&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.codeproject.com/Articles/567768/Object-Oriented-Design-Principles&quot;&gt;Object Oriented Design Principles&lt;/a&gt;和&lt;a href=&quot;http://www.importnew.com/10656.html&quot;&gt;面向对象设计原则和创建SOLID应用的5个方法&lt;/a&gt;中有详细的例子，说明代码的书写规范。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;代码腐坏的几个现象：&lt;/h2&gt;
-
-&lt;p&gt;代码变质，有几个现象：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;僵化：小的变化，导致整个系统重建；&lt;/li&gt;
-  &lt;li&gt;脆弱：一个模块的变化，导致其他不不相关的模块异常。例如，汽车系统中，调整电台会影响到窗户的使用；&lt;/li&gt;
-  &lt;li&gt;固定：一个模块，无法被抽取，并且在新环境中重用，例如登录模块，这是由于各个模块之间的耦合和依赖造成的额，改进策略是，从底层细节，比如特定数据库、UI实现、特殊框架等解耦核心对象；&lt;/li&gt;
-  &lt;li&gt;粘性：代码构建、测试要花费很长时间；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;一个软件项目，满足当前功能，是最基本的要求；而实际上，良好实现的软件项目，能在满足当前功能基础上，满足未来二次开发、维护的需要。软件项目的完整成本分为：开发成本、二次开发成本、维护成本。&lt;/p&gt;
-
-&lt;h2 id=&quot;single-responsibility&quot;&gt;单一责任（Single Responsibility）&lt;/h2&gt;
-
-&lt;p&gt;一个类只做一种类型的责任，当需要承担其他类型责任时，分解这个类。&lt;/p&gt;
-
-&lt;p&gt;下面的代码有多少职责？&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;class Employee {
-  public Pay calculatePay() {...}
-  public void save() {...}
-  public String describeEmployee() {...}
-}  
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;正确答案是3个。&lt;/p&gt;
-
-&lt;p&gt;在一个类中混合了：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;支付的计算逻辑&lt;/li&gt;
-  &lt;li&gt;数据库逻辑&lt;/li&gt;
-  &lt;li&gt;描述逻辑&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;如果你将多个职责结合在一个类中，可能很难实现修改一部分时不会破坏其他部分。混合职责也使这个类难以理解，测试，降低了内聚性。修改它的最简单方法是将这个类分割为三个不同的相互分离的类，每个类仅仅有一个职责：数据库访问，支付计算和描述。&lt;/p&gt;
-
-&lt;h2 id=&quot;open-closed&quot;&gt;开放封闭（Open Closed）&lt;/h2&gt;
-
-&lt;p&gt;对继承、扩展，是开放的；对修改，是封闭的。使用抽象类和接口。&lt;/p&gt;
-
-&lt;p&gt;为依赖关系使用接口的另一个作用是减少耦合和增加灵活性。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;void checkOut(Receipt receipt) {
-  Money total = Money.zero;
-  for (item : items) {
-	total += item.getPrice();
-	receipt.addItem(item);
-  }
-  Payment p = acceptCash(total);
-  receipt.addPayment(p);
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;那么增加信用卡支持该怎么做？你可能像下面的增加if语句，但这违反OCP原则。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;Payment p;
-if (credit)
-  p = acceptCredit(total);
-else
-  p = acceptCash(total);
-receipt.addPayment(p);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;更好的解决方案是：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;public interface PaymentMethod {void acceptPayment(Money total);}
-  
-void checkOut(Receipt receipt, PaymentMethod pm) {
-  Money total = Money.zero;
-  for (item : items) {
-	total += item.getPrice();
-	receipt.addItem(item);
-  }
-  Payment p = pm.acceptPayment(total);
-  receipt.addPayment(p);
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;这儿有一个小秘密：OCP仅仅用于未来变化可预见的情况，当未来变化发生时，采用OCP。因此，需要准确地预见将来的变化。
-这意味着等待用户做出改变，然后使用抽象应对将来的类似变化。&lt;/p&gt;
-
-&lt;p&gt;个人理解：通过抽象类、接口，实现，对扩展、新增开放，对修改关闭。&lt;/p&gt;
-
-&lt;h2 id=&quot;liskov-substitution&quot;&gt;里氏替换（Liskov Substitution）&lt;/h2&gt;
-
-&lt;p&gt;子类的对象实例，应该能够替换任何其超类的实例，即，子类必须符合父类的预期行为&lt;em&gt;（隐含的行为约束）&lt;/em&gt;。&lt;/p&gt;
-
-&lt;p&gt;下面几种情况，违反了LSP原则：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;子类抛出父类没有抛出的异常；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;一个违反LSP的典型例子是Square类派生于Rectangle类。Square类总是假定宽度与高度相等。如果一个正方形对象用于期望一个长方形的上下文中，可能会出现意外行为，因为一个正方形的宽高不能(或者说不应该)被独立修改。&lt;/p&gt;
-
-&lt;p&gt;解决这个问题并不容易：如果修改Square类的setter方法，使它们保持正方形不变(即保持宽高相等)，那么这些方法将弱化(违反)Rectangle类setter方法，在长方形中宽高可以单独修改。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;public class Rectangle {
-  private double height;
-  private double width;
-  
-  public double area();
-  
-  public void setHeight(double height);
-  public void setWidth(double width);
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;以上代码违反了LSP。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;public class Square extends Rectangle {  
-  public void setHeight(double height) {
-	super.setHeight(height);
-	super.setWidth(height);
-  }
-  
-  public void setWidth(double width) {
-	setHeight(width);
-  }
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;违反LSP导致不明确的行为。不明确的行为意味着它在开发过程中运行良好但在产品中出现问题，或者要花费几个星期调试每天只出现一次的bug，或者不得不查阅数百兆日志找出什么地方发生错误。&lt;/p&gt;
-
-&lt;p&gt;个人理解：子类可以替换父类。&lt;/p&gt;
-
-&lt;h2 id=&quot;interface-segregation&quot;&gt;接口分离（Interface Segregation）&lt;/h2&gt;
-
-&lt;p&gt;不能强迫用户去依赖那些他们不适用的接口。换句话说，使用多个专门的接口，比使用单一的总接口要好。&lt;/p&gt;
-
-&lt;p&gt;想象一个ATM取款机，通过一个屏幕显示我们想要的不同信息。你会如何解决显示不同信息的问题？我们使用SRP,OCP和LSP想出一个方案，但是这个系统仍然很难维护。这是为什么？&lt;/p&gt;
-
-&lt;p&gt;想象ATM的所有者想要添加仅在取款功能出现的一条信息，“ATM机将在您取款时收取一些费用，您同意吗”。你会如何解决？&lt;/p&gt;
-
-&lt;p&gt;可能你会给Messenger接口增加一个方法并使用这个方法完成。但是这会导致重新编译这个接口的所有使用者，几乎所有的系统需要重新部署，这直接违反了OCP。让代码腐坏开始了！&lt;/p&gt;
-
-&lt;p&gt;这里出现了这样的情形：对于取款功能的改变导致其他全部非相关功能也变化，我们现在知道这并不是我们想要的。这是怎么回事？&lt;/p&gt;
-
-&lt;p&gt;其实，这里是向后依赖在作怪，使用了该Messenger接口每个功能依赖了它不需要，但是被其他功能需要的方法，这正是我们想要避免的。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;public interface Messenger {
-  askForCard();
-  tellInvalidCard();
-  askForPin();
-  tellInvalidPin();
-  tellCardWasSiezed();
-  askForAccount();
-  tellNotEnoughMoneyInAccount();
-  tellAmountDeposited();
-  tellBalance();
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;相反，将Messenger接口分割，不同的ATM功能依赖于分离的Messenger。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;public interface LoginMessenger {
-  askForCard();
-  tellInvalidCard();
-  askForPin();
-  tellInvalidPin(); 
-}
-  
-public interface WithdrawalMessenger {
-  tellNotEnoughMoneyInAccount();
-  askForFeeConfirmation();
-}
-  
-publc class EnglishMessenger implements LoginMessenger, WithdrawalMessenger {
-  ...   
-}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;个人理解：接口功能单一，多接口之间隔离；避免单一的总接口。&lt;/p&gt;
-
-&lt;h2 id=&quot;dependency-inversion&quot;&gt;依赖反转（Dependency Inversion）&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;高层模块，不应依赖于底层模块，二者都应依赖于抽象；&lt;/li&gt;
-  &lt;li&gt;抽象不应该依赖于细节，细节应该依赖于抽象；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;例子：一个程序依赖于Reader和Writer接口，Keyboard和Printer作为依赖于这些抽象的细节实现了这些接口。CharCopier是依赖于Reader和Writer实现类的低层细节，可以传入任何实现了Reader和Writer接口的设备正确地工作。&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;public interface Reader { char getchar(); }
-public interface Writer { void putchar(char c)}
-  
-class CharCopier {
-  
-  void copy(Reader reader, Writer writer) {
-	int c;
-	while ((c = reader.getchar()) != EOF) {
-	  writer.putchar();
-	}
-  }
-}
-  
-public Keyboard implements Reader {...}
-public Printer implements Writer {...}
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;个人理解：通过接口，实现上下层之间的隔离。&lt;/p&gt;
-
-&lt;h2 id=&quot;section-1&quot;&gt;参考来源&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://butunclebob.com/ArticleS.UncleBob.PrinciplesOfOod&quot;&gt;the principles of OOD&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.importnew.com/10656.html&quot;&gt;面向对象设计原则和创建SOLID应用的5个方法&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.codeproject.com/Articles/567768/Object-Oriented-Design-Principles&quot;&gt;Object Oriented Design Principles&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>Spring搭建 java web 的基本架子</title>
-     <link href="http://ningg.github.com/java-web"/>
-     <updated>2015-03-23T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/java-web</id>
-     <content type="html">&lt;p&gt;目标：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;搭建一个基本的java web架子，包括：
-    &lt;ul&gt;
-      &lt;li&gt;前端数据发送、接收；&lt;/li&gt;
-      &lt;li&gt;后端数据处理；&lt;/li&gt;
-      &lt;li&gt;数据存储；&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;整理使用Spring搭建架子的基本过程，以及注意事项；&lt;/li&gt;
-  &lt;li&gt;重新熟悉Spring思路，整理这一基本思路；&lt;em&gt;（关键）&lt;/em&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;补充：Spring涵盖的内容很广，此次主要涉及Spring web部分知识。&lt;/p&gt;
-
-&lt;p&gt;利用spring，搭建java web架子，整体分为几点：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;基本的后端处理架子
-    &lt;ul&gt;
-      &lt;li&gt;Spring&lt;/li&gt;
-      &lt;li&gt;Hibernate + Spring jdbc&lt;/li&gt;
-      &lt;li&gt;MyBatis &lt;em&gt;（尚未熟悉）&lt;/em&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;基本的前端展示架子&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;工具&lt;/h2&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;工具&lt;/th&gt;
-      &lt;th&gt;版本&lt;/th&gt;
-      &lt;th&gt;说明&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;MyEclipse&lt;/td&gt;
-      &lt;td&gt;2014&lt;/td&gt;
-      &lt;td&gt;java web IDE&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h2 id=&quot;section-1&quot;&gt;后端架子&lt;/h2&gt;
-
-&lt;h3 id=&quot;spring&quot;&gt;Spring&lt;/h3&gt;
-
-&lt;h2 id=&quot;section-2&quot;&gt;常见问题&lt;/h2&gt;
-
-&lt;h3 id=&quot;myeclipse&quot;&gt;MyEclipse的环境配置&lt;/h3&gt;
-
-&lt;p&gt;在使用MyEclipse时，需要进行的前期配置：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;JDK&lt;/li&gt;
-  &lt;li&gt;Maven
-    &lt;ul&gt;
-      &lt;li&gt;Maven的JDK&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;myeclipsemavenjava-web&quot;&gt;MyEclipse下，maven管理java web工程&lt;/h3&gt;
-
-&lt;p&gt;在Myeclipse下，创建web project时，选中&lt;code&gt;Add maven support&lt;/code&gt;，一路点击&lt;code&gt;Next&lt;/code&gt;，后面有两个选项：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;MyEclipse JEE project structure：标准Java EE结构；&lt;/li&gt;
-  &lt;li&gt;Standard Maven JEE project structure &lt;em&gt;（推荐）&lt;/em&gt;：Maven的标准结构；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;UPDATE：20150325，分两步，从简单的来，先用&lt;code&gt;MyEclipse JEE project structure&lt;/code&gt;，后期再尝试新建工程，使用&lt;code&gt;Standard Maven JEE project structure&lt;/code&gt;。&lt;/p&gt;
-
-&lt;h3 id=&quot;todo&quot;&gt;TODO&lt;/h3&gt;
-
-&lt;p&gt;几个问题：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;java web上如何登记对数据库的修改&lt;/li&gt;
-  &lt;li&gt;maven管理的java web如何发布？如何debug测试？
-    &lt;ul&gt;
-      &lt;li&gt;直接在server下进行deploy就可以了吗？&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section-3&quot;&gt;参考来源&lt;/h2&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>Java WAR包的格式</title>
-     <link href="http://ningg.github.com/java-war-format"/>
-     <updated>2015-03-23T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/java-war-format</id>
-     <content type="html">&lt;h2 id=&quot;section&quot;&gt;简介&lt;/h2&gt;
-
-&lt;p&gt;java web 工程，包含几部分：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;web components &lt;em&gt;（是什么？）&lt;/em&gt;&lt;/li&gt;
-  &lt;li&gt;web resources，例如静态图片等；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;关于 java web，几点：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;需要符合 Java Servlet specification；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;war&quot;&gt;WAR格式&lt;/h2&gt;
-
-&lt;p&gt;WAR格式，就是部署java web的目录组织结构。&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/java-war-format/web-module-structure.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;关于目录结构，几点：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Assembly Root，整个java web的根目录；&lt;/li&gt;
-  &lt;li&gt;WEB-INF，核心处理逻辑的位置；
-    &lt;ul&gt;
-      &lt;li&gt;web.xml，web资源表述文件；&lt;/li&gt;
-      &lt;li&gt;classes目录，核心处理逻辑代码；&lt;/li&gt;
-      &lt;li&gt;lib目录，依赖的jar包；&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Web pages，展示页面所需要的资源，通常也需要如下几个目录：&lt;/li&gt;
-  &lt;li&gt;img目录 &lt;em&gt;（可选）&lt;/em&gt;&lt;/li&gt;
-  &lt;li&gt;css目录 &lt;em&gt;（可选）&lt;/em&gt;&lt;/li&gt;
-  &lt;li&gt;js目录 &lt;em&gt;（可选）&lt;/em&gt;&lt;/li&gt;
-  &lt;li&gt;META-INF &lt;em&gt;（可选）&lt;/em&gt; ，打包为war的元信息数据；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;mavenjava-web&quot;&gt;Maven构建时，java web目录结构&lt;/h2&gt;
-
-&lt;p&gt;本部分将着重开发过程中，Maven构建时，java web目录结构。注意，使用Maven管理的java project与java web project，基本类似：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;pom.xml，maven的工程对象模型（Project Object Module）&lt;/li&gt;
-  &lt;li&gt;src/main/java，项目类&lt;/li&gt;
-  &lt;li&gt;src/main/resources，项目资源&lt;/li&gt;
-  &lt;li&gt;src/test/java，测试类&lt;/li&gt;
-  &lt;li&gt;src/test/resources，测试资源&lt;/li&gt;
-  &lt;li&gt;src/main/webapp，web资源的目录&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;（下面给出一个截图）&lt;/p&gt;
-
-&lt;p&gt;疑问：JSTL的作用？JSP Standard Tag Library，JSP标准标签库。&lt;/p&gt;
-
-&lt;h2 id=&quot;section-1&quot;&gt;参考来源&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://docs.oracle.com/javaee/7/tutorial/packaging003.htm&quot;&gt;Java EE 7 Tutorial - Packaging Web Archives&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://docs.oracle.com/javaee/7/index.html&quot;&gt;Java Platform, Enterprise Edition (Java EE) 7&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://en.wikipedia.org/wiki/WAR_%28file_format%29&quot;&gt;wiki：war file format&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section-2&quot;&gt;闲谈&lt;/h2&gt;
-
-&lt;p&gt;WAR，对应查看Java EE 的帮助文档；JAR，对应查看Java SE 的帮助文档。需要花时间浏览一遍Java EE Tutorial。&lt;/p&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>Kibana入门操作</title>
-     <link href="http://ningg.github.com/kibana-intro"/>
-     <updated>2015-03-16T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/kibana-intro</id>
-     <content type="html">&lt;p&gt;当前使用组件的版本：&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;组件&lt;/th&gt;
-      &lt;th&gt;版本&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;ElasticSearch&lt;/td&gt;
-      &lt;td&gt;&lt;code&gt;1.4.4&lt;/code&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Java&lt;/td&gt;
-      &lt;td&gt;&lt;code&gt;1.7.0_67&lt;/code&gt; HotSpot(64) 64-Bit&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Kibana&lt;/td&gt;
-      &lt;td&gt;&lt;code&gt;kibana-4.0.1-linux-x64&lt;/code&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;启动&lt;/h2&gt;
-
-&lt;p&gt;Kibana本质就是一个Web工程，启动命令：&lt;code&gt;bin/kibana&lt;/code&gt;，具体查看启动脚本，发现最终启动的是NodeJS相关的服务：&lt;code&gt;bin/../node/bin/node bin/../src/bin/kibana.js&lt;/code&gt;，NodeJS我不懂，具体没看明白。几个疑问：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;如何后台启动Kibana？
-    &lt;ul&gt;
-      &lt;li&gt;&lt;code&gt;nohup bin/kibana &amp;amp;&lt;/code&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Kibana运行日志位置？&lt;/li&gt;
-  &lt;li&gt;如何监控Kibana运行状态？&lt;/li&gt;
-&lt;/ul&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>Trello快捷操作</title>
-     <link href="http://ningg.github.com/trello-shortcuts"/>
-     <updated>2015-03-15T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/trello-shortcuts</id>
-     <content type="html">&lt;p&gt;用鼠标点来点去，效率有点低，内心略感焦急，有没有快捷键？赶快找一下，基本思路还是寻找官方的引导和帮助文档，下面列一下我寻找shortcuts的基本路线吧：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://trello.com/yourway&quot;&gt;New Stuff&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://help.trello.com/&quot;&gt;Help Page&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;搜索 &lt;code&gt;shortcuts&lt;/code&gt; 关键字&lt;/li&gt;
-  &lt;li&gt;哈哈，找到：&lt;a href=&quot;http://help.trello.com/article/798-using-keyboard-shortcuts-in-trello&quot;&gt;Using keyboard shortcuts in Trello&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;shortcuts&quot;&gt;shortcuts&lt;/h2&gt;
-
-&lt;p&gt;You can also press &lt;code&gt;?&lt;/code&gt; on your keyboard while in Trello to view a list of shortcuts.&lt;/p&gt;
-
-&lt;p&gt;Here are some of the highlights:&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;The “b” shortcut which opens the boards menu and lets you search for boards instantly. Press “b”, type the first few letters of the board you’re looking for, press enter, and you’re there. It’s the fastest way to switch boards.&lt;/li&gt;
-  &lt;li&gt;“f” opens the card filter while on a board. You can instantly start searching for cards by title. The filter will also suggest members and labels, so you can start typing “da” and it will suggest Daniel. Press enter to see cards assigned to him. Press “x” to clear a filter.&lt;/li&gt;
-  &lt;li&gt;“t” will edit the card title and “e” will edit the card description. You can press it while on the card back, or hover over a card, press either one, and the card will open up and then begin editing the chosen field.&lt;/li&gt;
-  &lt;li&gt;“j” and “k” select the card above or below the current card. So do the up and down arrows.&lt;/li&gt;
-  &lt;li&gt;Press “n” while hovering over any card to open the card composer right below the selected card.&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;为方便自己记忆，简单总结一下：&lt;/p&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;快捷键&lt;/th&gt;
-      &lt;th&gt;说明&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code&gt;?&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;查询快捷键列表&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code&gt;b&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;打开Board面板&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code&gt;f&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;过滤Board下List下，不同Label的Card&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code&gt;x&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;与上述&lt;code&gt;f&lt;/code&gt;操作对应，取消过滤&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code&gt;t&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;在Card内，编辑title&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code&gt;e&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;在Card内，编辑description&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;&lt;code&gt;w&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;显示\隐藏 sidebar&lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;Trello内部结构：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;Trello（ROOT）
-	|
-	|--Board
-	|--Board(`b`)
-		|
-		|--List
-		|--List
-			|
-			|--Card
-			|--Card(`f`|`x`)
-				|
-				|--edit Title (`t`)
-				|--Edit description (`e`)
-				|--选中相邻的Card(`j`|`k`)
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;参考资料&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://help.trello.com/&quot;&gt;Help Page&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;https://trello.com/yourway&quot;&gt;New Stuff&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;&lt;strong&gt;疑问&lt;/strong&gt;：提供可交互的浏览方式，最佳方案就是借助&lt;a href=&quot;https://www.flinto.com/&quot;&gt;Flinto&lt;/a&gt;等第三方工具吗？&lt;/p&gt;
 
 </content>
    </entry>
