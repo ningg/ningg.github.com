@@ -56,6 +56,7 @@ category: java
 	
 	// Date -> String
 	System.out.println(simpleDateFormat.format(new Date()));
+	System.out.pringln(simpleDateFormat.format(Calendar.getInstance().getTime()))
 	
 	
 	// String -> Date
