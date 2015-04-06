@@ -17,7 +17,6 @@ category: maven
 		<spring.version>4.1.6.RELEASE</spring.version>
 	</properties>
 
-
 调用，与shell中调用变量一致：
 
 	<version>${spring.version}</version>
@@ -38,9 +37,7 @@ category: maven
 
 xml中如何注释？
 
-	<!-- -->
-
-
+`<!- ->`
 
 
 
