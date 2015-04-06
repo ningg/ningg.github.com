@@ -82,6 +82,8 @@ category: web
 
 UPDATE：20150325，分两步，从简单的来，先用`MyEclipse JEE project structure`，后期再尝试新建工程，使用`Standard Maven JEE project structure`。
 
+UPDATE：20150404，另一种，以Maven project为中心，最后选择`archetypes`时，选择Archetype：`maven-archetype-webapp`即可。
+
 ###数据库操作脚本
 
 （TODO）
