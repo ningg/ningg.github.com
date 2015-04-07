@@ -27,6 +27,15 @@ category: product
 ![简单的鼠标操作](/images/mockups-intro/simple-operate.jpg)
 
 
+通过`View`--`Skin`，可以切换两种显示样式：
+
+* Sketch skin；*（上述图片是Sketch skin）*
+* Wireframe skin；
+
+
+
+
+
 ##高效用法
 
 
@@ -43,6 +52,11 @@ category: product
 |`Ctrl+Shift+G`|取消组合|
 |`Ctrl+F`|全屏显示，`Esc`取消全屏|
 |`Ctrl+L`|显示\隐藏 UI Library|
+|`Ctrl+K`|显示\隐藏 markup（标记）|
+|`Ctrl+1`|Actual size|
+|`Ctrl+0`|Zoom to fit|
+|`Ctrl+'+'/'-'`|Zoom In/Out|
+
 
 
 （快捷操作，可以直接从菜单栏中查看，可以逐个尝试。）
@@ -75,8 +89,10 @@ category: product
 * 最大化
 	* `Ctrl + F`
 * 显示标记：标记是备注？
+	* `右键`，设置组件，`Treat as Markup`；类似操作，可取消；
 * 增加标记
 * 多页面切换
+* 思考多组件，如何层级显示，即，通过操作，分批次显示组件，类似ppt的操作；
 
 
 
