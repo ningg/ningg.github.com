@@ -43,6 +43,8 @@ __代码查看__
 |`F12`|光标定位Edit窗口|
 |`ctrl + F6`|切换Edit窗口|
 |`ctrl + L`|光标定位到指定行|
+|`alt + Enter`|查看Project的properties|
+|`alt + F5`|Update Maven Project|
 
 
 

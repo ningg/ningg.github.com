@@ -56,6 +56,7 @@ category: product
 |`Ctrl+1`|Actual size|
 |`Ctrl+0`|Zoom to fit|
 |`Ctrl+'+'/'-'`|Zoom In/Out|
+|`Ctrl+R`|Export to PNG，可以导出局部元素|
 
 
 
