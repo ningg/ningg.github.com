@@ -2,7 +2,7 @@
 layout: post
 title: 会议讨论 20150320 
 description: 协调小组工作的基本流程
-published: false
+published: true
 category: team
 ---
 
