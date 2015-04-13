@@ -42,15 +42,22 @@ category: java web
 
 
 
+##参考来源
+
+
+* [xml入门][xml入门]*（之前的一篇文章）*
 
 
 
 
 
 
-[NingG]:    http://ningg.github.com  "NingG"
 
 
+
+
+[NingG]:    		http://ningg.github.com  "NingG"
+[xml入门]:			/xml-intro/
 
 
 

@@ -3,7 +3,7 @@ layout: post
 title: Lecture 6--Growth
 description: 阅读原文
 published: true
-category: blog
+category: YCombinator
 ---
 
 > 原文地址：[Growth][Growth]
