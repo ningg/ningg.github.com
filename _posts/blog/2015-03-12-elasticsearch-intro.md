@@ -123,6 +123,68 @@ category: elasticsearch
 Elastic官网提供了一种方式Marvel，不过这种方式是付费的，我x，那能不能利用Ganglia监控呢？实际上，ElasticSearch是基于Java的，而JVM能够通过JMX方式向外停工监控数据，唯一的问题是：ElasticSearch在JVM中记录的运行状态数据吗？
 
 
+##常见问题
+
+
+###WARN: Too many open files
+
+详细错误信息：
+
+	[2015-04-14 11:18:25,797][WARN ][indices.cluster          ] [Rune] [flume-2015-04-14][2] failed to start shard
+	org.elasticsearch.index.gateway.IndexShardGatewayRecoveryException: [flume-2015-04-14][2] failed recovery
+		at org.elasticsearch.index.gateway.IndexShardGatewayService$1.run(IndexShardGatewayService.java:185)
+		at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+		at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+		at java.lang.Thread.run(Thread.java:745)
+	Caused by: org.elasticsearch.index.engine.EngineCreationFailureException: [flume-2015-04-14][2] failed to open reader on writer
+		at org.elasticsearch.index.engine.internal.InternalEngine.start(InternalEngine.java:326)
+		at org.elasticsearch.index.shard.service.InternalIndexShard.performRecoveryPrepareForTranslog(InternalIndexShard.java:732)
+		at org.elasticsearch.index.gateway.local.LocalIndexShardGateway.recover(LocalIndexShardGateway.java:231)
+		at org.elasticsearch.index.gateway.IndexShardGatewayService$1.run(IndexShardGatewayService.java:132)
+		... 3 more
+	Caused by: java.nio.file.FileSystemException: /home/storm/es/elasticsearch-1.4.4/data/elasticsearch/nodes/0/indices/flume-2015-04-14/2/index/_h3.cfe: Too many open files
+		at sun.nio.fs.UnixException.translateToIOException(UnixException.java:91)
+		at sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:102)
+		at sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:107)
+		at sun.nio.fs.UnixFileSystemProvider.newFileChannel(UnixFileSystemProvider.java:177)
+		at java.nio.channels.FileChannel.open(FileChannel.java:287)
+		at java.nio.channels.FileChannel.open(FileChannel.java:334)
+		at org.apache.lucene.store.NIOFSDirectory.openInput(NIOFSDirectory.java:81)
+		at org.apache.lucene.store.FileSwitchDirectory.openInput(FileSwitchDirectory.java:172)
+		at org.apache.lucene.store.FilterDirectory.openInput(FilterDirectory.java:80)
+		at org.elasticsearch.index.store.DistributorDirectory.openInput(DistributorDirectory.java:130)
+		at org.apache.lucene.store.FilterDirectory.openInput(FilterDirectory.java:80)
+		at org.elasticsearch.index.store.Store$StoreDirectory.openInput(Store.java:515)
+		at org.apache.lucene.store.Directory.openChecksumInput(Directory.java:113)
+		at org.apache.lucene.store.CompoundFileDirectory.readEntries(CompoundFileDirectory.java:166)
+		at org.apache.lucene.store.CompoundFileDirectory.<init>(CompoundFileDirectory.java:106)
+		at org.apache.lucene.index.SegmentReader.readFieldInfos(SegmentReader.java:274)
+		at org.apache.lucene.index.SegmentReader.<init>(SegmentReader.java:107)
+		at org.apache.lucene.index.ReadersAndUpdates.getReader(ReadersAndUpdates.java:145)
+		at org.apache.lucene.index.ReadersAndUpdates.getReadOnlyClone(ReadersAndUpdates.java:239)
+		at org.apache.lucene.index.StandardDirectoryReader.open(StandardDirectoryReader.java:104)
+		at org.apache.lucene.index.IndexWriter.getReader(IndexWriter.java:422)
+		at org.apache.lucene.index.DirectoryReader.open(DirectoryReader.java:112)
+		at org.apache.lucene.search.SearcherManager.<init>(SearcherManager.java:89)
+		at org.elasticsearch.index.engine.internal.InternalEngine.buildSearchManager(InternalEngine.java:1569)
+		at org.elasticsearch.index.engine.internal.InternalEngine.start(InternalEngine.java:313)
+		... 6 more
+
+解决办法：
+
+* 在当前Linux下，使用elasticsearch用户身份，执行`ulimt -Hn`和`ulimit -Sn`，查看当前用户，在当前shell环境下，允许打开文件的最大个数；
+* 打开`/etc/security/limits.conf`文件，在最后，添加如下两行内容：*（启动elasticsearch的用户为`elasticsearch`）*
+	* elasticsearch soft  nofile 32000
+	* elasticsearch hard  nofile 32000
+* 重新以elasticsearch用户身份登录，并执行执行`ulimt -Hn`和`ulimit -Sn`，以此验证上述配置是否生效；若设置生效，则重启Elasticsearch即可。
+
+简要解释：`/etc/security/limits.conf`文件中设置了，一个用户或者组，所能使用的系统资源，例如：CPU、内存以及可同时打开文件的数量等。
+
+
+更多细节，参考：
+
+* [Error - Too many open files][Error - Too many open files]
+* [Elasticsearch - too many open files][Elasticsearch - too many open files]
 
 
 ##参考来源
@@ -140,7 +202,8 @@ Elastic官网提供了一种方式Marvel，不过这种方式是付费的，我x
 [ElasticSearch(Github)]:							https://github.com/elastic/elasticsearch
 [gitbook：Elasticsearch权威指南（中文版）]:		https://www.gitbook.com/book/looly/elasticsearch-the-definitive-guide-cn/details
 [gitbook：Elasticsearch 权威指南]:					http://learnes.net/index.html
-
+[Error - Too many open files]:						http://elasticsearch-users.115913.n3.nabble.com/Error-Too-many-open-files-td2779067.html
+[Elasticsearch - too many open files]:				http://queirozf.com/entries/elasticsearch-too-many-open-files
 
 
 

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Flume实现将Kafka中数据传入ElasticSearch中
-description: 
+description: 利用Flume读取Kafka中的数据，对数据进行初步处理之后，送入到Elasticsearch
 categories: flume kafka elasticsearch
 ---
 

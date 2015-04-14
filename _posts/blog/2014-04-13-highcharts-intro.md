@@ -9,6 +9,7 @@ category: javascript
 
 ##柱状图
 
+
 ###坐标轴
 
 ####调整横轴坐标字体、斜放
@@ -43,6 +44,14 @@ category: javascript
 
 
 
+##小结
+
+
+使用Highcharts，几点：
+
+* 多在google、baidu上搜索遇到的问题；
+* 多看官网的API文档：
+	* [Highcharts API 文档][Highcharts API 文档]
 
 
 
@@ -74,7 +83,7 @@ category: javascript
 
 [NingG]:    				http://ningg.github.com  "NingG"
 [Highcharts中文网]:			http://www.hcharts.cn/index.php
-
+[Highcharts API 文档]:		http://www.hcharts.cn/api/index.php
 
 
 
