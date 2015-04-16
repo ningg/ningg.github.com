@@ -62,7 +62,7 @@ categories: web java
 	* Java EE这个标准/规范，包含了很多其他的规范？
 * Java EE 有很多实现，例如，当前[官网][Java EE at a Glance]提到，有20+种 Java EE 6的具体实现；
 * Java EE，也是一个标准，在JCP（[Java Community Process][Java Community Process]）中可以搜索`java ee`找到相应的标准；
-* Java EE，只是标准，需要依托具体的lib实现；
+* Java EE，只是标准，需要依托具体的lib实现；思考：哪些lib来实现的？
 
 通过查看[Java EE的白皮书][Java EE 7 Whitepaper]可知，Java EE 7包含了14个JSR（Java Specification Requests）：
 
@@ -124,6 +124,24 @@ categories: web java
 * Spring 也能用于进行web开发，也是一系列规范？还是一些列组件和实现？
 
 
+几点：
+
+* Spring包含一系列模块化组件，目标：更便捷的开发企业级应用；*（不仅仅是web应用，其涉及范围很广）*
+* Spring Framework是常用的Spring组件，也是最核心的Spring组件之一，包含IoC、AOP等；
+* Spring Framework是流行的轻量级框架，很好的系统解耦效果，支持DI（Dependency Injection），可以用于连接多种框架，例如Hibernate等，例如，希望读取MongoDB中数据时，Spring自带有相应的组件。
+
+更多细节，都可以从官网上获取，列几个：
+
+* [Spring Docs][Spring Docs]：下载参考文档，各种官方文档；
+* [Spring Guides][Spring Guides]：各种典型场景、组件的使用样例；
+* [Spring Projects][Spring Projects]：spring下的整体组件，以及解决方法，当前特别关注一下[Spring Framework][Spring Framework]
+
+
+
+
+
+
+
 
 
 
@@ -179,7 +197,7 @@ web.xml是遵循servlet规范的，war包是否也是符合servlet规范的？�
 * [Tomcat8.0][Tomcat8.0]
 * vdisk下github/jvm目录内，上传了几个JSR，方便查看；
 * 多在[Java EE官网][Java EE at a Glance]点击链接，会发现很多整理好的内容，如果有的链接是无效的，就想办法找到对应的有效链接，例如Java EE Tutorial。
-
+* [Spring官网][Spring官网]
 
 
 
@@ -205,4 +223,9 @@ web.xml是遵循servlet规范的，war包是否也是符合servlet规范的？�
 [Java EE Compatibility]:					http://www.oracle.com/technetwork/java/javaee/overview/compatibility-jsp-136984.html
 [Introducing the Java EE Web Profile]:		http://jaxenter.com/introducing-the-java-ee-web-profile-103275.html
 [PlayFramework]:							https://www.playframework.com/
+[Spring官网]:								https://spring.io/
+[Spring Docs]:								https://spring.io/docs
+[Spring Guides]:							https://spring.io/guides
+[Spring Projects]:							https://spring.io/projects
+[Spring Framework]:							http://projects.spring.io/spring-framework/
 

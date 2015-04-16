@@ -43,6 +43,8 @@ category: web
 
 
 
+
+
 ###Spring
 
 
@@ -108,10 +110,11 @@ java代码规范，几点：
 * java web上如何登记对数据库的修改
 * maven管理的java web如何发布？如何debug测试？
 	* 直接在server下进行deploy就可以了吗？
-
-
-
-
+* 微框架，Spring boot用于解决什么问题？将会产生什么影响？
+	* [Spring Boot 官网][Spring Boot 官网]
+	* [Java Bootstrap - Dropwizard vs. Spring Boot][Java Bootstrap - Dropwizard vs. Spring Boot]
+	* [SHOULD YOU USE SPRING BOOT IN YOUR NEXT PROJECT?][SHOULD YOU USE SPRING BOOT IN YOUR NEXT PROJECT?]
+	* [深入学习微框架：Spring Boot][深入学习微框架：Spring Boot]
 
 
 
@@ -132,8 +135,10 @@ java代码规范，几点：
 
 [NingG]:    http://ningg.github.com  "NingG"
 
-
-
+[深入学习微框架：Spring Boot]:							http://www.infoq.com/cn/articles/microframeworks1-spring-boot
+[SHOULD YOU USE SPRING BOOT IN YOUR NEXT PROJECT?]:		http://steveperkins.com/use-spring-boot-next-project/
+[Java Bootstrap - Dropwizard vs. Spring Boot]:			http://blog.takipi.com/java-bootstrap-dropwizard-vs-spring-boot/
+[Spring Boot 官网]:										http://projects.spring.io/spring-boot/
 
 
 
