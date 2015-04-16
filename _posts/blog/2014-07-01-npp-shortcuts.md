@@ -2,7 +2,7 @@
 layout: post
 title: Notepad++快捷键
 description: 熟练使用工具，提升效率，把精力放在较为关键的地方
-category: tool
+category: notepad
 ---
 
 ##背景

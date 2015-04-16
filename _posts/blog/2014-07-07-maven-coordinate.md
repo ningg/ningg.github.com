@@ -2,7 +2,7 @@
 layout: post
 title: maven坐标和依赖
 describe: Maven有一个中央仓库，其中包含丰富的资源，如何找出特定资源呢？
-category: tool
+category: maven
 ---
 
 > 题记：[《Maven实战（迷你版）》](http://www.infoq.com/cn/minibooks/maven-in-action)这本书写的太好了，我忍不住把其中的内容又敲一遍。

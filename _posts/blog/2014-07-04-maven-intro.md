@@ -2,7 +2,7 @@
 layout: post
 title: maven使用入门
 description: 项目构建，包括java源文件编译、文件复制、打包等，手动很繁琐，需要借助其他工具
-category: tool
+category: maven
 ---
 
 > 题记：[《Maven实战（迷你版）》](http://www.infoq.com/cn/minibooks/maven-in-action)这本书写的太好了，我忍不住把其中的内容又敲一遍。
@@ -590,7 +590,7 @@ Hello World项目中有一些Maven的约定：
 
 todo list：（需要详细学习）
 
-* [<maven权威指南>学习笔记][<maven权威指南>学习笔记]
+* [maven权威指南 - 学习笔记][maven权威指南 - 学习笔记]
 
 
 
@@ -602,7 +602,7 @@ todo list：（需要详细学习）
 * [《Maven实战（迷你版）》][《Maven实战（迷你版）》]
 * [The Central Repository - Maven(Search Engine)][The Central Repository - Maven(Search Engine)]
 * [The Central Repository - Maven][The Central Repository - Maven]
-* [<maven权威指南>学习笔记][<maven权威指南>学习笔记]
+* [maven权威指南 - 学习笔记][maven权威指南 - 学习笔记]
 
 
 
@@ -636,7 +636,7 @@ todo list：（需要详细学习）
 [《Maven实战（迷你版）》]:											/download/maven/Maven+in+action.pdf
 [The Central Repository - Maven(Search Engine)]:					http://search.maven.org/
 [The Central Repository - Maven]:									http://repo1.maven.org/maven2/org/
-[<maven权威指南>学习笔记]:											http://macrochen.iteye.com/blog/531437
+[maven权威指南 - 学习笔记]:										http://macrochen.iteye.com/blog/531437
 
 [Gradle，构建工具的未来？]:										http://www.infoq.com/cn/news/2011/04/xxb-maven-6-gradle
 [Why Build Your Java Projects with Gradle Rather than Ant or Maven?]:	http://www.drdobbs.com/jvm/why-build-your-java-projects-with-gradle/240168608

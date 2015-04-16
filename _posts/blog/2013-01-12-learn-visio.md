@@ -2,7 +2,7 @@
 layout: post
 title: visio的使用入门及快捷操作
 description: 自己绘图，基本都是用visio，这是个工具，需要用熟了
-category: tool
+category: visio
 ---
 
 

@@ -2,7 +2,7 @@
 layout: post
 title: Vim编辑器常用操作
 description: vim是Linux下自带的编辑器，熟练使用，能够节省不少时间
-categories: linux tool
+categories: vim
 ---
 
 面向实际应用场景，进行梳理：

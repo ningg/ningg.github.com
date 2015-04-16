@@ -2,7 +2,7 @@
 layout: post
 title: Eclipse的快捷键
 description: Eclipse是Java项目过程中，广泛使用的集成开发环境，其下有很多快捷操作
-category: tool
+category: eclipse
 ---
 
 ##背景

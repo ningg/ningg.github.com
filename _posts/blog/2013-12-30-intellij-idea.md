@@ -2,7 +2,7 @@
 layout: post
 title: IntelliJ IDEA
 description: 又是一把利刃，把玩一下，闻鸡起舞？NO，粗人一个，抡刀起舞
-category: tool
+category: idea
 ---
 
 ##显示帮助信息

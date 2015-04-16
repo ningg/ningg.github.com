@@ -2,7 +2,7 @@
 layout: post
 title: Trello快捷操作
 description: 加快开发效率，快捷操作少不了
-categories: trello tool
+categories: trello
 ---
 
 
