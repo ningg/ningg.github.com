@@ -115,7 +115,10 @@ java代码规范，几点：
 	* [Java Bootstrap - Dropwizard vs. Spring Boot][Java Bootstrap - Dropwizard vs. Spring Boot]
 	* [SHOULD YOU USE SPRING BOOT IN YOUR NEXT PROJECT?][SHOULD YOU USE SPRING BOOT IN YOUR NEXT PROJECT?]
 	* [深入学习微框架：Spring Boot][深入学习微框架：Spring Boot]
-
+* Spring MVC中获取jsp片段：
+	* [spring mvc中返回ModelAndView后执行ajax异步请求][spring mvc中返回ModelAndView后执行ajax异步请求]
+	* [How to render a View using AJAX in Spring MVC][How to render a View using AJAX in Spring MVC]
+	* [Spring框架，如何返回数据给视图(jsp文件)][Spring框架，如何返回数据给视图(jsp文件)]
 
 
 
@@ -124,7 +127,9 @@ java代码规范，几点：
 ##参考来源
 
 
-
+* [spring mvc中返回ModelAndView后执行ajax异步请求][spring mvc中返回ModelAndView后执行ajax异步请求]
+* [How to render a View using AJAX in Spring MVC][How to render a View using AJAX in Spring MVC]
+* [Spring框架，如何返回数据给视图(jsp文件)][Spring框架，如何返回数据给视图(jsp文件)]
 
 
 
@@ -139,8 +144,9 @@ java代码规范，几点：
 [SHOULD YOU USE SPRING BOOT IN YOUR NEXT PROJECT?]:		http://steveperkins.com/use-spring-boot-next-project/
 [Java Bootstrap - Dropwizard vs. Spring Boot]:			http://blog.takipi.com/java-bootstrap-dropwizard-vs-spring-boot/
 [Spring Boot 官网]:										http://projects.spring.io/spring-boot/
-
-
+[spring mvc中返回ModelAndView后执行ajax异步请求]:		http://blog.csdn.net/cdnsa/article/details/21167789
+[How to render a View using AJAX in Spring MVC]:		http://stackoverflow.com/questions/4816080/how-to-render-a-view-using-ajax-in-spring-mvc
+[Spring框架，如何返回数据给视图(jsp文件)]:				http://blog.csdn.net/lee353086/article/details/8620470
 
 
 

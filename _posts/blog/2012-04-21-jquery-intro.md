@@ -90,7 +90,7 @@ jQuery建议代码规范：
 DOM，Document Object Model，文档对象模型，每一份DOM都可以看作一棵树；一个HTML页面中，有很多标签，每个标签都看作一个节点，构成一颗树，称为DOM树，每个节点都是一个DOM对象。可以通过javascript来获取DOM对象，示例代码如下：
 
 	var domObj = document.getElementById("id");	//获得DOM对象
-	var ObjHTML = domObj.innerHTML;				//使用JavaScript中的属性innerHTML
+	var ObjHTML = domObj.innerHTML;		//使用JavaScript中的属性innerHTML
 
 
 ####jQuery对象
@@ -106,12 +106,12 @@ jQuery对象，通过jQuery包装DOM对象之后，产生的对象，几点：
 
 示例代码：
 
-	var jQueryObj = $("#id");		// jQuery对象
-	var domObj = jQueryObj[0];		// 获取DOM对象
+	var jQueryObj = $("#id");	// jQuery对象
+	var domObj = jQueryObj[0];	// 获取DOM对象
 	var domObj2 = jQueryObj.get(0);
 
-	var domObj = document.getElementById("id");		// DOM对象
-	var jQueryObj = $(domObj);						// 获取jQuery对象
+	var domObj = document.getElementById("id");	// DOM对象
+	var jQueryObj = $(domObj);	// 获取jQuery对象
 
 备注：`$()`函数，获取jQuery对象；为什么？哪个地方定义的？
 
