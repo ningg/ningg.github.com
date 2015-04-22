@@ -8,6 +8,24 @@ category: javascript
 
 
 
+
+
+##TODO
+
+* JavaScript编码规范：
+	* [网易邮箱前端Javascript编码规范：基础规范][网易邮箱前端Javascript编码规范：基础规范]
+	* [Web前端：11个让你代码整洁的原则][Web前端：11个让你代码整洁的原则]
+	* [JavaScript初学者应注意的七个细节][JavaScript初学者应注意的七个细节]
+	* 几个较为全面的来源，再去查找，浏览现有规范有个印象
+* JavaScript中常用概念的理解：
+	* [理解 JavaScript（一）]
+	* 还有 二 ~ 四
+	* [“流式”前端构建工具——gulp.js 简介][“流式”前端构建工具——gulp.js 简介]
+
+
+
+
+
 ##常见问题
 
 
@@ -63,10 +81,21 @@ category: javascript
 * [MDN - JavaScript中clearInterval(zh)][MDN - JavaScript中clearInterval(zh)]
 
 
+###函数声明、命名函数表达式
+
+两种方式的最大不同，可调用事件的不同：
+
+* 函数声明，可以在任意地方使用；
+* 命名函数表达式，只有在声明之后，才能使用；
+
+上述现象称为：`函数声明提升`，参考[MDN - 函数声明提升][MDN - 函数声明提升]
 
 
+###JavaScript语言基本语法
 
+几点：
 
+* 单行代码使用`;`结尾；
 
 
 
@@ -105,11 +134,13 @@ category: javascript
 [MDN - JavaScript]:						https://developer.mozilla.org/zh-CN/docs/Web/JavaScript
 [MDN - JavaScript中clearInterval(en)]:	https://developer.mozilla.org/en-US/docs/Web/API/WindowTimers/clearInterval
 [MDN - JavaScript中clearInterval(zh)]:	https://developer.mozilla.org/zh-CN/docs/Web/API/Window/clearInterval
+[MDN - 函数声明提升]:					https://developer.mozilla.org/zh-CN/docs/Web/JavaScript/Reference/Statements/function
 
-
-
-
-
+[网易邮箱前端Javascript编码规范：基础规范]:	http://blog.jobbole.com/19197/
+[Web前端：11个让你代码整洁的原则]:				http://blog.jobbole.com/23617/
+[JavaScript初学者应注意的七个细节]:			http://blog.jobbole.com/8481/
+[理解 JavaScript（一）]:						http://segmentfault.com/a/1190000000347914
+[“流式”前端构建工具——gulp.js 简介]:			http://segmentfault.com/a/1190000000435599
 
 
 

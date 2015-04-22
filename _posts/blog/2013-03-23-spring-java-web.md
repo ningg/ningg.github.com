@@ -119,7 +119,8 @@ java代码规范，几点：
 	* [spring mvc中返回ModelAndView后执行ajax异步请求][spring mvc中返回ModelAndView后执行ajax异步请求]
 	* [How to render a View using AJAX in Spring MVC][How to render a View using AJAX in Spring MVC]
 	* [Spring框架，如何返回数据给视图(jsp文件)][Spring框架，如何返回数据给视图(jsp文件)]
-
+* Spring security中对应的用户管理：
+	* 用户登录的时候，哪个地方捕获用户登录信息？同时实例化一个用户身份实例，今后直接获取该实例即可；
 
 
 

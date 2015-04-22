@@ -62,6 +62,12 @@ Trello内部结构：
 
 
 
+##TODO
+
+团队协作工具：
+
+* tower、trello等等之间的关系，以及不同的定位和链接；
+* teambition，Tower.im，Worktile，trello，Jira
 
 
 ##参考资料
