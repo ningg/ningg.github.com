@@ -4,7 +4,7 @@
    <title>ningg.top</title>
    <link href="http://ningg.top/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://ningg.top" rel="alternate" type="text/html" />
-   <updated>2015-04-06T09:39:08+08:00</updated>
+   <updated>2015-04-22T22:57:06+08:00</updated>
    <id>http://ningg.top</id>
    <author>
      <name></name>
@@ -13,43 +13,87 @@
 
    
    <entry>
-     <title>Maven中pom文件如何编写</title>
-     <link href="http://ningg.github.com/maven-pom-file"/>
-     <updated>2015-04-05T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/maven-pom-file</id>
-     <content type="html">&lt;h2 id=&quot;properties&quot;&gt;properties定义与调用&lt;/h2&gt;
+     <title>51用车APP--新用户注册下载APP步骤</title>
+     <link href="http://ningg.github.com/51yche-car-owner-zm-activity"/>
+     <updated>2015-04-22T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/51yche-car-owner-zm-activity</id>
+     <content type="html">&lt;blockquote&gt;
+  &lt;p&gt;新用户下载安装APP，有两种模式：1. 下载APP–注册–使用APP；2. 注册–下载APP–安装APP。由于第二种方式，先以对用户影响较小的方式，与用户建立沟通途径，因此，相对更容易争取边缘用户。&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;p&gt;定义，典型的xml定义属性的方式：&lt;/p&gt;
+&lt;h2 id=&quot;app&quot;&gt;51用车APP获取新用户步骤&lt;/h2&gt;
 
-&lt;pre&gt;&lt;code&gt;&amp;lt;properties&amp;gt;
-	&amp;lt;spring.version&amp;gt;4.1.6.RELEASE&amp;lt;/spring.version&amp;gt;
-&amp;lt;properties&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;今天下班路上，无意间看到51用车的宣传单：招募车主。浏览了一下，注册成为车主的步骤：&lt;/p&gt;
 
-&lt;p&gt;调用，与shell中调用变量一致：&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/51yche-car-owner-zm-activity/cowner-step.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;pre&gt;&lt;code&gt;&amp;lt;version&amp;gt;${spring.version}&amp;lt;/version&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;上面的图片中列出了6个步骤：&lt;/p&gt;
 
-&lt;p&gt;疑问：xml变量的定义，有规范吗？&lt;/p&gt;
+&lt;ol&gt;
+  &lt;li&gt;扫描二维码，进入招募车主页面&lt;/li&gt;
+  &lt;li&gt;在招募车主页面，点击“立即报名”按钮&lt;/li&gt;
+  &lt;li&gt;阅读招募标准，并提交简单资料后，获得临时短信密码&lt;/li&gt;
+  &lt;li&gt;下载APP客户端，选择以“我是车主”身份登录&lt;/li&gt;
+  &lt;li&gt;登录后，进入车主版首页，点“发布路线”按钮，设置上下班线路&lt;/li&gt;
+  &lt;li&gt;提交驾驶本、行驶证正面照片，客服审核通过后，即成为车主&lt;/li&gt;
+&lt;/ol&gt;
 
-&lt;pre&gt;&lt;code&gt;sysout.println();
-&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;上面步骤很详细，简单抽象一下：&lt;/p&gt;
 
-&lt;h2 id=&quot;dependencyscope&quot;&gt;dependency的内scope的含义&lt;/h2&gt;
+&lt;ol&gt;
+  &lt;li&gt;注册：不必下载APP，直接以手机号注册&lt;/li&gt;
+  &lt;li&gt;下载APP：下载并安装到手机上&lt;/li&gt;
+  &lt;li&gt;使用APP：下载APP后，提交资料，审核后，成为车主&lt;/li&gt;
+&lt;/ol&gt;
 
-&lt;p&gt;几点：&lt;/p&gt;
+&lt;h2 id=&quot;app-1&quot;&gt;普通APP获取新用户步骤&lt;/h2&gt;
+
+&lt;p&gt;回顾一下，自己之前用到的APP的普遍注册步骤：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;下载APP&lt;/li&gt;
+  &lt;li&gt;注册：手机或者邮箱&lt;/li&gt;
+  &lt;li&gt;使用APP&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;上面几个步骤中，有一个难点，怎么说服用户下载APP到手机上？当然用户下载APP，常见原因有：&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;scope的含义；&lt;/li&gt;
-  &lt;li&gt;scope都有哪些取值；&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;广告&lt;/strong&gt;，让用户体会到使用APP能够获得两点：
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;方便&lt;/strong&gt;：能够解决困扰自己的问题；&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;有利可图&lt;/strong&gt;：常见的优惠，送话费、送优惠券、送折扣；&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;朋友推荐&lt;/strong&gt;，朋友体会到上述两点：便利、有利可图之后，会向身边好友推荐，如果推荐的同时，自己还能获得二次优惠，那推荐的动力就更足了。&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;section&quot;&gt;如何注释？&lt;/h2&gt;
+&lt;p&gt;特别说明：如果APP只能让用户体会到&lt;strong&gt;有利可图&lt;/strong&gt;
+很大一部分人，占了便宜之后，很长时间不再使用APP，甚至删掉APP，当然，如果有持续的优惠，用户一般会持续的使用APP的，但这种持续，是无意义的。一个APP能够长久存在，必须为用户创造价值，具体几类：&lt;/p&gt;
 
-&lt;p&gt;xml中如何注释？&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;便利&lt;/strong&gt;：节省自己的时间，例如，大众点评APP上的排号功能，不到现场，就能排号，更合理的安排自己的时间；&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;有趣&lt;/strong&gt;：休闲时间，获得乐趣，例如：德州扑克，各种手游；&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;&lt;code&gt;&amp;lt;!- -&amp;gt;&lt;/code&gt;&lt;/p&gt;
+&lt;p&gt;特别说明：微信、QQ是通讯类APP，便捷的与他人交流，归属&lt;strong&gt;便利&lt;/strong&gt;这一类。&lt;/p&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;两种方式&lt;/h2&gt;
+
+&lt;p&gt;上述两种方式，都包含：下载APP、注册、使用APP，共计3个步骤，差异在于顺序的不同，同时这几个步骤中，下载APP对用户的影响是最大的，因为要消耗流量、等待时间较长。下图将用一张图来形象对比上述的两种获取新用户的步骤。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/51yche-car-owner-zm-activity/51yche-vs-other.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;上图中，3个步骤：&lt;code&gt;下载APP&lt;/code&gt;、&lt;code&gt;注册&lt;/code&gt;、&lt;code&gt;使用APP&lt;/code&gt;；其中，&lt;code&gt;下载APP&lt;/code&gt;的图标最大，来标识其对用户的影响最大。&lt;/p&gt;
+
+&lt;p&gt;简要分析两种方式的特点：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;下载APP–注册–使用APP&lt;/strong&gt;，此方式特点：弱化注册过程，用户犹豫是否要安装APP的时间，都在&lt;code&gt;下载APP&lt;/code&gt;之前；在用户下载并安装APP之前，APP提供商与用户之间的沟通途径是没有的，即，APP提供商，无法触达用户；一旦用户下载APP的意愿不够强烈，同时又因为其他事情打断&lt;code&gt;下载APP&lt;/code&gt;，这就会丢失一个用户；此类用户称为边缘用户，是争取的重点，但没有途径触达他们，这是个遗憾；&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;注册–下载APP–使用APP&lt;/strong&gt;，此方式特点：缓存&lt;code&gt;下载APP&lt;/code&gt;给用户的压力，对用户来说，注册给用户带来的相对较小，而且，这种方式，能够在用户犹豫的时候，获取与用户之间沟通的途径；有了这条途径，可以低成本的争取边缘用户。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;总上所述，针对使用APP意愿不强烈的边缘用户，采用&lt;code&gt;注册&lt;/code&gt;-&lt;code&gt;下载APP&lt;/code&gt;-&lt;code&gt;使用APP&lt;/code&gt;方式，更容易争取边缘用户。&lt;/p&gt;
 
 </content>
    </entry>
@@ -113,462 +157,1137 @@ fdiy - marked for deletion
    </entry>
    
    <entry>
-     <title>JQuery EasyUI入门简介</title>
-     <link href="http://ningg.github.com/easyui-intro"/>
-     <updated>2015-04-01T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/easyui-intro</id>
-     <content type="html">&lt;h2 id=&quot;section&quot;&gt;参考来源&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.cnblogs.com/wuhuacong/p/3281103.html&quot;&gt;基于MVC4+EasyUI的Web开发框架形成之旅–总体介绍&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.jeasyui.net/&quot;&gt;JQuery EasyUI中文网站&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://echarts.baidu.com/&quot;&gt;Echarts&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>SQL语言中DDL、DML、DCL、TCL简介</title>
-     <link href="http://ningg.github.com/sql-language-ddl-dml-dcl-tcl"/>
-     <updated>2015-03-31T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/sql-language-ddl-dml-dcl-tcl</id>
-     <content type="html">&lt;p&gt;SQL（Structured Query Language，结构化查询语言），是操作RDBMS（relational database management system，关系型数据库管理系统）的专用语言。
-SQL的众多命令，例如，create、drop、insert、grant等，可以被分为4类：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;DDL，Data Definition Language，定义数据库结构、表结构；&lt;/li&gt;
-  &lt;li&gt;DML，Data Manipulation Language，操作具体数据；&lt;/li&gt;
-  &lt;li&gt;DCL，Data Control Language，数据库控制语言，授权、角色控制；&lt;/li&gt;
-  &lt;li&gt;TCL，Transaction Control Language，事务控制语言&lt;em&gt;（有的SQL实现支持，有的不支持）&lt;/em&gt;；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;ddl&quot;&gt;DDL&lt;/h2&gt;
-
-&lt;p&gt;定义数据库的三级结构，包括外模式、概念模式、内模式以及相互之间的映像，定义数据的完整性、安全控制等约束。&lt;em&gt;（有安全控制？）&lt;/em&gt;
-DDL，不需要commit。&lt;/p&gt;
-
-&lt;p&gt;思考：DDL，不需要commit？commit的作用是什么？&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;CREATE – to create objects in the database&lt;/li&gt;
-  &lt;li&gt;ALTER – alters the structure of the database&lt;/li&gt;
-  &lt;li&gt;DROP – delete objects from the database&lt;/li&gt;
-  &lt;li&gt;TRUNCATE – remove all records from a table, including all spaces allocated for the records are removed&lt;/li&gt;
-  &lt;li&gt;COMMENT – add comments to the data dictionary&lt;/li&gt;
-  &lt;li&gt;RENAME – rename an object&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;dml&quot;&gt;DML&lt;/h2&gt;
-
-&lt;p&gt;对应数据库的增删改查（CRUD）操作。DML分为交互型DML和嵌入型DML两类。依据语言级别，DML又可分为过程性DML和非过程性DML两种。需要commit。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;SELECT – retrieve data from the a database&lt;/li&gt;
-  &lt;li&gt;INSERT – insert data into a table&lt;/li&gt;
-  &lt;li&gt;UPDATE – updates existing data within a table&lt;/li&gt;
-  &lt;li&gt;DELETE – Delete all records from a database table&lt;/li&gt;
-  &lt;li&gt;MERGE – UPSERT operation (insert or update)&lt;/li&gt;
-  &lt;li&gt;CALL – call a PL/SQL or Java subprogram&lt;/li&gt;
-  &lt;li&gt;EXPLAIN PLAN – interpretation of the data access path&lt;/li&gt;
-  &lt;li&gt;LOCK TABLE – concurrency Control&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;dcl&quot;&gt;DCL&lt;/h2&gt;
-
-&lt;p&gt;数据库控制语言，授权、角色控制等&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;GRANT – allow users access privileges to database&lt;/li&gt;
-  &lt;li&gt;REVOKE – withdraw users access privileges given by using the GRANT command&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;tcl&quot;&gt;TCL&lt;/h2&gt;
-
-&lt;p&gt;设置事务控制&lt;em&gt;（不同SQL的实现方式，支持程度不同）&lt;/em&gt;，通常针对DML语句。&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;SAVEPOINT 设置保存点&lt;/li&gt;
-  &lt;li&gt;ROLLBACK  回滚&lt;/li&gt;
-  &lt;li&gt;SET TRANSACTION&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;小结&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;数据定义，（SQL DDL）用于定义SQL模式、基本表、视图和索引的创建和撤消操作；&lt;/li&gt;
-  &lt;li&gt;数据操作，（SQL DML）数据操纵分成数据查询和数据更新两类。数据更新又分成插入、删除、和修改三种操作；&lt;/li&gt;
-  &lt;li&gt;数据控制，包括对基本表和视图的授权，完整性规则的描述，事务控制等内容。&lt;/li&gt;
-  &lt;li&gt;嵌入式SQL的使用规定。涉及到SQL语句嵌入在宿主语言程序中使用的规则。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;sqlddldmldcltcl&quot;&gt;为什么将SQL，细分为DDL\DML\DCL\TCL？&lt;/h2&gt;
-
-&lt;p&gt;将SQL的操作，细分为4类：DDL\DML\DCL\TCL的作用，方便进行分类控制，例如：金融、税务等系统，禁止进行DDL操作。&lt;/p&gt;
-
-&lt;p&gt;思考：上述的权限控制，是否能够只针对单个SQL命令，例如INSERT\UPDATE等？即，更细粒度的权限控制。&lt;/p&gt;
-
-&lt;h2 id=&quot;section-1&quot;&gt;参考来源&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.cnblogs.com/henryhappier/archive/2010/07/05/1771295.html&quot;&gt;SQL四种语言：DDL,DML,DCL,TCL&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.w3schools.in/mysql/ddl-dml-dcl/&quot;&gt;What is DDL, DML and DCL&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://stackoverflow.com/questions/12803047/why-are-sql-statements-divided-into-ddl-dml-dcl-and-tcl-statements&quot;&gt;Why are SQL statements divided into DDL, DML, DCL and TCL statements&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>Navicat for MySQL 常用操作</title>
-     <link href="http://ningg.github.com/navicat-intro"/>
-     <updated>2015-03-31T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/navicat-intro</id>
-     <content type="html">&lt;p&gt;（TODO）&lt;/p&gt;
-
-&lt;p&gt;参考：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Navicat for MySQL的自带帮助文档（&lt;code&gt;F1&lt;/code&gt;）&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;特别说明：之前整理的《SQL必知必会(第3版)》，内容没有整理完，当前的形态应该是ppt。&lt;/p&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;常见问题&lt;/h2&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;导出建表语句&lt;/h3&gt;
-
-&lt;p&gt;目标：查看表格的DDL信息&lt;/p&gt;
-
-&lt;p&gt;具体操作：表格 &amp;gt; 右键 &amp;gt; 对象信息 &amp;gt; DDL&lt;/p&gt;
-
-&lt;p&gt;补充：DDL （Data Definition Language，数据定义语言），用于定义数据库的结构；&lt;/p&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>几个概念：UGC\PGC\OGC</title>
-     <link href="http://ningg.github.com/ugc-pgc-ogc"/>
-     <updated>2015-03-27T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/ugc-pgc-ogc</id>
-     <content type="html">&lt;h2 id=&quot;section&quot;&gt;简介&lt;/h2&gt;
-
-&lt;p&gt;UGC\PGC\OGC的定义如下：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;UGC，User-Generated Content，&lt;code&gt;用户&lt;/code&gt;生产内容；又称UCC，User-Created Content。&lt;/li&gt;
-  &lt;li&gt;PGC，Professionally-generated Content，&lt;code&gt;专业&lt;/code&gt;生产内容；又称PPC，Professionally-produced Content。&lt;/li&gt;
-  &lt;li&gt;OGC，Occupationally-Generated Content，&lt;code&gt;职业&lt;/code&gt;生产内容。&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/ugc-pgc-ogc/relation.jpg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;为什么会有UGC\PGC\OGC的划分？先看一下当前的趋势：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Web 2.0（论坛、博客为代表）大兴之后，Web 3.0（社交平台、微博为代表）兴起；&lt;/li&gt;
-  &lt;li&gt;移动互联网快速扩张，信息量太大，有一个需求：有限的时间内，获得尽可能多的准确信息，这就是专业信息的需求；&lt;/li&gt;
-  &lt;li&gt;在垂直领域，内容创作又被细分PGC和UGC，PGC对应专业的内容；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;UGC\PGC\OGC之间的区别：&lt;/p&gt;
+     <title>Kibana入门操作</title>
+     <link href="http://ningg.github.com/kibana-intro"/>
+     <updated>2015-03-16T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/kibana-intro</id>
+     <content type="html">&lt;p&gt;当前使用组件的版本：&lt;/p&gt;
 
 &lt;table&gt;
   &lt;thead&gt;
     &lt;tr&gt;
-      &lt;th style=&quot;text-align: left&quot;&gt;维度&lt;/th&gt;
-      &lt;th style=&quot;text-align: right&quot;&gt;UGC&lt;/th&gt;
-      &lt;th style=&quot;text-align: right&quot;&gt;PGC&lt;/th&gt;
-      &lt;th style=&quot;text-align: right&quot;&gt;OGC&lt;/th&gt;
+      &lt;th&gt;组件&lt;/th&gt;
+      &lt;th&gt;版本&lt;/th&gt;
     &lt;/tr&gt;
   &lt;/thead&gt;
   &lt;tbody&gt;
     &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;专业知识背景&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;&lt;code&gt;N&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;&lt;code&gt;Y&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;&lt;code&gt;Y&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;ElasticSearch&lt;/td&gt;
+      &lt;td&gt;&lt;code&gt;1.4.4&lt;/code&gt;&lt;/td&gt;
     &lt;/tr&gt;
     &lt;tr&gt;
-      &lt;td style=&quot;text-align: left&quot;&gt;付费&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;&lt;code&gt;N&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;&lt;code&gt;N&lt;/code&gt;&lt;/td&gt;
-      &lt;td style=&quot;text-align: right&quot;&gt;&lt;code&gt;Y&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;Java&lt;/td&gt;
+      &lt;td&gt;&lt;code&gt;1.7.0_67&lt;/code&gt; HotSpot(64) 64-Bit&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Kibana&lt;/td&gt;
+      &lt;td&gt;&lt;code&gt;kibana-4.0.1-linux-x64&lt;/code&gt;&lt;/td&gt;
     &lt;/tr&gt;
   &lt;/tbody&gt;
 &lt;/table&gt;
 
-&lt;p&gt;简介几点：&lt;/p&gt;
+&lt;h2 id=&quot;section&quot;&gt;启动&lt;/h2&gt;
+
+&lt;p&gt;Kibana本质就是一个Web工程，启动命令：&lt;code&gt;bin/kibana&lt;/code&gt;，具体查看启动脚本，发现最终启动的是NodeJS相关的服务：&lt;code&gt;bin/../node/bin/node bin/../src/bin/kibana.js&lt;/code&gt;，NodeJS我不懂，具体没看明白。几个疑问：&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;UGC代表：论坛、博客、微博，内容由用户自行创作，管理人员只是协调和维护秩序；&lt;/li&gt;
-  &lt;li&gt;OGC代表：各大新闻站点、视频网站，其内容均有内部自行创造和从外部花钱购入版权；&lt;/li&gt;
-  &lt;li&gt;PGC是UGC、OGC都欢迎的对象，因为其既能产生专业的内容，又不需要付费；&lt;/li&gt;
-  &lt;li&gt;实际上，PGC只是一种错觉，根本上看来，PGC是UGC的一部分，只是这部分相当专业和精彩；&lt;/li&gt;
-  &lt;li&gt;互联网内容供应，仍是泾渭分明的UGC和OGC；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section-1&quot;&gt;趋势&lt;/h2&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;备注：下面是整理的自己比较认同的别人的观点。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;PGC将会长久把握话语权，大部分用户，通过PGC获得相对专业、可靠的信息，几点：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;过去、现在、将来，都是&lt;code&gt;专家意见获得主流话语权&lt;/code&gt;；&lt;/li&gt;
-  &lt;li&gt;PGC只是UGC的一部分；&lt;/li&gt;
-  &lt;li&gt;UGC带来的变化，不是话语权的转变，而是&lt;code&gt;专家认证过程&lt;/code&gt;的转变；举例：之前照片拍的好不好，是由垄断的杂志社编辑们说的算，他们认可，你才是摄影专家；Flickr出现后，摄影师，只要获得最终用户（读者）的认可，就可以直接办摄影展；&lt;/li&gt;
-  &lt;li&gt;互联网的本质：脱媒，最小化中间环节。（运营商，或者编辑们）&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;UGC存在的&lt;strong&gt;必要性&lt;/strong&gt;，几点：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;用户除了获取专业、可靠的信息，还有两方面需求：互动、个性化；&lt;/li&gt;
-  &lt;li&gt;互动：熟人之间互动频繁；互联网使得这些互动，随时随地都可以发生，成本很低；&lt;/li&gt;
-  &lt;li&gt;个性化：交通台的路况信息；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;新媒体要解决&lt;strong&gt;几个问题&lt;/strong&gt;：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;内容：好内容永远稀缺，PGC永远占有一席之地；&lt;/li&gt;
-  &lt;li&gt;互动：用户交流的价值巨大；&lt;/li&gt;
-  &lt;li&gt;高效率分发：例如，新浪微博的关注机制的定制功能；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section-2&quot;&gt;参考来源&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://yjy.people.com.cn/n/2014/0120/c245079-24169402.html&quot;&gt;浅析UGC、PGC、OGC&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.zhihu.com/question/19863075&quot;&gt;UGC\PGC谁会成为主流？&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>MySQL的命名规范</title>
-     <link href="http://ningg.github.com/mysql-name-conventions"/>
-     <updated>2015-03-27T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/mysql-name-conventions</id>
-     <content type="html">&lt;p&gt;数据库、表、字段，如何命名？这可是个大事：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;命名可理解&lt;/li&gt;
-  &lt;li&gt;团队协作&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;上面起名起的好，能够减少大量的沟通成本，避免一些错误操作。&lt;/p&gt;
-
-&lt;p&gt;如何去找这些命名规范？初步想了一下，两个途径：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.jb51.net/article/47617.htm&quot;&gt;MySQL的官方文档&lt;/a&gt;；&lt;/li&gt;
-  &lt;li&gt;行业内通用的规范；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;找了一下，行业内通用规范，看到了nettedfish的&lt;a href=&quot;http://vdisk.weibo.com/s/dR8G_5nKajgp&quot;&gt;去哪儿MySQL开发规范.pdf&lt;/a&gt;，规范太多，就这个了。&lt;/p&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;常用规范简介&lt;/h2&gt;
-
-&lt;p&gt;（todo）&lt;/p&gt;
-
-&lt;p&gt;准备整理一点记得住的规范，要简洁一点。&lt;/p&gt;
-
-&lt;p&gt;详细参考下面几个文档：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.jb51.net/article/47617.htm&quot;&gt;MySQL数据库命名规范及约定&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://vdisk.weibo.com/s/dR8G_5nKajgp&quot;&gt;去哪儿MySQL开发规范.pdf&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section-1&quot;&gt;参考来源&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://dev.mysql.com/doc/refman/5.6/en/index.html&quot;&gt;MySQL 5.6 Reference Manual&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.jb51.net/article/47617.htm&quot;&gt;MySQL数据库命名规范及约定&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://vdisk.weibo.com/s/dR8G_5nKajgp&quot;&gt;去哪儿MySQL开发规范.pdf&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>流程图 and 线框图</title>
-     <link href="http://ningg.github.com/flow-chart-and-line-diagram"/>
-     <updated>2015-03-26T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/flow-chart-and-line-diagram</id>
-     <content type="html">&lt;p&gt;提示：本篇是杂谈，没有太多系统的干货。&lt;/p&gt;
-
-&lt;p&gt;在产品需求确定之后，下面的工作如何开展？梳理流程图？开启线框图？流程图看起来有点复杂、琐碎，不直观，因为无法直观看到页面；相反，线框图画起来很快的，托拉拽，效果也直观的很。额外说一点，线框图最终成型是以界面为单位，而在实际绘制过程中，可以先梳理人的行为，最后严格梳理界面。&lt;/p&gt;
-
-&lt;p&gt;好了，上面关于流程图和线框图的争论，先不说。下面说一下，需求确定后需要考虑的几个问题：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;用户要获取哪些信息？&lt;em&gt;（用户的目的）&lt;/em&gt;&lt;/li&gt;
-  &lt;li&gt;什么流程，比较合理？&lt;em&gt;（操作过程）&lt;/em&gt;&lt;/li&gt;
-  &lt;li&gt;上述流程怎么页面化？以页面为单元进行分割；&lt;/li&gt;
-  &lt;li&gt;当前页面，有哪些信息需要展示？如何布局？&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;上面是按照线性逻辑，在思考问题，直觉上，感觉是合理的；但事实上，不一定是合理的，具体要从操作层面来看。&lt;/p&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;杂谈&lt;/h2&gt;
-
-&lt;p&gt;每天都有系统整理，这个基本是不可能的，因为一天时间太短了，只有24h，而且要睡觉6h；吃饭、间歇休息、上下班路上时间消耗掉4h。剩下的时间…不多说了&lt;/p&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>Git入门</title>
-     <link href="http://ningg.github.com/git-intro"/>
-     <updated>2015-03-25T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/git-intro</id>
-     <content type="html">&lt;h2 id=&quot;section&quot;&gt;立意&lt;/h2&gt;
-
-&lt;p&gt;几点想法：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Git的常用操作&lt;/li&gt;
-  &lt;li&gt;Git的基本原理，操作是附属于原理的，对原理的把握，两点好处：方便记忆Git的操作，方便快速定位问题；&lt;/li&gt;
-  &lt;li&gt;典型场景下Git的使用
+  &lt;li&gt;如何后台启动Kibana？
     &lt;ul&gt;
-      &lt;li&gt;dev、prod等多个分支如何组织？&lt;/li&gt;
+      &lt;li&gt;&lt;code&gt;nohup bin/kibana &amp;amp;&lt;/code&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Kibana运行日志位置？&lt;/li&gt;
+  &lt;li&gt;如何监控Kibana运行状态？&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+   </entry>
+   
+   <entry>
+     <title>ElasticSearch入门操作</title>
+     <link href="http://ningg.github.com/elasticsearch-intro"/>
+     <updated>2015-03-12T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/elasticsearch-intro</id>
+     <content type="html">&lt;p&gt;当前使用组件的版本：&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;组件&lt;/th&gt;
+      &lt;th&gt;版本&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;ElasticSearch&lt;/td&gt;
+      &lt;td&gt;&lt;code&gt;1.4.4&lt;/code&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Java&lt;/td&gt;
+      &lt;td&gt;&lt;code&gt;1.7.0_67&lt;/code&gt; HotSpot(64) 64-Bit&lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;启动&lt;/h2&gt;
+
+&lt;p&gt;直接下载，然后解压，直接运行脚本&lt;code&gt;bin/elasticsearch&lt;/code&gt;。如果希望 ElasticSearch 在后台运行，则执行命令&lt;code&gt;bin/elasticsearch -d&lt;/code&gt;，其将 ElasticSearch 进程的父进程设置为超级进程（&lt;code&gt;pid=1&lt;/code&gt;）。现在，如何测试是否启动成功？可向 &lt;code&gt;http://localhost:9200&lt;/code&gt; 发送一条请求，会查看到返回的JSON字符串，具体效果如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[ningg@localhost ~]$ curl -XGET http://localhost:9200/
+{
+  &quot;status&quot; : 200,
+  &quot;name&quot; : &quot;Silly Seal&quot;,
+  &quot;cluster_name&quot; : &quot;elasticsearch&quot;,
+  &quot;version&quot; : {
+	&quot;number&quot; : &quot;1.4.4&quot;,
+	&quot;build_hash&quot; : &quot;c88f77ffc81301dfa9dfd81ca2232f09588bd512&quot;,
+	&quot;build_timestamp&quot; : &quot;2015-02-19T13:05:36Z&quot;,
+	&quot;build_snapshot&quot; : false,
+	&quot;lucene_version&quot; : &quot;4.10.3&quot;
+  },
+  &quot;tagline&quot; : &quot;You Know, for Search&quot;
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;补充几点：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;验证ElasticSearch是否成功启动，也可以直接使用浏览器，访问&lt;code&gt;http://localhost:9200&lt;/code&gt;，将此处 &lt;code&gt;localhost&lt;/code&gt; 替换为服务器的IP。&lt;/li&gt;
+  &lt;li&gt;在后台启动ElasticSearch的详细过程，可以参考&lt;code&gt;bin/elasticsearch&lt;/code&gt;脚本细节，内部有详细说明，本质就是shell脚本中启动一个Java进程。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;index&quot;&gt;Index操作&lt;/h2&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;插入数据&lt;/h3&gt;
+
+&lt;p&gt;如果指定的 &lt;code&gt;Index&lt;/code&gt;`Type&lt;code&gt; 不存在，则自动创建，下面为向&lt;/code&gt;Index&lt;code&gt;\&lt;/code&gt;Type` 插入数据的命令；&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;curl -XPUT &#39;http://localhost:9200/test/test/1&#39; -d &#39;{ &quot;name&quot; : &quot;Ning Guo&quot;}&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;查询数据&lt;/h3&gt;
+
+&lt;p&gt;查询指定条件的数据，两个操作：&lt;code&gt;_count&lt;/code&gt;、&lt;code&gt;_search&lt;/code&gt;。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[ningg@localhost ~]$ curl -XGET http://localhost:9200/test/_count?pretty=true
+{
+  &quot;count&quot; : 1,
+  &quot;_shards&quot; : {
+	&quot;total&quot; : 5,
+	&quot;successful&quot; : 5,
+	&quot;failed&quot; : 0
+  }
+}
+[ningg@localhost ~]$ 
+[ningg@localhost ~]$ curl -XGET http://localhost:9200/test/_search?pretty=true
+{
+  &quot;took&quot; : 2,
+  &quot;timed_out&quot; : false,
+  &quot;_shards&quot; : {
+	&quot;total&quot; : 5,
+	&quot;successful&quot; : 5,
+	&quot;failed&quot; : 0
+  },
+  &quot;hits&quot; : {
+	&quot;total&quot; : 1,
+	&quot;max_score&quot; : 1.0,
+	&quot;hits&quot; : [ {
+	  &quot;_index&quot; : &quot;test&quot;,
+	  &quot;_type&quot; : &quot;test&quot;,
+	  &quot;_id&quot; : &quot;1&quot;,
+	  &quot;_score&quot; : 1.0,
+	  &quot;_source&quot;:{ &quot;name&quot; : &quot;Ning Guo&quot;}
+	} ]
+  }
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;其他查询：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;查询 ElasticSearch 下，所有的 Index ：
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code&gt;curl http://localhost:9200/_alias?pretty&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;code&gt;curl http://localhost:9200/_stats/indexes?pretty&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;code&gt;curl http://localhost:9200/_cat/indices?pretty&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;注：直接执行&lt;code&gt;_cat&lt;/code&gt;会显示提示信息；&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;查询 Index 下所有的 Type 以及 Type 详情：
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code&gt;curl http://localhost:9200/indexName/_mapping?pretty&lt;/code&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;查询 Index 的详情：
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code&gt;curl http://localhost:9200/indexName/_status?pretty&lt;/code&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;精确查询：避免对keyword的分词和对document中field的分词&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;section-3&quot;&gt;删除数据&lt;/h3&gt;
+
+&lt;p&gt;如何删除一个Index、Type、Document。&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;curl -XDELETE http://localhost:9200/test?pretty
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;section-4&quot;&gt;监控&lt;/h2&gt;
+
+&lt;p&gt;Elastic官网提供了一种方式Marvel，不过这种方式是付费的，我x，那能不能利用Ganglia监控呢？实际上，ElasticSearch是基于Java的，而JVM能够通过JMX方式向外停工监控数据，唯一的问题是：ElasticSearch在JVM中记录的运行状态数据吗？&lt;/p&gt;
+
+&lt;h2 id=&quot;section-5&quot;&gt;常见问题&lt;/h2&gt;
+
+&lt;h3 id=&quot;warn-too-many-open-files&quot;&gt;WARN: Too many open files&lt;/h3&gt;
+
+&lt;p&gt;详细错误信息：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[2015-04-14 11:18:25,797][WARN ][indices.cluster          ] [Rune] [flume-2015-04-14][2] failed to start shard
+org.elasticsearch.index.gateway.IndexShardGatewayRecoveryException: [flume-2015-04-14][2] failed recovery
+	at org.elasticsearch.index.gateway.IndexShardGatewayService$1.run(IndexShardGatewayService.java:185)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: org.elasticsearch.index.engine.EngineCreationFailureException: [flume-2015-04-14][2] failed to open reader on writer
+	at org.elasticsearch.index.engine.internal.InternalEngine.start(InternalEngine.java:326)
+	at org.elasticsearch.index.shard.service.InternalIndexShard.performRecoveryPrepareForTranslog(InternalIndexShard.java:732)
+	at org.elasticsearch.index.gateway.local.LocalIndexShardGateway.recover(LocalIndexShardGateway.java:231)
+	at org.elasticsearch.index.gateway.IndexShardGatewayService$1.run(IndexShardGatewayService.java:132)
+	... 3 more
+Caused by: java.nio.file.FileSystemException: /home/storm/es/elasticsearch-1.4.4/data/elasticsearch/nodes/0/indices/flume-2015-04-14/2/index/_h3.cfe: Too many open files
+	at sun.nio.fs.UnixException.translateToIOException(UnixException.java:91)
+	at sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:102)
+	at sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:107)
+	at sun.nio.fs.UnixFileSystemProvider.newFileChannel(UnixFileSystemProvider.java:177)
+	at java.nio.channels.FileChannel.open(FileChannel.java:287)
+	at java.nio.channels.FileChannel.open(FileChannel.java:334)
+	at org.apache.lucene.store.NIOFSDirectory.openInput(NIOFSDirectory.java:81)
+	at org.apache.lucene.store.FileSwitchDirectory.openInput(FileSwitchDirectory.java:172)
+	at org.apache.lucene.store.FilterDirectory.openInput(FilterDirectory.java:80)
+	at org.elasticsearch.index.store.DistributorDirectory.openInput(DistributorDirectory.java:130)
+	at org.apache.lucene.store.FilterDirectory.openInput(FilterDirectory.java:80)
+	at org.elasticsearch.index.store.Store$StoreDirectory.openInput(Store.java:515)
+	at org.apache.lucene.store.Directory.openChecksumInput(Directory.java:113)
+	at org.apache.lucene.store.CompoundFileDirectory.readEntries(CompoundFileDirectory.java:166)
+	at org.apache.lucene.store.CompoundFileDirectory.&amp;lt;init&amp;gt;(CompoundFileDirectory.java:106)
+	at org.apache.lucene.index.SegmentReader.readFieldInfos(SegmentReader.java:274)
+	at org.apache.lucene.index.SegmentReader.&amp;lt;init&amp;gt;(SegmentReader.java:107)
+	at org.apache.lucene.index.ReadersAndUpdates.getReader(ReadersAndUpdates.java:145)
+	at org.apache.lucene.index.ReadersAndUpdates.getReadOnlyClone(ReadersAndUpdates.java:239)
+	at org.apache.lucene.index.StandardDirectoryReader.open(StandardDirectoryReader.java:104)
+	at org.apache.lucene.index.IndexWriter.getReader(IndexWriter.java:422)
+	at org.apache.lucene.index.DirectoryReader.open(DirectoryReader.java:112)
+	at org.apache.lucene.search.SearcherManager.&amp;lt;init&amp;gt;(SearcherManager.java:89)
+	at org.elasticsearch.index.engine.internal.InternalEngine.buildSearchManager(InternalEngine.java:1569)
+	at org.elasticsearch.index.engine.internal.InternalEngine.start(InternalEngine.java:313)
+	... 6 more
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;解决办法：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;在当前Linux下，使用elasticsearch用户身份，执行&lt;code&gt;ulimt -Hn&lt;/code&gt;和&lt;code&gt;ulimit -Sn&lt;/code&gt;，查看当前用户，在当前shell环境下，允许打开文件的最大个数；&lt;/li&gt;
+  &lt;li&gt;打开&lt;code&gt;/etc/security/limits.conf&lt;/code&gt;文件，在最后，添加如下两行内容：&lt;em&gt;（启动elasticsearch的用户为&lt;code&gt;elasticsearch&lt;/code&gt;）&lt;/em&gt;
+    &lt;ul&gt;
+      &lt;li&gt;elasticsearch soft  nofile 32000&lt;/li&gt;
+      &lt;li&gt;elasticsearch hard  nofile 32000&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;重新以elasticsearch用户身份登录，并执行执行&lt;code&gt;ulimt -Hn&lt;/code&gt;和&lt;code&gt;ulimit -Sn&lt;/code&gt;，以此验证上述配置是否生效；若设置生效，则重启Elasticsearch即可。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;简要解释：&lt;code&gt;/etc/security/limits.conf&lt;/code&gt;文件中设置了，一个用户或者组，所能使用的系统资源，例如：CPU、内存以及可同时打开文件的数量等。&lt;/p&gt;
+
+&lt;p&gt;更多细节，参考：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://elasticsearch-users.115913.n3.nabble.com/Error-Too-many-open-files-td2779067.html&quot;&gt;Error - Too many open files&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://queirozf.com/entries/elasticsearch-too-many-open-files&quot;&gt;Elasticsearch - too many open files&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section-6&quot;&gt;参考来源&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/elastic/elasticsearch&quot;&gt;ElasticSearch(Github)&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.gitbook.com/book/looly/elasticsearch-the-definitive-guide-cn/details&quot;&gt;gitbook：Elasticsearch权威指南（中文版）&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://learnes.net/index.html&quot;&gt;gitbook：Elasticsearch 权威指南&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+   </entry>
+   
+   <entry>
+     <title>Flume实现将Kafka中数据传入ElasticSearch中</title>
+     <link href="http://ningg.github.com/flume-kafka-source-elasticsearch-sink"/>
+     <updated>2015-03-11T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/flume-kafka-source-elasticsearch-sink</id>
+     <content type="html">&lt;p&gt;目标：利用Flume Agent实现，将Kafka中数据取出，送入ElasticSearch中。&lt;/p&gt;
+
+&lt;p&gt;分析：Flume Agent需要的工作，两点：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Flume Kafka Source：负责从Kafka中读取数据；&lt;/li&gt;
+  &lt;li&gt;Flume ElasticSearch Sink：负责将数据送入ElasticSearch；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;当前Flume 1.5.2已经包含了ElasticSearchSink，因此，需要定制实现Flume Kafka Source即可。当前从Jira上得知，Flume 1.6.0 中将包含Flume-ng-kafka-source，但是，当前Flume 1.6.0版本并没有发布，怎么办？两条路：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;github上别人开源的Flume-ng-kafka-source&lt;/li&gt;
+  &lt;li&gt;flume 1.6.0分支的代码中flume-ng-kafka-source&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;初步选定Flume 1.6.0分支中的flume-ng-kafka-source部分，这部分代码已经包含在&lt;a href=&quot;https://github.com/ningg/flume-ng-extends-source&quot;&gt;flume-ng-extends-source&lt;/a&gt;。&lt;/p&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;编译代码&lt;/h2&gt;
+
+&lt;p&gt;执行命令：&lt;code&gt;mvn clean package&lt;/code&gt;得到jar包：&lt;code&gt;flume-ng-extends-source-x.x.x.jar&lt;/code&gt;。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;安装插件&lt;/h2&gt;
+
+&lt;p&gt;两类jar包：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;lib中jar包
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code&gt;flume-ng-extends-source-x.x.x.jar&lt;/code&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;libext中jar包
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code&gt;kafka_2.9.2-0.8.2.0.jar&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;code&gt;kafka-clients-0.8.2.0.jar&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;code&gt;metrics-core-2.2.0.jar&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;code&gt;scala-library-2.9.2.jar&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;code&gt;zkclient-0.3.jar&lt;/code&gt;&lt;/li&gt;
     &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;基本思路：整体上，系统参考几个内容：&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;疑问&lt;/strong&gt;：maven打包时，如何将当前jar包以及其依赖包都导出？
+参考&lt;a href=&quot;https://github.com/thilinamb/flume-ng-kafka-sink&quot;&gt;thilinamb flume kafka sink&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;配置&lt;/h2&gt;
+
+&lt;p&gt;在properties文件中进行配置，配置样本文件：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# Kafka Source For retrieve from Kafka cluster.
+agent.sources.seqGenSrc.type = com.github.ningg.flume.source.KafkaSource
+#agent.sources.seqGenSrc.batchSize = 2
+agent.sources.seqGenSrc.batchDurationMillis = 1000
+agent.sources.seqGenSrc.topic = good
+agent.sources.seqGenSrc.zookeeperConnect = 168.7.2.164:2181,168.7.2.165:2181,168.7.2.166:2181
+agent.sources.seqGenSrc.groupId = elasticsearch
+#agent.sources.seqGenSrc.kafka.consumer.timeout.ms = 1000
+#agent.sources.seqGenSrc.kafka.auto.commit.enable = false
+
+# ElasticSearchSink for ElasticSearch.
+agent.sinks.loggerSink.type = org.apache.flume.sink.elasticsearch.ElasticSearchSink
+agent.sinks.loggerSink.indexName = flume
+agent.sinks.loggerSink.indexType = log
+agent.sinks.loggerSink.batchSize = 100
+#agent.sinks.loggerSink.ttl = 5
+agent.sinks.loggerSink.client = transport
+agent.sinks.loggerSink.hostNames = 168.7.1.69:9300
+#agent.sinks.loggerSink.client = rest
+#agent.sinks.loggerSink.hostNames = 168.7.1.69:9200
+#agent.sinks.loggerSink.serializer = org.apache.flume.sink.elasticsearch.ElasticSearchLogStashEventSerializer
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;section-3&quot;&gt;定制&lt;/h2&gt;
+
+&lt;p&gt;目标：定制ElasticSearchSink的serializer。&lt;/p&gt;
+
+&lt;p&gt;现象：设置ElasticSearchSink的参数&lt;code&gt;batchSize=1000&lt;/code&gt;后，当前ES中当天的Index中出现了&lt;code&gt;120,000&lt;/code&gt;+的记录，而此时，原有平台发现，当前产生的数据只有&lt;code&gt;20,000&lt;/code&gt;，因此，猜测KafkaSource将Kafka集群中指定topic下的所有数据都传入了ES中。&lt;/p&gt;
+
+&lt;p&gt;几点：&lt;/p&gt;
+
+&lt;p&gt;ElasticSearchSink中新的配置参数：&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://git-scm.com/book/zh/v1&quot;&gt;Pro Git&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://rogerdudler.github.io/git-guide/index.zh.html&quot;&gt;git - 简明指南&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://marklodato.github.io/visual-git-guide/index-zh-cn.html&quot;&gt;图解Git&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.cnblogs.com/lookenwu/p/3925308.html&quot;&gt;快学Git&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;indexNameBuilder=org.apache.flume.sink.elasticsearch.TimeBasedIndexNameBuilder
+    &lt;ul&gt;
+      &lt;li&gt;上述将以&lt;code&gt;indexPrefix&lt;/code&gt;-&lt;code&gt;yyyy-MM-dd&lt;/code&gt;方式，每天产生一个Index；&lt;/li&gt;
+      &lt;li&gt;其他选项：org.apache.flume.sink.elasticsearch.SimpleIndexNameBuilder，其直接以设定的&lt;code&gt;indexPrefix&lt;/code&gt;（实际就是设置的&lt;code&gt;indexName&lt;/code&gt;）&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;dateFormat=&lt;code&gt;yyyy-MM-dd&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;timeZONE=&lt;code&gt;Etc/UTC&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;serializer=org.apache.flume.sink.elasticsearch.ElasticSearchLogStashEventSerializer
+    &lt;ul&gt;
+      &lt;li&gt;上述选项，将 flume event 的 Header 中 key-value 添加到一个新增的字段&lt;code&gt;@fields&lt;/code&gt;中；&lt;/li&gt;
+      &lt;li&gt;其他选项：org.apache.flume.sink.elasticsearch.ElasticSearchDynamicSerializer，其直接将body、header构造为一个JSON字符串，添加到ElasticSearch中。&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;几个结果：&lt;/p&gt;
+&lt;h2 id=&quot;section-4&quot;&gt;重启&lt;/h2&gt;
+
+&lt;p&gt;如果终止Flume Agent，然后重启。疑问：&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;快学Git：git相关的基本操作，不涉及过多原理；&lt;/li&gt;
-  &lt;li&gt;详细整理Git：侧重Git的原理，以及常见场景下，Git的用法；&lt;/li&gt;
+  &lt;li&gt;Kafka中的数据，是否会重复发送到ElasticSearch？&lt;/li&gt;
+  &lt;li&gt;Kafka中的数据，是否有遗漏，没有发送到ElasticSearch？&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;注：在之前的&lt;a href=&quot;/project-flume-ng-extends-source&quot;&gt;一篇文章&lt;/a&gt;中也涉及过Git的使用。&lt;/p&gt;
-
-&lt;h2 id=&quot;section-1&quot;&gt;常见问题&lt;/h2&gt;
-
-&lt;h3 id=&quot;git-commitgit-push&quot;&gt;git commit之后，git push之前，如何进行回滚&lt;/h3&gt;
-
-&lt;p&gt;git commit之后，发现有的文件不详添加到git server中，希望回滚，该如何做？&lt;/p&gt;
-
-&lt;p&gt;思路：&lt;/p&gt;
+&lt;p&gt;思考，几个情况：&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;将文件git push之后，再添加.gitignore文件；&lt;/li&gt;
-  &lt;li&gt;直接回滚处理git commit，然后，添加.gitignore，重新git commit；&lt;/li&gt;
+  &lt;li&gt;Kafka对应的Consumer有offset&lt;/li&gt;
+  &lt;li&gt;Kafka中数据，周期性的清理，例如默认3天&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;（TODO）&lt;/p&gt;
-
-&lt;p&gt;如何解决？thinking…&lt;/p&gt;
-
-&lt;h3 id=&quot;gitignore&quot;&gt;设置.gitignore对多级目录都有效？&lt;/h3&gt;
-
-&lt;p&gt;直接在顶级目录中设置.gitignore？&lt;/p&gt;
-
-&lt;h2 id=&quot;section-2&quot;&gt;参考来源&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://git-scm.com/book/zh/v1&quot;&gt;Pro Git&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://rogerdudler.github.io/git-guide/index.zh.html&quot;&gt;git - 简明指南&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://marklodato.github.io/visual-git-guide/index-zh-cn.html&quot;&gt;图解Git&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.cnblogs.com/lookenwu/p/3925308.html&quot;&gt;快学Git&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section-3&quot;&gt;闲谈&lt;/h2&gt;
-
-&lt;p&gt;前一段时间得知消息 &lt;code&gt;**&lt;/code&gt; 队伍，逐渐兵强马壮，并且被邀请上了一个山头，做起了事业；细看他们的做法，他们队长在开始的时候，相信 &lt;code&gt;人生要独辟蹊径&lt;/code&gt; 这么个说法，然后，在做事情的时候，他们战略立意为：时间紧迫，做好事情，抓住机会，成立队伍，把事情做好、做丰富，合适机会出现的时候，就做事业。实际上在2年之前，我们队伍与 &lt;code&gt;**&lt;/code&gt; 队伍做的事情是相似的，但我们战略上没有定位，基本想法是：有事情做就把事情做好，一起做事，一起吃肉。最后，毕业了，我们的小队伍，散伙，各自谋生。当然，我认为造成当前与 &lt;code&gt;**&lt;/code&gt; 队伍巨大差异的原因有很多，但我们战略立意太低了，没有战略定位，到头来，就成了混日子，能偷懒的时候，都偷懒了，1年回头一看，啥事情都没做成。我作为队伍的大佬之一，对此反思，下次有机会到北京，跟当时队伍大佬 &lt;code&gt;2W&lt;/code&gt; 见面了，好好扯扯这个事。&lt;/p&gt;
-
-&lt;p&gt;上面为什么提到这个战略定位呢？是想说无论事情大小，都要有个清晰、适当的战略目标，以此避免因为短期视野局限，迷失方向，浪费精力；时间太宝贵了，关键不可逆啊。&lt;/p&gt;
+&lt;p&gt;需要详细思考Flume Agent的重启场景。&lt;/p&gt;
 
 </content>
    </entry>
    
    <entry>
-     <title>产品分析、设计基本流程</title>
-     <link href="http://ningg.github.com/create-effective-product-protype"/>
-     <updated>2015-03-25T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/create-effective-product-protype</id>
-     <content type="html">&lt;blockquote&gt;
-  &lt;p&gt;原文地址：&lt;a href=&quot;http://ued.taobao.org/blog/2014/05/%E9%AB%98%E6%95%88%E8%BE%93%E5%87%BA%E7%A7%BB%E5%8A%A8app%E4%BA%A7%E5%93%81%E5%8E%9F%E5%9E%8B/&quot;&gt;高效输出移动app产品原型&lt;/a&gt;。本文在原文基础上，进行适当的调整，添加了自己的理解。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;目标：输出移动 app 产品原型，高效的实现这个目标。&lt;/p&gt;
-
-&lt;p&gt;几个特点：&lt;/p&gt;
+     <title>ElasticSearch下配置Kafka插件</title>
+     <link href="http://ningg.github.com/elasticsearch-kafka-plugin"/>
+     <updated>2015-03-10T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/elasticsearch-kafka-plugin</id>
+     <content type="html">&lt;p&gt;做个记录：ElasticSearch下如何添加、删除插件。做此记录的初衷有两个：&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;产品思路，清晰&lt;/li&gt;
-  &lt;li&gt;协同合作，顺畅&lt;/li&gt;
-  &lt;li&gt;素材元素，齐备&lt;/li&gt;
-  &lt;li&gt;体验感受，真实 &lt;em&gt;（做出的原型）&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;记录，作为备忘；&lt;/li&gt;
+  &lt;li&gt;记录初稿，今后操作时，方便基于此的改进和积累；&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;具体操作步骤：&lt;/p&gt;
+&lt;h2 id=&quot;section&quot;&gt;组件版本&lt;/h2&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th&gt;组件&lt;/th&gt;
+      &lt;th&gt;版本&lt;/th&gt;
+      &lt;th&gt;链接&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td&gt;ElasticSearch&lt;/td&gt;
+      &lt;td&gt;&lt;code&gt;1.4.4&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;http://www.elasticsearch.org/&quot;&gt;参考链接&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;Kafka&lt;/td&gt;
+      &lt;td&gt;&lt;code&gt;0.8.2.0&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;http://kafka.apache.org/&quot;&gt;参考链接&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;ElasticSearch river kafka&lt;/td&gt;
+      &lt;td&gt;&lt;code&gt;1.2.1&lt;/code&gt;&lt;/td&gt;
+      &lt;td&gt;&lt;a href=&quot;https://github.com/mariamhakobyan/elasticsearch-river-kafka&quot;&gt;参考链接&lt;/a&gt;&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td&gt;操作系统&lt;/td&gt;
+      &lt;td&gt;centOS 6.3&lt;/td&gt;
+      &lt;td&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;p&gt;备注：已经folk了插件&lt;a href=&quot;https://github.com/ningg/elasticsearch-river-kafka&quot;&gt;ElasticSearch river kafka&lt;/a&gt;，并将其中ElasticSearch、Kafka对应版本好进行升级，本地&lt;code&gt;mvn clean install&lt;/code&gt;编译之后，用于进行插件的安装。&lt;/p&gt;
+
+&lt;p&gt;执行&lt;code&gt;mvn clean install&lt;/code&gt;命令时，提示：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;$mvn clean insatll
+...
+[INFO] --- maven-failsafe-plugin:2.14:integration-test (default) @ elasticsearch-river-kafka ---
+[INFO] No tests to run.
+[WARNING] File encoding has not been set, using platform encoding GBK, i.e. build is platform dependent!
+...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;解决方案&lt;/strong&gt;：在&lt;code&gt;pom.xml&lt;/code&gt;中&lt;code&gt;failsafe&lt;/code&gt;插件下，设定编码方式，具体：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;&amp;lt;plugin&amp;gt;
+	&amp;lt;artifactId&amp;gt;maven-failsafe-plugin&amp;lt;/artifactId&amp;gt;
+	&amp;lt;version&amp;gt;${version.maven.failsafe.plugin}&amp;lt;/version&amp;gt;
+	&amp;lt;configuration&amp;gt;
+		&amp;lt;encoding&amp;gt;UTF-8&amp;lt;/encoding&amp;gt;
+	&amp;lt;/configuration&amp;gt;
+	&amp;lt;executions&amp;gt;
+		&amp;lt;execution&amp;gt;
+			&amp;lt;goals&amp;gt;
+				&amp;lt;goal&amp;gt;integration-test&amp;lt;/goal&amp;gt;
+				&amp;lt;goal&amp;gt;verify&amp;lt;/goal&amp;gt;
+			&amp;lt;/goals&amp;gt;
+		&amp;lt;/execution&amp;gt;
+	&amp;lt;/executions&amp;gt;
+&amp;lt;/plugin&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;添加插件&lt;/h2&gt;
+
+&lt;p&gt;目标：在ElasticSearch下添加Kafka插件。&lt;/p&gt;
+
+&lt;p&gt;第一步：编译插件：&lt;code&gt;mvn clean install&lt;/code&gt;，得到&lt;code&gt;$PROJECT-PATH/target/elasticsearch-river-kafka-1.2.1-SNAPSHOT-plugin.zip&lt;/code&gt;文件。&lt;/p&gt;
+
+&lt;p&gt;第二步：安装插件：将上述&lt;code&gt;elasticsearch-river-kafka-1.2.1-SNAPSHOT-plugin.zip&lt;/code&gt;文件上传到ElasticSearch运行的服务器上&lt;code&gt;/home/es&lt;/code&gt;目录下，执行下述命令，安装插件：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cd $ELASTICSEARCH_HOME
+.bin/plugin --install kafka-river --url file:////home/es/elasticsearch-river-kafka-1.2.1-SNAPSHOT-plugin.zip
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;第三步：配置Kafka插件，详细配置参数，参考&lt;a href=&quot;https://github.com/mariamhakobyan/elasticsearch-river-kafka&quot;&gt;ElasticSearch river kafka&lt;/a&gt;，下面只贴一下我自己的配置：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;curl -XPUT &#39;http://168.7.1.69:9200/_river/kafka-river/_meta&#39; -d &#39;
+{  
+  &quot;type&quot;:&quot;kafka&quot;,
+  &quot;kafka&quot;:{
+	 &quot;zookeeper.connect&quot;:&quot;168.7.2.164:2181,168.7.2.165:2181,168.7.2.166:2181&quot;,
+	 &quot;zookeeper.connection.timeout.ms&quot;:10000,
+	 &quot;topic&quot;:&quot;good&quot;,
+	 &quot;message.type&quot;: &quot;json&quot;
+  },
+  &quot;index&quot;:{
+	 &quot;index&quot;:&quot;kafka-index&quot;,
+	 &quot;type&quot;:&quot;status&quot;,
+	 &quot;bulk.size&quot;:100,
+	 &quot;concurrent.requests&quot;:1,
+	 &quot;action.type&quot;:&quot;index&quot;
+  }
+}&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;第四步：重新启动ElasticSearch&lt;/p&gt;
+
+&lt;p&gt;第五步：查询Kafka数据是否已经传送至ElasticSearch，执行命令如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;curl -XGET &#39;http://168.7.1.69:9200/kafka-index/status/_search?pretty&#39;
+// 或者 统计记录条数
+curl -XGET &#39;http://168.7.1.69:9200/kafka-index/status/_count?pretty&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;注：参考自&lt;a href=&quot;https://github.com/mariamhakobyan/elasticsearch-river-kafka&quot;&gt;ElasticSearch river kafka&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;删除插件&lt;/h2&gt;
+
+&lt;p&gt;第一步，通过rest接口，删除，执行命令：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;curl -XDELETE &#39;http://168.7.1.69:9200/_river/kafka-river/&#39;
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;第二步，通过plugin命令删除，具体执行命令：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;cd $ELASTICSEARCH_HOME
+.bin/plugin --remove kafka-river
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;第三步，重启ElasticSearch。&lt;/p&gt;
+
+&lt;p&gt;注：参考自&lt;a href=&quot;https://github.com/mariamhakobyan/elasticsearch-river-kafka&quot;&gt;ElasticSearch river kafka&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;section-3&quot;&gt;参考来源&lt;/h2&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;产品流程图，界面为单位&lt;/li&gt;
-  &lt;li&gt;基础原型控件，可修改&lt;/li&gt;
-  &lt;li&gt;动态原型，可点击&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/mariamhakobyan/elasticsearch-river-kafka&quot;&gt;ElasticSearch river kafka&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;下文将分开来说上面的 3 个操作步骤。&lt;/p&gt;
+</content>
+   </entry>
+   
+   <entry>
+     <title>Kafka、ElasticSearch、Kibana实现日志分析平台</title>
+     <link href="http://ningg.github.com/elasticsearch-kibana"/>
+     <updated>2015-03-06T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/elasticsearch-kibana</id>
+     <content type="html">&lt;h2 id=&quot;section&quot;&gt;基本思路&lt;/h2&gt;
 
-&lt;h2 id=&quot;section&quot;&gt;产品流程图，界面为单位&lt;/h2&gt;
-
-&lt;p&gt;高校输出，首先要保证产品的整体思路要正确，这点可以从产品流程中体现出来。移动产品需要做到聚焦，因为手机界面的大小，用户的碎片化使用等等，所以一个界面上必然不可能出现太多的内容和行动点，这就保证了我们可以用最简洁的方式来画流程。以界面为单位，定义 &lt;code&gt;界面标题&lt;/code&gt; 和 &lt;code&gt;主要内容&lt;/code&gt;，如下图所示：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/create-effective-product-protype/single-element.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;以上述页面为单位，来画流程，下面以一个app的登录注册为例：&lt;/p&gt;
-
-&lt;p&gt;&lt;img src=&quot;/images/create-effective-product-protype/complete-flow-chart.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
-
-&lt;p&gt;上述的产品流程图，有几个目的：&lt;/p&gt;
+&lt;p&gt;几点：&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;快速了解产品有多少页面；&lt;/li&gt;
-  &lt;li&gt;检验用户路径是否太长；&lt;/li&gt;
-  &lt;li&gt;形式简单，方便讨论修改；&lt;em&gt;（visio中能够批注吗？留下痕迹）&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;对知识盲区清理，形成基本轮廓，先理念、后操作：
+    &lt;ul&gt;
+      &lt;li&gt;ElasticSearch&lt;/li&gt;
+      &lt;li&gt;Kibana&lt;/li&gt;
+      &lt;li&gt;Logstash：TODO&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;敲定路线图
+    &lt;ul&gt;
+      &lt;li&gt;现有资源和条件&lt;/li&gt;
+      &lt;li&gt;设立目标&lt;/li&gt;
+      &lt;li&gt;框架细化&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;反复测试、开阔视野
+    &lt;ul&gt;
+      &lt;li&gt;当前demo的缺陷&lt;/li&gt;
+      &lt;li&gt;前人的做法&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;&lt;strong&gt;疑问&lt;/strong&gt;：手机界面小，需要聚焦，因此以 &lt;code&gt;界面&lt;/code&gt; 为单位，绘制最简洁的流程；那 PC 端的产品流程图，如何画？&lt;/p&gt;
+&lt;h2 id=&quot;section-1&quot;&gt;路线图&lt;/h2&gt;
 
-&lt;h2 id=&quot;section-1&quot;&gt;基础原型控件，可修改&lt;/h2&gt;
+&lt;p&gt;具体步骤，几点：&lt;/p&gt;
 
-&lt;p&gt;如何快速产出高保真原型？一套备用的基础原型控件，必不可少。大部分设计师一般利用axure来完成产品原型，所以从协同合作的角度，本文专门在axure里制作了整套最常用的移动产品组控件。设计师只要改文字，改颜色，摆位置就可以完成简单的高保真原型。基础组控件截图如下：&lt;a href=&quot;http://pan.baidu.com/s/1kTjy1Xd&quot;&gt;下载地址&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;Kafka中数据送入ElasticSearch
+    &lt;ul&gt;
+      &lt;li&gt;Flume从Kafka中取数&lt;/li&gt;
+      &lt;li&gt;Flume将取来的数，送入ElasticSearch&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Kibana图形化展示ElasticSearch中的数据&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/create-effective-product-protype/gbz03.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;h2 id=&quot;section-2&quot;&gt;具体操作&lt;/h2&gt;
 
-&lt;p&gt;以此控件为例子，在之前提到的app登录注册例子，快速组件高保真原型，如下图：&lt;/p&gt;
+&lt;h3 id=&quot;flumekafka&quot;&gt;Flume从Kafka中读取数据&lt;/h3&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/create-effective-product-protype/gbz04.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;p&gt;当前从Jira上得知，Flume 1.6.0 中将包含Flume-ng-kafka-source，但是，当前Flume 1.6.0版本并没有发布，怎么办？两条路：&lt;/p&gt;
 
-&lt;p&gt;关于设计上很多细节，大家可以查考书籍&lt;a href=&quot;http://product.dangdang.com/23434009.html&quot;&gt;方寸指间——移动设计实战手册&lt;/a&gt;，里面涉及到很多最基本的移动设计知识。&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;github上别人开源的Flume-ng-kafka-source&lt;/li&gt;
+  &lt;li&gt;flume 1.6.0分支的代码中flume-ng-kafka-source&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;h2 id=&quot;section-2&quot;&gt;动态原型，可点击&lt;/h2&gt;
+&lt;p&gt;初步选定Flume 1.6.0分支中的flume-ng-kafka-source部分，具体步骤，参考：&lt;a href=&quot;/flume-kafka-source-elasticsearch-sink&quot;&gt;Flume实现将Kafka中数据传入ElasticSearch中&lt;/a&gt;&lt;/p&gt;
 
-&lt;p&gt;完成高保真原型，根据流程图，可以很方便制作出在手机上可体验的动态效果，让产品人员或用户真实感受app实际的效果。这里推荐一个特别简单的方法，登录&lt;a href=&quot;https://www.flinto.com/&quot;&gt;Flinto&lt;/a&gt;，完成注册，将高保真原型以图片的方式导入，通过链接和专长方式选择，就可以很方便地在手机上查看。网站提供的指导比较具体，大家可以直接查看。&lt;/p&gt;
+&lt;h2 id=&quot;section-3&quot;&gt;参考来源&lt;/h2&gt;
 
-&lt;p&gt;&lt;img src=&quot;/images/create-effective-product-protype/gbz06.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/medcl/elasticsearch-rtf&quot;&gt;ElasticSearch中文发行版&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://fuxiaopang.gitbooks.io/learnelasticsearch/&quot;&gt;ElasticSearche权威指南&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://shgy.gitbooks.io/mastering-elasticsearch/&quot;&gt;精通 ElasticSearch&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://kibana.logstash.es/&quot;&gt;Kibana中文指南&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
 
-&lt;p&gt;&lt;strong&gt;疑问&lt;/strong&gt;：提供可交互的浏览方式，最佳方案就是借助&lt;a href=&quot;https://www.flinto.com/&quot;&gt;Flinto&lt;/a&gt;等第三方工具吗？&lt;/p&gt;
+</content>
+   </entry>
+   
+   <entry>
+     <title>工程Flume NG extends source辅助记录</title>
+     <link href="http://ningg.github.com/project-flume-ng-extends-source"/>
+     <updated>2015-02-26T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/project-flume-ng-extends-source</id>
+     <content type="html">&lt;h2 id=&quot;section&quot;&gt;常见问题&lt;/h2&gt;
+
+&lt;h3 id=&quot;github&quot;&gt;github上创建工程，克隆到本地&lt;/h3&gt;
+
+&lt;p&gt;在github上创建 new repository：flume-ng-extends-source之后，在本地执行git clone命令，即可：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git clone https://github.com/ningg/flume-ng-extends-source.git
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;git-repository&quot;&gt;将本地内容，提交到远端git repository中&lt;/h3&gt;
+
+&lt;p&gt;几个命令：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git add --all .
+git commit -m &quot;create maven project&quot;
+git push origin master
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;思考&lt;/strong&gt;：上述命令：git push origin master 中&lt;code&gt;origin&lt;/code&gt;和&lt;code&gt;master&lt;/code&gt;是什么含义？&lt;/p&gt;
+
+&lt;h3 id=&quot;git&quot;&gt;git出现错误&lt;/h3&gt;
+
+&lt;p&gt;错误信息，如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;error: Your local changes to the following files would be overwritten by merge:
+		README.md
+Please, commit your changes or stash them before you can merge.
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;分析：上述错误信息表示，从本地文件已经修改过了，但没有提交，如果强行从git服务器下载此文件，则文件内容将被覆盖；建议先提交本地文件改动的地方，或者直接放弃本地修改的内容。&lt;/p&gt;
+
+&lt;p&gt;解决办法：&lt;/p&gt;
+
+&lt;h4 id=&quot;gitmerge&quot;&gt;方法一：希望保存本地改动的文件，但不想与git服务器上版本合并（merge）&lt;/h4&gt;
+
+&lt;p&gt;操作如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git stash
+git pull
+git stash pop
+git diff -w +文件名		// 查看文件的合并情况
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h4 id=&quot;section-1&quot;&gt;方法二：放弃本地修改的内容，直接放弃本地文件&lt;/h4&gt;
+
+&lt;p&gt;操作如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;git reset --hard
+git pull
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;详细参考：&lt;a href=&quot;http://blog.csdn.net/iefreer/article/details/7679631&quot;&gt;Git冲突常见解决办法&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;maven&quot;&gt;在指定目录创建maven工程&lt;/h3&gt;
+
+&lt;p&gt;在Eclipse下，Ctrl + N 创建 Maven Project时，选择：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Create a simple project(skip archetype selection)&lt;/li&gt;
+  &lt;li&gt;Location：E:\flume-ng-extends-source&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;这样，才能使最终生成的maven project以&lt;code&gt;E:\flume-ng-extends-source&lt;/code&gt;为根目录；在这中间遇到一个问题，当不选定&lt;code&gt;Create a simple project&lt;/code&gt;时，创建的maven project始终&lt;code&gt;E:\flume-ng-extends-source&lt;/code&gt;为根目录。&lt;/p&gt;
+
+&lt;h3 id=&quot;gitgitignore&quot;&gt;git下设置.gitignore&lt;/h3&gt;
+
+&lt;p&gt;对于java编写的maven projcet，使用git进行管理时，需要设置&lt;code&gt;.gitignore&lt;/code&gt;，几点：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code&gt;.gitignore&lt;/code&gt;是什么？&lt;/li&gt;
+  &lt;li&gt;利用git管理maven project时，哪些文件需要设置为&lt;code&gt;gitignore&lt;/code&gt;？&lt;/li&gt;
+  &lt;li&gt;如何设置git的&lt;code&gt;.gitignore&lt;/code&gt;？&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;如何创建&lt;code&gt;.gitignore&lt;/code&gt;文件，因为，在WIN环境下，OS一直提示”必须键入文件名”。
+	* 直接执行命令&lt;code&gt;touch .gitignore&lt;/code&gt;即可。&lt;/p&gt;
+
+&lt;p&gt;对于Eclipse创建的Maven工程，直接在&lt;code&gt;.gitignore&lt;/code&gt;文件中，添加如下内容：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;# Eclipse
+.classpath
+.project
+.settings/
+# Maven
+target/
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;疑问&lt;/strong&gt;：如何设置下一级目录中的.gitignore？&lt;/p&gt;
+
+&lt;p&gt;可以将 &lt;code&gt;.gitignore&lt;/code&gt; 文件放置到工作树（working tree）下的其他目录，这将对当前目录以及子目录生效。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;参考&lt;/strong&gt;：&lt;a href=&quot;http://stackoverflow.com/questions/991801/git-ignores-and-maven-targets&quot;&gt;Git ignores and Maven targets&lt;/a&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;eclipsesourceformat&quot;&gt;Eclipse下进行source的format&lt;/h3&gt;
+
+&lt;p&gt;几点：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;如何定制source的format？&lt;/li&gt;
+  &lt;li&gt;如何快捷进行source的format？&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;eclipsejava&quot;&gt;Eclipse下创建的java文件，自动添加头部注释信息&lt;/h3&gt;
+
+&lt;p&gt;（todo）&lt;/p&gt;
+
+&lt;h3 id=&quot;mavenjar&quot;&gt;maven导出jar包&lt;/h3&gt;
+
+&lt;p&gt;背景：当前自己都是eclipse的&lt;code&gt;Export&lt;/code&gt;–&lt;code&gt;Jar file&lt;/code&gt;/&lt;code&gt;Runnable Jar file&lt;/code&gt;，如何利用maven直接生成jar包？&lt;/p&gt;
+
+&lt;p&gt;命令：&lt;code&gt;maven clean package&lt;/code&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;maven-1&quot;&gt;maven打包时，指定源文件编码方式&lt;/h3&gt;
+
+&lt;h3 id=&quot;mavenjar-1&quot;&gt;maven打包时，如何将当前jar包以及其依赖包都导出？&lt;/h3&gt;
+
+&lt;p&gt;参考&lt;a href=&quot;https://github.com/thilinamb/flume-ng-kafka-sink&quot;&gt;thilinamb flume kafka sink&lt;/a&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;编程相关&lt;/h2&gt;
+
+&lt;h3 id=&quot;section-3&quot;&gt;判断参数是否输入有误&lt;/h3&gt;
+
+&lt;p&gt;（TODO：专门学习一下）&lt;/p&gt;
+
+&lt;p&gt;用到&lt;code&gt;guava-11.0.2.jar&lt;/code&gt;包，示例代码如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;...
+Preconditions.checkState(spoolDirectory != null, &quot;Configuration must specify a spooling directory&quot;);
+...
+Preconditions.checkNotNull(spoolDirectory);
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h3 id=&quot;null&quot;&gt;判断对象是否为null&lt;/h3&gt;
+
+&lt;p&gt;（TODO：专门学习一下）&lt;/p&gt;
+
+&lt;p&gt;用到&lt;code&gt;guava-11.0.2.jar&lt;/code&gt;包，示例代码如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;...
+private Optional&amp;lt;FileInfo&amp;gt; currentFile = Optional.absent();
+...
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;思考&lt;/strong&gt;：使用上述&lt;code&gt;Optional&amp;lt;T&amp;gt;&lt;/code&gt;有什么好处？&lt;/p&gt;
+
+&lt;h3 id=&quot;section-4&quot;&gt;过滤文件&lt;/h3&gt;
+
+&lt;p&gt;利用java.io.FileFilter，示例代码如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;FileFilter filter = new FileFilter() {
+  public boolean accept(File candidate) {
+    String fileName = candidate.getName();
+    if ((candidate.isDirectory()) ||
+        (fileName.endsWith(completedSuffix)) ||
+        (fileName.startsWith(&quot;.&quot;)) ||
+        ignorePattern.matcher(fileName).matches()) {
+      return false;
+    }
+    return true;
+  }
+};
+List&amp;lt;File&amp;gt; candidateFiles = Arrays.asList(spoolDirectory.listFiles(filter));
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;section-5&quot;&gt;参考来源&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://stackoverflow.com/questions/991801/git-ignores-and-maven-targets&quot;&gt;Git ignores and Maven targets&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://gary-rowe.com/agilestack/2012/10/12/a-gitignore-file-for-intellij-and-eclipse-with-maven/&quot;&gt;A .gitignore file for Intellij and Eclipse with Maven&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://blog.csdn.net/iefreer/article/details/7679631&quot;&gt;Git冲突常见解决办法&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+   </entry>
+   
+   <entry>
+     <title>Java实现tail命令</title>
+     <link href="http://ningg.github.com/java-tail-cmd"/>
+     <updated>2015-02-14T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/java-tail-cmd</id>
+     <content type="html">&lt;h2 id=&quot;section&quot;&gt;开篇闲谈&lt;/h2&gt;
+
+&lt;p&gt;实时捕获文件的新增内容，如何实现？拍拍脑袋，需要借助3个变量：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;File-snapshot-new：文件发生变动后，快速做出的副本；&lt;/li&gt;
+  &lt;li&gt;File-snapshot-old：文件发生变动后，将File-snapshot-new的内容备份到File-snapshot-old中；&lt;/li&gt;
+  &lt;li&gt;File-snapshot-delta：File-snapshot-new与File-snapshot-old的差异部分；&lt;/li&gt;
+  &lt;li&gt;File-current：当前文件内容；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;具体过程：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;初始File-snapshot-old为null；&lt;/li&gt;
+  &lt;li&gt;对现有文件做一个副本，File-snapshot-new，并启动Thread将File-snapshot-new与File-napshot-old的差异部分File-snapshot-delta发送出去；&lt;/li&gt;
+  &lt;li&gt;一个Thread监听文件的变动（最后修改日期）；&lt;/li&gt;
+  &lt;li&gt;如果文件发生变动，立即将File-snapshot-new内容转移到File-snapshot-old中，同时，将File-current内容备份到File-snapshot-new中；&lt;/li&gt;
+  &lt;li&gt;File-snapshot-delta内容不为空，则将其发送出去；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;我x，上面好复杂，不会这么困难吧。抓紧去学习一下别人的思路。&lt;/p&gt;
+
+&lt;p&gt;上述整个过程，都在避免一种情况：在发送一个文件新增内容的时候，文件又有新增内容；而最佳的逻辑是：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;顺序遍历文件内容，在正在读取的位置，打上标记；&lt;/li&gt;
+  &lt;li&gt;标记：字符长度，不涉及内容；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;bufferedreader&quot;&gt;BufferedReader&lt;/h2&gt;
+
+&lt;p&gt;利用BufferedReader下的&lt;code&gt;readLine()&lt;/code&gt;方法来实现，示例代码如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;public class JavaTail {
+
+	public static void main(String[] args) throws IOException {
+		
+		String srcFilename = &quot;E:/1.log&quot;;
+		String charset = &quot;GBK&quot;;
+		
+		InputStream fileInputStream = new FileInputStream(srcFilename);
+		Reader fileReader = new InputStreamReader(fileInputStream, charset);
+		BufferedReader bufferedReader = new BufferedReader(fileReader);
+		
+		String singleLine = &quot;&quot;;
+		while(true){
+			if( (singleLine = bufferedReader.readLine()) != null ){
+				System.out.println(singleLine);
+				continue;
+			}
+			
+			try {
+				Thread.sleep(1000L);
+			} catch (InterruptedException e) {
+				Thread.currentThread().interrupt();
+				break;
+			}
+			
+		}
+		
+		bufferedReader.close();
+	}
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;编写成multi-thread方式：进程中，单独启动一个线程来监听文件，示例代码如下：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;package com.github.ningg.tail;
+
+import java.io.IOException;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+import java.util.concurrent.TimeUnit;
+
+public class JavaTail{
+
+	public static void main(String[] args) throws IOException, InterruptedException {
+		
+		String srcFilename = &quot;E:/2.log&quot;;
+		String charset = &quot;GBK&quot;;
+		
+		Thread.sleep(5000L);
+		
+		ScheduledExecutorService executor = Executors.newSingleThreadScheduledExecutor();
+		SpoolingRunnable spool = new SpoolingRunnable(srcFilename, charset, true);
+		
+		executor.scheduleWithFixedDelay(spool, 1, 1, TimeUnit.SECONDS);
+		Thread.sleep(20000L);
+		
+		System.out.println(&quot;--------------SHUTDOWN EXECUTOR----------------&quot;);
+		spool.setKeepReading(false);
+		Thread.sleep(20000L);
+
+		System.out.println(&quot;-------------- RESTART EXECUTOR----------------&quot;);
+		spool.setKeepReading(true);
+		Thread.sleep(20000L);
+		
+		System.out.println(&quot;--------------SHUTDOWN EXECUTOR----------------&quot;);
+		spool.setKeepReading(false);
+		spool.destroy();
+	}
+	
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;以及另一个文件：&lt;code&gt;SpoolingRunnable.java&lt;/code&gt;：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;package com.github.ningg.tail;
+
+import java.io.BufferedReader;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.io.Reader;
+import java.io.UnsupportedEncodingException;
+
+public class SpoolingRunnable implements Runnable{
+
+	private String filename;
+	private String charset;
+	private volatile boolean keepReading;
+	
+	private BufferedReader bufferedReader = null;
+	
+	public SpoolingRunnable( String filename, String charset,
+			boolean keepReading) {
+		this.filename = filename;
+		this.charset = charset;
+		this.keepReading = keepReading;
+	}
+
+	public void run() {
+		try {
+			if(bufferedReader == null){
+				InputStream is = new FileInputStream(filename);
+				Reader reader = new InputStreamReader(is, charset);
+				bufferedReader = new BufferedReader(reader);
+			}
+			
+			String singleLine = &quot;&quot;;
+			
+			while(keepReading){
+				if( (singleLine = bufferedReader.readLine()) != null ){
+					System.out.println(singleLine);
+					continue;
+				}
+				
+				Thread.sleep(1000L);
+			}
+			
+			System.out.println(&quot;-----[stop: keep reading]-----&quot;);
+			
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		} catch (UnsupportedEncodingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
+//		finally{
+//			Thread.currentThread().interrupt();
+//		}
+		
+	}
+
+	public void destroy() throws IOException{
+		bufferedReader.close();
+	}
+	
+	public String getFilename() {
+		return filename;
+	}
+
+	public SpoolingRunnable setFilename(String filename) {
+		this.filename = filename;
+		return this;
+	}
+
+	public String getCharset() {
+		return charset;
+	}
+
+	public SpoolingRunnable setCharset(String charset) {
+		this.charset = charset;
+		return this;
+	}
+
+	public boolean isKeepReading() {
+		return keepReading;
+	}
+
+	public SpoolingRunnable setKeepReading(boolean keepReading) {
+		this.keepReading = keepReading;
+		return this;
+	}
+	
+	
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;&lt;strong&gt;特别说明&lt;/strong&gt;：整理java实现tail，最初本意是因为需要在Flume的agent上利用java实现捕获文件增量内容，因为java编写的代码，有了JRE，就可以跨平台；最近事情又有新的进展：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;当前看来github上，已经有人实现了Flume的tail source，具体在github上搜索&lt;code&gt;tail flume&lt;/code&gt;即可；&lt;/li&gt;
+  &lt;li&gt;学习了一下flume的spooling directory source，其机制可以用于实现tail directory source，并且采用这一方式，能够达到很高的可靠性；&lt;/li&gt;
+  &lt;li&gt;下一步打算：基于flume自带的spooling directory source机制，实现tail directory source，并且在github上开源；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;利用Flume自带API，实现的java tail功能，源文件&lt;code&gt;TestLineDeserializer.java&lt;/code&gt;：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;package com.github.ningg.flume.source;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.charset.Charset;
+
+import org.apache.flume.Context;
+import org.apache.flume.Event;
+import org.apache.flume.serialization.DecodeErrorPolicy;
+import org.apache.flume.serialization.DurablePositionTracker;
+import org.apache.flume.serialization.EventDeserializer;
+import org.apache.flume.serialization.EventDeserializerFactory;
+import org.apache.flume.serialization.PositionTracker;
+import org.apache.flume.serialization.ResettableFileInputStream;
+import org.apache.flume.serialization.ResettableInputStream;
+
+public class TestLineDeserializer {
+
+	public static void main(String[] args) throws IOException, InterruptedException {
+		
+		String srcFilename = &quot;E:/2.log&quot;;
+		String metaFilename = &quot;E:/meta.log&quot;;
+		String charset = &quot;GBK&quot;;
+		String decodeErrorPolicy = &quot;IGNORE&quot;;
+		String deserializerType = &quot;LINE&quot;;
+		Context context = new Context();
+		
+		
+		File srcFile = new File(srcFilename);
+		File metaFile = new File(metaFilename);
+		
+		PositionTracker tracker = DurablePositionTracker.getInstance(metaFile, srcFile.getPath());
+		ResettableInputStream in = new ResettableFileInputStream(srcFile, tracker,
+										ResettableFileInputStream.DEFAULT_BUF_SIZE, 
+										Charset.forName(charset), DecodeErrorPolicy.valueOf(decodeErrorPolicy));
+		
+		EventDeserializer eventDeserializer = EventDeserializerFactory.getInstance(deserializerType, context, in);
+		
+		Event event = null;
+		String singleLine = &quot;&quot;;
+		
+		
+		while(true){
+			if ( (event = eventDeserializer.readEvent()) != null){
+				singleLine = new String(event.getBody());
+				System.out.println(singleLine);
+				continue;
+			}
+			
+			Thread.sleep(1000L);
+		}
+		
+		
+	}
+	
+}
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;参考来源&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://stackoverflow.com/questions/557844/java-io-implementation-of-unix-linux-tail-f&quot;&gt;Java IO implementation of unix/linux “tail -f”&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://en.newinstance.it/2005/11/19/listening-changes-on-a-text-file-unix-tail-implementation-with-java/&quot;&gt;Listening changes on a text file (Unix Tail implementation with Java)&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/search?utf8=%E2%9C%93&amp;amp;q=tail+flume&quot;&gt;github-tail source of flume&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+   </entry>
+   
+   <entry>
+     <title>Linux下查看 full command arguments</title>
+     <link href="http://ningg.github.com/linux-pid-and-ps"/>
+     <updated>2015-02-13T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/linux-pid-and-ps</id>
+     <content type="html">&lt;p&gt;Linux下，查看一个正在运行的命令的详细启动参数，可以运行如下命令：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;ps -ef | grep [pattern]
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;但是有个问题，命令的详细执行参数过长时，会被截断，具体看下行：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;[storm@server apache-flume-1.5.2-bin]$ ps -ef | grep flume
+storm    52842 48176  0 15:25 pts/0    00:00:15 /usr/java/default/bin/java
+-Xms128m -Xmx512m -Dflume.monitoring.type=ganglia -Dflume.monitoring.host
+s=239.2.11.165:8649 -cp /home/storm/apache-flume-1.5.2-bin/conf-165:/home
+/storm.p（此处被开始，内容被系统强制省略）
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;本来截断信息，无所谓的；不过恰好，截断信息中含有有用的内容，我x，这个一定要把他揪出来。查询一下，发现一个&lt;a href=&quot;http://stackoverflow.com/questions/821837/how-to-get-the-command-line-args-passed-to-a-running-process-on-unix-linux-syste&quot;&gt;相关的讨论&lt;/a&gt;，赶紧尝试一下其中的解决办法：&lt;/p&gt;
+
+&lt;pre&gt;&lt;code&gt;// 查找 &amp;lt;pid&amp;gt;
+ps -ef | grep [pattern]
+
+// 查看 &amp;lt;pid&amp;gt; 对应命令的详细参数
+cat /proc/&amp;lt;pid&amp;gt;/cmdline
+&lt;/code&gt;&lt;/pre&gt;
+
+&lt;p&gt;很不幸呀，上述查看&lt;code&gt;/proc/&amp;lt;pid&amp;gt;/cmdline&lt;/code&gt;的内容与&lt;code&gt;ps -ef&lt;/code&gt;获取的command arguments没有差别。怎么办？还好，自己的命令都是&lt;code&gt;nohup ... &lt;/code&gt;启动的，在启动目录下，&lt;code&gt;nohup.out&lt;/code&gt;文件中保存了详细的启动参数，在其中直接可以看出。问题解决了，暂时就这样吧，更深层的内容，找机会解决了。&lt;/p&gt;
+
+&lt;p&gt;TODO：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code&gt;/proc/&amp;lt;pid&amp;gt;&lt;/code&gt;文件的详细用法及含义；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;参考来源&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://stackoverflow.com/questions/821837/how-to-get-the-command-line-args-passed-to-a-running-process-on-unix-linux-syste&quot;&gt;how to get the command line args passed to a running process on unix/linux systems&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;杂谈&lt;/h2&gt;
+
+&lt;p&gt;博客中写什么内容？&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;琐碎的小问题：
+    &lt;ul&gt;
+      &lt;li&gt;今后遇到次数多了，方便进行系统思考；&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;系统思考、梳理的问题：
+    &lt;ul&gt;
+      &lt;li&gt;预期：随着理解深入，调整表述&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
 
 </content>
    </entry>
