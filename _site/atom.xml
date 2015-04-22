@@ -4,7 +4,7 @@
    <title>ningg.top</title>
    <link href="http://ningg.top/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://ningg.top" rel="alternate" type="text/html" />
-   <updated>2015-04-22T22:57:06+08:00</updated>
+   <updated>2015-04-22T23:25:03+08:00</updated>
    <id>http://ningg.top</id>
    <author>
      <name></name>
@@ -18,7 +18,7 @@
      <updated>2015-04-22T00:00:00+08:00</updated>
      <id>http://ningg.github.com/51yche-car-owner-zm-activity</id>
      <content type="html">&lt;blockquote&gt;
-  &lt;p&gt;新用户下载安装APP，有两种模式：1. 下载APP–注册–使用APP；2. 注册–下载APP–安装APP。由于第二种方式，先以对用户影响较小的方式，与用户建立沟通途径，因此，相对更容易争取边缘用户。&lt;/p&gt;
+  &lt;p&gt;新用户下载安装APP，有两种方式：1. 下载APP–注册–使用APP；2. 注册–下载APP–安装APP。由于第2种方式，能以对用户影响较小的方式，与用户建立沟通途径，因此，相对更容易争取边缘用户。&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;h2 id=&quot;app&quot;&gt;51用车APP获取新用户步骤&lt;/h2&gt;
@@ -78,22 +78,22 @@
 
 &lt;p&gt;特别说明：微信、QQ是通讯类APP，便捷的与他人交流，归属&lt;strong&gt;便利&lt;/strong&gt;这一类。&lt;/p&gt;
 
-&lt;h2 id=&quot;section&quot;&gt;两种方式&lt;/h2&gt;
+&lt;h2 id=&quot;section&quot;&gt;两种方式分析&lt;/h2&gt;
 
 &lt;p&gt;上述两种方式，都包含：下载APP、注册、使用APP，共计3个步骤，差异在于顺序的不同，同时这几个步骤中，下载APP对用户的影响是最大的，因为要消耗流量、等待时间较长。下图将用一张图来形象对比上述的两种获取新用户的步骤。&lt;/p&gt;
 
 &lt;p&gt;&lt;img src=&quot;/images/51yche-car-owner-zm-activity/51yche-vs-other.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
 
-&lt;p&gt;上图中，3个步骤：&lt;code&gt;下载APP&lt;/code&gt;、&lt;code&gt;注册&lt;/code&gt;、&lt;code&gt;使用APP&lt;/code&gt;；其中，&lt;code&gt;下载APP&lt;/code&gt;的图标最大，来标识其对用户的影响最大。&lt;/p&gt;
+&lt;p&gt;上图中，3个步骤：&lt;strong&gt;下载APP&lt;/strong&gt;、&lt;strong&gt;注册&lt;/strong&gt;、&lt;strong&gt;使用APP&lt;/strong&gt;；其中，&lt;strong&gt;下载APP&lt;/strong&gt;的图标最大，来标识其对用户的影响最大。&lt;/p&gt;
 
 &lt;p&gt;简要分析两种方式的特点：&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;&lt;strong&gt;下载APP–注册–使用APP&lt;/strong&gt;，此方式特点：弱化注册过程，用户犹豫是否要安装APP的时间，都在&lt;code&gt;下载APP&lt;/code&gt;之前；在用户下载并安装APP之前，APP提供商与用户之间的沟通途径是没有的，即，APP提供商，无法触达用户；一旦用户下载APP的意愿不够强烈，同时又因为其他事情打断&lt;code&gt;下载APP&lt;/code&gt;，这就会丢失一个用户；此类用户称为边缘用户，是争取的重点，但没有途径触达他们，这是个遗憾；&lt;/li&gt;
-  &lt;li&gt;&lt;strong&gt;注册–下载APP–使用APP&lt;/strong&gt;，此方式特点：缓存&lt;code&gt;下载APP&lt;/code&gt;给用户的压力，对用户来说，注册给用户带来的相对较小，而且，这种方式，能够在用户犹豫的时候，获取与用户之间沟通的途径；有了这条途径，可以低成本的争取边缘用户。&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;下载APP–注册–使用APP&lt;/strong&gt;，此方式特点：弱化注册过程，用户犹豫是否要安装APP的时间，都在&lt;strong&gt;下载APP&lt;/strong&gt;之前；在用户下载并安装APP之前，APP提供商与用户之间的沟通途径是没有的，即，APP提供商，无法触达用户；一旦用户下载APP的意愿不够强烈，同时又因为其他事情打断&lt;strong&gt;下载APP&lt;/strong&gt;，这就会丢失一个用户；此类用户称为边缘用户，是争取的重点，但没有途径触达他们，这是个遗憾；&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;注册–下载APP–使用APP&lt;/strong&gt;，此方式特点：缓冲&lt;strong&gt;下载APP&lt;/strong&gt;给用户的压力，对用户来说，注册给用户带来的相对较小，而且，这种方式，能够在用户犹豫的时候，获取与用户之间沟通的途径；有了这条途径，可以低成本的争取边缘用户。&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;p&gt;总上所述，针对使用APP意愿不强烈的边缘用户，采用&lt;code&gt;注册&lt;/code&gt;-&lt;code&gt;下载APP&lt;/code&gt;-&lt;code&gt;使用APP&lt;/code&gt;方式，更容易争取边缘用户。&lt;/p&gt;
+&lt;p&gt;总上所述，针对使用APP意愿不强烈的边缘用户，采用&lt;strong&gt;注册–下载APP–使用APP&lt;/strong&gt;方式，更容易争取边缘用户。&lt;/p&gt;
 
 </content>
    </entry>
