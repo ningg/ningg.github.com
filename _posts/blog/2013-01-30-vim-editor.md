@@ -94,7 +94,7 @@ categories: vim
 
 
 
-###光标快速移动：
+###光标快速移动
 
 几种方式：
 
@@ -115,10 +115,12 @@ categories: vim
 
 
 
+###替换
+
+替换动作：vim中，`:%s/from/to/g`，替换整个文档中的from字符串为to字符串；
 
 
-
-TODO：参考 Vdisk.weibo.com/github/vim-editor下内容。
+**TODO**：参考 Vdisk.weibo.com/github/vim-editor下内容。
 
 
 
