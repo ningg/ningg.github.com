@@ -49,6 +49,13 @@ categories: css html javascript
 * [google的html、css代码规范][google的html、css代码规范]
 * [Google HTML/CSS代码规范指南][Google HTML/CSS代码规范指南]
 * [推荐大家使用的CSS书写规范、顺序][推荐大家使用的CSS书写规范、顺序]
+* [Baidu EFE Team 规范][Baidu EFE Team 规范]
+* [WEB前端开发规范][WEB前端开发规范]
+
+
+
+
+
 
 
 
@@ -64,8 +71,8 @@ categories: css html javascript
 [Google HTML/CSS代码规范指南]:	http://www.zjgsq.com/1281.html
 
 [推荐大家使用的CSS书写规范、顺序]:		http://www.shejidaren.com/css-written-specifications.html
-
-
+[Baidu EFE Team 规范]:			https://github.com/ecomfe/spec
+[WEB前端开发规范]:				http://wenku.baidu.com/view/7a16b12db4daa58da0114a3d.html
 
 
 
