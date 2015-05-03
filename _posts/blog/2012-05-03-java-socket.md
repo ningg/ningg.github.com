@@ -179,9 +179,9 @@ ServerSocket的构造函数：
 		while(true){
 			Socket socket=null;
 			try{
-				socket=serverSocket.accept();                        //主线程获取客户端连接
-				Thread workThread=new Thread(new Handler(socket));    //创建线程
-				workThread.start();                                    //启动线程
+				socket=serverSocket.accept();      //主线程获取客户端连接
+				Thread workThread=new Thread(new Handler(socket)); //创建线程
+				workThread.start();     //启动线程
 			}catch(Exception e){
 				e.printStackTrace();
 			}
