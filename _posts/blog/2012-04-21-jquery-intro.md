@@ -1,6 +1,6 @@
 ---
 layout: post
-title: jQuery简介
+title: jQuery梳理
 description: jQuery的基本知识、使用jQuery的基本要点
 published: true
 category: jQuery
@@ -8,8 +8,10 @@ category: jQuery
 
 几点：
 
-* jQuery与JavaScript之间的关系，JQuery能解决哪些问题？
-* 如何使用JQuery？基本思路：选择元素、绑定动作、动态效果；
+* jQuery与JavaScript之间的关系，jQuery能解决哪些问题？
+* 如何使用jQuery？基本思路：
+	* 选定元素*（选择器）*
+	* 操作元素：绑定动作、动态效果*（DOM操作）*
 * jQuery下Ajax如何使用？
 
 > 遇到问题，首要查看[jQuery 官网 API][jQuery 官网 API]。
@@ -19,18 +21,15 @@ category: jQuery
 几点：
 
 * jQuery介绍
-* 选择器
+* 选择器：定位到元素
 * DOM操作：添加属性、属性判断
 * 事件和动画：为元素绑定事件、动画效果
-* 表单操作
 * Ajax应用
-* 插件
-* 完整Demo
 
 
 
 
-##JQuery简介
+##jQuery简介
 
 
 JavaScript几个劣势：
@@ -58,7 +57,7 @@ jQuery的特点：
 * 开源；
 
 
-JQuery两个版本：
+jQuery两个版本：
 
 * jquery.min.js，生产版（最小化、压缩版），230KB
 * jquery.js，开发板（未压缩），30KB
@@ -149,9 +148,9 @@ jQuery对象，通过jQuery包装DOM对象之后，产生的对象，几点：
 
 ###CSS选择器
 
-几点：
+常识几点：
 
-* 网页结构HTML实现，表现样式CSS实现；
+* 网页结构HTML实现，表现样式CSS实现，元素动作JavaScript实现；
 * HTML和CSS实现了，网页结构和表现样式的分离；
 * CSS设置的样式应用到HTML文档中，3种方式：*（重用减少带宽占用和工作量，但增加了http连接数）*
 	* 行间样式表；`<a style="color:red; margin:auto;">...</a>`，同一页面中，样式要写很多次
@@ -182,7 +181,7 @@ jQuery选择器，完全继承CSS选择器的风格，几点：
 * 兼容性：jQuery屏蔽了浏览器的差异；
 * 建议：将网页内容（结构和样式）与动作分开，`<script type="text/javascript"> ... </script>`
 
-**小结**：一个网页，包含3类内容：
+一个网页，包含3类内容：
 
 * 具体内容（HTML）
 * 样式（CSS）
@@ -275,7 +274,11 @@ jQuery选择器，完全继承CSS选择器的风格，几点：
 ##DOM操作
 
 
-DOM，文档对象模型，与浏览器、平台、语言无关的接口，目的是快速访问指定元素。
+DOM，文档对象模型，几点：
+
+* 目的：描述脚本与结构化文档进行交互和访问的web标准；简单来说，DOM是为获取对象而存在的；
+* 包含内容：DOM定义了一系列对象、方法、属性，用于访问、操作、创建文档的结构、样式、行为；
+* 特点：与浏览器、平台、语言无关；
 
 ###jQuery中DOM操作
 
@@ -285,6 +288,22 @@ DOM，文档对象模型，与浏览器、平台、语言无关的接口，目�
 * `attr("attr_name")`：属性值；
 * `append(str)`：插入新的元素；
 
+DOM操作分类：
+
+* 查找节点
+* 创建节点
+* 插入节点
+* 删除节点
+* 复制节点
+* 替换节点
+* 遍历节点
+* 属性操作
+* 样式操作
+* 设置和获取HTML、文本、值
+
+
+
+
 更多参考：
 
 * [jQuery HTML / CSS 方法][jQuery HTML / CSS 方法]
@@ -293,11 +312,104 @@ DOM，文档对象模型，与浏览器、平台、语言无关的接口，目�
 
 ##jQuery中事件和动画
 
+
+
 参考：
 
 * [jQuery 官网 API][jQuery 官网 API]
 * [jQuery 事件方法][jQuery 事件方法]
 * [jQuery 效果方法][jQuery 效果方法]
+
+
+
+##Ajax应用
+
+Ajax：
+
+* Asynchronous JavaScript And XML（异步的JavaScript和XML），
+* JavaScript实现Ajax的核心是XMLHttpRequest对象，对应很多属性和方法；
+* jQuery对Ajax操作进行了封装，提供load、ajax、get、post等操作：
+	* 最底层：`$.ajax()`
+	* 第2层：`load()`、`$.get()`、`$.post()`
+	* 第3层：`$.getScript()`、`$.getJSON()`
+
+简要说几个：
+
+* `$("#id").load(url, data, callback)`，通过url请求HTML文档；
+* `$.get(url, data, callback, type)`，GET方式进行异步请求：
+	* data是JSON格式，典型的key:value对；
+	* callback格式：`function(data, textStatus)`，回调函数仅当sucess时，才会执行，其中：data代表请求返回的内容，textStatus代表请求状态；
+	* type：服务器端返回内容的格式，xml、html、script、json、text、_default
+* `$.post(url, data, callback, type)`，POST方式进行异步请求，与`$.get()`类似；
+
+
+
+
+简要说一下`$.get()`和`$.post()`之间的差异：
+
+* 请求参数：GET请求参数包含在URL中，而POST请求参数在HTTP实体内部；
+* 传输数据大小：GET向后端传输数据<2KB，POST方式没有限制；
+* 安全性：GET方式请求数据，会被浏览器缓存，如果传送帐号、密码等内容，有严重的安全性问题；
+
+
+
+上面提到的load、get、post等方法都可以用`$.ajax()`来实现，实际上，`$.ajax()`是jQuery最底层的Ajax实现。
+
+###$.ajax()详解
+
+`$.ajax()`方法常用参数解释
+
+
+|参数 | 类型 | 说明|
+|-----|-----|-----|
+|url | String | 请求地址|
+|type| String | POST、GET，默认GET|
+|timeOut| Number | 请求超时时间（ms）|
+|async|	Boolean|		(默认: true) 默认设置下，所有请求均为异步请求。如果需要发送同步请求，请将此选项设置为 false。|
+|data|	Object,String|	发送到服务器的参数|
+|dataType|	String|	预期服务器返回的数据类型（xml、html、json、script）。如果不指定，jQuery 将自动根据 HTTP 包 MIME 信息返回 responseXML 或 responseText，并作为回调函数参数传递。|
+|success|	Function	|请求成功后回调函数。|
+|error	|Function	|(默认: 自动判断 (xml 或 html)) 请求失败时将调用此方法。|
+|complete|	Function	|请求完成后回调函数 (请求成功或失败时均调用)。|
+
+
+###$.ajax()实例
+
+有几点注意的：
+
+* `data:{}`, data为空也一定要传`{}`；
+
+
+	$(document).ready(function() {
+		jQuery("#clearCac").click(function() {
+			jQuery.ajax({
+				url: "/Handle/Do",
+				type: "post",
+				data: { id: '0' },
+				dataType: "json",
+				success: function(msg) {
+					alert(msg);
+				},
+				error: function(XMLHttpRequest, textStatus, errorThrown) {
+					alert(XMLHttpRequest.status);
+					alert(XMLHttpRequest.readyState);
+					alert(textStatus);
+				},
+				complete: function(XMLHttpRequest, textStatus) {
+					this; // 调用本次AJAX请求时传递的options参数
+				}
+			});
+		});
+	});
+
+
+
+
+
+
+
+
+
 
 ##参考来源
 
