@@ -14,6 +14,8 @@ category: java
 	* 输出
 * set、list、map之间相互转换
 * guava在处理集合类方面提供的便利
+* ArrayList、LinkedList、HashMap内部实现机制
+	* [Java 容器和泛型][Java 容器和泛型]
 
 
 
@@ -60,7 +62,7 @@ category: java
 
 [NingG]:    http://ningg.github.com  "NingG"
 
-
+[Java 容器和泛型]:		http://www.bysocket.com/?cat=12
 
 
 
