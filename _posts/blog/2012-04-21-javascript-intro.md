@@ -105,6 +105,15 @@ category: javascript
 * 单行代码使用`;`结尾；
 
 
+###两个整数相除，结果不一定为整数
+
+示例代码：
+
+	var interval = 23 / 10;
+	var interval_int = Math.floor(interval);//向下取整
+	var interval_int2 = Math.ceil(interval);//向上取整
+	
+
 
 
 

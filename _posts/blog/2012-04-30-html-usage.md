@@ -14,6 +14,12 @@ category: html
 ###input文本框设置和移除默认值
 
 
+**HTML5**： placeholder属性，示例代码如下：
+
+```
+<input type="text" name="loginName" placeholder="邮箱/手机号/QQ号">
+```
+
 
 **input输入框**，示例代码如下：
 
@@ -62,7 +68,9 @@ category: html
 
 
 
+##参考来源
 
+* [PlaceHolder的两种实现方式][PlaceHolder的两种实现方式]
 
 
 
@@ -71,6 +79,7 @@ category: html
 
 [NingG]:    http://ningg.github.com  "NingG"
 
+[PlaceHolder的两种实现方式]:		http://www.cnblogs.com/snandy/p/4115883.html
 
 
 
