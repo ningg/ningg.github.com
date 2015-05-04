@@ -39,7 +39,23 @@ xml中如何注释？
 
 `<!- ->`
 
+##设定仓库位置
 
+实例代码：
+
+	  <repositories>  
+		<repository>  
+		  <id>maven-net-cn</id>  
+		  <name>Maven China Mirror</name>  
+		  <url>http://maven.net.cn/content/groups/public/</url>  
+		  <releases>  
+			<enabled>true</enabled>  
+		  </releases>  
+		  <snapshots>  
+			<enabled>false</enabled>  
+		  </snapshots>  
+		</repository>  
+	  </repositories>  
 
 
 

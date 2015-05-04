@@ -1,6 +1,6 @@
 ---
 layout: post
-title: java中集合类简介
+title: Java中集合类简介
 description: 集合类的适用场景？几段典型代码
 category: java
 ---
