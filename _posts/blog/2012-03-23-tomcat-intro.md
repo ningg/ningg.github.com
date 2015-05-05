@@ -46,7 +46,10 @@ Apache Tomcat，开源软件*（这句是废话）*，支持Java Servlet和JavaS
 
 ##Tomcat常用配置
 
-几个配置文件以及其作用。
+Tomcat依赖`server.xml`文件来启动Sserver，一个Tomcat实例，核心就是启动容器Catalina。
+
+Tomcat部署Webapp时，依赖`context.xml`和`web.xml`来部署Web应用。实际上，在部署任何一个webapp时，Tomcat自带的context.xml以及web.xml都会生效，同时webapp自带的META-INF/context.xml和WEB-INF/web.xml也会定义每个webapp的特定行为。
+
 
 ###web.xml
 
@@ -189,7 +192,7 @@ web.xml文件中，示例代码片段：
 * [Apache Tomcat 7-more about the cat][Apache Tomcat 7-more about the cat]
 * [How to Install Apache Tomcat and Get Started with Java Servlet Programming][How to Install Apache Tomcat and Get Started with Java Servlet Programming]
 * [web.xml文件梳理][web.xml文件梳理]
-
+* [Servlet下URL映射规则以及冲突匹配原则][Servlet下URL映射规则以及冲突匹配原则]
 
 
 
@@ -212,7 +215,7 @@ web.xml文件中，示例代码片段：
 [How to Install Apache Tomcat and Get Started with Java Servlet Programming]:	http://www.ntu.edu.sg/home/ehchua/programming/howto/Tomcat_HowTo.html
 [Tomcat/Apache 6]:								http://www.datadisk.co.uk/html_docs/java_app/tomcat6/tomcat6.htm
 [web.xml文件梳理]:								http://ningg.top/web-xml-file-intro/
-[Servlet下URL映射规则以及冲突匹配原则]:		http://ningg.top/servlet-url-pattern/
+[Servlet下URL映射规则以及冲突匹配原则]:			http://ningg.top/servlet-url-pattern/
 
 
 
