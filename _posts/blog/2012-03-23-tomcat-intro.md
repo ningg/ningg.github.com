@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Tomcat 入门
+title: Tomcat 梳理
 description: Tomcat是一个web容器，如何启动、常用配置又有哪些？
 published: true
 category: tomcat
@@ -46,8 +46,113 @@ Apache Tomcat，开源软件*（这句是废话）*，支持Java Servlet和JavaS
 
 ##Tomcat常用配置
 
-（常用场景）
+几个配置文件以及其作用。
 
+###web.xml
+
+此处的web.xml文件，也是由Servlet官方规范来限定的，更多信息可参考：
+
+* [web.xml文件梳理][web.xml文件梳理]
+* [Servlet下URL映射规则以及冲突匹配原则][Servlet下URL映射规则以及冲突匹配原则]
+
+补充：
+
+* `$TOMCAT_HOME/conf/web.xml`文件配置了tomcat下web应用的默认web.xml配置；
+* web.xml中定义了多个`servlet`和`servlet-mapping`：
+	* 要先定义`servlet`再定义`servlet-mapping`；
+	* 当一个url满足多个`servlet`时，按照`servlet`定义的先后顺序来进行处理？
+* Tomcat自带web.xml，与web应用自己配置的web.xml文件之间关系？
+	
+	
+web.xml文件中，示例代码片段：
+
+	<web-app>
+	
+		<servlet>
+			<servlet-name>default</servlet-name>
+			<servlet-class>org.apache.catalina.servlets.DefaultServlet</servlet-class>
+			<init-param>
+				<param-name>debug</param-name>
+				<param-value>0</param-value>
+			</init-param>
+			<init-param>
+				<param-name>listings</param-name>
+				<param-value>false</param-value>
+			</init-param>
+			<load-on-startup>1</load-on-startup>
+		</servlet>
+		
+		<servlet>
+			<servlet-name>jsp</servlet-name>
+			<servlet-class>org.apache.jasper.servlet.JspServlet</servlet-class>
+			<init-param>
+				<param-name>fork</param-name>
+				<param-value>false</param-value>
+			</init-param>
+			<init-param>
+				<param-name>xpoweredBy</param-name>
+				<param-value>false</param-value>
+			</init-param>
+			<load-on-startup>3</load-on-startup>
+		</servlet>
+		
+		<!-- The mapping for the default servlet -->
+		<servlet-mapping>
+			<servlet-name>default</servlet-name>
+			<url-pattern>/</url-pattern>
+		</servlet-mapping>
+
+		<!-- The mappings for the JSP servlet -->
+		<servlet-mapping>
+			<servlet-name>jsp</servlet-name>
+			<url-pattern>*.jsp</url-pattern>
+			<url-pattern>*.jspx</url-pattern>
+		</servlet-mapping>
+		
+		<filter>
+			<filter-name>...</filter-name>
+			<filter-class>...</filter-class>
+		</filter>
+		
+		<filter-mapping>
+			<filter-name>...</filter-name>
+			<url-pattern>...</url-pattern>
+		</filter-mapping>
+		
+		<!-- session失效时间（mins） -->
+		<session-config>
+			<session-timeout>30</session-timeout>
+		</session-config>
+		
+		<!-- 请求静态资源时，根据资源后缀，添加`Content-Type`属性 -->
+		<mime-mapping>
+			<extension>123</extension>
+			<mime-type>application/vnd.lotus-1-2-3</mime-type>
+		</mime-mapping>
+
+		<!-- 欢迎页面 -->
+		<welcome-file-list>
+			<welcome-file>index.html</welcome-file>
+			<welcome-file>index.htm</welcome-file>
+			<welcome-file>index.jsp</welcome-file>
+		</welcome-file-list>
+
+	</web-app>
+	
+**思考**：上述代码中，当请求url为`index.jsp`时，上述两个Servelt如何进行处理？
+
+
+
+
+###server.xml
+
+
+
+###context.xml
+
+
+
+###tomcat-users.xml
 
 
 
@@ -83,7 +188,7 @@ Apache Tomcat，开源软件*（这句是废话）*，支持Java Servlet和JavaS
 * [Apache Tomcat][Apache Tomcat]
 * [Apache Tomcat 7-more about the cat][Apache Tomcat 7-more about the cat]
 * [How to Install Apache Tomcat and Get Started with Java Servlet Programming][How to Install Apache Tomcat and Get Started with Java Servlet Programming]
-
+* [web.xml文件梳理][web.xml文件梳理]
 
 
 
@@ -106,8 +211,8 @@ Apache Tomcat，开源软件*（这句是废话）*，支持Java Servlet和JavaS
 [Apache Tomcat 7-more about the cat]:			http://www.ntu.edu.sg/home/ehchua/programming/howto/Tomcat_More.html
 [How to Install Apache Tomcat and Get Started with Java Servlet Programming]:	http://www.ntu.edu.sg/home/ehchua/programming/howto/Tomcat_HowTo.html
 [Tomcat/Apache 6]:								http://www.datadisk.co.uk/html_docs/java_app/tomcat6/tomcat6.htm
-
-
+[web.xml文件梳理]:								http://ningg.top/web-xml-file-intro/
+[Servlet下URL映射规则以及冲突匹配原则]:		http://ningg.top/servlet-url-pattern/
 
 
 

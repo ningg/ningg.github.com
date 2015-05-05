@@ -15,6 +15,8 @@ category: web
 	* 原始官网来源；
 	* 样例解释；
 
+自己GitHub上开启了一个工程[web-demo][web-demo]，关于Web.xml的内容，也有涉及。
+	
 ##web.xml文件详解
 
 
@@ -22,7 +24,7 @@ category: web
 
 * web.xml是Servlet[规范][JSR315]中定义的；*（这就是官网）*
 * web.xml不是必须的，当只有静态内容时，可以不设置web.xml；
-* Servlet[规范][JSR315]中绘制的Deployment Descriptor Diagram，没有看懂，哈哈，标注有点多；
+* Servlet[规范][JSR315]中绘制的Deployment Descriptor Diagram，还有几点不明确，哈哈，标注有点多；
 
 ###web.xml中包含的内容
 
@@ -111,8 +113,8 @@ listener、filter、servlet的加载顺序，与他们的书写顺序无关，�
 
 [NingG]:    		http://ningg.github.com  "NingG"
 [xml入门]:			/xml-intro/
-
-
+[JSR315]:			https://www.jcp.org/en/jsr/detail?id=315
+[web-demo]:			https://github.com/ningg/simple-web-demo
 
 
 
