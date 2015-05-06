@@ -162,6 +162,21 @@ Windows Server 2008 与Windows XP基本相同，只需要调整一下`logToKafka
 
 
 
+##Windows 7
+
+vdisk中flume目录下，有专门文档；
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

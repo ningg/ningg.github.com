@@ -63,6 +63,25 @@ category: windows
 
 实际上，还有一种输入方式：交互式输入，具体参考：[prompt for user input(interact)][prompt for user input]
 
+##读取文件，并追加到另一文件
+
+示例代码如下图：
+
+	@echo on
+
+	set hosts_delta=hosts_delta.txt
+	set hosts_file="C:\WINDOWS\system32\drivers\etc\hosts"
+
+	FOR /F "tokens=*" %%i IN (%hosts_delta%) DO @ECHO %%i >> %hosts_file%
+
+	PAUSE
+
+
+思考：如何判断A文件是否包含在B文件中？
+
+
+
+
 
 
 
@@ -90,6 +109,13 @@ category: windows
 ##参考来源
 
 * [batch guide][batch guide]
+* [get windowss batch parent folder][get windowss batch parent folder]
+* [prompt for user input][prompt for user input]
+* [How to find if a file contains a given string using dos command line][How to find if a file contains a given string using dos command line]
+* [reading text file in batch script][reading text file in batch script]
+* [dos中一些常用命令的errorlevel返回值][dos中一些常用命令的errorlevel返回值]
+
+
 
 
 
@@ -102,3 +128,6 @@ category: windows
 [prompt for user input]:					http://stackoverflow.com/questions/1223721/in-windows-cmd-how-do-i-prompt-for-user-input-and-use-the-result-in-another-com
 
 
+[How to find if a file contains a given string using dos command line]:			http://stackoverflow.com/questions/5626879/how-to-find-if-a-file-contains-a-given-string-using-dos-command-line
+[reading text file in batch script]:		http://stackoverflow.com/questions/14834625/reading-text-file-in-batch-script
+[dos中一些常用命令的errorlevel返回值]:		http://www.jb51.net/article/49995.htm
