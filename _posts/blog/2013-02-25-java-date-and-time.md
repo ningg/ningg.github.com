@@ -71,7 +71,34 @@ category: java
 * 关于`yyyy-MM-dd`详细介绍，查看`SimpleDateFormat`，或[simpleDateFormat][simpleDateFormat]；
 
 
+###获取两个日期之间的所有日期
 
+示例代码如下：
+
+	public class GeneralUtils {
+
+		/*
+		 * 计算从起始时间startDate到endDate之间的所有日期，
+		 * 左右都是闭区间,包含startDate和endDate两个点.
+		 * @param startDate
+		 * @param endDate
+		 * @return
+		 */
+		public static List<Date> getDatesBetweenDates(Date startDate, Date endDate){
+			List<Date> dates = new ArrayList<>();
+			
+			Calendar calendar = new GregorianCalendar();
+			calendar.setTime(startDate);
+			
+			while (!calendar.getTime().after(endDate)) {
+				Date result = calendar.getTime();
+				dates.add(result);
+				calendar.add(Calendar.DATE, 1);
+			}
+			
+			return dates;
+		}
+	}
 
 
 ##借助第三方包

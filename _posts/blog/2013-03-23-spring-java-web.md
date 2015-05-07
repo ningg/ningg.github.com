@@ -1,9 +1,9 @@
 ---
 layout: post
-title: Spring搭建 java web 的基本架子
+title: Spring搭建 java web 的基本架子 (todo)
 description: java web的基本架子
 published: true
-category: web
+categories: web spring
 ---
 
 目标：
@@ -26,6 +26,12 @@ category: web
 	* Hibernate + Spring jdbc
 	* MyBatis *（尚未熟悉）*
 * 基本的前端展示架子
+
+
+todo:
+
+* [Spring MVC常见内容][Spring MVC常见内容]
+
 
 
 ##工具
@@ -149,6 +155,8 @@ java代码规范，几点：
 [How to render a View using AJAX in Spring MVC]:		http://stackoverflow.com/questions/4816080/how-to-render-a-view-using-ajax-in-spring-mvc
 [Spring框架，如何返回数据给视图(jsp文件)]:				http://blog.csdn.net/lee353086/article/details/8620470
 
+
+[Spring MVC常见内容]:			http://my.oschina.net/zhdkn/blog?catalog=318414
 
 
 

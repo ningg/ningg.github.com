@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Tomcat 梳理
+title: Tomcat 梳理 (todo)
 description: Tomcat是一个web容器，如何启动、常用配置又有哪些？
 published: true
 category: tomcat
@@ -141,13 +141,28 @@ web.xml文件中，示例代码片段：
 		</welcome-file-list>
 
 	</web-app>
-	
-**思考**：上述代码中，当请求url为`index.jsp`时，上述两个Servelt如何进行处理？
 
 
 
+
+**思考**：上述代码中，当请求url为`index.jsp`时，上述两个Servelt如何进行处理？RE：单独整理了一篇文章。
 
 ###server.xml
+
+Tomcat Server的结构图：
+
+![](/images/tomcat-intro/tomcat-server-framework.jpg)
+
+
+
+更多细节：
+
+* [Tomcat server.xml详解]
+* [Tomcat 8 server.xml详解]
+* [Tomcat系列之服务器的安装与配置以及各组件详解][Tomcat系列之服务器的安装与配置以及各组件详解]
+* [Tomcat启动过程原理详解][Tomcat启动过程原理详解]
+* [从零认识tomcat，构建一机多实例tomcat集群][从零认识tomcat，构建一机多实例tomcat集群]
+
 
 
 
@@ -163,6 +178,13 @@ web.xml文件中，示例代码片段：
 
 
 ##Tomcat基本原理
+
+todo:
+
+* [深入学习Tomcat8][深入学习Tomcat8]
+* [Apache Tomcat 8 Configuration Reference][Apache Tomcat 8 Configuration Reference]，Tomcat的详细配置
+* [Apache Tomcat 8 Architecture][Apache Tomcat 8 Architecture]，Tomcat的启动原理
+
 
 推荐资料：
 
@@ -193,6 +215,10 @@ web.xml文件中，示例代码片段：
 * [How to Install Apache Tomcat and Get Started with Java Servlet Programming][How to Install Apache Tomcat and Get Started with Java Servlet Programming]
 * [web.xml文件梳理][web.xml文件梳理]
 * [Servlet下URL映射规则以及冲突匹配原则][Servlet下URL映射规则以及冲突匹配原则]
+* [深入学习Tomcat8][深入学习Tomcat8]
+* [Apache Tomcat 8 Configuration Reference][Apache Tomcat 8 Configuration Reference]
+* [Apache Tomcat 8 Architecture][Apache Tomcat 8 Architecture]
+
 
 
 
@@ -215,12 +241,16 @@ web.xml文件中，示例代码片段：
 [How to Install Apache Tomcat and Get Started with Java Servlet Programming]:	http://www.ntu.edu.sg/home/ehchua/programming/howto/Tomcat_HowTo.html
 [Tomcat/Apache 6]:								http://www.datadisk.co.uk/html_docs/java_app/tomcat6/tomcat6.htm
 [web.xml文件梳理]:								http://ningg.top/web-xml-file-intro/
-[Servlet下URL映射规则以及冲突匹配原则]:			http://ningg.top/servlet-url-pattern/
+[Servlet下URL映射规则以及冲突匹配原则]:		http://ningg.top/servlet-url-pattern/
+[深入学习Tomcat8]:								http://blog.csdn.net/column/details/tomcat8.html
+[Apache Tomcat 8 Configuration Reference]:		http://tomcat.apache.org/tomcat-8.0-doc/config/index.html
+[Apache Tomcat 8 Architecture]:					http://tomcat.apache.org/tomcat-8.0-doc/architecture/index.html
 
 
-
-
-
-
+[Tomcat 8 server.xml详解]:						http://blog.csdn.net/flyliuweisky547/article/details/20790601
+[Tomcat server.xml详解]:						http://blog.sina.com.cn/s/blog_6925c03c0101d6tx.html
+[Tomcat系列之服务器的安装与配置以及各组件详解]:	http://freeloda.blog.51cto.com/2033581/1299644
+[从零认识tomcat，构建一机多实例tomcat集群]:	http://grass51.blog.51cto.com/4356355/1123400
+[Tomcat启动过程原理详解]:						http://www.ha97.com/4820.html
 
 
