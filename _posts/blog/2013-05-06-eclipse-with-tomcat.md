@@ -34,11 +34,14 @@ category: tomcat
 	proxy.use=on
 
 
-注：将上述Tomcat源码提交到GitHub上？使用一个本地Eclipse可以调试的版本，
+上述步骤是，利用官网的Tomcat源码包，通过Ant编译得到Tomcat的Eclipse Java Project，在Eclipse下来查看。为了方便，已经将上述编译好的Eclipse Java Project提交到[GitHub上][Tomcat 8.0 src(GitHub)]了，下载下来，作为Java Project，可以直接导入到Eclipse下查看。
 
 
 
+##Eclipse下，通过源码启动Tomcat
 
+
+（TODO）
 
 
 
@@ -69,7 +72,7 @@ category: tomcat
 
 
 [Tomcat8 - Building with Eclipse]:			http://tomcat.apache.org/tomcat-8.0-doc/building.html#Building_with_Eclipse
-
+[Tomcat 8.0 src(GitHub)]:					https://github.com/ningg/tomcat-8.0
 
 
 
