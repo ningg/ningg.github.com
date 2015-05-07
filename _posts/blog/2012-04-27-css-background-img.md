@@ -10,7 +10,7 @@ category: css
 
 CSS Sprites是网页图片处理方式，将一个页面中涉及到的零星图片包含到一张大图中，目标：
 
-* 避免网站中零星的图片一张一张显示出来；
+* 避免网站中零星的图片一张一张显示出来；*（整体页面响应时间长）*
 * 对于当前的网络环境，< 200KB的单张图片，加载时间差异不大；
 
 使用图片做背景时，本质是使用属性：`background-image`组合`background-repeat`、`background-position`等来实现。调整`background-position`即可实现，背景显示不同的图片，CSS Sprites *（指包含了很多图标的一张背景图）* 一般只能使用到固定大小的盒子（box）里，这样遮挡住不应该看到的部分。
@@ -24,7 +24,7 @@ CSS Sprites是网页图片处理方式，将一个页面中涉及到的零星图
 		background-color: black;
 	}
 	
-特别说明：上述`background-position`对应的两个参数为，x、y的定位坐标点，可以通过画图类软件来查看`sprites.png`图片中对应的坐标点。
+特别说明：上述`background-position`对应的两个参数为，x、y的定位坐标点，可以通过**画图**类软件来查看`sprites.png`图片中不同小图标，所对应的坐标点。
 
 
 ###优缺点
@@ -72,31 +72,7 @@ CSS Sprites是网页图片处理方式，将一个页面中涉及到的零星图
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-[NingG]:    http://ningg.github.com  "NingG"
+[NingG]:    				http://ningg.github.com  "NingG"
 [CSS 背景图片定位]:			http://wenku.baidu.com/view/60a843ec102de2bd96058898.html?re=view
 
 

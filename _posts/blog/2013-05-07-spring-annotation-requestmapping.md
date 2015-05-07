@@ -35,7 +35,10 @@ category: spring
 
 ##@RequestMapping
 
+几种情况：
 
+Class：`@RequestMapping`标注在某个`@Controller`的类上，表示设定的url入口为当前类，默认当前类的`${method.name}.do`为url后缀；
+* `@RequestMapping`标注在方法上，表示设定的url为当前方法，若此时
 
 
 
@@ -77,9 +80,11 @@ category: spring
 
 
 
+http://my.oschina.net/zhdkn/blog/316530
 
+http://my.oschina.net/zhdkn/blog/208720
 
-
+http://blog.csdn.net/jackyrongvip/article/details/9287281
 
 
 
