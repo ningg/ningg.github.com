@@ -375,10 +375,8 @@ Ajax：
 
 ###$.ajax()实例
 
-有几点注意的：
 
-* `data:{}`, data为空也一定要传`{}`；
-
+`$.ajax()`示例代码如下：
 
 	$(document).ready(function() {
 		jQuery("#clearCac").click(function() {
@@ -404,6 +402,9 @@ Ajax：
 
 
 
+有几点注意的：
+
+* `data:{}`, data为空也一定要传`{}`；
 
 
 
