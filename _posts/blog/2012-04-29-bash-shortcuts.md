@@ -20,13 +20,13 @@ category: bash
 |`Ctrl + e`/`End`|行尾|
 |`Ctrl + f`|后移一个字符|
 |`Ctrl + b`|前移一个字符|
+|`Alt + f`|与`Ctrl + Right`类似|
+|`Alt + b`|与`Ctrl + Left`类似|
 |`Ctrl + Left`	|后移一个单词|
 |`Ctrl + Right`	|迁移一个单词|
 |`Ctrl + w`|删除光标之前单词|
 |`Ctrl + u`|删除光标至行首|
 |`Ctrl + k`|删除光标至行尾|
-|`Alt + f`|与`Ctrl + Right`类似|
-|`Alt + b`|与`Ctrl + Left`类似|
 
 
 
@@ -37,7 +37,7 @@ category: bash
 
 |快捷键|说明|
 |------|----|
-|`Ctrl + r`|逆向搜索历史命令，`Left`选择命令|
+|`Ctrl + r`|逆向搜索历史命令，再按一次`Ctrl + r`，定位下一个命令；`Left\Tab`选择命令|
 |`Ctrl + g`|退出搜索历史命令|
 
 

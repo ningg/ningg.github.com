@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Tomcat 梳理 (todo)
+title: Tomcat 梳理
 description: Tomcat是一个web容器，如何启动、常用配置又有哪些？
 published: true
 category: tomcat
@@ -17,7 +17,7 @@ category: tomcat
 
 ##简介
 
-Apache Tomcat，开源软件*（这句是废话）*，支持Java Servlet和JavaServer Pages（JSP）的实现，具体Java Servlet和JavaServer Pages specification是由JCP（Java Community Process）主导制定。
+Apache Tomcat，开源软件*（这句是废话）*，支持Java Servlet和JavaServer Pages（JSP）的实现，具体Java Servlet和JavaServer Pages specification是由JCP（Java Community Process）主导制定。Tomcat不是完整意义上的Java EE服务器，没有提供完整的Java EE API支持*（实际上，TomEE服务器支持完成的Java EE API）*，Tomcat对Java开源框架Structs、Spring、Hibernate等，实现完美支持。
 
 	
 
@@ -281,6 +281,8 @@ Host负责管理一个或多个Web项目。常用属性：
 
 ####Context
 
+几点：
+
 * Context代表一个运行在Host上的Web Application，一个Host上可以有多个Context（即，多个Web Application）。
 * 一个Web Application由一个或者多个Servlet组成
 * Context在创建的时候将根据配置文件$CATALINA_HOME/conf/web.xml和$WEBAPP_HOME/WEB-INF/web.xml载入Servlet类
@@ -345,40 +347,43 @@ Server和Service充当的就是包装的角色：
 
 
 
-
 ###context.xml
 
-（todo）
+所有host下Context的默认配置信息；默认配置如下：
+
+	<Context>
+		<WatchedResource>WEB-INF/web.xml</WatchedResource>
+	</Context>
+
+说明：每个Context代表了运行在Host上的一个Web app。
 
 ###tomcat-users.xml
 
+Realm认证时用到的相关角色、用户和密码等信息；Tomcat自带的manager默认情况下会用到此文件；在Tomcat中添加/删除用户，为用户指定角色等将通过编辑此文件实现；
 
-（todo）
+###其他配置文件
 
+其他配置文件：
 
+* catalina.policy：Java相关的安全策略配置文件，在系统资源级别，提供访问控制；
+* catalina.properties：Tomcat内部package的定义及访问相关的控制，也包括对类加载器加载内容的控制，Tomcat启动时，会事先读取此文件的配置；
 
 
 ##Tomcat基本原理
 
-todo:
 
-* [深入学习Tomcat8][深入学习Tomcat8]
-* [Apache Tomcat 8 Configuration Reference][Apache Tomcat 8 Configuration Reference]，Tomcat的详细配置
-* [Apache Tomcat 8 Architecture][Apache Tomcat 8 Architecture]，Tomcat的启动原理
 
 
 推荐资料：
 
+* [深入学习Tomcat8][深入学习Tomcat8]
+* [Apache Tomcat 8 Configuration Reference][Apache Tomcat 8 Configuration Reference]，Tomcat的详细配置
+* [Apache Tomcat 8 Architecture][Apache Tomcat 8 Architecture]，Tomcat的启动原理
 * [Tomcat/Apache 6][Tomcat/Apache 6]
 * [Apache Tomcat 7-more about the cat][Apache Tomcat 7-more about the cat]
 * [How to Install Apache Tomcat and Get Started with Java Servlet Programming][How to Install Apache Tomcat and Get Started with Java Servlet Programming]
 
-疑问：tomcat运行时，是一个Process，那在tomcat容器中部署的web应用，是作为process启动的？还是直接thread？
-
-
-
-
-
+疑问：Tomcat运行时，是一个Process，那在Tomcat容器中部署的web应用，是作为process启动的？还是直接thread？
 
 
 ##Tomcat Server处理一个HTTP请求的过程
@@ -409,13 +414,18 @@ todo:
 规划： 
 
 * 网站网页目录：/web/www，域名：www.test1.com 
-* 论坛网页目录：/web/bbs，URL：bbs.test1.com/bbs 
+* 论坛网页目录：/web/bbs，URL：www.test1.com/bbs 
 * 网站管理程序：$CATALINA_HOME/wabapps，URL：manager.test.com，允许远程访问的地址：172.23.136.* 
- 
+
+分析：
+
+* 每个域名对应一个Host；
+* 每个路径，例如`/bbs`对应Host下的一个Context；
 
 注：下面两个配置文件，没有验证。
 
-**conf/server.xml **配置文件：
+
+**conf/server.xml** 配置文件：
 
 	<Server port="8005" shutdown="SHUTDOWN"> 
 	  <Listener className="org.apache.catalina.core.AprLifecycleListener" SSLEngine="on" /> 
@@ -424,62 +434,103 @@ todo:
 	  <Listener className="org.apache.catalina.mbeans.GlobalResourcesLifecycleListener" /> 
 	  <Listener className="org.apache.catalina.core.ThreadLocalLeakPreventionListener" /> 
 	  
+
+
 	  <!-- 全局命名资源，来定义一些外部访问资源，其作用是为所有引擎应用程序所引用的外部资源的定义 -->
 	  <GlobalNamingResources>  
-		<!-- 定义的一个名叫“UserDatabase”的认证资源，将conf/tomcat-users.xml加载至内存中，在需要认证的时候到内存中进行认证 --> 
+
+		<!-- 定义的一个名叫“UserDatabase”的认证资源，将conf/tomcat-users.xml加载至内存中，
+			在需要认证的时候到内存中进行认证 --> 
 		<Resource name="UserDatabase" auth="Container" 
 				  type="org.apache.catalina.UserDatabase" 
 				  description="User database that can be updated and saved" 
 				  factory="org.apache.catalina.users.MemoryUserDatabaseFactory" 
 				  pathname="conf/tomcat-users.xml" /> 
+
 	  </GlobalNamingResources> 
 	  
 	  <!-- # 定义Service组件，同来关联Connector和Engine，一个Engine可以对应多个Connector，每个Service中只能一个Engine --> 
 	  <Service name="Catalina"> 
+
+
 		<!-- 修改HTTP/1.1的Connector监听端口为80.客户端通过浏览器访问的请求，只能通过HTTP传递给tomcat。  --> 
 		<Connector port="80" protocol="HTTP/1.1" connectionTimeout="20000" redirectPort="8443" /> 
 		<Connector port="8009" protocol="AJP/1.3" redirectPort="8443" /> 
+
+
 		<Engine name="Catalina" defaultHost="test.com"> 
 		<!-- 修改当前Engine，默认主机是，www.test.com  --> 
+
+
 		<Realm className="org.apache.catalina.realm.LockOutRealm"> 
 			<Realm className="org.apache.catalina.realm.UserDatabaseRealm" 
 				   resourceName="UserDatabase"/> 
 		</Realm> 
 		<!-- # Realm组件，定义对当前容器内的应用程序访问的认证，通过外部资源UserDatabase进行认证   -->
+
+
 		  <Host name="test.com"  appBase="/web" unpackWARs="true" autoDeploy="true"> 
 		  <!--  定义一个主机，域名为：test.com，应用程序的目录是/web，设置自动部署，自动解压    --> 
+
+
 			<Alias>www.test.com</Alias> 
 			<!--    定义一个别名www.test.com，类似apache的ServerAlias --> 
+
+
 			<Context path="" docBase="www/" reloadable="true" /> 
-			<!--    定义该应用程序，访问路径""，即访问www.test.com即可访问，网页目录为：相对于appBase下的www/，即/web/www，并且当该应用程序下web.xml或者类等有相关变化时，自动重载当前配置，即不用重启tomcat使部署的新应用程序生效  --> 
+			<!--    定义该应用程序，访问路径""，即访问www.test.com即可访问，网页目录为：相对于appBase下的www/，
+				即/web/www，并且当该应用程序下web.xml或者类等有相关变化时，
+				自动重载当前配置，即不用重启tomcat使部署的新应用程序生效  --> 
+
+
 			<Context path="/bbs" docBase="/web/bbs" reloadable="true" /> 
 			<!--  定义另外一个独立的应用程序，访问路径为：www.test.com/bbs，该应用程序网页目录为/web/bbs   --> 
+
+
 			<Valve className="org.apache.catalina.valves.AccessLogValve" directory="/web/www/logs" 
 				   prefix="www_access." suffix=".log" 
 				   pattern="%h %l %u %t &quot;%r&quot; %s %b" /> 
-			<!--   定义一个Valve组件，用来记录tomcat的访问日志，日志存放目录为：/web/www/logs如果定义为相对路径则是相当于$CATALINA_HOME，并非相对于appBase，这个要注意。定义日志文件前缀为www_access.并以.log结尾，pattern定义日志内容格式，具体字段表示可以查看tomcat官方文档 --> 
+			<!--   定义一个Valve组件，用来记录tomcat的访问日志，日志存放目录为：/web/www/logs，
+				如果定义为相对路径则是相当于$CATALINA_HOME，并非相对于appBase，这个要注意。
+				定义日志文件前缀为www_access.并以.log结尾，pattern定义日志内容格式，
+				具体字段表示可以查看tomcat官方文档 --> 
 		  </Host> 
+
+
 		  <Host name="manager.test.com" appBase="webapps" unpackWARs="true" autoDeploy="true"> 
-		  <!--   定义一个主机名为man.test.com，应用程序目录是$CATALINA_HOME/webapps,自动解压，自动部署 --> 
+		  <!--   定义一个主机名为manager.test.com，应用程序目录是$CATALINA_HOME/webapps,自动解压，自动部署 --> 
+
+
 			<Valve className="org.apache.catalina.valves.RemoteAddrValve" allow="172.23.136.*" /> 
 			<!--   定义远程地址访问策略，仅允许172.23.136.*网段访问该主机，其他的将被拒绝访问  --> 
+
+
 			<Valve className="org.apache.catalina.valves.AccessLogValve" directory="/web/bbs/logs" 
 				   prefix="bbs_access." suffix=".log" 
 				   pattern="%h %l %u %t &quot;%r&quot; %s %b" /> 
 			<!--   定义该主机的访问日志   --> 
+
+
 		  </Host> 
 		</Engine> 
 	  </Service> 
 	</Server> 
- 
+
+
+
 **conf/tomcat-users.xml**配置文件：
 
 	<?xml version='1.0' encoding='utf-8'?> 
 	<tomcat-users> 
+
 	  <role rolename="manager-gui" /> 
 	  <!--  定义一种角色名为：manager-gui  --> 
+
+
 	  <user username="cz" password="manager$!!110" roles="manager-gui" /> 
 	  <!--  定义一个用户的用户名以及密码，并赋予manager-gui的角色    --> 
+
+
 	</tomcat-users> 
 
 

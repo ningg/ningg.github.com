@@ -77,7 +77,13 @@ ok，搞定。
 __补充__：
 
 * 自己查证，修改`~/.bashrc`和`/etc/bashrc`的区别
-* 3. 和 4.  就不写了，有兴趣的自己google查一下。
+* `3` 和 `4`  就不写了，有兴趣的自己google查一下。
+
+
+
+
+
+
 
 
 [NingG]:    http://ningg.github.com  "NingG"
