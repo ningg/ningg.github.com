@@ -3,7 +3,7 @@ layout: post
 title: jstack对运行的Thread进行分析
 description: 分析当前JVM运行情况
 published: true
-category: java
+categories: java jvm
 ---
 
 
