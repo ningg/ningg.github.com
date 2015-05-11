@@ -13,7 +13,7 @@ categories: Protocol HTTP
 
 ##HTTP协议的由来
 
-OSI模型把网络通信分成七层：物理层、数据链路层、网络层、传输层、会话层、表示层和应用层，对于开发网络应用人员来说，一般把网络分成五层，这样比较容易理解。这五层为：物理层、数据链路层、网络层、传输层和应用层（最顶层），如下图所示：
+OSI模型把网络通信分成七层：物理层、数据链路层、网络层、传输层、会话层、表示层和应用层，对于开发网络应用人员来说，一般把网络分成五层，这样比较容易理解。这五层为：物理层、数据链路层、网络层、传输层、会话层、表示层、应用层（最顶层），如下图所示：
 
 网络中的计算机互相通信就是实现了层与层之间的通信，要实现层与层之间的通信，则各层都要遵守规则，这样才能完成更好的通信， 我们就把它们之间遵守的规则就叫个“协议”，然而网络上的五层之间遵守的协议不一样，每层都有各自的协议。下面就对各层进行简要介绍：
 
@@ -89,7 +89,7 @@ __应用层__
 
 关于HTTP headers的简要汇总和介绍，请参看：[Quick reference to HTTP headers]
 
-####Request####
+###Request
 
 Request格式：
 
@@ -97,8 +97,8 @@ Request格式：
 
 备注：
 
-1. <CR><LF>为回车换行，其中：CR，Carriage Return，回车，打字机头部位置；LF，Line Feed，换行，打字机向下换一行；
-2. `Null Line`中必须只有<CR><LF>而无其他空格；
+1. `<CR><LF>`为回车换行，其中：CR，Carriage Return，回车，打字机头部位置；LF，Line Feed，换行，打字机向下换一行；
+2. `Null Line`中必须只有`<CR><LF>`而无其他空格；
 3. 在HTTP/1.1协议中，所有的`Headers`中，除Host外，都是可选的；
 
 Requset实例：
@@ -112,11 +112,15 @@ Requset实例：
 	Referer: http://www.baidu.com/s?wd=http%3A%2F%2Fwww.cnblogs.com%2Fgpcuster%2F&rsv_spt=1&issp=1&rsv_bp=0&ie=utf-8&tn=baiduhome_pg&rsv_n=2&rsv_sug3=1&rsv_sug4=271&inputT=2186
 	Accept-Encoding: gzip,deflate,sdch
 	Accept-Language: zh-CN,zh;q=0.8,en;q=0.6
-	Cookie: __gads=ID=d58f6aafc2b1682a:T=1399182693:S=ALNI_MbGQmpINTGEw1DKhg8-v-WGcqmDGg; CNZZDATA4902471=cnzz_eid%3D780096130-1402377079-http%253A%252F%252Fwww.baidu.com%252F%26ntime%3D1403490466; CNZZDATA3980738=cnzz_eid%3D371156967-1402987944-http%253A%252F%252Fwww.baidu.com%252F%26ntime%3D1404384515; CNZZDATA1923552=cnzz_eid%3D857445479-1402888944-http%253A%252F%252Fwww.cnblogs.com%252F%26ntime%3D1405079579; AJSTAT_ok_times=5; gs_u_GSN-690926-A=567797657:3115:11443:1407743725372; _ga=GA1.2.1054927095.1399182860; __utma=226521935.1054927095.1399182860.1407743656.1407743991.33; __utmb=226521935.2.10.1407743991; __utmc=226521935; __utmz=226521935.1407743991.33.27.utmcsr=baidu|utmccn=(organic)|utmcmd=organic|utmctr=http%3A%2F%2Fwww.cnblogs.com%2Fgpcuster%2F
+	Cookie: __gads=ID=d58f6aafc2b1682a:T=1399182693:S=ALNI_MbGQmpINTGEw1DKhg8-v-WGcqmDGg; CNZZDATA4902471=cnzz_eid%3D780096130-1402377079-http%253A%252F%252Fwww.baidu.com%252F%26ntime%3D1403490466; CNZZDATA3980738=cnzz_eid%3D371156967-1402987944-http%253A%252F%252Fwww.baidu.com%252F%26ntime%3D1404384515; CNZZDATA1923552=cnzz_eid%3D857445479-1402888944-http%253A%252F%252Fwww.cnblogs.com%252F%26ntime%3D1405079579; AJSTAT_ok_times=5; gs_u_GSN-690926-A=567797657:3115:11443:1407743725372; _ga=GA1.2.1054927095.1399182860; __utma=226521935.1054927095.1399182860.1407743656.1407743991.33; __utmb=226521935.2.10.1407743991; __utmc=226521935
 	If-Modified-Since: Mon, 11 Aug 2014 07:59:18 GMT
 
+Request常用的Headers：
+
+（todo）	
+
 	
-####Response####
+###Response
 	
 Response格式：
 
@@ -134,7 +138,8 @@ Response格式：
 	X-UA-Compatible: IE=10
 	Content-Encoding: gzip
 
-####常用的Headers####
+
+常用的Headers：
 
 （doing...）
 
@@ -147,11 +152,11 @@ http://blog.sina.com.cn/s/blog_5dd2af0901012oko.html
 http://canrry.iteye.com/blog/1331292
 
 
-###建立连接的方式###
+###建立连接的方式
 
 HTTP支持2种建立连接的方式：非持久连接和持久连接（HTTP 1.0 默认：持久连接的带流水线方式）
 
-####非持久连接####
+####非持久连接
 
 让我们查看一下非持久连接情况下，从Server到Client传送一个Web页面的步骤。假设该页面由：1个基本HTML文件和10个JPEG图像构成，而且所有这些对象都存放在同一台服务器中。再假设该基本HTML文件的URL为：`gpcuster.cnblogs.com/index.html`。
 
@@ -178,7 +183,7 @@ HTTP支持2种建立连接的方式：非持久连接和持久连接（HTTP 1.0 
 * TCP连接建立时，有3次握手，详细过程；
 * TCP连接释放时，也有4次握手，详细过程；
 
-####持久连接####
+####持久连接
 
 
 `非持久连接`有几点效率问题：
@@ -208,7 +213,7 @@ HTTP支持2种建立连接的方式：非持久连接和持久连接（HTTP 1.0 
 3. 所有引用到的对象一共只经历1个RTT的延迟(而不是像不带流水线的版本那样，每个引用到的对象都各有1个RTT的延迟)；
 4. 带流水线的持久连接中服务器空等请求的时间比较少；
 
-###缓存机制###
+###缓存机制
 
 HTTP/1.1中缓存机制主要目标：提高页面访问速度；实现途径，有两条：
 
