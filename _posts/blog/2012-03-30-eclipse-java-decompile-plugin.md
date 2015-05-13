@@ -17,7 +17,9 @@ category: java
 
 特别说明，在上述为`*.class`文件绑定编辑器时，有可能是需要为文件`*.class without source` 绑定编辑器。
 
+Tips：
 
+> 直接使用IntelliJ IDEA，不用安装插件即可查看反编译结果，是时候尝试使用其他IDE了。
 
 
 
