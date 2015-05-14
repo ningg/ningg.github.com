@@ -210,7 +210,7 @@ Tips：
 1. 类加载器基本概念：重点剖析`java.lang.ClassLoader`的`loadClass()`方法
 1. 开发自己的类加载器：做一个demo
 
-###1.类加载器由来
+###1. 类加载器由来
 
 类加载器从 JDK 1.0 就出现了，最初是为了满足 Java Applet 的需要而开发出来的。很奇葩的是现在 Java Applet 被淘汰了，但类加载器却在类层次划分、OSGi、热部署、代码加密等领域大放异彩，成为了Java的一大王牌，可谓失之东隅，收之桑榆。
 
@@ -223,7 +223,7 @@ Tips：
 ![](/images/understanding-jvm/jvm_language.jpg)
 
 
-###2.类加载器基本概念
+###2. 类加载器基本概念
 
 首先必须重点强调的是：
 
