@@ -1,6 +1,6 @@
 ---
 layout: post
-title: java中日期和时间
+title: Java中日期和时间
 description: java中date和time
 category: java
 ---

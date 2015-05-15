@@ -7,12 +7,10 @@ category: javascript
 ---
 
 
-##柱状图
+##柱状图、折线图
 
 
-###坐标轴
-
-####调整横轴坐标字体、斜放
+###调整横轴坐标字体、斜放
 
 调整字体样式、设置横坐标斜放，代码如下：
 
@@ -30,7 +28,7 @@ category: javascript
 	}
 
 
-####颜色组
+###颜色组
 
 最终图形中显示的折线、柱状图等的颜色，具体在highcharts元素下，设置`colors`属性：
 
@@ -41,7 +39,7 @@ category: javascript
 具体参考：[Highcharts API - colors](http://www.hcharts.cn/api/index.php#colors)
 
 
-####动态修改/添加数据
+###动态修改/添加/删除数据
 
 示例代码如下：
 
@@ -61,7 +59,7 @@ category: javascript
 	}
 
 
-####更新参数
+###更新参数
 
 示例代码如下：
 
@@ -72,7 +70,7 @@ category: javascript
 具体参考[Highcharts API 文档][Highcharts API 文档]中的函数部分。
 
 
-####X轴刻度名称位于刻度线正下方
+###X轴刻度名称位于刻度线正下方
 
 示例代码：
 
@@ -82,15 +80,56 @@ category: javascript
 
 详细内容参考：[highcharts初级入门之tickmarkPlacement]
 
-##条形图
 
-（todo）：
+###折线图中，多线条对比时，提示内容横轴显示内容
 
-* [Highcharts API 文档][Highcharts API 文档]
+代码如下：
 
+		xAxis: {
+			categories: ['2015-02-03', '2015-02-04', '2015-02-05'],
+        },
+        yAxis: {
+            title: {
+                text: 'Snow depth (m)'
+            },
+            min: 0
+        },
+        tooltip: {
+	       		headerFormat: '<table>',
+	            pointFormat: '<tr><td style="color:{series.color};padding:0">{point.name}: </td>' +
+	                '<td style="padding:0"><b>{point.y} </b></td></tr>',
+	            footerFormat: '</table>',
+	            shared: true,
+	            crosshairs: true,
+	            useHTML: true
+       	},
+        
+        series: [{
+            name: 'Winter 2007-2008',
+            data: [
+				{name:'2013-02-03', y:0},
+                {name:'2013-02-04', y:0.6},
+				{name:'2013-02-05', y:0.3}
+            ]
+        }, {
+            name: 'Winter 2008-2009',
+            data: [
+                {name:'2014-02-03', y:0},
+                {name:'2014-02-04', y:1.6},
+				{name:'2014-02-05', y:1.3}
+            ]
+        }, {
+            name: 'Winter 2009-2010',
+            data: [
+                {name:'2016-02-03', y:0},
+                {name:'2016-02-04', y:2.6},
+				{name:'2016-02-05', y:2.3}
+            ]
+        }]
 
+效果如下图：
 
-
+![](/images/highcharts-intro/multi-line-axis.png)
 
 
 ##小结
@@ -113,18 +152,18 @@ category: javascript
 
 
 
-
-
-
-
-
-
-
-
 ##参考来源
 
 * [Highcharts中文网][Highcharts中文网]
 * [highcharts初级入门之tickmarkPlacement][highcharts初级入门之tickmarkPlacement]
+* [Highcharts API 文档][Highcharts API 文档]
+* [Jquery 图表插件 Highcharts 选项配置详细说明文档][Jquery 图表插件 Highcharts 选项配置详细说明文档]
+
+
+
+
+
+
 
 
 
@@ -136,7 +175,7 @@ category: javascript
 
 
 [highcharts初级入门之tickmarkPlacement]:			http://www.stepday.com/topic/?767
-
+[Jquery 图表插件 Highcharts 选项配置详细说明文档]:		http://chengxudaren.com/index.php?act=article&op=detail&a_id=4
 
 
 
