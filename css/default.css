@@ -310,3 +310,28 @@ hr{
 margin-bottom: 20px;
 
 }
+
+#gotoTop{
+	display:none;
+	position:fixed;
+	right:10%;
+	bottom:10%;
+	cursor:pointer;
+	padding:12px 4px;
+	width:30px;
+	text-align:center;
+	border:1px solid #e0e0e0;
+	background:#000;
+	color:#fff;
+}
+
+#gotoTop{
+	_position:absolute;
+	_top:expression(documentElement.scrollTop + documentElement.clientHeight * 3/4 + "px")
+}
+
+#gotoTop.hover {
+	background:gray;
+	text-decoration:none;
+}
+

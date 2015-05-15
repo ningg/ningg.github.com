@@ -279,6 +279,9 @@ sizeofag.jar
 <script src="/js/post.js" type="text/javascript"></script>
 
 
+	<div id="gotoTop">Top</div>
+
+
     <!--*********************************************************-->
     <!--****** 宝贝儿，看见这个时候，删掉下面的统计代码哦~ ******-->
     <!--*********************************************************-->
@@ -298,6 +301,27 @@ sizeofag.jar
     
 	
     <script type="text/javascript">
+		function gotoTop(min_height){
+			$("#gotoTop").click(
+				function(){$('html,body').animate({scrollTop:0},700);
+			}).hover(
+				function(){$(this).addClass("hover");},
+				function(){$(this).removeClass("hover");
+			});
+			min_height ? min_height = min_height : min_height = 600;
+			$(window).scroll(function(){
+				
+				var s = $(window).scrollTop();
+				
+				if( s > min_height){
+					$("#gotoTop").fadeIn(100);
+				}else{
+					$("#gotoTop").fadeOut(200);
+				};
+			});
+		};
+		gotoTop();
+
         $(function(){
             $('.home-follow').click(function(e){
                 e.preventDefault();
@@ -309,6 +333,7 @@ sizeofag.jar
                 }
             });
         })
+
     </script>
 </body>
 </html>
