@@ -4,13 +4,110 @@
    <title>ningg.top</title>
    <link href="http://ningg.top/atom.xml" rel="self" type="application/atom+xml"/>
    <link href="http://ningg.top" rel="alternate" type="text/html" />
-   <updated>2015-05-15T20:52:32+08:00</updated>
+   <updated>2015-05-16T01:42:38+08:00</updated>
    <id>http://ningg.top</id>
    <author>
      <name></name>
      <email></email>
    </author>
 
+   
+   <entry>
+     <title>Be Kind</title>
+     <link href="http://ningg.github.com/be-kind"/>
+     <updated>2015-05-15T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/be-kind</id>
+     <content type="html">&lt;blockquote&gt;
+  &lt;p&gt;原文地址：&lt;a href=&quot;http://boz.com/articles/be-kind.html&quot;&gt;Be Kind&lt;/a&gt;，是不是工作中有一些人，技术强、辩才佳、充满正义感、一心为公家、都得按他的意思做事而且他道理都是对的你辩不过他，但大家都不喜欢跟他共事？Facebook早期员工Boz曾经是这样的人，看看他以过来人身份怎么说的。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;原文&lt;/h2&gt;
+
+&lt;p&gt;I almost got fired once.&lt;/p&gt;
+
+&lt;p&gt;My friend, and CTO at the time, Dustin Moskovitz pulled me into a room one morning. He told me I would no longer be working on News Feed, which was surprising because at the time I was the only engineer keeping it running. Instead they were going to hand it off to someone else and build a team around that person. With alarm in my voice I asked if I was being fired. Dustin relented only after a telling pause: “no, but you need to find something else to do.”&lt;/p&gt;
+
+&lt;p&gt;I believe if you looked at what I had accomplished in my two years at Facebook to that point, it would not be obvious that I should be a candidate for such a stern conversation. In addition to building the backend and ranking for News Feed I had also launched a number of other popular features on the site. I maintained our early anti-abuse efforts in my spare time. I was one of a small group of people making decisions that would shape our infrastructure for years to come. I wasn’t the best engineer at the company but I was solid, I was dedicated, and I was clearly having an impact.&lt;/p&gt;
+
+&lt;p&gt;So why was I being sidelined? I demanded answers. Dustin did not disappoint.&lt;/p&gt;
+
+&lt;p&gt;He gave me a single sheet of paper. On it, in a dull monospace font, were anonymous quotes about me from my coworkers.&lt;/p&gt;
+
+&lt;p&gt;“Boz is one of the better engineers at Facebook” one read, and then the next “I would have a hard time working with him.”&lt;/p&gt;
+
+&lt;p&gt;These two statements struck me as incongruous. If I was a good engineer, why would it be hard to work with me? Of course that question was the very foundation of my problem.&lt;/p&gt;
+
+&lt;p&gt;“He is most interested in the truth…but more inhibited members of the team avoid any discussions with him.”&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;notes(ningg)：团队内部，真理（真相）重要，但不要一味地追求真理（真相），特别留意围绕什么是真理（真相）讨论来讨论去，通常，这不是团队的首要目标，还会破坏团队内部氛围，首要目标是什么？做既定的有意义、有价值的工作，有计划的完成。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The realization hit me hard. In short, I thought my job was to be right. I thought that was how I proved my worth to the company. But that was all wrong. &lt;strong&gt;My job was to get things done and doing anything meaningful past a certain point requires more than one person&lt;/strong&gt;. If you are right but nobody wants to work with you, then how valuable are you really? How much can you realistically expect to accomplish on your own? I was “winning” my way out of a job one argument at a time.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;notes(ningg)：一个人终难成事，需要一个队伍，队伍内部首要的是团结一心做事情，大家和谐相处，把事情做成，而不是证明谁正确、谁聪明。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I headed home early that day to think about what I had heard. My future wife April was gentle but she offered me little reprieve from the feedback: “&lt;strong&gt;If you want people to work with you, you need to be kind.&lt;/strong&gt;” It turns out this wasn’t just a problem I had at work. Looking back, I’m amazed (and grateful) that my friends put up with me.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;notes(ningg)：个人的行为动作，通常不仅仅表现在工作中，生活中也是如此，一起做事情，be kind。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Altogether this feedback changed the course of my career and probably my life.&lt;/p&gt;
+
+&lt;p&gt;I don’t think I was ever outright mean to anyone. I was just callously indifferent and on a long enough timeline that is indistinguishable from being mean. In a cruel twist of irony I thought that was what it meant to be professional. In retrospect it just seems inhuman. It will take me several posts to details the many mistakes that got me to this point, but my biggest lesson was the importance of kindness.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;notes(ningg)：总认为自己与众不同，不知道自己对待他人过于刻薄，反倒自认为是专业，而实际上，自己的做法堪称不人道。这件事，收获最大的一点是：Kind，善意地去理解、善意地对待。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Being kind isn’t the same as being nice. It isn’t about superficial praise. It doesn’t mean dulling your opinions. And it shouldn’t diminish the passion with which you present them.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;notes(ningg)：善意，与待人和蔼不同，不是肤浅的赞美；也不是要求，弱化自己的见解；也不是，让自己的激情消减。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Being kind is fundamentally about taking responsibility for your impact on the people around you. It requires you be mindful of their feelings and considerate of the way your presence affects them.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;notes(ningg)：善意，是为你对周围人的影响负责。你需要体会他们的感受，以及你的行为对他们的影响。因为，团队要一起前进，才能走的更扎实、更稳妥。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Being kind hasn’t hurt my effectiveness at all. Being thoughtful about the emotions of my colleagues hasn’t made me any less right or wrong, it has simply made me more likely to be asked to help in the first place. Being invited to more conversations has allowed me to scale my impact in a way that would have been unfathomable on my own.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;notes(ningg)：真正的善意，并不会影响工作的效率和产出；理解和照顾他人的感受，也不会影响自己的观点，反倒会让团队更加团结。多参加交流、讨论，找到自己善意的那个点。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;I’m still not as good as I’d like to be at any of this. When I’m under stress I can sometimes fall back into my old habits. But believing deeply that I am responsible for how I make others feel has been life changing for me. Being kind turns out to be a long term strategy for maximizing impact.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;notes(ningg)：压力大的时候，就会随心所欲的发表自己的意见；在内心深处，为自己对他人的影响负责，会帮助自己。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;个人成长&lt;/h2&gt;
+
+&lt;p&gt;在这个时间，看到这篇自述，让我很触动，反思自己，我在这方面问题很多、很大，下面才是可取的态度：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;为自己对他人的影响负责&lt;/li&gt;
+  &lt;li&gt;善意理解&lt;/li&gt;
+  &lt;li&gt;善意对待&lt;/li&gt;
+  &lt;li&gt;理解他人的感受，照顾他人的感受，这是长期策略&lt;/li&gt;
+  &lt;li&gt;自己有观点，交流、表述过程中要主意方式，避免带着情绪说话&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section-2&quot;&gt;参考来源&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://boz.com/articles/be-kind.html&quot;&gt;Be Kind&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://wanqu.co/2015-05-15-be-kind.html&quot;&gt;Be Kind - 湾区日报&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+   </entry>
    
    <entry>
      <title>中国未来5~10年的社会发展趋势</title>
@@ -914,186 +1011,6 @@ curl -XGET &#39;http://168.7.1.69:9200/kafka-index/status/_count?pretty&#39;
   &lt;li&gt;&lt;a href=&quot;http://fuxiaopang.gitbooks.io/learnelasticsearch/&quot;&gt;ElasticSearche权威指南&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://shgy.gitbooks.io/mastering-elasticsearch/&quot;&gt;精通 ElasticSearch&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://kibana.logstash.es/&quot;&gt;Kibana中文指南&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>工程Flume NG extends source辅助记录</title>
-     <link href="http://ningg.github.com/project-flume-ng-extends-source"/>
-     <updated>2015-02-26T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/project-flume-ng-extends-source</id>
-     <content type="html">&lt;h2 id=&quot;section&quot;&gt;常见问题&lt;/h2&gt;
-
-&lt;h3 id=&quot;github&quot;&gt;github上创建工程，克隆到本地&lt;/h3&gt;
-
-&lt;p&gt;在github上创建 new repository：flume-ng-extends-source之后，在本地执行git clone命令，即可：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;git clone https://github.com/ningg/flume-ng-extends-source.git
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;git-repository&quot;&gt;将本地内容，提交到远端git repository中&lt;/h3&gt;
-
-&lt;p&gt;几个命令：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;git add --all .
-git commit -m &quot;create maven project&quot;
-git push origin master
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;strong&gt;思考&lt;/strong&gt;：上述命令：git push origin master 中&lt;code&gt;origin&lt;/code&gt;和&lt;code&gt;master&lt;/code&gt;是什么含义？&lt;/p&gt;
-
-&lt;h3 id=&quot;git&quot;&gt;git出现错误&lt;/h3&gt;
-
-&lt;p&gt;错误信息，如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;error: Your local changes to the following files would be overwritten by merge:
-		README.md
-Please, commit your changes or stash them before you can merge.
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;分析：上述错误信息表示，从本地文件已经修改过了，但没有提交，如果强行从git服务器下载此文件，则文件内容将被覆盖；建议先提交本地文件改动的地方，或者直接放弃本地修改的内容。&lt;/p&gt;
-
-&lt;p&gt;解决办法：&lt;/p&gt;
-
-&lt;h4 id=&quot;gitmerge&quot;&gt;方法一：希望保存本地改动的文件，但不想与git服务器上版本合并（merge）&lt;/h4&gt;
-
-&lt;p&gt;操作如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;git stash
-git pull
-git stash pop
-git diff -w +文件名		// 查看文件的合并情况
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h4 id=&quot;section-1&quot;&gt;方法二：放弃本地修改的内容，直接放弃本地文件&lt;/h4&gt;
-
-&lt;p&gt;操作如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;git reset --hard
-git pull
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;详细参考：&lt;a href=&quot;http://blog.csdn.net/iefreer/article/details/7679631&quot;&gt;Git冲突常见解决办法&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;maven&quot;&gt;在指定目录创建maven工程&lt;/h3&gt;
-
-&lt;p&gt;在Eclipse下，Ctrl + N 创建 Maven Project时，选择：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Create a simple project(skip archetype selection)&lt;/li&gt;
-  &lt;li&gt;Location：E:\flume-ng-extends-source&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;这样，才能使最终生成的maven project以&lt;code&gt;E:\flume-ng-extends-source&lt;/code&gt;为根目录；在这中间遇到一个问题，当不选定&lt;code&gt;Create a simple project&lt;/code&gt;时，创建的maven project始终&lt;code&gt;E:\flume-ng-extends-source&lt;/code&gt;为根目录。&lt;/p&gt;
-
-&lt;h3 id=&quot;gitgitignore&quot;&gt;git下设置.gitignore&lt;/h3&gt;
-
-&lt;p&gt;对于java编写的maven projcet，使用git进行管理时，需要设置&lt;code&gt;.gitignore&lt;/code&gt;，几点：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;code&gt;.gitignore&lt;/code&gt;是什么？&lt;/li&gt;
-  &lt;li&gt;利用git管理maven project时，哪些文件需要设置为&lt;code&gt;gitignore&lt;/code&gt;？&lt;/li&gt;
-  &lt;li&gt;如何设置git的&lt;code&gt;.gitignore&lt;/code&gt;？&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;如何创建&lt;code&gt;.gitignore&lt;/code&gt;文件，因为，在WIN环境下，OS一直提示”必须键入文件名”。
-	* 直接执行命令&lt;code&gt;touch .gitignore&lt;/code&gt;即可。&lt;/p&gt;
-
-&lt;p&gt;对于Eclipse创建的Maven工程，直接在&lt;code&gt;.gitignore&lt;/code&gt;文件中，添加如下内容：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# Eclipse
-.classpath
-.project
-.settings/
-# Maven
-target/
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;strong&gt;疑问&lt;/strong&gt;：如何设置下一级目录中的.gitignore？&lt;/p&gt;
-
-&lt;p&gt;可以将 &lt;code&gt;.gitignore&lt;/code&gt; 文件放置到工作树（working tree）下的其他目录，这将对当前目录以及子目录生效。&lt;/p&gt;
-
-&lt;p&gt;&lt;strong&gt;参考&lt;/strong&gt;：&lt;a href=&quot;http://stackoverflow.com/questions/991801/git-ignores-and-maven-targets&quot;&gt;Git ignores and Maven targets&lt;/a&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;eclipsesourceformat&quot;&gt;Eclipse下进行source的format&lt;/h3&gt;
-
-&lt;p&gt;几点：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;如何定制source的format？&lt;/li&gt;
-  &lt;li&gt;如何快捷进行source的format？&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h3 id=&quot;eclipsejava&quot;&gt;Eclipse下创建的java文件，自动添加头部注释信息&lt;/h3&gt;
-
-&lt;p&gt;（todo）&lt;/p&gt;
-
-&lt;h3 id=&quot;mavenjar&quot;&gt;maven导出jar包&lt;/h3&gt;
-
-&lt;p&gt;背景：当前自己都是eclipse的&lt;code&gt;Export&lt;/code&gt;–&lt;code&gt;Jar file&lt;/code&gt;/&lt;code&gt;Runnable Jar file&lt;/code&gt;，如何利用maven直接生成jar包？&lt;/p&gt;
-
-&lt;p&gt;命令：&lt;code&gt;maven clean package&lt;/code&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;maven-1&quot;&gt;maven打包时，指定源文件编码方式&lt;/h3&gt;
-
-&lt;h3 id=&quot;mavenjar-1&quot;&gt;maven打包时，如何将当前jar包以及其依赖包都导出？&lt;/h3&gt;
-
-&lt;p&gt;参考&lt;a href=&quot;https://github.com/thilinamb/flume-ng-kafka-sink&quot;&gt;thilinamb flume kafka sink&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;section-2&quot;&gt;编程相关&lt;/h2&gt;
-
-&lt;h3 id=&quot;section-3&quot;&gt;判断参数是否输入有误&lt;/h3&gt;
-
-&lt;p&gt;（TODO：专门学习一下）&lt;/p&gt;
-
-&lt;p&gt;用到&lt;code&gt;guava-11.0.2.jar&lt;/code&gt;包，示例代码如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;...
-Preconditions.checkState(spoolDirectory != null, &quot;Configuration must specify a spooling directory&quot;);
-...
-Preconditions.checkNotNull(spoolDirectory);
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h3 id=&quot;null&quot;&gt;判断对象是否为null&lt;/h3&gt;
-
-&lt;p&gt;（TODO：专门学习一下）&lt;/p&gt;
-
-&lt;p&gt;用到&lt;code&gt;guava-11.0.2.jar&lt;/code&gt;包，示例代码如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;...
-private Optional&amp;lt;FileInfo&amp;gt; currentFile = Optional.absent();
-...
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;strong&gt;思考&lt;/strong&gt;：使用上述&lt;code&gt;Optional&amp;lt;T&amp;gt;&lt;/code&gt;有什么好处？&lt;/p&gt;
-
-&lt;h3 id=&quot;section-4&quot;&gt;过滤文件&lt;/h3&gt;
-
-&lt;p&gt;利用java.io.FileFilter，示例代码如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;FileFilter filter = new FileFilter() {
-  public boolean accept(File candidate) {
-    String fileName = candidate.getName();
-    if ((candidate.isDirectory()) ||
-        (fileName.endsWith(completedSuffix)) ||
-        (fileName.startsWith(&quot;.&quot;)) ||
-        ignorePattern.matcher(fileName).matches()) {
-      return false;
-    }
-    return true;
-  }
-};
-List&amp;lt;File&amp;gt; candidateFiles = Arrays.asList(spoolDirectory.listFiles(filter));
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&quot;section-5&quot;&gt;参考来源&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://stackoverflow.com/questions/991801/git-ignores-and-maven-targets&quot;&gt;Git ignores and Maven targets&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://gary-rowe.com/agilestack/2012/10/12/a-gitignore-file-for-intellij-and-eclipse-with-maven/&quot;&gt;A .gitignore file for Intellij and Eclipse with Maven&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://blog.csdn.net/iefreer/article/details/7679631&quot;&gt;Git冲突常见解决办法&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 </content>

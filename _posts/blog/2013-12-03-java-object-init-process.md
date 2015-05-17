@@ -70,7 +70,7 @@ category: jvm
 
 
 [java中对象产生初始化过程]:			http://blog.csdn.net/mashangyou/article/details/24529583
-
+[Java中类的初始化顺序总结]:			http://blog.csdn.net/jinyongqing/article/details/7631788
 
 
 

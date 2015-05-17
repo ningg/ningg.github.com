@@ -97,16 +97,29 @@ MySQL无法连接，提示表格不存在，设置table名称不区分大小写�
 **思考**：字段是否区分大小写？数据库还有其他大小写敏感的地方吗？
 
 
+
+
+
+
+
+
 ##参考来源
 
 * [MySQL官方文档](http://dev.mysql.com/doc/)
 * [Installing and Upgrading MySQL](http://dev.mysql.com/doc/refman/5.6/en/installing.html)
 * [MySQL Server Administration](http://dev.mysql.com/doc/refman/5.6/en/server-administration.html)
+* [MySQL 乱码 与 字符集][MySQL 乱码 与 字符集]
+
+
+
 
 
 
 
 
 [charset connection]:			http://dev.mysql.com/doc/refman/5.6/en/charset-connection.html
+[MySQL 乱码 与 字符集]:			http://coderbee.net/index.php/db/20140112/709
+
+
 
 [NingG]:    http://ningg.github.com  "NingG"
