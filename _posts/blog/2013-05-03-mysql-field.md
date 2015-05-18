@@ -40,10 +40,16 @@ category: MySQL
 * 创建id的时候会给主键 、unsigned 、auto_increment  然后其他表与该表的id字段进行连接，注意最大值为 4294967295（42亿）
 
 
+##date、datetime、timestamp
 
+几点：
 
+* 几个时间相关字段类型的差异；
+* Java中对应的类型；*（Hibernate、MyBatis等对应的VO）*
 
+todo：
 
+* [MySQL数据库和Java的时间类型详细解析][MySQL数据库和Java的时间类型详细解析]
 
 
 
@@ -82,10 +88,9 @@ category: MySQL
 
 
 
-[NingG]:    http://ningg.github.com  "NingG"
-
+[NingG]:    												http://ningg.github.com  "NingG"
 [MySQL reference Manual - Chapter 11 Data Types]:			http://dev.mysql.com/doc/refman/5.6/en/data-types.html
-
+[MySQL数据库和Java的时间类型详细解析]:						http://database.51cto.com/art/201005/202730.htm
 
 
 

@@ -17,6 +17,9 @@ category: mybatis
 * 与Hibernate之间什么关系？
 	* Hibernate解决什么问题？
 	* Hibernate什么原理？
+* 典型场景：
+	* 单独的MyBatis：与数据库之间交互；
+	* Spring + MyBatis：如何设置，以及与数据库之间交互；
 
 
 
@@ -52,16 +55,18 @@ category: mybatis
 
 
 
+##参考资料
 
-
+* [Hibernate与MyBatis的比较?][Hibernate与MyBatis的比较?]
+* [mybatis+spring maven下 整合 完整demo][mybatis+spring maven下 整合 完整demo]
 
 
 
 
 [NingG]:    http://ningg.github.com  "NingG"
 
-
-
+[Hibernate与MyBatis的比较?]:				http://www.zhihu.com/question/25753928
+[mybatis+spring maven下 整合 完整demo]:		http://blog.csdn.net/philip502/article/details/37911395
 
 
 
