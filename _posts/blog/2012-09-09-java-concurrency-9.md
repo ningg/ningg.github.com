@@ -8,6 +8,7 @@ category: java-concurrency
 
 
 ##21.8 仿真
+
 这个小节是综合运用前面7个小节的知识来完成一个小的需求。虽然很简单，但是也有地方值得自己学习，所以我直接上代码了。
 
 ###1. 银行出纳问题
@@ -279,6 +280,8 @@ category: java-concurrency
 这个例子感觉不咋地，就跳过去了= =
 
 ###3. 分发问题
+
+代码实例：
 
 	 package concurrency;
 	 

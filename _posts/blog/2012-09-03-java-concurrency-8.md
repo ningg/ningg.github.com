@@ -49,8 +49,11 @@ Java SE5的 `java.util.concurrent `包中引入了大量设计用来解决并发
 文档也太详细了吧：
 
 > A synchronization aid that allows one or more threads to wait until a set of operations being performed in other threads completes.
+
 > A CountDownLatch is initialized with a given count. The `await` methods block until the current count reaches zero due to invocations of the `countDown()` method, after which all waiting threads are released and any subsequent invocations of `await` return immediately. **This is a one-shot phenomenon -- the count cannot be reset. If you need a version that resets the count, consider using a CyclicBarrier【和 CyclicBarrier 的区别】**.
+
 > A CountDownLatch is a versatile(多功能的) synchronization tool and can be used for a number of purposes. A CountDownLatch initialized with a count of one serves as a simple on/off latch, or gate: all threads invoking `await` wait at the gate until it is opened by a thread invoking `countDown()`. A CountDownLatch initialized to N can be used to make one thread wait until N threads have completed some action, or some action has been completed N times.【这里是使用场景：count=1为开关；count=N 重复 N 次】
+
 > A useful property of a CountDownLatch is that it doesn't require that threads calling countDown wait for the count to reach zero before proceeding, it simply prevents any thread from proceeding past an await until all threads could pass.
 
 
@@ -58,8 +61,8 @@ Java SE5的 `java.util.concurrent `包中引入了大量设计用来解决并发
 
 	 Here is a pair of classes in which a group of worker threads use two countdown latches:
 	 
-	 1. The first is a start signal that prevents any worker from proceeding until the driver is ready for them to proceed;
-	 2. The second is a completion signal that allows the driver to wait until all workers have completed.
+	 1.The first is a start signal that prevents any worker from proceeding until the driver is ready for them to proceed;
+	 2.The second is a completion signal that allows the driver to wait until all workers have completed.
 	  
 	 class Driver { // ...
 		void main() throws InterruptedException {
@@ -96,104 +99,12 @@ Java SE5的 `java.util.concurrent `包中引入了大量设计用来解决并发
 
 文档已经够清晰了，这里就不多废话了。
 
+
 ###2. CyclicBarrier
 
 直译为循环栅栏，通过它可以**让一组线程全部到达某个状态后再同时执行，也就是说假如有5个线程协作完成一个任务，那么只有当每个线程都完成了各自的任务（都到达终点），才能继续运行（开始领奖）**。循环的意思是当所有等待线程都被释放（也就是所有线程完成各自的任务，整个程序开始继续执行）以后，CyclicBarrier 可以被重用。而上面的 CountDownLatch 只能用一次。
 
-这个的文档也非常详细：
 
-> A synchronization aid that allows a set of threads to all wait for each other to reach a common barrier point *（各个线程互相等待，CountDownLatch 是一个等待其他多个线程）*. CyclicBarriers are useful in programs involving a fixed sized party of threads that must occasionally wait for each other *（使用场景：固定数目的线程互相等待）*. The barrier is called cyclic because it can be re-used after the waiting threads are released *（为什么叫做循环是因为释放后可以重用）*.
-> A CyclicBarrier supports an optional Runnable command that is run once per barrier point, after the last thread in the party arrives, but before any threads are released *(一个可选的参数是 Runnable，在所有线程到达 Barrier 后，但是在释放（让他们继续运行）之前。)*. This barrier action is useful for updating shared-state before any of the parties continue *(为什么要有这个 Runnable ？可以在所有线程继续运行前更新共享状态等)*.
-> If the barrier action does not rely on the parties being suspended when it is executed, then any of the threads in the party could execute that action when it is released. To facilitate this, each invocation of await() returns the arrival index of that thread at the barrier. You can then choose which thread should execute the barrier action, for example:
-
-    if (barrier.await() == 0) { 
-        // log the completion of this iteration
-    }
-
-> The CyclicBarrier uses an all-or-none breakage model for failed synchronization attempts: If a thread leaves a barrier point prematurely(提前) because of interruption, failure, or timeout, all other threads waiting at that barrier point will also leave abnormally via BrokenBarrierException (or InterruptedException if they too were interrupted at about the same time).[要么全体成功，要么全体失败。和 Future 类似]
-> Memory consistency effects: Actions in a thread prior to calling await() happen-before actions that are part of the barrier action, which in turn happen-before actions following a successful return from the corresponding await() in other threads.
-
-举一个例子，现在有一个比赛：
-
-> 每组 5 个人，要把 A 处的球运输到10米外的 B 处，每个人可以拿2个。等10个球全部被运输到 B 处后，这个组就算是完成了任务。那么，只要5个人有一个没有完成，就不能算是完成任务。符合上面 CyclicBarrier 的应用场景。下面是这个例子的代码：
-
-	package concurrency;
-
-	import java.util.Random;
-	import java.util.concurrent.BrokenBarrierException;
-	import java.util.concurrent.CyclicBarrier;
-	import java.util.concurrent.ExecutorService;
-	import java.util.concurrent.Executors;
-	import java.util.concurrent.TimeUnit;
-
-	class Player implements Runnable {
-
-		private CyclicBarrier cyclicBarrier;
-		private Random rand = new Random(47);
-
-		public Player(CyclicBarrier cyclicBarrier) {
-			this.cyclicBarrier = cyclicBarrier;
-		}
-
-		@Override
-		public void run() {
-			try {
-				// 运输2个球
-				TimeUnit.SECONDS.sleep(rand.nextInt(5));
-
-				// 等待其他队友完成
-				System.out.println(Thread.currentThread() + " 完成任务！等待队友 ing...");
-				cyclicBarrier.await();
-			} catch (BrokenBarrierException e) {
-				System.out.println("BrokenBarrierException " + e);
-			} catch (InterruptedException e) {
-				System.out.println("InterruptedException " + e);
-			}
-		}
-	}
-
-	public class CyclicBarrierGame {
-		public static void main(String[] args) {
-			//定义 CyclicBarrier
-			CyclicBarrier cyclicBarrier = new CyclicBarrier(5, new Runnable() {
-				@Override
-				public void run() {
-					//全部完成
-					System.out.println("\n全部完成！ 举手报告 ing...\n");
-					System.out.println("谁来执行 Barrier 的 Runnable？(猜测是最后一个) : " + Thread.currentThread());
-				}
-			});
-			
-			ExecutorService exec = Executors.newCachedThreadPool();
-			for(int i = 0; i < 5; i++) {
-				exec.execute(new Player(cyclicBarrier));
-			}
-
-			/* 下面是为了验证 CyclicBarrier 能够重用
-			 try {
-				TimeUnit.SECONDS.sleep(5);
-				for(int i = 0; i < 5; i++) {
-					exec.execute(new Player(cyclicBarrier));
-				}
-			} catch (InterruptedException e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
-			}
-			*/
-			
-			exec.shutdown();
-		}
-	}/*output:
-	Thread[pool-1-thread-3,5,main] 完成任务！等待队友 ing...
-	Thread[pool-1-thread-2,5,main] 完成任务！等待队友 ing...
-	Thread[pool-1-thread-5,5,main] 完成任务！等待队友 ing...
-	Thread[pool-1-thread-1,5,main] 完成任务！等待队友 ing...
-	Thread[pool-1-thread-4,5,main] 完成任务！等待队友 ing...
-
-	全部完成！ 举手报告 ing...
-
-	谁来执行 Barrier 的 Runnable？(猜测是最后一个) : Thread[pool-1-thread-4,5,main]
-	*/
 
 
 ###3. DelayQueue
@@ -279,9 +190,7 @@ DelayQueue 就是一个无界队列，是用 PriorityQueue 实现的 BlockingQue
 			goFirst(leaders);
 
 		}
-	}/*output:
-	
-		
+	}/*output:	
 	所有领导已经就坐，开始播放电影：速度与激情7...
 	着火了！！！
 	级别： 8的 leader 3 正在撤离...
@@ -295,6 +204,7 @@ DelayQueue 就是一个无界队列，是用 PriorityQueue 实现的 BlockingQue
 	级别： 2的 leader 10 正在撤离...
 	级别： 0的 leader 1 正在撤离...
 	*/
+
 
 ###5. ScheduledExcutor
 
@@ -329,15 +239,17 @@ DelayQueue 就是一个无界队列，是用 PriorityQueue 实现的 BlockingQue
 	
 嗯，这个例子虽然简单，但是我想说几点：
 
-1. ScheduleAtFixedRate 是基于固定时间间隔进行任务调度，ScheduleWithFixedDelay 取决于每次任务执行的时间长短，是基于不固定时间间隔进行任务调度：
-	1. scheduleWithFixedDelay()方法：每次执行时间为上一次任务结束起向后推一个时间间隔，即每次执行时间为：initialDelay, initialDelay+executeTime+delay, initialDelay+2executeTime+2delay
-	1. scheduleWithFixedRate()方法：每次执行时间为上一次任务开始起向后推一个时间间隔，即每次执行时间为 :initialDelay, initialDelay+period, initialDelay+2*period, …
-1. 有可能上面的程序执行了一段时间后，会发现不再执行了，去查看日志，可能是doBusiness()方法中抛出了异常。但是为什么doBusiness()抛出异常就会中止定时任务的执行呢？看文档就知道了：
+* ScheduleAtFixedRate 是基于固定时间间隔进行任务调度，ScheduleWithFixedDelay 取决于每次任务执行的时间长短，是基于不固定时间间隔进行任务调度：
+	* scheduleWithFixedDelay()方法：每次执行时间为上一次任务结束起向后推一个时间间隔，即每次执行时间为：initialDelay, initialDelay+executeTime+delay, initialDelay+2executeTime+2delay
+	* scheduleWithFixedRate()方法：每次执行时间为上一次任务开始起向后推一个时间间隔，即每次执行时间为 :initialDelay, initialDelay+period, initialDelay+2*period, …
+* 有可能上面的程序执行了一段时间后，会发现不再执行了，去查看日志，可能是doBusiness()方法中抛出了异常。
+
+但是为什么doBusiness()抛出异常就会中止定时任务的执行呢？看文档就知道了：
 
 > Creates and executes a periodic action that becomes enabled first after the given initial delay, and subsequently with the given delay between the termination of one execution and the commencement of the next. If any execution of the task encounters an exception, subsequent executions are suppressed. Otherwise, the task will only terminate via cancellation or termination of the executor.
-> 
-> 简单翻译就是：
-> 
+
+简单翻译就是：
+
 > 创建并执行一个在给定初始延迟后首次启用的定期操作，随后，在每一次执行终止和下一次执行开始之间都存在给定的延迟。如果任务的任一执行遇到异常，就会取消后续执行。否则，只能通过执行程序的取消或终止方法来终止该任务。
 
 所以上面的例子应该改成下面这样：
@@ -371,290 +283,6 @@ Semaphore 是一个计数信号量，平常的锁（来自 concurrent.locks 或�
 
 总结来说，一般的锁是保证一个资源只能被一个任务访问；Semaphore 是保证一堆资源可以同时有多个任务访问。举个例子，现在有一个厕所，5个坑位，如果使用 synchronized 的话，同步厕所就只能让1个人进入，浪费了4个坑位；稍微往前一步是使用 BlockingQueue（如果你用 synchronized 来同步5个坑位就很复杂多了），再往前一步，concurrent 提供了 Semaphore ，它通过 acquire()和 release()来保证资源的分发使用。
 
-下面我们通过实现一个资源池来说明，具体的场景完全在例子中注释：）
-
-	 package concurrency;
-	 
-	 import java.util.ArrayList;
-	 import java.util.List;
-	 import java.util.concurrent.ExecutorService;
-	 import java.util.concurrent.Executors;
-	 import java.util.concurrent.Future;
-	 import java.util.concurrent.Semaphore;
-	 import java.util.concurrent.TimeUnit;
-	 
-	 // 抽象成一个资源池
-	 class Pool<T> {
-		 private int size;
-		 private List<T> items = new ArrayList<T>();
-		 private volatile boolean[] checkedOut;
-		 private Semaphore available;
-	 
-		 // 要放入资源池的资源数目，如果请求线程数目大于资源池资源数目，就需要阻塞等待
-		 public Pool(Class<T> classObject, int size) {
-			 this.size = size;
-			 checkedOut = new boolean[size];
-			 /*
-			  * 第二个参数的含义:<br>
-			  * 
-			  * true: 代表的是公平竞争<br>
-			  * 没有第二个参数或者false：代表随机选中等待许可证的线程
-			  */
-			 available = new Semaphore(size, true);
-			 // Load pool with objects that can be checked out:
-			 for (int i = 0; i < size; i++) {
-				 try {
-					 // Assumes a default constructor:
-					 items.add(classObject.newInstance());
-				 } catch (Exception e) {
-					 throw new RuntimeException(e);
-				 }
-			 }
-		 }
-	 
-		 public T checkOut() throws InterruptedException {
-			 available.acquire();
-			 return getItem();
-		 }
-	 
-		 public void checkIn(T x) {
-			 if (releaseItem(x))
-				 available.release();
-		 }
-	 
-		 private synchronized T getItem() {
-			 for (int i = 0; i < size; i++)
-				 if (!checkedOut[i]) {
-					 checkedOut[i] = true;
-					 return items.get(i);
-				 }
-			 return null;
-		 }
-	 
-		 // 回收资源
-		 private synchronized boolean releaseItem(T item) {
-			 int index = items.indexOf(item);
-			 // not in the list
-			 if (index == -1)
-				 return false;
-			 if (checkedOut[index]) {
-				 checkedOut[index] = false;
-				 return true;
-			 }
-			 return false; // wasn't checked out
-		 }
-	 
-	 }
-	 
-	 class Fat {
-		 private volatile double d; // 阻止指令优化
-		 private static int counter = 0;
-		 private final int id = counter++;
-	 
-		 public Fat() {
-			 // Expensive, interruptible operation
-			 for (int i = 1; i < 10000; i++) {
-				 d += (Math.PI + Math.E) / (double) i;
-			 }
-		 }
-	 
-		 public void operation() {
-			 System.out.println(this);
-		 }
-	 
-		 public String toString() {
-			 return "Fat id: " + id;
-		 }
-	 
-	 }
-	 
-	 class CheckoutTask<T> implements Runnable {
-		 private static int counter = 0;
-		 private final int id = counter++;
-		 private Pool<T> pool;
-	 
-		 public CheckoutTask(Pool<T> pool) {
-			 this.pool = pool;
-		 }
-	 
-		 @Override
-		 public void run() {
-			 try {
-				 T item = pool.checkOut();
-				 System.out.println(this + "checked out " + item);
-				 TimeUnit.SECONDS.sleep(1);
-				 System.out.println(this + "checked in " + item);
-				 pool.checkIn(item);
-			 } catch (InterruptedException e) {
-				 // 终止
-			 }
-		 }
-	 
-		 @Override
-		 public String toString() {
-			 return "checkoutTask " + id + " ";
-		 }
-	 }
-	 
-	 public class SemaphoreDemo {
-		 final static int SIZE = 25;
-	 
-		 public static void main(String[] args) throws Exception {
-			 // 创建一个 Fat 的资源池，大小为25
-			 final Pool<Fat> pool = new Pool<Fat>(Fat.class, SIZE);
-	 
-			 // 启动25个线程开始玩，从25个资源池 checkout
-			 ExecutorService exec = Executors.newCachedThreadPool();
-			 for (int i = 0; i < SIZE; i++) {
-				 exec.execute(new CheckoutTask<Fat>(pool));
-			 }
-			 System.out.println("All CheckoutTasks created");
-	 
-			 // 然后用主线程把所有的 Fat 全灌到 list 中了，资源池为空
-			 List<Fat> list = new ArrayList<Fat>();
-			 for (int i = 0; i < SIZE; i++) {
-				 Fat fat = pool.checkOut();
-				 System.out.println(i + ": main() thread checked out ");
-				 fat.operation();
-				 list.add(fat);
-			 }
-	 
-			 // 还记得 Future 会阻塞吗？因为主线程把25个资源全 checkout 了，所以再 checkOut 肯定阻塞了
-			 Future<?> blocked = exec.submit(new Runnable() {
-				 @Override
-				 public void run() {
-					 try {
-						 // Semaphore prevents additional checkout,
-						 // so call is blocked:
-						 pool.checkOut();
-					 } catch (InterruptedException e) {
-						 System.out.println("checkOut() Interrupted");
-					 }
-				 }
-			 });
-			 // 因为 Semaphore 是阻塞的，所以10s 还拿不到的情况下，就取消 blocked 线程的工作
-			 TimeUnit.SECONDS.sleep(10);
-			 blocked.cancel(true); // Break out of blocked call
-			 System.out.println("\n\n\nChecking in objects in " + list);
-			 for (Fat f : list) {
-				 pool.checkIn(f);
-			 }
-			 for (Fat f : list) {
-				 pool.checkIn(f); // Second checkIn ignored
-			 }
-			 exec.shutdown();
-		 }
-	 
-	 }/*output:
-	 checkoutTask 1 checked out Fat id: 1
-	 checkoutTask 4 checked out Fat id: 4
-	 checkoutTask 3 checked out Fat id: 3
-	 checkoutTask 5 checked out Fat id: 5
-	 checkoutTask 2 checked out Fat id: 2
-	 checkoutTask 6 checked out Fat id: 6
-	 checkoutTask 0 checked out Fat id: 0
-	 checkoutTask 7 checked out Fat id: 7
-	 checkoutTask 8 checked out Fat id: 8
-	 checkoutTask 9 checked out Fat id: 9
-	 checkoutTask 10 checked out Fat id: 10
-	 checkoutTask 11 checked out Fat id: 11
-	 checkoutTask 12 checked out Fat id: 12
-	 checkoutTask 13 checked out Fat id: 13
-	 checkoutTask 14 checked out Fat id: 14
-	 checkoutTask 15 checked out Fat id: 15
-	 checkoutTask 16 checked out Fat id: 16
-	 checkoutTask 17 checked out Fat id: 17
-	 checkoutTask 18 checked out Fat id: 18
-	 checkoutTask 19 checked out Fat id: 19
-	 checkoutTask 20 checked out Fat id: 20
-	 checkoutTask 21 checked out Fat id: 21
-	 checkoutTask 22 checked out Fat id: 22
-	 checkoutTask 23 checked out Fat id: 23
-	 All CheckoutTasks created
-	 checkoutTask 24 checked out Fat id: 24
-	 checkoutTask 4 checked in Fat id: 4
-	 checkoutTask 2 checked in Fat id: 2
-	 checkoutTask 0 checked in Fat id: 0
-	 checkoutTask 3 checked in Fat id: 3
-	 checkoutTask 7 checked in Fat id: 7
-	 checkoutTask 9 checked in Fat id: 9
-	 checkoutTask 5 checked in Fat id: 5
-	 checkoutTask 11 checked in Fat id: 11
-	 checkoutTask 12 checked in Fat id: 12
-	 checkoutTask 13 checked in Fat id: 13
-	 checkoutTask 14 checked in Fat id: 14
-	 checkoutTask 15 checked in Fat id: 15
-	 checkoutTask 1 checked in Fat id: 1
-	 checkoutTask 17 checked in Fat id: 17
-	 checkoutTask 16 checked in Fat id: 16
-	 checkoutTask 10 checked in Fat id: 10
-	 checkoutTask 8 checked in Fat id: 8
-	 0: main() thread checked out 
-	 Fat id: 0
-	 1: main() thread checked out 
-	 Fat id: 1
-	 2: main() thread checked out 
-	 Fat id: 2
-	 3: main() thread checked out 
-	 Fat id: 3
-	 4: main() thread checked out 
-	 Fat id: 4
-	 5: main() thread checked out 
-	 Fat id: 5
-	 6: main() thread checked out 
-	 Fat id: 7
-	 7: main() thread checked out 
-	 Fat id: 8
-	 8: main() thread checked out 
-	 Fat id: 9
-	 9: main() thread checked out 
-	 Fat id: 10
-	 10: main() thread checked out 
-	 Fat id: 11
-	 11: main() thread checked out 
-	 Fat id: 12
-	 12: main() thread checked out 
-	 Fat id: 13
-	 13: main() thread checked out 
-	 Fat id: 14
-	 14: main() thread checked out 
-	 Fat id: 15
-	 15: main() thread checked out 
-	 Fat id: 16
-	 16: main() thread checked out 
-	 Fat id: 17
-	 checkoutTask 6 checked in Fat id: 6
-	 checkoutTask 18 checked in Fat id: 18
-	 checkoutTask 20 checked in Fat id: 20
-	 checkoutTask 21 checked in Fat id: 21
-	 checkoutTask 22 checked in Fat id: 22
-	 checkoutTask 23 checked in Fat id: 23
-	 checkoutTask 24 checked in Fat id: 24
-	 17: main() thread checked out 
-	 Fat id: 6
-	 18: main() thread checked out 
-	 Fat id: 18
-	 19: main() thread checked out 
-	 Fat id: 20
-	 20: main() thread checked out 
-	 Fat id: 21
-	 checkoutTask 19 checked in Fat id: 19
-	 21: main() thread checked out 
-	 Fat id: 22
-	 22: main() thread checked out 
-	 Fat id: 19
-	 23: main() thread checked out 
-	 Fat id: 23
-	 24: main() thread checked out 
-	 Fat id: 24
-	 checkOut() Interrupted
-	 
-	 
-	 
-	 Checking in objects in [Fat id: 0, Fat id: 1, Fat id: 2, Fat id: 3, Fat id: 4, Fat id: 5, Fat id: 7, Fat id: 8, Fat id: 9, Fat id: 10, Fat id: 11, Fat id: 12, Fat id: 13, Fat id: 14, Fat id: 15, Fat i
-	280 d: 16, Fat id: 17, Fat id: 6, Fat id: 18, Fat id: 20, Fat id: 21, Fat id: 22, Fat id: 19, Fat id: 23, Fat id: 24]
-	*/
-
 ###7. Exchanger
 
 终于来到21.7小节的最后一个构件了！！！！
@@ -663,92 +291,6 @@ Semaphore 是一个计数信号量，平常的锁（来自 concurrent.locks 或�
 
 > 一个任务在创建对象，这些对象的生产/销毁代价都非常高。上面 Semaphore 的例子还算靠谱，因为我用完了资源并没有销毁，直接还给资源池了，然后立马可以被复用。但是如果两个线程需要知晓对方的工作状态信息，就可以用 Exchanger 交换各自的工作状态。
 
-更具体的使用场景还没有仔细想，大概搜了下都是缓存交换（一个读，一个写），比如这个：[java.util.concurrent.Exchanger应用范例与原理浅析](http://lixuanbin.iteye.com/blog/2166772) 。我只是简单写了个 demo 备忘，用到的时候知道有这个东西，其他的再看文档吧：
-
-	 package concurrency;
-	 
-	 import java.util.ArrayList;
-	 import java.util.List;
-	 import java.util.Random;
-	 import java.util.concurrent.Exchanger;
-	 
-	 public class ExchangerTest {
-	 
-		 public static void main(String[] args) {
-			 Exchanger<List<Integer>> exchanger = new Exchanger<>();
-			 new Consumer(exchanger).start();
-			 new Producer(exchanger).start();
-		 }
-	 
-	 }
-	 
-	 class Producer extends Thread {
-		 List<Integer> list = new ArrayList<>();
-		 Exchanger<List<Integer>> exchanger = null;
-	 
-		 public Producer(Exchanger<List<Integer>> exchanger) {
-			 super();
-			 this.exchanger = exchanger;
-		 }
-	 
-		 @Override
-		 public void run() {
-			 System.out.println("this is Producer");
-			 Random rand = new Random();
-			 for (int i = 0; i < 1; i++) {
-				 list.clear();
-				 list.add(rand.nextInt(10000));
-				 list.add(rand.nextInt(10000));
-				 list.add(rand.nextInt(10000));
-				 list.add(rand.nextInt(10000));
-				 list.add(rand.nextInt(10000));
-				 try {
-					 System.out.println("producer exchanger...");
-					 list = exchanger.exchange(list);
-					 System.out.println("Producer is done");
-				 } catch (InterruptedException e) {
-					 e.printStackTrace();
-				 }
-			 }
-		 }
-	 }
-	 
-	 class Consumer extends Thread {
-		 List<Integer> list = new ArrayList<>();
-		 Exchanger<List<Integer>> exchanger = null;
-	 
-		 public Consumer(Exchanger<List<Integer>> exchanger) {
-			 super();
-			 this.exchanger = exchanger;
-		 }
-	 
-		 @Override
-		 public void run() {
-			 System.out.println("this is Consumer");
-			 for (int i = 0; i < 1; i++) {
-				 try {
-					 System.out.println("consumer blocking...");
-					 list = exchanger.exchange(list);
-					 System.out.println("consumer is done");
-				 } catch (InterruptedException e) {
-					 e.printStackTrace();
-				 }
-				 System.out.print(list.get(0) + ", ");
-				 System.out.print(list.get(1) + ", ");
-				 System.out.print(list.get(2) + ", ");
-				 System.out.print(list.get(3) + ", ");
-				 System.out.println(list.get(4) + ", ");
-			 }
-		 }
-	 }/*output:
-	 this is Consumer
-	 consumer blocking...
-	 this is Producer
-	 producer exchanger...
-	 Producer is done
-	 consumer is done
-	 7481, 9360, 6010, 4630, 4338, 
-	 */
 
 
 
@@ -761,9 +303,9 @@ Semaphore 是一个计数信号量，平常的锁（来自 concurrent.locks 或�
 
 
 
+##参考来源
 
-
-
+* [Java编程思想 - 第二十一章、并发（六）][Java编程思想 - 第二十一章、并发（六）]
 
 
 
