@@ -29,6 +29,7 @@ category: linux
 	* 磁盘空间不足，通常是block数量不足，但也可能inode数量不足（小文件很多）；
 	* 通常，一个file对应一个inode和多个block；（新建symbolic link文件，不会消耗新的inode）
 
+具体示例代码：
 
 	# 查看磁盘分区情况
 	$ df -hT
@@ -83,6 +84,8 @@ category: linux
 
 
 ####按大小查找文件
+
+示例代码：
 
 	# 查找文件大小 > 1GB 的文件
 	# find命令中 -type -size 两个选项
@@ -210,7 +213,7 @@ category: linux
 
 `find`命令，几个选项，简要说明如下：
 
-* `-name [pattern]`：`[pattern]`表示使用通配符`*`\`?`\`[]`，进行文件名的匹配；
+* `-name [pattern]`：`[pattern]`表示使用通配符`*` `?` `[]`，进行文件名的匹配；
 * `-regex [pattern]`：`[pattern]`表示利用Regular Expression，正则表达式；
 * `-type f`：限定文件类别；
 * `-size +1G`：限定文件大小；

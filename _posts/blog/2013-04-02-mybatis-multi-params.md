@@ -18,7 +18,7 @@ DAO层的函数方法：
 
 	<select id="selectUser" resultMap="BaseResultMap">
 		select  *  from user_user_t 
-			where user_name = #{0} and user_area=#{1}
+			where user_name = #{0} and user_area = #{1}
 	</select>
 
 其中，`#{0}`代表接收的是dao层中的第一个参数，`#{1}`代表dao层中第二参数，更多参数一致往后加即可。
@@ -36,8 +36,8 @@ Dao层的函数方法：
 
 	<select id=" selectUser" resultMap="BaseResultMap">
 	   select  *  from user_user_t  
-		where user_name=#{userName，jdbcType=VARCHAR} 
-			and user_area=#{userArea, jdbcType=VARCHAR}
+		where user_name = #{userName，jdbcType=VARCHAR} 
+			and user_area = #{userArea, jdbcType=VARCHAR}
 	</select>
 
 Service层调用：
@@ -56,14 +56,14 @@ Service层调用：
 
 Dao层的函数方法：
 
-	public User selectUser(@param(“userName”)Stringname,@param(“userArea”)String area);
+	public User selectUser(@param(“userName”)String name,@param(“userArea”)String area);
 
 对应的Mapper.xml：
 
 	<select id=" selectUser" resultMap="BaseResultMap">
 	   select  *  from user_user_t  
 		  where user_name = #{userName，jdbcType=VARCHAR} 
-		    and user_area=#{userArea, jdbcType=VARCHAR}
+		    and user_area = #{userArea, jdbcType=VARCHAR}
 	</select> 
 
 个人觉得这种方法比较好，能让开发者看到dao层方法就知道该传什么样的参数，比较直观，个人推荐用此种方案。

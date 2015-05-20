@@ -8,14 +8,14 @@ category: MySQL
 
 难得最近两天重新接触Mysql，正好整理一下基本的知识。下面是自己本篇文章的大纲：
 
-> 1. 增删改查；
-> 2. `group by`、`order by`、`distinct`；
-> 3. 常用函数：`count()`、`min()`、`max()`、`substing_index()`等；
-> 4. 查看mysql日志，主要是针对`warings`\`errors`的查询和处理；
-> 5. mysql存储过程；
-> 6. 数据备份；
-> 7. 常用工具的介绍及特点；
-> 8. （万佛归宗）MySQL的整体框架，备份时内部的线程机制，语句执行效率。
+1. 增删改查；
+1. `group by`、`order by`、`distinct`；
+1. 常用函数：`count()`、`min()`、`max()`、`substing_index()`等；
+1. 查看mysql日志，主要是针对`warings`\`errors`的查询和处理；
+1. mysql存储过程；
+1. 数据备份；
+1. 常用工具的介绍及特点；
+1. （万佛归宗）MySQL的整体框架，备份时内部的线程机制，语句执行效率。
 
 首先对于上面的8个要点进行一个整体的说明：`1-3`是基本的操作；`4-7`属于较深入的学习（有点难度），但仍然是操作过程；`8`是整个MySQL的基础，最核心的东西，从这里就可以窥见Mysql的起源了。操作部分关键是要记忆+操作；底层的理论需要一些理解（brain power）。
 
@@ -54,9 +54,9 @@ category: MySQL
 
 假设场景：
 
-> * 现在mysql运行，希望知道哪些sql命令正在运行；（正在执行的命令）
-> * 现在mysql运行，希望知道曾经执行过的sql命令；（历史命令）
-> * 运行出现问题，mysql无法正常使用，现在希望查看mysql的运行日志；
+* 现在mysql运行，希望知道哪些sql命令正在运行；（正在执行的命令）
+* 现在mysql运行，希望知道曾经执行过的sql命令；（历史命令）
+* 运行出现问题，mysql无法正常使用，现在希望查看mysql的运行日志；
 
 查看mysql的运行状态，命令：status；结果如下：
 
@@ -157,11 +157,11 @@ category: MySQL
 
 具体细节：
 
-> * `DELIMITER //`表示暂时更改分隔符（mysql内判断为开始执行的分隔符）；
-> * `–- `（最后有一个空格）表示单行注释；
-> * 上面的`procedure`包含了2个输入参数（IN）和一个返回参数（OUT）；
-> * 过程body中，使用`declare`定义了2个局部变量，`declare`要求使用变量名和类型；`select… into…` 语句将查询结果保存到`into`后面的变量中；
-> * `if…then…end` if语句表示了是否一个条件判断执行过程。
+* `DELIMITER //`表示暂时更改分隔符（mysql内判断为开始执行的分隔符）；
+* `–- `（最后有一个空格）表示单行注释；
+* 上面的`procedure`包含了2个输入参数（IN）和一个返回参数（OUT）；
+* 过程body中，使用`declare`定义了2个局部变量，`declare`要求使用变量名和类型；`select… into…` 语句将查询结果保存到`into`后面的变量中；
+* `if…then…end` if语句表示了是否一个条件判断执行过程。
 
 **补充**：`procedure`的参数后面有`COMMENT`类似于备注，当使用`SHOW PROCEDURE STATUS;`时可以看到此字段。
 
