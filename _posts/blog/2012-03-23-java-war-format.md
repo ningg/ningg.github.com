@@ -52,7 +52,13 @@ WAR格式，就是部署java web的目录组织结构。
 * src/test/resources，测试资源
 * src/main/webapp，web资源的目录
 
-（下面给出一个截图）
+具体如下图：
+
+![](/images/java-war-format/java-web-maven.png)
+
+对应的部署结构：
+
+![](/images/java-war-format/deployment-assembly.png)
 
 
 
