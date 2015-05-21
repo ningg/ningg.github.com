@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Java - 命令详解，java
+title: Java 命令详解，java
 description: 执行java命令时，需要考虑的选项
 published: true
 category: java
@@ -99,15 +99,28 @@ category: java
 
 通过`-cp .;a.jar;b.jar`来指定类加载的jar时，windows下使用`;`分隔，linux下使用`:`分隔，需要列出所有jar包*（现在这一情况有没有改善？）*；如果希望通配符效果，使用：`java -Djava.ext.dirs=...`来替换`-cp`配置。
 
+特别说明：不建议上述操作，具体：
+
+虚拟机在运行一个类时，需要将其装入内存，虚拟机搜索类的方式和顺序如下：*（双亲委派模式）*
+
+`Bootstrap classes` -- `Extension classes` -- `User classes`
+
+* Bootstrap 中的路径是虚拟机自带的jar或zip文件，虚拟机首先搜索这些包文件，用`System.getProperty("sun.boot.class.path")`可得到虚拟机搜索的包名。
+* Extension是位于jre/lib/ext目录下的jar文件，虚拟机在搜索完Bootstrap后就搜索该目录下的jar文件。用`System.getProperty("java.ext.dirs”)`可得到虚拟机使用Extension搜索路径。
+* User classes搜索顺序为当前目录、环境变量 CLASSPATH、-classpath，用`System.getProperty("java.class.path”)`得到User classes路径。
+
 
 ####JVM系统环境与OS系统环境
 
 上述`System.getProperty("<name>")`中System是指 JRE system，不是OS。
 
 
+
 ####Eclipse下配置VM参数
 
 在Eclipse下如何配置VM的启动参数？即，如何配置`-D`属性？具体：`run as`  -- `run configurations`  -- `Arguments` -- `VM arguments`，直接书写`-D<name>=<value>`即可，*（多参数时，分行输入）*
+
+
 
 ####扩展阅读
 
