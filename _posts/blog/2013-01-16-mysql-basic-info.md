@@ -25,7 +25,11 @@ category: MySQL
 
 ###1.增删改查
 
+（todo）
+
 ###2.group by、order by、distinct
+
+（todo）
 
 ###3.常用函数：count、min、max、substring_index
 
@@ -212,12 +216,12 @@ category: MySQL
 ##参考来源
 
 1. 《MySQL必知必会》Page171
-2. http://blog.sina.com.cn/s/blog_71f4cdbe0100yut4.html
-3. http://www.ccvita.com/100.html
-4. http://www.ccvita.com/category/mysql/
-5. http://blog.csdn.net/lxgwm2008/article/details/7738306
-6. http://joewalker.iteye.com/blog/277626
-7. http://blog.sina.com.cn/s/blog_406127500100pvar.html
+1. http://blog.sina.com.cn/s/blog_71f4cdbe0100yut4.html
+1. http://www.ccvita.com/100.html
+1. http://www.ccvita.com/category/mysql/
+1. http://blog.csdn.net/lxgwm2008/article/details/7738306
+1. http://joewalker.iteye.com/blog/277626
+1. http://blog.sina.com.cn/s/blog_406127500100pvar.html
 
 
 

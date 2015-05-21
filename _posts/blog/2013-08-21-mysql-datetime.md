@@ -3,7 +3,7 @@ layout: post
 title: MySQL中datetime字段的使用
 description: 如何查询datetime字段？如何按照datetime字段进行归类？
 published: true
-category: MySQL
+category: mysql
 ---
 
 
@@ -46,14 +46,13 @@ category: MySQL
 * between ... and ...
 * 
 
-###between - and方式
+###between...and方式
 
 代码如下：
 
 	mysql> select * from usercount where 
 	(datetimes between '2015-05-17 00:00:00' and '2015-05-19 23:00:00') 
 		and (type = 'cib') and (number = '00');
-	
 	+---------------------+------+--------+-----------+--------------+
 	| datetimes           | type | number | usercount | auditorcount |
 	+---------------------+------+--------+-----------+--------------+
@@ -85,7 +84,6 @@ Tips：
 		where (datetimes between '2015-05-17 00:00:00' and '2015-05-19 23:00:00')
 			and (type = 'cib') and (number = '00') 
 		group by left(datetimes, 10);
-		
 	+---------------------+------+--------+-----------+--------------+
 	| datetimes           | type | number | usercount | auditorcount |
 	+---------------------+------+--------+-----------+--------------+
@@ -118,7 +116,6 @@ Tips：
 	 where (datetimes between '2015-05-17 00:00:00' and '2015-05-19 23:00:00') 
 	 and (type = 'cib') and (number = '00') 
 	 group by left(datetimes, 10);
-	 
 	+---------------------+----------------+
 	| left(datetimes, 10) | sum(usercount) |
 	+---------------------+----------------+
@@ -135,7 +132,6 @@ Tips：
 		and (type = 'cib') and (number = '00') 
 	 group by left(datetimes, 10) 
 	 order by datetimes asc;
-
 	+---------------------+----------------+
 	| left(datetimes, 10) | sum(usercount) |
 	+---------------------+----------------+
