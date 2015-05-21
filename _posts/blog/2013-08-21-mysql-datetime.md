@@ -44,7 +44,6 @@ category: mysql
 几种方式：
 
 * between ... and ...
-* 
 
 ###between...and方式
 
@@ -68,7 +67,7 @@ Tips：
 > datetime类型字段的between...and...是一个闭合区间，包含起点和终点；
 
 
-##按照年-月-日进行group
+##按照年月日进行group
 
 几种方式：
 
