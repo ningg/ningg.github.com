@@ -62,7 +62,7 @@ Dao层的函数方法：
 
 	<select id=" selectUser" resultMap="BaseResultMap">
 	   select  *  from user_user_t  
-		  where user_name = #{userName，jdbcType=VARCHAR} 
+		  where user_name = #{userName, jdbcType=VARCHAR} 
 		    and user_area = #{userArea, jdbcType=VARCHAR}
 	</select> 
 
