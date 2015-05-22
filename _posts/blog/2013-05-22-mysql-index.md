@@ -53,7 +53,7 @@ todo：
 * [MySQL索引与Index Condition Pushdown]
 * [MySQL索引类型一览 让MySQL高效运行起来]
 * [mysql中索引的故事]	
-* [MySQL热点分享Blog-1]		
+* [MySQL热点分享Blog-1]	*(常用工具、常用linux命令)*
 * [mysql索引需要了解的几个注意]	
 * [mysql数据库中的索引有那些、有什么用]	
 * [MySQL中的索引][MySQL中的索引]
