@@ -18,6 +18,19 @@ category: MySQL
 * 主从同步机制
 * MySQL常用工具（几个牛人的博客）
 
+
+todo:
+
+* 定位执行较慢的SQL：
+	* Explain：如何查看执行计划？
+	* 日志文件
+* 主从复制：binlog、redolog
+* 数据库3范式
+
+
+
+
+
 ##前言
 
 
