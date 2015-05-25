@@ -165,6 +165,10 @@ PreapredStatement的用法：
 
 * PreparedStatement，通过set方法设置执行的SQL，代码可读性和可维护性好；
 * PreparedStatement，可防止SQL注入攻击；
+* 预编译，性能好；
+
+
+
 
 
 
@@ -183,6 +187,7 @@ PreapredStatement的用法：
 
 
 
+* [JDBC原理解析][JDBC原理解析] *(系列)*
 * [JDBC Driver for MySQL][JDBC Driver for MySQL]
 * [JDBC Driver for SQL Server][JDBC Driver for SQL Server]
 * [JDBC4简介，JDBC是什么？][JDBC4简介，JDBC是什么？]
@@ -207,6 +212,6 @@ PreapredStatement的用法：
 
 [An Introduction to Java Database (JDBC) Programming]:		http://www.ntu.edu.sg/home/ehchua/programming/java/JDBC_Basic.html#zz-3.1
 [JDBC为什么要使用PreparedStatement而不是Statement]:		http://www.importnew.com/5006.html
-
+[JDBC原理解析]:						http://blog.csdn.net/luanlouis/article/category/2158459
 
 
