@@ -12,6 +12,7 @@ category: MySQL
 * 事务的几个特性/要求：ACID？
 * 隔离级别？
 * MySQL中怎么支持事务的隔离级别的？
+* MySQL中如何修改事务隔离级别？
 
 
 ##事务是什么？
@@ -83,12 +84,12 @@ Tips：
 
 隔离级别，用于表述**并发事务**之间的相互干扰程度，其基于**锁机制**进行并发控制。
 
-###1. 可序列化（Serializable）
+###1. 可序列化 Serializable
 
 实现可序列化要求在`选定对象`上的**读锁和写锁**保持直到事务结束后才能释放。在 SELECT 的查询中使用一个 `WHERE 子句` 来描述一个范围时应该获得一个**“范围锁(range-locks)”**。这种机制可以避免“幻读(phantom reads)”现象。
 
 
-###2. 可重复读（Repeatable read）
+###2. 可重复读 Repeatable read
 
 该级别保证了同一个事务中**多次读取同样的记录**的结果是一致的。
 
@@ -99,7 +100,7 @@ Tips：
 可重复读是 MySQL 的默认事务隔离级别。
 
 
-###3. 读取已提交（Read committed）
+###3. 读取已提交 Read committed
 
 DBMS需要对选定对象的**写锁(write locks)**一直保持到事务结束，但是读锁(read locks)在SELECT操作完成后马上释放（因此“不可重复读”现象可能会发生，见下面描述）。和前一种隔离级别一样，也不要求“范围锁(range-locks)”。
 
@@ -107,7 +108,7 @@ DBMS需要对选定对象的**写锁(write locks)**一直保持到事务结束�
 
 大多数数据库的默认事务隔离级别都是这个。
 
-###4. 未提交读（Read uncommitted）
+###4. 未提交读 Read uncommitted
 
 也称为脏读（dirty read）。
 
@@ -143,14 +144,19 @@ InnoDB 的 MVCC 是通过在每行记录后面保存两个隐藏的列来实现�
 	* 对于原纪录，**删除版本号** = 当前事务的创建版本号
 
 
+##MySQL修改事务隔离级别
 
+
+todo:
+
+* [mysql修改事务隔离级别][mysql修改事务隔离级别]
 
 
 
 ##参考来源
 
 * [MySQL事务隔离级别][MySQL事务隔离级别]
-
+* [mysql修改事务隔离级别][mysql修改事务隔离级别]
 
 
 
@@ -160,8 +166,11 @@ InnoDB 的 MVCC 是通过在每行记录后面保存两个隐藏的列来实现�
 
 
 [NingG]:    http://ningg.github.com  "NingG"
-[MySQL事务隔离级别]:		http://coderbee.net/index.php/db/20141020/1056
 
+
+
+[MySQL事务隔离级别]:		http://coderbee.net/index.php/db/20141020/1056
+[mysql修改事务隔离级别]:	http://blog.itpub.net/195110/viewspace-1080777/
 
 
 

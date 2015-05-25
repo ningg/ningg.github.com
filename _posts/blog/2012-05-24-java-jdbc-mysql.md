@@ -1,9 +1,9 @@
 ---
 layout: post
-title: Java与数据库交互，Statement、PreparedStatement
+title: JDBC，Statement、PreparedStatement
 description: Java操作数据库基本过程，Statement、PreparedStatement之间差异
 published: true
-category: MySQL java
+categories: MySQL java
 ---
 
 
@@ -164,7 +164,7 @@ PreapredStatement的用法：
 总结一下两者之间的差异：
 
 * PreparedStatement，通过set方法设置执行的SQL，代码可读性和可维护性好；
-
+* PreparedStatement，可防止SQL注入攻击；
 
 
 
@@ -190,7 +190,7 @@ PreapredStatement的用法：
 * [jdbc编程基础（一）——jdbc是什么][jdbc编程基础（一）——jdbc是什么]
 * [JDBC常见面试题集锦(一)][JDBC常见面试题集锦(一)]
 * [An Introduction to Java Database (JDBC) Programming][An Introduction to Java Database (JDBC) Programming]
-
+* [JDBC为什么要使用PreparedStatement而不是Statement][JDBC为什么要使用PreparedStatement而不是Statement]
 
 
 
@@ -206,7 +206,7 @@ PreapredStatement的用法：
 
 
 [An Introduction to Java Database (JDBC) Programming]:		http://www.ntu.edu.sg/home/ehchua/programming/java/JDBC_Basic.html#zz-3.1
-
+[JDBC为什么要使用PreparedStatement而不是Statement]:		http://www.importnew.com/5006.html
 
 
 

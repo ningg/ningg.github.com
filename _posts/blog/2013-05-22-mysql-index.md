@@ -25,7 +25,7 @@ todo:
 	* Explain：如何查看执行计划？
 	* 日志文件
 * 主从复制：binlog、redolog
-* 数据库3范式
+* 数据库3范式	OK
 
 
 
@@ -614,6 +614,13 @@ title的选择性不足0.0001（精确值为0.00001579），所以实在没有�
 ##MySQL研究系列文章
 
 * [岭南六少-MySQL][岭南六少-MySQL]
+* [denglt_dba-MySQL][denglt_dba-MySQL]
+* [InfoQ上MySQL系列][InfoQ上MySQL系列]
+* [xifeijian-MySQL][xifeijian-MySQL]
+* 《高性能MySQL》
+
+
+
 
 
 
@@ -637,3 +644,7 @@ title的选择性不足0.0001（精确值为0.00001579），所以实在没有�
 
 
 [岭南六少-MySQL]:		http://blog.chedushi.com/archives/category/mysql
+[denglt_dba-MySQL]:		http://blog.itpub.net/195110/list/1/?cid=166483
+[InfoQ上MySQL系列]:		http://www.infoq.com/cn/mysql/
+[xifeijian-MySQL]:		http://blog.csdn.net/xifeijian/article/category/1430276/1
+
