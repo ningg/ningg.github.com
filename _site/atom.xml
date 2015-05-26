@@ -4,13 +4,51 @@
    <title>ningg.top</title>
    <link href="http://ningg.top" rel="self" type="application/atom+xml"/>
    <link href="http://ningg.top" rel="alternate" type="text/html" />
-   <updated>2015-05-25T00:37:05+08:00</updated>
+   <updated>2015-05-27T00:42:19+08:00</updated>
    <id>http://ningg.top</id>
    <author>
      <name></name>
      <email></email>
    </author>
 
+   
+   <entry>
+     <title>JS实现全屏滚动</title>
+     <link href="http://ningg.github.com/js-full-page"/>
+     <updated>2015-05-26T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/js-full-page</id>
+     <content type="html">&lt;h2 id=&quot;section&quot;&gt;示例效果&lt;/h2&gt;
+
+&lt;p&gt;示例效果如下：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.qiniu.com/&quot;&gt;青牛-MainPage&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.mi.com/shouhuan/#02&quot;&gt;小米手环-MainPage&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;jquery&quot;&gt;jQuery全屏滚动插件详解&lt;/h2&gt;
+
+&lt;p&gt;几点：&lt;/p&gt;
+
+&lt;p&gt;在线演示以及详细介绍：&lt;a href=&quot;http://www.dowebok.com/77.html&quot;&gt;jQuery全屏滚动插件fullPage.js&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;todo：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;添加GitHub上工程&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;参考来源&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://github.com/alvarotrigo/fullPage.js&quot;&gt;fullPage.js(GitHub)&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.dowebok.com/77.html&quot;&gt;jQuery全屏滚动插件fullPage.js&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.qiniu.com/&quot;&gt;青牛-MainPage&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.mi.com/shouhuan/#02&quot;&gt;小米手环-MainPage&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+   </entry>
    
    <entry>
      <title>Be Kind</title>
@@ -940,77 +978,6 @@ curl -XGET &#39;http://168.7.1.69:9200/kafka-index/status/_count?pretty&#39;
 
 &lt;ul&gt;
   &lt;li&gt;&lt;a href=&quot;https://github.com/mariamhakobyan/elasticsearch-river-kafka&quot;&gt;ElasticSearch river kafka&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>Kafka、ElasticSearch、Kibana实现日志分析平台</title>
-     <link href="http://ningg.github.com/elasticsearch-kibana"/>
-     <updated>2015-03-06T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/elasticsearch-kibana</id>
-     <content type="html">&lt;h2 id=&quot;section&quot;&gt;基本思路&lt;/h2&gt;
-
-&lt;p&gt;几点：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;对知识盲区清理，形成基本轮廓，先理念、后操作：
-    &lt;ul&gt;
-      &lt;li&gt;ElasticSearch&lt;/li&gt;
-      &lt;li&gt;Kibana&lt;/li&gt;
-      &lt;li&gt;Logstash：TODO&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;敲定路线图
-    &lt;ul&gt;
-      &lt;li&gt;现有资源和条件&lt;/li&gt;
-      &lt;li&gt;设立目标&lt;/li&gt;
-      &lt;li&gt;框架细化&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;反复测试、开阔视野
-    &lt;ul&gt;
-      &lt;li&gt;当前demo的缺陷&lt;/li&gt;
-      &lt;li&gt;前人的做法&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section-1&quot;&gt;路线图&lt;/h2&gt;
-
-&lt;p&gt;具体步骤，几点：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Kafka中数据送入ElasticSearch
-    &lt;ul&gt;
-      &lt;li&gt;Flume从Kafka中取数&lt;/li&gt;
-      &lt;li&gt;Flume将取来的数，送入ElasticSearch&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Kibana图形化展示ElasticSearch中的数据&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section-2&quot;&gt;具体操作&lt;/h2&gt;
-
-&lt;h3 id=&quot;flumekafka&quot;&gt;Flume从Kafka中读取数据&lt;/h3&gt;
-
-&lt;p&gt;当前从Jira上得知，Flume 1.6.0 中将包含Flume-ng-kafka-source，但是，当前Flume 1.6.0版本并没有发布，怎么办？两条路：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;github上别人开源的Flume-ng-kafka-source&lt;/li&gt;
-  &lt;li&gt;flume 1.6.0分支的代码中flume-ng-kafka-source&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;初步选定Flume 1.6.0分支中的flume-ng-kafka-source部分，具体步骤，参考：&lt;a href=&quot;/flume-kafka-source-elasticsearch-sink&quot;&gt;Flume实现将Kafka中数据传入ElasticSearch中&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;section-3&quot;&gt;参考来源&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/medcl/elasticsearch-rtf&quot;&gt;ElasticSearch中文发行版&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://fuxiaopang.gitbooks.io/learnelasticsearch/&quot;&gt;ElasticSearche权威指南&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://shgy.gitbooks.io/mastering-elasticsearch/&quot;&gt;精通 ElasticSearch&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://kibana.logstash.es/&quot;&gt;Kibana中文指南&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 </content>

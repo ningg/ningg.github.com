@@ -78,6 +78,8 @@ B+树：
 
 一般在数据库系统或文件系统中使用的B+Tree结构都在经典B+Tree的基础上进行了优化，增加了顺序访问指针。在B+Tree的每个叶子节点增加一个指向相邻叶子节点的指针，就形成了带有顺序访问指针的B+Tree。做这个优化的目的是为了提高区间访问的性能，例如图4中如果要查询key为从18到49的所有数据记录，当找到18后，只需顺着节点和指针顺序遍历就可以一次性访问到所有数据节点，极大提到了区间查询效率。
 
+更多参考：[B树、B-树、B+树、B*树详解]
+
 这一节对B-Tree和B+Tree进行了一个简单的介绍，下一节结合存储器存取原理介绍为什么目前B+Tree是数据库系统实现索引的首选数据结构。
 
 
@@ -604,7 +606,7 @@ title的选择性不足0.0001（精确值为0.00001579），所以实在没有�
 * [B-树与mysql索引][B-树与mysql索引]
 * [Hash索引与B-Tree索引 介绍及区别]
 * [mysql 索引分类][mysql 索引分类]
-
+* [B树、B-树、B+树、B*树详解][B树、B-树、B+树、B*树详解]
 
 
 
@@ -641,7 +643,7 @@ title的选择性不足0.0001（精确值为0.00001579），所以实在没有�
 [Hash索引与B-Tree索引 介绍及区别]:			http://blog.sina.com.cn/s/blog_6776884e0100pko1.html
 
 [mysql 索引分类]:							http://www.cnblogs.com/jiaxiaoai/archive/2011/07/26/2117385.html
-
+[B树、B-树、B+树、B*树详解]:				http://www.blogjava.net/supercrsky/articles/185167.html
 
 
 [岭南六少-MySQL]:		http://blog.chedushi.com/archives/category/mysql
