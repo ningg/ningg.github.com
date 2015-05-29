@@ -40,6 +40,8 @@ category: MySQL
 * 创建id的时候会给主键 、unsigned 、auto_increment  然后其他表与该表的id字段进行连接，注意最大值为 4294967295（42亿）
 
 
+int类型为4字节，那`int(5)`的含义是什么？实际上`int(5)`与字段值的范围无关，仅表示显示效果。参考：[详解mysql int类型的长度值问题]。
+
 ##date、datetime、timestamp
 
 几点：
@@ -94,7 +96,7 @@ todo：
 
 
 
-
+[详解mysql int类型的长度值问题]:				http://www.2cto.com/database/201208/150865.html
 
 
 

@@ -97,6 +97,7 @@ category: javascript
 
 上述现象称为：`函数声明提升`，参考[MDN - 函数声明提升][MDN - 函数声明提升]
 
+也可以参考之前的博文：[jQuery常用操作][jQuery常用操作]
 
 ###JavaScript语言基本语法
 
@@ -113,7 +114,18 @@ category: javascript
 	var interval_int = Math.floor(interval);//向下取整
 	var interval_int2 = Math.ceil(interval);//向上取整
 	
+###判断变量是否为空
 
+判断变量`startDay`的值，是否为空：
+
+	if(!startDay){
+		startDay = endDay;
+	}
+
+
+更多内容参考：
+
+* [如何判断Javascript对象是否存在][如何判断Javascript对象是否存在]
 
 
 
@@ -138,6 +150,11 @@ category: javascript
 * [JavaScript可放置的位置][JavaScript可放置的位置]
 * [MDN - JavaScript中clearInterval(en)][MDN - JavaScript中clearInterval(en)]
 * [MDN - JavaScript中clearInterval(zh)][MDN - JavaScript中clearInterval(zh)]
+* [jQuery常用操作][jQuery常用操作]
+* [如何判断Javascript对象是否存在]
+
+
+
 
 
 
@@ -159,5 +176,5 @@ category: javascript
 [“流式”前端构建工具——gulp.js 简介]:			http://segmentfault.com/a/1190000000435599
 
 
-
-
+[jQuery常用操作]:								http://ningg.top/jquery-usage/
+[如何判断Javascript对象是否存在]:				http://www.ruanyifeng.com/blog/2011/05/how_to_judge_the_existence_of_a_global_object_in_javascript.html
