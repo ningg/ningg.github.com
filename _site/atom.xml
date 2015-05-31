@@ -4,13 +4,70 @@
    <title>ningg.top</title>
    <link href="http://ningg.top" rel="self" type="application/atom+xml"/>
    <link href="http://ningg.top" rel="alternate" type="text/html" />
-   <updated>2015-05-27T00:42:19+08:00</updated>
+   <updated>2015-05-30T18:46:15+08:00</updated>
    <id>http://ningg.top</id>
    <author>
      <name></name>
      <email></email>
    </author>
 
+   
+   <entry>
+     <title>存在感</title>
+     <link href="http://ningg.github.com/"/>
+     <updated>2015-06-01T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/</id>
+     <content type="html">
+</content>
+   </entry>
+   
+   <entry>
+     <title>电影《1984》--观感</title>
+     <link href="http://ningg.github.com/movie-1984"/>
+     <updated>2015-05-29T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/movie-1984</id>
+     <content type="html">&lt;p&gt;电影：&lt;a href=&quot;http://movie.douban.com/subject/1949570/&quot;&gt;1984 Nineteen Eighty-Four&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;其中我印象最深的还是爱情，源自人性深处的两情相悦，挺美好的。&lt;/p&gt;
+
+&lt;p&gt;说点思维方面的，其中提到：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;He who controls the past controls the future. 
+He who controls the present controls the past.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;这个挺有意思，乍一看，没明白，仔细一想，卧槽，好险，警惕呀，别被别人设计了，自己还不清楚；俗话说就是：被别人卖了，还帮人数钱。下面简单说一下自己的理解：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;控制当下的人，控制过去：构造过去，选择性的展示过去；&lt;/li&gt;
+  &lt;li&gt;控制过去的人，控制未来：基于看到的过去，在通用的推理逻辑之下，去准备未来，怎么准备未来，就造就相应的未来；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;事实、逻辑推理、结论&lt;/h2&gt;
+
+&lt;p&gt;人的思考过程：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;事实是什么？&lt;/li&gt;
+  &lt;li&gt;基于已知的事实，进行通用的逻辑推理，得出结论。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;大众的逻辑差异不大&lt;em&gt;（当然天才除外）&lt;/em&gt;，因此，关键事实是什么，就显得很重要。&lt;/p&gt;
+
+&lt;p&gt;新的问题来了：怎么才能获得真实的关键的事实？从最初的信息源头去获取，而避免依赖二手信息，这样就可以获取真实的事实。那又如何才能获取关键事实呢？那就只能靠基于真实事实的大量研究了，投入多了，就能发掘出关键的事实。&lt;/p&gt;
+
+&lt;h2 id=&quot;section-1&quot;&gt;政治运动&lt;/h2&gt;
+
+&lt;p&gt;政治运动，对思想的禁锢，会毁灭人性和压制社会效率，人都是处于历史浪潮之中的，如果要发生政治运动，也不是一人、一己之力所能改变的，假使如果有一天不小心陷入政治运动的历史浪潮之中，该如何面对呢？&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;如果还有思想自由的地方，那自然是首选；&lt;/li&gt;
+  &lt;li&gt;如果因为故土亲人，无法离去，那不要谈论政治，潜心做好一门技术工作，哪怕是耕地种粮、养鸡放羊、编程调试，当然，如果能有机会做高科技，那更好了，高科技是未来；&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+   </entry>
    
    <entry>
      <title>JS实现全屏滚动</title>
@@ -267,7 +324,7 @@
 &lt;p&gt;有时候心情很低落，弄一个压箱底的小故事吧：&lt;/p&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;光武帝刘秀打仗的时候，有一次吃了败仗，夜里去巡视营房，看看那些战败的士兵是什么心态。结果一看，这个帐篷里几个人，都是满脸眼泪，哭哭啼啼地写家书的、写情书的。跑到另一个帐篷里一看，几人喝的醉醺醺的，也是满脸的眼泪，抱在一块又唱又哭，丑态百出。走着走着，发现一路都是这样，终于，在走到一个帐篷，往里一看，里面坐着一个年轻的将军。他拿着一块破布，不停的擦自己的武器和盔甲，擦的雪亮雪亮。脸上的表情，既不忧伤，也不沮丧，也不亢奋，很平静，就坐在那里擦武器，擦得雪亮雪亮的，准备下一场战斗。刘秀很惊讶，说：“这小子肯定能成事。”后来这小子真的成了事，他就是东汉的大将军吴汉。&lt;/p&gt;
+  &lt;p&gt;光武帝刘秀打仗的时候，有一次吃了败仗，夜里去巡视营房，看看那些战败的士兵是什么心态。结果一看，这个帐篷里几个人，都是满脸眼泪，哭哭啼啼地写家书的、写情书的。跑到另一个帐篷里一看，几人喝的醉醺醺的，也是满脸的眼泪，抱在一块又唱又哭，丑态百出。走着走着，发现一路都是这样，终于，在走到一个帐篷，往里一看，里面坐着一个年轻的将军。他拿着一块破布，不停的擦自己的武器和盔甲，擦的雪亮雪亮。脸上的表情，既不忧伤，也不沮丧，也不亢奋，很平静，就坐在那里擦武器，擦得雪亮雪亮的，准备下一场战斗。刘秀很惊讶，说：“这小子肯定能成事。”后来这小子真的成了事，他就是东汉的大将军&lt;a href=&quot;http://baike.baidu.com/subview/53675/5136039.htm#viewPageContent&quot;&gt;吴汉&lt;/a&gt;。&lt;/p&gt;
 &lt;/blockquote&gt;
 
 &lt;blockquote&gt;
@@ -705,279 +762,6 @@ Caused by: java.nio.file.FileSystemException: /home/storm/es/elasticsearch-1.4.4
   &lt;li&gt;&lt;a href=&quot;https://github.com/elastic/elasticsearch&quot;&gt;ElasticSearch(Github)&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;https://www.gitbook.com/book/looly/elasticsearch-the-definitive-guide-cn/details&quot;&gt;gitbook：Elasticsearch权威指南（中文版）&lt;/a&gt;&lt;/li&gt;
   &lt;li&gt;&lt;a href=&quot;http://learnes.net/index.html&quot;&gt;gitbook：Elasticsearch 权威指南&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>Flume实现将Kafka中数据传入ElasticSearch中</title>
-     <link href="http://ningg.github.com/flume-kafka-source-elasticsearch-sink"/>
-     <updated>2015-03-11T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/flume-kafka-source-elasticsearch-sink</id>
-     <content type="html">&lt;p&gt;目标：利用Flume Agent实现，将Kafka中数据取出，送入ElasticSearch中。&lt;/p&gt;
-
-&lt;p&gt;分析：Flume Agent需要的工作，两点：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Flume Kafka Source：负责从Kafka中读取数据；&lt;/li&gt;
-  &lt;li&gt;Flume ElasticSearch Sink：负责将数据送入ElasticSearch；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;当前Flume 1.5.2已经包含了ElasticSearchSink，因此，需要定制实现Flume Kafka Source即可。当前从Jira上得知，Flume 1.6.0 中将包含Flume-ng-kafka-source，但是，当前Flume 1.6.0版本并没有发布，怎么办？两条路：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;github上别人开源的Flume-ng-kafka-source&lt;/li&gt;
-  &lt;li&gt;flume 1.6.0分支的代码中flume-ng-kafka-source&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;初步选定Flume 1.6.0分支中的flume-ng-kafka-source部分，这部分代码已经包含在&lt;a href=&quot;https://github.com/ningg/flume-ng-extends-source&quot;&gt;flume-ng-extends-source&lt;/a&gt;。&lt;/p&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;编译代码&lt;/h2&gt;
-
-&lt;p&gt;执行命令：&lt;code&gt;mvn clean package&lt;/code&gt;得到jar包：&lt;code&gt;flume-ng-extends-source-x.x.x.jar&lt;/code&gt;。&lt;/p&gt;
-
-&lt;h2 id=&quot;section-1&quot;&gt;安装插件&lt;/h2&gt;
-
-&lt;p&gt;两类jar包：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;lib中jar包
-    &lt;ul&gt;
-      &lt;li&gt;&lt;code&gt;flume-ng-extends-source-x.x.x.jar&lt;/code&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;libext中jar包
-    &lt;ul&gt;
-      &lt;li&gt;&lt;code&gt;kafka_2.9.2-0.8.2.0.jar&lt;/code&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;code&gt;kafka-clients-0.8.2.0.jar&lt;/code&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;code&gt;metrics-core-2.2.0.jar&lt;/code&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;code&gt;scala-library-2.9.2.jar&lt;/code&gt;&lt;/li&gt;
-      &lt;li&gt;&lt;code&gt;zkclient-0.3.jar&lt;/code&gt;&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;&lt;strong&gt;疑问&lt;/strong&gt;：maven打包时，如何将当前jar包以及其依赖包都导出？
-参考&lt;a href=&quot;https://github.com/thilinamb/flume-ng-kafka-sink&quot;&gt;thilinamb flume kafka sink&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;section-2&quot;&gt;配置&lt;/h2&gt;
-
-&lt;p&gt;在properties文件中进行配置，配置样本文件：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;# Kafka Source For retrieve from Kafka cluster.
-agent.sources.seqGenSrc.type = com.github.ningg.flume.source.KafkaSource
-#agent.sources.seqGenSrc.batchSize = 2
-agent.sources.seqGenSrc.batchDurationMillis = 1000
-agent.sources.seqGenSrc.topic = good
-agent.sources.seqGenSrc.zookeeperConnect = 168.7.2.164:2181,168.7.2.165:2181,168.7.2.166:2181
-agent.sources.seqGenSrc.groupId = elasticsearch
-#agent.sources.seqGenSrc.kafka.consumer.timeout.ms = 1000
-#agent.sources.seqGenSrc.kafka.auto.commit.enable = false
-
-# ElasticSearchSink for ElasticSearch.
-agent.sinks.loggerSink.type = org.apache.flume.sink.elasticsearch.ElasticSearchSink
-agent.sinks.loggerSink.indexName = flume
-agent.sinks.loggerSink.indexType = log
-agent.sinks.loggerSink.batchSize = 100
-#agent.sinks.loggerSink.ttl = 5
-agent.sinks.loggerSink.client = transport
-agent.sinks.loggerSink.hostNames = 168.7.1.69:9300
-#agent.sinks.loggerSink.client = rest
-#agent.sinks.loggerSink.hostNames = 168.7.1.69:9200
-#agent.sinks.loggerSink.serializer = org.apache.flume.sink.elasticsearch.ElasticSearchLogStashEventSerializer
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&quot;section-3&quot;&gt;定制&lt;/h2&gt;
-
-&lt;p&gt;目标：定制ElasticSearchSink的serializer。&lt;/p&gt;
-
-&lt;p&gt;现象：设置ElasticSearchSink的参数&lt;code&gt;batchSize=1000&lt;/code&gt;后，当前ES中当天的Index中出现了&lt;code&gt;120,000&lt;/code&gt;+的记录，而此时，原有平台发现，当前产生的数据只有&lt;code&gt;20,000&lt;/code&gt;，因此，猜测KafkaSource将Kafka集群中指定topic下的所有数据都传入了ES中。&lt;/p&gt;
-
-&lt;p&gt;几点：&lt;/p&gt;
-
-&lt;p&gt;ElasticSearchSink中新的配置参数：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;indexNameBuilder=org.apache.flume.sink.elasticsearch.TimeBasedIndexNameBuilder
-    &lt;ul&gt;
-      &lt;li&gt;上述将以&lt;code&gt;indexPrefix&lt;/code&gt;-&lt;code&gt;yyyy-MM-dd&lt;/code&gt;方式，每天产生一个Index；&lt;/li&gt;
-      &lt;li&gt;其他选项：org.apache.flume.sink.elasticsearch.SimpleIndexNameBuilder，其直接以设定的&lt;code&gt;indexPrefix&lt;/code&gt;（实际就是设置的&lt;code&gt;indexName&lt;/code&gt;）&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;dateFormat=&lt;code&gt;yyyy-MM-dd&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;timeZONE=&lt;code&gt;Etc/UTC&lt;/code&gt;&lt;/li&gt;
-  &lt;li&gt;serializer=org.apache.flume.sink.elasticsearch.ElasticSearchLogStashEventSerializer
-    &lt;ul&gt;
-      &lt;li&gt;上述选项，将 flume event 的 Header 中 key-value 添加到一个新增的字段&lt;code&gt;@fields&lt;/code&gt;中；&lt;/li&gt;
-      &lt;li&gt;其他选项：org.apache.flume.sink.elasticsearch.ElasticSearchDynamicSerializer，其直接将body、header构造为一个JSON字符串，添加到ElasticSearch中。&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section-4&quot;&gt;重启&lt;/h2&gt;
-
-&lt;p&gt;如果终止Flume Agent，然后重启。疑问：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Kafka中的数据，是否会重复发送到ElasticSearch？&lt;/li&gt;
-  &lt;li&gt;Kafka中的数据，是否有遗漏，没有发送到ElasticSearch？&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;思考，几个情况：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;Kafka对应的Consumer有offset&lt;/li&gt;
-  &lt;li&gt;Kafka中数据，周期性的清理，例如默认3天&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;p&gt;需要详细思考Flume Agent的重启场景。&lt;/p&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>ElasticSearch下配置Kafka插件</title>
-     <link href="http://ningg.github.com/elasticsearch-kafka-plugin"/>
-     <updated>2015-03-10T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/elasticsearch-kafka-plugin</id>
-     <content type="html">&lt;p&gt;做个记录：ElasticSearch下如何添加、删除插件。做此记录的初衷有两个：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;记录，作为备忘；&lt;/li&gt;
-  &lt;li&gt;记录初稿，今后操作时，方便基于此的改进和积累；&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;组件版本&lt;/h2&gt;
-
-&lt;table&gt;
-  &lt;thead&gt;
-    &lt;tr&gt;
-      &lt;th&gt;组件&lt;/th&gt;
-      &lt;th&gt;版本&lt;/th&gt;
-      &lt;th&gt;链接&lt;/th&gt;
-    &lt;/tr&gt;
-  &lt;/thead&gt;
-  &lt;tbody&gt;
-    &lt;tr&gt;
-      &lt;td&gt;ElasticSearch&lt;/td&gt;
-      &lt;td&gt;&lt;code&gt;1.4.4&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;a href=&quot;http://www.elasticsearch.org/&quot;&gt;参考链接&lt;/a&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;Kafka&lt;/td&gt;
-      &lt;td&gt;&lt;code&gt;0.8.2.0&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;a href=&quot;http://kafka.apache.org/&quot;&gt;参考链接&lt;/a&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;ElasticSearch river kafka&lt;/td&gt;
-      &lt;td&gt;&lt;code&gt;1.2.1&lt;/code&gt;&lt;/td&gt;
-      &lt;td&gt;&lt;a href=&quot;https://github.com/mariamhakobyan/elasticsearch-river-kafka&quot;&gt;参考链接&lt;/a&gt;&lt;/td&gt;
-    &lt;/tr&gt;
-    &lt;tr&gt;
-      &lt;td&gt;操作系统&lt;/td&gt;
-      &lt;td&gt;centOS 6.3&lt;/td&gt;
-      &lt;td&gt; &lt;/td&gt;
-    &lt;/tr&gt;
-  &lt;/tbody&gt;
-&lt;/table&gt;
-
-&lt;p&gt;备注：已经folk了插件&lt;a href=&quot;https://github.com/ningg/elasticsearch-river-kafka&quot;&gt;ElasticSearch river kafka&lt;/a&gt;，并将其中ElasticSearch、Kafka对应版本好进行升级，本地&lt;code&gt;mvn clean install&lt;/code&gt;编译之后，用于进行插件的安装。&lt;/p&gt;
-
-&lt;p&gt;执行&lt;code&gt;mvn clean install&lt;/code&gt;命令时，提示：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;$mvn clean insatll
-...
-[INFO] --- maven-failsafe-plugin:2.14:integration-test (default) @ elasticsearch-river-kafka ---
-[INFO] No tests to run.
-[WARNING] File encoding has not been set, using platform encoding GBK, i.e. build is platform dependent!
-...
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;&lt;strong&gt;解决方案&lt;/strong&gt;：在&lt;code&gt;pom.xml&lt;/code&gt;中&lt;code&gt;failsafe&lt;/code&gt;插件下，设定编码方式，具体：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;&amp;lt;plugin&amp;gt;
-	&amp;lt;artifactId&amp;gt;maven-failsafe-plugin&amp;lt;/artifactId&amp;gt;
-	&amp;lt;version&amp;gt;${version.maven.failsafe.plugin}&amp;lt;/version&amp;gt;
-	&amp;lt;configuration&amp;gt;
-		&amp;lt;encoding&amp;gt;UTF-8&amp;lt;/encoding&amp;gt;
-	&amp;lt;/configuration&amp;gt;
-	&amp;lt;executions&amp;gt;
-		&amp;lt;execution&amp;gt;
-			&amp;lt;goals&amp;gt;
-				&amp;lt;goal&amp;gt;integration-test&amp;lt;/goal&amp;gt;
-				&amp;lt;goal&amp;gt;verify&amp;lt;/goal&amp;gt;
-			&amp;lt;/goals&amp;gt;
-		&amp;lt;/execution&amp;gt;
-	&amp;lt;/executions&amp;gt;
-&amp;lt;/plugin&amp;gt;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;h2 id=&quot;section-1&quot;&gt;添加插件&lt;/h2&gt;
-
-&lt;p&gt;目标：在ElasticSearch下添加Kafka插件。&lt;/p&gt;
-
-&lt;p&gt;第一步：编译插件：&lt;code&gt;mvn clean install&lt;/code&gt;，得到&lt;code&gt;$PROJECT-PATH/target/elasticsearch-river-kafka-1.2.1-SNAPSHOT-plugin.zip&lt;/code&gt;文件。&lt;/p&gt;
-
-&lt;p&gt;第二步：安装插件：将上述&lt;code&gt;elasticsearch-river-kafka-1.2.1-SNAPSHOT-plugin.zip&lt;/code&gt;文件上传到ElasticSearch运行的服务器上&lt;code&gt;/home/es&lt;/code&gt;目录下，执行下述命令，安装插件：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;cd $ELASTICSEARCH_HOME
-.bin/plugin --install kafka-river --url file:////home/es/elasticsearch-river-kafka-1.2.1-SNAPSHOT-plugin.zip
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;第三步：配置Kafka插件，详细配置参数，参考&lt;a href=&quot;https://github.com/mariamhakobyan/elasticsearch-river-kafka&quot;&gt;ElasticSearch river kafka&lt;/a&gt;，下面只贴一下我自己的配置：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;curl -XPUT &#39;http://168.7.1.69:9200/_river/kafka-river/_meta&#39; -d &#39;
-{  
-  &quot;type&quot;:&quot;kafka&quot;,
-  &quot;kafka&quot;:{
-	 &quot;zookeeper.connect&quot;:&quot;168.7.2.164:2181,168.7.2.165:2181,168.7.2.166:2181&quot;,
-	 &quot;zookeeper.connection.timeout.ms&quot;:10000,
-	 &quot;topic&quot;:&quot;good&quot;,
-	 &quot;message.type&quot;: &quot;json&quot;
-  },
-  &quot;index&quot;:{
-	 &quot;index&quot;:&quot;kafka-index&quot;,
-	 &quot;type&quot;:&quot;status&quot;,
-	 &quot;bulk.size&quot;:100,
-	 &quot;concurrent.requests&quot;:1,
-	 &quot;action.type&quot;:&quot;index&quot;
-  }
-}&#39;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;第四步：重新启动ElasticSearch&lt;/p&gt;
-
-&lt;p&gt;第五步：查询Kafka数据是否已经传送至ElasticSearch，执行命令如下：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;curl -XGET &#39;http://168.7.1.69:9200/kafka-index/status/_search?pretty&#39;
-// 或者 统计记录条数
-curl -XGET &#39;http://168.7.1.69:9200/kafka-index/status/_count?pretty&#39;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;注：参考自&lt;a href=&quot;https://github.com/mariamhakobyan/elasticsearch-river-kafka&quot;&gt;ElasticSearch river kafka&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;section-2&quot;&gt;删除插件&lt;/h2&gt;
-
-&lt;p&gt;第一步，通过rest接口，删除，执行命令：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;curl -XDELETE &#39;http://168.7.1.69:9200/_river/kafka-river/&#39;
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;第二步，通过plugin命令删除，具体执行命令：&lt;/p&gt;
-
-&lt;pre&gt;&lt;code&gt;cd $ELASTICSEARCH_HOME
-.bin/plugin --remove kafka-river
-&lt;/code&gt;&lt;/pre&gt;
-
-&lt;p&gt;第三步，重启ElasticSearch。&lt;/p&gt;
-
-&lt;p&gt;注：参考自&lt;a href=&quot;https://github.com/mariamhakobyan/elasticsearch-river-kafka&quot;&gt;ElasticSearch river kafka&lt;/a&gt;&lt;/p&gt;
-
-&lt;h2 id=&quot;section-3&quot;&gt;参考来源&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;https://github.com/mariamhakobyan/elasticsearch-river-kafka&quot;&gt;ElasticSearch river kafka&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 </content>
