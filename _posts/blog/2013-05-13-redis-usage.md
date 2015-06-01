@@ -122,7 +122,7 @@ category: redis
 
 
 
-##Redis基本结构
+##Redis基本操作
 
 几点：
 
@@ -144,6 +144,29 @@ Redis是数据库，数据库下面会包含具体的数据库，`select 3`：�
 Tips：
 
 > 通过`redis-cli`进入命令行交互环境之后，输入的`select 3`以及`keys *`等命令，**不要使用`;`结尾，否则出错**。
+
+###查询Redis的版本
+
+选项`-v`，具体如下：
+
+	$ redis-server -v
+	Redis server v=3.0.1 sha=00000000:0 malloc=jemalloc-3.6.0 bits=64 build=a1a7bc64c1d714b4
+	$ redis-cli -v
+	redis-cli 3.0.1
+
+思考：如下几个命令的详细用法？
+
+* `redis-benchmark`
+* `redis-check-aof`   
+* `redis-check-dump`  
+* `redis-cli` 
+* `redis-sentinel`
+* `redis-server`
+
+
+
+
+
 
 ##Redis中操作数据-CRUD
 
