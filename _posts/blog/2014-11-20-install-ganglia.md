@@ -2,7 +2,7 @@
 layout: post
 title: Ganglia简介与安装
 description: 系统监控
-categories: ganglia linux ops
+categories: ganglia linux
 ---
 
 

@@ -3,7 +3,7 @@ layout: post
 title: 数据库中主键、外键
 description: 主键约束、外键的作用，外键可以为null吗？
 published: true
-category: database
+category: MySQL
 ---
 
 

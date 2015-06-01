@@ -3,7 +3,7 @@ layout: post
 title: 想和自己谈一谈
 description: 不时会跳出自身，来看待自己这个人，会想这个人是谁？他要做什么？应该怎么做？索性，今天就谈一谈
 published: false
-category: personal think
+category: blog
 ---
 
 

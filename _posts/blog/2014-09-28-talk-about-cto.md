@@ -2,7 +2,7 @@
 layout: post
 title: CTO这点事
 description: 技术有前瞻性，对产业格局有判断，对管理有心得，情商还不能低
-categories: cto architect
+categories: blog
 ---
 
 > 题记：本文转载自caoz，原文地址：[CTO这点事](http://zhuanlan.zhihu.com/iamcaoz/19856992)

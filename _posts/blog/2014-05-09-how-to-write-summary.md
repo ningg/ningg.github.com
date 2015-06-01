@@ -2,7 +2,7 @@
 layout: post
 title: 关于整理笔记的小结
 description: 问题解决之后，解决问题的关键步骤、思路，要整理成文档的，那如何整理笔记？
-category: personal think
+category: blog
 ---
 
 ##疑惑
