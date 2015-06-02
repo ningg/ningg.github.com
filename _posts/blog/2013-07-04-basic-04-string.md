@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 字符串 -- 替换空格
+title: 字符串--替换空格
 description: 将字符串中指定字符，进行替换
 published: true
 category: CS basic
