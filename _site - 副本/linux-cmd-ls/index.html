@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html xmlns:wb="http://open.weibo.com/wb">
+<head>
+    <!--   Author: NingG   -->
+    <meta charset="utf-8" />
+	<meta property="wb:webmaster" content="7ea7f3d5f3edad6a" />
+    <title>Linux下查看文件、统计文件行数 | ningg.top</title>
+    <meta name="author" content="NingG" />
+    <meta name="renderer" content="webkit">
+    <meta name="description" content=" 简要梳理一下，几种场景下，ls命令和wc命令的用法  " />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+    <link rel="stylesheet" href="/css/default.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="" />
+	
+    <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+	<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+	
+    <div class="home-menu">
+        <div class="home-icon-con">
+            <a class="home-menu-icon" href="/">NingG</a>
+            <a class="home-follow" href="#" title="Contact Me">+</a>
+        </div>
+        <div class="home-contact">
+            <a href="http://weibo.com/ggningg/" target="_blank" style="margin-left:-5px;"><img src="http://www.weibo.com/favicon.ico" alt="" width="25"/></a>
+            <a href="http://www.douban.com/people/ggningg/" target="_blank" style="text-align:center;"><img src="http://www.douban.com/favicon.ico" alt="" width="22"/></a>
+			<a href="http://github.com/ningg" alt="" target="_blank" style="text-align:right;"><img src="/images/icon-cube-smaller.png" width="22"/></a>
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="/js/prettify/prettify.css" />
+<style type="text/css">
+    body { background:#e8e8e8; }
+    @media screen and (max-width: 750px){
+        body { background:#fff; }
+    }
+    @media screen and (max-width: 1020px){
+        body { background:#fff; }
+    }
+</style>
+
+<div id="content">
+    <div class="entry">
+        <h1 class="entry-title"><a href="/linux-cmd-ls" title="Linux下查看文件、统计文件行数">Linux下查看文件、统计文件行数</a></h1>
+        <p class="entry-date">2015-01-29</p>
+        <h2 id="ls">查看文件基本信息：ls命令</h2>
+
+<h3 id="section">按文件修改时间排序</h3>
+
+<p>有时要查询最近改动的文件，通过<code>ls -tr [dir]</code>命令即可实现查询，具体：</p>
+
+<pre><code># -t: sort by modification time
+# -r: reverse order while sorting
+ls -tr .
+</code></pre>
+
+<h3 id="section-1">设置查询结果配色</h3>
+
+<p>有时，希望区分ls查询的结果，可执行文件、文件、文件夹，为方便阅读，现实不同的颜色，具体命令：</p>
+
+<pre><code># --color= 
+ls --color=auto .
+
+# 可选参数：always，never，auto；
+# 建议使用：--color=auto
+[storm@cib02167 tmp]$ ls -al --color=default
+ls: invalid argument `default' for `--color'
+Valid arguments are:
+  - `always', `yes', `force'
+  - `never', `no', `none'
+  - `auto', `tty', `if-tty'
+Try `ls --help' for more information.
+</code></pre>
+
+<h3 id="section-2">通配符查询文件</h3>
+
+<p>通过利用Linux下命令的通配符（Wildcards），可以只查看满足一定规则的文件：</p>
+
+<pre><code># 查询以'.'开头的所有文件夹，
+# 如果为文件夹，通过'-d'配置只显示文件夹整体情况，不显示文件夹的内容
+ls -dl .*
+</code></pre>
+
+<p><strong>备注</strong>：通配符（Wildcards）与正则表达式（Regular Expression）不是一个概念，说两点：</p>
+
+<ul>
+  <li>之前专门写过一篇[正则表达式的文章]；</li>
+  <li>准备单独再写一篇[通配符的文章];</li>
+</ul>
+
+<h3 id="section-3">查看文件大小</h3>
+
+<pre><code># -h:  with -l, print sizes in human readable format (e.g., 1K 234M 2G)
+ls -lh [file]
+</code></pre>
+
+<h3 id="section-4">查看文件的子目录</h3>
+
+<pre><code># -R: --recursive, list subdirectories recursively
+ls -lR [file] | less
+</code></pre>
+
+<h3 id="section-5">只显示文件或目录</h3>
+
+<p>选项<code>-F</code>：–classify, append indicator (one of <code>*/=&gt;@|</code>) to entries；（注：不要与<code>-l</code>配合使用）；其中：</p>
+
+<ul>
+  <li><code>/</code>，目录；</li>
+  <li><code>@</code>，链接文件；</li>
+  <li><code>*</code>，可执行文件；</li>
+</ul>
+
+<p>具体操作如下：</p>
+
+<pre><code># 只显示目录
+ls -F | grep "/$"
+ls -al | grep "^d"
+
+# 只显示文件（不包含link文件）
+ls -al | grep "^-"
+
+# 统计文件个数
+ls -al | grep "^-" | wc -l
+</code></pre>
+
+<h2 id="findxargswc">统计文件的行数：find、xargs和wc命令</h2>
+
+<p>针对<code>find</code>、<code>xargs</code>和<code>wc</code>命令的简介：</p>
+
+<ul>
+  <li><code>find</code>：</li>
+  <li><code>xargs</code>：</li>
+  <li><code>wc</code>：	</li>
+</ul>
+
+<p>（todo：Find命令详解、xargs命令详解、wc命令详解，重点关注其manual手册中内容，借鉴别人的理解）</p>
+
+<h3 id="demojs">统计demo目录下，js文件数量：</h3>
+
+<pre><code>find demo/ -name "*.js" |wc -l
+</code></pre>
+
+<h3 id="demojs-1">统计demo目录下所有js文件代码行数：</h3>
+
+<pre><code>find demo/ -name "*.js" |xargs cat|wc -l 
+# 或 
+wc -l `find ./ -name "*.js"` | tail -n1
+</code></pre>
+
+<h3 id="demojs-2">统计demo目录下所有js文件代码行数，过滤了空行：</h3>
+
+<pre><code>find /demo -name "*.js" |xargs cat|grep -v ^$|wc -l
+</code></pre>
+
+<h2 id="section-6">参考来源</h2>
+
+<ul>
+  <li><a href="http://www.cnblogs.com/fullhouse/archive/2011/07/17/2108786.html">Linux统计文件行数</a></li>
+</ul>
+
+
+
+        <div id="disqus_container">
+            <div style="margin-bottom:20px" class="right">
+				<wb:share-button appkey="2306590132" addition="simple" type="button" ralateUid="2356527183"></wb:share-button>
+            </div>
+            <!--<a href="#" class="comment" onclick="return false;">点击查看评论</a>-->
+            <div id="disqus_thread"></div>
+        </div>
+    </div>
+
+	
+    <div class="sidenav">
+		<iframe width="100%" height="75" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=0&isFans=0&uid=2356527183&verifier=1ccfb61e&colors=d6f3f7,ffffff,666666,0082cb,ecfbfd&dpc=1"></iframe>
+    </div>
+
+</div>
+
+<script src="/js/post.js" type="text/javascript"></script>
+
+
+	<div id="gotoTop">Top</div>
+
+
+    <!--*********************************************************-->
+    <!--****** 宝贝儿，看见这个时候，删掉下面的统计代码哦~ ******-->
+    <!--*********************************************************-->
+	<script>
+	  (function(i,s,o,g,r,a,m){
+		  i['GoogleAnalyticsObject']=r;i[r]=i[r] || function(){
+			(i[r].q=i[r].q||[]).push(arguments)}, i[r].l=1*new Date();
+			a=s.createElement(o), m=s.getElementsByTagName(o)[0];
+			a.async=1;
+			a.src=g;
+			m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-48535193-1', 'ningg.github.io');
+	  ga('send', 'pageview');
+	</script>
+    
+	
+    <script type="text/javascript">
+		function gotoTop(min_height){
+			$("#gotoTop").click(
+				function(){$('html,body').animate({scrollTop:0},700);
+			}).hover(
+				function(){$(this).addClass("hover");},
+				function(){$(this).removeClass("hover");
+			});
+			min_height ? min_height = min_height : min_height = 600;
+			$(window).scroll(function(){
+				
+				var s = $(window).scrollTop();
+				
+				if( s > min_height){
+					$("#gotoTop").fadeIn(100);
+				}else{
+					$("#gotoTop").fadeOut(200);
+				};
+			});
+		};
+		gotoTop();
+
+        $(function(){
+            $('.home-follow').click(function(e){
+                e.preventDefault();
+
+                if($('.home-contact').is(':visible')){
+                    $('.home-contact').slideUp(100);
+                }else{
+                    $('.home-contact').slideDown(100);
+                }
+            });
+        })
+
+    </script>
+</body>
+</html>

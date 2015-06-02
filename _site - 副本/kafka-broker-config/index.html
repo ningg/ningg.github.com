@@ -1,0 +1,328 @@
+<!DOCTYPE html>
+<html xmlns:wb="http://open.weibo.com/wb">
+<head>
+    <!--   Author: NingG   -->
+    <meta charset="utf-8" />
+	<meta property="wb:webmaster" content="7ea7f3d5f3edad6a" />
+    <title>Kafka 0.8.1：broker config（doing） | ningg.top</title>
+    <meta name="author" content="NingG" />
+    <meta name="renderer" content="webkit">
+    <meta name="description" content=" Kafka构建的消息队列中，真正进行message存储的是broker  " />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+    <link rel="stylesheet" href="/css/default.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="" />
+	
+    <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+	<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+	
+    <div class="home-menu">
+        <div class="home-icon-con">
+            <a class="home-menu-icon" href="/">NingG</a>
+            <a class="home-follow" href="#" title="Contact Me">+</a>
+        </div>
+        <div class="home-contact">
+            <a href="http://weibo.com/ggningg/" target="_blank" style="margin-left:-5px;"><img src="http://www.weibo.com/favicon.ico" alt="" width="25"/></a>
+            <a href="http://www.douban.com/people/ggningg/" target="_blank" style="text-align:center;"><img src="http://www.douban.com/favicon.ico" alt="" width="22"/></a>
+			<a href="http://github.com/ningg" alt="" target="_blank" style="text-align:right;"><img src="/images/icon-cube-smaller.png" width="22"/></a>
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="/js/prettify/prettify.css" />
+<style type="text/css">
+    body { background:#e8e8e8; }
+    @media screen and (max-width: 750px){
+        body { background:#fff; }
+    }
+    @media screen and (max-width: 1020px){
+        body { background:#fff; }
+    }
+</style>
+
+<div id="content">
+    <div class="entry">
+        <h1 class="entry-title"><a href="/kafka-broker-config" title="Kafka 0.8.1：broker config（doing）">Kafka 0.8.1：broker config（doing）</a></h1>
+        <p class="entry-date">2014-11-09</p>
+        <h2 id="kafka">Kafka整体架构的回顾</h2>
+
+<p>（todo）</p>
+
+<p>要点：broker、producer、consumer的定位。</p>
+
+<h2 id="broker-configs">Broker Configs</h2>
+
+<p>The essential configurations are the following:（必要的配置如下）</p>
+
+<ul>
+  <li>broker.id</li>
+  <li>log.dirs</li>
+  <li>zookeeper.connect</li>
+</ul>
+
+<p>Topic-level configurations and defaults are discussed in <a href="http://kafka.apache.org/documentation.html#topic-config">more detail below</a>.</p>
+
+<p><strong>notes(ningg)</strong>：什么叫作<strong>Topic-level configuration</strong>？是指与<code>topic</code>相关的配置。</p>
+
+<p>下文针对各个属性的介绍将以如下形式进行：</p>
+
+<ul>
+  <li>Property
+    <ul>
+      <li>Default</li>
+      <li>Description</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="brokerid">broker.id</h3>
+<ul>
+  <li>null(non-negative integer id)</li>
+  <li>Each broker is uniquely identified by a non-negative integer id. This id serves as the broker’s “name” and allows the broker to be moved to a different host/port without confusing consumers. You can choose any number you like so long as it is unique.（唯一标识broker，目的：当broker移动到另一个<code>host:port</code>后，不会对consumer造成影响）</li>
+</ul>
+
+<h3 id="logdirs">log.dirs</h3>
+<ul>
+  <li>/tmp/kafka-logs</li>
+  <li>A comma-separated list of one or more directories in which Kafka data is stored. Each new partition that is created will be placed in the directory which currently has the fewest partitions.（以逗号<code>,</code>分割，Kafka data的存储位置；新建的partition将会被放置在当前partition数最小的目录下）</li>
+</ul>
+
+<h3 id="port">port</h3>
+<ul>
+  <li>6667</li>
+  <li>The port on which the server accepts client connections.</li>
+</ul>
+
+<h3 id="zookeeperconnect">zookeeper.connect</h3>
+<ul>
+  <li>null</li>
+  <li>Specifies the ZooKeeper connection string in the form <code>hostname:port</code>, where hostname and port are the host and port for a node in your ZooKeeper cluster. To allow connecting through other ZooKeeper nodes when that host is down you can also specify multiple hosts in the form <code>hostname1:port1,hostname2:port2,hostname3:port3</code>.</li>
+  <li>ZooKeeper also allows you to add a “chroot” path which will make all kafka data for this cluster appear under a particular path. This is a way to setup multiple Kafka clusters or other applications on the same ZooKeeper cluster. To do this give a connection string in the form <code>hostname1:port1,hostname2:port2,hostname3:port3/chroot/path</code> which would put all this cluster’s data under the path <code>/chroot/path</code>. Note that you must create this path yourself prior to starting the broker and consumers must use the same connection string.</li>
+</ul>
+
+<p><strong>notes(ningg)</strong>：关于<code>zookeeper</code>参数，几个问题：</p>
+
+<ul>
+  <li>Kafka集群需要借助Zookeeper来进行管理，因此，需要设定Zookeeper集群的位置，可以只设置一个Zookeeper，也可以设置一个列表，疑问：设置一个zookeeper与一个zookeeper列表有差异吗？当只设置一个zookeeper服务器时，是否会自动获取zookeeper列表？</li>
+  <li>可以设置<code>chroot</code>目录，用于存储kafka集群相关数据，这么做的原因：方便同一个zookeeper集群，管理多个应用（例如，kafka集群）；但需要在启动broker之前，提前创建<code>chroot</code>目录，并且consumer需要使用相同的<code>zookeeper.connect</code>作为connection string。</li>
+</ul>
+
+<h3 id="messagemaxbytes">message.max.bytes</h3>
+<ul>
+  <li>1000000</li>
+  <li>The maximum size of a message that the server can receive. It is important that this property be in sync with the maximum fetch size your consumers use or else an unruly producer will be able to publish messages too large for consumers to consume.</li>
+</ul>
+
+<h3 id="numnetworkthreads">num.network.threads</h3>
+<ul>
+  <li>3</li>
+  <li>The number of network threads that the server uses for handling network requests. You probably don’t need to change this.（处理网络请求所设定的线程数，通常不用调整这个参数）</li>
+</ul>
+
+<h3 id="numiothreads">num.io.threads</h3>
+<ul>
+  <li>8</li>
+  <li>The number of I/O threads that the server uses for executing requests. You should have at least as many threads as you have disks.（server执行request时，启动的I/O线程数目，建议与磁盘个数相同）</li>
+</ul>
+
+<h3 id="backgroundthreads">background.threads</h3>
+<ul>
+  <li>4</li>
+  <li>The number of threads to use for various background processing tasks such as file deletion. You should not need to change this.</li>
+</ul>
+
+<h3 id="queuedmaxrequests">queued.max.requests</h3>
+<ul>
+  <li>500</li>
+  <li>The number of requests that can be queued up for processing by the I/O threads before the network threads stop reading in new requests.</li>
+</ul>
+
+<h3 id="hostname">host.name</h3>
+<ul>
+  <li>null	</li>
+  <li>Hostname of broker. If this is set, it will only bind to this address. If this is not set, it will bind to all interfaces, and publish one to ZK.</li>
+</ul>
+
+<h3 id="advertisedhostname">advertised.host.name</h3>
+<ul>
+  <li>null	</li>
+  <li>If this is set this is the hostname that will be given out to producers, consumers, and other brokers to connect to.</li>
+</ul>
+
+<h3 id="advertisedport">advertised.port</h3>
+<ul>
+  <li>null	</li>
+  <li>
+    <p>The port to give out to producers, consumers, and other brokers to use in establishing connections. This only needs to be set if this port is different from the port the server should bind to.</p>
+  </li>
+  <li>socket.send.buffer.bytes	100 * 1024	The SO_SNDBUFF buffer the server prefers for socket connections.</li>
+  <li>socket.receive.buffer.bytes	100 * 1024	The SO_RCVBUFF buffer the server prefers for socket connections.</li>
+  <li>socket.request.max.bytes	100 * 1024 * 1024	The maximum request size the server will allow. This prevents the server from running out of memory and should be smaller than the Java heap size.</li>
+  <li>num.partitions	1	The default number of partitions per topic if a partition count isn’t given at topic creation time.</li>
+  <li>log.segment.bytes	1024 * 1024 * 1024	The log for a topic partition is stored as a directory of segment files. This setting controls the size to which a segment file will grow before a new segment is rolled over in the log. This setting can be overridden on a per-topic basis (see the per-topic configuration section).</li>
+  <li>log.roll.hours	24 * 7	This setting will force Kafka to roll a new log segment even if the log.segment.bytes size has not been reached. This setting can be overridden on a per-topic basis (see the per-topic configuration section).</li>
+  <li>log.cleanup.policy	delete	This can take either the value delete or compact. If delete is set, log segments will be deleted when they reach the size or time limits set. If compact is set log compaction will be used to clean out obsolete records. This setting can be overridden on a per-topic basis (see the per-topic configuration section).</li>
+  <li>log.retention.{minutes,hours}	7 days	The amount of time to keep a log segment before it is deleted, i.e. the default data retention window for all topics. Note that if both log.retention.minutes and log.retention.bytes are both set we delete a segment when either limit is exceeded. This setting can be overridden on a per-topic basis (see the per-topic configuration section).</li>
+  <li>log.retention.bytes	-1	The amount of data to retain in the log for each topic-partitions. Note that this is the limit per-partition so multiply by the number of partitions to get the total data retained for the topic. Also note that if both log.retention.hours and log.retention.bytes are both set we delete a segment when either limit is exceeded. This setting can be overridden on a per-topic basis (see the per-topic configuration section).</li>
+  <li>log.retention.check.interval.ms	5 minutes	The period with which we check whether any log segment is eligible for deletion to meet the retention policies.</li>
+  <li>log.cleaner.enable	false	This configuration must be set to true for log compaction to run.</li>
+  <li>log.cleaner.threads	1	The number of threads to use for cleaning logs in log compaction.</li>
+  <li>log.cleaner.io.max.bytes.per.second	None	The maximum amount of I/O the log cleaner can do while performing log compaction. This setting allows setting a limit for the cleaner to avoid impacting live request serving.</li>
+  <li>log.cleaner.dedupe.buffer.size	500<em>1024</em>1024	The size of the buffer the log cleaner uses for indexing and deduplicating logs during cleaning. Larger is better provided you have sufficient memory.</li>
+  <li>log.cleaner.io.buffer.size	512*1024	The size of the I/O chunk used during log cleaning. You probably don’t need to change this.</li>
+  <li>log.cleaner.io.buffer.load.factor	0.9	The load factor of the hash table used in log cleaning. You probably don’t need to change this.</li>
+  <li>log.cleaner.backoff.ms	15000	The interval between checks to see if any logs need cleaning.</li>
+  <li>log.cleaner.min.cleanable.ratio	0.5	This configuration controls how frequently the log compactor will attempt to clean the log (assuming log compaction is enabled). By default we will avoid cleaning a log where more than 50% of the log has been compacted. This ratio bounds the maximum space wasted in the log by duplicates (at 50% at most 50% of the log could be duplicates). A higher ratio will mean fewer, more efficient cleanings but will mean more wasted space in the log. This setting can be overridden on a per-topic basis (see the per-topic configuration section).</li>
+  <li>log.cleaner.delete.retention.ms	1 day	The amount of time to retain delete tombstone markers for log compacted topics. This setting also gives a bound on the time in which a consumer must complete a read if they begin from offset 0 to ensure that they get a valid snapshot of the final stage (otherwise delete tombstones may be collected before they complete their scan). This setting can be overridden on a per-topic basis (see the per-topic configuration section).</li>
+  <li>log.index.size.max.bytes	10 * 1024 * 1024	The maximum size in bytes we allow for the offset index for each log segment. Note that we will always pre-allocate a sparse file with this much space and shrink it down when the log rolls. If the index fills up we will roll a new log segment even if we haven’t reached the log.segment.bytes limit. This setting can be overridden on a per-topic basis (see the per-topic configuration section).</li>
+  <li>log.index.interval.bytes	4096	The byte interval at which we add an entry to the offset index. When executing a fetch request the server must do a linear scan for up to this many bytes to find the correct position in the log to begin and end the fetch. So setting this value to be larger will mean larger index files (and a bit more memory usage) but less scanning. However the server will never add more than one index entry per log append (even if more than log.index.interval worth of messages are appended). In general you probably don’t need to mess with this value.</li>
+  <li>log.flush.interval.messages	None	The number of messages written to a log partition before we force an fsync on the log. Setting this lower will sync data to disk more often but will have a major impact on performance. We generally recommend that people make use of replication for durability rather than depending on single-server fsync, however this setting can be used to be extra certain.</li>
+  <li>log.flush.scheduler.interval.ms	3000	The frequency in ms that the log flusher checks whether any log is eligible to be flushed to disk.</li>
+  <li>log.flush.interval.ms	None	The maximum time between fsync calls on the log. If used in conjuction with log.flush.interval.messages the log will be flushed when either criteria is met.</li>
+  <li>log.delete.delay.ms	60000	The period of time we hold log files around after they are removed from the in-memory segment index. This period of time allows any in-progress reads to complete uninterrupted without locking. You generally don’t need to change this.</li>
+  <li>log.flush.offset.checkpoint.interval.ms	60000	The frequency with which we checkpoint the last flush point for logs for recovery. You should not need to change this.</li>
+  <li>auto.create.topics.enable	true	Enable auto creation of topic on the server. If this is set to true then attempts to produce, consume, or fetch metadata for a non-existent topic will automatically create it with the default replication factor and number of partitions.</li>
+  <li>controller.socket.timeout.ms	30000	The socket timeout for commands from the partition management controller to the replicas.</li>
+  <li>controller.message.queue.size	10	The buffer size for controller-to-broker-channels</li>
+  <li>default.replication.factor	1	The default replication factor for automatically created topics.</li>
+  <li>replica.lag.time.max.ms	10000	If a follower hasn’t sent any fetch requests for this window of time, the leader will remove the follower from ISR (in-sync replicas) and treat it as dead.</li>
+  <li>replica.lag.max.messages	4000	If a replica falls more than this many messages behind the leader, the leader will remove the follower from ISR and treat it as dead.</li>
+  <li>replica.socket.timeout.ms	30 * 1000	The socket timeout for network requests to the leader for replicating data.</li>
+  <li>replica.socket.receive.buffer.bytes	64 * 1024	The socket receive buffer for network requests to the leader for replicating data.</li>
+  <li>replica.fetch.max.bytes	1024 * 1024	The number of byes of messages to attempt to fetch for each partition in the fetch requests the replicas send to the leader.</li>
+  <li>replica.fetch.wait.max.ms	500	The maximum amount of time to wait time for data to arrive on the leader in the fetch requests sent by the replicas to the leader.</li>
+  <li>replica.fetch.min.bytes	1	Minimum bytes expected for each fetch response for the fetch requests from the replica to the leader. If not enough bytes, wait up to replica.fetch.wait.max.ms for this many bytes to arrive.</li>
+  <li>num.replica.fetchers	1	</li>
+  <li>Number of threads used to replicate messages from leaders. Increasing this value can increase the degree of I/O parallelism in the follower broker.</li>
+  <li></li>
+  <li>replica.high.watermark.checkpoint.interval.ms	5000	The frequency with which each replica saves its high watermark to disk to handle recovery.</li>
+  <li>fetch.purgatory.purge.interval.requests	10000	The purge interval (in number of requests) of the fetch request purgatory.</li>
+  <li>producer.purgatory.purge.interval.requests	10000	The purge interval (in number of requests) of the producer request purgatory.</li>
+  <li>zookeeper.session.timeout.ms	6000	ZooKeeper session timeout. If the server fails to heartbeat to ZooKeeper within this period of time it is considered dead. If you set this too low the server may be falsely considered dead; if you set it too high it may take too long to recognize a truly dead server.</li>
+  <li>zookeeper.connection.timeout.ms	6000	The maximum amount of time that the client waits to establish a connection to zookeeper.</li>
+  <li>zookeeper.sync.time.ms	2000	How far a ZK follower can be behind a ZK leader.</li>
+  <li>controlled.shutdown.enable	false	Enable controlled shutdown of the broker. If enabled, the broker will move all leaders on it to some other brokers before shutting itself down. This reduces the unavailability window during shutdown.</li>
+  <li>controlled.shutdown.max.retries	3	Number of retries to complete the controlled shutdown successfully before executing an unclean shutdown.</li>
+  <li>controlled.shutdown.retry.backoff.ms	5000	Backoff time between shutdown retries.</li>
+  <li>auto.leader.rebalance.enable	false	If this is enabled the controller will automatically try to balance leadership for partitions among the brokers by periodically returning leadership to the “preferred” replica for each partition if it is available.</li>
+  <li>leader.imbalance.per.broker.percentage	10	The percentage of leader imbalance allowed per broker. The controller will rebalance leadership if this ratio goes above the configured value per broker.</li>
+  <li>leader.imbalance.check.interval.seconds	300	The frequency with which to check for leader imbalance.</li>
+  <li>offset.metadata.max.bytes	1024	The maximum amount of metadata to allow clients to save with their offsets.</li>
+</ul>
+
+<p>More details about broker configuration can be found in the scala class <code>kafka.server.KafkaConfig</code>.</p>
+
+<h2 id="topic-level-configuration">Topic-level configuration</h2>
+
+<p>Configurations pertinent to topics have both a global default as well an optional per-topic override. If no per-topic configuration is given the global default is used. The override can be set at topic creation time by giving one or more –config options. This example creates a topic named my-topic with a custom max message size and flush rate:
+ &gt; bin/kafka-topics.sh –zookeeper localhost:2181 –create –topic my-topic –partitions 1 
+        –replication-factor 1 –config max.message.bytes=64000 –config flush.messages=1
+Overrides can also be changed or set later using the alter topic command. This example updates the max message size for my-topic:
+ &gt; bin/kafka-topics.sh –zookeeper localhost:2181 –alter –topic my-topic 
+    –config max.message.bytes=128000
+To remove an override you can do
+ &gt; bin/kafka-topics.sh –zookeeper localhost:2181 –alter –topic my-topic 
+    –deleteConfig max.message.bytes
+The following are the topic-level configurations. The server’s default configuration for this property is given under the Server Default Property heading, setting this default in the server config allows you to change the default given to topics that have no override specified.
+Property	Default	Server Default Property	Description
+cleanup.policy	delete	log.cleanup.policy	A string that is either “delete” or “compact”. This string designates the retention policy to use on old log segments. The default policy (“delete”) will discard old segments when their retention time or size limit has been reached. The “compact” setting will enable log compaction on the topic.
+delete.retention.ms	86400000 (24 hours)	log.cleaner.delete.retention.ms	The amount of time to retain delete tombstone markers for log compacted topics. This setting also gives a bound on the time in which a consumer must complete a read if they begin from offset 0 to ensure that they get a valid snapshot of the final stage (otherwise delete tombstones may be collected before they complete their scan).
+flush.messages	None	log.flush.interval.messages	This setting allows specifying an interval at which we will force an fsync of data written to the log. For example if this was set to 1 we would fsync after every message; if it were 5 we would fsync after every five messages. In general we recommend you not set this and use replication for durability and allow the operating system’s background flush capabilities as it is more efficient. This setting can be overridden on a per-topic basis (see the per-topic configuration section).
+flush.ms	None	log.flush.interval.ms	This setting allows specifying a time interval at which we will force an fsync of data written to the log. For example if this was set to 1000 we would fsync after 1000 ms had passed. In general we recommend you not set this and use replication for durability and allow the operating system’s background flush capabilities as it is more efficient.
+index.interval.bytes	4096	log.index.interval.bytes	This setting controls how frequently Kafka adds an index entry to it’s offset index. The default setting ensures that we index a message roughly every 4096 bytes. More indexing allows reads to jump closer to the exact position in the log but makes the index larger. You probably don’t need to change this.
+max.message.bytes	1,000,000	message.max.bytes	This is largest message size Kafka will allow to be appended to this topic. Note that if you increase this size you must also increase your consumer’s fetch size so they can fetch messages this large.
+min.cleanable.dirty.ratio	0.5	log.cleaner.min.cleanable.ratio	This configuration controls how frequently the log compactor will attempt to clean the log (assuming log compaction is enabled). By default we will avoid cleaning a log where more than 50% of the log has been compacted. This ratio bounds the maximum space wasted in the log by duplicates (at 50% at most 50% of the log could be duplicates). A higher ratio will mean fewer, more efficient cleanings but will mean more wasted space in the log.
+retention.bytes	None	log.retention.bytes	This configuration controls the maximum size a log can grow to before we will discard old log segments to free up space if we are using the “delete” retention policy. By default there is no size limit only a time limit.
+retention.ms	7 days	log.retention.minutes	This configuration controls the maximum time we will retain a log before we will discard old log segments to free up space if we are using the “delete” retention policy. This represents an SLA on how soon consumers must read their data.
+segment.bytes	1 GB	log.segment.bytes	This configuration controls the segment file size for the log. Retention and cleaning is always done a file at a time so a larger segment size means fewer files but less granular control over retention.
+segment.index.bytes	10 MB	log.index.size.max.bytes	This configuration controls the size of the index that maps offsets to file positions. We preallocate this index file and shrink it only after log rolls. You generally should not need to change this setting.
+segment.ms	7 days	log.roll.hours	This configuration controls the period of time after which Kafka will force the log to roll even if the segment file isn’t full to ensure that retention can delete or compact old data.</p>
+
+<h2 id="section">参考来源</h2>
+
+<ul>
+  <li><a href="http://kafka.apache.org/documentation.html">Kafka Documentation</a></li>
+</ul>
+
+
+
+        <div id="disqus_container">
+            <div style="margin-bottom:20px" class="right">
+				<wb:share-button appkey="2306590132" addition="simple" type="button" ralateUid="2356527183"></wb:share-button>
+            </div>
+            <!--<a href="#" class="comment" onclick="return false;">点击查看评论</a>-->
+            <div id="disqus_thread"></div>
+        </div>
+    </div>
+
+	
+    <div class="sidenav">
+		<iframe width="100%" height="75" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=0&isFans=0&uid=2356527183&verifier=1ccfb61e&colors=d6f3f7,ffffff,666666,0082cb,ecfbfd&dpc=1"></iframe>
+    </div>
+
+</div>
+
+<script src="/js/post.js" type="text/javascript"></script>
+
+
+	<div id="gotoTop">Top</div>
+
+
+    <!--*********************************************************-->
+    <!--****** 宝贝儿，看见这个时候，删掉下面的统计代码哦~ ******-->
+    <!--*********************************************************-->
+	<script>
+	  (function(i,s,o,g,r,a,m){
+		  i['GoogleAnalyticsObject']=r;i[r]=i[r] || function(){
+			(i[r].q=i[r].q||[]).push(arguments)}, i[r].l=1*new Date();
+			a=s.createElement(o), m=s.getElementsByTagName(o)[0];
+			a.async=1;
+			a.src=g;
+			m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-48535193-1', 'ningg.github.io');
+	  ga('send', 'pageview');
+	</script>
+    
+	
+    <script type="text/javascript">
+		function gotoTop(min_height){
+			$("#gotoTop").click(
+				function(){$('html,body').animate({scrollTop:0},700);
+			}).hover(
+				function(){$(this).addClass("hover");},
+				function(){$(this).removeClass("hover");
+			});
+			min_height ? min_height = min_height : min_height = 600;
+			$(window).scroll(function(){
+				
+				var s = $(window).scrollTop();
+				
+				if( s > min_height){
+					$("#gotoTop").fadeIn(100);
+				}else{
+					$("#gotoTop").fadeOut(200);
+				};
+			});
+		};
+		gotoTop();
+
+        $(function(){
+            $('.home-follow').click(function(e){
+                e.preventDefault();
+
+                if($('.home-contact').is(':visible')){
+                    $('.home-contact').slideUp(100);
+                }else{
+                    $('.home-contact').slideDown(100);
+                }
+            });
+        })
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,184 @@
+<!DOCTYPE html>
+<html xmlns:wb="http://open.weibo.com/wb">
+<head>
+    <!--   Author: NingG   -->
+    <meta charset="utf-8" />
+	<meta property="wb:webmaster" content="7ea7f3d5f3edad6a" />
+    <title>搭建Android开发环境 | ningg.top</title>
+    <meta name="author" content="NingG" />
+    <meta name="renderer" content="webkit">
+    <meta name="description" content=" 做开发，不是盲目的，有一个要做的目标（产品），然后准备技术；敲定了技术方案之后，第一步就是搭建开发环境  " />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+    <link rel="stylesheet" href="/css/default.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="" />
+	
+    <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+	<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+	
+    <div class="home-menu">
+        <div class="home-icon-con">
+            <a class="home-menu-icon" href="/">NingG</a>
+            <a class="home-follow" href="#" title="Contact Me">+</a>
+        </div>
+        <div class="home-contact">
+            <a href="http://weibo.com/ggningg/" target="_blank" style="margin-left:-5px;"><img src="http://www.weibo.com/favicon.ico" alt="" width="25"/></a>
+            <a href="http://www.douban.com/people/ggningg/" target="_blank" style="text-align:center;"><img src="http://www.douban.com/favicon.ico" alt="" width="22"/></a>
+			<a href="http://github.com/ningg" alt="" target="_blank" style="text-align:right;"><img src="/images/icon-cube-smaller.png" width="22"/></a>
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="/js/prettify/prettify.css" />
+<style type="text/css">
+    body { background:#e8e8e8; }
+    @media screen and (max-width: 750px){
+        body { background:#fff; }
+    }
+    @media screen and (max-width: 1020px){
+        body { background:#fff; }
+    }
+</style>
+
+<div id="content">
+    <div class="entry">
+        <h1 class="entry-title"><a href="/install-android-dev-env" title="搭建Android开发环境">搭建Android开发环境</a></h1>
+        <p class="entry-date">2014-09-22</p>
+        <h2 id="section">背景</h2>
+
+<p>哈哈，这个背景说不说呢？说，坦坦荡荡的：想做一个对Android手机的截屏图片，直接打马赛克的小APP，当前满足这一需求的APP有不少，例如：美图秀秀等，但是不好意思，我想要一个轻量级的，而且最简单的打码操作。</p>
+
+<h2 id="section-1">搭建开发环境</h2>
+
+<p>打码APP，目标确定了，就开发搞起。<em>（具体功能是什么？技术方案定了吗？别急，这些我现在都不会、都不确定，个人估计折腾折腾就清晰的，我对这个还是有信心的）</em></p>
+
+<blockquote>
+  <p><strong>特别提醒</strong>：下面是我看官网的操作记录，请那些还有丁点技术追求的coder，也去看官网，我写blog不是为了布道，而且blog的精准、严谨程度，与官网差得太远。</p>
+</blockquote>
+
+<h3 id="section-2">下载软件</h3>
+
+<p>图省事，我从官网直接下载了”Eclipse ADT bundle”，详细版本信息：”adt-bundle-windows-x86_64-20140702.zip”，其下载地址如下：<a href="https://dl.google.com/android/adt/adt-bundle-windows-x86_64-20140702.zip">https://dl.google.com/android/adt/adt-bundle-windows-x86_64-20140702.zip</a> 。由于GFW的存在，很多地方无法直接下载上面链接文件，怎么办？用迅雷，复制上面的链接，新建一个迅雷下载任务，妥了，下载完毕。</p>
+
+<p>Eclipse ADT Bundle包含3个部分：</p>
+
+<ol>
+  <li>Android SDK</li>
+  <li>Eclipse IDE</li>
+  <li>ADT(Android Developer Tools)：Eclipse下进行Android开发的插件；</li>
+</ol>
+
+<p>客官，留意一下：上面Eclipse ADT Bundle对应的解压包中，自带了Android开发的文档，具体路径：<code>%ECLIPSE_ADT_BUNDLE%/sdk/docs/</code>，这个极其有用，我有问题，都会偷偷看这个。</p>
+
+<h3 id="package">安装package</h3>
+
+<p>上面Eclipse ADT Bundle对应的解压包中eclipse直接可以使用了，不过很多时候，需要安装写package，来支持Android的开发。通常，通过Android SDK Manager来安装package，截个图如下：</p>
+
+<p><img src="/images/install-android-dev-env/sdk-manager.jpg" alt="Android SDK Manager" /></p>
+
+<p>安装package，本来挺简单个事，由于GFW的存在，唉，上面的package基本无法下载，或者极其慢，解决办法：修改hosts文件，在其中添加片段：</p>
+
+<pre><code>#Google主页
+203.208.46.146 www.google.com
+#这行是为了方便打开Android开发官网 现在好像不VPN也可以打开
+#74.125.113.121 developer.android.com
+#更新的内容从以下地址下载
+203.208.46.146 dl.google.com
+203.208.46.146 dl-ssl.google.com
+****************************************
+</code></pre>
+
+<p>参考来源：<a href="http://www.cnblogs.com/tc310/archive/2012/12/21/2828450.html">http://www.cnblogs.com/tc310/archive/2012/12/21/2828450.html</a></p>
+
+<h2 id="section-3">推荐书籍</h2>
+
+<ul>
+  <li><a href="http://book.douban.com/subject/25942191/">第一行代码——Android</a>
+    <ul>
+      <li>这个入门不错，对于有开发经验的人员也可以借鉴一下</li>
+    </ul>
+  </li>
+</ul>
+
+
+
+        <div id="disqus_container">
+            <div style="margin-bottom:20px" class="right">
+				<wb:share-button appkey="2306590132" addition="simple" type="button" ralateUid="2356527183"></wb:share-button>
+            </div>
+            <!--<a href="#" class="comment" onclick="return false;">点击查看评论</a>-->
+            <div id="disqus_thread"></div>
+        </div>
+    </div>
+
+	
+    <div class="sidenav">
+		<iframe width="100%" height="75" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=0&isFans=0&uid=2356527183&verifier=1ccfb61e&colors=d6f3f7,ffffff,666666,0082cb,ecfbfd&dpc=1"></iframe>
+    </div>
+
+</div>
+
+<script src="/js/post.js" type="text/javascript"></script>
+
+
+	<div id="gotoTop">Top</div>
+
+
+    <!--*********************************************************-->
+    <!--****** 宝贝儿，看见这个时候，删掉下面的统计代码哦~ ******-->
+    <!--*********************************************************-->
+	<script>
+	  (function(i,s,o,g,r,a,m){
+		  i['GoogleAnalyticsObject']=r;i[r]=i[r] || function(){
+			(i[r].q=i[r].q||[]).push(arguments)}, i[r].l=1*new Date();
+			a=s.createElement(o), m=s.getElementsByTagName(o)[0];
+			a.async=1;
+			a.src=g;
+			m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-48535193-1', 'ningg.github.io');
+	  ga('send', 'pageview');
+	</script>
+    
+	
+    <script type="text/javascript">
+		function gotoTop(min_height){
+			$("#gotoTop").click(
+				function(){$('html,body').animate({scrollTop:0},700);
+			}).hover(
+				function(){$(this).addClass("hover");},
+				function(){$(this).removeClass("hover");
+			});
+			min_height ? min_height = min_height : min_height = 600;
+			$(window).scroll(function(){
+				
+				var s = $(window).scrollTop();
+				
+				if( s > min_height){
+					$("#gotoTop").fadeIn(100);
+				}else{
+					$("#gotoTop").fadeOut(200);
+				};
+			});
+		};
+		gotoTop();
+
+        $(function(){
+            $('.home-follow').click(function(e){
+                e.preventDefault();
+
+                if($('.home-contact').is(':visible')){
+                    $('.home-contact').slideUp(100);
+                }else{
+                    $('.home-contact').slideDown(100);
+                }
+            });
+        })
+
+    </script>
+</body>
+</html>

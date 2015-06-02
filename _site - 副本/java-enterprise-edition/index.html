@@ -1,0 +1,346 @@
+<!DOCTYPE html>
+<html xmlns:wb="http://open.weibo.com/wb">
+<head>
+    <!--   Author: NingG   -->
+    <meta charset="utf-8" />
+	<meta property="wb:webmaster" content="7ea7f3d5f3edad6a" />
+    <title>Java Enterprise Edition，Java EE，J2EE | ningg.top</title>
+    <meta name="author" content="NingG" />
+    <meta name="renderer" content="webkit">
+    <meta name="description" content=" Java EE本质是什么？  " />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+    <link rel="stylesheet" href="/css/default.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="" />
+	
+    <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+	<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+	
+    <div class="home-menu">
+        <div class="home-icon-con">
+            <a class="home-menu-icon" href="/">NingG</a>
+            <a class="home-follow" href="#" title="Contact Me">+</a>
+        </div>
+        <div class="home-contact">
+            <a href="http://weibo.com/ggningg/" target="_blank" style="margin-left:-5px;"><img src="http://www.weibo.com/favicon.ico" alt="" width="25"/></a>
+            <a href="http://www.douban.com/people/ggningg/" target="_blank" style="text-align:center;"><img src="http://www.douban.com/favicon.ico" alt="" width="22"/></a>
+			<a href="http://github.com/ningg" alt="" target="_blank" style="text-align:right;"><img src="/images/icon-cube-smaller.png" width="22"/></a>
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="/js/prettify/prettify.css" />
+<style type="text/css">
+    body { background:#e8e8e8; }
+    @media screen and (max-width: 750px){
+        body { background:#fff; }
+    }
+    @media screen and (max-width: 1020px){
+        body { background:#fff; }
+    }
+</style>
+
+<div id="content">
+    <div class="entry">
+        <h1 class="entry-title"><a href="/java-enterprise-edition" title="Java Enterprise Edition，Java EE，J2EE">Java Enterprise Edition，Java EE，J2EE</a></h1>
+        <p class="entry-date">2013-03-27</p>
+        <p>梳理几个小问题：</p>
+
+<ul>
+  <li>Java Enterprise Edition，哪里提出的？</li>
+  <li>Java EE，怎么定位？适用哪些场景，用于解决什么问题？</li>
+  <li>Java EE，类似的东西还有吗？他们之间差异有哪些？</li>
+</ul>
+
+<p>接触和使用Java EE有几年了，但上面的问题，还真没有去细查过，今天就来查一下。</p>
+
+<p>查询之后，几点：</p>
+
+<ul>
+  <li>关于名称，Java EE、J2EE：
+    <ul>
+      <li>在JDK 1.5 之前<em>（包含JDK 1.5）</em>，Java Enterprise Edition，简称为J2EE；</li>
+      <li>从JDK 1.6 开始，Java Enterprise Edition，简称为Java EE；</li>
+    </ul>
+  </li>
+  <li>Java EE是什么？下面几个术语的关系：
+    <ul>
+      <li>servlet</li>
+      <li>JSP</li>
+      <li>Java EE，就是Java web？</li>
+      <li>Spring mvc</li>
+      <li>web.xml文件</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="section">常见问题</h2>
+
+<h3 id="servlet-vs-jsp">Servlet vs. JSP</h3>
+
+<p>简要列几点：<em>（未整理完）</em></p>
+
+<ul>
+  <li>现有Servlet规范，后又JSP规范产生；</li>
+  <li>JSP出现之前，Servlet中负责以流形式，输出最终的页面，流中手动书写了大量的HTML标签；即，Servlet同时负责逻辑处理以及页面显示；</li>
+  <li>JSP出现之后，最终页面使用JSP来编写，其中可以嵌入JavaBean的信息，实现了页面显示与后端处理逻辑的分离；</li>
+  <li>本质上：JSP执行之前，也要编译为Servlet；</li>
+</ul>
+
+<p>补充几点：</p>
+
+<ul>
+  <li>Servlet和JSP都是是规范，在JCP（<a href="https://www.jcp.org/en/home/index">Java Community Process</a>）中可以找到<em>（通过搜索框，直接搜索关键词<code>Servlet</code>或者<code>JSP</code>）</em>；</li>
+  <li>列两个当前常用的规范：
+    <ul>
+      <li><a href="https://www.jcp.org/en/jsr/detail?id=315" title="JSR 315: JavaTM Servlet 3.0 Specification">JSR 315: JavaTM Servlet 3.0 Specification</a></li>
+      <li><a href="https://www.jcp.org/en/jsr/detail?id=245" title="JSR 245: JavaServerTM Pages 2.1">JSR 245: JavaServerTM Pages 2.1</a></li>
+    </ul>
+  </li>
+  <li>Tomcat是Servlet/JSP运行容器，具体这一容器支撑哪个版本规范，可以从Tomcat官网上查看得知，例如，<a href="http://tomcat.apache.org/tomcat-8.0-doc/index.html">Tomcat8.0</a>的Documentation中提到，Tomcat v8.0 实现了 Servlet 3.1 和 javaServer Pages 2.3两个规范；</li>
+</ul>
+
+<p>更多细节，参考：</p>
+
+<ul>
+  <li><a href="http://www.javabeat.net/difference-servlet-jsp/">Difference Between Servlet and JSP</a></li>
+  <li><a href="https://www.jcp.org/en/home/index">Java Community Process</a></li>
+</ul>
+
+<h3 id="java-ee">Java EE</h3>
+
+<p>简要几点：</p>
+
+<ul>
+  <li>Java EE（Java Plantform，Enterprise Edition），是一系列标准的集合，有个白皮书；
+    <ul>
+      <li>疑问：对应一个标准白皮书？在<a href="http://www.oracle.com/technetwork/java/javaee/overview/index.html">官网</a>，可以查看到<a href="http://www.oracle.com/technetwork/java/javaee/javaee7-whitepaper-1956203.pdf">Java EE的白皮书</a>，其中对Java EE的定位有详细说明；</li>
+      <li>Java EE这个标准/规范，包含了很多其他的规范？</li>
+    </ul>
+  </li>
+  <li>Java EE 有很多实现，例如，当前<a href="http://www.oracle.com/technetwork/java/javaee/overview/index.html">官网</a>提到，有20+种 Java EE 6的具体实现；</li>
+  <li>Java EE，也是一个标准，在JCP（<a href="https://www.jcp.org/en/home/index">Java Community Process</a>）中可以搜索<code>java ee</code>找到相应的标准；</li>
+  <li>Java EE，只是标准，需要依托具体的lib实现；思考：哪些lib来实现的？</li>
+</ul>
+
+<p>通过查看<a href="http://www.oracle.com/technetwork/java/javaee/javaee7-whitepaper-1956203.pdf">Java EE的白皮书</a>可知，Java EE 7包含了14个JSR（Java Specification Requests）：</p>
+
+<ul>
+  <li>JSR 236: Concurrency Utilities for Java EE 1.0 </li>
+  <li>JSR 338: Java Persistence API 2.1 </li>
+  <li>JSR 339: Java API for RESTful Web Services 2.0 </li>
+  <li>JSR 340: Java Servlet 3.1 </li>
+  <li>JSR 341: Expression Language 3.0 </li>
+  <li>JSR 342: Java Platform, Enterprise Edition 7 </li>
+  <li>JSR 343: Java Message Service 2.0 </li>
+  <li>JSR 344: JavaServer Faces 2.2  </li>
+  <li>JSR 345: Enterprise JavaBeans 3.2 </li>
+  <li>JSR 346: Contexts and Dependency Injection for Java EE 1.1 </li>
+  <li>JSR 349: Bean Validation 1.1 </li>
+  <li>JSR 352: Batch Applications for the Java Platform 1.0 </li>
+  <li>JSR 353: Java API for JSON Processing 1.0 </li>
+  <li>JSR 356: Java API for WebSocket 1.0</li>
+</ul>
+
+<p>上述查证来看，如何利用Java EE来进行java web的开发呢？在<a href="http://www.oracle.com/technetwork/java/javaee/overview/index.html">官网</a>上仔细瞅瞅，看到了吧：<a href="http://docs.oracle.com/javaee/7/index.html">Java EE7 Tutorial</a>，到页面中一看，很多实用资料：Tutorials、Release Documentation、API Documentation and Tag Reference等等；特别是两个内容：</p>
+
+<ul>
+  <li><a href="https://docs.oracle.com/javaee/7/firstcup/index.html">Your First Cup: An Introduction to the Java EE Platform</a></li>
+  <li><a href="https://docs.oracle.com/javaee/7/tutorial/index.html">The Java EE 7 Tutorial</a></li>
+</ul>
+
+<p>支持Java EE的服务器：</p>
+
+<ul>
+  <li>Java EE的官网上，提到了GlassFish，但没提Tomcat，参考<a href="http://www.oracle.com/technetwork/java/javaee/overview/compatibility-jsp-136984.html">Java EE Compatibility</a>；</li>
+  <li>Tomcat官网上，提到Tomcat是支持Java EE的，参考<a href="http://wiki.apache.org/tomcat/Specifications">Tomcat Specification</a>；<em>（疑问：此处说Tomcat支持Java EE API，是只支持Java EE的完整标准吗？不是完整标准，实现完整Java EE标准的是TomEE）</em></li>
+</ul>
+
+<p>更多细节，参考：</p>
+
+<ul>
+  <li><a href="http://www.oracle.com/technetwork/java/javaee/overview/index.html">Java EE at a Glance</a></li>
+  <li><a href="http://www.oracle.com/technetwork/java/javaee/javaee7-whitepaper-1956203.pdf">Java EE 7 Whitepaper</a></li>
+</ul>
+
+<h4 id="java-ee-1">如何学习Java EE？</h4>
+
+<p>有两种观点：</p>
+
+<ul>
+  <li>买本书，照着学习；</li>
+  <li>不需要买书，参考官方tutorial就行了；</li>
+</ul>
+
+<p>到底应该怎么做呢？</p>
+
+<ul>
+  <li>直接动手开干？你不是通过读书，学会骑自行车的；</li>
+  <li>有一本书籍和tutorial作为参考？</li>
+</ul>
+
+<p>更多内容，参考：<a href="http://stackoverflow.com/questions/1960280/what-to-learn-for-making-java-web-applications-in-java-ee-6">What to learn for making Java web applications in Java EE 6?</a></p>
+
+<h4 id="java-ee-web-profile-vs-full-platform">Java EE Web Profile vs. Full Platform</h4>
+
+<p>一个是简介版，包含的jar包较少，另一个是完整版，包含Java EE的完整jar包。JCP中有两者的规范。更多信息参考<a href="http://jaxenter.com/introducing-the-java-ee-web-profile-103275.html">Introducing the Java EE Web Profile</a>。</p>
+
+<h3 id="spring-web">Spring web</h3>
+
+<p>几个疑问：</p>
+
+<ul>
+  <li>Spring web就是 Spring MVC？</li>
+  <li>Spring 也能用于进行web开发，也是一系列规范？还是一些列组件和实现？</li>
+</ul>
+
+<p>几点：</p>
+
+<ul>
+  <li>Spring包含一系列模块化组件，目标：更便捷的开发企业级应用；<em>（不仅仅是web应用，其涉及范围很广）</em></li>
+  <li>Spring Framework是常用的Spring组件，也是最核心的Spring组件之一，包含IoC、AOP等；</li>
+  <li>Spring Framework是流行的轻量级框架，很好的系统解耦效果，支持DI（Dependency Injection），可以用于连接多种框架，例如Hibernate等，例如，希望读取MongoDB中数据时，Spring自带有相应的组件。</li>
+</ul>
+
+<p>更多细节，都可以从官网上获取，列几个：</p>
+
+<ul>
+  <li><a href="https://spring.io/docs">Spring Docs</a>：下载参考文档，各种官方文档；</li>
+  <li><a href="https://spring.io/guides">Spring Guides</a>：各种典型场景、组件的使用样例；</li>
+  <li><a href="https://spring.io/projects">Spring Projects</a>：spring下的整体组件，以及解决方法，当前特别关注一下<a href="http://projects.spring.io/spring-framework/">Spring Framework</a></li>
+</ul>
+
+<h3 id="webxml">web.xml文件</h3>
+
+<p>几个疑问：</p>
+
+<ul>
+  <li>为什么要存在web.xml？web.xml文件的放置位置？<em>（为什么有web.xml？）</em></li>
+  <li>web.xml内部结构以及内容？<em>（怎么写web.xml文件？）</em></li>
+</ul>
+
+<h4 id="webxml-1">文件web.xml存在的意义</h4>
+
+<p>几点：</p>
+
+<ul>
+  <li>web.xml是在JCP下的Servlet规范中提出的；</li>
+  <li>位置：<code>APP_ROOT/WEB-INF/web.xml</code>，应用部署时的说明文件（Deployment Descriptor）；参考：<a href="https://www.jcp.org/en/jsr/detail?id=315" title="JSR 315: JavaTM Servlet 3.0 Specification">JSR315</a>中Web Applications下Deployment Hierarchies章节内容；</li>
+  <li>当没有servlet、filter、listener等时，不比配置web.xml文件；即，只有静态文件和JSP页面时，可以没有web.xml文件；参考：<a href="https://www.jcp.org/en/jsr/detail?id=315" title="JSR 315: JavaTM Servlet 3.0 Specification">JSR315</a>中Web Applications下Inclusion of a web.xml Deployment Descriptor章节内容；</li>
+</ul>
+
+<h4 id="webxml-2">如何写web.xml文件？</h4>
+
+<p>直接参考：<a href="https://www.jcp.org/en/jsr/detail?id=315" title="JSR 315: JavaTM Servlet 3.0 Specification">JSR315</a>中Deploment Descriptor章节内容即可。<em>（会针对web.xml文件单独整理一篇博文）</em></p>
+
+<h4 id="webxmlwar">web.xml文件与WAR包间关系</h4>
+
+<p>web.xml是遵循servlet规范的，war包是否也是符合servlet规范的？有一篇<a href="http://ningg.top/java-war-format/">博文</a> 中提及，但并没有深入讨论，仅参考。</p>
+
+<p>思考：jar、war、ear文件组织结构的用途？原始参考来源？</p>
+
+<h2 id="section-1">闲聊</h2>
+
+<p>当前java &amp; scala的web框架Play，已经逐渐流行起来了，如果继续做web方面内容，需要了解、熟悉一下：</p>
+
+<ul>
+  <li><a href="https://www.playframework.com/">PlayFramework</a></li>
+</ul>
+
+<h2 id="section-2">参考来源</h2>
+
+<ul>
+  <li><a href="http://www.javabeat.net/difference-servlet-jsp/">Difference Between Servlet and JSP</a></li>
+  <li><a href="http://www.oracle.com/technetwork/java/javaee/overview/index.html">Java EE at a Glance</a></li>
+  <li><a href="https://www.jcp.org/en/jsr/detail?id=315" title="JSR 315: JavaTM Servlet 3.0 Specification">JSR315</a></li>
+  <li><a href="https://www.jcp.org/en/jsr/detail?id=245" title="JSR 245: JavaServerTM Pages 2.1">JSR245</a></li>
+  <li><a href="http://www.oracle.com/technetwork/java/javaee/javaee7-whitepaper-1956203.pdf">Java EE 7 Whitepaper</a></li>
+  <li><a href="https://www.jcp.org/en/home/index">Java Community Process</a></li>
+  <li><a href="http://tomcat.apache.org/tomcat-8.0-doc/index.html">Tomcat8.0</a></li>
+  <li>vdisk下github/jvm目录内，上传了几个JSR，方便查看；</li>
+  <li>多在<a href="http://www.oracle.com/technetwork/java/javaee/overview/index.html">Java EE官网</a>点击链接，会发现很多整理好的内容，如果有的链接是无效的，就想办法找到对应的有效链接，例如Java EE Tutorial。</li>
+  <li><a href="https://spring.io/">Spring官网</a></li>
+</ul>
+
+
+
+        <div id="disqus_container">
+            <div style="margin-bottom:20px" class="right">
+				<wb:share-button appkey="2306590132" addition="simple" type="button" ralateUid="2356527183"></wb:share-button>
+            </div>
+            <!--<a href="#" class="comment" onclick="return false;">点击查看评论</a>-->
+            <div id="disqus_thread"></div>
+        </div>
+    </div>
+
+	
+    <div class="sidenav">
+		<iframe width="100%" height="75" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=0&isFans=0&uid=2356527183&verifier=1ccfb61e&colors=d6f3f7,ffffff,666666,0082cb,ecfbfd&dpc=1"></iframe>
+    </div>
+
+</div>
+
+<script src="/js/post.js" type="text/javascript"></script>
+
+
+	<div id="gotoTop">Top</div>
+
+
+    <!--*********************************************************-->
+    <!--****** 宝贝儿，看见这个时候，删掉下面的统计代码哦~ ******-->
+    <!--*********************************************************-->
+	<script>
+	  (function(i,s,o,g,r,a,m){
+		  i['GoogleAnalyticsObject']=r;i[r]=i[r] || function(){
+			(i[r].q=i[r].q||[]).push(arguments)}, i[r].l=1*new Date();
+			a=s.createElement(o), m=s.getElementsByTagName(o)[0];
+			a.async=1;
+			a.src=g;
+			m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-48535193-1', 'ningg.github.io');
+	  ga('send', 'pageview');
+	</script>
+    
+	
+    <script type="text/javascript">
+		function gotoTop(min_height){
+			$("#gotoTop").click(
+				function(){$('html,body').animate({scrollTop:0},700);
+			}).hover(
+				function(){$(this).addClass("hover");},
+				function(){$(this).removeClass("hover");
+			});
+			min_height ? min_height = min_height : min_height = 600;
+			$(window).scroll(function(){
+				
+				var s = $(window).scrollTop();
+				
+				if( s > min_height){
+					$("#gotoTop").fadeIn(100);
+				}else{
+					$("#gotoTop").fadeOut(200);
+				};
+			});
+		};
+		gotoTop();
+
+        $(function(){
+            $('.home-follow').click(function(e){
+                e.preventDefault();
+
+                if($('.home-contact').is(':visible')){
+                    $('.home-contact').slideUp(100);
+                }else{
+                    $('.home-contact').slideDown(100);
+                }
+            });
+        })
+
+    </script>
+</body>
+</html>

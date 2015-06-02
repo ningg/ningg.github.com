@@ -1,0 +1,343 @@
+<!DOCTYPE html>
+<html xmlns:wb="http://open.weibo.com/wb">
+<head>
+    <!--   Author: NingG   -->
+    <meta charset="utf-8" />
+	<meta property="wb:webmaster" content="7ea7f3d5f3edad6a" />
+    <title>Linux下查看进程的内存占用 - top命令 | ningg.top</title>
+    <meta name="author" content="NingG" />
+    <meta name="renderer" content="webkit">
+    <meta name="description" content=" Linux环境下，查看内存、CPU占用情况，并且终止相应的进程都可以使用top命令  " />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+    <link rel="stylesheet" href="/css/default.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="" />
+	
+    <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+	<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+	
+    <div class="home-menu">
+        <div class="home-icon-con">
+            <a class="home-menu-icon" href="/">NingG</a>
+            <a class="home-follow" href="#" title="Contact Me">+</a>
+        </div>
+        <div class="home-contact">
+            <a href="http://weibo.com/ggningg/" target="_blank" style="margin-left:-5px;"><img src="http://www.weibo.com/favicon.ico" alt="" width="25"/></a>
+            <a href="http://www.douban.com/people/ggningg/" target="_blank" style="text-align:center;"><img src="http://www.douban.com/favicon.ico" alt="" width="22"/></a>
+			<a href="http://github.com/ningg" alt="" target="_blank" style="text-align:right;"><img src="/images/icon-cube-smaller.png" width="22"/></a>
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="/js/prettify/prettify.css" />
+<style type="text/css">
+    body { background:#e8e8e8; }
+    @media screen and (max-width: 750px){
+        body { background:#fff; }
+    }
+    @media screen and (max-width: 1020px){
+        body { background:#fff; }
+    }
+</style>
+
+<div id="content">
+    <div class="entry">
+        <h1 class="entry-title"><a href="/linux-top" title="Linux下查看进程的内存占用 - top命令">Linux下查看进程的内存占用 - top命令</a></h1>
+        <p class="entry-date">2014-06-23</p>
+        <h2 id="section">背景</h2>
+
+<p>最近几天，服务器使用<code>free -g</code>来查看当前内存使用情况时，会发现内存空间几乎被完全占用了，如何能查看是哪个进程的问题？自己使用<code>top</code>进来，看着不断刷新的监控数据，也无法找出哪个进程占用的内存最多，有位哥们儿建议：你按内存占用来排序，这样就直观看出来了。</p>
+
+<h2 id="top">top简介</h2>
+
+<blockquote>
+  <p><strong>top</strong> - display Linux tasks</p>
+</blockquote>
+
+<blockquote>
+  <ul>
+    <li>The  top  program  provides a dynamic real-time view of a running system.  It can display system summary information as
+well as a list of tasks currently being managed by the Linux kernel.  The types of system summary information shown and
+the  types,  order  and size of information displayed for tasks are all user configurable and that configuration can be
+made persistent across restarts.</li>
+    <li>The program provides a limited interactive interface for process manipulation as well as a much more  extensive  interface for personal configuration  –  encompassing every aspect of its operation.  And while top is referred to throughout this document, you are free to name the program anything you wish.  That new name, possibly an alias, will then  be reflected on top’s display and used when reading and writing a configuration file.</li>
+  </ul>
+</blockquote>
+
+<h2 id="top-1">top使用</h2>
+
+<p>输入<code>top</code>命令之后，可以继续进行如下操作，依次来获取想要的信息。</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">输入</th>
+      <th style="text-align: left">说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code>h</code></td>
+      <td style="text-align: left">获取帮助信息  or <code>?</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code>q</code></td>
+      <td style="text-align: left">退出top监控页面 or <code>ctrl + c</code></td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code>u</code></td>
+      <td style="text-align: left">某一用户启动的所有进程</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code>c</code></td>
+      <td style="text-align: left">显示/取消，进程执行的详细信息，在COMMAND字段显示</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code>k</code></td>
+      <td style="text-align: left">kill指定PID的进程</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code>O</code></td>
+      <td style="text-align: left">排序，设置排序字段；<code>n</code>:Mem，<code>k</code>:CPU</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code>P</code></td>
+      <td style="text-align: left">排序，按照CPU</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code>M</code></td>
+      <td style="text-align: left">排序，按照内存</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code>T</code></td>
+      <td style="text-align: left">排序，按照时间/累计时间</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code>R</code></td>
+      <td style="text-align: left">倒序；即，如果原来按从小到大排序，则，变为从大到小排序</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code>Z</code></td>
+      <td style="text-align: left">设置窗口颜色配置方案</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code>H</code></td>
+      <td style="text-align: left">显示线程</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code>W</code></td>
+      <td style="text-align: left">保存当前top命令的设置</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code>i</code></td>
+      <td style="text-align: left">忽略闲置和僵尸进程</td>
+    </tr>
+  </tbody>
+</table>
+
+<p><strong>思考</strong>：top命令显示的监控信息，是如何计算出来的？是使用<code>/proc</code>目录下的文件吗？</p>
+
+<h2 id="section-1">详细参数</h2>
+
+<p>基本输出结果如下：</p>
+
+<pre><code>[storm@cib02166 ~]$ top
+top - 09:34:07 up 187 days, 28 min,  3 users,  load average: 0.25, 0.29, 0.16
+Tasks: 512 total,   1 running, 511 sleeping,   0 stopped,   0 zombie
+Cpu(s):  2.8%us,  1.6%sy,  0.0%ni, 95.1%id,  0.0%wa,  0.0%hi,  0.5%si,  0.0%st
+Mem:  32838576k total, 23395280k used,  9443296k free,  1227016k buffers
+Swap: 65535992k total,   278940k used, 65257052k free, 12226520k cached
+
+  PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+  COMMAND                                
+ 4983 storm     20   0 9740m 312m  13m S 63.6  1.0   3697:59 java  
+29907 jmxtrans  20   0 5488m 138m 5232 S  3.9  0.4   1121:42 java 
+31207 storm     20   0 15296 1472  840 R  3.9  0.0   0:00.03 top 
+  846 root      20   0     0    0    0 S  1.9  0.0  24:17.63 flush-8:0
+	3 root      RT   0     0    0    0 S  0.0  0.0   2:32.38 migration/0
+</code></pre>
+
+<h3 id="section-2">基本信息与系统负载</h3>
+
+<blockquote>
+  <p>top - 09:34:07 up 187 days, 28 min,  3 users,  load average: 0.25, 0.29, 0.16</p>
+</blockquote>
+
+<p>系统当前时间 、系统到目前为止已运行的时间、当前登录系统的用户数量、系统负载(任务队列的平均长度)三个值分别为1分钟、5分钟、15分钟前到现在的平均值。</p>
+
+<h3 id="section-3">系统进程信息</h3>
+
+<blockquote>
+  <p>Tasks: 512 total,   1 running, 511 sleeping,   0 stopped,   0 zombie</p>
+</blockquote>
+
+<p>processes 自最近一次刷新以来的运行进程总数。这些进程被分为：正在运行的，休眠的，停止运行的和僵尸的，数字表示的是相应类型进程的数目。</p>
+
+<h3 id="cpu">CPU状态信息</h3>
+
+<blockquote>
+  <p>Cpu(s):  2.8%us,  1.6%sy,  0.0%ni, 95.1%id,  0.0%wa,  0.0%hi,  0.5%si,  0.0%st</p>
+</blockquote>
+
+<p>CPU states 显示用户模式、系统模式、优先级进程（只有优先级为负的列入考虑）和闲置等各种情况所占用CPU时间的百分比。优先级进程所消耗的时间也被列入到用户和系统的时间中，所以总的百分比将大于100％。</p>
+
+<p>各部分所表达的意思如下所示：</p>
+
+<ul>
+  <li>us  –  User CPU time
+    <ul>
+      <li>The time the CPU has spent running users’ processes that are not niced.</li>
+    </ul>
+  </li>
+  <li>sy  –  System CPU time
+    <ul>
+      <li>The time the CPU has spent running the kernel and its processes.</li>
+    </ul>
+  </li>
+  <li>ni  –  Nice CPU time
+    <ul>
+      <li>The time the CPU has spent running users’ proccess that have been niced.</li>
+    </ul>
+  </li>
+  <li>wa  – iowait
+    <ul>
+      <li>Amount of time the CPU has been waiting for I/O to complete.</li>
+    </ul>
+  </li>
+  <li>hi  –  Hardware IRQ
+    <ul>
+      <li>The amount of time the CPU has been servicing hardware interrupts.</li>
+    </ul>
+  </li>
+  <li>si  –  Software Interrupts
+    <ul>
+      <li>The amount of time the CPU has been servicing software interrupts.</li>
+    </ul>
+  </li>
+  <li>st  – Steal Time
+    <ul>
+      <li>The amount of CPU ‘stolen’ from this virtual machine by the hypervisor for other tasks (such as running another virtual machine).</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="section-4">内存使用信息</h3>
+
+<blockquote>
+  <p>Mem:   3991724k total,  3388492k used,   603232k free,   212624k buffers</p>
+</blockquote>
+
+<p>Mem 内存使用情况统计，其中包括总的内存、已用内存、空闲内存，内存缓存的情况。</p>
+
+<h3 id="section-5">交换空间信息</h3>
+
+<blockquote>
+  <p>Swap:  7815580k total,    12144k used,  7803436k free,  2569748k cached</p>
+</blockquote>
+
+<p>Swap 交换空间统计，其中包括总的交换空间、已用交换空间、可用交换空间和已交换内容的信息。</p>
+
+<h3 id="section-6">进程详细信息</h3>
+
+<blockquote>
+  <p>PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+  COMMAND </p>
+</blockquote>
+
+<p>简要介绍：</p>
+
+<ul>
+  <li>PID 每个进程的ID。PPID 每个进程的父进程ID。UID 每个进程所有者的UID </li>
+  <li>USER 每个进程所有者的用户名</li>
+  <li>PR 每个进程的优先级别（负数最高，整数越大，优先级越低）</li>
+  <li>NI 该进程的优先级值</li>
+  <li>VIRT 进程“需要的”虚拟内存大小，包括进程使用的库、代码和数据等</li>
+  <li>RES 该进程占用的物理内存的总数量，单位是KB</li>
+  <li>SHE 该进程使用共享内存的数量</li>
+  <li>S 该进程的状态。其中S代表休眠状态；D代表不可中断的休眠状态；R代表运行状态；Z代表僵死状态；T代表停止或跟踪状态</li>
+  <li>%CPU 该进程自最近一次刷新以来所占用的CPU时间和总时间的百分比</li>
+  <li>%MEM 该进程占用的物理内存占总内存的百分比</li>
+  <li>TIME+ 该进程自启动以来所占用的总CPU时间。如果进入的是累计模式，那么该时间还包括这个进程子进程所占用的时间。且标题会变成CTIME</li>
+  <li>COMMAND 该进程的命令名称，如果一行显示不下，则会进行截取。内存中的进程会有一个完整的命令行</li>
+</ul>
+
+
+
+        <div id="disqus_container">
+            <div style="margin-bottom:20px" class="right">
+				<wb:share-button appkey="2306590132" addition="simple" type="button" ralateUid="2356527183"></wb:share-button>
+            </div>
+            <!--<a href="#" class="comment" onclick="return false;">点击查看评论</a>-->
+            <div id="disqus_thread"></div>
+        </div>
+    </div>
+
+	
+    <div class="sidenav">
+		<iframe width="100%" height="75" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=0&isFans=0&uid=2356527183&verifier=1ccfb61e&colors=d6f3f7,ffffff,666666,0082cb,ecfbfd&dpc=1"></iframe>
+    </div>
+
+</div>
+
+<script src="/js/post.js" type="text/javascript"></script>
+
+
+	<div id="gotoTop">Top</div>
+
+
+    <!--*********************************************************-->
+    <!--****** 宝贝儿，看见这个时候，删掉下面的统计代码哦~ ******-->
+    <!--*********************************************************-->
+	<script>
+	  (function(i,s,o,g,r,a,m){
+		  i['GoogleAnalyticsObject']=r;i[r]=i[r] || function(){
+			(i[r].q=i[r].q||[]).push(arguments)}, i[r].l=1*new Date();
+			a=s.createElement(o), m=s.getElementsByTagName(o)[0];
+			a.async=1;
+			a.src=g;
+			m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-48535193-1', 'ningg.github.io');
+	  ga('send', 'pageview');
+	</script>
+    
+	
+    <script type="text/javascript">
+		function gotoTop(min_height){
+			$("#gotoTop").click(
+				function(){$('html,body').animate({scrollTop:0},700);
+			}).hover(
+				function(){$(this).addClass("hover");},
+				function(){$(this).removeClass("hover");
+			});
+			min_height ? min_height = min_height : min_height = 600;
+			$(window).scroll(function(){
+				
+				var s = $(window).scrollTop();
+				
+				if( s > min_height){
+					$("#gotoTop").fadeIn(100);
+				}else{
+					$("#gotoTop").fadeOut(200);
+				};
+			});
+		};
+		gotoTop();
+
+        $(function(){
+            $('.home-follow').click(function(e){
+                e.preventDefault();
+
+                if($('.home-contact').is(':visible')){
+                    $('.home-contact').slideUp(100);
+                }else{
+                    $('.home-contact').slideDown(100);
+                }
+            });
+        })
+
+    </script>
+</body>
+</html>

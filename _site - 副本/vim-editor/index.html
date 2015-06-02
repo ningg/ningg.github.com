@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html xmlns:wb="http://open.weibo.com/wb">
+<head>
+    <!--   Author: NingG   -->
+    <meta charset="utf-8" />
+	<meta property="wb:webmaster" content="7ea7f3d5f3edad6a" />
+    <title>Vim编辑器常用操作 | ningg.top</title>
+    <meta name="author" content="NingG" />
+    <meta name="renderer" content="webkit">
+    <meta name="description" content=" vim是Linux下自带的编辑器，熟练使用，能够节省不少时间  " />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+    <link rel="stylesheet" href="/css/default.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="" />
+	
+    <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+	<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+	
+    <div class="home-menu">
+        <div class="home-icon-con">
+            <a class="home-menu-icon" href="/">NingG</a>
+            <a class="home-follow" href="#" title="Contact Me">+</a>
+        </div>
+        <div class="home-contact">
+            <a href="http://weibo.com/ggningg/" target="_blank" style="margin-left:-5px;"><img src="http://www.weibo.com/favicon.ico" alt="" width="25"/></a>
+            <a href="http://www.douban.com/people/ggningg/" target="_blank" style="text-align:center;"><img src="http://www.douban.com/favicon.ico" alt="" width="22"/></a>
+			<a href="http://github.com/ningg" alt="" target="_blank" style="text-align:right;"><img src="/images/icon-cube-smaller.png" width="22"/></a>
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="/js/prettify/prettify.css" />
+<style type="text/css">
+    body { background:#e8e8e8; }
+    @media screen and (max-width: 750px){
+        body { background:#fff; }
+    }
+    @media screen and (max-width: 1020px){
+        body { background:#fff; }
+    }
+</style>
+
+<div id="content">
+    <div class="entry">
+        <h1 class="entry-title"><a href="/vim-editor" title="Vim编辑器常用操作">Vim编辑器常用操作</a></h1>
+        <p class="entry-date">2013-01-30</p>
+        <p>面向实际应用场景，进行梳理：</p>
+
+<h2 id="section">常见场景</h2>
+
+<p>（todo：弄清楚vim的信息源，例如，官网、帮助手册上，如何快速定位下述场景的问题）</p>
+
+<h3 id="section-1">修改配色</h3>
+
+<p>两个地方配置，可修改vim的配色：</p>
+
+<ul>
+  <li><code>/etc/vimrc</code>：影响所有用户；</li>
+  <li><code>~/.vimrc</code>文件，如果文件<code>~/.vimrc</code>不存在，则，直接新建即可；</li>
+</ul>
+
+<p>遇到的问题：当前默认vim编辑文档时，文档内容没有显示区分颜色，并且设置<code>syntax on</code>显示颜色之后，文档的注释基本看不清楚，那如何对注释内容的颜色进行调整？
+在<code>~/.vimrc</code>文件中添加如下命令，即可实现，vim编辑器的高亮显示，以及修改配色：</p>
+
+<pre><code>syntax on
+hi comment ctermfg=gray
+</code></pre>
+
+<p><strong>特别说明</strong>：上述配置，也可以在vim的<code>:</code>模式下输入。（vim有几种模式？如何进行切换？）</p>
+
+<p>在修改文件配置过程中，涉及到的几个缩写的含义：</p>
+
+<ul>
+  <li><code>hi</code>：highlight；</li>
+  <li><code>cterm</code>：command terminal；</li>
+  <li><code>fg</code>：foreground；</li>
+</ul>
+
+<p>上面理解可能有误，需要参考<a href="/download/vim-editor" title="on Vdisk.weibo.com/github/vim-editor">Vim Tutorial From Official website</a> 进行校验。</p>
+
+<h3 id="section-2">高亮检查结果</h3>
+
+<p>在<code>~/.vimrc</code>中进行如下设置：</p>
+
+<pre><code>" 设置搜索结果的高亮显示
+set hlsearch
+</code></pre>
+
+<h3 id="section-3">批量注释</h3>
+
+<p>在块选择模式下，进行批量注释和注释的取消；</p>
+
+<h4 id="section-4">批量注释</h4>
+
+<ul>
+  <li><code>ctrl + v</code> 进入块选择模式；</li>
+  <li>移动光标，选择要注释的行；</li>
+  <li>大写 <code>I</code> ，在一行中输入<code>#</code>；</li>
+  <li>按<code>ESC</code>，之后再进入<code>:</code>，则，完成批量注释；</li>
+</ul>
+
+<h4 id="section-5">取消注释</h4>
+
+<ul>
+  <li><code>ctrl + v</code> 进入块选择模式；</li>
+  <li>移动光标，选择多行的行首；</li>
+  <li>敲击<code>x</code>，删除选定的字符；</li>
+  <li>OK，打完收工；</li>
+</ul>
+
+<h3 id="section-6">调用<code>:</code>下的历史命令</h3>
+
+<p>（TODO:具体没查询）</p>
+
+<ul>
+  <li><code>q:</code>，显示历史命令;</li>
+  <li>在命令行下（<code>:</code>模式），<code>Ctrl + f</code>即可查看历史命令；</li>
+  <li>在历史命令中，与vim模式下完全相同，可以编辑和选择，然后在调整之后的行上，直接回车即可；</li>
+  <li>在命令行下（<code>:</code>模式），先输入几个字符，直接按<code>up/down</code>即可实现对历史命令的查询；</li>
+</ul>
+
+<h2 id="section-7">快捷键</h2>
+
+<p>（TODO：参考鸟哥私房菜）</p>
+
+<p>大概几点：</p>
+
+<ul>
+  <li>文档搜索、替换；</li>
+  <li>光标移动；（按word、按行）</li>
+  <li>多文档编辑；</li>
+</ul>
+
+<h3 id="section-8">光标快速移动</h3>
+
+<p>几种方式：</p>
+
+<ul>
+  <li>w</li>
+  <li>W</li>
+  <li>b</li>
+  <li>B</li>
+</ul>
+
+<h3 id="section-9">内容快速查找</h3>
+
+<ul>
+  <li><code>#</code>：查找到的内容，高亮显示</li>
+  <li><code>*</code>：查找到的内容，高亮显示</li>
+  <li><code>v</code>进入可视模式，同时复制希望查找的内容，在<code>/</code>窗口中<code>ctrl+r</code>，然后输入<code>0</code>，即可粘贴刚刚复制的内容</li>
+</ul>
+
+<p><strong>备注</strong>：如何获取vim下的复制、粘贴内容：</p>
+
+<p><strong>RE</strong>：<code>:register</code> 即可查看，同时，”0、”1、”2、”3、”4等等代表之前复制的记录；</p>
+
+<h3 id="section-10">替换</h3>
+
+<p>替换动作：vim中，<code>:%s/from/to/g</code>，替换整个文档中的from字符串为to字符串；</p>
+
+<p><strong>TODO</strong>：参考 Vdisk.weibo.com/github/vim-editor下内容。</p>
+
+<h2 id="section-11">参考来源</h2>
+
+<ul>
+  <li><a href="http://www.sbf5.com/~cduan/technical/vi/vi-4.shtml">Using Vim Syntax Highlighting</a></li>
+  <li><a href="http://www.vim.org/docs.php">Vim Documentation</a></li>
+  <li><a href="/download/vim-editor" title="on Vdisk.weibo.com/github/vim-editor">Vim Tutorial From Official website</a> （TODO）</li>
+  <li><a href="http://be-evil.org/vim-how-to-comment-multi-line-code.html">Vim实现批量注释的方法</a></li>
+  <li><a href="http://www.douban.com/group/topic/7502081/">Vim下查看历史命令</a></li>
+  <li><a href="http://www.haodaima.net/art/2774935">Vim实用命令行</a></li>
+</ul>
+
+<p><strong>备注</strong>：鸟哥中有对vim进行深入介绍（todo）</p>
+
+
+
+        <div id="disqus_container">
+            <div style="margin-bottom:20px" class="right">
+				<wb:share-button appkey="2306590132" addition="simple" type="button" ralateUid="2356527183"></wb:share-button>
+            </div>
+            <!--<a href="#" class="comment" onclick="return false;">点击查看评论</a>-->
+            <div id="disqus_thread"></div>
+        </div>
+    </div>
+
+	
+    <div class="sidenav">
+		<iframe width="100%" height="75" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=0&isFans=0&uid=2356527183&verifier=1ccfb61e&colors=d6f3f7,ffffff,666666,0082cb,ecfbfd&dpc=1"></iframe>
+    </div>
+
+</div>
+
+<script src="/js/post.js" type="text/javascript"></script>
+
+
+	<div id="gotoTop">Top</div>
+
+
+    <!--*********************************************************-->
+    <!--****** 宝贝儿，看见这个时候，删掉下面的统计代码哦~ ******-->
+    <!--*********************************************************-->
+	<script>
+	  (function(i,s,o,g,r,a,m){
+		  i['GoogleAnalyticsObject']=r;i[r]=i[r] || function(){
+			(i[r].q=i[r].q||[]).push(arguments)}, i[r].l=1*new Date();
+			a=s.createElement(o), m=s.getElementsByTagName(o)[0];
+			a.async=1;
+			a.src=g;
+			m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-48535193-1', 'ningg.github.io');
+	  ga('send', 'pageview');
+	</script>
+    
+	
+    <script type="text/javascript">
+		function gotoTop(min_height){
+			$("#gotoTop").click(
+				function(){$('html,body').animate({scrollTop:0},700);
+			}).hover(
+				function(){$(this).addClass("hover");},
+				function(){$(this).removeClass("hover");
+			});
+			min_height ? min_height = min_height : min_height = 600;
+			$(window).scroll(function(){
+				
+				var s = $(window).scrollTop();
+				
+				if( s > min_height){
+					$("#gotoTop").fadeIn(100);
+				}else{
+					$("#gotoTop").fadeOut(200);
+				};
+			});
+		};
+		gotoTop();
+
+        $(function(){
+            $('.home-follow').click(function(e){
+                e.preventDefault();
+
+                if($('.home-contact').is(':visible')){
+                    $('.home-contact').slideUp(100);
+                }else{
+                    $('.home-contact').slideDown(100);
+                }
+            });
+        })
+
+    </script>
+</body>
+</html>

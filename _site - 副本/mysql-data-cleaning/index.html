@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html xmlns:wb="http://open.weibo.com/wb">
+<head>
+    <!--   Author: NingG   -->
+    <meta charset="utf-8" />
+	<meta property="wb:webmaster" content="7ea7f3d5f3edad6a" />
+    <title>MySQL--数据去重 | ningg.top</title>
+    <meta name="author" content="NingG" />
+    <meta name="renderer" content="webkit">
+    <meta name="description" content=" 一次利用MySQL，进行数据清洗的规范操作  " />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+    <link rel="stylesheet" href="/css/default.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="" />
+	
+    <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+	<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+	
+    <div class="home-menu">
+        <div class="home-icon-con">
+            <a class="home-menu-icon" href="/">NingG</a>
+            <a class="home-follow" href="#" title="Contact Me">+</a>
+        </div>
+        <div class="home-contact">
+            <a href="http://weibo.com/ggningg/" target="_blank" style="margin-left:-5px;"><img src="http://www.weibo.com/favicon.ico" alt="" width="25"/></a>
+            <a href="http://www.douban.com/people/ggningg/" target="_blank" style="text-align:center;"><img src="http://www.douban.com/favicon.ico" alt="" width="22"/></a>
+			<a href="http://github.com/ningg" alt="" target="_blank" style="text-align:right;"><img src="/images/icon-cube-smaller.png" width="22"/></a>
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="/js/prettify/prettify.css" />
+<style type="text/css">
+    body { background:#e8e8e8; }
+    @media screen and (max-width: 750px){
+        body { background:#fff; }
+    }
+    @media screen and (max-width: 1020px){
+        body { background:#fff; }
+    }
+</style>
+
+<div id="content">
+    <div class="entry">
+        <h1 class="entry-title"><a href="/mysql-data-cleaning" title="MySQL--数据去重">MySQL--数据去重</a></h1>
+        <p class="entry-date">2013-01-14</p>
+        <h2 id="section">问题背景</h2>
+
+<p>一张表有几个字段：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">字段</th>
+      <th style="text-align: left">类型</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">IP</td>
+      <td style="text-align: left">varchar(30)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">timeStart</td>
+      <td style="text-align: left">double(13,3)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">durationTime</td>
+      <td style="text-align: left">double(13,3)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">httpURL</td>
+      <td style="text-align: left">varchar(1000)</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">terminalType</td>
+      <td style="text-align: left">varchar(1000)</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>现在要去重，重复的标准：IP相同，httpURL也相同；保留重复数据中timeStart最小的那条记录。估计的<strong>瓶颈</strong>: 数据量很大，近千万条记录，需要考虑方案的可行性和效率。</p>
+
+<p><strong>猜测</strong>：MySQL数据库中有没有专门负责去重的机制？</p>
+
+<h2 id="section-1">解决方法</h2>
+
+<p>经初步分析，可选择的方法有：</p>
+
+<blockquote>
+  <ol>
+    <li>在同一张表中进行处理；</li>
+    <li>使用另一张表格；</li>
+    <li>使用文本进行处理；</li>
+  </ol>
+</blockquote>
+
+<p>针对上面3种方法，进行简要说明：</p>
+
+<h3 id="section-2">1.在同一张表中进行处理</h3>
+
+<ul>
+  <li><strong>表格预处理</strong>：排序，按照“timeStart”从小到大进行排序；</li>
+  <li><strong>查询</strong>：在排序好的Table中，从上到下进行逐条读取记录，并查询后面的记录中是否有重复；</li>
+  <li><strong>去重</strong>：删除重复记录；</li>
+</ul>
+
+<h3 id="section-3">2.使用另一张表</h3>
+
+<ul>
+  <li><strong>表格预处理</strong>：排序，按照“timeStart”从小到大进行排序；（同上），现在将预处理之后得到的表格记为TableA；</li>
+  <li><strong>新建TableB</strong>：字段与TableA保持一致；</li>
+  <li><strong>向TableB中插入数据</strong>：从TableA中逐条取出记录，判断在TableB中没有重复后，插入TableB中；</li>
+</ul>
+
+<h3 id="section-4">3.使用文本进行处理</h3>
+
+<ul>
+  <li><strong>文本转换</strong>：将表中记录，导出为文本形式；</li>
+  <li><strong>去重</strong>：针对文本进行去重；</li>
+</ul>
+
+<h3 id="section-5">4.具体解决细节&amp;代码</h3>
+
+<p>现在，咱们先按某一字段进行排序[1]：</p>
+
+<pre><code class="language-sql">SELECT * FROM oldTalbe \
+ORDER BY IP,timeStart LIMIT 10;
+</code></pre>
+
+<p>现在有了预期的排序结果，但是怎样才能以这个结果来更新数据库呢？有一个简单的办法，新建一个额外表，并将查询的结果逐条插入。复制表结构[2]的sql语句如下：</p>
+
+<pre><code>CREATE TABLE newTable LIKE oldTable;
+</code></pre>
+
+<p>将查询结果逐条的插入到newTable中[2][3]：</p>
+
+<pre><code>INSERT INTO newTable \
+			   SELECT * FROM oldTable \
+			   ORDER BY IP,timeStart;
+</code></pre>
+
+<p>运行上面的代码时间：<code>21s</code>，总数据量：<code>260万</code>。（若不使用排序，只进行数据复制，耗时<code>4.3s</code>）我们无聊了(这一步仅仅是测试，自己玩的，不感兴趣，可以直接跳过)：尝试将无序的记录先添加入新建的表格中，针对同一个表格使用<code>insert into</code>和<code>select</code>，即sql语句如下：</p>
+
+<pre><code>INSERT INTO newTable 
+			   SELECT * FROM oldTable; 
+INSERT INTO newTable \
+			   SELECT * FROM newTable \
+			   ORDER BY IP,timeStart;
+</code></pre>
+
+<p>测试结果显示，后来执行完之后，数据翻倍变为<code>520万</code>，而且时间在<code>4mins</code>以上。</p>
+
+<p>刚刚lby大牛路过，我把自己的问题描述了一下；他说自己之前做过，有两种办法，一时间只想到一种：先复制表结构到新表newTable，然后对于newTable添加一个约束Unique(IP,httpURL)，OK；现在可以向newTable中添加数据了，约束条件会帮助我们自动去重。完整的代码如下[4]：</p>
+
+<pre><code>#复制表结构
+CREATE TABLE newTable LIKE oldTable;
+ 
+#修改表字段，因为httpURL太大
+ALTER TABLE newTable MODIFY httpURL VARCHAR(300);
+ 
+#为表格添加约束条件（在Mysql5中，如果约束字段过大，则报错，因此要先执行上面的修改表字段）
+ALTER TABLE newTable ADD UNIQUE(IP,timeStart);
+ 
+#为新表中添加数据（约束条件自动去重）
+INSERT IGNORE newTable \
+			   (SELECT * FROM newTable \
+			   ORDER BY IP,timeStart);
+</code></pre>
+
+<p><strong>NOTE</strong>:现有MySQL中注释方法：1）单行注释，“#”，“–-空格/tab”；2）多行注释，“/<em>…</em>/”</p>
+
+<p><strong>MySQL中提前终止或者后台运行SQL语句的操作</strong>：<code>ctrl+c</code> or <code>ctrl+d</code>；</p>
+
+<p>Lby大牛刚才过来，提醒了一下可以考虑SQL中<code>select distinct IP,httpURL</code>的相关语句，至少可以使用下面的语句，统计一下去重后最终的记录个数：</p>
+
+<pre><code>SELECT COUNT(DISTINCT IP,httpURL) \
+				  FROM oldTable;
+</code></pre>
+
+<p>测试结果发现，上面的记录个数要比之前使用<code>Unique</code>进行约束方式，多了10条记录。猜测：跟<code>httpURL</code>字段被人为减少到<code>varchar(300)</code>有关。(后来的几次运行，此问题消失了)。</p>
+
+<p><strong>遗留问题</strong>：思考将上面的内容以脚本形式书写出来，并且将<code>newTable</code>、<code>oldTable</code>作为变量输入。思路：1）在SQL语句脚本内，设置变量；2）使用单独的shell脚本，配合SQL语句脚本。</p>
+
+<p><strong>NOTE</strong>:如何验证去重是否完成？基本思路：</p>
+
+<blockquote>
+  <ol>
+    <li>从<code>oldTable</code>中随便取出一个<code>IP</code>对应的多条记录进行处理，获取其中不同<code>httpURL</code>的个数，以及每个<code>httpURL</code>对应的最小<code>timeStart</code>字段；</li>
+    <li>从<code>newTable</code>中找出对应的<code>IP</code>，查询其对应的<code>httpURL</code>，以及对应的时间。（与上面的结果进行对比，如果完全相同，则说明去重正确）</li>
+  </ol>
+</blockquote>
+
+<p>具体验证代码如下：</p>
+
+<p>针对oldTable执行下面代码</p>
+
+<pre><code>#对应上面的步骤1
+#从oldTable中查询IP,可以知道哪些IP的记录最多
+SELECT IP,COUNT(*) FROM oldTable GROUP BY IP ORDER BY COUNT(*);
+ 
+#从上面的结果中，找出记录数较多的IP，查询其对应的httpURL以及最小的时间，要求：按照httpURL进行排序
+SELECT DISTINCT httpURL，MIN（timeStart） FROM oldTable WHERE IP='10.10.10.10' ORDER BY httpURL;
+</code></pre>
+
+<p>针对newTable执行下面代码</p>
+
+<pre><code>#对应上面的步骤2
+#从newTable中找出对应IP的httpURL，以及timeStart
+SELECT httpURL，timeStart FROM newTable WHERE IP='10.10.10.10' ORDER BY httpURL;
+</code></pre>
+
+<p>如果上面针对<code>oldTable</code>和<code>newTable</code>的查询结果相同，则表示去重完成。（可以随意更换上面的IP值，进行验证）</p>
+
+<h3 id="sql">5.SQL脚本实现去重</h3>
+
+<p>刚刚还说上面的遗留问题，现在已经解决了，用了一下午时间吧。下面对于以SQL脚本实现上述功能，进行一个小结。我们使用MySQL的存储过程，来实现动态输入变量<code>newTable</code>、<code>oldTable</code>。最终代码如下：</p>
+
+<pre><code>/*
+ *usage：
+ *      1) login the 'mysql' ;
+ *      2) source ~/deduc.sql;
+ *      3) CALL deduc('oldTable','newTable');
+ *
+ *function: de-duplication, remove the repeat record, and store the result in a new table;
+ *
+ *parameters:
+ *      oldTable: the original table, that we need to remove the repeat record;
+ *      newTable: the new build table, where we store the results.
+ *
+ *author：Ning Guo
+ *
+ *time: 1/15/2013
+ *
+ *程序运行效果：
+ *  260万数据，去重之后为60万，执行时间为：1min23s
+ */
+ 
+USE chinacache;
+DROP PROCEDURE IF EXISTS deduc;
+DELIMITER //
+CREATE PROCEDURE deduc(
+		$oldTable VARCHAR(100),
+		$newTable VARCHAR(100)
+)
+BEGIN
+		SET @SQL = concat('DROP TABLE IF EXISTS ',$newTable);
+		PREPARE stmt1 FROM @SQL;
+		EXECUTE stmt1;
+		DEALLOCATE PREPARE stmt1;
+ 
+		SET @SQL = concat('CREATE TABLE ',$newTable,' LIKE ',$oldTable);
+		PREPARE stmt1 FROM @SQL;
+		EXECUTE stmt1;
+		DEALLOCATE PREPARE stmt1;
+ 
+		SET @SQL = concat('ALTER TABLE ',$newTable,' MODIFY httpURL VARCHAR\(300\)');
+		PREPARE stmt1 FROM @SQL;
+		EXECUTE stmt1;
+		DEALLOCATE PREPARE stmt1;
+ 
+		SET @SQL = concat('ALTER TABLE ',$newTable,' ADD CONSTRAINT UNIQUE\(IP\,httpURL\)');
+		PREPARE stmt1 FROM @SQL;
+		EXECUTE stmt1;
+		DEALLOCATE PREPARE stmt1;
+ 
+		SET @SQL = concat('INSERT IGNORE ',$newTable,' \(SELECT \* FROM ',$oldTable,' ORDER BY IP\,timeStart\)');
+		PREPARE stmt1 FROM @SQL;
+		EXECUTE stmt1;
+		DEALLOCATE PREPARE stmt1;
+ 
+END //
+DELIMITER ;
+</code></pre>
+
+<p>由于MySQL不支持表名作为存储过程的变量，因此应该使用预定义语句：<code>PREPARE</code>、<code>EXECUTE</code>、<code>DEALLOCATE PREPARE</code>来进行实现[6]。</p>
+
+<h3 id="section-6">6.补充知识——存储过程[7][8]</h3>
+
+<p>什么是存储过程？可以将其看做一个批处理文件，包含多条MySQL语句，其会根据输入的参数（可以没有输入参数），有选择地执行对应的程序；而且可以有返回参数。</p>
+
+<p><code>DELIMITER //</code>的使用：为了区分存储过程内<code>;</code>与存储过程结束的标志，使用<code>DELIMITER</code>来临时更改<code>语句结束分隔符</code>。</p>
+
+<p>调用存储过程：<code>CALL deduc()</code>；</p>
+
+<p>删除存储过程：<code>DROP PROCEDURE deduc</code>；</p>
+
+<p>存储过程传入的参数不能作为表名：因此借鉴使用预定义语句<code>PREPARE</code>、<code>EXECUTE</code>、<code>DEALLOCATE PREPARE</code>。[8]</p>
+
+<p>几个常用的查询命令：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">命令</th>
+      <th style="text-align: left">说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left">show procedure status</td>
+      <td style="text-align: left">查询所有procedure的名称、创建时间</td>
+    </tr>
+    <tr>
+      <td style="text-align: left">show create procedure “procedure_name”</td>
+      <td style="text-align: left">查询某一procedure的创建语句</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="section-7">参考来源</h2>
+
+<ol>
+  <li>《MySQL必知必会》Page33；</li>
+  <li>http://www.2cto.com/database/201202/120259.html</li>
+  <li>《MySQL必知必会》Page136；</li>
+  <li>http://blog.sina.com.cn/s/blog_6fb90ed30100o09p.html</li>
+  <li>http://www.bhcode.net/article/20090220/4175.htm</li>
+  <li>http://bbs.csdn.net/topics/330197598</li>
+  <li>《MySQL必知必会》Page163；</li>
+  <li>http://blog.csdn.net/freecodetor/article/details/5818283</li>
+</ol>
+
+
+
+        <div id="disqus_container">
+            <div style="margin-bottom:20px" class="right">
+				<wb:share-button appkey="2306590132" addition="simple" type="button" ralateUid="2356527183"></wb:share-button>
+            </div>
+            <!--<a href="#" class="comment" onclick="return false;">点击查看评论</a>-->
+            <div id="disqus_thread"></div>
+        </div>
+    </div>
+
+	
+    <div class="sidenav">
+		<iframe width="100%" height="75" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=0&isFans=0&uid=2356527183&verifier=1ccfb61e&colors=d6f3f7,ffffff,666666,0082cb,ecfbfd&dpc=1"></iframe>
+    </div>
+
+</div>
+
+<script src="/js/post.js" type="text/javascript"></script>
+
+
+	<div id="gotoTop">Top</div>
+
+
+    <!--*********************************************************-->
+    <!--****** 宝贝儿，看见这个时候，删掉下面的统计代码哦~ ******-->
+    <!--*********************************************************-->
+	<script>
+	  (function(i,s,o,g,r,a,m){
+		  i['GoogleAnalyticsObject']=r;i[r]=i[r] || function(){
+			(i[r].q=i[r].q||[]).push(arguments)}, i[r].l=1*new Date();
+			a=s.createElement(o), m=s.getElementsByTagName(o)[0];
+			a.async=1;
+			a.src=g;
+			m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-48535193-1', 'ningg.github.io');
+	  ga('send', 'pageview');
+	</script>
+    
+	
+    <script type="text/javascript">
+		function gotoTop(min_height){
+			$("#gotoTop").click(
+				function(){$('html,body').animate({scrollTop:0},700);
+			}).hover(
+				function(){$(this).addClass("hover");},
+				function(){$(this).removeClass("hover");
+			});
+			min_height ? min_height = min_height : min_height = 600;
+			$(window).scroll(function(){
+				
+				var s = $(window).scrollTop();
+				
+				if( s > min_height){
+					$("#gotoTop").fadeIn(100);
+				}else{
+					$("#gotoTop").fadeOut(200);
+				};
+			});
+		};
+		gotoTop();
+
+        $(function(){
+            $('.home-follow').click(function(e){
+                e.preventDefault();
+
+                if($('.home-contact').is(':visible')){
+                    $('.home-contact').slideUp(100);
+                }else{
+                    $('.home-contact').slideDown(100);
+                }
+            });
+        })
+
+    </script>
+</body>
+</html>

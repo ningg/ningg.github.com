@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html xmlns:wb="http://open.weibo.com/wb">
+<head>
+    <!--   Author: NingG   -->
+    <meta charset="utf-8" />
+	<meta property="wb:webmaster" content="7ea7f3d5f3edad6a" />
+    <title>Flume下插件方式实现Advanced Logger Sink | ningg.top</title>
+    <meta name="author" content="NingG" />
+    <meta name="renderer" content="webkit">
+    <meta name="description" content=" Flume自带的Logger sink常用于直接在console上输出event的header和body，这对test和debug很重要，但body默认只truncate 16B，无法全部展示  " />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+    <link rel="stylesheet" href="/css/default.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="" />
+	
+    <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+	<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+	
+    <div class="home-menu">
+        <div class="home-icon-con">
+            <a class="home-menu-icon" href="/">NingG</a>
+            <a class="home-follow" href="#" title="Contact Me">+</a>
+        </div>
+        <div class="home-contact">
+            <a href="http://weibo.com/ggningg/" target="_blank" style="margin-left:-5px;"><img src="http://www.weibo.com/favicon.ico" alt="" width="25"/></a>
+            <a href="http://www.douban.com/people/ggningg/" target="_blank" style="text-align:center;"><img src="http://www.douban.com/favicon.ico" alt="" width="22"/></a>
+			<a href="http://github.com/ningg" alt="" target="_blank" style="text-align:right;"><img src="/images/icon-cube-smaller.png" width="22"/></a>
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="/js/prettify/prettify.css" />
+<style type="text/css">
+    body { background:#e8e8e8; }
+    @media screen and (max-width: 750px){
+        body { background:#fff; }
+    }
+    @media screen and (max-width: 1020px){
+        body { background:#fff; }
+    }
+</style>
+
+<div id="content">
+    <div class="entry">
+        <h1 class="entry-title"><a href="/flume-advance-logger-sink" title="Flume下插件方式实现Advanced Logger Sink">Flume下插件方式实现Advanced Logger Sink</a></h1>
+        <p class="entry-date">2014-10-31</p>
+        <h2 id="section">背景</h2>
+
+<p>Flume自带的Logger sink常用于直接在console上输出event的header和body，这对test和debug很重要，但body默认只truncate 16B，无法全部展示，这对test造成很大影响，怎么办？自己实现一个Adavanced Logger sink：完全输出整个event，这样就便利多了。</p>
+
+<h2 id="flumelogger-sink">Flume中Logger Sink</h2>
+
+<p>在<a href="/build-flume">编译flume：使用eclipse查看flume源码</a>中，已经介绍了如何在Eclipse下查看Flume的源代码，通过查看<code>LoggerSink</code>源码发现：</p>
+
+<pre><code>// LoggerSink.java
+logger.info("Event: " + EventHelper.dumpEvent(event));
+...
+
+// EventHelper.java
+private static final int DEFAULT_MAX_BYTES = 16;
+
+public static String dumpEvent(Event event) {
+	return dumpEvent(event, DEFAULT_MAX_BYTES);
+}
+</code></pre>
+
+<p>通过上面的Flume源码片段可知，Logger Sink默认限制了event的大小为16字节，这样，只需要实现一个与Logger Sink基本一致，但不对event设限制的sink就好了。</p>
+
+<p><strong>notes(ningg)</strong>：编译flume时，直接将源码当作existing maven project导入，行不行？Flume的源码全是java写的吗？还有个问题：如果使用eclipse来进行源代码的开发，最终通过git方式向repository中提交代码时，会夹带.class文件吗？</p>
+
+<h2 id="sink">自定义Sink</h2>
+
+<p><img src="/images/flume-advance-logger-sink/advanced-logger-sink.png" alt="" /></p>
+
+<p>在<code>flume-ng-core</code>工程的<code>src/main/java</code>目录下，新建package：<code>com.github.ningg</code>，然后新建class：<code>AdvancedLoggerSink</code>，内容如下：</p>
+
+<pre><code>package com.github.ningg;
+
+import org.apache.flume.Channel;
+import org.apache.flume.Context;
+import org.apache.flume.Event;
+import org.apache.flume.EventDeliveryException;
+import org.apache.flume.Transaction;
+import org.apache.flume.conf.Configurable;
+import org.apache.flume.event.EventHelper;
+import org.apache.flume.sink.AbstractSink;
+import org.apache.flume.sink.LoggerSink;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
+public class AdvancedLoggerSink extends AbstractSink implements Configurable {
+
+	private static final Logger logger = LoggerFactory
+			.getLogger(LoggerSink.class);
+
+	private static final int DEFAULT_MAX_BYTES = 16;
+	private int maxBytes = DEFAULT_MAX_BYTES;
+	
+	@Override
+	public void configure(Context context) {
+		maxBytes = context.getInteger("maxBytes", DEFAULT_MAX_BYTES);
+		logger.debug(this.getName() + " maximum bytes set to " + String.valueOf(maxBytes));
+	}
+	
+	@Override
+	public Status process() throws EventDeliveryException {
+		Status result = Status.READY;
+		Channel channel = getChannel();
+		Transaction transaction = channel.getTransaction();
+		Event event = null;
+
+		try {
+			transaction.begin();
+			event = channel.take();
+
+			if (event != null) {
+				if (logger.isInfoEnabled()) {
+					// edit this line, so you can change the output formater.
+					logger.info("Event: " + EventHelper.dumpEvent(event, maxBytes));
+				}
+			} else {
+				// No event found, request back-off semantics from the sink
+				// runner
+				result = Status.BACKOFF;
+			}
+			transaction.commit();
+		} catch (Exception ex) {
+			transaction.rollback();
+			throw new EventDeliveryException("Failed to log event: " + event,
+					ex);
+		} finally {
+			transaction.close();
+		}
+
+		return result;
+	}
+
+}
+</code></pre>
+
+<p>接下来，将整个<code>com.github.ningg</code>package导出为jar包：<code>advancedLoggerSink.jar</code>；根据Flume官网的建议，将此jar包上传到<code>$FLUME_HOME/plugins.d</code>目录下，具体：</p>
+
+<pre><code>plugins.d/advanced-logger-sink/lib/advancedLoggerSink.jar
+</code></pre>
+
+<p>为了测试效果，在<code>$FLUME_HOME/conf</code>下新建<code>advancedLoggerSink.conf</code>文件:</p>
+
+<pre><code>agent.sources = net
+agent.sinks = loggerSink
+agent.channels = memoryChannel
+
+# For each one of the sources, the type is defined
+agent.sources.net.type = netcat
+agent.sources.net.bind = localhost
+agent.sources.net.port = 44444
+
+# Each sink's type must be defined
+agent.sinks.loggerSink.type = com.github.ningg.AdvancedLoggerSink
+agent.sinks.loggerSink.maxBytes = 100
+
+# Each channel's type is defined.
+agent.channels.memoryChannel.type = memory
+agent.channels.memoryChannel.capacity = 100
+
+
+agent.sources.net.channels = memoryChannel
+agent.sinks.loggerSink.channel = memoryChannel
+</code></pre>
+
+<p>回到<code>$FLUME_HOME</code>目录下，执行如下命令：</p>
+
+<pre><code>bin/flume-ng agent --conf conf --conf-file conf/advancedLoggerSink.conf --name agent -Dflume.root.logger=INFO,console
+</code></pre>
+
+<p>当页面显示如下字样，表示flume启动成功：</p>
+
+<pre><code>Created serverSocket:sun.nio.ch.ServerSocketChannelImpl[/127.0.0.1:44444]
+</code></pre>
+
+<p>另开一个窗口，在当前服务器上，执行命令：<code>telnet localhost 44444</code>，并且输入如下内容：</p>
+
+<pre><code>Now I'm testing the Advanced Logger Sink
+</code></pre>
+
+<p>则，AdavancedSinkLogger的输出内容如下：</p>
+
+<pre><code>[INFO - com.github.ningg.AdvancedLoggerSink.process(AdvancedLoggerSink.java:44)] Event: { headers:{} 
+   body: 4E 6F 77 20 49 27 6D 20 74 65 73 74 69 6E 67 20 Now I'm testing
+00000010 74 68 65 20 41 64 76 61 6E 63 65 64 20 4C 6F 67 the Advanced Log
+00000020 67 65 72 20 53 69 6E 6B 0D                      ger Sink. }
+</code></pre>
+
+<p>AdvancedLoggerSink的输出格式：每行输出16个byte，左侧是字母对应的ASCII码，右侧是字母本身。备注：如果希望定制上述的输出格式，可以直接新建类来替代<code>EventHelper.dumpEvent(event, maxBytes)</code>。</p>
+
+<h2 id="section-1">参考来源</h2>
+
+<ul>
+  <li><a href="http://stackoverflow.com/questions/20189437/flume-is-truncating-characters-when-i-use-the-source-type-as-logger-it-just-s">Logger Sink truncate Event body</a></li>
+  <li><a href="https://issues.apache.org/jira/browse/FLUME-2246">FLUME-2246</a></li>
+</ul>
+
+<h2 id="section-2">杂谈</h2>
+
+<p>本文写完之后，我发现了：<a href="https://issues.apache.org/jira/browse/FLUME-2246">FLUME-2246</a>，Ou，已经有人在Flume官网上讨论并解决了这个问题，看来不会使用Flume官网不行呀，之前自己阅读标记过<a href="/how-to-contribute-open-source-project">如何参与开源项目</a>， 但是没有实际尝试参与。个人心里一个想法：玩开源的东西，要参与到开源社区中，你的问题开源社区早已涉及，只不过有些扩展功能重要程度低，虽然已解决，但并没有并入发行版本中。</p>
+
+<p>另，说明一点啊：遇到问题，自己先想思路，再去社区找答案，也是个好方法。</p>
+
+
+
+        <div id="disqus_container">
+            <div style="margin-bottom:20px" class="right">
+				<wb:share-button appkey="2306590132" addition="simple" type="button" ralateUid="2356527183"></wb:share-button>
+            </div>
+            <!--<a href="#" class="comment" onclick="return false;">点击查看评论</a>-->
+            <div id="disqus_thread"></div>
+        </div>
+    </div>
+
+	
+    <div class="sidenav">
+		<iframe width="100%" height="75" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=0&isFans=0&uid=2356527183&verifier=1ccfb61e&colors=d6f3f7,ffffff,666666,0082cb,ecfbfd&dpc=1"></iframe>
+    </div>
+
+</div>
+
+<script src="/js/post.js" type="text/javascript"></script>
+
+
+	<div id="gotoTop">Top</div>
+
+
+    <!--*********************************************************-->
+    <!--****** 宝贝儿，看见这个时候，删掉下面的统计代码哦~ ******-->
+    <!--*********************************************************-->
+	<script>
+	  (function(i,s,o,g,r,a,m){
+		  i['GoogleAnalyticsObject']=r;i[r]=i[r] || function(){
+			(i[r].q=i[r].q||[]).push(arguments)}, i[r].l=1*new Date();
+			a=s.createElement(o), m=s.getElementsByTagName(o)[0];
+			a.async=1;
+			a.src=g;
+			m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-48535193-1', 'ningg.github.io');
+	  ga('send', 'pageview');
+	</script>
+    
+	
+    <script type="text/javascript">
+		function gotoTop(min_height){
+			$("#gotoTop").click(
+				function(){$('html,body').animate({scrollTop:0},700);
+			}).hover(
+				function(){$(this).addClass("hover");},
+				function(){$(this).removeClass("hover");
+			});
+			min_height ? min_height = min_height : min_height = 600;
+			$(window).scroll(function(){
+				
+				var s = $(window).scrollTop();
+				
+				if( s > min_height){
+					$("#gotoTop").fadeIn(100);
+				}else{
+					$("#gotoTop").fadeOut(200);
+				};
+			});
+		};
+		gotoTop();
+
+        $(function(){
+            $('.home-follow').click(function(e){
+                e.preventDefault();
+
+                if($('.home-contact').is(':visible')){
+                    $('.home-contact').slideUp(100);
+                }else{
+                    $('.home-contact').slideDown(100);
+                }
+            });
+        })
+
+    </script>
+</body>
+</html>

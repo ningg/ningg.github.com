@@ -1,0 +1,384 @@
+<!DOCTYPE html>
+<html xmlns:wb="http://open.weibo.com/wb">
+<head>
+    <!--   Author: NingG   -->
+    <meta charset="utf-8" />
+	<meta property="wb:webmaster" content="7ea7f3d5f3edad6a" />
+    <title>磁盘和文件系统 | ningg.top</title>
+    <meta name="author" content="NingG" />
+    <meta name="renderer" content="webkit">
+    <meta name="description" content=" 计算机上，数据写在磁盘上，那么，磁盘是什么结构？磁盘读写速度有没有瓶颈？  " />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+    <link rel="stylesheet" href="/css/default.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="" />
+	
+    <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+	<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+	
+    <div class="home-menu">
+        <div class="home-icon-con">
+            <a class="home-menu-icon" href="/">NingG</a>
+            <a class="home-follow" href="#" title="Contact Me">+</a>
+        </div>
+        <div class="home-contact">
+            <a href="http://weibo.com/ggningg/" target="_blank" style="margin-left:-5px;"><img src="http://www.weibo.com/favicon.ico" alt="" width="25"/></a>
+            <a href="http://www.douban.com/people/ggningg/" target="_blank" style="text-align:center;"><img src="http://www.douban.com/favicon.ico" alt="" width="22"/></a>
+			<a href="http://github.com/ningg" alt="" target="_blank" style="text-align:right;"><img src="/images/icon-cube-smaller.png" width="22"/></a>
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="/js/prettify/prettify.css" />
+<style type="text/css">
+    body { background:#e8e8e8; }
+    @media screen and (max-width: 750px){
+        body { background:#fff; }
+    }
+    @media screen and (max-width: 1020px){
+        body { background:#fff; }
+    }
+</style>
+
+<div id="content">
+    <div class="entry">
+        <h1 class="entry-title"><a href="/computer-system-disk" title="磁盘和文件系统">磁盘和文件系统</a></h1>
+        <p class="entry-date">2014-05-20</p>
+        <h2 id="section">背景</h2>
+
+<p>最近在服务器间传送文件，需要监控磁盘IO和网络IO，确定哪一个是瓶颈，并且找出服务器之间<code>高效传输文件</code>的方案。
+更细节一些的：例如，提高磁盘的转速、改进磁盘接口，当前环境下，哪个有效？</p>
+
+<h2 id="section-1">磁盘</h2>
+
+<p>（本文关注的是旋转磁盘，固态硬盘不包含在内。）</p>
+
+<p>开篇有个疑问：要想在服务器间<code>高效地传输文件</code>，首先要弄明白的是：文件在哪？好，文件不是凭空想想的，而是实实在在存储在物理介质上的，当前主要是存储于磁盘中。</p>
+
+<p>几个小常识：</p>
+
+<ul>
+  <li>硬盘尺寸：台式机3.5英寸，笔记本尺寸2.5英寸；</li>
+</ul>
+
+<h3 id="section-2">物理结构</h3>
+
+<p><img src="/images/computer-system-disk/true-disk.jpg" alt="true-disk" /></p>
+
+<p>从上图可以看出，磁盘物理上，包含如下几个部分：</p>
+
+<ol>
+  <li>盘片：通常包含两个<code>盘面</code>，上面覆盖了磁性物质，用于记录数据；</li>
+  <li>磁头：每个<code>盘面</code>对应一个磁头，读取<code>盘面</code>上的数据；</li>
+  <li>主轴马达：带动盘片转动；</li>
+  <li>机械手臂：调整磁头位置；</li>
+</ol>
+
+<p>备注：所有磁头，任何时刻，都在同一<code>磁柱</code>上。</p>
+
+<h3 id="section-3">逻辑结构</h3>
+
+<p>磁盘有一个指标叫作<code>磁盘容量</code>，它标识了一个磁盘可以存储多少个字节；那好，一个字节过来了，应该存储在哪个地方？<em>（类比，一位新兵到了，应该到部队中哪个地方去？）</em></p>
+
+<p>为避免混乱，方便管理，需要为磁盘设计一个组织方式。<em>（类比，部队被划分为一个个基本单元：<code>班</code>，几个<code>班</code>构成一个<code>排</code>，几个<code>排</code>构成一个<code>连</code>……）</em></p>
+
+<p><img src="/images/computer-system-disk/disk-layer-structure.png" alt="disk-layer-structure" /></p>
+
+<p>磁盘的组织方式如上图所示，简要说明如下：</p>
+
+<ol>
+  <li>磁盘最小的物理单元为<code>扇区</code>(sector)，扇区的大小是固定的，通常为 512 bytes；</li>
+  <li>同一个<code>盘面</code>上，同一圆圈上的所有<code>扇区</code>组成一个<code>磁道</code>(track)，又称<code>磁轨</code>；</li>
+  <li>所有<code>盘面</code>上，在对应位置的所有<code>磁道</code>组成一个<code>磁柱</code>(cylinder)；</li>
+</ol>
+
+<p>将上面的磁盘组织方式对应到实际物理磁盘上，如下图所示：</p>
+
+<p><img src="/images/computer-system-disk/disk-logic-structure.png" alt="disk-logic-structure" /></p>
+
+<p>补充说明：</p>
+
+<ol>
+  <li>2009年底，磁盘制造商逐渐推广<code>扇区</code>大小为 4096 bytes;</li>
+  <li>通常，每个<code>磁道</code>上<code>扇区</code>个数相同，则，外圈的磁道上，扇区分布稀疏。为提升盘片的利用率，产生了<code>多区记录技术</code>(multiple zone recording)：相邻的几个磁柱被分割为一个记录区（recording zone），一个记录区中，每个磁柱的每个磁道拥有相同数量的扇区，扇区数由记录区中最里侧的磁道来决定。</li>
+</ol>
+
+<h3 id="section-4">接口</h3>
+
+<p>为了读取磁盘中数据，需要一根排线，将磁盘连到电脑上；磁盘连接排线的地方叫接口，接口的传输速度限制了读取磁盘的最大速度。常见的磁盘接口，有IDE、SATA、SCSI。</p>
+
+<p><strong>IDE接口</strong>：Integrated Drive Electronics，集成电路设备，具有如下特点：</p>
+
+<ol>
+  <li>排线较宽；</li>
+  <li>Ultra 133，即理论速度 133MB/s</li>
+  <li>每条IDE排线，可接2个IDE接口设备，分为master和slave，需要设置跳针；</li>
+  <li>常用于个人电脑；</li>
+</ol>
+
+<p><strong>SATA接口</strong>：Serial ATA，具有如下特点：</p>
+
+<ol>
+  <li>插槽比IDE小；</li>
+  <li>每条SATA排线，仅能连接一个SATA接口设备；</li>
+  <li>SATA-1理论速度：150MB/s，SATA-2理论速度：300MB/s，最近的SATA-3理论速度：600MB/s；</li>
+  <li>常用于个人电脑；</li>
+</ol>
+
+<p><strong>SCSI接口</strong>：Small Computer System Interface，小型计算机系统接口，具有如下特点：</p>
+
+<ol>
+  <li>对应磁盘上，有一个处理器，节省主板上CPU资源；</li>
+  <li>SCSI-3 Ultra 320的理论速度：320MB/s，Ultra 640的理论速度：640MB/s；</li>
+  <li>常用于服务器、工作站；</li>
+</ol>
+
+<h3 id="section-5">筛选磁盘注意事项</h3>
+
+<ol>
+  <li>接口类型：IDE？SATA？SCSI？主板上插槽是否支持？</li>
+  <li>容量：2T？500G？</li>
+  <li>转速：7200转/min？5400转/min？</li>
+  <li>磁盘缓冲内存大小：磁盘上此机制，加速文件读取速率；</li>
+</ol>
+
+<p>备注：建议每次正常关机，这样磁盘的机械手臂会回到原位。<em>（当前已有技术使得磁盘停止旋转后，机械手臂自动回到原位）</em></p>
+
+<h3 id="section-6">查看磁盘详情</h3>
+
+<p>（Linux命令，磁盘容量多少？接口是什么？有几块磁盘？用什么命令来查看，具体步骤）</p>
+
+<p>（能否通过命令，查看磁盘的生产厂家？磁盘型号？目标：到官网查看给出的IO速度标准）</p>
+
+<h3 id="section-7">读写磁盘耗时</h3>
+
+<p>读写磁盘所需时间，较为专业的称呼是<code>磁盘访问时间</code>，其主要分为：寻道时间、旋转时间、传送时间，具体如下：</p>
+
+<ol>
+  <li>寻道时间(<code>seek time</code>)：机械手臂摆动，将磁头定位到目标扇区所在磁道上，其耗时是ms级；</li>
+  <li>旋转时间(<code>rotational time</code>)：磁头定位到磁道后，需要等待目标扇区的第一个bit旋转到磁头下；</li>
+  <li>传送时间(<code>transfer time</code>)：磁头从目标扇区第一个bit扫描到最后一个bit所需时间；</li>
+</ol>
+
+<p>备注：旋转磁盘的访问时间是ms级别的。</p>
+
+<h3 id="io">磁盘IO的基本过程</h3>
+
+<p>（DMA，已经制作过visio图片了）</p>
+
+<h3 id="section-8">测试磁盘读写速度</h3>
+
+<p>（doing…）</p>
+
+<h2 id="section-9">磁盘格式化</h2>
+
+<p>一块新磁盘放在我面前，怎么往上面写文件呢？要想使用，需要先把磁盘内部的东西整理一下，即进行格式化。具体磁盘格式化包括：</p>
+
+<ol>
+  <li>低级格式化：又称，低阶格式化，</li>
+  <li>分区：</li>
+  <li>高级格式化：又称，高阶格式化，</li>
+</ol>
+
+<h3 id="block">逻辑区块Block</h3>
+
+<p>逻辑区块（Block），这个概念很重要，需要单独拎出来说一下。</p>
+
+<p>数据总是要存储在磁盘上的，磁盘的最小物理单元为<code>扇区</code>（Sector），通常一个扇区 512 Bytes，磁盘通过磁头读取扇区内的信息，对于一个 10M Bytes的文件，磁头要进行20480次读取（I/O）。</p>
+
+<p>为了克服上述文件读取效率问题，逻辑区块（Block）这一概念就产生了！逻辑区块，是在磁盘格式化为某一种文件系统（File System）时，所指定的<code>最小存储单元</code>。这个最小存储单元，是架构在<code>扇区</code>之上的（因为<code>扇区</code>是磁盘的最小物理存储单元），由多个连续的Sector构成；Block的大小一般为Sector的2的n次方倍。此时，磁头一次读取一个Block，假设格式化时，指定Block为4KB（即由8个512Bytes的Sector组成），那么同样10MB大小的文件，读取时，磁头的读取次数降至2560次，文件的读取效率大大提升了。
+通常Block越大，文件读取效率越高。</p>
+
+<p>小结一下，有几点：</p>
+
+<blockquote>
+  <ol>
+    <li>硬盘最小物理存储单元，扇区（Sector），通常 512 Bytes；</li>
+    <li>数据最小逻辑存储单元，逻辑区块（Block），由 2 的 n 次方个连续的Sector组成；</li>
+    <li>磁头一次读取一个Block；</li>
+  </ol>
+</blockquote>
+
+<p>Block是不是越大越好？不是，因为一个Block最多仅能容纳一个文件；举例来说：假设Block为4KB，而文件只有100B，这个文件仍然要占用1个Block的存储空间。因此，在进行Block大小规划的时候，需要考虑如下两个方面：</p>
+
+<ul>
+  <li>文件的读写效率；</li>
+  <li>文件大小可能造成的磁盘空间浪费；</li>
+</ul>
+
+<h3 id="section-10">磁盘分区</h3>
+
+<p>我是一个保守的人，做事的原则是能不改变就不要改变（墨守成规？嗯，是这样），想问一下，磁盘分区出现之前没有磁盘分区，后来为什么会出现磁盘分区（partition）？</p>
+
+<p>你是什么样的人，我管不着，不过上面是个好问题。对磁盘进行分区，主要从两点考虑：</p>
+
+<p><strong>1.数据安全性</strong>：将磁盘分区，不同分区之间不会相互影响，举例：分区A损坏了，其内部的文件将无法恢复，但这并不会影响分区B；最常见的情况时，重装系统时，只需要覆盖掉系统分区，不会影响其他分区上的文件。</p>
+
+<p><strong>2.数据读写性能</strong>
+：分区实质是按照磁柱进行分割的，即，一个分区有一个开始磁柱和一个终止磁柱，分区将数据集中在某些连续的磁柱区间内；举例：一次分区位于磁柱1~100，则当从该分区读取数据文件时，磁盘只会搜索1~100范围内的磁柱，由于数据集中了，有助于数据读取的速度和效率。</p>
+
+<p>上面已经简单说明了磁盘分区的必要性，那具体是如何进行磁盘分区的呢？</p>
+
+<p>一块磁盘分区（<code>partition</code>）的详情，以分区表（<code>partition table</code>）的形式存储在磁盘第一个扇区内。</p>
+
+<p>补充一下：每块磁盘的第一个扇区都是最重要的扇区，其内存储了两个重要信息：</p>
+
+<ul>
+  <li>MBR（<code>Master Boot Record</code>，主启动区）：指定当前区块中内容分布（什么意思？不明白），系统启动后会主动读取MBR，446 Bytes；</li>
+  <li>分区表（<code>Partation Table</code>）：磁盘的分区详细信息，64 Bytes；<em>（其后面还有2字节，是MBR的结束标志<code>55AA</code>）</em></li>
+</ul>
+
+<p><img src="/images/computer-system-disk/fig2.gif" alt="" /></p>
+
+<p>分区表，有几点：</p>
+
+<blockquote>
+  <ol>
+    <li>64B的分区表，共4条分区记录；</li>
+    <li>每条分区记录为 16B，对应一个起始磁柱和一个截止磁柱；</li>
+    <li>每条分区记录，只能为主分区（Primary）或扩展分区（Extended）；</li>
+    <li>扩展分区，最多有 1 个；</li>
+    <li>扩展分区，可进一步划分为逻辑分区；</li>
+    <li>逻辑分区数量有限制，IDE硬盘（编号：5~63，最多59个）、SATA硬盘（编号：5~15，最多11个）；</li>
+    <li>扩展分区不能被格式化，只有主分区和逻辑分区可以；</li>
+  </ol>
+</blockquote>
+
+<p><img src="/images/computer-system-disk/disk-partition.png" alt="disk-partition" /></p>
+
+<p>思考：一个操作系统下，有多块磁盘，如何分区？每块磁盘最多划分为4个分区？一块磁盘最少划分为一个分区？多块磁盘能否构成一个分区？</p>
+
+<p>初步结论<em>（详细信息<a href="http://www.tldp.org/HOWTO/Partition/index.html">参考阅读Linux Partition HOWTO</a>）</em>：</p>
+
+<ol>
+  <li>磁盘作为系统引导盘时，至少有一个primary partition、至少一个swap partition；</li>
+  <li>非系统引导盘，可以有0个或0个以上的primary partition、logical partition、swap partition；</li>
+  <li>boot partition，最好选为primary partition<em>（技术手段上，不要求一定要primary partition，logical partition也可以）</em></li>
+</ol>
+
+<blockquote>
+  <p><strong>特别说明</strong>：生产服务器上，务必将数据单独分区存放，这样及时系统出问题时，也能保证数据的完整性。</p>
+</blockquote>
+
+<p>备注：分区表，除了上面提到的MBR，还有一种GPT来解决大硬盘问题：MBR分区表，一个分区最大容量为2T。疑问：如何确定系统是否是GPT分区表？</p>
+
+<h3 id="section-11">磁盘格式化</h3>
+
+<h2 id="section-12">系统开机过程</h2>
+
+<p>系统开机/重启时，会经历几个基本过程：</p>
+
+<ol>
+  <li>系统启动：CPU加载BIOS（Basic Input Output System，主板上ROM中固化的程序）：设置系统信息、开机后系统自检。特别要说明的是：BIOS运行时，会按照COMS（记录时间、启动设置等信息的芯片）中设置的顺序，来搜索处于活动状态并且可以引导的设备；设备可以是CD/DVD、磁盘上的某个分区、U盘、甚至是网络上的某个设备。通常，Linux是从硬盘上引导的，硬盘上MBR包含了主引导加载程序，当MBR被加载到内存后，BIOS就将控制权转交给MBR；</li>
+  <li>第一阶段BootLoader：对于磁盘加载来说，就是磁盘的第一扇区，包含了MBR和分区表；这一阶段目标：从分区表中，查找唯一的活动分区，<em>（是否要求一定是活动分区，由引导程序定），</em>将活动分区的引导记录读取RAM，并执行。</li>
+  <li>第二阶段BootLoader：启动内核映像，转交控制权；</li>
+  <li>内核：内核映像并不是可执行的内核，而是压缩过的映像，通常为zImage/bzImage；一个进程对映像解压之后，开始启动内核；</li>
+  <li>Init：用户自己的应用环境；</li>
+</ol>
+
+<p><img src="/images/computer-system-disk/fig1.gif" alt="" /></p>
+
+<h2 id="section-13">文件系统</h2>
+
+<p>（doing…）</p>
+
+<h2 id="section-14">参考资料</h2>
+
+<ol>
+  <li>深入理解计算机系统</li>
+  <li>鸟哥私房菜（基础篇）第三版</li>
+  <li>Disk formatting wiki: <a href="http://en.wikipedia.org/wiki/Disk_formatting">http://en.wikipedia.org/wiki/Disk_formatting</a></li>
+  <li>南非蚂蚁的<a href="http://linux.chinaunix.net/techdoc/beginner/2009/07/15/1124345.shtml">逻辑区块的介绍</a></li>
+  <li><a href="http://zh.wikipedia.org/zh/%E4%B8%BB%E5%BC%95%E5%AF%BC%E8%AE%B0%E5%BD%95">MBR（wiki）</a></li>
+  <li><a href="https://www.ibm.com/developerworks/cn/linux/l-linuxboot/#ibm-pcon">Linux引导过程内幕</a></li>
+  <li><a href="http://zh.wikipedia.org/wiki/%E6%A0%BC%E5%BC%8F%E5%8C%96">磁盘格式化</a></li>
+  <li><a href="http://en.wikipedia.org/wiki/GUID_Partition_Table">GPT Partition Table</a></li>
+  <li><a href="http://www.tldp.org/HOWTO/Partition/requirements.html">Linux Partition HOWTO</a></li>
+</ol>
+
+<h2 id="section-15">杂谈</h2>
+
+<p>维基百科，自由的百科全书，对于我这类的科技工作者，很有用；因为，我查询知识的时候，总希望能够找到知识的源头，说白了，我更希望从知识的源头看起，希望能够自己去品味、理解；而百度百科、国内科技博客，很少说明参考资料来源，唯有维基百科，不仅针对某个知识进行说明，而且提供了详尽的参考资料，这很美妙。如果你也有类似的需求，请用维基百科吧。</p>
+
+
+
+        <div id="disqus_container">
+            <div style="margin-bottom:20px" class="right">
+				<wb:share-button appkey="2306590132" addition="simple" type="button" ralateUid="2356527183"></wb:share-button>
+            </div>
+            <!--<a href="#" class="comment" onclick="return false;">点击查看评论</a>-->
+            <div id="disqus_thread"></div>
+        </div>
+    </div>
+
+	
+    <div class="sidenav">
+		<iframe width="100%" height="75" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=0&isFans=0&uid=2356527183&verifier=1ccfb61e&colors=d6f3f7,ffffff,666666,0082cb,ecfbfd&dpc=1"></iframe>
+    </div>
+
+</div>
+
+<script src="/js/post.js" type="text/javascript"></script>
+
+
+	<div id="gotoTop">Top</div>
+
+
+    <!--*********************************************************-->
+    <!--****** 宝贝儿，看见这个时候，删掉下面的统计代码哦~ ******-->
+    <!--*********************************************************-->
+	<script>
+	  (function(i,s,o,g,r,a,m){
+		  i['GoogleAnalyticsObject']=r;i[r]=i[r] || function(){
+			(i[r].q=i[r].q||[]).push(arguments)}, i[r].l=1*new Date();
+			a=s.createElement(o), m=s.getElementsByTagName(o)[0];
+			a.async=1;
+			a.src=g;
+			m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-48535193-1', 'ningg.github.io');
+	  ga('send', 'pageview');
+	</script>
+    
+	
+    <script type="text/javascript">
+		function gotoTop(min_height){
+			$("#gotoTop").click(
+				function(){$('html,body').animate({scrollTop:0},700);
+			}).hover(
+				function(){$(this).addClass("hover");},
+				function(){$(this).removeClass("hover");
+			});
+			min_height ? min_height = min_height : min_height = 600;
+			$(window).scroll(function(){
+				
+				var s = $(window).scrollTop();
+				
+				if( s > min_height){
+					$("#gotoTop").fadeIn(100);
+				}else{
+					$("#gotoTop").fadeOut(200);
+				};
+			});
+		};
+		gotoTop();
+
+        $(function(){
+            $('.home-follow').click(function(e){
+                e.preventDefault();
+
+                if($('.home-contact').is(':visible')){
+                    $('.home-contact').slideUp(100);
+                }else{
+                    $('.home-contact').slideDown(100);
+                }
+            });
+        })
+
+    </script>
+</body>
+</html>

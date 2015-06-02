@@ -1,0 +1,334 @@
+<!DOCTYPE html>
+<html xmlns:wb="http://open.weibo.com/wb">
+<head>
+    <!--   Author: NingG   -->
+    <meta charset="utf-8" />
+	<meta property="wb:webmaster" content="7ea7f3d5f3edad6a" />
+    <title>ElasticSearch入门操作 | ningg.top</title>
+    <meta name="author" content="NingG" />
+    <meta name="renderer" content="webkit">
+    <meta name="description" content=" 安装、启动，新建、查询、删除 Index  " />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+    <link rel="stylesheet" href="/css/default.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="" />
+	
+    <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+	<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+	
+    <div class="home-menu">
+        <div class="home-icon-con">
+            <a class="home-menu-icon" href="/">NingG</a>
+            <a class="home-follow" href="#" title="Contact Me">+</a>
+        </div>
+        <div class="home-contact">
+            <a href="http://weibo.com/ggningg/" target="_blank" style="margin-left:-5px;"><img src="http://www.weibo.com/favicon.ico" alt="" width="25"/></a>
+            <a href="http://www.douban.com/people/ggningg/" target="_blank" style="text-align:center;"><img src="http://www.douban.com/favicon.ico" alt="" width="22"/></a>
+			<a href="http://github.com/ningg" alt="" target="_blank" style="text-align:right;"><img src="/images/icon-cube-smaller.png" width="22"/></a>
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="/js/prettify/prettify.css" />
+<style type="text/css">
+    body { background:#e8e8e8; }
+    @media screen and (max-width: 750px){
+        body { background:#fff; }
+    }
+    @media screen and (max-width: 1020px){
+        body { background:#fff; }
+    }
+</style>
+
+<div id="content">
+    <div class="entry">
+        <h1 class="entry-title"><a href="/elasticsearch-intro" title="ElasticSearch入门操作">ElasticSearch入门操作</a></h1>
+        <p class="entry-date">2015-03-12</p>
+        <p>当前使用组件的版本：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>组件</th>
+      <th>版本</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>ElasticSearch</td>
+      <td><code>1.4.4</code></td>
+    </tr>
+    <tr>
+      <td>Java</td>
+      <td><code>1.7.0_67</code> HotSpot(64) 64-Bit</td>
+    </tr>
+  </tbody>
+</table>
+
+<h2 id="section">启动</h2>
+
+<p>直接下载，然后解压，直接运行脚本<code>bin/elasticsearch</code>。如果希望 ElasticSearch 在后台运行，则执行命令<code>bin/elasticsearch -d</code>，其将 ElasticSearch 进程的父进程设置为超级进程（<code>pid=1</code>）。现在，如何测试是否启动成功？可向 <code>http://localhost:9200</code> 发送一条请求，会查看到返回的JSON字符串，具体效果如下：</p>
+
+<pre><code>[ningg@localhost ~]$ curl -XGET http://localhost:9200/
+{
+  "status" : 200,
+  "name" : "Silly Seal",
+  "cluster_name" : "elasticsearch",
+  "version" : {
+	"number" : "1.4.4",
+	"build_hash" : "c88f77ffc81301dfa9dfd81ca2232f09588bd512",
+	"build_timestamp" : "2015-02-19T13:05:36Z",
+	"build_snapshot" : false,
+	"lucene_version" : "4.10.3"
+  },
+  "tagline" : "You Know, for Search"
+}
+</code></pre>
+
+<p>补充几点：</p>
+
+<ul>
+  <li>验证ElasticSearch是否成功启动，也可以直接使用浏览器，访问<code>http://localhost:9200</code>，将此处 <code>localhost</code> 替换为服务器的IP。</li>
+  <li>在后台启动ElasticSearch的详细过程，可以参考<code>bin/elasticsearch</code>脚本细节，内部有详细说明，本质就是shell脚本中启动一个Java进程。</li>
+</ul>
+
+<h2 id="index">Index操作</h2>
+
+<h3 id="section-1">插入数据</h3>
+
+<p>如果指定的 <code>Index</code>`Type<code> 不存在，则自动创建，下面为向</code>Index<code>\</code>Type` 插入数据的命令；</p>
+
+<pre><code>curl -XPUT 'http://localhost:9200/test/test/1' -d '{ "name" : "Ning Guo"}'
+</code></pre>
+
+<h3 id="section-2">查询数据</h3>
+
+<p>查询指定条件的数据，两个操作：<code>_count</code>、<code>_search</code>。</p>
+
+<pre><code>[ningg@localhost ~]$ curl -XGET http://localhost:9200/test/_count?pretty=true
+{
+  "count" : 1,
+  "_shards" : {
+	"total" : 5,
+	"successful" : 5,
+	"failed" : 0
+  }
+}
+[ningg@localhost ~]$ 
+[ningg@localhost ~]$ curl -XGET http://localhost:9200/test/_search?pretty=true
+{
+  "took" : 2,
+  "timed_out" : false,
+  "_shards" : {
+	"total" : 5,
+	"successful" : 5,
+	"failed" : 0
+  },
+  "hits" : {
+	"total" : 1,
+	"max_score" : 1.0,
+	"hits" : [ {
+	  "_index" : "test",
+	  "_type" : "test",
+	  "_id" : "1",
+	  "_score" : 1.0,
+	  "_source":{ "name" : "Ning Guo"}
+	} ]
+  }
+}
+</code></pre>
+
+<p>其他查询：</p>
+
+<ul>
+  <li>查询 ElasticSearch 下，所有的 Index ：
+    <ul>
+      <li><code>curl http://localhost:9200/_alias?pretty</code></li>
+      <li><code>curl http://localhost:9200/_stats/indexes?pretty</code></li>
+      <li><code>curl http://localhost:9200/_cat/indices?pretty</code></li>
+      <li>注：直接执行<code>_cat</code>会显示提示信息；</li>
+    </ul>
+  </li>
+  <li>查询 Index 下所有的 Type 以及 Type 详情：
+    <ul>
+      <li><code>curl http://localhost:9200/indexName/_mapping?pretty</code></li>
+    </ul>
+  </li>
+  <li>查询 Index 的详情：
+    <ul>
+      <li><code>curl http://localhost:9200/indexName/_status?pretty</code></li>
+    </ul>
+  </li>
+  <li>精确查询：避免对keyword的分词和对document中field的分词</li>
+</ul>
+
+<h3 id="section-3">删除数据</h3>
+
+<p>如何删除一个Index、Type、Document。</p>
+
+<pre><code>curl -XDELETE http://localhost:9200/test?pretty
+</code></pre>
+
+<h2 id="section-4">监控</h2>
+
+<p>Elastic官网提供了一种方式Marvel，不过这种方式是付费的，我x，那能不能利用Ganglia监控呢？实际上，ElasticSearch是基于Java的，而JVM能够通过JMX方式向外停工监控数据，唯一的问题是：ElasticSearch在JVM中记录的运行状态数据吗？</p>
+
+<h2 id="section-5">常见问题</h2>
+
+<h3 id="warn-too-many-open-files">WARN: Too many open files</h3>
+
+<p>详细错误信息：</p>
+
+<pre><code>[2015-04-14 11:18:25,797][WARN ][indices.cluster          ] [Rune] [flume-2015-04-14][2] failed to start shard
+org.elasticsearch.index.gateway.IndexShardGatewayRecoveryException: [flume-2015-04-14][2] failed recovery
+	at org.elasticsearch.index.gateway.IndexShardGatewayService$1.run(IndexShardGatewayService.java:185)
+	at java.util.concurrent.ThreadPoolExecutor.runWorker(ThreadPoolExecutor.java:1145)
+	at java.util.concurrent.ThreadPoolExecutor$Worker.run(ThreadPoolExecutor.java:615)
+	at java.lang.Thread.run(Thread.java:745)
+Caused by: org.elasticsearch.index.engine.EngineCreationFailureException: [flume-2015-04-14][2] failed to open reader on writer
+	at org.elasticsearch.index.engine.internal.InternalEngine.start(InternalEngine.java:326)
+	at org.elasticsearch.index.shard.service.InternalIndexShard.performRecoveryPrepareForTranslog(InternalIndexShard.java:732)
+	at org.elasticsearch.index.gateway.local.LocalIndexShardGateway.recover(LocalIndexShardGateway.java:231)
+	at org.elasticsearch.index.gateway.IndexShardGatewayService$1.run(IndexShardGatewayService.java:132)
+	... 3 more
+Caused by: java.nio.file.FileSystemException: /home/storm/es/elasticsearch-1.4.4/data/elasticsearch/nodes/0/indices/flume-2015-04-14/2/index/_h3.cfe: Too many open files
+	at sun.nio.fs.UnixException.translateToIOException(UnixException.java:91)
+	at sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:102)
+	at sun.nio.fs.UnixException.rethrowAsIOException(UnixException.java:107)
+	at sun.nio.fs.UnixFileSystemProvider.newFileChannel(UnixFileSystemProvider.java:177)
+	at java.nio.channels.FileChannel.open(FileChannel.java:287)
+	at java.nio.channels.FileChannel.open(FileChannel.java:334)
+	at org.apache.lucene.store.NIOFSDirectory.openInput(NIOFSDirectory.java:81)
+	at org.apache.lucene.store.FileSwitchDirectory.openInput(FileSwitchDirectory.java:172)
+	at org.apache.lucene.store.FilterDirectory.openInput(FilterDirectory.java:80)
+	at org.elasticsearch.index.store.DistributorDirectory.openInput(DistributorDirectory.java:130)
+	at org.apache.lucene.store.FilterDirectory.openInput(FilterDirectory.java:80)
+	at org.elasticsearch.index.store.Store$StoreDirectory.openInput(Store.java:515)
+	at org.apache.lucene.store.Directory.openChecksumInput(Directory.java:113)
+	at org.apache.lucene.store.CompoundFileDirectory.readEntries(CompoundFileDirectory.java:166)
+	at org.apache.lucene.store.CompoundFileDirectory.&lt;init&gt;(CompoundFileDirectory.java:106)
+	at org.apache.lucene.index.SegmentReader.readFieldInfos(SegmentReader.java:274)
+	at org.apache.lucene.index.SegmentReader.&lt;init&gt;(SegmentReader.java:107)
+	at org.apache.lucene.index.ReadersAndUpdates.getReader(ReadersAndUpdates.java:145)
+	at org.apache.lucene.index.ReadersAndUpdates.getReadOnlyClone(ReadersAndUpdates.java:239)
+	at org.apache.lucene.index.StandardDirectoryReader.open(StandardDirectoryReader.java:104)
+	at org.apache.lucene.index.IndexWriter.getReader(IndexWriter.java:422)
+	at org.apache.lucene.index.DirectoryReader.open(DirectoryReader.java:112)
+	at org.apache.lucene.search.SearcherManager.&lt;init&gt;(SearcherManager.java:89)
+	at org.elasticsearch.index.engine.internal.InternalEngine.buildSearchManager(InternalEngine.java:1569)
+	at org.elasticsearch.index.engine.internal.InternalEngine.start(InternalEngine.java:313)
+	... 6 more
+</code></pre>
+
+<p>解决办法：</p>
+
+<ul>
+  <li>在当前Linux下，使用elasticsearch用户身份，执行<code>ulimt -Hn</code>和<code>ulimit -Sn</code>，查看当前用户，在当前shell环境下，允许打开文件的最大个数；</li>
+  <li>打开<code>/etc/security/limits.conf</code>文件，在最后，添加如下两行内容：<em>（启动elasticsearch的用户为<code>elasticsearch</code>）</em>
+    <ul>
+      <li>elasticsearch soft  nofile 32000</li>
+      <li>elasticsearch hard  nofile 32000</li>
+    </ul>
+  </li>
+  <li>重新以elasticsearch用户身份登录，并执行执行<code>ulimt -Hn</code>和<code>ulimit -Sn</code>，以此验证上述配置是否生效；若设置生效，则重启Elasticsearch即可。</li>
+</ul>
+
+<p>简要解释：<code>/etc/security/limits.conf</code>文件中设置了，一个用户或者组，所能使用的系统资源，例如：CPU、内存以及可同时打开文件的数量等。</p>
+
+<p>更多细节，参考：</p>
+
+<ul>
+  <li><a href="http://elasticsearch-users.115913.n3.nabble.com/Error-Too-many-open-files-td2779067.html">Error - Too many open files</a></li>
+  <li><a href="http://queirozf.com/entries/elasticsearch-too-many-open-files">Elasticsearch - too many open files</a></li>
+</ul>
+
+<h2 id="section-6">参考来源</h2>
+
+<ul>
+  <li><a href="https://github.com/elastic/elasticsearch">ElasticSearch(Github)</a></li>
+  <li><a href="https://www.gitbook.com/book/looly/elasticsearch-the-definitive-guide-cn/details">gitbook：Elasticsearch权威指南（中文版）</a></li>
+  <li><a href="http://learnes.net/index.html">gitbook：Elasticsearch 权威指南</a></li>
+</ul>
+
+
+
+        <div id="disqus_container">
+            <div style="margin-bottom:20px" class="right">
+				<wb:share-button appkey="2306590132" addition="simple" type="button" ralateUid="2356527183"></wb:share-button>
+            </div>
+            <!--<a href="#" class="comment" onclick="return false;">点击查看评论</a>-->
+            <div id="disqus_thread"></div>
+        </div>
+    </div>
+
+	
+    <div class="sidenav">
+		<iframe width="100%" height="75" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=0&isFans=0&uid=2356527183&verifier=1ccfb61e&colors=d6f3f7,ffffff,666666,0082cb,ecfbfd&dpc=1"></iframe>
+    </div>
+
+</div>
+
+<script src="/js/post.js" type="text/javascript"></script>
+
+
+	<div id="gotoTop">Top</div>
+
+
+    <!--*********************************************************-->
+    <!--****** 宝贝儿，看见这个时候，删掉下面的统计代码哦~ ******-->
+    <!--*********************************************************-->
+	<script>
+	  (function(i,s,o,g,r,a,m){
+		  i['GoogleAnalyticsObject']=r;i[r]=i[r] || function(){
+			(i[r].q=i[r].q||[]).push(arguments)}, i[r].l=1*new Date();
+			a=s.createElement(o), m=s.getElementsByTagName(o)[0];
+			a.async=1;
+			a.src=g;
+			m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-48535193-1', 'ningg.github.io');
+	  ga('send', 'pageview');
+	</script>
+    
+	
+    <script type="text/javascript">
+		function gotoTop(min_height){
+			$("#gotoTop").click(
+				function(){$('html,body').animate({scrollTop:0},700);
+			}).hover(
+				function(){$(this).addClass("hover");},
+				function(){$(this).removeClass("hover");
+			});
+			min_height ? min_height = min_height : min_height = 600;
+			$(window).scroll(function(){
+				
+				var s = $(window).scrollTop();
+				
+				if( s > min_height){
+					$("#gotoTop").fadeIn(100);
+				}else{
+					$("#gotoTop").fadeOut(200);
+				};
+			});
+		};
+		gotoTop();
+
+        $(function(){
+            $('.home-follow').click(function(e){
+                e.preventDefault();
+
+                if($('.home-contact').is(':visible')){
+                    $('.home-contact').slideUp(100);
+                }else{
+                    $('.home-contact').slideDown(100);
+                }
+            });
+        })
+
+    </script>
+</body>
+</html>

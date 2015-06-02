@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html xmlns:wb="http://open.weibo.com/wb">
+<head>
+    <!--   Author: NingG   -->
+    <meta charset="utf-8" />
+	<meta property="wb:webmaster" content="7ea7f3d5f3edad6a" />
+    <title>web.xml文件简介 | ningg.top</title>
+    <meta name="author" content="NingG" />
+    <meta name="renderer" content="webkit">
+    <meta name="description" content=" NingG's Blog  " />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+    <link rel="stylesheet" href="/css/default.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="" />
+	
+    <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+	<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+	
+    <div class="home-menu">
+        <div class="home-icon-con">
+            <a class="home-menu-icon" href="/">NingG</a>
+            <a class="home-follow" href="#" title="Contact Me">+</a>
+        </div>
+        <div class="home-contact">
+            <a href="http://weibo.com/ggningg/" target="_blank" style="margin-left:-5px;"><img src="http://www.weibo.com/favicon.ico" alt="" width="25"/></a>
+            <a href="http://www.douban.com/people/ggningg/" target="_blank" style="text-align:center;"><img src="http://www.douban.com/favicon.ico" alt="" width="22"/></a>
+			<a href="http://github.com/ningg" alt="" target="_blank" style="text-align:right;"><img src="/images/icon-cube-smaller.png" width="22"/></a>
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="/js/prettify/prettify.css" />
+<style type="text/css">
+    body { background:#e8e8e8; }
+    @media screen and (max-width: 750px){
+        body { background:#fff; }
+    }
+    @media screen and (max-width: 1020px){
+        body { background:#fff; }
+    }
+</style>
+
+<div id="content">
+    <div class="entry">
+        <h1 class="entry-title"><a href="/web-xml-file-intro" title="web.xml文件简介">web.xml文件简介</a></h1>
+        <p class="entry-date">2013-04-09</p>
+        <p>几点：</p>
+
+<ul>
+  <li>web.xml详解：
+    <ul>
+      <li>原始官网来源；</li>
+      <li>当前广泛的解释，理解之后整理，配合样例；</li>
+    </ul>
+  </li>
+  <li>Spring下web.xml详解：
+    <ul>
+      <li>原始官网来源；</li>
+      <li>样例解释；</li>
+    </ul>
+  </li>
+</ul>
+
+<p>自己GitHub上开启了一个工程<a href="https://github.com/ningg/simple-web-demo">web-demo</a>，关于Web.xml的内容，也有涉及。</p>
+
+<h2 id="webxml">web.xml文件详解</h2>
+
+<p>简要几点：</p>
+
+<ul>
+  <li>web.xml是Servlet<a href="https://www.jcp.org/en/jsr/detail?id=315">规范</a>中定义的；<em>（这就是官网）</em></li>
+  <li>web.xml不是必须的，当只有静态内容时，可以不设置web.xml；</li>
+  <li>Servlet<a href="https://www.jcp.org/en/jsr/detail?id=315">规范</a>中绘制的Deployment Descriptor Diagram，还有几点不明确，哈哈，标注有点多；</li>
+</ul>
+
+<h3 id="webxml-1">web.xml中包含的内容</h3>
+
+<p>直接来原文：</p>
+
+<ul>
+  <li>ServletContext Init Parameters</li>
+  <li>Session Configuration</li>
+  <li>Servlet Declaration</li>
+  <li>Servlet Mappings</li>
+  <li>Application Lifecyle Listener classes</li>
+  <li>Filter Definitions and Filter Mappings</li>
+  <li>MIME Type Mappings</li>
+  <li>Welcome File list</li>
+  <li>Error Pages</li>
+  <li>Locale and Encoding Mappings</li>
+  <li>Security configuration, including login-config, security-constraint, security-role, security-role-ref and run-as</li>
+</ul>
+
+<h3 id="section">基本过程</h3>
+
+<p>几点：</p>
+
+<ul>
+  <li>部署WEB工程的时候，WEB容器会读取web.xml文件，读取<code>&lt;listener&gt;</code>和<code>&lt;context-param&gt;</code>两个节点；<em>（只是这两个节点吗？）</em></li>
+  <li>WEB容器创建ServletContext（Servlet上下文），当前WEB工程的所有部分都共享这个Context（上下文）；<em>（疑问：依照读取的web.xml创建一个ServletContext？）</em></li>
+  <li>WEB容器将<code>&lt;context-param&gt;</code>转换为key-value，交给ServletContext；</li>
+  <li>WEB容器将<code>&lt;listener&gt;</code>对应类进行实例化，并创建监听器；</li>
+</ul>
+
+<h3 id="load-on-startup">Load-on-startup</h3>
+
+<p><code>&lt;load-on-startup&gt;5&lt;/load-on-startup&gt;</code>元素几点：</p>
+
+<ul>
+  <li>设定了servlet加载顺序；</li>
+  <li>如果为0或正整数，则，容器在配置的时候，就会加载并初始化这些Servlet，并且，值小的，优先加载；若值相等，则，随机选取加载顺序；</li>
+  <li>若值为负整数，则，容器会在调用这个Servlet时，才会加载，延迟加载；<em>（如果是负整数，就直接省略即可）</em></li>
+  <li>值，整数；默认，不指定<code>&lt;load-on-startup&gt;</code>时，延迟加载；</li>
+</ul>
+
+<h3 id="section-1">加载顺序</h3>
+
+<p>listener、filter、servlet的加载顺序，与他们的书写顺序无关，而实际加载顺序：</p>
+
+<ol>
+  <li>ServletContext</li>
+  <li>listener</li>
+  <li>filter</li>
+  <li>servlet</li>
+</ol>
+
+<p>思考：上述的理论支撑在哪？设计来源？context-param，为ServletContext提供键值对，即，Servlet上下文的信息，这些信息listener、filter、servlet都有可能用到，因此，真正加载顺序是：</p>
+
+<ol>
+  <li>context-param</li>
+  <li>listener</li>
+  <li>filter</li>
+  <li>servlet</li>
+</ol>
+
+<p>其他几点说明：</p>
+
+<ul>
+  <li>filter-mapping必须出现在filter之后，否则出现filter-name未定义情况；</li>
+  <li>同一类请求，设置多个filter时，默认按照filter-mapping的顺序进行拦截；</li>
+  <li>servlet也有servlet-mapping，与filter情况类似；</li>
+  <li>filter、listener的用途；</li>
+</ul>
+
+<h2 id="section-2">参考来源</h2>
+
+<ul>
+  <li><a href="/xml-intro/">xml入门</a><em>（之前的一篇文章）</em></li>
+</ul>
+
+
+
+        <div id="disqus_container">
+            <div style="margin-bottom:20px" class="right">
+				<wb:share-button appkey="2306590132" addition="simple" type="button" ralateUid="2356527183"></wb:share-button>
+            </div>
+            <!--<a href="#" class="comment" onclick="return false;">点击查看评论</a>-->
+            <div id="disqus_thread"></div>
+        </div>
+    </div>
+
+	
+    <div class="sidenav">
+		<iframe width="100%" height="75" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=0&isFans=0&uid=2356527183&verifier=1ccfb61e&colors=d6f3f7,ffffff,666666,0082cb,ecfbfd&dpc=1"></iframe>
+    </div>
+
+</div>
+
+<script src="/js/post.js" type="text/javascript"></script>
+
+
+	<div id="gotoTop">Top</div>
+
+
+    <!--*********************************************************-->
+    <!--****** 宝贝儿，看见这个时候，删掉下面的统计代码哦~ ******-->
+    <!--*********************************************************-->
+	<script>
+	  (function(i,s,o,g,r,a,m){
+		  i['GoogleAnalyticsObject']=r;i[r]=i[r] || function(){
+			(i[r].q=i[r].q||[]).push(arguments)}, i[r].l=1*new Date();
+			a=s.createElement(o), m=s.getElementsByTagName(o)[0];
+			a.async=1;
+			a.src=g;
+			m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-48535193-1', 'ningg.github.io');
+	  ga('send', 'pageview');
+	</script>
+    
+	
+    <script type="text/javascript">
+		function gotoTop(min_height){
+			$("#gotoTop").click(
+				function(){$('html,body').animate({scrollTop:0},700);
+			}).hover(
+				function(){$(this).addClass("hover");},
+				function(){$(this).removeClass("hover");
+			});
+			min_height ? min_height = min_height : min_height = 600;
+			$(window).scroll(function(){
+				
+				var s = $(window).scrollTop();
+				
+				if( s > min_height){
+					$("#gotoTop").fadeIn(100);
+				}else{
+					$("#gotoTop").fadeOut(200);
+				};
+			});
+		};
+		gotoTop();
+
+        $(function(){
+            $('.home-follow').click(function(e){
+                e.preventDefault();
+
+                if($('.home-contact').is(':visible')){
+                    $('.home-contact').slideUp(100);
+                }else{
+                    $('.home-contact').slideDown(100);
+                }
+            });
+        })
+
+    </script>
+</body>
+</html>

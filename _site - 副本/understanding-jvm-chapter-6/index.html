@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html xmlns:wb="http://open.weibo.com/wb">
+<head>
+    <!--   Author: NingG   -->
+    <meta charset="utf-8" />
+	<meta property="wb:webmaster" content="7ea7f3d5f3edad6a" />
+    <title>Understanding the JVM——类文件结构 | ningg.top</title>
+    <meta name="author" content="NingG" />
+    <meta name="renderer" content="webkit">
+    <meta name="description" content=" class文件的结构  " />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+    <link rel="stylesheet" href="/css/default.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="" />
+	
+    <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+	<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+	
+    <div class="home-menu">
+        <div class="home-icon-con">
+            <a class="home-menu-icon" href="/">NingG</a>
+            <a class="home-follow" href="#" title="Contact Me">+</a>
+        </div>
+        <div class="home-contact">
+            <a href="http://weibo.com/ggningg/" target="_blank" style="margin-left:-5px;"><img src="http://www.weibo.com/favicon.ico" alt="" width="25"/></a>
+            <a href="http://www.douban.com/people/ggningg/" target="_blank" style="text-align:center;"><img src="http://www.douban.com/favicon.ico" alt="" width="22"/></a>
+			<a href="http://github.com/ningg" alt="" target="_blank" style="text-align:right;"><img src="/images/icon-cube-smaller.png" width="22"/></a>
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="/js/prettify/prettify.css" />
+<style type="text/css">
+    body { background:#e8e8e8; }
+    @media screen and (max-width: 750px){
+        body { background:#fff; }
+    }
+    @media screen and (max-width: 1020px){
+        body { background:#fff; }
+    }
+</style>
+
+<div id="content">
+    <div class="entry">
+        <h1 class="entry-title"><a href="/understanding-jvm-chapter-6" title="Understanding the JVM——类文件结构">Understanding the JVM——类文件结构</a></h1>
+        <p class="entry-date">2013-12-17</p>
+        <h2 id="section">前言</h2>
+
+<p>Java作为一门优秀的语言，必定有它的过人之处。当初Java诞生时的口号是：</p>
+
+<blockquote>
+  <p>Write Once, Run Anywhere.</p>
+</blockquote>
+
+<p>可见Java最大的特点在于平台无关性。我们知道，计算机只认识0和1，所以无论我们写的任何程序，最终都会被翻译成0和1组成的机器码才能被计算机识别并运行。但由于最近十年计算机各个方向技术的突飞猛进，<strong>将我们编写的程序翻译成二进制本地机器码（Native Code）已不再是唯一选择，越来越多的语言选择了与操作系统和机器指令集无关的、平台中立的格式作为程序编译后的存储格式</strong>。</p>
+
+<p>那么，这么平台无关性是建立在什么基础上呢？</p>
+
+<blockquote>
+  <p>平台无关性实现在操作系统的应用层上。Sun公司及其虚拟机提供商发布了许多可以运行在不同平台上的虚拟机，这些虚拟机的输入都是字节码，输出则是各个平台不同的机器码。那么，只要我们使用Java编译器将源代码编译成符合虚拟机的输入规范.class文件（平台无关），虚拟机就会自动的将.class文件中的字节码翻译成本平台的机器码（平台有关）。本质上来说，是虚拟机完成了平台无关性的任务。即，<strong>通过虚拟机，屏蔽底层操作系统的差异</strong>。</p>
+</blockquote>
+
+<p>在Java发展初期，发布文档时都会有<strong>Java语言规范</strong>和<strong>Java虚拟机规范</strong>，而发布<strong>Java虚拟机规范就是为了让更多语言实现平台无关性</strong>。只要其他语言的编译器将源代码编译成符合Java虚拟机规范的输入格式，就可以被虚拟机执行。比如下图：</p>
+
+<p><img src="/images/understanding-jvm/jvm_language.jpg" alt="" /></p>
+
+<p>接下来，就让我们揭开JVM平台平台无关性的入门条件——class类文件结构。</p>
+
+<h2 id="class">1. Class类文件结构</h2>
+
+<p>我大概翻了这一小节，主要是讲字节码的，就好像将IP数据报协议一样，每个字段代表什么含义、占几个字节，是非常琐碎的。所以我决定从整体上把握，先知道每个字段是什么含义。等到需要研究字节码的时候再仔细研究。</p>
+
+<p>首先需要说明的是：</p>
+
+<p>Class文件是一组以8个字节为基础单位的二进制流，各个数据项目严格按照顺序紧凑地排列在Class文件中，中间没有添加任何分隔符，这使得整个Class文件中存储的内容几乎全部都是程序运行的必要数据，没有空隙存在。当遇到需要占用8个字节以上空间的数据项时，则会按照高位在前的方式分割成若干个8字节进行存储（大小端）。
+根据Java虚拟机规范，Class文件采用一种类似于C语言结构体的东西来存储数据，里面有两种数据类型：</p>
+
+<ul>
+  <li>无符号数：是基本的数据类型，以u1/u2/u4/u8代表1字节、2字节、4字节、8字节的无符号数。用来描述数字、索引引用、数量值，或者UTF-8的字符串值</li>
+  <li>表：由多个无符号数或其他表作为数据项构成的复合数据类型，表习惯以_info结尾。用于描述有层次关系的复合结构的数据，比如整个Class文件本质上就是一张表</li>
+</ul>
+
+<p>因为<strong>Class文件的结构没有任何分隔符</strong>，所以无论是顺序还是数量，都是被严格限定的，哪个字节代表什么含义，长度是多少，先后顺序如何，都不允许改变。下面就简单说明一下Class文件的结构：</p>
+
+<ol>
+  <li><strong>魔数</strong>：每个Class文件的头4个字节成为魔数，唯一作用是<strong>用于确定这个文件是否为一个能被虚拟机接受的Class文件</strong>（其他类似的有字符编码的BOM头）。目前值为0xCAFEBABE</li>
+  <li><strong>版本</strong>：紧接着魔数后4个字节为Class文件的版本号，5、6字节为次版本号，7、8字节为主版本号。</li>
+  <li><strong>常量池</strong>：紧接着版本号的是常量池入口，常量池是Class文件结构中与其他项目关联最多的数据结构，也是占用Class文件空间最大的数据项目之一，同时它还是在Class文件中第一个出现的表类型数据项目。因为常量池中常量数目不确定，所以入口是一个u2类型的数据，代表常量池容量。（从1开始计数，比如换算成十进制22，就代表有21个常量，0代表的是表达“不引用任何一个常量池项目”的意思。）</li>
+  <li><strong>访问标志</strong>：紧接着常量池之后的2个字节代表访问标志，用于<strong>识别一些类或借口层次的访问信息，包括：这个Class是类还是借口；是否定义为public类型，是否定义为abstract类型；如果是类的话，是否被声明为final的等等</strong>。说白了，全是跟访问相关的数据。</li>
+  <li><strong>类索引、父类索引与接口索引集合</strong>：类索引和父类索引都是u2类型的数据，而接口索引集合是一组u2类型的数据的集合，Class文件中<strong>由这三项数据来确定这个类的继承关系</strong>。类索引用于确定这个类的全限定名，父类索引用于确定这个类的父类的全限定名。然后接口索引就是implements(或者是接口extends其他接口）后的接口顺序从左到右排序在这个集合中</li>
+  <li><strong>字段表集合</strong></li>
+  <li><strong>方法表集合</strong></li>
+  <li><strong>属性表集合</strong></li>
+</ol>
+
+<p>随着JDK的发展，Class文件结构却一直比较稳定，修修补补的主要是在访问标识、属性表这些在设计上本就可以扩展的数据结构中添加内容。</p>
+
+<h2 id="section-1">2. 小结</h2>
+
+<p>Class文件是Java虚拟机的入口，本章讲了Class文件结构中的各个组成部分，以及每个部分的定义、数据结构和使用方法。</p>
+
+
+
+        <div id="disqus_container">
+            <div style="margin-bottom:20px" class="right">
+				<wb:share-button appkey="2306590132" addition="simple" type="button" ralateUid="2356527183"></wb:share-button>
+            </div>
+            <!--<a href="#" class="comment" onclick="return false;">点击查看评论</a>-->
+            <div id="disqus_thread"></div>
+        </div>
+    </div>
+
+	
+    <div class="sidenav">
+		<iframe width="100%" height="75" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=0&isFans=0&uid=2356527183&verifier=1ccfb61e&colors=d6f3f7,ffffff,666666,0082cb,ecfbfd&dpc=1"></iframe>
+    </div>
+
+</div>
+
+<script src="/js/post.js" type="text/javascript"></script>
+
+
+	<div id="gotoTop">Top</div>
+
+
+    <!--*********************************************************-->
+    <!--****** 宝贝儿，看见这个时候，删掉下面的统计代码哦~ ******-->
+    <!--*********************************************************-->
+	<script>
+	  (function(i,s,o,g,r,a,m){
+		  i['GoogleAnalyticsObject']=r;i[r]=i[r] || function(){
+			(i[r].q=i[r].q||[]).push(arguments)}, i[r].l=1*new Date();
+			a=s.createElement(o), m=s.getElementsByTagName(o)[0];
+			a.async=1;
+			a.src=g;
+			m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-48535193-1', 'ningg.github.io');
+	  ga('send', 'pageview');
+	</script>
+    
+	
+    <script type="text/javascript">
+		function gotoTop(min_height){
+			$("#gotoTop").click(
+				function(){$('html,body').animate({scrollTop:0},700);
+			}).hover(
+				function(){$(this).addClass("hover");},
+				function(){$(this).removeClass("hover");
+			});
+			min_height ? min_height = min_height : min_height = 600;
+			$(window).scroll(function(){
+				
+				var s = $(window).scrollTop();
+				
+				if( s > min_height){
+					$("#gotoTop").fadeIn(100);
+				}else{
+					$("#gotoTop").fadeOut(200);
+				};
+			});
+		};
+		gotoTop();
+
+        $(function(){
+            $('.home-follow').click(function(e){
+                e.preventDefault();
+
+                if($('.home-contact').is(':visible')){
+                    $('.home-contact').slideUp(100);
+                }else{
+                    $('.home-contact').slideDown(100);
+                }
+            });
+        })
+
+    </script>
+</body>
+</html>

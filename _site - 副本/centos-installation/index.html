@@ -1,0 +1,522 @@
+<!DOCTYPE html>
+<html xmlns:wb="http://open.weibo.com/wb">
+<head>
+    <!--   Author: NingG   -->
+    <meta charset="utf-8" />
+	<meta property="wb:webmaster" content="7ea7f3d5f3edad6a" />
+    <title>安装CentOS 6.4 | ningg.top</title>
+    <meta name="author" content="NingG" />
+    <meta name="renderer" content="webkit">
+    <meta name="description" content=" 安装系统，有两点要说一下：磁盘如何分区？网络如何配置？  " />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+    <link rel="stylesheet" href="/css/default.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="" />
+	
+    <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+	<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+	
+    <div class="home-menu">
+        <div class="home-icon-con">
+            <a class="home-menu-icon" href="/">NingG</a>
+            <a class="home-follow" href="#" title="Contact Me">+</a>
+        </div>
+        <div class="home-contact">
+            <a href="http://weibo.com/ggningg/" target="_blank" style="margin-left:-5px;"><img src="http://www.weibo.com/favicon.ico" alt="" width="25"/></a>
+            <a href="http://www.douban.com/people/ggningg/" target="_blank" style="text-align:center;"><img src="http://www.douban.com/favicon.ico" alt="" width="22"/></a>
+			<a href="http://github.com/ningg" alt="" target="_blank" style="text-align:right;"><img src="/images/icon-cube-smaller.png" width="22"/></a>
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="/js/prettify/prettify.css" />
+<style type="text/css">
+    body { background:#e8e8e8; }
+    @media screen and (max-width: 750px){
+        body { background:#fff; }
+    }
+    @media screen and (max-width: 1020px){
+        body { background:#fff; }
+    }
+</style>
+
+<div id="content">
+    <div class="entry">
+        <h1 class="entry-title"><a href="/centos-installation" title="安装CentOS 6.4">安装CentOS 6.4</a></h1>
+        <p class="entry-date">2014-10-26</p>
+        <h2 id="section">1. 简介</h2>
+
+<p>CentOS（Community Enterprise Operating System，企业社区操作系统）是Linux发行版本之一。Red Hat Enterpris Linux（RHEL，红帽企业级Linux）依照开放源码规定，开源了每个RHEL版本的源代码，CentOS正是基于RHEL的源代码重新编译而成的[1]，并且在RHEL基础上修复了一些已知的bug，相对与其他Linux发行版本，CentOS稳定性值得信赖。当前，很多企业都在服务器上安装CentOS系统，来支撑线上应用。
+CentOS与RHEL的最大区别在于：</p>
+
+<ol>
+  <li>RHEL中包含了部分封闭源码的工具，而CentOS包含的所有工具都是开源的；</li>
+  <li>RHEL提供技术服务，以此来收费；</li>
+</ol>
+
+<p>值得注意的是，2014年初，CentOS宣布加入Red Hat[2]。</p>
+
+<p>备注：CentOS的版本与RHEL版本基本一一对应，举例，CentOS 6.4对应RHEL 6.4的源代码。</p>
+
+<h2 id="centos-6">2. 安装CentOS 6</h2>
+
+<p>说到安装Linux系统，不要着急，官网肯定有操作手册来说明这个事，嗯，CentOS应用这么广泛，帮助手册总该有吧，要不然与其身份也不相符合。很不幸，<a href="http://www.centos.org/docs/">CentOS的官网</a>中，并没有CentOS 6的操作手册，欧，赶快查查什么原因：CentOS完全基于RHEL源码编译而来，并且版本基本一一对应，因此，直接使用RHEL的官网文档即可[3]。</p>
+
+<p><strong>特别说明</strong>：本文所有安装CentOS 6的步骤、配置，都参考自RHEL 6官方文档[5]。</p>
+
+<h3 id="section-1">2.1.	基本设置</h3>
+
+<p>这一部分，主要演示几点：如何通过CD/DVD光驱来重装系统。</p>
+
+<p>步骤 1. 	重启系统，出现图1界面时，点击”F11”按钮，目的：设置Boot Menu。
+说明：当点击完”F11”按钮之后，如图1界面最下端所示，”F11”按钮背景由黑色变为白色。</p>
+
+<p><img src="/images/centos-installation/001.png" alt="" /></p>
+
+<p>步骤 2. 	当出现图2所示界面时，选择”1”，目标：从光驱中加载系统。</p>
+
+<p><img src="/images/centos-installation/002.png" alt="" /></p>
+
+<p>稍等一会儿，有可能出现图3所示界面，不要管他，等一段时间即可
+备注：如果长时间停留在图3界面，则敲击Enter。</p>
+
+<p><img src="/images/centos-installation/003.png" alt="图 3" /></p>
+
+<p>步骤 3. 	出现如图4时，选择“Install sytem with basic video driver”（第二项），目标：重装系统。
+备注：也可选择“Install or upgrade an existing system”（第一项），但，有可能显示器画面出现倾斜异常（显卡驱动问题），因此推荐 “Install sytem with basic video driver”（第二项）。</p>
+
+<p><img src="/images/centos-installation/004.png" alt="" />
+图 4</p>
+
+<p>步骤 4. 	出现如图5所示界面后，通过”Tab”键，选择“Skip”选项，并使用“Space”键来确认即可。目标：在安装之前，不进行磁盘、网卡、内存等硬件设备的测试。（因为太浪费时间了）</p>
+
+<p><img src="/images/centos-installation/005.png" alt="" />
+图 5</p>
+
+<p>选择”Skip”之后，可能会出现图6所示界面，稍等一会儿，会自动跳入下个页面（如图7）。等待时间：几十秒~几分钟。</p>
+
+<p><img src="/images/centos-installation/006.png" alt="" /> 
+图 6</p>
+
+<p>步骤 5. 	出现如图7所示页面后，点击”Next”。</p>
+
+<p><img src="/images/centos-installation/007.png" alt="" />
+图 7</p>
+
+<p>步骤 6. 	在如图8所示界面，选择安装CentOS过程中，页面的显示语言，当安装服务器时，建议选择“English（English）”。
+备注：这一步选定哪种语言，貌似对安装系统没有影响，而实际测试发现，有些细微差异，例如，安装完系统后，系统环境变量LANG会有细微差异。</p>
+
+<p><img src="/images/centos-installation/008.png" alt="" />
+图 8</p>
+
+<p>步骤 7. 	参照下图9~15，一步步安装下去即可。</p>
+
+<p><img src="/images/centos-installation/009.png" alt="" />
+图 9</p>
+
+<p>图9：选择系统键盘语言，选“U.S. English”即可。</p>
+
+<p><img src="/images/centos-installation/010.png" alt="" />
+图 10</p>
+
+<p>图10：选择系统安装的磁盘，选“Basic Storage Devices”。</p>
+
+<p><img src="/images/centos-installation/011.png" alt="" /> 
+图 11</p>
+
+<p>特别说明：有可能会出现图11界面，如果没有出现，则忽略图11。</p>
+
+<p>图11：是否覆盖掉所有系统数据，如果是重装系统，数据已经做过备份，则直接选“Fresh Installation”。</p>
+
+<p><img src="/images/centos-installation/012.png" alt="" />
+图 12</p>
+
+<p>图12：设定主机名（hostname），按照要求进行设置即可。</p>
+
+<p>备注：</p>
+
+<ol>
+  <li>在图11页面的左下角，也可以通过“配置网络”按钮来设定网络，但不建议在此通过页面来配置网络（因为可能碰到乱七八糟的问题），而建议安装完系统后，通过简单命令来配置网络。</li>
+  <li>也可以安装完系统后，打开文件”/etc/sysconfig/network”，修改其中HOSTNAME字段。</li>
+</ol>
+
+<p><img src="/images/centos-installation/013.png" alt="" />
+图 13</p>
+
+<p>图13：选定时区，选定“Asia/Shanghai”即可。</p>
+
+<p><img src="/images/centos-installation/014.png" alt="" /> 
+图 14</p>
+
+<p>图14：设定root密码</p>
+
+<p><img src="/images/centos-installation/015.png" alt="" /> 
+图 15：选“Use Anyway”</p>
+
+<p>图15：提示密码不够安全，直接点击“Use Anyway”（无论如何都使用）即可。</p>
+
+<p>特别说明：至此，安装并没有结束，下面“2.2磁盘分区”部分才是重点。</p>
+
+<h3 id="section-2">2.2.	磁盘分区</h3>
+
+<p>从图16开始，我们将进行磁盘分区，这一部分有些配置的东西，需要认真看了。</p>
+
+<p>备注：在此之前，需要补充一点理论知识：</p>
+
+<p><strong>1.	为什么要进行磁盘分区？</strong></p>
+
+<p>磁盘分区两点考虑，也就是说两个好处：</p>
+
+<ul>
+  <li>数据安全：不同磁盘分区之间相互独立，某个分区损坏，不会影响其他分区内的数据；</li>
+  <li>读写性能：读写数据时，磁盘分区对应一段连续的磁柱，由于磁柱集中，提升数据的读写效率；</li>
+</ul>
+
+<p><strong>2.	磁盘分区要分为几个区？</strong></p>
+
+<p>磁盘分区方案，官网建议[7]，应该包含如下几个分区：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>分区</th>
+      <th>作用</th>
+      <th>官方建议大小</th>
+      <th>此次安装使用</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td>/boot</td>
+      <td>存放OS kernel，以及系统bootstrap过程要使用的其他文件</td>
+      <td>&gt;250MB</td>
+      <td>500MB</td>
+    </tr>
+    <tr>
+      <td>swap</td>
+      <td>虚拟内存：当内存空间不足时使用此空间</td>
+      <td>至少4GB，推荐为内存的1~2倍</td>
+      <td>128GB （系统内存64GB）</td>
+    </tr>
+    <tr>
+      <td>/</td>
+      <td>存放：系统安装文件</td>
+      <td>3~5GB</td>
+      <td>60GB</td>
+    </tr>
+    <tr>
+      <td>/home</td>
+      <td>存放：user data \n单独分区的目标：将user data与系统文件隔离</td>
+      <td>没有</td>
+      <td>100GB（实际是sda磁盘的剩余空间）</td>
+    </tr>
+  </tbody>
+</table>
+
+<p>步骤 8. 	在图16界面，选择“Use All Space”，同时，勾选左下的“Review and modify partitioning layout”，目标：进入磁盘分区设置页面，调整磁盘分区。</p>
+
+<p><img src="/images/centos-installation/016.png" alt="" />
+图 16：选“Use All Space”和勾选“Review and modify partitioning layout”</p>
+
+<p>中间可能要等待一段时间</p>
+
+<p>步骤 9. 	在图17所示页面，选择要进行分区的的磁盘，通常将“Data Storage Devicess”中所有磁盘都添加到“Install Target Devices”中，添加结果如图18所示。</p>
+
+<p><img src="/images/centos-installation/017.png" alt="" /> 
+图 17</p>
+
+<p><img src="/images/centos-installation/018.png" alt="" /> 
+图 18</p>
+
+<p>图18：将“Data Storage Devicess”中所有磁盘都添加到“Install Target Devices”后的结果。 </p>
+
+<p>步骤 10. 	在图19所示页面，删除磁盘sda默认的分区：LVM Volume groups下的vg_cib61、sda下sda1和sda2；删除结果如图20所示。</p>
+
+<p>特别说明：要删除sda2分区，需要先删除LVM Volume groups下的vg_cib61。</p>
+
+<p><img src="/images/centos-installation/019.png" alt="" /> 
+图 19</p>
+
+<p><img src="/images/centos-installation/020.png" alt="" />
+图 20</p>
+
+<p>图20：删除sda上所有分区之后的结果。 </p>
+
+<p>步骤 11. 	在图20页面，按照提前规划的分区方案，在sda磁盘的Free空间上，依次划分/boot、swap、/、/home共计4个分区。</p>
+
+<p><img src="/images/centos-installation/021.png" alt="" /> 
+图 21</p>
+
+<p>图21：选择sda下Free空间，” Create” “Standard Partition”，即可进行创建分区，具体“/boot、swap、/、/home”的分区操作，依次参考图22、图23、图24、图25。</p>
+
+<p><img src="/images/centos-installation/022.png" alt="" /> 
+图 22</p>
+
+<p><img src="/images/centos-installation/023.png" alt="" />
+图 23</p>
+
+<p><img src="/images/centos-installation/024.png" alt="" />
+图 24</p>
+
+<p><img src="/images/centos-installation/025.png" alt="" />
+图 25</p>
+
+<p>步骤 12. 	这一步是进行LVM设置，如果没有LVM创建LV的需要，请直接跳过这一步，直接参考“步骤13”。 </p>
+
+<p>在此之前，补充一点LVM相关的理论知识：</p>
+
+<p><strong>1.	为什么要用LVM？</strong></p>
+
+<p><strong>LVM要解决的典型问题</strong>：一块磁盘的空间160GB，其存满数据后，需要扩容，怎么办？传统静态分区时，需要将磁盘中近160GB的数据复制到1TB的磁盘上，然后，使用1TB的磁盘替换掉原来160GB的磁盘。（这个是传统扩容的基本原理，还有其他的原理吗？）</p>
+
+<p><strong>LVM基本原理</strong>：要解决上面磁盘空间不足时，磁盘的扩容问题，LVM提供了一个基本思路：LVM将底层的磁盘封装抽象为逻辑卷（logical volume），上层应用不直接从物理磁盘分区中读数据，而是从逻辑卷中读数据；LVM负责底层磁盘到逻辑卷的映射和管理；增加底层磁盘时，通过LVM可以为逻辑卷动态扩充容量，而这对上层应用是无影响的（透明的）。</p>
+
+<p>说这么多，总结一点：LVM能够将多个小磁盘抽象为一个大逻辑卷，并且支持磁盘的动态扩容，提高了磁盘管理的灵活性。</p>
+
+<p>图26、图27、图28、图29：展示了在sdb1、sdc1、sdd1上创建一个大小约为850GB大小的VG（命名为vg_cib61），并且在这一VG上创建一个500GB大小的LV（lv_00）的基本过程。脑袋疼，不想多说，请自行查找其他资料。</p>
+
+<p><img src="/images/centos-installation/026.png" alt="" /> 
+图 26</p>
+
+<p><img src="/images/centos-installation/027.png" alt="" />
+图 27</p>
+
+<p><img src="/images/centos-installation/028.png" alt="" />
+图 28</p>
+
+<p><img src="/images/centos-installation/029.png" alt="" />
+图 29</p>
+
+<p>图29：创建Logical Volume时，并没有设置Mount Point，因为当前并不能确定挂载目录，装完系统之后，可以通过命令进行挂载。</p>
+
+<p>步骤 13. 	设置完磁盘分区后，到达图30所示界面，直接点击“Next”。</p>
+
+<p>特别说明：如果没有在步骤12中设置LVM，则没有图30中的“LVM Volume Groups”部分。</p>
+
+<p><img src="/images/centos-installation/030.png" alt="" />
+图 30</p>
+
+<p><img src="/images/centos-installation/031.png" alt="" />
+图 31：选“Write changes to disk”</p>
+
+<p><img src="/images/centos-installation/032.png" alt="" />
+图 32</p>
+
+<p><img src="/images/centos-installation/033.png" alt="" />
+图 33</p>
+
+<p><img src="/images/centos-installation/034.png" alt="" />
+图 34：选“Basic Server”</p>
+
+<p><img src="/images/centos-installation/035.png" alt="" />
+图 35</p>
+
+<p><img src="/images/centos-installation/036.png" alt="" />
+图 36</p>
+
+<h2 id="section-3">3.	配置网络</h2>
+
+<p>安装完系统之后，需要进行网络配置，目标：保证机器能够入网。</p>
+
+<p>通常直接修改/etc/sysconfig/network-scripts/ifcfg-eth0文件即可，此次使用的是静态配置IP方式，因此需要进行如下修改（保持ifcfg-eth0文件中其他字段不变）：</p>
+
+<pre><code>ONBOOT=yes
+BOOTPROTO=static
+IPADDR=168.7.2.111
+NETMASK=255.255.255.0
+GATEWAY=168.7.2.126
+</code></pre>
+
+<p>特别说明：服务器上有eth0–eth5，共计6个网口，需要根据具体情况，修改配置文件，上例中修改的是ifcfg-eth0文件，而在其他服务器上，如果网线插在eth3口，则需要修改ifcfg-eth3文件。</p>
+
+<p>有个小问题，值得说一下：服务器通常带有eth0–eth5多个网口，如何将eth0~5与实际的物理网口对应起来？</p>
+
+<p>RE：需要借助工具：ethtool，执行命令<code>ethtool -p eth0</code>，再去看看那排网口，会有发现的~执行Ctrl + C，即可终止此命令。</p>
+
+<h2 id="section-4">4.	格式化磁盘并挂载</h2>
+
+<p>场景 1.	格式化单个磁盘，并进行挂载，命令如下：</p>
+
+<pre><code># 格式化磁盘
+mkfs -t ext3 /dev/sdb1
+# 新建挂载点
+mkdir -p /srv/hadoop/data1
+# 挂载磁盘
+mount /dev/sdb1 /srv/hadoop/data1
+</code></pre>
+
+<p>场景 2.	批量格式化多个磁盘，并进行挂载，本质上就是重复“场景1”，只不过使用shell脚本来实现，脚本如下：</p>
+
+<pre><code>for i in {b..k}; do mkfs -t ext3 /dev/sd${i}1; done
+
+for i in {1..10}; do mkdir -p /srv/hadoop/data${i}; done
+
+array=(b c d e f g h i j k)
+for((i=0;i&lt;${#array[@]};i++)); do mount /dev/sd${array[i]}1 /srv/hadoop/data$(($i+1)); done
+</code></pre>
+
+<p>场景 3.	设置开机自动挂载磁盘</p>
+
+<p>上面两个场景中，都涉及到mount磁盘到某个目录，但如果系统一不小心重启了，这些磁盘就需要重新挂载。解决办法：在fstab文件中设置开机自动挂载磁盘。
+通过命令：man  fstab就可以查看fstab文件每列的含义：</p>
+
+<table>
+  <thead>
+    <tr>
+      <th>1</th>
+      <th>2</th>
+      <th>3</th>
+      <th>4</th>
+      <th>5</th>
+      <th>6</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td><code>&lt;special device&gt;</code></td>
+      <td><code>&lt;mount point&gt;</code></td>
+      <td><code>&lt;fs type&gt;</code></td>
+      <td><code>&lt;mount options&gt;</code></td>
+      <td><code>&lt;dump&gt;</code></td>
+      <td><code>&lt;fsck&gt;</code></td>
+    </tr>
+  </tbody>
+</table>
+
+<p>上述/etc/fstab文件每行数据，都有6个字段，如上图所示，简要说明几点：</p>
+
+<ul>
+  <li>间隔符号：不同字段之间使用 ”空格” 或者 “Tab” 键来间隔</li>
+  <li>special device：要挂载的设备，例如：/dev/sdb1;</li>
+  <li>mount point：设备挂载的目标目录；</li>
+  <li>fs type：要挂载的设备上文件系统的类型；</li>
+  <li>options：mount命令进行挂载时，输入的参数；</li>
+  <li>dump：是否要对此文件系统进行备份，0代表不做dump备份，1代表需要dump备份，2代表也需要dump备份，但2的重要程度低于1；</li>
+  <li>fsck：系统启动时，是否检测文件系统的完整性，0代表不检测，根目录/需要设置为1，其他需要开机扫描的文件系统设置为2；</li>
+</ul>
+
+<p>来个fstab文件的样例，朝着这个格式来做就可以：</p>
+
+<pre><code>/dev/sdb1  /srv/hadoop/data1  ext3  defaults  0  0
+</code></pre>
+
+<p>配置完fstab文件，一定要来一条命令：<code>mount -a</code>
+含义：<code>Mount all filesystems (of the given types) mentioned in fstab.</code>
+这一命令可用于检查fstab文件中的配置是否正确。</p>
+
+<h2 id="section-5">5.	参考来源</h2>
+
+<ol>
+  <li><a href="http://www.centos.org/about/">CentOS简介</a></li>
+  <li><a href="http://www.redhat.com/en/about/press-releases/red-hat-and-centos-join-forces">Red Hat and CentOS Project Join Forces to Speed Open Source Innovation</a></li>
+  <li><a href="http://lists.centos.org/pipermail/centos/2012-November/130123.html">CentOS 6 docs参考RHEL 6即可</a></li>
+  <li><a href="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/">RHEL官方文档</a></li>
+  <li><a href="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Installation_Guide/index.html">RHEL 6官文文档“Installation Guide”</a></li>
+  <li><a href="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Installation_Guide/s1-x86-bootloader.html">设定bootloader</a></li>
+  <li><a href="https://access.redhat.com/documentation/en-US/Red_Hat_Enterprise_Linux/6/html/Installation_Guide/s2-diskpartrecommend-x86.html">Recommended Partitioning Schema</a></li>
+</ol>
+
+<h2 id="section-6">6.	附录</h2>
+
+<p>几个有用的命令：</p>
+
+<p>命令 1. 	<code>dmidecode -t 1</code>，查看当前服务器的序列号。</p>
+
+<pre><code>[root@localhost ~]# dmidecode -t 1
+# dmidecode 2.11
+SMBIOS 2.7 present.
+
+Handle 0x0100, DMI type 1, 27 bytes
+System Information
+		Manufacturer: HP
+		Product Name: ProLiant ********
+		Version: Not Specified
+		Serial Number: ********
+		UUID: ****-****-****-****-****
+		Wake-up Type: Power Switch
+		SKU Number: ****-****
+		Family: ProLiant
+</code></pre>
+
+
+
+        <div id="disqus_container">
+            <div style="margin-bottom:20px" class="right">
+				<wb:share-button appkey="2306590132" addition="simple" type="button" ralateUid="2356527183"></wb:share-button>
+            </div>
+            <!--<a href="#" class="comment" onclick="return false;">点击查看评论</a>-->
+            <div id="disqus_thread"></div>
+        </div>
+    </div>
+
+	
+    <div class="sidenav">
+		<iframe width="100%" height="75" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=0&isFans=0&uid=2356527183&verifier=1ccfb61e&colors=d6f3f7,ffffff,666666,0082cb,ecfbfd&dpc=1"></iframe>
+    </div>
+
+</div>
+
+<script src="/js/post.js" type="text/javascript"></script>
+
+
+	<div id="gotoTop">Top</div>
+
+
+    <!--*********************************************************-->
+    <!--****** 宝贝儿，看见这个时候，删掉下面的统计代码哦~ ******-->
+    <!--*********************************************************-->
+	<script>
+	  (function(i,s,o,g,r,a,m){
+		  i['GoogleAnalyticsObject']=r;i[r]=i[r] || function(){
+			(i[r].q=i[r].q||[]).push(arguments)}, i[r].l=1*new Date();
+			a=s.createElement(o), m=s.getElementsByTagName(o)[0];
+			a.async=1;
+			a.src=g;
+			m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-48535193-1', 'ningg.github.io');
+	  ga('send', 'pageview');
+	</script>
+    
+	
+    <script type="text/javascript">
+		function gotoTop(min_height){
+			$("#gotoTop").click(
+				function(){$('html,body').animate({scrollTop:0},700);
+			}).hover(
+				function(){$(this).addClass("hover");},
+				function(){$(this).removeClass("hover");
+			});
+			min_height ? min_height = min_height : min_height = 600;
+			$(window).scroll(function(){
+				
+				var s = $(window).scrollTop();
+				
+				if( s > min_height){
+					$("#gotoTop").fadeIn(100);
+				}else{
+					$("#gotoTop").fadeOut(200);
+				};
+			});
+		};
+		gotoTop();
+
+        $(function(){
+            $('.home-follow').click(function(e){
+                e.preventDefault();
+
+                if($('.home-contact').is(':visible')){
+                    $('.home-contact').slideUp(100);
+                }else{
+                    $('.home-contact').slideDown(100);
+                }
+            });
+        })
+
+    </script>
+</body>
+</html>

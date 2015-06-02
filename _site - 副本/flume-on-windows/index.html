@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html xmlns:wb="http://open.weibo.com/wb">
+<head>
+    <!--   Author: NingG   -->
+    <meta charset="utf-8" />
+	<meta property="wb:webmaster" content="7ea7f3d5f3edad6a" />
+    <title>Flume 1.5.0.1：windows下安装Flume agent | ningg.top</title>
+    <meta name="author" content="NingG" />
+    <meta name="renderer" content="webkit">
+    <meta name="description" content=" Windows下安装配置Flume  " />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+    <link rel="stylesheet" href="/css/default.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="" />
+	
+    <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+	<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+	
+    <div class="home-menu">
+        <div class="home-icon-con">
+            <a class="home-menu-icon" href="/">NingG</a>
+            <a class="home-follow" href="#" title="Contact Me">+</a>
+        </div>
+        <div class="home-contact">
+            <a href="http://weibo.com/ggningg/" target="_blank" style="margin-left:-5px;"><img src="http://www.weibo.com/favicon.ico" alt="" width="25"/></a>
+            <a href="http://www.douban.com/people/ggningg/" target="_blank" style="text-align:center;"><img src="http://www.douban.com/favicon.ico" alt="" width="22"/></a>
+			<a href="http://github.com/ningg" alt="" target="_blank" style="text-align:right;"><img src="/images/icon-cube-smaller.png" width="22"/></a>
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="/js/prettify/prettify.css" />
+<style type="text/css">
+    body { background:#e8e8e8; }
+    @media screen and (max-width: 750px){
+        body { background:#fff; }
+    }
+    @media screen and (max-width: 1020px){
+        body { background:#fff; }
+    }
+</style>
+
+<div id="content">
+    <div class="entry">
+        <h1 class="entry-title"><a href="/flume-on-windows" title="Flume 1.5.0.1：windows下安装Flume agent">Flume 1.5.0.1：windows下安装Flume agent</a></h1>
+        <p class="entry-date">2014-11-27</p>
+        <h2 id="section">背景</h2>
+
+<p>最近要采集windows下的数据，希望能用Flume来进行采集汇总，但是不知道Flume在windows下的兼容性怎么样，OK，测试一下。</p>
+
+<h2 id="windowsflume">在windows下配置Flume</h2>
+
+<h3 id="section-1">系统环境</h3>
+
+<p>相关版本信息：</p>
+
+<ul>
+  <li>Flume：apache-flume-1.5.0.1-bin.tar.gz</li>
+  <li>windows：Microsoft Windows Server 2008 R2 Enterprise（x64-based PC）</li>
+</ul>
+
+<h3 id="section-2">解决办法</h3>
+
+<ul>
+  <li>下载<code>apache-flume-1.5.0.1-bin.tar.gz</code><em>（当前的最新版本，之后的版本应该也是可以的）</em></li>
+  <li>解压之后，在<code>conf</code>目录下创建文件``</li>
+</ul>
+
+<h3 id="windowstail">windows下tail命令</h3>
+
+<p>至此为止，windows上，已经成功部署了flume。</p>
+
+<h2 id="section-3">思路</h2>
+
+<blockquote>
+  <p>截止上一部分，已经实现了Windows下flume的部署，这一部分主要是闲谈点其他的东西。</p>
+</blockquote>
+
+<p><a href="http://flume.apache.org/FlumeUserGuide.html">官方文档</a>上，看了一下，没有说windows上部署的问题；再查看flume的启动脚本，只有一个脚本<code>flume-ng</code>，而且是bash写的。凭借自己对flume官方文档的一些了解，基本没有提及windows上安装部署的问题；Flume是ASF下的项目，通过<a href="http://flume.apache.org/getinvolved.html">官网</a>知道，Flume的开发、讨论都在<a href="https://issues.apache.org/jira/browse/FLUME">Flume JIRA</a>上；抓紧上去查一下，看看有没有人提到：windows下flume的安装配置问题，找到两个主要相关内容：<a href="https://issues.apache.org/jira/browse/FLUME-1334">FLUME-1334</a>和<a href="https://issues.apache.org/jira/browse/FLUME-1335">FLUME-1335</a>。大概理解一下，奥，原来一帮engineer在讨论Flume直接运行在windows的问题，他们的目标大意是：利用一个脚本，直接在windows安装、启动flume服务。而且已经有人提供了一些patch，当前初步打算，<strong>利用这些patch来更新当前flume代码，并且在本地进行试用</strong>。</p>
+
+<p>情况总是变化的，查看<a href="https://issues.apache.org/jira/browse/FLUME-1335">FLUME-1335</a>时，看到其下面评论<a href="http://mapredit.blogspot.de/2012/07/run-flume-13x-on-windows.html">run flume 13x on win</a>；同时在google上搜索<code>flume windows</code>，看到了几个地方：</p>
+
+<ul>
+  <li><a href="https://cwiki.apache.org/confluence/display/FLUME/Build+Flume+1.3.x+up+on+Windows">build flume 13x up on windows</a></li>
+  <li><a href="http://abloz.com/2013/02/18/compile-under-windows-flume-1-3-1.html">windows下编译flume 1.3.1</a></li>
+</ul>
+
+<p>上面看到，<a href="https://cwiki.apache.org/confluence/display/FLUME/Build+Flume+1.3.x+up+on+Windows">apache的官网</a>在2012-12也提到在windows下编译、运行flume，所以当即决定，参照<a href="https://cwiki.apache.org/confluence/display/FLUME/Build+Flume+1.3.x+up+on+Windows">apache的官网</a>来进行windows下flume的编译和安装配置。</p>
+
+<p>总结一下上面的思路：</p>
+
+<ul>
+  <li>官方文档、官方讨论交流区发现patch；（最新）</li>
+  <li>官方早期文档、其他开发人员提供windows下flume编译、配置；（较旧）</li>
+  <li>采用<a href="https://cwiki.apache.org/confluence/display/FLUME/Build+Flume+1.3.x+up+on+Windows">官方早期文档</a>进行windows下编译、配置；</li>
+  <li>结果：发现flume 1.5.0.1版本，不需要在windows下编译，直接进行配置，也能启动flume；</li>
+</ul>
+
+<h2 id="section-4">参考来源</h2>
+
+<h2 id="section-5">杂谈</h2>
+
+<p>说出解决问题的思路，这种分享精神，我自己都感动到了。</p>
+
+
+
+        <div id="disqus_container">
+            <div style="margin-bottom:20px" class="right">
+				<wb:share-button appkey="2306590132" addition="simple" type="button" ralateUid="2356527183"></wb:share-button>
+            </div>
+            <!--<a href="#" class="comment" onclick="return false;">点击查看评论</a>-->
+            <div id="disqus_thread"></div>
+        </div>
+    </div>
+
+	
+    <div class="sidenav">
+		<iframe width="100%" height="75" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=0&isFans=0&uid=2356527183&verifier=1ccfb61e&colors=d6f3f7,ffffff,666666,0082cb,ecfbfd&dpc=1"></iframe>
+    </div>
+
+</div>
+
+<script src="/js/post.js" type="text/javascript"></script>
+
+
+	<div id="gotoTop">Top</div>
+
+
+    <!--*********************************************************-->
+    <!--****** 宝贝儿，看见这个时候，删掉下面的统计代码哦~ ******-->
+    <!--*********************************************************-->
+	<script>
+	  (function(i,s,o,g,r,a,m){
+		  i['GoogleAnalyticsObject']=r;i[r]=i[r] || function(){
+			(i[r].q=i[r].q||[]).push(arguments)}, i[r].l=1*new Date();
+			a=s.createElement(o), m=s.getElementsByTagName(o)[0];
+			a.async=1;
+			a.src=g;
+			m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-48535193-1', 'ningg.github.io');
+	  ga('send', 'pageview');
+	</script>
+    
+	
+    <script type="text/javascript">
+		function gotoTop(min_height){
+			$("#gotoTop").click(
+				function(){$('html,body').animate({scrollTop:0},700);
+			}).hover(
+				function(){$(this).addClass("hover");},
+				function(){$(this).removeClass("hover");
+			});
+			min_height ? min_height = min_height : min_height = 600;
+			$(window).scroll(function(){
+				
+				var s = $(window).scrollTop();
+				
+				if( s > min_height){
+					$("#gotoTop").fadeIn(100);
+				}else{
+					$("#gotoTop").fadeOut(200);
+				};
+			});
+		};
+		gotoTop();
+
+        $(function(){
+            $('.home-follow').click(function(e){
+                e.preventDefault();
+
+                if($('.home-contact').is(':visible')){
+                    $('.home-contact').slideUp(100);
+                }else{
+                    $('.home-contact').slideDown(100);
+                }
+            });
+        })
+
+    </script>
+</body>
+</html>

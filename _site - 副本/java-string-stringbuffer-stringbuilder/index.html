@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html xmlns:wb="http://open.weibo.com/wb">
+<head>
+    <!--   Author: NingG   -->
+    <meta charset="utf-8" />
+	<meta property="wb:webmaster" content="7ea7f3d5f3edad6a" />
+    <title>Java中String、StringBuffer、StringBuilder | ningg.top</title>
+    <meta name="author" content="NingG" />
+    <meta name="renderer" content="webkit">
+    <meta name="description" content=" Java中字符串相关内容梳理  " />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+    <link rel="stylesheet" href="/css/default.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="" />
+	
+    <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+	<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+	
+    <div class="home-menu">
+        <div class="home-icon-con">
+            <a class="home-menu-icon" href="/">NingG</a>
+            <a class="home-follow" href="#" title="Contact Me">+</a>
+        </div>
+        <div class="home-contact">
+            <a href="http://weibo.com/ggningg/" target="_blank" style="margin-left:-5px;"><img src="http://www.weibo.com/favicon.ico" alt="" width="25"/></a>
+            <a href="http://www.douban.com/people/ggningg/" target="_blank" style="text-align:center;"><img src="http://www.douban.com/favicon.ico" alt="" width="22"/></a>
+			<a href="http://github.com/ningg" alt="" target="_blank" style="text-align:right;"><img src="/images/icon-cube-smaller.png" width="22"/></a>
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="/js/prettify/prettify.css" />
+<style type="text/css">
+    body { background:#e8e8e8; }
+    @media screen and (max-width: 750px){
+        body { background:#fff; }
+    }
+    @media screen and (max-width: 1020px){
+        body { background:#fff; }
+    }
+</style>
+
+<div id="content">
+    <div class="entry">
+        <h1 class="entry-title"><a href="/java-string-stringbuffer-stringbuilder" title="Java中String、StringBuffer、StringBuilder">Java中String、StringBuffer、StringBuilder</a></h1>
+        <p class="entry-date">2012-08-11</p>
+        <p>我们先要记住三者的特征：</p>
+
+<ul>
+  <li>String 字符串常量</li>
+  <li>StringBuffer 字符串变量（线程安全）</li>
+  <li>StringBuilder 字符串变量（非线程安全）</li>
+</ul>
+
+<h2 id="section">一、定义</h2>
+
+<p>查看API会发现，String、StringBuffer、StringBuilder都实现了 CharSequence接口，虽然它们都与字符串相关，但是其处理机制不同。</p>
+
+<ul>
+  <li>String：
+    <ul>
+      <li>是字符串常量；</li>
+      <li>final class，不能被继承；</li>
+      <li>内部<code>final char[] value</code>，字符数组常量；</li>
+    </ul>
+  </li>
+  <li>StringBuffer：
+    <ul>
+      <li>字符串变量；</li>
+      <li>线程安全</li>
+      <li>final class，不能被继承；</li>
+      <li>内部<code>char[] value</code>，可以进行扩容，字符数组变量；<em>（实际上，为数组分配新的堆内存、销毁原数组空间）</em></li>
+    </ul>
+  </li>
+  <li>StringBuilder：
+    <ul>
+      <li>与StringBuffer类基本相同</li>
+      <li>非线程安全；</li>
+    </ul>
+  </li>
+</ul>
+
+<p>在性能方面，由于String类的操作是产生新的String对象，而StringBuilder和StringBuffer只是一个字符数组的扩容而已，所以String类的操作要远慢于StringBuffer和StringBuilder。</p>
+
+<h2 id="section-1">二、使用场景</h2>
+
+<p>几点：</p>
+
+<ul>
+  <li>String：在字符串不经常变化的场景中可以使用String类，例如常量的声明、少量的变量运算。</li>
+  <li>StringBuffer：在频繁进行字符串运算（如拼接、替换、删除等），并且运行在<strong>多线程环境</strong>中，则可以考虑使用StringBuffer，例如XML解析、HTTP参数解析和封装。</li>
+  <li>StringBuilder：在频繁进行字符串运算（如拼接、替换、和删除等），并且运行在<strong>单线程的环境</strong>中，则可以考虑使用StringBuilder，如SQL语句的拼装、JSON封装等。</li>
+</ul>
+
+<h2 id="section-2">三、分析</h2>
+
+<p>简要的说， String 类型和 StringBuffer 类型的主要性能区别其实在于 String 是不可变的对象, 因此在每次对 String 类型进行改变的时候其实都等同于生成了一个新的 String 对象，然后将指针指向新的 String 对象。所以经常改变内容的字符串最好不要用 String ，因为每次生成对象都会对系统性能产生影响，特别当内存中无引用对象多了以后， JVM 的 GC 就会开始工作，那速度是一定会相当慢的。</p>
+
+<p>而如果是使用 StringBuffer 类则结果就不一样了，每次结果都会对 StringBuffer 对象本身进行操作，而不是生成新的对象，再改变对象引用。所以在一般情况下我们推荐使用 StringBuffer ，特别是字符串对象经常改变的情况下。而在某些特别情况下， String 对象的字符串拼接其实是被 JVM 解释成了 StringBuffer 对象的拼接，所以这些时候 String 对象的速度并不会比 StringBuffer 对象慢，而特别是以下的字符串对象生成中， String 效率是远要比 StringBuffer 快的：</p>
+
+<pre><code>String S1 = “This is only a" + “ simple" + “ test";
+StringBuffer Sb = new StringBuilder(“This is only a").append(“ simple").append(“ test");
+</code></pre>
+
+<p>你会很惊讶的发现，生成 String S1 对象的速度简直太快了，而这个时候 StringBuffer 居然速度上根本一点都不占优势。其实这是 JVM 的一个把戏，在 JVM 眼里，这个</p>
+
+<p><code>String S1 = “This is only a" + “ simple" + “test";</code>其实就是：<code>String S1 = “This is only a simple test";</code></p>
+
+<p>所以当然不需要太多的时间了。但大家这里要注意的是，如果你的字符串是来自另外的 String 对象的话，速度就没那么快了，譬如：</p>
+
+<pre><code>String S2 = "This is only a";
+String S3 = "simple";
+String S4 = "test";
+String S1 = S2 +S3 + S4;
+</code></pre>
+
+<p>这时候 JVM 会规规矩矩的按照原来的方式去做。</p>
+
+<h2 id="section-3">四、结论</h2>
+
+<p><strong>1. 在大部分情况下 StringBuffer &gt; String</strong></p>
+
+<p>Java.lang.StringBuffer是线程安全的可变字符序列。一个类似于 String 的字符串缓冲区，但不能修改。虽然在任意时间点上它都包含某种特定的字符序列，但通过某些方法调用可以改变该序列的长度和内容。在程序中可将字符串缓冲区安全地用于多线程。而且在必要时可以对这些方法进行同步，因此任意特定实例上的所有操作就好像是以串行顺序发生的，该顺序与所涉及的每个线程进行的方法调用顺序一致。</p>
+
+<p>StringBuffer 上的主要操作是 append 和 insert 方法，可重载这些方法，以接受任意类型的数据。每个方法都能有效地将给定的数据转换成字符串，然后将该字符串的字符追加或插入到字符串缓冲区中。append 方法始终将这些字符添加到缓冲区的末端；而 insert 方法则在指定的点添加字符。</p>
+
+<p>例如，如果 z 引用一个当前内容是“start”的字符串缓冲区对象，则此方法调用 z.append(“le”) 会使字符串缓冲区包含“startle”(累加);而 z.insert(4, “le”) 将更改字符串缓冲区，使之包含“starlet”。</p>
+
+<p><strong>2. 在大部分情况下 StringBuilder &gt; StringBuffer</strong></p>
+
+<p>java.lang.StringBuilder一个可变的字符序列是JAVA 5.0新增的。此类提供一个与 StringBuffer 兼容的 API，但不保证同步，所以使用场景是单线程。该类被设计用作 StringBuffer 的一个简易替换，用在字符串缓冲区被单个线程使用的时候（这种情况很普遍）。如果可能，建议优先采用该类，因为在大多数实现中，它比 StringBuffer 要快。两者的使用方法基本相同。</p>
+
+<h2 id="string">五、String详解</h2>
+
+<p>几点：</p>
+
+<ul>
+  <li>equals方法：
+    <ul>
+      <li><code>str1.equals(str2)</code>判断两个字符串内容是否相等；</li>
+      <li><code>str1 == str2</code>，比较两个字符串的引用是否相等，即，内存中地址位置是否相等；</li>
+    </ul>
+  </li>
+  <li>intern方法：
+    <ul>
+      <li>判断String对应字符数组，是否在常量池中存在，如果存在，则返回常量池中的引用；</li>
+      <li><code>String str1 = "abc";</code>编译期，确定为常量，会在常量池中放置<code>abc</code>的字符数组，并且将引用返回给<code>str1</code>;</li>
+      <li><code>String str2 = new String("abc");</code>编译期无法确认为常量，因此，在JVM 堆中放置<code>abc</code>的字符数组，并且将引用返回给<code>str2</code>;</li>
+      <li><code>str1 == str2</code>为false，<code>str1 == str2.intern()</code>为true；</li>
+    </ul>
+  </li>
+</ul>
+
+
+
+        <div id="disqus_container">
+            <div style="margin-bottom:20px" class="right">
+				<wb:share-button appkey="2306590132" addition="simple" type="button" ralateUid="2356527183"></wb:share-button>
+            </div>
+            <!--<a href="#" class="comment" onclick="return false;">点击查看评论</a>-->
+            <div id="disqus_thread"></div>
+        </div>
+    </div>
+
+	
+    <div class="sidenav">
+		<iframe width="100%" height="75" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=0&isFans=0&uid=2356527183&verifier=1ccfb61e&colors=d6f3f7,ffffff,666666,0082cb,ecfbfd&dpc=1"></iframe>
+    </div>
+
+</div>
+
+<script src="/js/post.js" type="text/javascript"></script>
+
+
+	<div id="gotoTop">Top</div>
+
+
+    <!--*********************************************************-->
+    <!--****** 宝贝儿，看见这个时候，删掉下面的统计代码哦~ ******-->
+    <!--*********************************************************-->
+	<script>
+	  (function(i,s,o,g,r,a,m){
+		  i['GoogleAnalyticsObject']=r;i[r]=i[r] || function(){
+			(i[r].q=i[r].q||[]).push(arguments)}, i[r].l=1*new Date();
+			a=s.createElement(o), m=s.getElementsByTagName(o)[0];
+			a.async=1;
+			a.src=g;
+			m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-48535193-1', 'ningg.github.io');
+	  ga('send', 'pageview');
+	</script>
+    
+	
+    <script type="text/javascript">
+		function gotoTop(min_height){
+			$("#gotoTop").click(
+				function(){$('html,body').animate({scrollTop:0},700);
+			}).hover(
+				function(){$(this).addClass("hover");},
+				function(){$(this).removeClass("hover");
+			});
+			min_height ? min_height = min_height : min_height = 600;
+			$(window).scroll(function(){
+				
+				var s = $(window).scrollTop();
+				
+				if( s > min_height){
+					$("#gotoTop").fadeIn(100);
+				}else{
+					$("#gotoTop").fadeOut(200);
+				};
+			});
+		};
+		gotoTop();
+
+        $(function(){
+            $('.home-follow').click(function(e){
+                e.preventDefault();
+
+                if($('.home-contact').is(':visible')){
+                    $('.home-contact').slideUp(100);
+                }else{
+                    $('.home-contact').slideDown(100);
+                }
+            });
+        })
+
+    </script>
+</body>
+</html>

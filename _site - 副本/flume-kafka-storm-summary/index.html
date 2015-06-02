@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html xmlns:wb="http://open.weibo.com/wb">
+<head>
+    <!--   Author: NingG   -->
+    <meta charset="utf-8" />
+	<meta property="wb:webmaster" content="7ea7f3d5f3edad6a" />
+    <title>Flume、Kafka、Storm小结 | ningg.top</title>
+    <meta name="author" content="NingG" />
+    <meta name="renderer" content="webkit">
+    <meta name="description" content=" Flume(apache-flume-1.5.0.1)、Kafka()、Storm()这三个东西都研究一段时间了，做个阶段性小结  " />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+    <link rel="stylesheet" href="/css/default.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="" />
+	
+    <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+	<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+	
+    <div class="home-menu">
+        <div class="home-icon-con">
+            <a class="home-menu-icon" href="/">NingG</a>
+            <a class="home-follow" href="#" title="Contact Me">+</a>
+        </div>
+        <div class="home-contact">
+            <a href="http://weibo.com/ggningg/" target="_blank" style="margin-left:-5px;"><img src="http://www.weibo.com/favicon.ico" alt="" width="25"/></a>
+            <a href="http://www.douban.com/people/ggningg/" target="_blank" style="text-align:center;"><img src="http://www.douban.com/favicon.ico" alt="" width="22"/></a>
+			<a href="http://github.com/ningg" alt="" target="_blank" style="text-align:right;"><img src="/images/icon-cube-smaller.png" width="22"/></a>
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="/js/prettify/prettify.css" />
+<style type="text/css">
+    body { background:#e8e8e8; }
+    @media screen and (max-width: 750px){
+        body { background:#fff; }
+    }
+    @media screen and (max-width: 1020px){
+        body { background:#fff; }
+    }
+</style>
+
+<div id="content">
+    <div class="entry">
+        <h1 class="entry-title"><a href="/flume-kafka-storm-summary" title="Flume、Kafka、Storm小结">Flume、Kafka、Storm小结</a></h1>
+        <p class="entry-date">2014-11-10</p>
+        <h2 id="flume">Flume</h2>
+
+<h3 id="section">可靠性和可恢复性</h3>
+
+<h4 id="reliability">Reliability</h4>
+
+<p>The events are staged in a channel on each agent. The events are then delivered to the next agent or terminal repository (like HDFS) in the flow. The events are removed from a channel only after they are stored in the channel of next agent or in the terminal repository. This is a how the single-hop message delivery semantics in Flume provide end-to-end reliability of the flow.（<strong>single-hop message delivery semantics</strong>：Channel中的event仅在被成功处理之后，才从Channel中删掉。）</p>
+
+<p>Flume uses a transactional approach to guarantee the reliable delivery of the events. The sources and sinks encapsulate in a transaction the storage/retrieval, respectively, of the events placed in or provided by a transaction provided by the channel. This ensures that the set of events are reliably passed from point to point in the flow. In the case of a multi-hop flow, the sink from the previous hop and the source from the next hop both have their transactions running to ensure that the data is safely stored in the channel of the next hop.（<strong>multi-hop</strong>：）</p>
+
+<p><strong>notes(ningg)</strong>：Flume如何保证事物操作？没看懂</p>
+
+<h4 id="recoverability">Recoverability</h4>
+
+<p>The events are staged in the channel, which manages recovery from failure. Flume supports a durable file channel which is backed by the local file system. There’s also a memory channel which simply stores the events in an in-memory queue, which is faster but any events still left in the memory channel when an agent process dies can’t be recovered.（Channel需保证崩溃后，能恢复events，具体：本地FS上保存durable file channel，另，占用一个in-memory queue，Channel进程崩溃后，能加快恢复速度；但，如果agent进程崩溃，将导致内存泄漏：无法回收这一内存）</p>
+
+<h2 id="kafka">Kafka</h2>
+
+<p>（TODO List）</p>
+
+<p>（Kafka集群涉及到的可扩展性和可靠性）</p>
+
+<h2 id="storm">Storm</h2>
+
+<p>（TODO List）</p>
+
+<p>（Storm集群相关的可扩展性和可靠性）</p>
+
+<h2 id="flumekafkastorm">Flume/Kafka/Storm框架性能测试</h2>
+
+<p>简要说一下，性能测试的目标：弄清楚整个框架的承载能力，到底能处理多达流量的数据。</p>
+
+<h3 id="section-1">前期问题</h3>
+
+<p>几个搭建测试环境相关的问题：</p>
+
+<ul>
+  <li><strong>Flume集群与Kafka集群之间</strong>，<strong>是否要走网络</strong>？简要来说，Flume集群的最后一个聚合的Agent是否要放置到Kafka即群里？
+    <ul>
+      <li><strong>RE</strong>：Flume的最后一个负责聚合的Agent即使放置在某个Kafka broker上，仍然是要走网络的，因为Kafka本身就是一个集群，Flume的Kafka Sink与其他Kafka broker连接时，走的也是网络；</li>
+    </ul>
+  </li>
+  <li><strong>Flume收集的数据源</strong>，<strong>是否同时包含IP:port和日志</strong>？Flume提供了从这两种source收集数据的能力，测试的时候要覆盖到。</li>
+</ul>
+
+<h2 id="section-2">搭建测试环境步骤</h2>
+
+<ul>
+  <li>实现Flume集群；
+    <ul>
+      <li>165、166收集数据，并以avro方式汇聚到167；</li>
+      <li>167上以logger方式将收到的message输出到stdout；</li>
+    </ul>
+  </li>
+  <li>实现Kafka集群；
+    <ul>
+      <li>配置每一个 Kafka broker 的 id 以及 zookeeper 集群；</li>
+      <li>将167上Flume agent的sink修改为Flume Kafka Sink；</li>
+      <li></li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="section-3">测试方案列表</h3>
+
+<h4 id="zookeeper">zookeeper集群</h4>
+
+<p>当前使用的是CDH中自带的zookeeper：</p>
+
+<ul>
+  <li>节点位置：
+    <ul>
+      <li>168.7.1.68:2181</li>
+      <li>168.7.1.69:2181</li>
+      <li>168.7.1.70:2181</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>notes(ningg)</strong>：zookeeper集群的基本原理，如何监控其性能？</p>
+
+<h4 id="flume-1">Flume集群</h4>
+
+<ul>
+  <li>节点位置：
+    <ul>
+      <li>168.7.2.165: 21811</li>
+      <li>168.7.2.166: 21811</li>
+      <li>168.7.2.167: 21811（作为聚合的Agent）</li>
+    </ul>
+  </li>
+  <li>下载路径和版本信息：
+    <ul>
+      <li>下载路径：http://flume.apache.org/download.html</li>
+      <li>版本信息：apache-flume-1.5.0.1-bin</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Flume的配置文件需要考虑几点：</p>
+
+<ul>
+  <li>source包含两个：Exec Source、NetCat Source、avro Source；</li>
+  <li>Sink包含：logger Sink、avro Sink、Flume Kafka Sink；</li>
+</ul>
+
+<p><strong>notes(ningg)</strong>：一个问题，使用Exec Source来进行收集数据时，有一种情况，如果<code>tail -F</code>命令意外终止了，Flume无法自动重启这一命令，原因：Flume无法确定是文件没有新增信息，还是tail命令意外终止；为解决这一问题，官网有两个建议：</p>
+
+<ul>
+  <li>使用Spooling Directory Source，不过这个Source也有一个问题，他要求将文件添加到一个固定目录，这就会造成信息传递的实时性降低；</li>
+  <li>通过JDK直接与Flume集成；</li>
+</ul>
+
+<p><strong>个人想法</strong>：官网给出的信息很权威，不过可以到官网的JIRA上看看，其他人也遇到这个问题，应该会有其他思路。</p>
+
+<h4 id="kafka-1">Kafka集群</h4>
+
+<ul>
+  <li>节点位置：
+    <ul>
+      <li>168.7.2.165:9091</li>
+      <li>168.7.2.166:9091</li>
+      <li>168.7.2.167:9091</li>
+    </ul>
+  </li>
+  <li>下载路径和版本信息：
+    <ul>
+      <li>下载路径：http://kafka.apache.org/downloads.html</li>
+      <li>版本信息：kafka_2.9.2-0.8.1.1</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>notes(ningg)</strong>：有几个疑问：</p>
+
+<ul>
+  <li>如何确定当前Kafka集群中broker存活状态？</li>
+  <li>Kafka运行过程中，可定制的输出日志有哪些？输出日志位置？</li>
+</ul>
+
+<h4 id="storm-1">Storm集群</h4>
+
+<ul>
+  <li>节点位置：
+    <ul>
+      <li>168.7.1.68:2181</li>
+      <li>168.7.1.69:2181</li>
+      <li>168.7.1.70:2181</li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>notes(ningg)</strong>：如何构建Storm集群？</p>
+
+<h2 id="section-4">问题汇总</h2>
+
+<ul>
+  <li>Flume、Kafka、Storm构成框架，如何监控每个模块的存活状态和性能？如何确定系统处理的瓶颈位置？</li>
+</ul>
+
+<h2 id="section-5">参考来源</h2>
+
+
+
+        <div id="disqus_container">
+            <div style="margin-bottom:20px" class="right">
+				<wb:share-button appkey="2306590132" addition="simple" type="button" ralateUid="2356527183"></wb:share-button>
+            </div>
+            <!--<a href="#" class="comment" onclick="return false;">点击查看评论</a>-->
+            <div id="disqus_thread"></div>
+        </div>
+    </div>
+
+	
+    <div class="sidenav">
+		<iframe width="100%" height="75" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=0&isFans=0&uid=2356527183&verifier=1ccfb61e&colors=d6f3f7,ffffff,666666,0082cb,ecfbfd&dpc=1"></iframe>
+    </div>
+
+</div>
+
+<script src="/js/post.js" type="text/javascript"></script>
+
+
+	<div id="gotoTop">Top</div>
+
+
+    <!--*********************************************************-->
+    <!--****** 宝贝儿，看见这个时候，删掉下面的统计代码哦~ ******-->
+    <!--*********************************************************-->
+	<script>
+	  (function(i,s,o,g,r,a,m){
+		  i['GoogleAnalyticsObject']=r;i[r]=i[r] || function(){
+			(i[r].q=i[r].q||[]).push(arguments)}, i[r].l=1*new Date();
+			a=s.createElement(o), m=s.getElementsByTagName(o)[0];
+			a.async=1;
+			a.src=g;
+			m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-48535193-1', 'ningg.github.io');
+	  ga('send', 'pageview');
+	</script>
+    
+	
+    <script type="text/javascript">
+		function gotoTop(min_height){
+			$("#gotoTop").click(
+				function(){$('html,body').animate({scrollTop:0},700);
+			}).hover(
+				function(){$(this).addClass("hover");},
+				function(){$(this).removeClass("hover");
+			});
+			min_height ? min_height = min_height : min_height = 600;
+			$(window).scroll(function(){
+				
+				var s = $(window).scrollTop();
+				
+				if( s > min_height){
+					$("#gotoTop").fadeIn(100);
+				}else{
+					$("#gotoTop").fadeOut(200);
+				};
+			});
+		};
+		gotoTop();
+
+        $(function(){
+            $('.home-follow').click(function(e){
+                e.preventDefault();
+
+                if($('.home-contact').is(':visible')){
+                    $('.home-contact').slideUp(100);
+                }else{
+                    $('.home-contact').slideDown(100);
+                }
+            });
+        })
+
+    </script>
+</body>
+</html>

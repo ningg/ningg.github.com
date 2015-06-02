@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html xmlns:wb="http://open.weibo.com/wb">
+<head>
+    <!--   Author: NingG   -->
+    <meta charset="utf-8" />
+	<meta property="wb:webmaster" content="7ea7f3d5f3edad6a" />
+    <title>Java 命令详解，java | ningg.top</title>
+    <meta name="author" content="NingG" />
+    <meta name="renderer" content="webkit">
+    <meta name="description" content=" 执行java命令时，需要考虑的选项  " />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+    <link rel="stylesheet" href="/css/default.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="" />
+	
+    <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+	<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+	
+    <div class="home-menu">
+        <div class="home-icon-con">
+            <a class="home-menu-icon" href="/">NingG</a>
+            <a class="home-follow" href="#" title="Contact Me">+</a>
+        </div>
+        <div class="home-contact">
+            <a href="http://weibo.com/ggningg/" target="_blank" style="margin-left:-5px;"><img src="http://www.weibo.com/favicon.ico" alt="" width="25"/></a>
+            <a href="http://www.douban.com/people/ggningg/" target="_blank" style="text-align:center;"><img src="http://www.douban.com/favicon.ico" alt="" width="22"/></a>
+			<a href="http://github.com/ningg" alt="" target="_blank" style="text-align:right;"><img src="/images/icon-cube-smaller.png" width="22"/></a>
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="/js/prettify/prettify.css" />
+<style type="text/css">
+    body { background:#e8e8e8; }
+    @media screen and (max-width: 750px){
+        body { background:#fff; }
+    }
+    @media screen and (max-width: 1020px){
+        body { background:#fff; }
+    }
+</style>
+
+<div id="content">
+    <div class="entry">
+        <h1 class="entry-title"><a href="/java-command" title="Java 命令详解，java">Java 命令详解，java</a></h1>
+        <p class="entry-date">2013-04-01</p>
+        <h2 id="java">java命令</h2>
+
+<h3 id="cp-">-cp 设定加载类路径</h3>
+
+<p>在JDK 7，存在<code>-cp</code>参数，具体参考：</p>
+
+<ul>
+  <li><a href="http://docs.oracle.com/javase/7/docs/technotes/tools/windows/java.html">Windows下java命令(JDK 7)</a></li>
+  <li><a href="http://docs.oracle.com/javase/7/docs/technotes/tools/solaris/java.html">Linux下java命令(JDK 7)</a></li>
+</ul>
+
+<p>在JDK 8，已经取消了<code>-cp</code>参数，详细参考：<em>（是这样吗？）</em></p>
+
+<ul>
+  <li><a href="http://docs.oracle.com/javase/8/docs/technotes/tools/windows/java.html">Windows下java命令(JDK 8)</a></li>
+  <li><a href="http://docs.oracle.com/javase/8/docs/technotes/tools/unix/java.html">Linux下java命令(JDK 8)</a></li>
+</ul>
+
+<h3 id="d-arguments-">-D arguments 参数</h3>
+
+<blockquote>
+  <p><code>-D&lt;name&gt;=&lt;value&gt;</code> set a system property  设置JVM系统属性；</p>
+</blockquote>
+
+<p>在java源文件中，通过<code>System.getProperty("&lt;name&gt;")</code>即可获取上述设置的JVM系统属性；这种方式来传递属性，与<code>main(String[] args)</code>不同，因为<code>-D&lt;name&gt;=&lt;value&gt;</code>是JVM系统级的，在JVM上所有class文件中都可以获取，而<code>main(String[] args)</code>中，<code>args</code>默认是入口class的参数。</p>
+
+<p>查看JVM内部所有的系统属性：<code>System.getProperties().list(System.out);</code>，我本地输出效果如下：<em>（与本地通过<code>env</code>命令，查看的效果不同）</em></p>
+
+<pre><code>-- listing properties --
+java.runtime.name=Java(TM) SE Runtime Environment
+sun.boot.library.path=D:\Program Files\Java\jdk1.7.0_67\jre...
+java.vm.version=24.65-b04
+java.vm.vendor=Oracle Corporation
+java.vendor.url=http://java.oracle.com/
+path.separator=;
+java.vm.name=Java HotSpot(TM) Client VM
+file.encoding.pkg=sun.io
+user.script=
+user.country=CN
+sun.java.launcher=SUN_STANDARD
+sun.os.patch.level=Service Pack 3
+java.vm.specification.name=Java Virtual Machine Specification
+user.dir=D:\Program-Files\workspace\TestBasic
+java.runtime.version=1.7.0_67-b01
+java.awt.graphicsenv=sun.awt.Win32GraphicsEnvironment
+java.endorsed.dirs=D:\Program Files\Java\jdk1.7.0_67\jre...
+os.arch=x86
+java.io.tmpdir=C:\DOCUME~1\Luious\LOCALS~1\Temp\
+line.separator=
+
+java.vm.specification.vendor=Oracle Corporation
+user.variant=
+os.name=Windows XP
+sun.jnu.encoding=GBK
+java.library.path=D:\Program Files\Java\jdk1.7.0_67\bin...
+
+test_input=test_value
+
+java.specification.name=Java Platform API Specification
+java.class.version=51.0
+sun.management.compiler=HotSpot Client Compiler
+os.version=5.1
+user.home=C:\Documents and Settings\Luious
+user.timezone=Asia/Shanghai
+java.awt.printerjob=sun.awt.windows.WPrinterJob
+file.encoding=UTF-8
+java.specification.version=1.7
+user.name=cib
+java.class.path=D:\Program-Files\workspace\TestBasic\bin
+java.vm.specification.version=1.7
+sun.arch.data.model=32
+java.home=D:\Program Files\Java\jdk1.7.0_67\jre
+sun.java.command=com.cib.time.TimE
+java.specification.vendor=Oracle Corporation
+user.language=zh
+awt.toolkit=sun.awt.windows.WToolkit
+java.vm.info=mixed mode, sharing
+java.version=1.7.0_67
+java.ext.dirs=D:\Program Files\Java\jdk1.7.0_67\jre...
+sun.boot.class.path=D:\Program Files\Java\jdk1.7.0_67\jre...
+java.vendor=Oracle Corporation
+file.separator=\
+java.vendor.url.bug=http://bugreport.sun.com/bugreport/
+sun.cpu.endian=little
+sun.io.unicode.encoding=UnicodeLittle
+sun.desktop=windows
+sun.cpu.isalist=pentium_pro+mmx pentium_pro pentium+m...
+</code></pre>
+
+<p>上述输出中：<code>test_input=test_value</code>，是我以<code>-Dtest_input=test_value</code>配置的。</p>
+
+<h4 id="djavaextdirs-cp">通过-Djava.ext.dirs来设置-cp（类搜索路径）</h4>
+
+<p>通过<code>-cp .;a.jar;b.jar</code>来指定类加载的jar时，windows下使用<code>;</code>分隔，linux下使用<code>:</code>分隔，需要列出所有jar包<em>（现在这一情况有没有改善？）</em>；如果希望通配符效果，使用：<code>java -Djava.ext.dirs=...</code>来替换<code>-cp</code>配置。</p>
+
+<p>特别说明：不建议上述操作，具体：</p>
+
+<p>虚拟机在运行一个类时，需要将其装入内存，虚拟机搜索类的方式和顺序如下：<em>（双亲委派模式）</em></p>
+
+<p><code>Bootstrap classes</code> – <code>Extension classes</code> – <code>User classes</code></p>
+
+<ul>
+  <li>Bootstrap 中的路径是虚拟机自带的jar或zip文件，虚拟机首先搜索这些包文件，用<code>System.getProperty("sun.boot.class.path")</code>可得到虚拟机搜索的包名。</li>
+  <li>Extension是位于jre/lib/ext目录下的jar文件，虚拟机在搜索完Bootstrap后就搜索该目录下的jar文件。用<code>System.getProperty("java.ext.dirs”)</code>可得到虚拟机使用Extension搜索路径。</li>
+  <li>User classes搜索顺序为当前目录、环境变量 CLASSPATH、-classpath，用<code>System.getProperty("java.class.path”)</code>得到User classes路径。</li>
+</ul>
+
+<h4 id="jvmos">JVM系统环境与OS系统环境</h4>
+
+<p>上述<code>System.getProperty("&lt;name&gt;")</code>中System是指 JRE system，不是OS。</p>
+
+<h4 id="eclipsevm">Eclipse下配置VM参数</h4>
+
+<p>在Eclipse下如何配置VM的启动参数？即，如何配置<code>-D</code>属性？具体：<code>run as</code>  – <code>run configurations</code>  – <code>Arguments</code> – <code>VM arguments</code>，直接书写<code>-D&lt;name&gt;=&lt;value&gt;</code>即可，<em>（多参数时，分行输入）</em></p>
+
+<h4 id="section">扩展阅读</h4>
+
+<ul>
+  <li><a href="http://blog.sina.com.cn/s/blog_605f5b4f0100hlt9.html">JAVA 命令参数详解：-D</a></li>
+</ul>
+
+<h2 id="section-1">参考来源</h2>
+
+<p>主要参考：Java的官方文档</p>
+
+<ul>
+  <li><a href="http://www.oracle.com/technetwork/java/javase/tech/index.html">Java SE Technologies</a> <em>（所有内容，都从这个开始）</em></li>
+  <li><a href="http://docs.oracle.com/javase/8/docs/index.html">Java Platform Standard Edition 8 Documentation</a></li>
+  <li><a href="http://www.oracle.com/technetwork/articles/java/vmoptions-jsp-140102.html">Java HotSpot VM Options</a></li>
+  <li><a href="http://docs.oracle.com/javase/7/docs/technotes/tools/windows/java.html">java command</a></li>
+  <li><a href="http://www.cnblogs.com/redcreen/archive/2011/05/04/2037057.html">JVM系列三:JVM参数设置、分析</a></li>
+  <li><a href="http://xinklabi.iteye.com/blog/837435">Java命令行运行参数说明大全</a></li>
+</ul>
+
+
+
+        <div id="disqus_container">
+            <div style="margin-bottom:20px" class="right">
+				<wb:share-button appkey="2306590132" addition="simple" type="button" ralateUid="2356527183"></wb:share-button>
+            </div>
+            <!--<a href="#" class="comment" onclick="return false;">点击查看评论</a>-->
+            <div id="disqus_thread"></div>
+        </div>
+    </div>
+
+	
+    <div class="sidenav">
+		<iframe width="100%" height="75" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=0&isFans=0&uid=2356527183&verifier=1ccfb61e&colors=d6f3f7,ffffff,666666,0082cb,ecfbfd&dpc=1"></iframe>
+    </div>
+
+</div>
+
+<script src="/js/post.js" type="text/javascript"></script>
+
+
+	<div id="gotoTop">Top</div>
+
+
+    <!--*********************************************************-->
+    <!--****** 宝贝儿，看见这个时候，删掉下面的统计代码哦~ ******-->
+    <!--*********************************************************-->
+	<script>
+	  (function(i,s,o,g,r,a,m){
+		  i['GoogleAnalyticsObject']=r;i[r]=i[r] || function(){
+			(i[r].q=i[r].q||[]).push(arguments)}, i[r].l=1*new Date();
+			a=s.createElement(o), m=s.getElementsByTagName(o)[0];
+			a.async=1;
+			a.src=g;
+			m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-48535193-1', 'ningg.github.io');
+	  ga('send', 'pageview');
+	</script>
+    
+	
+    <script type="text/javascript">
+		function gotoTop(min_height){
+			$("#gotoTop").click(
+				function(){$('html,body').animate({scrollTop:0},700);
+			}).hover(
+				function(){$(this).addClass("hover");},
+				function(){$(this).removeClass("hover");
+			});
+			min_height ? min_height = min_height : min_height = 600;
+			$(window).scroll(function(){
+				
+				var s = $(window).scrollTop();
+				
+				if( s > min_height){
+					$("#gotoTop").fadeIn(100);
+				}else{
+					$("#gotoTop").fadeOut(200);
+				};
+			});
+		};
+		gotoTop();
+
+        $(function(){
+            $('.home-follow').click(function(e){
+                e.preventDefault();
+
+                if($('.home-contact').is(':visible')){
+                    $('.home-contact').slideUp(100);
+                }else{
+                    $('.home-contact').slideDown(100);
+                }
+            });
+        })
+
+    </script>
+</body>
+</html>

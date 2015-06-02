@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html xmlns:wb="http://open.weibo.com/wb">
+<head>
+    <!--   Author: NingG   -->
+    <meta charset="utf-8" />
+	<meta property="wb:webmaster" content="7ea7f3d5f3edad6a" />
+    <title>Windows下常用命令 | ningg.top</title>
+    <meta name="author" content="NingG" />
+    <meta name="renderer" content="webkit">
+    <meta name="description" content=" NingG's Blog  " />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+    <link rel="stylesheet" href="/css/default.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="" />
+	
+    <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+	<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+	
+    <div class="home-menu">
+        <div class="home-icon-con">
+            <a class="home-menu-icon" href="/">NingG</a>
+            <a class="home-follow" href="#" title="Contact Me">+</a>
+        </div>
+        <div class="home-contact">
+            <a href="http://weibo.com/ggningg/" target="_blank" style="margin-left:-5px;"><img src="http://www.weibo.com/favicon.ico" alt="" width="25"/></a>
+            <a href="http://www.douban.com/people/ggningg/" target="_blank" style="text-align:center;"><img src="http://www.douban.com/favicon.ico" alt="" width="22"/></a>
+			<a href="http://github.com/ningg" alt="" target="_blank" style="text-align:right;"><img src="/images/icon-cube-smaller.png" width="22"/></a>
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="/js/prettify/prettify.css" />
+<style type="text/css">
+    body { background:#e8e8e8; }
+    @media screen and (max-width: 750px){
+        body { background:#fff; }
+    }
+    @media screen and (max-width: 1020px){
+        body { background:#fff; }
+    }
+</style>
+
+<div id="content">
+    <div class="entry">
+        <h1 class="entry-title"><a href="/windows-normal-cmd" title="Windows下常用命令">Windows下常用命令</a></h1>
+        <p class="entry-date">2014-12-01</p>
+        <blockquote>
+  <p>说实话，之前在技术上很排斥windows，经过这段时间打磨，基本有个观点：倾向使用Linux，但环境限制需要解决windows下的某些情况时，本质就是问题，用心去解决。</p>
+</blockquote>
+
+<h2 id="section">查看端口占用</h2>
+
+<p>Windows下，CMD中，通过如下命令查看端口占用情况：</p>
+
+<pre><code>// netstat -h查看命令详情
+C:\Documents and Settings\ningg&gt;  netstat -ano
+
+Active Connections
+
+  Proto  Local Address          Foreign Address        State           PID
+  TCP    0.0.0.0:135            0.0.0.0:0              LISTENING       1160
+  TCP    0.0.0.0:445            0.0.0.0:0              LISTENING       4
+  TCP    0.0.0.0:3389           0.0.0.0:0              LISTENING       1076
+  TCP    0.0.0.0:5140           0.0.0.0:0              LISTENING       4472
+  TCP    0.0.0.0:8081           0.0.0.0:0              LISTENING       1416
+  TCP    0.0.0.0:8197           0.0.0.0:0              LISTENING       5092
+  TCP    0.0.0.0:17866          0.0.0.0:0              LISTENING       1848
+  TCP    127.0.0.1:1028         0.0.0.0:0              LISTENING       780
+  TCP    127.0.0.1:1033         127.0.0.1:1034         ESTABLISHED     1116
+</code></pre>
+
+<p>现在希望终结占用5140端口的进程，上面查询可知PID=4472的进程占用此端口，如何终止这个进程呢？打开<code>任务管理器</code>，在<code>查看(V)</code>–&gt;<code>选择列(S)...</code>–&gt;勾选<code>PID（进程标识符）</code>，然后在任务管理器中<code>进程</code>页面，即可看到每个进程对应的PID号，终止掉对应PID的进程即可。下图为查询到的进程。</p>
+
+<p><img src="/images/windows-normal-cmd/pid-windows-manager.png" alt="" /></p>
+
+<h2 id="cmd">更改CMD的编码方式</h2>
+
+<h3 id="section-1">背景</h3>
+
+<p>最近通过<a href="http://sourceforge.net/projects/unxutils/">UNXutils</a>来实现windows下的tail命令时，如果log是<code>ANSI</code>格式编码，则CMD窗口能够正常显示；但如果log是<code>UTF-8</code>格式，则CMD窗口显示乱码。</p>
+
+<h3 id="section-2">分析</h3>
+
+<p>本地文件的乱码问题，无非关注几个点：</p>
+
+<ul>
+  <li>原始文件的编码；</li>
+  <li>显示窗口的编码（解码方式）；</li>
+  <li>传输过程中的编码方式；<em>（对利用网络传输的内容有效）</em></li>
+</ul>
+
+<p>windows下，通过Notepad++编辑器，能够很容易查看当前log的编码方式，同时，利用Notepad++也能很方便地对log进行编码方式的转换。总结一下：能够完全掌握原始文件的编码。现在问题焦点就是显示窗口的编码方式了，如何查看？窗口是有属性的吧，对，就在CMD窗口的<code>属性</code>中，有两个相关项：<code>当前代码页</code>和<code>字体</code>。</p>
+
+<p>再往下，不说了思考的细节了，直接说解决办法：</p>
+
+<h4 id="section-3">1. 修改当前代码页的编码方式</h4>
+
+<pre><code>// 当前代码页修改为65001：UTF-8
+chcp 65001
+</code></pre>
+
+<p>补充：代码页默认936：ANSI/OEM - 简体中文（GBK）</p>
+
+<h4 id="cmd-1">2. 修改CMD窗口的字体</h4>
+
+<p>选择字体为：Lucida Console</p>
+
+<p>OK，确定对当前窗口生效。</p>
+
+<h2 id="java">Java常见问题</h2>
+
+<pre><code>...
+java.lang.IllegalArgumentException: Malformed \uxxxx encoding.
+...
+</code></pre>
+
+<p>通常是properties配置文件中，路径中包含<code>\\</code>，则出现上述错误，需要将其替换为<code>/</code>即可。</p>
+
+<h2 id="winbatpath">win下bat脚本中设置path</h2>
+
+<pre><code>set Path=%Path%;d:/
+</code></pre>
+
+<h2 id="windowstail">windows下tail命令</h2>
+
+<p>整体上有两种方式，一种直接利用第三方的开源实现，另一种，利用windows下的powershell环境。</p>
+
+<ul>
+  <li><a href="http://sourceforge.net/projects/unxutils/">UNXutils</a>，直接下载后，在环境变量中配置之后，即可使用，推荐XP环境下使用；</li>
+  <li>利用powershell命令：<code>get-content mylog.log -wait</code>，更多参考：<a href="http://www.stackify.com/11-ways-to-tail-a-log-file-on-windows-unix/">11 ways to tail a log on windows</a>；</li>
+</ul>
+
+<p>注：powershell v1.0版本中，<code>get-content mylog.log -wait</code> 可以实现tail命令功能，但在powershell v2.0版本中，<code>get-content</code>命令可能有差异，具体参考：<a href="http://stackoverflow.com/questions/4426442/unix-tail-equivalent-command-in-windows-powershell">更多阅读</a></p>
+
+<h2 id="win">win下名词</h2>
+
+<ul>
+  <li>Win32：Windows 95, 98, ME, NT, 2000, XP, 2003, Vista</li>
+</ul>
+
+<h2 id="section-4">参考来源</h2>
+
+<ul>
+  <li><a href="http://sourceforge.net/projects/unxutils/">UNXutils</a></li>
+  <li><a href="http://www.stackify.com/11-ways-to-tail-a-log-file-on-windows-unix/">11 ways to tail a log on windows</a></li>
+  <li><a href="http://stackoverflow.com/questions/4426442/unix-tail-equivalent-command-in-windows-powershell">windows powershell get-content</a></li>
+</ul>
+
+<h2 id="section-5">杂谈</h2>
+
+<p>乐于分享，我算是这么一类人，有时候心想：把经验分享出去，会不会导致被别人反超？但转念又一想：即使有人花费一点点时间就学会了，自己花费挺长时间才总结积累的经验，那对我可能不利，但对整个社会、对民族总是好的，能作为社会向前的垫脚石，也算是有点用。</p>
+
+
+
+        <div id="disqus_container">
+            <div style="margin-bottom:20px" class="right">
+				<wb:share-button appkey="2306590132" addition="simple" type="button" ralateUid="2356527183"></wb:share-button>
+            </div>
+            <!--<a href="#" class="comment" onclick="return false;">点击查看评论</a>-->
+            <div id="disqus_thread"></div>
+        </div>
+    </div>
+
+	
+    <div class="sidenav">
+		<iframe width="100%" height="75" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=0&isFans=0&uid=2356527183&verifier=1ccfb61e&colors=d6f3f7,ffffff,666666,0082cb,ecfbfd&dpc=1"></iframe>
+    </div>
+
+</div>
+
+<script src="/js/post.js" type="text/javascript"></script>
+
+
+	<div id="gotoTop">Top</div>
+
+
+    <!--*********************************************************-->
+    <!--****** 宝贝儿，看见这个时候，删掉下面的统计代码哦~ ******-->
+    <!--*********************************************************-->
+	<script>
+	  (function(i,s,o,g,r,a,m){
+		  i['GoogleAnalyticsObject']=r;i[r]=i[r] || function(){
+			(i[r].q=i[r].q||[]).push(arguments)}, i[r].l=1*new Date();
+			a=s.createElement(o), m=s.getElementsByTagName(o)[0];
+			a.async=1;
+			a.src=g;
+			m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-48535193-1', 'ningg.github.io');
+	  ga('send', 'pageview');
+	</script>
+    
+	
+    <script type="text/javascript">
+		function gotoTop(min_height){
+			$("#gotoTop").click(
+				function(){$('html,body').animate({scrollTop:0},700);
+			}).hover(
+				function(){$(this).addClass("hover");},
+				function(){$(this).removeClass("hover");
+			});
+			min_height ? min_height = min_height : min_height = 600;
+			$(window).scroll(function(){
+				
+				var s = $(window).scrollTop();
+				
+				if( s > min_height){
+					$("#gotoTop").fadeIn(100);
+				}else{
+					$("#gotoTop").fadeOut(200);
+				};
+			});
+		};
+		gotoTop();
+
+        $(function(){
+            $('.home-follow').click(function(e){
+                e.preventDefault();
+
+                if($('.home-contact').is(':visible')){
+                    $('.home-contact').slideUp(100);
+                }else{
+                    $('.home-contact').slideDown(100);
+                }
+            });
+        })
+
+    </script>
+</body>
+</html>

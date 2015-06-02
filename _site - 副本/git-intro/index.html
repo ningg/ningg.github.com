@@ -1,0 +1,196 @@
+<!DOCTYPE html>
+<html xmlns:wb="http://open.weibo.com/wb">
+<head>
+    <!--   Author: NingG   -->
+    <meta charset="utf-8" />
+	<meta property="wb:webmaster" content="7ea7f3d5f3edad6a" />
+    <title>Git入门 | ningg.top</title>
+    <meta name="author" content="NingG" />
+    <meta name="renderer" content="webkit">
+    <meta name="description" content=" 进行版本管理，团队协作时，涉及到的 Git 常用操作  " />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+    <link rel="stylesheet" href="/css/default.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="" />
+	
+    <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+	<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+	
+    <div class="home-menu">
+        <div class="home-icon-con">
+            <a class="home-menu-icon" href="/">NingG</a>
+            <a class="home-follow" href="#" title="Contact Me">+</a>
+        </div>
+        <div class="home-contact">
+            <a href="http://weibo.com/ggningg/" target="_blank" style="margin-left:-5px;"><img src="http://www.weibo.com/favicon.ico" alt="" width="25"/></a>
+            <a href="http://www.douban.com/people/ggningg/" target="_blank" style="text-align:center;"><img src="http://www.douban.com/favicon.ico" alt="" width="22"/></a>
+			<a href="http://github.com/ningg" alt="" target="_blank" style="text-align:right;"><img src="/images/icon-cube-smaller.png" width="22"/></a>
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="/js/prettify/prettify.css" />
+<style type="text/css">
+    body { background:#e8e8e8; }
+    @media screen and (max-width: 750px){
+        body { background:#fff; }
+    }
+    @media screen and (max-width: 1020px){
+        body { background:#fff; }
+    }
+</style>
+
+<div id="content">
+    <div class="entry">
+        <h1 class="entry-title"><a href="/git-intro" title="Git入门">Git入门</a></h1>
+        <p class="entry-date">2014-03-25</p>
+        <h2 id="section">立意</h2>
+
+<p>几点想法：</p>
+
+<ul>
+  <li>Git的常用操作</li>
+  <li>Git的基本原理，操作是附属于原理的，对原理的把握，两点好处：方便记忆Git的操作，方便快速定位问题；</li>
+  <li>典型场景下Git的使用
+    <ul>
+      <li>dev、prod等多个分支如何组织？</li>
+    </ul>
+  </li>
+</ul>
+
+<p>基本思路：整体上，系统参考几个内容：</p>
+
+<ul>
+  <li><a href="http://git-scm.com/book/zh/v1">Pro Git</a></li>
+  <li><a href="http://rogerdudler.github.io/git-guide/index.zh.html">git - 简明指南</a></li>
+  <li><a href="http://marklodato.github.io/visual-git-guide/index-zh-cn.html">图解Git</a></li>
+  <li><a href="http://www.cnblogs.com/lookenwu/p/3925308.html">快学Git</a></li>
+</ul>
+
+<p>几个结果：</p>
+
+<ul>
+  <li>快学Git：git相关的基本操作，不涉及过多原理；</li>
+  <li>详细整理Git：侧重Git的原理，以及常见场景下，Git的用法；</li>
+</ul>
+
+<p>注：在之前的<a href="/project-flume-ng-extends-source">一篇文章</a>中也涉及过Git的使用。</p>
+
+<h2 id="section-1">常见问题</h2>
+
+<h3 id="git-commitgit-push">git commit之后，git push之前，如何进行回滚</h3>
+
+<p>git commit之后，发现有的文件不详添加到git server中，希望回滚，该如何做？</p>
+
+<p>思路：</p>
+
+<ul>
+  <li>将文件git push之后，再添加.gitignore文件；</li>
+  <li>直接回滚处理git commit，然后，添加.gitignore，重新git commit；</li>
+</ul>
+
+<p>（TODO）</p>
+
+<p>如何解决？thinking…</p>
+
+<h3 id="gitignore">设置.gitignore对多级目录都有效？</h3>
+
+<p>直接在顶级目录中设置.gitignore？</p>
+
+<h2 id="section-2">参考来源</h2>
+
+<ul>
+  <li><a href="http://git-scm.com/book/zh/v1">Pro Git</a></li>
+  <li><a href="http://rogerdudler.github.io/git-guide/index.zh.html">git - 简明指南</a></li>
+  <li><a href="http://marklodato.github.io/visual-git-guide/index-zh-cn.html">图解Git</a></li>
+  <li><a href="http://www.cnblogs.com/lookenwu/p/3925308.html">快学Git</a></li>
+</ul>
+
+<h2 id="section-3">闲谈</h2>
+
+<p>前一段时间得知消息 <code>**</code> 队伍，逐渐兵强马壮，并且被邀请上了一个山头，做起了事业；细看他们的做法，他们队长在开始的时候，相信 <code>人生要独辟蹊径</code> 这么个说法，然后，在做事情的时候，他们战略立意为：时间紧迫，做好事情，抓住机会，成立队伍，把事情做好、做丰富，合适机会出现的时候，就做事业。实际上在2年之前，我们队伍与 <code>**</code> 队伍做的事情是相似的，但我们战略上没有定位，基本想法是：有事情做就把事情做好，一起做事，一起吃肉。最后，毕业了，我们的小队伍，散伙，各自谋生。当然，我认为造成当前与 <code>**</code> 队伍巨大差异的原因有很多，但我们战略立意太低了，没有战略定位，到头来，就成了混日子，能偷懒的时候，都偷懒了，1年回头一看，啥事情都没做成。我作为队伍的大佬之一，对此反思，下次有机会到北京，跟当时队伍大佬 <code>2W</code> 见面了，好好扯扯这个事。</p>
+
+<p>上面为什么提到这个战略定位呢？是想说无论事情大小，都要有个清晰、适当的战略目标，以此避免因为短期视野局限，迷失方向，浪费精力；时间太宝贵了，关键不可逆啊。</p>
+
+
+
+        <div id="disqus_container">
+            <div style="margin-bottom:20px" class="right">
+				<wb:share-button appkey="2306590132" addition="simple" type="button" ralateUid="2356527183"></wb:share-button>
+            </div>
+            <!--<a href="#" class="comment" onclick="return false;">点击查看评论</a>-->
+            <div id="disqus_thread"></div>
+        </div>
+    </div>
+
+	
+    <div class="sidenav">
+		<iframe width="100%" height="75" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=0&isFans=0&uid=2356527183&verifier=1ccfb61e&colors=d6f3f7,ffffff,666666,0082cb,ecfbfd&dpc=1"></iframe>
+    </div>
+
+</div>
+
+<script src="/js/post.js" type="text/javascript"></script>
+
+
+	<div id="gotoTop">Top</div>
+
+
+    <!--*********************************************************-->
+    <!--****** 宝贝儿，看见这个时候，删掉下面的统计代码哦~ ******-->
+    <!--*********************************************************-->
+	<script>
+	  (function(i,s,o,g,r,a,m){
+		  i['GoogleAnalyticsObject']=r;i[r]=i[r] || function(){
+			(i[r].q=i[r].q||[]).push(arguments)}, i[r].l=1*new Date();
+			a=s.createElement(o), m=s.getElementsByTagName(o)[0];
+			a.async=1;
+			a.src=g;
+			m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-48535193-1', 'ningg.github.io');
+	  ga('send', 'pageview');
+	</script>
+    
+	
+    <script type="text/javascript">
+		function gotoTop(min_height){
+			$("#gotoTop").click(
+				function(){$('html,body').animate({scrollTop:0},700);
+			}).hover(
+				function(){$(this).addClass("hover");},
+				function(){$(this).removeClass("hover");
+			});
+			min_height ? min_height = min_height : min_height = 600;
+			$(window).scroll(function(){
+				
+				var s = $(window).scrollTop();
+				
+				if( s > min_height){
+					$("#gotoTop").fadeIn(100);
+				}else{
+					$("#gotoTop").fadeOut(200);
+				};
+			});
+		};
+		gotoTop();
+
+        $(function(){
+            $('.home-follow').click(function(e){
+                e.preventDefault();
+
+                if($('.home-contact').is(':visible')){
+                    $('.home-contact').slideUp(100);
+                }else{
+                    $('.home-contact').slideDown(100);
+                }
+            });
+        })
+
+    </script>
+</body>
+</html>

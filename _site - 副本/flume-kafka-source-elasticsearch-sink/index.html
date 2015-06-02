@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html xmlns:wb="http://open.weibo.com/wb">
+<head>
+    <!--   Author: NingG   -->
+    <meta charset="utf-8" />
+	<meta property="wb:webmaster" content="7ea7f3d5f3edad6a" />
+    <title>Flume实现将Kafka中数据传入ElasticSearch中 | ningg.top</title>
+    <meta name="author" content="NingG" />
+    <meta name="renderer" content="webkit">
+    <meta name="description" content=" 利用Flume读取Kafka中的数据，对数据进行初步处理之后，送入到Elasticsearch  " />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+    <link rel="stylesheet" href="/css/default.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="" />
+	
+    <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+	<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+	
+    <div class="home-menu">
+        <div class="home-icon-con">
+            <a class="home-menu-icon" href="/">NingG</a>
+            <a class="home-follow" href="#" title="Contact Me">+</a>
+        </div>
+        <div class="home-contact">
+            <a href="http://weibo.com/ggningg/" target="_blank" style="margin-left:-5px;"><img src="http://www.weibo.com/favicon.ico" alt="" width="25"/></a>
+            <a href="http://www.douban.com/people/ggningg/" target="_blank" style="text-align:center;"><img src="http://www.douban.com/favicon.ico" alt="" width="22"/></a>
+			<a href="http://github.com/ningg" alt="" target="_blank" style="text-align:right;"><img src="/images/icon-cube-smaller.png" width="22"/></a>
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="/js/prettify/prettify.css" />
+<style type="text/css">
+    body { background:#e8e8e8; }
+    @media screen and (max-width: 750px){
+        body { background:#fff; }
+    }
+    @media screen and (max-width: 1020px){
+        body { background:#fff; }
+    }
+</style>
+
+<div id="content">
+    <div class="entry">
+        <h1 class="entry-title"><a href="/flume-kafka-source-elasticsearch-sink" title="Flume实现将Kafka中数据传入ElasticSearch中">Flume实现将Kafka中数据传入ElasticSearch中</a></h1>
+        <p class="entry-date">2015-03-11</p>
+        <p>目标：利用Flume Agent实现，将Kafka中数据取出，送入ElasticSearch中。</p>
+
+<p>分析：Flume Agent需要的工作，两点：</p>
+
+<ul>
+  <li>Flume Kafka Source：负责从Kafka中读取数据；</li>
+  <li>Flume ElasticSearch Sink：负责将数据送入ElasticSearch；</li>
+</ul>
+
+<p>当前Flume 1.5.2已经包含了ElasticSearchSink，因此，需要定制实现Flume Kafka Source即可。当前从Jira上得知，Flume 1.6.0 中将包含Flume-ng-kafka-source，但是，当前Flume 1.6.0版本并没有发布，怎么办？两条路：</p>
+
+<ul>
+  <li>github上别人开源的Flume-ng-kafka-source</li>
+  <li>flume 1.6.0分支的代码中flume-ng-kafka-source</li>
+</ul>
+
+<p>初步选定Flume 1.6.0分支中的flume-ng-kafka-source部分，这部分代码已经包含在<a href="https://github.com/ningg/flume-ng-extends-source">flume-ng-extends-source</a>。</p>
+
+<h2 id="section">编译代码</h2>
+
+<p>执行命令：<code>mvn clean package</code>得到jar包：<code>flume-ng-extends-source-x.x.x.jar</code>。</p>
+
+<h2 id="section-1">安装插件</h2>
+
+<p>两类jar包：</p>
+
+<ul>
+  <li>lib中jar包
+    <ul>
+      <li><code>flume-ng-extends-source-x.x.x.jar</code></li>
+    </ul>
+  </li>
+  <li>libext中jar包
+    <ul>
+      <li><code>kafka_2.9.2-0.8.2.0.jar</code></li>
+      <li><code>kafka-clients-0.8.2.0.jar</code></li>
+      <li><code>metrics-core-2.2.0.jar</code></li>
+      <li><code>scala-library-2.9.2.jar</code></li>
+      <li><code>zkclient-0.3.jar</code></li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>疑问</strong>：maven打包时，如何将当前jar包以及其依赖包都导出？
+参考<a href="https://github.com/thilinamb/flume-ng-kafka-sink">thilinamb flume kafka sink</a></p>
+
+<h2 id="section-2">配置</h2>
+
+<p>在properties文件中进行配置，配置样本文件：</p>
+
+<pre><code># Kafka Source For retrieve from Kafka cluster.
+agent.sources.seqGenSrc.type = com.github.ningg.flume.source.KafkaSource
+#agent.sources.seqGenSrc.batchSize = 2
+agent.sources.seqGenSrc.batchDurationMillis = 1000
+agent.sources.seqGenSrc.topic = good
+agent.sources.seqGenSrc.zookeeperConnect = 168.7.2.164:2181,168.7.2.165:2181,168.7.2.166:2181
+agent.sources.seqGenSrc.groupId = elasticsearch
+#agent.sources.seqGenSrc.kafka.consumer.timeout.ms = 1000
+#agent.sources.seqGenSrc.kafka.auto.commit.enable = false
+
+# ElasticSearchSink for ElasticSearch.
+agent.sinks.loggerSink.type = org.apache.flume.sink.elasticsearch.ElasticSearchSink
+agent.sinks.loggerSink.indexName = flume
+agent.sinks.loggerSink.indexType = log
+agent.sinks.loggerSink.batchSize = 100
+#agent.sinks.loggerSink.ttl = 5
+agent.sinks.loggerSink.client = transport
+agent.sinks.loggerSink.hostNames = 168.7.1.69:9300
+#agent.sinks.loggerSink.client = rest
+#agent.sinks.loggerSink.hostNames = 168.7.1.69:9200
+#agent.sinks.loggerSink.serializer = org.apache.flume.sink.elasticsearch.ElasticSearchLogStashEventSerializer
+</code></pre>
+
+<h2 id="section-3">定制</h2>
+
+<p>目标：定制ElasticSearchSink的serializer。</p>
+
+<p>现象：设置ElasticSearchSink的参数<code>batchSize=1000</code>后，当前ES中当天的Index中出现了<code>120,000</code>+的记录，而此时，原有平台发现，当前产生的数据只有<code>20,000</code>，因此，猜测KafkaSource将Kafka集群中指定topic下的所有数据都传入了ES中。</p>
+
+<p>几点：</p>
+
+<p>ElasticSearchSink中新的配置参数：</p>
+
+<ul>
+  <li>indexNameBuilder=org.apache.flume.sink.elasticsearch.TimeBasedIndexNameBuilder
+    <ul>
+      <li>上述将以<code>indexPrefix</code>-<code>yyyy-MM-dd</code>方式，每天产生一个Index；</li>
+      <li>其他选项：org.apache.flume.sink.elasticsearch.SimpleIndexNameBuilder，其直接以设定的<code>indexPrefix</code>（实际就是设置的<code>indexName</code>）</li>
+    </ul>
+  </li>
+  <li>dateFormat=<code>yyyy-MM-dd</code></li>
+  <li>timeZONE=<code>Etc/UTC</code></li>
+  <li>serializer=org.apache.flume.sink.elasticsearch.ElasticSearchLogStashEventSerializer
+    <ul>
+      <li>上述选项，将 flume event 的 Header 中 key-value 添加到一个新增的字段<code>@fields</code>中；</li>
+      <li>其他选项：org.apache.flume.sink.elasticsearch.ElasticSearchDynamicSerializer，其直接将body、header构造为一个JSON字符串，添加到ElasticSearch中。</li>
+    </ul>
+  </li>
+</ul>
+
+<h2 id="section-4">重启</h2>
+
+<p>如果终止Flume Agent，然后重启。疑问：</p>
+
+<ul>
+  <li>Kafka中的数据，是否会重复发送到ElasticSearch？</li>
+  <li>Kafka中的数据，是否有遗漏，没有发送到ElasticSearch？</li>
+</ul>
+
+<p>思考，几个情况：</p>
+
+<ul>
+  <li>Kafka对应的Consumer有offset</li>
+  <li>Kafka中数据，周期性的清理，例如默认3天</li>
+</ul>
+
+<p>需要详细思考Flume Agent的重启场景。</p>
+
+
+
+        <div id="disqus_container">
+            <div style="margin-bottom:20px" class="right">
+				<wb:share-button appkey="2306590132" addition="simple" type="button" ralateUid="2356527183"></wb:share-button>
+            </div>
+            <!--<a href="#" class="comment" onclick="return false;">点击查看评论</a>-->
+            <div id="disqus_thread"></div>
+        </div>
+    </div>
+
+	
+    <div class="sidenav">
+		<iframe width="100%" height="75" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=0&isFans=0&uid=2356527183&verifier=1ccfb61e&colors=d6f3f7,ffffff,666666,0082cb,ecfbfd&dpc=1"></iframe>
+    </div>
+
+</div>
+
+<script src="/js/post.js" type="text/javascript"></script>
+
+
+	<div id="gotoTop">Top</div>
+
+
+    <!--*********************************************************-->
+    <!--****** 宝贝儿，看见这个时候，删掉下面的统计代码哦~ ******-->
+    <!--*********************************************************-->
+	<script>
+	  (function(i,s,o,g,r,a,m){
+		  i['GoogleAnalyticsObject']=r;i[r]=i[r] || function(){
+			(i[r].q=i[r].q||[]).push(arguments)}, i[r].l=1*new Date();
+			a=s.createElement(o), m=s.getElementsByTagName(o)[0];
+			a.async=1;
+			a.src=g;
+			m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-48535193-1', 'ningg.github.io');
+	  ga('send', 'pageview');
+	</script>
+    
+	
+    <script type="text/javascript">
+		function gotoTop(min_height){
+			$("#gotoTop").click(
+				function(){$('html,body').animate({scrollTop:0},700);
+			}).hover(
+				function(){$(this).addClass("hover");},
+				function(){$(this).removeClass("hover");
+			});
+			min_height ? min_height = min_height : min_height = 600;
+			$(window).scroll(function(){
+				
+				var s = $(window).scrollTop();
+				
+				if( s > min_height){
+					$("#gotoTop").fadeIn(100);
+				}else{
+					$("#gotoTop").fadeOut(200);
+				};
+			});
+		};
+		gotoTop();
+
+        $(function(){
+            $('.home-follow').click(function(e){
+                e.preventDefault();
+
+                if($('.home-contact').is(':visible')){
+                    $('.home-contact').slideUp(100);
+                }else{
+                    $('.home-contact').slideDown(100);
+                }
+            });
+        })
+
+    </script>
+</body>
+</html>

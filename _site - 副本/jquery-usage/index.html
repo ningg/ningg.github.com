@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html xmlns:wb="http://open.weibo.com/wb">
+<head>
+    <!--   Author: NingG   -->
+    <meta charset="utf-8" />
+	<meta property="wb:webmaster" content="7ea7f3d5f3edad6a" />
+    <title>jQuery常用操作 | ningg.top</title>
+    <meta name="author" content="NingG" />
+    <meta name="renderer" content="webkit">
+    <meta name="description" content=" 利用jQuery来实现前端常见效果  " />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+    <link rel="stylesheet" href="/css/default.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="" />
+	
+    <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+	<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+	
+    <div class="home-menu">
+        <div class="home-icon-con">
+            <a class="home-menu-icon" href="/">NingG</a>
+            <a class="home-follow" href="#" title="Contact Me">+</a>
+        </div>
+        <div class="home-contact">
+            <a href="http://weibo.com/ggningg/" target="_blank" style="margin-left:-5px;"><img src="http://www.weibo.com/favicon.ico" alt="" width="25"/></a>
+            <a href="http://www.douban.com/people/ggningg/" target="_blank" style="text-align:center;"><img src="http://www.douban.com/favicon.ico" alt="" width="22"/></a>
+			<a href="http://github.com/ningg" alt="" target="_blank" style="text-align:right;"><img src="/images/icon-cube-smaller.png" width="22"/></a>
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="/js/prettify/prettify.css" />
+<style type="text/css">
+    body { background:#e8e8e8; }
+    @media screen and (max-width: 750px){
+        body { background:#fff; }
+    }
+    @media screen and (max-width: 1020px){
+        body { background:#fff; }
+    }
+</style>
+
+<div id="content">
+    <div class="entry">
+        <h1 class="entry-title"><a href="/jquery-usage" title="jQuery常用操作">jQuery常用操作</a></h1>
+        <p class="entry-date">2012-04-20</p>
+        <h2 id="section">常见问题</h2>
+
+<h3 id="section-1">为元素绑定点击事件</h3>
+
+<p>下面几种方法：</p>
+
+<ul>
+  <li>方法 1：独立function，单独绑定click事件，异常：页面加载完之后，自动触发click操作，同时，click绑定事件失效；</li>
+  <li>方法 2：内嵌function，绑定click事件，正常；</li>
+  <li>方法 3：独立function，同时，使用属性<code>onclick</code>绑定function；</li>
+  <li>方法 4：独立function，单独绑定click事件，在<code>click</code>对应的事件中，无论多么简单的function，都在外面添加一层匿名<code>function(){}</code> <em>（什么原因？）</em></li>
+  <li>方法 5：独立function，但返回handler，同时，绑定click事件时，直接使用handler即可；<em>（去真正的官网，理解这一内容，具体看下面的参考）</em></li>
+</ul>
+
+<p>疑问：出现上述现象的原因？几个参考来源：</p>
+
+<ul>
+  <li><a href="http://api.jquery.com/click/">jQuery官网 click</a></li>
+  <li><a href="http://api.jquery.com/Types/#Function">jQuery官网 function</a></li>
+  <li><a href="http://stackoverflow.com/questions/11146814/difference-between-assigning-function-to-variable-or-not">difference between assigning function to variable or not</a></li>
+  <li><a href="http://helephant.com/2012/07/14/javascript-function-declaration-vs-expression/">Javascript function declarations vs function operators</a></li>
+</ul>
+
+<h4 id="section-2">方法1：</h4>
+
+<pre><code>function retrieveTransNum() {
+	$.ajax({
+		type : 'get',
+		url : appContext + '/nativepages/retrieveTransNum.do',
+		//dataType : 'json',
+		timeout : 2000,
+		success : function(result) {
+			$('#switch-area .mini-panel-body').append(result);
+		}
+	});
+} 
+
+$("#trans-num-li").bind("click", retrieveTransNum());
+</code></pre>
+
+<h4 id="section-3">方法1（补充）：</h4>
+
+<p>下面的示例代码是有效的，具体：</p>
+
+<pre><code>function retrieveTransNum() {
+	$.ajax({
+		type : 'get',
+		url : appContext + '/nativepages/retrieveTransNum.do',
+		//dataType : 'json',
+		timeout : 2000,
+		success : function(result) {
+			$('#switch-area .mini-panel-body').append(result);
+		}
+	});
+} 
+
+$("#trans-num-li").bind("click", retrieveTransNum);
+</code></pre>
+
+<p>简要说明：</p>
+
+<ul>
+  <li>上述本质是，事件绑定与函数声明之间的关系；</li>
+  <li>函数声明之后，调用函数时，使用<code>function_name();</code>；</li>
+  <li>函数声明之后，绑定事件时，使用<code>bind("click", function_name)</code>；</li>
+</ul>
+
+<h4 id="section-4">方法2：</h4>
+
+<pre><code>$("#trans-num-li").bind("click", function retrieveTransNum() {
+	$.ajax({
+		type : 'get',
+		url : appContext + '/nativepages/retrieveTransNum.do',
+		//dataType : 'json',
+		timeout : 2000,
+		success : function(result) {
+			$('#switch-area .mini-panel-body').empty().append(result);
+		}
+	});
+});
+</code></pre>
+
+<h4 id="section-5">方法3：</h4>
+
+<pre><code>...
+&lt;li id="trans-num-li" onclick="retrieveTransNum()"&gt;
+...
+
+function retrieveTransNum() {
+	$.ajax({
+		type : 'get',
+		url : appContext + '/nativepages/retrieveTransNum.do',
+		//dataType : 'json',
+		timeout : 2000,
+		success : function(result) {
+			$('#switch-area .mini-panel-body').append(result);
+		}
+	});
+} 
+</code></pre>
+
+<h4 id="section-6">方法4：</h4>
+
+<pre><code>function retrieveTransNum() {
+	$.ajax({
+		type : 'get',
+		url : appContext + '/nativepages/retrieveTransNum.do',
+		//dataType : 'json',
+		//timeout : 2000,
+		success : function(result) {
+			//针对CAP4J前端渲染框架，需要将获取的html片段，添加到.mini-panel-body中
+			$('#switch-area .mini-panel-body').append(result);
+		}
+	});
+}
+
+$("#trans-num-li").bind("click", function(){
+	retrieveTransNum();
+});
+</code></pre>
+
+<h4 id="section-7">方法5：</h4>
+
+<pre><code>//命名函数之后，函数定义名称retrieveTransNum在下文中失效
+var retrieveTransNumHandler = function retrieveTransNum() {
+	$.ajax({
+		type : 'get',
+		url : appContext + '/nativepages/retrieveTransNum.do',
+		//dataType : 'json',
+		//timeout : 2000,
+		success : function(result) {
+			//针对CAP4J前端渲染框架，需要将获取的html片段，添加到.mini-panel-body中
+			$('#switch-area .mini-panel-body').append(result);
+		}
+	});
+}
+
+$("#trans-num-li").bind("click", retrieveTransNumHandler);
+</code></pre>
+
+<h4 id="section-8">思考</h4>
+
+<p>上述<code>方法1</code>、<code>方法4</code>、<code>方法5</code>中定义function时，有两种方式：</p>
+
+<ul>
+  <li>函数声明：直接定义function；</li>
+  <li>命名函数表达式：将function内容赋给一个var，适用只使用一次的情况；</li>
+</ul>
+
+<p>使用场景，参考：<a href="http://helephant.com/2012/07/14/javascript-function-declaration-vs-expression/">Javascript function declarations vs function operators</a>；本质是javascript中函数声明、命名函数表达式，与事件绑定之间关系；</p>
+
+<p>JavaScript中，function的用法，添加小括号：<code>function_name()</code>与不添加小括号：<code>function_name</code>，两者之间的关系：</p>
+
+<ul>
+  <li><code>function_name();</code>表示执行函数；</li>
+  <li><code>function_name</code>代表函数对象；</li>
+  <li><code>var alias_name = function function_name(){...}</code>说明：
+    <ul>
+      <li>本质：相当于<code>alias_name</code>完全取代<code>function_name</code>；</li>
+      <li><code>alias_name</code>代表函数对象；</li>
+      <li><code>alias_name()</code>表示执行函数；</li>
+    </ul>
+  </li>
+  <li><code>$("#id").bind("click", alias_name)</code>，是正确的写法；</li>
+  <li><code>$("#id").bind("click", alias_name())</code>，表示<code>click</code>动作绑定在<code>alias_name()</code>函数运行结果的返回值上，如果没有返回值，则什么也没有绑定；</li>
+</ul>
+
+<h3 id="section-9">绑定多个点击事件</h3>
+
+<p>直接调用多次<code>click(function(){})</code>方法即可：</p>
+
+<pre><code>$(document).ready(function (){
+
+	$(".div2").click(function() {
+		initDiv();
+		//initDivLi();
+		//当前被点击的div改变背景色
+		$(this).css("background", "rgb(194, 203, 207)");
+		//取消当前div的mouseout和mouseover事件
+		$(this).unbind("mouseout");
+		$(this).unbind("mouseover");
+	});
+	
+	$(".div2").click(
+		function() {
+			$(this).next("div").slideToggle("slow").siblings(
+					".div3:visible").slideUp("slow");
+			/* $(this).next("div").slideToggle("normal"); */
+		});
+	
+});
+</code></pre>
+
+<p>思考：当为元素绑定多个<code>click</code>事件时，如何进行区分事件的执行顺序？按照绑定先后顺序来执行，参考<a href="http://api.jquery.com/bind/">官网</a>.</p>
+
+<p>特别说明，JS中绑定多个事件时，会造成较大的内存消耗，具体参考：</p>
+
+<ul>
+  <li><a href="http://developer.51cto.com/art/201304/390351.htm">对jQuery的事件绑定的一些思考(1)</a></li>
+</ul>
+
+<h2 id="section-10">参考来源</h2>
+
+<ul>
+  <li><a href="http://www.w3cschool.cc/jquery/jquery-tutorial.html">JQuery-tutorial</a></li>
+  <li><a href="http://www.w3school.com.cn/jquery/index.asp">jQuery教程</a></li>
+  <li><a href="http://api.jquery.com/click/">jQuery官网 click</a></li>
+  <li><a href="http://api.jquery.com/Types/#Function">jQuery官网 function</a></li>
+  <li><a href="http://stackoverflow.com/questions/11146814/difference-between-assigning-function-to-variable-or-not">difference between assigning function to variable or not</a></li>
+  <li><a href="http://helephant.com/2012/07/14/javascript-function-declaration-vs-expression/">Javascript function declarations vs function operators</a></li>
+  <li><a href="http://tieba.baidu.com/p/3419868759">Js事件绑定时 函数名加括号和不加括号有什么区别？</a></li>
+</ul>
+
+
+
+        <div id="disqus_container">
+            <div style="margin-bottom:20px" class="right">
+				<wb:share-button appkey="2306590132" addition="simple" type="button" ralateUid="2356527183"></wb:share-button>
+            </div>
+            <!--<a href="#" class="comment" onclick="return false;">点击查看评论</a>-->
+            <div id="disqus_thread"></div>
+        </div>
+    </div>
+
+	
+    <div class="sidenav">
+		<iframe width="100%" height="75" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=0&isFans=0&uid=2356527183&verifier=1ccfb61e&colors=d6f3f7,ffffff,666666,0082cb,ecfbfd&dpc=1"></iframe>
+    </div>
+
+</div>
+
+<script src="/js/post.js" type="text/javascript"></script>
+
+
+	<div id="gotoTop">Top</div>
+
+
+    <!--*********************************************************-->
+    <!--****** 宝贝儿，看见这个时候，删掉下面的统计代码哦~ ******-->
+    <!--*********************************************************-->
+	<script>
+	  (function(i,s,o,g,r,a,m){
+		  i['GoogleAnalyticsObject']=r;i[r]=i[r] || function(){
+			(i[r].q=i[r].q||[]).push(arguments)}, i[r].l=1*new Date();
+			a=s.createElement(o), m=s.getElementsByTagName(o)[0];
+			a.async=1;
+			a.src=g;
+			m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-48535193-1', 'ningg.github.io');
+	  ga('send', 'pageview');
+	</script>
+    
+	
+    <script type="text/javascript">
+		function gotoTop(min_height){
+			$("#gotoTop").click(
+				function(){$('html,body').animate({scrollTop:0},700);
+			}).hover(
+				function(){$(this).addClass("hover");},
+				function(){$(this).removeClass("hover");
+			});
+			min_height ? min_height = min_height : min_height = 600;
+			$(window).scroll(function(){
+				
+				var s = $(window).scrollTop();
+				
+				if( s > min_height){
+					$("#gotoTop").fadeIn(100);
+				}else{
+					$("#gotoTop").fadeOut(200);
+				};
+			});
+		};
+		gotoTop();
+
+        $(function(){
+            $('.home-follow').click(function(e){
+                e.preventDefault();
+
+                if($('.home-contact').is(':visible')){
+                    $('.home-contact').slideUp(100);
+                }else{
+                    $('.home-contact').slideDown(100);
+                }
+            });
+        })
+
+    </script>
+</body>
+</html>

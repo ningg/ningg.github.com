@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html xmlns:wb="http://open.weibo.com/wb">
+<head>
+    <!--   Author: NingG   -->
+    <meta charset="utf-8" />
+	<meta property="wb:webmaster" content="7ea7f3d5f3edad6a" />
+    <title>Java并发 - 摘要 | ningg.top</title>
+    <meta name="author" content="NingG" />
+    <meta name="renderer" content="webkit">
+    <meta name="description" content=" Java编程思想  " />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+    <link rel="stylesheet" href="/css/default.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="" />
+	
+    <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+	<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+	
+    <div class="home-menu">
+        <div class="home-icon-con">
+            <a class="home-menu-icon" href="/">NingG</a>
+            <a class="home-follow" href="#" title="Contact Me">+</a>
+        </div>
+        <div class="home-contact">
+            <a href="http://weibo.com/ggningg/" target="_blank" style="margin-left:-5px;"><img src="http://www.weibo.com/favicon.ico" alt="" width="25"/></a>
+            <a href="http://www.douban.com/people/ggningg/" target="_blank" style="text-align:center;"><img src="http://www.douban.com/favicon.ico" alt="" width="22"/></a>
+			<a href="http://github.com/ningg" alt="" target="_blank" style="text-align:right;"><img src="/images/icon-cube-smaller.png" width="22"/></a>
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="/js/prettify/prettify.css" />
+<style type="text/css">
+    body { background:#e8e8e8; }
+    @media screen and (max-width: 750px){
+        body { background:#fff; }
+    }
+    @media screen and (max-width: 1020px){
+        body { background:#fff; }
+    }
+</style>
+
+<div id="content">
+    <div class="entry">
+        <h1 class="entry-title"><a href="/java-concurrency-1" title="Java并发 - 摘要">Java并发 - 摘要</a></h1>
+        <p class="entry-date">2012-08-15</p>
+        <p>首先我们来看下目录结构：</p>
+
+<ul>
+  <li>21.1 并发的多面性
+    <ul>
+      <li>21.1.1 更快的执行</li>
+      <li>21.1.2 改进代码设计</li>
+    </ul>
+  </li>
+  <li>21.2 基本的线程机制
+    <ul>
+      <li>21.2.1 定义任务</li>
+      <li>21.2.2 Thread 类</li>
+      <li>21.2.3 使用 Executor</li>
+      <li>21.2.4 从任务中产生返回值</li>
+      <li>21.2.5 休眠</li>
+      <li>21.2.6 优先级</li>
+      <li>21.2.7 让步</li>
+      <li>21.2.8 后台线程</li>
+      <li>21.2.9 编码的变体</li>
+      <li>21.2.10 术语</li>
+      <li>21.2.11 加入一个线程</li>
+      <li>21.2.12 创建有响应的用户界面</li>
+      <li>21.2.13 线程组</li>
+      <li>21.2.14 捕获异常</li>
+    </ul>
+  </li>
+  <li>21.3 共享受限资源
+    <ul>
+      <li>21.3.1 不正确地访问资源</li>
+      <li>21.3.2 解决共享资源竞争</li>
+      <li>21.3.3 原子性与易变性</li>
+      <li>21.3.4 原子类</li>
+      <li>21.3.5 临界区</li>
+      <li>21.3.6 在其他对象上同步</li>
+      <li>21.3.7 线程本地存储</li>
+    </ul>
+  </li>
+  <li>21.4 终结任务
+    <ul>
+      <li>21.4.1 装饰性花园</li>
+      <li>21.4.2 在阻塞时终结</li>
+      <li>21.4.3 中断</li>
+      <li>21.4.4 检查中断</li>
+    </ul>
+  </li>
+  <li>21.5 线程之间的协作
+    <ul>
+      <li>21.5.1 wait()与 notifyAll()</li>
+      <li>21.5.2 notify()与 notifyAll()</li>
+      <li>21.5.3 生产者与消费者</li>
+      <li>21.5.4 生产者-消费者队列</li>
+      <li>21.5.5 任务间使用管道进行输入/输出</li>
+    </ul>
+  </li>
+  <li>21.6 死锁</li>
+  <li>21.7 新类库中的构件
+    <ul>
+      <li>21.7.1 CountDownLatch</li>
+      <li>21.7.2 CyclicBarrier</li>
+      <li>21.7.3 DelayQueue</li>
+      <li>21.7.4 PriorityBlockingQueue</li>
+      <li>21.7.5 使用 ScheduledExecutor 的温室控制器</li>
+      <li>21.7.6 Semaphore</li>
+      <li>21.7.7 Exchanger</li>
+    </ul>
+  </li>
+  <li>21.8 仿真
+    <ul>
+      <li>21.8.1 银行出纳员仿真</li>
+      <li>21.8.2 饭店仿真</li>
+      <li>21.8.3 分发工作</li>
+    </ul>
+  </li>
+  <li>21.9 性能调优
+    <ul>
+      <li>21.9.1 比较各类互斥技术</li>
+      <li>21.9.2 免锁容器</li>
+      <li>21.9.3 乐观加锁</li>
+      <li>21.9.4 ReadWriteLock</li>
+    </ul>
+  </li>
+  <li>21.10 活动对象</li>
+  <li>21.11 总结
+    <ul>
+      <li>21.11.1 进阶读物</li>
+    </ul>
+  </li>
+</ul>
+
+<p>上面就是这一章的所有内容，其实这一章的内容很枯燥。如果想真正看懂，是要花费很大精力的。</p>
+
+<h2 id="section">前言</h2>
+
+<p>从上面的目录中我们就能得到一些很重要的信息，如果仔细观察，这一章的组织是非常合理的：</p>
+
+<ul>
+  <li>21.1小节：为什么要引入并发？遇到了什么问题？</li>
+  <li>21.2小节：最最最基础的线程使用方法介绍</li>
+  <li>21.3小节：基础（每个线程都是完全独立）介绍过了，现在要考虑一下：如果每个线程使用的资源是不独立而是共享的，怎么办？</li>
+  <li>21.4小节：线程的逻辑搞定了，如何优雅的关闭线程？</li>
+  <li>21.5小节：现在，单独线程如何工作（独享资源、共享资源）说过了，那么多个线程之间如何协作？</li>
+  <li>21.6小节：协作之必备话题——打架（线程死锁）</li>
+  <li>21.7小节：好了，知识点全部介绍过了。在 java.util.concurrent 中有哪些宝贝（很明显，concurrent 包就是高效使用并发编程的绝佳例子，后续必然看看看）</li>
+  <li>21.8小节：好了，知识点 + 好用的类库都介绍了，开始动手实践吧</li>
+  <li>21.9小节：在实践中体验多线程编程，反思-优化-调试 loop…</li>
+  <li>21.10小节：活动对象是啥？这个比较模糊，到了再去说</li>
+</ul>
+
+<p>这么一总结，并发这一章的安排是非常合理的。</p>
+
+<h2 id="section-1">章节索引</h2>
+
+<p>Java并发系列的汇总：</p>
+
+<ul>
+  <li>21.1 并发的多面性 + 21.2 基本的线程机制</li>
+  <li>21.3 共享受限资源</li>
+  <li>21.4 终结任务</li>
+  <li>21.5 线程之间的协作</li>
+  <li>21.6 死锁</li>
+  <li>21.7 新类库中的构件</li>
+  <li>21.8 仿真</li>
+  <li>21.9 性能调优</li>
+  <li>21.10 活动对象</li>
+  <li>21.11 总结</li>
+</ul>
+
+<h2 id="section-2">参考来源</h2>
+
+<ul>
+  <li>Java编程思想 第二十一章</li>
+</ul>
+
+
+
+        <div id="disqus_container">
+            <div style="margin-bottom:20px" class="right">
+				<wb:share-button appkey="2306590132" addition="simple" type="button" ralateUid="2356527183"></wb:share-button>
+            </div>
+            <!--<a href="#" class="comment" onclick="return false;">点击查看评论</a>-->
+            <div id="disqus_thread"></div>
+        </div>
+    </div>
+
+	
+    <div class="sidenav">
+		<iframe width="100%" height="75" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=0&isFans=0&uid=2356527183&verifier=1ccfb61e&colors=d6f3f7,ffffff,666666,0082cb,ecfbfd&dpc=1"></iframe>
+    </div>
+
+</div>
+
+<script src="/js/post.js" type="text/javascript"></script>
+
+
+	<div id="gotoTop">Top</div>
+
+
+    <!--*********************************************************-->
+    <!--****** 宝贝儿，看见这个时候，删掉下面的统计代码哦~ ******-->
+    <!--*********************************************************-->
+	<script>
+	  (function(i,s,o,g,r,a,m){
+		  i['GoogleAnalyticsObject']=r;i[r]=i[r] || function(){
+			(i[r].q=i[r].q||[]).push(arguments)}, i[r].l=1*new Date();
+			a=s.createElement(o), m=s.getElementsByTagName(o)[0];
+			a.async=1;
+			a.src=g;
+			m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-48535193-1', 'ningg.github.io');
+	  ga('send', 'pageview');
+	</script>
+    
+	
+    <script type="text/javascript">
+		function gotoTop(min_height){
+			$("#gotoTop").click(
+				function(){$('html,body').animate({scrollTop:0},700);
+			}).hover(
+				function(){$(this).addClass("hover");},
+				function(){$(this).removeClass("hover");
+			});
+			min_height ? min_height = min_height : min_height = 600;
+			$(window).scroll(function(){
+				
+				var s = $(window).scrollTop();
+				
+				if( s > min_height){
+					$("#gotoTop").fadeIn(100);
+				}else{
+					$("#gotoTop").fadeOut(200);
+				};
+			});
+		};
+		gotoTop();
+
+        $(function(){
+            $('.home-follow').click(function(e){
+                e.preventDefault();
+
+                if($('.home-contact').is(':visible')){
+                    $('.home-contact').slideUp(100);
+                }else{
+                    $('.home-contact').slideDown(100);
+                }
+            });
+        })
+
+    </script>
+</body>
+</html>

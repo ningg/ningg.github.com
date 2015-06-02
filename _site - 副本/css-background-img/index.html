@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html xmlns:wb="http://open.weibo.com/wb">
+<head>
+    <!--   Author: NingG   -->
+    <meta charset="utf-8" />
+	<meta property="wb:webmaster" content="7ea7f3d5f3edad6a" />
+    <title>CSS中背景图片定位 | ningg.top</title>
+    <meta name="author" content="NingG" />
+    <meta name="renderer" content="webkit">
+    <meta name="description" content=" 多个图标集中在一张背景图上，网页中显示指定区域  " />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+    <link rel="stylesheet" href="/css/default.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="" />
+	
+    <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+	<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+	
+    <div class="home-menu">
+        <div class="home-icon-con">
+            <a class="home-menu-icon" href="/">NingG</a>
+            <a class="home-follow" href="#" title="Contact Me">+</a>
+        </div>
+        <div class="home-contact">
+            <a href="http://weibo.com/ggningg/" target="_blank" style="margin-left:-5px;"><img src="http://www.weibo.com/favicon.ico" alt="" width="25"/></a>
+            <a href="http://www.douban.com/people/ggningg/" target="_blank" style="text-align:center;"><img src="http://www.douban.com/favicon.ico" alt="" width="22"/></a>
+			<a href="http://github.com/ningg" alt="" target="_blank" style="text-align:right;"><img src="/images/icon-cube-smaller.png" width="22"/></a>
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="/js/prettify/prettify.css" />
+<style type="text/css">
+    body { background:#e8e8e8; }
+    @media screen and (max-width: 750px){
+        body { background:#fff; }
+    }
+    @media screen and (max-width: 1020px){
+        body { background:#fff; }
+    }
+</style>
+
+<div id="content">
+    <div class="entry">
+        <h1 class="entry-title"><a href="/css-background-img" title="CSS中背景图片定位">CSS中背景图片定位</a></h1>
+        <p class="entry-date">2012-04-27</p>
+        <h2 id="css-sprites">CSS Sprites简介</h2>
+
+<p>CSS Sprites是网页图片处理方式，将一个页面中涉及到的零星图片包含到一张大图中，目标：</p>
+
+<ul>
+  <li>避免网站中零星的图片一张一张显示出来；<em>（整体页面响应时间长）</em></li>
+  <li>对于当前的网络环境，&lt; 200KB的单张图片，加载时间差异不大；</li>
+</ul>
+
+<p>使用图片做背景时，本质是使用属性：<code>background-image</code>组合<code>background-repeat</code>、<code>background-position</code>等来实现。调整<code>background-position</code>即可实现，背景显示不同的图片，CSS Sprites <em>（指包含了很多图标的一张背景图）</em> 一般只能使用到固定大小的盒子（box）里，这样遮挡住不应该看到的部分。</p>
+
+<pre><code>p {
+	width: 25px;
+	height: 25px;
+	background-image: url(../images/sprites.png);
+	background-repeat: no-repeat;
+	background-position: 0 -350px; 
+	background-color: black;
+}
+</code></pre>
+
+<p>特别说明：上述<code>background-position</code>对应的两个参数为，x、y的定位坐标点，可以通过<strong>画图</strong>类软件来查看<code>sprites.png</code>图片中不同小图标，所对应的坐标点。</p>
+
+<h3 id="section">优缺点</h3>
+
+<ul>
+  <li>优点：将多张图片，合并为一张图片，减少HTTP的连接数，提升网页响应时间；</li>
+  <li>缺点：每个小图标改动，都需要对整张图片进行编辑；并且，由于需要固定<code>background-position</code>对应的px值，失去了<code>center</code>之类的灵活性；</li>
+</ul>
+
+<h3 id="section-1">图片定位几种方式</h3>
+
+<p>几种方式：</p>
+
+<ul>
+  <li>描述性词语：left、top、center</li>
+  <li>数值：20px、1em</li>
+  <li>百分比：20%、50%</li>
+</ul>
+
+<p>简要介绍：</p>
+
+<ul>
+  <li>关键字：background-position: top right; </li>
+  <li>像素：background-position: 0px 0px; </li>
+  <li>百分比：background-position: 0% 0%;</li>
+</ul>
+
+<p>上面的位置，含义：相对于容器左上角的点，图片的左上角的点，之间位置关系，参考下图；只有在<code>background-repeat: no-repeat;</code>条件下，<code>bacaground-position: 0px -23px;</code>设置才有效。</p>
+
+<p><img src="/images/css-background-img/css-background-img.png" alt="" /></p>
+
+<p>几点：</p>
+
+<ul>
+  <li>数值、百分比，可以混合使用，例如：<code>50% 20px</code></li>
+  <li>数值、描述性词语，不混用</li>
+  <li>描述性词语，建议单独使用，例如：<code>right bottom</code></li>
+</ul>
+
+<h2 id="section-2">参考来源</h2>
+
+<ul>
+  <li><a href="http://wenku.baidu.com/view/60a843ec102de2bd96058898.html?re=view">CSS 背景图片定位</a></li>
+</ul>
+
+
+
+        <div id="disqus_container">
+            <div style="margin-bottom:20px" class="right">
+				<wb:share-button appkey="2306590132" addition="simple" type="button" ralateUid="2356527183"></wb:share-button>
+            </div>
+            <!--<a href="#" class="comment" onclick="return false;">点击查看评论</a>-->
+            <div id="disqus_thread"></div>
+        </div>
+    </div>
+
+	
+    <div class="sidenav">
+		<iframe width="100%" height="75" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=0&isFans=0&uid=2356527183&verifier=1ccfb61e&colors=d6f3f7,ffffff,666666,0082cb,ecfbfd&dpc=1"></iframe>
+    </div>
+
+</div>
+
+<script src="/js/post.js" type="text/javascript"></script>
+
+
+	<div id="gotoTop">Top</div>
+
+
+    <!--*********************************************************-->
+    <!--****** 宝贝儿，看见这个时候，删掉下面的统计代码哦~ ******-->
+    <!--*********************************************************-->
+	<script>
+	  (function(i,s,o,g,r,a,m){
+		  i['GoogleAnalyticsObject']=r;i[r]=i[r] || function(){
+			(i[r].q=i[r].q||[]).push(arguments)}, i[r].l=1*new Date();
+			a=s.createElement(o), m=s.getElementsByTagName(o)[0];
+			a.async=1;
+			a.src=g;
+			m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-48535193-1', 'ningg.github.io');
+	  ga('send', 'pageview');
+	</script>
+    
+	
+    <script type="text/javascript">
+		function gotoTop(min_height){
+			$("#gotoTop").click(
+				function(){$('html,body').animate({scrollTop:0},700);
+			}).hover(
+				function(){$(this).addClass("hover");},
+				function(){$(this).removeClass("hover");
+			});
+			min_height ? min_height = min_height : min_height = 600;
+			$(window).scroll(function(){
+				
+				var s = $(window).scrollTop();
+				
+				if( s > min_height){
+					$("#gotoTop").fadeIn(100);
+				}else{
+					$("#gotoTop").fadeOut(200);
+				};
+			});
+		};
+		gotoTop();
+
+        $(function(){
+            $('.home-follow').click(function(e){
+                e.preventDefault();
+
+                if($('.home-contact').is(':visible')){
+                    $('.home-contact').slideUp(100);
+                }else{
+                    $('.home-contact').slideDown(100);
+                }
+            });
+        })
+
+    </script>
+</body>
+</html>

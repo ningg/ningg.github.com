@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html xmlns:wb="http://open.weibo.com/wb">
+<head>
+    <!--   Author: NingG   -->
+    <meta charset="utf-8" />
+	<meta property="wb:webmaster" content="7ea7f3d5f3edad6a" />
+    <title>Storm：Running topologies on a production cluster | ningg.top</title>
+    <meta name="author" content="NingG" />
+    <meta name="renderer" content="webkit">
+    <meta name="description" content=" Storm官方文档，启动线上的Storm集群  " />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+    <link rel="stylesheet" href="/css/default.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="" />
+	
+    <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+	<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+	
+    <div class="home-menu">
+        <div class="home-icon-con">
+            <a class="home-menu-icon" href="/">NingG</a>
+            <a class="home-follow" href="#" title="Contact Me">+</a>
+        </div>
+        <div class="home-contact">
+            <a href="http://weibo.com/ggningg/" target="_blank" style="margin-left:-5px;"><img src="http://www.weibo.com/favicon.ico" alt="" width="25"/></a>
+            <a href="http://www.douban.com/people/ggningg/" target="_blank" style="text-align:center;"><img src="http://www.douban.com/favicon.ico" alt="" width="22"/></a>
+			<a href="http://github.com/ningg" alt="" target="_blank" style="text-align:right;"><img src="/images/icon-cube-smaller.png" width="22"/></a>
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="/js/prettify/prettify.css" />
+<style type="text/css">
+    body { background:#e8e8e8; }
+    @media screen and (max-width: 750px){
+        body { background:#fff; }
+    }
+    @media screen and (max-width: 1020px){
+        body { background:#fff; }
+    }
+</style>
+
+<div id="content">
+    <div class="entry">
+        <h1 class="entry-title"><a href="/running-topol-on-a-prod-cluster" title="Storm：Running topologies on a production cluster">Storm：Running topologies on a production cluster</a></h1>
+        <p class="entry-date">2014-12-13</p>
+        <p>Running topologies on a production cluster is similar to running in <a href="http://storm.apache.org/documentation/Local-mode.html">Local mode</a>. Here are the steps:</p>
+
+<p><strong>Define the topology</strong> (Use <a href="http://storm.apache.org/apidocs/backtype/storm/topology/TopologyBuilder.html">TopologyBuilder</a> if defining using Java)</p>
+
+<p><strong>Use <a href="http://storm.apache.org/apidocs/backtype/storm/StormSubmitter.html">StormSubmitter</a> to submit the topology to the cluster</strong>. <code>StormSubmitter</code> takes as input the <code>name</code> of the topology, a <code>configuration</code> for the topology, and the topology itself. For example:</p>
+
+<pre><code>Config conf = new Config();
+conf.setNumWorkers(20);
+conf.setMaxSpoutPending(5000);
+StormSubmitter.submitTopology("mytopology", conf, topology);
+</code></pre>
+
+<p><strong>Create a <code>jar</code></strong> containing your code and all the dependencies of your code (except for Storm – the Storm jars will be added to the classpath on the worker nodes).</p>
+
+<p>If you’re using Maven, the <a href="http://maven.apache.org/plugins/maven-assembly-plugin/">Maven Assembly Plugin</a> can do the packaging for you. Just add this to your <code>pom.xml</code>:</p>
+
+<pre><code>  &lt;plugin&gt;
+	&lt;artifactId&gt;maven-assembly-plugin&lt;/artifactId&gt;
+	&lt;configuration&gt;
+	  &lt;descriptorRefs&gt;  
+		&lt;descriptorRef&gt;jar-with-dependencies&lt;/descriptorRef&gt;
+	  &lt;/descriptorRefs&gt;
+	  &lt;archive&gt;
+		&lt;manifest&gt;
+		  &lt;mainClass&gt;com.path.to.main.Class&lt;/mainClass&gt;
+		&lt;/manifest&gt;
+	  &lt;/archive&gt;
+	&lt;/configuration&gt;
+  &lt;/plugin&gt;
+</code></pre>
+
+<p>Then run <code>mvn assembly:assembly</code> to get an appropriately packaged jar. Make sure you <a href="http://maven.apache.org/plugins/maven-assembly-plugin/examples/single/including-and-excluding-artifacts.html">exclude</a> the Storm jars since the cluster already has Storm on the classpath.</p>
+
+<p><strong>Submit the topology</strong> to the cluster using the <code>storm</code> client, specifying the path to your jar, the classname to run, and any arguments it will use:</p>
+
+<pre><code>storm jar path/to/allmycode.jar org.me.MyTopology arg1 arg2 arg3
+</code></pre>
+
+<p><code>storm jar</code> will submit the jar to the cluster and configure the <code>StormSubmitter</code> class to talk to the right cluster. In this example, after uploading the jar, <code>storm jar</code> calls the main function on <code>org.me.MyTopology</code> with the arguments “arg1”, “arg2”, and “arg3”.</p>
+
+<p>You can find out how to configure your <code>storm</code> client to talk to a Storm cluster on <a href="http://storm.apache.org/documentation/Setting-up-development-environment.html">Setting up development environment</a>.</p>
+
+<p><strong>notes(ningg)</strong>：说两点：</p>
+
+<ul>
+  <li>本地Storm充当client向远端cluster提交topol时，只需要在本地Storm的<code>storm.yaml</code>文件中配置<code>nimbus.host:123.45.678.890</code>即可，具体参考：<a href="/storm-setting-up-dev-env/">Storm：setting up a development environment</a>；</li>
+  <li>具体在windows的CMD下，我无法正确执行<code>storm jar</code>命令，转而，我在windows下安装了Cygwin，并在其中执行<code>storm jar ...</code>命令，向远端的Storm cluster提交topol以及依赖的代码；</li>
+</ul>
+
+<h2 id="common-configurations">Common configurations</h2>
+
+<p>There are a variety of configurations you can set per topology. A list of all the configurations you can set can be found here. The ones prefixed with “TOPOLOGY” can be overridden on a topology-specific basis (the other ones are cluster configurations and cannot be overridden). Here are some common ones that are set for a topology:</p>
+
+<ul>
+  <li><strong>Config.TOPOLOGY_WORKERS</strong>: This sets the number of worker processes to use to execute the topology. For example, if you set this to 25, there will be 25 Java processes across the cluster executing all the tasks. If you had a combined 150 parallelism across all components in the topology, each worker process will have 6 tasks running within it as threads.</li>
+  <li><strong>Config.TOPOLOGY_ACKERS</strong>: This sets the number of tasks that will track tuple trees and detect when a spout tuple has been fully processed. Ackers are an integral part of Storm’s reliability model and you can read more about them on <a href="http://storm.apache.org/documentation/Guaranteeing-message-processing.html">Guaranteeing message processing</a>.</li>
+  <li><strong>Config.TOPOLOGY_MAX_SPOUT_PENDING</strong>: This sets the maximum number of spout tuples that can be pending on a single spout task at once (pending means the tuple has not been acked or failed yet). It is highly recommended you set this config to prevent queue explosion.</li>
+  <li><strong>Config.TOPOLOGY_MESSAGE_TIMEOUT_SECS</strong>: This is the maximum amount of time a spout tuple has to be fully completed before it is considered failed. This value defaults to 30 seconds, which is sufficient for most topologies. See <a href="http://storm.apache.org/documentation/Guaranteeing-message-processing.html">Guaranteeing message processing</a> for more information on how Storm’s reliability model works.</li>
+  <li><strong>Config.TOPOLOGY_SERIALIZATIONS</strong>: You can register more serializers to Storm using this config so that you can use custom types within tuples.</li>
+</ul>
+
+<h2 id="killing-a-topology">Killing a topology</h2>
+
+<p>To kill a topology, simply run:</p>
+
+<pre><code>storm kill {stormname}
+</code></pre>
+
+<p>Give the same name to <code>storm kill</code> as you used when submitting the topology.</p>
+
+<p>Storm won’t kill the topology immediately. Instead, it deactivates all the spouts so that they don’t emit any more tuples, and then Storm waits <code>Config.TOPOLOGY_MESSAGE_TIMEOUT_SECS</code> seconds before destroying all the workers. This gives the topology enough time to complete any tuples it was processing when it got killed.</p>
+
+<h2 id="updating-a-running-topology">Updating a running topology</h2>
+
+<p>To update a running topology, the only option currently is to kill the current topology and resubmit a new one. A planned feature is to implement a <code>storm swap</code> command that swaps a running topology with a new one, ensuring minimal downtime and no chance of both topologies processing tuples at the same time.</p>
+
+<h2 id="monitoring-topologies">Monitoring topologies</h2>
+
+<p>The best place to monitor a topology is using the <code>Storm UI</code>. The Storm UI provides information about errors happening in tasks and fine-grained stats on the throughput and latency performance of each component of each running topology.</p>
+
+<p>You can also look at the worker logs on the cluster machines.</p>
+
+
+
+        <div id="disqus_container">
+            <div style="margin-bottom:20px" class="right">
+				<wb:share-button appkey="2306590132" addition="simple" type="button" ralateUid="2356527183"></wb:share-button>
+            </div>
+            <!--<a href="#" class="comment" onclick="return false;">点击查看评论</a>-->
+            <div id="disqus_thread"></div>
+        </div>
+    </div>
+
+	
+    <div class="sidenav">
+		<iframe width="100%" height="75" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=0&isFans=0&uid=2356527183&verifier=1ccfb61e&colors=d6f3f7,ffffff,666666,0082cb,ecfbfd&dpc=1"></iframe>
+    </div>
+
+</div>
+
+<script src="/js/post.js" type="text/javascript"></script>
+
+
+	<div id="gotoTop">Top</div>
+
+
+    <!--*********************************************************-->
+    <!--****** 宝贝儿，看见这个时候，删掉下面的统计代码哦~ ******-->
+    <!--*********************************************************-->
+	<script>
+	  (function(i,s,o,g,r,a,m){
+		  i['GoogleAnalyticsObject']=r;i[r]=i[r] || function(){
+			(i[r].q=i[r].q||[]).push(arguments)}, i[r].l=1*new Date();
+			a=s.createElement(o), m=s.getElementsByTagName(o)[0];
+			a.async=1;
+			a.src=g;
+			m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-48535193-1', 'ningg.github.io');
+	  ga('send', 'pageview');
+	</script>
+    
+	
+    <script type="text/javascript">
+		function gotoTop(min_height){
+			$("#gotoTop").click(
+				function(){$('html,body').animate({scrollTop:0},700);
+			}).hover(
+				function(){$(this).addClass("hover");},
+				function(){$(this).removeClass("hover");
+			});
+			min_height ? min_height = min_height : min_height = 600;
+			$(window).scroll(function(){
+				
+				var s = $(window).scrollTop();
+				
+				if( s > min_height){
+					$("#gotoTop").fadeIn(100);
+				}else{
+					$("#gotoTop").fadeOut(200);
+				};
+			});
+		};
+		gotoTop();
+
+        $(function(){
+            $('.home-follow').click(function(e){
+                e.preventDefault();
+
+                if($('.home-contact').is(':visible')){
+                    $('.home-contact').slideUp(100);
+                }else{
+                    $('.home-contact').slideDown(100);
+                }
+            });
+        })
+
+    </script>
+</body>
+</html>

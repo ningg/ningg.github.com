@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html xmlns:wb="http://open.weibo.com/wb">
+<head>
+    <!--   Author: NingG   -->
+    <meta charset="utf-8" />
+	<meta property="wb:webmaster" content="7ea7f3d5f3edad6a" />
+    <title>非通信专业，如何对通信有一个整体的认识 | ningg.top</title>
+    <meta name="author" content="NingG" />
+    <meta name="renderer" content="webkit">
+    <meta name="description" content=" 通信知识，整体上有一个脉络，理清楚了就很明朗  " />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+    <link rel="stylesheet" href="/css/default.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="" />
+	
+    <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+	<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+	
+    <div class="home-menu">
+        <div class="home-icon-con">
+            <a class="home-menu-icon" href="/">NingG</a>
+            <a class="home-follow" href="#" title="Contact Me">+</a>
+        </div>
+        <div class="home-contact">
+            <a href="http://weibo.com/ggningg/" target="_blank" style="margin-left:-5px;"><img src="http://www.weibo.com/favicon.ico" alt="" width="25"/></a>
+            <a href="http://www.douban.com/people/ggningg/" target="_blank" style="text-align:center;"><img src="http://www.douban.com/favicon.ico" alt="" width="22"/></a>
+			<a href="http://github.com/ningg" alt="" target="_blank" style="text-align:right;"><img src="/images/icon-cube-smaller.png" width="22"/></a>
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="/js/prettify/prettify.css" />
+<style type="text/css">
+    body { background:#e8e8e8; }
+    @media screen and (max-width: 750px){
+        body { background:#fff; }
+    }
+    @media screen and (max-width: 1020px){
+        body { background:#fff; }
+    }
+</style>
+
+<div id="content">
+    <div class="entry">
+        <h1 class="entry-title"><a href="/frame-of-communication-knowledge" title="非通信专业，如何对通信有一个整体的认识">非通信专业，如何对通信有一个整体的认识</a></h1>
+        <p class="entry-date">2012-11-30</p>
+        <h2 id="section">背景</h2>
+
+<p>今天有人问我，不是通信专业怎么才能对通信以及通信网络有个整体的认识，大概想了一下，列了一下自己的想法，如果有错误的地方还请大家帮忙改正。 </p>
+
+<p><a href="http://bbs.byr.cn/">北邮人论坛</a>的注册用户<code>bacbyr (比爱成)</code>和<code>wuxuguang ( 水炎) </code>都推荐《<a href="http://book.douban.com/subject/4199502/">大话无线通信</a>》，评语：理解清清楚楚，就靠它入门了；比较生动形象，一下子就能翻几十页，很痛快。</p>
+
+<p>看来《<a href="http://book.douban.com/subject/4199502/">大话无线通信</a>》这本书值得一读。</p>
+
+<h2 id="section-1">个人观点</h2>
+
+<p>要对通信有整体认识，需要解决下面几个问题： </p>
+
+<h3 id="section-2">1.什么是通信？</h3>
+
+<p>我的理解，双方进行信息交换过程就是通信。 </p>
+
+<p>举例：你和隔壁的吴老二，俩人的聊天过程就是一个典型的通信过程。见下图： </p>
+
+<p><img src="/images/frame-of-communication-knowledge/talk-with-neighbour.jpg" alt="talk-with-neighbour" /></p>
+
+<h3 id="section-3">2.什么是通信网？</h3>
+
+<p>通信网是由基本通信系统组成的，一个基本的通信系统包括：信源、信道、信宿；信源实际就是发信者，信宿就是收信者；信源产生的信息，通过信道进行传输，最终到达信宿。 </p>
+
+<p>举例：具体，在聊天过程中，当你在说、隔壁吴老二在听的时候，你是信源（发信者），空气是信道（无线信道有木有），吴老二是信宿（收信者）；反之，自己想。基本通信系统，见下图： </p>
+
+<p><img src="/images/frame-of-communication-knowledge/base-unit.jpg" alt="base-unit" /></p>
+
+<h3 id="section-4">3.通信知识框架-基础</h3>
+
+<p>（理解了上面两个问题，再看这一个）上面提到的“通信系统”虽然很简单，只是由“信源、信道、信宿”构成，但是却引出整个通信的知识。简要说明如下： </p>
+
+<blockquote>
+  <p><strong>a</strong>.  信源发出的信息，一般都是模拟信号，需要经过数字化处理，之后还需要信息编码；（对不同信息：声音、图像、视频等，都有各色各样的编码技术）什么编码方式能保证不失真，需要信息论的知识；</p>
+</blockquote>
+
+<blockquote>
+  <p><strong>b</strong>.  经过处理的信息，要想在信道上传输，需要信道编码；（对于不同信道，主要是有线信道、无线信道，根据信道特性不同，使用不同的传输技术；特别需要说明的是，在不同情况下，信道的衰减特性不同，使用不同的信息增强技术） </p>
+</blockquote>
+
+<blockquote>
+  <p><strong>c</strong>. 信宿收到信息之后，需要进行与信源相反的操作：解码。 </p>
+</blockquote>
+
+<p>举例：具体，就好比，你跟隔壁吴老二距离很近的时候，直接说话聊天，你俩人都能听清楚；但是当你俩距离很远时，直接说话对方不一定能听清楚，这就需要经过一些处理，才能保证你俩能继续聊天，例如，用大喇叭来放大声音等。见下图： </p>
+
+<p><img src="/images/frame-of-communication-knowledge/talk-with-neighbour-advance.jpg" alt="talk-with-neighbour-advance" /></p>
+
+<h3 id="section-5">4.通信知识框架-深入</h3>
+
+<p>（理解了上面三个问题，再看这一个）进一步，想构成一个能容纳多用户的通信网，就涉及到一些列的技术： </p>
+
+<blockquote>
+  <p><strong>a</strong>. 双工技术：双工技术是什么？能解决什么问题？（单工、半双工、双工） </p>
+</blockquote>
+
+<blockquote>
+  <p><strong>b</strong>. 复用技术：为什么要使用复用技术？能解决什么问题？（时分复用、码分复用、频分复用） </p>
+</blockquote>
+
+<blockquote>
+  <p><strong>c</strong>. 信令：为什么有信令？没有信令行不行？现网中常用的信令都有哪些？ </p>
+</blockquote>
+
+<blockquote>
+  <p><strong>d</strong>. 网络规划：网络扩容的依据是什么？常用的网络规划技术有哪些？（通信网拓扑结构） </p>
+</blockquote>
+
+<blockquote>
+  <p><strong>e</strong>. 网络中需要什么配套设备：网络中的交换机、控制中心有什么作用？没有行不行？ </p>
+</blockquote>
+
+<blockquote>
+  <p><strong>f</strong>. 通信网络的性能指标：怎么评价一个网络的容量？怎么评价一个次通话的通信质量？怎样评价一个网络的性能？这些指标有哪些？ </p>
+</blockquote>
+
+<blockquote>
+  <p><strong>g</strong>. 无线信道：使用无线信道，跟有线信道有什么区别？需要什么特别的技术吗？（这是整个无线通信的基础） </p>
+</blockquote>
+
+<p>举例：这就好比，之前在一个地方，只有你和隔壁吴老二聊天，你俩都能相互听清楚对方；但是，现在这个地方里来了很多人，都想两两之间进行聊天；如果不采取一些措施，大家都说话，那就乱哄哄的，最糟糕的情况是：所有人都听不清楚对方，这个地方的聊天这个功能瘫痪掉了；这时候，管理人员就诞生了，制定一些规则，例如，大家轮流说话，这样，就能保证至少大家都能聊天（虽然有的时候，可能要等很久，才能轮到自己聊天）。 </p>
+
+<p><img src="/images/frame-of-communication-knowledge/talk-with-neighbour-highest.jpg" alt="talk-with-neighbour-highest" /> </p>
+
+<h3 id="section-6">5.通信知识框架-应用</h3>
+
+<p>（理解了上面四个问题，再看这一个）再进一步，通信网有各种类型：公共电话交换网（传统的固定电话网）、互联网（计算机网）、移动通信网（3g网）； </p>
+
+<blockquote>
+  <p><strong>a</strong>. 这些网络各自有什么特点？ </p>
+</blockquote>
+
+<blockquote>
+  <p><strong>b</strong>. 这些网络中各自有什么独特的问题？不同网络的瓶颈不同，例如无线网络的一个瓶颈就是：自由空间的无线资源是有限的，而且无线信道中干扰很大。 </p>
+</blockquote>
+
+<p>上面就是对于整个通信知识的基本介绍了，建议：</p>
+
+<ul>
+  <li>最好能弄明白上面的每一个问题，不需要知道答案； </li>
+  <li>今后工作中用到这些知识了，再去深入学习； </li>
+</ul>
+
+<h2 id="section-7">几本书</h2>
+
+<p>最后列几本我们学过的书： </p>
+
+<ol>
+  <li><a href="http://product.dangdang.com/product.aspx?product_id=9223550">《通信原理（第6版）》</a> 讲解的理论比较深，很多公式；</li>
+  <li><a href="http://product.dangdang.com/product.aspx?product_id=20042290">《数字通信原理（第2版）》</a>主要解决<code>3.a</code>、<code>4.b</code>的问题；</li>
+  <li><a href="http://product.dangdang.com/product.aspx?product_id=9046475">《移动通信原理与系统》</a>主要解决<code>3.b</code>、<code>4.g</code>、<code>5.b</code>的问题；</li>
+  <li><a href="http://book.douban.com/subject/4864934/">《通信概论》</a>我没看过这本书，在网上找了一下，感觉可能还行；</li>
+  <li><a href="http://product.dangdang.com/product.aspx?product_id=9229349">《宽带通信网原理》</a>主要解决<code>4.d</code>、<code>4.e</code>、<code>4.f</code>的问题；</li>
+</ol>
+
+
+
+        <div id="disqus_container">
+            <div style="margin-bottom:20px" class="right">
+				<wb:share-button appkey="2306590132" addition="simple" type="button" ralateUid="2356527183"></wb:share-button>
+            </div>
+            <!--<a href="#" class="comment" onclick="return false;">点击查看评论</a>-->
+            <div id="disqus_thread"></div>
+        </div>
+    </div>
+
+	
+    <div class="sidenav">
+		<iframe width="100%" height="75" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=0&isFans=0&uid=2356527183&verifier=1ccfb61e&colors=d6f3f7,ffffff,666666,0082cb,ecfbfd&dpc=1"></iframe>
+    </div>
+
+</div>
+
+<script src="/js/post.js" type="text/javascript"></script>
+
+
+	<div id="gotoTop">Top</div>
+
+
+    <!--*********************************************************-->
+    <!--****** 宝贝儿，看见这个时候，删掉下面的统计代码哦~ ******-->
+    <!--*********************************************************-->
+	<script>
+	  (function(i,s,o,g,r,a,m){
+		  i['GoogleAnalyticsObject']=r;i[r]=i[r] || function(){
+			(i[r].q=i[r].q||[]).push(arguments)}, i[r].l=1*new Date();
+			a=s.createElement(o), m=s.getElementsByTagName(o)[0];
+			a.async=1;
+			a.src=g;
+			m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-48535193-1', 'ningg.github.io');
+	  ga('send', 'pageview');
+	</script>
+    
+	
+    <script type="text/javascript">
+		function gotoTop(min_height){
+			$("#gotoTop").click(
+				function(){$('html,body').animate({scrollTop:0},700);
+			}).hover(
+				function(){$(this).addClass("hover");},
+				function(){$(this).removeClass("hover");
+			});
+			min_height ? min_height = min_height : min_height = 600;
+			$(window).scroll(function(){
+				
+				var s = $(window).scrollTop();
+				
+				if( s > min_height){
+					$("#gotoTop").fadeIn(100);
+				}else{
+					$("#gotoTop").fadeOut(200);
+				};
+			});
+		};
+		gotoTop();
+
+        $(function(){
+            $('.home-follow').click(function(e){
+                e.preventDefault();
+
+                if($('.home-contact').is(':visible')){
+                    $('.home-contact').slideUp(100);
+                }else{
+                    $('.home-contact').slideDown(100);
+                }
+            });
+        })
+
+    </script>
+</body>
+</html>

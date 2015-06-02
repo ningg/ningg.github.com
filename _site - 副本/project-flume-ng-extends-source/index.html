@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html xmlns:wb="http://open.weibo.com/wb">
+<head>
+    <!--   Author: NingG   -->
+    <meta charset="utf-8" />
+	<meta property="wb:webmaster" content="7ea7f3d5f3edad6a" />
+    <title>工程Flume NG extends source辅助记录 | ningg.top</title>
+    <meta name="author" content="NingG" />
+    <meta name="renderer" content="webkit">
+    <meta name="description" content=" 工程开发细节  " />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+    <link rel="stylesheet" href="/css/default.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="" />
+	
+    <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+	<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+	
+    <div class="home-menu">
+        <div class="home-icon-con">
+            <a class="home-menu-icon" href="/">NingG</a>
+            <a class="home-follow" href="#" title="Contact Me">+</a>
+        </div>
+        <div class="home-contact">
+            <a href="http://weibo.com/ggningg/" target="_blank" style="margin-left:-5px;"><img src="http://www.weibo.com/favicon.ico" alt="" width="25"/></a>
+            <a href="http://www.douban.com/people/ggningg/" target="_blank" style="text-align:center;"><img src="http://www.douban.com/favicon.ico" alt="" width="22"/></a>
+			<a href="http://github.com/ningg" alt="" target="_blank" style="text-align:right;"><img src="/images/icon-cube-smaller.png" width="22"/></a>
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="/js/prettify/prettify.css" />
+<style type="text/css">
+    body { background:#e8e8e8; }
+    @media screen and (max-width: 750px){
+        body { background:#fff; }
+    }
+    @media screen and (max-width: 1020px){
+        body { background:#fff; }
+    }
+</style>
+
+<div id="content">
+    <div class="entry">
+        <h1 class="entry-title"><a href="/project-flume-ng-extends-source" title="工程Flume NG extends source辅助记录">工程Flume NG extends source辅助记录</a></h1>
+        <p class="entry-date">2015-02-26</p>
+        <h2 id="section">常见问题</h2>
+
+<h3 id="github">github上创建工程，克隆到本地</h3>
+
+<p>在github上创建 new repository：flume-ng-extends-source之后，在本地执行git clone命令，即可：</p>
+
+<pre><code>git clone https://github.com/ningg/flume-ng-extends-source.git
+</code></pre>
+
+<h3 id="git-repository">将本地内容，提交到远端git repository中</h3>
+
+<p>几个命令：</p>
+
+<pre><code>git add --all .
+git commit -m "create maven project"
+git push origin master
+</code></pre>
+
+<p><strong>思考</strong>：上述命令：git push origin master 中<code>origin</code>和<code>master</code>是什么含义？</p>
+
+<h3 id="git">git出现错误</h3>
+
+<p>错误信息，如下：</p>
+
+<pre><code>error: Your local changes to the following files would be overwritten by merge:
+		README.md
+Please, commit your changes or stash them before you can merge.
+</code></pre>
+
+<p>分析：上述错误信息表示，从本地文件已经修改过了，但没有提交，如果强行从git服务器下载此文件，则文件内容将被覆盖；建议先提交本地文件改动的地方，或者直接放弃本地修改的内容。</p>
+
+<p>解决办法：</p>
+
+<h4 id="gitmerge">方法一：希望保存本地改动的文件，但不想与git服务器上版本合并（merge）</h4>
+
+<p>操作如下：</p>
+
+<pre><code>git stash
+git pull
+git stash pop
+git diff -w +文件名		// 查看文件的合并情况
+</code></pre>
+
+<h4 id="section-1">方法二：放弃本地修改的内容，直接放弃本地文件</h4>
+
+<p>操作如下：</p>
+
+<pre><code>git reset --hard
+git pull
+</code></pre>
+
+<p>详细参考：<a href="http://blog.csdn.net/iefreer/article/details/7679631">Git冲突常见解决办法</a></p>
+
+<h3 id="maven">在指定目录创建maven工程</h3>
+
+<p>在Eclipse下，Ctrl + N 创建 Maven Project时，选择：</p>
+
+<ul>
+  <li>Create a simple project(skip archetype selection)</li>
+  <li>Location：E:\flume-ng-extends-source</li>
+</ul>
+
+<p>这样，才能使最终生成的maven project以<code>E:\flume-ng-extends-source</code>为根目录；在这中间遇到一个问题，当不选定<code>Create a simple project</code>时，创建的maven project始终<code>E:\flume-ng-extends-source</code>为根目录。</p>
+
+<h3 id="gitgitignore">git下设置.gitignore</h3>
+
+<p>对于java编写的maven projcet，使用git进行管理时，需要设置<code>.gitignore</code>，几点：</p>
+
+<ul>
+  <li><code>.gitignore</code>是什么？</li>
+  <li>利用git管理maven project时，哪些文件需要设置为<code>gitignore</code>？</li>
+  <li>如何设置git的<code>.gitignore</code>？</li>
+</ul>
+
+<p>如何创建<code>.gitignore</code>文件，因为，在WIN环境下，OS一直提示”必须键入文件名”。
+	* 直接执行命令<code>touch .gitignore</code>即可。</p>
+
+<p>对于Eclipse创建的Maven工程，直接在<code>.gitignore</code>文件中，添加如下内容：</p>
+
+<pre><code># Eclipse
+.classpath
+.project
+.settings/
+# Maven
+target/
+</code></pre>
+
+<p><strong>疑问</strong>：如何设置下一级目录中的.gitignore？</p>
+
+<p>可以将 <code>.gitignore</code> 文件放置到工作树（working tree）下的其他目录，这将对当前目录以及子目录生效。</p>
+
+<p><strong>参考</strong>：<a href="http://stackoverflow.com/questions/991801/git-ignores-and-maven-targets">Git ignores and Maven targets</a></p>
+
+<h3 id="eclipsesourceformat">Eclipse下进行source的format</h3>
+
+<p>几点：</p>
+
+<ul>
+  <li>如何定制source的format？</li>
+  <li>如何快捷进行source的format？</li>
+</ul>
+
+<h3 id="eclipsejava">Eclipse下创建的java文件，自动添加头部注释信息</h3>
+
+<p>（todo）</p>
+
+<h3 id="mavenjar">maven导出jar包</h3>
+
+<p>背景：当前自己都是eclipse的<code>Export</code>–<code>Jar file</code>/<code>Runnable Jar file</code>，如何利用maven直接生成jar包？</p>
+
+<p>命令：<code>maven clean package</code></p>
+
+<h3 id="maven-1">maven打包时，指定源文件编码方式</h3>
+
+<h3 id="mavenjar-1">maven打包时，如何将当前jar包以及其依赖包都导出？</h3>
+
+<p>参考<a href="https://github.com/thilinamb/flume-ng-kafka-sink">thilinamb flume kafka sink</a></p>
+
+<h2 id="section-2">编程相关</h2>
+
+<h3 id="section-3">判断参数是否输入有误</h3>
+
+<p>（TODO：专门学习一下）</p>
+
+<p>用到<code>guava-11.0.2.jar</code>包，示例代码如下：</p>
+
+<pre><code>...
+Preconditions.checkState(spoolDirectory != null, "Configuration must specify a spooling directory");
+...
+Preconditions.checkNotNull(spoolDirectory);
+</code></pre>
+
+<h3 id="null">判断对象是否为null</h3>
+
+<p>（TODO：专门学习一下）</p>
+
+<p>用到<code>guava-11.0.2.jar</code>包，示例代码如下：</p>
+
+<pre><code>...
+private Optional&lt;FileInfo&gt; currentFile = Optional.absent();
+...
+</code></pre>
+
+<p><strong>思考</strong>：使用上述<code>Optional&lt;T&gt;</code>有什么好处？</p>
+
+<h3 id="section-4">过滤文件</h3>
+
+<p>利用java.io.FileFilter，示例代码如下：</p>
+
+<pre><code>FileFilter filter = new FileFilter() {
+  public boolean accept(File candidate) {
+    String fileName = candidate.getName();
+    if ((candidate.isDirectory()) ||
+        (fileName.endsWith(completedSuffix)) ||
+        (fileName.startsWith(".")) ||
+        ignorePattern.matcher(fileName).matches()) {
+      return false;
+    }
+    return true;
+  }
+};
+List&lt;File&gt; candidateFiles = Arrays.asList(spoolDirectory.listFiles(filter));
+</code></pre>
+
+<h2 id="section-5">参考来源</h2>
+
+<ul>
+  <li><a href="http://stackoverflow.com/questions/991801/git-ignores-and-maven-targets">Git ignores and Maven targets</a></li>
+  <li><a href="http://gary-rowe.com/agilestack/2012/10/12/a-gitignore-file-for-intellij-and-eclipse-with-maven/">A .gitignore file for Intellij and Eclipse with Maven</a></li>
+  <li><a href="http://blog.csdn.net/iefreer/article/details/7679631">Git冲突常见解决办法</a></li>
+</ul>
+
+
+
+        <div id="disqus_container">
+            <div style="margin-bottom:20px" class="right">
+				<wb:share-button appkey="2306590132" addition="simple" type="button" ralateUid="2356527183"></wb:share-button>
+            </div>
+            <!--<a href="#" class="comment" onclick="return false;">点击查看评论</a>-->
+            <div id="disqus_thread"></div>
+        </div>
+    </div>
+
+	
+    <div class="sidenav">
+		<iframe width="100%" height="75" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=0&isFans=0&uid=2356527183&verifier=1ccfb61e&colors=d6f3f7,ffffff,666666,0082cb,ecfbfd&dpc=1"></iframe>
+    </div>
+
+</div>
+
+<script src="/js/post.js" type="text/javascript"></script>
+
+
+	<div id="gotoTop">Top</div>
+
+
+    <!--*********************************************************-->
+    <!--****** 宝贝儿，看见这个时候，删掉下面的统计代码哦~ ******-->
+    <!--*********************************************************-->
+	<script>
+	  (function(i,s,o,g,r,a,m){
+		  i['GoogleAnalyticsObject']=r;i[r]=i[r] || function(){
+			(i[r].q=i[r].q||[]).push(arguments)}, i[r].l=1*new Date();
+			a=s.createElement(o), m=s.getElementsByTagName(o)[0];
+			a.async=1;
+			a.src=g;
+			m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-48535193-1', 'ningg.github.io');
+	  ga('send', 'pageview');
+	</script>
+    
+	
+    <script type="text/javascript">
+		function gotoTop(min_height){
+			$("#gotoTop").click(
+				function(){$('html,body').animate({scrollTop:0},700);
+			}).hover(
+				function(){$(this).addClass("hover");},
+				function(){$(this).removeClass("hover");
+			});
+			min_height ? min_height = min_height : min_height = 600;
+			$(window).scroll(function(){
+				
+				var s = $(window).scrollTop();
+				
+				if( s > min_height){
+					$("#gotoTop").fadeIn(100);
+				}else{
+					$("#gotoTop").fadeOut(200);
+				};
+			});
+		};
+		gotoTop();
+
+        $(function(){
+            $('.home-follow').click(function(e){
+                e.preventDefault();
+
+                if($('.home-contact').is(':visible')){
+                    $('.home-contact').slideUp(100);
+                }else{
+                    $('.home-contact').slideDown(100);
+                }
+            });
+        })
+
+    </script>
+</body>
+</html>

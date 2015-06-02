@@ -4,7 +4,7 @@
    <title>ningg.top</title>
    <link href="http://ningg.top" rel="self" type="application/atom+xml"/>
    <link href="http://ningg.top" rel="alternate" type="text/html" />
-   <updated>2015-05-30T18:46:15+08:00</updated>
+   <updated>2015-06-02T19:50:09+08:00</updated>
    <id>http://ningg.top</id>
    <author>
      <name></name>
@@ -13,11 +13,231 @@
 
    
    <entry>
-     <title>存在感</title>
-     <link href="http://ningg.github.com/"/>
+     <title>产品运营梳理</title>
+     <link href="http://ningg.github.com/product-operate"/>
      <updated>2015-06-01T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/</id>
-     <content type="html">
+     <id>http://ningg.github.com/product-operate</id>
+     <content type="html">&lt;p&gt;几点：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;什么是运营？&lt;/li&gt;
+  &lt;li&gt;运营有什么价值？&lt;/li&gt;
+  &lt;li&gt;如何做运营？&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section&quot;&gt;简介&lt;/h2&gt;
+
+&lt;p&gt;运营的本质：传递产品的价值。目标是，构造产品的竞争壁垒。运营人员，是产品与用户之间的桥梁，需要同时&lt;strong&gt;理解产品&lt;/strong&gt;和&lt;strong&gt;理解用户&lt;/strong&gt;，具体：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;理解产品：产品到底解决什么问题？与竞品相比，哪些优劣？&lt;/li&gt;
+  &lt;li&gt;理解用户：目标用户？他们的关注点有哪些？&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;什么时候开展运营工作呢？实际上，运营工作不是在产品诞生之后才开始的，在产品的设计过程中，就应将运营思维考虑进去。产品，应满足：用户需求和运营需求。&lt;/p&gt;
+
+&lt;p&gt;大家眼中的运营工作，包含哪些？&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;针对产品上线搞个活动&lt;/li&gt;
+  &lt;li&gt;写个软文放到相应的媒体宣传平台上&lt;/li&gt;
+  &lt;li&gt;针对产品进行SEO&lt;/li&gt;
+  &lt;li&gt;转发赠礼品，以此增加注册量跟活跃度&lt;/li&gt;
+  &lt;li&gt;…&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;section-1&quot;&gt;运营的对象&lt;/h3&gt;
+
+&lt;p&gt;运营的对象是产品，那什么是产品？&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;产品是满足人们需求的东西；&lt;/li&gt;
+  &lt;li&gt;产品的具体形式：有形的物品、无形的服务；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;section-2&quot;&gt;运营概要&lt;/h3&gt;
+
+&lt;p&gt;运营整体分为几个步骤：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;制定运营计划&lt;/li&gt;
+  &lt;li&gt;组织资源&lt;em&gt;（人、钱）&lt;/em&gt;，准备运营&lt;/li&gt;
+  &lt;li&gt;实施运营&lt;/li&gt;
+  &lt;li&gt;监测运营效果、做好运营控制&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;把上面的步骤摊开来说，运营过程中有几个要点：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;最低的预算：钱&lt;em&gt;（资金投入）&lt;/em&gt;、人力、时间&lt;em&gt;（机会成本）&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;最优的路径：当前面临的问题是什么，希望在哪些指标上得到提升？目标用户是什么？不要走弯路，用直接的办法来解决；&lt;/li&gt;
+  &lt;li&gt;最高效的执行：产品有窗口期，产品会在经历18个月的投入之后，进入流行期&lt;em&gt;（多种竞品涌现）&lt;/em&gt;，需要把握窗口期内的时间，在此期间建立产品的竞争壁垒；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;section-3&quot;&gt;运营的目标&lt;/h3&gt;
+
+&lt;p&gt;运营的目标：吸引忠实用户，形成竞争壁垒。&lt;/p&gt;
+
+&lt;p&gt;Tips：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;门槛与竞争壁垒之间的差异：门槛是指，开始做一个产品时所需要的资源、条件，如果无法获取这些资源或条件，就无法做；竞争壁垒，又称护城河，是指产品的独特优势，别人无法超越的优势，即使别人也可以做这个产品，但是你有独特的优势，始终领先于其他产品。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;section-4&quot;&gt;什么是运营？&lt;/h2&gt;
+
+&lt;p&gt;运营的本质是传递产品的价值，目标是，构造竞争壁垒。&lt;/p&gt;
+
+&lt;h3 id=&quot;section-5&quot;&gt;分类&lt;/h3&gt;
+
+&lt;p&gt;从运营人员的工作方式和人员考核的KPI来看，运营分为如下几种：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;内容运营&lt;/li&gt;
+  &lt;li&gt;推广运营&lt;/li&gt;
+  &lt;li&gt;商务运营&lt;/li&gt;
+  &lt;li&gt;核心用户运营&lt;/li&gt;
+  &lt;li&gt;活动运营&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;实际上，同一个产品的不同阶段，运营工作的侧重有所不同，例如，针对内容运营来说，是先获取用户，再创造优秀内容呢？还是先有优秀内容，再获取用户？好像是一个&lt;code&gt;鸡&lt;/code&gt;和&lt;code&gt;蛋&lt;/code&gt;的关系，应该先有哪个？实际上，这个问题不用争论，优秀的内容、更多的用户，都是我们的运营目标，只是要考虑当前情况，来开展工作，具体：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;早期：运营优质内容，自己生产，或者社交媒体上找到特定的人员，从他们那儿获取优质内容&lt;/li&gt;
+  &lt;li&gt;发展期：引导用户产生优质内容，其中，与用户相伴成长，分享优质内容的生产方式，例如，布局、插图等&lt;/li&gt;
+  &lt;li&gt;稳定期：审核并维护社区氛围&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;section-6&quot;&gt;不同产品阶段，运营团队的构成&lt;/h3&gt;
+
+&lt;p&gt;针对不同的产品阶段，运营团队的工作重点有所侧重：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;早期，侧重：
+    &lt;ul&gt;
+      &lt;li&gt;内容运营：目标，优质内容；途径：自己生产，或者社交媒体上寻找合适的人员，来生产优质的内容；&lt;/li&gt;
+      &lt;li&gt;推广运营：目标，导入流量；途径：社交媒体，或者搜索引擎（SE\SEO）&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;发展期，侧重：（日浏览量10W、注册用户10W？）
+    &lt;ul&gt;
+      &lt;li&gt;核心用户运营：引导用户生产优质内容；&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;稳定期：
+    &lt;ul&gt;
+      &lt;li&gt;商务运营：机构&lt;/li&gt;
+      &lt;li&gt;活动运营：品牌曝光度、用户激活&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;section-7&quot;&gt;当前常见的运营衡量指标&lt;/h3&gt;
+
+&lt;p&gt;几个常见的运营衡量指标：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;新浪微博，媒体属性，KPI：用户活跃度（UV\PV）&lt;/li&gt;
+  &lt;li&gt;腾讯产品，互动营销，专门的产品互动中心&lt;/li&gt;
+  &lt;li&gt;阿里，BD合作（商务合作），KPI：交易额&lt;/li&gt;
+  &lt;li&gt;人人网，植入营销，KPI：广告收入&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section-8&quot;&gt;运营有什么价值？&lt;/h2&gt;
+
+&lt;p&gt;运营，围绕着&lt;strong&gt;构造产品的竞争壁垒&lt;/strong&gt;这一目标，具体价值：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;管理产品氛围
+    &lt;ul&gt;
+      &lt;li&gt;什么是产品氛围？比如，用户参与情况、内容生产情况；&lt;/li&gt;
+      &lt;li&gt;如何衡量？对应不同的指标，因环境而变；&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;掌控用户情绪
+    &lt;ul&gt;
+      &lt;li&gt;情绪引导，消除负面情绪&lt;/li&gt;
+      &lt;li&gt;危机公关&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;收集用户需求
+    &lt;ul&gt;
+      &lt;li&gt;通过数据反映出的用户浏览途径，数据客观，但不深入&lt;/li&gt;
+      &lt;li&gt;运营与核心用户之间的沟通，切中要害 &lt;em&gt;（主要）&lt;/em&gt;&lt;/li&gt;
+      &lt;li&gt;假想出来的调查问卷，通常设计出的问卷，也很讲究，无法设计的完全理想&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;缔造产品声誉
+    &lt;ul&gt;
+      &lt;li&gt;BD合作：Bussiness Development，商务拓展，品牌合作，通常从产品解决的问题出发，分析潜在的合作方&lt;/li&gt;
+      &lt;li&gt;用户：种子用户 – 核心用户，从产品定位的目标用户中，发掘有影响力的潜在用户，例如，QQ群主、论坛版主、俱乐部&lt;/li&gt;
+      &lt;li&gt;创意活动：口碑&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;探索商业模式：什么方式创造价值？什么方式赚钱？
+    &lt;ul&gt;
+      &lt;li&gt;商业模式清晰：验证已有商业模式，为寻求新的商业模式提供数据&lt;/li&gt;
+      &lt;li&gt;商业模式不清晰：核心，先占市场，同时，寻找聚焦目标市场，维系客户关系&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section-9&quot;&gt;如何做运营？&lt;/h2&gt;
+
+&lt;p&gt;运营工作的具体内容包含：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;立项前，产品的市场调研：理解产品价值、与目标用户直接接触，理解用户可接受的方式&lt;/li&gt;
+  &lt;li&gt;设计产品时，营销策略的植入：让产品融合大众需求以及运营的需求&lt;/li&gt;
+  &lt;li&gt;上线时，营销推广：微博、微信、口碑&lt;/li&gt;
+  &lt;li&gt;上线时，核心用户的维护&lt;/li&gt;
+  &lt;li&gt;上线后，数据统计与维护&lt;/li&gt;
+  &lt;li&gt;产品需求反馈&lt;/li&gt;
+  &lt;li&gt;各项核心KPI的跟进：产品的KPI，而非人员的KPI&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;运营过程中，一项很重要的工作是沟通，沟通上，有几点：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;沟通的目标：将所做的努力呈现出来，以争取更多的支持和资源；&lt;/li&gt;
+  &lt;li&gt;表述上，面向未来：例如，屡战屡败 – 屡败屡战&lt;/li&gt;
+  &lt;li&gt;数据支撑：80%的页面跳出率，需要调整这个页面&lt;/li&gt;
+  &lt;li&gt;面对不同对象，采用不同的表述方式，例如，面对专业的人员，向工程师提出bug时，表述”是不是我的使用方式不对”&lt;/li&gt;
+  &lt;li&gt;与用户沟通时，面对用户的建议，正面反馈：”这个功能已经在计划中了”，”这个正在调研当中”，…&lt;/li&gt;
+  &lt;li&gt;工程师已经累成狗了…&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;当个大嘴巴，再强调一下运营的根本目标：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;在窗口期内&lt;em&gt;（通常18个月）&lt;/em&gt;，建立产品的竞争壁垒。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;在说一下一个现象，未来在高校，高校发生的情况，3~5年会延伸至整个社会，例如：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;搜狗浏览器&lt;/li&gt;
+  &lt;li&gt;网民数目：1995年62w&lt;em&gt;（主要是高校）&lt;/em&gt;，1998年600+w&lt;em&gt;（高校毕业生都工作了）&lt;/em&gt;&lt;/li&gt;
+  &lt;li&gt;网购：京东、淘宝，&lt;em&gt;（思考：当当更早，为什么被京东超越？）&lt;/em&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section-10&quot;&gt;推荐资料&lt;/h2&gt;
+
+&lt;p&gt;产品\设计相关资料：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://ixdc.org/&quot;&gt;IXDC&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.pmcaff.com/forum.php&quot;&gt;pmcaff&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.zcool.com.cn/&quot;&gt;站酷&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://ucdchina.com/&quot;&gt;UCDchina&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;section-11&quot;&gt;参考来源&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;http://vdisk.weibo.com/lc/2xFkLT8908rgbGRtA1H&quot;&gt;以用户为中心的产品运营&lt;/a&gt;  密码：Y8A5&lt;/li&gt;
+&lt;/ul&gt;
+
 </content>
    </entry>
    

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html xmlns:wb="http://open.weibo.com/wb">
+<head>
+    <!--   Author: NingG   -->
+    <meta charset="utf-8" />
+	<meta property="wb:webmaster" content="7ea7f3d5f3edad6a" />
+    <title>1个月学习小结——代价敏感的数据流分类算法 | ningg.top</title>
+    <meta name="author" content="NingG" />
+    <meta name="renderer" content="webkit">
+    <meta name="description" content=" 不知不觉一个月了，嗯，来个小结  " />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+    <link rel="stylesheet" href="/css/default.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="" />
+	
+    <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+	<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+	
+    <div class="home-menu">
+        <div class="home-icon-con">
+            <a class="home-menu-icon" href="/">NingG</a>
+            <a class="home-follow" href="#" title="Contact Me">+</a>
+        </div>
+        <div class="home-contact">
+            <a href="http://weibo.com/ggningg/" target="_blank" style="margin-left:-5px;"><img src="http://www.weibo.com/favicon.ico" alt="" width="25"/></a>
+            <a href="http://www.douban.com/people/ggningg/" target="_blank" style="text-align:center;"><img src="http://www.douban.com/favicon.ico" alt="" width="22"/></a>
+			<a href="http://github.com/ningg" alt="" target="_blank" style="text-align:right;"><img src="/images/icon-cube-smaller.png" width="22"/></a>
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="/js/prettify/prettify.css" />
+<style type="text/css">
+    body { background:#e8e8e8; }
+    @media screen and (max-width: 750px){
+        body { background:#fff; }
+    }
+    @media screen and (max-width: 1020px){
+        body { background:#fff; }
+    }
+</style>
+
+<div id="content">
+    <div class="entry">
+        <h1 class="entry-title"><a href="/summary-of-20130103" title="1个月学习小结——代价敏感的数据流分类算法">1个月学习小结——代价敏感的数据流分类算法</a></h1>
+        <p class="entry-date">2013-01-03</p>
+        <p>最近几个月阅读论文都是“抄家底”的方式进行，即，认准一个作者，把他最近几年的论文看个遍，然后再看看自己有没有新的想法。</p>
+
+<p>其中，第一个作者是西北农林科技的张阳教授，再一个就是针对<code>cost-sensitive decision tree</code>方向看了一些论文，值得说明的是找到一篇比较全面的综述，还是2011年左右的，不过这篇文章还没有详细去看。</p>
+
+<p><img src="/images/summary-of-20130103/Mountain-and-Sky-Twitter-Header.jpg" alt="Mountain-and-Sky-Twitter-Header" /></p>
+
+<p>这一个多月内（从<code>2012.10.12</code>开题那一天算起），确定了这个月将围绕一个主题进行学习<code>数据流、代价敏感、分类</code>；基于这个主题，可以预想到的工作有：</p>
+
+<blockquote>
+  <ol>
+    <li>研究现有的数据流data-stream中的classification；研究现有的cost-sensitive classification；</li>
+    <li>将cost-sensitive应用于data stream classification中（设计算法）；</li>
+    <li>初期处理数据，改造实验平台（weka、MOA）进行试验；</li>
+    <li>小论文（EI）、毕业论文（中期、最终）；</li>
+  </ol>
+</blockquote>
+
+<p>现在的进展：</p>
+
+<blockquote>
+  <ul>
+    <li><code>data stream classification</code> &amp; <code>cost sensitive classification</code>都有有了一点了解；</li>
+    <li>决定classification使用<code>Decision tree</code>进行；（在<code>data stream</code>和<code>cost sensitive</code>中<code>Decision-tree</code>都有前人进行过较深入的研究工作）</li>
+    <li>遇到第一个问题：2012年TKDE中有文章指出<code>VFDT</code>中使用的<code>Hoeffding’s-bound</code>不严格，而应改为使用<code>McDiarmid’s-bound</code>，针对这个自己很纠结，因为新提出的<code>bound</code>限定的n值更大，需要的训练<code>instance</code>更多，这对自己有什么影响吗？</li>
+  </ul>
+</blockquote>
+
+<blockquote>
+  <blockquote>
+    <ol>
+      <li>需要更多的instance</li>
+      <li>或者，更换选择分裂属性的指标（可以使用Gini Index）</li>
+      <li>思考能否，重新描述“VFDT”中数学问题，并提出与McDiarmid’s-Bound并列的界限值（换个角度想），或者能否改进McDiarmid’s-Bound。</li>
+    </ol>
+  </blockquote>
+</blockquote>
+
+<p><strong>今天的进展</strong>：<em>(2013/01/04)</em>改进了[2]中针对Infomation-gain提出的McDiarmid’s-bound，将其值降低了18倍，但仍然不可用。如果能够再降低10倍，与“VFDT”中bound结果逼近，则可以在实际试验中使用参数info-gain。</p>
+
+<p><strong>目标</strong>：改进[2]中针对Infomation-gain提出的McDiarmid’s-bound</p>
+
+<p><strong>具体</strong>：重新审视McDiarmid’s_inequality，参考[1]中Hoeffding’s_inequality是一个特列。参考[3]中（Definition 1）empirical-entropy和entropy-norm之间关系，结合[2]中原始的McDiarmid’s bound重新计算info-gain的bound。</p>
+
+<p><strong>下一步打算</strong>：继续改进Infomation-gain提出的McDiarmid’s-bound，具体可以从[3][4]中获得想法（改进思路：决策树分裂属性的数学描述、信息增益的原始计算公式、熵、McDiarmid’s-inequality）。（目标：最终可用）</p>
+
+<p><strong>参考文献</strong></p>
+
+<ol>
+  <li>ashish-mcdiarmid.pdf</li>
+  <li>Decision trees for mining data streams based on the McDiarmid’s bound.pdf</li>
+  <li>A Near-Optimal Algorithm for Computing the Entropy of a Stream.pdf</li>
+  <li>Extensions to McDiarmid’s inequality when differences are bounded with high probability.pdf</li>
+</ol>
+
+<p><strong>结束语</strong></p>
+
+<p>问：世间此山最高？或者另有高处？</p>
+
+<p>答：世间自有他山高此山，Open-mind比天高。</p>
+
+
+
+        <div id="disqus_container">
+            <div style="margin-bottom:20px" class="right">
+				<wb:share-button appkey="2306590132" addition="simple" type="button" ralateUid="2356527183"></wb:share-button>
+            </div>
+            <!--<a href="#" class="comment" onclick="return false;">点击查看评论</a>-->
+            <div id="disqus_thread"></div>
+        </div>
+    </div>
+
+	
+    <div class="sidenav">
+		<iframe width="100%" height="75" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=0&isFans=0&uid=2356527183&verifier=1ccfb61e&colors=d6f3f7,ffffff,666666,0082cb,ecfbfd&dpc=1"></iframe>
+    </div>
+
+</div>
+
+<script src="/js/post.js" type="text/javascript"></script>
+
+
+	<div id="gotoTop">Top</div>
+
+
+    <!--*********************************************************-->
+    <!--****** 宝贝儿，看见这个时候，删掉下面的统计代码哦~ ******-->
+    <!--*********************************************************-->
+	<script>
+	  (function(i,s,o,g,r,a,m){
+		  i['GoogleAnalyticsObject']=r;i[r]=i[r] || function(){
+			(i[r].q=i[r].q||[]).push(arguments)}, i[r].l=1*new Date();
+			a=s.createElement(o), m=s.getElementsByTagName(o)[0];
+			a.async=1;
+			a.src=g;
+			m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-48535193-1', 'ningg.github.io');
+	  ga('send', 'pageview');
+	</script>
+    
+	
+    <script type="text/javascript">
+		function gotoTop(min_height){
+			$("#gotoTop").click(
+				function(){$('html,body').animate({scrollTop:0},700);
+			}).hover(
+				function(){$(this).addClass("hover");},
+				function(){$(this).removeClass("hover");
+			});
+			min_height ? min_height = min_height : min_height = 600;
+			$(window).scroll(function(){
+				
+				var s = $(window).scrollTop();
+				
+				if( s > min_height){
+					$("#gotoTop").fadeIn(100);
+				}else{
+					$("#gotoTop").fadeOut(200);
+				};
+			});
+		};
+		gotoTop();
+
+        $(function(){
+            $('.home-follow').click(function(e){
+                e.preventDefault();
+
+                if($('.home-contact').is(':visible')){
+                    $('.home-contact').slideUp(100);
+                }else{
+                    $('.home-contact').slideDown(100);
+                }
+            });
+        })
+
+    </script>
+</body>
+</html>

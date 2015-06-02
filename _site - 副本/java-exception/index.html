@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html xmlns:wb="http://open.weibo.com/wb">
+<head>
+    <!--   Author: NingG   -->
+    <meta charset="utf-8" />
+	<meta property="wb:webmaster" content="7ea7f3d5f3edad6a" />
+    <title>Java中异常处理 | ningg.top</title>
+    <meta name="author" content="NingG" />
+    <meta name="renderer" content="webkit">
+    <meta name="description" content=" 异常如何捕获？如何定制返回用户的信息？主动抛出异常？  " />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+    <link rel="stylesheet" href="/css/default.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="" />
+	
+    <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+	<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+	
+    <div class="home-menu">
+        <div class="home-icon-con">
+            <a class="home-menu-icon" href="/">NingG</a>
+            <a class="home-follow" href="#" title="Contact Me">+</a>
+        </div>
+        <div class="home-contact">
+            <a href="http://weibo.com/ggningg/" target="_blank" style="margin-left:-5px;"><img src="http://www.weibo.com/favicon.ico" alt="" width="25"/></a>
+            <a href="http://www.douban.com/people/ggningg/" target="_blank" style="text-align:center;"><img src="http://www.douban.com/favicon.ico" alt="" width="22"/></a>
+			<a href="http://github.com/ningg" alt="" target="_blank" style="text-align:right;"><img src="/images/icon-cube-smaller.png" width="22"/></a>
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="/js/prettify/prettify.css" />
+<style type="text/css">
+    body { background:#e8e8e8; }
+    @media screen and (max-width: 750px){
+        body { background:#fff; }
+    }
+    @media screen and (max-width: 1020px){
+        body { background:#fff; }
+    }
+</style>
+
+<div id="content">
+    <div class="entry">
+        <h1 class="entry-title"><a href="/java-exception" title="Java中异常处理">Java中异常处理</a></h1>
+        <p class="entry-date">2013-02-12</p>
+        <p>TODO</p>
+
+<p>java中异常处理机制：</p>
+
+<ul>
+  <li>法级别的抛出异常 <code>throws Exception</code>；
+    <ul>
+      <li>特点：抛出异常之后，后续代码不再执行；</li>
+      <li>优势：代码易读，没有太多的try…catch结构；</li>
+      <li>劣势：直接返回系统默认的Exception信息；</li>
+    </ul>
+  </li>
+  <li>针对代码片段的主动捕获异常，并且定制抛出异常；
+    <ul>
+      <li><code>try{…}catch(Exception e){ throw Exception; }finally{…}</code></li>
+      <li>特点：捕获异常之后，除非主动处理，否则，catch{}之外的代码，仍会继续执行；</li>
+      <li>优势：定制异常的返回信息；</li>
+      <li>思考：catch从小到达？finally{}的作用？</li>
+    </ul>
+  </li>
+</ul>
+
+<p>具体场景下，捕获异常之后，</p>
+
+<ul>
+  <li>返回定制的信息；</li>
+  <li>不再执行后续代码；</li>
+</ul>
+
+<p>在指定的逻辑分层上进行统一的异常捕获；思考：</p>
+
+<ul>
+  <li>controller？</li>
+  <li>service？</li>
+</ul>
+
+<p>主动抛出异常，示例代码：</p>
+
+<pre><code>...
+} catch (IOException ioe) {
+  throw new FlumeException("Error instantiating spooling event parser",
+      ioe);
+}
+</code></pre>
+
+<p><code>FlumeException.java</code>源文件：</p>
+
+<pre><code>package org.apache.flume;
+
+/*
+ * Base class of all flume exceptions.
+ */
+public class FlumeException extends RuntimeException {
+
+  private static final long serialVersionUID = 1L;
+
+  public FlumeException(String msg) {
+	super(msg);
+  }
+
+  public FlumeException(String msg, Throwable th) {
+	super(msg, th);
+  }
+
+  public FlumeException(Throwable th) {
+	super(th);
+  }
+
+}
+</code></pre>
+
+<p>连续多个<code>catch(Exception exception)</code>动作，什么作用？</p>
+
+<pre><code>try {
+	...
+} catch (FlumeException ex){
+	transaction.rollback();
+} catch (Exception ex){
+	transaction.rollback();
+	String errorMsg = "Failed to publish event: " + event ;
+	logger.error(errorMsg);
+	throw new EventDeliveryException(errorMsg, ex);
+} finally {
+	transaction.close();
+}
+</code></pre>
+
+<p>下面代码的含义：</p>
+
+<pre><code>e.printStackTrace();
+Throwables.propagate(e);
+</code></pre>
+
+<h2 id="section">参考来源</h2>
+
+<ul>
+  <li><a href="http://docs.oracle.com/javase/tutorial/essential/exceptions/">Java Tutorial–Lesson: Exceptions</a></li>
+</ul>
+
+
+
+        <div id="disqus_container">
+            <div style="margin-bottom:20px" class="right">
+				<wb:share-button appkey="2306590132" addition="simple" type="button" ralateUid="2356527183"></wb:share-button>
+            </div>
+            <!--<a href="#" class="comment" onclick="return false;">点击查看评论</a>-->
+            <div id="disqus_thread"></div>
+        </div>
+    </div>
+
+	
+    <div class="sidenav">
+		<iframe width="100%" height="75" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=0&isFans=0&uid=2356527183&verifier=1ccfb61e&colors=d6f3f7,ffffff,666666,0082cb,ecfbfd&dpc=1"></iframe>
+    </div>
+
+</div>
+
+<script src="/js/post.js" type="text/javascript"></script>
+
+
+	<div id="gotoTop">Top</div>
+
+
+    <!--*********************************************************-->
+    <!--****** 宝贝儿，看见这个时候，删掉下面的统计代码哦~ ******-->
+    <!--*********************************************************-->
+	<script>
+	  (function(i,s,o,g,r,a,m){
+		  i['GoogleAnalyticsObject']=r;i[r]=i[r] || function(){
+			(i[r].q=i[r].q||[]).push(arguments)}, i[r].l=1*new Date();
+			a=s.createElement(o), m=s.getElementsByTagName(o)[0];
+			a.async=1;
+			a.src=g;
+			m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-48535193-1', 'ningg.github.io');
+	  ga('send', 'pageview');
+	</script>
+    
+	
+    <script type="text/javascript">
+		function gotoTop(min_height){
+			$("#gotoTop").click(
+				function(){$('html,body').animate({scrollTop:0},700);
+			}).hover(
+				function(){$(this).addClass("hover");},
+				function(){$(this).removeClass("hover");
+			});
+			min_height ? min_height = min_height : min_height = 600;
+			$(window).scroll(function(){
+				
+				var s = $(window).scrollTop();
+				
+				if( s > min_height){
+					$("#gotoTop").fadeIn(100);
+				}else{
+					$("#gotoTop").fadeOut(200);
+				};
+			});
+		};
+		gotoTop();
+
+        $(function(){
+            $('.home-follow').click(function(e){
+                e.preventDefault();
+
+                if($('.home-contact').is(':visible')){
+                    $('.home-contact').slideUp(100);
+                }else{
+                    $('.home-contact').slideDown(100);
+                }
+            });
+        })
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html xmlns:wb="http://open.weibo.com/wb">
+<head>
+    <!--   Author: NingG   -->
+    <meta charset="utf-8" />
+	<meta property="wb:webmaster" content="7ea7f3d5f3edad6a" />
+    <title>AIX下安装bash | ningg.top</title>
+    <meta name="author" content="NingG" />
+    <meta name="renderer" content="webkit">
+    <meta name="description" content=" AIX系统下默认shell是ksh，而Linux下是bash，习惯了bash，那就在AIX下继续使用bash吧  " />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+    <link rel="stylesheet" href="/css/default.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="" />
+	
+    <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+	<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+	
+    <div class="home-menu">
+        <div class="home-icon-con">
+            <a class="home-menu-icon" href="/">NingG</a>
+            <a class="home-follow" href="#" title="Contact Me">+</a>
+        </div>
+        <div class="home-contact">
+            <a href="http://weibo.com/ggningg/" target="_blank" style="margin-left:-5px;"><img src="http://www.weibo.com/favicon.ico" alt="" width="25"/></a>
+            <a href="http://www.douban.com/people/ggningg/" target="_blank" style="text-align:center;"><img src="http://www.douban.com/favicon.ico" alt="" width="22"/></a>
+			<a href="http://github.com/ningg" alt="" target="_blank" style="text-align:right;"><img src="/images/icon-cube-smaller.png" width="22"/></a>
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="/js/prettify/prettify.css" />
+<style type="text/css">
+    body { background:#e8e8e8; }
+    @media screen and (max-width: 750px){
+        body { background:#fff; }
+    }
+    @media screen and (max-width: 1020px){
+        body { background:#fff; }
+    }
+</style>
+
+<div id="content">
+    <div class="entry">
+        <h1 class="entry-title"><a href="/install-bash-on-aix" title="AIX下安装bash">AIX下安装bash</a></h1>
+        <p class="entry-date">2014-11-23</p>
+        <h2 id="aix">AIX系统简介</h2>
+
+<p>AIX（Advanced Interactive eXecutive）是IBM基于AT&amp;T Unix System V开发的一套类UNIX操作系统，运行在IBM专有的Power系列芯片设计的小型机硬件系统之上。它符合Open group的UNIX 98行业标准（The Open Group UNIX 98 Base Brand），通过全面集成对32-位和64-位应用的并行运行支持，为这些应用提供了全面的可扩展性。</p>
+
+<p>关于AIX的入门知识和基本操作，参考：</p>
+
+<ul>
+  <li><a href="http://www.ibm.com/developerworks/cn/aix/library/1111_liuge_getstartaix/">快速透视AIX系统</a></li>
+  <li><a href="http://www.ibm.com/developerworks/cn/aix/library/au-dutta_cmds.html">AIX常用命令汇总</a></li>
+</ul>
+
+<h2 id="bash">安装bash</h2>
+
+<p>在Linux下，用户默认使用bash，包含了一些小功能：自动补全、上下按键、backspace删除按键等，这些简单操作在ksh下全部无法使用，简直是中煎熬，shell不就是内核之外的一层“外壳”么，直接换掉就行了。</p>
+
+<h3 id="bash-1">检测是否已安装bash</h3>
+
+<pre><code>#rpm -qa | grep bash
+</code></pre>
+
+<p>如果没有内容返回，则表示未安装bash。</p>
+
+<h3 id="bash-for-aix">下载bash for AIX</h3>
+
+<p>通过如下命令查看当前系统信息：</p>
+
+<pre><code># oslevel	//查看操作系统版本
+6.1.0.0
+# bootinfo -y	//查看AIX机器硬件是32位还是64位
+64
+# bootinfo -K	//查看AIX系统内核是32位还是64位
+64
+</code></pre>
+
+<p>到官网<a href="http://www-03.ibm.com/systems/power/software/aix/linux/toolbox/alpha.html">AIX toolbox</a>，下载bash-4.2-3.aix6.1.ppc.rpm（看起来，rpm包不区分32、64位）；</p>
+
+<h3 id="bash-2">安装bash</h3>
+
+<p>安装bash，并查看是否完成安装，具体命令如下：</p>
+
+<pre><code># rpm -ivh bash-4.2-3.aix6.1.ppc.rpm
+...
+# rpm -qa | grep bash	// 查看是否完成bash的安装
+bash-4.2-3
+</code></pre>
+
+<h3 id="shell">更换shell</h3>
+
+<p>将某些用户user的默认shell由/usr/bin/ksh改为/usr/bin/bash</p>
+
+<pre><code># whereis bash		// 查看shell的安装位置
+bash: /usr/bin/bash
+
+# vi /etc/passwd	// 以user用户为例，更换shell
+...
+user:!:204:1::/home/user:/usr/bin/bash
+...
+</code></pre>
+
+<p>以用户user身份，打开一个新的终端，这样就是Linux下熟悉的bash风格了。</p>
+
+<h3 id="section">补充：更换提示符风格</h3>
+
+<pre><code># vi ~/.profile
+...
+export PS1='[/u@/h /w]/$'		// 最后一行添加此内容
+</code></pre>
+
+<p>这样AIX下就呈现完整的bash环境了。</p>
+
+<h2 id="section-1">参考来源</h2>
+
+<ul>
+  <li><a href="http://blog.csdn.net/zztp01/article/details/6213451">AIX下安装bash</a></li>
+  <li><a href="http://www.ibm.com/developerworks/cn/aix/library/1111_liuge_getstartaix/">快速透视AIX系统</a></li>
+  <li><a href="http://www.ibm.com/developerworks/cn/aix/library/au-dutta_cmds.html">AIX常用命令汇总</a></li>
+</ul>
+
+
+
+        <div id="disqus_container">
+            <div style="margin-bottom:20px" class="right">
+				<wb:share-button appkey="2306590132" addition="simple" type="button" ralateUid="2356527183"></wb:share-button>
+            </div>
+            <!--<a href="#" class="comment" onclick="return false;">点击查看评论</a>-->
+            <div id="disqus_thread"></div>
+        </div>
+    </div>
+
+	
+    <div class="sidenav">
+		<iframe width="100%" height="75" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=0&isFans=0&uid=2356527183&verifier=1ccfb61e&colors=d6f3f7,ffffff,666666,0082cb,ecfbfd&dpc=1"></iframe>
+    </div>
+
+</div>
+
+<script src="/js/post.js" type="text/javascript"></script>
+
+
+	<div id="gotoTop">Top</div>
+
+
+    <!--*********************************************************-->
+    <!--****** 宝贝儿，看见这个时候，删掉下面的统计代码哦~ ******-->
+    <!--*********************************************************-->
+	<script>
+	  (function(i,s,o,g,r,a,m){
+		  i['GoogleAnalyticsObject']=r;i[r]=i[r] || function(){
+			(i[r].q=i[r].q||[]).push(arguments)}, i[r].l=1*new Date();
+			a=s.createElement(o), m=s.getElementsByTagName(o)[0];
+			a.async=1;
+			a.src=g;
+			m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-48535193-1', 'ningg.github.io');
+	  ga('send', 'pageview');
+	</script>
+    
+	
+    <script type="text/javascript">
+		function gotoTop(min_height){
+			$("#gotoTop").click(
+				function(){$('html,body').animate({scrollTop:0},700);
+			}).hover(
+				function(){$(this).addClass("hover");},
+				function(){$(this).removeClass("hover");
+			});
+			min_height ? min_height = min_height : min_height = 600;
+			$(window).scroll(function(){
+				
+				var s = $(window).scrollTop();
+				
+				if( s > min_height){
+					$("#gotoTop").fadeIn(100);
+				}else{
+					$("#gotoTop").fadeOut(200);
+				};
+			});
+		};
+		gotoTop();
+
+        $(function(){
+            $('.home-follow').click(function(e){
+                e.preventDefault();
+
+                if($('.home-contact').is(':visible')){
+                    $('.home-contact').slideUp(100);
+                }else{
+                    $('.home-contact').slideDown(100);
+                }
+            });
+        })
+
+    </script>
+</body>
+</html>

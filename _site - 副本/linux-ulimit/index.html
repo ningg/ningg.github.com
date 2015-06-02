@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html xmlns:wb="http://open.weibo.com/wb">
+<head>
+    <!--   Author: NingG   -->
+    <meta charset="utf-8" />
+	<meta property="wb:webmaster" content="7ea7f3d5f3edad6a" />
+    <title>Linux命令ulimit | ningg.top</title>
+    <meta name="author" content="NingG" />
+    <meta name="renderer" content="webkit">
+    <meta name="description" content=" 限定user、group所能使用系统资源的上限（CPU、内存、同时打开文件个数）  " />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+    <link rel="stylesheet" href="/css/default.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="" />
+	
+    <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+	<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+	
+    <div class="home-menu">
+        <div class="home-icon-con">
+            <a class="home-menu-icon" href="/">NingG</a>
+            <a class="home-follow" href="#" title="Contact Me">+</a>
+        </div>
+        <div class="home-contact">
+            <a href="http://weibo.com/ggningg/" target="_blank" style="margin-left:-5px;"><img src="http://www.weibo.com/favicon.ico" alt="" width="25"/></a>
+            <a href="http://www.douban.com/people/ggningg/" target="_blank" style="text-align:center;"><img src="http://www.douban.com/favicon.ico" alt="" width="22"/></a>
+			<a href="http://github.com/ningg" alt="" target="_blank" style="text-align:right;"><img src="/images/icon-cube-smaller.png" width="22"/></a>
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="/js/prettify/prettify.css" />
+<style type="text/css">
+    body { background:#e8e8e8; }
+    @media screen and (max-width: 750px){
+        body { background:#fff; }
+    }
+    @media screen and (max-width: 1020px){
+        body { background:#fff; }
+    }
+</style>
+
+<div id="content">
+    <div class="entry">
+        <h1 class="entry-title"><a href="/linux-ulimit" title="Linux命令ulimit">Linux命令ulimit</a></h1>
+        <p class="entry-date">2014-04-14</p>
+        <h2 id="ulimit">ulimit命令简介</h2>
+
+<p>通过<code>man ulimit</code>命令查询官方的简要解释如下：</p>
+
+<blockquote>
+  <p>ulimit [-HSTabcdefilmnpqrstuvx [limit]]</p>
+</blockquote>
+
+<p>Provides  control over the resources available to the shell and to processes started by it, on systems that allow such control.  The -H and -S options specify that the hard or soft limit is set for the given resource.  A hard limit cannot be increased by a non-root user once it is set; a soft limit may be increased up to the value of the  hard  limit.  If neither -H nor -S is specified, both the soft and hard limits are set.  The value of limit can be a number in the unit specified for the resource or one of the special values hard, soft, or unlimited, which stand for the current hard limit, the current soft limit, and no limit, respectively. If limit  is  omitted, the current value of the soft limit of the resource is printed, unless the -H option is given. When more than one resource is specified, the limit name and unit are printed before the value.  Other options are interpreted as follows:</p>
+
+<ul>
+  <li><code>-a</code> : All current limits are reported</li>
+  <li><code>-b</code> : The maximum socket buffer size</li>
+  <li><code>-c</code> : The maximum size of core files created</li>
+  <li><code>-d</code> : The maximum size of a process’s data segment</li>
+  <li><code>-e</code> : The maximum scheduling priority (“nice”)</li>
+  <li><code>-f</code> : The maximum size of files written by the shell and its children</li>
+  <li><code>-i</code> : The maximum number of pending signals</li>
+  <li><code>-l</code> : The maximum size that may be locked into memory</li>
+  <li><code>-m</code> : The maximum resident set size (many systems do not honor this limit)</li>
+  <li><code>-n</code> : The maximum number of open file descriptors (most systems do not allow this value to be set)</li>
+  <li><code>-p</code> : The pipe size in 512-byte blocks (this may not be set)</li>
+  <li><code>-q</code> : The maximum number of bytes in POSIX message queues</li>
+  <li><code>-r</code> : The maximum real-time scheduling priority</li>
+  <li><code>-s</code> : The maximum stack size</li>
+  <li><code>-t</code> : The maximum amount of cpu time in seconds</li>
+  <li><code>-u</code> : The maximum number of processes available to a single user</li>
+  <li><code>-v</code> : The maximum amount of virtual memory available to the shell</li>
+  <li><code>-x</code> : The maximum number of file locks</li>
+  <li><code>-T</code> : The maximum number of threads</li>
+</ul>
+
+<p>If limit is given, it is the new value of the specified resource (the -a option is display only).  If no option is given, then -f is assumed.  Values are in  1024-byte increments,  except  for  -t, which is in seconds, -p, which is in units of 512-byte blocks, and -T, -b, -n, and -u, which are unscaled values.  The return status is 0 unless an invalid option or argument is supplied, or an error occurs while setting a new limit.</p>
+
+<p>简要说明如下：</p>
+
+<ul>
+  <li>进行资源控制的对象？当前的shell以及其下启动的process；</li>
+  <li>什么时候生效？<code>ulimit -n 1024</code>设置之后，当前shell就生效了，重启即失效；</li>
+</ul>
+
+<p>通过命令<code>ulimit -a</code>，即可查看当前shell及其下启动的process所允许占用资源的上限，例如：</p>
+
+<pre><code>[dev@cib69 elasticsearch-1.4.4]$ ulimit -a
+core file size          (blocks, -c) 0
+data seg size           (kbytes, -d) unlimited
+scheduling priority             (-e) 0
+file size               (blocks, -f) unlimited
+pending signals                 (-i) 514940
+max locked memory       (kbytes, -l) 64
+max memory size         (kbytes, -m) unlimited
+open files                      (-n) 2048
+pipe size            (512 bytes, -p) 8
+POSIX message queues     (bytes, -q) 819200
+real-time priority              (-r) 0
+stack size              (kbytes, -s) 10240
+cpu time               (seconds, -t) unlimited
+max user processes              (-u) 1024
+virtual memory          (kbytes, -v) unlimited
+file locks                      (-x) unlimited
+</code></pre>
+
+<h2 id="limitsconf">limits.conf文件</h2>
+
+<p>上述使用<code>ulimit -n 1024</code>方式设置的参数，只对当前shell生效，重启之后失效，有没有永久生效的配置？有，文件<code>/etc/security/limits.conf</code>。文件的样例如下：</p>
+
+<pre><code># /etc/security/limits.conf
+#
+#Each line describes a limit for a user in the form:
+#
+#&lt;domain&gt;        &lt;type&gt;  &lt;item&gt;  &lt;value&gt;
+#
+#Where:
+#&lt;domain&gt; can be:
+#        - an user name
+#        - a group name, with @group syntax
+#        - the wildcard *, for default entry
+#        - the wildcard %, can be also used with %group syntax,
+#                 for maxlogin limit
+#
+#&lt;type&gt; can have the two values:
+#        - "soft" for enforcing the soft limits
+#        - "hard" for enforcing hard limits
+#
+#&lt;item&gt; can be one of the following:
+#        - core - limits the core file size (KB)
+#        - data - max data size (KB)
+#        - fsize - maximum filesize (KB)
+#        - memlock - max locked-in-memory address space (KB)
+#        - nofile - max number of open files
+#        - rss - max resident set size (KB)
+#        - stack - max stack size (KB)
+#        - cpu - max CPU time (MIN)
+#        - nproc - max number of processes
+#        - as - address space limit (KB)
+#        - maxlogins - max number of logins for this user
+#        - maxsyslogins - max number of logins on the system
+#        - priority - the priority to run user process with
+#        - locks - max number of file locks the user can hold
+#        - sigpending - max number of pending signals
+#        - msgqueue - max memory used by POSIX message queues (bytes)
+#        - nice - max nice priority allowed to raise to values: [-20, 19]
+#        - rtprio - max realtime priority
+#
+#&lt;domain&gt;      &lt;type&gt;  &lt;item&gt;         &lt;value&gt;
+#
+
+#*               soft    core            0
+#*               hard    rss             10000
+#@student        hard    nproc           20
+#@faculty        soft    nproc           20
+#@faculty        hard    nproc           50
+#ftp             hard    nproc           0
+#@student        -       maxlogins       4
+
+# End of file
+</code></pre>
+
+<p>举例，设置用户允许用户dev同时打开文件个数为64000，则，在<code>/etc/security/limits.conf</code>文件中添加如下配置即可：</p>
+
+<pre><code>dev		soft	nofile	64000
+dev		hard	nofile	64000
+</code></pre>
+
+<h2 id="section">参考来源</h2>
+
+<ul>
+  <li><a href="http://it.yooxue.com/linux-zuidawenjianshu-ulimit/">修改linux最大打开文件数ulimit</a></li>
+  <li>Linux下<code>man ulimit</code></li>
+  <li><a href="http://www.ibm.com/developerworks/cn/linux/l-cn-ulimit/">通过 ulimit 改善系统性能</a></li>
+</ul>
+
+
+
+        <div id="disqus_container">
+            <div style="margin-bottom:20px" class="right">
+				<wb:share-button appkey="2306590132" addition="simple" type="button" ralateUid="2356527183"></wb:share-button>
+            </div>
+            <!--<a href="#" class="comment" onclick="return false;">点击查看评论</a>-->
+            <div id="disqus_thread"></div>
+        </div>
+    </div>
+
+	
+    <div class="sidenav">
+		<iframe width="100%" height="75" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=0&isFans=0&uid=2356527183&verifier=1ccfb61e&colors=d6f3f7,ffffff,666666,0082cb,ecfbfd&dpc=1"></iframe>
+    </div>
+
+</div>
+
+<script src="/js/post.js" type="text/javascript"></script>
+
+
+	<div id="gotoTop">Top</div>
+
+
+    <!--*********************************************************-->
+    <!--****** 宝贝儿，看见这个时候，删掉下面的统计代码哦~ ******-->
+    <!--*********************************************************-->
+	<script>
+	  (function(i,s,o,g,r,a,m){
+		  i['GoogleAnalyticsObject']=r;i[r]=i[r] || function(){
+			(i[r].q=i[r].q||[]).push(arguments)}, i[r].l=1*new Date();
+			a=s.createElement(o), m=s.getElementsByTagName(o)[0];
+			a.async=1;
+			a.src=g;
+			m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-48535193-1', 'ningg.github.io');
+	  ga('send', 'pageview');
+	</script>
+    
+	
+    <script type="text/javascript">
+		function gotoTop(min_height){
+			$("#gotoTop").click(
+				function(){$('html,body').animate({scrollTop:0},700);
+			}).hover(
+				function(){$(this).addClass("hover");},
+				function(){$(this).removeClass("hover");
+			});
+			min_height ? min_height = min_height : min_height = 600;
+			$(window).scroll(function(){
+				
+				var s = $(window).scrollTop();
+				
+				if( s > min_height){
+					$("#gotoTop").fadeIn(100);
+				}else{
+					$("#gotoTop").fadeOut(200);
+				};
+			});
+		};
+		gotoTop();
+
+        $(function(){
+            $('.home-follow').click(function(e){
+                e.preventDefault();
+
+                if($('.home-contact').is(':visible')){
+                    $('.home-contact').slideUp(100);
+                }else{
+                    $('.home-contact').slideDown(100);
+                }
+            });
+        })
+
+    </script>
+</body>
+</html>

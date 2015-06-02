@@ -1,0 +1,401 @@
+<!DOCTYPE html>
+<html xmlns:wb="http://open.weibo.com/wb">
+<head>
+    <!--   Author: NingG   -->
+    <meta charset="utf-8" />
+	<meta property="wb:webmaster" content="7ea7f3d5f3edad6a" />
+    <title>Linux下用户和组管理 | ningg.top</title>
+    <meta name="author" content="NingG" />
+    <meta name="renderer" content="webkit">
+    <meta name="description" content=" 系统权限管理，包含用户和用户组管理  " />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+    <link rel="stylesheet" href="/css/default.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="" />
+	
+    <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+	<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+	
+    <div class="home-menu">
+        <div class="home-icon-con">
+            <a class="home-menu-icon" href="/">NingG</a>
+            <a class="home-follow" href="#" title="Contact Me">+</a>
+        </div>
+        <div class="home-contact">
+            <a href="http://weibo.com/ggningg/" target="_blank" style="margin-left:-5px;"><img src="http://www.weibo.com/favicon.ico" alt="" width="25"/></a>
+            <a href="http://www.douban.com/people/ggningg/" target="_blank" style="text-align:center;"><img src="http://www.douban.com/favicon.ico" alt="" width="22"/></a>
+			<a href="http://github.com/ningg" alt="" target="_blank" style="text-align:right;"><img src="/images/icon-cube-smaller.png" width="22"/></a>
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="/js/prettify/prettify.css" />
+<style type="text/css">
+    body { background:#e8e8e8; }
+    @media screen and (max-width: 750px){
+        body { background:#fff; }
+    }
+    @media screen and (max-width: 1020px){
+        body { background:#fff; }
+    }
+</style>
+
+<div id="content">
+    <div class="entry">
+        <h1 class="entry-title"><a href="/linux-user-and-group" title="Linux下用户和组管理">Linux下用户和组管理</a></h1>
+        <p class="entry-date">2014-07-27</p>
+        <h2 id="section">背景</h2>
+
+<p>平日里，常遇到几个需求：</p>
+
+<ol>
+  <li>Linux服务器上，为新人开个账号，并加入到某一组中；</li>
+  <li>查询，组中的所有用户；</li>
+  <li>查询，用户是否存在；</li>
+  <li>查询，某一用户所在组；</li>
+  <li>用户和组管理，如何实现的；</li>
+</ol>
+
+<h2 id="section-1">如何使用</h2>
+
+<h3 id="section-2">几个命令</h3>
+
+<p><strong>用户相关</strong>：</p>
+
+<ul>
+  <li><code>useradd [LOGIN]</code>：新增用户</li>
+  <li><code>passwd [LOGIN]</code>：设置用户密码</li>
+  <li><code>usermod [options] [LOGIN]</code>：修改用户的属性信息，与<code>useradd</code>类似</li>
+  <li><code>userdel [LOGIN]</code>：删除用户</li>
+  <li><code>whoami</code>：当前登录的用户</li>
+</ul>
+
+<p><strong>用户组相关</strong>：</p>
+
+<ul>
+  <li><code>groups [LOGIN]</code>：查询用户所属组</li>
+  <li><code>groupadd [GROUP]</code>：新增用户组</li>
+  <li><code>gpasswd [GROUP]</code>：设置组成员、添加组管理员（参考命令：<code>usermod</code>）</li>
+  <li><code>groupmod [GROUP]</code>：修改用户组信息，与<code>groupadd</code>类似</li>
+  <li><code>groupdel [GROUP]</code>：删除组</li>
+  <li><code>newgrp [GROUP]</code>：设置<code>有效组</code></li>
+</ul>
+
+<p>注：作为<code>初始组</code>的用户组，无法使用命令<code>groupdel</code>进行删除。</p>
+
+<p>上面的命令，细节不想多说，用的时候，直接<code>man command</code>查看帮助文档即可。</p>
+
+<h3 id="section-3">几个文件</h3>
+
+<table>
+  <thead>
+    <tr>
+      <th style="text-align: left">文件</th>
+      <th style="text-align: left">说明</th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <td style="text-align: left"><code>/etc/passwd</code></td>
+      <td style="text-align: left">用户信息</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code>/etc/shadow</code></td>
+      <td style="text-align: left">用户密码信息</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code>/etc/group</code></td>
+      <td style="text-align: left">用户组信息</td>
+    </tr>
+    <tr>
+      <td style="text-align: left"><code>/etc/gshadow</code></td>
+      <td style="text-align: left">用户组管理信息</td>
+    </tr>
+  </tbody>
+</table>
+
+<h4 id="etcpasswd">/etc/passwd</h4>
+
+<p>文件片段：</p>
+
+<pre><code>root:x:0:0:root:/root:/bin/bash
+bin:x:1:1:bin:/bin:/sbin/nologin
+daemon:x:2:2:daemon:/sbin:/sbin/nologin
+adm:x:3:4:adm:/var/adm:/sbin/nologin
+lp:x:4:7:lp:/var/spool/lpd:/sbin/nologin
+sync:x:5:0:sync:/sbin:/bin/sync
+shutdown:x:6:0:shutdown:/sbin:/sbin/shutdown
+hbase:x:1002:507::/home/hbase:/bin/bash
+nagios:x:1003:508::/home/nagios:/bin/bash
+oozie:x:1004:507::/home/oozie:/bin/bash
+hcat:x:1005:507::/home/hcat:/bin/bash
+hive:x:1006:507::/home/hive:/bin/bash
+yarn:x:1007:507::/home/yarn:/bin/bash
+hdfs:x:1008:507::/home/hdfs:/bin/bash
+mapred:x:1009:507::/home/mapred:/bin/bash
+</code></pre>
+
+<p>格式说明:</p>
+
+<pre><code>`用户名`:`密码`:`UID`:`GID`:`用户说明信息`:`默认登录路径`:`Shell`
+</code></pre>
+
+<p>补充说明：</p>
+
+<ol>
+  <li><code>密码</code>列，是历史遗留问题，现在所有的<code>密码</code>，都已被单独的提出并存储至<code>/etc/passwd</code>文件中；</li>
+  <li><code>UID</code>=0，表示系统管理员；</li>
+  <li><code>GID</code>，与文件<code>/etc/group</code>有关，这个文件用于规范组名和GID的对应关系；</li>
+  <li><code>Shell</code>，用户登录之后，就会获得一个Shell进程来与系统核心进行沟通，以此来执行用户任务；特别需要注意的是，<code>/sbin/nologin</code>将会使用户无法登录；</li>
+</ol>
+
+<h4 id="etcshadow">/etc/shadow</h4>
+
+<p>文件片段：</p>
+
+<pre><code>root:$6$t...(实际密码较长):15996:0:99999:7:::
+bin:*:15422:0:99999:7:::
+sshd:!!:15977::::::
+dev:!!:15989:0:99999:7:::
+devp:$6$...(实际密码较长):15989:0:99999:7:::
+mysql:!!:15990::::::
+storm:$6$2...(实际密码较长):15991:0:99999:7:::
+strom:!!:15991:0:99999:7:::
+ambari-qa:!!:16262:0:99999:7:::
+hbase:!!:16262:0:99999:7:::
+nagios:!!:16262:0:99999:7:::
+oozie:!!:16262:0:99999:7:::
+hcat:!!:16262:0:99999:7:::
+hive:!!:16262:0:99999:7:::
+yarn:!!:16262:0:99999:7:::
+hdfs:!!:16262:0:99999:7:::
+mapred:!!:16262:0:99999:7:::
+</code></pre>
+
+<p>格式说明(<code>:</code>分隔各个列)：</p>
+
+<ol>
+  <li><code>用户名</code></li>
+  <li><code>密码</code>：是加密后的结果，但仍有可能被破解；</li>
+  <li><code>最近改动密码日期</code>：单位：天，从1970.01.01算起的天数；</li>
+  <li><code>密码不可被改动的天数</code>：多少天内不能修改；如果为0，表示随时可以更改；</li>
+  <li><code>密码需要重新改动的天数</code>：多少天内需要修改再次密码；</li>
+  <li><code>需要变更前的警告天数</code>：在<code>密码需要重新改动的天数</code>到来之前，提前显示警告信息；</li>
+  <li><code>密码过期后帐号宽限期</code>：在<code>密码需要重新改动的天数</code>到来之前，都没有修改密码，那么还有机会，在宽限期内，用户登录，系统会强制用户必须重新设定密码；</li>
+  <li><code>帐号失效日期</code>：单位：天，从1970.01.01算起的天数；过了这一天，帐号当即失效；</li>
+  <li>（保留）</li>
+</ol>
+
+<p>补充说明：</p>
+
+<ol>
+  <li><code>密码</code>列，是加密后的结果，但仍有可能被破解；</li>
+  <li><code>最近改动密码日期</code>列，单位：天，从1970.01.01算起的天数；</li>
+  <li><code>密码不可被改动的天数</code>列，从<code>最近改动密码日期</code>向后推迟的天数，如果为0，表示随时可以更改；</li>
+  <li><code>密码需要重新改动的天数</code>列，强制用户在多少天内必须修改密码；</li>
+  <li><code>chage -l [LOGIN]</code>命令，可用于查询用户密码相关的详细信息；</li>
+</ol>
+
+<p>小提示：</p>
+
+<blockquote>
+  <p>有趣的功能：用户第一次登录后，强制其修改密码后才能使用系统资源.
+具体命令：<code>chage -d 0 [LOGIN]</code></p>
+</blockquote>
+
+<h4 id="etcgroup">/etc/group</h4>
+
+<p>文件片段：</p>
+
+<pre><code>hadoop:x:507:hbase,hdfs,mapred
+nagios:x:508:
+mailnull:x:47:
+smmsp:x:51:
+hdfs:x:481:devp
+hbase:x:480:
+</code></pre>
+
+<p>格式说明：</p>
+
+<pre><code>`组名`:`群组密码`:`GID`:`组内成员`
+</code></pre>
+
+<p>补充说明：</p>
+
+<ol>
+  <li>在上面文件片段中，如果想将用户nagios，添加到hdfs组中，则，只需在hdfs的<code>组内成员</code>列中添加<code>,nagios</code>即可；</li>
+  <li><code>id</code>命令，可查询用户组的详细信息；（类似<code>groups</code>命令）</li>
+</ol>
+
+<p>疑问：</p>
+
+<blockquote>
+  <p>有的账户，在<code>/etc/passwd</code>中，看出其<code>GID</code>项为507，而在<code>/etc/group</code>中<code>GID</code>=507的组内成员中，并没有看到这些账户？</p>
+</blockquote>
+
+<p>这个涉及到<code>有效组（effective group）</code>和<code>初始组（initial group）</code>的概念，请往下继续看。</p>
+
+<p><strong>有效组（effective group） vs. 初始组（initial group）</strong></p>
+
+<ol>
+  <li>文件<code>/etc/passwd</code>中，每个用户对应有且只有一个<code>GID</code>，这是<code>初始组</code>，即用户一登入系统，立即拥有这个群组的权限；</li>
+  <li><code>初始组</code>，不需要在<code>/etc/group</code>文件的<code>组内成员</code>中写入该用户（也可以写入）；</li>
+  <li>若用户还属于<code>非初始组</code>，则，在<code>/etc/group</code>文件的<code>组内成员</code>部分进行标识；</li>
+  <li>用户新建一个文件，这个文件属于<code>有效组</code>；</li>
+  <li><code>groups</code>命令，查询出的组中，第一个组为<code>有效组</code>；</li>
+  <li>用户登录之后，<code>newgrp [GROUP]</code>命令，可以切换有效组；</li>
+</ol>
+
+<p>额外，需要说明一下<code>newgrp [GROUP]</code>，其实质上是有启动了一个shell，来实现切换<code>有效组</code>的，具体如下：</p>
+
+<p>如何将用户添加到组中呢？两种方式：</p>
+
+<ol>
+  <li>root用户，使用命令：<code>usermod</code>；</li>
+  <li>组管理员，使用命令：<code>gpasswd</code>；（下文会介绍）</li>
+</ol>
+
+<p>有个问题，记录一下：</p>
+
+<blockquote>
+  <p>疑问：命令<code>newgrp</code>会重新启动一个shell，shell是kernel之外的一层壳，shell与进程、线程之间什么关系？shell是如何调用内核？</p>
+</blockquote>
+
+<p>（之前APUE课程上，有个课下作业：写一个自己的shell，类似bash）</p>
+
+<h4 id="etcgshadow">/etc/gshadow</h4>
+
+<p>文件片段：</p>
+
+<pre><code>hadoop:!::hbase,hdfs,mapred
+nagios:!::
+mailnull:!::
+smmsp:!::
+hdfs:!::
+</code></pre>
+
+<p>格式说明：</p>
+
+<pre><code>`组名`:`组密码`:`组管理员帐号`:`组内成员`
+</code></pre>
+
+<p>补充说明：</p>
+
+<ol>
+  <li><code>组密码</code>为<code>!</code>，表示无合法密码，无组管理员；</li>
+  <li><code>组内成员</code>，与<code>/etc/group</code>文件中内容相同；</li>
+</ol>
+
+<p>具体添加组内成员、设置组的管理员，使用命令：<code>gpasswd</code>。</p>
+
+<h4 id="section-4">特别提示</h4>
+
+<p>使用<code>useradd</code>、<code>passwd</code>等命令添加用户，并为用户设置用户组之后，如果想修改用户的信息，两条途径：</p>
+
+<ol>
+  <li>直接修改<code>/etc/passwd</code>和<code>/etc/shadow</code>文件中相应字段；</li>
+  <li>使用<code>usermod</code>命令进行修改；<strong>[推荐]</strong></li>
+</ol>
+
+<h2 id="section-5">深入原理</h2>
+
+<h3 id="section-6">为什么存在用户和用户组</h3>
+
+<p>主机放在这，谁都想用，如果所有人（UserA\UserB\UserC）都使用同一个帐号登录，则，大家都没有隐私可言，而且UserA的文件可能会被UserB给删除；这就要求创建多个帐号（用户），UserA\UserB\UserC每人使用一个不同的帐号来登陆，这样大家的文件就相互隔离了；问题又来了，UserA想与UserB共享文件FileA，但是不想与UserC共享这一文件怎么办？这就产生了<code>用户组</code>这一概念，只需要UserA\UserB同属某个用户组GroupA，然后设置组GroupA内的人都有权操作FileA就可以了。</p>
+
+<h3 id="section-7">具体实现原理</h3>
+
+<p>用户登录时，输入<code>用户名</code>和<code>密码</code>，实际上，Linux主机是按照 <code>UID</code>（User ID） 来识别用户的，<code>用户名</code>是为便于人们记忆才存在的。
+同理，Linux主机只识别<code>GID</code>（Group ID）来标识<code>用户组</code>。具体，使用<code>ls -l</code>命令查询文件详情时，系统会按照<code>GID</code>和<code>UID</code>分别去文件<code>/etc/group</code>和<code>/etc/passwd</code>中查询相应的<code>用户组</code>和<code>用户</code>的名字并显示出来。</p>
+
+<p>上面一段话，总结：系统上文件属性、权限等存储的都是<code>UID</code>和<code>GID</code>，只有在登录、显示时，才会用到<code>用户名</code>和<code>用户组名</code>。</p>
+
+<h2 id="section-8">参考来源</h2>
+
+<ul>
+  <li>《鸟哥私房菜基础篇（第三版）》 第6章 Linux的档案权限与目录配置</li>
+  <li>《鸟哥私房菜基础篇（第三版）》 第14章 Linux帐号管理与ACL权限设定</li>
+</ul>
+
+
+
+        <div id="disqus_container">
+            <div style="margin-bottom:20px" class="right">
+				<wb:share-button appkey="2306590132" addition="simple" type="button" ralateUid="2356527183"></wb:share-button>
+            </div>
+            <!--<a href="#" class="comment" onclick="return false;">点击查看评论</a>-->
+            <div id="disqus_thread"></div>
+        </div>
+    </div>
+
+	
+    <div class="sidenav">
+		<iframe width="100%" height="75" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=0&isFans=0&uid=2356527183&verifier=1ccfb61e&colors=d6f3f7,ffffff,666666,0082cb,ecfbfd&dpc=1"></iframe>
+    </div>
+
+</div>
+
+<script src="/js/post.js" type="text/javascript"></script>
+
+
+	<div id="gotoTop">Top</div>
+
+
+    <!--*********************************************************-->
+    <!--****** 宝贝儿，看见这个时候，删掉下面的统计代码哦~ ******-->
+    <!--*********************************************************-->
+	<script>
+	  (function(i,s,o,g,r,a,m){
+		  i['GoogleAnalyticsObject']=r;i[r]=i[r] || function(){
+			(i[r].q=i[r].q||[]).push(arguments)}, i[r].l=1*new Date();
+			a=s.createElement(o), m=s.getElementsByTagName(o)[0];
+			a.async=1;
+			a.src=g;
+			m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-48535193-1', 'ningg.github.io');
+	  ga('send', 'pageview');
+	</script>
+    
+	
+    <script type="text/javascript">
+		function gotoTop(min_height){
+			$("#gotoTop").click(
+				function(){$('html,body').animate({scrollTop:0},700);
+			}).hover(
+				function(){$(this).addClass("hover");},
+				function(){$(this).removeClass("hover");
+			});
+			min_height ? min_height = min_height : min_height = 600;
+			$(window).scroll(function(){
+				
+				var s = $(window).scrollTop();
+				
+				if( s > min_height){
+					$("#gotoTop").fadeIn(100);
+				}else{
+					$("#gotoTop").fadeOut(200);
+				};
+			});
+		};
+		gotoTop();
+
+        $(function(){
+            $('.home-follow').click(function(e){
+                e.preventDefault();
+
+                if($('.home-contact').is(':visible')){
+                    $('.home-contact').slideUp(100);
+                }else{
+                    $('.home-contact').slideDown(100);
+                }
+            });
+        })
+
+    </script>
+</body>
+</html>

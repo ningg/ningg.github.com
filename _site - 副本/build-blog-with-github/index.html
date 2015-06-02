@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html xmlns:wb="http://open.weibo.com/wb">
+<head>
+    <!--   Author: NingG   -->
+    <meta charset="utf-8" />
+	<meta property="wb:webmaster" content="7ea7f3d5f3edad6a" />
+    <title>GitHub上搭建个人网站 | ningg.top</title>
+    <meta name="author" content="NingG" />
+    <meta name="renderer" content="webkit">
+    <meta name="description" content=" GitHub是代码管理、分享平台，利用其GitHub Pages功能可搭建个人网站  " />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+    <link rel="stylesheet" href="/css/default.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="" />
+	
+    <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+	<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+	
+    <div class="home-menu">
+        <div class="home-icon-con">
+            <a class="home-menu-icon" href="/">NingG</a>
+            <a class="home-follow" href="#" title="Contact Me">+</a>
+        </div>
+        <div class="home-contact">
+            <a href="http://weibo.com/ggningg/" target="_blank" style="margin-left:-5px;"><img src="http://www.weibo.com/favicon.ico" alt="" width="25"/></a>
+            <a href="http://www.douban.com/people/ggningg/" target="_blank" style="text-align:center;"><img src="http://www.douban.com/favicon.ico" alt="" width="22"/></a>
+			<a href="http://github.com/ningg" alt="" target="_blank" style="text-align:right;"><img src="/images/icon-cube-smaller.png" width="22"/></a>
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="/js/prettify/prettify.css" />
+<style type="text/css">
+    body { background:#e8e8e8; }
+    @media screen and (max-width: 750px){
+        body { background:#fff; }
+    }
+    @media screen and (max-width: 1020px){
+        body { background:#fff; }
+    }
+</style>
+
+<div id="content">
+    <div class="entry">
+        <h1 class="entry-title"><a href="/build-blog-with-github" title="GitHub上搭建个人网站">GitHub上搭建个人网站</a></h1>
+        <p class="entry-date">2014-05-02</p>
+        <h2 id="section">0.背景</h2>
+
+<p>准备重新捡起博客，记录自己的生活，特别是技术生活<em>（过于私密的东西，也不敢往博客上放不是）。</em>个人博客有两个途径：a.使用已有的博客网站; b.搭建自己的私人网站。调研了一下国内博客网站，（<a href="http://www.csdn.net/" title="CSDN">CSDN</a>、<a href="http://www.iteye.com/" title="javaEye(现在更名为ITeye)">javaEye</a>、<a href="http://www.oschina.net/" title="OSCHINA">OSCHINA</a>等）普遍文字格式、代码编排样式不是很喜欢<em>（太挑剔了？对，我就是一个挑剔的人），</em>这让自己转向私人博客。可以预想到，自己搭建要稍微复杂一点，话又说回来了，作为<code>software engineer</code>折腾网站也算看家本领了<em>（我会告诉你我的目标是<code>scientist</code>么）。</em></p>
+
+<p>既然要搭自己的私人博客，那选定什么框架/方案呢？之前使用<a href="https://wordpress.org/" title="WordPress">WordPress</a>搭过，但需要购买域名和空间；现在流行在<a href="https://github.com/about" title="GitHub">GitHub</a>上搭，并且不需要考虑域名和空间的问题，那就他了，上<a href="https://github.com/about" title="GitHub">GitHub</a>，走起<em>（其实，国内也有一个类似的地方<a href="https://gitcafe.com/" title="GitCafe">GitCafe</a>，不过，出于装B需要，最终选定了<a href="https://github.com/about" title="GitHub">GitHub</a>）。</em></p>
+
+<h2 id="section-1">1.做什么？</h2>
+
+<p>目标：私人博客、自己搭建。</p>
+
+<p>方式：<a href="https://pages.github.com/">GitHub Pages</a></p>
+
+<p><img src="/images/build-blog-with-github/blog-or-not.jpg" alt="blog or not" /></p>
+
+<h2 id="section-2">2.怎么做？</h2>
+
+<p>初步分析，在<a href="https://github.com/about" title="GitHub">GitHub</a>上搭建博客，实质是：将自己的博客内容上传到GitHub上<em>（因为GitHub提供了空间）；</em>如果需要修改博客内容，则需要从GitHub上将download/pull下来；接下来就是让外面可以访问GitHub上的博客。总结一下，对应3个必要步骤：</p>
+
+<ol>
+  <li>GitHub上创建工程、并且能够将GitHub上的文件/代码，下载到本地；</li>
+  <li>将本地的文件/代码，上传到GitHub上；</li>
+  <li>配置GitHub，使其对外提供私人博客的访问页面；</li>
+</ol>
+
+<p>好了，上面是凭空想出来的<em>（任何地方搭建博客，都是上面的逻辑步骤，而不仅限于GitHub）；</em>那实际如何操作呢？具体分为4个阶段：</p>
+
+<ol>
+  <li>熟悉<a href="https://github.com/about" title="GitHub">GitHub</a>的基本操作（创建工程、上传代码、下载代码）；</li>
+  <li>利用<a href="https://pages.github.com/">GitHub Pages</a>功能，搭建简易网站；</li>
+  <li>利用<a href="http://jekyllrb.com/">jekyll</a>，增强网站功能（除了jekyll，还有其他的方式）；</li>
+  <li>在<a href="http://jekyllrb.com/">jekyll</a>框架下，依照个人偏好，进行定制；</li>
+</ol>
+
+<h2 id="section-3">3.实际操作</h2>
+
+<h3 id="github">3.1GitHub的基本操作</h3>
+
+<ul>
+  <li><a href="https://help.github.com/articles/set-up-git">安装使用Git（GitHub上传、下载文件的工具）</a></li>
+  <li><a href="https://help.github.com/articles/create-a-repo">GitHub上创建项目（其中包含了，GitHub上传文件的Git命令）</a></li>
+  <li><a href="https://help.github.com/articles/fork-a-repo">GitHub上Fork项目（其中包含了，GitHub下载文件的Git命令）</a></li>
+</ul>
+
+<p>补充：<a href="https://help.github.com/articles/adding-an-existing-project-to-github-using-the-command-line">上传文件至GitHub</a>；另外，向GitHub提交代码时，按照上面的操作方式，需要每次都输入GitHub的用户名和密码，可以采用<code>SSH Keys</code>的方式来解决此问题。</p>
+
+<p><img src="/images/build-blog-with-github/git-github.png" alt="git-github" /></p>
+
+<h3 id="section-4">3.2如何搭建博客？</h3>
+
+<p>GitHub上对于个人博客的支持，实质是利用GitHub Pages功能来实现的，具体操作：<a href="https://pages.github.com/">GitHub Pages</a>,认真读一遍，5mins，一步一步操作下来，简易博客就搭建成功了（一个简单的欢迎页面<code>index.html</code>）。</p>
+
+<p>补充：扩展阅读<a href="https://help.github.com/categories/20/articles">GitHub Pages FAQ</a>.</p>
+
+<p><img src="/images/build-blog-with-github/github-pages.jpg" alt="github-pages" /></p>
+
+<h3 id="jekyll">3.3Jekyll增强博客网站功能</h3>
+
+<p>详细阅读”<strong>3.2如何搭建博客</strong>“中提到的<a href="https://pages.github.com/">GitHub Pages</a>的童鞋，在<a href="https://pages.github.com/">GitHub Pages</a>页面最下端一定注意到了<a href="http://jekyllrb.com/docs/quickstart/">Blogging with Jekyll</a>，对，就是他，读一遍，操作一下，搞定。</p>
+
+<p>补充：jekyll用起来倒是用起来了，怎么发表一遍博文呢？这个…额…等到学会 “<strong>3.4 基于jekyll框架，定制博客</strong>” 再去写博客吧，现在建议把上面的操作反复看两遍，捋一捋逻辑流程。</p>
+
+<h3 id="jekyll-1">3.4基于jekyll框架，定制博客</h3>
+
+<p>先看一下两个使用jekyll框架的博客：<a href="http://beiyuu.com/">BeiYuu</a> &amp; <a href="http://havee.me/">Havee</a>，他们对应的模版在GitHub上都可以找到：<a href="https://github.com/beiyuu/beiyuu.github.com">BeiYuu.com Template of GitHub</a> &amp; <a href="https://github.com/Ihavee/ihavee.github.io">Havee.me Template of GitHub</a>。 </p>
+
+<p>先膜拜一下上面两个博客模板，<em>光彩夺目，亮瞎一双狗眼，</em>好了，我能不能也搭建一个类似的博客？途径有一个：深入学习一下<a href="http://jekyllrb.com/">Jekyll的官方文档</a>，补充：<a href="http://jekyllcn.com/">中文版本</a>。<em>（基于jekyll，如何定制博客，我将写一篇详细的介绍，敬请期待）</em></p>
+
+<h3 id="section-5">3.5绑定域名</h3>
+
+<p>几点：</p>
+
+<ul>
+  <li>购买域名</li>
+  <li>GitHub上绑定域名：
+    <ul>
+      <li>创建CNAME</li>
+      <li>从<a href="https://help.github.com/">GitHub Help</a> 上搜索 <code>custom domain</code></li>
+    </ul>
+  </li>
+</ul>
+
+<p><strong>TODO</strong>：整理GitHub上域名配置的基本原理：</p>
+
+<ul>
+  <li>整理A、C域名的区别</li>
+  <li>…</li>
+</ul>
+
+<h2 id="faq">4.FAQ</h2>
+
+<h3 id="google-analytics">4.1使用google analytics来统计网站访问情况</h3>
+
+<ol>
+  <li>注册<a href="http://www.google.com/analytics/">Google Analytics</a>账户；</li>
+  <li>在账户下，添加要监控的网站信息，<a href="http://www.google.com/analytics/">Google Analytics</a>会生成跟踪信息的JS片段；</li>
+  <li>将上述JS片段插入到自己想要统计的页面上；</li>
+</ol>
+
+<p>具体设置细节：请查看<a href="http://www.google.com/intl/zh-CN_ALL/analytics/learn/index.html">官方文档</a>。</p>
+
+<h4 id="todogoogle-analytics">TODO：使用百度统计，替代google analytics</h4>
+
+<p>TODO：单独写一篇文章，关注几点：如何配置、基本原理。</p>
+
+<p>参考资料：</p>
+
+<ul>
+  <li>http://www.williamlong.info/archives/2214.html</li>
+  <li>http://lusongsong.com/reed/548.html</li>
+</ul>
+
+<h3 id="discus">4.2如何DISCUS作为评论插件？</h3>
+
+<ol>
+  <li>注册<a href="http://disqus.com/">DISQUS</a>账户；</li>
+  <li>登录后，点击<code>Add Disqus to your site</code>按钮，操作下去，最终将获得相应的JS片段；</li>
+  <li>将上述JS片段插入到自己想要包含评论的页面即可；</li>
+</ol>
+
+<h3 id="latex">4.3配置网站，支持LaTeX语法</h3>
+
+<p>配置博客，支持<a href="http://www.latex-project.org/">LaTeX</a>公式，此次设置<a href="http://kramdown.gettalong.org">kramdown</a>来解析<a href="http://daringfireball.net/projects/markdown/syntax">Markdown</a>文件。</p>
+
+<pre><code>/*
+If you have sufficient control over the publishing process
+(e.g. you are running Jekyll yourself), an easy solution is
+to switch the markdown parser to one that supports TeX.
+*/
+
+//For example, using kramdown:
+gem install kramdown
+
+//Change the markdown line in _config.yml to
+markdown: kramdown
+
+//and add something like
+&lt;script type="text/javascript" 
+src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"&gt;
+&lt;/script&gt;
+//to _layouts/default.html. 
+
+//Now you can simply mark any mathematics in your posts with $$
+</code></pre>
+
+<p>原文链接：<a href="http://stackoverflow.com/questions/10987992/using-mathjax-with-jekyll">Using MathJax with Jekyll</a></p>
+
+<h3 id="section-6">4.4遇到的问题&amp;解决办法？</h3>
+
+<ol>
+  <li><a href="http://blog.csdn.net/dengjianqiang2011/article/details/9260435">执行Git命令时，出错提示：（fatal: remote origin already exists.）</a></li>
+  <li><a href="https://help.github.com/articles/migrating-your-pages-site-from-maruku">GitHub上markdown的解析引擎不同，会造成最终页面效果的差异</a></li>
+  <li>jekyll serve启动出错提示：（Liquid Exception: invalid byte sequence in GBK）<strong>见下文</strong></li>
+</ol>
+
+<p>修改<code>\Ruby200\lib\ruby\gems\2.0.0\gems\jekyll-1.0.3\lib\jekyll</code>目录下的<code>convertible.rb</code>文件，将其中：</p>
+
+<pre><code>self.content = File.read(File.join(base, name))
+</code></pre>
+
+<p>修改为：</p>
+
+<pre><code>self.content = File.read(File.join(base, name),:encoding=&gt;"utf-8")
+</code></pre>
+
+<p>如果上述修改之后，仍然提示出错，则：<code>...\lib\jekyll\tags</code>目录下<code>include.rb</code>文件，类似对于<code>convertible.rb</code>文件的操作；</p>
+
+<p><img src="/images/build-blog-with-github/github-social-coding.png" alt="github-social-coding" /></p>
+
+
+
+        <div id="disqus_container">
+            <div style="margin-bottom:20px" class="right">
+				<wb:share-button appkey="2306590132" addition="simple" type="button" ralateUid="2356527183"></wb:share-button>
+            </div>
+            <!--<a href="#" class="comment" onclick="return false;">点击查看评论</a>-->
+            <div id="disqus_thread"></div>
+        </div>
+    </div>
+
+	
+    <div class="sidenav">
+		<iframe width="100%" height="75" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=0&isFans=0&uid=2356527183&verifier=1ccfb61e&colors=d6f3f7,ffffff,666666,0082cb,ecfbfd&dpc=1"></iframe>
+    </div>
+
+</div>
+
+<script src="/js/post.js" type="text/javascript"></script>
+
+
+	<div id="gotoTop">Top</div>
+
+
+    <!--*********************************************************-->
+    <!--****** 宝贝儿，看见这个时候，删掉下面的统计代码哦~ ******-->
+    <!--*********************************************************-->
+	<script>
+	  (function(i,s,o,g,r,a,m){
+		  i['GoogleAnalyticsObject']=r;i[r]=i[r] || function(){
+			(i[r].q=i[r].q||[]).push(arguments)}, i[r].l=1*new Date();
+			a=s.createElement(o), m=s.getElementsByTagName(o)[0];
+			a.async=1;
+			a.src=g;
+			m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-48535193-1', 'ningg.github.io');
+	  ga('send', 'pageview');
+	</script>
+    
+	
+    <script type="text/javascript">
+		function gotoTop(min_height){
+			$("#gotoTop").click(
+				function(){$('html,body').animate({scrollTop:0},700);
+			}).hover(
+				function(){$(this).addClass("hover");},
+				function(){$(this).removeClass("hover");
+			});
+			min_height ? min_height = min_height : min_height = 600;
+			$(window).scroll(function(){
+				
+				var s = $(window).scrollTop();
+				
+				if( s > min_height){
+					$("#gotoTop").fadeIn(100);
+				}else{
+					$("#gotoTop").fadeOut(200);
+				};
+			});
+		};
+		gotoTop();
+
+        $(function(){
+            $('.home-follow').click(function(e){
+                e.preventDefault();
+
+                if($('.home-contact').is(':visible')){
+                    $('.home-contact').slideUp(100);
+                }else{
+                    $('.home-contact').slideDown(100);
+                }
+            });
+        })
+
+    </script>
+</body>
+</html>

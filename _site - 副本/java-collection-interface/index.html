@@ -1,0 +1,435 @@
+<!DOCTYPE html>
+<html xmlns:wb="http://open.weibo.com/wb">
+<head>
+    <!--   Author: NingG   -->
+    <meta charset="utf-8" />
+	<meta property="wb:webmaster" content="7ea7f3d5f3edad6a" />
+    <title>Java容器 - List、Set、Map | ningg.top</title>
+    <meta name="author" content="NingG" />
+    <meta name="renderer" content="webkit">
+    <meta name="description" content=" Java中容器类，2个接口，Collection和Map  " />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+
+    <link rel="stylesheet" href="/css/default.css" type="text/css" />
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon" />
+    <link rel="alternate" type="application/atom+xml" title="Recent Entries" href="" />
+	
+    <script src="/js/jquery-1.7.1.min.js" type="text/javascript"></script>
+	<script src="http://tjs.sjs.sinajs.cn/open/api/js/wb.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+</head>
+<body>
+	
+    <div class="home-menu">
+        <div class="home-icon-con">
+            <a class="home-menu-icon" href="/">NingG</a>
+            <a class="home-follow" href="#" title="Contact Me">+</a>
+        </div>
+        <div class="home-contact">
+            <a href="http://weibo.com/ggningg/" target="_blank" style="margin-left:-5px;"><img src="http://www.weibo.com/favicon.ico" alt="" width="25"/></a>
+            <a href="http://www.douban.com/people/ggningg/" target="_blank" style="text-align:center;"><img src="http://www.douban.com/favicon.ico" alt="" width="22"/></a>
+			<a href="http://github.com/ningg" alt="" target="_blank" style="text-align:right;"><img src="/images/icon-cube-smaller.png" width="22"/></a>
+        </div>
+    </div>
+
+    <link rel="stylesheet" href="/js/prettify/prettify.css" />
+<style type="text/css">
+    body { background:#e8e8e8; }
+    @media screen and (max-width: 750px){
+        body { background:#fff; }
+    }
+    @media screen and (max-width: 1020px){
+        body { background:#fff; }
+    }
+</style>
+
+<div id="content">
+    <div class="entry">
+        <h1 class="entry-title"><a href="/java-collection-interface" title="Java容器 - List、Set、Map">Java容器 - List、Set、Map</a></h1>
+        <p class="entry-date">2012-05-17</p>
+        <p>容器是Java语言中比较重要的一部分，Java中容器类，由两个接口派生而来：Collection和Map。</p>
+
+<h2 id="collection-vs-collections">Collection vs Collections</h2>
+
+<p>首先，Collection 和 Collections 是两个不同的概念。</p>
+
+<p>*Collection是容器层次结构中根接口。
+*Collections是一个提供一些处理容器类静态方法的类。</p>
+
+<p>JDK不提供Collection接口的具体实现，而是提供了更加具体的子接口（如Set和List）实现。那Collection接口存在有何作用呢？原因在于：所有容器的实现类（如ArrayList实现了List接口，HashSet实现了Set接口）提供了<strong>两个‘标准’的构造函数</strong>：</p>
+
+<ul>
+  <li>无参的构造方法（void）</li>
+  <li>带有Collection类型单参数构造方法，用于创建一个具有其参数相同元素新的Collection及其实现类等。<em>（允许容器之间相互的复制）</em></li>
+</ul>
+
+<h2 id="collection">Collection的类层次结构</h2>
+
+<p>下面的图是关于Collection的类的层次结构。</p>
+
+<p><img src="/images/java-collection-interface/java-collection-hierarchy_thumb.jpg" alt="" /></p>
+
+<h3 id="set">Set：</h3>
+
+<p>特点：</p>
+
+<ul>
+  <li>不包括重复元素（包括可变对象）<em>（不包含满足 a.equals(b) 的元素对a和b）</em></li>
+  <li>无序</li>
+  <li>最多有一个null</li>
+  <li>常用Set：HashSet、TreeSet</li>
+</ul>
+
+<h3 id="list">List：</h3>
+
+<p>几点：</p>
+
+<ul>
+  <li>元素可以重复 <em>（允许满足 e1.equals(e2) 的元素对 e1 和 e2）</em></li>
+  <li>有序</li>
+  <li>允许多个 null 元素</li>
+  <li>常用List：ArrayList、LinkedList、Vector、Stack等</li>
+</ul>
+
+<h3 id="queue">Queue：</h3>
+
+<p>几点：</p>
+
+<ul>
+  <li>一种队列则是<strong>双端队列</strong>，支持在头、尾两端插入和移除元素；常用Queue：ArrayDeque、LinkedBlockingDeque、LinkedList；</li>
+  <li>一种是<strong>阻塞式队列</strong>，队列满了以后再插入元素则会抛出异常，主要包括ArrayBlockQueue、PriorityBlockingQueue、LinkedBlockingQueue。虽然接口并未定义阻塞方法，但是实现类扩展了此接口。</li>
+</ul>
+
+<h2 id="map">Map的类的层次结构</h2>
+
+<p>下面的图是Map的层次结构图</p>
+
+<p><img src="/images/java-collection-interface/MapClassHierarchy-600x354_thumb.jpg" alt="" /></p>
+
+<p>Map，几点：</p>
+
+<ul>
+  <li>键值对（Key - value）的集合</li>
+  <li>key值不重复</li>
+  <li>常用Map：HashMap、TreeMap、HashTable、Properties、EnumMap。</li>
+</ul>
+
+<h2 id="collection-1">不同Collection的对比</h2>
+
+<p>todo：图形化显示下面的实现机制</p>
+
+<p>ArrayList
+LinkedList
+HashMap
+HashTable</p>
+
+<h3 id="arraylist">ArrayList的实现机制</h3>
+
+<p>查看源码描述，几点：</p>
+
+<ul>
+  <li>几个方法的实现都是<code>O(1)</code>：<code>size</code>，<code>isEmpty</code>，<code>get</code>，<code>set</code>；</li>
+  <li>底层基于<strong>动态数组</strong>实现，随着ArrayList中元素增加，动态数组的容量也在会扩充；
+    <ul>
+      <li>默认，按增长<code>50%</code>扩充底层数组空间；</li>
+      <li>每次动态扩充空间，都会分配新的内存，并进行数据复制；</li>
+    </ul>
+  </li>
+  <li>ArrayList不是线程安全的，<code>Vector</code>是基于ArrayList上的线程同步的实现，添加了<code>synchronized</code>修饰；
+    <ul>
+      <li>创建List时，通过<code>Collections.synchronizedList</code>使其变为线程安全的；</li>
+      <li><code>List list = Collections.synchronizedList(new ArrayList(...));</code></li>
+    </ul>
+  </li>
+  <li><code>iterator</code>调用时，不能对ArrayList中内容进行删除和新增，否则fail-fast，抛出异常；</li>
+</ul>
+
+<h3 id="vector">Vector的实现机制</h3>
+
+<p>查看源码，<code>Vector</code>与<code>ArrayList</code>基本类似，几点：</p>
+
+<ul>
+  <li>底层是<strong>动态数组</strong>：
+    <ul>
+      <li>数组扩容时，按增长<code>100%</code>扩充；</li>
+    </ul>
+  </li>
+  <li>线程安全的，使用synchronized修饰；</li>
+</ul>
+
+<h3 id="linkedlist">LinkedList的实现机制</h3>
+
+<p>查看源码，几点：</p>
+
+<ul>
+  <li>LinkedList，底层是双向链表；<em>（Entry包含了next和previous）</em></li>
+  <li>不是线程安全的；</li>
+  <li>add和remove元素，操作效率高，因为是链表；但get、set操作，由于需要操作指针，效率相对较低。</li>
+</ul>
+
+<h3 id="hashmap">HashMap的实现机制</h3>
+
+<p>几点：</p>
+
+<ul>
+  <li>底层是<strong>数组链表</strong>；</li>
+  <li>HashMap，非线程安全的；可通过<code>Map m = Collections.synchronizedMap(new HashMap(...));</code>将其设置为线程安全的；</li>
+  <li>内部元素是无序的；</li>
+  <li>获取key对应Value的过程：通过对<code>key.hashcode</code>，再次进行Hash运算，确定key对应数组中链表的位置；</li>
+  <li>允许key为null，对应数组链表的起始位置；对key为null的情况，不会进行第二次Hash运算；</li>
+  <li>HashMap构造函数包含两个参数：数组初始容量、加载因子
+    <ul>
+      <li>数组初始容量，是指，数组长度；</li>
+      <li>加载因子，用于设定一个阈值<code>初始容量 x 加载因子</code>，当HashMap中元素个数超过这个阈值时，数组容量扩充<code>2 x
+ Old</code>；</li>
+      <li>默认数组容量<code>16</code>，加载因子<code>0.75</code>；</li>
+      <li>数组容量，始终为 <strong>2的n次幂</strong>，降低Hash冲突的概率，是数据分布更加均匀；</li>
+      <li>当<code>length=2^n</code>时，<code>hashcode &amp; (length-1) == hashcode % length</code>，增加操作效率；</li>
+      <li>加载因子：是在时间和空间上的一个权衡；</li>
+    </ul>
+  </li>
+</ul>
+
+<p>Tips：</p>
+
+<blockquote>
+  <p>HashMap中判断key与otherKey是否相等，两个要求：key.hashCode()相等，同时，key.equals(otherKey)；</p>
+</blockquote>
+
+<p>示意图：</p>
+
+<p><img src="/images/java-collection-interface/hashmap-table.jpg" alt="" /></p>
+
+<h3 id="treemap">TreeMap的实现机制</h3>
+
+<p>几点：</p>
+
+<ul>
+  <li>基于红黑树<em>（平衡二叉树）</em></li>
+  <li>内部元素有序，比较key之间的大小关系</li>
+</ul>
+
+<p>Tips：</p>
+
+<blockquote>
+  <p>平衡二叉树：如果是排序好的搜索二叉树，则，树的期望高度为<code>log2(n)</code>，此时，搜索效率为<code>O(log(n))</code>，而极端情况下，如果搜索效率退化为<code>O(n)</code>，为避免这一现象，要求树的左右子树高度差值&lt; 1，满足此条件的树，即为：平衡二叉树。</p>
+</blockquote>
+
+<h3 id="hashtable">HashTable的实现机制</h3>
+
+<p>几点：</p>
+
+<ul>
+  <li>基于数组链表；</li>
+  <li>数组初始长度、负载因子；</li>
+  <li>线程安全</li>
+  <li>不允许key和value为null</li>
+  <li>只进行一次hash运算，即，key.hashCode();</li>
+  <li>默认容量，按照<code>2 x Old + 1</code>的方式扩充；</li>
+</ul>
+
+<h3 id="hashset">HashSet实现机制</h3>
+
+<p>通过查看源码，几点：</p>
+
+<ul>
+  <li>内部使用HashMap存储；</li>
+  <li>初始数组容量、负载因子，都是设置HashMap的；</li>
+  <li>判断两个元素是否相同，使用<code>hashCode()</code>和<code>equals()</code>两个方法；</li>
+  <li>HashSet本质：在HashMap外进行包装，丢弃HashMap中的value，只保留key；</li>
+</ul>
+
+<h3 id="treeset">TreeSet</h3>
+
+<p>几点：</p>
+
+<ul>
+  <li>通常基于TreeMap实现；<em>（也不一定）</em></li>
+  <li>内部元素是有序的；</li>
+</ul>
+
+<h2 id="section">对比</h2>
+
+<h3 id="vector-vs-arraylist">Vector vs. ArrayList</h3>
+
+<p>几点：</p>
+
+<ul>
+  <li>相同点：都是基于动态数组；</li>
+  <li>不同点：
+    <ul>
+      <li>Vector是线程安全的，ArrayList不是；</li>
+      <li>Vector动态数组扩充 100%，ArrayList动态数组扩充 50%；</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="arraylistlinkedlist">Arraylist和Linkedlist</h3>
+
+<p>几点：</p>
+
+<ol>
+  <li>ArrayList 基于<strong>动态数组</strong>的数据结构，LinkedList基于<strong>双向链表</strong>的数据结构。</li>
+  <li>对于随机访问get和set，ArrayList觉得优于LinkedList，因为LinkedList要移动指针。</li>
+  <li>对于新增和删除操作add和remove，LinkedList比较占优势，因为ArrayList要移动数据<em>（remove时，要将后面数据前移；中间add数据时，要将数据后移；末端add时，若动态数组容量不足，要移动数据）</em>。</li>
+  <li>两者都不是线程安全的；</li>
+</ol>
+
+<h3 id="hashmap-vs-treemap">HashMap vs. TreeMap</h3>
+
+<p>几点：</p>
+
+<ul>
+  <li>元素是否有序：
+    <ul>
+      <li>HashMap中元素是无序的，通过key的hashCode进行查找；</li>
+      <li>TreeMap中元素保持固定顺序</li>
+    </ul>
+  </li>
+  <li>底层数据结构：
+    <ul>
+      <li>HashMap，基于<strong>数组链表</strong></li>
+      <li>TreeMap，基于<strong>红黑树</strong></li>
+    </ul>
+  </li>
+  <li>非线程安全：HashMap与TreeMap都是非线程安全的</li>
+  <li>是否可以调优：
+    <ul>
+      <li>HashMap，通过数组容量和负载因子，调优</li>
+      <li>TreeMap，红黑树，始终是平衡的，无法调优</li>
+    </ul>
+  </li>
+  <li>适用场景：
+    <ul>
+      <li>HashMap，适合在Map中插入、删除、访问元素，因为使用Hash运算，相对红黑树，操作效率较高；</li>
+      <li>TreeMap，适合按自然顺序和定义的顺序遍历key</li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="hashmap-vs-hashtable">HashMap vs. HashTable</h3>
+
+<p>几点：</p>
+
+<ul>
+  <li>是否线程安全：
+    <ul>
+      <li>HashTable，同步的，线程安全；</li>
+      <li>HashMap，非线程安全；</li>
+    </ul>
+  </li>
+  <li>key是否为null：
+    <ul>
+      <li>HashTable，不允许key和value为null；</li>
+      <li>HashMap，允许key和value为null；</li>
+    </ul>
+  </li>
+  <li>进行几次Hash计算：
+    <ul>
+      <li>HashTable中，只计算一次key的HashCode</li>
+      <li>HashMap中，利用key.hashCode()，会再进行一次Hash运算；</li>
+    </ul>
+  </li>
+  <li>数组容量扩充：
+    <ul>
+      <li>HashTable，<code>2 x Old + 1</code></li>
+      <li>HashMap，<code>2 x Old</code></li>
+    </ul>
+  </li>
+</ul>
+
+<h3 id="hashset-vs-treeset">HashSet vs. TreeSet</h3>
+
+<p>本质就是HashMap与TreeMap的差异，几点：</p>
+
+<ul>
+  <li>是否有序</li>
+  <li>底层实现</li>
+</ul>
+
+<h2 id="section-1">参考来源</h2>
+
+<ul>
+  <li><a href="http://www.bysocket.com/?p=162">Java 容器 &amp; 泛型</a></li>
+  <li><a href="http://www.cnblogs.com/xwdreamer/archive/2012/05/14/2499339.html">Hashmap实现原理</a></li>
+</ul>
+
+
+
+        <div id="disqus_container">
+            <div style="margin-bottom:20px" class="right">
+				<wb:share-button appkey="2306590132" addition="simple" type="button" ralateUid="2356527183"></wb:share-button>
+            </div>
+            <!--<a href="#" class="comment" onclick="return false;">点击查看评论</a>-->
+            <div id="disqus_thread"></div>
+        </div>
+    </div>
+
+	
+    <div class="sidenav">
+		<iframe width="100%" height="75" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=0&isFans=0&uid=2356527183&verifier=1ccfb61e&colors=d6f3f7,ffffff,666666,0082cb,ecfbfd&dpc=1"></iframe>
+    </div>
+
+</div>
+
+<script src="/js/post.js" type="text/javascript"></script>
+
+
+	<div id="gotoTop">Top</div>
+
+
+    <!--*********************************************************-->
+    <!--****** 宝贝儿，看见这个时候，删掉下面的统计代码哦~ ******-->
+    <!--*********************************************************-->
+	<script>
+	  (function(i,s,o,g,r,a,m){
+		  i['GoogleAnalyticsObject']=r;i[r]=i[r] || function(){
+			(i[r].q=i[r].q||[]).push(arguments)}, i[r].l=1*new Date();
+			a=s.createElement(o), m=s.getElementsByTagName(o)[0];
+			a.async=1;
+			a.src=g;
+			m.parentNode.insertBefore(a,m)
+	  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');
+
+	  ga('create', 'UA-48535193-1', 'ningg.github.io');
+	  ga('send', 'pageview');
+	</script>
+    
+	
+    <script type="text/javascript">
+		function gotoTop(min_height){
+			$("#gotoTop").click(
+				function(){$('html,body').animate({scrollTop:0},700);
+			}).hover(
+				function(){$(this).addClass("hover");},
+				function(){$(this).removeClass("hover");
+			});
+			min_height ? min_height = min_height : min_height = 600;
+			$(window).scroll(function(){
+				
+				var s = $(window).scrollTop();
+				
+				if( s > min_height){
+					$("#gotoTop").fadeIn(100);
+				}else{
+					$("#gotoTop").fadeOut(200);
+				};
+			});
+		};
+		gotoTop();
+
+        $(function(){
+            $('.home-follow').click(function(e){
+                e.preventDefault();
+
+                if($('.home-contact').is(':visible')){
+                    $('.home-contact').slideUp(100);
+                }else{
+                    $('.home-contact').slideDown(100);
+                }
+            });
+        })
+
+    </script>
+</body>
+</html>
