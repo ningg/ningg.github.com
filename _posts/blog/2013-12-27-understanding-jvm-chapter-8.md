@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Understanding the JVM——虚拟机字节码执行引擎
+title: 虚拟机字节码执行引擎——Understanding the JVM
 description: 如何执行class字节码文件？
 category: jvm
 ---
@@ -303,11 +303,12 @@ Java虚拟机一共提供了 4 条方法调用字节码指令，分别是：
 * `StaticDispatch[编译期]`：前面说过，重载是由静态类型决定的。那么，编译器在处理重载函数时，使用哪个版本的重载函数就取决于传入参数的静态类型。并且因为静态类型是编译期可知的，所以在编译阶段，javac编译器就根据参数的静态类型决定使用哪个版本，同时把这个方法的符号引用写入到invokevirtual指令的参数中。在本例子中，就是编译器看到main中调用sayHello()的参数静态类型是Human，于是就把sayHello(Human guy)写入到main中2个调用sayHello()的invokevirtual指令中。
 * `DynamicDispatch[运行期]`：对于多态来说，重写使用的是参数的实际类型。因为参数的实际类型是在运行期才能知道的，所以就需要学习一下invokevirtual的多态查找过程（上面那个是编译期写死使用哪个版本）：
 
-* 找到操作数栈顶的第一个元素所指向的对象的实际类型，记作C
-* 如果在类型C中找到与常量中的描述符和简单名称都相符的方法，进行访问权限验证，通过则返回这个方法的直接引用，查找过程结束；否则返回java.lang.IllegalAccessError
-* 否则，按照继承关系从下到上依次对C的各个父类进行第2步的搜索和验证过程
-* 如果还是没有找到合适的方法，就抛出java.lang.AbstractMethodError
+	* 找到操作数栈顶的第一个元素所指向的对象的实际类型，记作C
+	* 如果在类型C中找到与常量中的描述符和简单名称都相符的方法，进行访问权限验证，通过则返回这个方法的直接引用，查找过程结束；否则返回java.lang.IllegalAccessError
+	* 否则，按照继承关系从下到上依次对C的各个父类进行第2步的搜索和验证过程
+	* 如果还是没有找到合适的方法，就抛出java.lang.AbstractMethodError
 
+Tips:
 
 > 由于invokevirtual指令执行的第一步就是在运行时确定接收者的实际类型，所以两次调用中的invokevirtual指令把常量池中的类方法符号引用解析到了不同的直接引用，这个过程就是Java重写的本质。我们把这种在运行时确定方法执行版本的过程成为动态分派。
 

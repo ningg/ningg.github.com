@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Understanding the JVM——内存区域与内存溢出异常
+title: 内存区域与内存溢出异常——Understanding the JVM
 description: JVM运行时，其中占用的内存分为几块？用于存放什么东西？与GC有什么关系吗？如何创建对象实例？对象实例包含哪些信息？如何获取对象实例？
 category: jvm
 ---
@@ -8,7 +8,7 @@ category: jvm
 
 ##开篇随便说
 
-C++编写的程序，编写的程序上，要为每个对象分派内存、回收内存；而Java编写的程序，JVM负责进行内存回收（又称垃圾回收，Garbage Collector，简称GC），不过JVM有可能出现内存泄漏和溢出方面的问题。
+C++编写的程序，编写的程序上，要为每个对象分派内存、回收内存；而Java编写的程序，JVM负责进行内存回收（又称垃圾回收，Garbage Collector，简称GC），不过JVM有可能出现内存泄漏和溢出方面的问题*（对象是可达的，但是对象是无用的）*。
 
 上面提到JVM对其分配的内存进行GC，那就涉及几个问题：
 

@@ -12,8 +12,8 @@ category: Java
 
 首先，Collection 和 Collections 是两个不同的概念。
 
-*Collection是容器层次结构中根接口。
-*Collections是一个提供一些处理容器类静态方法的类。
+* Collection是容器层次结构中根接口。
+* Collections是一个提供一些处理容器类静态方法的类。
 
 JDK不提供Collection接口的具体实现，而是提供了更加具体的子接口（如Set和List）实现。那Collection接口存在有何作用呢？原因在于：所有容器的实现类（如ArrayList实现了List接口，HashSet实现了Set接口）提供了**两个‘标准’的构造函数**：
 
@@ -75,10 +75,10 @@ Map，几点：
 
 todo：图形化显示下面的实现机制
 
-ArrayList
-LinkedList
-HashMap
-HashTable
+* ArrayList
+* LinkedList
+* HashMap
+* HashTable
 
 
 ###ArrayList的实现机制
@@ -94,14 +94,10 @@ HashTable
 	* `List list = Collections.synchronizedList(new ArrayList(...));`
 * `iterator`调用时，不能对ArrayList中内容进行删除和新增，否则fail-fast，抛出异常；
 
-###Vector的实现机制
 
-查看源码，`Vector`与`ArrayList`基本类似，几点：
+Tips：
 
-* 底层是**动态数组**：
-	* 数组扩容时，按增长`100%`扩充；
-* 线程安全的，使用synchronized修饰；
-
+> `Collections.synchronizedList`本质：为原始方法添加同步(`synchronized`)锁代理，相当远在原始对象之外封装了一层。
 
 
 ###LinkedList的实现机制
@@ -111,6 +107,17 @@ HashTable
 * LinkedList，底层是双向链表；*（Entry包含了next和previous）*
 * 不是线程安全的；
 * add和remove元素，操作效率高，因为是链表；但get、set操作，由于需要操作指针，效率相对较低。
+
+
+###Vector的实现机制
+
+查看源码，`Vector`与`ArrayList`基本类似，几点：
+
+* 底层是**动态数组**：
+	* 数组扩容时，按增长`100%`扩充；
+* 线程安全的，使用synchronized修饰；
+
+
 
 
 ###HashMap的实现机制
@@ -141,6 +148,51 @@ Tips：
 
 
 
+###HashTable的实现机制
+
+几点：
+
+* 基于数组链表；
+* 数组初始长度、负载因子；
+* 线程安全
+* 不允许key和value为null
+* 只进行一次hash运算，即，key.hashCode();
+* 默认容量，按照`2 x Old + 1`的方式扩充；
+
+
+###ConcurrentHashMap的实现机制
+
+
+
+通过分析Hashtable就知道，synchronized是针对整张Hash表的，即每次锁住整张表让线程独占，ConcurrentHashMap允许多个修改操作并发进行，其关键在于使用了锁分离技术。它使用了多个锁来控制对hash表的不同部分进行的修改。ConcurrentHashMap内部使用段(Segment)来表示这些不同的部分，每个段其实就是一个小的hash table，它们有自己的锁。只要多个修改操作发生在不同的段上，它们就可以并发进行。
+有些方法需要跨段，比如size()和containsValue()，它们可能需要锁定整个表而而不仅仅是某个段，这需要按顺序锁定所有段，操作完毕后，又按顺序释放所有段的锁。这里“按顺序”是很重要的，否则极有可能出现死锁，在ConcurrentHashMap内部，段数组是final的，并且其成员变量实际上也是final的，但是，仅仅是将数组声明为final的并不保证数组成员也是final的，这需要实现上的保证。
+
+
+ ConcurrentHashMap和Hashtable主要区别就是围绕着锁的粒度以及如何锁,可以简单理解成把一个大的HashTable分解成多个，形成了锁分离。如图:
+
+![](/images/java-collection-interface/concurrentHashMap.png)
+
+
+而Hashtable的实现方式是---锁整个hash表
+
+
+ConcurrentHashMap是由Segment数组结构和HashEntry数组结构组成。Segment是一种可重入锁ReentrantLock，在ConcurrentHashMap里扮演锁的角色，HashEntry则用于存储键值对数据。一个ConcurrentHashMap里包含一个Segment数组，Segment的结构和HashMap类似，是一种数组和链表结构， 一个Segment里包含一个HashEntry数组，每个HashEntry是一个链表结构的元素， 每个Segment守护者一个HashEntry数组里的元素,当对HashEntry数组的数据进行修改时，必须首先获得它对应的Segment锁。
+
+
+![](/images/java-collection-interface/ConcurrentHashMap.png)
+
+
+
+更令人惊讶的是ConcurrentHashMap的读取并发，因为在读取的大多数时候都没有用到锁定，所以读取操作几乎是完全的并发操作，而写操作锁定的粒度又非常细，比起之前又更加快速（这一点在桶更多时表现得更明显些）。只有在求size等操作时才需要锁定整个表。
+
+而在迭代时，ConcurrentHashMap使用了不同于传统集合的快速失败迭代器的另一种迭代方式，我们称为弱一致迭代器。在这种迭代方式中，当iterator被创建后集合再发生改变就不再是抛出 ConcurrentModificationException，取而代之的是在改变时new新的数据从而不影响原有的数 据，iterator完成后再将头指针替换为新的数据，这样iterator线程可以使用原来老的数据，而写线程也可以并发的完成改变，更重要的，这保证了多个线程并发执行的连续性和扩展性，是性能提升的关键。
+
+
+
+
+
+
+
 ###TreeMap的实现机制
 
 几点：
@@ -152,18 +204,6 @@ Tips：
 Tips：
 
 > 平衡二叉树：如果是排序好的搜索二叉树，则，树的期望高度为`log2(n)`，此时，搜索效率为`O(log(n))`，而极端情况下，如果搜索效率退化为`O(n)`，为避免这一现象，要求树的左右子树高度差值< 1，满足此条件的树，即为：平衡二叉树。
-
-
-###HashTable的实现机制
-
-几点：
-
-* 基于数组链表；
-* 数组初始长度、负载因子；
-* 线程安全
-* 不允许key和value为null
-* 只进行一次hash运算，即，key.hashCode();
-* 默认容量，按照`2 x Old + 1`的方式扩充；
 
 
 ###HashSet实现机制
@@ -196,6 +236,20 @@ Tips：
 ##对比
 
 
+
+
+
+###Arraylist vs. Linkedlist
+
+几点：
+
+1. ArrayList 基于**动态数组**的数据结构，LinkedList基于**双向链表**的数据结构。
+1. 对于随机访问get和set，ArrayList觉得优于LinkedList，因为LinkedList要移动指针。
+1. 对于新增和删除操作add和remove，LinkedList比较占优势，因为ArrayList要移动数据*（remove时，要将后面数据前移；中间add数据时，要将数据后移；末端add时，若动态数组容量不足，要移动数据）*。
+1. 两者都不是线程安全的；
+
+
+
 ###Vector vs. ArrayList
 
 几点：
@@ -210,14 +264,36 @@ Tips：
 
 
 
-###Arraylist和Linkedlist
+###HashMap vs. HashTable
+
 
 几点：
 
-1. ArrayList 基于**动态数组**的数据结构，LinkedList基于**双向链表**的数据结构。
-1. 对于随机访问get和set，ArrayList觉得优于LinkedList，因为LinkedList要移动指针。
-1. 对于新增和删除操作add和remove，LinkedList比较占优势，因为ArrayList要移动数据*（remove时，要将后面数据前移；中间add数据时，要将数据后移；末端add时，若动态数组容量不足，要移动数据）*。
-1. 两者都不是线程安全的；
+* 是否线程安全：
+	* HashTable，同步的，线程安全；
+	* HashMap，非线程安全；
+* key是否为null：
+	* HashTable，不允许key和value为null；
+	* HashMap，允许key和value为null；
+* 进行几次Hash计算：
+	* HashTable中，只计算一次key的HashCode
+	* HashMap中，利用key.hashCode()，会再进行一次Hash运算；
+* 数组容量扩充：
+	* HashTable，`2 x Old + 1`
+	* HashMap，`2 x Old`
+
+
+###HashMap vs. HashTable vs. ConcurrentHashMap
+
+* 线程安全：HashMap不是线程安全的
+* 并发性能：
+	* HashTable，锁住整个hash表
+	* ConcurrentHashMap，局部锁住hash表，实际就是Segment
+* 迭代器一致性：
+	* HashTable，迭代器，强一致，
+	* ConcurrentHashMap，迭代器，弱一致，
+
+
 
 
 
@@ -239,23 +315,8 @@ Tips：
 	* HashMap，适合在Map中插入、删除、访问元素，因为使用Hash运算，相对红黑树，操作效率较高；
 	* TreeMap，适合按自然顺序和定义的顺序遍历key
 
-###HashMap vs. HashTable
 
 
-几点：
-
-* 是否线程安全：
-	* HashTable，同步的，线程安全；
-	* HashMap，非线程安全；
-* key是否为null：
-	* HashTable，不允许key和value为null；
-	* HashMap，允许key和value为null；
-* 进行几次Hash计算：
-	* HashTable中，只计算一次key的HashCode
-	* HashMap中，利用key.hashCode()，会再进行一次Hash运算；
-* 数组容量扩充：
-	* HashTable，`2 x Old + 1`
-	* HashMap，`2 x Old`
 
 
 ###HashSet vs. TreeSet
@@ -269,8 +330,11 @@ Tips：
 
 
 
+###HashMap原理深入
 
+todo：*（可以单独写一篇了）*
 
+* [HashMap原理深入]
 
 
 
@@ -283,6 +347,14 @@ Tips：
 
 * [Java 容器 & 泛型]
 * [Hashmap实现原理]
+* [ConcurrentHashMap原理分析]
+* [ConcurrentHashMap能完全替代HashTable吗？]
+* [Hashtable与ConcurrentHashMap区别]
+
+
+
+
+
 
 
 
@@ -293,12 +365,13 @@ Tips：
 [NingG]:    http://ningg.github.com  "NingG"
 
 
-[Java 容器 & 泛型]:		http://www.bysocket.com/?p=162
-[Hashmap实现原理]:		http://www.cnblogs.com/xwdreamer/archive/2012/05/14/2499339.html
+[Java 容器 & 泛型]:					http://www.bysocket.com/?p=162
+[Hashmap实现原理]:					http://www.cnblogs.com/xwdreamer/archive/2012/05/14/2499339.html
+[ConcurrentHashMap原理分析]:		http://www.cnblogs.com/ITtangtang/p/3948786.html
+[HashMap原理深入]:					http://www.cnblogs.com/ITtangtang/p/3948798.html
 
-
-
-
+[ConcurrentHashMap能完全替代HashTable吗？]:			http://ifeve.com/concurrenthashmap-vs-hashtable/
+[Hashtable与ConcurrentHashMap区别]:					http://blog.csdn.net/wisgood/article/details/19338693
 
 
 

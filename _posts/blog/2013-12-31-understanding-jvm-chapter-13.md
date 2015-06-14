@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Understanding the JVM——线程安全与锁优化
+title: 线程安全与锁优化——Understanding the JVM
 description: 线程安全，锁优化机制
 category: jvm
 ---

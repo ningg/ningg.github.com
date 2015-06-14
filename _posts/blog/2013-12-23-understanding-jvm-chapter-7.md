@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Understanding the JVM——虚拟机类加载机制
+title: 虚拟机类加载机制——Understanding the JVM
 description: class文件如何加载的？
 category: jvm
 ---

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Understanding the JVM——垃圾回收与内存分配策略
+title: 垃圾回收与内存分配策略——Understanding the JVM
 description: 如何进行垃圾回收的？内存又如何进行分配？
 category: jvm
 ---
