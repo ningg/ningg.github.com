@@ -1,15 +1,15 @@
 ---
 layout: post
-title: wordpress的开发调试环境
-description: wordpress的最近几年来一直流行的博客平台，基于其可以快速建站，但要想较深入定制，就需要对其运行架构有个基本了解
-category: wordpress
+title: WordPress的开发调试环境
+description: WordPress是一直流行的博客平台，基于其可以快速建站，但要想较深入定制，就需要对其运行架构有个基本了解
+category: WordPress
 ---
 
 ##背景
 
-用wordpress建站，两个功能：一个是展示团队工作，另一个是方便其他人进来讨论。
+用WordPress建站，两个功能：一个是展示团队工作，另一个是方便其他人进来讨论。
 
-初步立意：使用wordpress搭建两个网站，团队工作展示一个，讨论区一个；
+初步立意：使用WordPress搭建两个网站，团队工作展示一个，讨论区一个；
 
 ##组件与安装
 
@@ -27,7 +27,7 @@ category: wordpress
 
 依次安装：
 
-1. XAMPP：wordpress的运行环境
+1. XAMPP：WordPress的运行环境
 2. wordpress，并为其配置主题：
 	* twenty eleven
 	* hum
@@ -51,7 +51,7 @@ category: wordpress
 
 主要是为成功安装主题，所需要进行的配置。
 
-* wordpress
+* WordPress
 	1. 取消twenty eleven主题中google front（因为google被墙了）
 
 
@@ -62,7 +62,7 @@ category: wordpress
 
 * 如何进行调试；
 * PHP web基本处理逻辑；
-* wordpress中使用了哪些巧妙的设计，使其流行数年；
+* WordPress中使用了哪些巧妙的设计，使其流行数年；
 
 
 
