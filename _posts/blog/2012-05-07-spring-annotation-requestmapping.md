@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Spring MVC中常见注解（annotation） (todo)
+title: Spring MVC中常见注解（annotation）
 description: Controller、Service、Repository、RequestMapping、PathVariable、
 published: true
 category: spring

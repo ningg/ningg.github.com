@@ -21,11 +21,46 @@ equals方法，需要满足以下三点：
 
 * **不唯一原则**：不必对每个不同的对象都产生一个唯一的hashcode，只要你的HashCode方法使get()能够得到put()放进去的内容就可以了。
 * **分散原则**：生成hashcode的算法尽量使hashcode的值分散一些，不要很多hashcode都集中在一个范围内，这样有利于提高HashMap的性能；
+* a.equals(b)，则a与b的hashCode()必须相等；
+
+##Object.equals()方法
+
+代码如下：
+
+	public boolean equals(Object obj) {
+		return (this == obj);
+    }
+
+直接比较两个基础类型的值是否相等、两个对象的内存地址是否相同。
 
 
+##String.equals()方法
 
+String中`equals()`方法，要求两个String的值相等即可；
 
+代码如下：
 
+    public boolean equals(Object anObject) {
+	if (this == anObject) {
+	    return true;
+	}
+	if (anObject instanceof String) {
+	    String anotherString = (String)anObject;
+	    int n = count;
+	    if (n == anotherString.count) {
+		char v1[] = value;
+		char v2[] = anotherString.value;
+		int i = offset;
+		int j = anotherString.offset;
+		while (n-- != 0) {
+		    if (v1[i++] != v2[j++])
+			return false;
+		}
+		return true;
+	    }
+	}
+	return false;
+    }
 
 
 

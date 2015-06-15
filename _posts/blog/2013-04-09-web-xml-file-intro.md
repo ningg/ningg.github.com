@@ -1,7 +1,7 @@
 ---
 layout: post
 title: web.xml文件简介
-description: 
+description: Servlet规范定义的web.xml文件的详解
 published: true
 category: web
 ---

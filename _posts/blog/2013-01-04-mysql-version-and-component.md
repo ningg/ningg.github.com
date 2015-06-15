@@ -106,7 +106,7 @@ MySQL offers standard database driver connectivity for using MySQL with applicat
 
 下载[MySQL Community Server (GPL)][MySQL官网--下载]，本文下载的是`5.6.20`版本：
 
->	MySQL-5.6.20-1.el6.x86_64.rpm-bundle.tar 
+> MySQL-5.6.20-1.el6.x86_64.rpm-bundle.tar 
 
 解压后，得到多个rpm包：
 

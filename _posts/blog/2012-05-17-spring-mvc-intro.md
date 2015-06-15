@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Spring MVC梳理 (todo)
-description: 
+title: Spring MVC梳理
+description: Spring MVC的基本原理、配置、使用
 published: true
 category: spring
 ---

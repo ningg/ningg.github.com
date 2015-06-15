@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Spring中IoC机制（todo）
+title: Spring中IoC机制
 description: IoC是什么？有什么优点？怎么实现？
 published: true
 category: Spring
@@ -29,8 +29,8 @@ todo，重新阅读，补充整理：
 TODO:
 
 * [Spring系列][Spring系列]
-
-
+* [Spring技术内幕][Spring技术内幕]
+* [Spring实用系列][Spring实用系列]
 
 
 
@@ -47,9 +47,9 @@ TODO:
 
 [NingG]:    http://ningg.github.com  "NingG"
 
-[Spring系列]:		http://www.cnblogs.com/xing901022/category/642864.html
-
-
+[Spring系列]:					http://www.cnblogs.com/xing901022/category/642864.html
+[Spring技术内幕]:				http://blog.csdn.net/chjttony/article/category/1239946/1
+[Spring实用系列]:				http://blog.csdn.net/wangpeng047/article/category/907053/1
 
 
 

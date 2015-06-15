@@ -200,6 +200,12 @@ category: java-concurrency
 实际上，notify()和 notifyAll()的区别还是非常值得研究的，stackoverflow 上也有这个问题的讨论：[Java: notify() vs. notifyAll() all over again](http://stackoverflow.com/questions/37026/java-notify-vs-notifyall-all-over-again#)
 
 
+> notify()和notifyAll()都是Object对象用于通知处在等待该对象的线程的方法。两者的最大区别在于：
+> 
+> notifyAll使所有原来在该对象上等待被notify的线程统统退出wait的状态，变成等待该对象上的锁，一旦该对象被解锁，他们就会去竞争。
+notify则文明得多他只是选择一个wait状态线程进行通知，并使它获得该对象上的锁，但不惊动其他同样在等待被该对象notify的线程们，当第一个线程运行完毕以后释放对象上的锁此时如果该对象没有再次使用notify语句，则即便该对象已经空闲，其他wait状态等待的线程由于没有得到该对象的通知，继续处在wait状态，直到这个对象发出一个notify或notifyAll，它们等待的是被notify或notifyAll，而不是锁。
+
+
 
 ###4. 生产者与消费者
 
@@ -841,7 +847,20 @@ category: java-concurrency
 
 
 
+###补充：wait、notify、notifyAll
 
+使用wait方法和使用synchornized来分配cpu时间是有本质区别的。wait会释放锁，synchornized不释放锁。
+还有：（wait/notify/notifyAll）只能在取得对象锁的时候才能调用。
+
+**调用notifyAll通知所有线程继续执行，只能有一个线程在执行其余的线程在等待(因为在所有线程被唤醒的时候在synchornized块中)**。这时的等待和调用notifyAll前的等待是不一样的。
+
+* notifyAll前：在对象上休息区内休息
+* notifyAll后：在排队等待获得对象锁。
+
+notify和notifyAll都是把某个对象上休息区内的线程唤醒,notify只能唤醒一个,但究竟是哪一个不能确定,而notifyAll则唤醒这个对象上的休息室中所有的线程.
+
+一般有为了安全性,我们在**绝对多数时候应该使用notifyAll()**,除非你明确知道只唤醒其中的一个线程.
+至于有些书上说“notify：唤醒同一对象监视器中调用wait的第一个线程”我认为是没有根据的因为sun公司是这样说的“The choice is arbitrary and occurs at the discretion of the implementation.”
 
 
 

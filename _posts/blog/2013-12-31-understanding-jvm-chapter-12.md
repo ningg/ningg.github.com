@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Understanding the JVM——Java内存模型与线程
+title: Java内存模型与线程——Understanding the JVM
 description: 线程与内存模型
 category: jvm
 ---
