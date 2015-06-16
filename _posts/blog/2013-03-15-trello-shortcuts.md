@@ -39,6 +39,7 @@ Here are some of the highlights:
 |`t`|在Card内，编辑title|
 |`e`|在Card内，编辑description|
 |`w`|显示\隐藏 sidebar|
+|`ctrl + Enter`| 保存，Save|
 
 
 

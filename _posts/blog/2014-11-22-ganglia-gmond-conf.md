@@ -200,7 +200,7 @@ The `mcast_join` and `mcast_if` attributes are `optional`. When specified, `gmon
 **notes(ningg)**：几个疑问：
 
 * mcast_join用来标识一个multicast group，必须是IP吗？这个IP的用途是什么？IP必须是cluster中某个node吗?**RE**：mcast_join，是保留的D类地址，用于进行multicast，这个IP不是cluster中某个node的IP，是保留IP。
-* 设置了mcast_join之后，还能设置host吗？
+* 设置了mcast_join之后，还能设置host吗？**RE**：不能再设置host属性
 * multicast方式时，只能使用UDP吗？**RE**：当前看，只能走UDP socket方式；
 * 设置mcast_join之后，没有指定mcast_if，这个有影响吗？UDP socket通过哪个端口进行连接？
 * multicast方式时，gmond部署的服务器的CPU等运行状态数据是怎么获取的？gmond向cluster内其他host广播自己的运行状态，然后，从其他host再获取自己的运行状态数据？

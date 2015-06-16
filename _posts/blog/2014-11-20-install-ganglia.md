@@ -248,13 +248,13 @@ The Ganglia web frontend is written in the PHP scripting language, and uses grap
 	
 由于gmetad依赖rrdtool，需要设置两个东西：
 
-* 设置datasource和UID，具体：
+设置datasource和UID，具体：
 	
 	vim /usr/local/etc/gmetad.conf
 	data_source "RT-SYS" localhost
 	setuid_username "apache"
 
-* 设置rrdtool的数据目录，具体命令：
+设置rrdtool的数据目录，具体命令：
 
 	mkdir -p /var/lib/ganglia/rrds
 	chown -R apache:apache /var/lib/ganglia/rrds
@@ -300,8 +300,9 @@ gmond的详细信息，可以通过命令`man gmond`和`man gmond.conf`来查看
 	[root@cib02166 ganglia-3.6.1]# cd gmetad
 	[root@localhost gmetad]# cp gmetad.init /etc/rc.d/init.d/gmetad
 	
-	# 修改/etc/init.d/gmetad中 GMETAD=/usr/local/sbin/gmetad
 	[root@localhost gmetad]# vim /etc/init.d/gmetad
+	# 修改/etc/init.d/gmetad中 GMETAD=/usr/local/sbin/gmetad
+
 
 	[root@localhost gmetad]# chkconfig --add gmetad
 	[root@localhost gmetad]# chkconfig --list gmetad
@@ -311,7 +312,11 @@ gmond的详细信息，可以通过命令`man gmond`和`man gmond.conf`来查看
 	Starting GANGLIA gmetad:                                   [  OK  ]
 
 **思考**：如何验证gmond、gmetad已经正常安装并成功启动？
-**RE**：两种方法，方法1：通过命令`netstat -tpnl | grep "gmond"`即可查看是否启动，当然也可以通过`service gmond status`查看；方法2：通过`gmond -d 5`在前台启动进程，并查看输出信息。
+
+**RE**：两种方法
+
+* 方法1：通过命令`netstat -tpnl | grep "gmond"`即可查看是否启动，当然也可以通过`service gmond status`查看；
+* 方法2：通过`gmond -d 5`在前台启动进程，并查看输出信息。
 
 
 **思考**：
@@ -470,7 +475,7 @@ OK，再次启动gmetad，成功启动。
 	# 利用符号链接
 	ln -s /usr/share/ganglia-webfrontend /var/www/html/ganglia
 
-###错误4：
+###错误4
 
 通过浏览器访问[http://locahost/ganglia]()时，出现如下错误信息：
 
@@ -559,9 +564,10 @@ Ganglia用于监测分布式系统的运行状态，如何把Ganglia集群用起
 	* 在某个服务器上，汇总并实时刷新监控数据；
 * 定制Ganglia来监控应用系统：
 	* （如何定制？下面是随便说的）
-	* 在Flume、Kafka、Storm运行的服务器上都安装Ganglia的client；
-	* Ganglia client收集应用的运行状态数据，并汇总到Ganglia的某个node；
-	* 疑问：在Ganglia集群外的某个服务器上，可以安装、使用web frontend吗？
+	* 需要监控服务器OS的运行情况，在这些服务器上安装Ganglia的gmond；
+	* 在Flume、Kafka、Storm运行的服务器上，监控JVM应用的状态，只需要JMX+JMXTrans即可，不必安装Ganglia的gmond；
+	* Ganglia gmond收集应用的运行状态数据，并汇总到Ganglia的某个node*(gmond或者gmetad)*；
+	* 疑问：在Ganglia集群外的某个服务器上，可以安装、使用web frontend吗？可以，但需要在服务器上配置一个gmetad；
 
 
 

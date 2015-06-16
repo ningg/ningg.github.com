@@ -211,9 +211,9 @@ and gmond will output its default configuration to stdout. This default configur
 
 	% gmond --default_config > gmond.conf
 	
-would create a file gmond.conf which you can then edit to taste and copy to /etc/ganglia/gmond.conf or elsewhere.
+would create a file `gmond.conf` which you can then edit to taste and copy to `/etc/ganglia/gmond.conf` or elsewhere.
 
-To start gmond with a configuration file other then /etc/ganglia/gmond.conf, simply specify the configuration file location by running
+To start gmond with a configuration file other then `/etc/ganglia/gmond.conf`, simply specify the configuration file location by running
 
 	% gmond --config /my/ganglia/configs/custom.conf
 	
@@ -241,7 +241,7 @@ The behavior of the Ganglia Meta Daemon is completely controlled by a single con
 In this example, there are two unique data sources: "Cluster A" and "Cluster B". The Cluster A data source has three redundant sources. If gmetad cannot pull the data from the first source, it will continue trying the other sources in order.
 *（仅当第一个cluster中某个ip:port无效时，gmetad才会从备选ip:port获取metric）*
 
-If you do not specify a port number, gmetad will assume the default ganglia port which is `8649` (U*N*I*X on a phone key pad)
+If you do not specify a port number, gmetad will assume the default ganglia port which is `8649` (`U*N*I*X` on a phone key pad)
 
 For a sample gmetad configuration file with comments, look at the gmetad.conf file provided as part of the distribution package in the gmetad directory
 
