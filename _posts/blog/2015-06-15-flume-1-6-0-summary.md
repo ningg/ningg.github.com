@@ -78,7 +78,7 @@ Flume Agent内部以Flume Event形式传递数据，具体内部由Source、Chan
 
 ####Flume Event
 
-**Flume Event**，由 `byte[] body` 和 `Map<String, String> Headers`构成，是Flume Agent内数据流转的基本单元。
+Flume Event，由 `byte[] body` 和 `Map<String, String> Headers`构成，是Flume Agent内数据流转的基本单元。
 
 Flume中Event对应的源代码如下：
 
@@ -106,7 +106,7 @@ Flume中Event对应的源代码如下：
 
 ####Flume Agent
 
-**Flume Agent**，本质就是一个JVM进程，提供了Flume内部Source、Channel、Sink线程的运行环境。
+Flume Agent，本质就是一个JVM进程，提供了Flume内部Source、Channel、Sink线程的运行环境。
 
 具体：
 

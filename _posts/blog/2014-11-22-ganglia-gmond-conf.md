@@ -76,6 +76,11 @@ The host section provides information the host running this instance of gmond. C
  
 The numbers represent **Rack**, **Rank** and **Plane** respectively.
 
+**notes(ningg)**：针对同一个组播地址构造的集群，内部所有节点，通过`host`下的`location`属性唯一标识集群内主机，否则，整个集群中，始终只有一个节点的数据，而没有其他节点数据。特别说明，要求上述`location`属性，必须以`,`分隔`Rack,Rank,Plane`属性，否则，拖累整个Cluster无法收集信息。*（上面的解释行得通吗？好像这样解释不对，因为gweb上看到的信息，持续一段时间之后，就都消失了，只剩下gmetad同一台的gmond收集的信息）*
+
+整个Ganglia由几个概念：Grid、Cluster、Node；其中，Grid与gmetad对应，其中配置的data source为Cluster。
+
+
 ###globals
 
 The **globals** section controls general characteristics of **gmond** such as whether is should daemonize, what user it should run as, whether is should send/receive date and such. The globals section has the following attributes: 
