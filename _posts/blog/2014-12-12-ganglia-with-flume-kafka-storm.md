@@ -97,13 +97,48 @@ Flume的官网上[Monitoring][Flume doc：Monitoring]部分，显示通过简单
 
 ###Ganglia Integration(adambarthelson)
 
-（doing...）
-
 从上以部分发现，如果利用`metrics-ganglia-2.2.0.jar`来实现Ganglia对Kafka的监控，有几个方面需要定制，涉及到一些定制的工作量。而[Ganglia Integration][Ganglia Integration]好像可以直接通过Json文件来指定收集特定的参数，涉及到的定制可能会较少。
 
-（doing...）
-
 初步计划，在配置完Ganglia对Storm的监控时，学习一下jmxtrans的基本知识，然后回过头来，再来尝试一下[Ganglia Integration][Ganglia Integration]。
+
+
+
+####使用和调试步骤
+
+具体使用`JMX`+`jmxtrans`服务来监控Kafka运行状态，分为几步：
+
+* 安装Jmxtrans服务
+    * 日志文件位置：`/var/log/jmxtrans/jmxtrans.log`
+    * 配置文件位置：`/etc/sysconfig/jmxtrans` 
+        *（配置`export JAVA_HOME=/usr/java/default`）*
+    * 统计的json文件位置：`/var/lib/jmxtrans/`，例如`kafka.json`文件
+* 启动、停止`jmxtrans`服务
+    * `sudo service jmxtrans start/stop`
+* Kafka集群内`broker`节点设置：
+    * `kafka-server-start.sh`文件，配置：
+        *  *(`export JMX_PORT=19091`)*
+
+
+具体调试方法：
+
+* 启动Kafka broker，同时，查看`19091`端口是否启用，命令：`netstat -tpnl | grep 19091`；
+* 启动 jmxtrans 服务，注意监听`/var/log/jmxtrans/jmxtrans.log`日志输出的内容；
+
+
+
+####收集Kafka运行参数
+
+编写`kafka.json`文件，并收集Kafka运行状态参数，具体办法：`jconsole`工具查看Kafka运行参数，并据此编写`kafka.json`文件。
+
+
+
+
+
+
+
+
+
+
 
 
 

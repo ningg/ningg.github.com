@@ -169,7 +169,7 @@ The Ganglia web frontend is written in the PHP scripting language, and uses grap
 	
 上面这么多组件，也可以运行一条命令完成安装：
 
-	sudo yum install gcc rrdtool rrdtool-devel apr apr-devel pcre pcre-devel zlib zlib-devel pyton python-devel gperf
+	sudo yum install gcc rrdtool rrdtool-devel apr apr-devel pcre pcre-devel zlib zlib-devel python python-devel gperf
 	
 ###libconfuse
 
@@ -251,6 +251,8 @@ The Ganglia web frontend is written in the PHP scripting language, and uses grap
 设置datasource和UID，具体：
 	
 	vim /usr/local/etc/gmetad.conf
+	
+	# 进行如下配置
 	data_source "RT-SYS" localhost
 	setuid_username "apache"
 
@@ -268,6 +270,8 @@ The Ganglia web frontend is written in the PHP scripting language, and uses grap
 	gmond -t > /usr/local/etc/gmond.conf
 	
 	vim /usr/local/etc/gmond.conf
+	
+	# 进行如下配置
 	cluster {  
 		name="RT-SYS"   //和gmetad.conf配置文件对应  
 		owner="apache"   //和gmetad.conf配置文件对应  
@@ -277,7 +281,8 @@ The Ganglia web frontend is written in the PHP scripting language, and uses grap
 	
 **备注**：`whereis`命令的用途？例如下面怎么解释
 
-	[root@localhost html]# whereis gmond
+	whereis gmond
+	
 	gmond: /usr/local/sbin/gmond /usr/local/etc/gmond.conf
 
 gmond的详细信息，可以通过命令`man gmond`和`man gmond.conf`来查看。
@@ -292,7 +297,7 @@ gmond的详细信息，可以通过命令`man gmond`和`man gmond.conf`来查看
 * /usr/local/sbin/gmond
 * /usr/local/sbin/gmetad
 
-**备注**：本地实测是上面的位置，与官方源码自带文档ganglia-3.6.1/ganglia.html的说法有差异。
+**备注**：本地实测是上面的位置，与官方源码自带文档`ganglia-3.6.1/ganglia.html`的说法有差异。
 
 在Linux上按照上述步骤，通过编译源码方式安装的的Ganglia，那可以将`gmond`和`gmetad`添加到sys service中，并且配置是否开机启动。
 配置gmetad服务步骤如下（gmond同理）：
@@ -380,7 +385,7 @@ gmond的详细信息，可以通过命令`man gmond`和`man gmond.conf`来查看
 	service httpd start
 	service gmetad start
 
-打开浏览器，查看[http://locahost/ganglia]
+打开浏览器，查看`http://locahost/ganglia`
 	
 （疑问：makefile的作用？单纯的命令集合吗？）
 	
@@ -539,6 +544,33 @@ OK，再次启动gmetad，成功启动。
 
 **疑问**：同一台服务器上，能够部署多个gmond吗？有个问题是：我在3台服务器上，同时部署了3个集群：Flume Cluster、Kafka Cluster、Storm Cluster，希望能够在3个页面上分别监控每个集群的情况。这就涉及一个问题：Ganglia监控的基本单元是物理服务器？还是逻辑上的一个节点？在应用层，Ganglia监控服务情况如何？
 
+
+特别说明：
+
+* gmond之间可以通过组播方式，构建gmond群组；
+* gmetad通过TCP获取gmond信息
+* 应用有两种方式向gmond传输数据：
+	* UDP，组播地址:端口，送至gmond，需在`gmond.conf`中添加
+	* UDP，单播地址:端口，送至gmond，需在`gmond.conf`中添加
+
+示例代码如下：
+
+	/* You can specify as many udp_recv_channels as you like as well. */
+	udp_recv_channel {
+	  mcast_join = 239.2.11.71
+	  port = 8649
+	  bind = 239.2.11.71
+	  retry_bind = true
+	  # Size of the UDP buffer. If you are handling lots of metrics you really
+	  # should bump it up to e.g. 10MB or even higher.
+	  # buffer = 10485760
+	}
+
+	/* You can specify as many udp_recv_channels as you like as well. */
+	udp_recv_channel {
+	  port = 8649
+	  retry_bind = true
+	}
 
 （doing...）
 
