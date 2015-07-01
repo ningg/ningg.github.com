@@ -36,7 +36,6 @@ category: MySQL
 * [深入理解MyBatis原理][深入理解MyBatis原理]
 * [Mybatis数据源与连接池][Mybatis数据源与连接池]
 * [mysql连接数据库的三种方法（连接池，jdbc，Hibernate）][mysql连接数据库的三种方法（连接池，jdbc，Hibernate）]
-* [Mybatis数据源与连接池][Mybatis数据源与连接池]
 * [MySql数据库连接池]
 * [Java 连接池的工作原理]
 

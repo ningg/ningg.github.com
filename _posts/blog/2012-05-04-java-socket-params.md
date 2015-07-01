@@ -13,31 +13,31 @@ Java Socket网络编程中涉及的参数详解：
 
 backlog：ServerSocket对应的最大的客户端等待队列长度，即，当ServerSocket.accept()所在线程阻塞时，新的Client仍可以与Server建立连接，只是这些连接会被放置在Client等待队列中，backlog参数设定了这一等待队列的最大长度；示例代码如下：
 
-package top.ningg.java.socket;
+	package top.ningg.java.socket;
 
-import java.io.BufferedReader;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.net.ServerSocket;
-import java.net.Socket;
+	import java.io.BufferedReader;
+	import java.io.IOException;
+	import java.io.InputStreamReader;
+	import java.net.ServerSocket;
+	import java.net.Socket;
 
-public class SocketParams {
-	public static void main(String[] args) throws IOException {
-		int port = 7777;
-		int backlog = 2;
-		
-		ServerSocket serverSocket = new ServerSocket(port, backlog);
-		
-		Socket clientSocket = serverSocket.accept();
-		System.out.println("Client Socket port: " + clientSocket.getLocalPort());
-		
-		while(true){
-			BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
-			System.out.println(in.readLine());
+	public class SocketParams {
+		public static void main(String[] args) throws IOException {
+			int port = 7777;
+			int backlog = 2;
+			
+			ServerSocket serverSocket = new ServerSocket(port, backlog);
+			
+			Socket clientSocket = serverSocket.accept();
+			System.out.println("Client Socket port: " + clientSocket.getLocalPort());
+			
+			while(true){
+				BufferedReader in = new BufferedReader(new InputStreamReader(clientSocket.getInputStream()));
+				System.out.println(in.readLine());
+			}
+			
 		}
-		
 	}
-}
 
 这段测试代码在第一次处理一个客户端时，就不会处理第二个客户端，所以除了第一个客户端，其他客户端就是等待队列了。所以这个服务器最多可以同时连接3个客户端，其中2个等待队列。可以telnet localhost 7777测试下。
 

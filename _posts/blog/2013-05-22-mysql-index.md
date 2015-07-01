@@ -552,7 +552,7 @@ title的选择性不足0.0001（精确值为0.00001579），所以实在没有�
 
 
 
-
+Tips：二级索引，即，辅助索引，更多参考：[mysql 二级索引]，InnoDB一定会创建一个聚簇索引，如果有主键，则，基于主键创建索引，如果没有主键，则，自己生成一个ID来构建索引。*（这样的理解对吗？）*
 
 
 
@@ -651,3 +651,5 @@ title的选择性不足0.0001（精确值为0.00001579），所以实在没有�
 [InfoQ上MySQL系列]:		http://www.infoq.com/cn/mysql/
 [xifeijian-MySQL]:		http://blog.csdn.net/xifeijian/article/category/1430276/1
 
+
+[mysql 二级索引]:							http://blog.csdn.net/wmsjlihuan/article/details/14447479
