@@ -97,7 +97,7 @@ Tips：
 
 幻读：是因为没有保持**范围锁**，该事务执行了一个 where 子句的范围查询后，其他事务可能新增了一条处于该事务 where 查询范围内的记录，那么该事务再次执行范围查询时就会看到这些新增的记录行（幻行，Phantom row）。
 
-可重复读是 MySQL 的默认事务隔离级别。
+**可重复读**是 MySQL 的默认事务隔离级别。
 
 
 ###3. 读取已提交 Read committed
@@ -150,7 +150,7 @@ InnoDB 的 MVCC 是通过在每行记录后面保存两个隐藏的列来实现�
 todo:
 
 * [mysql修改事务隔离级别][mysql修改事务隔离级别]
-
+* [Mysql事务以及加锁机制][Mysql事务以及加锁机制]
 
 
 ##参考来源
@@ -172,7 +172,7 @@ todo:
 [MySQL事务隔离级别]:		http://coderbee.net/index.php/db/20141020/1056
 [mysql修改事务隔离级别]:	http://blog.itpub.net/195110/viewspace-1080777/
 
-
+[Mysql事务以及加锁机制]:	http://lhc1986.iteye.com/blog/1462856
 
 
 
