@@ -1,7 +1,7 @@
 ---
 layout: post
-title: 集合类、字符串
-description: Guava梳理
+title: Guava梳理
+description: Guava提供的简便用法
 published: true
 category: guava
 ---
