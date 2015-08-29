@@ -3,21 +3,21 @@ layout: post
 title: Java中Generic Type（泛型）
 description: 泛型是什么？如何使用？
 published: true
-category: java
+category: Java
 ---
 
-ArrayList是集合类中无处不在的，泛型也是，泛型对集合类尤其有用。但是为啥要使用泛型？理解好了这个问题可以帮助理解相关的更多知识点。下面以最简单的例子来验证这个问题。
+ArrayList很常见，泛型也是，泛型对集合类尤其有用。关键的问题：为什么要使用泛型？
 
 ##一、泛型
 
 泛型（Generic Type）的主要作用：
 
-* 不同类型对象重用这个类；
-* 编译时发现bug；
+* 类/接口/方法，能够被不同类型对象重用；
+* 编译期发现bug；
 
 Tips：
 
-> 编译时，指的是源代码翻译成机器识别的代码的时候。运行时，是指代码在机器中运行的时候。泛型只存在编译时，运行时，不存在泛型。
+> 编译期，是指源代码翻译成机器识别的代码。运行时，是指代码在机器中运行。Java中，泛型只存在编译期，运行时，不存在泛型。
 
 
 ##二、实现没有泛型的简易版ArrayList
@@ -66,12 +66,12 @@ Tips：
 
 想问的问题是：”这Object对象属性，怎么不能强转呢？“
 
-答：编译时，代码没错的。运行main时，当set了String类型时，将结果强制转换为Integer就会报错这个错了。
+答：编译时，代码没错的。运行main时，当set了String类型时，将结果强制转换为Integer就会报错。
 
 泛型的作用：
 
-* 泛型，比那些杂乱的需要强制转换的Object代码具有更好的安全性和可读性。
-* 泛型，可以在编译时轻松找到和解决bugs
+* 泛型，比需要强制转换的Object代码，具有更好的安全性和可读性。
+* 泛型，在编译期发现bugs
 
 ##三、使用改写简易版ArrayList
 
@@ -116,41 +116,65 @@ Tips：
 ![](/images/java-generic-type/image_thumb.png)
 
 
-Java 泛型只是编译时的概念，因为编译后类型会被擦除，还原真实类型。上述例子中，T就相当于Integer。
+Java 泛型只是编译期的概念，因为编译后类型会被擦除，还原真实类型。上述例子中，T 就相当于Integer。
 
 
 Tips：
 
 > 如何编写泛型（Generic Type）？最简单的方式：`public class CLASSNAME<K, V>{...}`直接在类名后添加`<>`即可，内部可以指定多个泛型。
 
-##四、小结
+##四、泛型分类
+
+根据位置不同，泛型可以分为：
+
+* 泛型类
+* 泛型接口
+* 泛型方法
+
+泛型类:
+
+	public class Holder<T> {
+		public final T obj;
+		public Holder(T obj) {
+			this.obj = obj;
+		}
+		public T get() {
+			return obj;
+		}
+	}
+
+泛型接口：泛型接口可以用来做生成器，专门用来负责创建对象的类。
+
+	public interface Generator<T> {
+		public T generate();
+	}
+
+泛型方法：泛型与其所在的类是否是泛型类没有关系，但是对于一个static方法来说，无法访问泛型类的类型参数，所以如果一个static方法想使用泛型能力，就必须让它成为泛型方法。
+
+	public class Test{
+		public <T> void set(T x) {
+			System.out.println(x.getClass().getName());
+		}
+
+		public <H> H get(Class<H> m) {
+			m.getName();
+			return m;
+		}
+	 
+		public static <M> void m(M m) {
+			m.getClass().getName();
+		}
+	}
+
+
+
+
+##五、小结
 
 泛型的作用：
 
 1. 编译时，检查强类型
 1. 代码重用*（更好的安全性和可读性）*
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
