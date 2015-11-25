@@ -3,7 +3,7 @@ layout: post
 title: 服务器并发模型
 description: 服务器如何多个客户端？
 published: true
-category: Linux java
+categories: Linux java
 ---
 
 典型问题：

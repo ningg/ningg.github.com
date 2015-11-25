@@ -20,11 +20,13 @@ __外加问题__：现在一个命令的输出信息过多，希望后台运行�
 
 简要说明：
 
-1. `&`：表示进程`sh collectCloSpan.sh`在后台运行；
-2. `nohup`：表示，如果当前连接到服务器的终端关闭，进程`sh collectCloSpan.sh`;
+1. `&`：表示启动子进程，`sh collectCloSpan.sh`在后台运行；
+2. `nohup`：表示，如果当前连接到服务器的终端关闭，进程`sh collectCloSpan.sh` 继续执行，不受影响;
 3. 进程`sh collectCloSpan.sh`的输出信息，保存在当前路径的`nohup.out`文件中。（如果当前路径不允许新建文件，则，输出信息保存在`~/nohup.out`文件中）
 
 好了，现在怎么解决`nohup.out`文件过大的问题呢？
+
+**补充说明**：除了 `nohup CMD &`的解决方案，还有一个更优的方案： `screen` 命令。*（会单独写一篇文章介绍 screen 命令）*
 
 ###输出文件过大
 
@@ -75,8 +77,13 @@ __总结__：后台运行：`command &`和 `nohup command &`有区别吗？
 
 答：
 
-1. `command &`：后台运行，关掉中断，命令会终止运行；
-2. `nobup command &`：后台运行，关掉终端，命令会继续运行；
+1. `command &`：启用新进程，后台运行，关掉中断，命令会终止运行；
+2. `nohup command &`：启动新进程，后台运行，关掉终端，命令会继续运行（nohup：让进程忽略 SIGHUP 中断信号）；
+
+特别说明：上述 `nohup command &` 的本意：
+
+1. `&`：启用子进程运行 command；
+2. `nohup`：设定子进程忽略 SIGHUP 进程中断信号；如果子进程的父进程终止运行，则子进程将父进程设置为 `pid = 1` 的超级进程
 
 ##进程的挂起与运行
 
