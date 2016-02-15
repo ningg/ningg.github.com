@@ -6,7 +6,7 @@ published: true
 category: linux
 ---
 
-##什么问题？
+## 什么问题？
 
 问题：
 
@@ -16,7 +16,7 @@ category: linux
 
 现在使用 `screen` 命令，是更优的选择。
 
-##如何使用？
+## 如何使用？
 
 几点：
 
@@ -28,11 +28,11 @@ category: linux
 * 查看screen的输出：CTRL + A
 
 
-###完整的使用场景
+### 完整的使用场景
 
 典型场景：终端登陆服务器后，通常要打开很多窗口，使用 screen 可以保存窗口，每次登陆，只需要在 screen 之间切换即可。
 
-###例子
+### 例子
 
 #### 新建一个Screen Session
 
@@ -92,7 +92,7 @@ screen命令很好用，但是最让人头痛的是`CTRL+A`命令和BASH里的�
 
 
 
-##什么原理？
+## 什么原理？
 
 screen 如何抵挡的住网络中断？什么道理？
 
@@ -105,27 +105,10 @@ screen 命令，什么原理？
 
 
 
-##参考来源
+## 参考来源
 
 1. <https://github.com/chenzhiwei/linux/tree/master/screen>
 2. <https://www.ibm.com/developerworks/cn/linux/l-cn-screen/>
-3. 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

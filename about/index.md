@@ -2,7 +2,7 @@
 layout: about
 ---
 
-###自我介绍
+### 自我介绍
 
 * 90年，在河南出生和长大
 * 小时候就喜欢吹牛，现在还是这样，想象力太丰富，没办法
@@ -19,7 +19,7 @@ layout: about
 
 
 
-###研究方向
+### 研究方向
 
 * Web开发
 * 系统架构
@@ -28,7 +28,7 @@ layout: about
 * Java相关
 
 
-###学术论文
+### 学术论文
 
 * [Soft-CsGDT: soft cost-sensitive Gaussian decision tree for cost-sensitive classification of data streams], In Proc. of BigMine Workshop (BigMine'13) of ACM SIGKDD, 11-14 August 2013, Chicago, IL, USA, pp.7-14. 
 
