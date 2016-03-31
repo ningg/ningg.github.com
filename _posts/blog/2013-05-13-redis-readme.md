@@ -217,7 +217,7 @@ Enjoy!
 
 
 
-##参考来源
+## 参考来源
 
 * [Redis源码包中README文件][Redis源码包中README文件]
 

@@ -19,12 +19,12 @@ categories: flume kafka elasticsearch
 
 初步选定Flume 1.6.0分支中的flume-ng-kafka-source部分，这部分代码已经包含在[flume-ng-extends-source][flume-ng-extends-source]。
 
-##编译代码
+## 编译代码
 
 执行命令：`mvn clean package`得到jar包：`flume-ng-extends-source-x.x.x.jar`。
 
 
-##安装插件
+## 安装插件
 
 两类jar包：
 
@@ -40,7 +40,7 @@ categories: flume kafka elasticsearch
 **疑问**：maven打包时，如何将当前jar包以及其依赖包都导出？
 参考[thilinamb flume kafka sink](https://github.com/thilinamb/flume-ng-kafka-sink)
 
-##配置
+## 配置
 
 在properties文件中进行配置，配置样本文件：
 
@@ -68,7 +68,7 @@ categories: flume kafka elasticsearch
 
 
 
-##定制
+## 定制
 
 目标：定制ElasticSearchSink的serializer。
 
@@ -89,7 +89,7 @@ ElasticSearchSink中新的配置参数：
 	* 其他选项：org.apache.flume.sink.elasticsearch.ElasticSearchDynamicSerializer，其直接将body、header构造为一个JSON字符串，添加到ElasticSearch中。
 
 
-##重启
+## 重启
 
 如果终止Flume Agent，然后重启。疑问：
 

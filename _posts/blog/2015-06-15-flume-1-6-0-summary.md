@@ -21,7 +21,7 @@ category: Flume
 
 
 
-##Flume简介
+## Flume简介
 
  Apache Flume是一个高可靠、高可用的分布式的海量日志收集、聚合、传输系统。它可以从不同的日志源采集数据并集中存储。
  
@@ -39,7 +39,7 @@ Tips：
 
 > ad-hoc方案：没有中心控制节点，每个节点都可以用户收集、转发数据。
 
-##Flume 1.6.0新特性
+## Flume 1.6.0新特性
 
 完整的Flume 1.6.0升级的新特性参考[Flume 1.6.0 release page]，几个典型的新特性：
 
@@ -59,7 +59,7 @@ Tips：
 会陆续尝试上述的新特性，`Flume 1.6.0`的版本说明，参考：[Flume 1.6.0 release page].
 
 
-##Flume内部机制
+## Flume内部机制
 
 从下面几个方面来说：
 
@@ -69,14 +69,14 @@ Tips：
 
 
 
-###相关术语
+### 相关术语
 
 ![](/images/flume-1-6-0-summary/flumeAgentModel.png)
 
 Flume Agent内部以Flume Event形式传递数据，具体内部由Source、Channel、Sink多线程相互协调进行。
 
 
-####Flume Event
+#### Flume Event
 
 Flume Event，由 `byte[] body` 和 `Map<String, String> Headers`构成，是Flume Agent内数据流转的基本单元。
 
@@ -104,7 +104,7 @@ Flume中Event对应的源代码如下：
     
     }
 
-####Flume Agent
+#### Flume Agent
 
 Flume Agent，本质就是一个JVM进程，提供了Flume内部Source、Channel、Sink线程的运行环境。
 
@@ -120,7 +120,7 @@ Tips：
 
 
 
-####核心概念：Interceptor
+#### 核心概念：Interceptor
 
 > 用于Source的一组Interceptor，按照预设的顺序在必要地方装饰和过滤events。
 
@@ -130,7 +130,7 @@ Tips：
 
 
 
-####核心概念：Channel Selector
+#### 核心概念：Channel Selector
 
 channel selectors：用于设定Source中Event送入哪个Channel，通常是依照Event中的`Headers`下的具体属性，来决定Event送入哪个Channel，`channel selectors`通常有 3 种类型：
 
@@ -143,7 +143,7 @@ channel selectors：用于设定Source中Event送入哪个Channel，通常是依
 
 
 
-####核心概念：Sink Processor
+#### 核心概念：Sink Processor
 
 > 多个Sink可以构成一个Sink Group。一个Sink Processor负责从一个指定的Sink Group中激活一个Sink。Sink Processor可以通过组中所有Sink实现负载均衡；也可以在一个Sink失败时转移到另一个。
 
@@ -158,7 +158,7 @@ channel selectors：用于设定Source中Event送入哪个Channel，通常是依
 
 
 
-###内部结构
+### 内部结构
 
 单个Flume Agent的内部结构：
 
@@ -184,7 +184,7 @@ channel selectors：用于设定Source中Event送入哪个Channel，通常是依
 
 
 
-###可靠性
+### 可靠性
 
 几点：
 
@@ -221,7 +221,7 @@ channel selectors：用于设定Source中Event送入哪个Channel，通常是依
 
 
 
-##参考来源
+## 参考来源
 
 * [Flume 1.6.0 release page]
 * [Flume User Guide]

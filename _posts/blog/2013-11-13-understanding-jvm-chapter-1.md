@@ -5,11 +5,11 @@ description: Java的特点、发展历程、当前发展定位
 category: JVM
 ---
 
-##Java几个特点
+## Java几个特点
 
 从Java语言的几个特点说起：
 
-###一次编写，到处执行
+### 一次编写，到处执行
 
 Java：`Write Once，Run Anywhere`，归根结底是在JVM上运行的。整体几个过程：
 
@@ -27,7 +27,7 @@ Java：`Write Once，Run Anywhere`，归根结底是在JVM上运行的。整体�
 
 
 
-###内存管理
+### 内存管理
 
 Java提供相对安全的内存管理和访问机制，主要是几个术语：
 
@@ -37,7 +37,7 @@ Java提供相对安全的内存管理和访问机制，主要是几个术语：
 
 **疑问**：程序占用的内存，不用主动释放？例如：`obj = new Class()`;
 
-###热点代码
+### 热点代码
 
 Java实现了热点代码检测、运行时编译及优化，能够实现：Java应用程序随应用运行时间的增加而获得更高的性能。
 
@@ -48,13 +48,13 @@ Java实现了热点代码检测、运行时编译及优化，能够实现：Java
 
 
 
-###第三方类库
+### 第三方类库
 
 Java有丰富多样的第三方类库，实现各种功能。（举几个例子？）
 
 
 
-##两个名词：JDK、JRE
+## 两个名词：JDK、JRE
 
 说两个术语JDK和JRE：
 
@@ -78,7 +78,7 @@ Java有丰富多样的第三方类库，实现各种功能。（举几个例子�
 	* Java ME 6；
 
 
-##JDK的发展过程
+## JDK的发展过程
 
 * JAVA，1995年诞生；
 * JDK 1.0（1996），纯解释执行的Java虚拟机实现（Classic VM）；
@@ -121,7 +121,7 @@ Java有丰富多样的第三方类库，实现各种功能。（举几个例子�
 		* OpenJDK 1.7 与 Sun JDK 1.7 的代码基本一致
 
 
-##JVM
+## JVM
 
 几个熟知的Java Virtual Machine：
 
@@ -129,7 +129,7 @@ Java有丰富多样的第三方类库，实现各种功能。（举几个例子�
 * Exact VM
 * HotSpot VM
 
-###HotSpot VM
+### HotSpot VM
 
 重点说一下HotSpot VM，两个点：
 
@@ -150,7 +150,7 @@ Java有丰富多样的第三方类库，实现各种功能。（举几个例子�
 
 JVM，java运行环境，语言自身实现其运行环境，元循环，Meta-Circular，两个例子：JavaInJava虚拟机，Maxine VM。
 
-###Google Android Dalvik VM
+### Google Android Dalvik VM
 
 说几点吧，列一下清晰一些：
 
@@ -166,15 +166,15 @@ Dalvik VM与Java之间有千丝万缕的联系：
 * 可以直接使用大部分Java的API
 * Android 2.2中已经实现及时编译器；
 
-##JAVA当前重要进展
+## JAVA当前重要进展
 
-###多核并行
+### 多核并行
 
-####背景
+#### 背景
 
 CPU硬件的发展方向，已经从单CPU高频率转向为多核心，随着多核时代来临，软件开发越来越关注并行编程领域。
 
-####JAVA API与Lambda函数式编程
+#### JAVA API与Lambda函数式编程
 
 JDK 1.5中引入java.util.concurrent包，实现一个粗粒度的并发框架；JDK 1.7中引入java.util.concurrent.forkjoin包，Folk/Join模式是处理并行编程的经典方法。
 
@@ -183,13 +183,13 @@ JDK 1.5中引入java.util.concurrent包，实现一个粗粒度的并发框架�
 极其重要进展：Java 8 中，提供Lambda函数式编程，函数式编程的重要有点是：程序天然的适合并行运行；这将有助于Java在多核时代继续保持主流语言的地位。
 
 
-###64位JVM
+### 64位JVM
 
-####背景
+#### 背景
 
 主流CPU开始支持64位架构，一个问题：32位、64位CPU是怎么衡量的？
 
-####效果
+#### 效果
 
 64位虚拟机有什么好处？更多的计算资源？更多的内存空间？超过4G的内存空间，就必须要使用64位JVM？
 
@@ -200,12 +200,12 @@ JDK 1.5中引入java.util.concurrent包，实现一个粗粒度的并发框架�
 
 上面的结果是：64位JVM占用更多内存（额外10%~30%）。*（具体什么原因？）*
 
-##编译自己的JDK
+## 编译自己的JDK
 
 JDK的很多底层方法是本地化的（native），如何跟踪这些方法？需要编译一下JDK源码。
 
 
-##参考来源
+## 参考来源
 
 * [深入理解Java虚拟机][深入理解Java虚拟机]
 

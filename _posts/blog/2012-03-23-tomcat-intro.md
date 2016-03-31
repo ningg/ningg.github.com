@@ -15,13 +15,13 @@ category: tomcat
 	* web在Tomcat中的处理过程；
 
 
-##简介
+## 简介
 
 Apache Tomcat，开源软件*（这句是废话）*，支持Java Servlet和JavaServer Pages（JSP）的实现，具体Java Servlet和JavaServer Pages specification是由JCP（Java Community Process）主导制定。Tomcat不是完整意义上的Java EE服务器，没有提供完整的Java EE API支持*（实际上，TomEE服务器支持完成的Java EE API）*，Tomcat对Java开源框架Structs、Spring、Hibernate等，实现完美支持。
 
 	
 
-##安装、启动Tomcat
+## 安装、启动Tomcat
 
 几个步骤：
 
@@ -44,14 +44,14 @@ Apache Tomcat，开源软件*（这句是废话）*，支持Java Servlet和JavaS
 
 
 
-##Tomcat常用配置
+## Tomcat常用配置
 
 Tomcat依赖`server.xml`文件来启动Sserver，一个Tomcat实例，核心就是启动容器Catalina。
 
 Tomcat部署Webapp时，依赖`context.xml`和`web.xml`来部署Web应用。实际上，在部署任何一个webapp时，Tomcat自带的context.xml以及web.xml都会生效，同时webapp自带的META-INF/context.xml和WEB-INF/web.xml也会定义每个webapp的特定行为。
 
 
-###web.xml
+### web.xml
 
 此处的web.xml文件，也是由Servlet官方规范来限定的，更多信息可参考：
 
@@ -147,7 +147,7 @@ web.xml文件中，示例代码片段：
 
 **思考**：上述代码中，当请求url为`index.jsp`时，上述两个Servelt如何进行处理？RE：单独整理了一篇文章。
 
-###server.xml
+### server.xml
 
 > server.xml配置文件详解，官网地址：[Apache Tomcat 8 Configuration Reference][Apache Tomcat 8 Configuration Reference]
 
@@ -175,7 +175,7 @@ Tomcat的server.xml文件基本结构：
 		</Service>
 	</Server>
 
-####Server
+#### Server
 
 Server是Catalina Servlet容器。属性如下：
 
@@ -185,17 +185,17 @@ Server是Catalina Servlet容器。属性如下：
 * shutdown：通过指定的地址（address）、端口（port）关闭Tomcat所需的字符串。修改shutdown的值，对shutdown.bat无影响
 
 
-####Listener
+#### Listener
 
 Listener即监听器，负责监听特定的事件，当特定事件触发时，Listener会捕捉到该事件，并做出相应处理。Listener通常用在Tomcat的启动和关闭过程。Listener可嵌在Server、Engine、Host、Context内。常用属性：
 
 * className：指定实现org.apache.catalina.LifecycleListener接口的类
 
-####GlobalNamingResources
+#### GlobalNamingResources
 
 GlobalNamingResources用于配置JNDI。
 
-####Service
+#### Service
 
 Service包装Executor、n个Connector、1个Engine，Connector获取request，Engine处理request。Server可以包含多个Service组件。
 常用属性：
@@ -204,13 +204,13 @@ Service包装Executor、n个Connector、1个Engine，Connector获取request，En
 * name：Service的名字
 
 
-####Executor
+#### Executor
 
 
 Executor即Service提供的线程池，供Service内各组件使用，特别是Connector组件。
 
 
-####Connector
+#### Connector
 
 Connector是Tomcat接收请求的入口，每个Connector有自己专属的监听端口；Connector有两种：HTTP Connector和AJP Connector。
 常用属性：
@@ -227,7 +227,7 @@ HTTP与AJP：
 * HTTP：监听browser发送的http请求；
 * AJP：其他WebServer（Apache）的servlet/jsp代理请求；
 
-####Engine
+#### Engine
 
 Engine负责处理Service内的所有请求。它接收来自Connector的请求，并决定传给哪个Host来处理，Host处理完请求后，将结果返回给Engine，Engine再将结果返回给Connector。
 常用属性：
@@ -248,7 +248,7 @@ Engine负责处理Service内的所有请求。它接收来自Connector的请求�
 * Service内必须包含一个Engine组件
 * Service内的Connector共享一个Engine
 
-####Host
+#### Host
 
 关于Host，几点：
 
@@ -279,7 +279,7 @@ Host负责管理一个或多个Web项目。常用属性：
 	* startStopThreads默认值为1
 	* startStopThreads为默认值时，Host只提供一个线程，用于部署Host下的所有Web项目。如果Host下的Web项目较多，由于只有一个线程负责部署这些项目，因此这些项目将依次部署，最终导致Tomcat的启动时间较长。此时，修改startStopThreads值，增加Host部署Web项目的并行线程数，可降低Tomcat的启动时间
 
-####Context
+#### Context
 
 几点：
 
@@ -305,11 +305,11 @@ Host负责管理一个或多个Web项目。常用属性：
 	* 通常项目开发过程中设为true，项目发布的则设为false
 * crossContext：设置为true，该Web项目的Session信息可以共享给同一host下的其他Web项目。默认为false
 
-####Cluster
+#### Cluster
 
 Tomcat集群配置。
 
-####Realm
+#### Realm
 
 Realm可以理解为包含用户、密码、角色的”数据库”。Tomcat定义了多种Realm实现：
 
@@ -318,13 +318,13 @@ Realm可以理解为包含用户、密码、角色的”数据库”。Tomcat定
 * JNDI Directory Realm
 * UserDatabase Realm等
 
-####Valve
+#### Valve
 
 Valve可以理解为Tomcat的拦截器，而我们常用filter为项目内的拦截器。Valve可以用于Tomcat的日志、权限等。Valve可嵌在Engine、Host、Context内。
 
 
 
-####小结：Request处理过程
+#### 小结：Request处理过程
 
 request为http://localhost:8080/examples/index.html，回顾一下Tomcat处理请求的流程图：
 
@@ -347,7 +347,7 @@ Server和Service充当的就是包装的角色：
 
 
 
-###context.xml
+### context.xml
 
 所有host下Context的默认配置信息；默认配置如下：
 
@@ -357,11 +357,11 @@ Server和Service充当的就是包装的角色：
 
 说明：每个Context代表了运行在Host上的一个Web app。
 
-###tomcat-users.xml
+### tomcat-users.xml
 
 Realm认证时用到的相关角色、用户和密码等信息；Tomcat自带的manager默认情况下会用到此文件；在Tomcat中添加/删除用户，为用户指定角色等将通过编辑此文件实现；
 
-###其他配置文件
+### 其他配置文件
 
 其他配置文件：
 
@@ -369,7 +369,7 @@ Realm认证时用到的相关角色、用户和密码等信息；Tomcat自带的
 * catalina.properties：Tomcat内部package的定义及访问相关的控制，也包括对类加载器加载内容的控制，Tomcat启动时，会事先读取此文件的配置；
 
 
-##Tomcat基本原理
+## Tomcat基本原理
 
 
 
@@ -386,7 +386,7 @@ Realm认证时用到的相关角色、用户和密码等信息；Tomcat自带的
 疑问：Tomcat运行时，是一个Process，那在Tomcat容器中部署的web应用，是作为process启动的？还是直接thread？
 
 
-##Tomcat Server处理一个HTTP请求的过程
+## Tomcat Server处理一个HTTP请求的过程
 
 
 假设来自客户的请求为：
@@ -409,7 +409,7 @@ Realm认证时用到的相关角色、用户和密码等信息；Tomcat自带的
 1. Engine把HttpServletResponse对象返回给Connector
 1. Connector把HttpServletResponse对象返回给客户browser
 
-##单实例应用程序配置一例
+## 单实例应用程序配置一例
 
 规划： 
 
@@ -537,7 +537,7 @@ Realm认证时用到的相关角色、用户和密码等信息；Tomcat自带的
 
 
 
-##参考来源
+## 参考来源
 
 * [Apache Tomcat][Apache Tomcat]
 * [Apache Tomcat 7-more about the cat][Apache Tomcat 7-more about the cat]
@@ -552,7 +552,7 @@ Realm认证时用到的相关角色、用户和密码等信息；Tomcat自带的
 
 
 
-##杂谈
+## 杂谈
 
 重走web路，一年多没碰web的东西，该忘的都忘了，用到的时候，需要重新查阅，现在只有解决问题的基本思路，索性借着这次重新使用java web的机会把整体的内容再过一遍。
 

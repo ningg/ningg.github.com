@@ -27,9 +27,9 @@ categories: web java
 	* web.xml文件
 
 
-##常见问题
+## 常见问题
 
-###Servlet vs. JSP
+### Servlet vs. JSP
 
 简要列几点：*（未整理完）*
 
@@ -53,7 +53,7 @@ categories: web java
 * [Difference Between Servlet and JSP][Difference Between Servlet and JSP]
 * [Java Community Process][Java Community Process]
 
-###Java EE
+### Java EE
 
 简要几点：
 
@@ -97,7 +97,7 @@ categories: web java
 * [Java EE at a Glance][Java EE at a Glance]
 * [Java EE 7 Whitepaper][Java EE 7 Whitepaper]
 
-####如何学习Java EE？
+#### 如何学习Java EE？
 
 有两种观点：
 
@@ -111,12 +111,12 @@ categories: web java
 
 更多内容，参考：[What to learn for making Java web applications in Java EE 6?][What to learn for making Java web applications in Java EE 6?]
 
-####Java EE Web Profile vs. Full Platform
+#### Java EE Web Profile vs. Full Platform
 
 一个是简介版，包含的jar包较少，另一个是完整版，包含Java EE的完整jar包。JCP中有两者的规范。更多信息参考[Introducing the Java EE Web Profile][Introducing the Java EE Web Profile]。
 
 
-###Spring web
+### Spring web
 
 几个疑问：
 
@@ -150,14 +150,14 @@ categories: web java
 
 
 
-###web.xml文件
+### web.xml文件
 
 几个疑问：
 
 * 为什么要存在web.xml？web.xml文件的放置位置？*（为什么有web.xml？）*
 * web.xml内部结构以及内容？*（怎么写web.xml文件？）*
 
-####文件web.xml存在的意义
+#### 文件web.xml存在的意义
 
 几点：
 
@@ -165,11 +165,11 @@ categories: web java
 * 位置：`APP_ROOT/WEB-INF/web.xml`，应用部署时的说明文件（Deployment Descriptor）；参考：[JSR315][JSR315]中Web Applications下Deployment Hierarchies章节内容；
 * 当没有servlet、filter、listener等时，不比配置web.xml文件；即，只有静态文件和JSP页面时，可以没有web.xml文件；参考：[JSR315][JSR315]中Web Applications下Inclusion of a web.xml Deployment Descriptor章节内容；
 
-####如何写web.xml文件？
+#### 如何写web.xml文件？
 
 直接参考：[JSR315][JSR315]中Deploment Descriptor章节内容即可。*（会针对web.xml文件单独整理一篇博文）*
 
-####web.xml文件与WAR包间关系
+#### web.xml文件与WAR包间关系
 
 
 web.xml是遵循servlet规范的，war包是否也是符合servlet规范的？有一篇[博文](http://ningg.top/java-war-format/) 中提及，但并没有深入讨论，仅参考。
@@ -177,7 +177,7 @@ web.xml是遵循servlet规范的，war包是否也是符合servlet规范的？�
 思考：jar、war、ear文件组织结构的用途？原始参考来源？
 
 
-##闲聊
+## 闲聊
 
 
 当前java & scala的web框架Play，已经逐渐流行起来了，如果继续做web方面内容，需要了解、熟悉一下：
@@ -186,7 +186,7 @@ web.xml是遵循servlet规范的，war包是否也是符合servlet规范的？�
 
 
 
-##参考来源
+## 参考来源
 
 * [Difference Between Servlet and JSP][Difference Between Servlet and JSP]
 * [Java EE at a Glance][Java EE at a Glance]

@@ -16,7 +16,7 @@ category: MyBatis
 
 
 
-##一级缓存
+## 一级缓存
 
 一级缓存是Session会话级别的，几点：
 
@@ -37,7 +37,7 @@ category: MyBatis
 
 
 
-##二级缓存
+## 二级缓存
 
 
 MyBatis并不是简单地对整个Application就只有一个Cache缓存对象，它将缓存划分的更细，即是Mapper级别的，即每一个Mapper都可以拥有一个Cache对象，具体如下：
@@ -53,7 +53,7 @@ MyBatis对二级缓存的支持粒度很细，它会指定某一条查询语句�
 
 
 
-##一级缓存和二级缓存的使用顺序
+## 一级缓存和二级缓存的使用顺序
 
 
 请注意，如果你的MyBatis使用了二级缓存，并且你的Mapper和select语句也配置使用了二级缓存，那么在执行select查询的时候，MyBatis会先从二级缓存中取输入，其次才是一级缓存，即MyBatis查询数据的顺序是：
@@ -62,7 +62,7 @@ MyBatis对二级缓存的支持粒度很细，它会指定某一条查询语句�
 
 
 
-##todo
+## todo
 
 
 Hibernate vs. MyBatis
@@ -71,7 +71,7 @@ Hibernate vs. MyBatis
 * [Hibernate 与mybatis的区别]
 
 
-##参考来源
+## 参考来源
 
 
 * [深入理解MyBatis原理]

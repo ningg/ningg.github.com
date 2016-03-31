@@ -9,7 +9,7 @@ category: TCP
 todo
 
 
-##三次握手和四次握手
+## 三次握手和四次握手
 
 
 ![](/images/tcp-protocol/connect-and-disconnect.png)
@@ -27,7 +27,6 @@ todo
 
 
 
-##参考来源
 
 
 
@@ -41,7 +40,7 @@ todo
 
 
 
-##参考来源
+## 参考来源
 
 * [TCP的三次握手(建立连接）和四次挥手(关闭连接）]
 

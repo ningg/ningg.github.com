@@ -16,7 +16,7 @@ category: WordPress
 > 基本思路：参考[官方网站][WordPress中文站]进行。
 
 
-##安装WordPress
+## 安装WordPress
 
 几点：
 
@@ -32,7 +32,7 @@ todo：
 * 安装之后，将其添加为服务，并且设置为：开机自动启动；
 
 
-###安装WordPress
+### 安装WordPress
 
 todo
 
@@ -48,7 +48,7 @@ todo
 
 
 
-###WordPress本地化
+### WordPress本地化
 
 todo：
 
@@ -75,7 +75,7 @@ todo：
 
 
 
-##参考来源
+## 参考来源
 
 * [WordPress中文站][WordPress中文站]
 

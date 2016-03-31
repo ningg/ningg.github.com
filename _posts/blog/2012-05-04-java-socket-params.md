@@ -9,7 +9,7 @@ category: java
 
 Java Socket网络编程中涉及的参数详解：
 
-##backlog
+## backlog
 
 backlog：ServerSocket对应的最大的客户端等待队列长度，即，当ServerSocket.accept()所在线程阻塞时，新的Client仍可以与Server建立连接，只是这些连接会被放置在Client等待队列中，backlog参数设定了这一等待队列的最大长度；示例代码如下：
 
@@ -49,7 +49,7 @@ backlog：ServerSocket对应的最大的客户端等待队列长度，即，当S
 **思考**：如何调用线程池？单独写一篇博客；
 
 
-##（todo）
+## （todo）
 
 
 
@@ -65,7 +65,7 @@ backlog：ServerSocket对应的最大的客户端等待队列长度，即，当S
 
 
 
-##参考来源
+## 参考来源
 
 
 * [Java网络编程中Socket参数详解][Java网络编程中Socket参数详解]

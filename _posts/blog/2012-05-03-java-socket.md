@@ -7,21 +7,21 @@ category: java
 ---
 
 
-##长连接、短连接
+## 长连接、短连接
 
-###短连接
+### 短连接
 
 
 连接->传输数据->关闭连接
 
 
-###长连接
+### 长连接
 
 一般长连接相对短连接而言的，长连接在传输完数后不关闭连接，而不断的发送包保持连接等待处理下一个数据包。
 
 连接->传输数据->保持连接 -> 传输数据-> 。。。 ->关闭连接。
 
-###适用场景
+### 适用场景
 
 短连接、长连接的适用场景如下：
 
@@ -30,11 +30,11 @@ category: java
 
 
 
-##Socket通信
+## Socket通信
 
 对于即时类应用或者即时类游戏，HTTP协议很多时候无法满足我们的需求。这时，Socket对于我们来说就比较使用。Socket实际上以一个IP:PORT，是通信句柄。
 
-###原理
+### 原理
 
 
 Java Socket原理类似于打电话过程：
@@ -45,7 +45,7 @@ Java Socket原理类似于打电话过程：
 1. 挂断
 
 
-###建立Socket通信模型
+### 建立Socket通信模型
 
 首先，在服务器端建立一个ServerSocket对象，用于监听客户端的连接请求：
 
@@ -73,10 +73,10 @@ Socket与ServerSocket的交互过程如下：
 ![](/images/java-socket/socket-serversocket.png)
 
 
-##Socket
+## Socket
 
 
-###构造函数
+### 构造函数
 
 Socket的构造函数如下：
 
@@ -89,7 +89,7 @@ Socket的构造函数如下：
 除去第一种不带参数的之外，其它构造函数会尝试建立与服务器的连接。如果失败会抛出IOException错误。如果成功，则返回Socket对象。
 InetAddress是一个用于记录主机的类，其静态getHostByName(String msg)可以返回一个实例，其静态方法getLocalHost()也可以获得当前主机的IP地址，并返回一个实例。Socket(String host, int port, InetAddress localAddress, int localPort)构造函数的参数分别为目标IP、目标端口、绑定本地IP、绑定本地端口。
  
-###Socket方法
+### Socket方法
 
 Socket的方法如下：
 
@@ -102,7 +102,7 @@ Socket的方法如下：
 
 值得注意的是，在这些方法里面，最重要的就是`getInputStream()`和`getOutputStream()`了。
  
-###Socket状态
+### Socket状态
 
 Socket几个方法：
 
@@ -114,7 +114,7 @@ Socket几个方法：
 
 	boolean isConnection=socket.isConnected() && !socket.isClosed();   //判断当前是否处于连接
 
-###半关闭Socket
+### 半关闭Socket
 
 很多时候，我们并不知道在获得的输入流里面到底读多长才结束。下面是一些比较普遍的方法：
 
@@ -127,9 +127,9 @@ Socket几个方法：
 
 
 
-##ServerSocket
+## ServerSocket
 
-###构造函数
+### 构造函数
 
 ServerSocket的构造函数：
 
@@ -146,7 +146,7 @@ ServerSocket的构造函数：
 1. bindAddr用于绑定服务器IP，为什么会有这样的设置呢，譬如有些机器有多个网卡。
 1. ServerSocket一旦绑定了监听端口，就无法更改。ServerSocket()可以实现在绑定端口前设置其他的参数。
  
-###单线程的ServerSocket
+### 单线程的ServerSocket
 
 	public void service(){
 		while(true){
@@ -163,7 +163,7 @@ ServerSocket的构造函数：
 		}
 	}
  
-###多线程的ServerSocket
+### 多线程的ServerSocket
 
 多线程的好处不用多说，而且大多数的场景都是多线程的，无论是我们的即时类游戏还是IM，多线程的需求都是必须的。下面说说实现方式：
 
@@ -216,11 +216,11 @@ ServerSocket的构造函数：
 ![](/images/java-socket/socket-multi-thread.jpg)
 
 
-##完整Demo
+## 完整Demo
 
 此处的Demo代码已经提交到GitHub上simple-web-demo下learn-java-basic工程中top.ningg.java.socket包下。
 
-###SocketOfServer
+### SocketOfServer
 
 SocketOfServer.java文件，服务器端监听Socket连接：
 
@@ -256,7 +256,7 @@ SocketOfServer.java文件，服务器端监听Socket连接：
 		}
 	}
 
-###ServerHandler
+### ServerHandler
 
 SocketOfServer.java文件，服务器端处理socket连接：
 
@@ -310,7 +310,7 @@ SocketOfServer.java文件，服务器端处理socket连接：
 		
 	}
 
-###SocketOfClient
+### SocketOfClient
 
 SocketOfClient.java客户端，向服务器端发起socket连接：
 
@@ -372,7 +372,7 @@ SocketOfClient.java客户端，向服务器端发起socket连接：
 
 
 
-##参考来源
+## 参考来源
 
 
 * [Java Socket对象原理的详细介绍][Java Socket对象原理的详细介绍]

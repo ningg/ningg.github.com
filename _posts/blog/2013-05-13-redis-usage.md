@@ -21,11 +21,11 @@ category: redis
 	* 如何定位当前Redis性能
 	* 调优的注意事项？
 
-##下载与安装
+## 下载与安装
 
 此处使用的Redis版本为：redis-3.0.1.tar.gz
 
-###make
+### make
 
 基本命令：
 
@@ -48,7 +48,7 @@ category: redis
 
 > 备注：上述redis的安装包中有一个README文件，其中，包含了编译、安装、运行Redis的简要过程。
 
-###make install
+### make install
 
 上面完成了Redis源码编译，还需要安装，默认安装到`/usr/local/bin`：
 
@@ -89,7 +89,7 @@ category: redis
 	Successfully added to chkconfig!
 	Successfully added to runlevels 345!
 
-###检测Redis服务状态
+### 检测Redis服务状态
 
 查看Redis是否启动：
 
@@ -109,7 +109,7 @@ category: redis
 	
 注：Service是以名字来区分的，修改名字即更换Service的标识。
 
-###使用redis-cli登录
+### 使用redis-cli登录
 
 敲一个小例子：
 
@@ -122,7 +122,7 @@ category: redis
 
 
 
-##Redis基本操作
+## Redis基本操作
 
 几点：
 
@@ -145,7 +145,7 @@ Tips：
 
 > 通过`redis-cli`进入命令行交互环境之后，输入的`select 3`以及`keys *`等命令，**不要使用`;`结尾，否则出错**。
 
-###查询Redis的版本
+### 查询Redis的版本
 
 选项`-v`，具体如下：
 
@@ -168,7 +168,7 @@ Tips：
 
 
 
-##Redis中操作数据-CRUD
+## Redis中操作数据-CRUD
 
 针对不同类型的key，可进行的操作，参考：[Redis 命令参考(中文)][Redis 命令参考(中文)]
 
@@ -194,7 +194,7 @@ Tips：
 
 
 
-##参考来源
+## 参考来源
 
 * [安装redis及常见问题][安装redis及常见问题]
 * [redis安装][redis安装]

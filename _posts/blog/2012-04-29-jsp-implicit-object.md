@@ -12,13 +12,13 @@ category: jsp
 * 使用内置对象的典型场景；
 
 
-##JSP内置对象
+## JSP内置对象
 
 
 在JSP页面中不需要声明，可以直接使用，是JSP容器为每个JSP页面提供的Java对象。
 
 
-###request对象
+### request对象
 
 request对象是javax.servlet.http.HttpServletRequest 类的实例。每当客户端请求一个JSP页面时，JSP引擎就会制造一个新的request对象来代表这个请求。
 
@@ -46,14 +46,14 @@ request对象提供了一系列方法来获取HTTP头信息，cookies，HTTP方�
 
 
 
-###response对象
+### response对象
 
 response对象是javax.servlet.http.HttpServletResponse类的实例。当服务器创建request对象时会同时创建用于响应这个客户端的response对象。
 
 response对象也定义了处理HTTP头模块的接口。通过这个对象，开发者们可以添加新的cookies，时间戳，HTTP状态码等等。
 
 
-###session对象
+### session对象
 
 session对象是 javax.servlet.http.HttpSession 类的实例。和Java Servlets中的session对象有一样的行为。
 session对象指的是客户端与服务器的一次会话，从客户连到服务器的一个WebApplication开始，直到客户端与服务器断开连接为止。
@@ -75,7 +75,7 @@ session对象指的是客户端与服务器的一次会话，从客户连到服�
 
 
 
-###application对象
+### application对象
 
 application对象直接包装了servlet的ServletContext类的对象，是javax.servlet.ServletContext 类的实例。
 这个对象在JSP页面的整个生命周期中都代表着这个JSP页面。这个对象在JSP页面初始化时被创建，随着jspDestroy()方法的调用而被移除。
@@ -84,7 +84,7 @@ application对象实现了用户间数据的共享，可存放全局变量。它
 
 
 
-##整理和对比
+## 整理和对比
 
 JSP提供的内置对象如下：
 
@@ -100,14 +100,14 @@ JSP提供的内置对象如下：
 |page | java.lang.Object | page |
 |exception | java.lang.Throwable  |page |
 
-###属性的设置和取得
+### 属性的设置和取得
 
 设置和获取属性：
 
 * 设置属性：`public void setAttribute(String name，Object.value)`
 * 取得属性：`public void getAttribute(String name)`
 
-###四类范围
+### 四类范围
 
 几类范围：
 
@@ -119,11 +119,11 @@ JSP提供的内置对象如下：
 
 
 
-##常见问题
+## 常见问题
 
 
 
-###Request中getContextPath、getServletPath、getRequestURI、getRealPath的区别
+### Request中getContextPath、getServletPath、getRequestURI、getRealPath的区别
 
 假定你的web application 名称为news,你在浏览器中输入请求路径：
 

@@ -8,7 +8,7 @@ category: Java
 
 容器是Java语言中比较重要的一部分，Java中容器类，由两个接口派生而来：Collection和Map。
 
-##Collection vs Collections
+## Collection vs Collections
 
 首先，Collection 和 Collections 是两个不同的概念。
 
@@ -20,7 +20,7 @@ JDK不提供Collection接口的具体实现，而是提供了更加具体的子�
 * 无参的构造方法（void）
 * 带有Collection类型单参数构造方法，用于创建一个具有其参数相同元素新的Collection及其实现类等。*（允许容器之间相互的复制）*
 
-##Collection的类层次结构
+## Collection的类层次结构
 
 下面的图是关于Collection的类的层次结构。
 
@@ -28,7 +28,7 @@ JDK不提供Collection接口的具体实现，而是提供了更加具体的子�
 
  
 
-###Set：
+### Set：
 
 特点：
 
@@ -38,7 +38,7 @@ JDK不提供Collection接口的具体实现，而是提供了更加具体的子�
 * 常用Set：HashSet、TreeSet
 
 
-###List：
+### List：
 
 几点：
 
@@ -48,7 +48,7 @@ JDK不提供Collection接口的具体实现，而是提供了更加具体的子�
 * 常用List：ArrayList、LinkedList、Vector、Stack等
 
 
-###Queue：
+### Queue：
 
 几点：
 
@@ -57,7 +57,7 @@ JDK不提供Collection接口的具体实现，而是提供了更加具体的子�
 
 
 
-##Map的类的层次结构
+## Map的类的层次结构
 
 下面的图是Map的层次结构图
 
@@ -71,7 +71,7 @@ Map，几点：
 * 常用Map：HashMap、TreeMap、HashTable、Properties、EnumMap。
 
 
-##不同Collection的对比
+## 不同Collection的对比
 
 todo：图形化显示下面的实现机制
 
@@ -81,7 +81,7 @@ todo：图形化显示下面的实现机制
 * HashTable
 
 
-###ArrayList的实现机制
+### ArrayList的实现机制
 
 查看源码描述，几点：
 
@@ -100,7 +100,7 @@ Tips：
 > `Collections.synchronizedList`本质：为原始方法添加同步(`synchronized`)锁代理，相当远在原始对象之外封装了一层。
 
 
-###LinkedList的实现机制
+### LinkedList的实现机制
 
 查看源码，几点：
 
@@ -109,7 +109,7 @@ Tips：
 * add和remove元素，操作效率高，因为是链表；但get、set操作，由于需要操作指针，效率相对较低。
 
 
-###Vector的实现机制
+### Vector的实现机制
 
 查看源码，`Vector`与`ArrayList`基本类似，几点：
 
@@ -120,7 +120,7 @@ Tips：
 
 
 
-###HashMap的实现机制
+### HashMap的实现机制
 
 几点：
 
@@ -148,7 +148,7 @@ Tips：
 
 
 
-###HashTable的实现机制
+### HashTable的实现机制
 
 几点：
 
@@ -160,7 +160,7 @@ Tips：
 * 默认容量，按照`2 x Old + 1`的方式扩充；
 
 
-###ConcurrentHashMap的实现机制
+### ConcurrentHashMap的实现机制
 
 
 
@@ -193,7 +193,7 @@ ConcurrentHashMap是由Segment数组结构和HashEntry数组结构组成。Segme
 
 
 
-###TreeMap的实现机制
+### TreeMap的实现机制
 
 几点：
 
@@ -206,7 +206,7 @@ Tips：
 > 平衡二叉树：如果是排序好的搜索二叉树，则，树的期望高度为`log2(n)`，此时，搜索效率为`O(log(n))`，而极端情况下，如果搜索效率退化为`O(n)`，为避免这一现象，要求树的左右子树高度差值< 1，满足此条件的树，即为：平衡二叉树。
 
 
-###HashSet实现机制
+### HashSet实现机制
 
 
 通过查看源码，几点：
@@ -217,7 +217,7 @@ Tips：
 * HashSet本质：在HashMap外进行包装，丢弃HashMap中的value，只保留key；
 
 
-###TreeSet
+### TreeSet
 
 几点：
 
@@ -233,13 +233,13 @@ Tips：
 
 
 
-##对比
+## 对比
 
 
 
 
 
-###Arraylist vs. Linkedlist
+### Arraylist vs. Linkedlist
 
 几点：
 
@@ -250,7 +250,7 @@ Tips：
 
 
 
-###Vector vs. ArrayList
+### Vector vs. ArrayList
 
 几点：
 
@@ -264,7 +264,7 @@ Tips：
 
 
 
-###HashMap vs. HashTable
+### HashMap vs. HashTable
 
 
 几点：
@@ -283,7 +283,7 @@ Tips：
 	* HashMap，`2 x Old`
 
 
-###HashMap vs. HashTable vs. ConcurrentHashMap
+### HashMap vs. HashTable vs. ConcurrentHashMap
 
 * 线程安全：HashMap不是线程安全的
 * 并发性能：
@@ -297,7 +297,7 @@ Tips：
 
 
 
-###HashMap vs. TreeMap
+### HashMap vs. TreeMap
 
 几点：
 
@@ -319,7 +319,7 @@ Tips：
 
 
 
-###HashSet vs. TreeSet
+### HashSet vs. TreeSet
 
 本质就是HashMap与TreeMap的差异，几点：
 
@@ -330,7 +330,7 @@ Tips：
 
 
 
-###HashMap原理深入
+### HashMap原理深入
 
 todo：*（可以单独写一篇了）*
 
@@ -342,7 +342,7 @@ todo：*（可以单独写一篇了）*
 
 
 
-##参考来源
+## 参考来源
 
 
 * [Java 容器 & 泛型]

@@ -11,7 +11,7 @@ category: tomcat
 * 如何在Eclipse下查看Tomcat的源码？
 * 在Eclipse下，通过源码启动Tomcat？
 
-##Eclipse下查看Tomcat源码
+## Eclipse下查看Tomcat源码
 
 在Tomcat官网上，认真浏览一下，找到[Tomcat8 - Building with Eclipse][Tomcat8 - Building with Eclipse]，简单列几个步骤：
 
@@ -38,7 +38,7 @@ category: tomcat
 
 
 
-##Eclipse下，通过源码启动Tomcat
+## Eclipse下，通过源码启动Tomcat
 
 
 （TODO）
@@ -53,7 +53,7 @@ category: tomcat
 
 
 
-##参考资料
+## 参考资料
 
 * [Tomcat8 - Building with Eclipse][Tomcat8 - Building with Eclipse]
 

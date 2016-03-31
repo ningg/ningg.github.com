@@ -7,12 +7,12 @@ categories: vim
 
 面向实际应用场景，进行梳理：
 
-##常见场景
+## 常见场景
 
 （todo：弄清楚vim的信息源，例如，官网、帮助手册上，如何快速定位下述场景的问题）
 
 
-###修改配色
+### 修改配色
 
 两个地方配置，可修改vim的配色：
 
@@ -37,7 +37,7 @@ categories: vim
 上面理解可能有误，需要参考[Vim Tutorial From Official website][Vim Tutorial From Official website] 进行校验。
 
 
-###高亮检查结果
+### 高亮检查结果
 
 在`~/.vimrc`中进行如下设置：
 
@@ -47,12 +47,12 @@ categories: vim
 
 
 
-###批量注释
+### 批量注释
 
 
 在块选择模式下，进行批量注释和注释的取消；
 
-####批量注释
+#### 批量注释
 
 * `ctrl + v` 进入块选择模式；
 * 移动光标，选择要注释的行；
@@ -60,7 +60,7 @@ categories: vim
 * 按`ESC`，之后再进入`:`，则，完成批量注释；
 
 
-####取消注释
+#### 取消注释
 
 * `ctrl + v` 进入块选择模式；
 * 移动光标，选择多行的行首；
@@ -69,7 +69,7 @@ categories: vim
 
 
 
-###调用`:`下的历史命令
+### 调用`:`下的历史命令
 
 
 （TODO:具体没查询）
@@ -82,7 +82,7 @@ categories: vim
 
 
 
-##快捷键
+## 快捷键
 
 （TODO：参考鸟哥私房菜）
 
@@ -94,7 +94,7 @@ categories: vim
 
 
 
-###光标快速移动
+### 光标快速移动
 
 几种方式：
 
@@ -103,7 +103,7 @@ categories: vim
 * b
 * B
 
-###内容快速查找
+### 内容快速查找
 
 * `#`：查找到的内容，高亮显示
 * `*`：查找到的内容，高亮显示
@@ -115,7 +115,7 @@ categories: vim
 
 
 
-###替换
+### 替换
 
 替换动作：vim中，`:%s/from/to/g`，替换整个文档中的from字符串为to字符串；
 
@@ -124,7 +124,7 @@ categories: vim
 
 
 
-##参考来源
+## 参考来源
 
 
 * [Using Vim Syntax Highlighting][Using Vim Syntax Highlighting]

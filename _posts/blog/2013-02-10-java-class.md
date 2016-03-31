@@ -10,7 +10,7 @@ class与object之间：
 * 什么含义；
 * 什么时候使用；
 
-##class
+## class
 
 **疑问**：几点：
 
@@ -34,13 +34,13 @@ class与object之间：
 
 
 
-##Object
+## Object
 
 
 Java中，Object是所有类的父类，可以显式继承Object类，也可以隐式继承Object类。
 
 
-###Object类的方法
+### Object类的方法
 
 Object自带的方法：
 
@@ -55,17 +55,17 @@ Object自带的方法：
 * finalize()：GC时，当确定该对象的引用不存在时，由垃圾回收器调用；
 
 
-###clone()方法
+### clone()方法
 
 一个对象调用`clone()`方法，要求类必须继承`Cloneable`接口。
 
-####深克隆 vs. 浅克隆
+#### 深克隆 vs. 浅克隆
 
 如果对象中有其他对象的引用，使用浅拷贝无法完成对象的整个克隆，因为如果使用浅拷贝，只是对象的引用得到的拷贝，而两个引用是指向了同一个对象，对其中一个修改还是会影响到另外一个对象。这时后我们需要引入深拷贝，深拷贝实现起来也比较简单，只需要对对象中的对象再次进行clone操作。
 
 
 
-###equals()方法
+### equals()方法
 
 equals方法，需要满足以下三点： 
 
@@ -74,7 +74,7 @@ equals方法，需要满足以下三点：
 1. 传递性：就是说a.equals(b)为true，并且b.equals(c)为true的话，a.equals(c)也必须为true。 
 
 
-###hashCode()方法
+### hashCode()方法
 
 重写hashCode()的原则： 
 
@@ -98,7 +98,7 @@ equals方法，需要满足以下三点：
 
 
 
-##参考来源
+## 参考来源
 
 * [Retrieving Class Objects][Retrieving Class Objects]
 * [Java中equals方法，判断两个对象是否相等]

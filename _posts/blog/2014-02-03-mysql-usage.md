@@ -7,7 +7,7 @@ category: mysql
 ---
 
 
-##登录远程MySQL服务器
+## 登录远程MySQL服务器
 
 登录命令：`mysql -h 168.7.1.65 -P 3306 -u fdiy -p`
 

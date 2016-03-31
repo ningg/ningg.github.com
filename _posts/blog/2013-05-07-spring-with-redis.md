@@ -14,11 +14,11 @@ categories: spring web
 
 详细信息参考：[Simple Web DEMO][Simple Web DEMO]
 
-##Spring Data Redis官网
+## Spring Data Redis官网
 
 官网地址：[Spring Data Redis - 官网][Spring Data Redis - 官网]，特别说明，页面右侧有[Reference][Spring Data Redis - Reference]文档，值得好好读读。
 
-###Maven中配置
+### Maven中配置
 
 利用spring-data-redis模块，实现Spring与Redis之间的集成，具体，在pom.xml中添加依赖：
 
@@ -30,7 +30,7 @@ categories: spring web
 		</dependency>
 	</dependencies>
 
-###Spring中配置Bean
+### Spring中配置Bean
 
 在Spring配置文件中，添加如下bean配置：
 
@@ -51,7 +51,7 @@ categories: spring web
 注：使用Maven来管理工程，能够方便的查看`JedisConnectionFactory`的源码，其中对应的属性、构造函数等，包含的信息丰富。
 
 
-##实际配置
+## 实际配置
 
 下文将列出，实际场景中自己的配置。几点：
 
@@ -59,7 +59,7 @@ categories: spring web
 * 配置Redis数据源
 * 操作Redis
 
-###Maven中配置
+### Maven中配置
 
 pom.xml中配置依赖：
 
@@ -75,7 +75,7 @@ pom.xml中配置依赖：
 		<version>2.6.2</version>
 	</dependency>
 
-###配置Redis数据源
+### 配置Redis数据源
 
 在Spring的配置文件中，添加bean，以实现对Redis数据源的配置，具体如下：
 
@@ -127,7 +127,7 @@ pom.xml中配置依赖：
 
 
 
-###操作Redis
+### 操作Redis
 
 在上述配置条件下，通过IoC机制，可以直接操作Redis，简单举个例子：
 
@@ -160,7 +160,7 @@ pom.xml中配置依赖：
 
 
 
-##参考来源
+## 参考来源
 
 * [Spring Data Redis - 官网][Spring Data Redis - 官网]
 * [Spring Data Redis - Reference][Spring Data Redis - Reference]

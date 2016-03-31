@@ -7,7 +7,7 @@ category: MySQL
 ---
 
 
-##int相关
+## int相关
 
 
 在MySQL中 int 的 最大值可以看成 2 个：
@@ -42,7 +42,7 @@ category: MySQL
 
 int类型为4字节，那`int(5)`的含义是什么？实际上`int(5)`与字段值的范围无关，仅表示显示效果。参考：[详解mysql int类型的长度值问题]。
 
-##date、datetime、timestamp
+## date、datetime、timestamp
 
 几点：
 
@@ -82,7 +82,7 @@ todo：
 
 
 
-##参考来源
+## 参考来源
 
 * [MySQL reference Manual - Chapter 11 Data Types][MySQL reference Manual - Chapter 11 Data Types]
 

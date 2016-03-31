@@ -6,7 +6,7 @@ published: true
 category: web
 ---
 
-##url-pattern中通配符`*`
+## url-pattern中通配符`*`
 
 url-pattern中通配符`*`的使用规则:
 
@@ -28,7 +28,7 @@ url-pattern中通配符`*`的使用规则:
 	</servlet-mapping>
 
 
-##servlet容器对url的匹配过程：
+## servlet容器对url的匹配过程：
 
 当一个请求发送到servlet容器的时候，容器先会将请求的url减去当前`应用上下文的路径`作为servlet的映射url，比如我访问的是 `http://localhost/test/aaa.html`，我的应用上下文是`test`，容器会将`http://localhost/test`去掉，剩下的`/aaa.html`部分拿来做servlet的映射匹配。这个映射匹配过程是有顺序的，而且**当有一个servlet匹配成功以后，就不会去理会剩下的servlet了**（filter不同，后文会提到）。其匹配规则和顺序如下： 
 
@@ -41,7 +41,7 @@ url-pattern中通配符`*`的使用规则:
 
 对于filter，不会像servlet那样只匹配一个servlet，因为**filter的集合是一个链，所以只会有处理的顺序不同，而不会出现只选择一个filter**。Filter的处理顺序和filter-mapping在web.xml中定义的顺序相同。 
 
-##缺省匹配
+## 缺省匹配
 
 
 web.xml中如果某个Servlet的映射路径仅仅为一个正斜杠（`/`），那么这个Servlet就成为当前Web应用程序的**缺省Servlet**。
@@ -89,7 +89,7 @@ web.xml中如果某个Servlet的映射路径仅仅为一个正斜杠（`/`），
 
 
 
-##url-pattern详解 
+## url-pattern详解 
 
 在web.xml文件中，以下语法用于定义映射： 
 
@@ -100,7 +100,7 @@ web.xml中如果某个Servlet的映射路径仅仅为一个正斜杠（`/`），
 
 所以，为什么定义`/*.action`这样一个看起来很正常的匹配在启动tomcat时会报错？因为这个匹配既属于**路径映射**，也属于**扩展映射**，导致容器无法判断。
 
-##示例(*.do的优先级别最低)
+## 示例(*.do的优先级别最低)
 
 对于如下的一些映射关系：
 
@@ -140,7 +140,7 @@ web.xml中如果某个Servlet的映射路径仅仅为一个正斜杠（`/`），
 
 
 
-##参考来源
+## 参考来源
 
 * [Servlet映射规则和Servlet的映射URL冲突时匹配原则][Servlet映射规则和Servlet的映射URL冲突时匹配原则]
 

@@ -4,7 +4,7 @@ title: MySQL--基本操作
 description: 开源的数据库MySQL的常用操作、内部原理
 category: MySQL
 ---
-##简介
+## 简介
 
 难得最近两天重新接触Mysql，正好整理一下基本的知识。下面是自己本篇文章的大纲：
 
@@ -21,17 +21,17 @@ category: MySQL
 
 **说明**：整篇的表述，都是以自己浅显的理解为基础的；有描述不当的地方，还请留言指正。
 
-##具体
+## 具体
 
-###1.增删改查
-
-（todo）
-
-###2.group by、order by、distinct
+### 1.增删改查
 
 （todo）
 
-###3.常用函数：count、min、max、substring_index
+### 2.group by、order by、distinct
+
+（todo）
+
+### 3.常用函数：count、min、max、substring_index
 
 前3项，参照下面链接，把命令反复敲2遍，重复的也要敲。
 
@@ -52,7 +52,7 @@ category: MySQL
 
 `alter`：修改表结构等。
 
-###4.日志
+### 4.日志
 
 **读日志是熟悉使用一个工具的最基本要求**。如果执行了一个sql脚本之后，提示`n warnings`，可以使用`show warnings`命令来查看详细信息。
 
@@ -119,7 +119,7 @@ category: MySQL
 
 	show variables like ‘log_%’;
 
-###5.mysql存储过程（procedure）
+### 5.mysql存储过程（procedure）
 
 什么是`mysql的存储过程`[1][2][3]？简单的说，为方便使用而保存的一条或者多条MySQL语句的集合，就是一个sql脚本文件，有输入\出参数，根据参数来动态执行其内部SQL语句（存储过程，实际是一种函数）。
 
@@ -181,23 +181,23 @@ category: MySQL
 * 显示所有正在运行的存储过程：`SHOW PROCEDURE STATUS`;其中包含了`procedure`的名称、创建时间、修改时间等;
 * 显示存储过程的创建语句：`SHOW CREATE PROCEDURE procedure_name`;
 
-###6.数据备份（操作）
+### 6.数据备份（操作）
 
 (doing…)
 
-###7.常用工具
+### 7.常用工具
 
 (doing…)
 
-###8.(万佛归宗)Mysql整体框架，内部线程机制，语句执行效率
+### 8.(万佛归宗)Mysql整体框架，内部线程机制，语句执行效率
 
 (doing…)
  
  
-##常见问题
+## 常见问题
 
 
-###查看Table的建表语句
+### 查看Table的建表语句
 
 执行如下SQL语句即可：
 
@@ -213,7 +213,7 @@ category: MySQL
 	) ENGINE=InnoDB DEFAULT CHARSET=utf8   |
 
  
-##参考来源
+## 参考来源
 
 1. 《MySQL必知必会》Page171
 1. http://blog.sina.com.cn/s/blog_71f4cdbe0100yut4.html

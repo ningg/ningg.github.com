@@ -6,7 +6,7 @@ category: jvm
 ---
 
 
-##前言
+## 前言
 
 这一章是给出了几个例子说明前面几章讲过的内容。我觉得关于tomcat那个例子对我来说太有用了。正好被这个问题困扰，然后今天看完瞬间感觉豁然开朗。而这一章关注点有：
 
@@ -15,7 +15,7 @@ category: jvm
 
 因为平时跟字节码打交道的场景不多，而最近研究类加载器算是比较多。所以，这章我主要关注的就是类加载器相关的东西。
 
-##一、类加载器实例之——Tomcat
+## 一、类加载器实例之——Tomcat
 
 主流的Java Web服务器，如Tomcat、Jetty、WebLogic、WebSphere，都实现了**自己定义的类加载器（一般都不止一个）**。因为一个功能健全的Web服务器，要解决如下问题：
 
@@ -26,7 +26,7 @@ category: jvm
 
 由于以上几个要求，如果只有一个`CLASSPATH`就很难实现了。**所以各种Web服务器都会提供好几个CLASSPATH路径供用户存放第三方类库，这些路径一般都以lib或者classes命名。被放置在不同目录的类库，具备不同的访问范围和服务对象。通常而言，每一个目录都会有一个对应的自定义类加载器去加载设置在里面的Java类库**。那么我们就以Tomcat为例来看一下。
 
-###1. Tomcat目录结构
+### 1. Tomcat目录结构
 
 在Tomcat目录结构中，有三组目录可以存放Java类库，另外加上应用程序自身的目录，一共四组：
 
@@ -60,13 +60,13 @@ category: jvm
 
 
 
-###2. Tomcat版本升级
+### 2. Tomcat版本升级
 
 对于Tomcat的6.x版本，只有指定了conf/catalina.properties配置文件中的server.loader和share.loader才会真正建立CatalinaClassLoader和SharedClassLoader的实例，否则会以CommonClassLoader代替。而默认的配置里面是没有设置这两个loader的，所以Tomcat 6.x顺理成章的把/commmon、/server、/shared这三个目录合并为一个/lib目录。这是Tomcat团队为了简化大多数部署场景所做的一项改进，如果默认设置不能满足需求，再通过修改配置完成3种类加载器的协同分工。
 
 ![](/images/understanding-jvm/tomcat6_classloader.jpg)
 
-##二、OSGi：灵活的类加载器结构
+## 二、OSGi：灵活的类加载器结构
 
 传说Java社区流传这样一句话：学习JEE规范，去看JBoss源码；学习类加载器，去看OSGi源码。可见，OSGi的类加载器机制确实值得学习。
 

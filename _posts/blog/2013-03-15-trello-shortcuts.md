@@ -14,7 +14,7 @@ categories: trello
 * 搜索 `shortcuts` 关键字
 * 哈哈，找到：[Using keyboard shortcuts in Trello][Using keyboard shortcuts in Trello]
 
-##shortcuts
+## shortcuts
 
 
 You can also press `?` on your keyboard while in Trello to view a list of shortcuts.
@@ -63,7 +63,7 @@ Trello内部结构：
 
 
 
-##TODO
+## TODO
 
 团队协作工具：
 
@@ -71,7 +71,7 @@ Trello内部结构：
 * teambition，Tower.im，Worktile，trello，Jira
 
 
-##参考资料
+## 参考资料
 
 
 * [Help Page][Help Page]

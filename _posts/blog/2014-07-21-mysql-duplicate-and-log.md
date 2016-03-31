@@ -9,7 +9,7 @@ category: MySQL
 
 
 
-##主从复制基本过程
+## 主从复制基本过程
 
 
 
@@ -41,7 +41,7 @@ MySQL的复制，是异步的，对应3个进程，即：
 
 
 
-##参考来源
+## 参考来源
 
 * [mysql binlog 复制][mysql binlog 复制]
 

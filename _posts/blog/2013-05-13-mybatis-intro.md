@@ -55,7 +55,7 @@ category: mybatis
 
 
 
-##参考资料
+## 参考资料
 
 * [Hibernate与MyBatis的比较?][Hibernate与MyBatis的比较?]
 * [mybatis+spring maven下 整合 完整demo][mybatis+spring maven下 整合 完整demo]

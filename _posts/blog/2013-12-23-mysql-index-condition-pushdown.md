@@ -10,7 +10,7 @@ category: MySQL
 > 原文地址；[MySQL索引背后的数据结构及算法原理]，本文按照自己的理解，进行了稍微的调整
 
 
-##背景
+## 背景
 
 联合索引是将各个索引字段做字符串连接后作为key，使用时将整体做前缀匹配。
 
@@ -18,12 +18,12 @@ category: MySQL
 
 实际上，这个页面所讲述的是在MariaDB 5.3.3（MySQL是在5.6）开始引入的一种叫做Index Condition Pushdown（以下简称ICP，索引条件下推）的查询优化方式。由于本身不是一个层面的东西，前文中说的是Index Access，而这里是Query Optimization，所以并不构成对前文正确性的影响。在写前文时，MySQL还没有ICP，所以文中没有涉及相关内容，但考虑到新版本的MariaDB或MySQL中ICP的启用确实影响了一些查询行为的外在表现。所以决定写这篇文章详细讲述一下ICP的原理以及对索引使用方式的优化。
 
-
+ 
 ##实验
 
 先从一个简单的实验开始直观认识ICP的作用。
 
-###安装数据库
+### 安装数据库
 
 首先需要安装一个支持ICP的MariaDB或MySQL数据库。我使用的是MariaDB 5.5.34，如果是使用MySQL则需要5.6版本以上。
 
@@ -33,7 +33,7 @@ Mac环境下可以通过brew安装：
 
 其它环境下的安装请参考MariaDB官网关于下载安装的文档。
 
-###导入示例数据
+### 导入示例数据
 
 与前文一样，我们使用`Employees Sample Database`，作为示例数据库。完整示例数据库的下载地址为：https://launchpad.net/test-db/employees-db-1/1.0.6/+download/employees_db-full-1.0.6.tar.bz2。
 
@@ -58,7 +58,7 @@ Mac环境下可以通过brew安装：
 
 我们将使用employees表做实验。
 
-###建立联合索引
+### 建立联合索引
 
 employees表包含雇员的基本信息，表结构如下：
 
@@ -81,7 +81,7 @@ employees表包含雇员的基本信息，表结构如下：
 
 这样就建立了一个first_name和last_name的联合索引。
 
-###查询
+### 查询
 
 为了明确看到查询性能，我们启用profiling并关闭query cache：
 
@@ -147,8 +147,8 @@ employees表包含雇员的基本信息，表结构如下：
 前者是开启ICP，后者是关闭ICP。可以看到区别在于Extra，开启ICP时，用的是Using index condition；关闭ICP时，是Using where。
 
 其中Using index condition就是ICP提高查询性能的关键。下一节说明ICP提高查询性能的原理。
-
-###原理
+ 
+### 原理
 
 ICP的原理简单说来就是将可以利用索引筛选的where条件在存储引擎一侧进行筛选，而不是将所有index access的结果取出放在server端进行where筛选。
 
@@ -156,20 +156,20 @@ ICP的原理简单说来就是将可以利用索引筛选的where条件在存储
 
 下面通过图两种查询的原理详细解释。
 
-####关闭ICP
+#### 关闭ICP
 
 ![](/images/mysql-index-condition-pushdown/01.png)
 
 
 在不支持ICP的系统下，索引仅仅作为data access使用。
 
-开启ICP
+#### 开启ICP
 
 ![](/images/mysql-index-condition-pushdown/02.png)
 
 在ICP优化开启时，在存储引擎端首先用索引过滤可以过滤的where条件，然后再用索引做data access，被index condition过滤掉的数据不必读取，也不会返回server端。
 
-###注意事项
+### 注意事项
 
 有几个关于ICP的事情要注意：
 
@@ -213,7 +213,7 @@ ICP的原理简单说来就是将可以利用索引筛选的where条件在存储
 
 
 
-##参考来源
+## 参考来源
 
 * [MySQL索引背后的数据结构及算法原理]
 * [MySQL索引与Index Condition Pushdown]

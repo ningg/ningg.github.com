@@ -7,7 +7,7 @@ category: linux
 ---
 
 
-##ulimit命令简介
+## ulimit命令简介
 
 通过`man ulimit`命令查询官方的简要解释如下：
 
@@ -64,7 +64,7 @@ If limit is given, it is the new value of the specified resource (the -a option 
 	file locks                      (-x) unlimited
 
 
-##limits.conf文件
+## limits.conf文件
 
 上述使用`ulimit -n 1024`方式设置的参数，只对当前shell生效，重启之后失效，有没有永久生效的配置？有，文件`/etc/security/limits.conf`。文件的样例如下：
 
@@ -126,7 +126,7 @@ If limit is given, it is the new value of the specified resource (the -a option 
 
 
 
-##参考来源
+## 参考来源
 
 * [修改linux最大打开文件数ulimit][修改linux最大打开文件数ulimit]
 * Linux下`man ulimit`

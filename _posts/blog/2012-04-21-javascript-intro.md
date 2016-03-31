@@ -10,7 +10,7 @@ category: javascript
 
 
 
-##TODO
+## TODO
 
 * JavaScript编码规范：
 	* [网易邮箱前端Javascript编码规范：基础规范][网易邮箱前端Javascript编码规范：基础规范]
@@ -26,10 +26,10 @@ category: javascript
 
 
 
-##常见问题
+## 常见问题
 
 
-###var定义变量
+### var定义变量
 
 关于var定义变量：
 
@@ -40,7 +40,7 @@ category: javascript
 	* 什么情况下使用`$name`形式的变量命名方式？通常标识`$name = $("#id")`标识为一个jQuery对象时，在变量名上添加`$`字符作为前缀来标识，当然有人习惯在变量名前添加`j`字符来标识jQuery对象；
 
 
-###JavaScript可放置的位置
+### JavaScript可放置的位置
 
 几个位置：
 
@@ -59,7 +59,7 @@ category: javascript
 	// 引入外部JS代码
 	<script type="text/javascript" src="../resources/test.js"></script>
 	
-###添加、清除页面中定时任务
+### 添加、清除页面中定时任务
 
 添加定时任务，示例代码如下：
 
@@ -88,7 +88,7 @@ category: javascript
 * [MDN - JavaScript中clearInterval(zh)][MDN - JavaScript中clearInterval(zh)]
 
 
-###函数声明、命名函数表达式
+### 函数声明、命名函数表达式
 
 两种方式的最大不同，可调用事件的不同：
 
@@ -99,14 +99,14 @@ category: javascript
 
 也可以参考之前的博文：[jQuery常用操作][jQuery常用操作]
 
-###JavaScript语言基本语法
+### JavaScript语言基本语法
 
 几点：
 
 * 单行代码使用`;`结尾；
 
 
-###两个整数相除，结果不一定为整数
+### 两个整数相除，结果不一定为整数
 
 示例代码：
 
@@ -114,7 +114,7 @@ category: javascript
 	var interval_int = Math.floor(interval);//向下取整
 	var interval_int2 = Math.ceil(interval);//向上取整
 	
-###判断变量是否为空
+### 判断变量是否为空
 
 判断变量`startDay`的值，是否为空：
 
@@ -144,7 +144,7 @@ category: javascript
 
 
 
-##参考来源
+## 参考来源
 
 * [MDN - JavaScript][MDN - JavaScript]
 * [JavaScript可放置的位置][JavaScript可放置的位置]

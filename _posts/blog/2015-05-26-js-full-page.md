@@ -7,7 +7,7 @@ category: JavaScript
 ---
 
 
-##示例效果
+## 示例效果
 
 
 示例效果如下：
@@ -25,7 +25,7 @@ category: JavaScript
 
 
 
-##jQuery全屏滚动插件详解
+## jQuery全屏滚动插件详解
 
 
 几点：
@@ -45,7 +45,7 @@ todo：
 
 
 
-##参考来源
+## 参考来源
 
 * [fullPage.js(GitHub)][fullPage.js(GitHub)]
 * [jQuery全屏滚动插件fullPage.js][jQuery全屏滚动插件fullPage.js]

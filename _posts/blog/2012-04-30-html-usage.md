@@ -7,11 +7,11 @@ category: html
 ---
 
 
-##常用场景
+## 常用场景
 
 
 
-###input文本框设置和移除默认值
+### input文本框设置和移除默认值
 
 
 **HTML5**： placeholder属性，示例代码如下：
@@ -68,7 +68,7 @@ category: html
 
 
 
-##参考来源
+## 参考来源
 
 * [PlaceHolder的两种实现方式][PlaceHolder的两种实现方式]
 

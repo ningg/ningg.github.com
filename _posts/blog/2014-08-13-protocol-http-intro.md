@@ -5,13 +5,13 @@ description: 打开浏览器，输入一个网址，回车，一个HTTP请求就
 categories: HTTP
 ---
 
-##背景
+## 背景
 
 > 最近要用java来构造HTTP请求、接收HTTP响应，并从HTTP响应中获取尽可能多的上下文信息，自己每次都查看JAVA的API，不过结果总是浑浑噩噩的感觉，因为自己并不确定HTTP响应中包含了哪些详细的信息，更何谈要提取这些信息了。
 
 （备注：不要求大而全，而要求先能够解决问题）
 
-##HTTP协议的由来
+## HTTP协议的由来
 
 OSI模型把网络通信分成七层：物理层、数据链路层、网络层、传输层、会话层、表示层和应用层，对于开发网络应用人员来说，一般把网络分成五层，这样比较容易理解。这五层为：物理层、数据链路层、网络层、传输层、会话层、表示层、应用层（最顶层），如下图所示：
 
@@ -75,7 +75,7 @@ __应用层__
 
 （应用层到底是什么？应用层与端口之间什么关系？会话层、表示层、应用层之间又有什么差异？）
 
-##HTTP协议如何工作
+## HTTP协议如何工作
 
 利用HTTP协议传输数据时，其基本过程：Client发送HTTP请求，Server返回HTTP响应；如下图所示：
 
@@ -83,13 +83,13 @@ __应用层__
 （插入一个图片）
 
 
-###Request\Response格式
+### Request\Response格式
 
 详细信息请参考：[RFC2616].
 
 关于HTTP headers的简要汇总和介绍，请参看：[Quick reference to HTTP headers]
 
-###Request
+### Request
 
 Request格式：
 
@@ -120,7 +120,7 @@ Request常用的Headers：
 （todo）	
 
 	
-###Response
+### Response
 	
 Response格式：
 
@@ -152,11 +152,11 @@ http://blog.sina.com.cn/s/blog_5dd2af0901012oko.html
 http://canrry.iteye.com/blog/1331292
 
 
-###建立连接的方式
+### 建立连接的方式
 
 HTTP支持2种建立连接的方式：非持久连接和持久连接（HTTP 1.0 默认：持久连接的带流水线方式）
 
-####非持久连接
+#### 非持久连接
 
 让我们查看一下非持久连接情况下，从Server到Client传送一个Web页面的步骤。假设该页面由：1个基本HTML文件和10个JPEG图像构成，而且所有这些对象都存放在同一台服务器中。再假设该基本HTML文件的URL为：`gpcuster.cnblogs.com/index.html`。
 
@@ -183,7 +183,7 @@ HTTP支持2种建立连接的方式：非持久连接和持久连接（HTTP 1.0 
 * TCP连接建立时，有3次握手，详细过程；
 * TCP连接释放时，也有4次握手，详细过程；
 
-####持久连接
+#### 持久连接
 
 
 `非持久连接`有几点效率问题：
@@ -213,7 +213,7 @@ HTTP支持2种建立连接的方式：非持久连接和持久连接（HTTP 1.0 
 3. 所有引用到的对象一共只经历1个RTT的延迟(而不是像不带流水线的版本那样，每个引用到的对象都各有1个RTT的延迟)；
 4. 带流水线的持久连接中服务器空等请求的时间比较少；
 
-###缓存机制
+### 缓存机制
 
 HTTP/1.1中缓存机制主要目标：提高页面访问速度；实现途径，有两条：
 
@@ -228,9 +228,9 @@ HTTP/1.1中缓存机制主要目标：提高页面访问速度；实现途径，
 
 关于web缓存方面的内容可以参考：Caching Tutorial for Web Authors and Webmasters（[英文版](https://www.mnot.net/cache_docs/#DEFINITION)）（[中文版](http://www.chedong.com/tech/cache_docs.html)）
 
-##基于HTTP的应用##
+## 基于HTTP的应用 ##
 
-###HTTP代理###
+### HTTP代理 ###
 
 （doing...）
 
@@ -242,7 +242,7 @@ HTTP/1.1中缓存机制主要目标：提高页面访问速度；实现途径，
 
 
 
-###多线程下载###
+### 多线程下载 ###
 
 （doing...）
 
@@ -252,13 +252,13 @@ HTTP/1.1中缓存机制主要目标：提高页面访问速度；实现途径，
 * 每个HTTP请求只请求资源文件的一部分：Content-Range:bytes 20000-40000/47000
 * 合并每个线程下载的文件
 
-###HTTPS传输协议原理###
+### HTTPS传输协议原理 ###
 
 （doing...）
 
 参考：[浅析HTTP协议]
 
-###WEB开发过程中常用的Request Methods###
+### WEB开发过程中常用的Request Methods ###
 
 （doing...）
 
@@ -273,7 +273,7 @@ HTTP/1.1中缓存机制主要目标：提高页面访问速度；实现途径，
 * CONNECT
 	* 将请求的连接转换成透明的TCP/IP通道，通常用来简化通过非加密的HTTP代理的SSL-加密通讯（HTTPS）。
 
-###用户与服务器交互###
+### 用户与服务器交互 ###
 
 （doing...）
 
@@ -284,24 +284,24 @@ HTTP/1.1中缓存机制主要目标：提高页面访问速度；实现途径，
 3. 待条件的GET；
 
 	
-##java中的HTTP协议
+## java中的HTTP协议
 
 （doing...）
 
 
 
-###java中HTTP协议
+### java中HTTP协议
 
 
 （主要两种方式：java api 和 http-common.jar?）
 
 
-###servlet中HTTP协议
+### servlet中HTTP 协议
 
 
 
 
-##参考来源
+## 参考来源
 
 1. [W3C: HTTP (HTTP Activity statement)]
 2. [W3C中文版简介]
@@ -313,18 +313,18 @@ HTTP/1.1中缓存机制主要目标：提高页面访问速度；实现途径，
 8. [O'Reilly - HTTP Pocket Reference]
 9. [Sams - HTTP Developers Handbook]
 
-##附录
+## 附录
 
 对与几个名词/组织的简介
 
-###W3C
+### W3C
 万维网联盟（World Wide Web Consortium，简称W3C）创建与1994年，是Web技术领域，影响力较强的国际中立性，技术标准机构。其致力于开发协议、标准、指南，来确保Web的长期发展。详细信息参考：[W3C: HTTP (HTTP Activity statement)]。
 
-###IETF
+### IETF
 互联网工程任务组（Internet Engineering Task Force，简称IETF）成立于1985年底，是全球互联网领域，极具权威的技术标准化组织，主要任务是负责互联网相关技术规范的研发和制定，当前绝大多数互联网技术标准都出自IETF。详细信息参考：[IETF]。
 
 
-###RFC
+### RFC
 
 IETF（互联网工程任务组）产生两种文件，一个叫Internet Draft，即"互联网草案"，另一个叫RFC（Request For Comments，意见征求书、请求注解书），RFC相对Draft更为正式，一般情况下，RFC文档发布后，其内容不再做变动。
  

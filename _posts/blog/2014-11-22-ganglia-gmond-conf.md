@@ -8,15 +8,15 @@ category: ganglia
 > 原文地址：[ganglia-3.6.1(ganglia monitoring core)][ganglia-3.6.1(ganglia monitoring core)]的源码包中gmond/gmond.conf.html文件。
 
 
-##NAME
+## NAME
 
 **gmond.conf** - configuration file for ganglia monitoring daemon (**gmond**)
 
-##DESCRIPTION
+## DESCRIPTION
 
 The gmond.conf file is used to configure the ganglia monitoring daemon (gmond) which is part of the **Ganglia Distributed Monitoring System**.
 
-##SECTIONS AND ATTRIBUTES
+## SECTIONS AND ATTRIBUTES
 
 All sections and attributes are case-insensitive. For example, `name` or `NAME` or `Name` or `NaMe` are all equivalent.
 
@@ -66,7 +66,7 @@ There directives directly control the XML output of **gmond**. For example, the 
 
 
 
-###host
+### host
 
 The host section provides information the host running this instance of gmond. Currently only the **location** string attribute is supported. Example:
 
@@ -81,7 +81,7 @@ The numbers represent **Rack**, **Rank** and **Plane** respectively.
 整个Ganglia由几个概念：Grid、Cluster、Node；其中，Grid与gmetad对应，其中配置的data source为Cluster。
 
 
-###globals
+### globals
 
 The **globals** section controls general characteristics of **gmond** such as whether is should daemonize, what user it should run as, whether is should send/receive date and such. The globals section has the following attributes: 
 `daemonize` , `setuid` , `user` , `debug_level` , `mute` , `deaf` , `allow_extra_data` , `host_dmax` , `host_tmax` , `cleanup_threshold` , `gexec` , `send_metadata_interval` , `module_dir`.
@@ -179,7 +179,7 @@ For example, in a 32-bit Intel compatible Linux host that is usually:
 **notes(ningg)**：`DSO` modules是什么？
 
 
-###udp_send_channel
+### udp_send_channel
 
 You can define as many `udp_send_channel` sections as you like within the limitations of memory and file descriptors. If **gmond** is configured as `mute` this section will be ignored.
 
@@ -240,7 +240,7 @@ would configure gmond to send messages to two hosts. The `host` specification ca
 
 The `ttl` attribute lets you modify the Time-To-Live (TTL) of outgoing messages (unicast or multicast).The time-to-live, this setting is particularly important for `multicast` environments, as it limits the number of hops over which the metric transmissions are permitted to propagate. Setting this value to any value higher than necessary could result in metrics being transmitted across WAN connections to multiple sites or even out into the global Internet.
 
-###udp_recv_channel
+### udp_recv_channel
 
 You can specify as many `udp_recv_channel` sections as you like within the limits of memory and file descriptors. If gmond is configured `deaf` this attribute will be ignored.
 
@@ -307,7 +307,7 @@ If you have a large system with lots of metrics, you might experience UDP drops.
 
 **Note**: increasing buffer size will increase memory usage by gmond.
 
-###tcp_accept_channel
+### tcp_accept_channel
 
 You can specify as many `tcp_accept_channel` sections as you like within the limitations of memory and file descriptors. If **gmond** is configured to be `mute`, then these sections are ignored.
 
@@ -340,7 +340,7 @@ The `timeout` attribute allows you to specify how many microseconds to block bef
 
 The `interface` is not implemented at this time (use `bind`).
 
-###collection_group
+### collection_group
 
 You can specify as many `collection_group` section as you like within the limitations of memory. A `collection_group` has the following attributes: `collect_once`, `collect_every` and `time_threshold`. A `collection_group` must also contain one or more `metric` sections.
 
@@ -413,7 +413,7 @@ If both name and `name_match` are specified, then `name` is ignored.
 * `collection_group`下的metric section用于设定metric的约束（通过`name`或者`name_match`来匹配），而不是用于重新定义metric；
 * 同时设定`name`和`name_match`时，以`name_match`为准；
 
-###Modules
+### Modules
 
 A `modules` section contains the parameters that are necessary to load a metric module. A metric module is a dynamically loadable module that extends the available metrics that gmond is able to collect. Each modules section contains at least one module section. Within a module section are the directives `name`, `language`, `enabled`, `path` and `params`. The module `name` is the name of the module as determined by the module structure if the module was developed in C/C++. Alternatively, the name can be the name of the source file if the module has been implemented in a interpreted language such as python. A language designation must be specified as a string value for each module. The `language` directive must correspond to the source code language in which the module was implemented (ex. language = "python"). If a language directive does not exist for the module, the assumed language will be "C/C++". The `enabled` directive allows a metric module to be easily enabled or disabled through the configuration file. If the enabled directive is not included in the module configuration, the enabled state will default to "yes". One thing to note is that if a module has been disabled yet the metric which that module implements is still listed as part of a collection group, gmond will produce a warning message. However gmond will continue to function normally by simply ignoring the metric. The `path` is the path from which gmond is expected to load the module (C/C++ compiled dynamically loadable module only). The `params` directive can be used to pass a single string parameter directly to the module initialization function (C/C++ module only). Multiple parameters can be passed to the module's initialization function by including one or more param sections. Each param section must be named and contain a value directive. Once a module has been loaded, the additional metrics can be discovered by invoking `gmond -m`.
 
@@ -435,7 +435,7 @@ A `modules` section contains the parameters that are necessary to load a metric 
 
 **notes(ningg)**：`path`参数设定的默认路径是哪个？
 	
-###sFlow
+### sFlow
 
 sFlow is an industry standard technology for monitoring high-speed switched networks. Originally targeted at embedded network hardware, sFlow collectors now exist for general-purpose operating systems as well as popular applica-tions such as Tomcat, memcached, and the Apache Web Server. gmond can be con-figured to act as a collector for sFlow agents on the network, packaging the sFlow agent data so that it may be transparently reported to gmetad. 
 
@@ -466,7 +466,7 @@ will allow the HTTP metrics, and also mark them with a distinguishing identifier
 
 **notes(ningg)**：sFlow怎么用？跟之前gmond通过UDP socket收集所有metric有差异吗？sFlow用于采集metric，还是收集metric？原始gmond、gmetad、gweb结构中，sFlow的位置在哪？
 
-###Include
+### Include
 
 This directive allows the user to include additional configuration files rather than having to add all gmond configuration directives to the `gmond.conf` file. The following example includes any file with the extension of .conf contained in the directory `conf.d` as if the contents of the included configuration files were part of the original `gmond.conf` file. This allows the user to modularize their configuration file. One usage example might be to load individual metric modules by including module specific `.conf` files.
 （添加定制的配置文件）
@@ -474,7 +474,7 @@ This directive allows the user to include additional configuration files rather 
 
 	include ('/etc/ganglia/conf.d/*.conf')
 
-##ACCESS CONTROL
+## ACCESS CONTROL
 
 The `udp_recv_channel` and `tcp_accept_channel` directives can contain an Access Control List (ACL). This ACL allows you to specify exactly which hosts gmond process data from.
 
@@ -509,7 +509,7 @@ Here is another example
   
 This ACL will by default allow all traffic unless it comes from the two subnets specified with action = "deny".
 
-##EXAMPLE
+## EXAMPLE
 
 The default behavior for a 2.5.x gmond would be specified as...
 
@@ -538,24 +538,24 @@ edit `custom.conf` to taste and then
 
     % gmond -c ./custom.conf
   
-##SEE ALSO
+## SEE ALSO
 
 gmond(1).
 
 
-##NOTES
+## NOTES
 
 The ganglia web site is at [http://ganglia.info/][http://ganglia.info/].
 
 
 
-##COPYRIGHT
+## COPYRIGHT
 
 Copyright (c) 2005 The University of California, Berkeley
 
 
 
-##参考来源
+## 参考来源
 
 * [ganglia-3.6.1(ganglia monitoring core)][ganglia-3.6.1(ganglia monitoring core)]的源码包中gmond/gmond.conf.html文件
 * [Monitoring with Ganglia][Monitoring with Ganglia] Chapter 2: Installing and Configuring Ganglia

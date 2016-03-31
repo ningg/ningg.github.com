@@ -11,7 +11,7 @@ category: linux
 * grep -rni
 * grep -A 10
 
-##grep常用选项
+## grep常用选项
 
 > 用法：grep [-cinv] '搜寻字符串' filename
 
@@ -25,15 +25,15 @@ category: linux
 --color=auto：查询结果，设置颜色
 
 
-##场景
+## 场景
 
-###搜索文件夹
+### 搜索文件夹
 
 具体：查询logs目录下所有含有ERROR的行，并且含有2015-02-03的行，命令如下：
 
 	grep -rni "ERROR" logs | grep "2015-02-03" > error.log
 
-###正则表达式
+### 正则表达式
 
 取前面非字符的字符
 

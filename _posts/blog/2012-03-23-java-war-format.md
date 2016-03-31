@@ -6,7 +6,7 @@ published: true
 category: java
 ---
 
-##简介
+## 简介
 
 java web 工程，包含几部分：
 
@@ -20,7 +20,7 @@ java web 工程，包含几部分：
 * 需要符合 Java Servlet specification；
 
 
-##WAR格式
+## WAR格式
 
 WAR格式，就是部署java web的目录组织结构。
 
@@ -41,7 +41,7 @@ WAR格式，就是部署java web的目录组织结构。
 * META-INF *（可选）* ，打包为war的元信息数据；
 
 
-##Maven构建时，java web目录结构
+## Maven构建时，java web目录结构
 
 本部分将着重开发过程中，Maven构建时，java web目录结构。注意，使用Maven管理的java project与java web project，基本类似：
 
@@ -70,7 +70,7 @@ WAR格式，就是部署java web的目录组织结构。
 
 
 
-##参考来源
+## 参考来源
 
 * [Java EE 7 Tutorial - Packaging Web Archives][Java EE 7 Tutorial - Packaging Web Archives]
 * [Java Platform, Enterprise Edition (Java EE) 7][Java Platform, Enterprise Edition (Java EE) 7]
@@ -79,7 +79,7 @@ WAR格式，就是部署java web的目录组织结构。
 
 
 
-##闲谈
+## 闲谈
 
 WAR，对应查看Java EE 的帮助文档；JAR，对应查看Java SE 的帮助文档。需要花时间浏览一遍Java EE Tutorial。
 

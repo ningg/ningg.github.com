@@ -7,7 +7,7 @@ category: mysql
 ---
 
 
-##背景
+## 背景
 
 有一张表格usercount：
 
@@ -39,13 +39,13 @@ category: mysql
 * 最后结果以：datetime的年月日、以及sum(usercount)输出；
 
 
-##查询指定时间段内结果
+## 查询指定时间段内结果
 
 几种方式：
 
 * between ... and ...
 
-###between...and方式
+### between...and方式
 
 代码如下：
 
@@ -67,7 +67,7 @@ Tips：
 > datetime类型字段的between...and...是一个闭合区间，包含起点和终点；
 
 
-##按照年月日进行group
+## 按照年月日进行group
 
 几种方式：
 
@@ -75,7 +75,7 @@ Tips：
 
 
 
-###left函数
+### left函数
 
 示例代码如下：
 
@@ -92,7 +92,7 @@ Tips：
 	+---------------------+------+--------+-----------+--------------+
 	3 rows in set (0.00 sec)
 
-##计算group内字段的sum结果
+## 计算group内字段的sum结果
 
 直接对group获得的分组，进行组内`sum(FIELD_NAME)`操作即可，示例代码：
 
@@ -141,7 +141,7 @@ Tips：
 	3 rows in set (0.00 sec)
 
 
-##datetime类型字段的查询范围
+## datetime类型字段的查询范围
 
 
 当datetime类型字段，只使用`2015-05-19`格式来约束datetime时，默认为`2015-05-19 00:00:00`，示例代码如下：
@@ -161,7 +161,7 @@ Tips：
 	+---------------------+----------------+
 	3 rows in set (0.00 sec)
 
-##关于datetime、date、time、timestamp的简单对比
+## 关于datetime、date、time、timestamp的简单对比
 
 
 todo:

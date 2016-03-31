@@ -33,7 +33,7 @@ category: spring
 
 
 
-##@RequestMapping
+## @RequestMapping
 
 几种情况：
 
@@ -60,7 +60,7 @@ Class：`@RequestMapping`标注在某个`@Controller`的类上，表示设定的
 
 
 
-##参考来源
+## 参考来源
 
 * [Spring常用注解][Spring常用注解]
 

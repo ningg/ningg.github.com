@@ -17,7 +17,7 @@ category: web
 
 自己GitHub上开启了一个工程[web-demo][web-demo]，关于Web.xml的内容，也有涉及。
 	
-##web.xml文件详解
+## web.xml文件详解
 
 
 简要几点：
@@ -26,7 +26,7 @@ category: web
 * web.xml不是必须的，当只有静态内容时，可以不设置web.xml；
 * Servlet[规范][JSR315]中绘制的Deployment Descriptor Diagram，还有几点不明确，哈哈，标注有点多；
 
-###web.xml中包含的内容
+### web.xml中包含的内容
 
 直接来原文：
 
@@ -42,7 +42,7 @@ category: web
 * Locale and Encoding Mappings
 * Security configuration, including login-config, security-constraint, security-role, security-role-ref and run-as
 
-###基本过程
+### 基本过程
 
 几点：
 
@@ -51,7 +51,7 @@ category: web
 * WEB容器将`<context-param>`转换为key-value，交给ServletContext；
 * WEB容器将`<listener>`对应类进行实例化，并创建监听器；
 
-###Load-on-startup
+### Load-on-startup
 
 `<load-on-startup>5</load-on-startup>`元素几点：
 
@@ -60,7 +60,7 @@ category: web
 * 若值为负整数，则，容器会在调用这个Servlet时，才会加载，延迟加载；*（如果是负整数，就直接省略即可）*
 * 值，整数；默认，不指定`<load-on-startup>`时，延迟加载；
 
-###加载顺序
+### 加载顺序
 
 listener、filter、servlet的加载顺序，与他们的书写顺序无关，而实际加载顺序：
 
@@ -97,7 +97,7 @@ listener、filter、servlet的加载顺序，与他们的书写顺序无关，�
 
 
 
-##参考来源
+## 参考来源
 
 
 * [xml入门][xml入门]*（之前的一篇文章）*

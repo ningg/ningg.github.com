@@ -14,7 +14,7 @@ category: maven
 * [Why Build Your Java Projects with Gradle Rather than Ant or Maven?][Why Build Your Java Projects with Gradle Rather than Ant or Maven?]
 * [Java构建工具：Ant vs Maven vs Gradle][Java构建工具：Ant vs Maven vs Gradle]
 
-##0. 背景
+## 0. 背景
 
 今天在GitHub上找了一个java语言编写的HDFS client，其使用Maven来进行工程的管理和构建；作为Maven工程导入Eclipse，提示pom.xml相关错误近10条。
 
@@ -22,7 +22,7 @@ category: maven
 
 要学东西，需要先找些可靠、严谨的书籍，大概搜索了一下，[《Maven实战》](http://www.juvenxu.com/mvn-in-action/) 的评价较高，那就他了。 一两天内，也无法拿到纸质版的书籍，索性在InfoQ上找了一个[《Maven实战（迷你版）》](http://www.infoq.com/cn/minibooks/maven-in-action)。 
 
-###0.1 Maven是什么？能做什么？
+### 0.1 Maven是什么？能做什么？
 
 在开始正式介绍之前，还总结一下Maven到底能做什么吧，所谓**学以致用**，还是希望能够在今后的开发中，把Maven用起来的。
 
@@ -31,9 +31,9 @@ Maven能做什么？
 
 
 
-##1. Maven的安装与配置
+## 1. Maven的安装与配置
 
-###1.1 Maven的安装
+### 1.1 Maven的安装
 
 从Maven官网下载软件，根据官方文档安装即可。基本步骤：
 
@@ -59,11 +59,11 @@ Linux下，使用符号链接文件，来作为软件升级方案：
 	rm apache-maven
 	ln -s apache-maven-3.1 apache-maven
 
-###1.2 安装目录分析
+### 1.2 安装目录分析
 
 前文简要说明了Maven的安装与升级步骤，现在我们简要分析一下Maven的安装文件。
 
-####安装目录：M2_HOME
+#### 安装目录：M2_HOME
 
 前面的讲解中，我们都是将环境变量`M2_HOME`指向Maven的安装目录，本文之后所有使用`M2_HOME`的地方都代表了该安装目录，让我们看一下该目录的安装结构和内容：
 
@@ -101,14 +101,14 @@ Linux下，使用符号链接文件，来作为软件升级方案：
 * NOTICE：记录了Maven的发行机构。
 * README.txt：包含了Maven的简要介绍、安装步骤以及参考资料的链接。
 
-####本地仓库：~/.m2目录
+#### 本地仓库：~/.m2目录
 
 安装完Maven之后，运行命令`mvn help:system` ，该命令打印出所有的Java系统属性和环境变量，这些信息对我们日常的编程工作很有帮助。这条命令执行之后，可以看到Maven会下载`maven-help-plugin`，包括pom文件和jar文件，这些文件都被存储在本地仓库中。
 
 打开当前登录用户的主目录（即，用户目录），下文使用`~` 来表示用户目录。在用户目录下，可以看到 `.m2` 目录。默认情况下，该文件夹下放置了Maven本地仓库：`.m2/repository` 。所有的Maven构建（artifact）都被存储在本仓库中，以方便重用。我们可以在`~/.m2/repository/org/apache/maven/plugins/maven-help-plugins/` 目录下，找到刚才下载的pom文件和jar文件（两文件缺一不可）。Maven根据几套规则来确定任何一个构建（artifact）在仓库中的位置。**特别说明**：由于Maven仓库是通过简单文件系统，透明地展示给Maven用户的，有时候可以绕过Maven直接查看或修改仓库文件，在遇到疑难问题时，这往往十分有用。
 
 
-###1.3 配置HTTP代理
+### 1.3 配置HTTP代理
 
 有时候公司处于安全考虑，要求通过安全认证的代理访问因特网。这就要求设置Maven通过HTTP代理方式，来访问外网的仓库，以下载所需的资源。
 
@@ -134,23 +134,23 @@ Linux下，使用符号链接文件，来作为软件升级方案：
 
 上述代理的配置方式十分简单，porxies下可以配置多个proxy，如果声明了多个proxy元素，默认第一个proxy被激活，否则active值为true表示被激活。当代理服务需要认证时，需要配置username和password。nonProxyHosts元素用于指定哪些主机名不需要代理，可以使用 `|` 来分隔多个主机名。此外，该配置也支持通配符，例如，*.google.com表示所有以google.com结尾的域名访问都不通过代理。
 
-###1.4 安装Eclipse的Maven插件
+### 1.4 安装Eclipse的Maven插件
 
 对于一个稍微大一点的项目来说，没有IDE是不可想象的，还好很多IDE都有Maven的插件。
 
 Eclipse平台下，插件名称：m2eclipse，我下载的Eclispe版本中，默认已经安装了此插件，因此，本文不暂讨论此问题。
 
-###1.5 Maven安装最佳实践
+### 1.5 Maven安装最佳实践
 
 本节介绍一些配置要点，在Maven安装过程中，这些要点是非必要的，但这些要点却比较实用。
 
-####1.5.1 配置用户范围的settings.xml
+#### 1.5.1 配置用户范围的settings.xml
 
 Maven用户可以选择配置 `$M2_HOME/settings.xml` 或者 `~/.m2/settings.xml` 。前者是全局范围的配置，整台机器上的所有用户都会受这一配置的影响，而后者是用户范围的，只有当前用户会受到该配置的影响。
 
 推荐使用用户范围的配置，避免影响其他用户的配置，另一方面，也便于Maven升级：直接修改conf 目录下的settings.xml文件，这样每次升级时，都需要复制该文件，而如果使用`.m2/settings.xml`，则升级时，不需要触动settings.xml文件。
 
-####1.5.2 不使用IDE内嵌的Maven
+#### 1.5.2 不使用IDE内嵌的Maven
 
 无论Eclipse还是NetBeans，当我们集成Maven时，都会安装一个内嵌的Maven：一方面，这个Maven通常比较新，但不一定很稳定；另一方面，通常我们还需要使用Maven的命令行方式，如果两个Maven版本不同的话，可能造成项目构建过程不一致，这也是我们不希望看到的。因此，建议单独下载安装一个Maven，并将恰配置到IDE中。
 
@@ -158,11 +158,11 @@ Eclipse下，配置Maven：`Windows`--`Preferences`--`Maven`--`Installations`。
 
 
 
-###1.6 常见错误
+### 1.6 常见错误
 
 这一节，记录一些可能会遇到的问题，以及解决办法。
 
-####1.6.1 创建/导入 Maven Project
+#### 1.6.1 创建/导入 Maven Project
 
 错误详情：
 
@@ -180,13 +180,13 @@ Eclipse下，配置Maven：`Windows`--`Preferences`--`Maven`--`Installations`。
 
 参考：[stackoverflow](http://stackoverflow.com/questions/14491298/an-internal-error-occurred-during-updating-maven-dependencies)
 
-####1.6.2 Eclipse环境下，Maven报错找不到某些jar包
+#### 1.6.2 Eclipse环境下，Maven报错找不到某些jar包
 
 
 如果命令行方式下，使用`mvn`的命令编译没有问题，而使用Eclipse时，`mvn install`等出现问题，则，解决办法：在pom.xml中指定`<project> <build> <plugins>`内添加`<plugin>`，设置成与命令行条件下`mvn`调用的`<plugin>`保持一致。[参考1](http://blog.csdn.net/imlmy/article/details/8268293)、[参考2](http://blog.csdn.net/huang86411/article/details/17548481)，当然还有另一种办法：[手动下载jar和pom](http://central.maven.org/maven2/org/apache/maven/plugins/).
 
 
-####1.6.3 新建或重新打开 Maven Project，出现错误
+#### 1.6.3 新建或重新打开 Maven Project，出现错误
 
 错误详情：
 
@@ -201,11 +201,11 @@ Eclipse下，配置Maven：`Windows`--`Preferences`--`Maven`--`Installations`。
 **思考**：Maven已经在settings.xml中配置了代理，那么，在Eclipse中开发调试Maven工程时，需要再配置Eclipse的代理吗？RE：不需要，只需要在Maven的配置中指定代理即可。
 
 
-##2. 入门实例
+## 2. 入门实例
 
 在此之前，需要安装配置好Maven，如果要在Eclipse下建立Maven工程，则需要安装配置Eclipse下的Maven的插件。具体信息，参考：[《Maven实战（迷你版）》]中第一章 Maven的安装与配置。
 
-###2.1 编写POM
+### 2.1 编写POM
 
 Maven项目的核心是：pom.xml文件。POM：（Project Object Model，项目对象模型）定义了项目的基本信息：
 
@@ -246,7 +246,7 @@ Maven项目的核心是：pom.xml文件。POM：（Project Object Model，项目
 
 代码第一行是XML头，指定版本和编码方式。project是所有pom.xml的根元素，它还声明了一些命名空间和xsd（XML Schemas Definition，XML结构定义）元素，虽然这些属性是非必须的，但它们能够让第三方工具（如IDE中的XML编辑器）帮助我们快速编译POM。
 
-###2.2 编写主代码
+### 2.2 编写主代码
 
 项目主代码与测试代码不同。项目主代码会被打包到最终发布的构件中（例如jar包），而测试代码只在运行测试的时候使用，不会被打包发布。
 默认情况下，Maven假设项目的主代码位于src/main/java目录下，我们遵循Maven的约定，创建该目录，并在该项目下创建文件com/github/ningg/mvnbook/helloworld/HelloWorld.java，其内容如下：
@@ -271,7 +271,7 @@ Maven项目的核心是：pom.xml文件。POM：（Project Object Model，项目
 1. 95%情况下，应将项目主代码放在src/main/java/目录下（Maven默认的约定），这样无需额外配置，Maven会自动搜索该项目主代码。
 2. Java类的包名（package），应该与POM中定义的groupId和artifactId相吻合，例如，本例中的com.github.ningg.mvnbook.helloworld，这样代码结构清晰，符合基本逻辑，方便搜索构件或者java类。
 
-###2.3 进行编译
+### 2.3 进行编译
 
 运行命令`mvn clean compile`，则输出：
 
@@ -310,7 +310,7 @@ Maven项目的核心是：pom.xml文件。POM：（Project Object Model，项目
 
 至此，Maven在没有修改pom.xml配置的情况下，就进行了项目的清理和编译任务，在下文中，将继续编写一些测试单元代码并让Maven自动化测试。
 
-###2.4 编写测试代码
+### 2.4 编写测试代码
 
 为保持项目结构清晰，主代码与测试代码分别在独立的目录中，前文提到过，主代码在src/main/java/目录下，对应的测试代码的目录是src/test/java/。因此，在编写代码前，应先创建这两个目录。
 
@@ -413,7 +413,7 @@ Maven项目的核心是：pom.xml文件。POM：（Project Object Model，项目
 
 从输出结果可以看出，执行`mvn clean test`时，Maven实际执行了：clean: clean，resources: resources，compiler: compile，resources: testResources，compiler: testCompile，surefire: test。详细来说，Maven在执行测试（test）之前，会先执行：目录清理、主资源处理、主代码编译、测试资源处理、测试代码编译、执行测试等过程，这是Maven生命周期的一个特性，本文后续部分会详细介绍Maven的生命周期。（注：surefire是执行测试的插件，其运行测试用例，并输出测试报告。）
 
-###2.5 打包和运行
+### 2.5 打包和运行
 
 项目进行编译、测试之后，下一步就是打包（package）。Hello World项目的POM中没有设置打包类型，默认为jar；执行命令：`mvn clean package`进行打包，可以看到如下输出：
 
@@ -519,7 +519,7 @@ Maven项目的核心是：pom.xml文件。POM：（Project Object Model，项目
 
 本小节介绍了一个Hello World实例，侧重点是Maven而非Java代码，介绍了POM，Maven项目结构，以及如何编译、测试、打包、发布、运行。
 
-###2.6 使用Archetype生成项目骨架
+### 2.6 使用Archetype生成项目骨架
 
 Hello World项目中有一些Maven的约定：
 
@@ -571,9 +571,9 @@ Hello World项目中有一些Maven的约定：
 
 
 
-##附录
+## 附录
 
-###中央仓库查找jar包
+### 中央仓库查找jar包
 
 基本步骤：
 
@@ -581,7 +581,7 @@ Hello World项目中有一些Maven的约定：
 * 通过Maven中添加`dependency`即可自动下载jar包以及源码；
 * 迫不得已时，需要上[中央仓库][The Central Repository - Maven]查看具体jar是否存在等情况；
 
-###强制添加依赖
+### 强制添加依赖
 
 
 如果在pom中强制添加`<dependency>`，则，通过`assembly:assembly`生成的jar包中，会包含此依赖吗？还是会自动剔除未使用的jar包？
@@ -597,7 +597,7 @@ todo list：（需要详细学习）
 
 
 
-##参考来源
+## 参考来源
 
 * [《Maven实战（迷你版）》][《Maven实战（迷你版）》]
 * [The Central Repository - Maven(Search Engine)][The Central Repository - Maven(Search Engine)]
@@ -606,7 +606,7 @@ todo list：（需要详细学习）
 
 
 
-##杂谈
+## 杂谈
 
 系统梳理一个常用的工具或者概念，应该有几点：
 

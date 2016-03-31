@@ -7,7 +7,7 @@ categories: ganglia linux
 
 
 
-##背景
+## 背景
 
 （当前文档仍然需要再梳理一遍）
 
@@ -15,7 +15,7 @@ categories: ganglia linux
 准备监控整个Flume、Kafka、Storm框架运行状态，不想重复造轮子，初步查询官网发现这个几个东西都可以跟Ganglia结合。初步查了一下Ganglia的应用很广泛，上Ganglia，走起。
 
 
-##Ganglia基本知识
+## Ganglia基本知识
 
 [Ganglia官网][Ganglia]提供了较为简介的介绍，整理一下有几点：
 
@@ -29,7 +29,7 @@ categories: ganglia linux
 	* data structures and algorithms to achieve very low per-node overheads and high concurrency;
 
 
-###软件版本信息
+### 软件版本信息
 
 此次采用最新的Ganglia版本，具体：
 
@@ -45,7 +45,7 @@ categories: ganglia linux
 
 **特别说明**：下面针对Ganglia组件的介绍，完全参考自ganglia-3.6.1:ganglia monitoring core源码压缩包中的ganglia.html文件。
 
-###Ganglia Monitoring Daemon (gmond)
+### Ganglia Monitoring Daemon (gmond)
 
 Gmond is a multi-threaded daemon which runs on each cluster node you want to monitor. Installation is easy. You don't have to have a common NFS filesystem or a database backend, install special accounts, maintain configuration files or other annoying hassles.
 
@@ -66,7 +66,7 @@ Each gmond transmits in information in two different ways: unicasting/multicasti
 	* UDP：external data representation（XDR）；
 	* TCP：XML；
 
-###Ganglia Meta Daemon (gmetad)
+### Ganglia Meta Daemon (gmetad)
 
 Federation in Ganglia is achieved using a tree of point-to-point connections amongst representative cluster nodes to aggregate the state of multiple clusters. At each node in the tree, a Ganglia Meta Daemon (gmetad) periodically polls a collection of child data sources, parses the collected XML, saves all numeric, volatile metrics to round-robin databases and exports the aggregated XML over a TCP sockets to clients. Data sources may be either gmond daemons, representing specific clusters, or other gmetad daemons, representing sets of clusters. Data sources use source IP addresses for access control and can be specified using multiple IP addresses for failover. The latter capability is natural for aggregating data from clusters since each gmond daemon contains the entire state of its cluster.
 
@@ -87,7 +87,7 @@ Federation in Ganglia is achieved using a tree of point-to-point connections amo
 	* using multiple IP addresses for failover（失效备援）
 
 
-###Ganglia PHP Web Frontend
+### Ganglia PHP Web Frontend
 
 
 The Ganglia web frontend provides a view of the gathered information via real-time dynamic web pages. Most importantly, it displays Ganglia data in a meaningful way for system administrators and computer users. Although the web frontend to ganglia started as a simple HTML view of the XML tree, it has evolved into a system that keeps a colorful history of all collected data.
@@ -118,7 +118,7 @@ The Ganglia web frontend is written in the PHP scripting language, and uses grap
 **notes(ningg)**：疑问，Web Frontend 只能读取其运行的服务器上`gmetad`提供的数据？这就是说，要求web frontend必须运行在整个Ganglia集群的树状结构的根节点？
 
 
-##配置基础环境
+## 配置基础环境
 
 当前服务器基本环境（CentOS 6.4 x86_64）：
 
@@ -127,7 +127,7 @@ The Ganglia web frontend is written in the PHP scripting language, and uses grap
 	Distributor ID: CentOS
 	Description:    CentOS release 6.4 (Final)
 
-###新增用户和组
+### 新增用户和组
 
 为方便所有操作，以及进行权限管理，新建用户ganglia：
 
@@ -137,7 +137,7 @@ The Ganglia web frontend is written in the PHP scripting language, and uses grap
 
 如何卸载gweb？（make uninstall）
 	
-###几个基本组件
+### 几个基本组件
 
 `gmetad`进程需要去[rrdtool][rrdtool]，同时如果要同时在node上安装`gmetad`和`gmond`，则需要提前安装：`apr*`、`pcre*`、`zlib*`，具体：
 
@@ -171,7 +171,7 @@ The Ganglia web frontend is written in the PHP scripting language, and uses grap
 
 	sudo yum install gcc rrdtool rrdtool-devel apr apr-devel pcre pcre-devel zlib zlib-devel python python-devel gperf
 	
-###libconfuse
+### libconfuse
 
 	# 出错信息
 	libconfuse not found
@@ -193,7 +193,7 @@ The Ganglia web frontend is written in the PHP scripting language, and uses grap
 	make
 	make install
 
-###libexpat
+### libexpat
 
 	# 出错信息
 	libexpat not found
@@ -213,7 +213,7 @@ The Ganglia web frontend is written in the PHP scripting language, and uses grap
 	make install
 
 
-##安装Ganglia
+## 安装Ganglia
 
 安装Ganglia有几种方式：
 
@@ -229,7 +229,7 @@ The Ganglia web frontend is written in the PHP scripting language, and uses grap
 * gmetad
 * web frontend
 
-###gmond和gmetad
+### gmond和gmetad
 
 此次安装版本为：[ganglia-3.6.1(ganglia monitoring core)][ganglia-3.6.1(ganglia monitoring core)]
 	
@@ -244,7 +244,7 @@ The Ganglia web frontend is written in the PHP scripting language, and uses grap
 	make
 	make install
 
-####配置gmetad
+#### 配置gmetad
 	
 由于gmetad依赖rrdtool，需要设置两个东西：
 
@@ -263,7 +263,7 @@ The Ganglia web frontend is written in the PHP scripting language, and uses grap
 
 上述`chown`时，利用的用户UID与gmetad.conf中`setuid_username`的配置保持一致；另外，安装配置好之后，可通过命令`gmetad -d 2`来在前台运行gmetad进程，以方便查看其运行状态。
 
-####配置gmond
+#### 配置gmond
 
 利用gmond的默认配置生成配置文件：
 
@@ -287,7 +287,7 @@ The Ganglia web frontend is written in the PHP scripting language, and uses grap
 
 gmond的详细信息，可以通过命令`man gmond`和`man gmond.conf`来查看。
 
-###添加服务：gmond、gmetad
+### 添加服务：gmond、gmetad
 
 
 通过上述安装步骤，服务器上应该已经安装了以下文件：
@@ -331,9 +331,9 @@ gmond的详细信息，可以通过命令`man gmond`和`man gmond.conf`来查看
 * /etc/rc.d/init.d/目录又是干什么的？
 * chkconfig命令的含义？
 
-###web frontend
+### web frontend
 
-####安装前准备
+#### 安装前准备
 
 此次安装版本为：[ganglia-3.6.2(ganglia-web)][ganglia-3.6.2(ganglia-web)]
 
@@ -351,7 +351,7 @@ gmond的详细信息，可以通过命令`man gmond`和`man gmond.conf`来查看
 	# 安装apache服务器，以及PHP支持的组件
 	yum install php-common php-cli php php-gd httpd
 
-####安装web frontend（推荐）
+#### 安装web frontend（推荐）
 
 在ganglia web的解压文件中能够看到一个文件`Makefile`，通过对其进行设置就可以实现web frontend的快捷安装，具体要配置的参数如下：
 
@@ -390,7 +390,7 @@ gmond的详细信息，可以通过命令`man gmond`和`man gmond.conf`来查看
 （疑问：makefile的作用？单纯的命令集合吗？）
 	
 	
-####安装web frontend（弃用）
+#### 安装web frontend（弃用）
 	
 	tar -zxvf ganglia-web-3.6.2.tar.gz
 	cd ganglia-web-3.6.2
@@ -414,9 +414,9 @@ gmond的详细信息，可以通过命令`man gmond`和`man gmond.conf`来查看
 
 
 
-##遇到的错误以及解决办法
+## 遇到的错误以及解决办法
 
-###错误1
+### 错误1
 
 	# service gmond start时，出现错误：
 	error while loading shared libraries: libconfuse.so.0: cannot open shared object file: No such file or directory
@@ -428,7 +428,7 @@ gmond的详细信息，可以通过命令`man gmond`和`man gmond.conf`来查看
 	cp libconfuse.so.0 ../lib64/
 	service gmond start
 	
-###错误2
+### 错误2
 
 启动gmetad之后，通过命令`service gmetad status`查询出现：
 
@@ -471,7 +471,7 @@ gmetad在启动之后，会自动归指定UID接管，具体在`/usr/local/etc/g
 	
 OK，再次启动gmetad，成功启动。
 
-###错误3
+### 错误3
 
 通过rpm包或者yum源方式安装web frontend时，默认web frontend会被安装在`/usr/share/ganglia-webfrontend`目录下，这样通过[http://locahost/ganglia]()就无法进行访问。
 
@@ -480,7 +480,7 @@ OK，再次启动gmetad，成功启动。
 	# 利用符号链接
 	ln -s /usr/share/ganglia-webfrontend /var/www/html/ganglia
 
-###错误4
+### 错误4
 
 通过浏览器访问[http://locahost/ganglia]()时，出现如下错误信息：
 
@@ -498,7 +498,7 @@ OK，再次启动gmetad，成功启动。
 	
 **疑问**：Linux下SELinux是什么安全机制？`setenforce 0`的含义是什么？
 	
-###错误5
+### 错误5
 
 在一批新服务器上，安装的Linux版本与上文提到的一致；
 按照本文前一部分的步骤来安装Ganglia时，当执行`./configure --with-gmetad --enable-gexec`之后，再执行`make`命令时，具体出错信息如下：
@@ -529,14 +529,14 @@ OK，再次启动gmetad，成功启动。
 
 
 
-###补充思考
+### 补充思考
 
 **疑问**：本文中实际是直接编译源码来安装组件的，即：`./configure`以及`make install`方式，那有个问题：在安装成功后，删掉安装时使用的源码文件，会影响安装的组件吗？*（个人感觉应该不影响才是基本需求）*
 
 **RE**：要弄清上面的问题，需要弄清楚`./configure`以及`make install`执行过程中，导致进行了哪些操作？即：如何将软件安装到哪了？配置文件在哪？
 
 
-##配置Ganglia集群的拓扑
+## 配置Ganglia集群的拓扑
 
 上面主要说的是一个目标：在一台服务器上安装Ganglia的组件：gmond、gmetad、web frontend；这些都是针对单个服务器（single ganglia node）来说的。那如何将多个Ganglia node构成一个Ganglia cluster呢？之前我们简单提到：Ganglia是按照树状结构来组织的，下面将说一下细节。
 
@@ -574,7 +574,7 @@ OK，再次启动gmetad，成功启动。
 
 （doing...）
 
-##与Ganglia集成
+## 与Ganglia集成
 
 （通过Ganglia来监控Flume、Kafka、Storm的运行状态，不仅仅是OS层面的，更重要的是具体应用及其组件的运行状态）
 
@@ -584,7 +584,7 @@ OK，再次启动gmetad，成功启动。
 
 
 
-##回顾与总结
+## 回顾与总结
 
 Ganglia用于监测分布式系统的运行状态，如何把Ganglia集群用起来？
 
@@ -605,7 +605,7 @@ Ganglia用于监测分布式系统的运行状态，如何把Ganglia集群用起
 
 
 
-##参考来源
+## 参考来源
 
 * [分布式监控工具Ganglia介绍与集群部署][分布式监控工具Ganglia介绍与集群部署]
 * [GangLia简介][GangLia简介]
@@ -634,7 +634,7 @@ Ganglia用于监测分布式系统的运行状态，如何把Ganglia集群用起
 * [Ganglia core(GitHub) WIKI][Ganglia core(GitHub) WIKI]
 * [Ganglia web(GitHub) WIKI][Ganglia web(GitHub) WIKI]
 
-##闲谈
+## 闲谈
 
 今天无意间看到`YUKI小糖`的[Ganglia集群部署文章][分布式监控工具Ganglia介绍与集群部署]，看到其也会在博文中唠叨几句；突然相当，我x，难道这是工程师的共同习性吗？莫不是因为一天到晚跟机器接触太久了，没有人说话，就通过博客来唠叨了吧~~啊哈哈~~*（平静一下心情，细想想，还是挺凄凉的...）*
 

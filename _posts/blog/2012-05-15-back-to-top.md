@@ -8,10 +8,10 @@ categories: javascript css
 
 
 
-##JavaScript方式
+## JavaScript方式
 
 
-###CSS代码：
+### CSS代码：
 
 下述样式关键是：
 
@@ -47,7 +47,7 @@ categories: javascript css
 
 
 
-###JavaScript代码：
+### JavaScript代码：
 
 	function gotoTop(min_height){
 		$("#gotoTop").click(
@@ -78,7 +78,7 @@ categories: javascript css
 	gotoTop();
 
 
-###HTML代码片段：
+### HTML代码片段：
 
 	<div id="gotoTop">Top</div>
 
@@ -95,7 +95,7 @@ categories: javascript css
 
 
 
-##参考来源
+## 参考来源
 
 
 * [简单返回顶部代码及注释说明][简单返回顶部代码及注释说明]

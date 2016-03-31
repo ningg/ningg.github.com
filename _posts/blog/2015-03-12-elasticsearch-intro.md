@@ -18,7 +18,7 @@ category: elasticsearch
 
 
 
-##启动
+## 启动
 
 直接下载，然后解压，直接运行脚本`bin/elasticsearch`。如果希望 ElasticSearch 在后台运行，则执行命令`bin/elasticsearch -d`，其将 ElasticSearch 进程的父进程设置为超级进程（`pid=1`）。现在，如何测试是否启动成功？可向 `http://localhost:9200` 发送一条请求，会查看到返回的JSON字符串，具体效果如下：
 
@@ -42,16 +42,16 @@ category: elasticsearch
 * 验证ElasticSearch是否成功启动，也可以直接使用浏览器，访问`http://localhost:9200`，将此处 `localhost` 替换为服务器的IP。
 * 在后台启动ElasticSearch的详细过程，可以参考`bin/elasticsearch`脚本细节，内部有详细说明，本质就是shell脚本中启动一个Java进程。
 
-##Index操作
+## Index操作
 
 
-###插入数据
+### 插入数据
 
 如果指定的 `Index`\`Type` 不存在，则自动创建，下面为向`Index`\`Type` 插入数据的命令；
 
 	curl -XPUT 'http://localhost:9200/test/test/1' -d '{ "name" : "Ning Guo"}'
 	
-###查询数据
+### 查询数据
 
 查询指定条件的数据，两个操作：`_count`、`_search`。
 
@@ -107,7 +107,7 @@ category: elasticsearch
 
 
 
-###删除数据
+### 删除数据
 
 如何删除一个Index、Type、Document。
 
@@ -118,15 +118,15 @@ category: elasticsearch
 
 
 
-##监控
+## 监控
 
 Elastic官网提供了一种方式Marvel，不过这种方式是付费的，我x，那能不能利用Ganglia监控呢？实际上，ElasticSearch是基于Java的，而JVM能够通过JMX方式向外停工监控数据，唯一的问题是：ElasticSearch在JVM中记录的运行状态数据吗？
 
 
-##常见问题
+## 常见问题
 
 
-###WARN: Too many open files
+### WARN: Too many open files
 
 详细错误信息：
 
@@ -187,7 +187,7 @@ Elastic官网提供了一种方式Marvel，不过这种方式是付费的，我x
 * [Elasticsearch - too many open files][Elasticsearch - too many open files]
 
 
-##参考来源
+## 参考来源
 
 * [ElasticSearch(Github)][ElasticSearch(Github)]
 * [gitbook：Elasticsearch权威指南（中文版）][gitbook：Elasticsearch权威指南（中文版）]

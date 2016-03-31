@@ -23,7 +23,7 @@ equals方法，需要满足以下三点：
 * **分散原则**：生成hashcode的算法尽量使hashcode的值分散一些，不要很多hashcode都集中在一个范围内，这样有利于提高HashMap的性能；
 * a.equals(b)，则a与b的hashCode()必须相等；
 
-##Object.equals()方法
+## Object.equals()方法
 
 代码如下：
 
@@ -34,7 +34,7 @@ equals方法，需要满足以下三点：
 直接比较两个基础类型的值是否相等、两个对象的内存地址是否相同。
 
 
-##String.equals()方法
+## String.equals()方法
 
 String中`equals()`方法，要求两个String的值相等即可；
 

@@ -34,7 +34,7 @@ todo:
 
 
 
-##工具
+## 工具
 
 |工具|版本|说明|
 |----|----|----|
@@ -44,21 +44,14 @@ todo:
 
 
 
-##后端架子
+## 后端架子
 
 
 
 
 
 
-###Spring
-
-
-
-
-
-
-
+### Spring
 
 
 
@@ -70,10 +63,17 @@ todo:
 
 
 
-##常见问题
 
 
-###MyEclipse的环境配置
+
+
+
+
+
+## 常见问题
+
+
+### MyEclipse的环境配置
 
 在使用MyEclipse时，需要进行的前期配置：
 
@@ -81,7 +81,7 @@ todo:
 * Maven
 	* Maven的JDK
 
-###MyEclipse下，maven管理java web工程
+### MyEclipse下，maven管理java web工程
 
 在Myeclipse下，创建web project时，选中`Add maven support`，一路点击`Next`，后面有两个选项：
 
@@ -92,13 +92,13 @@ UPDATE：20150325，分两步，从简单的来，先用`MyEclipse JEE project s
 
 UPDATE：20150404，另一种，以Maven project为中心，最后选择`archetypes`时，选择Archetype：`maven-archetype-webapp`即可。
 
-###数据库操作脚本
+### 数据库操作脚本
 
 （TODO）
 
 在web工程中，添加目录：SQLScript，其下，添加*.sql脚本，要求脚本文件命名为：ddl_timestamp.sql；要求，具体sql语句中，每个字段都必须添加comment？其他人有没有类似经验。
 
-###java代码规范
+### java代码规范
 
 java代码规范，几点：
 
@@ -109,7 +109,7 @@ java代码规范，几点：
 
 
 
-###TODO
+### TODO
 
 几个问题：
 
@@ -131,7 +131,7 @@ java代码规范，几点：
 
 
 
-##参考来源
+## 参考来源
 
 
 * [spring mvc中返回ModelAndView后执行ajax异步请求][spring mvc中返回ModelAndView后执行ajax异步请求]

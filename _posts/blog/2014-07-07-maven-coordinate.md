@@ -7,13 +7,13 @@ category: maven
 
 > 题记：[《Maven实战（迷你版）》](http://www.infoq.com/cn/minibooks/maven-in-action)这本书写的太好了，我忍不住把其中的内容又敲一遍。
 
-###何为Maven坐标
+### 何为Maven坐标
 
 Maven来管理项目依赖。为了能自动化解析任何一个java构建，Maven必须将他们唯一标识，这是依赖管理的基础——坐标（coordinate）。本文将详细介绍Maven坐标的作用，并在此基础上介绍Maven的配置。
 
 Maven坐标的元素包括：`groupId`，`artifactId`，`version`，`packaging`，`classifier`。根据坐标，Maven能够从中央仓库（http://repo1.maven.org/maven2）中，找出java构件并进行下载。
 
-###坐标详解
+### 坐标详解
 
 先看一个坐标定义：
 

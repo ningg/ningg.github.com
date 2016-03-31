@@ -16,7 +16,7 @@ category: jQuery
 
 > 遇到问题，首要查看[jQuery 官网 API][jQuery 官网 API]。
 
-##基本路线
+## 基本路线
 
 几点：
 
@@ -29,7 +29,7 @@ category: jQuery
 
 
 
-##jQuery简介
+## jQuery简介
 
 
 JavaScript几个劣势：
@@ -82,7 +82,7 @@ jQuery对象，什么含义？
 	* 编写个数：只能写一个，如果写了多个，则，最后一个有效；
 
 
-###jQuery代码风格
+### jQuery代码风格
 
 
 jQuery建议代码规范：
@@ -93,7 +93,7 @@ jQuery建议代码规范：
 * 添加注释：`// 注释`
 
 
-###DOM对象与jQuery对象
+### DOM对象与jQuery对象
 
 理清几个问题：
 
@@ -102,7 +102,7 @@ jQuery建议代码规范：
 * 2类对象之间，如何转换？
 
 
-####DOM对象
+#### DOM对象
 
 DOM，Document Object Model，文档对象模型，每一份DOM都可以看作一棵树；一个HTML页面中，有很多标签，每个标签都看作一个节点，构成一棵树，称为DOM树，每个节点都是一个DOM对象。可以通过JavaScript来获取DOM对象，示例代码如下：
 
@@ -110,7 +110,7 @@ DOM，Document Object Model，文档对象模型，每一份DOM都可以看作�
 	var ObjHTML = domObj.innerHTML;		//使用JavaScript中的属性innerHTML
 
 
-####jQuery对象
+#### jQuery对象
 
 jQuery对象，通过jQuery包装DOM对象之后，产生的对象，几点：
 
@@ -124,7 +124,7 @@ jQuery对象，通过jQuery包装DOM对象之后，产生的对象，几点：
 	// 上述jQuery对象的操作，等效于下面DOM对象的操作
 	document.getElementById("foo").innerHTML; 
 
-####jQuery对象与DOM对象之间相互转换
+#### jQuery对象与DOM对象之间相互转换
 
 示例代码：
 
@@ -137,16 +137,16 @@ jQuery对象，通过jQuery包装DOM对象之后，产生的对象，几点：
 
 备注：`$()`函数，获取jQuery对象；为什么？哪个地方定义的？
 
-####解决jQuery与其他库的冲突
+#### 解决jQuery与其他库的冲突
 
 调用`jQuery.noConflict();`将变量`$`的控制权放弃，也可以使用`var $j = jQuery.noConfilct();` 在放弃`$`变量同时，自定义jQuery的其他别名`$j`；补充一点，通过`var variable`定义的变量`variable`在下文中直接引用即可，同理，`var $j`定义的变量`$j`，在下文中也直接使用`$j`，不要忘记了`$`符号，此处，其为变量名的一部分。
 
 
-##选择器
+## 选择器
 
 对一个元素进行操作之前，定位到这个元素，是第一步；选择器，负责定位元素。
 
-###CSS选择器
+### CSS选择器
 
 常识几点：
 
@@ -174,7 +174,7 @@ CSS选择器，几类：
 
 注：CSS，Cascading Style Sheets，层叠样式表。
 
-###jQuery选择器
+### jQuery选择器
 
 jQuery选择器，完全继承CSS选择器的风格，几点：
 
@@ -187,7 +187,7 @@ jQuery选择器，完全继承CSS选择器的风格，几点：
 * 样式（CSS）
 * 动作（JavaScript）
 
-####jQuery选择器的特点
+#### jQuery选择器的特点
 
 几点：
 
@@ -196,7 +196,7 @@ jQuery选择器，完全继承CSS选择器的风格，几点：
 * 支持CSS1~CSS3的选择器：CSS1、CSS2的全部选择器，CSS3的部分选择器，少量独特的选择器
 * 完善的处理机制：原生JavaScript在选择元素时，需要判断元素是否存在，而jQuery选择器，可以无需判断元素是否存在
 
-####jQuery选择器分类及用法
+#### jQuery选择器分类及用法
 
 几类：
 
@@ -222,7 +222,7 @@ jQuery选择器，完全继承CSS选择器的风格，几点：
 
 
 
-#####基本过滤器
+##### 基本过滤器
 
 比较常用，具体如下：
 
@@ -241,7 +241,7 @@ jQuery选择器，完全继承CSS选择器的风格，几点：
 |:focus		|$(":focus")	|当前具有焦点的元素|
 
 
-#####内容过滤
+##### 内容过滤
 
 过滤规则与其包含的子元素或文本内容相关。
 
@@ -252,7 +252,7 @@ jQuery选择器，完全继承CSS选择器的风格，几点：
 |:empty				|$(":empty")				|所有空元素									|
 |:parent			|$(":parent")				|所有是另一个元素的父元素的元素				|
 
-#####可见性过滤
+##### 可见性过滤
 
 根据元素是否可见来判断：
 
@@ -271,7 +271,7 @@ jQuery选择器，完全继承CSS选择器的风格，几点：
 
 
 
-##DOM操作
+## DOM操作
 
 
 DOM，文档对象模型，几点：
@@ -280,7 +280,7 @@ DOM，文档对象模型，几点：
 * 包含内容：DOM定义了一系列对象、方法、属性，用于访问、操作、创建文档的结构、样式、行为；
 * 特点：与浏览器、平台、语言无关；
 
-###jQuery中DOM操作
+### jQuery中DOM操作
 
 随便列几个：
 
@@ -310,7 +310,7 @@ DOM操作分类：
 * [jQuery 官网 API][jQuery 官网 API]
 
 
-##jQuery中事件和动画
+## jQuery中事件和动画
 
 
 
@@ -322,7 +322,7 @@ DOM操作分类：
 
 
 
-##Ajax应用
+## Ajax应用
 
 Ajax：
 
@@ -355,7 +355,7 @@ Ajax：
 
 上面提到的load、get、post等方法都可以用`$.ajax()`来实现，实际上，`$.ajax()`是jQuery最底层的Ajax实现。
 
-###$.ajax()详解
+### $.ajax()详解
 
 `$.ajax()`方法常用参数解释
 
@@ -373,7 +373,7 @@ Ajax：
 |complete|	Function	|请求完成后回调函数 (请求成功或失败时均调用)。|
 
 
-###$.ajax()实例
+### $.ajax()实例
 
 
 `$.ajax()`示例代码如下：
@@ -412,7 +412,7 @@ Ajax：
 
 
 
-##参考来源
+## 参考来源
 
 * [jQuery Tutorial][jQuery Tutorial]
 * [jQuery选择器][jQuery选择器]

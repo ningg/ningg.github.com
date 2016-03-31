@@ -13,10 +13,10 @@ category: chrome
 * 如何开发chrome插件？
 
 
-##快捷键
+## 快捷键
 
 
-###标签页
+### 标签页
 
 |快捷键 |说明|
 |-----|-----|
@@ -29,7 +29,7 @@ category: chrome
 |`ctrl + click on link`|新tab页打开链接|
 |`ctrl + shift + click..`|新tab页打开链接，同时切换过去|
 
-###窗口
+### 窗口
 
 |快捷键 |说明|
 |-----|-----|
@@ -38,14 +38,14 @@ category: chrome
 |`ctrl + shift + Q`|关闭chrome浏览器|
 
 
-###地址栏
+### 地址栏
 
 |快捷键 |说明|
 |-----|-----|
 |`alt + d`/`ctrl + l`|光标定位到地址栏|
 
 
-###书签
+### 书签
 
 |快捷键 |说明|
 |-----|-----|
@@ -53,7 +53,7 @@ category: chrome
 |`ctrl + shift + D`|为打开的所有tab页，添加书签|
 |`ctrl + shift + O`|打开书签管理器|
 
-###页面效果
+### 页面效果
 
 |快捷键 |说明|
 |-----|-----|
@@ -61,14 +61,14 @@ category: chrome
 |`ctrl + 0`|恢复原始页面大小|
 |`f11`|全屏显示|
 
-###打开开发工具
+### 打开开发工具
 
 |快捷键 |说明|
 |-----|-----|
 |`F12`|打开/关闭Chrome调试工具|
 
 
-##Developer Tools
+## Developer Tools
 
 TODO：
 
@@ -97,7 +97,7 @@ TODO：
 
 
 
-##参考来源
+## 参考来源
 
 * [Chrome Shortcuts][Chrome Shortcuts]
 * [神器——Chrome开发者工具(一)][神器——Chrome开发者工具(一)]

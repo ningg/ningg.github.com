@@ -9,7 +9,7 @@ category: YCombinator
 > 原文地址：[Sales and Marketing][Sales and Marketing]
 
 
-##打造企业软件公司
+## 打造企业软件公司
 
 > Building for the Enterprise (and why it's not as bad as think.)
 
@@ -19,7 +19,7 @@ category: YCombinator
 * 软件行业的变化，使得软件行业的创业更加容易
 * 创建软件公司的模式和方法
 
-###Box的成长过程
+### Box的成长过程
 
 观察到几个因素：
 
@@ -36,7 +36,7 @@ category: YCombinator
 * over-serving consumers：普通用户，产品很好，甚至有很多不需要的功能；
 * under-serving bussiness：企业用户，产品不好，在安全性和容量方面做得还远不够；
 
-####个人用户产品 vs. 企业用户产品
+#### 个人用户产品 vs. 企业用户产品
 
 个人用户产品与企业用户产品，给人们留下的印象差异很大：
 
@@ -64,7 +64,7 @@ category: YCombinator
 	* 印象：吸引力不大、竞争压力大、创业困难；
 	* 实际情况：投入企业软件中，不会有上述感受，相反，早上起床，会因打造企业软件而异常兴奋；
 
-####企业用户产品的特点
+#### 企业用户产品的特点
 
 整体上，企业软件，给人的印象：slow、expensive、complex、sale，具体：
 
@@ -96,7 +96,7 @@ Box的结果在于：
 让企业软件面向未来趋势，即，IT产品要顺应潮流。
 
 
-###软件行业哪些变化？
+### 软件行业哪些变化？
 
 行业发生了哪些变化，使得企业软件领域创业变得更容易？
 
@@ -124,7 +124,7 @@ Box的结果在于：
 	* user导向的世界中，终端用户引入技术、引入到销售团队、引入到营销团队、财务团队等等，基于用户打造产品，即，用户把IT产品引入到公司，当他们公司需要更好的控制性、更好的安全性、更好的可扩展性时，可以顺势把产品卖给他们的公司；与传统企业软件相比，商业模式是一样的，不过产品是通过终端用户引入到他们的公司的。
 
 
-####移动互联时代
+#### 移动互联时代
 
 > 17.5 亿的 smart phone.
 
@@ -178,11 +178,11 @@ Box的结果在于：
 * 未来5~10年，更多的企业会与科技公司合作；
 
 
-###实用建议
+### 实用建议
 
 开篇提示：大部分建议，是事后回顾获得的，也就是说当时并不知道是对的。*（没问题，增加见识、潜意识即可）*实际上，刚建立公司时，很难胸有成竹，这些建议不一定都能用上，不过，可以构造一个框架，整体上有个把握。
 
-####洞悉科技变革
+#### 洞悉科技变革
 
 洞悉科技变革，个人用户产品、企业用户产品，同时适用：
 
@@ -214,7 +214,7 @@ Box的结果在于：
 
 
 
-##原文
+## 原文
 
 Can we turn it up a little bit so it has more pump up? Okay, there we go. Okay. Guys, we have to find the beat then clap to the beat. Okay, please stop the music. Please put on the presentation. Thank you. That will be about the most pumped up thing that happens in enterprise software. The rest is downhill from here. Thank you for that well rehearsed intro.
 

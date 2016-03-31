@@ -14,7 +14,7 @@ WebSocket，几点：
 * 实例代码？
 
 
-##解决什么问题？
+## 解决什么问题？
 
 针对实时通信的场景*（实时Web应用）*，几点：
 
@@ -38,17 +38,17 @@ WebSocket，是HTML5引入Web的新特性，目标：构建高效的实时Web应
 * 节省服务器CPU资源；*（HTTP协议的Polling方式，即使Server没有数据也要接收Request）*
 
 
-##传统解决方案
+## 传统解决方案
 
 上述构建实时Web应用的场景，传统的解决方案是：轮询、长轮询、流，
 
-###轮询（Polling）
+### 轮询（Polling）
 
 轮询（Polling）又称定期轮询：Client定期向Server发送请求，以此保持与Server端数据的同步。*（通常使用Ajax技术，局部刷新Web页面）*；**缺点：由于Client定期向Server发送请求，当Server端没有数据更新时，Client仍旧发送请求，这造成带宽的浪费以及Server端CPU的耗费。**
 
 ![](/images/websocket-intro/polling.png)
 
-###长轮询（Long Polling）
+### 长轮询（Long Polling）
 
 长轮询是对普通轮询的改进和提高，目标：降低无效的网络传输。基本原理：Server接收到Client的请求之后，如果没有数据更新，则连接保持一段时间，直到有数据更新或者连接超时，这样可以减少无效的Client与Server之间的交互。实例：WebQQ。
 
@@ -56,18 +56,18 @@ WebSocket，是HTML5引入Web的新特性，目标：构建高效的实时Web应
 
 ![](/images/websocket-intro/long-polling.png)
 
-###流（长连接）
+### 流（长连接）
 
 流（也称，长连接方式）是指Client在页面内使用一个隐蔽的窗口向Server端发起一个长连接请求。Server端接到这个请求后，进行响应，并且不断更新连接状态，保证连接不过期。如此可以保证Server与Client之间的实时通信。实例：Comet技术*（基于HTTP长连接的Server端Push技术）*。**缺点**：大并发情况下，服务器可能会宕机。
 
 
-###小结
+### 小结
 
 HTML5 WebSocket的目标：取代Polling、Comet技术，实现Browser与Server之间实时通信。浏览器通过JavaScript向服务器发出建立 WebSocket 连接的请求，连接建立以后，客户端和服务器端就可以通过 TCP 连接直接交换数据。因为 WebSocket 连接本质上就是一个 TCP 连接，所以在数据传输的稳定性和数据传输量的大小方面，和轮询以及 Comet 技术比较，具有很大的性能优势。
 
-##WebSocket实现原理
+## WebSocket实现原理
 
-###OSI模型、TCP/IP
+### OSI模型、TCP/IP
 
 OSI（Open System Interconnection Reference Model，开放式系统互联通信参考模型），OSI模型分为7层：TCP/IP网络模型，可以看作对OSI模型的简化，具体如下：
 
@@ -75,7 +75,7 @@ OSI（Open System Interconnection Reference Model，开放式系统互联通信�
 
 注：HTTP、WebSocket协议，都属于OSI模型的应用层。
 
-###WebSocket、HTTP、TCP
+### WebSocket、HTTP、TCP
 
 上面提到的应用层协议：HTTP、WebSocket，都是基于TCP协议来传输数据的。使用TCP协议，就遵守TCP协议的三次握手建立连接和四次握手释放连接，只是连接建立之后发送的内容不同，或者断开的时间不同。
 
@@ -84,7 +84,7 @@ OSI（Open System Interconnection Reference Model，开放式系统互联通信�
 
 WebSocket，依赖HTTP协议进行一次握手，握手成功后，数据就直接从TCP通道传输，与HTTP无关了。
 
-###WebSocket、Socket
+### WebSocket、Socket
 
 Socket不是协议，而是应用层与传输层/传输层之间的抽象接口，此用户向用户屏蔽下层协议的使用细节，更加方便易用。
 
@@ -92,7 +92,7 @@ Socket不是协议，而是应用层与传输层/传输层之间的抽象接口�
 
 WebSocket则是完整的应用层协议；从使用上来说，WebSocket更易用，而Socket更灵活。
 
-###WebSocket、HTML5
+### WebSocket、HTML5
 
 WebSocket API是HTML5标准的一部分，但这并不代表 WebSocket 一定要用在 HTML 中，或者只能在基于浏览器的应用程序中使用。实际上，很多语言、框架、服务器都提供了WebSocket的支持，例如：
 
@@ -100,14 +100,14 @@ WebSocket API是HTML5标准的一部分，但这并不代表 WebSocket 一定要
 * Apache 对 WebSocket 的支持： Apache Module mod_proxy_wstunnel
 * Nginx 对 WebSockets 的支持： NGINX as a WebSockets Proxy 、 NGINX Announces Support for WebSocket Protocol 、WebSocket proxying
 
-##WebSocket原理
+## WebSocket原理
 
 WebSocket是为解决客户端与服务端实时通信而产生的技术。**其本质是先通过HTTP/HTTPS协议进行握手后创建一个用于交换数据的TCP连接，此后服务端与客户端通过此TCP连接进行实时通信**。
 
 **Tomcat 7.0.27开始支持WebSocket服务**，在tomcat webapps/examples目录下有关于websocket的示例及源码，有兴趣的可以自行查看。
 WebSocket规范当前还没有正式版本，草案变化也较为迅速。Tomcat7当前支持 RFC6455 定义的WebSocket，而RFC 6455目前还未成型，将来可能会修复一些Bug，甚至协议本身也可能会产生一些变化。**RFC6455定义的WebSocket协议由握手和数据传输两个部分组成**：
 
-###握手信息格式
+### 握手信息格式
 
 首先是通过握手信息建立TCP链接，为后续的信息传输做好准备。
 
@@ -130,7 +130,7 @@ WebSocket规范当前还没有正式版本，草案变化也较为迅速。Tomca
 	Sec-WebSocket-Accept: s3pPLMBiTxaQ9kYGzzhZRbK+xOo=
 	Sec-WebSocket-Protocol: chat
 
-###传输信息格式
+### 传输信息格式
 
 一旦客户端和服务端都发送了握手信息并且成功握手，则数据传输部分将开始。数据传输对客户端和服务端而言都是一个**双工通信通道**，客户端和服务端来回传递的数据称之为“消息”。
 
@@ -147,7 +147,7 @@ ws是普通的WebSocket通信协议，而wss是安全的WebSocket通信协议(�
 **建立连接后，随后通过socket.send(message);即可实现消息的发送和接收。**
 
 
-###优势所在
+### 优势所在
 
 WebSocket的优势：
 
@@ -155,7 +155,7 @@ WebSocket的优势：
 * 客户端与服务器都可以主动传送数据给对方，真正的全双工；
 * 不用频率创建TCP请求及销毁请求，减少网络带宽资源的占用，同时也节省服务器资源；
 
-##WebSocket实例
+## WebSocket实例
 
 Tomcat7提供的与WebSocket相关的类均位于包org.apache.catalina.websocket之中，Servlet处理类以org.apache.catalina.websocket.WebSocketServlet作为它的父类。
 
@@ -176,7 +176,7 @@ WebSocketServlet：提供遵循RFC6455的WebSocket连接的Servlet基本实现�
 
 
 
-##参考来源
+## 参考来源
 
 * [Socket 与 WebSocket][Socket 与 WebSocket]
 * [WebSocket官网][WebSocket官网]

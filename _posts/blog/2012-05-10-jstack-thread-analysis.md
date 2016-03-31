@@ -21,14 +21,14 @@ categories: java jvm
 
 vmstat来看看机器的情况，发现当前的排队线程有时高达76，低时也有10个以上，已经超出了CPU数。既然是线程的情况，就重新执行`jstack -l [pid] > [pid].stack`，来详细分析Waiting的线程。
 
-##查看进程
+## 查看进程
 
 top命令`top` -- `P/M`，结果：
 
 	  PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+  COMMAND                                                                   
 	 4796 storm     20   0 9935m 264m  13m S 134.5  0.8   3745:18 java  
 
-##参看线程
+## 参看线程
 
 top命令`top -H -p 4796`，结果：
 
@@ -37,7 +37,7 @@ top命令`top -H -p 4796`，结果：
 	4915 storm     20   0 3582m 256m  12m S  0.3  0.8   7:44.29 java      
 
 	
-##查看JVM中线程详细信息
+## 查看JVM中线程详细信息
 
 4967是最耗CPU的线程，转换成16进制1367，再用`jstack`命令查看线程堆栈：
 
@@ -65,7 +65,7 @@ top命令`top -H -p 4796`，结果：
 		at java.util.concurrent.LinkedBlockingQueue.take(LinkedBlockingQueue.java:442)  __
 	
 
-##备注
+## 备注
 
 几点：
 
@@ -99,7 +99,7 @@ top命令`top -H -p 4796`，结果：
 
 
 
-##参考来源
+## 参考来源
 
 * [一个Tomcat高CPU占用问题的定位][一个Tomcat高CPU占用问题的定位]
 

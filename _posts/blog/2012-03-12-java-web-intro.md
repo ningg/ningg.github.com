@@ -7,7 +7,7 @@ category: web
 
 
 
-###Web提供服务，多用户使用，是否会相互干扰
+### Web提供服务，多用户使用，是否会相互干扰
 
 Spring MVC方式提供web服务，不同用户登录，会相互干扰吗？
 本质：web为用户提供服务的实现细节，同一个JVM为所有用户服务？每个用户都占用一个JVM process？每个用户都新建一个java thread？在Eclipse的debug模式下，可以查看Thread情况。

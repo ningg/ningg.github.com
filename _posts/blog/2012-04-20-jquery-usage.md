@@ -8,9 +8,9 @@ category: jQuery
 
 
 
-##常见问题
+## 常见问题
 
-###为元素绑定点击事件
+### 为元素绑定点击事件
 
 下面几种方法：
 
@@ -28,7 +28,7 @@ category: jQuery
 * [Javascript function declarations vs function operators][Javascript function declarations vs function operators]
 
 
-####方法1：
+#### 方法1：
 
 	function retrieveTransNum() {
 		$.ajax({
@@ -44,7 +44,7 @@ category: jQuery
 	
 	$("#trans-num-li").bind("click", retrieveTransNum());
 	
-####方法1（补充）：
+#### 方法1（补充）：
 
 下面的示例代码是有效的，具体：
 
@@ -68,7 +68,7 @@ category: jQuery
 * 函数声明之后，调用函数时，使用`function_name();`；
 * 函数声明之后，绑定事件时，使用`bind("click", function_name)`；
 
-####方法2：
+#### 方法2：
 
 	$("#trans-num-li").bind("click", function retrieveTransNum() {
 		$.ajax({
@@ -82,7 +82,7 @@ category: jQuery
 		});
 	});
 
-####方法3：
+#### 方法3：
 	
 	...
 	<li id="trans-num-li" onclick="retrieveTransNum()">
@@ -100,7 +100,7 @@ category: jQuery
 		});
 	} 
 	
-####方法4：
+#### 方法4：
 
 	function retrieveTransNum() {
 		$.ajax({
@@ -119,7 +119,7 @@ category: jQuery
 		retrieveTransNum();
 	});
 
-####方法5：
+#### 方法5：
 
 	//命名函数之后，函数定义名称retrieveTransNum在下文中失效
 	var retrieveTransNumHandler = function retrieveTransNum() {
@@ -138,7 +138,7 @@ category: jQuery
 	$("#trans-num-li").bind("click", retrieveTransNumHandler);
 
 
-####思考
+#### 思考
 
 上述`方法1`、`方法4`、`方法5`中定义function时，有两种方式：
 
@@ -161,7 +161,7 @@ JavaScript中，function的用法，添加小括号：`function_name()`与不添
 
 
 
-###绑定多个点击事件
+### 绑定多个点击事件
 
 直接调用多次`click(function(){})`方法即可：
 
@@ -215,7 +215,7 @@ JavaScript中，function的用法，添加小括号：`function_name()`与不添
 
 
 
-##参考来源
+## 参考来源
 
 * [JQuery-tutorial][JQuery-tutorial]
 * [jQuery教程][jQuery教程]

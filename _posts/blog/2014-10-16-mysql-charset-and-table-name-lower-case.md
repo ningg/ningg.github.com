@@ -5,7 +5,7 @@ description: 没有系统整理过MySQL知识，先这样零散地整理了
 category: mysql
 ---
 
-##背景
+## 背景
 
 关于MySQL，遇到几个问题，列一下：
 
@@ -20,7 +20,7 @@ MySQL版本：
 	mysql  Ver 14.14 Distrib 5.6.20, for Linux (x86_64) using  EditLine wrapper
 
 
-##乱码问题
+## 乱码问题
 
 看官网，mysql的refman（reference manual，参考手册）中，`globalization` --> `character set configuration`，其中提到：
 system、server、client的charset不一致时，会产生乱码。
@@ -64,7 +64,7 @@ system、server、client的charset不一致时，会产生乱码。
 * 通常情况下，如果没有找到`my.ini`文件，则将`my-default.ini`文件复制之后重命名为`my.ini`文件；
 
 
-##无法启动
+## 无法启动
 
 通过`service mysql start`，无法启动MySQL，提示出错，略焦躁，不要着急，有错误日志，查看即可。错误日志位置：/var/lib/mysql/*.err，出错信息：
 
@@ -73,7 +73,7 @@ system、server、client的charset不一致时，会产生乱码。
 原来是在my.cnf文件中添加了一个变量，MySQL无法识别，从my.cnf删除即可。官方文档中[MySQL Server Administration](http://dev.mysql.com/doc/refman/5.6/en/server-administration.html)，有查看错误日志的详细信息，另外，错误日志位置参考[Installing and Upgrading MySQL](http://dev.mysql.com/doc/refman/5.6/en/installing.html)中提到的安装目录结构。
 
 
-##无法删除Database
+## 无法删除Database
 
 删除database时，出错：
 
@@ -86,7 +86,7 @@ system、server、client的charset不一致时，会产生乱码。
 * 如果重启MySQL服务后，仍然无法删除，则，停掉MySQL服务，然后，到MySQL存放数据的路径下（/var/lib/mysql/），将test数据库对应目录（./test）下内容清空，再删除test数据库即可；
 
 
-##找不到table
+## 找不到table
 
 MySQL无法连接，提示表格不存在，设置table名称不区分大小写：
 
@@ -103,7 +103,7 @@ MySQL无法连接，提示表格不存在，设置table名称不区分大小写�
 
 
 
-##参考来源
+## 参考来源
 
 * [MySQL官方文档](http://dev.mysql.com/doc/)
 * [Installing and Upgrading MySQL](http://dev.mysql.com/doc/refman/5.6/en/installing.html)

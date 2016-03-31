@@ -6,9 +6,9 @@ category: java
 ---
 
 
-##JDK自带类
+## JDK自带类
 
-###获取年月日
+### 获取年月日
 
 常用两种方式：
 
@@ -45,7 +45,7 @@ category: java
 
 
 
-###String与date、time之间的相互转换
+### String与date、time之间的相互转换
 
 
 利用DateFormat可以实现String与Date之间的相互转换，`SimpleDateFormat`使用的更为广泛，示例代码如下：
@@ -71,7 +71,7 @@ category: java
 * 关于`yyyy-MM-dd`详细介绍，查看`SimpleDateFormat`，或[simpleDateFormat][simpleDateFormat]；
 
 
-###获取两个日期之间的所有日期
+### 获取两个日期之间的所有日期
 
 示例代码如下：
 
@@ -101,10 +101,10 @@ category: java
 	}
 
 
-##借助第三方包
+## 借助第三方包
 
 
-###commons-long-2.5.jar
+### commons-long-2.5.jar
 
 `pom.xml`片段：
 
@@ -137,7 +137,7 @@ API中解释：
 可借助[Time zone converter][Time zone converter]进行查询。
 
 
-###joda
+### joda
 
 `pom.xml`片段：
 
@@ -165,7 +165,7 @@ API中解释：
 
 
 
-##参考来源
+## 参考来源
 
 
 * [simpleDateFormat][simpleDateFormat]

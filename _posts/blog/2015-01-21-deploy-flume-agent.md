@@ -6,7 +6,7 @@ category: flume
 ---
 
 
-##分析
+## 分析
 
 开篇扯一扯，Flume Agent要部署到不同的OS环境下，典型的代表：Win XP、Win Server 2008、Linux、Unix。Flume运行在JVM之上，正常情况下，只要安装JRE即可运行Flume Agent。查看[Flume官方文档][Flume User Guide]，安装Flume Agent时，系统要满足如下几个要求：
 
@@ -21,7 +21,7 @@ category: flume
 * Hadoop商业版企业Hortonworks、Cloudera等；
 * 通过Search Engine查找；
 
-##Windows XP
+## Windows XP
 
 在Win XP下安装部署一个Flume Agent，同时利用Tail命令实时收集某一文件上追加的内容，简单说，分下面几步：
 
@@ -29,15 +29,15 @@ category: flume
 * 下载Windows XP下的Tail命令；
 * 定制Flume Agent的bat启动脚本；
 
-###下载Flume Agent
+### 下载Flume Agent
 
 下载地址：[Flume官方下载地址][Flume download]
 
-###下载Window XP下的Tail命令
+### 下载Window XP下的Tail命令
 
 在StackOverflow上简要查了一下，UnxUtils，GNU utilities for Win32，可在Win32下实现tail命令，具体下载地址：[UnxUtils官网][UnxUtils]。
 
-###定制Windown XP下的bat启动脚本
+### 定制Windown XP下的bat启动脚本
 
 在Linux下启动Flume，使用的是`bin/flume-ng`脚本，这个脚本需要`bash shell`环境的支持，而Windows下没有`bash shell`，这样是不是就没有办法在Windows下启动Flume了？仔细想一下，两点：
 
@@ -152,7 +152,7 @@ category: flume
 
 
 	
-##Windows Server 2008
+## Windows Server 2008
 
 Windows Server 2008 与Windows XP基本相同，只需要调整一下`logToKafka.properties`脚本中sources部分，将command由`tail`（UnxUtils）替换为`get-content`（powershell），因为UnxUtils下的`tail`命令，在Windows Server 2008环境下，在Flume的source中时，无法捕获日志内容。**（很奇怪，原因不明）**
 
@@ -162,7 +162,7 @@ Windows Server 2008 与Windows XP基本相同，只需要调整一下`logToKafka
 
 
 
-##Windows 7
+## Windows 7
 
 vdisk中flume目录下，有专门文档；
 

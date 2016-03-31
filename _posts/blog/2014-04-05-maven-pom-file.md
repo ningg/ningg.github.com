@@ -9,7 +9,7 @@ category: maven
 
 
 
-##properties定义与调用
+## properties定义与调用
 
 定义，典型的xml定义属性的方式：
 
@@ -24,7 +24,7 @@ category: maven
 疑问：xml变量的定义，有规范吗？
 
 
-##dependency的内scope的含义
+## dependency的内scope的含义
 
 
 几点：
@@ -33,13 +33,13 @@ category: maven
 * scope都有哪些取值；
 
 
-##如何注释？
+## 如何注释？
 
 xml中如何注释？
 
 `<!- ->`
 
-##设定仓库位置
+## 设定仓库位置
 
 实例代码：
 

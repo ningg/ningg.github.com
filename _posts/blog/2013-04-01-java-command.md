@@ -7,9 +7,9 @@ category: java
 ---
 
 
-##java命令
+## java命令
 
-###-cp 设定加载类路径
+### -cp 设定加载类路径
 
 在JDK 7，存在`-cp`参数，具体参考：
 
@@ -23,7 +23,7 @@ category: java
 
 
 
-###-D arguments 参数
+### -D arguments 参数
 
 > `-D<name>=<value>` set a system property  设置JVM系统属性；
 
@@ -95,7 +95,7 @@ category: java
 
 上述输出中：`test_input=test_value`，是我以`-Dtest_input=test_value`配置的。
 
-####通过-Djava.ext.dirs来设置-cp（类搜索路径）
+#### 通过-Djava.ext.dirs来设置-cp（类搜索路径）
 
 通过`-cp .;a.jar;b.jar`来指定类加载的jar时，windows下使用`;`分隔，linux下使用`:`分隔，需要列出所有jar包*（现在这一情况有没有改善？）*；如果希望通配符效果，使用：`java -Djava.ext.dirs=...`来替换`-cp`配置。
 
@@ -110,26 +110,26 @@ category: java
 * User classes搜索顺序为当前目录、环境变量 CLASSPATH、-classpath，用`System.getProperty("java.class.path”)`得到User classes路径。
 
 
-####JVM系统环境与OS系统环境
+#### JVM系统环境与OS系统环境
 
 上述`System.getProperty("<name>")`中System是指 JRE system，不是OS。
 
 
 
-####Eclipse下配置VM参数
+#### Eclipse下配置VM参数
 
 在Eclipse下如何配置VM的启动参数？即，如何配置`-D`属性？具体：`run as`  -- `run configurations`  -- `Arguments` -- `VM arguments`，直接书写`-D<name>=<value>`即可，*（多参数时，分行输入）*
 
 
 
-####扩展阅读
+#### 扩展阅读
 
 * [JAVA 命令参数详解：-D][JAVA 命令参数详解：-D]
 
 
 
 
-##参考来源
+## 参考来源
 
 主要参考：Java的官方文档
 
