@@ -6,7 +6,7 @@ categories: flume
 ---
 
 
-##HDFS Sink
+## HDFS Sink
 
 This sink writes events into the Hadoop Distributed File System (HDFS). It currently supports creating text and sequence files. It supports compression in both file types. The files can be rolled (close current file and create a new one) periodically based on the elapsed time or size of data or number of events. It also buckets/partitions data by attributes like timestamp or machine where the event originated. The HDFS directory path may contain formatting escape sequences that will replaced by the HDFS sink to generate a directory/file name to store the events. Using this sink requires hadoop to be installed so that Flume can use the Hadoop jars to communicate with the HDFS cluster. Note that a version of Hadoop that supports the sync() call is required.
 （将events写到HDFS上，当前支持text和sequence file，同时也支持两种类型文件的压缩；支持根据time、size、event number来roll file——close current file并且create a new one；）
@@ -90,7 +90,7 @@ The above configuration will round down the timestamp to the last 10th minute. F
 
 
 
-##Logger Sink
+## Logger Sink
 
 Logs event at INFO level. Typically useful for `testing`/`debugging` purpose. Required properties are in bold.
 （将INFO以上级别的event都记录下来，Logger Sink主要用于test和debugging）
@@ -109,7 +109,7 @@ Example for agent named `a1`:
 
 **notes(ningg)**：`logger`类型的Sink，有长度限制吗？其输出的event的body在stdout中只显示16字节；
 
-##Avro Sink
+## Avro Sink
 
 This sink forms one half of Flume’s tiered collection support. Flume events sent to this sink are turned into Avro events and sent to the configured hostname / port pair. The events are taken from the configured Channel in batches of the configured batch size. Required properties are in **bold**.
 （Avro Sink常用于构建分级的Flume topology，通过Avro sink，event就变为Avro event了，Avro Sink中可配置参数`batch-size`，Avro Sink按照这一参数从Channel以batch为单位，来获取数据。）
@@ -142,7 +142,7 @@ Example for agent named `a1`:
 	a1.sinks.k1.hostname = 10.10.10.10
 	a1.sinks.k1.port = 4545
 
-##Thrift Sink
+## Thrift Sink
 
 This sink forms one half of Flume’s tiered collection support. Flume events sent to this sink are turned into Thrift events and sent to the configured hostname / port pair. The events are taken from the configured Channel in batches of the configured batch size. Required properties are in bold.
 
@@ -165,7 +165,7 @@ a1.sinks.k1.channel = c1
 a1.sinks.k1.hostname = 10.10.10.10
 a1.sinks.k1.port = 4545
 
-##IRC Sink
+## IRC Sink
 
 The IRC sink takes messages from attached channel and relays those to configured IRC destinations. Required properties are in bold.
 
@@ -192,7 +192,7 @@ a1.sinks.k1.hostname = irc.yourdomain.com
 a1.sinks.k1.nick = flume
 a1.sinks.k1.chan = #flume
 
-##File Roll Sink
+## File Roll Sink
 
 Stores events on the local filesystem. Required properties are in bold.
 （将event存储到local FS上）
@@ -220,7 +220,7 @@ Example for agent named a1:
 	a1.sinks.k1.channel = c1
 	a1.sinks.k1.sink.directory = /var/log/flume
 
-##Null Sink
+## Null Sink
 
 Discards all events it receives from the channel. Required properties are in bold.
 （丢弃所有event）
@@ -238,16 +238,16 @@ Example for agent named a1:
 	a1.sinks.k1.type = null
 	a1.sinks.k1.channel = c1
 
-##HBaseSinks
+## HBaseSinks
 
 （todo）
 
-##MorphlineSolrSink
+## MorphlineSolrSink
 
 （todo）
 
 
-##ElasticSearchSink
+## ElasticSearchSink
 
 This sink writes data to an [ElasticSearch][ElasticSearch] cluster. By default, events will be written so that the [Kibana][Kibana] graphical interface can display them - just as if [logstash][logstash] wrote them.
 
@@ -309,7 +309,7 @@ Example for agent named a1:
 
 
 
-##Custom Sink
+## Custom Sink
 
 A custom sink is your own implementation of the `Sink` interface. A custom sink’s class and its dependencies must be included in the agent’s classpath when starting the Flume agent. The type of the custom sink is its FQCN. Required properties are in bold.
 （通过实现Sink接口，可以定制自己的custom；需要在启动Flume agent时，将自定义的Sink和其depedencies添加到classpath中）

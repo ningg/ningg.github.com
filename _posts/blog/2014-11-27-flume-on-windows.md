@@ -5,14 +5,14 @@ description: Windows下安装配置Flume
 category: flume
 ---
 
-##背景
+## 背景
 
 最近要采集windows下的数据，希望能用Flume来进行采集汇总，但是不知道Flume在windows下的兼容性怎么样，OK，测试一下。
 
 
-##在windows下配置Flume
+## 在windows下配置Flume
 
-###系统环境
+### 系统环境
 
 相关版本信息：
 
@@ -20,17 +20,17 @@ category: flume
 * windows：Microsoft Windows Server 2008 R2 Enterprise（x64-based PC）
 
 
-###解决办法
+### 解决办法
 
 * 下载`apache-flume-1.5.0.1-bin.tar.gz`*（当前的最新版本，之后的版本应该也是可以的）*
 * 解压之后，在`conf`目录下创建文件``
 
 
-###windows下tail命令
+### windows下tail命令
 
 至此为止，windows上，已经成功部署了flume。
 
-##思路
+## 思路
 
 > 截止上一部分，已经实现了Windows下flume的部署，这一部分主要是闲谈点其他的东西。
 
@@ -57,7 +57,7 @@ category: flume
 
 
 
-##参考来源
+## 参考来源
 
 
 
@@ -65,7 +65,7 @@ category: flume
 
 
 
-##杂谈
+## 杂谈
 
 说出解决问题的思路，这种分享精神，我自己都感动到了。
 

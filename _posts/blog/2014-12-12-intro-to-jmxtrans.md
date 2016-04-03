@@ -19,7 +19,7 @@ categories: java jmxtrans
 
 
 
-##Installing the RPM
+## Installing the RPM
 
 There is a `.rpm` file which you can download and install on an Fedora/CentOS/RHEL machine. This makes setting up the application trivial and is highly recommended. It also makes upgrades painless as well.
 
@@ -38,7 +38,7 @@ Notes:
 * Put your .json files into: `/var/lib/jmxtrans`
 
 
-##Running Jmx Transformer
+## Running Jmx Transformer
 
 There is a `jmxtrans.sh` script included with the distribution. This should be used to start the application running. If you read through the script, you will see that all of the options are customizable by exporting environment variables without having to edit the `.sh` script. You can even create a `jmxtrans.conf` file to put the options into so that you don't need to setup environment variables yourself.
 
@@ -71,7 +71,7 @@ Options you may want to configure:
 
 
 
-##Enabling JMX for a JVM
+## Enabling JMX for a JVM
 
 In order to use jmxtrans, you must first enable Java Management Extensions (JMX) on your Java Virtual Machine (JVM). We recommend that you connect to Java 6 (or greater) JVM's because there are improvements to the JMX protocol that we can take advantage of, such as wildcard (`*`) queries.
 
@@ -89,17 +89,17 @@ For more details on enabling the agent, please read:
 * [Monitoring and Management][Monitoring and Management]
 
 
-##JConsole
+## JConsole
 
 If you are going to use jmxtrans, it is helpful to gain an understanding of JConsole. This is a good visual tool for viewing attributes in a JVM. Using this tool will help you write your jmxtrans queries.
 
 * [JConsole Documentation][JConsole Documentation]
 
-##Using Ant Vars
+## Using Ant Vars
 
 Ant like variables could be used in json files since v239, so you could avoid hardcoding some values, like graphite servers.
 
-###Before
+### Before
 
 	{
 	  "servers" : [ {
@@ -119,7 +119,7 @@ Ant like variables could be used in json files since v239, so you could avoid ha
 	  } ]
 	}
 
-###Now
+### Now
 
 	{
 	  "servers" : [ {
@@ -139,7 +139,7 @@ Ant like variables could be used in json files since v239, so you could avoid ha
 	  } ]
 	}
 
-###Notice
+### Notice
 
 Double-quotes (`"`) should be using even when providing int values, like port, it's mandatory for StringResolver, String to Int conversion will be done internally.
 

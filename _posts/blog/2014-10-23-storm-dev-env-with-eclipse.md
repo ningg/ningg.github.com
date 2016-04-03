@@ -5,13 +5,13 @@ description: Storm官方文档的阅读和笔记
 categories: storm
 ---
 
-##背景
+## 背景
 
 Storm topologies，支撑multilang，不过通常使用java来编写，这样我就想在Eclipse下来编写Storm topologies，毕竟IDE能够加快开发效率。
 
 > 下面的内容，基本都是从官网看的，使用自己语言重新写了一遍，建议有追求的Coder/Engineer/Scientist，还是去看官网吧，看官网才是捷径。
 
-##系统环境
+## 系统环境
 
 今天要进行Storm topology开发的系统，基本环境：win xp(x86)操作系统；更详细的编译环境信息，通过如下方式查看：`CMD`--`systeminfo`，这个命令执行需要时间，10~40s，稍等一会儿，得到如下信息：
 
@@ -30,7 +30,7 @@ Storm topologies，支撑multilang，不过通常使用java来编写，这样我
 	物理内存总量: 3,546 MB
 
 
-##eclipse下查看storm-start工程
+## eclipse下查看storm-start工程
 
 [storm-starter][storm-starter]是Storm官网提供的一个例子，简要介绍了storm topology的编写，在[storm Tutorial][storm Tutorial]中重点讲解了这个例子；总之，一点：[storm-starter][storm-starter]是入门学习的典型例子。OK，我准备在Eclipse下查看[storm-starter][storm-starter]工程。
 
@@ -58,7 +58,7 @@ OK，不要管这个，直接在storm-starter工程上，`右键`--`Run As`--`Ma
 
 **RE**：是的，直接开发，[storm Tutorial][storm Tutorial]中的例子就是这样。
 
-##Maven方式构建工程
+## Maven方式构建工程
 
 如果希望新建工程，并在其内进行Storm的开发，则，推荐新建Maven工程，并在其`pom.xml`下，添加如下配置：
 
@@ -138,7 +138,7 @@ OK，不要管这个，直接在storm-starter工程上，`右键`--`Run As`--`Ma
 	
 **注**：如果pom.xml一直提示出错，则update project(Maven)，或者close project之后再打开也可以。
 	
-##本地安装Storm
+## 本地安装Storm
 
 下载[Storm的binary版本][storm downloads]，就两点：
 
@@ -151,7 +151,7 @@ OK，不要管这个，直接在storm-starter工程上，`右键`--`Run As`--`Ma
 **疑问**：上面已经可以进行Storm topology的开发了，但如果希望查看Storm源代码，特别是Clojure编写的那部分，怎么办？
 **RE**：关于这个问题，官网有提示：[Creating a new Storm project][Storm: Creating a new Storm project]。
 
-##特别说明
+## 特别说明
 
 进行Storm开发的详细过程：
 
@@ -162,7 +162,7 @@ OK，不要管这个，直接在storm-starter工程上，`右键`--`Run As`--`Ma
 具体参考博客：[Storm：Running topologies on a production cluster][Storm：Running topologies on a production cluster]。
 
 
-##参考来源
+## 参考来源
 
 * [Storm Example: storm-starter](https://github.com/apache/incubator-storm/tree/master/examples/storm-starter)
 * [Storm: Setting up development environment](http://storm.apache.org/documentation/Setting-up-development-environment.html)

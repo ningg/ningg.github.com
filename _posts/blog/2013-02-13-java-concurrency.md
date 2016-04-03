@@ -5,12 +5,12 @@ description: 现实应用中，遇到稍微复杂一点的问题，就需要进�
 category: java
 ---
 
-##开篇推荐
+## 开篇推荐
 
 > 推荐阅读：[Java Tutorials：Lesson-Concurrency][Java Tutorials：Lesson-Concurrency]
 
 
-##基本知识点
+## 基本知识点
 
 直接列重点吧，几点：
 
@@ -19,7 +19,7 @@ category: java
 
 
 
-##java.util.concurrent
+## java.util.concurrent
 
 
 （todo：基本用法）
@@ -44,9 +44,9 @@ category: java
 
 
 
-##附录
+## 附录
 
-###processor & core
+### processor & core
 
 CPU为2个processor，每个prcessor可以有8个core；core是执行thread的基本单元；
 
@@ -54,7 +54,7 @@ CPU为2个processor，每个prcessor可以有8个core；core是执行thread的�
 
 
 
-###process & thread
+### process & thread
 
 process（进程）和thread（线程）之间的关系，如下：
 
@@ -101,7 +101,7 @@ __关于`thread`，几点__：
 
 
 
-##参考来源
+## 参考来源
 
 * [Java Tutorials：Lesson-Concurrency][Java Tutorials：Lesson-Concurrency]
 

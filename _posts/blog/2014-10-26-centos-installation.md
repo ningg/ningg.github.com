@@ -5,7 +5,7 @@ description: 安装系统，有两点要说一下：磁盘如何分区？网络�
 category: linux
 ---
 
-##1. 简介
+## 1. 简介
 
 CentOS（Community Enterprise Operating System，企业社区操作系统）是Linux发行版本之一。Red Hat Enterpris Linux（RHEL，红帽企业级Linux）依照开放源码规定，开源了每个RHEL版本的源代码，CentOS正是基于RHEL的源代码重新编译而成的[1]，并且在RHEL基础上修复了一些已知的bug，相对与其他Linux发行版本，CentOS稳定性值得信赖。当前，很多企业都在服务器上安装CentOS系统，来支撑线上应用。
 CentOS与RHEL的最大区别在于：
@@ -17,13 +17,13 @@ CentOS与RHEL的最大区别在于：
 
 备注：CentOS的版本与RHEL版本基本一一对应，举例，CentOS 6.4对应RHEL 6.4的源代码。
 
-##2. 安装CentOS 6
+## 2. 安装CentOS 6
 
 说到安装Linux系统，不要着急，官网肯定有操作手册来说明这个事，嗯，CentOS应用这么广泛，帮助手册总该有吧，要不然与其身份也不相符合。很不幸，[CentOS的官网](http://www.centos.org/docs/)中，并没有CentOS 6的操作手册，欧，赶快查查什么原因：CentOS完全基于RHEL源码编译而来，并且版本基本一一对应，因此，直接使用RHEL的官网文档即可[3]。
 
 **特别说明**：本文所有安装CentOS 6的步骤、配置，都参考自RHEL 6官方文档[5]。
 
-###2.1.	基本设置
+### 2.1.	基本设置
 
 这一部分，主要演示几点：如何通过CD/DVD光驱来重装系统。
  
@@ -118,7 +118,7 @@ CentOS与RHEL的最大区别在于：
 特别说明：至此，安装并没有结束，下面“2.2磁盘分区”部分才是重点。
 
  
-###2.2.	磁盘分区
+### 2.2.	磁盘分区
 
 从图16开始，我们将进行磁盘分区，这一部分有些配置的东西，需要认真看了。
 
@@ -245,7 +245,7 @@ CentOS与RHEL的最大区别在于：
 ![](/images/centos-installation/036.png)
 图 36
 
-##3.	配置网络
+## 3.	配置网络
 
 安装完系统之后，需要进行网络配置，目标：保证机器能够入网。
 
@@ -263,7 +263,7 @@ CentOS与RHEL的最大区别在于：
 
 RE：需要借助工具：ethtool，执行命令`ethtool -p eth0`，再去看看那排网口，会有发现的~执行Ctrl + C，即可终止此命令。
 
-##4.	格式化磁盘并挂载
+## 4.	格式化磁盘并挂载
 
 场景 1.	格式化单个磁盘，并进行挂载，命令如下：
 
@@ -311,7 +311,7 @@ RE：需要借助工具：ethtool，执行命令`ethtool -p eth0`，再去看看
 含义：`Mount all filesystems (of the given types) mentioned in fstab.`
 这一命令可用于检查fstab文件中的配置是否正确。
 
-##5.	参考来源
+## 5.	参考来源
 
 1. [CentOS简介][CentOS简介]
 1. [Red Hat and CentOS Project Join Forces to Speed Open Source Innovation][Red Hat and CentOS Project Join Forces to Speed Open Source Innovation]
@@ -322,7 +322,7 @@ RE：需要借助工具：ethtool，执行命令`ethtool -p eth0`，再去看看
 1. [Recommended Partitioning Schema][Recommended Partitioning Schema]
 
 
-##6.	附录
+## 6.	附录
 
 几个有用的命令：
 

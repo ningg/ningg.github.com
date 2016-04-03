@@ -5,7 +5,7 @@ description: AIX系统下默认shell是ksh，而Linux下是bash，习惯了bash�
 categories: AIX
 ---
 
-##AIX系统简介
+## AIX系统简介
 
 AIX（Advanced Interactive eXecutive）是IBM基于AT&T Unix System V开发的一套类UNIX操作系统，运行在IBM专有的Power系列芯片设计的小型机硬件系统之上。它符合Open group的UNIX 98行业标准（The Open Group UNIX 98 Base Brand），通过全面集成对32-位和64-位应用的并行运行支持，为这些应用提供了全面的可扩展性。
 
@@ -14,17 +14,17 @@ AIX（Advanced Interactive eXecutive）是IBM基于AT&T Unix System V开发的�
 * [快速透视AIX系统][快速透视AIX系统]
 * [AIX常用命令汇总][AIX常用命令汇总]
 
-##安装bash
+## 安装bash
 
 在Linux下，用户默认使用bash，包含了一些小功能：自动补全、上下按键、backspace删除按键等，这些简单操作在ksh下全部无法使用，简直是中煎熬，shell不就是内核之外的一层“外壳”么，直接换掉就行了。
 
-###检测是否已安装bash
+### 检测是否已安装bash
 
 	#rpm -qa | grep bash
 	
 如果没有内容返回，则表示未安装bash。
 
-###下载bash for AIX
+### 下载bash for AIX
 
 通过如下命令查看当前系统信息：
 
@@ -37,7 +37,7 @@ AIX（Advanced Interactive eXecutive）是IBM基于AT&T Unix System V开发的�
 
 到官网[AIX toolbox][AIX toolbox]，下载bash-4.2-3.aix6.1.ppc.rpm（看起来，rpm包不区分32、64位）；
 
-###安装bash
+### 安装bash
 
 安装bash，并查看是否完成安装，具体命令如下：
 
@@ -46,7 +46,7 @@ AIX（Advanced Interactive eXecutive）是IBM基于AT&T Unix System V开发的�
 	# rpm -qa | grep bash	// 查看是否完成bash的安装
 	bash-4.2-3
 	
-###更换shell
+### 更换shell
 
 将某些用户user的默认shell由/usr/bin/ksh改为/usr/bin/bash
 
@@ -60,7 +60,7 @@ AIX（Advanced Interactive eXecutive）是IBM基于AT&T Unix System V开发的�
 	
 以用户user身份，打开一个新的终端，这样就是Linux下熟悉的bash风格了。
 
-###补充：更换提示符风格
+### 补充：更换提示符风格
 
 	# vi ~/.profile
 	...
@@ -72,7 +72,7 @@ AIX（Advanced Interactive eXecutive）是IBM基于AT&T Unix System V开发的�
 
 
 
-##参考来源
+## 参考来源
 
 * [AIX下安装bash][AIX下安装bash]
 * [快速透视AIX系统][快速透视AIX系统]

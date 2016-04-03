@@ -5,7 +5,7 @@ description: 通信知识，整体上有一个脉络，理清楚了就很明朗
 category: blog
 ---
 
-##背景
+## 背景
 
 今天有人问我，不是通信专业怎么才能对通信以及通信网络有个整体的认识，大概想了一下，列了一下自己的想法，如果有错误的地方还请大家帮忙改正。 
 
@@ -14,11 +14,11 @@ category: blog
 
 看来《[大话无线通信]》这本书值得一读。
 
-##个人观点
+## 个人观点
 
 要对通信有整体认识，需要解决下面几个问题： 
   
-###1.什么是通信？
+### 1.什么是通信？
 
 我的理解，双方进行信息交换过程就是通信。 
 
@@ -26,7 +26,7 @@ category: blog
 
 ![talk-with-neighbour](/images/frame-of-communication-knowledge/talk-with-neighbour.jpg)
   
-###2.什么是通信网？
+### 2.什么是通信网？
 
 通信网是由基本通信系统组成的，一个基本的通信系统包括：信源、信道、信宿；信源实际就是发信者，信宿就是收信者；信源产生的信息，通过信道进行传输，最终到达信宿。 
 
@@ -34,7 +34,7 @@ category: blog
 
 ![base-unit](/images/frame-of-communication-knowledge/base-unit.jpg)
   
-###3.通信知识框架-基础
+### 3.通信知识框架-基础
 
 （理解了上面两个问题，再看这一个）上面提到的“通信系统”虽然很简单，只是由“信源、信道、信宿”构成，但是却引出整个通信的知识。简要说明如下： 
 
@@ -49,7 +49,7 @@ category: blog
 
 ![talk-with-neighbour-advance](/images/frame-of-communication-knowledge/talk-with-neighbour-advance.jpg)
   
-###4.通信知识框架-深入
+### 4.通信知识框架-深入
 
 （理解了上面三个问题，再看这一个）进一步，想构成一个能容纳多用户的通信网，就涉及到一些列的技术： 
   
@@ -73,7 +73,7 @@ category: blog
 
 ![talk-with-neighbour-highest](/images/frame-of-communication-knowledge/talk-with-neighbour-highest.jpg) 
   
-###5.通信知识框架-应用
+### 5.通信知识框架-应用
 
 （理解了上面四个问题，再看这一个）再进一步，通信网有各种类型：公共电话交换网（传统的固定电话网）、互联网（计算机网）、移动通信网（3g网）； 
   
@@ -89,7 +89,7 @@ category: blog
 * 今后工作中用到这些知识了，再去深入学习； 
   
 
-##几本书
+## 几本书
 
 最后列几本我们学过的书： 
 

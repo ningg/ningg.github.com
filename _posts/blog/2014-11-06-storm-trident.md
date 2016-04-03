@@ -17,7 +17,7 @@ Trident，说几点：
 Trident能够支撑stateful、incremental processing；
 Trident支撑consistent、exactly-once semantics；
 
-##Illustrative example
+## Illustrative example
 
 
 Let’s look at an illustrative example of Trident. This example will do two things:
@@ -152,7 +152,7 @@ Trident is intelligent about how it executes a topology to maximize performance.
 Let’s look at another example of Trident.
 
 
-##Reach
+## Reach
 
 The next example is a pure DRPC topology that computes the reach of a URL on demand. Reach is the number of unique people exposed to a URL on Twitter. To compute reach, you need to fetch all the people who ever tweeted a URL, fetch all the followers of all those people, unique that set of followers, and that count that uniqued set. Computing reach is too intense for a single machine – it can require thousands of database calls and tens of millions of tuples. With Storm and Trident, you can parallelize the computation of each step across a cluster.
 
@@ -199,7 +199,7 @@ This is a “combiner aggregator”, which knows how to do partial aggregations 
 
 Let’s now look at Trident in more detail.
 
-##Fields and tuples
+## Fields and tuples
 
 The Trident data model is the TridentTuple which is a named list of values. During a topology, tuples are incrementally built up through a sequence of operations. Operations generally take in a set of input fields and emit a set of “function fields”. The input fields are used to select a subset of the tuple as input to the operation, while the “function fields” name the fields the operation emits.
 
@@ -247,7 +247,7 @@ With grouped streams, the output will contain the grouping fields followed by th
 
 In this example, the output will contain the fields “val1” and “sum”.
 
-##State
+## State
 
 A key problem to solve with realtime computation is how to manage state so that updates are idempotent in the face of failures and retries. It’s impossible to eliminate failures, so when a node dies or something else goes wrong, batches need to be retried. The question is – how do you do state updates (whether external databases or state internal to the topology) so that it’s like each message was only processed only once?
 
@@ -264,7 +264,7 @@ Of course, you don’t have to do this logic manually in your topologies. This l
 
 A State is allowed to use whatever strategy it wants to store state. So it could store state in an external database or it could keep the state in-memory but backed by HDFS (like how HBase works). State’s are not required to hold onto state forever. For example, you could have an in-memory State implementation that only keeps the last X hours of data available and drops anything older. Take a look at the implementation of the [Memcached integration](https://github.com/nathanmarz/trident-memcached/blob/master/src/jvm/trident/memcached/MemcachedState.java) for an example State implementation.
 
-##Execution of Trident topologies
+## Execution of Trident topologies
 
 Trident topologies compile down into as efficient of a Storm topology as possible. Tuples are only sent over the network when a repartitioning of the data is required, such as if you do a groupBy or a shuffle. So if you had this Trident topology:
 
@@ -274,7 +274,7 @@ It would compile into Storm spouts/bolts like this:
 
 ![](/images/storm-trident/trident-to-storm2.png)
 
-##Conclusion
+## Conclusion
 
 Trident makes realtime computation elegant. You’ve seen how high throughput stream processing, state manipulation, and low-latency querying can be seamlessly intermixed via Trident’s API. Trident lets you express your realtime computations in a natural way while still getting maximal performance.
 
@@ -285,12 +285,12 @@ Trident makes realtime computation elegant. You’ve seen how high throughput st
 
 
 
-##参考来源
+## 参考来源
 
 
 
 
-##杂谈
+## 杂谈
 
 今天几个人讨论某事，说来是鸡毛蒜皮的小事，不过也大小是个活动，通过及时通讯软件进行讨论，参与人员基本上都装死，很冷清，大部分人都是在看消息，不过内心里，大家都是愿意参加这么个活动的，这样只有一个人积极发言，没有交互、讨论，内心还是挺凄凉的，这种情况怎么办？时势造英雄，需要一个人花点时间整理一下活动的方方面面细则：时间、地点、人员、路线、内容、费用、事项（每项的负责人），然后出一个基本稿，发到群中，针对基本稿进行讨论，就有目标了；讨论结束再来个总结，算是定稿，妥妥的。
 

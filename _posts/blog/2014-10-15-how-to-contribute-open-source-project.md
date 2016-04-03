@@ -5,13 +5,13 @@ description: 基础工具开源，是自己的一个理念，现在力量单薄�
 categories: flume open-source
 ---
 
-##背景
+## 背景
 
 本来今天晚上想浏览一下flume官网的，不过突然看到How to Get Involved，再看看那些贡献了代码的名单，很是羡慕，我这个人爱吹牛，如果我也在名单中，那岂不又能吹牛一把？哈哈~想想都能笑出声。另一方面，用过的开源工具不少，但是如何参与到开源项目中，我还真不知道，碰巧在看flume官网，那就看看如何参与到flume这个开源项目中去吧。
 
 > 官方原文地址：[How to Contribute](https://cwiki.apache.org/confluence/display/FLUME/How+to+Contribute)，本文使用`英文原文+中文注释`方式来写。
 
-##Preface
+## Preface
 
 Welcome contributors! We strive to include everyone's contributions. This page provides necessary guidelines on how to contribute effectively towards furthering the development and evolution of Flume. You should also read the guide on setting up [Development Environment](https://cwiki.apache.org/confluence/display/FLUME/Development+Environment) where you will find details on how to checkout, build and test Flume.
 （如何下载源码、编译源码、测试源码，需要先阅读[Development Environment](https://cwiki.apache.org/confluence/display/FLUME/Development+Environment)。）
@@ -20,7 +20,7 @@ Note: This guide applies to general contributors. If you are a committer, please
 （committer还需阅读[How to Commit](https://cwiki.apache.org/confluence/display/FLUME/How+to+Commit)）
 
 
-##What can be contributed?
+## What can be contributed?
 
 There are many ways you can contribute towards the project. A few of these are:（参与方式，有如下几种）
 
@@ -31,7 +31,7 @@ There are many ways you can contribute towards the project. A few of these are:�
 
 **notes(ningg)：邮件列表、JIRA，我都没有关注过，也不知道具体怎么用，打算学一下；patch文件了解一点。**
 
-##Providing Patches
+## Providing Patches
 
 In order to provide patches, follow these guidelines:
 
@@ -85,13 +85,13 @@ In order to provide patches, follow these guidelines:
 
 **notes(ningg)：代码中添加javadocs，集成测试是什么，我还不清楚。**
 
-##Reviewing Code
+## Reviewing Code
 
 Flume uses the [Apache Review Board](https://reviews.apache.org/groups/Flume) for doing code reviews. In order for a change to be reviewed, it should be either posted on the review board or attached to the JIRA. If the change is a minor change affecting only few lines and does not seem to impact main logic of the affected sources, it need not be posted on the review board. However, if the code change is large or otherwise impacting the core logic of the affected sources, it should be posted on the review board. Feel free to comment on the JIRA requesting the assignee to post the patch for review on review board.（小改动的patch，贴在JIRA上就好了；涉及核心代码的patch，应同时在JIRA和review board上贴出来。）
 
 **Note**: Not all patches attached to a JIRA are ready for review. Sometimes the patches are attached just to solicit early feedback regarding the implementation direction. Feel free to look it over and give your feedback in the JIRA as necessary. Patches are considered ready for review either when the patch has been posted on review board, or the JIRA status has been changed to 'Patch Available'. Find here a [list of Flume JIRAs marked Patch Available](https://issues.apache.org/jira/issues/?jql=project%20%3D%20flume%20AND%20status%20%3D%20%22Patch%20Available%22). （patch有时候are not ready for review，只是为了征求意见，看看实现的方向对不对）
 
-###Goals for Code Reviews
+### Goals for Code Reviews
 
 The net outcome from the review should be the same - which is to ensure the following:
 
@@ -100,7 +100,7 @@ The net outcome from the review should be the same - which is to ensure the foll
 * Changes are evaluated from the perspective of a consumer (the reviewer) as opposed to the developer, which often brings out subtleties in the implementation that otherwise go unnoticed.（reviewer通常能为代码实现，提供细微改动的建议）
 * The change should be backward compatible and not require extensive work on existing installations in order for it to be consumed. There are exceptions to this in some cases like when work is done on a major release, but otherwise backward compatibility should be upheld at all times. If you are not clear, raise it is as a concern to be clarified during the review.（change保证，后向兼容，即，原来已有的应用代码部分，不需要大改动；如果不确定是否后向兼容，则，说明一下）
 
-###Code review guidelines
+### Code review guidelines
 
 Following are some guidelines on how to do a code review. You may use any other approach instead as long as the above stated goals are met. That said, here is an approach that works fine generally:
 
@@ -111,7 +111,7 @@ Following are some guidelines on how to do a code review. You may use any other 
 * **See if the change is complete**: Check if the change is such that it affects the user interface. If it does, then the documentation should likely be updated. What about testing - does it have enough test coverage or not? What about other aspects like license headers, copyright statements etc. How about checkstyle and findbugs - did they generate new warnings? How about compiler warnings?（代码层面上，修改全面了吗？是否测试了、warning信息）
 * **Test the change**: It is very easy to test the change if you have the development environment setup. Run as many tests as you want with the patch. Manually test the change for functionality that you think is not fully covered via the associated tests. If you find a problem, report it.（全面测试、必要的地方手动测）
 
-###How to give feedback
+### How to give feedback
 
 Once you have collected your comments/concerns/feedback you need to send it to back to the contributor. In doing so, please be as courteous as possible and ensure the following:
 
@@ -123,7 +123,7 @@ Once you have provided your feedback, wait for the developer to respond. It is p
 
 If a change has met all your criteria for review, please +1 the change to indicate that you are happy with it.（如果代码让你满意，请点击+1）
 
-##闲谈
+## 闲谈
 
 [How to contribute](https://cwiki.apache.org/confluence/display/FLUME/How+to+Contribute)中提到了各种规范、细节，这些就是参与开源项目的基本准则，大家都按照这个准则来操作，才能保证开源项目的顺利进行。想到了[Robbin](http://robbinfan.com/)的一句话：Small is beautiful, constraint is liberty.
 

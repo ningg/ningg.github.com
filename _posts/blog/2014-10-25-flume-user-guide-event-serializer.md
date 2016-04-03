@@ -9,7 +9,7 @@ categories: flume
 The `file_roll sink` and the `hdfs sink` both support the `EventSerializer` interface. Details of the `EventSerializers` that ship with Flume are provided below.
 （Event serializer，事件序列化，）
 
-##Body Text Serializer
+## Body Text Serializer
 
 Alias: text. This interceptor writes the body of the event to an output stream without any transformation or modification. The event headers are ignored. Configuration options are as follows:
 

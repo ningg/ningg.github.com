@@ -15,7 +15,7 @@ This page outlines what you need to do to get a Storm development environment se
 
 More detail on each of these steps is below.
 
-##What is a development environment?
+## What is a development environment?
 
 Storm has two modes of operation: `local mode` and `remote mode`. In local mode, you can develop and test topologies completely in process on your local machine. In remote mode, you submit topologies for execution on a cluster of machines.
 （两种mode：local mode，develop和test topologies；remote mode，真正执行时，submit topologies到cluster）
@@ -43,7 +43,7 @@ Let’s quickly go over the relationship between your machine and a remote clust
 **RE**：distribute code到物理上的node？assign worker to run topologies针对的是不同物理主机上的worker process；（这个理解对吗？）
 
 
-##Installing a Storm release locally
+## Installing a Storm release locally
 
 If you want to be able to submit topologies to a remote cluster from your machine, you should install a Storm release locally. Installing a Storm release will give you the `storm` client that you can use to interact with remote clusters. To install Storm locally, download a release [from here](https://github.com/apache/incubator-storm/downloads) and unzip it somewhere on your computer. Then add the unpacked `bin/` directory onto your `PATH` and make sure the `bin/storm` script is executable.
 （本地安装的Storm，也可以作为与remote cluster交互的client；安装办法：下载、解压、添加bin到PATH）
@@ -55,7 +55,7 @@ Installing a Storm release locally is only for interacting with remote clusters.
 * 本地安装Storm唯一目标：interact with remote cluster；
 * 如果想利用local mode来进行develop、test，建议使用Maven将Storm作为依赖导入；
 
-##Starting and stopping topologies on a remote cluster
+## Starting and stopping topologies on a remote cluster
 
 The previous step installed the `storm` client on your machine which is used to communicate with remote Storm clusters. Now all you have to do is tell the client which Storm cluster to talk to. To do this, all you have to do is put the host address of the master in the `~/.storm/storm.yaml` file. It should look something like this:
 （在本地安装storm实质是为了interact with remote cluster，这就需要告诉本地storm：remote cluster的位置。）
@@ -69,7 +69,7 @@ Alternatively, if you use the [storm-deploy](https://github.com/nathanmarz/storm
 
 More information is on the storm-deploy [wiki](https://github.com/nathanmarz/storm-deploy/wiki)
 
-##参考来源
+## 参考来源
 
 * [Apache Storm](http://storm.apache.org/)
 * [Apache Storm: Documentation Rationale](http://storm.apache.org/documentation/Rationale.html)

@@ -15,7 +15,7 @@ category: linux
 * 如何查看当前系统服务，以及对应服务的开机启动状态？
 * 如果系统服务已经存在，如何重新添加系统服务？即，要覆盖掉之前系统服务的配置？
 
-##chkconfig
+## chkconfig
 
 通过man查询chkconfig的基本用法：
 
@@ -34,7 +34,7 @@ category: linux
 	# 设置服务jmxtrans启动级别
 	chkconfig --level 2345 jmxtrans on
 	
-##系统服务runlevel
+## 系统服务runlevel
 
 （doing...）
 
@@ -90,7 +90,7 @@ category: linux
 
 
 
-##Linux下系统服务的含义？
+## Linux下系统服务的含义？
 
 （doing...）
 
@@ -101,7 +101,7 @@ category: linux
 
 
 
-##参考来源
+## 参考来源
 
 * [chkconfig命令][chkconfig命令]
 * [About run levels][About run levels]

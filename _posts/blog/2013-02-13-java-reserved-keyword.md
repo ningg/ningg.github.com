@@ -11,10 +11,10 @@ category: java
 * 场景
 * 总结
 
-##static
+## static
 
 
-###import static class
+### import static class
 
 遇到一种情况，常量所在类，被利用`import static classname`，例：
 
@@ -25,7 +25,7 @@ category: java
 
 
 
-###private static class
+### private static class
 
 内部类：private static class
 
@@ -44,10 +44,10 @@ category: java
 
 
 
-##final
+## final
 
 
-###常量命名
+### 常量命名
 
 示例代码，参考：
 
@@ -68,10 +68,10 @@ category: java
 
 
 
-##synchronized 
+## synchronized 
 
 
-##子类override method时，添加synchronized
+## 子类override method时，添加synchronized
 
 
 	@Override
@@ -81,7 +81,7 @@ category: java
 
 
 
-##transient
+## transient
 
 见到代码如下：
 
@@ -111,7 +111,7 @@ category: java
 
 
 
-##参考来源
+## 参考来源
 
 
 

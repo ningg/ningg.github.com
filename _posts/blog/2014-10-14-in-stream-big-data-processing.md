@@ -31,13 +31,13 @@ Second, we describe a number of patterns and techniques that are frequently used
 
 The article is based on a research project developed at Grid Dynamics Labs. Much of the credit goes to Alexey Kharlamov and Rafael Bagmanov who led the project and other contributors: Dmitry Suslov, Konstantine Golikov, Evelina Stepanova, Anatoly Vinogradov, Roman Belous, and Varvara Strizhkova.
 
-##Basics of Distributed Query Processing
+## Basics of Distributed Query Processing
 
 It is clear that distributed in-stream data processing has something to do with query processing in distributed relational databases. Many standard query processing techniques can be employed by in-stream processing engine, so it is extremely useful to understand classical algorithms of distributed query processing and see how it all relates to in-stream processing and other popular paradigms like MapReduce.
 
 Distributed query processing is a very large area of knowledge that was under development for decades, so we start with a brief overview of the main techniques just to provide a context for further discussion.
 
-###Partitioning and Shuffling
+### Partitioning and Shuffling
 
 Distributed and parallel query processing heavily relies on data partitioning to break down a large data set into multiple pieces that can be processed by independent processors. Query processing could consist of multiple steps and each step could require its own partitioning strategy, so data shuffling is an operation frequently performed by distributed databases.
 
@@ -68,7 +68,7 @@ In this example, computation consists of two steps: local aggregation and global
 
 The whole point of this section is that all the algorithms above can be naturally implemented using a message passing architectural style i.e. the query execution engine can be considered as a distributed network of nodes connected by the messaging queues. It is conceptually similar to the in-stream processing pipelines.
 
-###Pipelining
+### Pipelining
 
 In the previous section, we noted that many distributed query processing algorithms resemble message passing networks. However, it is not enough to organize efficient in-stream processing: all operators in a query should be chained in such a way that the data flows smoothly through the entire pipeline i.e. neither operation should block processing by waiting for a large piece of input data without producing any output or by writing intermediate results on disk. Some operations like sorting are inherently incompatible with this concept (obviously, a sorting block cannot produce any output until the entire input is ingested), but in many cases pipelining algorithms are applicable.  A typical example of pipelining is shown below:
 
@@ -88,11 +88,11 @@ However, it does not make a lot of sense to perform a complete join of infinite 
 
 It is worth noting that in-stream processing often deals with sophisticated stream correlation algorithms where records are matched based on scoring metrics, not on field equality condition. A more complex system of buffers can be required for both streams in such cases.
 
-##In-Stream Processing Patterns
+## In-Stream Processing Patterns
 
 In the previous section, we discussed a number of standard query processing techniques that can be used in massively parallel stream processing. Thus, on a conceptual level, an efficient query engine in a distributed database can act as a stream processing system and vice versa, a stream processing system can act as a distributed database query engine. Shuffling and pipelining are the key techniques of distributed query processing and message passing networks can naturally implement them. However, things are not so simple. In a contrast to database query engines where reliability is not critical because a read-only query can always be restarted, streaming systems should pay a lot of attention to reliable events processing. In this section, we discuss a number of techniques that are used by streaming systems to provide message delivery guarantees and some other patterns that are not typical for standard query processing.
 
-###Stream Replay
+### Stream Replay
 
 Ability to rewind data stream back in time and replay the data is very important for in-stream processing systems because of the following reasons:
 This is the only way to guarantee correct data processing. Even if data processing pipeline is fault-tolerant, it is very problematic to guarantee that the deployed processing logic is defect-free. One can always face a necessity to fix and redeploy the system and replay the data on a new version of the pipeline.
@@ -112,7 +112,7 @@ As a bottom line, Stream Replay technique imposes the following requirements of 
 * The system is able to revoke a part of the produced results, replay the corresponding input data and produce a new version of the results.
 * The system should work fast enough to rewind the data back in time, replay them, and then catch up with the constantly arriving data stream.
 
-###Lineage Tracking
+### Lineage Tracking
 
 In a streaming system, events flow through a chain of processors until the result reaches the final destination (like an external database). Each input event produces a directed graph of descendant events (lineage) that ends by the final results. To guarantee reliable data processing, it is necessary to ensure that the entire graph was processed successfully and to restart processing in case of failures.
 
@@ -140,7 +140,7 @@ In this example, the framework joins two streams on a sliding window and then th
 
 This simple but powerful paradigm enables centralized transaction management and inherently provides exactly-once message processing semantics. It is worth noting that this technique can be used both for batch processing and for stream processing because it treats the input data as a set of batches regardless to their streaming of static nature.
 
-###State Checkpointing
+### State Checkpointing
 
 In the previous section we have considered the lineage tracking algorithm that uses signatures (checksums) to provide at-least-one message delivery semantics. This technique improves reliability of the system, but it leaves at least two major open questions:
 
@@ -163,7 +163,7 @@ This technique allows one to achieve exactly-once processing semantics assuming 
 
 As a footnote, it is worth mentioning that state writing can be implemented in different ways. The most straightforward approach is to dump in-memory state to the persistent store as part of the transaction commit process. This does not work well for large states (sliding windows an so on). An alternative is to write a kind of transaction log i.e. a sequence of operations that transform the old state into the new one (for a sliding window it can be a set of added and evicted events). This approach complicates crash recovery because the state has to be reconstructed from the log, but can provide performance benefits in a variety of cases.
 
-###Additive State and Sketches
+### Additive State and Sketches
 
 Additivity of intermediate and final computational results is an important property that drastically simplifies design, implementation, maintenance, and recovery of in-stream data processing systems. Additivity means that the computational result for a larger time range or a larger data partition can be calculated as a combination of results for smaller time ranges or smaller partitions. For example, a daily number of page views can be calculated as a sum of hourly numbers of page views. Additive state allows one to split processing of a stream into processing of batches that can be computed and re-computed independently and, as we discussed in the previous sections, this helps to simplify lineage tracking and reduce complexity of state maintenance.
 
@@ -175,7 +175,7 @@ It is not always trivial to achieve additivity:
 
 Sketches is a very efficient way to transform non-additive values into additive. In the previous example, lists of ID can be replaced by compact additive statistical counters. These counters provide approximations instead of precise result, but it is acceptable for many practical applications. Sketches are very popular in certain areas like internet advertising and can be considered as an independent pattern of in-stream processing. A thorough overview of the sketching techniques can be found in [5].
 
-###Logical Time Tracking
+### Logical Time Tracking
 
 It is very common for in-stream computations to depend on time: aggregations and joins are often performed on sliding time windows; processing logic often depends on a time interval between events and so on. Obviously, the in-stream processing system should have a notion of application’s view of time, instead of CPU wall-clock. However, proper time tracking is not trivial because data streams and particular events can be replayed in case of failures. It is often a good idea to have a notion of global logical time that can be implemented as follows:
 
@@ -183,7 +183,7 @@ It is very common for in-stream computations to depend on time: aggregations and
 * Each processor in a pipeline tracks the maximal timestamp it has seen in a stream and updates a global persistent clock by this timestamp if the global clock is behind. All other processors synchronize their time with the global clock.
 * Global clock can be reset in case of data replay.
 
-###Aggregation in a Persistent Store
+### Aggregation in a Persistent Store
 
 We already have discussed that persistent store can be used for state checkpointing. However, it not the only way to employ an external store for in-stream processing. Let us consider an example that employs Cassandra to join multiple data streams over a time window. Instead of maintaining in-memory event buffers, one can simply save all incoming events from all data streams to Casandra using a join key as row key, as it shown in the figure below:
 
@@ -192,7 +192,7 @@ We already have discussed that persistent store can be used for state checkpoint
 On the other side, the second process traverses the records periodically, assembles and emits joined events, and evicts the events that fell out of the time window. Cassandra even can facilitate this activity by sorting events according to their timestamps.
 It is important to understand that such techniques can defeat the whole purpose of in-stream data processing if implemented incorrectly – writing individual events to the data store can introduce a serious performance bottleneck even for fast stores like Cassandra or Redis. On the other hand, this approach provides perfect persistence of the computational state and different performance optimizations – say, batch writes – can help to achieve acceptable performance in many use cases.
 
-###Aggregation on a Sliding Window
+### Aggregation on a Sliding Window
 
 In-stream data processing frequently deals with queries like “What is the sum of the values in the stream over last 10 minutes?” i.e. with continuous queries on a sliding time window. A straightforward approach to processing of such queries is to compute the aggregation function like sum for each instance of the time window independently. It is clear that this approach is not optimal because of the high similarity between two sequential instances of the time window. If the window at the time T contains samples {s(0), s(1), s(2), …, s(T-1), s(T)}, then the window at the time T+1 contains samples {s(1), s(2), s(3), …, s(T), s(T+1)}. This observation suggests that incremental processing might be used.
 
@@ -202,7 +202,7 @@ Incremental computations over sliding windows is a group of techniques that are 
 	
 Similar techniques exist not only for simple aggregations like sums or products, but also for more complex transformations. For example, the SDFT (Sliding Discreet Fourier Transform) algorithm [4] is a computationally efficient alternative to per-window calculation of the FFT (Fast Fourier Transform) algorithm.
 
-##Query Processing Pipeline: Storm, Cassandra, Kafka
+## Query Processing Pipeline: Storm, Cassandra, Kafka
 
 Now let us return to the practical problem that was stated in the beginning of this article. We have designed and implemented our in-stream data processing system on top of Storm, Kafka, and Cassandra adopting the techniques described earlier in this article. Here we provide just a very brief overview of the solution – a detailed description of all implementation pitfalls and tricks is too large and probably requires a separate article.
 
@@ -214,7 +214,7 @@ Cassandra is employed for state checkpointing and in-store aggregation, as descr
 
 Twitter’s Storm is a backbone of the system. All active query processing is performed in Storm’s topologies that interact with Kafka and Cassandra. Some data flows are simple and straightforward: the data arrives to Kafka; Storm reads and processes it and persist the results to Cassandra or other destination. Other flows are more sophisticated: one Storm topology can pass the data to another topology via Kafka or Cassandra. Two examples of such flows are shown in the figure above (red and blue curved arrows).
 
-##Towards Unified Big Data Processing
+## Towards Unified Big Data Processing
 
 It is great that the existing technologies like Hive, Storm, and Impala enable us to crunch Big Data using both batch processing for complex analytics and machine learning, and real-time query processing for online analytics, and in-stream processing for continuous querying. Moreover, techniques like Lambda Architecture [6, 7] were developed and adopted to combine these solutions efficiently. This brings us to the question of how all these technologies and approaches could converge to a solid solution in the future.  In this section, we discuss the striking similarity between distributed relational query processing, batch processing, and in-stream query processing to figure out the technologies that could cover all these use cases and, consequently, have the highest potential in this area.
 
@@ -233,7 +233,7 @@ Among the emerging technologies, the following two are especially notable in the
 * Apache Tez [8], a part of the Stinger Initiative [9]. Apache Tez is designed to succeed the MapReduce framework introducing a set of fine-grained query processing primitives. The goal is to enable frameworks like Apache Pig and Apache Hive to decompose their queries and scripts into efficient query processing pipelines instead of sequences of MapReduce jobs that are generally slow due to materialization of intermediate results.
 * Apache Spark [10]. This project is probably the most advanced and promising technology for unified Big Data processing that already includes a batch processing framework, SQL query engine, and a stream processing framework.
 
-##References
+## References
 
 1. A. Wilschut and P. Apers, “Dataflow Query Execution in a Parallel Main-Memory Environment “
 1. T. Urhan and M. Franklin, “XJoin: A Reactively-Scheduled Pipelined Join Operator“
@@ -247,7 +247,7 @@ Among the emerging technologies, the following two are especially notable in the
 1. [http://spark-project.org/](http://spark-project.org/)
 
 
-##杂谈
+## 杂谈
 
 这次看到dirtysalt的文章：[In-stream-big-data-processing（英文版+中文注释）](http://dirlt.com/in-stream-big-data-processing.html)，顿时解决了困扰自己的一个问题，英文的好文章，如何做记录？直接翻译中文？直接转载中文？NO，最佳方式当然是在原文基础上，添加自己的注释，OK，作者dirtysalt已经在做了，今后我也这么办。
 

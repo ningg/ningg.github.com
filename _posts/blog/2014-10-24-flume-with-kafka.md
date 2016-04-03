@@ -5,21 +5,21 @@ description: Flume负责数据聚合，Kafka作为消息队列，需要接收Flu
 categories: flume kafka
 ---
 
-##背景
+## 背景
 
 Flume收集分布在不同机器上的日志信息，聚合之后，将信息送入Kafka消息队列，问题来了：如何将Flume输出的信息送入Kafka中？
 
 定一个场景：flume读取apache的访问日志，然后送入Kafka中，最终消息从Kafka中取出，显示在终端屏幕上（stdout）。
 
 
-##Flume复习
+## Flume复习
 
 整理一下Flume的基本知识，参考来源有两个：
 
 * [Flume Documentation][Flume Documentation]
 * Book: [apache-flume-distributed-log-collection-hadoop][apache-flume-distributed-log-collection-hadoop]
 
-###几个概念
+### 几个概念
 
 * Flume **event**: a unit of data flow, having a byte payload and an optional set of string attributes.（event中包含了，payload和attributes）
 * Flume **agent**: a (JVM) process, that hosts the components through which events flow from an external source to the next destination(hop).（agent对应JVM process）
@@ -29,13 +29,13 @@ Flume收集分布在不同机器上的日志信息，聚合之后，将信息送
 ![](/images/flume-user-guide/UserGuide_image00.png) 
 
 
-###练习
+### 练习
 
 **场景**：Flume收集apache访问日志，然后，在标准终端（stdout）显示。
 
 **分析**：Flume官方文档中，已经给出了一个demo，flume从`localhost:port`收集数据，并在标准终端上显示。基于这一场景，只需要修改Source即可。
 
-####构造实例
+#### 构造实例
 
 通过参阅Flume官网，得知`ExecSource`可用于捕获命令的输出，并将输出结果按行构造event，`tail -F [local file]`命令用于查阅文件`[local file]`的新增内容；在`$FLUME_HOME/conf`目录下，新建文件`apache_log_scan.log`，内容如下：
 
@@ -65,7 +65,7 @@ Flume收集分布在不同机器上的日志信息，聚合之后，将信息送
 
 然后访问一下Apache承载的网站，可以看到上面的窗口也在输出信息，即，已经在捕获Apache访问日志`access_log`的增量了。（可以另起一个窗口，通过`tail -F access_log`查看日志的实际内容）
 
-####存在的问题
+#### 存在的问题
 
 通过比较Flume上sink的输出、`tail -F access_log`命令的输出，发现输出有差异：
 	
@@ -84,13 +84,13 @@ Flume收集分布在不同机器上的日志信息，聚合之后，将信息送
 通过`vim access_log`，向文件最后添加一行内容，发现应该是logger类型的sink，对于event的长度有限制；或者，memory类型的channel对于存储的event有限制。
 **RE**：上述问题已经解决，Logger sink输出内容不完整，详情可参考[Advanced Logger Sink](/flume-advance-logger-sink)。
 
-##Kafka复习
+## Kafka复习
 
 下面Kafka的相关总结都参考自：
 
 * [Kafka 0.8.1 Documentation][Kafka 0.8.1 Documentation]
 
-###几个概念
+### 几个概念
 
 ![](/images/kafka-documentation/producer_consumer.png)
 
@@ -147,20 +147,20 @@ Ordering guarantee，Kafka保证message按序处理，同时也保证并行处�
 
 **notes(ningg)**：同一个partition中的message，当其中一个message A被指派给一个consumer instance后，在message A被处理完之前，message B是否会被指派出去？**RE**：细节还没看，具当前的理解，应该是串行处理的，即，一个处理完后，才会发送另一个。
 
-###小结
+### 小结
 
 Kafka通过 partition data by key 和 pre-partition ordering，满足了大部分需求。如果要保证所有message都顺序处理，则将topic设置为only one partition，此时，变为串行处理。
 
 **notes(ningg)**：单个partition是以什么形式存储在server上的？纯粹的文档文件？Flume的fan-in、fan-out什么含义？fan-in针对的是agent之间，fan-out针对agent内部source--channel之间？
 
-##Flume的Kafka sink
+## Flume的Kafka sink
 
 Flume中数据送入Kafka，本质上就是一个Kafka sink。很多人都有这个需求，甚至有的还需要将Flume来读取Kafka中的数据（Kafka source）。本次使用的Flume和Kafka的详细版本信息如下：
 
 * Flume：apache-flume-1.5.0.1-bin.tar.gz
 * Kafka：kafka_2.9.2-0.8.1.1.tgz
 
-###前人的工作
+### 前人的工作
 
 Flume中Kafka source和Kafka sink都有人在做，整体来说有几个进展：
 
@@ -173,7 +173,7 @@ Flume中Kafka source和Kafka sink都有人在做，整体来说有几个进展�
 **notes(ningg)**：Flume官网虽然还没有发布 1.6 版本，但作为开源软件，能够提前查看针对Kafka source和sink部分的代码吗？JIRA上能不能看？
 
 
-###具体实现
+### 具体实现
 
 直接参考thilinamb的[Kafka 0.8.1.1的实现版本](https://github.com/thilinamb/flume-ng-kafka-sink)中的README。 说明：thilinamb的工程是用Maven进行管理的，可以作为`Existing Maven Project`直接导入，然后`mvn clean instal`即可。
 
@@ -181,7 +181,7 @@ Flume中Kafka source和Kafka sink都有人在做，整体来说有几个进展�
 
 **notes(ningg)**：thilinamb的[工程](https://github.com/thilinamb/flume-ng-kafka-sink)，使用maven进行管理，结构好像挺合理的，有一个parent的project，需要认真学习一下。
 
-###Flume Kafka sink原理
+### Flume Kafka sink原理
 
 在上一部分，虽然实现了Flume中数据送入Kafka，但具体原理是什么？需要深入学习一下。
 
@@ -204,7 +204,7 @@ Flume中Kafka source和Kafka sink都有人在做，整体来说有几个进展�
 
 
 
-##参考来源
+## 参考来源
 
 * [Flume Documentation][Flume Documentation]
 * Book: [apache-flume-distributed-log-collection-hadoop][apache-flume-distributed-log-collection-hadoop]

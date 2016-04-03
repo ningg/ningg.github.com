@@ -5,14 +5,14 @@ description: AIX机器上，软件环境的安装
 categories: AIX
 ---
 
-##背景
+## 背景
 
 安装某个软件，需要JRE 6、JRE 7（推荐），而默认执行`java -version`查看为JRE 5。思考一下，初步解决思路两个：
 
 * 查看当前系统是否安装JRE 6 ：系统可能已安装，只不过默认使用JRE 5，这样只需更换一下java调用路径即可；
 * 安装JRE 6：本机没有JRE 6，那就安装一个；
 
-##检测是否已经安装JRE6
+## 检测是否已经安装JRE6
 
 	# find / -name java		
 	...
@@ -44,7 +44,7 @@ categories: AIX
 
 从上面可知，系统已经安装了JDK 6，此可以替代JRE 6，具体路径：`/usr/java6/`。
 
-##AIX环境下安装IBM JDK 1.6
+## AIX环境下安装IBM JDK 1.6
 
 (doing...)
 

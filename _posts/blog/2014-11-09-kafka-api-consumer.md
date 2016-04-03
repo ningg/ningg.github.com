@@ -8,7 +8,7 @@ category: kafka
 
 
 
-##Consumer API
+## Consumer API
 
 如何从Kafka中读取数据？三种方式：
 
@@ -16,7 +16,7 @@ category: kafka
 * Simple Consumer API；
 * Kafka Hadoop Consumer API；
 
-###High Level Consumer API
+### High Level Consumer API
 
 	class Consumer {
 	  /**
@@ -88,7 +88,7 @@ category: kafka
 You can follow [this example][Consumer Group Example] to learn how to use the high level consumer api.
 
 
-###Simple Consumer API
+### Simple Consumer API
 
 	class kafka.javaapi.consumer.SimpleConsumer {
 	/**
@@ -127,7 +127,7 @@ For most applications, the high level consumer Api is good enough. Some applicat
 
 
 
-###Kafka Hadoop Consumer API
+### Kafka Hadoop Consumer API
 
 Providing a horizontally scalable solution for aggregating and loading data into Hadoop was one of our basic use cases. To support this use case, we provide a Hadoop-based consumer which spawns off many map tasks to pull data from the Kafka cluster in parallel. This provides extremely fast pull-based Hadoop data load capabilities (we were able to fully saturate the network with only a handful of Kafka servers).
 
@@ -136,7 +136,7 @@ Usage information on the hadoop consumer can be found [here][Kafka Hadoop Consum
 
 
 
-##Consumer Configs
+## Consumer Configs
 
 The essential consumer configurations are the following:
 
@@ -248,7 +248,7 @@ More details about consumer configuration can be found in the scala class `kafka
 
 
 
-##参考来源
+## 参考来源
 
 * [Consumer Group Example][Consumer Group Example]
 * [Simple Consumer Example][Simple Consumer Example]

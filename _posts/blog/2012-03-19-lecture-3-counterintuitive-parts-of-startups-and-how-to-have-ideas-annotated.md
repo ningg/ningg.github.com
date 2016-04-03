@@ -22,7 +22,7 @@ Startups are as unnatural as skiing and there is a similar list of stuff you hav
 
 The first thing on it is the fact I just mentioned: startups are so weird that if you follow your instincts they will lead you astray. If you remember nothing more than that, when you're about to make a mistake, you can pause before making it. When I was running Y Combinator we used to joke that our function was to tell founders things they would ignore, and it's really true. Batch after batch the YC partners warned founders about mistakes they were about to make and the founders ignored them, and they came back a year later and said, "I wish we'd listened." But that dude is in their cap table and there is nothing they can do.
 
-##不能按照直觉/本能，来做决定
+## 不能按照直觉/本能，来做决定
 
 第一，按照直觉/本能做事，startup注定悲剧。
 
@@ -36,7 +36,7 @@ There is this specific sub-case in business, especially if you come from an engi
 
 进行判断之前，多问一下自己判断的依据是什么？直觉？直觉的依据是什么？再来详细分析一下，判断的依据是否存在。
 
-##不需要对创业这件事很专业
+## 不需要对创业这件事很专业
 
 The second counterintuitive point, this might come as a little bit of a disappointment, but what you need to succeed in a startup is not expertise in startups. That makes this class different from most other classes you take. You take a French class, at the end of it you've learned how to speech French. You do the work, you may not sound exactly like a French person, but pretty close, right? This class can teach you about startups, but that is not what you need to know. What you need to know to succeed in a startup is not expertise in startups, what you need is expertise in your own users.
 
@@ -69,7 +69,7 @@ So many of the conversations the YC partners have with the founders begin with t
 YC partner 与 founder之间谈论 startup 时的用语，通常很繁琐，我想了很久，认为产生这种情况的原因是：他们都在找捷径、找诀窍，他们的说话方式是经过训练的。*（应该直接点表达？）*
 
 
-##认真做事情，不要耍小聪明
+## 认真做事情，不要耍小聪明
 
 So, this is the third counterintuitive thing to remember about startups: starting a startup is where gaming the system stops working. Gaming the system may continue to work, if you go to work for a big company, depending on how broken the company is, you may be able to succeed by sucking up to the right person; Giving the impression of productivity by sending emails late at night, or if you're smart enough changing the clock on your computer, cause who's going to check the headers, right? I like an audience I can tell jokes to and they laugh. Over in the business school: "headers?" Okay, God this thing is being recorded, I just realized that.
 
@@ -87,7 +87,7 @@ Though, in a sense, it's bad news that gaming the system stops working now, in t
 
 明确一点：耍小技巧不是万能的，甚至一些情境下，他的作用微乎其微。*（想表达什么意思？）*
 
-##startup意味着付出：数年无怨言的付出
+## startup意味着付出：数年无怨言的付出
 
 That brings us to our fourth counterintuitive point, startups are all consuming. If you start a startup, it will take over your life to a degree that you cannot imagine and if it succeeds it will take over your life for a long time; for several years, at the very least, maybe a decade, maybe the rest of your working life. So there is a real opportunity cost here. It may seem to you that Larry Page has an enviable life, but there are parts of it that are defiantly unenviable. The way the world looks to him is that he started running as fast as he could, at age twenty-five, and he has not stopped to catch his breath since. Every day shit happens within the Google empire that only the emperor can deal with and he, as the emperor, has to deal with it. If he goes on vacation for even a week, a whole backlog of shit accumulates, and he has to bear this, uncomplaining, because: number one, as the company’s daddy, he cannot show fear or weakness; and number two, if you’re a billionaire, you get zero, actually less than zero sympathy, if you complain about having a difficult life.
 
@@ -134,7 +134,7 @@ While it can be really cool to be in the grip of some project you consider your 
 
 Should you do it at any age? Starting a startup may sound kind of hard, if I haven't made that clear let me try again. Starting a startup is really hard. If it’s too hard, what if you are not up to this challenge?
 
-##You can't tell 
+## You can't tell 
 
 *（什么意思？没理解）*
 

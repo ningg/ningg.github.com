@@ -10,7 +10,7 @@ Monitoring in Flume is still a work in progress. Changes can happen very often. 
 
 **notes(ningg)**：JVM上两个东西，什么用途？**JMX platform**、**MBean server**。
 
-##Ganglia Reporting
+## Ganglia Reporting
 
 Flume can also report these metrics to Ganglia 3 or Ganglia 3.1 metanodes. To report metrics to Ganglia, a flume agent must be started with this support. The Flume agent has to be started by passing in the following parameters as system properties prefixed by flume.monitoring., and can be specified in the `flume-env.sh`:
 
@@ -31,7 +31,7 @@ We can start Flume with Ganglia support as follows:
 	JAVA_OPTS="-Dflume.monitoring.type=ganglia -Dflume.monitoring.hosts=239.2.11.166:8649"
 
 
-##JSON Reporting
+## JSON Reporting
 
 Flume can also report metrics in a JSON format. To enable reporting in JSON format, Flume hosts a Web server on a configurable port. Flume reports metrics in the following JSON format:
 
@@ -74,7 +74,7 @@ We can start Flume with JSON Reporting support as follows:
 	
 Metrics will then be available at `http://<hostname>:<port>/metrics` webpage. Custom components can report metrics as mentioned in the Ganglia section above.
 
-##Custom Reporting
+## Custom Reporting
 
 It is possible to report metrics to other systems by writing servers that do the reporting. Any reporting class has to implement the interface, `org.apache.flume.instrumentation.MonitorService`. Such a class can be used the same way the `GangliaServer` is used for reporting. They can poll the platform mbean server to poll the mbeans for metrics. For example, if an HTTP monitoring service called `HTTPReporting` can be used as follows:
 
@@ -89,7 +89,7 @@ It is possible to report metrics to other systems by writing servers that do the
 |type|	–	|The component type name, has to be FQCN|
 
 
-##Reporting metrics from custom components
+## Reporting metrics from custom components
 
 Any custom flume components should inherit from the `org.apache.flume.instrumentation.MonitoredCounterGroup` class. The class should then provide `getter methods` for each of the metrics it exposes. See the code below. The MonitoredCounterGroup expects a list of attributes whose metrics are exposed by this class. As of now, this class only supports exposing metrics as long values.
 

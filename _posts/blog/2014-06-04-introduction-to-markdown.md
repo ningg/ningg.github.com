@@ -5,7 +5,7 @@ description: 现在流行markdown，特别是github上用的更多，那到底ma
 category: markdown
 ---
 
-##背景
+## 背景
 
 几个问题：
 
@@ -24,7 +24,7 @@ category: markdown
 
 在这一背景下，markdown产生了。
 
-##markdown是什么？
+## markdown是什么？
 
 markdown到底是什么？最原始介绍在这儿[markdown] ，markdown有两层含义：
 
@@ -36,7 +36,7 @@ markdown到底是什么？最原始介绍在这儿[markdown] ，markdown有两�
 看到上面图示，有人会问，markdown能够转换为HTML文档，那么，HTML文档能否转换为markdown格式文档呢？我x，你说呢，两种文档之间有映射关系，当然可以相互转换了，参考工具[html2text](http://www.aaronsw.com/2002/html2text/)。 
 
 
-##Notepad++上配置markdown
+## Notepad++上配置markdown
 
 我在GitHub上已经公开了Notepad++支持markdown语法的配置文件[markdown of Notepad++](https://github.com/ningg/npp-markdown)， 可以试用一下，感觉不错。
 
@@ -45,7 +45,7 @@ __说明__：一个bug需要调整，当markdown文档内url包含1个`_`时，�
 
 
 
-##GitHub上使用markdown
+## GitHub上使用markdown
 
 markdown有不同的解析引擎，GitHub上，应该使用哪一个？对此，GitHub帮助文档上有[详细介绍](https://help.github.com/articles/migrating-your-pages-site-from-maruku)， 简要介绍如下：
 
@@ -56,7 +56,7 @@ __说明__：下文的基本语法，主要是[kramdown]解析引擎支持的mar
 
 __更新__：GitHub现在使用[GitHub Flavored Markdown][GitHub Flavored Markdown] 的Markdown语法，其在标准的[markdown]语法上，进行了一些改进。
 
-###如何查询GitHub支持的Markdown
+### 如何查询GitHub支持的Markdown
 
 几个步骤：
 
@@ -65,7 +65,7 @@ __更新__：GitHub现在使用[GitHub Flavored Markdown][GitHub Flavored Markdo
 	* [Markdown Basics][Markdown Basics]
 	* [GitHub Flavored Markdown][GitHub Flavored Markdown]
 
-##基本语法(doing...)
+## 基本语法(doing...)
 
 对于标准markdown的语法规则，[markdown官网][markdown]已经有了完善的介绍，当然也有中文版的[markdown语法(简体中文)](http://wowubuntu.com/markdown/) 。
 
@@ -73,7 +73,7 @@ __更新__：GitHub现在使用[GitHub Flavored Markdown][GitHub Flavored Markdo
 
 下文将对自己常用到的语法，进行简要介绍，以备查阅。
 
-###链接
+### 链接
 
 包括：图片、文档、其他网页链接；
 
@@ -84,18 +84,18 @@ __更新__：GitHub现在使用[GitHub Flavored Markdown][GitHub Flavored Markdo
 
 
 
-###代码
+### 代码
 
 
 
 
 
-###公式
+### 公式
 
 
 
 
-###表格
+### 表格
 
 
 表格，给一个样例：

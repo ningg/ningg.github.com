@@ -10,13 +10,13 @@ categories: storm
 In this tutorial, you’ll learn how to create Storm topologies and deploy them to a Storm cluster. Java will be the main language used, but a few examples will use Python to illustrate Storm’s multi-language capabilities.
 （这个tutorial中，着重说明：如何创建Storm topologies，如何将Storm topologies部署到Storm cluster中。）
 
-##Preliminaries
+## Preliminaries
 
 This tutorial uses examples from the [storm-starter][storm-starter] project. It’s recommended that you clone the project and follow along with the examples. Read [Setting up a development environment][Setting up a development environment] and [Creating a new Storm project][Creating a new Storm project] to get your machine set up.
 （example都是来自[storm-starter][storm-starter]project，建议clone一份，跟着例子操作一把。在此之前，需要参考[Setting up a development environment][Setting up a development environment] 和 [Creating a new Storm project][Creating a new Storm project]来配置一下环境）
 
 
-##Components of a Storm cluster
+## Components of a Storm cluster
 
 A Storm cluster is superficially similar to a Hadoop cluster. Whereas on Hadoop you run “MapReduce jobs”, on Storm you run “topologies”. “Jobs” and “topologies” themselves are very different – one key difference is that a MapReduce job eventually finishes, whereas a topology processes messages forever (or until you kill it).
 （Storm cluster与Hadoop cluster类似，Hadoop中运行`MapReduce jobs`，Storm中运行`topologies`。）
@@ -38,7 +38,7 @@ All coordination between Nimbus and the Supervisors is done through a [Zookeeper
 >
 > Fail-fast是并发中乐观(optimistic)策略的具体应用，它允许线程自由竞争，但在出现冲突的情况下假设你能应对，即你能判断出问题何在，并且给出解决办法。悲观(pessimistic)策略就正好相反，它总是预先设置足够的限制，通常是采用锁(lock)，来保证程序进行过程中的无错，付出的代价是其它线程的等待开销。
 
-##Topologies
+## Topologies
 
 To do realtime computation on Storm, you create what are called “topologies”. A topology is a graph of computation. Each node in a topology contains processing logic, and links between nodes indicate how data should be passed around between nodes.
 （topology中每个node都包含了相应的processing logic）
@@ -55,7 +55,7 @@ Since topology definitions are just Thrift structs, and Nimbus is a Thrift servi
 
 **notes(ningg)**：Thrift structs? Thrift service?
 
-##Streams
+## Streams
 
 The core abstraction in Storm is the “stream”. A stream is an unbounded sequence of tuples. Storm provides the primitives for transforming a stream into a new stream in a distributed and reliable way. For example, you may transform a stream of tweets into a stream of trending topics.
 （Storm的核心是`Stream`，Storm提供一种分布式的、可靠的数据流转换方式，将原始数据流处理后，转换为其他的数据流）
@@ -85,7 +85,7 @@ A topology runs forever, or until you kill it. Storm will automatically reassign
 **notes(ningg)**：Storm如何保证Nimbus、Supervisor崩溃后，no data loss的？
 
 
-##Data model
+## Data model
 
 Storm uses tuples as its data model. A tuple is a named list of values, and a field in a tuple can be an object of any type. Out of the box, Storm supports all the primitive types, strings, and byte arrays as tuple field values. To use an object of another type, you just need to implement [a serializer](http://storm.apache.org/documentation/Serialization.html) for the type.
 （Storm中用`tuple`结构来存储数据，tuple中的field可以是任何类型的object，自定义的类型，需要实现[a serializer](http://storm.apache.org/documentation/Serialization.html)接口）
@@ -119,7 +119,7 @@ Every node in a topology must declare the output fields for the tuples it emits.
 
 The declareOutputFields function declares the output fields `["double", "triple"]` for the component. The rest of the bolt will be explained in the upcoming sections.
 
-##A simple topology
+## A simple topology
 
 Let’s take a look at a simple topology to explore the concepts more and see how the code shapes up. Let’s look at the `ExclamationTopology` definition from storm-starter:
 	
@@ -242,7 +242,7 @@ Methods like `cleanup` and `getComponentConfiguration` are often not needed in a
 	   }     
 	}
 
-##Running ExclamationTopology in local mode
+## Running ExclamationTopology in local mode
 
 Let’s see how to run the ExclamationTopology in local mode and see that it’s working.
 
@@ -301,7 +301,7 @@ There’s many other configurations you can set for the topology. The various co
 To learn about how to set up your development environment so that you can run topologies in local mode (such as in Eclipse), see [Creating a new Storm project][Creating a new Storm project]。
 （设置本地的开发环境，这样就可以在Eclipse等中进行调试开发）	
 
-##Stream groupings
+## Stream groupings
 
 A stream grouping tells a topology how to send tuples between two components. Remember, spouts and bolts execute in parallel as many tasks across the cluster. If you look at how a topology is executing at the task level, it looks something like this:
 （stream grouping负责一个topology中tuples在components（Spout、Bolt）间的传递；）
@@ -342,7 +342,7 @@ There’s a few other kinds of stream groupings. You can read more about them on
 （关于stream grouping的更多内容，参考[Concepts][Storm Concepts]）
 
 
-##Defining Bolts in other languages
+## Defining Bolts in other languages
 
 Bolts can be defined in any language. Bolts written in another language are executed as subprocesses, and Storm communicates with those subprocesses with JSON messages over stdin/stdout. The communication protocol just requires an ~100 line adapter library, and Storm ships with adapter libraries for Ruby, Python, and Fancy.
 （bolt可以使用其他语言实现，本质上其他语言编写的bolt都是subprocess，Storm通过stdin/stdout上的JSON串来与其进行通讯）
@@ -375,24 +375,24 @@ SplitSentence overrides ShellBolt and declares it as running using python with t
 
 For more information on writing spouts and bolts in other languages, and to learn about how to create topologies in other languages (and avoid the JVM completely), see [Using non-JVM languages with Storm](http://storm.apache.org/documentation/Using-non-JVM-languages-with-Storm.html).
 
-##Guaranteeing message processing
+## Guaranteeing message processing
 
 Earlier on in this tutorial, we skipped over a few aspects of how tuples are emitted. Those aspects were part of Storm’s reliability API: how Storm guarantees that every message coming off a spout will be fully processed. See [Guaranteeing message processing](http://storm.apache.org/documentation/Guaranteeing-message-processing.html) for information on how this works and what you have to do as a user to take advantage of Storm’s reliability capabilities.
 （本文中，并没有深入介绍how tuples are emitted，其中涉及一个关键问题：如何保证spout提供的message一定会被成功处理，详细信息可参考[Guaranteeing message processing](http://storm.apache.org/documentation/Guaranteeing-message-processing.html)）
 
-##Transactional topologies
+## Transactional topologies
 
 Storm guarantees that every message will be played through the topology at least once. A common question asked is “how do you do things like counting on top of Storm? Won’t you overcount?” Storm has a feature called transactional topologies that let you achieve exactly-once messaging semantics for most computations. Read more about transactional topologies [here](http://storm.apache.org/documentation/Transactional-topologies.html).
 （如何保证message只被处理一次，而不被重复处理？Storm提供了transactional topologies来保证只执行一次）
 
 **notes(ningg)**：message到底是什么？tuple？task？message就是storm中data model所指的tuple（一组field的有序排列）。
 
-##Distributed RPC
+## Distributed RPC
 
 This tutorial showed how to do basic stream processing on top of Storm. There’s lots more things you can do with Storm’s primitives. One of the most interesting applications of Storm is Distributed RPC, where you parallelize the computation of intense functions on the fly. Read more about Distributed RPC [here](http://storm.apache.org/documentation/Distributed-RPC.html).
 （Distribute RPC很有意思的，能够parallelize the computation of intense functions on the fly。）
 
-##Conclusion
+## Conclusion
 
 This tutorial gave a broad overview of developing, testing, and deploying Storm topologies. The rest of the documentation dives deeper into all the aspects of using Storm.
 
@@ -400,7 +400,7 @@ This tutorial gave a broad overview of developing, testing, and deploying Storm 
 
 
 
-##参考来源
+## 参考来源
 
 * [Storm Tutorial][Storm Tutorial]
 

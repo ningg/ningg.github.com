@@ -5,13 +5,13 @@ description: 耳边不时响起“消息队列”，这么个东西，OK，好�
 category: message queue
 ---
 
-##背景
+## 背景
 
 之前做日志收集模块时，用到flume，另外也有的方案，集成kafaka来提升系统可扩展性，其中涉及到`消息队列`，当时自己并不清楚为什么要使用`消息队列`，而在我自己提出的原始日志采集方案中不适用`消息队列`时，有几个基本问题：1.日志文件上传过程，有个基本的`生产者-消费者`问题；2.另外系统崩溃时，数据丢失的处理问题。
 
 今天，几位同事再次谈到`消息队列`这么个东西，很NB的样子，我也想弄清楚，OK，搞起。
 
-##什么是消息队列
+## 什么是消息队列
 
 消息队列（Message Queue，简称MQ），从字面意思上看，本质是个队列，FIFO先入先出，只不过队列中存放的内容是`message`而已。其主要用途：不同进程Process/线程Thread之间通信。为什么会产生`消息队列`？这个问题问的好，我大概查了一下，没有查到最初产生消息队列的背景，但我猜测可能几个原因：
 
@@ -20,7 +20,7 @@ category: message queue
 
 不管到底是什么原因催生了`消息队列`，总之，上面两个猜测是其实际应用的典型场景。
 
-##为什么要用
+## 为什么要用
 
 切合前一部分猜测的`消息队列`产生背景，其主要解决两个问题：
 
@@ -48,17 +48,17 @@ category: message queue
 	* 数据流的阶段性能定位：获取用户某一操作的各个阶段（通过message来标识），捕获不同阶段的耗时，可用于定位系统瓶颈。
 
 
-##常用的消息队列
+## 常用的消息队列
 
 （doing...）
 
-##小结
+## 小结
 
 `消息队列`实现了进程间通信的升级，如下图所示：
 
 
 
-##参考来源
+## 参考来源
 
 * top 10 uses for message queue：[英文原文](http://blog.iron.io/2012/12/top-10-uses-for-message-queue.html)、[pdf版本](/download/message-queue-intro/top-10-mq.pdf)、[中文译文](http://www.oschina.net/translate/top-10-uses-for-message-queue)
 * [Message Queue wiki](http://en.wikipedia.org/wiki/Message_queue)

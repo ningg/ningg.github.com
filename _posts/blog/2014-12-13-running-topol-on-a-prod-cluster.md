@@ -54,7 +54,7 @@ You can find out how to configure your `storm` client to talk to a Storm cluster
 * 具体在windows的CMD下，我无法正确执行`storm jar`命令，转而，我在windows下安装了Cygwin，并在其中执行`storm jar ...`命令，向远端的Storm cluster提交topol以及依赖的代码；
 
 
-##Common configurations
+## Common configurations
 
 There are a variety of configurations you can set per topology. A list of all the configurations you can set can be found here. The ones prefixed with "TOPOLOGY" can be overridden on a topology-specific basis (the other ones are cluster configurations and cannot be overridden). Here are some common ones that are set for a topology:
 
@@ -64,7 +64,7 @@ There are a variety of configurations you can set per topology. A list of all th
 * **Config.TOPOLOGY_MESSAGE_TIMEOUT_SECS**: This is the maximum amount of time a spout tuple has to be fully completed before it is considered failed. This value defaults to 30 seconds, which is sufficient for most topologies. See [Guaranteeing message processing](http://storm.apache.org/documentation/Guaranteeing-message-processing.html) for more information on how Storm's reliability model works.
 * **Config.TOPOLOGY_SERIALIZATIONS**: You can register more serializers to Storm using this config so that you can use custom types within tuples.
 
-##Killing a topology
+## Killing a topology
 
 To kill a topology, simply run:
 
@@ -74,11 +74,11 @@ Give the same name to `storm kill` as you used when submitting the topology.
 
 Storm won't kill the topology immediately. Instead, it deactivates all the spouts so that they don't emit any more tuples, and then Storm waits `Config.TOPOLOGY_MESSAGE_TIMEOUT_SECS` seconds before destroying all the workers. This gives the topology enough time to complete any tuples it was processing when it got killed.
 
-##Updating a running topology
+## Updating a running topology
 
 To update a running topology, the only option currently is to kill the current topology and resubmit a new one. A planned feature is to implement a `storm swap` command that swaps a running topology with a new one, ensuring minimal downtime and no chance of both topologies processing tuples at the same time.
 
-##Monitoring topologies
+## Monitoring topologies
 
 The best place to monitor a topology is using the `Storm UI`. The Storm UI provides information about errors happening in tasks and fine-grained stats on the throughput and latency performance of each component of each running topology.
 

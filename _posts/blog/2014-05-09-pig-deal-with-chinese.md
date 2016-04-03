@@ -13,7 +13,7 @@ category: Pig
 * 使用`SecuryCRT`/`putty`客户端连接服务器时，中文文档显示乱码的解决办法；
 * Pig脚本解析中文文档的步骤；
 
-##将文档存储为UTF-8格式
+## 将文档存储为UTF-8格式
 
 在`windows`下，可以使用`notepad++`来进行文档转码：
 `Encoding`--`Convert to UTF-8 without BOM`，则当前文档转换为`UTF-8`编码方式。
@@ -26,13 +26,13 @@ __补充__：
 
 `Linux`下使用`iconv`可以进行编码格式转换，具体操作如下：
 
-###查看文档编码方式：
+### 查看文档编码方式：
 
 	file –i origin.txt
 
 ![file-i](/images/pig-deal-with-chinese/file-i.png)
  
-###对文档转码：
+### 对文档转码：
 
 	// 下面命令中 origin.txt.utf8为输出文件。
 	iconv –f ISO-8859-1 –t UTF-8 < origin.txt > origin.txt.utf8
@@ -47,7 +47,7 @@ __特别说明__：
 
 （思考：不同的编码格式的差异？为什么有多种编码？对应的应用场景？）
 
-###iconv转码出错[重要]
+### iconv转码出错[重要]
 
 当对`1G`以上的大文件，进行转码时：如果按照如下命令进行转码：
 
@@ -81,7 +81,7 @@ __特别说明__：
 [1]	http://www.aiezu.com/system/linux/linux_iconv_code.html
 [2] http://www.linuxquestions.org/questions/linux-newbie-8/usr-bin-iconv-illegal-input-sequence-at-position-905152/
 
-##将文档传到远端linux服务器
+## 将文档传到远端linux服务器
 
 注意：在传输过程中，应尽量保持文档的属性/编码方式保持不变。
 仅仅是将`windows`下文档传递到远端linux服务器上，方法很多：`fileZilla`、`WinSCP`等，下面说一种不需要安装软件的方法（亲，不要想错了，需要下载软件的，只是软件很小，不需要安装）。
@@ -100,11 +100,11 @@ __特别说明__：
 
 现在按照`utf-8`编码的文件，已经在服务器上了，那原材料就齐全了，开始处理吧。
 
-##远端服务器上，中文显示乱码
+## 远端服务器上，中文显示乱码
 
 既然要操作远端`linux`服务器，最好要建立持久的连接，常用的方式：`putty`、`secureCRT`。然而，查看服务器上的中文文档时，可能出现乱码。
 
-###服务器的基本环境
+### 服务器的基本环境
 
 针对上述情况，需要先检查一下服务器上设置的语言环境。
 
@@ -123,7 +123,7 @@ __特别说明__：
 
 （思考：LANG的配置有什么用？LANG不就是个环境变量吗？）
 
-###Putty连接服务器
+### Putty连接服务器
 
 设置方式：
 `Window`--`Translation`--`Character set translation`--`Remote character set`，选中“UTF-8”。
@@ -134,7 +134,7 @@ __特别说明__：
 
 ![putty-appearance](/images/pig-deal-with-chinese/putty-appearance.png)
 
-###SecureCRT连接服务器
+### SecureCRT连接服务器
 
 `选项`--`会话选项`--`终端`--`外观`--`字体`，`字符编码`选中`UTF-8`；
 `标准字体`选中`幼圆`（宋体等其他也可以）
@@ -149,7 +149,7 @@ OK，到现在位置，使用`putty`/`secureCRT`连接远程服务器，再查�
 
  ![less.png](/images/pig-deal-with-chinese/less.png)
 
-##Pig脚本解析中文文档
+## Pig脚本解析中文文档
 
 千呼万唤始出来、犹抱琵琶半遮面，使用pig来解析中文文档是本文的重点，却姗姗来迟。好的，先来回顾一下前面的工作：
 

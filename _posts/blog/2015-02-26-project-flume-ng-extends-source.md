@@ -14,13 +14,13 @@ categories: open-source git flume
 
 
 
-##常见问题
+## 常见问题
 
 
 
 
 
-###github上创建工程，克隆到本地
+### github上创建工程，克隆到本地
 
 
 在github上创建 new repository：flume-ng-extends-source之后，在本地执行git clone命令，即可：
@@ -28,7 +28,7 @@ categories: open-source git flume
 	git clone https://github.com/ningg/flume-ng-extends-source.git
 
 
-###将本地内容，提交到远端git repository中
+### 将本地内容，提交到远端git repository中
 
 几个命令：
 
@@ -39,7 +39,7 @@ categories: open-source git flume
 **思考**：上述命令：git push origin master 中`origin`和`master`是什么含义？
 
 
-###git出现错误
+### git出现错误
 
 错误信息，如下：
 
@@ -51,7 +51,7 @@ categories: open-source git flume
 
 解决办法：
 
-####方法一：希望保存本地改动的文件，但不想与git服务器上版本合并（merge）
+#### 方法一：希望保存本地改动的文件，但不想与git服务器上版本合并（merge）
 
 操作如下：
 
@@ -61,7 +61,7 @@ categories: open-source git flume
 	git diff -w +文件名		// 查看文件的合并情况
 
 
-####方法二：放弃本地修改的内容，直接放弃本地文件
+#### 方法二：放弃本地修改的内容，直接放弃本地文件
 
 操作如下：
 
@@ -71,7 +71,7 @@ categories: open-source git flume
 
 详细参考：[Git冲突常见解决办法][Git冲突常见解决办法]
 	
-###在指定目录创建maven工程
+### 在指定目录创建maven工程
 	
 在Eclipse下，Ctrl + N 创建 Maven Project时，选择：
 
@@ -81,7 +81,7 @@ categories: open-source git flume
 这样，才能使最终生成的maven project以`E:\flume-ng-extends-source`为根目录；在这中间遇到一个问题，当不选定`Create a simple project`时，创建的maven project始终`E:\flume-ng-extends-source`为根目录。
 
 
-###git下设置.gitignore
+### git下设置.gitignore
 
 对于java编写的maven projcet，使用git进行管理时，需要设置`.gitignore`，几点：
 
@@ -122,7 +122,7 @@ categories: open-source git flume
 
 
 
-###Eclipse下进行source的format
+### Eclipse下进行source的format
 
 几点：
 
@@ -130,13 +130,13 @@ categories: open-source git flume
 * 如何快捷进行source的format？
 
 
-###Eclipse下创建的java文件，自动添加头部注释信息
+### Eclipse下创建的java文件，自动添加头部注释信息
 
 （todo）
 
 
 
-###maven导出jar包
+### maven导出jar包
 
 背景：当前自己都是eclipse的`Export`--`Jar file`/`Runnable Jar file`，如何利用maven直接生成jar包？
 
@@ -144,11 +144,11 @@ categories: open-source git flume
 
 
 
-###maven打包时，指定源文件编码方式
+### maven打包时，指定源文件编码方式
 
 
 
-###maven打包时，如何将当前jar包以及其依赖包都导出？
+### maven打包时，如何将当前jar包以及其依赖包都导出？
 
 
 参考[thilinamb flume kafka sink](https://github.com/thilinamb/flume-ng-kafka-sink)
@@ -156,10 +156,10 @@ categories: open-source git flume
 
 
 
-##编程相关
+## 编程相关
 
 
-###判断参数是否输入有误
+### 判断参数是否输入有误
 
 （TODO：专门学习一下）
 
@@ -170,7 +170,7 @@ categories: open-source git flume
 	...
 	Preconditions.checkNotNull(spoolDirectory);
 
-###判断对象是否为null
+### 判断对象是否为null
 
 （TODO：专门学习一下）
 
@@ -184,7 +184,7 @@ categories: open-source git flume
 
 
 
-###过滤文件
+### 过滤文件
 
 利用java.io.FileFilter，示例代码如下：
 
@@ -218,7 +218,7 @@ categories: open-source git flume
 
 
 
-##参考来源
+## 参考来源
 
 * [Git ignores and Maven targets][Git ignores and Maven targets]
 * [A .gitignore file for Intellij and Eclipse with Maven][A .gitignore file for Intellij and Eclipse with Maven]

@@ -5,11 +5,11 @@ description: Kafka是一个消息队列，那就要允许往其中存入数据�
 category: kafka
 ---
 
-##背景
+## 背景
 
 最近在做Flume与Kafka的整合，其中用到了一个工程：[flume-ng-kafka-sink][flume-ng-kafka-sink]，本质上就是Flume的一个插件：Kafka sink。遇到一个问题：Kafka sink通过设置kafak broker的`ip:port`来寻找broker，那就有一个问题，如果设置连接的kafka broker 宕掉了，flume的数据是不是就送不出去了？
 
-##Producer
+## Producer
 
 开始介绍Producer之前，说个小问题：上面**背景**中一直在说Flume的Sink：Kafka Sink，那与Kafka producer什么关系呢？为什么这次标题是**Kafka Producer**，而丝毫未提**Flume Sink**？这个问题很好，说明读者在思考，大概说几点：
 
@@ -18,7 +18,7 @@ category: kafka
 
 此次，主要站在Kafka的角度来看一个Producer可以进行的配置。
 
-###Kafka Producer API
+### Kafka Producer API
 
 下面是`kafka.javaapi.producer.Producer`类的java API，实际上这个类是scala编写的，
 
@@ -52,7 +52,7 @@ category: kafka
 
 具体如何使用上述Producer API，可参考[0.8.0 Producer Example][0.8.0 Producer Example]。
 
-###0.8.0 Producer Example
+### 0.8.0 Producer Example
 
 研究要深入，上面提到的[0.8.0 Producer Example][0.8.0 Producer Example]，下面简要介绍一下。
 
@@ -240,7 +240,7 @@ To confirm you have data, use the command line tool to see what was written:
 
 
 
-###几个情况
+### 几个情况
 
 **思考1**：Kafka 0.7.2版本中，直接在Producer中配置Zookeeper，Producer通过Zookeeper来获知Broker的位置，简单来说，应用与Kafka之间是解耦的，可以在不修改Producer信息的情况下，动态增减Broker。
 
@@ -255,7 +255,7 @@ To confirm you have data, use the command line tool to see what was written:
 **思考3**：如果某一个flume挂了，能否能自动重启？
 
 
-##Producer配置的详细参数
+## Producer配置的详细参数
 
 针对Kafka 0.8.1版本，这一部分介绍的Producer配置信息，主要参考两个地方：
 
@@ -382,7 +382,7 @@ More details about producer configuration can be found in the scala class `kafka
 
 
 
-##New Producer Configs（补充）
+## New Producer Configs（补充）
 
 下面是今后Kafka Producer会采用的新的配置参数，当前，可以有一个基本的了解。
 
@@ -526,7 +526,7 @@ We are working on a replacement for our existing producer. The code is available
 
 
 
-##参考来源
+## 参考来源
 
 
 * [flume-ng-kafka-sink][flume-ng-kafka-sink]
@@ -535,7 +535,7 @@ We are working on a replacement for our existing producer. The code is available
 
 
 
-##杂谈
+## 杂谈
 
 人是有差异的，特别是视野上的差异，有些东西，如果一个人没有见识过，同时想象力也不行，或者说胆小如鼠不敢想象，这样的人脑袋不行、胆子也不行，年轻人脑袋行不行，至少胆子要大；另，信任是金子，别人对我的绝对信任，我对别人的绝对信任，都是很难建立的，要如同珍惜脑袋一样，珍惜这些信任。（注：绝对信任：无论做什么事，都相信是在做一件值得做的事，无论怎样，都是信任，甚至当有流言蜚语产生时，都能力排众议对其信任。这种信任，大都是建立在对人格的熟知上。）
 

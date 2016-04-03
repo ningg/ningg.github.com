@@ -4,7 +4,7 @@ title:			Eclipse下查看MOA源代码
 category:		MOA
 description:	MOA:Massive Online Analysis,开源的数据流挖掘框架。
 ---
-##概要
+## 概要
 本篇短文中，此目标包含两层意思：
 
 1. 使用Eclipse快速查看java代码，特别是class之间的继承(extends)、实现(implements)等关系；
@@ -23,10 +23,10 @@ description:	MOA:Massive Online Analysis,开源的数据流挖掘框架。
 2. 规定算法实现接口的class，这些class一般是Interface或者 Abstract class。
 
 
-##示例准备
+## 示例准备
 
 此次采用的例子是[MOA]的[Tutorial2]中提供的两个示例代码：
-###代码一：`ApiOfTest1.java`
+### 代码一：`ApiOfTest1.java`
 ```
 源代码名称: ApiOfTest1.java
 文档中对应位置：Listing 1
@@ -37,7 +37,7 @@ __补充说明：__ 本次例子`ApiOfTest1.java`中使用的`stream`和`learner
     RandomTreeGenerator stream = new RandomTreeGenerator();
     Classifier learner = new DecisionStumpTutorial();
 
-###代码二：`DecisionStumpTutorial.java`
+### 代码二：`DecisionStumpTutorial.java`
 ```
 源代码名称: DecisionStumpTutorial.java
 文档中对应位置：Listing 8
@@ -49,7 +49,7 @@ __补充说明：__ 本次例子`ApiOfTest1.java`中使用的`stream`和`learner
 [Tutorial2]: http://sourceforge.net/projects/moa-datastream/files/documentation/Tutorial2.pdf "Introduction to the API of MOA"
 
 
-##java基本知识
+## java基本知识
 
 ### 类（class）
 
@@ -59,7 +59,7 @@ _说明_ ：由属性（`attribute`）和方法（`method`）构成。
 
 _说明_ ：`java`中类（`class`）是__单继承__的，即，最多只能继承一个类。
  
-###抽象类（abstract class）
+### 抽象类（abstract class）
 
 _说明_ : 无法具体的对象被定义为抽象类（`abstract class`）；
 
@@ -78,7 +78,7 @@ Fruit fruit = new Fruit();
 
 _说明_ ：抽象类中可以有实例属性。
  
-###接口（interface）
+### 接口（interface）
 
 接口也是抽象对象，它甚至比抽象类更抽象。__接口中的方法都是抽象方法__。
 一个接口可以`继承`其他接口；一个类通过关键字implements声明要`实现`一个接口，并具体实现接口的方法。例如：
@@ -100,22 +100,22 @@ _说明_ ：正常的`class`实现（`implements`）接口（`interface`），�
 _说明_ ：接口中不能有实例属性，如果有属性，必须为静态的常量（`static final`）
 _说明_ ：`java`中一个类，可以同时实现（`implements`）多个接口（`interface`）
  
-###注解（annotation）
+### 注解（annotation）
 
 Java注解是附加在代码中的一些元信息，用于一些工具在编译、运行时进行解析和使用，起到说明、配置的功能。注解不会也不能影响代码的实际逻辑，仅仅起到辅助性的作用。包含在 `java.lang.annotation` 包中。
 _说明_ ：此次只对注解`@Override`进行说明：
 `@Override`注解用于类方法(`Method`)，
 表示一个方法声明打算重写超类中的另一个方法声明。如果方法利用此注释类型进行注解但没有重写超类方法，则编译器会生成一条错误消息。
  
-###反射（Reflection）
+### 反射（Reflection）
 
 _说明_ ：程序运行时，通过反射获得某个类中的各种变量，函数，数组，构造函数以及类本身，并使用它们。
  
-###其他概念：内部类
+### 其他概念：内部类
 (doing...)
 
 
-##MOA基本知识
+## MOA基本知识
 
 参看MOA自带文档，并且对于instanse的基本类借用于weka工程。
 

@@ -7,7 +7,7 @@ category: windows
 
 > 说实话，之前在技术上很排斥windows，经过这段时间打磨，基本有个观点：倾向使用Linux，但环境限制需要解决windows下的某些情况时，本质就是问题，用心去解决。
 
-##查看端口占用
+## 查看端口占用
 
 Windows下，CMD中，通过如下命令查看端口占用情况：
 
@@ -31,13 +31,13 @@ Windows下，CMD中，通过如下命令查看端口占用情况：
 
 ![](/images/windows-normal-cmd/pid-windows-manager.png)
 
-##更改CMD的编码方式
+## 更改CMD的编码方式
 
-###背景
+### 背景
 
 最近通过[UNXutils][UNXutils]来实现windows下的tail命令时，如果log是`ANSI`格式编码，则CMD窗口能够正常显示；但如果log是`UTF-8`格式，则CMD窗口显示乱码。
 
-###分析
+### 分析
 
 本地文件的乱码问题，无非关注几个点：
 
@@ -49,20 +49,20 @@ windows下，通过Notepad++编辑器，能够很容易查看当前log的编码�
 
 再往下，不说了思考的细节了，直接说解决办法：
 
-####1. 修改当前代码页的编码方式
+#### 1. 修改当前代码页的编码方式
 	
 	// 当前代码页修改为65001：UTF-8
 	chcp 65001
 	
 补充：代码页默认936：ANSI/OEM - 简体中文（GBK）
 	
-####2. 修改CMD窗口的字体
+#### 2. 修改CMD窗口的字体
 
 选择字体为：Lucida Console
 
 OK，确定对当前窗口生效。
 
-##Java常见问题
+## Java常见问题
 
 	...
 	java.lang.IllegalArgumentException: Malformed \uxxxx encoding.
@@ -71,13 +71,13 @@ OK，确定对当前窗口生效。
 通常是properties配置文件中，路径中包含`\\`，则出现上述错误，需要将其替换为`/`即可。
 
 
-##win下bat脚本中设置path
+## win下bat脚本中设置path
 
 
 	set Path=%Path%;d:/
 
 
-##windows下tail命令
+## windows下tail命令
 
 整体上有两种方式，一种直接利用第三方的开源实现，另一种，利用windows下的powershell环境。
 
@@ -86,7 +86,7 @@ OK，确定对当前窗口生效。
 
 注：powershell v1.0版本中，`get-content mylog.log -wait` 可以实现tail命令功能，但在powershell v2.0版本中，`get-content`命令可能有差异，具体参考：[更多阅读][windows powershell get-content]
 
-##win下名词
+## win下名词
 
 * Win32：Windows 95, 98, ME, NT, 2000, XP, 2003, Vista
 
@@ -103,7 +103,7 @@ OK，确定对当前窗口生效。
 
 
 
-##参考来源
+## 参考来源
 
 * [UNXutils][UNXutils]
 * [11 ways to tail a log on windows][11 ways to tail a log on windows]
@@ -117,7 +117,7 @@ OK，确定对当前窗口生效。
 [windows powershell get-content]:			http://stackoverflow.com/questions/4426442/unix-tail-equivalent-command-in-windows-powershell
 
 
-##杂谈
+## 杂谈
 
 乐于分享，我算是这么一类人，有时候心想：把经验分享出去，会不会导致被别人反超？但转念又一想：即使有人花费一点点时间就学会了，自己花费挺长时间才总结积累的经验，那对我可能不利，但对整个社会、对民族总是好的，能作为社会向前的垫脚石，也算是有点用。
 

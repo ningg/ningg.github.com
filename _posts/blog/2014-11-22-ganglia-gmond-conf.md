@@ -28,7 +28,7 @@ Some sections can be included in the configuration file `multiple` times and som
 * section和attribute是case-insensitive的；
 * 在整个配置文件中，有的section只能有一个，有的section可以有多个；
 
-###cluster
+### cluster
 
 There should **only be one cluster section** defined. This section controls how gmond reports the attributes of the cluster that it is part of.
 

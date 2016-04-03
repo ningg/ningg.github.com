@@ -6,7 +6,7 @@ category: java
 ---
 
 
-##关注点
+## 关注点
 
 要解决几个问题：
 
@@ -19,7 +19,7 @@ category: java
 	* `数组`：java下，基础类型（char、byte、int）数组的定义和使用
 
 
-##乱码
+## 乱码
 
 
 ![](/images/java-encode-byte-char-string/encode-process.png)
@@ -33,7 +33,7 @@ java中，对String进行编码、解码的基本过程，见上图；简要解�
 * `charset`字符集，对应编码方式，通俗说，就是一张映射表，既可以将char映射为byte，也可以将byte映射为char。
 
 
-###编码的基本解释
+### 编码的基本解释
 
 ![](/images/java-encode-byte-char-string/general-explain.png)
 
@@ -60,7 +60,7 @@ java 读写 file，有两种方式：
 * 按照 byte 读取，此为文件的镜像，不涉及文件编码问题；
 * 按照 char 读取，此过程中，涉及两处编码字符集：读取文件、写入文件；
 
-###何时出现乱码？如何解决？
+### 何时出现乱码？如何解决？
 
 依照前文分析的编码解码基本过程，产生乱码，本质是输入的`char[]`与最终输出的`char[]`不一致，有如下几种：
 
@@ -83,7 +83,7 @@ java 读写 file，有两种方式：
 **疑问**：ASCII的control code是如何输入到File中的？可以直接通过键盘输入吗？还有哪些场景？
 
 
-####UPDATE 2015-03-18
+#### UPDATE 2015-03-18
 
 中文编码问题：
 
@@ -94,7 +94,7 @@ java 读写 file，有两种方式：
 
 参考下文的示例代码即可。
 
-###字符串的编解码
+### 字符串的编解码
 
 几点：
 
@@ -199,7 +199,7 @@ java 读写 file，有两种方式：
 
 
 
-###文件内容的编解码
+### 文件内容的编解码
 
 
 下面示例代码，简要说明，以某一指定charsetIn读取文件，再以指定charsetOut写入文件即可；完整示例代码如下：
@@ -254,7 +254,7 @@ java 读写 file，有两种方式：
 
 
 
-##编码方式
+## 编码方式
 
 **思考**：几个小疑问：
 
@@ -266,7 +266,7 @@ java 读写 file，有两种方式：
 
 
 
-###ASCII
+### ASCII
 
 ASCII：American Standard Code for Information Interchange（信息交换，美国标准码）；简单说几点：
 
@@ -296,7 +296,7 @@ ASCII：American Standard Code for Information Interchange（信息交换，美�
 
 
 
-###GB2312
+### GB2312
 
 整体上说一下GB2312、GBK、GB18030几种编码之间的关系：
 
@@ -359,7 +359,7 @@ ASCII：American Standard Code for Information Interchange（信息交换，美�
 
 
 
-###GBK
+### GBK
 
 几点：
 
@@ -371,7 +371,7 @@ ASCII：American Standard Code for Information Interchange（信息交换，美�
 
 
 
-###GB18030
+### GB18030
 
 几点：
 
@@ -392,7 +392,7 @@ ASCII：American Standard Code for Information Interchange（信息交换，美�
 * [信息交换用汉字编码字符集·基本集][信息交换用汉字编码字符集·基本集]
 
 
-###Unicode
+### Unicode
 
 几点：
 
@@ -420,7 +420,7 @@ ASCII：American Standard Code for Information Interchange（信息交换，美�
 
 
 
-###UTF-8
+### UTF-8
 
 几点：
 
@@ -481,11 +481,11 @@ ASCII：American Standard Code for Information Interchange（信息交换，美�
 
 
 
-##附录
+## 附录
 
 
 
-###Huffman coding
+### Huffman coding
 
 Huffman coding，霍夫曼编码：
 
@@ -504,7 +504,7 @@ Huffman coding，霍夫曼编码：
 
 
 
-###字母体系
+### 字母体系
 
 世界三大字母体系：
 
@@ -532,14 +532,14 @@ Huffman coding，霍夫曼编码：
 
 
 
-###utf_unicode_ci和utf8_general_ci
+### utf_unicode_ci和utf8_general_ci
 
 在数据库系统MySQL中有多种字符集，其中utf8_unicode_ci和utf8_general_ci是最常用的，但是utf8_general_ci对某些语言的支持有一些小问题，如果可以接受，那最好使用utf8_general_ci，因为它速度快。否则，请使用较为精确的utf8_unicode_ci，不过速度会慢一些。
 
 多语言无差错，首选“utf_unicode_ci”。
 
 
-###全角 & 半角
+### 全角 & 半角
 
 [信息交换用汉字编码字符集·基本集][信息交换用汉字编码字符集·基本集]对应的是GB2312，其中也指定了拉丁字母（英文字母）对应的 2 byte编码，这个只有在`全角`情况下，才输入GB2312字符集中的拉丁字母，而`半角`时，输入的为ASCII下的拉丁字母编码；
 
@@ -559,7 +559,7 @@ Huffman coding，霍夫曼编码：
 
 
 
-##参考来源
+## 参考来源
 
 
 * [ASCII wiki][ASCII wiki]

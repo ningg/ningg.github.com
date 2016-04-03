@@ -4,7 +4,7 @@ title: MySQL--字段内信息抽取
 description: MySQL表格内，抽取字段信息的一个基本例子
 category: MySQL
 ---
-##问题背景
+## 问题背景
 
 现在有一张表，结构如下：
 
@@ -24,7 +24,7 @@ category: MySQL
 
 现在要提取`iOS6`和`com_Update`字段，并且组合为：`iOS6_com_Update`，将此作为新字段添加到表中。
 
-##解决办法
+## 解决办法
 
 初步思考，解决步骤如下：
 
@@ -89,7 +89,7 @@ __关键__，使用`substring_index`函数。
 	END //
 	DELIMITER ;
 
-##参考来源
+## 参考来源
 
 1. http://www.chinesejy.com/jishu/508/518/20101017465148.html
 2. http://www.jb51.net/article/27458.htm

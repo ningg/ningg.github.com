@@ -5,12 +5,12 @@ description: Flume自带的Logger sink常用于直接在console上输出event的
 categories: flume
 ---
 
-##背景
+## 背景
 
 Flume自带的Logger sink常用于直接在console上输出event的header和body，这对test和debug很重要，但body默认只truncate 16B，无法全部展示，这对test造成很大影响，怎么办？自己实现一个Adavanced Logger sink：完全输出整个event，这样就便利多了。
 
 
-##Flume中Logger Sink
+## Flume中Logger Sink
 
 在[编译flume：使用eclipse查看flume源码](/build-flume)中，已经介绍了如何在Eclipse下查看Flume的源代码，通过查看`LoggerSink`源码发现：
 
@@ -29,7 +29,7 @@ Flume自带的Logger sink常用于直接在console上输出event的header和body
 	
 **notes(ningg)**：编译flume时，直接将源码当作existing maven project导入，行不行？Flume的源码全是java写的吗？还有个问题：如果使用eclipse来进行源代码的开发，最终通过git方式向repository中提交代码时，会夹带.class文件吗？
 
-##自定义Sink
+## 自定义Sink
 
 ![](/images/flume-advance-logger-sink/advanced-logger-sink.png)
 
@@ -146,12 +146,12 @@ Flume自带的Logger sink常用于直接在console上输出event的header和body
 
 AdvancedLoggerSink的输出格式：每行输出16个byte，左侧是字母对应的ASCII码，右侧是字母本身。备注：如果希望定制上述的输出格式，可以直接新建类来替代`EventHelper.dumpEvent(event, maxBytes)`。
 
-##参考来源
+## 参考来源
 
 * [Logger Sink truncate Event body][Logger Sink truncate Event body]
 * [FLUME-2246][FLUME-2246]
 
-##杂谈
+## 杂谈
 
 本文写完之后，我发现了：[FLUME-2246][FLUME-2246]，Ou，已经有人在Flume官网上讨论并解决了这个问题，看来不会使用Flume官网不行呀，之前自己阅读标记过[如何参与开源项目](/how-to-contribute-open-source-project)， 但是没有实际尝试参与。个人心里一个想法：玩开源的东西，要参与到开源社区中，你的问题开源社区早已涉及，只不过有些扩展功能重要程度低，虽然已解决，但并没有并入发行版本中。
 

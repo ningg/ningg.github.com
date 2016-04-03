@@ -8,7 +8,7 @@ categories: flume
 Channels are the repositories where the events are staged on a agent. Source adds the events and Sink removes it.
 （agent中events存储在channels中：source将events添加到channels，sink从channels中读取events）
 
-##Memory Channel
+## Memory Channel
 
 The events are stored in an in-memory queue with configurable max size. It’s ideal for flows that need higher throughput and are prepared to lose the staged data in the event of a agent failures. Required properties are in bold.
 （events被储存在in-memory queue中，queue的大小可以设定；适用场景：高吞吐量、在agent fail时允许lose data。）
@@ -34,7 +34,7 @@ Example for agent named a1:
 	a1.channels.c1.byteCapacityBufferPercentage = 20
 	a1.channels.c1.byteCapacity = 800000
 
-##JDBC Channel
+## JDBC Channel
 
 The events are stored in a persistent storage that’s backed by a database. The JDBC channel currently supports embedded Derby. This is a durable channel that’s ideal for flows where recoverability is important. Required properties are in bold.
 （将events持久化存储在database中，当前JDBC channel支持embeded Derby；适用于数据流可恢复性要求较高的场景。）
@@ -62,18 +62,18 @@ Example for agent named a1:
 	a1.channels = c1
 	a1.channels.c1.type = jdbc
 
-##File Channel
+## File Channel
 
 （todo）
 
-##Spillable Memory Channel
+## Spillable Memory Channel
 
 The events are stored in an in-memory queue and on disk. The in-memory queue serves as the primary store and the disk as overflow. The disk store is managed using an embedded File channel. When the in-memory queue is full, additional incoming events are stored in the file channel. This channel is ideal for flows that need high throughput of memory channel during normal operation, but at the same time need the larger capacity of the file channel for better tolerance of intermittent sink side outages or drop in drain rates. The throughput will reduce approximately to file channel speeds during such abnormal situations. In case of an agent crash or restart, only the events stored on disk are recovered when the agent comes online. **This channel is currently experimental and not recommended for use in production**.
 
 **notes(ningg)**：Spillable Memory Channel当前还是试验阶段，不推荐在生产环境中使用。
 
 
-##Pseudo Transaction Channel
+## Pseudo Transaction Channel
 
 Warning The Pseudo Transaction Channel is only for unit testing purposes and is NOT meant for production use.
 Required properties are in bold.
@@ -85,7 +85,7 @@ Required properties are in bold.
 |capacity|	50|	The max number of events stored in the channel|
 |keep-alive|	3|	Timeout in seconds for adding or removing an event|
 
-##Custom Channel
+## Custom Channel
 
 A custom channel is your own implementation of the Channel interface. A custom channel’s class and its dependencies must be included in the agent’s classpath when starting the Flume agent. The type of the custom channel is its FQCN. Required properties are in bold.
 

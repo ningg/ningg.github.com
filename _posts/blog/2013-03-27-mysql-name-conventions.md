@@ -23,7 +23,7 @@ category: mysql
 找了一下，行业内通用规范，看到了nettedfish的[去哪儿MySQL开发规范.pdf][去哪儿MySQL开发规范.pdf]，规范太多，就这个了。
 
 
-##常用规范简介
+## 常用规范简介
 
 （todo）
 
@@ -51,7 +51,7 @@ category: mysql
 
 
 
-##参考来源
+## 参考来源
 
 
 * [MySQL 5.6 Reference Manual][MySQL 5.6 Reference Manual]

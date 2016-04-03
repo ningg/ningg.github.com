@@ -5,9 +5,9 @@ description: Kafka官方文档的阅读和笔记
 categories: kafka
 ---
 
-##1. Getting Started
+## 1. Getting Started
 
-###1.1 Introduction
+### 1.1 Introduction
 
 Kafka is a distributed, partitioned, replicated commit log service. It provides the functionality of a messaging system, but with a unique design.
 What does all that mean?
@@ -27,7 +27,7 @@ So, at a high level, producers send messages over the network to the Kafka clust
 
 Communication between the clients and the servers is done with a simple, high-performance, language agnostic [TCP protocol](https://cwiki.apache.org/confluence/display/KAFKA/A+Guide+To+The+Kafka+Protocol). We provide a Java client for Kafka, but clients are available in [many languages](https://cwiki.apache.org/confluence/display/KAFKA/Clients).（client与server之间通过TCP协议通信，默认为kafka提供了java client，当然也可以用其他语言实现client）
 
-####Topics and Logs
+#### Topics and Logs
 
 A topic is a category or feed name to which messages are published. For each topic, the Kafka cluster maintains a partitioned log that looks like this:（topic，就是category、feed name，message按此分开存放；每个topic，对应一个partitioned log）
 
@@ -44,7 +44,7 @@ This combination of features means that Kafka consumers are very cheap—they ca
 
 The partitions in the log serve several purposes. First, they allow the log to scale beyond a size that will fit on a single server. Each individual partition must fit on the servers that host it, but a topic may have many partitions so it can handle an arbitrary amount of data. Second they act as the unit of parallelism—more on that in a bit.（对log分partition，有几点目的：1.single server支撑较大的log，单个partition受到server的限制，但partition的数量不受限；2.多partition可以支撑并发处理，每个partition作为一个unit。）
 
-####Distribution
+#### Distribution
 
 The partitions of the log are distributed over the servers in the Kafka cluster with each server handling data and requests for a share of the partitions. Each partition is replicated across a configurable number of servers for fault tolerance.
 （partition分布式存储，方便共享；同时可配置每个patition的复制份数，以提升系统可靠性）
@@ -53,12 +53,12 @@ Each partition has one server which acts as the "leader" and zero or more server
 （每个partition都对应一个server担当"leader"角色，也可能有其他server担当"follower"角色；leader负责所有的Read、write；follower只replicate the leader；如果leader崩溃，则自动推选一个follower升级为leader；server只对其上的部分partition充当leader角色，方便cluster的均衡。）
 
 
-####Producers
+#### Producers
 
 Producers publish data to the topics of their choice. The producer is responsible for choosing which message to assign to which partition within the topic. This can be done in a round-robin fashion simply to balance load or it can be done according to some semantic partition function (say based on some key in the message). More on the use of partitioning in a second.
 （producer负责将message分发到相应的topic，具体将message分发到哪个topic的哪个partition，常用方式，轮询、函数；）
 
-####Consumers
+#### Consumers
 
 Messaging traditionally has two models: [queuing](http://en.wikipedia.org/wiki/Message_queue) and [publish-subscribe](http://en.wikipedia.org/wiki/Publish%E2%80%93subscribe_pattern). In a queue, a pool of consumers may read from a server and each message goes to one of them; in publish-subscribe the message is broadcast to all consumers. Kafka offers a single consumer abstraction that generalizes both of these—the consumer group.
 （messaging，消息发送，有两种方式：queuing、publish-subscribe。Queuing，message发送到某一个consumer；publish-subscribe，message广播到所有的consumers。Kafka，通过将consumer泛化为consumer group，来支持这两种方式）
@@ -99,7 +99,7 @@ Kafka only provides a total order over messages within a partition, not between 
 
 **notes(ningg)**：producer、consumer属于kafka吗？*（Kafka主要负责按Topic进行message的存储，同时提供Producer\Consumer API，本质上Kafka不包含producer和consumer；）*外部的message怎么进来的？怎么出去的？flume+kafka+storm模式到底什么情况？*（外部应用通过调用Kafka的Producer API向Kafka中存入message；同时，外部应用也可以通过调用Kafka的Consumer API来读取Kafka中的message；flume+kafka+storm，就是flume中添加了一个实现Kafka Producer API的kafka sink，storm中添加了一个实现了Kafka Consumer API的kafka spout）*
 
-####Guarantees
+#### Guarantees
 
 At a high-level Kafka gives the following guarantees:
 
@@ -109,12 +109,12 @@ At a high-level Kafka gives the following guarantees:
 
 More details on these guarantees are given in the design section of the documentation.
 
-###1.2 Use Cases
+### 1.2 Use Cases
 
 Here is a description of a few of the popular use cases for Apache Kafka. For an overview of a number of these areas in action, see [this blog post](http://engineering.linkedin.com/distributed-systems/log-what-every-software-engineer-should-know-about-real-time-datas-unifying).
 （使用Kafka的典型场景，详细应用参考[this blog post](http://engineering.linkedin.com/distributed-systems/log-what-every-software-engineer-should-know-about-real-time-datas-unifying)）
 
-####Messaging
+#### Messaging
 
 Kafka works well as a replacement for a more traditional message broker. Message brokers are used for a variety of reasons (to decouple processing from data producers, to buffer unprocessed messages, etc). In comparison to most messaging systems Kafka has better throughput, built-in partitioning, replication, and fault-tolerance which makes it a good solution for large scale message processing applications.
 （替换传统的message broker/消息代理，其基本用途：解耦processing和data producer，缓存message，etc。）
@@ -125,7 +125,7 @@ In our experience messaging uses are often comparatively low-throughput, but may
 In this domain Kafka is comparable to traditional messaging systems such as [ActiveMQ](http://activemq.apache.org/) or [RabbitMQ](https://www.rabbitmq.com/).
 （在messaging方面，Kafka的性能可与ActiveMQ、RabbitMQ相匹敌。）
 
-####Website Activity Tracking
+#### Website Activity Tracking
 
 The original use case for Kafka was to be able to rebuild a user activity tracking pipeline as a set of real-time publish-subscribe feeds. This means site activity (page views, searches, or other actions users may take) is published to central topics with one topic per activity type. These feeds are available for subscription for a range of use cases including real-time processing, real-time monitoring, and loading into Hadoop or offline data warehousing systems for offline processing and reporting.
 
@@ -133,47 +133,47 @@ The original use case for Kafka was to be able to rebuild a user activity tracki
 Activity tracking is often very high volume as many activity messages are generated for each user page view.
 （活动追踪，数据流量很大）
 
-####Metrics
+#### Metrics
 
 Kafka is often used for operational monitoring data. This involves aggregating statistics from distributed applications to produce centralized feeds of operational data.
 （运行状态监控系统，从分布式应用中，汇总统计数据，形成集中的运行监控数据）
 
-####Log Aggregation
+#### Log Aggregation
 
 Many people use Kafka as a replacement for a log aggregation solution. Log aggregation typically collects physical log files off servers and puts them in a central place (a file server or HDFS perhaps) for processing. Kafka abstracts away the details of files and gives a cleaner abstraction of log or event data as a stream of messages. This allows for lower-latency processing and easier support for multiple data sources and distributed data consumption. In comparison to log-centric systems like Scribe or Flume, Kafka offers equally good performance, stronger durability guarantees due to replication, and much lower end-to-end latency.
 （收集不同物理机器上的log，汇总到a central place：a file server or HDFS。与 Scribe or Flume相比，Kafka提供相当的performance、可靠性、低延迟。）
 
 **notes(ningg)**：日志收集方面，Kafka的性能与Flume相当？Kafka能取代掉Flume吗？
 
-####Stream Processing
+#### Stream Processing
 
 Many users end up doing stage-wise processing of data where data is consumed from topics of raw data and then aggregated, enriched, or otherwise transformed into new Kafka topics for further consumption. For example a processing flow for article recommendation might crawl article content from RSS feeds and publish it to an "articles" topic; further processing might help normalize or deduplicate this content to a topic of cleaned article content; a final stage might attempt to match this content to users. This creates a graph of real-time data flow out of the individual topics. [Storm](https://github.com/nathanmarz/storm) and [Samza](http://samza.incubator.apache.org/) are popular frameworks for implementing these kinds of transformations.
 （在Stream Processing中，Kafka担当data存储功能，即，raw data存储到Kafka中，consumer处理后的结果存储到new kafka topics中）
 
-####Event Sourcing
+#### Event Sourcing
 
 [Event sourcing](http://martinfowler.com/eaaDev/EventSourcing.html) is a style of application design where state changes are logged as a time-ordered sequence of records. Kafka's support for very large stored log data makes it an excellent backend for an application built in this style.
 （Event sourcing，事件溯源，记录不同时间点的应用状态变化，通常log数据很大，Kafka满足此需求）
 
 
-####Commit Log
+#### Commit Log
 
 Kafka can serve as a kind of external commit-log for a distributed system. The log helps replicate data between nodes and acts as a re-syncing mechanism for failed nodes to restore their data. The [log compaction](http://kafka.apache.org/documentation.html#compaction) feature in Kafka helps support this usage. In this usage Kafka is similar to Apache BookKeeper project.
 
-###1.3 Quick Start
+### 1.3 Quick Start
 
 This tutorial assumes you are starting fresh and have no existing Kafka or ZooKeeper data.
 （新手入门，对Kafka、Zookeeper一知半解的人，看这儿就对了）
 
 
-####Step 1: Download the code
+#### Step 1: Download the code
 
 [Download](https://www.apache.org/dyn/closer.cgi?path=/kafka/0.8.1.1/kafka_2.9.2-0.8.1.1.tgz) the 0.8.1.1 release and un-tar it.
 
 	> tar -xzf kafka_2.9.2-0.8.1.1.tgz
 	> cd kafka_2.9.2-0.8.1.1
 
-####Step 2: Start the server
+#### Step 2: Start the server
 
 Kafka uses ZooKeeper so you need to first start a ZooKeeper server if you don't already have one. You can use the convenience script packaged with kafka to get a quick-and-dirty single-node ZooKeeper instance.
 （kafka自带了ZooKeeper，不推荐使用）
@@ -189,7 +189,7 @@ Now start the Kafka server:
 	[2013-04-22 15:01:47,051] INFO Property socket.send.buffer.bytes is overridden to 1048576 (kafka.utils.VerifiableProperties)
 	...
 
-####Step 3: Create a topic
+#### Step 3: Create a topic
 
 Let's create a topic named "test" with a single partition and only one replica:
 
@@ -203,7 +203,7 @@ We can now see that topic if we run the list topic command:
 Alternatively, instead of manually creating topics you can also configure your brokers to auto-create topics when a non-existent topic is published to.
 （可通过配置文件，让broker自动创建topic）
 
-####Step 4: Send some messages
+#### Step 4: Send some messages
 
 Kafka comes with a command line client that will take input from a file or from standard input and send it out as messages to the Kafka cluster. By default each line will be sent as a separate message.
 （kafka自带了一个工具，能够将file或者standard input作为输入，按行传送到kafka cluster中。）
@@ -214,7 +214,7 @@ Run the producer and then type a few messages into the console to send to the se
 	This is a message
 	This is another message
 	
-####Step 5: Start a consumer
+#### Step 5: Start a consumer
 
 Kafka also has a command line consumer that will dump out messages to standard output.
 
@@ -227,7 +227,7 @@ If you have each of the above commands running in a different terminal then you 
 All of the command line tools have additional options; running the command with no arguments will display usage information documenting them in more detail.
 （所有命令行，不夹带参数启动时，会自动弹出usage info）
 
-####Step 6: Setting up a multi-broker cluster
+#### Step 6: Setting up a multi-broker cluster
 
 So far we have been running against a single broker, but that's no fun. For Kafka, a single broker is just a cluster of size one, so nothing much changes other than starting a few more broker instances. But just to get feel for it, let's expand our cluster to three nodes (still all on our local machine).
 （上述例子中，只启动了一个broker，其最多能够启动几个broker instances。下面说一下如何启动多个broker，构造cluster）
@@ -327,25 +327,25 @@ But the messages are still be available for consumption even though the leader t
 	my test message 2
 	^C
 
-###1.4 Ecosystem
+### 1.4 Ecosystem
 
 There are a plethora of tools that integrate with Kafka outside the main distribution. The [ecosystem page](https://cwiki.apache.org/confluence/display/KAFKA/Ecosystem) lists many of these, including stream processing systems, Hadoop integration, monitoring, and deployment tools.
 （有很多工具与Kafka集成，参考[页面](https://cwiki.apache.org/confluence/display/KAFKA/Ecosystem)）
 
 
-###1.5 Upgrading From Previous Versions
+### 1.5 Upgrading From Previous Versions
 
-####Upgrading from 0.8.0 to 0.8.1
+#### Upgrading from 0.8.0 to 0.8.1
 
 0.8.1 is fully compatible with 0.8. The upgrade can be done one broker at a time by simply bringing it down, updating the code, and restarting it.
 
-####Upgrading from 0.7
+#### Upgrading from 0.7
 
 0.8, the release in which added replication, was our first backwards-incompatible release: major changes were made to the API, ZooKeeper data structures, and protocol, and configuration. The upgrade from 0.7 to 0.8.x requires a [special tool](https://cwiki.apache.org/confluence/display/KAFKA/Migrating+from+0.7+to+0.8) for migration. This migration can be done without downtime.
 
-##2. API
+## 2. API
 
-###2.1 Producer API
+### 2.1 Producer API
 
 	/**
 	 *  V: type of the message
@@ -375,7 +375,7 @@ There are a plethora of tools that integrate with Kafka outside the main distrib
 
 You can follow [this example](https://cwiki.apache.org/confluence/display/KAFKA/0.8.0+Producer+Example) to learn how to use the producer api.
 
-###2.2 High Level Consumer API
+### 2.2 High Level Consumer API
 
 	class Consumer {
 	  /**
@@ -447,7 +447,7 @@ You can follow [this example](https://cwiki.apache.org/confluence/display/KAFKA/
 You can follow [this example](https://cwiki.apache.org/confluence/display/KAFKA/Consumer+Group+Example) to learn how to use the high level consumer api.
 
 
-###2.3 Simple Consumer API
+### 2.3 Simple Consumer API
 
 	class kafka.javaapi.consumer.SimpleConsumer {
 	  /**
@@ -482,7 +482,7 @@ You can follow [this example](https://cwiki.apache.org/confluence/display/KAFKA/
 
 For most applications, the high level consumer Api is good enough. Some applications want features not exposed to the high level consumer yet (e.g., set initial offset when restarting the consumer). They can instead use our low level SimpleConsumer Api. The logic will be a bit more complicated and you can follow the example in [here](https://cwiki.apache.org/confluence/display/KAFKA/0.8.0+SimpleConsumer+Example).
 
-###2.4 Kafka Hadoop Consumer API
+### 2.4 Kafka Hadoop Consumer API
 
 Providing a horizontally scalable solution for aggregating and loading data into Hadoop was one of our basic use cases. To support this use case, we provide a Hadoop-based consumer which spawns off many map tasks to pull data from the Kafka cluster in parallel. This provides extremely fast pull-based Hadoop data load capabilities (we were able to fully saturate the network with only a handful of Kafka servers).
 （Hadoop-based consumer，并行的从Kafka cluster中pull data，速度很快）
@@ -491,11 +491,11 @@ Usage information on the hadoop consumer can be found [here](https://github.com/
 
 
 
-##3. Configuration
+## 3. Configuration
 
 Kafka uses key-value pairs in the [property file format](http://en.wikipedia.org/wiki/.properties) for configuration. These values can be supplied either from a file or programmatically.
 
-###3.1 Broker Configs
+### 3.1 Broker Configs
 
 The essential configurations are the following:
 
@@ -506,7 +506,7 @@ The essential configurations are the following:
 详细信息，请参考官网：[Broker Configs](http://kafka.apache.org/documentation.html#brokerconfigs)。
 
 
-###3.2 Consumer Configs
+### 3.2 Consumer Configs
 
 The essential consumer configurations are the following:
 
@@ -515,7 +515,7 @@ The essential consumer configurations are the following:
 
 详细信息，请参考官网：[Consumer Configs](http://kafka.apache.org/documentation.html#consumerconfigs)
 
-###3.3 Producer Configs
+### 3.3 Producer Configs
 
 Essential configuration properties for the producer include:
 
@@ -526,7 +526,7 @@ Essential configuration properties for the producer include:
 
 详细信息，请参考官网：[Producer Configs](http://kafka.apache.org/documentation.html#producerconfigs)
 
-###3.4 New Producer Configs
+### 3.4 New Producer Configs
 
 We are working on a replacement for our existing producer. The code is available in trunk now and can be considered beta quality. Below is the configuration for the new producer.
 
@@ -534,7 +534,7 @@ We are working on a replacement for our existing producer. The code is available
 
 
 
-##参考来源
+## 参考来源
 
 * [Kafka Documentation](http://kafka.apache.org/documentation.html)
 

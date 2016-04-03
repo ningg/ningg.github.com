@@ -5,12 +5,12 @@ description: 入门去了解一个领域，概念/术语很重要，本文将描
 category: Android
 ---
 
-##背景
+## 背景
 
 最近参加某活动，也算掌握了点滴的内容，整理一下，算是阶段的笔记。
 
 
-##Android的4个模块
+## Android的4个模块
 
 Android开发中涉及4个模块/对象：
 
@@ -19,15 +19,15 @@ Android开发中涉及4个模块/对象：
 3. Broadcast Receiver；
 4. Content Provider；
 
-###Activity
+### Activity
 
 通常是用户界面，粒度也可能更细些，例如：菜单列表、图片、图片标题，都可能是一个单独的Activity；
 
-###Service
+### Service
 
 没有用户界面，但会一直在后台运行，例如：进行其他操作时，播放背景音乐、后台下载数据；
 
-###Broadcast Receiver
+### Broadcast Receiver
 
 应用程序利用Broadcast Receiver机制，来接收、发送广播消息，举例：
 
@@ -37,16 +37,16 @@ Android开发中涉及4个模块/对象：
 4. 电池电量不足；
 5. 用户选择一张图片；
 
-###Content Provider
+### Content Provider
 
 应用程序利用Content Provider机制，来进行数据共享，例如：读取系统电话簿中联系人；
 
 
-##Activity的生命周期
+## Activity的生命周期
 
 生命周期？对，这个术语在计算机相关的开发中，总能听到，到底什么意思？干什么的？生命周期，`lifecycle`，其基本目标是：描述清楚一个对象从产生到消亡的过程，为开发者干预这一过程提供方法。*（用个通俗的术语来重新表述一下Object lifecycle：物体的状态变化路径）*
 
-###返回站（Back Stack）
+### 返回站（Back Stack）
 
 说Activity的生命周期之前，补充一个概念：返回栈；为了方便管理Activity，将多个相互关联的Activity合并称作一个Task，一个Task对应一个Back Stack。如下图：
 
@@ -58,7 +58,7 @@ Android开发中涉及4个模块/对象：
 2. the back stack operates as a `last in, first out` object structure.
 3. pushed onto the stack when started by the current activity and popped off when the user leaves it using the Back button.
 
-###Activity状态
+### Activity状态
 
 Activity从产生到消亡，会有几个典型的状态，简要说一下（来自官方文档）：
 
@@ -67,7 +67,7 @@ Activity从产生到消亡，会有几个典型的状态，简要说一下（来
 * 停止状态：不处于栈顶，也全部不可见；
 * 销毁状态：返回栈中，已经移除；
 
-###Acitivity lifecycle
+### Acitivity lifecycle
 
 Activity生命周期如下：
 
@@ -76,7 +76,7 @@ Activity生命周期如下：
 备注：可利用上面7个回调方法，来调整Activity。
 
 
-##Intent简介
+## Intent简介
 
 Intent是不同组件之间进行交互的重要方式，基本点两个：
 
@@ -94,11 +94,11 @@ Intent分为2类：
 * 显式Intent：举例，Intent直接指定下一步启动的Activity；
 * 隐式Intent；举例，通过Activity的`<activity><intent-filter>`来隐式指定，某个Activity来捕获哪一类的Intent；
 
-##Android测试相关
+## Android测试相关
 
 之前，我对测试不感兴趣的，但最近感觉，开发中前期，对系统弄一个测试框架，能够提升开发、调试的效率，同时，也能在产品最终上线前进行较为全面的验证。
 
-###测试点
+### 测试点
 
 测试，到底要测哪些方面？
 
@@ -139,7 +139,7 @@ Intent分为2类：
 	* 问题1：如何找出用户较多的具体手机型号？
 	* RE问题1：选几个纬度，屏幕尺寸、分辨率、Android系统版本，正交定位一下
 
-###Android Testing Framework
+### Android Testing Framework
 
 下面会列出一张图（官网拿的），简要说几点：*（可能理解有错，会陆续更正）*
 
@@ -160,7 +160,7 @@ Intent分为2类：
 备注：在官网文档中，`Develop`--`Tools`部分，针对`Tests`有详细介绍。
 
 
-###测试工具
+### 测试工具
 
 列几个常用测试工具，以及简要的说明：
 
@@ -173,9 +173,9 @@ Intent分为2类：
 
 
 
-##附录
+## 附录
 
-###几个名词
+### 几个名词
 
 * 回归测试：修改代码之后，重新测试。
 * AVD：Android Virtual Devices，模拟器
@@ -184,13 +184,13 @@ Intent分为2类：
 * ADB：Android Debug Bridge，调试桥
 
 
-###产品设计几点
+### 产品设计几点
 
 * 允许用户登录情况下，使用app的大部分通用功能；
 * 当且仅当用户要使用一些核心功能时，强制用户注册、登录；
 
 
-##参考来源
+## 参考来源
 
 * [Android官方开发者网站](http://developer.android.com/index.html)
 * [Android官方文档](http://developer.android.com/develop/index.html)

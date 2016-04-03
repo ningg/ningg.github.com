@@ -5,7 +5,7 @@ category: blog
 description: 学习学习再学习，充分利用互联网工具：google
 ---
 
-##[推荐]lixiaolai的博客
+## [推荐]lixiaolai的博客
 
 发个文，标记一下lixiaolai的一篇博客：[《学习学习在学习》]，也算为自己今后提个醒。
 

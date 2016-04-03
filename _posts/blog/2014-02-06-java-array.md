@@ -6,7 +6,7 @@ category: java
 ---
 
 
-##基础类型的数组
+## 基础类型的数组
 
 基础类型：int，byte，char，double等；
 
@@ -18,13 +18,13 @@ category: java
 * 初始化赋值，`{}`，内部以`,`分隔；
 
 
-###声明和初始化
+### 声明和初始化
 
 	int[] intArray1 = new int[10];
 	int[] intArray2 = {1,2,3,4};
 
 	
-###操作
+### 操作
 
 对一个数组，可以进行的操作有：
 
@@ -37,7 +37,7 @@ category: java
 
 **特别说明**：这些操作大都已经作为基本的操作，封装在`java.util.Arrays`类中了。
 
-###复制
+### 复制
 
 用到了`System.arraycopy`方法，示例代码如下：
 
@@ -54,7 +54,7 @@ category: java
 
 **备注**：`Arrays.copyOfRange()`实质调用的也是`System.arraycopy()`。
 
-###输出
+### 输出
 
 
 `Arrays.toString`可以直接输出整个数组的内容：
@@ -64,7 +64,7 @@ category: java
 
 
 
-###排序
+### 排序
 
 排序，调用`Arrays.sort()`，默认升序排列；本质是快排算法：
 
@@ -73,25 +73,25 @@ category: java
 
 
 
-###查找
+### 查找
 
 
 直接调用`Arrays.binarySearch`方法即可，但要求，调用此方法之前，必须对整个Array进行排序，即`Arrays.sort()`方法，否则，得到的结果可能有错；
 
 
-###清零
+### 清零
 
 `Arrays.fill(char[] charArray, char singleChar)`：将整个charArray中所有内容填充为singleChar，通常char：`\0`表示为空。
 
 
-###转换为List
+### 转换为List
 
 `List<T> Arrays.asList(T... a)`，将数组`a`转换为List；
 
 **疑问**：如何将List转换为List？`List.toArray();`
 
 
-##对象的数组
+## 对象的数组
 
 对象的数组，与基础类型的基本一致，包含几点：
 
@@ -103,7 +103,7 @@ category: java
 
 
 
-##数组链表
+## 数组链表
 
 特别说明，数组链表，本质是`链表`，只不过其底层采用`数组`形式实现，即，`数组链表`对应：连续的存储空间；但，因为`数组链表`（ArrayList）与`数组`名称相似，下文将对`数组链表`进行简要分析。
 
@@ -113,7 +113,7 @@ category: java
 
 
 
-##参考来源
+## 参考来源
 
 
 * [Java Tutorials：Arrays][Java Tutorials：Arrays]

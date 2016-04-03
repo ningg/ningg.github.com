@@ -5,7 +5,7 @@ description: Kafka可以作为消息队列，实现写数据采集与数据分�
 categories: kafka storm
 ---
 
-##背景
+## 背景
 
 之前研读了[In-Stream Big Data Processing](/in-stream-big-data-processing)，组里将基于此实现一个实时的数据分析系统，基本选定三个组件：Flume、Kafka、Storm，其中，Flume负责数据采集，Kafka是一个MQ:负责数据采集与数据分析之间解耦，Storm负责进行流式处理。
 
@@ -13,7 +13,7 @@ categories: kafka storm
 [Storm Integrates][Storm Integrates]，其中给出了Storm与Kafka集成的[方案][storm-kafka]。
 
 
-##回顾Storm
+## 回顾Storm
 
 之前都是以原文+注释方式，来阅读Storm的官方文档，现在集中整理一下。Storm集群的构成：
 
@@ -59,16 +59,16 @@ Storm有两种执行模式，`local mode`和`distributed mode`，补充几点：
 ![](/images/storm-tutorial/topology-tasks.png)
 
 
-##Strom整合Kafka
+## Strom整合Kafka
 
-###版本信息
+### 版本信息
 
 Storm与Kafka的版本信息：
 
 * Storm：apache-storm-0.9.2-incubating
 * Kafka：kafka_2.9.2-0.8.1.1.tgz
 
-###基础知识
+### 基础知识
 
 实现Storm读取Kafka中的数据，参考[官网介绍][Storm Integrates]， 本部分主要参考自[storm-kafka][storm-kafka]的README。
 
@@ -107,9 +107,9 @@ KafkaConfig类中涉及到的配置参数默认值如下：
 * `ZkHosts`类的一个构造方法`ZkHosts(String brokerZkStr, String brokerZkPath)`，其中`brokerZkPath`的含义，原始给出的说法是："rokerZkPath is the root directory under which all the topics and partition information is stored. by Default this is `/brokers` which is what default kafka implementation uses."
 * `SpoutConfig(BrokerHosts hosts, String topic, String zkRoot, String id)`，其中，`zkRoot`是一个root目录，用于存储consumer的offset；那这个`zkRoot`对应的目录物理上在哪台机器？
 
-###配置实例
+### 配置实例
 
-####Core Kafka Spout
+#### Core Kafka Spout
 
 本质是设置一个读取Kafka中数据的Kafka Spout，然后，将从替换原始local mode下，topology中的Spout即可。下面是一个已经验证过的实例
 
@@ -131,7 +131,7 @@ KafkaConfig类中涉及到的配置参数默认值如下：
 	LocalCluster cluster = new LocalCluster();
 	cluster.submitTopology("test", conf, builder.createTopology());
 
-###Trident Kafka Spout（todo）
+### Trident Kafka Spout（todo）
 
 todo
 
@@ -146,11 +146,12 @@ todo
 
 
 
-##参考来源
+## 参考来源
 
 * [Storm Integrates][Storm Integrates]
 * [storm-kafka][storm-kafka]
 
 
 
-[Storm Integrates]:		http://storm.apache.org/about/integrates.html[storm-kafka]:			https://github.com/apache/incubator-storm/tree/master/external/storm-kafka
+[Storm Integrates]:		http://storm.apache.org/about/integrates.html
+[storm-kafka]:			https://github.com/apache/incubator-storm/tree/master/external/storm-kafka

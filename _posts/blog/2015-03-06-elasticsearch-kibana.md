@@ -6,7 +6,7 @@ categories: kafka elasticsearch kibana
 ---
 
 
-##基本思路
+## 基本思路
 
 几点：
 
@@ -22,7 +22,7 @@ categories: kafka elasticsearch kibana
 	* 当前demo的缺陷
 	* 前人的做法
 
-##路线图
+## 路线图
 
 
 具体步骤，几点：
@@ -33,9 +33,9 @@ categories: kafka elasticsearch kibana
 * Kibana图形化展示ElasticSearch中的数据
 
 
-##具体操作
+## 具体操作
 
-###Flume从Kafka中读取数据
+### Flume从Kafka中读取数据
 
 
 当前从Jira上得知，Flume 1.6.0 中将包含Flume-ng-kafka-source，但是，当前Flume 1.6.0版本并没有发布，怎么办？两条路：
@@ -53,7 +53,7 @@ categories: kafka elasticsearch kibana
 
 
 
-##参考来源
+## 参考来源
 
 * [ElasticSearch中文发行版][ElasticSearch中文发行版]
 * [ElasticSearche权威指南][ElasticSearche权威指南]

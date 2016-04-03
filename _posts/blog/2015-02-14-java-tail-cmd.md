@@ -6,7 +6,7 @@ category: java
 ---
 
 
-##开篇闲谈
+## 开篇闲谈
 
 实时捕获文件的新增内容，如何实现？拍拍脑袋，需要借助3个变量：
 
@@ -35,7 +35,7 @@ category: java
 
 
 
-##BufferedReader
+## BufferedReader
 
 利用BufferedReader下的`readLine()`方法来实现，示例代码如下：
 
@@ -288,7 +288,7 @@ category: java
 
 
 
-##参考来源
+## 参考来源
 
 * [Java IO implementation of unix/linux “tail -f”][Java IO implementation of unix/linux “tail -f”]
 * [Listening changes on a text file (Unix Tail implementation with Java)][Listening changes on a text file (Unix Tail implementation with Java)]

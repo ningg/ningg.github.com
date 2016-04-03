@@ -5,7 +5,7 @@ description: 在Linux下要进行查询时，要用到通配符，整理一下
 category: linux
 ---
 
-##帮助文档
+## 帮助文档
 
 执行命令`man 7 glob`，即可查看Linux shell下通配符的帮助文档，具体：
 
@@ -17,7 +17,7 @@ category: linux
 
 
 
-##wildcards梳理
+## wildcards梳理
 
 * `*`：匹配，任意字符的0个或1个；
 * `?`：匹配，任意字符的1个；
@@ -27,7 +27,7 @@ category: linux
 * '\'（backslash）：将`*`，`?`，`[`，`]`等特殊字符转义为普通字符；注：此时，建议利用`""`（双引号）将包含wildcards的字符串包含起来；
 
 
-##通配符与正则表达式
+## 通配符与正则表达式
 
 典型区别：
 
@@ -41,7 +41,7 @@ category: linux
 
 
 
-##参考来源
+## 参考来源
 
 
 * [GNU/Linux Command-Line Tools Summary][GNU/Linux Command-Line Tools Summary]

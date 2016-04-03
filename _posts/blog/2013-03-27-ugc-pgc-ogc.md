@@ -6,7 +6,7 @@ published: true
 category: product
 ---
 
-##简介
+## 简介
 
 
 
@@ -44,7 +44,7 @@ UGC\PGC\OGC之间的区别：
 
 
 
-##趋势
+## 趋势
 
 > 备注：下面是整理的自己比较认同的别人的观点。
 
@@ -78,7 +78,7 @@ UGC存在的**必要性**，几点：
 
 
 
-##参考来源
+## 参考来源
 
 * [浅析UGC、PGC、OGC][浅析UGC、PGC、OGC]
 * [UGC\PGC谁会成为主流？][UGC\PGC谁会成为主流？]

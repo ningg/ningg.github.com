@@ -5,7 +5,7 @@ description: flume是开源的分布式日志采集系统，深入使用flume，
 categories: flume
 ---
 
-##背景
+## 背景
 
 最近要弄日志收集系统，初始方案是将日志压缩之后，通过类似FTP方式上传，其中有一个问题：日志不能实时收集，因此，无法实时监控系统状态。Flume支持实时的日志采集，妥了，尝试用一下。
 
@@ -18,7 +18,7 @@ categories: flume
 * 日志传输到服务器上之后，如何才能立即就进行分析？
 * 分析日志之前，怎么判断日志是否满足规范？（命名、编码等）
 
-##编译环境
+## 编译环境
 
 查看自己机器的环境：我用笔记本来编译的，是win 7（x64）操作系统；更详细的编译环境信息通过如下方式查看：`CMD`-->`systeminfo`，这个命令收集系统信息，需要花费40s，稍等一会儿，得到如下信息：
 
@@ -37,7 +37,7 @@ categories: flume
 	虚拟内存: 可用:   2,196 MB
 	虚拟内存: 使用中: 3,738 MB
 
-##Eclipse下查看Flume的源码（推荐）
+## Eclipse下查看Flume的源码（推荐）
 
 下载完Flume的源码包之后，直接将整个flume源码目录，当作`Existing  Maven Projects`，`Import`到Eclipse中即可。注，遇到的几个问题：
 
@@ -51,7 +51,7 @@ categories: flume
 
 
 
-###Flume源码的Debug
+### Flume源码的Debug
 
 本质上Flume是启动一个JVM实例，具体启动参数，可以参考`/bin/flume-ng`脚本的最终启动命令。列几个启动脚本的常量，就是JVM实例的main class：
 
@@ -73,7 +73,7 @@ TODO：
 
 
 	
-##开始编译（<span style="color:red">废弃</span>）
+## 开始编译（<span style="color:red">废弃</span>）
 
 **备注**：不必再通过mvn命令，将原始的flume源码编译为Eclipse工程了，直接将原始的flume源码作为maven工程导入即可，具体，参考前一部分**Eclipse下查看Flume的源码（推荐）**。
 
@@ -81,14 +81,14 @@ OK，在这台Win7上，编译flume源码，走起。
 
 > 特别说明：这些内容，都是我从官网看来的，建议有点追求的coder，多看看[flume官网]，这样才能有提高，我的博客仅仅是自己留作备份看的。
 
-###下载源码
+### 下载源码
 
 Apache flume的下载页面：[Apache Flume Download](http://flume.apache.org/download.html)。
 
 我下载的是当前稳定版本flume对应的源码：[apache-flume-1.5.0.1-src](http://www.apache.org/dyn/closer.cgi/flume/1.5.0.1/apache-flume-1.5.0.1-src.tar.gz)
 
 
-###开始编译
+### 开始编译
 
 根据官方资料：[flume开发&调试环境]，开始编译。此次编译，我的目标很简单：在eclipse下查看flume的源代码。具体编译时，使用的命令：
 
@@ -96,7 +96,7 @@ Apache flume的下载页面：[Apache Flume Download](http://flume.apache.org/do
 	mvn eclipse:eclipse -DdownloadSources
 
 
-###出现的问题
+### 出现的问题
 
 执行命令`mvn install -DskipTests`后，程序有一段时间静止在编译flume ng core的模块上，强行终止（操作：`ctrl + c`）后，使用  "mvn install -rf :flume-ng-core -X " 启动debug进行问题定位找到线索:
 
@@ -198,7 +198,7 @@ ok，重新执行命令`mvn install -DskipTests`，欧NO，又出错了，得到
 
 重新编译，还不行，说是找不到`p2.jfrog.org`，怒了，翻墙，再编译，搞定。（有的网络环境，不需要翻墙，也能编译通过）
 
-###eclipse下查看源码
+### eclipse下查看源码
 
 上面编译之后，在eclipse下，`Import`-->`Existing Projects into Workspace`，然后选择flume编译源码的路径即可，结果如下图所示：
 
@@ -218,7 +218,7 @@ ok，重新执行命令`mvn install -DskipTests`，欧NO，又出错了，得到
 
 
 
-##参考来源
+## 参考来源
 
 * [flume官网]
 * [flume开发&调试环境]

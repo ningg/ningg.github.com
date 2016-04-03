@@ -5,14 +5,14 @@ description: 使用Kafka，先要搭建一个开发环境，这属于基础设�
 categories: kafka
 ---
 
-##背景
+## 背景
 
 最近要进行Kafka开发，在[官网](http://kafka.apache.org/code.html)看到可以在IDE下开发，赶紧点进去看了看，并且在本地Eclipse下搭建了个Kafka的开发环境，主要参考来源：
 
 * [Kafka Developer Setup][Kafka Developer Setup]
 
 
-##编译环境(非代理)
+## 编译环境(非代理)
 
 查看自己机器的环境：我用笔记本来编译的，是win 7（x64）操作系统；更详细的编译环境信息通过如下方式查看：`CMD`-->`systeminfo`，这个命令收集系统信息，需要花费40s，稍等一会儿，得到如下信息：
 
@@ -32,7 +32,7 @@ categories: kafka
 	虚拟内存: 使用中: 3,738 MB
 
 
-###开始编译
+### 开始编译
 
 需要提前下载几个东西：
 
@@ -40,7 +40,7 @@ categories: kafka
 * Eclipse下的Scala 2.10.x IDE plugin：[For Scala 2.10.4](http://scala-ide.org/download/current.html)
 * Eclipse下的IvyIDE plugin：[ apache-ivyde-2.2.0.final-201311091524-RELEASE.zip](http://ant.apache.org/ivy/ivyde/download.cgi)
 
-###Eclipse下安装插件
+### Eclipse下安装插件
 
 基本步骤：打开Eclipse--Help--Install new Software，具体见下图：
 
@@ -55,7 +55,7 @@ categories: kafka
 * IvyDE plugins `plugins/org.apache.ivyde.*.jar` to put in your `$ECLIPSE_HOME/plugins`
 
 
-###生成Eclipse project file
+### 生成Eclipse project file
 
 由于我的电脑是Windowns 7，因此安装了Cygwin，下面的操作都是在Cygwin下进行的，具体是，到Kafka源码包的路径下，执行如下命令：
 
@@ -63,7 +63,7 @@ categories: kafka
 	./gradlew eclipse
 
 
-###kafka工程导入Eclipse
+### kafka工程导入Eclipse
 
 将上一步生成的project导入到Eclipse中，具体：`File` -> `Import` -> `General` -> `Existing Projects into Workspace`，结果如下图：
 
@@ -71,7 +71,7 @@ categories: kafka
 
 
 
-###问题及解决办法
+### 问题及解决办法
 
 上述kafka工程导入Eclipse后，实质是几个工程：perf、examples、core、contrib、clients；其中perf、core工程是scala工程，其余为java工程；但是examples工程中提示多个问题，列出一个看一下：
 
@@ -93,7 +93,7 @@ categories: kafka
 clean一下core工程，OK，这次总算搞定了，开始开发吧。
 
 
-##编译环境(代理)
+## 编译环境(代理)
 
 利用公司内网进行编译，开始之前，先查询一下机器配置，命令`CMD`--`systeminfo`，显示结果如下：
 
@@ -113,11 +113,11 @@ clean一下core工程，OK，这次总算搞定了，开始开发吧。
 
 **编译环境(代理)**与**编译环境(非代理)**基本一致，不过需要配置一下代理，仅此而已，下面只列出两者有差异的地方。
 	
-###生成Eclipse project file
+### 生成Eclipse project file
 
 目标：通过代理方式要Cygwin能够联网，并且在Cygwin下编译Kafka对应的eclipse环境。
 
-####设置Cygwin的http代理
+#### 设置Cygwin的http代理
 
 在Cygwin下无法上网，并且没有`wget`命令，那好，重装一下Cygwin，并且安装过程中增加`wget`工具；然后，配置Cygwin的代理：
 
@@ -129,7 +129,7 @@ clean一下core工程，OK，这次总算搞定了，开始开发吧。
 	
 按照当前的设置，Cygwin环境就联网了。另，仍有个问题，每次重启Cygwin的终端窗口，都需要重新设置http_proxy，如何解决？
 
-####gradle代理设置
+#### gradle代理设置
 
 上述设置，并无法执行`./gradlew eclipse`，具体出错信息是：无法下载一些maven的中央仓库中的依赖。gradle是第一次接触，说是与Maven功能类似的自动构建工具，细节不多说，既然是工具，应该跟Maven类似，可以配置代理，查询一下，OK，果真能设置，具体操作：在工程的根目录下，创建文件`gradle.properties`，其中添加proxy设置：
 
@@ -146,7 +146,7 @@ clean一下core工程，OK，这次总算搞定了，开始开发吧。
 * gradle入门：[http://spring.io/guides/gs/gradle/](http://spring.io/guides/gs/gradle/)
 * gradle官网有免费电子书：《Building and Testing with Gradle》
 
-##杂谈
+## 杂谈
 
 今天在公司，折腾一下午，网络问题，脑袋都大了，回来后，不到30mins就搞定了，顺便还整理了下，形成了此文；没有稳定的网络，对于有追求的工程师，就如同拿着锄头的特战队员，能力再牛，照样被拿微冲的小白恐吓。
 

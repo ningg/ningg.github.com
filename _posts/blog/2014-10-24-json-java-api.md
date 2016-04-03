@@ -5,11 +5,11 @@ description: 常用的数据交换格式有XML和JSON，如何进行解析、转
 categories: json java
 ---
 
-##背景
+## 背景
 
 最近做个数据采集的东西，初步决定使用JSON作为数据交换格式，OK，学习整理一下。
 
-##JSON简介
+## JSON简介
 
 JSON（JavaScript Object Notation），轻量级的数据交换格式，易于阅读和编写，同时机器也很容易输出JSON格式、解析JSON格式。JSON是完全独立于语言的文本格式，这使其成为理想的数据交换语言。
 
@@ -54,7 +54,7 @@ Whitespace can be inserted between any pair of tokens. Excepting a few encoding 
 
 
 
-##处理JSON的JAVA API
+## 处理JSON的JAVA API
 
 处理JSON格式数据，无非两条路：
 
@@ -65,7 +65,7 @@ Whitespace can be inserted between any pair of tokens. Excepting a few encoding 
 
 当前项目需求，在JDK5以及之上的版本都能进行JSON字符串与JSON对象之间的转换，OK，那直接上第三方jar包得了。
 
-###java解析JSON的第三方jar包
+### java解析JSON的第三方jar包
 
 从[JSON 主页][介绍 JSON]可知，当前，有很多的第三方jar包：org.json、org.json.me、jsonp、[Jackson Json Processor][Jackson Json Processor]、[google-gson][google-gson]、Json-lib...，有点多呀，到底选哪个呢？当前初步考虑在如下两个中选：
 
@@ -74,7 +74,7 @@ Whitespace can be inserted between any pair of tokens. Excepting a few encoding 
 
 最终决定采用gson，其基本的JSON操作，参考：[JSON转换利器:Gson][JSON转换利器:Gson]
 
-##解析JSON字符串的效率问题
+## 解析JSON字符串的效率问题
 
 [处理JSON的Java API ：JSON的简介][处理JSON的Java API ：JSON的简介]中提到解析JSON的API分为两类：
 
@@ -83,7 +83,7 @@ Whitespace can be inserted between any pair of tokens. Excepting a few encoding 
 
 这两种方式在原理、效率上都有差异，TODO
 
-##参考来源
+## 参考来源
 
 * [介绍 JSON][介绍 JSON]
 * [处理JSON的Java API ：JSON的简介][处理JSON的Java API ：JSON的简介]

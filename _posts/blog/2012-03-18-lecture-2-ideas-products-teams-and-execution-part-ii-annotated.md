@@ -41,7 +41,7 @@ Last lecture, we covered the idea and the product and I want to emphasize that i
 * how to execute
 
 
-##Cofounder
+## Cofounder
 
 First, I want to talk about cofounders. Cofounder relationships are among the most important in the entire company. Everyone says you have to watch out for tension brewing among cofounders and you have to address is immediately. That's all true and certainly in YC's case, the number one cause of early death for startups is cofounder blowups. But for some reason, a lot of people treat choosing their cofounder with even less importance than hiring. Don't do this! This is one of the most important decisions you make in the life of your startup and you need to treat it as such.
 
@@ -107,7 +107,7 @@ That doesn't work too well in our experience. Software people should really be s
 
 做什么事，就需要什么人；软件公司，就应该注重软件技术；媒体公司，就应该找媒体相关人员。通常，2~3个合伙人是最佳的，4个勉强能维持，5个就极其糟糕。
 
-###How to hire
+### How to hire
 
 The second part of how to hire: try not to. One of the weird things you'll notice as you start a company, is that everyone will ask you how many employees you have. And this is the metric people use to judge how real your startup is and how cool you are. And if you say you have a high number of employees, they're really impressed. And if you say you have a low number of employees, then you sound like this little joke. But actually it sucks to have a lot of employees, and you should be proud of how few employees you have. Lots of employees ends up with things like a high burn rate, meaning you're losing a lot of money every month, complexity, slow decision making, the list goes on and it's nothing good.
 
@@ -315,7 +315,7 @@ I am going to get to that later. The question is: what about cofounders that are
 一个问题：cofounder 不在同一地点，怎么办？我的建议是：那就不要一起做。我个人对远程协助办公，持怀疑态度，但在 early days of startup，沟通和推进速度是第一位的，视频会议的效果并不好。
 
 
-##Execution
+## Execution
 
 Alright, so now we're going to talk about execution. Execution for most founders is not the most fun part of running the company, but it is the most critical. Many cofounders think they're just signing up to this beautiful idea and then they're going to go be on magazine covers and go to parties. But really what it’s about more than anything else, what being a cofounder really means, is signing up for this years long grind on execution and you can’t outsource this.
 
@@ -389,7 +389,7 @@ So you want to have the right metrics and you want to be focused on growing thos
 
 As I mentioned already, be in the same space. I think this is pretty much a nonstarter. Remote confounding teams is just really really hard. It slows down the cycle time more than anybody ever thinks it's going to.
 
-###intensity
+### intensity
 
 The other piece besides focus for execution is intensity. Startups only work at a fairly intense level. A friend of mine says the secret to start up success is extreme focus and extreme dedication. You can have a startup and one other thing, you can have a family, but you probably can't have many other things. Startups are not the best choice for work life balance and that's sort of just the sad reality. There's a lot of great things about a startup, but this is not one of them. Startups are all-consuming in a way that is generally difficult to explain. You basically need to be willing to outwork your competitors.
 

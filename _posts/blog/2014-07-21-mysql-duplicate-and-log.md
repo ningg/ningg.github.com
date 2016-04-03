@@ -25,7 +25,7 @@ MySQL的复制，是异步的，对应3个进程，即：
 	* 执行SQL的进程，检测到relay log中内容有更新，则在Slave上执行sql；
 
 
-##MySQL中日志简析
+## MySQL中日志简析
 
 
 

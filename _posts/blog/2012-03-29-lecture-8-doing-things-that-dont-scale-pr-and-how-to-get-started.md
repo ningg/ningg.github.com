@@ -8,9 +8,9 @@ category: YCombinator
 
 > 原文地址：[Doing Things That Don't Scale, PR, and How to Get Started][Doing Things That Don't Scale, PR, and How to Get Started]
 
-##Doing things that don't scale
+## Doing things that don't scale
 
-###Stanley(founder of DoorDash)
+### Stanley(founder of DoorDash)
 
 Thanks for having me! I'm Stanley, the founder of DoorDash. It's really amazing to be here, because it wasn't actually that long ago when I sat in your seats. I was class of 2014, graduated in CS, as well as my cofounder Andy. For those of you who don't know what DoorDash is, we're building an on-demand delivery network for local cities. I want to start off with this photo that I took a few months ago. This was the night when we just raised our series A. I took this photo as I was walking back to where I lived; I actually lived in Roble at the time on campus. I took this photo because I realized just how ridiculous the combination of things I was holding in my hand was at the time. I was holding my CS247 homework, my tax forms (it was April – so I had to fill out my tax forms), that yellow speeding ticket, and right below that was a $15 million piece of paper I had just signed from Sequoia. And that kind of summarizes just how ridiculous our journey has been, doing this while I was at Stanford, and then transitioning this to an actual startup. I want to share with you that story today.
 
@@ -80,7 +80,7 @@ Q: Where do you plan to go beyond food delivery?
 
 A: For us when we started DoorDash, it was always about helping small business owners and figuring out how you served this for any local merchant whether you were a macaroon store, restaurant, or furniture shop. That's still our focus; that's our long-term vision. For now we are just focused on restaurant delivery as a way to scale, but ultimately that's where we want to end up in.
 
-##Walker(founder of Teespring)
+## Walker(founder of Teespring)
 
 Sam Altman: Next is Walker Williams, founder of Teespring. He's been working with YC for about a year and a half, something like that. I almost rejected him, which sounds like a dumb idea, but now they're making hundreds of millions of dollars in revenue, so very luckily I did not. Walker is also going to talk about doing things that don't scale.
 
@@ -158,7 +158,7 @@ A: No, today our biggest customer base is entrepreneurs who are trying to build 
 
 Thank you.
 
-##Public Relations
+## Public Relations
 
 Sam Altman: Now we have Justin Kan. Justin was the founder of Kiko, and the Justin.tv which became Twitch. He is going to talk about Public Relations.
 

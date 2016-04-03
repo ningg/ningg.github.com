@@ -7,7 +7,7 @@ category: java
 
 通常查看JDK的源码，只需要绑定JDK安装目录下的`src.zip`文件即可；不过src.zip中包含的源代码不全，例如，查看rt.jar包对应的 `sun.nio` package。
 
-##源码绑定
+## 源码绑定
 
 几点：
 
@@ -29,7 +29,7 @@ category: java
 
 
 
-##参考来源
+## 参考来源
 
 
 * [openjdk-JDK6][openjdk-JDK6]

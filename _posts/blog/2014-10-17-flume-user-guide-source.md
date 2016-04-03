@@ -6,7 +6,7 @@ categories: flume
 ---
 
 
-##Avro Source
+## Avro Source
 
 Listens on Avro port and receives events from external Avro client streams. When paired with the built-in Avro Sink on another (previous hop) Flume agent, it can create tiered collection topologies. Required properties are in bold.
 （Avro sink与Avro source可以构成tiered collection topologies；下表中，必须属性**加黑**了）
@@ -88,7 +88,7 @@ Note that the first rule to match will apply as the example below shows from a c
 
 
 	
-##Thrift Source
+## Thrift Source
 
 Listens on Thrift port and receives events from external Thrift client streams. When paired with the built-in ThriftSink on another (previous hop) Flume agent, it can create tiered collection topologies. Required properties are in bold.
 （通过Thrift sink和Thrift source，可以构成tired collection topologies；必要的属性都已加黑）
@@ -114,7 +114,7 @@ Example for agent named a1:
 	a1.sources.r1.bind = 0.0.0.0
 	a1.sources.r1.port = 4141
 	
-##Exec Source
+## Exec Source
 
 Exec source runs a given Unix command on start-up and expects that process to continuously produce data on standard out (stderr is simply discarded, unless property logStdErr is set to true). If the process exits for any reason, the source also exits and will produce no further data. This means configurations such as `cat [named pipe]` or `tail -F [file]` are going to produce the desired results where as `date` will probably not - the former two commands produce streams of data where as the latter produces a single event and exits.（捕获命令的输出，并按行进行处理，当`logStdErr`设为true时，也将捕获stderr的输出；）
 
@@ -161,7 +161,7 @@ The ‘shell’ config is used to invoke the ‘command’ through a command she
 
 
 
-##JMS Source
+## JMS Source
 
 JMS Source reads messages from a JMS destination such as a queue or topic. Being a JMS application it should work with any JMS provider but has only been tested with ActiveMQ. The JMS source provides configurable batch size, message selector, user/pass, and message to flume event converter. Note that the vendor provided JMS jars should be included in the Flume classpath using `plugins.d` directory (preferred), –classpath on command line, or via `FLUME_CLASSPATH` variable in `flume-env.sh`.
 （JMS从JMS destination中读取message，例如：a queue、topic；）
@@ -188,7 +188,7 @@ Required properties are in **bold**.
 
 **notes(ningg)**：JMS是java方面的消息队列？做几年java了，对这个我还不清楚~~
 
-###Converter
+### Converter
 
 The JMS source allows pluggable converters, though it’s likely the default converter will work for most purposes. The default converter is able to convert Bytes, Text, and Object messages to FlumeEvents. In all cases, the properties in the message are added as headers to the FlumeEvent.（默认，message的properties会转换为FlumeEvent的headers）
 
@@ -208,7 +208,7 @@ Example for agent named a1:
 	a1.sources.r1.destinationName = BUSINESS_DATA
 	a1.sources.r1.destinationType = QUEUE
 
-##Spooling Directory Source
+## Spooling Directory Source
 
 This source lets you ingest data by placing files to be ingested into a “spooling” directory on disk. This source will watch the specified directory for new files, and will parse events out of new files as they appear. The event parsing logic is pluggable. After a given file has been fully read into the channel, it is renamed to indicate completion (or optionally deleted).
 （设定一个`spooling`目录，Spooling Directory Source将会监控这一目录中的new files，并且解析其中新增的内容——生成event；解析file的逻辑，是可以配置的；当一个file全部读入channel后，通常会rename/delete这个file，来标识此文件已经被处理）
@@ -284,7 +284,7 @@ Example for an agent named agent-1:
 	agent-1.sources.src-1.spoolDir = /var/log/apache/flumeSpool
 	agent-1.sources.src-1.fileHeader = true
 
-##Twitter 1% firehose Source (experimental)
+## Twitter 1% firehose Source (experimental)
 
 Warning This source is hightly experimental and may change between minor versions of Flume. Use at your own risk.
 
@@ -313,11 +313,11 @@ a1.sources.r1.accessTokenSecret = YOUR_TWITTER_ACCESS_TOKEN_SECRET
 a1.sources.r1.maxBatchSize = 10
 a1.sources.r1.maxBatchDurationMillis = 200
 
-###Event Deserializers
+### Event Deserializers
 
 The following event deserializers ship with Flume.
 
-####LINE
+#### LINE
 
 This deserializer generates one event per line of text input.
 
@@ -325,7 +325,7 @@ Property Name	Default	Description
 deserializer.maxLineLength	2048	Maximum number of characters to include in a single event. If a line exceeds this length, it is truncated, and the remaining characters on the line will appear in a subsequent event.
 deserializer.outputCharset	UTF-8	Charset to use for encoding events put into the channel.
 
-####AVRO
+#### AVRO
 
 This deserializer is able to read an Avro container file, and it generates one event per Avro record in the file. Each event is annotated with a header that indicates the schema used. The body of the event is the binary Avro record data, not including the schema or the rest of the container file elements.
 
@@ -334,7 +334,7 @@ Note that if the spool directory source must retry putting one of these events o
 Property Name	Default	Description
 deserializer.schemaType	HASH	How the schema is represented. By default, or when the value HASH is specified, the Avro schema is hashed and the hash is stored in every event in the event header “flume.avro.schema.hash”. If LITERAL is specified, the JSON-encoded schema itself is stored in every event in the event header “flume.avro.schema.literal”. Using LITERAL mode is relatively inefficient compared to HASH mode.
 
-####BlobDeserializer
+#### BlobDeserializer
 
 This deserializer reads a Binary Large Object (BLOB) per event, typically one BLOB per file. For example a PDF or JPG file. Note that this approach is not suitable for very large objects because the entire BLOB is buffered in RAM.
 
@@ -344,7 +344,7 @@ deserializer.maxBlobLength	100000000	The maximum number of bytes to read and buf
 
 
 
-##NetCat Source
+## NetCat Source
 
 A netcat-like source that listens on a given port and turns each line of text into an event. Acts like `nc -k -l [host] [port]`. In other words, it opens a specified port and listens for data. The expectation is that the supplied data is newline separated text. Each line of text is turned into a Flume event and sent via the connected channel.
 （NetCat Source监听`[host] [port]`，并将数据按行构造为Flume event）
@@ -373,7 +373,7 @@ Example for agent named a1:
 	a1.sources.r1.port = 6666
 	a1.sources.r1.channels = c1
 
-##Sequence Generator Source
+## Sequence Generator Source
 
 
 A simple sequence generator that continuously generates events with a counter that starts from 0 and increments by 1. Useful mainly for testing. Required properties are in bold.
@@ -396,14 +396,14 @@ Example for agent named a1:
 	a1.sources.r1.channels = c1
 
 
-##Syslog Sources
+## Syslog Sources
 
 Reads syslog data and generate Flume events. The UDP source treats an entire message as a single event. The TCP sources create a new event for each string of characters separated by a newline (‘n’).
 （读取`syslog`中数据，并构造Flume event；UDP source，将整个message构造成一个event；TCP source将收到的每行数据都单独构造一个event）
 
 Required properties are in bold.
 
-###Syslog TCP Source
+### Syslog TCP Source
 
 The original, tried-and-true syslog TCP source.
 （原始的、可靠的syslog TCP source）
@@ -430,7 +430,7 @@ For example, a syslog TCP source for agent named a1:
 	a1.sources.r1.channels = c1
 
 
-###Multiport Syslog TCP Source
+### Multiport Syslog TCP Source
 
 This is a newer, faster, multi-port capable version of the Syslog TCP source. Note that the ports configuration setting has replaced port. Multi-port capability means that it can listen on many ports at once in an efficient manner. This source uses the Apache Mina library to do that. Provides support for RFC-3164 and many common RFC-5424 formatted messages. Also provides the capability to configure the character set used on a per-port basis.
 （监听多端口的数据，效率很高；这是通过Apache Mina lib来实现的，当前支持RFC-3164和RFC-5424中规定的message格式）
@@ -465,7 +465,7 @@ For example, a multiport syslog TCP source for agent named a1:
 	a1.sources.r1.portHeader = port
 
 
-###Syslog UDP Source
+### Syslog UDP Source
 
 Property Name	Default	Description
 channels	–	 
@@ -488,7 +488,7 @@ For example, a syslog UDP source for agent named a1:
 	a1.sources.r1.channels = c1
 
 
-##HTTP Source
+## HTTP Source
 
 A source which accepts Flume Events by HTTP POST and GET. GET should be used for experimentation only. HTTP requests are converted into flume events by a pluggable “handler” which must implement the HTTPSourceHandler interface. This handler takes a HttpServletRequest and returns a list of flume events. All events handled from one Http request are committed to the channel in one transaction, thus allowing for increased efficiency on channels like the file channel. If the handler throws an exception, this source will return a HTTP status of 400. If the channel is full, or the source is unable to append events to the channel, the source will return a HTTP 503 - Temporarily unavailable status.
 （`GET`方式当前只用于experiment；利用`handler`将request转换为Flume events，同一个HTTP请求对应的event构成一个transaction）
@@ -521,7 +521,7 @@ For example, a http source for agent named a1:
 	a1.sources.r1.handler.nickname = random props
 
 
-###JSONHandler
+### JSONHandler
 
 A handler is provided out of the box which can handle events represented in JSON format, and supports UTF-8, UTF-16 and UTF-32 character sets. The handler accepts an array of events (even if there is only one event, the event has to be sent in an array) and converts them to a Flume event based on the encoding specified in the request. If no encoding is specified, UTF-8 is assumed. The JSON handler supports UTF-8, UTF-16 and UTF-32. Events are represented as follows.
 （处理JSON字符串，并生成Flume event，要求JSON字符串是`UTF-8`、`UTF-16`、`UTF-32`编码格式）
@@ -550,7 +550,7 @@ One way to create an event in the format expected by this handler is to use `JSO
 	Type type = new TypeToken<List<JSONEvent>>() {}.getType();
 
 
-###BlobHandler
+### BlobHandler
 
 By default HTTPSource splits JSON input into Flume events. As an alternative, BlobHandler is a handler for HTTPSource that returns an event that contains the request parameters as well as the Binary Large Object (BLOB) uploaded with this request. For example a PDF or JPG file. Note that this approach is not suitable for very large objects because it buffers up the entire BLOB in RAM.
 （默认情况下，HTTPSource将JSON字符串分割为多个Flume event；BlobHandler能够保证将所有的request parameters甚至是BLOB的文件，不进行分割，构造为一个event；特别注意：BlobHandler不适合大文件，因为会占用过多的RAM）
@@ -559,7 +559,7 @@ Property Name	Default	Description
 handler	–	The FQCN of this class: org.apache.flume.sink.solr.morphline.BlobHandler
 handler.maxBlobLength	100000000	The maximum number of bytes to read and buffer for a given request
 
-##Legacy Sources
+## Legacy Sources
 
 **notes(ningg)**：Legacy Sources，目标，将`Flume 0.9.x`输出的event format，转换为`Flume 1.x`能够接收和处理的event format。
 
@@ -568,7 +568,7 @@ The legacy sources allow a Flume 1.x agent to receive events from Flume 0.9.4 ag
 Note The reliability semantics of Flume 1.x are different from that of Flume 0.9.x. The E2E or DFO mode of a Flume 0.9.x agent will not be supported by the legacy source. The only supported 0.9.x mode is the best effort, though the reliability setting of the 1.x flow will be applicable to the events once they are saved into the Flume 1.x channel by the legacy source.
 Required properties are in bold.
 
-###Avro Legacy Source
+### Avro Legacy Source
 
 Property Name	Default	Description
 channels	–	 
@@ -589,7 +589,7 @@ Example for agent named a1:
 	a1.sources.r1.bind = 6666
 	a1.sources.r1.channels = c1
 
-###Thrift Legacy Source
+### Thrift Legacy Source
 
 Property Name	Default	Description
 channels	–	 
@@ -610,7 +610,7 @@ a1.sources.r1.host = 0.0.0.0
 a1.sources.r1.bind = 6666
 a1.sources.r1.channels = c1
 
-##Custom Source
+## Custom Source
 
 A custom source is your own implementation of the Source interface. A custom source’s class and its dependencies must be included in the agent’s classpath when starting the Flume agent. The type of the custom source is its FQCN.
 （通过实现Source接口，可以自定义一个Source；要求：源文件和依赖的jar包需要添加到`classpath`）
@@ -632,7 +632,7 @@ Example for agent named a1:
 	a1.sources.r1.type = org.example.MySource
 	a1.sources.r1.channels = c1
 
-##Scribe Source
+## Scribe Source
 
 Scribe is another type of ingest system. To adopt existing Scribe ingest system, Flume should use ScribeSource based on Thrift with compatible transfering protocol. For deployment of Scribe please follow the guide from Facebook. Required properties are in bold.
 
@@ -660,7 +660,7 @@ Example for agent named a1:
 
 
 
-##参考来源
+## 参考来源
 
 * [Flume User Guide 1.5.0.1](http://flume.apache.org/FlumeUserGuide.html)
 

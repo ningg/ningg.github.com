@@ -5,7 +5,7 @@ description: java对象，强制类型转换后，方法调用时，潜在的问
 category: java
 ---
 
-##问题背景
+## 问题背景
 
 阅读程序时，看到在子类中的各种@Override的注解，例如：
 
@@ -33,7 +33,7 @@ category: java
 
 类`B`继承了`A`，并且在`B`中`Override`了方法`speak()`;现在问`a1.speak(1)`调用的是`class A`？`class B`？中的`speak()`方法？
 
-##分析
+## 分析
 
 上面的例子是一个典型的`重写`，因为：`subclass`中方法的名称、输入参数、返回参数都与`supclass`中完全相同。
 
@@ -56,7 +56,7 @@ __重载（`overload`）__：基于同一个类的，不同的重载方法，主
 
 __重写 & 重载__：都是多态性的体现，重写是子类与父类间的多态性，重载是同一类中多态性的体现。
 
-##参考来源
+## 参考来源
 
 1. <http://blog.csdn.net/smyhmz/article/details/2716638>
 2. <http://blog.csdn.net/leonardwang/article/details/7046180>

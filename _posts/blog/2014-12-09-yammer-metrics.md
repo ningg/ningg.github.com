@@ -5,7 +5,7 @@ description: 获取系统、应用的运行状态数据，Yammer Metrics是一�
 category: java
 ---
 
-##Yammer Metrics简介
+## Yammer Metrics简介
 
 最近用到的某个框架，其官网提到利用Yammer Metrics来测量系统运行状态，需要对其统计的具体参数有个基本的了解，OK，那就需要弄清几个简单的问题：
 
@@ -13,7 +13,7 @@ category: java
 * Yammer Metrics收集哪些数据？
 * Yammer Metrics收集数据的基本过程、原理？
 
-###Yammer Metrics的官网
+### Yammer Metrics的官网
 
 上述列了几个问题，但有个最基本的问题：官网地址在哪？为什么说这个最基础、最重要，因为这是信息源，其他所有的网络信息都是以此为基础的。
 在google中输入`yammer metrics wiki`没有搜到类似一个明显的官网，到时找到了github上的两个工程：
@@ -29,13 +29,13 @@ category: java
 * [repo: yammer metrics 3.x][repo: yammer metrics 3.x]
 
 
-###Yammer metrics的作用
+### Yammer metrics的作用
 
 为什么要用Metrics？[Metrics doc 3.x][Metrics doc 3.x]中有句话很经典：
 
 > Metrics is a Java library which gives you unparalleled insight into what your code does in production.（注：unparalleled，空前的、无与伦比的）
 
-##Yammer Metrics相关术语
+## Yammer Metrics相关术语
 
 > **特别说明**：从[Yammer metrics官网][Metrics doc 3.x]可知，当前为3.1.0版本，但是当前在项目中广泛使用的是2.2.0版本，因此，本文将主要关注[http://dropwizard.github.io/metrics/2.2.0/][Metrics doc 2.x]。
 
@@ -50,7 +50,7 @@ category: java
 
 
 
-###Gauges
+### Gauges
 
 A gauge is an instantaneous measurement of a value. For example, we may want to measure the number of pending jobs in a queue:
 
@@ -65,7 +65,7 @@ Every time this gauge is measured, it will return the number of jobs in the queu
 
 For most queue and queue-like structures, you won’t want to simply return `queue.size()`. Most of `java.util` and `java.util.concurrent` have implementations of `#size()` which are `O(n)`, which means your gauge will be slow (potentially while holding a lock).
 
-###Counters
+### Counters
 
 A counter is just a gauge for an `AtomicLong` instance. You can increment or decrement its value. For example, we may want a more efficient way of measuring the pending job in a queue:
 
@@ -83,7 +83,7 @@ A counter is just a gauge for an `AtomicLong` instance. You can increment or dec
 	
 Every time this counter is measured, it will return the number of jobs in the queue.
 
-###Meters
+### Meters
 
 A meter measures the rate of events over time (e.g., “requests per second”). In addition to the mean rate, meters also track `1-`, `5-`, and `15-`minute moving averages.
 
@@ -96,7 +96,7 @@ A meter measures the rate of events over time (e.g., “requests per second”).
 	
 This meter will measure the rate of requests in requests per second.
 
-###Histograms
+### Histograms
 
 A histogram measures the statistical distribution of values in a stream of data. In addition to minimum, maximum, mean, etc., it also measures median, 75th, 90th, 95th, 98th, 99th, and 99.9th percentiles.
 
@@ -109,7 +109,7 @@ A histogram measures the statistical distribution of values in a stream of data.
 	
 This histogram will measure the size of responses in bytes.
 
-###Timers
+### Timers
 
 A timer measures both the rate that a particular piece of code is called and the distribution of its duration.
 
@@ -127,7 +127,7 @@ A timer measures both the rate that a particular piece of code is called and the
 	
 This timer will measure the amount of time it takes to process each request in milliseconds and provide a rate of requests in requests per second.
 
-###Health Checks
+### Health Checks
 
 Metrics also has the ability to centralize your service’s health checks. First, implement a `HealthCheck` instance:
 
@@ -174,7 +174,7 @@ Metrics comes with a pre-built health check: `DeadlockHealthCheck`, which uses J
 
 
 
-##Yammer metrics原理与具体用法
+## Yammer metrics原理与具体用法
 
 （doing...）
 
@@ -195,7 +195,7 @@ Metrics comes with a pre-built health check: `DeadlockHealthCheck`, which uses J
 
 ![](/images/yammer-metrics/learn-metrics.png)
 
-###gauge
+### gauge
 
 	package io.github.ningg.gauge;
 
@@ -245,7 +245,7 @@ Metrics comes with a pre-built health check: `DeadlockHealthCheck`, which uses J
 	  list-size-gauge:
 		value = 3
 
-###counter
+### counter
 
 	package io.github.ningg.counter;
 
@@ -310,7 +310,7 @@ Metrics comes with a pre-built health check: `DeadlockHealthCheck`, which uses J
 		count = 2
 
 
-###meter
+### meter
 
 	package io.github.ningg.meter;
 
@@ -354,7 +354,7 @@ Metrics comes with a pre-built health check: `DeadlockHealthCheck`, which uses J
 		 5-minute rate = 0.00 request/s
 		15-minute rate = 0.00 request/s
 
-###histogram
+### histogram
 
 	package io.github.ningg.histogram;
 
@@ -425,7 +425,7 @@ Metrics comes with a pre-built health check: `DeadlockHealthCheck`, which uses J
 	
 	
 
-###timer
+### timer
 
 
 	package io.github.ningg.timer;
@@ -485,12 +485,12 @@ Metrics comes with a pre-built health check: `DeadlockHealthCheck`, which uses J
 
 		
 		
-###小结
+### 小结
 
 上面可知，在Java工程中使用Yammer Metrics的gauge、counter、meter、histogram、timer时，本质上就是创建一个Metrics的Gauge、Counter、Meter、Histogram、Timer对象，然后在特定的地点触发对象，即可实现对应用状态的监控。		
 		
 
-##参考来源
+## 参考来源
 
 * [Metrics doc 3.x][Metrics doc 3.x]*（官方文档简洁明了，推荐阅读；唯一需要注意的是，现在官网已经是3.x版本了，而很多项目使用过2.x版本，需要留意其差异）*
 
@@ -505,7 +505,7 @@ Metrics comes with a pre-built health check: `DeadlockHealthCheck`, which uses J
 
 
 
-##杂谈
+## 杂谈
 
 刚看到的一个几个东西，感觉时代在进步呀，没有仔细看，看来需要不断学习、整理一些新的东西：
 

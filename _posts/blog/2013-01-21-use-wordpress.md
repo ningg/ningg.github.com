@@ -24,7 +24,7 @@ category: WordPress
 * 配置Apache服务、MySQL服务，开机自启动
 * 安装WordPress
 
-###安装Apache、PHP、MySQL
+### 安装Apache、PHP、MySQL
 
 todo：
 

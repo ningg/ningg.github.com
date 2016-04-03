@@ -7,7 +7,7 @@ categories: storm
 
 > 原文地址：[Storm Rationale](http://storm.apache.org/documentation/Rationale.html)，本文使用`英文原文+中文注释`方式来写。
 
-##Background
+## Background
 
 The past decade has seen a revolution in data processing. MapReduce, Hadoop, and related technologies have made it possible to store and process data at scales previously unthinkable. Unfortunately, these data processing technologies are not realtime systems, nor are they meant to be. There’s no hack that will turn Hadoop into a realtime system; realtime data processing has a fundamentally different set of requirements than batch processing.
 （Hadoop的相关技术已经很多，大规模数据处理方面很强，但realtime processing却不行）
@@ -32,7 +32,7 @@ Although the queues and workers paradigm breaks down for large numbers of messag
 Storm satisfies these goals.
 （Storm就是这么一个方案）
 
-##Why Storm is important
+## Why Storm is important
 
 Storm exposes a set of primitives for doing realtime computation. Like how MapReduce greatly eases the writing of parallel batch processing, Storm’s primitives greatly ease the writing of parallel realtime computation.
 （Storm暴漏了a set of primitives/原语，来进行realtime computation。就像MapReduce极大改善了parallel batch processing一样，Storm改善了parallel realtime computation）
@@ -50,7 +50,7 @@ The key properties of Storm are:
 1. **Programming language agnostic**: Robust and scalable realtime processing shouldn’t be limited to a single platform. Storm topologies and processing components can be defined in any language, making Storm accessible to nearly anyone.（语言无关性：Storm topologies、processing components可使用多种语言实现）
 
 
-##参考来源
+## 参考来源
 
 * [Apache Storm](http://storm.apache.org/)
 * [Apache Storm: Documentation Rationale](http://storm.apache.org/documentation/Rationale.html)

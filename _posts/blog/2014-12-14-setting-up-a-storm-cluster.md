@@ -18,7 +18,7 @@ Here's a summary of the steps for setting up a Storm cluster:
 1. Fill in mandatory configurations into `storm.yaml`
 1. Launch daemons under supervision using "storm" script and a supervisor of your choice
 
-##Set up a Zookeeper cluster
+## Set up a Zookeeper cluster
 
 Storm uses Zookeeper for coordinating the cluster. Zookeeper **is not** used for message passing, so the load Storm places on Zookeeper is quite low. Single node Zookeeper clusters should be sufficient for most cases, but if you want failover or are deploying large Storm clusters you may want larger Zookeeper clusters. Instructions for deploying Zookeeper are [here][zookeeper].
 
@@ -27,7 +27,7 @@ A few notes about Zookeeper deployment:
 1. It's critical that you run Zookeeper under supervision, since Zookeeper is fail-fast and will exit the process if it encounters any error case. See [here][zookeeper supervision] for more details.
 1. It's critical that you set up a cron to compact Zookeeper's data and transaction logs. The Zookeeper daemon does not do this on its own, and if you don't set up a cron, Zookeeper will quickly run out of disk space. See [here][zookeeper maintenance] for more details.
 
-##Install dependencies on Nimbus and worker machines
+## Install dependencies on Nimbus and worker machines
 
 Next you need to install Storm's dependencies on Nimbus and the worker machines. These are:
 
@@ -36,11 +36,11 @@ Next you need to install Storm's dependencies on Nimbus and the worker machines.
 
 These are the versions of the dependencies that have been tested with Storm. Storm may or may not work with different versions of Java and/or Python.
 
-##Download and extract a Storm release to Nimbus and worker machines
+## Download and extract a Storm release to Nimbus and worker machines
 
 Next, download a Storm release and extract the zip file somewhere on Nimbus and each of the worker machines. The Storm releases can be downloaded [from here][download storm].
 
-##Fill in mandatory configurations into storm.yaml
+## Fill in mandatory configurations into storm.yaml
 
 The Storm release contains a file at `conf/storm.yaml` that configures the Storm daemons. You can see the default configuration values [here][storm default config]. `storm.yaml` overrides anything in `defaults.yaml`. There's a few configurations that are mandatory to get a working cluster:
 
@@ -68,7 +68,7 @@ If the **port** that your Zookeeper cluster uses is different than the default, 
 		- 6702
 		- 6703
 	
-##Launch daemons under supervision using "storm" script and a supervisor of your choice
+## Launch daemons under supervision using "storm" script and a supervisor of your choice
 
 The last step is to launch all the Storm daemons. It is critical that you run each of these daemons under supervision. Storm is a **fail-fast** system which means the processes will halt whenever an unexpected error is encountered. Storm is designed so that it can safely halt at any point and recover correctly when the process is restarted. This is why Storm keeps no state in-process -- if Nimbus or the Supervisors restart, the running topologies are unaffected. Here's how to run the Storm daemons:
 

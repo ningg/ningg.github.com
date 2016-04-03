@@ -5,17 +5,17 @@ description: 做开发，不是盲目的，有一个要做的目标（产品）�
 category: android
 ---
 
-##背景
+## 背景
 
 哈哈，这个背景说不说呢？说，坦坦荡荡的：想做一个对Android手机的截屏图片，直接打马赛克的小APP，当前满足这一需求的APP有不少，例如：美图秀秀等，但是不好意思，我想要一个轻量级的，而且最简单的打码操作。
 
-##搭建开发环境
+## 搭建开发环境
 
 打码APP，目标确定了，就开发搞起。*（具体功能是什么？技术方案定了吗？别急，这些我现在都不会、都不确定，个人估计折腾折腾就清晰的，我对这个还是有信心的）*
 
 > **特别提醒**：下面是我看官网的操作记录，请那些还有丁点技术追求的coder，也去看官网，我写blog不是为了布道，而且blog的精准、严谨程度，与官网差得太远。
 
-###下载软件
+### 下载软件
 
 图省事，我从官网直接下载了”Eclipse ADT bundle”，详细版本信息：”adt-bundle-windows-x86_64-20140702.zip”，其下载地址如下：[https://dl.google.com/android/adt/adt-bundle-windows-x86_64-20140702.zip](https://dl.google.com/android/adt/adt-bundle-windows-x86_64-20140702.zip) 。由于GFW的存在，很多地方无法直接下载上面链接文件，怎么办？用迅雷，复制上面的链接，新建一个迅雷下载任务，妥了，下载完毕。
 
@@ -28,7 +28,7 @@ Eclipse ADT Bundle包含3个部分：
 
 客官，留意一下：上面Eclipse ADT Bundle对应的解压包中，自带了Android开发的文档，具体路径：`%ECLIPSE_ADT_BUNDLE%/sdk/docs/`，这个极其有用，我有问题，都会偷偷看这个。
 
-###安装package
+### 安装package
 
 上面Eclipse ADT Bundle对应的解压包中eclipse直接可以使用了，不过很多时候，需要安装写package，来支持Android的开发。通常，通过Android SDK Manager来安装package，截个图如下：
 
@@ -48,7 +48,7 @@ Eclipse ADT Bundle包含3个部分：
 
 参考来源：[http://www.cnblogs.com/tc310/archive/2012/12/21/2828450.html](http://www.cnblogs.com/tc310/archive/2012/12/21/2828450.html)
 
-##推荐书籍
+## 推荐书籍
 
 * [第一行代码——Android](http://book.douban.com/subject/25942191/)
 	* 这个入门不错，对于有开发经验的人员也可以借鉴一下

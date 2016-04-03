@@ -5,11 +5,11 @@ description: 如何确定哪些用户可以远程登录？如何禁止用户远�
 category: linux
 ---
 
-##背景
+## 背景
 
 有些用户不安份，能不能禁止用户登录（锁定用户）？
 
-##分析
+## 分析
 
 说实话，这个问题很小，不过思路不能丢，要禁止用户登录，涉及几个问题：
 
@@ -26,7 +26,7 @@ category: linux
 * 如何又快又好的把事情做成？
 
 
-##锁定用户和解锁用户
+## 锁定用户和解锁用户
 
 通过命令`usermod`即可完成对用户的锁定和解锁：
 	
@@ -43,7 +43,7 @@ category: linux
 **备注**：命令`passwd`也可以进行用户的锁定和解锁：`passwd -l [login]`和`passwd -u [login]`两个命令。
 
 
-##查看是否锁定用户
+## 查看是否锁定用户
 
 查看`/etc/shadow`文件，以`:`分割的第二行，如果以`!`或者`*`开头，则表示当前用户无法远程登录，只能通过root用户以su命令切换身份而来，具体，看下面的示例：
 
@@ -58,7 +58,7 @@ category: linux
 
 **疑问**：以`!`与`*`开头，有没有差异？
 	
-##修改shell类型
+## 修改shell类型
 
 通过修改用户登录之后的shell类型实现禁止用户登录，具体命令如下：
 
@@ -67,7 +67,7 @@ category: linux
 	
 用户登录，提示信息：This account is currently not available.
 
-###特殊的shell：/sbin/nologin
+### 特殊的shell：/sbin/nologin
 
 `/sbin/nologin`本质是用户的login shell，不过这个nologin shell有些特殊，需要说一说。`/sbin/nologin`使用户无法登录，本质是：用户无法使用bash或其他shell来登入系统，这个账户仍然可以使用其他系统资源，例如：www服务由帐号apache管理，其可以进行系统程序的工作，但是无法登入主机；
 
@@ -79,7 +79,7 @@ category: linux
 
 当用户的login shell被设置为`/sbin/nologin`时，用户登录时，会被拒绝，并且提示信息：This account is currently not available；这个提示信息是可以定制的，具体定制方法：新建`/etc/nologin.txt`，并在其中写入提示信息即可。
 
-###禁止所有用户登录
+### 禁止所有用户登录
 
 如果因为系统维护升级等原因，希望禁止所有用户登录，则按照上面的方式，一个一个禁用用户，很无聊，而且容易出错，一种下面是简便的解决方法：
 
@@ -92,7 +92,7 @@ category: linux
 	 
 解禁帐号也简单，直接将`/etc/nologin`删除就行了！
 
-##比较两种方式
+## 比较两种方式
 
 整理上面两种禁止用户登录的方式，其出发思路不同：
 
@@ -105,7 +105,7 @@ category: linux
 
 
 
-##参考来源
+## 参考来源
 
 * [Linux如何禁止用户登录][Linux如何禁止用户登录]
 * [Linux下用户和组管理][Linux下用户和组管理]

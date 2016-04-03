@@ -5,7 +5,7 @@ category:      MOA
 description:   MOA中随机树(Random Tree)数据流产生器深入探索
 ---
 
-##1.简介
+## 1.简介
 `RandomTreeGenerator`是一个`stream`产生器，源源不断的输出`Instance`；这一部分，将详细探讨其实现；请先阅读"[MOA中RandomTreeGenerator-Basic](/moa-random-tree-generator/)"。查看源码的工具是Eclipse，关于Eclipse下查看源代码的快捷键，可参考"[Eclipse下查看MOA源代码](/moa-sourcecode-with-eclipse/)"。
 
 具体将分为2个方面来讨论`RandomTreeGenerator`：
@@ -23,7 +23,7 @@ description:   MOA中随机树(Random Tree)数据流产生器深入探索
 * data stream的数学表示是什么？程序中存储在什么地方？
 * Attribute、Instance、Instances、InstancesHeader之间有什么联系？
 
-##2.对外继承关系
+## 2.对外继承关系
 
 几个基本的快捷键：
 
@@ -65,7 +65,7 @@ __接口`InstanceStream`__，规定了一个`data stream`所必须实现的方�
 更详细的知识，可以参考“eclipse下查看MOA源代码”中java基础知识部分。
 
 
-##3.内部成员
+## 3.内部成员
 
 在"__2. 对外继承关系__"讨论的基础上，可以得出结论：
 
@@ -88,7 +88,7 @@ __接口`InstanceStream`__，规定了一个`data stream`所必须实现的方�
 
 现在我需要去查询MOA的API文档（或者查看MOA工程的源代码），分析、记忆上面几个类、接口中的__方法成员__。[关键*]
 
-##4. 使用RandomTreeGenerator
+## 4. 使用RandomTreeGenerator
 
 使用分为3个步骤，说明如下：
 
@@ -101,14 +101,14 @@ __接口`InstanceStream`__，规定了一个`data stream`所必须实现的方�
 		   Instance trainInst = stream.nextInstance();
 	}
 
-##5. 定义一个stream的generator
+## 5. 定义一个stream的generator
 
 只需要按下面来进行定义，并补充实现其中抽象方法即可，这就是java编写代码的好处，使用继承可以快速开发自己的类；代码如下：
 
 
 	public class YourselfGenerator extends AbstractOptionHandler implements InstanceStream
 
-##6. data stream的数学含义
+## 6. data stream的数学含义
 
 data stream的数学表示是什么？程序中存储在什么地方？
 
@@ -116,7 +116,7 @@ data stream的数学表示是什么？程序中存储在什么地方？
 
 在MOA中，一个类，只要实现了接口`InstranceStream`，就认为他是一个`data stream`的产生器。通常，`data stream`并没有一次性产生所有的Instance并存储下来，而是采用`产生一个Instance，使用一个`的原则来实现。为实现一个`data_stream`，`MOA`提供了几个基本的类：`Attribute`、`Instance`、`Instances`、`InstancesHeader`。
 
-##7. 数据存储相关的class
+## 7. 数据存储相关的class
 
 数据存储相关的class：Attribute、Instance、Instances、InstancesHeader
 
@@ -124,7 +124,7 @@ data stream的数学表示是什么？程序中存储在什么地方？
 * Instance: weka.core包中，定义instance（由attribute构成）；（weka）
 * Instances: weka.core包中，定义dataset（instance的集合）；（weka）
 
-###7.1 weka.core.Atribute
+### 7.1 weka.core.Atribute
 
 weka.core.Atribute（Class）用来表示Instance中的一个属性，共计可以表示5种：numeric、nominal、string、date、relational（这个需要注意）；典型的用法（code from the main() method of this class）：
 
@@ -145,7 +145,7 @@ weka.core.Atribute（Class）用来表示Instance中的一个属性，共计可�
 
 
 
-###7.2 weka.core.Instance
+### 7.2 weka.core.Instance
 
 weka.core.Instance(Interface),（下图表示了weka.core.Instance的继承关系）此接口统一了instance对外调用的方法；subclass：weka.core.AbstractInstance，直接由Attribute构成，用于表示data_stream中的一个例子；对于所有的Attibute类型（5种），都以浮点数（floating-point）来存储，如果Attribute类型是：nominal、string、relational，则存储的值表示相应类型真实值的索引位置。
 
@@ -191,7 +191,7 @@ setDataset方法：
 
 上面是weka.core.AbstractInstance中的具体实现。其中Instances将在下面进行介绍。
 
-###7.3 weka.core.Instances
+### 7.3 weka.core.Instances
 
 weka.core.Instances(Class)，他的继承关系如下图，特别需要说明的是：
 

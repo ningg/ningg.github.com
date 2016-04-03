@@ -19,7 +19,7 @@ category: MySQL
 实际上，这个页面所讲述的是在MariaDB 5.3.3（MySQL是在5.6）开始引入的一种叫做Index Condition Pushdown（以下简称ICP，索引条件下推）的查询优化方式。由于本身不是一个层面的东西，前文中说的是Index Access，而这里是Query Optimization，所以并不构成对前文正确性的影响。在写前文时，MySQL还没有ICP，所以文中没有涉及相关内容，但考虑到新版本的MariaDB或MySQL中ICP的启用确实影响了一些查询行为的外在表现。所以决定写这篇文章详细讲述一下ICP的原理以及对索引使用方式的优化。
 
  
-##实验
+## 实验
 
 先从一个简单的实验开始直观认识ICP的作用。
 

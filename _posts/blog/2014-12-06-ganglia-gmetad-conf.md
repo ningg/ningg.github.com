@@ -10,7 +10,7 @@ category: ganglia
 
 
 -------------------------------------------------------------------------------
-##debug_level
+## debug_level
 
 Setting the debug_level to 1 will keep daemon in the forground and
  show only error messages. Setting this value higher than 1 will make
@@ -198,7 +198,7 @@ ase_sensitive_hostnames 0
 
 
 
-##参考来源
+## 参考来源
 
 
 

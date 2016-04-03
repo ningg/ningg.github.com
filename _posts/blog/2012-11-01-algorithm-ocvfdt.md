@@ -11,20 +11,20 @@ category: data stream algorithm
 
 下面是阅读论文的笔记：
 
-##Problem:
+## Problem:
 
 * 现有的`Data stream`分类器，都是`supervised`分类器；
 * `supervised`分类器，要求：`train set`中`instance`都有已知的`class`标签；满足这样条件的`train set`很难获得。
 
-##解决办法：
+## 解决办法：
 
 * 提出`OcVFDT`算法，效果：`train set`中，一部分`instance`已知`class`标签，剩余`instance`的`class`标签未知；
 
-###几个基本知识补充说明：
+### 几个基本知识补充说明：
 
 * `one-class`分类：`class`只有2类，`instance`的标签只有两种值，`A`和`非A`，`A`又被称为`target class`；
 
-###OcVFDT有如下几个特点：
+### OcVFDT有如下几个特点：
 
 1. 只解决`One-class`的分类问题；
 2. `train set`：一部分`instance`的`class`为`A`，剩余`instance`为`unknown`；这两类`instance`在`data stream`中服从均匀分布；（对于已经明确`class`为`非A`的`instance`，直接丢弃，不计入`train set`）

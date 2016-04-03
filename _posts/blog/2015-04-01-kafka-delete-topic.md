@@ -60,7 +60,7 @@ category: kafka
 
 
 
-##参考来源
+## 参考来源
 
 * [Kafka 0.8.2 Documentation][Kafka 0.8.2 Documentation]
 * [Purge Kafka Queue][Purge Kafka Queue]

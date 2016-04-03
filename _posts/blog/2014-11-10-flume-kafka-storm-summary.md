@@ -5,11 +5,11 @@ description: Flume(apache-flume-1.5.0.1)、Kafka()、Storm()这三个东西都�
 categories: flume kafka storm 
 ---
 
-##Flume
+## Flume
 
-###可靠性和可恢复性
+### 可靠性和可恢复性
 
-####Reliability
+#### Reliability
 
 The events are staged in a channel on each agent. The events are then delivered to the next agent or terminal repository (like HDFS) in the flow. The events are removed from a channel only after they are stored in the channel of next agent or in the terminal repository. This is a how the single-hop message delivery semantics in Flume provide end-to-end reliability of the flow.（**single-hop message delivery semantics**：Channel中的event仅在被成功处理之后，才从Channel中删掉。）
 
@@ -17,13 +17,13 @@ Flume uses a transactional approach to guarantee the reliable delivery of the ev
 
 **notes(ningg)**：Flume如何保证事物操作？没看懂
 
-####Recoverability
+#### Recoverability
 
 The events are staged in the channel, which manages recovery from failure. Flume supports a durable file channel which is backed by the local file system. There’s also a memory channel which simply stores the events in an in-memory queue, which is faster but any events still left in the memory channel when an agent process dies can’t be recovered.（Channel需保证崩溃后，能恢复events，具体：本地FS上保存durable file channel，另，占用一个in-memory queue，Channel进程崩溃后，能加快恢复速度；但，如果agent进程崩溃，将导致内存泄漏：无法回收这一内存）
 
 
 
-##Kafka
+## Kafka
 
 （TODO List）
 
@@ -31,7 +31,7 @@ The events are staged in the channel, which manages recovery from failure. Flume
 
 
 
-##Storm
+## Storm
 
 （TODO List）
 
@@ -39,11 +39,11 @@ The events are staged in the channel, which manages recovery from failure. Flume
 
 
 
-##Flume/Kafka/Storm框架性能测试
+## Flume/Kafka/Storm框架性能测试
 
 简要说一下，性能测试的目标：弄清楚整个框架的承载能力，到底能处理多达流量的数据。
 
-###前期问题
+### 前期问题
 
 几个搭建测试环境相关的问题：
 
@@ -52,7 +52,7 @@ The events are staged in the channel, which manages recovery from failure. Flume
 
 * **Flume收集的数据源**，**是否同时包含IP:port和日志**？Flume提供了从这两种source收集数据的能力，测试的时候要覆盖到。
 
-##搭建测试环境步骤
+## 搭建测试环境步骤
 
 * 实现Flume集群；
 	* 165、166收集数据，并以avro方式汇聚到167；
@@ -62,11 +62,11 @@ The events are staged in the channel, which manages recovery from failure. Flume
 	* 将167上Flume agent的sink修改为Flume Kafka Sink；
 	* 
 
-###测试方案列表
+### 测试方案列表
 
 
 
-####zookeeper集群
+#### zookeeper集群
 
 当前使用的是CDH中自带的zookeeper：
 
@@ -77,7 +77,7 @@ The events are staged in the channel, which manages recovery from failure. Flume
 
 **notes(ningg)**：zookeeper集群的基本原理，如何监控其性能？
 
-####Flume集群
+#### Flume集群
 
 * 节点位置：
 	* 168.7.2.165: 21811
@@ -100,7 +100,7 @@ Flume的配置文件需要考虑几点：
 **个人想法**：官网给出的信息很权威，不过可以到官网的JIRA上看看，其他人也遇到这个问题，应该会有其他思路。
 
 
-####Kafka集群
+#### Kafka集群
 
 * 节点位置：
 	* 168.7.2.165:9091
@@ -115,7 +115,7 @@ Flume的配置文件需要考虑几点：
 * 如何确定当前Kafka集群中broker存活状态？
 * Kafka运行过程中，可定制的输出日志有哪些？输出日志位置？
 
-####Storm集群
+#### Storm集群
 
 * 节点位置：
 	* 168.7.1.68:2181
@@ -125,11 +125,11 @@ Flume的配置文件需要考虑几点：
 **notes(ningg)**：如何构建Storm集群？
 
 
-##问题汇总
+## 问题汇总
 
 * Flume、Kafka、Storm构成框架，如何监控每个模块的存活状态和性能？如何确定系统处理的瓶颈位置？
 
-##参考来源
+## 参考来源
 
 
 

@@ -29,7 +29,7 @@ All of the advice in this class is geared towards people starting a business whe
 
 在big companies、non-startups，本课程的经验可能无效。startups are very different than normal companies. *（为什么？）*
 
-##Ideas, Products, Teams and Execution Part I
+## Ideas, Products, Teams and Execution Part I
 
 So the four areas: You need a great idea, a great product, a great team, and great execution. These overlap somewhat, but I'm going to have to talk about them somewhat individually to make it make sense.
 
@@ -59,7 +59,7 @@ startups很有趣，几点：
 	* 无知，更有想象力
 
 
-###Why you should start a startup
+### Why you should start a startup
 
 Before we jump in on the how, I want to talk about why you should start a startup. I'm somewhat hesitant to be doing this class at all because you should never start a startup just for the sake of doing so. There are much easier ways to become rich and everyone who starts a startup always says, always, that they couldn't have imagined how hard and painful it was going to be. You should only start a startup if you feel compelled by a particular problem and that you think starting a company is the best way to solve it.
 
@@ -79,7 +79,7 @@ The specific passion should come first, and the startup second. In fact, all of 
 
 自己当初在研究某个学术问题时，就有感觉，当时要解决某个问题，通过收集大量资料，脑袋中有一点朦胧的解决办法，但并不清晰，后来，自己将现实问题抽象为数学问题，并到图书馆查阅数学书籍，特别是概率论，从头梳理了一遍，中间不断整理概率论知识；最终，并没有用概率论的高级理论，但重新梳理概率论知识过程中，促使自己不断将可能的解决办法，与最初脑袋中的想法进行对比，期间，最初的想法反倒越发清晰；自己论文中，最后采用的是脑袋中最初的想法解决的问题，得到业界的普遍接受和接收，嗯，还是很自豪的，顺带也成长了。现在想起来也怪，当初竟然也没有放弃的念想。
 
-###Idea
+### Idea
 
 The first of the four areas: a great idea. It's become popular in recent years to say that the idea doesn't matter. In fact, it's uncool to spend a lot of time thinking about the idea for a startup. You're just supposed to start, throw stuff at the wall, see what sticks, and not even spend any time thinking about if it will be valuable if it works.
 
@@ -106,7 +106,7 @@ If you look at successful pivots, they almost always are a pivot into something 
 
 常思考，product的真正 user、customer对product的感受，他们在使用吗？他们愿意付费吗？
 
-####Definition of the idea
+#### Definition of the idea
 
 The definition of the idea, as we talk about it, is very broad. It includes the size and the growth of the market, the growth strategy for the company, the defensibility strategy, and so on. When you're evaluating an idea, you need to think through all these things, not just the product. If it works out, you're going to be working on this for ten years so it's worth some real up front time to think through the up front value and the defensibility of the business. Even though plans themselves are worthless, the exercise of planning is really valuable and totally missing in most startups today.
 
@@ -249,7 +249,7 @@ So I want to finish this section of my talk with a quote from 50 Cent. This is f
 * It's about the importance of thinking about what custormers want,
 * think about the demands of the market.
 
-###Product
+### Product
 
 
 
@@ -418,7 +418,7 @@ So this about wraps up the overview on building a great product. I want to empha
 
 So I'm going to pause here, we'll pick back up with the rest of this on Thursday, and now Dustin is going to talk about why you should start a startup. Thank you for coming, Dustin.
 
-##Why To Start A Startup
+## Why To Start A Startup
 
 But yeah, Sam asked me to talk about why you should start a startup. There's a bunch of common reasons that people have, that I hear all the time for why you might start a startup. Its important to know what reason is yours, because some of them only make sense in certain contexts, some of them will actually, like, lead you astray. You may have been mislead by the way that Hollywood or the press likes to romanticize entrepreneurship, so I want to try to illuminate some of those potential fallacies, so you guys can make the decision in a clear way. And then I'll talk about the reason I like best for actually starting a startup, its very related to a lot of what Sam just talked about. But surprisingly, I don't think its the most common reason. Usually people have one of these other reasons, or, you know, they just want to start a company for the sake of starting a company.
 
@@ -517,7 +517,7 @@ And even on a day to day basis, I might come in on Monday and have all these gra
 
 
 
-####flexibility
+#### flexibility
 
 A subset of You're the Boss is you have flexibility, you have control over your own schedule. This is a really attractive idea. So here's the reality:
 
@@ -543,7 +543,7 @@ Some companies like to tell the story about you can have your cake and eat it to
 
 如果只是一个人，只要条件允许，你既可以每周工作 4 天，也可以每周只工作 12 小时，但这只是在一些特定环境下，可以采取的做法。而，如果你希望获取较大的 business，或者，队伍成长为2~3人的规模，通常，你需要全身心的投入工作了。
 
-####you'll make more money and have more impact
+#### you'll make more money and have more impact
 
 This is the big one, the one I hear the most especially like candidates applying to Asana, they tell me "You know I'd really like to work for much smaller companies or start my own because then I have a much bigger slice of the pie or have much more impact on how that company does and I'll have more equity so I'll make more money as well". So let's examine when this might be true.
 
@@ -608,7 +608,7 @@ So important to keep in mind the context for what kind of company you're trying 
 * where you will actually be able to make it happen
 * reason
 
-####So what's the best reason?
+#### So what's the best reason?
 
 Sam already talked about this a little bit, but basically you can't not do it*（你不可不做，势在必行）*. You're super passionate about this idea, you're the right person to do it, you've gotta make it happen. So how does this break down?
 

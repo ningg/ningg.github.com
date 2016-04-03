@@ -15,7 +15,7 @@ category: kibana
 
 
 
-##启动
+## 启动
 
 Kibana本质就是一个Web工程，启动命令：`bin/kibana`，具体查看启动脚本，发现最终启动的是NodeJS相关的服务：`bin/../node/bin/node bin/../src/bin/kibana.js`，NodeJS我不懂，具体没看明白。几个疑问：
 

@@ -10,7 +10,7 @@ category: elasticsearch
 * 记录，作为备忘；
 * 记录初稿，今后操作时，方便基于此的改进和积累；
 
-##组件版本
+## 组件版本
 
 |组件|版本|链接|
 |----|----|----|
@@ -56,7 +56,7 @@ category: elasticsearch
 
 
 
-##添加插件
+## 添加插件
 
 目标：在ElasticSearch下添加Kafka插件。
 
@@ -111,7 +111,7 @@ category: elasticsearch
 注：参考自[ElasticSearch river kafka][ElasticSearch river kafka]
 
 
-##删除插件
+## 删除插件
 
 
 第一步，通过rest接口，删除，执行命令：
@@ -131,7 +131,7 @@ category: elasticsearch
 注：参考自[ElasticSearch river kafka][ElasticSearch river kafka]
 
 
-##参考来源
+## 参考来源
 
 
 * [ElasticSearch river kafka][ElasticSearch river kafka]

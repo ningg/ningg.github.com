@@ -22,12 +22,12 @@ Linux下一切皆文件，设备也被映射为文件；（依据在哪？）
 
 
 
-##两种link文件
+## 两种link文件
 
 linux下link文件：为已经存在的文件，创建另一个名字（别名），而不复制文件的内容。
 link文件有两种：hard link（硬链接）和symbolic link（符号链接，软链接）。
 
-###文件系统基本知识
+### 文件系统基本知识
 
 文件系统中，几点：
 
@@ -47,7 +47,7 @@ link文件有两种：hard link（硬链接）和symbolic link（符号链接，
 ![](/images/symbolic-and-hard-link/symbolic-and-hard-link.png)
 
 
-###hard link
+### hard link
 
 指向同一个inode的两个不同名字，hard link是相互的，只有指向同一文件inode的所有hard link都删除，文件内容才会删除；不同hard link之间互不影响，相互对立。
 
@@ -72,7 +72,7 @@ When to use Hard Link:
 * 保证文件的安全性，原始文件被删除，通过hard link仍能访问原始文件，即，本质上文件并没有被删除；
 * 操作系统层面上，禁止对directory创建link；
 
-###symbolic link
+### symbolic link
 
 指向其他link的link文件，不指向真正的inode，当源链接文件删除之后，symbolic link文件即失效；
 
@@ -97,9 +97,9 @@ When to use Soft Link:
 * 为什么？最上面的symbolic link图示对吗？创建symbolic link时，a new file is created with a new inode；但是新的直接指向源文件的inode？还是新的inode指向新文件？具体如何匹配的？
 
 
-##查看Inode信息
+## 查看Inode信息
 
-###指定文件的Inode信息
+### 指定文件的Inode信息
 
 命令`stat [file]`和命令`ls -dil [file]`可查看文件的inode信息：
 
@@ -122,7 +122,7 @@ When to use Soft Link:
 * 计算一个文件夹对应的Links数：针对一个文件夹的所有hard link个数，新建一个文件夹时，初始Links=2，因为在文件夹内部存在文件`.`，其也为指向当前目录的hard link；当在文件夹下创建子文件夹时，由于子文件夹下的`..`文件存在，文件夹的Links数也会增加；
 
 
-###文件系统的Inode信息
+### 文件系统的Inode信息
 
 查询当前文件系统的inode信息：
 
@@ -136,7 +136,7 @@ When to use Soft Link:
 	none                  213415       1  213414    1% /var/lock
 	/dev/sda2            7643136  156663 7486473    3% /home
 
-##创建Link文件
+## 创建Link文件
 
 利用命令`ln`来创建link文件：
 
@@ -151,7 +151,7 @@ When to use Soft Link:
 
 
 
-##参考来源
+## 参考来源
 
 * [Hard Link vs Soft Link][Hard Link vs Soft Link]
 * [Understanding Linux/Unix Filesystem Inode][Understanding Linux/Unix Filesystem Inode]
