@@ -2,7 +2,7 @@
 layout: post
 title: Lecture 1--How to Start a Startup 
 description: 文章阅读
-category: YCombinator
+category: ycombinator
 ---
 
 

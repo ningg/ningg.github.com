@@ -3,7 +3,7 @@ layout: post
 title: 汇总——Understanding the JVM
 description: JVM涉及常见问题汇总
 published: true
-category: JVM
+category: jvm
 ---
 
 

@@ -3,7 +3,7 @@ layout: post
 title: JS实现全屏滚动
 description: 捕获滚轴动作，并且全屏切换页面
 published: true
-category: JavaScript
+category: javascript
 ---
 
 

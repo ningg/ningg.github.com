@@ -2,7 +2,7 @@
 layout: post
 title: Linux下查看内存占用情况(C实现)
 description: 如何使用C语言，实现查看当前内存占用的函数
-category: Linux
+category: linux
 ---
 
 ## 背景

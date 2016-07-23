@@ -3,7 +3,7 @@ layout: post
 title: MySQL连接池
 description: 连接池的基本原理
 published: true
-category: MySQL
+category: mysql
 ---
 
 

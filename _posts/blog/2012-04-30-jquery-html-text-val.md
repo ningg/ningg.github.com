@@ -3,7 +3,7 @@ layout: post
 title: jQuery中html、text、val之间的关系和差异
 description: 设置和获取HTML、文本、值
 published: true
-category: jQuery
+category: jquery
 ---
 
 

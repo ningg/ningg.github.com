@@ -3,7 +3,7 @@ layout: post
 title: SQL语言中DDL、DML、DCL、TCL简介
 description: SQL相关术语简介
 published: true
-category: MySQL
+category: mysql
 ---
 
 

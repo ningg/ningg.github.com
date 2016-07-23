@@ -3,7 +3,7 @@ layout: post
 title: 数据库设计 3 个范式
 description: 3 个范式是什么？为什么这么设计？
 published: true
-category: MySQL
+category: mysql
 ---
 
 ## 什么是范式？

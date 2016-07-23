@@ -2,7 +2,7 @@
 layout: post
 title: 走进Java——Understanding the JVM
 description: Java的特点、发展历程、当前发展定位
-category: JVM
+category: jvm
 ---
 
 ## Java几个特点

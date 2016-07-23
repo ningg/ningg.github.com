@@ -2,7 +2,7 @@
 layout: post
 title: HTTP协议
 description: 打开浏览器，输入一个网址，回车，一个HTTP请求就发送出去了，等待HTTP响应返回，就看到网上的内容了
-categories: HTTP
+categories: http
 ---
 
 ## 背景

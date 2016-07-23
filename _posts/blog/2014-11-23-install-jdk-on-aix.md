@@ -2,7 +2,7 @@
 layout: post
 title: AIX下安装IBM JDK 1.6
 description: AIX机器上，软件环境的安装
-categories: AIX
+categories: aix
 ---
 
 ## 背景

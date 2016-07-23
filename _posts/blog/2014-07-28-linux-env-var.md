@@ -2,7 +2,7 @@
 layout: post
 title: Linux的环境变量
 description: 环境变量是什么？不同的用户拥有不同的环境变量，怎么设置的？
-category: Linux
+category: linux
 ---
 
 ## 背景

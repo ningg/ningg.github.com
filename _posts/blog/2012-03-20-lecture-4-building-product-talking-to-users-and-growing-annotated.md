@@ -3,7 +3,7 @@ layout: post
 title: Lecture 4--Building Product, Talking to Users, and Growing 
 description: 原文阅读
 published: true
-category: YCombinator
+category: ycombinator
 ---
 
 

@@ -3,7 +3,7 @@ layout: post
 title: JSP中redirect与forward简析（todo）
 description: 页面跳转
 published: true
-category: JSP
+category: jsp
 ---
 
 几点：

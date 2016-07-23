@@ -3,7 +3,7 @@ layout: post
 title: JSP中涉及的编码问题
 description: pageEncoding、contextType、charset涉及的多种编码之间的关系
 published: true
-category: JSP
+category: jsp
 ---
 
 JSP页面中代码：*（page指令）*

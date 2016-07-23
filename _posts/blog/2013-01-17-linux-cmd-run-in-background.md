@@ -2,7 +2,7 @@
 layout: post
 title: Linux 后台运行命令
 description: SSH远程操作linux服务器：SSH连接中断，导致当前运行的命令也终止
-category: Linux
+category: linux
 ---
 
 ## 问题背景

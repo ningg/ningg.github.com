@@ -1,7 +1,7 @@
 ---
 layout:        post
 title:         MOA的安装
-category:      MOA
+category:      moa
 description:   MOA源代码定制之前，需要先运行其java源代码；
 ---
 

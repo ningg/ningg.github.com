@@ -3,7 +3,7 @@ layout: post
 title: Lecture 9--How to Raise Money
 description: 阅读原文
 published: true
-category: YCombinator
+category: ycombinator
 ---
 
 > 原文地址：[How to Raise Money][How to Raise Money]

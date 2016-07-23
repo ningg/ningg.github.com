@@ -2,7 +2,7 @@
 layout: post
 title: HDFS:Hadoop Distributed File System简介
 description: HDFS是一个文件系统，为什么会存在文件系统？HDFS是分布式的文件系统，它又有什么特别的实现机制吗？
-category: Hadoop
+category: hadoop
 ---
 
 ## 背景

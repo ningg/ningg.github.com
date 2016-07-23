@@ -3,7 +3,7 @@ layout: post
 title: MySQL字段类型与适用场景
 description: tinyint？smallint？int？bigint？
 published: true
-category: MySQL
+category: mysql
 ---
 
 

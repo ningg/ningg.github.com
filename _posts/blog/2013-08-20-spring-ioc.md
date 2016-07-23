@@ -3,7 +3,7 @@ layout: post
 title: Spring中IoC机制
 description: IoC是什么？有什么优点？怎么实现？
 published: true
-category: Spring
+category: spring
 ---
 
 todo，重新阅读，补充整理：

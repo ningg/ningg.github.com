@@ -2,7 +2,7 @@
 layout: post
 title: GitHub上搭建个人网站
 description: GitHub是代码管理、分享平台，利用其GitHub Pages功能可搭建个人网站
-category: GitHub
+category: github
 ---
 
 ## 0.背景

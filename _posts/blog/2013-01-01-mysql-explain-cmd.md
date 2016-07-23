@@ -3,7 +3,7 @@ layout: post
 title: MySQL中Explain命令
 description: Explain命令详解
 published: true
-category: MySQL
+category: mysql
 ---
 
 几点：

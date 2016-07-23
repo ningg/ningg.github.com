@@ -2,7 +2,7 @@
 layout: post
 title: Linux下用户和组管理
 description: 系统权限管理，包含用户和用户组管理
-category: Linux
+category: linux
 ---
 
 ## 背景

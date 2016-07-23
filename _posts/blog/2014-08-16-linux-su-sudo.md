@@ -2,7 +2,7 @@
 layout: post
 title: Linux下su和sudo进行身份变换
 description: Linux下，如果一直使用root身份来操作，是很危险的，应该：只在必要的时候才切换root权限，而且root密码只有管理员一人知道才合理
-category: Linux
+category: linux
 ---
 
 ## 背景## 

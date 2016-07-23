@@ -3,7 +3,7 @@ layout: post
 title: Xshell常用快捷操作
 description: Xshell是工具，常用快捷操作有哪些？
 published: true
-category: Xshell
+category: xshell
 ---
 
 

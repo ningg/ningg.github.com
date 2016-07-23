@@ -2,7 +2,7 @@
 layout: post
 title: Good and Bad Reasons to Become an Entrepreneur
 description: 文章阅读
-category: YCombinator
+category: ycombinator
 ---
 
 > 原文地址：[Good and Bad Reasons to Become an Entrepreneur][Good and Bad Reasons to Become an Entrepreneur]

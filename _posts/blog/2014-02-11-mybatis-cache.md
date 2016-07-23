@@ -3,7 +3,7 @@ layout: post
 title: MyBatis中缓存机制
 description: 一级缓存、二级缓存的实现原理
 published: true
-category: MyBatis
+category: mybatis
 ---
 
 

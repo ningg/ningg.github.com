@@ -3,7 +3,7 @@ layout: post
 title: Flume 1.6.0 梳理
 description: Flume发行新版本了，梳理一下Flume的基本知识，尝试一下新特性
 published: true
-category: Flume
+category: flume
 ---
 
 几点：

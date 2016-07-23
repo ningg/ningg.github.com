@@ -2,7 +2,7 @@
 layout: post
 title: MySQL--字段内信息抽取
 description: MySQL表格内，抽取字段信息的一个基本例子
-category: MySQL
+category: mysql
 ---
 ## 问题背景
 

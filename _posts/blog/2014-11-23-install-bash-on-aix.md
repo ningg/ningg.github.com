@@ -2,7 +2,7 @@
 layout: post
 title: AIX下安装bash
 description: AIX系统下默认shell是ksh，而Linux下是bash，习惯了bash，那就在AIX下继续使用bash吧
-categories: AIX
+categories: aix
 ---
 
 ## AIX系统简介

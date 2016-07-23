@@ -2,7 +2,7 @@
 layout: post
 title: Lecture 2--Ideas, Products, Teams and Execution Part II 
 description: 文章阅读
-category: YCombinator
+category: ycombinator
 ---
 
 

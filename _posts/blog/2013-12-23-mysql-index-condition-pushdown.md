@@ -3,7 +3,7 @@ layout: post
 title: MySQL索引与Index Condition Pushdown
 description: 什么是索引条件下推，ICP？
 published: true
-category: MySQL
+category: mysql
 ---
 
 

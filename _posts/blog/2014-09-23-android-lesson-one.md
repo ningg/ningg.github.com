@@ -2,7 +2,7 @@
 layout: post
 title: Android入门几个基本知识
 description: 入门去了解一个领域，概念/术语很重要，本文将描述一下Android的几个基本概念
-category: Android
+category: android
 ---
 
 ## 背景

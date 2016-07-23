@@ -3,7 +3,7 @@ layout: post
 title: Lecture 8--Doing Things That Don't Scale, PR, and How to Get Started
 description: 阅读原文
 published: true
-category: YCombinator
+category: ycombinator
 ---
 
 > 原文地址：[Doing Things That Don't Scale, PR, and How to Get Started][Doing Things That Don't Scale, PR, and How to Get Started]

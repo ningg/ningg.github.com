@@ -2,7 +2,7 @@
 layout: post
 title: MOA框架的学习策略
 description: MOA框架学习有段时间了，小结一下
-category: MOA
+category: moa
 ---
 
 断断续续学习[MOA]:`Massive Online Analysis`，将近2个月了，来个小结，记录一下现在的想法。

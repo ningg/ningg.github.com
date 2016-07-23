@@ -3,7 +3,7 @@ layout: post
 title: Navicat for MySQL 常用操作
 description: 图形化操作、表格设计
 published: true
-category: MySQL
+category: mysql
 ---
 
 

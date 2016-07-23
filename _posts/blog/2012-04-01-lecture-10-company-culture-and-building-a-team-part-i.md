@@ -3,7 +3,7 @@ layout: post
 title: Lecture 10--Company Culture and Building a Team, Part I
 description: 原文阅读
 published: true
-category: YCombinator
+category: ycombinator
 ---
 
 

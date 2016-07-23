@@ -3,7 +3,7 @@ layout: post
 title: MySQL数据库MyISAM和InnoDB存储引擎的比较
 description: 两个存储引擎MyISAM、InnoDB的适用场景
 published: true
-category: MySQL
+category: mysql
 ---
 
 

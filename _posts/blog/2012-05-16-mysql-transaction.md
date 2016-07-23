@@ -3,7 +3,7 @@ layout: post
 title: MySQL事务隔离级别与MVCC
 description: 数据库支持事务，事务有隔离级别
 published: true
-category: MySQL
+category: mysql
 ---
 
 几点：

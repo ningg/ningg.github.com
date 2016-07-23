@@ -2,6 +2,7 @@
 layout: post
 title: 想和自己谈一谈
 description: 不时会跳出自身，来看待自己这个人，会想这个人是谁？他要做什么？应该怎么做？索性，今天就谈一谈
+published: true
 category: blog
 ---
 
@@ -43,6 +44,15 @@ category: blog
 * [InfoQ](www.infoq.com)
 * [弯曲评论](www.valleytalk.org)
 
+
+
+个人博客、微信：
+
+* [酷壳coolshell](coolshell.cn)
+* [月光博客](www.williamlong.info)
+* 陈利人：[微博](http://weibo.com/lirenchen)、`微信号：daiziguizhongren`
+* 梁斌：[微博](http://weibo.com/pennyliang)、`微信号：pennyjob`
+* Fenng：[小道消息](http://hutu.me/)、[Startup News](http://news.dbanotes.net/)
 
 
 新秀网站：对一些如同爆炸性出现的新技术、网站、观点，保持敏感度，简要学习其基本原理、规律，了解轮廓。

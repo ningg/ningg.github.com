@@ -2,7 +2,7 @@
 layout: post
 title: 正则表达式（字符串匹配模式）
 description: 正则表达式，以简单、高效的方式，实现字符串的复杂匹配操作
-category: RegExp
+category: regexp
 ---
 
 ## 背景

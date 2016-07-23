@@ -2,7 +2,7 @@
 layout: post
 title: MySQL--数据去重
 description: 一次利用MySQL，进行数据清洗的规范操作
-category: MySQL
+category: mysql
 ---
 
 

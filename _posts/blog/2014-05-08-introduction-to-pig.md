@@ -2,7 +2,7 @@
 layout: post
 title: Pig入门1h
 description: Pig，Hadoop生态体系中，数据处理利器
-category: Pig
+category: pig
 ---
 
 > 开篇先推荐一个PPT：[Pig简介]，简要介绍了Pig的基本原理，重点说明了其与MapReduce的关系。

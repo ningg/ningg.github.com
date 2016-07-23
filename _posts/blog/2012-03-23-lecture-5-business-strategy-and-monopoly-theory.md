@@ -3,7 +3,7 @@ layout: post
 title: Lecture 5--Business Strategy and Monopoly Theory 
 description: 阅读原文
 published: true
-category: YCombinator
+category: ycombinator
 ---
 
 

@@ -3,7 +3,7 @@ layout: post
 title: Spring之AOP--代理模式
 description: AOP的实例、底层原理
 published: true
-categories: Spring Java
+categories: spring java
 ---
 
 

@@ -3,7 +3,7 @@ layout: post
 title: TCP协议
 description: TCP三次握手、四次握手
 published: true
-category: TCP
+category: tcp
 ---
 
 todo

@@ -2,7 +2,7 @@
 layout: post
 title: MySQL--基本操作
 description: 开源的数据库MySQL的常用操作、内部原理
-category: MySQL
+category: mysql
 ---
 ## 简介
 

@@ -2,7 +2,7 @@
 layout: post
 title: Advice for Ambitious 19 Year Olds
 description: 文章阅读
-category: YCombinator
+category: ycombinator
 ---
 
 > 原文地址：[Advice for Ambitious 19 Year Olds][Advice for Ambitious 19 Year Olds]

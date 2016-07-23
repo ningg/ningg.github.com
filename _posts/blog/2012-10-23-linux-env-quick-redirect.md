@@ -2,7 +2,7 @@
 layout: post
 title: Linux下快速跳转到指定路径
 description:  每次登录之后，都需要cd到指定路径，这类重复劳动可以避免
-category: Linux
+category: linux
 ---
 
 ## 问题背景

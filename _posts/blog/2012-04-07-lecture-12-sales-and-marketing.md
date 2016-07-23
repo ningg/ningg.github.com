@@ -3,7 +3,7 @@ layout: post
 title: Lecture 12--Sales and Marketing
 description: 原文阅读
 published: true
-category: YCombinator
+category: ycombinator
 ---
 
 > 原文地址：[Sales and Marketing][Sales and Marketing]

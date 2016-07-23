@@ -2,7 +2,7 @@
 layout: post
 title: WordPress的开发调试环境
 description: WordPress是一直流行的博客平台，基于其可以快速建站，但要想较深入定制，就需要对其运行架构有个基本了解
-category: WordPress
+category: wordpress
 ---
 
 ## 背景

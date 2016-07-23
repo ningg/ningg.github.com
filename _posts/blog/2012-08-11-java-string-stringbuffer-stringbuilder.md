@@ -3,7 +3,7 @@ layout: post
 title: Java中String、StringBuffer、StringBuilder
 description: Java中字符串相关内容梳理
 published: true
-category: Java
+category: java
 ---
 
 我们先要记住三者的特征：

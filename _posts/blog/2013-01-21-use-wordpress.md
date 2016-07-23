@@ -3,7 +3,7 @@ layout: post
 title: 使用WordPress搭建简单站点
 description: 快速建站、简单定制
 published: true
-category: WordPress
+category: wordpress
 ---
 
 几点：

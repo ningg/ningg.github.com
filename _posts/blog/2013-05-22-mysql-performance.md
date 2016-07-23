@@ -3,7 +3,7 @@ layout: post
 title: MySQL定位效率较低的SQL
 description: 
 published: true
-category: MySQL
+category: mysql
 ---
 
 几点：

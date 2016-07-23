@@ -3,7 +3,7 @@ layout: post
 title: Java中Generic Type（泛型）
 description: 泛型是什么？如何使用？
 published: true
-category: Java
+category: java
 ---
 
 ArrayList很常见，泛型也是，泛型对集合类尤其有用。关键的问题：为什么要使用泛型？

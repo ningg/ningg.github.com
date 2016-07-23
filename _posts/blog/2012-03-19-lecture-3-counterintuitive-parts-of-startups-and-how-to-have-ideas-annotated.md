@@ -2,7 +2,7 @@
 layout: post
 title: Lecture 3--Counterintuitive Parts of Startups, and How to Have Ideas
 description: 阅读原文
-category: YCombinator
+category: ycombinator
 ---
 
 > 原文地址：[Counterintuitive Parts of Startups, and How to Have Ideas ][Counterintuitive Parts of Startups, and How to Have Ideas ]

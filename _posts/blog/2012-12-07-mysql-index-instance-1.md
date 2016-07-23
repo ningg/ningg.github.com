@@ -3,7 +3,7 @@ layout: post
 title: MySQL中索引、行锁、表锁
 description: 不同的存储引擎支持不同粒度的锁，同时也与具体的SQL语句相关
 published: true
-category: MySQL
+category: mysql
 ---
 
 几点：

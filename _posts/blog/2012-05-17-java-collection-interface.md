@@ -3,7 +3,7 @@ layout: post
 title: Java容器 - List、Set、Map
 description: Java中容器类，2个接口，Collection和Map
 published: true
-category: Java
+category: java
 ---
 
 容器是Java语言中比较重要的一部分，Java中容器类，由两个接口派生而来：Collection和Map。

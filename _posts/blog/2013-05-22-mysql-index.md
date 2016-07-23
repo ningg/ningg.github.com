@@ -3,7 +3,7 @@ layout: post
 title: MySQL索引背后的数据结构及算法原理
 description: 索引是什么？对应数据结构？InnoDB、MyISAM之间差异？
 published: true
-category: MySQL
+category: mysql
 ---
 
 > 原文地址；[MySQL索引背后的数据结构及算法原理]，本文按照自己的理解，进行了稍微的调整

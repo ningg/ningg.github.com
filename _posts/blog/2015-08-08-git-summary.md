@@ -3,7 +3,7 @@ layout: post
 title: Git梳理
 description: 版本控制的基本原理是什么？实用操作？团队协作？
 published: true
-category: Git
+category: git
 ---
 
 ## 关于版本控制说几句

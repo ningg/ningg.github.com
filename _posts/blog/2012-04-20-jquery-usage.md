@@ -3,7 +3,7 @@ layout: post
 title: jQuery常用操作
 description: 利用jQuery来实现前端常见效果
 published: true
-category: jQuery
+category: jquery
 ---
 
 

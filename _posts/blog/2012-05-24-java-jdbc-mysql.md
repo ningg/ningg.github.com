@@ -3,7 +3,7 @@ layout: post
 title: JDBC，Statement、PreparedStatement
 description: Java操作数据库基本过程，Statement、PreparedStatement之间差异
 published: true
-categories: MySQL java
+categories: mysql java
 ---
 
 

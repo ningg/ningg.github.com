@@ -3,7 +3,7 @@ layout: post
 title: jQuery梳理
 description: jQuery的基本知识、使用jQuery的基本要点
 published: true
-category: jQuery
+category: jquery
 ---
 
 几点：

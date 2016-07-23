@@ -3,7 +3,7 @@ layout: post
 title: MySQL的版本和组件
 description: 简要说明MySQL的基本常见版本、以及其内部包含的组件
 published: true
-category: MySQL
+category: mysql
 ---
 
 

@@ -1,7 +1,7 @@
 ---
 layout:			post
 title:			Eclipse下查看MOA源代码
-category:		MOA
+category:		moa
 description:	MOA:Massive Online Analysis,开源的数据流挖掘框架。
 ---
 ## 概要

@@ -2,7 +2,7 @@
 layout: post
 title: Dropbox CEO Drew Houston 2013 MIT commencement address transcript
 description: MIT alum tells grads, I stopped trying to make my life perfect, and instead tried to make it interesting
-category: YCombinator
+category: ycombinator
 ---
 
 
