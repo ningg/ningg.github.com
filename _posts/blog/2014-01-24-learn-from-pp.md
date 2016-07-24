@@ -2,7 +2,7 @@
 layout: post
 title: 针对pp的6年简要经历的个人思考
 description: 时间流过，留下痕迹，都有收获，差异在于是不是期望的收获
-published: false
+published: true
 category: blog
 ---
 

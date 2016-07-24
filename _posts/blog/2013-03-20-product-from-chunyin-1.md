@@ -2,7 +2,7 @@
 layout: post
 title: 纯银--我的产品设计流程
 description: 工作基本状态的呈现
-published: false
+published: true
 category: product
 ---
 
