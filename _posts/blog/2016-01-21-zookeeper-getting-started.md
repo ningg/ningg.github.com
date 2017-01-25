@@ -9,7 +9,7 @@ category: zookeeper
 
 ## 背景
 
-现在使用的很多基础组件，都使用 ZK 来进行分布式协调，而且之前看了很多 ZK 的内部实现细节，总感觉不直观，准备按照[官网文档][ZooKeeper]，本地安装、使用一下，试试手感。
+现在使用的很多基础组件，都用 ZK 进行分布式协作，之前看了很多 ZK 的内部实现细节，总感觉不直观，准备按照[官网文档][ZooKeeper]，本地安装、使用一下，试试手感。
 
 
 ## 整体思路
@@ -39,7 +39,7 @@ category: zookeeper
 
 启动步骤：
 
-1.`conf` 文件夹下，配置 `zoo.cfg` 文件
+1. `conf` 文件夹下，配置 `zoo.cfg` 文件
 2. `bin/zkServer.sh start` 启动
 
 ZK 单机模式下，`zoo.cfg` 文件配置样本：
@@ -57,7 +57,7 @@ clientPort=2181
 启动步骤：
 
 1. ZK 目录下，输入命令：`bin/zkCli.sh -server localhost:2181` 
-2. 正常启动后，会创建 Session，并且启用 JLine，可以通过 console（控制台），直接跟 ZK Server 交互
+2. 正常启动后，会创建 Session，并启用 JLine，可通过 console，直接跟 Server 交互
 
 **补充信息**： JLine，是处理 console input 的 Java jar 包，更多信息参考：[JLine]
 
@@ -115,7 +115,7 @@ ZooKeeper -server host:port cmd args
 
 ## 补充：集群模式
 
-上面演示的安装、启动，都是**单机模式**，应用的开发、测试过程中，常采用。实际生产环境，更多采用 ZK 的集群模式，更多细节参考：[Getting Started]。
+上面演示的安装、启动，都是**单机模式**，应用的开发、测试过程中，常采用。实际生产环境，更多采用 ZK 的**集群模式**，更多细节参考：[Getting Started]。
 
 
 
