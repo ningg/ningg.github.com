@@ -113,9 +113,9 @@ numChildren = 0
 2. ZK 中事务操作，**没有回滚**机制；但 Leader 跟 Follower 之间，有 Truncate 机制，当 Follower 的事务执行，比 Leader 新时，Leader 会发送 TRUNC 命令，让 Follower 截断事务；ZK 中，事务采取 2PC 策略，先写事务日志，然后发起 Proposal 投票，最后，听 Leader 号令 commit 事务。
 3. 事务执行的**顺序性**：统一 Leader 执行所有的事务操作，并且 Leader 上，启用`单线程`执行所有事务，保证事务顺序；最近 ZK 增加了`多线程`的支持，提高事务处理的速度。
 4. ZK 中事务，具有**幂等性**：同一个事务，执行多次，得到结果相同；多个事务，保证同一执行顺序，执行结果相同；
-5. Leader 为每一个事务请求，分配 ZXID，保证不 ZXID 有序
+5. Leader 为每一个事务请求，分配 ZXID，保证不同 ZXID 有序
 6. ZK Leader 选举过程中，通过交换 ZXID 判断，哪个 Follower 的数据最新
-7. ZXID 为 long 型（64位）整数，2 部分：时间戳（epoch） + 计数器（counter）
+7. ZXID 为 long 型（64位）整数，2 部分（每个32位）：时间戳（epoch） + 计数器（counter）
 	1. Leader 选举，会产生新的 epoch（自增）
 	2. 同一个 Leader 生成的 ZXID，epoch 相同，counter 自增
 
