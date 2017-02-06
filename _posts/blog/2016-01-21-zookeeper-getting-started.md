@@ -52,6 +52,16 @@ clientPort=2181
 
 更多配置参数细节： [Getting Started]
 
+**思考**：启动 ZooKeeper 服务节点时，是否可以配置`conf` 文件夹的位置？
+
+可以直接指定 `zoo.cfg` 配置文件，即可启动，具体命令：
+
+````
+[localhost:zookeeper-3.4.9 root]$bin/zkServer.sh start zoo_2181.cfg
+ZooKeeper JMX enabled by default
+Using config: /Users/guoning/ningg/projects/zookeeper/zookeeper-3.4.9/bin/../conf/zoo_2181.cfg
+````
+
 ### 启动 Client
 
 启动步骤：
@@ -116,6 +126,234 @@ ZooKeeper -server host:port cmd args
 ## 补充：集群模式
 
 上面演示的安装、启动，都是**单机模式**，应用的开发、测试过程中，常采用。实际生产环境，更多采用 ZK 的**集群模式**，更多细节参考：[Getting Started]。
+
+
+### 安装和启动
+
+ZooKeeper 的**单机模式**和**集群模式**之前配置文件的差异不大，下面是**集群模式**中，单个 ZooKeeper 节点的典型配置：
+
+````
+tickTime=2000
+dataDir=/tmp/zookeeper
+clientPort=2181
+# 多少个 tickTime 时间内，必须连接到 Leader
+initLimit=5
+# 多少个 tickTime 时间内，必须跟 Leader 同步一次
+syncLimit=2
+server.1=zoo1:2888:3888
+server.2=zoo2:2888:3888
+server.3=zoo3:2888:3888
+````
+
+逐个启动： `bin/zkServer.sh start zoo_2181.cfg`
+
+### 一台服务器上 ZooKeeper 集群搭建
+
+在一台物理服务器上，搭建 4 节点的 ZooKeeper 集群，基本步骤：
+
+1. 创建 4 个配置文件
+2. 每个配置文件，配置不同的 `clientPort` 和 `dataDir` 
+3. 每个 `dataDir` 对应的目录下，都创建一个 `myid` 文件
+4. `myid`文件中，只填写一个（1～255）的数字，对应配置文件中的`server.[myid]`，以标识当前服务节点的配置。
+
+具体我实验过程的配置文件如下。
+
+#### zoo.cfg 配置文件
+
+`conf/zoo_2181.cfg` 文件：
+
+````
+# The number of milliseconds of each tick
+tickTime=2000
+# The number of ticks that the initial
+# synchronization phase can take
+initLimit=10
+# The number of ticks that can pass between
+# sending a request and getting an acknowledgement
+syncLimit=5
+# the directory where the snapshot is stored.
+# do not use /tmp for storage, /tmp here is just
+# example sakes.
+dataDir=/tmp/zookeeper/2181
+# the port at which the clients will connect
+clientPort=2181
+# the maximum number of client connections.
+# increase this if you need to handle more clients
+#maxClientCnxns=60
+#
+# Be sure to read the maintenance section of the
+# administrator guide before turning on autopurge.
+#
+# http://zookeeper.apache.org/doc/current/zookeeperAdmin.html#sc_maintenance
+#
+# The number of snapshots to retain in dataDir
+#autopurge.snapRetainCount=3
+# Purge task interval in hours
+# Set to "0" to disable auto purge feature
+#autopurge.purgeInterval=1
+server.1=localhost:2881:3881
+server.2=localhost:2882:3882
+server.3=localhost:2883:3883
+server.4=localhost:2884:3884
+````
+
+`conf/zoo_2182.cfg` 文件：
+
+````
+# The number of milliseconds of each tick
+tickTime=2000
+# The number of ticks that the initial
+# synchronization phase can take
+initLimit=10
+# The number of ticks that can pass between
+# sending a request and getting an acknowledgement
+syncLimit=5
+# the directory where the snapshot is stored.
+# do not use /tmp for storage, /tmp here is just
+# example sakes.
+dataDir=/tmp/zookeeper/2182
+# the port at which the clients will connect
+clientPort=2182
+# the maximum number of client connections.
+# increase this if you need to handle more clients
+#maxClientCnxns=60
+#
+# Be sure to read the maintenance section of the
+# administrator guide before turning on autopurge.
+#
+# http://zookeeper.apache.org/doc/current/zookeeperAdmin.html#sc_maintenance
+#
+# The number of snapshots to retain in dataDir
+#autopurge.snapRetainCount=3
+# Purge task interval in hours
+# Set to "0" to disable auto purge feature
+#autopurge.purgeInterval=1
+server.1=localhost:2881:3881
+server.2=localhost:2882:3882
+server.3=localhost:2883:3883
+server.4=localhost:2884:3884
+````
+
+`conf/zoo_2183.cfg` 文件：
+
+````
+# The number of milliseconds of each tick
+tickTime=2000
+# The number of ticks that the initial
+# synchronization phase can take
+initLimit=10
+# The number of ticks that can pass between
+# sending a request and getting an acknowledgement
+syncLimit=5
+# the directory where the snapshot is stored.
+# do not use /tmp for storage, /tmp here is just
+# example sakes.
+dataDir=/tmp/zookeeper/2183
+# the port at which the clients will connect
+clientPort=2183
+# the maximum number of client connections.
+# increase this if you need to handle more clients
+#maxClientCnxns=60
+#
+# Be sure to read the maintenance section of the
+# administrator guide before turning on autopurge.
+#
+# http://zookeeper.apache.org/doc/current/zookeeperAdmin.html#sc_maintenance
+#
+# The number of snapshots to retain in dataDir
+#autopurge.snapRetainCount=3
+# Purge task interval in hours
+# Set to "0" to disable auto purge feature
+#autopurge.purgeInterval=1
+server.1=localhost:2881:3881
+server.2=localhost:2882:3882
+server.3=localhost:2883:3883
+server.4=localhost:2884:3884
+````
+
+
+`conf/zoo_2184.cfg` 文件：
+
+````bash
+# The number of milliseconds of each tick
+tickTime=2000
+# The number of ticks that the initial
+# synchronization phase can take
+initLimit=10
+# The number of ticks that can pass between
+# sending a request and getting an acknowledgement
+syncLimit=5
+# the directory where the snapshot is stored.
+# do not use /tmp for storage, /tmp here is just
+# example sakes.
+dataDir=/tmp/zookeeper/2184
+# the port at which the clients will connect
+clientPort=2184
+# the maximum number of client connections.
+# increase this if you need to handle more clients
+#maxClientCnxns=60
+#
+# Be sure to read the maintenance section of the
+# administrator guide before turning on autopurge.
+#
+# http://zookeeper.apache.org/doc/current/zookeeperAdmin.html#sc_maintenance
+#
+# The number of snapshots to retain in dataDir
+#autopurge.snapRetainCount=3
+# Purge task interval in hours
+# Set to "0" to disable auto purge feature
+#autopurge.purgeInterval=1
+
+server.1=localhost:2881:3881
+server.2=localhost:2882:3882
+server.3=localhost:2883:3883
+server.4=localhost:2884:3884
+````
+
+#### dataDir 目录下，myid 文件
+
+对应的 dataDir 目录下，都创建一个名为 `myid` 的文件，其中，内容分别为其对应的 `server.[myid]`
+
+* `/tmp/zookeeper/2181/myid`：内容 `1`
+* `/tmp/zookeeper/2182/myid`：内容 `2`
+* `/tmp/zookeeper/2183/myid`：内容 `3`
+* `/tmp/zookeeper/2184/myid`：内容 `4`
+
+#### 自定义启动\停止脚本
+
+为了方便同时启动、关闭 zookeeper 集群，编写 2 个脚本：
+
+启动脚本 `start_zk_cluster.sh`：
+
+````
+bin/zkServer.sh start zoo_2181.cfg
+bin/zkServer.sh start zoo_2182.cfg
+bin/zkServer.sh start zoo_2183.cfg
+bin/zkServer.sh start zoo_2184.cfg
+````
+
+关闭脚本 `stop_zk_cluster.sh`：
+
+````
+bin/zkServer.sh stop zoo_2181.cfg
+bin/zkServer.sh stop zoo_2182.cfg
+bin/zkServer.sh stop zoo_2183.cfg
+bin/zkServer.sh stop zoo_2184.cfg
+````
+
+#### 通过 client 验证 ZK 集群
+
+通过命令方式，分别连接到 ZK 集群的不同节点：
+
+````
+// 连接到 2181 端口 
+bin/zkCli.sh -server localhost:2181
+// 连接到 2182 端口
+bin/zkCli.sh -server localhost:2182
+
+````
+
+通过一个 cient 链接创建 ZNode，通过另一个 client 链接查询新建的 ZNode。
 
 
 
