@@ -147,6 +147,13 @@ server.3=zoo3:2888:3888
 
 逐个启动： `bin/zkServer.sh start zoo_2181.cfg`
 
+补充说明：集群方式启动 ZK 时，配置服务节点的列表：`server.A=IP:PORT1:PORT2`，其中
+
+* `A` 是服务节点的 `myid`
+* `IP` 是服务节点的 ip 地址
+* `PORT1` 与集群中 Leader 服务器交换信息
+* `PORT2` 进行 Leader 选举
+
 ### 一台服务器上 ZooKeeper 集群搭建
 
 在一台物理服务器上，搭建 4 节点的 ZooKeeper 集群，基本步骤：
@@ -163,34 +170,11 @@ server.3=zoo3:2888:3888
 `conf/zoo_2181.cfg` 文件：
 
 ````
-# The number of milliseconds of each tick
 tickTime=2000
-# The number of ticks that the initial
-# synchronization phase can take
 initLimit=10
-# The number of ticks that can pass between
-# sending a request and getting an acknowledgement
 syncLimit=5
-# the directory where the snapshot is stored.
-# do not use /tmp for storage, /tmp here is just
-# example sakes.
 dataDir=/tmp/zookeeper/2181
-# the port at which the clients will connect
 clientPort=2181
-# the maximum number of client connections.
-# increase this if you need to handle more clients
-#maxClientCnxns=60
-#
-# Be sure to read the maintenance section of the
-# administrator guide before turning on autopurge.
-#
-# http://zookeeper.apache.org/doc/current/zookeeperAdmin.html#sc_maintenance
-#
-# The number of snapshots to retain in dataDir
-#autopurge.snapRetainCount=3
-# Purge task interval in hours
-# Set to "0" to disable auto purge feature
-#autopurge.purgeInterval=1
 server.1=localhost:2881:3881
 server.2=localhost:2882:3882
 server.3=localhost:2883:3883
@@ -200,34 +184,11 @@ server.4=localhost:2884:3884
 `conf/zoo_2182.cfg` 文件：
 
 ````
-# The number of milliseconds of each tick
 tickTime=2000
-# The number of ticks that the initial
-# synchronization phase can take
 initLimit=10
-# The number of ticks that can pass between
-# sending a request and getting an acknowledgement
 syncLimit=5
-# the directory where the snapshot is stored.
-# do not use /tmp for storage, /tmp here is just
-# example sakes.
 dataDir=/tmp/zookeeper/2182
-# the port at which the clients will connect
 clientPort=2182
-# the maximum number of client connections.
-# increase this if you need to handle more clients
-#maxClientCnxns=60
-#
-# Be sure to read the maintenance section of the
-# administrator guide before turning on autopurge.
-#
-# http://zookeeper.apache.org/doc/current/zookeeperAdmin.html#sc_maintenance
-#
-# The number of snapshots to retain in dataDir
-#autopurge.snapRetainCount=3
-# Purge task interval in hours
-# Set to "0" to disable auto purge feature
-#autopurge.purgeInterval=1
 server.1=localhost:2881:3881
 server.2=localhost:2882:3882
 server.3=localhost:2883:3883
@@ -237,34 +198,11 @@ server.4=localhost:2884:3884
 `conf/zoo_2183.cfg` 文件：
 
 ````
-# The number of milliseconds of each tick
 tickTime=2000
-# The number of ticks that the initial
-# synchronization phase can take
 initLimit=10
-# The number of ticks that can pass between
-# sending a request and getting an acknowledgement
 syncLimit=5
-# the directory where the snapshot is stored.
-# do not use /tmp for storage, /tmp here is just
-# example sakes.
 dataDir=/tmp/zookeeper/2183
-# the port at which the clients will connect
 clientPort=2183
-# the maximum number of client connections.
-# increase this if you need to handle more clients
-#maxClientCnxns=60
-#
-# Be sure to read the maintenance section of the
-# administrator guide before turning on autopurge.
-#
-# http://zookeeper.apache.org/doc/current/zookeeperAdmin.html#sc_maintenance
-#
-# The number of snapshots to retain in dataDir
-#autopurge.snapRetainCount=3
-# Purge task interval in hours
-# Set to "0" to disable auto purge feature
-#autopurge.purgeInterval=1
 server.1=localhost:2881:3881
 server.2=localhost:2882:3882
 server.3=localhost:2883:3883
@@ -275,35 +213,11 @@ server.4=localhost:2884:3884
 `conf/zoo_2184.cfg` 文件：
 
 ````bash
-# The number of milliseconds of each tick
 tickTime=2000
-# The number of ticks that the initial
-# synchronization phase can take
 initLimit=10
-# The number of ticks that can pass between
-# sending a request and getting an acknowledgement
 syncLimit=5
-# the directory where the snapshot is stored.
-# do not use /tmp for storage, /tmp here is just
-# example sakes.
 dataDir=/tmp/zookeeper/2184
-# the port at which the clients will connect
 clientPort=2184
-# the maximum number of client connections.
-# increase this if you need to handle more clients
-#maxClientCnxns=60
-#
-# Be sure to read the maintenance section of the
-# administrator guide before turning on autopurge.
-#
-# http://zookeeper.apache.org/doc/current/zookeeperAdmin.html#sc_maintenance
-#
-# The number of snapshots to retain in dataDir
-#autopurge.snapRetainCount=3
-# Purge task interval in hours
-# Set to "0" to disable auto purge feature
-#autopurge.purgeInterval=1
-
 server.1=localhost:2881:3881
 server.2=localhost:2882:3882
 server.3=localhost:2883:3883
