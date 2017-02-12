@@ -107,6 +107,9 @@ numChildren = 0
 
 特别说明：事务是跟 ZK 中服务器角色相关的，ZK 服务器角色有 3 种：Leader、Follower、Observer，其中，所有的**事务操作**都会被转发给 Leader，由 Leader 执行事务，完成 ZK 状态的变更。
 
+> Note：`事务请求转发`只发生在 Leader 跟 Follower/Observer 之间，不会发生在 Leader 跟 Client 之间。
+
+
 事务请求的详细处理过程：
 
 1. 一个事务为一个单位，以原子方式操作，需要保证同时变更`节点数据`和`节点版本号`，保证事务之间相互隔离；
@@ -139,10 +142,6 @@ Session 在整个运行过程中，会在不同状态之间切换，即：Sessio
 ## 参考来源
 
 * [从Paxos到Zookeeper分布式一致性原理与实践]
-
-
-
-
 
 
 
