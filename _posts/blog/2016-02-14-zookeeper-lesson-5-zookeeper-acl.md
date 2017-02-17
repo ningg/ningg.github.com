@@ -41,7 +41,7 @@ IP： 使用 IP 识别用户，可以精确匹配 IP，也可以匹配到 IP 段
 
 Note： IP 地址是 32 位，十进制表示 4 个十进制；IP 段，表示前面多少位相同。
 
-### Digest
+#### Digest
 
 Digest，类似 `username:password`，用户名和密码。
 

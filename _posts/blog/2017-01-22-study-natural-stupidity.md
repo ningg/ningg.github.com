@@ -12,7 +12,7 @@ category: nature
 
 其中一个观点，让我受益至今：矛盾是一切事物发展的不竭动力。
 
-现在，我对‘矛盾’这个东西，是既爱又恨，矛盾这东西不可避免，人活着就不可避免遇到很多矛盾，只有遇到矛盾、正视矛盾、解决矛盾，才会进步，才会获得极大的快感和自信，所以，我爱矛盾；但是，矛盾又让人痛苦，有时候苦不堪言，作为一个人，有时候又害怕矛盾。
+现在，对‘矛盾’这个东西，是既爱又恨，矛盾不可避免，活着就会遇到很多矛盾，只有遇到矛盾、正视矛盾、解决矛盾，才会进步，会获得极大的快感和自信，所以，爱矛盾；但，矛盾又带来痛苦，有时苦不堪言，矛盾令人畏惧。
 
 前一段时间，无意间看到，***说：顺境让公司成长、逆境让个人成长。豁然开朗，顺逆皆有用，关键是用到合适的场景。
 
@@ -23,7 +23,11 @@ category: nature
 
 原文：
 
-> Some people get rich studying artificial intelligence. Me, I make money studying natural stupidity.  -- Carl Icahn
+> Some people get rich studying artificial intelligence. 
+> 
+> Me, I make money studying natural stupidity.  
+> 
+> -- Carl Icahn
 
 ### 道听途说，简单模仿
 

@@ -233,6 +233,14 @@ server.4=localhost:2884:3884
 * `/tmp/zookeeper/2183/myid`：内容 `3`
 * `/tmp/zookeeper/2184/myid`：内容 `4`
 
+具体命令 shell：
+
+````
+$ cd /tmp/zookeeper
+// 来一个 shell，创建 myid 文件
+$ for((i=1;i<=4;i++)) do touch ./218${i}/myid; echo ${i} > ./218${i}/myid ; done
+````
+
 #### 自定义启动\停止脚本
 
 为了方便同时启动、关闭 zookeeper 集群，编写 2 个脚本：
