@@ -163,11 +163,6 @@ ZK 的数据与存储中，有几个特别关注点：
 
 
 
-
-
-
-
-
 [NingG]:    http://ningg.github.com  "NingG"
 [从Paxos到Zookeeper分布式一致性原理与实践]:	https://book.douban.com/subject/26292004/
 [ZooKeeper-Distributed Process Coordination]:    http://shop.oreilly.com/product/0636920028901.do
