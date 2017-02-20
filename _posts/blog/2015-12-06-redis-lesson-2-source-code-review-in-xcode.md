@@ -112,13 +112,15 @@ Xcode下，常用快捷键：
 
 ### 4.1. 高亮插件
 
-NOTE：高亮插件，在 Xcode 7.1.1 下，不兼容
+NOTE：**高亮插件，在 Xcode 7.1.1 下，不兼容**
 
 完全按照 [SCXcodeMiniMap](https://github.com/stefanceriu/SCXcodeMiniMap) 进行安装，具体步骤如下：
 
 安装 [Alcatraz](https://github.com/supermarin/Alcatraz)：
 
-> curl -fsSL https://raw.github.com/supermarin/Alcatraz/master/Scripts/install.sh | sh
+```
+curl -fsSL https://raw.github.com/supermarin/Alcatraz/master/Scripts/install.sh | sh
+```
 
 重启 Xcode，在「Window」–「Package Manager」中搜索并安装 [SCXcodeMiniMap](https://github.com/stefanceriu/SCXcodeMiniMap) 。
  
