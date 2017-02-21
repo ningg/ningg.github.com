@@ -113,7 +113,7 @@ Redis 支持了 2 种持久化策略：
 
 * AOF 持久化：Append Only File
 * AOF 持久化，基本过程：
-	* 命令追加：redisServer 中 sds aof_buf 缓冲区
+	* 命令追加：redisServer 中 sds `aof_buf` 缓冲区
 	* 文件写入：命令，写入文件
 	* 文件同步：文件内容，刷新到磁盘
 * AOF 文件，默认同步策略：
@@ -147,6 +147,8 @@ Redis 支持了 2 种持久化策略：
 	* 伪客户端执行命令
 	* 重复步骤1、步骤2
 
+![](/images/redis/redis-aof-load-aof-file.png)
+
 ## AOF 重写
 
 * 为什么需要 AOF 重写？
@@ -173,6 +175,8 @@ Redis 支持了 2 种持久化策略：
 * 疑问：AOF 重写期间，是否还会追加 AOF 文件？
 	* 写命令，会同时追加到 AOF 缓冲区、AOF 重写缓冲区。
 
+![](/images/redis/redis-aof-rewrite-combine.png)
+
 ## 常见问题
 
 **问题1：RDB、AOF 同时存在时，优先使用哪个？**
@@ -181,6 +185,7 @@ Redis 支持了 2 种持久化策略：
 * RDB：全量持久化
 * AOF：增量持久化
 
+![](/images/redis/redis-select-rdb-or-aof.png)
 
 **问题2：RDB、AOF 时，过期 key 的处理？**
 

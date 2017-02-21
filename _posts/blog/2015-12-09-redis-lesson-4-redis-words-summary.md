@@ -102,7 +102,7 @@ category: redis
 |---|---|---|
 | cluster info | 集群状态 |   |
 | cluster nodes | 节点状态 |   |
-| cluster addslots `[slot] | 槽指派 |  |
+| cluster addslots `[slot]` | 槽指派 |  |
 | cluster keyslot `[key]` | 计算key对应的slot |   |
 | cluster replicate `<node_id>` | 设置当前节点为`<node_id>`节点的slave |   |
 | cluster getkeysinslot `<slot>` `<count>` | 从`<slot>`中获取`<count>`个key | 使用跳跃表 |
