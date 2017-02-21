@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Redis 设计与实现：持久化 RDB & AOF
+title: Redis 设计与实现：持久化 RDB&AOF
 description: Redis 支持的持久化策略
 published: true
 category: redis

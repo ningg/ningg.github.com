@@ -242,6 +242,42 @@ serverCron 函数的主要功能：
 	* 疑问：为什么优先AOF？因为 AOF 更新频率更高
 * 执行事件循环：接受客户端的连接请求？
 
+
+## 小结
+
+![](/images/redis/redis-client-and-server-interactive-progress.png)
+
+几个关键点：
+
+1. 操作对象：redisClient
+1. 两个缓冲区：服务器端，redisClient 的输入缓冲区、输出缓冲区
+1. 执行前的分析和检查：命令执行之前，分析、检查命令
+1. 子进程：执行命令后，子进程进行必要处理
+
+关于输出缓冲区：
+
+1. 分为：固定区（16KB）、可变区
+1. 一次命令的执行结果，不会被截断，只能存储到固定区或可变区
+1. 优先使用固定区，如果固定区空间不足，则将命令执行结果放置到可变区
+1. 如果可变区已经启用，则，不会继续向固定区追加数据
+1. 可变区分为：`hard limit`、`soft limit` + `timeout`，触发关闭 Client 条件
+	* 超过 `hard limit`，立即关闭？
+	* 超过 `soft limit`，并且`timeout`，立即关闭？
+
+关闭 Client ，有两种情况，redisClient 中 flag：
+
+1. `REDIS_CLOSE_AFTER_REPLY`：返回执行结果后，再关闭
+	* 适用命令：quit、kill、输入缓冲区中数据不符合协议规范
+	* 不会继续读取输入缓冲区中命令
+	* 不会向输出缓冲区，添加内容
+	* 返回当前时刻输出缓冲区中内容
+2. `REDIS_CLOSE_ASAP`：异步释放，cronServer下次执行时，安全关闭
+	* 使用情况：输出缓冲区，超过 hard limit、soft limit + timeout
+	* 不会返回输出缓冲区中内容
+	* cronServer下次执行时，安全关闭
+	* 不是 As Soon As Possible
+
+
 ## 参考来源
 
 * [服务器与客户端](http://origin.redisbook.com/internal/redis.html) 
