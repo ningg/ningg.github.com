@@ -18,9 +18,13 @@ category: redis
 	* redis cluster 内部的 master & slave 结构，能够自动进行故障迁移
 	* redis cluster 的关注点：单机的内存不足，需要多节点分布式内存存储
 
+思考：Redis Cluster 内部，自动故障转移，依赖 Sentinel 机制？
 
 
-复制，就是主从复制，只存在于 master、slave 之间;
+复制，就是主从复制：
+
+1. 只存在于 master、slave 之间;
+2. 复制，分为：同步复制、异步复制，Reids 的 MS 之间是`异步复制`；
 
 > 主从复制的目标：master、slave数据保持一致。
 
@@ -30,10 +34,15 @@ category: redis
 	* slave 上，执行 SLAVEOF 命令
 	* slave 上，设置 slaveof 配置
 
-主从复制，分为`同步`（sync）和`命令传播`（command propagate）两个操作：
+主从复制，分为`全量同步`（sync）和`命令传播`（command propagate）两个操作：
 
-* **同步**：将 slave 状态更新至 master 的当前状态，利用 RDB 文件进行；（**全量**） 
-* **命令传播**：master 上执行 write 命令，导致slave 与 master 状态不一致，slave 上也需要执行这些 write 命令（**增量**）
+* **全量同步**：将 slave 状态更新至 master 的当前状态，利用 RDB 文件进行；（**全量**） 
+* **增量命令传播**：master 上执行 write 命令，导致slave 与 master 状态不一致，slave 上也需要执行这些 write 命令（**增量**）
+
+特别说明：
+
+1. 新加入的 Slave 在从 Master 进行`全量同步`时，Master 仍可以提供 write 服务；
+2. Master 何时会终止 write 服务，只提供 read 服务？配置文件中设定 min-slave 以及 max-lag。
 
 ## 1. 旧版主从复制
 slave 新加入时，进行主从复制，包括：全量、增量两个过程：
@@ -50,12 +59,17 @@ slave 新加入时，进行主从复制，包括：全量、增量两个过程�
 1. slave 通过向 master 发送 PING 命令，反馈自己加载 RDB 文件过程？
 1. 命令传播，时间间隔？master 执行的命令，多久能够传播到 slave？
 
+疑问：
+
+1. 有几个缓冲区？作用分别是什么？
+2. AOF 缓冲区？复制积压缓冲区？Client 输出缓冲区？
+
 ## 2. 旧版主从复制的局限
 
 主从复制，几种情况：
 
-1. **初次，主从复制**：slave 之前没有复制过 master 的状态，包含：`同步`和`命令传播`，2 个过程
-1. **断网重连，主从复制**：命令传播过程中，网络连接中断， slave 重新连接到 master，重新进行主从复制
+1. **初次，主从复制**：slave 之前没有复制过 master 的状态，包含：`全量同步`和`增量命令传播`，2 个过程
+1. **断网重连，主从复制**：命令传播过程中，网络连接中断，slave 重新连接到 master，重新进行主从复制
  
 旧版主从复制功能，**局限性**：`断网重连`，主从复制时，会执行 SYNC 同步命令，非常耗时（磁盘 IO、网络IO）。
 
@@ -81,9 +95,9 @@ Redis 开始支持 PSYNC（部分重同步）的版本：
 
 ## 3. 新版本主从复制
 
-Redis 2.8 开始，使用 `PSYNC` 命令，替代 `SYNC` 命令，来进行重新主从同步。
+Redis 2.8 开始，使用 `PSYNC` 命令，替代 `SYNC` 命令，来进行`网络闪断`后的重新主从同步。
 
-PSYNC 主要解决的问题：
+PSYNC（Partial Synchronize） 主要解决的问题：
 
 > **断网重连后**，master & slave 之间的重新同步，条件满足时，避免 RDB 文件的资源消耗。
 
@@ -96,11 +110,13 @@ PSYNC 包含两种情景：
 
 1. master 是否存在两个缓冲区？生成 RDB文件时，write 命令存储至缓冲区
 1. 命令传播时，复制积压缓冲区，用于支持部分同步
-1. 有了 PSYN 命令，是否还需要 SYNC 命令？不再需要 SYNC，但为了版本兼容，仍支持 SYNC 命令
+1. 有了 PSYN 命令，是否还需要 SYNC 命令？
 
 Re：
 
-1. master & slave 场景，只有一个缓冲区，生成 RDB 文件时，write 命令使用，命令传播时使用。
+1. master & slave 场景，只有一个缓冲区，无论是否生成 RDB 文件：
+	1. 写入：write 命令使用
+	2. 读取：命令传播、部分重同步
 1. 如果master 开启了 AOF 功能，则 write 命令也会向 aof 文件缓冲区写入一份。
 1. 可以完全使用 PSYN 替代 SYNC 命令，但为了兼容，Redis 2.8+ 之后，仍然支持 SYNC 命令。
 
