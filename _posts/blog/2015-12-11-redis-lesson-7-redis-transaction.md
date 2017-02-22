@@ -10,7 +10,8 @@ category: redis
 Client 发起一次事务时：
 
 * 多个命令、一次性、按顺序执行
-* 事务在执行的期间，不会主动中断：服务器在执行完事务中的所有命令之后， 才会继续处理其他客户端的命令
+* 事务在执行的期间，不会主动中断：
+	* 服务器在执行完事务中的所有命令之后， 才会继续处理其他客户端的命令
 
 事务执行的基本过程：
 
@@ -73,7 +74,9 @@ Redis中，事务的ACID属性的表现：
 
 疑问：Redis 的一个事务中，是否会出现脏读、不可重复读、幻读的现象？
 
+## 参考资料
 
+* [http://origin.redisbook.com/feature/transaction.html](http://origin.redisbook.com/feature/transaction.html)
 
 
 
