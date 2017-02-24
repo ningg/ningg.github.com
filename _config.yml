@@ -21,7 +21,7 @@ description: NingG's Blog
 # comment
 comments:
     duoshuo:
-        name:                                # short name
+        name: ningg                             # short name
         rcomments:
             num: 10
             avatar: 0
