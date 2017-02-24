@@ -4,7 +4,7 @@
 markdown: kramdown
 
 # 代码高亮
-pygments: true
+highlighter: rouge
 # 分页设置
 #paginate: 8
 # 链接样式
@@ -15,7 +15,7 @@ permalink: /:title/
 title: ningg.top
 
 # page中head部分的meta元素
-keywords: keywords
+keywords: 激情 使命
 description: NingG's Blog
 
 # comment
