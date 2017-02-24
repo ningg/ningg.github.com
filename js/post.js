@@ -203,20 +203,21 @@ $(document).ready(function(){
         $.getScript('/js/css3-ani.js',function(){});
     }
 
-	//***********************
+    //***********************
     //**评论的代码也删掉哦***
-    window.disqus_shortname = 'ningg'; // required: replace example with your forum shortname(register on DISQUS)
-    
-	/*(function() {
-         var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-         dsq.src = 'http://' + disqus_shortname + '.disqus.com/embed.js';
-         (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-     })();*/
-	$('#disqus_container .comment').on('click',function(){
-        $(this).html('加载中...');
-        var that = this;
-        $.getScript('http://' + disqus_shortname + '.disqus.com/embed.js',function(){$(that).remove()});
-    });
+    <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
+	<script type="text/javascript">
+	var duoshuoQuery = {short_name:"ningg"};
+		(function() {
+			var ds = document.createElement('script');
+			ds.type = 'text/javascript';ds.async = true;
+			ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.unstable.js';
+			ds.charset = 'UTF-8';
+			(document.getElementsByTagName('head')[0] 
+			 || document.getElementsByTagName('body')[0]).appendChild(ds);
+		})();
+		</script>
+    <!-- 多说公共JS代码 end -->
     //**评论的代码也删掉哦***
     //***********************
 
