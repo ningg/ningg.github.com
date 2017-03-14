@@ -58,7 +58,7 @@ Kafka 具体结构：
 > Apache Kafka 0.7.x~0.8.x 中，并没有提到 Stream Processors 和 Connectors。
 
 
-## 搭建 Kafka 本地运行环境（单节点模式）
+## 搭建 Kafka 运行环境(单节点模式)
 
 这一部分，主要参考： [Kafka 官网-Quickstart] 来操作。
 
@@ -71,7 +71,7 @@ Kafka 具体结构：
 > cd kafka_2.11-0.10.2.0
 ```
 
-### 启动 Kafka 服务器
+### 启动
 
 Kafka 集群的运行，需要依赖 ZooKeeper 集群，如果没有ZooKeeper 集群，则，使用下述命令，先启动一个 ZK 集群：
 
@@ -81,7 +81,7 @@ Kafka 集群的运行，需要依赖 ZooKeeper 集群，如果没有ZooKeeper �
 [2017-03-13 23:43:08,455] INFO Reading configuration from: config/zookeeper.properties (org.apache.zookeeper.server.quorum.QuorumPeerConfig)
 ```
 
-启动 Kafka 集群：
+启动 Kafka 集群（单节点）：
 
 ```
 > bin/kafka-server-start.sh config/server.properties
@@ -129,7 +129,7 @@ hello !
 你好！
 ```
 
-## 搭建 Kafka 本地运行环境（集群模式）
+## 搭建 Kafka 运行环境(集群模式)
 
 参考： [Kafka 官网-Quickstart] 来操作；具体涵盖的内容：
 
