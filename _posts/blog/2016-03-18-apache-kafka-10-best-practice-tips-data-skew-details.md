@@ -265,7 +265,7 @@ private def getPartition(topic: String, key: Any, topicPartitionList: Seq[Partit
 ## 参考资料
 
 * [Kafka 官网]
-* [https://cwiki.apache.org/confluence/display/KAFKA/0.8.0+Producer+Example Kafka ](https://cwiki.apache.org/confluence/display/KAFKA/0.8.0+Producer+Example Kafka ) 0.8.1版本以下，Producer API 的示例
+* [https://cwiki.apache.org/confluence/display/KAFKA/0.8.0+Producer+Example](https://cwiki.apache.org/confluence/display/KAFKA/0.8.0+Producer+Example)  Kafka 0.8.1版本以下，Producer API 的示例
 * [https://cwiki.apache.org/confluence/display/KAFKA/Consumer+Group+Example](https://cwiki.apache.org/confluence/display/KAFKA/Consumer+Group+Example) High Level Consumer API 示例 （offset 未及时提交到 zookeeper 导致数据重复消费）
 * [https://cwiki.apache.org/confluence/display/KAFKA/0.8.0+SimpleConsumer+Example](https://cwiki.apache.org/confluence/display/KAFKA/0.8.0+SimpleConsumer+Example) Simple Consumer API
 * [http://kafka.apache.org/082/documentation.html](http://kafka.apache.org/082/documentation.html) Kafka 0.8.2 版本文档

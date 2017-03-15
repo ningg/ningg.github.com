@@ -125,6 +125,37 @@ Kafka 0.8.2+ 开始，offset 管理策略有改进：
 
 * [http://www.confluent.io/blog/whats-coming-in-apache-kafka-0-8-2/](http://www.confluent.io/blog/whats-coming-in-apache-kafka-0-8-2/)
 
+## Consumer 处理能力感知
+
+Consumer 的处理能力感知：
+
+1. Kafka：一个 partition 只能被一个 consumer 处理
+1. 某个 consumer 处理能力很强时，如何设置 consumer 切换处理其他 partition？
+
+需要弄清楚：
+
+1. Kafka 的 Consumer API 中解决了上述问题了么？
+1. 解决上述问题，基本思路是什么？
+
+**结论**：
+
+> Kafka 作为新一代数据平台核心组件，`不会感知计算能力`，而是以「数据」为第一公民，Consumer 处理能力很强时，不会类似 `Fork-Join` 机制一样去处理其他 Partition，而是类似 `Map-Reduce` 机制，Consumer 处理完之后，就会空转。
+
+先看一个问题：
+
+1. consumer 消费 partition 中数据，当没有新数据时，consumer 会断开连接吗？
+1. partition 中有新的数据产生时，consumer 会定期查询、并获取最新数据吗？
+1. 细节上，consumer 与  partition 中之间详细交互过程？
+
+**结论**：
+
+> 无论partition是否有数据，consumer都会不断向broker轮询。所以不会断开连接，且会获取到最新的数据。
+
+
+
+
+
+
 ## producer、broker、zookeeper、consumer 之间的基本关系
 
 几个基本说法：
