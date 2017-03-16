@@ -1,6 +1,6 @@
 ---
 layout: post
-title: ZooKeeper 典型应用场景
+title: ZooKeeper 技术内幕：典型应用场景
 description: ZooKeeper 的应用实例剖析
 published: true
 category: zookeeper

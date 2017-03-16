@@ -1,6 +1,6 @@
 ---
 layout: post
-title: ZooKeeper 使用：Curator ZooKeeper API 的高级封装库
+title: ZooKeeper 技术内幕：Curator ZooKeeper API 的高级封装库
 description: Curator 的使用剖析
 published: true
 category: zookeeper
