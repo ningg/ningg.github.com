@@ -1,7 +1,7 @@
 ---
 layout: post
-title: MySQL字符编码和大小写敏感问题
-description: 没有系统整理过MySQL知识，先这样零散地整理了
+title: MySQL 最佳实践：常见问题汇总(1)
+description: 没有系统整理 MySQL 实践知识，先这样零散地整理了
 category: mysql
 ---
 

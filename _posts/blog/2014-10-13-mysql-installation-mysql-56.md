@@ -1,6 +1,6 @@
 ---
 layout: post
-title: MySQL安装
+title: MySQL安装：MySQL 5.6
 description: 经常要安装MySQL，虽然整理有文档，但每次都会遇到点问题，这次系统整理一下
 category: mysql
 ---
