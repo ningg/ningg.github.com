@@ -1,6 +1,6 @@
 ---
 layout: post
-title: MySQL索引与Index Condition Pushdown
+title: MySQL 技术内幕：索引与Index Condition Pushdown
 description: 什么是索引条件下推，ICP？
 published: true
 category: mysql
@@ -182,56 +182,10 @@ ICP的原理简单说来就是将可以利用索引筛选的where条件在存储
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 ## 参考来源
 
 * [MySQL索引背后的数据结构及算法原理]
 * [MySQL索引与Index Condition Pushdown]
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
