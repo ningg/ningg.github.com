@@ -1,6 +1,6 @@
 ---
 layout: post
-title: MySQL中主从复制以及日志简析
+title: MySQL 基础：中主从复制以及日志简析
 description: 主从复制的基本过程，MySQL中常见日志的作用
 published: true
 category: mysql

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: MySQL中datetime字段的使用
+title: MySQL 基础：datetime 字段典型应用
 description: 如何查询datetime字段？如何按照datetime字段进行归类？
 published: true
 category: mysql
