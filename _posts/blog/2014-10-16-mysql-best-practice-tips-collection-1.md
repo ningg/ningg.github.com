@@ -98,11 +98,6 @@ MySQL无法连接，提示表格不存在，设置table名称不区分大小写�
 
 
 
-
-
-
-
-
 ## 参考来源
 
 * [MySQL官方文档](http://dev.mysql.com/doc/)
