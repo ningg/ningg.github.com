@@ -89,8 +89,6 @@ MySQL **主从复制**的过程：
 		* 第一阶段：Master 依赖 `bin log` 向 Slave 复制`事务操作`
 		* 第二阶段：Master 收到至少一个 Slave 响应后，`提交事务`
 
-![](/images/inside-mysql/mysq-semi-sync-5-5.png)
-
 ![](/images/inside-mysql/mysq-semi-sync-5-7.png)
 
 ### 集群：主从延时
@@ -256,11 +254,33 @@ Re：拆成`子表` + `lazy-load` 方式
 3. 表`字段改名`，前者不需要修改，后者需要改
 4. 后者的`可读性`比前者要高
 
+### 实践：日期字段，是否适合创建索引
+
+MySQL 中日期类型字段有：
+
+* datetime：8字节，日期、时间
+* timestamp：4字节，日期、实践
+* date：3字节，日期
+* time：3字节，时间
+
+对于日期字段，索引的使用需要特别注意：
+
+* 日期字段，使用函数时，索引无效，会全表扫描，例如：
+	* `SUBSTR(WorkDate,1,7) = 'YYYY-MM'` 
+	* `DATE_FORMAT(WorkDate,'%Y%m') = 'YYYYMM'`
+* 使用 `=` ，会使用索引
+* 使用 `BETWEEN...AND...`，会使用索引
+
+因此，日期字段，创建索引时，要特别注意 SQL 优化。
+
+更多索引使用情况，参考：[如何提高查询速度](http://www.cnblogs.com/luxf/archive/2012/02/08/2343345.html)
+
 ## 参考资料
 
 * [MySQL之char、varchar和text的设计](http://www.cnblogs.com/billyxp/p/3548540.html)
 * [MySQL 知识点](http://www.cnblogs.com/zengkefu/p/5716190.html)
 * [一份mysql面试题](http://www.cnblogs.com/wyeat/p/job_interview2.html)
+* [如何提高查询速度](http://www.cnblogs.com/luxf/archive/2012/02/08/2343345.html)
 
 
 TODO：
