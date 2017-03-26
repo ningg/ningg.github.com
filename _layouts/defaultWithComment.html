@@ -34,7 +34,10 @@
 
     {{ content }}
 
-	<div id="gotoTop">Top</div>
+    <!-- 网易云跟帖 -->
+    <div id="cloud-tie-wrapper" class="cloud-tie-wrapper"></div>
+    
+    <div id="gotoTop">Top</div>
 
 
     <!--*********************************************************-->
@@ -91,20 +94,18 @@
 
     </script>
 
-{% if site.comments.duoshuo.name %}
- <!-- 多说公共JS代码 start (一个网页只需插入一次) -->
- <script type="text/javascript">
- var duoshuoQuery = {short_name:"ningg"};
-	(function() {
-		var ds = document.createElement('script');
-		ds.type = 'text/javascript';ds.async = true;
-		ds.src = (document.location.protocol == 'https:' ? 'https:' : 'http:') + '//static.duoshuo.com/embed.unstable.js';
-		ds.charset = 'UTF-8';
-		(document.getElementsByTagName('head')[0] 
-	 || document.getElementsByTagName('body')[0]).appendChild(ds);
-	})();
- </script>
- <!-- 多说公共JS代码 end -->
+{% if site.comments.163.gentie.name %}
+ <!-- 网易云跟帖公共JS代码 start (一个网页只需插入一次) -->
+<script>
+  var cloudTieConfig = {
+    url: document.location.href, 
+    sourceId: "",
+    productKey: "7c8adb9f15a64f7cad475845e5b7996f",
+    target: "cloud-tie-wrapper"
+  };
+</script>
+<script src="https://img1.cache.netease.com/f2e/tie/yun/sdk/loader.js"></script>
+ <!-- 网易云跟帖公共JS代码 end -->
 {% endif %}
 
 </body>

@@ -113,6 +113,8 @@ Update：（time：20170224）因为中国大陆无法访问 Discus ，跟读者
 1. 注册 [多说](duoshuo.com) 账号
 2. 获得评论框的 JS 代码
 
+update：（time：20170326）多说网站将在 6月1日 关闭，因此，需要切换到其他评论了，这次，切换到[网易云跟帖](https://gentie.163.com/index.html)
+
 
 ### 4.3配置网站，支持LaTeX语法
 

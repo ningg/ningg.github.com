@@ -1,6 +1,6 @@
 ---
 layout: post
-title: MySQL的命名规范
+title: MySQL 基础：表、字段的命名规范
 description: MySQL的database、table、column的命名规范
 published: true
 category: mysql
@@ -41,28 +41,12 @@ category: mysql
 
 
 
-
-
-
-
-
-
-
-
-
-
 ## 参考来源
 
 
 * [MySQL 5.6 Reference Manual][MySQL 5.6 Reference Manual]
 * [MySQL数据库命名规范及约定][MySQL数据库命名规范及约定]
 * [去哪儿MySQL开发规范.pdf][去哪儿MySQL开发规范.pdf]
-
-
-
-
-
-
 
 
 

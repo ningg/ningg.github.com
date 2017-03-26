@@ -20,15 +20,9 @@ description: NingG's Blog
 
 # comment
 comments:
-    duoshuo:
-        name: ningg                             # short name
-        rcomments:
-            num: 10
-            avatar: 0
-            time: 0
-            title: 0
-            admin: 0
-            length: 26
+    163:
+        gentie:
+            name: ningg                             # short name
 
 # url: http://ningg.github.com
 url: http://ningg.top
