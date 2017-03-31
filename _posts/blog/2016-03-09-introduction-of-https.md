@@ -1,75 +1,192 @@
 ---
 layout: post
-title: HTTPS 协议剖析
+title: HTTPS：简介
 description: 为什么会产生 HTTPS 协议？HTTPS 协议设计的原理
 published: true
 category: http
 ---
 
-## 背景
+## 0. 概要
 
-有几个疑问：
+Web 应用已经全面升级为 HTTPS 服务，有几个基本的问题：
 
-1. 为什么会产生 HTTPS？解决什么问题？
-2. HTTPS 跟 HTTP 什么关系？S 是什么含义？
-3. HTTPS 连接建立的过程？中间涉及几个主体？
+1. 为什么：HTTP 应用这么多年，遇到什么问题了吗？为什么要升级到 HTTPS？
+1. 是什么：HTTPS 是什么？如何解决这些问题的？
+1. 怎么做：Web 服务，如何开启 HTTPS 支持？浏览器？DNS？Nginx 代理服务器？
+1. 附录：引入 HTTPS 的收益？代价？
 
-## HTTPS 解决什么问题
+## 1. 为什么：HTTP 的问题
 
-HTTP 协议传输的内容，因为是明文的，存在几个问题：（**安全问题**）
+HTTP，基于 TCP 的应用层协议，明文传输，存在隐患：
 
-1. 偷窥（嗅探）：传输内容被偷窥
-2. 篡改：传输内容被篡改
-3. 重放攻击：抓到网络上 HTTP 请求后，重放多次，导致服务异常
+1. 窃听：传输内容，被第三方获取
+1. 篡改：传输内容，被修改
+1. 劫持：伪造 Server 身份，为 Client 服务；又称：冒充、中间人攻击
 
-为了解决上述问题，HTTPS 诞生，其本质是 HTTP over SSL/TLS，相当于基于 HTTPS 做了一层'加密/解密'。
+ ![](/images/http/http-problems.png)
 
+## 2. 是什么：HTTPS 提升安全性
 
-### 最原始解决方法
+有没有什么办法，解决上述问题？
 
-但是，简单的加密、解密无法解决上述问题：（简单的加密：把密钥存放到 HTTP 的头部）
-
-1. Web 服务：Client 是浏览器，而且默认是任何浏览器都可以访问的，因此，需要公开全网的解密算法
-2. 密钥放到 HTTP 头部：任何人都可以获取到
-3. 由于有`公开的解密算法`和`公开的解密密钥`，因此，仍可以偷窥、篡改网页内容
-
-从上面，可以看出：
-
-* **浏览器（Client）默认被信任的**，这是 Web 服务的典型特点;
-* 因此，**不能在 HTTP 响应中，包含解密密钥**。
-
-todo：添加图片
-
-结论：
-
-> 传统的加密、解密，无法解决 HTTP 的安全问题。
-
-### HTTPS 协议的设计需求
-
-整体几个方面，HTTPS 要满足下面几点：
-
-1. 兼容性：现有 HTTP，后有 HTTPS，因此，设计 HTTPS 时，需要考虑兼容 HTTP，具体：
-	1. Web 应用无缝迁移：无缝迁移到 HTTPS
-	2. 浏览器厂商：支持 HTTPS 的改动尽可能小
-2. 
-
-
-补充：
-
-基于`兼容性`考虑，得出结论：
-
-1. HTTPS 还是要基于 TCP 来传输：调整为基于 
+1. 归类一下，都是安全性问题，根源是「明文传输」，怎么解决？加密。
+1. 加密，怎么加密？
+	1. 加密、解密，需要密钥
+	1. 传递密钥之前，是明文传输，此时，如何传递「密钥」？
+	1. 使用「非对称加密」，传递「对称加密」的「密钥」
+1. 整个过程：
+	1. 非对称加密：Client 向 Server 传递「密钥」
+	1. 对称加密：Client 和 Server 都获得「密钥」后，即可进行「对称加密」
+	1. 思考：完整的请求响应过程，使用「非对称加密」，是否可以？（窃听）
+1. 使用「非对称加密」+「对称加密」，能否解决所有安全问题？（窃听、篡改、劫持）
+	1. 劫持：风险仍然存在，中间人攻击（劫持）
+	1. 效率问题：非对称加密效率低、耗时长（相对于对称加密）
+1. 劫持，产生的根源：无法验证「公钥」是否真的是指定网站所有。
+	1. Client 如何验证「公钥」的有效性？
+	1. 引入`数字证书`，数字证书中包含公钥，只要证书是可信的，公钥就是可信的
+	1. 浏览器中，内置通用数字证书的验证逻辑和「根证书」
+1. 数字证书的验证过程：如何验证数字证书是有效的？数字证书是否有伪造风险？
+	1. 数字证书，内部包含：`公钥`和`数字签名`，使用根数字证书，验证公钥和数字签名的匹配关系
+	1. 依赖浏览器中内置的「根数字证书」
+	1. 数字证书：依赖链
+ 
+![](/images/http/https-mitm.png)
 
 
+HTTPS 请求的连接建立过程：
 
+1. HTTP 是完全基于 TCP 协议的， TCP 是三次握手，建立的连接；
+1. HTTPS 请求，基于 SSL/TLS，连接是如何建立的？
+1. 断网重连机制？
 
-## HTTPS 连接建立过程
+![](/images/http/https-with-rsa-handshake.png)
 
-几个核心问题：
+ 
+特别说明：
 
-1. HTTPS 连接建立过程
-2. HTTPS 数据传输过程
-3. HTTPS 解决的问题？（相对 HTTP）
+1. HTTPS 的 RSA 算法，建立加密通信的过程：非对称加密
+1. 握手阶段，RSA 算法，使用 3 个随机数，生成 Session Key 作为加密密钥的原因：
+	1. 防止「随机数 C」被猜出
+	1. 引入多个随机因素，增加 Session Key 的随机性
+1. 「步骤 1」：Client 会发出：支持的「非对称/对称加密」算法
+1. 「步骤 2」：Server会返回：选用的「非对称/对称加密」算法
+1. 「步骤 3」：Client 确认算法
+1. 「步骤 4」：Server 确认算法
+
+几个关键词：
+
+非对称加密：实现「密钥协商」
+对称加密：采用协商的密钥，进行「数据加密」
+数字证书：实现「身份认证」
+
+补充：如果使用 DH（ Diffie-Hellman算法）进行非对称加密，实际上，调整的是「步骤 3」交换「随机数 C」的过程，更多细节参考：[http://www.ruanyifeng.com/blog/2014/09/illustration-ssl.html](http://www.ruanyifeng.com/blog/2014/09/illustration-ssl.html)
+
+DH 非对称加密：
+
+![](/images/http/https-with-dh-handshake.png)
+ 
+ 
+思考：
+
+> HTTPS 是否加密：HTTP Header 和 HTTP Body？
+> 
+> RE：因为 HTTPS 是运行在 SSL/TLS 之上的，所以， HTTPS 的所有数据（header 和 body）都是加密的。
+
+##3. 怎么做：如何升级到 HTTPS？
+
+* 端到端，都要支持 SSL/TLS：
+* 浏览器：
+* Nginx
+	* [Nginx 使用ssl模块配置HTTPS支持](https://www.centos.bz/2011/12/nginx-ssl-https-support/)
+	* [Configuring HTTPS Server](http://nginx.org/en/docs/http/configuring_https_servers.html)
+* Web Server Container：是否有影响？
+	* [Jetty 配置 SSL](http://www.eclipse.org/jetty/documentation/current/configuring-ssl.html)
+
+ 
+## 4. 实例
+
+现在常用的 HTTPS 细节：
+
+* 非对称加密算法：RSA？DH？
+* 对称加密算法：AES？
+
+举例：
+
+> The connection to this site is encrypted and authenticated using a strong protocol (TLS 1.2), a strong key exchange (ECDHE_RSA with P-256), and a strong cipher (AES_256_GCM).
+
+* ECDHE_RSA ：非对称加密算法，DH 的升级版本
+* AES_256_GCM：对称加密算法，AES（Advanced Encryption Standard，先进加密标准）
+
+## 5. 附录
+
+### 5.1. 附录：加密和密钥
+
+这一部分，对加密、解密、密钥、公钥、私钥、对称加密、非对称加密，进行简单介绍。
+
+从使用场景入手：
+
+> 场景：对一部分内容，加密和解密。
+
+各个术语：
+
+1. 明文：加密之前的内容
+1. 密文：加密之后的内容
+1. 加密密钥：明文→ 密文，加密过程中，使用的密钥
+1. 解密密钥：密文→ 明文，解密过程中，使用的密钥
+1. 对称加密：「加密密钥」等于「解密密钥」
+1. 非对称加密：「加密密钥」不等于「解密密钥」
+	1. 「公钥」加密的内容，只有「私钥」能解密
+	1. 「私钥」加密的内容，只有「公钥」能解密
+	1. **非对称加密，是单向的**，公钥是公开的，任何人都可以获取公钥，从而获得 Server 信息的明文
+	1. 非对称加密的典型作用：传递对称加密的密钥
+1. 公钥：公开的密钥，对应到「非对称加密」中的 Client 端的「加密密钥」
+1. 私钥：私有的密钥，对应到「非对称加密」中的 Server 端的「解密密钥」
+
+![](/images/http/encrypt-and-decode.png)
+
+### 5.2. 附录：HTTPS 的代价
+
+HTTPS （HTTP over SSL/TLS）：
+
+1. 使用 SSL 安全通道，非对称加密：交换随机数，生成对称加密的密钥；
+1. 数据传输过程中：完整的 HTTP 协议，但使用密钥进行「对称加密」；
+
+HTTPS 相对 HTTP ，获得了很好的安全性，那是否有代价呢？
+
+* 连接建立过程：增加了 SSL 的握手过程，连接建立时间，比 HTTP 要长 2～5 倍
+* 数据传输过程：HTTP 数据传输，需要加密、解密，时长更长
+
+HTTP vs. HTTPS：
+
+1. HTTP耗时 = TCP握手
+1. HTTPs耗时 = TCP握手 + SSL握手 （TCP 和 SSL 共用了一个请求）
+
+![](/images/http/tcp-handshake-3-times.png)
+
+![](/images/http/tcp-discard-4-times.png)
+
+![](/images/http/ssl-handshake-4-times.png)
+
+![](/images/http/tcp-with-ssl-handshake.png)
+
+使用 curl 命令，可以统计 TCP握手 和 SSL握手的时间：
+
+```
+curl -w "TCP handshake: %{time_connect}, SSL handshake: %{time_appconnect}\n" -so /dev/null https://www.baidu.com
+```
+
+不同的网站，TCP握手时间和 SSL握手时间，差异比较大，一般认为：
+
+* SSL 握手时间，是 TCP 握手时间的 2～10 倍。
+
+更多操作细节，参考：[http://www.ruanyifeng.com/blog/2014/09/ssl-latency.html](http://www.ruanyifeng.com/blog/2014/09/ssl-latency.html)
+
+## 6. 参考资料
+
+* [图解SSL/TLS协议](http://www.ruanyifeng.com/blog/2014/09/illustration-ssl.html)
+* [SSL/TLS协议运行机制的概述](http://www.ruanyifeng.com/blog/2014/02/ssl_tls.html)
+* [SSL延迟有多大？](http://www.ruanyifeng.com/blog/2014/09/ssl-latency.html)
+* [TLS 握手优化详解](https://imququ.com/post/optimize-tls-handshake.html)
 
 
 
@@ -157,46 +274,6 @@ HTTP 如何使用 TCP ？
 1. TCP 长连接中，keep-alive 是谁设置的？
 2. keep-alive，超时之后，谁负责释放 TCP 连接？
 3. 超时时间，同时保存在 client 和 server 侧？
-
-## 加密：对称加密和非对称加密
-
-加密：
-
-* 涉及概念：明文、密文、密钥
-* 加密：使用**密钥**，对**明文**加密，获得**密文**
-
-
-整体过程：
-
-todo: 加密-解密过程，图片
-
-
-加密密钥、解密密钥：
-
-* 对称加密：**加密密钥**跟**解密密钥**完全相同
-* 非对称加密：**加密密钥**跟**解密密钥**不相同
-
-从功能角度而言：
-
-* “**非对称加密**”优点：能做的事情更多，（思考：比如，哪些事情对称加密做不了？）
-* “**非对称加密**”缺点：，涉及“复杂数学问题”，性能相对更差一点；
-
-这两者的优缺点，也影响到了 SSL 协议的设计。（思考：比如，哪些影响？）
-
-## CA 证书的用途和原理
-
-todo
-
-
-
-
-
-
-
-
-
-
-
 
 
 

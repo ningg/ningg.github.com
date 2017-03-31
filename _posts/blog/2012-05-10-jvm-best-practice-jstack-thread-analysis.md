@@ -1,15 +1,22 @@
 ---
 layout: post
-title: jstack对运行的Thread进行分析
+title: JVM 实践：jstack对运行的 Thread 进行分析
 description: 分析当前JVM运行情况
 published: true
-categories: java jvm
+categories: jvm
 ---
 
 
 当Java应用运行时，如果CPU占用高，此时，需要对应用的性能进行分析，简要步骤如下：
 
-* top命令 - O/F ：查看哪个Process占用大量CPU，记录PID；
+1. 定位进程
+2. 定位线程
+3. 输出线程的调用栈
+4. 根据调用栈，分析代码，进行优化
+
+具体操作：
+
+* `top` 命令 - O/F ：查看哪个Process占用大量CPU，记录PID；
 * `top -H -p [pid]`：查看Process内部Thread的运行情况，重点记录排在前面运行的Thread；
 * `jstack -l [pid] > [pid].stack`：获得对应pid下Thread的详细情况；
 * `jmap [pid]`：查看内存堆栈信息；
@@ -21,14 +28,16 @@ categories: java jvm
 
 vmstat来看看机器的情况，发现当前的排队线程有时高达76，低时也有10个以上，已经超出了CPU数。既然是线程的情况，就重新执行`jstack -l [pid] > [pid].stack`，来详细分析Waiting的线程。
 
-## 查看进程
+Note：`r` 运行态的线程数量，`b` 阻塞状态的线程数量。
+
+## 1.查看进程
 
 top命令`top` -- `P/M`，结果：
 
 	  PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+  COMMAND                                                                   
 	 4796 storm     20   0 9935m 264m  13m S 134.5  0.8   3745:18 java  
 
-## 参看线程
+## 2.查看线程
 
 top命令`top -H -p 4796`，结果：
 
@@ -37,7 +46,7 @@ top命令`top -H -p 4796`，结果：
 	4915 storm     20   0 3582m 256m  12m S  0.3  0.8   7:44.29 java      
 
 	
-## 查看JVM中线程详细信息
+## 3.分析线程调用栈
 
 4967是最耗CPU的线程，转换成16进制1367，再用`jstack`命令查看线程堆栈：
 
@@ -69,30 +78,17 @@ top命令`top -H -p 4796`，结果：
 
 几点：
 
-* top + jstack，更通用
-* Jprofiler和java自带的可视化工具，更方便
-
-
-
-
-
-
+* 更通用：top + jstack
+* 更方便：Jprofiler和java自带的可视化工具
 
 
 
 
 思考：
 
-* vmstat输出结果参数的含义？
+* vmstat输出结果参数的含义？ 详细参考：[vmstat 命令参数详解
+](http://blog.csdn.net/zhuying_linux/article/details/7336869)
 * jstack、jmap详解；（JVM性能调优工具）
-
-
-
-
-
-
-
-
 
 
 
@@ -102,12 +98,6 @@ top命令`top -H -p 4796`，结果：
 ## 参考来源
 
 * [一个Tomcat高CPU占用问题的定位][一个Tomcat高CPU占用问题的定位]
-
-
-
-
-
-
 
 
 
