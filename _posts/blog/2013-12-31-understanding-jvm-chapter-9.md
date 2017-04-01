@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 类加载及执行子系统的案例与实战——Understanding the JVM
+title: Understanding the JVM：类加载及执行子系统的案例与实战
 description: 类加载、字节码执行，通过实例方式串联起来
 category: jvm
 ---
@@ -38,6 +38,8 @@ category: jvm
 为了支持这套目录，并对目录内的类库进行加载和隔离，Tomcat自定义了几个类加载器，这些类加载器按照经典的**双亲委派模型**来实现，如下图所示：
 
 ![](/images/understanding-jvm/tomcat5_classloader.jpg)
+
+Note：上述 JVM 中的 `App ClassLoader`，是特殊的**应用类加载器**，也称为 `Sys ClassLoader` **系统类加载器**。
 
 上述的类加载器：
 

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: JVM性能监控与故障处理工具——Understanding the JVM
+title: Understanding the JVM：JVM性能监控与故障处理工具
 description: 如何监控JVM性能？如何进行故障定位？进程还是线程？
 category: jvm
 ---

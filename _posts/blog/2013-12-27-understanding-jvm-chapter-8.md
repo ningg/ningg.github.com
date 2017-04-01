@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 虚拟机字节码执行引擎——Understanding the JVM
+title: Understanding the JVM：虚拟机字节码执行引擎
 description: 如何执行class字节码文件？
 category: jvm
 ---

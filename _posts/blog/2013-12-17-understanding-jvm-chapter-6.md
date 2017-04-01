@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 类文件结构——Understanding the JVM
+title: Understanding the JVM：类文件结构
 description: class文件的结构
 category: jvm
 ---
