@@ -1,6 +1,6 @@
 ---
 layout: post
-title: HTTPS：简介
+title: HTTPS：原理剖析
 description: 为什么会产生 HTTPS 协议？HTTPS 协议设计的原理
 published: true
 category: http

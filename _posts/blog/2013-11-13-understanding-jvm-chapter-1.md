@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 走进Java——Understanding the JVM
+title: Understanding the JVM：走进Java
 description: Java的特点、发展历程、当前发展定位
 category: jvm
 ---
@@ -14,7 +14,7 @@ category: jvm
 Java：`Write Once，Run Anywhere`，归根结底是在JVM上运行的。整体几个过程：
 
 * 编写.java源文件
-* 编译为.class字节码文件
+* 编译为.class字节码文件 （`javac` 命令）
 * .class文件在JVM上运行
 
 即，“一次编写，到处执行”的口号，实际是，有JVM的地方才能执行，因为其依赖于JVM。关于上述3个过程，有几个小问题：
@@ -119,6 +119,19 @@ Java有丰富多样的第三方类库，实现各种功能。（举几个例子�
 	* 开源工作进展上：
 		* 2006.11开始逐步开源JDK的各个组件
 		* OpenJDK 1.7 与 Sun JDK 1.7 的代码基本一致
+* JDK 1.7：
+	* 语法层面：
+		* switch 支持 String
+		* try-with-resource 语法支持，所有实现 java.lang.AutoCloseable 接口java.io.Closeable 接口的对象，都可以使用
+		* 单行 catch 多种异常
+		* 创建泛型时，类型推断
+* JDK 1.8：
+	* 语法层面：
+		* Lambda 表达式
+		* 函数式接口：接口中只包含一个方法（不包含静态方法和默认方法）
+	* JVM 层面：
+		* 去除了`永久代`的概念
+		* 方法区，直接存储在`直接内存`中
 
 
 ## JVM
@@ -157,7 +170,11 @@ JVM，java运行环境，语言自身实现其运行环境，元循环，Meta-Ci
 * Dalvik VM，只能被称为"虚拟机"，而不是"JAVA 虚拟机"
 * Dalvik VM没有执行Java虚拟机规范
 * 不能直接执行Java的Class文件
-* 寄存器架构，不是JVM中常见的栈架构
+* `寄存器`架构，不是JVM中常见的`栈架构`
+
+> 思考：寄存器架构，和栈架构之间的区别？
+> 
+> 简单说一下：指令集不同
 
 Dalvik VM与Java之间有千丝万缕的联系：
 
@@ -176,11 +193,20 @@ CPU硬件的发展方向，已经从单CPU高频率转向为多核心，随着�
 
 #### JAVA API与Lambda函数式编程
 
-JDK 1.5中引入java.util.concurrent包，实现一个粗粒度的并发框架；JDK 1.7中引入java.util.concurrent.forkjoin包，Folk/Join模式是处理并行编程的经典方法。
+JDK 1.5中引入java.util.concurrent包，实现一个粗粒度的并发框架；JDK 1.7中引入java.util.concurrent.forkjoin包，Fork/Join模式是处理并行编程的经典方法。
 
-**疑问**：Folk/Join模式，是经典的并行编程方法？怎么说？
+> **疑问**：Fork/Join模式，是经典的并行编程方法？怎么说？
+> 
+> 1. Fork/Join，是分治思想的一种，跟 Map/Reduce 类似
+> 2. Fork/Join，以`计算能力`为中心，充分利用空闲的计算能力，一个任务队列执行完了，就从其他任务队列偷取任务；
+> 3. Map/Reduce，以`数据`为中心，认为所有的线程执行能力是等同的，只要给相同的数据量，处理时间就相同；
 
 极其重要进展：Java 8 中，提供Lambda函数式编程，函数式编程的重要有点是：程序天然的适合并行运行；这将有助于Java在多核时代继续保持主流语言的地位。
+
+> 疑问：函数式编程语言，为什么，天然适合`并行运行`？
+> 
+> 1. 函数式编程，基本但愿是`函数`，函数是无状态的，始终是线程安全的
+> 2. 线程安全的代码，可以任意的分布在多核 CPU 上运行
 
 
 ### 64位JVM
