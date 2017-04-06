@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Java并发 - 并发 6
+title: Java并发：concurrent 包
 description: Java编程思想
 published: true
 category: java-concurrency
@@ -187,6 +187,11 @@ DelayQueue 就是一个无界队列，是用 PriorityQueue 实现的 BlockingQue
 
 ### 4. PriorityBlockingQueue
 
+1. BlockingQueue：线程安全
+	* ArrayBlockingQueue：
+	* LinkedBlockingQueue：
+1. Queue：非线程安全
+
 哈哈，前面刚看完 PriorityQueue 的源码，这里就遇到了 PriorityBlockingQueue，其实 PriorityBlockingQueue就是用 PriorityQueue 实现的 BlockingQueue，所以没啥可说的。写了个例子低空掠过：
 
 	package concurrency;
@@ -310,11 +315,11 @@ DelayQueue 就是一个无界队列，是用 PriorityQueue 实现的 BlockingQue
 嗯，这个例子虽然简单，但是我想说几点：
 
 * ScheduleAtFixedRate 是基于固定时间间隔进行任务调度，ScheduleWithFixedDelay 取决于每次任务执行的时间长短，是基于不固定时间间隔进行任务调度：
-	* scheduleWithFixedDelay()方法：每次执行时间为上一次任务结束起向后推一个时间间隔，即每次执行时间为：initialDelay, initialDelay+executeTime+delay, initialDelay+2executeTime+2delay
-	* scheduleWithFixedRate()方法：每次执行时间为上一次任务开始起向后推一个时间间隔，即每次执行时间为 :initialDelay, initialDelay+period, initialDelay+2*period, …
+	* `scheduleWithFixedDelay()`方法：每次执行时间为上一次任务结束起向后推一个时间间隔，即每次执行时间为：initialDelay, initialDelay+executeTime+delay, initialDelay+2executeTime+2delay
+	* `scheduleWithFixedRate()`方法：每次执行时间为上一次任务开始起向后推一个时间间隔，即每次执行时间为 :initialDelay, initialDelay+period, initialDelay+2*period, …
 * 有可能上面的程序执行了一段时间后，会发现不再执行了，去查看日志，可能是doBusiness()方法中抛出了异常。
 
-但是为什么doBusiness()抛出异常就会中止定时任务的执行呢？看文档就知道了：
+但是为什么 `doBusiness()` 抛出异常就会中止定时任务的执行呢？看文档就知道了：
 
 > Creates and executes a periodic action that becomes enabled first after the given initial delay, and subsequently with the given delay between the termination of one execution and the commencement of the next. If any execution of the task encounters an exception, subsequent executions are suppressed. Otherwise, the task will only terminate via cancellation or termination of the executor.
 

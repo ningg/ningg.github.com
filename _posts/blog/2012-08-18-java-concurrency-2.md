@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Java并发 - 并发 1
+title: Java并发：线程基础
 description: Java编程思想
 published: true
 category: java-concurrency

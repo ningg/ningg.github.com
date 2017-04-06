@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Java并发 - 并发 2
+title: Java并发：临界资源，线程同步
 description: Java编程思想
 published: true
 category: java-concurrency
@@ -9,6 +9,13 @@ category: java-concurrency
 ## 21.3小节：共享资源如何处理呢？
 
 这一小节其实也是基础知识，核心是处理**临界资源**，方法就是**加锁**。下面我们就简单说说。
+
+2 种方式：
+
+1. synchronized：对象的同步锁
+2. ReentrantLock：更灵活，支持更多特性
+	1. 公平锁（支持）
+	2. 等待中断（支持）
 
 ### 1. 一个使用临界资源的例子
 
@@ -141,7 +148,7 @@ category: java-concurrency
 
 #### 2) Lock 的使用
 
-Java SE5的 java.util.concurrent 类库还包含有定义在 java.util.concurrent.locks 中的显式的互斥机制。**Lock 对象必须显式的创建、锁定和释放**。因此，它与 synchronized 提供的锁机制相比，代码缺少优雅性。但是对于有些场景，使用 Lock 会更加灵活。
+Java SE5的 `java.util.concurrent` 类库还包含有定义在 java.util.concurrent.locks 中的显式的互斥机制。**Lock 对象必须显式的创建、锁定和释放**。因此，它与 synchronized 提供的锁机制相比，代码缺少优雅性。但是对于有些场景，使用 Lock 会更加灵活。
 
 使用 Lock 来改进上面的例子：
 
@@ -546,26 +553,6 @@ Notice:
 ### 6. 线程本地存储
 
 虽然在《Java 编程思想》中仅仅占用了1页的篇幅，但是感觉很有用处。果然挖出了不少东西，于是单独写一篇文章分析 ThreadLocal 吧，详情请见理解 ThreadLocal
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Java并发 - 并发 3
+title: Java并发：结束线程
 description: Java编程思想
 published: true
 category: java-concurrency
@@ -163,6 +163,8 @@ category: java-concurrency
 
 好了，通过上面的讲解。我们知道，有时希望能中终止处于阻塞状态的任务。什么意思呢？比如公园统计人流量的例子中，run()不是休眠100ms，而是100分钟，但是我现在想立即终止所有的统计任务。这怎么办？**因为对处于阻塞状态的任务，你不能等待其到达代码中可以检查其状态值的某一点，进而决定让它主动终止，那么唯一的做法就是强制这个任务跳出阻塞状态**。
 
+![](/images/java-concurrency/thread-state-flow.png)
+
 ### 2. 将任务从阻塞状态叫醒：中断机制
 
 这个概念大家都非常理解，同时对它的棘手性也都感同身受：
@@ -173,15 +175,15 @@ category: java-concurrency
 
 那么，用代码来完成就用到了 Thread 类的 interrupt 相关函数：
 
-* interrupted()
-* interrupt()
-* isInterrupted()
+* interrupt()：标记中断
+* interrupted()：查询是否有中断标记，并清除中断标记
+* isInterrupted()：查询是否有中断标记，不会清除标记
 
 我们注意到，**新的 concurrent 类库似乎在避免对 Thread 对象的直接操作，转而尽量通过 Executor 来执行所有操作**。但是，本质来说，只是 concurrent 的 Executor 帮我们调用了这3个函数，所以还是要学习一下，直接去看文档即可。我简单总结一下这3个方法吧【自己看完文档、总结后再来看我的总结，不然直接看我的总结你还是立马就忘】：
 
-* interrupt()——中断一个线程。如果当前线程处于阻塞中（比如调用了 wait()、sleep()、join()等）那么线程中断状态会被清除，并且抛出一个InterruptedException。对于可中断的 I/O 操作也会清除中断状态，抛出一个 ClosedByInterruptedException（还记得前面说过，I/O 是不能中断的吗？注意这里针对的是可中断的 I/O 操作，所以就是后来又提到的 NIO，NIO 可以被中断）。这个是为了替换 Thread.stop()，虽然 stop 已经废弃，但是我们也应该了解 stop 被废弃是因为它中断线程太暴力，like a assault rifle（像一把来福枪的袭击）.这就会导致非原子操作会被直接干掉，很容易出问题。
-* interrupted()——是一个 static 方法。（被吐槽无数次了，因为命名不规范，导致有很多人用错。）检查线程的中断状态(Thread.status)，但是**会清除线程的中断状态**，如果你连续调用2次，就会返回 false（当然，是在第一次和第二次之间没有新的 interrupt 的情况下）
-* isInterrupted()——仅仅检查线程的中断状态，**不会清除线程的中断状态**
+* `interrupt()`——中断一个线程。如果当前线程处于阻塞中（比如调用了 wait()、sleep()、join()等）那么线程中断状态会被清除，并且抛出一个InterruptedException。对于可中断的 I/O 操作也会清除中断状态，抛出一个 ClosedByInterruptedException（还记得前面说过，I/O 是不能中断的吗？注意这里针对的是可中断的 I/O 操作，所以就是后来又提到的 NIO，NIO 可以被中断）。这个是为了替换 Thread.stop()，虽然 stop 已经废弃，但是我们也应该了解 stop 被废弃是因为它中断线程太暴力，like a assault rifle（像一把来福枪的袭击）.这就会导致非原子操作会被直接干掉，很容易出问题。
+* `interrupted()`——是一个 static 方法。（被吐槽无数次了，因为命名不规范，导致有很多人用错。）检查线程的中断状态(Thread.status)，但是**会清除线程的中断状态**，如果你连续调用2次，就会返回 false（当然，是在第一次和第二次之间没有新的 interrupt 的情况下）
+* `isInterrupted()`——仅仅检查线程的中断状态，**不会清除线程的中断状态**
 * 在文档中有个 alive的词让我很困惑：A thread interruption ignored because a thread was not alive at the time of the interrupt will be reflected by this method returning false.在 stackoverflow 上找到了答案：When is a Java thread alive?。意思是线程正在运行 run()方法 is still ongoing.
 
 那么，我们再来看 Executor 是如何帮助我们的：
@@ -298,7 +300,7 @@ category: java-concurrency
 
 从结果我们可以看到，sleep 是可以被中断的，但是 IO 和 Synchronized 却不能被中断。所以结论是：
 
-* 能够中断对 sleep()的调用（或者任何要求抛出 InterruptedException 的调用）
+* 能够中断对 sleep() 的调用（或者任何要求抛出 InterruptedException 的调用）
 * 不能中断正在试图获取 Synchronized 锁的线程
 * 不能中断正在试图执行 I/O 操作的线程
 
@@ -425,7 +427,12 @@ category: java-concurrency
 	 Broken out of blocked call
 	 */
 
-上面关于 IO 和 Synchronized 的例子只是最最简单的使用，其实这里我们只需要知道** IO 和 Synchronized 阻塞状态不可中断，但是通过使用新的技术，如 NIO 和 concurrent 提供的 ReentrantLock 就可以解决这个问题**。所以，以后遇到阻塞和中断的问题，就可以知道大概的解决思路啦。
+上面关于 IO 和 Synchronized 的例子只是最最简单的使用，其实这里我们只需要知道**IO 和 Synchronized 阻塞状态不可中断，但是通过使用新的技术，如 NIO 和 concurrent 提供的 ReentrantLock 就可以解决这个问题**。所以，以后遇到阻塞和中断的问题，就可以知道大概的解决思路啦。
+
+Note：再说一遍，不嫌多
+
+> 1. IO 和 Synchronized 阻塞状态，不可中断；
+> 2. NIO（New IO） 和 concurrent 提供的 ReentrantLock 可以解决上述问题；
 
 ### 5. 检查中断
 
