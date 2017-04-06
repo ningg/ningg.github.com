@@ -32,8 +32,8 @@ Java SE5的 `java.util.concurrent `包中引入了大量设计用来解决并发
 
 下面我们先简单的“望文生义”一下，然后再逐个击破：）
 
-* CountDownLatch：名字直译为——倒计时锁。官方文档的描述是 A synchronization aid that allows one or more threads to wait until a set of operations being performed in other threads completes.*(一个线程同步辅助工具，可以让一个或多个线程等待直到其它线程的任务全部完成才会被唤醒。)*
-* CyclicBarrier：和上面那个功能相似，只是上面的倒计时数值不能被重置，只能递减到0停止；而 CyclicBarrier 可以在倒计时数减为0之后重用（还是原来的值）
+* `CountDownLatch`：名字直译为——倒计时锁。官方文档的描述是 A synchronization aid that allows one or more threads to wait until a set of operations being performed in other threads completes. *(一个线程同步辅助工具，可以让一个或多个线程等待直到其它线程的任务全部完成才会被唤醒。)*
+* `CyclicBarrier`：和上面那个功能相似，只是上面的倒计时数值不能被重置，只能递减到0停止；而 CyclicBarrier 可以在倒计时数减为0之后重用（还是原来的值）
 * DelayQueue：无界的 BlockingQueue（前面生产者-消费者讲过哦），用于放置实现了 Delayed interface 的对象，其中的对象只能在到期时才能在队列中取走。这种队列是有序的，即队头对象的延期到期的时间最长。
 * PriorityBlockingQueue：优先队列的 BlockingQueue，具有可阻塞的读取操作。其实就是 BlockingQueue 的优先队列实现
 * 使用 ScheduledExecutor 的温室控制器：
@@ -45,6 +45,19 @@ Java SE5的 `java.util.concurrent `包中引入了大量设计用来解决并发
 下面给每个构件都写个小例子，然后总结一下它们产生的原因和最佳使用场景。go go go!!
 
 ### 1. CountDownLatch
+
+CountDownLatch 被用于：
+
+1. `主线程`等待`多个子线程`执行结束后
+2. `主线程`再执行
+
+因此，具体使用过程中：
+
+1. 主线程：定义 CountDownLatch 需要等待的子线程个数
+2. 子线程：调整 CountDownLatch 的剩余线程数
+3. 主线程：`countDownLatch.await()` 阻塞等待子线程执行结束
+
+从上面过程可以看出：主线程定义 CountDownLatch，子线程调整 CountDownLatch，主线程在 CountDownLatch 上保持等待状态。
 
 文档也太详细了吧：
 
@@ -102,9 +115,66 @@ Java SE5的 `java.util.concurrent `包中引入了大量设计用来解决并发
 
 ### 2. CyclicBarrier
 
+使用 CyclicBarrier，多个`子线程`之间`相互等待`，具体操作：
+
+1. 主线程：定义 CyclicBarrier 需要等待的子线程个数
+2. 子线程：调用 `CyclicBarrier.await()` 等待其他线程
+
 直译为循环栅栏，通过它可以**让一组线程全部到达某个状态后再同时执行，也就是说假如有5个线程协作完成一个任务，那么只有当每个线程都完成了各自的任务（都到达终点），才能继续运行（开始领奖）**。循环的意思是当所有等待线程都被释放（也就是所有线程完成各自的任务，整个程序开始继续执行）以后，CyclicBarrier 可以被重用。而上面的 CountDownLatch 只能用一次。
 
+所有线程达到指定的状态后，一起继续执行：
 
+```
+package top.ningg.java.concurrent;
+
+import java.util.concurrent.BrokenBarrierException;
+import java.util.concurrent.CyclicBarrier;
+import java.util.concurrent.TimeUnit;
+
+public class TestOfCyclicBarrier {
+
+    public static void main(String[] args) {
+        // 说明：
+        // 1. 创建 CyclicBarrier 时，可以指定一个 Runnable 的任务；
+        // 2. 所有线程都到齐后，先执行这个任务，之后才会继续执行；
+        CyclicBarrier cyclicBarrier = new CyclicBarrier(5);
+        for (int index = 0; index < 5; index++) {
+            Thread newThread = new Thread(new TaskOfCyclicBarrier(cyclicBarrier));
+            newThread.start();
+        }
+    }
+
+}
+
+class TaskOfCyclicBarrier implements Runnable {
+
+    private CyclicBarrier cyclicBarrier;
+
+    public TaskOfCyclicBarrier(CyclicBarrier cyclicBarrier) {
+        this.cyclicBarrier = cyclicBarrier;
+    }
+
+    @Override
+    public void run() {
+        System.out.println("等待所有人到齐后，开始开会...");
+        try {
+            TimeUnit.SECONDS.sleep(3);
+            cyclicBarrier.await();
+            System.out.println("开始开会...");
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        } catch (BrokenBarrierException e) {
+            e.printStackTrace();
+        }
+    }
+}
+
+```
+
+CyclicBarrier 和 CountDownLatch 之间的差异：
+
+1. CyclicBarrier是`多个线程` `互相等待`，CountDownLatch是`一个线程` `等待多个线程`；
+1. CyclicBarrier可以`重复使用`，而CountDownLatch `一次有效`
 
 
 ### 3. DelayQueue

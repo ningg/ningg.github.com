@@ -11,14 +11,14 @@ category: java-concurrency
 
 前面对线程进行了讨论，但是比较简单，要么是每个线程独享自己线程内部的资源，要么是用锁机制串行访问共享资源。而本小节做了一点点升级：使用共享资源不再是盲目的阻塞了，而是使用新的握手机制，其实握手类似事件驱动。不过我对事件驱动也只是了解个皮毛，知道大概的 select/kqueue/epoll 原理，具体的还请自行 man 或者 google。我简单举个例子吧：
 
-* 首先要**理解阻塞**：阻塞是什么呢？假如现在有个快递（共享资源），但是你不知道什么时候能送到自己手里，而且你没有别的事可以干（或者说接下来的事要等快递来了才能做）。那么你可以去睡觉了，因为你知道快递把货送来时一定会给你打个电话（假定一定能叫醒你）
+* 首先要理解**阻塞**：阻塞是什么呢？假如现在有个快递（共享资源），但是你不知道什么时候能送到自己手里，接下来的事要等快递来了才能做。那么你什么也不能去做，只能等待快递；
 * 然后是**非阻塞忙轮询**：如果用忙轮询的方法，那么你需要知道快递员的手机号，然后不停地给他打电话：“你到了没？”
 
-这样一看，我们在前面学习的就是阻塞（synchronized 锁）或者非阻塞忙轮询（使用 while(资源不可用) {sleep...}）。这样做不仅效率低，还会大大降低效率，因为对于线程来说，不仅需要保存线程上下文，还要频繁的切换用户态和内核态。而这里解决方法就类似 epoll 那样的回调。
+这样一看，我们在前面学习的就是**阻塞**（synchronized 锁）或者**非阻塞忙轮询**（使用 while(资源不可用) {sleep...}）。这样做不仅效率低，还会大大降低效率，因为对于线程来说，不仅需要保存线程上下文，还要频繁的切换用户态和内核态。而这里解决方法就类似 epoll 那样的回调。
 
 > 线程协作简单来说就是对共享资源的使用还是阻塞，但是一旦共享资源释放，会**主动给阻塞线程发送信号**。这样就不用傻傻等待或者不停轮询了。而协作的关键就是如何传递这个信号，在 Java 中我们可以使用 Object 中的` wait()`和 `notify()`/`notifyAll()`函数，也可以使用 concurrent 类库中提供的 `await()`和 `signal()`/`signalAll()`函数。
 
-下面我们就来具体学习线程协作的相关知识。如果先大致浏览这一小节的话，会发生节奏非常紧凑：
+下面我们就来具体学习线程协作的相关知识。如果先大致浏览这一小节的话，会发现节奏非常紧凑：
 
 1. 第一小节首先介绍线程协作，以及相关的3个函数： wait()、notify()、notifyAll()，然后用一个凃蜡、喷漆程序演示如何进行线程协作（重点是明白线程为什么可以协作呢？因为 wait()不会一直占有锁，在挂起期间会允许进入其他 synchronized 方法改变条件，从而 notify()后再醒来继续工作）
 1. notify()和 notifyAll()的区别（个人感觉这一节讲的很迷糊，可以自己去 stackoverflow 或者其他地方查资料）
@@ -740,8 +740,8 @@ notify则文明得多他只是选择一个wait状态线程进行通知，并使�
 	 public class ToastMatic {
 		 public static void main(String[] args) throws Exception {
 			 ToastQueue dryQueue = new ToastQueue(),
-					 butteredQueue = new ToastQueue(),
-					 finishedQueue = new ToastQueue();
+			 	butteredQueue = new ToastQueue(),
+			 	finishedQueue = new ToastQueue();
 			 ExecutorService exec = Executors.newCachedThreadPool();
 			 exec.execute(new Toaster(dryQueue));
 			 exec.execute(new Butterer(dryQueue, butteredQueue));
@@ -852,37 +852,16 @@ notify则文明得多他只是选择一个wait状态线程进行通知，并使�
 使用wait方法和使用synchornized来分配cpu时间是有本质区别的。wait会释放锁，synchornized不释放锁。
 还有：（wait/notify/notifyAll）只能在取得对象锁的时候才能调用。
 
-**调用notifyAll通知所有线程继续执行，只能有一个线程在执行其余的线程在等待(因为在所有线程被唤醒的时候在synchornized块中)**。这时的等待和调用notifyAll前的等待是不一样的。
+调用`notifyAll`通知**所有线程**继续执行，**只能有一个线程**执行，其余的线程在等待(因为在所有线程被唤醒的时候在`synchornized`块中)。这时的等待和调用notifyAll前的等待是不一样的。
 
 * notifyAll前：在对象上休息区内休息
 * notifyAll后：在排队等待获得对象锁。
 
 notify和notifyAll都是把某个对象上休息区内的线程唤醒,notify只能唤醒一个,但究竟是哪一个不能确定,而notifyAll则唤醒这个对象上的休息室中所有的线程.
 
-一般有为了安全性,我们在**绝对多数时候应该使用notifyAll()**,除非你明确知道只唤醒其中的一个线程.
+一般有为了安全性,我们在**绝对多数时候**应该使用`notifyAll()`,除非你明确知道只唤醒其中的一个线程.
+
 至于有些书上说“notify：唤醒同一对象监视器中调用wait的第一个线程”我认为是没有根据的因为sun公司是这样说的“The choice is arbitrary and occurs at the discretion of the implementation.”
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
