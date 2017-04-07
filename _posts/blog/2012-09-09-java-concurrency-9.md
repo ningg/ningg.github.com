@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Java并发 - 并发 7
+title: Java并发：实例
 description: Java编程思想
 published: true
 category: java-concurrency

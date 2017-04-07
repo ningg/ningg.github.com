@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Java并发 - 并发 8
+title: Java并发：性能调优
 description: Java编程思想
 published: true
 category: java-concurrency
@@ -19,6 +19,7 @@ category: java-concurrency
 然后作者写了一个测试框架，旨在比较加锁容器和免锁容器在性能上的差异。很明显，免锁容器去掉了获取、销毁锁的开销，肯定会有性能的提升....
 
 如果有兴趣，建议搜索一下 ConcurrentHashMap 相关的文章，知道它为什么能用于并发场景（因为有 N 个Segement 重入锁，每个 Segement 锁管理一个 HashEntry 数组），实现的效率如何（分段锁表而非锁整表），有什么弱点（弱一致性）？网上有很多分析源码的文章，大概了解一下原理也不是什么难事。
+
 
 ### 2. 乐观加锁
 
