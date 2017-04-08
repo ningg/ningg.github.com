@@ -315,18 +315,29 @@ HTTP/1.1中缓存机制主要目标：提高页面访问速度；实现途径，
 
 ## 附录
 
-对与几个名词/组织的简介
+### 几个名词/组织的简介
 
-### W3C
+#### W3C
 万维网联盟（World Wide Web Consortium，简称W3C）创建与1994年，是Web技术领域，影响力较强的国际中立性，技术标准机构。其致力于开发协议、标准、指南，来确保Web的长期发展。详细信息参考：[W3C: HTTP (HTTP Activity statement)]。
 
-### IETF
+#### IETF
 互联网工程任务组（Internet Engineering Task Force，简称IETF）成立于1985年底，是全球互联网领域，极具权威的技术标准化组织，主要任务是负责互联网相关技术规范的研发和制定，当前绝大多数互联网技术标准都出自IETF。详细信息参考：[IETF]。
 
 
-### RFC
+#### RFC
 
 IETF（互联网工程任务组）产生两种文件，一个叫Internet Draft，即"互联网草案"，另一个叫RFC（Request For Comments，意见征求书、请求注解书），RFC相对Draft更为正式，一般情况下，RFC文档发布后，其内容不再做变动。
+
+### HTTP 响应状态码
+
+|状态码|解释|备注|
+|---|---|---|
+|500|服务器内部错误| |
+|503|服务器不可用| |
+|504|网关超时| |
+
+
+
  
 [W3C: HTTP (HTTP Activity statement)]:	http://www.w3.org/Protocols/
 [W3C中文版简介]:						http://www.chinaw3c.org/about.html

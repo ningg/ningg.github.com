@@ -37,21 +37,15 @@ HTTP 连接建立和请求处理过程：
 4. Worker 进程，竞争新的连接，获胜方通过三次握手，建立 Socket 连接，并处理请求
 
 
-Nginx 高性能：
+Nginx 高性能、高并发：
 
-1. Nginx 采用：异步非阻塞方式
+1. Nginx 采用：`多进程` + `异步非阻塞`方式（`IO 多路复用` epoll）
 2. 请求的完整过程：
 	1. 建立连接
-	2. 读取请求
-	3. 解析请求
-	4. 处理请求
-	5. 响应请求
-3. 请求的完整过程，对应到底层，就是：
-	1. 本质：读写事件
-	2. 阻塞方式：读写事件未准备好时，**用户进程**阻塞，CPU 使用率低、仍然占用内存
-	3. 非阻塞方式：读写事件为准备好时，**用户进程**可以处理其他任务：
-		1. 用户进程：轮询，定期询问
-		2. 用户进程：事件，读写事件准备好后，以事件方式通知用户进程
+	2. 读取请求：解析请求
+	3. 处理请求
+	4. 响应请求
+3. 请求的完整过程，对应到底层，就是：读写 socket 事件
 
 
 
@@ -70,6 +64,8 @@ Nginx 也是这个套路，整体流程一致。
 ![](/images/nginx-series/nginx-request-process-model.png)
 
 ### 模块化体系结构
+
+![](/images/nginx-series/nginx-architecture.png)
 
 nginx的模块根据其功能基本上可以分为以下几种类型：
 
@@ -207,6 +203,8 @@ select，poll，epoll：
 ## 参考资料
 
 * [nginx平台初探](http://tengine.taobao.org/book/chapter_02.html)
+* [Nginx vs Apache](http://www.oschina.net/translate/nginx-vs-apache)
+* [nginx](http://www.aosabook.org/en/nginx.html)
 
 
 [NingG]:    http://ningg.github.com  "NingG"
