@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Java并发 - 并发 5
+title: Java并发：线程死锁
 description: Java编程思想
 published: true
 category: java-concurrency

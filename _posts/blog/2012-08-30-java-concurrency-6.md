@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Java并发 - 并发 4
+title: Java并发：线程协作
 description: Java编程思想
 published: true
 category: java-concurrency
