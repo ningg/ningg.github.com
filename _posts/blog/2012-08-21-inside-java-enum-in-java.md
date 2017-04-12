@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 浅谈 Enum
+title: Java 剖析：浅谈 Enum
 description: Enum 能解决什么问题？怎么用？
 published: true
 category: java
@@ -189,7 +189,7 @@ NOTE：实际上，枚举类继承自java.lang.Enum抽象类。
 
 [NingG]:    	http://ningg.github.com  "NingG"
 
-[Is there a way to bitwise-OR enums in Java?]:	  	http://stackoverflow.com/q/6282619
+[Is there a way to bitwise-OR enums in Java?]:    http://stackoverflow.com/q/6282619
 
 [Effective Java Item 32: Use EnumSet instead of bit fields]:		http://dhruba.name/2008/12/31/effective-java-item-32-use-enumset-instead-of-bit-fields/
 
