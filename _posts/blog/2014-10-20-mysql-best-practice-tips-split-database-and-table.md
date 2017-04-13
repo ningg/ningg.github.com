@@ -86,6 +86,13 @@ MySQL 的 InnoDB 存储引擎，使用 `B+Tree` 结构存储索引和数据，�
 2. 分区表是一个`独立的逻辑表`，但是底层由多个`物理子表`组成
 3. `索引`也是按照分区的子表定义，没有全局索引
 
+特别说明：
+
+> 分区表，因为物理上是多个子表，因此，可以为每个分区表单独指定`数据文件`和`索引文件`的存储路径。
+> 
+> 1. **MyISAM 存储引擎**：非聚簇索引，可以单独指定 2 个文件地址；
+> 2. **InnoDB 存储引擎**：聚簇索引，只需要指定一个`数据文件地址`即可；
+
 #### 创建分区表
 
 分区表分为 `RANGE`,`LIST`,`HASH`,`KEY` 四种类型，并且分区表的索引是可以局部针对分区表建立的
@@ -109,7 +116,6 @@ CREATE TABLE sales (
 
 Note： 
 
-* 分区字段`order_day`必须包含在`主键`中
 * 当年份超过阈值,到了2013,2014时,需要手动创建这些分区
 
 替代方法就是使用HASH：
@@ -124,6 +130,45 @@ CREATE TABLE sales (
 
 这种分区表示每100W条数据建立一个分区,且没有阈值范围的影响.
 
+补充说明：可以为每个分区表，设定单独的数据文件和索引文件位置，具体示例：
+
+```
+-- MyISAM 存储引擎
+CREATE TABLE th (id INT, adate DATE)
+engine='MyISAM'
+PARTITION BY LIST(YEAR(adate))
+(
+  PARTITION p1999 VALUES IN (1995, 1999, 2003)
+    DATA DIRECTORY = '/data/data'
+    INDEX DIRECTORY = '/data/idx',
+  PARTITION p2000 VALUES IN (1996, 2000, 2004)
+    DATA DIRECTORY = '/data/data'
+    INDEX DIRECTORY = '/data/idx',
+  PARTITION p2001 VALUES IN (1997, 2001, 2005)
+    DATA DIRECTORY = '/data/data'
+    INDEX DIRECTORY = '/data/idx',
+  PARTITION p2002 VALUES IN (1998, 2002, 2006)
+    DATA DIRECTORY = '/data/data'
+    INDEX DIRECTORY = '/data/idx'
+);
+
+-- InnoDB 存储引擎
+CREATE TABLE thex (id INT, adate DATE)
+engine='InnoDB'
+PARTITION BY LIST(YEAR(adate))
+(
+  PARTITION p1999 VALUES IN (1995, 1999, 2003)
+    DATA DIRECTORY = '/data/data',
+  PARTITION p2000 VALUES IN (1996, 2000, 2004)
+    DATA DIRECTORY = '/data/data',
+  PARTITION p2001 VALUES IN (1997, 2001, 2005)
+    DATA DIRECTORY = '/data/data',
+  PARTITION p2002 VALUES IN (1998, 2002, 2006)
+    DATA DIRECTORY = '/data/data'
+);
+```
+
+
 #### 使用分区表
 
 使用上，跟普通表一样，无特约束。
@@ -133,7 +178,7 @@ CREATE TABLE sales (
 分区表的优点：
 
 1. **局部查询**：根据查找条件，也就是 where后面的条件，查找`只查找` `部分分区`
-2. **磁盘吞吐量**：跨`多个磁盘`来分散数据查询，来获得更大的查询吞吐量
+2. **磁盘吞吐量**：跨`多个磁盘`来分散数据查询，来获得更大的查询吞吐量；
 
 
 ## 参考来源
@@ -142,7 +187,7 @@ CREATE TABLE sales (
 * [分库分表的几种常见形式以及可能遇到的难](http://www.infoq.com/cn/articles/key-steps-and-likely-problems-of-split-table)
 * [MySQL大表优化方案](https://segmentfault.com/a/1190000006158186)
 * [MySQL分区表（总结）](http://blog.51yip.com/mysql/1013.html)
-
+* [MySQL 指定各分区路径](http://www.cnblogs.com/chenmh/p/5644713.html)
 
 
 
