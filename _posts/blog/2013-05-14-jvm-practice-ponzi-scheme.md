@@ -114,6 +114,21 @@ Note：
 > 1. CMS：默认，标记-清除；（*可以开启压缩*：`-XX:+UseCMSCompactAtFullCollection` 和 `-XX:CMSFullGCsBeforeCompaction` 多少次 full gc 进行一次压缩）
 > 2. Serial Old：标记-清除-压缩
 
+
+特别说明：这个实际案例，本质是 2 个原因
+
+1. 老年代 CMS 退化为 Serial Old
+2. OOM 默认阈值：GC 之后，只要不超过阈值，就认为可以继续尝试 GC，而不主动 OOM
+	1. 已占用 Heap 的阈值：98%
+	2. GC 占用时间的阈值：98%
+
+针对 `OOM 阈值`的问题：
+
+1. 对象进入新生代/老年代
+2. 通过 full gc 新生代/老年代，总能回收出恰当的空间
+
+根本原因：参数设置不合理。
+
 ## 参考来源
 
 * [The Hotspot JVM is a Ponzi Scheme]
