@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Java中equals方法，判断两个对象是否相等
+title: Java 基础：equals 方法，判断两个对象是否相等
 description: equals方法与==的比较
 published: true
 category: java
@@ -17,11 +17,11 @@ equals方法，需要满足以下三点：
 
 
 
-重写HashCode()的原则： 
+重写 `hashCode()` 的原则： 
 
-* **不唯一原则**：不必对每个不同的对象都产生一个唯一的hashcode，只要你的HashCode方法使get()能够得到put()放进去的内容就可以了。
-* **分散原则**：生成hashcode的算法尽量使hashcode的值分散一些，不要很多hashcode都集中在一个范围内，这样有利于提高HashMap的性能；
-* a.equals(b)，则a与b的hashCode()必须相等；
+* **不唯一原则**：不必对每个不同的对象都产生一个唯一的 hashCode，只要你的 hashCode 方法使get()能够得到put()放进去的内容就可以了。
+* **分散原则**：生成 hashCode 的算法尽量使 hashCode 的值分散一些，不要很多 hashCode 都集中在一个范围内，这样有利于提高HashMap的性能；
+* a.equals(b)，则a与b的hashCode()必须相等，因为，多数场景，比较 2 个对象是否相等之前，会判断 2 个对象的 hashCode 是否相等；
 
 ## Object.equals()方法
 
@@ -61,22 +61,6 @@ String中`equals()`方法，要求两个String的值相等即可；
 	}
 	return false;
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
