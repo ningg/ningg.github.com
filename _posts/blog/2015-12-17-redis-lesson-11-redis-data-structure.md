@@ -18,6 +18,14 @@ Redis 采用最简的思路，实现了几个数据结构，向上支持对象�
 * 压缩列表
 * 对象
 
+Redis 上层的对象：字符串、列表、哈希、集合、有序集合5种数据类型
+
+1. REDIS_STRING，编码是整数数值或 SDS 类型（和 embstr 字符串，将 SDS 与 redisObject 紧挨着申请内存空间，一种优化，缓存友好，当字符串长度小于等于32时用）
+1. REDIS_LIST，编码是 ziplist 或 linkedlist。所有字符串长度小于 list-max-ziplist-value (64)，元素数量少于 list-max-ziplist-entries (512) 时使用 ziplist
+1. REDIS_HASH，编码可以是 ziplist 或者 hashtable。所有字符串长度小于 hash-max-ziplist-value (64)，元素数量少于 hash-max-ziplist-entries (512) 时使用 ziplist
+1. REDIS_SET，编码是 intset 或 hashtable。所有元素都是整数并且长度小于 set-max-intset-entries (512) 时使用 inset
+1. REDIS_ZSET，编码是 ziplist 或者 skiplist。所有字符串长度小于 zset-max-ziplist-value (64)，元素数量少于 zset-max-ziplist-entries (128) 时使用 ziplist（这里的 ziplist 是按照 score 排序的）
+
 
 ## 跳跃表（Skip List）
 
