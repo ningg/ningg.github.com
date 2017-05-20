@@ -217,6 +217,10 @@ alias ll="ls -alhG"
 alias ls="ls -ahG"
 ````
 
+特别说明：
+
+> 只有通过 homebrew 安装的命令/工具，才会自动补全。
+
 ### 4.5. iTerm2
 
 iTerm2 是一个更强大的 Terminal，它提供了更好的查找、补全、复制、多 tab 等功能，优势很多，具体安装如下：
