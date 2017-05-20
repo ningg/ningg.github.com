@@ -279,6 +279,27 @@ f12：
 * shift + cmd + f12：Edit window的最大化和还原
 
 
+几个十分常用的操作：
+
+1. cmd + G：查找下一个
+1. ctrl + opt + O：optimize import，调整import包
+1. opt + cmd + L：reformat code，格式化代码
+1. cmd + Del：删除当前行
+1. shift + F6：重命名
+1. cmd + F6：重构方法名称和输入参数；change signature
+1. F6：移动代码，静态属性或者私有方法
+1. ctrl + T：所有重构的命令
+1. shift + click：关闭当前文件
+1. cmd + shift + *：列编辑模式，光标同时定位多行
+
+
+
+
+
+
+
+
+
 
 
 
