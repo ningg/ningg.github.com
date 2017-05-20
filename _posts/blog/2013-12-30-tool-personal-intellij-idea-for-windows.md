@@ -1,8 +1,8 @@
 ---
 layout: post
-title: IntelliJ IDEA
+title: 工具系列：IntelliJ IDEA (Windows)
 description: 又是一把利刃，把玩一下，闻鸡起舞？NO，粗人一个，抡刀起舞
-category: idea
+category: tool 
 ---
 
 ## 显示帮助信息
