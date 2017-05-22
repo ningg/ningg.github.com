@@ -85,7 +85,7 @@ IDEA 下，创建远程调试任务：
 ## 3. 参考来源
 
 
-* [http://www.grygoriy.com/blog/2011/01/20/how-to-debug-tests-maven-test-via-intellij-idea/](http://www.grygoriy.com/blog/2011/01/20/how-to-debug-tests-maven-test-via-intellij-idea/)
+* [how-to-debug-tests-maven-test-via-intellij-idea/](http://www.grygoriy.com/blog/2011/01/20/how-to-debug-tests-maven-test-via-intellij-idea/)
 
 
 
