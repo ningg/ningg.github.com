@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 产品运营梳理
+title: 产品运营系列：产品运营整体梳理
 description: 运营，是什么？有什么用？怎么做运营？
 published: true
 category: product
