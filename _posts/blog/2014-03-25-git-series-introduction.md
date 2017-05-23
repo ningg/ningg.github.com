@@ -1,12 +1,12 @@
 ---
 layout: post
-title: Git入门
+title: Git 系列：入门初探
 description: 进行版本管理，团队协作时，涉及到的 Git 常用操作
 published: true
 category: git
 ---
 
-## 立意
+## 背景
 
 几点想法：
 
@@ -15,17 +15,6 @@ category: git
 * 典型场景下Git的使用
 	* dev、prod等多个分支如何组织？
 
-	
-
-基本思路：整体上，系统参考几个内容：
-
-* [Pro Git][Pro Git]
-* [git - 简明指南][git - 简明指南]
-* [图解Git][图解Git]
-* [快学Git][快学Git]
-
-
-
 几个结果：
 
 * 快学Git：git相关的基本操作，不涉及过多原理；
@@ -33,45 +22,6 @@ category: git
 
 
 注：在之前的[一篇文章][flume extends source]中也涉及过Git的使用。
-
-
-
-
-
-
-
-
-
-
-## 常见问题
-
-
-### git commit之后，git push之前，如何进行回滚
-
-git commit之后，发现有的文件不详添加到git server中，希望回滚，该如何做？
-
-思路：
-
-* 将文件git push之后，再添加.gitignore文件；
-* 直接回滚处理git commit，然后，添加.gitignore，重新git commit；
-
-（TODO）
-
-如何解决？thinking...
-
-
-### 设置.gitignore对多级目录都有效？
-
-直接在顶级目录中设置.gitignore？
-
-
-
-
-
-
-
-
-
 
 
 ## 参考来源
