@@ -92,7 +92,7 @@ DH 非对称加密：
 > 
 > RE：因为 HTTPS 是运行在 SSL/TLS 之上的，所以， HTTPS 的所有数据（header 和 body）都是加密的。
 
-##3. 怎么做：如何升级到 HTTPS？
+## 3. 怎么做：如何升级到 HTTPS？
 
 * 端到端，都要支持 SSL/TLS：
 * 浏览器：
