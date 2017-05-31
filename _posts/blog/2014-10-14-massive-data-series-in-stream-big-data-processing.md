@@ -1,8 +1,8 @@
 ---
 layout: post
-title: In-Stream Big Data Processing
+title: 数据平台系列：In-Stream Big Data Processing
 description: 流式大数据处理系统，大数据实时分析系统，就是这个意思
-category: stream process
+category: 数据平台
 ---
 
 > 英文原文：[In-Stream-big-data-processing](http://highlyscalable.wordpress.com/2013/08/20/in-stream-big-data-processing/)，有人翻译了[中文版](http://blog.csdn.net/idontwantobe/article/details/25938511)，也有直接[中文注释英文版](http://dirlt.com/in-stream-big-data-processing.html)。
