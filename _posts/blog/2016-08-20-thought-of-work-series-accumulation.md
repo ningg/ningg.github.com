@@ -20,11 +20,11 @@ category: 效率提升
 
 看标题：
 
-![](accumulation-of-red-team-demo.png)
+![](/images/thought-of-work/accumulation-of-red-team-demo.png)
 
 > 思考：`根据地`的作用？
 
-![](accumulation-details.png)
+![](/images/thought-of-work/accumulation-details.png)
  
 思考：
 

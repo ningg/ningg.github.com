@@ -21,11 +21,11 @@ category: 效率提升
 
 就是这个场景：
 
-![](organization-demo.png)
+![](/images/thought-of-work/organization-demo.png)
  
 解决办法：
 
-![](organization-demo-solution.png)
+![](/images/thought-of-work/organization-demo-solution.png)
 
 核心思路：
 
