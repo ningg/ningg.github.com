@@ -14,7 +14,7 @@ category: 基础原理
 * Redis 在生成 RDB 快照文件时，是否会终止对外服务？
 * 快照，是精确的？模糊的？
 
-![](redis-multi-process-demo.png)
+![](/images/computer-basic-theory/redis-multi-process-demo.png)
 
 典型问题：
 
@@ -29,16 +29,16 @@ category: 基础原理
  
 思路 1：继续提供服务之前，复制一份内存数据，用于生成快照。
 
-![](fork-and-copy.png)
+![](/images/computer-basic-theory/fork-and-copy.png)
 
  
 思路 2：继续提供服务，只有当有人修改当前内存数据时，才去复制一份原始内存内容，用于生成快照。（内存复制的时间，向后推迟）
 
-![](fork-and-copy-until-edit.png)
+![](/images/computer-basic-theory/fork-and-copy-until-edit.png)
 
 思路 3：继续提供服务，只有当有人修改当前内存数据时，才去复制被修改的内存页，用于生成快照。（内存复制的时间，向后推迟；内存粒度，拆解更细）
 
-![](fork-and-copy-small-unit-until-edit.png)
+![](/images/computer-basic-theory/fork-and-copy-small-unit-until-edit.png)
  
 上面就是 Copy-On-Write 写时复制技术的思路。
 
