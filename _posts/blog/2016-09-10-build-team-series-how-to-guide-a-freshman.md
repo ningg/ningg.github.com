@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 技术团队，新人培养
+title: 团队系列：技术团队，新人培养
 description: 对新人提供指导和培养，形成梯度
 published: true
 category: 团队建设

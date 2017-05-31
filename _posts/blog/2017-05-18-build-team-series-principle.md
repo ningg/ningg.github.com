@@ -1,9 +1,9 @@
 ---
 layout: post
-title: 组建团队系列：招人原则
+title: 团队系列：招人原则
 description: 为什么要招人？可以不招人吗？合适的人选，在哪儿？如何评判一个人？
 published: true
-category: Team
+category: 团队建设
 ---
 
 ## 0. 背景
