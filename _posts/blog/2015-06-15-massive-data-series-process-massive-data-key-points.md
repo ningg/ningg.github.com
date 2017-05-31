@@ -20,7 +20,7 @@ category: 数据平台
 
 1. 网络瓶颈：如果数据量过大，达到网络瓶颈，怎么处理？
 
-> 补充：Keynote 下载地址：[海量数据处理：关键思想.key](/download/data-platform/海量数据处理：关键思想.pdf)
+> 补充：Keynote 下载地址：[海量数据处理：关键思想.pdf](/download/data-platform/海量数据处理：关键思想.pdf)
 
 ## 1. 基本原理
 

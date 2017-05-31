@@ -1,8 +1,8 @@
 ---
 layout: post
-title: 磁盘和文件系统
+title: 基础原理系列：磁盘和文件系统
 description: 计算机上，数据写在磁盘上，那么，磁盘是什么结构？磁盘读写速度有没有瓶颈？
-category: computer system
+category: 基础原理
 ---
 
 ## 背景
