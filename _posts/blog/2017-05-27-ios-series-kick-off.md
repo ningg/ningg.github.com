@@ -13,13 +13,13 @@ category: iOS
 
 最近正好赶上端午节，有几天时间，静下心来，琢磨一下。
 
-收集了市面上基本评价不错的书籍：
+收集了市面上整体评价不错的书籍：
 
 1. [Producter：让产品从 0 到 1](https://book.douban.com/subject/1172442/)
 2. [iOS 开发指南：从零基础到 App Store 上架（第三版）](https://book.douban.com/subject/26372385/)
 3. [第一行代码 Android 开发](https://book.douban.com/subject/25942191/)
 
-好的，先把书买了，开始学习。
+好的，全部买下，开始学习。
 
 Note：上面部分书籍的部分内容，已经过时了，请读者自行鉴别。
 

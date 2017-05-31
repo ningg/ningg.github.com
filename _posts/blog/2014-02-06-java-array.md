@@ -88,7 +88,7 @@ category: java
 
 `List<T> Arrays.asList(T... a)`，将数组`a`转换为List；
 
-**疑问**：如何将List转换为List？`List.toArray();`
+**疑问**：如何将List转换为数组？`List.toArray();`
 
 
 ## 对象的数组
