@@ -3,7 +3,7 @@ layout: post
 title: 设计模式：委派模式 Delegate
 description: 存在感对于每个人的生活有多么的重要，可能平时并不是太关注，其实他就是生活的全部
 published: true
-category: blog
+category: 设计模式
 ---
 
 ## 1. 委派模式 Delegate
