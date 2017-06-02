@@ -3,7 +3,7 @@ layout: post
 title: 团队系列：新人培养计划
 description: 新人入职，需要提前做好准备，制定培养计划
 published: true
-category: 团队建设
+category: 团队
 ---
 
 

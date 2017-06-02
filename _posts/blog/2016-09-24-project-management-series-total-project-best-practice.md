@@ -57,7 +57,7 @@ category: 项目管理
 
 项目主体流程：
 
-[](/images/project-management/role-and-duty.png)
+[项目主体流程-新标签打开](/images/project-management/role-and-duty.png)
 
 Note：图片很大，请在新标签页打开
 

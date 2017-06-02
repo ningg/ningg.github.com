@@ -3,7 +3,7 @@ layout: post
 title: 团队系列：招人原则
 description: 为什么要招人？可以不招人吗？合适的人选，在哪儿？如何评判一个人？
 published: true
-category: 团队建设
+category: 团队
 ---
 
 ## 0. 背景
