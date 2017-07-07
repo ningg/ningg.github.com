@@ -6,10 +6,11 @@ published: true
 category: 技术成长系列
 ---
 
-## 概要
+> 1. 讨论焦点：分析、设计状态机的极简思路和要点，不涵盖 BPM，也不涵盖 Activiti 类似的框架；
+> 2. 结果预期：一般场景下，能够快速、准确设计一个合适的状态机，平滑支撑业务\架构演进；
+> 3. 这篇分享，整理有 keynote
 
-> 1. blog 的讨论焦点：分析、设计状态机的极简思路和要点，不涵盖 BPM，也不涵盖 Activiti 类似的框架；
-> 2. blog 的结果预期：一般场景下，能够快速、准确设计一个合适的状态机，平滑支撑业务\架构演进；
+## 概要
 
 几个朴素的问题：
 
@@ -46,7 +47,7 @@ category: 技术成长系列
 1. 产品团队
 1. 业务、技术感兴趣的同学
 
-### 状态机
+## 简介状态机
 
 基本原则：
 
@@ -107,9 +108,9 @@ Note：
 
 * 状态：暂态、终态
 
-![](images/tech-growth/status-machine-experiment-part1.png)
+![](/images/tech-growth/status-machine-experiment-part1.png)
 
-![](images/tech-growth/status-machine-experiment-part2.png)
+![](/images/tech-growth/status-machine-experiment-part2.png)
 
 ### 实现
 
@@ -130,7 +131,6 @@ Note：
 * 状态是否实时变更
 
 ## 总结
-
 
 基本原则：
 
