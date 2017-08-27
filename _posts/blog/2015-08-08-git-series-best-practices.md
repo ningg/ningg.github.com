@@ -272,7 +272,22 @@ git rebase --abort
 
 * [http://chris.beams.io/posts/git-commit/](http://chris.beams.io/posts/git-commit/)
 
-## 10. 参考来源
+## 10. Case：修改 git commit msg
+
+具体操作：
+
+```
+// 提交 commit
+git commit -m "msg"
+
+// 提交 commit 之后，仍可以修 msg
+git commit --amend
+
+// 查看 git msg
+git log
+```
+
+## 11. 参考来源
 
 * [git - 简明指南]
 * [图解Git]
