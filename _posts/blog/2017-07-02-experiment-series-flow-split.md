@@ -1,7 +1,7 @@
 ---
 layout: post
-title: 实验平台：关键技术细节--流量分割
-description: 实验平台，具体落地的过程，需要考虑哪些关键细节？这些关键细节，如何实现？
+title: 实验平台：设计--流量分割
+description: 如何把流量切分开，分配到各个实验分组上？
 published: true
 category: experiment
 ---

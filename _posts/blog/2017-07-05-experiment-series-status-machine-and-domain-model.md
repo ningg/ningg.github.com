@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 实验平台：关键技术细节--领域模型 & 状态机
+title: 实验平台：设计--领域模型 & 状态机
 description: 实验平台，具体落地的过程，需要考虑哪些关键细节？这些关键细节，如何实现？
 published: true
 category: experiment
@@ -12,14 +12,14 @@ category: experiment
 
 实验平台，结合领域知识，进行通用的领域模型设计：
 
-![](domain-model-design.png)
+![](/images/experiment-series/domain-model-design.png)
 
 
 ## 实验管理状态机
 
 实验平台中，实验的生命周期是流转的，不同的状态，可以承载不同的操作/业务功能：
 
-![](experiment-lifecycle.png)
+![](/images/experiment-series/experiment-lifecycle.png)
 
 
 
