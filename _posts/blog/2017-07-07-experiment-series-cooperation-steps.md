@@ -2,7 +2,7 @@
 layout: post
 title: 实验平台：协作流程
 description: 开放式实验平台，如何协作？
-published: true
+published: false
 category: experiment
 ---
 

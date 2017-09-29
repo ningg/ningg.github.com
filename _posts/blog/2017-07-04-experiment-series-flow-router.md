@@ -2,7 +2,7 @@
 layout: post
 title: 实验平台：设计--分桶
 description: 如何支持流量的动态伸缩？如何保证流量完全正交？如何支持实验的用户累积效应？
-published: true
+published: false
 category: experiment
 ---
 

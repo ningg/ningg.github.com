@@ -251,6 +251,19 @@ git revert -m 1 [hashcode]
 上述改动，会增加一次 commit
 ```
 
+补充说明：从远端拉取代码，然后 merge，如果希望 revert 回退，则：
+
+```
+# 查看 log
+git log
+
+# 回退：去掉 remote 的代码
+git revert -m 1 [hashcode]
+
+# 回退：去掉 local 的代码
+git revert -m 2 [hashcode]
+```
+
 ## 8. Case：合并多次commit
 
 合并多次 commit，直接 rebase：
