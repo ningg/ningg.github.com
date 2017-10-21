@@ -64,6 +64,12 @@ Instant RDNS update from control panel
 * SsrConnect：免费 for iOS client.
 
 
+2 种代理模式：
+
+* `自动代理模式`：PAC 代理模式
+* `全局代理模式`
+
+
 TODO: 考虑剖析一下 SS 的原理。
 
 ## 附录
@@ -72,9 +78,11 @@ TODO: 考虑剖析一下 SS 的原理。
 
 * VPS(Virtual Private Server)：就是 VM ，虚拟主机。
 
+
 ## 参考资料
 
 * [https://bwh1.net](https://bwh1.net)
+* [PAC 代理模式](https://lvii.gitbooks.io/outman/content/ss.pac.mode.html)
 
 
 
