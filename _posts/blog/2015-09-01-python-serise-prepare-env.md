@@ -77,9 +77,6 @@ pip install geopy
 
 
 
-
-
-
 [NingG]:    http://ningg.github.com  "NingG"
 
 
