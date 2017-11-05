@@ -53,8 +53,8 @@ python launch.py
 
 备注：
 
-* Mac 下安装 Redis：[ningg.top](ningg.top) 中其他文章
-* Mac 下安装 Mongo：[ningg.top](ningg.top) 中其他文章
+* Mac 下安装 Redis：[ningg.top](http://ningg.top) 中其他文章
+* Mac 下安装 Mongo：[ningg.top](http://ningg.top) 中其他文章
 
 
 ## 参考资料
