@@ -108,12 +108,14 @@ TODO：单独写一篇文章，关注几点：如何配置、基本原理。
 2. 登录后，点击`Add Disqus to your site`按钮，操作下去，最终将获得相应的JS片段；
 3. 将上述JS片段插入到自己想要包含评论的页面即可；
 
-Update：（time：20170224）因为中国大陆无法访问 Discus ，跟读者之间互动渠道就断了，因此，将 Discus 切换为 [多说](duoshuo.com)：
+Update：（time：20170224）因为中国大陆无法访问 Disqus ，跟读者之间互动渠道就断了，因此，将 Disqus 切换为 [多说](http://duoshuo.com)：
 
-1. 注册 [多说](duoshuo.com) 账号
+1. 注册 [多说](http://duoshuo.com) 账号
 2. 获得评论框的 JS 代码
 
 update：（time：20170326）多说网站将在 6月1日 关闭，因此，需要切换到其他评论了，这次，切换到[网易云跟帖](https://gentie.163.com/index.html)
+
+update：（time：20180121）由于网易云跟帖服务也关闭了，因此，重新切换 Disqus，但是，在中国大陆，需要「accross the wall」后，才能访问.
 
 
 ### 4.3配置网站，支持LaTeX语法
