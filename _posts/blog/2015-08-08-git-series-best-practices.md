@@ -300,6 +300,22 @@ git commit --amend
 git log
 ```
 
+## 11. checkout 出指定 tag or commit 的代码
+
+具体操作：
+
+```
+// 查看 log
+git log
+
+// 从指定的 tag, checkout 出新分支
+git checkout -b new_branch_name tag_name
+
+// 从指定的 commit, checkout 出新分支
+git checkout -b new_branch_name commit_id
+
+```
+
 ## 11. 参考来源
 
 * [git - 简明指南]
