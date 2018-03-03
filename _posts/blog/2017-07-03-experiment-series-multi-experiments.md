@@ -2,7 +2,7 @@
 layout: post
 title: 实验平台：设计--分层
 description: 多实验并行，实验平台是否会遇到瓶颈？实验数量的线性增长，实验间是否会可能相互干扰？实验管理的复杂度，是否保持不变？
-published: false
+published: true
 category: experiment
 ---
 

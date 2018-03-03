@@ -2,7 +2,7 @@
 layout: post
 title: 实验平台：架构设计
 description: 实验平台，有什么作用？整体架构，要涵盖哪些主要功能？
-published: false
+published: true
 category: experiment
 ---
 

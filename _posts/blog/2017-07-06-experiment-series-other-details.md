@@ -2,7 +2,7 @@
 layout: post
 title: 实验平台：设计--其他落地细节
 description: 实验平台，具体落地的过程，需要考虑哪些关键细节？这些关键细节，如何实现？
-published: false
+published: true
 category: experiment
 ---
 
