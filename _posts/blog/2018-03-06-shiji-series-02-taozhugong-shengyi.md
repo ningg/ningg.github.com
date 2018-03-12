@@ -136,7 +136,6 @@ category: 史记
 
 ## 参考资料
 
-* [勤劳致贫](http://t.cn/RENMYW3)
 * [史记-货殖列传]
 
 
@@ -146,7 +145,6 @@ category: 史记
 
 
 [NingG]:    http://ningg.github.com  "NingG"
-[勤劳致贫]:		http://t.cn/RENMYW3	"勤劳致贫-计算广告"
 [史记-货殖列传]:	https://baike.baidu.com/item/%E8%B4%A7%E6%AE%96%E5%88%97%E4%BC%A0		"史记-货殖列传"
 
 
