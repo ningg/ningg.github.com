@@ -3,7 +3,7 @@ layout: post
 title: 道法自然：社会发展的客观规律
 description: 在一定的条件下，就会发生相应的事情，是客观规律，不以某部分人的意志为转移；但是，需要认识，这些到底是不是客观规律，避免假的幻想
 published: true
-category: blog
+category: nature
 ---
 
 原文地址： 
