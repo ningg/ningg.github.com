@@ -21,6 +21,10 @@ Kafka 的优势：
 * **Producer**：
 	*  支持`同步复制`和`异步复制`
 		* 复制策略，控制方：Producer 控制？还是 Kafka cluster 控制？
+		* 完全由 Producer 上控制，通过 `acks` 参数进行设置
+		* 其他关联参数：
+			* Broker 上的参数 `min.insync.replicas` 作为所有 Producer 的兜底策略，同步的副本，必须满足，否则 Producer 会抛出异常；
+			* Topic 维度，也有参数 `min.insync.replicas` 标识最少同步的副本，保证系统可用性
 	* **批量发送**：Nagle 策略，利用`缓冲区`、`超时时间`，合并小的数据包
 		* 减少网络 IO 次数
 		* 增加有效 payload 比例，提升有效吞吐量
@@ -35,7 +39,18 @@ Kafka 的优势：
 
 ### msg 复制：同步、异步
 
-Broker 上，通过配置 `min.insync.replicas` 参数，控制`同步复制`、`异步复制`、`部分同步复制`。
+msg 的**复制**，是指：一条 msg 提交到 broker 后，在 partition 的`不同副本`之间，进行复制。
+
+* 完全由 Producer 上控制，通过 `acks` 参数进行设置
+		* 其他关联参数：
+			* Broker 上的参数 `min.insync.replicas` 作为所有 Producer 的兜底策略，同步的副本，必须满足，否则 Producer 会抛出异常；
+			* Topic 维度，也有参数 `min.insync.replicas` 标识最少同步的副本，保证系统可用性
+
+producer 上的 `acks` 参数，控制`同步复制`、`异步复制`， Note： 暂时不支持 `部分同步复制`。
+
+TODO：
+
+* `acks` 取值的说明.
 
 参数 `min.insync.replicas` 可以配置的位置：
 

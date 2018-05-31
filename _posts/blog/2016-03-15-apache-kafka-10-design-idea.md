@@ -116,6 +116,23 @@ Kafka 集群的典型内部结构：
 
 ![](/images/apache-kafka-10/kafka-inner-structure-demo.png)
 
+## 常见问题
+
+其他几个疑问：
+
+1. partition 的 leader 失联后， 选举新的 leader 期间：几个细节
+	* producer 和 consumer 是否正常工作？
+	* 新的 leader 选举之后，如何周知到 producer 和 consumer？
+1. partition 数量 > consumer 数量，此时，消费关系：几个细节
+	* 每个 consumer 分配多个 partition ？
+	* 针对一个 consumer 如何在 partition 之间进行切换？
+1. 消费关系调整：什么时候，会触发消费关系的调整？
+	* broker 数量调整？
+	* partition 的 leader 重新选举？
+	* consumer 数量调整？
+
+
+
 ## 参考资料
 
 * [Kafka 官网]

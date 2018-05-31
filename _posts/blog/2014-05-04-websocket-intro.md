@@ -16,54 +16,134 @@ WebSocket，几点：
 
 ## 解决什么问题？
 
+问题焦点：
+
+* **实时 Web 应用**：Client 跟 Server 之间，实时的双向通信，例如 IM 等及时消息。
+
+### B/S的请求-响应模式
+
 针对实时通信的场景*（实时Web应用）*，几点：
 
-* 传统Web中，由Browser主动向Server发送请求，以此获得Server端数据；
-* 如果要实现实时通信，实时获取Server端的数据，通常是Client端定期发送HTTP请求，Server端进行响应并返回数据；
-* HTTP协议：基于请求/响应模式的、无状态的、应用层协议；
+* 传统Web中，由 Browser 主动向 Server 发送请求，以此获得 Server 端数据；
+* 如果要实现实时通信，实时获取 Server 端的数据，通常是 Client 端定期发送HTTP请求，Server端进行响应并返回数据；
+* HTTP协议：基于`请求`/`响应`模式的、单向的、无状态的、应用层协议；
 
-**补充**：HTTP协议为什么不允许Server主动向Client推送数据？如果允许Server向Client主动推送数据，则，Client很容易受到攻击，特别是广告商会将广告信息，强行推送给Client，因此HTTP的单向特性是必要的。
+**补充**：
 
-**疑问**：WebSocket只能用于构建实时Web应用吗？WebSocket只能与HTML5结合吗？
+> HTTP协议为什么不允许Server主动向Client推送数据？
+> 
+> RE: 如果允许 Server 向 Client 主动推送数据，则，Client 很容易受到攻击；特别是广告商会将广告信息，**强行推送**给 Client，因此 HTTP 的`单向特性`是必要的。
+
+### WebSocket 简介
+
+WebSocket：
+
+* Client 跟 Server 之间，双向通信技术，Client 和 Server，都可以主动发起通信
+* 是一种网络`通信协议`
+* 建立在传输层 TCP 协议之上
+
+**疑问**：WebSocket 只能用于构建实时Web应用吗？WebSocket只能与HTML5结合吗？
 
 
-
-WebSocket，是HTML5引入Web的新特性，目标：构建高效的实时Web应用。*（WebSocket是HTML5特有的吗？）*下图展示了Polling和WebSocket两种模式下，Web应用的效率：
+下图展示了Polling和WebSocket两种模式下，Web应用的效率：
 
 ![](/images/websocket-intro/latency-comparison.gif)
 
-相对于传统的基于HTTP协议Polling方式构建的Web应用，WebSocket方式构建的Web应用，具有如下优点：
+WebSocket方式构建的Web应用，具有如下优点：
 
-* 节省带宽；*（HTTP协议的HEAD比较大）*
-* 节省服务器CPU资源；*（HTTP协议的Polling方式，即使Server没有数据也要接收Request）*
+* 节省**带宽**；*（HTTP 协议的 HEAD 比较大）*
+* 节省服务器**CPU资源**；*（HTTP 协议的 Polling 方式，即使 Server 没有数据也要接收 Request）*
 
 
 ## 传统解决方案
 
-上述构建实时Web应用的场景，传统的解决方案是：轮询、长轮询、流，
+上述构建实时Web应用的场景，传统的解决方案是：
+
+* 轮询（polling）
+* 长轮询（long polling）
+* 流（stream）：基于 `长轮询` 实现
 
 ### 轮询（Polling）
 
-轮询（Polling）又称定期轮询：Client定期向Server发送请求，以此保持与Server端数据的同步。*（通常使用Ajax技术，局部刷新Web页面）*；**缺点：由于Client定期向Server发送请求，当Server端没有数据更新时，Client仍旧发送请求，这造成带宽的浪费以及Server端CPU的耗费。**
+`轮询`（Polling）又称`定期轮询`：
+
+* Client 定期向 Server 发送请求，以此保持与 Server 端数据的同步。
+
+典型应用场景：
+
+* Ajax技术，局部刷新Web页面
+
+缺点：
+
+* 带宽和 CPU 资源：由于 Client 定期向 Server 发送请求，当 Server 端没有数据更新时，Client仍旧发送请求，这造成带宽的浪费以及Server端CPU的耗费
+* 实时性：轮询间隔内，会有数据延迟
 
 ![](/images/websocket-intro/polling.png)
 
 ### 长轮询（Long Polling）
 
-长轮询是对普通轮询的改进和提高，目标：降低无效的网络传输。基本原理：Server接收到Client的请求之后，如果没有数据更新，则连接保持一段时间，直到有数据更新或者连接超时，这样可以减少无效的Client与Server之间的交互。实例：WebQQ。
+`长轮询`是对`普通轮询`的改进和提高。
 
-**缺陷**：当Server端数据频繁更新时，Server端必须等待下一个请求到来，才能发送更新的数据，这中间的延迟为 2 x RTT（往返时间），另外，在网络拥塞的情况下，等待时间更久；同时，HTTP的数据包HEAD部分数据量很大（400+Byte），但真正有效的数据很少（10Byte），这样的数据包在网络中周期传输，浪费带宽。
+目标：
+
+* **节省带宽**，降低无效的网络传输。
+
+基本原理：
+
+* `保持连接`：HTTP 层，保持连接，Server 接收到 Client 的请求之后，如果没有数据更新，则连接保持一段时间；
+* 直到有`数据更新`或者`连接超时`，这样可以减少无效的 Client 与 Server 之间的交互；
+* 通过`保持连接`，减少 Request 和 Response 的数量，节省带宽；
+
+典型应用场景：
+
+* WebQQ
+
+**缺陷**：
+
+* 节省带宽，效果有限：HTTP的数据包HEAD部分数据量很大（400+Byte），但真正有效的数据很少（10Byte），这样的数据包在网络中周期传输，浪费带宽。
+* 数据更新频繁场景下，数据实时性：当Server端数据频繁更新时，Server端必须等待下一个请求到来，才能发送更新的数据，这中间的延迟为 2 x RTT（往返时间）
+* 网路拥塞场景下，等待时间更久，因为需要重新建立连接；
 
 ![](/images/websocket-intro/long-polling.png)
 
+
+Think： 上述`长轮询`（long polling）的几个缺陷
+
+* 节省带宽，效果有限：HTTP 请求的 HEADER 占据比例较大；
+* 数据更新频繁场景下，实时性较差
+* 网络拥塞情况下，等待时间更久
+
+本质原因：
+
+* `连接保持`：需要重新建立 HTTP 连接（HTTP 1.1 只能缓解，无法从原理上，彻底解决）
+* `数据格式`：仍然为应用层的数据格式， HTTP HEADER 数据占比较大
+
 ### 流（长连接）
 
-流（也称，长连接方式）是指Client在页面内使用一个隐蔽的窗口向Server端发起一个长连接请求。Server端接到这个请求后，进行响应，并且不断更新连接状态，保证连接不过期。如此可以保证Server与Client之间的实时通信。实例：Comet技术*（基于HTTP长连接的Server端Push技术）*。**缺点**：大并发情况下，服务器可能会宕机。
+`流`（也称，`长连接`方式）是指
+
+* Client 在页面内使用一个隐蔽的窗口向 Server 端发起一个长连接请求。
+* Server端接到这个请求后，进行响应，并且`不断更新`连接状态，`保证`连接`不过期`。
+* 如此可以保证Server与Client之间的实时通信。
+
+应用场景：实例
+
+* `Comet` 技术：基于HTTP长连接的Server端Push技术
+
+缺点：
+
+* 大并发情况下，服务器可能会宕机。
 
 
 ### 小结
 
-HTML5 WebSocket的目标：取代Polling、Comet技术，实现Browser与Server之间实时通信。浏览器通过JavaScript向服务器发出建立 WebSocket 连接的请求，连接建立以后，客户端和服务器端就可以通过 TCP 连接直接交换数据。因为 WebSocket 连接本质上就是一个 TCP 连接，所以在数据传输的稳定性和数据传输量的大小方面，和轮询以及 Comet 技术比较，具有很大的性能优势。
+HTML5 WebSocket 的目标：
+
+* 取代Polling、Comet技术，实现 Browser 与 Server 之间实时通信。
+
+浏览器通过 JavaScript 向服务器发出建立 WebSocket 连接的请求，连接建立以后，客户端和服务器端就可以通过 TCP 连接`直接交换数据`。
+
+因为 WebSocket 连接本质上就是一个 TCP 连接，所以在数据`传输的稳定性`和`数据量`方面，和轮询以及 Comet 技术比较，具有很大的性能优势。
 
 ## WebSocket实现原理
 
@@ -101,6 +181,28 @@ WebSocket API是HTML5标准的一部分，但这并不代表 WebSocket 一定要
 * Nginx 对 WebSockets 的支持： NGINX as a WebSockets Proxy 、 NGINX Announces Support for WebSocket Protocol 、WebSocket proxying
 
 ## WebSocket原理
+
+WebSocket 简介：
+
+* 服务器可以主动向客户端推送信息，客户端也可以主动向服务器发送信息，是真正的双向平等对话
+* 建立在 TCP 协议之上，服务器端的实现比较容易
+* 与 HTTP 协议有着良好的兼容性：握手阶段采用 HTTP 协议，因此握手时不容易屏蔽，能通过各种 HTTP 代理服务器。
+* 数据格式比较轻量，性能开销小，通信高效
+* 没有同源限制，客户端可以与任意服务器通信；（没有跨域限制）
+* 协议标识符是ws（如果加密，则为wss），服务器网址就是 URL
+
+几个方面：
+
+* 单个 TCP 连接上，本质上，TCP 是全双工的协议，但应用层的协议不一定是全双工的
+* 持久性的 TCP 连接
+* 允许 B/S 双向通信
+* WebSocket 是全双工的协议
+* WebSocket 是应用层协议
+* HTTP 是单向协议，是半双工的协议，应用语义交付上，同一时刻，Client 和 Server 只有一个可以发送数据
+* WebSocket 支持 2 种帧格式：文本和二进制流
+* HTTP + TCP
+	* HTTP：从 HTTP 层面上，进行一次握手，通过 upgrade 的 HTTP 请求，建立连接
+
 
 WebSocket是为解决客户端与服务端实时通信而产生的技术。**其本质是先通过HTTP/HTTPS协议进行握手后创建一个用于交换数据的TCP连接，此后服务端与客户端通过此TCP连接进行实时通信**。
 
@@ -165,15 +267,6 @@ WebSocketServlet：提供遵循RFC6455的WebSocket连接的Servlet基本实现�
 
 
 （TODO）
-
-
-
-
-
-
-
-
-
 
 
 ## 参考来源
