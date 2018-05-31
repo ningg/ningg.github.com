@@ -2,7 +2,7 @@
 layout: post
 title: 商业系列：商业模式
 description: 商业模式是什么？要解决哪些问题？有什么用？
-category: product 
+category: 商业系列 
 ---
 
 ## 背景
