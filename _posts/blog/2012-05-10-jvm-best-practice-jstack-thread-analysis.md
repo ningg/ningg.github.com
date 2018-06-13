@@ -16,7 +16,9 @@ categories: jvm
 
 具体操作：
 
-* `top` 命令 - O/F ：查看哪个Process占用大量CPU，记录PID；
+* `top` 命令 - P/M ：查看哪个Process占用大量CPU，记录PID；
+	* `top` 命令， 选中 `%CPU`，然后 `s` 选中这一字段进行排序
+	* `top` 命令下， `c` 命令，则，显示完整的 command 执行参数
 * `top -H -p [pid]`：查看Process内部Thread的运行情况，重点记录排在前面运行的Thread；
 * `jstack -l [pid] > [pid].stack`：获得对应pid下Thread的详细情况；
 * `jmap [pid]`：查看内存堆栈信息；
@@ -32,10 +34,12 @@ Note：`r` 运行态的线程数量，`b` 阻塞状态的线程数量。
 
 ## 1.查看进程
 
-top命令`top` -- `P/M`，结果：
+top命令`top` -- `P/M` （按照 `CPU` or `MEM` 排序），结果：
 
-	  PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+  COMMAND                                                                   
-	 4796 storm     20   0 9935m 264m  13m S 134.5  0.8   3745:18 java  
+```
+  PID USER      PR  NI  VIRT  RES  SHR S %CPU %MEM    TIME+  COMMAND                                                                   
+ 4796 storm     20   0 9935m 264m  13m S 134.5  0.8   3745:18 java  
+```
 
 ## 2.查看线程
 
@@ -74,6 +78,13 @@ top命令`top -H -p 4796`，结果：
 		at java.util.concurrent.LinkedBlockingQueue.take(LinkedBlockingQueue.java:442)  __
 	
 
+补充说明：如果是 docker 容器启动的 JVM， 则，需要先进入 docker 容器，再执行 jstack：
+
+```
+# 执行下述命令，进入 docker 容器
+$ dockert -it [container] /bin/bash
+```
+
 ## 备注
 
 几点：
@@ -98,6 +109,7 @@ top命令`top -H -p 4796`，结果：
 ## 参考来源
 
 * [一个Tomcat高CPU占用问题的定位][一个Tomcat高CPU占用问题的定位]
+* [top命令](http://ningg.top/linux-top/)
 
 
 
