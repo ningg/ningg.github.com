@@ -23,9 +23,11 @@ note：
 1. HTTP BA 定制：
 	1. HTTP 头部：Authorization
 	1. Authorization: Basic QWxhZGRpbjpvcGVuIHNlc2FtZQ==
-	1. 其「数字签名」定制的「签名算法」，「私钥」
+	1. 其「数字签名」定制的「签名算法」和「私钥」
 		1. 计算数字签名过程中，加入「请求参数」和「时间」
 		1. 防止篡改和重放攻击（时间窗口）
+			1. 请求参数：参与「计算签名」，防止篡改
+			2. 时间戳：参与「计算签名」，防止重放攻击
 
 ## 2. HTTP BA 认证
 
@@ -125,14 +127,14 @@ HTTP BA 认证，需要提前沟通的内容：
 
 HTTP BA 签名的基本过程：
 
-1. 计算数字签名，Client 端：根据 `client_id`，使用对应 secret，对 string_to_sign 进行数字签名运算
+1. 计算数字签名，Client 端：根据 `client_id`，使用对应 secret，对 `string_to_sign` 进行数字签名运算
 	1. `string_to_sign`：uri、date、param
 1. 传输数字签名，HTTP 头部携带数字签名
 	1. Authorization：头部
-	1. Authorization: MWS shanghai:frJIUN8DYpKDtOLCwozzyllqDzg=
-	1. AWS：A web service
-	1. shanghai：client id
-	1. frJIUN8DYpKDtOLCwozzyllqDzg=：具体的数字签名
+	1. Authorization: AWS shanghai:frJIUN8DYpKDtOLCwozzyllqDzg=
+		1. AWS：A web service
+		1. shanghai：client id
+		1. frJIUN8DYpKDtOLCwozzyllqDzg=：具体的数字签名
 1. 验证数字签名，Server 端：根据 client_id 找出对应的 secret，并根据「签名算法」，计算签名，进行校验。
 
 BA 认证：使用「私钥」计算数字签名，通过数字签名，验证消息的完整性和可信性。
@@ -167,32 +169,6 @@ HMAC：Hash-based Message Authentication Code，使用 secret 对 message 进行
 
 1. [http://baike.baidu.com/item/base64](http://baike.baidu.com/item/base64)
 1. [https://zh.wikipedia.org/wiki/SHA%E5%AE%B6%E6%97%8F](https://zh.wikipedia.org/wiki/SHA%E5%AE%B6%E6%97%8F)
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 
