@@ -303,6 +303,7 @@ jstat -gcutil -h5 [pid] 1s 20
 jstat -gccapacity -h5 [pid] 1s 20
 ```
 
+更多细节，参考：[jstat-Java Platform, Standard Edition Tools Reference](https://docs.oracle.com/javase/8/docs/technotes/tools/unix/jstat.html)
 
 ## 附录
 
