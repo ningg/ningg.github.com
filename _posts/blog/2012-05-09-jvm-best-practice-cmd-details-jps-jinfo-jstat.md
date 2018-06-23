@@ -256,9 +256,9 @@ jstat [-命令选项] [vmid] [间隔时间/毫秒] [查询次数]
 其中，选项：
 
 * `-h n`：每输出 `n` 行，就输出一行 header
-* class: Displays statistics about the behavior of the class loader.
-* compiler: Displays statistics about the behavior of the Java HotSpot VM Just-in-Time compiler.
-* gc: Displays statistics about the behavior of the garbage collected heap.
+* `class`: Displays statistics about the behavior of the class loader.
+* `compiler`: Displays statistics about the behavior of the Java HotSpot VM Just-in-Time compiler.
+* `gc`: Displays statistics about the behavior of the garbage collected heap.
 * gccapacity: Displays statistics about the capacities of the generations and their corresponding spaces.
 * gccause: Displays a summary about garbage collection statistics (same as -gcutil), with the cause of the last and current (when applicable) garbage collection events.
 * gcnew: Displays statistics of the behavior of the new generation.
@@ -271,22 +271,24 @@ jstat [-命令选项] [vmid] [间隔时间/毫秒] [查询次数]
 
 几个术语：
 
-* S0：survivor space 0，新生代-幸存者0区
-* S1：survivor space 1，新生代-幸存者1区
-* S0C：S0 Capacity (kB)
-* S0U：S0 Utilization (kB)
-* E：eden space，新生代-伊甸区
-* O：old space，老年代
-* M：Metaspace，元数据区
-* CCS：Compressed class space，压缩类空间
-* YGC：Number of young generation garbage collection events，年轻代 Young GC 的次数
-* YGCT：Young generation garbage collection time，年轻代 Young GC 累计时间（s）
-* FGC: Number of full GC events，老年代 Full GC 的次数
-* FGCT: Full garbage collection time，老年代 Full GC 的累计时间（s）
-* GCT: Total garbage collection time，累计 GC 的时间
-* MN：Minimum，最小的
-* MX：Maximum，最大的
-* OGCMN：Old Generation Capacity MN，老年代容量的最大取值（kB）
+* `S0`：survivor space 0，新生代-幸存者0区
+* `S1`：survivor space 1，新生代-幸存者1区
+* `S0C`：S0 Capacity (kB)
+* `S0U`：S0 Utilization (kB)
+* `E`：eden space，新生代-伊甸区
+* `O`：old space，老年代
+* `M`：Metaspace，元数据区
+* `CCS`：Compressed class space，压缩类空间
+* `YGC`：Number of young generation garbage collection events，年轻代 Young GC 的次数
+* `YGCT`：Young generation garbage collection time，年轻代 Young GC 累计时间（s）
+* `FGC`: Number of full GC events，老年代 Full GC 的次数
+* `FGCT`: Full garbage collection time，老年代 Full GC 的累计时间（s）
+* `GCT`: Total garbage collection time，累计 GC 的时间
+* `MN`：Minimum，最小的
+* `MX`：Maximum，最大的
+* `OGCMN`：Old Generation Capacity MN，老年代容量的最大取值（kB）
+* `LGCC`：Cause of last garbage collection， 最后一次 GC 的原因
+* `GCC`：Cause of current garbage collection，当前 GC 的原因
 
 几个常用命令：
 
