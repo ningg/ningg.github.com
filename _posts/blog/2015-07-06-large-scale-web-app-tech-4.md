@@ -3,7 +3,7 @@ layout: post
 title: 大型网站架构：无损发布
 description: 系统发布过程中，服务不可用，会损失流量，系统可用性也会降低
 published: true
-category: arch
+category: 技术架构
 ---
 
 

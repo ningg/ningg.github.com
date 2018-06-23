@@ -3,7 +3,7 @@ layout: post
 title: 大型网站架构：高性能
 description: 什么是高性能？如何衡量？如何监控这些指标？如何优化？
 published: true
-category: arch
+category: 技术架构
 ---
 
 ## 1. 概要

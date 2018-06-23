@@ -3,7 +3,7 @@ layout: post
 title: 大型网站架构：高可用
 description: 
 published: true
-category: arch
+category: 技术架构
 ---
 
 

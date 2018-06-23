@@ -3,7 +3,7 @@ layout: post
 title: 大型网站架构：伸缩性
 description: 伸缩性是什么？如何衡量？如何优化？
 published: true
-category: arch
+category: 技术架构
 ---
 
 

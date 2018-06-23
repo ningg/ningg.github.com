@@ -3,7 +3,7 @@ layout: post
 title: 大型网站架构：前言
 description: 大型网站架构，有什么共性问题？又有什么通用解决思路？演进思路？
 published: true
-category: arch
+category: 技术架构
 ---
 
 ## 1. 概要
