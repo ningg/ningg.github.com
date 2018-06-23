@@ -1,7 +1,7 @@
 ---
 layout: post
 title: JVM 实践：GC 调优实践
-description: Java 代码执行过程是什么？JVM 内存是怎么被分配的？为什么需要被回收？又如何回收？核心原理和要点是什么
+description: JVM GC 一般会出现哪些问题？问题的原因是什么？如何定位这些问题？有哪些工具可以使用？
 category: jvm
 ---
 
@@ -9,7 +9,7 @@ category: jvm
 
 接着上一篇 blog：
 
-* [JVM 实践：GC 原理]()
+* [JVM 实践：GC 原理](http://ningg.top/jvm-series-jvm-practice-jvm-gc-principle/)
 
 
 ## 2. 主要内容
@@ -36,7 +36,9 @@ category: jvm
 	* 命令格式：`jmap [pid]`
 * 备注：可视化工具 JConsole、**VisualVM**
 
-详细操作使用，可以参考：[JVM 实践：jps、jinfo、jstat 命令详解](http://ningg.top/jvm-best-practice-cmd-details-jps-jinfo-jstat/)
+详细操作使用，可以参考：
+
+* [JVM 实践：jps、jinfo、jstat 命令详解](http://ningg.top/jvm-best-practice-cmd-details-jps-jinfo-jstat/)
 
 
 其中，从上至下，要解决 5 个问题：
@@ -155,7 +157,7 @@ OOM 异常，细分为 3 类：
 			* 64位的机器默认 85M（指针膨胀）
 	* JDK8 中，`-XX:MetaspaceSize` 和`-XX:MaxMetaspaceSize`设定「方法区」大小，但如果不指定，Metaspace的 大小仅受限于「直接内存」大小，上限是物理内存大小
 
-## 3. 遗留问题
+## 3. 讨论问题
 
 讨论过程中，提到的几个问题：
 
