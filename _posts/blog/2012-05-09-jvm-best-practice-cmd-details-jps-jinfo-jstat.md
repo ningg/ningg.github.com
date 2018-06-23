@@ -11,8 +11,10 @@ categories: jvm
 JVM 性能调优、问题排查过程中，常用几个命令，逐个分析一下细节：
 
 * `jps`：获取 jvm 进程的列表，获取 pid，jvm process status，类似 `ps`
-* `jinfo`：
-* `jstat`
+* `jinfo`：运行环境参数，Java System 属性、JVM 命令参数，class path 等
+* `jstat`：JVM 运行状态信息，类加载、内存回收等
+* `jstack`：JVM 进程内部，所有线程的运行情况
+
 
 
 ## jps 命令
@@ -245,7 +247,7 @@ sun.cpu.isalist =
 
 > 下文所有内容，都是针对 JDK8 来描述的
 
-jstat命令可以查看堆内存各部分的使用量，以及加载类的数量。
+jstat命令：查看堆内存使用情况，以及加载类的数量。
 
 命令的格式如下：
 
@@ -304,6 +306,20 @@ jstat -gccapacity -h5 [pid] 1s 20
 ```
 
 更多细节，参考：[jstat-Java Platform, Standard Edition Tools Reference](https://docs.oracle.com/javase/8/docs/technotes/tools/unix/jstat.html)
+
+
+## jstack
+
+jstack 命令：JVM 进程内部，所有线程的运行情况
+
+命令详细介绍：
+
+```
+jstack [pid]
+```
+
+
+
 
 ## 附录
 
