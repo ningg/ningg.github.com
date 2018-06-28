@@ -121,6 +121,19 @@ Docker 公司，借助 Moby ，提出 `容器平台` 的**构建规范**：
 * [Samples](https://docker.github.io/samples/)：各类场景的操作示例
 
 
+具体`左边栏`系统性的涵盖下面内容：
+
+* Get Docker：下载、安装
+* Get started：基本操作、底层支撑的原理、Docker 架构
+* Develop with Docker：制作镜像、管理容器启动等的 API 接口
+* Configure networking：各种网络模式的配置、原理分析
+* Manage application data：磁盘等存储
+* Run your app in production：生产环境的一些配置，涵盖镜像、容器、Daemon 管理进程等
+* Standards and compliance：标准和联盟
+* Open source at Docker：参与 Docker 社区建设，涵盖文档、架构
+* Documentation archive：不同版本 Docker 的文档，归档存储的位置
+
+
 ## 安装 & 使用
 
 直接按照 [Documentation](https://docs.docker.com/) 中 [Get Started](https://docker.github.io/get-started/)，逐步阅读并操作即可。
