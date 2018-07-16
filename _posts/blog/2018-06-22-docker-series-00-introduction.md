@@ -49,6 +49,14 @@ Docker 的版本，有 2 个：
 
 备注，截止写 blog 的时候， Docker 最新版本为 `1.18`
 
+几个常见的问题：
+
+1. 如何查询 Docker 的版本？
+2. 下面截图中，多个版本信息，分别什么含义？
+
+![](/images/docker-series/docker-version-of-mac.png)
+
+
 ### Docker 社区
 
 Docker 社区：[Community](https://www.docker.com/docker-community) 提供了 3 方面的信息：
