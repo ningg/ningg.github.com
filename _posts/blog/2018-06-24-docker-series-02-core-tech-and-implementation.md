@@ -244,7 +244,7 @@ Union file systems, or `UnionFS`，通过`分层`方式，标识**差量部分**
 
 ### 容器格式
 
-Docker 引擎，封装 `namespaces`、`control groups`、 `UnionFS` 构造程一个**容器格式**。当前默认的容器格式，是 `libcontainer`。
+Docker 引擎，封装 `namespaces`、`control groups`、 `UnionFS` 构造成一个**容器格式**。当前默认的容器格式，是 `libcontainer`。
 
 未来，结合了 `BSD Jails`或 `Solaris Zones` 技术，可能会诞生其他**容器格式**。
 
