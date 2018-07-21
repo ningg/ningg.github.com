@@ -2,7 +2,7 @@
 layout: post
 title: Docker 系列：核心原理和实现
 description: Docker 是什么架构？ C/S 架构？其实现的核心原理有哪些？
-published: false
+published: true
 category: Docker
 ---
 
@@ -61,7 +61,7 @@ Docker 引擎，本质是 `Client`-`Server` 模式，包含下述几个组件：
 
 * **服务器**：
 	* **对外接口**：REST API，接收 `Client` 的命令，管理容器 
-	* **后台进程**：后台进程 `dockerd`，实现功能，包括管理`容器`、`镜像`，以及`网络`、`磁盘`。
+	* **后台进程**：后台进程 `dockerd`，实现功能，包括创建并管理`容器`、`镜像`，以及`网络`、`磁盘`。
 * **客服端**：提供命令接口的客服端（CLI, Command Line Interface），例如 `docker` 命令
 
 参考示意图：
@@ -79,9 +79,30 @@ Docker 可以用来做什么呢？有什么好处呢？
 
 ## Docker 架构
 
+主要关键点：
+
+1. Docker 是 C/S 架构，由 Client 和 Server 组成。
+1. Client 通过 REST API 跟 Server 之间交互。
+1. Docker Server 具体形式，就是 Docker Daemon 后台进程。
+1. Docker Client 和 Docker Server，可以在同一台机器上，也可以不在一起。
+
+具体的架构：
+
+![](/images/docker-series/architecture.svg)
+
+具体 4 个关键对象：
+
+* Docker 服务器：Docker Daemon
+* Dcoker 客服端：Docker Client
+* Docker 仓库：Docker Registies
+* Docker 对象：
+	* 镜像：Images
+	* 容器：Container
+	* 服务：service
+
+### Docker 服务器
 
 
-* TODO
 
 
 
