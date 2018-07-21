@@ -56,6 +56,15 @@ Docker 的版本，有 2 个：
 
 ![](/images/docker-series/docker-version-of-mac.png)
 
+特别说明：
+
+1. Docker 的所有版本，都可以在 GitHub 上查看： [https://github.com/moby/moby/labels](https://github.com/moby/moby/labels)
+2. Docker 在 2017.01.18 发布了 [version/1.13](https://github.com/moby/moby/labels/version%2F1.13) 版本后，就不再使用 `1.x` 的版本编排方式了，改为使用 `YY.MM` 的日期格式
+3. 当前 blog 时，最新的版本为 `18.09`
+4. 拓展资料：
+	1. [Docker 17.03系列：Docker EE/Docker CE简介与版本规划](http://itmuch.com/docker/docker-1/)
+	2. [ANNOUNCING DOCKER ENTERPRISE EDITION](https://blog.docker.com/2017/03/docker-enterprise-edition/)
+
 
 ### Docker 社区
 
