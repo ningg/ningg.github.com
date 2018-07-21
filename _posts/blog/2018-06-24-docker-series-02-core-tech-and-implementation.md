@@ -102,14 +102,151 @@ Docker 可以用来做什么呢？有什么好处呢？
 
 ### Docker 服务器
 
+Docker Daemon 后台进程（`dockerd`），做几件事情：
+
+1. 对外：通过 REST API，提供交互接口，监听外部的交互命令
+2. 对内：管理 `镜像`、`容器`、`网络`、`磁盘`
+
+补充说明：
+
+* Docker Daemon 后台进程，可以跟其他 Docker Daemon 后台进程通信，来管理 Docker Service. (疑问： 什么含义？)
+
+
+### Docker 客户端
+
+几个方面：
+
+1. 直接使用的 `docker` 命令，就是最常见的 Docker 客户端；
+1. 使用 `docker` 命令，能够跟 `dockerd` 后台进程，进行交互；
+1. docker 客户端，可以跟多个 `dockerd` 后台进程，进行交互； （疑问：什么含义？）
+
+### Docker 仓库
+
+Docker 仓库：
+
+* 用于存储 `image`
+* 常用的 Docker 仓库：`Docker Hub` 和 `Docker Cloud`
+* 默认，docker 服务端的**默认**仓库是： `Docker Hub`
+* 可以搭建自己的 Docker 仓库
+
+### Docker 对象
+
+Docker 场景下，几个常见对象的说明：
+
+* 镜像：image
+	* 可使用 Dockerfile 来快速创建镜像
+* 容器：container
+	* `image` 的运行实例，构成一个容器
+	* 根据 `image`，来**创建**和**运行**一个容器时，可以指定`运行参数`
+* 服务：service
+	* 目标：
+		* 对外，看起来是一个服务.
+		* 可以通过 swarm，控制一起 Docker 服务器，进行容器的伸缩.
+	* swarm：
+		* 由一群 Docker 服务器构成，包括：manager 和 worker 两类节点
+		* 不同的 Docker 服务器之间，通过 REST API 进行通信
+		* Docker `1.12+` 开始支持 swarm 模式
+
+更多细节，可以参考下文的「实例」部分的说明。
 
 
 
+## 实例
+
+下面一条命令的执行过程：
+
+```
+-- 目标：运行一个 ubuntu 容器，同时，进入容器的操作系统命令行
+$ docker run -i -t ubuntu /bin/bash
+```
+
+具体分为下面几个过程：
+
+1. **镜像**：如果 `dockerd` 的本地不存在 `ubuntu 镜像`，则，自动执行 `docker pull ubuntu` 命令，从 `Docker 仓库` 获取镜像，下载到 `Docker 服务器` 的本地；
+2. **容器**：创建一个容器，跟命令 `docker container create` 类似；
+3. **文件系统**：自动创建一个可读、可写层，允许容器在本地文件系统上，进行读写操作；
+4. **网络**：为容器分配一个网络地址，容器可以使用宿主机的网络对外通信；
+5. **启动**：启动容器，并且，执行 `/bin/bash` 命令，因为设置了 `-it` 选项，容器通过本地终端窗口，进行交互
+6. **终止**：交互命令窗口中，输入 `exit` 容器会终止运行，但是，容器并未删除，可以再次重启，或者进一步删除容器；
 
 
+## 底层技术
+
+Docker 是使用 [Go](https://golang.org/) 语言编写的，使用了大量的 `Linux 内核调用`，以达到其对外的资源隔离.
+
+Docker 的底层技术，涵盖：
+
+1. 命名空间：namespace，OS 级别，实现资源隔离，避免`容器之间`相互干扰
+2. 控制组：control groups
+3. 联合文件系统（分层文件系统）：Union file systems
+4. 容器格式：Container format
+
+### 命名空间：资源隔离, OS 级别
+
+Docker 引擎，通过**命名空间**（`namespace`），来实现容器之间的资源隔离，每个容器，只能看到自己空间内的东西。
+
+Docker 引擎，使用的命名空间：（**OS 级别**）
+
+* CPU：`进程`
+	* **进程**，`pid` 命名空间 + `IPC` 命名空间
+* 存储：
+	* **文件目录**：磁盘，`mnt` 命名空间（内存，是否存在命名空间，不确定）
+* 网络：
+	* `net` 命名空间
+* 用户和组：
+	* `uts` ：uid 和 gid ？
 
 
+详细说明：
 
+* The `pid` namespace: Process isolation (`PID`: Process ID).
+* The `net` namespace: Managing network interfaces (`NET`: Networking).
+* The `ipc` namespace: Managing access to IPC resources (`IPC`: InterProcess Communication).
+* The `mnt` namespace: Managing filesystem mount points (`MNT`: Mount).
+* The `uts` namespace: Isolating kernel and version identifiers. (`UTS`: Unix Timesharing System).
+
+
+### 控制组：资源限制，硬件级别
+
+Docker 引擎，依赖**控制组**（control group, `cgroup`），实现`硬件资源`的**共享**和**限额**。
+
+关于`限额`，几个方面：
+
+1. 隔离
+2. 优先级
+3. 配额
+
+可以控制限额的`硬件资源`：
+
+* CPU
+* 内存
+* 磁盘
+* 网络：这个有控制限额么？
+
+疑问：
+
+* 仍然是 OS 级别吧？因为所有的东西，都是在 OS 之上，对外暴露的
+
+### 联合文件系统，分层文件系统
+
+Union file systems, or `UnionFS`，通过`分层`方式，标识**差量部分**。提供几点便利：
+
+* 快速构造镜像：只构造`差量部分`
+* 快速分发镜像：只分发`差量部分`
+
+现在有多种**联合文件系统**的实现：
+
+* AUFS
+* btrfs
+* vfs
+* DeviceMapper
+
+
+### 容器格式
+
+Docker 引擎，封装 `namespaces`、`control groups`、 `UnionFS` 构造程一个**容器格式**。当前默认的容器格式，是 `libcontainer`。
+
+未来，结合了 `BSD Jails`或 `Solaris Zones` 技术，可能会诞生其他**容器格式**。
 
 
 
