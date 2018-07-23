@@ -54,6 +54,10 @@ docker container ls --all
 docker container ls -aq
 ```
 
+特别说明：
+
+> 命令查询入口：多查看 `docker` 命令，其输出的提示信息，显示 `docker` 可以操作 `对象`（镜像、容器、网络、磁盘、配置等等），也可以直接执行`动作`（查看信息、查看镜像列表、制作镜像等等）
+
 ## 镜像
 
 镜像（image）的唯一标志：`name:tag`，其中，`tag` 默认取值为 `latest`.

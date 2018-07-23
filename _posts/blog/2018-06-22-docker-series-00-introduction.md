@@ -128,7 +128,11 @@ Docker 公司，借助 Moby ，提出 `容器平台` 的**构建规范**：
 上述 2 个地方的手册，内容是完全相同的，涵盖几个方面：
 
 * [Guides](https://docker.github.io/)： 手册首页，可以切换 Docker 手册的版本
-* [Product Manuals](https://docker.github.io/ee/)：主要是针对 EE 版本，进行界面化操作的介绍
+* [Product Manuals](https://docker.github.io/ee/)：
+	* 针对 EE 版本，进行界面化操作的介绍；
+	* Docker Cloud，使用介绍
+	* Docker Compose，使用介绍
+	* Docker Hub，使用介绍
 * [Glossary](https://docker.github.io/glossary/)：术语表
 * [Reference](https://docker.github.io/reference/)：指导手册，包含 
 	* File formats
