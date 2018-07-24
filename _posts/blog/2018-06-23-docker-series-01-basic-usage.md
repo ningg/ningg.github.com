@@ -225,6 +225,87 @@ docker container stop [container]
 docker container kill [container]
 ```
 
+## 附录
+
+### 附录 A：Docker 命令的详解
+
+自带 `docker` 命令，具体操作参数细节。
+
+详细信息，参考：
+
+* [Docker 常用指令详解](https://www.jianshu.com/p/7c9e2247cfbd)
+
+#### 对象的管理命令
+
+针对对象的管理命令列表：
+
+|选项|说明|
+|:----|:----|
+|container|管理容器|
+|image|管理镜像|
+|network|管理容器网络(默认为bridge、host、none三个网络配置)|
+|plugin|管理插件|
+|system|管理系统资源。其中, docker system prune 命令用于清理没有使用的镜像, 容器, 数据卷以及网络|
+|volume|管理数据卷|
+|swarm|管理Swarm模式|
+|service|管理Swarm模式下的服务|
+|node|管理Swarm模式下的docker集群中的节点|
+|secret|管理Swarm模式下的敏感数据|
+|stack|Swarm模式下利用compose-file管理服务|
+
+说明
+
+* 其中 `container` 、`image` 、`system` 一般用后面的简化指令。
+* `Swarm` 模式用来管理 **docker 集群**：
+	* 它将一群 Docker 宿主机，看做一个单一的虚拟的主机
+	* 实现对多台物理机的**集群管理**。
+
+#### 通用的管理命令
+
+|选项|说明|
+|:----|:----|
+|attach|进入运行中的容器, 显示该容器的控制台界面。注意, 从该指令退出会导致容器关闭|
+|build	|根据 Dockerfile 文件构建镜像|
+|commit|提交容器所做的改为为一个新的镜像|
+|cp|在容器和宿主机之间复制文件|
+|create|根据镜像生成一个新的容器|
+|diff|展示容器相对于构建它的镜像内容所做的改变|
+|events|实时打印服务端执行的事件|
+|exec|在已运行的容器中执行命令|
+|export|导出容器到本地快照文件|
+|history|显示镜像每层的变更内容|
+|images|列出本地所有镜像|
+|import|导入本地容器快照文件为镜像|
+|info|显示 Docker 详细的系统信息|
+|inspect|查看容器或镜像的配置信息, 默认为json数据|
+|kill| `-s` 选项向容器发送信号, 默认为SIGKILL信号(强制关闭)|
+|load|导入镜像压缩包|
+|login|登录第三方仓库|
+|logout|退出第三方仓库|
+|logs|打印容器的控制台输出内容|
+|pause|暂停容器|
+|port|容器端口映射列表|
+|ps|列出正在运行的容器, `-a` 选项显示所有容器|
+|pull|从镜像仓库拉取镜像|
+|push|将镜像推送到镜像仓库|
+|rename|重命名容器名|
+|restart|重启容器|
+|rm|删除已停止的容器, `-f` 选项可强制删除正在运行的容器|
+|rmi|删除镜像(必须先删除该镜像构建的所有容器)|
+|run|根据镜像生成并进入一个新的容器|
+|save|打包本地镜像, 使用压缩包来完成迁移|
+|search|查找镜像|
+|start|启动关闭的容器|
+|stats|显示容器对资源的使用情况(内存、CPU、磁盘等)|
+|stop|关闭正在运行的容器|
+|tag|修改镜像tag|
+|top|显示容器中正在运行的进程(相当于容器内执行 `ps -ef` 命令)|
+|unpause|恢复暂停的容器|
+|update|更新容器的硬件资源限制(内存、CPU等)|
+|version|显示docker客户端和服务端版本信息|
+|wait|阻塞当前命令直到对应的容器被关闭, 容器关闭后打印结束代码|
+|daemon|这个子命令已过期, 将在Docker 17.12之后的版本中移出, 直接使用dockerd|
+
 
 ## 参考资料
 
