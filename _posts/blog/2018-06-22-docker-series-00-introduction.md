@@ -163,7 +163,9 @@ Docker 公司，借助 Moby ，提出 `容器平台` 的**构建规范**：
 
 ## 参考资料
 
-* 官网：[https://www.docker.com/](https://www.docker.com/)
+* 官网：[https://www.docker.com/](https://www.docker.com/)，必看
+* [GitBook：Docker简明教程](https://legacy.gitbook.com/book/jiajially/dockerguide/details)，必看
+* [GitBook：Docker —— 从入门到实践](https://legacy.gitbook.com/book/yeasy/docker_practice/details)，必看，持续更新
 
 
 

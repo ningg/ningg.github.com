@@ -97,7 +97,89 @@ Dockerfile 中，可以包含多种指令，每种指令的含义：
 
 
 
+## 原理 & 入门实例
+
+### 原理：docker build
+
+`Dockerfile` 文件，构建镜像的基本命令：
+
+```
+docker build -t [image]:[tag] -f [Dockerfile] [context_path]
+```
+
+特别说明：
+
+* `[context_path]`：上下文路径
+* `[Dockerfile]`：`Dockerfile` 文件，默认在 `上下文路径` 下，并且，默认命名为 `Dockerfile`
+
+关于 `docker build` 生成镜像的背后原理：
+
+1. `上下文路径` 下的所有文件，都会 `打包上传` 给 `Docker 服务器` （daemon）
+2. `docker build` 命令，基于 `Dockerfile` 生成镜像的本质：
+	1. 基于基础镜像，启动容器
+	2. 在容器中，逐行执行命令
+	3. 基于运行的容器，生成镜像
+3. `上下文路径`：
+	1. `COPY` 之类的命令，需要定位`源文件位置`，都必须是基于`上下文路径`的`相对位置`，必须在 `上下文路径`之内，比如：`./tmp`，而不能为 `../tmp` 超出了范围
+	2. `Dockerfile` 文件，默认在 `上下文路径` 下，并且，默认命名为 `Dockerfile`
+	3. 如果需要忽略 `上下文路径` 下的文件，创建 `.dockerignore` 文件即可
+
+
+
 ### 入门实例
+
+编写一个 `Dockerfile`， 内容：
+
+```
+# 基础镜像
+FROM nginx
+# 执行命令，构造一个分层
+RUN echo '<h1>Hello, Docker!</h1>' > /usr/share/nginx/html/index.html
+```
+
+在 `Dockerfile` 所在的目录，编译生成镜像：
+
+```
+# 本质：启动一个容器，基于运行的容器，生成一个镜像
+$ docker build -t nginx:v3 .
+Sending build context to Docker daemon  3.072kB
+Step 1/2 : FROM nginx
+ ---> e548f1a579cf
+Step 2/2 : RUN echo '<h1>Hello, Docker!</h1>' > /usr/share/nginx/html/index.html
+ ---> Running in b57ac9ffd3ef
+Removing intermediate container b57ac9ffd3ef
+ ---> a1f2f7c1541f
+Successfully built a1f2f7c1541f
+Successfully tagged nginx:v3
+```
+
+查看生成的镜像：
+
+```
+# 查看生成的镜像
+$ docker image ls
+REPOSITORY                                  TAG                 IMAGE ID            CREATED             SIZE
+nginx                                       v3                  a1f2f7c1541f        4 minutes ago       109MB
+
+# 分析镜像
+$ docker history a1f2f7c1541f
+IMAGE               CREATED             CREATED BY                                      SIZE                COMMENT
+a1f2f7c1541f        4 minutes ago       /bin/sh -c echo '<h1>Hello, Docker!</h1>' > …   24B
+e548f1a579cf        5 months ago        /bin/sh -c #(nop)  CMD ["nginx" "-g" "daemon…   0B
+<missing>           5 months ago        /bin/sh -c #(nop)  STOPSIGNAL [SIGTERM]         0B
+```
+
+通过上面可以看出：
+
+* Dockerfile 的本质：
+	* 基于基础镜像，运行一个容器
+	* 在容器中执行命令
+	* 基于容器，创建一个镜像
+
+补充说明：
+
+> `RUN` 运行**多行 shell 命令**时，可以借助 `\`(换行) + `&&`(连接)
+
 
 
 TODO 参考：
