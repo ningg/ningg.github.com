@@ -316,14 +316,40 @@ git checkout -b new_branch_name commit_id
 
 ```
 
-## 11. 参考来源
+## 12. 从 git 仓库迁移出代码，并导入到另一个 git 仓库
+
+具体操作：
+
+```
+# 1. 拷贝一份「裸版本库」，不包含工作区，完全的代码、分支、提交记录，无法提交新的 commit
+git clone --bare git://github.com/username/project.git
+
+# 2. 创建新的 git 仓库/项目
+...
+
+# 3. 迁移：进入老的代码目录，然后，以镜像方式，上传代码到新的 git 仓库/项目
+cd project
+git push --mirror git@gitcafe.com/username/newproject.git
+
+# 4. 删除本地代码
+rm -rf project
+
+# 5. clone 新的 git 仓库中的代码
+git clone git@gitcafe.com/username/newproject.git
+
+```
+
+更多细节，参考：
+
+* [从一个git仓库迁移到另外一个git仓库](https://blog.csdn.net/samxx8/article/details/72329002)
+
+
+## 13. 参考来源
 
 * [git - 简明指南]
 * [图解Git]
 * [Git work cmd]
 * [Git 社区参考书]
-
-
 
 
 
