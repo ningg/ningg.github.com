@@ -113,6 +113,22 @@ $ git config user.name
 
 如果用了 `--global` 选项，那么更改的配置文件就是位于你用户主目录下的那个，以后你所有的项目都会默认使用这里配置的用户信息。如果要在某个特定的项目中使用其他名字或者邮箱，只要去掉 `--global` 选项重新配置即可，新的设定保存在当前项目的 `.git/config` 文件里。
 
+补充说明：
+
+* 对于场景：自己有个人 Email 和 工作 Email 时，可以通过下述快捷配置，进行切换。
+
+```
+# .bash_profile 中，配置别名
+# Alias for init git for Work
+alias initGitForWork="source ~/initGitInfoLocalOfWork.sh"
+
+# 具体 initGitInfoLocalOfWork.sh 的配置
+git config --local user.name "郭宁"
+git config --local user.email "guoning@china.com"
+
+git config --local -l | grep user
+```
+
 #### 3.2.2. 查看帮助文档
 
 想了解 Git 的各式工具该怎么用，可以阅读它们的使用帮助，方法有三：
