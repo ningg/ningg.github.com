@@ -10,14 +10,14 @@ category: docker
 
 Docker Machine，目标：
 
-* 在各种平台上，快速安装 Docker 环境。
+* 在各种平台上，快速安装 Docker 环境，即，快速创建 **Docker 服务器**。
 
 几个方面：
 
 1. Docker Machine 安装
 2. Docker Machine 使用
 
-`docker-machine` 本质就是通过 `REST API` 跟 Docker Daemon 进行交互，实现创建 Docker 运行环境.
+`docker-machine` 本质就是通过 `REST API` 跟 Docker Daemon 进行交互，实现创建 Docker 运行环境（`Docker 服务器`）.
 
 ![](/images/docker-series/docker-machine.png)
 
@@ -43,7 +43,7 @@ Docker Machine 支持多种后端驱动：
 * 虚拟机
 * 云平台
 
-### 本地物理机，创建 Docker 运行环境
+### 本地物理机
 
 在本地物理机上，使用 `virtualbox` 驱动，创建 Docker 运行环境：
 
