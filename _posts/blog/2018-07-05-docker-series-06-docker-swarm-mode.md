@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Docker 系列：swarm mode
-description:Docker swarm mode 有什么用？如何安装？如何使用？
+description: Docker swarm mode 有什么用？如何安装？如何使用？
 published: true
 category: docker
 ---
