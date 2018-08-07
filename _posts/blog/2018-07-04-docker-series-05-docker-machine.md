@@ -17,6 +17,10 @@ Docker Machine，目标：
 1. Docker Machine 安装
 2. Docker Machine 使用
 
+`docker-machine` 本质就是通过 `REST API` 跟 Docker Daemon 进行交互，实现创建 Docker 运行环境.
+
+![](/images/docker-series/docker-machine.png)
+
 ## 安装
 
 Docker for Mac 和 Docker for Windows，自带了 docker-machine ，查看具体版本的命令：
