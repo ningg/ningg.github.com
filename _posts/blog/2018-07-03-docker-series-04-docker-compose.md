@@ -1,7 +1,7 @@
 ---
 layout: post
 title: Docker 系列：Docker Compose
-description:Docker Compose 有什么用？如何安装？如何使用？
+description: Docker Compose 有什么用？如何安装？如何使用？
 published: true
 category: docker
 ---
