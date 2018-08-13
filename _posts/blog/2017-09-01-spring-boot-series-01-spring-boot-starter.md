@@ -41,7 +41,7 @@ Spring Boot 体系下，使用 **Spring Boot Starter** 进行`依赖复用`。
 
 下文，完整的代码，看这里：
 
-* [github.com/ningg/spring-boot-starter-learn](github.com/ningg/spring-boot-starter-learn)
+* [https://github.com/ningg/spring-boot-starter-learn](https://github.com/ningg/spring-boot-starter-learn)
 
 ### pom 配置
 
