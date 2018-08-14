@@ -41,6 +41,10 @@ $ xcode-select -p
 /Library/Developer/CommandLineTools
 ````
 
+如果遇到 `Xcode` 版本过低的异常提示，则，需要升级 `Xcode`，具体办法：
+
+* 在 `App Store` 中，搜索 `Xcode` 进行更新。
+
 ### 3.2. homebrew
 
 
