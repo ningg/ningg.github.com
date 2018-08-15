@@ -10,11 +10,12 @@ category: docker
 
 关于 Kubernetes ，几个方面：
 
-* 有什么作用？
-* 如何安装？
-* 基本的使用？
+* 准备工作
+	* 有什么作用？
+	* 如何安装？
+* 基本用法
 
-## Kubernetes
+## 准备工作
 
 官网地址： [Kubernetes Documentation]
 
@@ -114,7 +115,7 @@ Error: Permission denied @ dir_s_mkdir - /usr/local/Caskroom/minikube
 sudo chown -R `whoami`:admin /usr/local/Caskroom
 ```
 
-## Kubernetes 基本用法
+## 基本用法
 
 几个方面：
 
@@ -164,7 +165,12 @@ $ minikube logs
 # 查看集群状态
 $ kubectl get pods --namespace=kube-system -o wide
 
+# 查看 minikube 的状态
 $ minikube status
+
+# 查看 minikube 已经启动的插件
+$ minikube addons list
+
 
 # 2. 本地连接到 minikube 集群
 $ kubectl cluster-info
@@ -205,7 +211,6 @@ kube-system   kubernetes-dashboard-5498ccf677-fh2rj   0/1       CrashLoopBackOff
 $ minikube stop
 $ minikube delete
 $ minikube start
-
 ```
 
 
@@ -218,6 +223,7 @@ $ minikube start
 * [Install Minikube]
 * [Install and Set Up kubectl]
 * [Running Kubernetes Locally via Minikube]
+* [Kubernetes中文社区]
 
 
 
@@ -233,6 +239,7 @@ $ minikube start
 [Install and Set Up kubectl]:			https://kubernetes.io/docs/tasks/tools/install-kubectl/
 [Sharing Cluster Access document]:			https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/
 [Running Kubernetes Locally via Minikube]:				https://kubernetes.io/docs/setup/minikube/
+[Kubernetes中文社区]:		http://docs.kubernetes.org.cn/
 
 
 
