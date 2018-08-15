@@ -77,6 +77,23 @@ brew 升级软件
 
 cask 与上述类似：但不需要 brew update，因为 cask 是 brew 的子集
 
+常见问题：
+
+```
+# 1. Mac 上 brew install 一直停顿在 Updating Homebrew...
+Updating Homebrew...
+
+# 解决办法：在环境变量中（.bash_profile 文件），关闭 brew 的自动更新，后续需要时，手动更新 brew update 即可
+export HOMEBREW_NO_AUTO_UPDATE=true
+```
+
+更新 brew 的基本过程：（待验证，暂时没有采用）
+
+```
+# 1. 更新 brew
+brew update-reset
+```
+
 ### 3.3. 输入法
 
 > 特别说明：针对 MBP 16，键盘布局变化了，当前，只有「百度输入法」可以使用，而且，建议，去百度官网下载，不建议通过 homebrew cask 安装输入法。
