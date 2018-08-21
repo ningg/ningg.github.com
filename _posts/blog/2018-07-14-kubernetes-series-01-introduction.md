@@ -323,7 +323,7 @@ docker pull registry.cn-shenzhen.aliyuncs.com/kubernetes1_x/k8s-dns-dnsmasq-nann
 
 docker pull registry.cn-shanghai.aliyuncs.com/google-gcr/storage-provisioner:v1.8.1 && docker tag registry.cn-shanghai.aliyuncs.com/google-gcr/storage-provisioner:v1.8.1 gcr.io/k8s-minikube/storage-provisioner:v1.8.1
 
-docker pull registry.cn-hangzhou.aliyuncs.com/test_k8s/kubernetes-dashboard-amd64:v1.8.1 && docker tag registry.cn-hangzhou.aliyuncs.com/test_k8s/kubernetes-dashboard-amd64:v1.8.1 k8s.gcr.io/kubernetes-dashboard-amd64:v1.8.1
+docker pull registry.cn-hangzhou.aliyuncs.com/zhangyouliang/kubernetes-dashboard-amd64:v1.8.1 && docker tag registry.cn-hangzhou.aliyuncs.com/zhangyouliang/kubernetes-dashboard-amd64:v1.8.1 k8s.gcr.io/kubernetes-dashboard-amd64:v1.8.1
 
 docker pull registry.cn-shenzhen.aliyuncs.com/kubernetes1_x/kube-proxy-amd64:v1.10.0 && docker tag registry.cn-shenzhen.aliyuncs.com/kubernetes1_x/kube-proxy-amd64:v1.10.0 k8s.gcr.io/kube-proxy-amd64:v1.10.0
 
