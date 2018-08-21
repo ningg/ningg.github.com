@@ -227,6 +227,10 @@ kube-system   kubernetes-dashboard-5498ccf677-fh2rj   0/1       CrashLoopBackOff
 $ minikube stop
 $ minikube delete
 $ minikube start
+
+
+# 统一执行
+$ minikube stop && minikube delete && minikube start
 ```
 
 特别说明： 
@@ -298,6 +302,7 @@ docker tag anjia0532/pause-amd64:3.1 k8s.gcr.io/pause-amd64:3.1
 docker image ls
 
 # 5. 其他镜像
+
 docker pull anjia0532/pause-amd64:3.1 && docker tag anjia0532/pause-amd64:3.1 k8s.gcr.io/pause-amd64:3.1
 
 docker pull registry.cn-beijing.aliyuncs.com/k8s_images/etcd-amd64:3.1.12 && docker tag registry.cn-beijing.aliyuncs.com/k8s_images/etcd-amd64:3.1.12 k8s.gcr.io/etcd-amd64:3.1.12
@@ -308,18 +313,22 @@ docker pull registry.cn-hangzhou.aliyuncs.com/k8sth/kube-controller-manager-amd6
 
 docker pull registry.cn-hangzhou.aliyuncs.com/k8sth/kube-apiserver-amd64:v1.10.0 && docker tag registry.cn-hangzhou.aliyuncs.com/k8sth/kube-apiserver-amd64:v1.10.0 k8s.gcr.io/kube-apiserver-amd64:v1.10.0
 
-
 docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/kube-addon-manager:v8.6 && docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/kube-addon-manager:v8.6 k8s.gcr.io/kube-addon-manager:v8.6
 
+docker pull registry.cn-shenzhen.aliyuncs.com/kubernetes1_x/k8s-dns-kube-dns-amd64:1.14.8 && docker tag registry.cn-shenzhen.aliyuncs.com/kubernetes1_x/k8s-dns-kube-dns-amd64:1.14.8 k8s.gcr.io/k8s-dns-kube-dns-amd64:1.14.8
+
+docker pull registry.cn-shenzhen.aliyuncs.com/kubernetes1_x/k8s-dns-sidecar-amd64:1.14.8 && docker tag registry.cn-shenzhen.aliyuncs.com/kubernetes1_x/k8s-dns-sidecar-amd64:1.14.8 k8s.gcr.io/k8s-dns-sidecar-amd64:1.14.8
+
+docker pull registry.cn-shenzhen.aliyuncs.com/kubernetes1_x/k8s-dns-dnsmasq-nanny-amd64:1.14.8 && docker tag registry.cn-shenzhen.aliyuncs.com/kubernetes1_x/k8s-dns-dnsmasq-nanny-amd64:1.14.8 k8s.gcr.io/k8s-dns-dnsmasq-nanny-amd64:1.14.8
 
 docker pull registry.cn-shanghai.aliyuncs.com/google-gcr/storage-provisioner:v1.8.1 && docker tag registry.cn-shanghai.aliyuncs.com/google-gcr/storage-provisioner:v1.8.1 gcr.io/k8s-minikube/storage-provisioner:v1.8.1
 
-
-docker pull registry.cn-beijing.aliyuncs.com/orcas-mirror/kubernetes-dashboard-amd64:v1.8.1 && docker tag registry.cn-beijing.aliyuncs.com/orcas-mirror/kubernetes-dashboard-amd64:v1.8.1 k8s.gcr.io/kubernetes-dashboard-amd64:v1.8.1
+docker pull registry.cn-hangzhou.aliyuncs.com/test_k8s/kubernetes-dashboard-amd64:v1.8.1 && docker tag registry.cn-hangzhou.aliyuncs.com/test_k8s/kubernetes-dashboard-amd64:v1.8.1 k8s.gcr.io/kubernetes-dashboard-amd64:v1.8.1
 
 docker pull registry.cn-shenzhen.aliyuncs.com/kubernetes1_x/kube-proxy-amd64:v1.10.0 && docker tag registry.cn-shenzhen.aliyuncs.com/kubernetes1_x/kube-proxy-amd64:v1.10.0 k8s.gcr.io/kube-proxy-amd64:v1.10.0
 
-docker pull registry.cn-shenzhen.aliyuncs.com/kubernetes1_x/k8s-dns-kube-dns-amd64:1.14.8 && docker tag registry.cn-shenzhen.aliyuncs.com/kubernetes1_x/k8s-dns-kube-dns-amd64:1.14.8 k8s.gcr.io/k8s-dns-kube-dns-amd64:1.14.8
+docker image ls
+
 ```
 
 在外部，查看 pod：
