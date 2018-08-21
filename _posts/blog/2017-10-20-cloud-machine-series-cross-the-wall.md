@@ -72,6 +72,108 @@ Instant RDNS update from control panel
 
 TODO: 考虑剖析一下 SS 的原理。
 
+## 使用限制
+
+### 系统代理 vs. Socks5 代理
+
+上述 `ShadowsocksX` 客户端，开启 shadowsocks 后，自动开启了 `系统代理`。
+
+系统代理
+
+* shadowsocks 创建的 「系统代理」 将自动接管浏览器的访问 全部请求
+* 浏览器默认不需要任何设置，也无需安装 代理插件 （Firefox 除外）
+* 如果浏览器安装了代理插件，需要 禁用 代理插件或将代理插件设置为 使用系统代理
+
+SOCKS5 代理
+
+* 若不 【启用系统代理】 shadowsocks 成功连接代理服务器后，仅创建了 「SOCKS5 代理」
+* 浏览器需要安装 代理插件 并设置 shadowsocks 创建的 SOCKS5 代理端口，才能科学上网
+
+
+更多细节，参考：
+
+* [shadowsocks on Mac OS X]
+* [ShadowsocksX-NG 工作原理](https://fafe.me/2017/10/07/shadowsocksx-ng/)
+
+### iterm2 命令终端
+
+系统自带的终端或 iTerm 2 是不走 Socks5 的，因此，为了让 iTerm2 走「代理」，需要特殊的设置，一般 2 个途径：
+
+1. 使用新版客户端 ShadowsocksX-NG：
+	* 新版 ShadowsocksX-NG，有的版本，跟 Mac OSX 存在兼容性问题，需要注意
+	* [shadowsocks可以用X-NG却用不了](https://github.com/shadowsocks/ShadowsocksX-NG/issues/174)
+	* [Mac 10.13.6无法打开问题](https://github.com/shadowsocks/ShadowsocksX-NG/issues/879)
+2. 借助工具，将 HTTP 代理，转换为 Socks5 代理：
+	* [使用 shadowsocks 加速 Mac 自带终端或iTerm 2](https://tech.jandou.com/to-accelerate-the-terminal.html)
+
+通过多次尝试，最终选定 [使用 shadowsocks 加速 Mac 自带终端或iTerm 2](https://tech.jandou.com/to-accelerate-the-terminal.html) 的方案，设定 iterm 的 http 代理。
+
+进行的关键操作：
+
+```
+# 安装 privoxy
+brew install privoxy
+
+# 配置 HTTP 代理
+vim /usr/local/etc/privoxy/config
+
+# 上述 config 文件，末尾追加（下面配置的 1080 端口，是 Shadowsocks 默认配置的）
+...
+listen-address 0.0.0.0:8118
+forward-socks5 / localhost:1080 .
+...
+
+# 查看启动状态
+netstat -na | grep 8118
+
+# 手动启动（不一定需要手动启动，根据上面查询结果判断）
+/usr/local/sbin/privoxy /usr/local/etc/privoxy/config
+
+```
+
+一般需要进行 1 个自动操作：
+
+```
+# 开机自启动 privoxy
+brew services start privoxy
+
+```
+
+终端里 privoxy 的使用，配置 privoxy 的代理 `快速开启` 和 `快速关闭` 的命令：
+
+```
+#  ~/.bash_profile 里加入开关函数
+function proxy_off(){
+    unset http_proxy
+    unset https_proxy
+    echo -e "已关闭代理"
+}
+
+function proxy_on() {
+    export no_proxy="localhost,127.0.0.1,localaddress,.localdomain.com"
+    export http_proxy="http://127.0.0.1:8118"
+    export https_proxy=$http_proxy
+    echo -e "已开启代理"
+}
+
+# 配置立即生效
+source  ~/.bash_profile
+
+# 开启代理
+proxy_on
+
+# 关闭代理
+proxy_off
+
+# 验证：是否走代理
+curl ip.gs
+
+Current IP / 当前 IP: 97.64.37.104
+ISP / 运营商:  it7.net
+City / 城市: Los Angeles California
+Country / 国家: United States
+```
+
 ## 附录
 
 术语介绍：
@@ -83,6 +185,7 @@ TODO: 考虑剖析一下 SS 的原理。
 
 * [https://bwh1.net](https://bwh1.net)
 * [PAC 代理模式](https://lvii.gitbooks.io/outman/content/ss.pac.mode.html)
+* [shadowsocks on Mac OS X]
 
 
 
@@ -101,7 +204,7 @@ TODO: 考虑剖析一下 SS 的原理。
 
 [NingG]:    http://ningg.github.com  "NingG"
 
-
+[shadowsocks on Mac OS X]: 		https://lvii.gitbooks.io/outman/content/ss.mac.html
 
 
 

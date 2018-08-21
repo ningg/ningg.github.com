@@ -229,8 +229,113 @@ $ minikube delete
 $ minikube start
 ```
 
+特别说明： 
+
+> 中国国内，因为 GFW 的存在，可能无法拉取镜像等内容，此时，需要以代理方式启动 minikube。
+
+具体分为 2 个步骤：
+
+1. 定位问题：查询 minikube 的启动日志，判断是否是 GFW 导致的
+2. 解决问题：以 HTTP 和 HTTPS 的代理模式，启动 minikube
+
+操作细节：
+
+```
+# 查询启动日志
+$ minikube logs 
+
+...
+Aug 21 15:31:28 minikube kubelet[2687]: E0821 15:31:28.536418    2687 kuberuntime_manager.go:646] createPodSandbox for pod "kube-controller-manager-minikube_kube-system(16a099baef9c74567ee1930ed78d0339)" failed: rpc error: code = Unknown desc = failed pulling image "k8s.gcr.io/pause-amd64:3.1": Error response from daemon: Get https://k8s.gcr.io/v2/: net/http: request canceled while waiting for connection (Client.Timeout exceeded while awaiting headers)
+...
+
+# 以 HTTP 和 HTTPS 代理模式，启动 minikube
+$ minikube start --docker-env=HTTP_PROXY=http://127.0.0.1:8118 --docker-env=HTTPS_PROXY=https://127.0.0.1:8118
+```
+
+如果没有 HTTP 和 HTTPS 本地代理， 则，基于之前的 `ShadowsocksX` 采用的 Socket5 代理，只在浏览器生效，在 iterm 等终端，无法翻墙。
+
+具体解决办法：
+
+1. 设置 HTTP 代理：iterm 等终端中，设置 HTTP 代理
+	* 细节参考： [握手时代、触碰时代](http://ningg.top/cloud-machine-series-cross-the-wall/)
+2. 使用 HTTP 代理，启动 minikube 集群：参考上面的命令
+
+另外，如果没有 HTTP 代理，同时，也没有 ShadowsocksX 等 Socket5 代理时，则，可以手动下载镜像文件，细节参考：
+
+* [mac使用minikube安装kubernetes](https://my.oschina.net/go4it/blog/828941)
+* [Mac 安装 minikube](https://www.jianshu.com/p/c7d50bb46c8c)
+
+本次的解决办法：
+
+1. iterm 终端，升级为 HTTP 代理
+2. 仍然有部分 image 找不到，手动进行下载，具体参考下面细节
+
+查看 minikube 启动的 log 日志，发现仍有 image 找不到：
+
+```
+# 查看 minikube 的 log 日志
+minikube logs
+
+...
+Aug 21 17:31:37 minikube kubelet[2693]: E0821 17:31:37.453747    2693 pod_workers.go:186] Error syncing pod 9a2b8fee6510861e37a3351eb1aba711 ("kube-apiserver-minikube_kube-system(9a2b8fee6510861e37a3351eb1aba711)"), skipping: failed to "CreatePodSandbox" for "kube-apiserver-minikube_kube-system(9a2b8fee6510861e37a3351eb1aba711)" with CreatePodSandboxError: "CreatePodSandbox for pod \"kube-apiserver-minikube_kube-system(9a2b8fee6510861e37a3351eb1aba711)\" failed: rpc error: code = Unknown desc = failed pulling image \"k8s.gcr.io/pause-amd64:3.1\": Error response from daemon: Get https://k8s.gcr.io/v2/: net/http: request canceled while waiting for connection (Client.Timeout exceeded while awaiting headers)"
+...
+
+```
+
+手动下载 image，并且打 tag：(阿里的镜像查询地址：[https://dev.aliyun.com/search.html](https://dev.aliyun.com/search.html))
+
+```
+# 1. 登录 minikube 虚拟机
+minikube ssh
+
+# 2. 下载镜像
+docker pull anjia0532/pause-amd64:3.1
+
+# 3. 打一个新的 Tag
+docker tag anjia0532/pause-amd64:3.1 k8s.gcr.io/pause-amd64:3.1
+
+# 4. 查看镜像
+docker image ls
+
+# 5. 其他镜像
+docker pull anjia0532/pause-amd64:3.1 && docker tag anjia0532/pause-amd64:3.1 k8s.gcr.io/pause-amd64:3.1
+
+docker pull registry.cn-beijing.aliyuncs.com/k8s_images/etcd-amd64:3.1.12 && docker tag registry.cn-beijing.aliyuncs.com/k8s_images/etcd-amd64:3.1.12 k8s.gcr.io/etcd-amd64:3.1.12
+
+docker pull registry.cn-hangzhou.aliyuncs.com/k8sth/kube-scheduler-amd64:v1.10.0 && docker tag registry.cn-hangzhou.aliyuncs.com/k8sth/kube-scheduler-amd64:v1.10.0 k8s.gcr.io/kube-scheduler-amd64:v1.10.0
+
+docker pull registry.cn-hangzhou.aliyuncs.com/k8sth/kube-controller-manager-amd64:v1.10.0 && docker tag registry.cn-hangzhou.aliyuncs.com/k8sth/kube-controller-manager-amd64:v1.10.0 k8s.gcr.io/kube-controller-manager-amd64:v1.10.0
+
+docker pull registry.cn-hangzhou.aliyuncs.com/k8sth/kube-apiserver-amd64:v1.10.0 && docker tag registry.cn-hangzhou.aliyuncs.com/k8sth/kube-apiserver-amd64:v1.10.0 k8s.gcr.io/kube-apiserver-amd64:v1.10.0
 
 
+docker pull registry.cn-hangzhou.aliyuncs.com/google_containers/kube-addon-manager:v8.6 && docker tag registry.cn-hangzhou.aliyuncs.com/google_containers/kube-addon-manager:v8.6 k8s.gcr.io/kube-addon-manager:v8.6
+
+
+docker pull registry.cn-shanghai.aliyuncs.com/google-gcr/storage-provisioner:v1.8.1 && docker tag registry.cn-shanghai.aliyuncs.com/google-gcr/storage-provisioner:v1.8.1 gcr.io/k8s-minikube/storage-provisioner:v1.8.1
+
+
+docker pull registry.cn-beijing.aliyuncs.com/orcas-mirror/kubernetes-dashboard-amd64:v1.8.1 && docker tag registry.cn-beijing.aliyuncs.com/orcas-mirror/kubernetes-dashboard-amd64:v1.8.1 k8s.gcr.io/kubernetes-dashboard-amd64:v1.8.1
+
+docker pull registry.cn-shenzhen.aliyuncs.com/kubernetes1_x/kube-proxy-amd64:v1.10.0 && docker tag registry.cn-shenzhen.aliyuncs.com/kubernetes1_x/kube-proxy-amd64:v1.10.0 k8s.gcr.io/kube-proxy-amd64:v1.10.0
+
+docker pull registry.cn-shenzhen.aliyuncs.com/kubernetes1_x/k8s-dns-kube-dns-amd64:1.14.8 && docker tag registry.cn-shenzhen.aliyuncs.com/kubernetes1_x/k8s-dns-kube-dns-amd64:1.14.8 k8s.gcr.io/k8s-dns-kube-dns-amd64:1.14.8
+```
+
+在外部，查看 pod：
+
+```
+# 查看 pods 列表
+kubectl describe pods
+
+# 删除失败的 pods
+
+
+```
+
+关联细节，参考：
+
+* [ failed pulling image "k8s.gcr.io/pause-amd64:3.1"](https://github.com/anjia0532/gcr.io_mirror/issues/5)
 
 
 ## 参考资料
