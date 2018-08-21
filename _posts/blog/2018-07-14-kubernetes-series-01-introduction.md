@@ -115,6 +115,22 @@ Error: Permission denied @ dir_s_mkdir - /usr/local/Caskroom/minikube
 sudo chown -R `whoami`:admin /usr/local/Caskroom
 ```
 
+如果网络不好，但是可以通过浏览器下载，则，可以把下载之后的文件，复制到指定的目录：
+
+* `minikube` 对应目录： `~/.minikube/cache/iso`
+* `kubeadm` 和 `kubelet` 对应目录： `~/.minikube/cache/v1.10.0`
+
+具体的目录结构，例如：
+
+```
+~/.minikube/cache
+ - iso
+   - minikube-v0.28.1.iso
+ - v1.10.0
+   - kubeadm
+   - kubelet
+```
+
 ## 基本用法
 
 几个方面：
