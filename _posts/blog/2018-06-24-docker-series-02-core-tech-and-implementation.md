@@ -241,6 +241,12 @@ Union file systems, or `UnionFS`，通过`分层`方式，标识**差量部分**
 * vfs
 * DeviceMapper
 
+更多细节，参考：
+
+* [About storage drivers](https://docs.docker.com/storage/storagedriver/)
+* [Docker Getting Start: Related Knowledge](http://tiewei.github.io/cloud/Docker-Getting-Start/)
+* [https://docker-doc.readthedocs.io/zh_CN/latest/terms/layer.html](https://docker-doc.readthedocs.io/zh_CN/latest/terms/layer.html) 
+
 
 ### 容器格式
 
