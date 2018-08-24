@@ -344,11 +344,12 @@ kubectl describe pods
 
 关联细节，参考：
 
-* [ failed pulling image "k8s.gcr.io/pause-amd64:3.1"](https://github.com/anjia0532/gcr.io_mirror/issues/5)
+* [failed pulling image "k8s.gcr.io/pause-amd64:3.1"](https://github.com/anjia0532/gcr.io_mirror/issues/5)
 
 
 ## 参考资料
 
+* [Kubernetes 指南--非常专业易懂]
 * [Kubernetes Documentation]
 * [Install Minikube]
 * [Install and Set Up kubectl]
@@ -370,6 +371,7 @@ kubectl describe pods
 [Sharing Cluster Access document]:			https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/
 [Running Kubernetes Locally via Minikube]:				https://kubernetes.io/docs/setup/minikube/
 [Kubernetes中文社区]:		http://docs.kubernetes.org.cn/
+[Kubernetes 指南--非常专业易懂]:		https://github.com/ningg/kubernetes-handbook
 
 
 

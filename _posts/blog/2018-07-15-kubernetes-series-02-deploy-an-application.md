@@ -299,7 +299,7 @@ unset DOCKER_API_VERSION
 
 ## 参考资料
 
-
+* [Kubernetes 指南--非常专业易懂]
 * [Kubernetes 项目]
 * [Kubernetes Documentation]
 * [Kubernetes中文社区]
@@ -315,6 +315,7 @@ unset DOCKER_API_VERSION
 [Kubernetes 项目]:				https://yeasy.gitbooks.io/docker_practice/kubernetes/
 [Kubernetes Documentation]:				https://kubernetes.io/docs/home/
 [Kubernetes中文社区]:		http://docs.kubernetes.org.cn/
+[Kubernetes 指南--非常专业易懂]:		https://github.com/ningg/kubernetes-handbook
 
 
 
