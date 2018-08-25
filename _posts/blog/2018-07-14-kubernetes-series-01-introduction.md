@@ -357,7 +357,11 @@ kubectl describe pods
 * [Kubernetes中文社区]
 
 
+特别说明，3 个非常有价值的治疗：
 
+* [Kubernetes Documentation]
+* [Kubernetes 指南]
+* [Kubernetes 完全教程]
 
 
 
@@ -372,6 +376,8 @@ kubectl describe pods
 [Running Kubernetes Locally via Minikube]:				https://kubernetes.io/docs/setup/minikube/
 [Kubernetes中文社区]:		http://docs.kubernetes.org.cn/
 [Kubernetes 指南--非常专业易懂]:		https://github.com/ningg/kubernetes-handbook
+[Kubernetes 指南]:						https://legacy.gitbook.com/book/feisky/kubernetes/details
+[Kubernetes 完全教程]:					http://jolestar.com/kubernetes-complete-course/
 
 
 
