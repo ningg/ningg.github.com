@@ -1,10 +1,20 @@
 ---
 layout: post
 title: Kubernetes 系列：核心架构
-description: 
-published: false
+description: 物理架构？逻辑架构？
+published: true
 category: docker
 ---
+
+## 概要
+
+Kubernetes 集群，几个基本疑问：
+
+* Kubernetes 的 Docker 集群，是由什么构成的？
+* 看得见、摸得着的东西，是什么？（物理架构、部署架构）
+* 不同 Docker 节点之间，协作机制、处理逻辑是什么？
+
+
 
 
 
