@@ -29,6 +29,7 @@ Kubernetes 是一种解决方案，聚焦容器的集群管理、服务编排。
 
 > **备注**: `Minikube`, 在本地的 VM 中，启动一个单节点的 Kubernetes 集群。`Minikube` 包括了**所有功能**，以及所有的**核心组件**，进行本地**应用开发**，基本足够了。
 
+在 minikube 下，配置 kubelet、apiserver、proxy、controller-manager、etcd、scheduler 等，具体配置参数，可参考：[Running Kubernetes Locally via Minikube]。
 
 #### 安装 kubectl 客户端
 
@@ -378,7 +379,7 @@ kubectl describe pods
 [Kubernetes 指南--非常专业易懂]:		https://github.com/ningg/kubernetes-handbook
 [Kubernetes 指南]:						https://legacy.gitbook.com/book/feisky/kubernetes/details
 [Kubernetes 完全教程]:					http://jolestar.com/kubernetes-complete-course/
-
+[Running Kubernetes Locally via Minikube]:				https://kubernetes.io/docs/setup/minikube/
 
 
 
