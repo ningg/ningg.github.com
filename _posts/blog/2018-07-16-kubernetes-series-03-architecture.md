@@ -27,7 +27,7 @@ Kubernetes 集群，几个基本疑问：
 
 ## 参考资料
 
-特别说明，3 个非常有价值的治疗：
+特别说明，3 个非常有价值的资料：
 
 * [Kubernetes Documentation]
 * [Kubernetes 指南]
@@ -47,6 +47,15 @@ Kubernetes 集群，几个基本疑问：
 [Kubernetes 完全教程]:					http://jolestar.com/kubernetes-complete-course/
 [Kubernetes 架构浅析]:					http://jolestar.com/kubernetes-architecture/
 
+[kubernetes 简介：kubernetes 架构介绍]:		http://cizixs.com/2016/07/12/kubernetes-intro
+[Introduction to Kubernetes]:			https://www.slideshare.net/rajdeep/introduction-to-kubernetes
+[kubernetes简介]:				https://blog.csdn.net/chenleiking/article/details/78076588
+[Kubernetes 核心概念简介]:		http://blog.51cto.com/tryingstuff/2119034
+[Kubernetes的组成和资源对象简介]:			https://blog.frognew.com/2017/04/kubernetes-overview.html
+[使用kubeadm安装Kubernetes 1.11]:		https://blog.frognew.com/2018/08/kubeadm-install-kubernetes-1.11.html
+[kubernetes（k8s）以及涉及组件简单介绍]:		https://blog.csdn.net/qq_35254726/article/details/54233781
+[Kubernetes系列之介绍篇]:			https://www.jianshu.com/p/4dcfcde779e1
+[十分钟带你理解Kubernetes核心概念]:			http://dockone.io/article/932
 
 
 
