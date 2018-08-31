@@ -363,6 +363,18 @@ brew cask install adobe-air
 
 可以在本地使用一下：[http://www.sdifenzhou.com/mindnode222.html](http://www.sdifenzhou.com/mindnode222.html)，个人的百度云盘中也有备份
 
+### 5.7 OmniGraffle
+
+之前一直使用 lucidchart 绘图，有几个好处：
+
+1. 非常简便，易学易用
+2. 云端携带，随时随地，能够查看、编辑图片
+
+但是，最近开始网络问题特别大，因此，尝试其他绘图软件：
+
+* OmniGraffle Pro：在 Mac 下，用户比较多，准备试一下。
+* [http://xclient.info/](http://xclient.info/) 可以下载学习一下，如果流畅，请在 App Store 购买.
+
 ## 6. 附录
 
 ### 6.1. 常用操作
