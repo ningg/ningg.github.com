@@ -110,6 +110,111 @@ Pod 是 Kubernetes 集群运行的最小单元。
 
 ### Label
 
+Label 几个方面：
+
+* 作用：标记资源对象，实现对象分组，例如 Pod、Service、RC（Replication Controller）等
+* 标记时间：
+	* 定义资源时，进行标记
+	* 对象创建后，动态添加 or 修改
+* 映射关系：
+	* 一个 Label 标记在多个资源对象上
+	* 一个资源对象上，标记多个 Label
+
+常见的 Label：
+
+* 版本标签：
+	* "release":"stable"
+	* "release":"beta"
+* 环境标签：
+	* “environment”:"dev"
+	* "environment":"qa"
+	* "environment":"production"
+
+Label Selector (标签选择器) ：筛选出具有指定 Label 的资源，方便进行管理。
+
+* 匹配：等式和集合形式，进行匹配查询
+* 组合：通过多个表达式的组合，从而实现复杂的条件选择
+
+具体的 Label Selector：
+
+```
+name=mysql,env!=production
+name notin (tomcat),env!=production
+```
+
+### RC，Replication Controller
+
+复制控制器（Replication Controller），具体作用：
+
+* 保证有指定数量的 Pod 处于运行状态
+* 高级特性：滚动升级、回滚等
+
+一般配置参数：
+
+* 副本数：Pod 期待的副本数（replicas）（疑问：是否有默认值？）
+* 标签：用于筛选目标Pod的Label Selector.
+
+
+RC运行过程： 
+
+1. 定义一个RC的YAML文件（或者调用kubectl命令）提交到Kubernets集群后，
+2. Master 上的 Controller Manager 组件就得到通知，定期巡检系统中当前存活的目标Pod
+3. Controller Manager 确保运行状态的 Pod 数量，跟预期的 Pod 数量相匹配
+4. 过多的 Pod 在运行，则，会主动终止，否则，会增加运行状态的 Pod
+
+自动伸缩：
+
+```
+# 通过修改RC数量，实现Pod的动态缩放：
+kubectl scale rc myweb --replicas=10        # 将pod 扩展到10个       
+kubectl scale rc myweb --replicas=1          # 将pod 缩到 1个
+```
+
+
+滚动升级：
+
+使用RC可以进行动态平滑升级,保证业务始终在线。其具体实现方式：
+
+```
+kubectl rolling-update my-rcName-v1 -f my-rcName-v2-rc.yaml --update-period=10s
+```
+
+升级开始后：
+
+1. 首先依据提供的定义文件创建V2版本的RC，
+2. 然后每隔10s（--update-period=10s）逐步的增加V2版本的Pod副本数，逐步减少V1版本Pod的副本数。
+3. 升级完成之后，删除V1版本的RC。
+4. 保留V2版本的RC，及实现滚动升级。
+
+升级过程中，发生了错误中途退出时：
+
+1. 可以选择继续升级，Kubernetes能够智能的判断升级中断之前的状态，然后紧接着继续执行升级。
+2. 也可以进行回退，命令如下：
+
+```
+ kubectl rolling-update my-rcName-v1 -f my-rcName-v2-rc.yaml --update-period=10s --rollback
+```
+
+**ReplicaSet**：
+
+1. replica set，可以被认为 是“升级版”的Replication Controller
+2. replica set也是用于保证与label selector匹配的pod数量维持在期望状态。
+3. 区别在于，`replica set`引入了对`基于子集`的selector查询条件，而`Replication Controller`仅支持`基于值相等`的selecto条件查询。
+4. `replica set`很少被单独使用，目前它多被`Deployment`用于进行pod的创建、更新与删除的编排机制。
+
+RC（Replica Set）特性和作用：
+
+1. 通过定义一个RC，实现Pod的创建过程及副本数量的自动控制。
+2. RC 里包括完整的Pod定义模板。
+3. RC通过`Label Selector` 机制是对Pod副本的自动控制。
+4. 通过改变`RC`的`副本数量`，可以实现Pod副本的`扩容`和`缩容`。
+5. 通过改变`RC`里`Pod模板`中的`镜像版本`，可以实现Pod`滚动升级`。
+
+### Deployment
+
+
+
+
 
 
 
