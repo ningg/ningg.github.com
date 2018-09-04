@@ -107,6 +107,46 @@ Pod 是 Kubernetes 集群运行的最小单元。
 	* 共享 volumes：Pod中的所有容器都访问共享volumes，允许这些容器共享数据。
 	* 持久化：volumes 还用于Pod中的数据持久化，以防其中一个容器需要重新启动而丢失数据。
 
+下面是一个 Pod 的资源定义：
+
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: myweb
+  labels:
+    name: myweb
+spec:
+  containers:
+  - name: myweb
+    image: kubeguide/tomcat-app:v1
+    ports:
+    - containerPort: 8080
+    env:
+    - name: MYSQL_SERVER_HOST
+      value: 'mysql'
+    - name: MYSQL_SERVER_PORT
+      value: '3306'
+  - name: db
+    image: mysql
+    resources:
+      requests:                  # 最小资源申请量
+        memory: "64Mi"     # 64M内存
+        cpu: "250m"           # 0.25个CPU
+      limits:                       # 最大配额
+        memory: "128Mi"   # 128M 内存
+        cpu: "500m"           # 0.5个CPU
+```  
+
+Pod 的常用操作：
+
+```
+kubectl create -f  pod_file.yaml            # 创建pod
+kubectl describe pods POD_NAME  # 查看pod详细信息
+kubectl get pods                               # pods 列表
+kubectl delete pod POD_NAME    # 删除pod
+kubectl replace  pod_file.yaml      # 更新pod
+```
 
 ### Label
 
@@ -212,62 +252,435 @@ RC（Replica Set）特性和作用：
 
 ### Deployment
 
+Deployment 主要职责同样是为了保证`运行状态` `pod 的数量`：
+
+1. 90%的功能与Replication Controller完全一样
+2. 可看做新一代的Replication Controller
+3. Deployment内部使用了Replica Set来实现；
+4. 相对于 RC，Deployment 有个增强，可以查看：Pod `部署进度`和`运行状态`
+
+具体实现细节：
+
+1. 创建 Pod：创建 Deployment 对象，来生成 Replica Set，控制 Pod 副本的创建；
+2. 查看状态：检查 Deployment 的状态，来查看是否完成部署，例如，副本数量是否为目标数量；
+3. 滚动升级：更新 Deployment，以创建新的 Pod，同事清理不再需要的旧版本的 Replica Set；
+4. 回滚：如果当前 Pod 不稳定 or 有 bug，则，可以回滚到一个早期的稳定版本；
+5. 暂停和恢复：随时暂停 Deployment 对象，修改对应的参数配置，之后再恢复 Deployment 继续发布；
 
 
+Deployment 定义
+
+* `Deployment`的定义和`Replica Set`的定义几乎一样，仅仅是`API版本`和`kind类型`不同：
+
+具体 Deployment 定义的实例：
+
+```
+# Deployment的声明
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: nginx-deployment
+  labels:
+    app: nginx
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: nginx
+  template:
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        ports:
+        - containerPort: 80
+
+# Replica Set的声明
+apiVersion: v1
+kind: ReplicaSet
+metadata:
+  name: mysql
+...
+```
+
+创建 Deployment 并查看状态：
+
+```
+# 创建 Deployment
+kubectl create -f nginx.yaml 
+
+# 查看 Deployment
+# 刚执行时，显示的AVAILABLE数量时0
+kubectl get deployments
+
+# 滚动升级
+kubectl set image deployment/nginx-deployment nginx=nginx:1.12.2
+
+# 查看 Replica Set（RS）
+# 每次升级 Deployment，都会生成一个新的 RS
+kubectl get rs
+...
+NAME                          DESIRED   CURRENT   READY     AGE
+nginx-deployment-666865b5dd   0         0         0         22m
+nginx-deployment-69647c4bc6   3         3         3         5m
+...
+
+```
+
+所有 Deployment 的操作命令，可以参考：
+
+* kubectl describe deployments #查询详细信息，获取升级进度
+* kubectl get deployments # 获取升级进度的简略信息
+* kubectl get rs # 获取RS记录，每执行一次deployment就会生成一个RS记录。
+* kubectl set image deployment/nginx-deployment nginx=nginx:1.12.2 # 升级
+* kubectl edit deployments/nginx-deployment # 修改deployment 参数
+* kubectl rollout pause deployment/nginx-deployment #暂停升级
+* kubectl rollout resume deployment/nginx-deployment #继续升级
+* kubectl rollout undo deployment/nginx-deployment #回滚到上一版本
+* kubectl scale deployment nginx-deployment --replicas 10 #弹性伸缩Pod数量
+
+### Service
+
+Service 定义了服务访问入口：
+
+* 允许内部 Pod 之间，相互访问，仅限集群内部使用
+* 集群外部使用时，需要借助 Flannel、Weave、Romana 等第三方网络服务
+
+TODO：
+
+* Service 的示意图
+
+详细的说明：
+
+* Cluster IP：全局唯一，用于 Pod 之间的相互访问
+	* 创建 Service 时， Kubernetes 会自动创建一个 Cluster IP
+	* 是虚拟 IP，无法 Ping 通
+	* 通过 Cluster IP + 端口，访问后端 Pod
+	* 后端 Pod，通过 RC 自动控制，提供持续服务
+* Cluster IP：保持恒定
+	* 在Service的整个生命周期内，Cluster IP不会发生改变
+	* Service Name与Cluster IP形成固定的映射关系（这里一般使用的是DNS，早期使用的是环境变量的方式），这样就不存在服务发现的问题
+* 内部地址：Service 和 Pod 的 Endpoint 属于集群内部地址
+	* 无法在集群外部使用
+	* 使用Flannel、Weave、Romana等第三方网络服务，实现Pod之间的通讯
+* Proxy：
+	* 每个Node节点上都运行着一个kube-proxy的进程
+	* 提供负载均衡的作用，将对service的请求转发到后端的某个Pod实例上
+	* 并在内部实现了`负载均衡`和`会话保持`（疑问：会话保持，什么含义？）
+
+外部访问的 Service：
+
+* Cluster IP是一个**内部地址**，外部的 node 节点无法直接访问到
+* 当我们的`外部用户`需要访问这些服务时，需要在定义Service时添加 `NodePort` 的扩展。
+
+下面的文件定义了一个nginx服务添加外部NodePort的示例：
+
+```
+apiVersion: v1
+kind: Service
+metadata: 
+  name: nginx
+spec:
+  type: NodePort
+  ports:
+    - port: 80
+      nodePort: 30008   # 对外的用户访问端口，默认范围是30000-32767
+  selector:
+    app: nginx
+```
+
+特别说明：
+
+> 当我们创建这个 service 后，所有的节点上都会有`30008`的端口映射，访问`任意节点`都会转发到对应的Pod集群中。
+
+本质：在所有节点 Node 的 kube-proxy 上，登记了 `Service` --> `ClusterIP`:`NodePort` --> `Pod IP`:`ContainerPort` 的映射关系。
+
+疑问：
+
+* 外部 Node，是如何调用 Service 的？Service 有什么标识？是根据 `name` 标记进行调用？具体的调用方式呢？
+
+命令参考
+
+* kubectl get services # 获取service列表，可以指定具体的service
+* kubectl describe services # 显示service的详细信息，可以指定具体的service
+* kubectl get endpoints # 获取Endpoint 信息
+* kubectl delete services mysql # 删除指定的service
+
+### Volume
+
+关于磁盘存储：
+
+1. Pod中，多个容器共享 Volume；
+2. 使用单独的存储空间，挂载到对应的Pod上，保证数据持久化；
+3. 当容器终止时，Volume中的数据不会丢失；
+
+Volume的定义格式：
+
+```
+apiVersion: v1
+kind: Pod
+metadata:
+  name: test-pd
+spec:
+  containers:
+  - image: k8s.gcr.io/test-webserver
+    name: test-container
+    volumeMounts:
+    - mountPath: /cache
+      name: cache-volume
+  volumes:
+  - name: cache-volume
+    emptyDir: {}                    # 指定Volume类型
+```
+
+Kubernetes支持多种类型的Volume,下面会对一些常见的Volume做出说明：
+
+本地存储：
+网络存储：
+Persistent Volume：
+
+#### 本地存储
+
+本地存储：
+
+* **emptyDir**: 无需指定宿主机的对应目录路径，由Pod自动创建，Pod移除时数据会永久删除，作为容器间的共享目录。上面的示例就是此格式的Volume。
+* **hostPath**: Pod挂载宿主机上的文件和目录，可用于永久保存日志，容器内部访问宿主机数据，定义方式如下：
+
+```
+apiVersion: v1
+kind: Pod
+metadata:
+name: test-pd
+spec:
+containers:
+- image: k8s.gcr.io/test-webserver
+name: test-container
+volumeMounts:
+- mountPath: /test-pd
+  name: test-volume
+volumes:
+- name: test-volume
+hostPath:
+  # directory location on host
+  path: /data
+  # this field is optional
+  type: Directory
+```
+
+#### 网络存储
+
+网络存储
+
+* **gce Persistemt Disk**: 谷歌公有云提供的永久磁盘，这里要求使用谷歌的公有云，节点是GCE虚拟机才行。
+* **AWS Elastic Block Store**： 与GCE类似，此类型的Volume使用亚马逊公有云提供的EBS数据存储。
+* **NFS**： NFS网络文件系统的数据存储，这个需要部署NFS服务器，定义如下：
+
+```
+volumes:
+  - name: nfs
+    nfs:
+          server: NFS-SERVER-IP   # NFS 服务器地址
+            path: "/"
+```
+
+* iscsi： 使用iSCSI存储设备上的目录挂载到Pod中。
+* glusterfs： 使用GlusterFS挂载到Pod中。
+* rbd： 使用Ceph对象存储挂载到Pod。
+
+除此之外，Kubernetes还支持其他的存储方式，具体详情可以查看官方文档。
+
+#### Persistent Volume
+
+理解并管理五花八门的存储是一件让人头疼的事情，Kubernetes为了解决这些问题，对所有的网络存储进行了抽象，让我们在管理这些存储时不必考虑后端的实现细节，对于不同的网络存储统一使用一套相同的管理手段。
+
+`PersistentVolume`为用户和管理员提供了一个API，它抽象了如何`定义存储`以及`使用存储`的细节。 为此，引入两个新的API资源：PersistentVolume和PersistentVolumeClaim。
+
+* **PersistentVolume（PV）**: 是管理员设置的单独的网络存储集群，定义存储，它不属于任何节点，但是可以被每个节点访问。 PV是Volumes之类的卷插件，具有独立于的生命周期。 此API对象用于捕获存储实现的细节，如NFS，iSCSI，GlusterFS,CephFS或特定于云提供程序的存储系统。
+* **PersistentVolumeClaim（PVC）**：是用户对存储的请求的定义，定义使用存储。 它与pod相似。pods消耗节点资源，PVC消耗PV资源， Pods可以请求特定级别的资源（CPU和内存）。Claim可以配置特定的存储资源大小和访问模式（例如，多种不同的读写权限）,并根据用户定义的需求去使用合适的Persistent Volume。
+
+定义Persistent Volume：
+
+```
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: pv1
+spec:
+  capacity:
+    storage: 5Gi
+  accessModes:
+    - ReadWriteOnce
+  nfs:
+    path: /somepath
+    server: 10.2.2.2
+```
+
+accessModes有三种权限：
+
+* **ReadWriteOnce**：读写权限，只能被单个Node挂载
+* **ReadOnlyMany**: 只读权限，允许被多个Node挂载
+* **ReadWriteMany**: 读写权限、允许被多个Node挂载。
+
+疑问：
+
+* PV 和 PVC 之间的映射关系？
+* 如何使用 PV？
+
+定义Persistent Volume Claim
+
+如果某个Pod想申请某种类型的PV，可以做如下定义：
+
+```
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  name: myclaim
+spec:
+  accessModes:
+    - ReadWriteOnce
+  resources:
+    requests:
+      stroage: 8Gi
+```
+
+定义之后再Pod的Volume中引用上述PVC：
+
+```
+volumes:
+  - name: mypd
+    persistentVolumeClaim:
+          claimName: myclaim
+```  
+
+PV是有状态的对象，有如下几种状态：
+
+* **Available**: 空闲状态
+* **Bound**: 已经绑定到某个PVC上
+* **Released**: 对应的PVC已经删除，但是资源还没有被释放
+* **Failed**: PV自动回收失败
 
 
+### Namespace
 
+Namespace 用于实现多租户隔离。
 
-## 资源定义
+几个常用命令，查询 namespace：
 
-几个方面：
+```
+# 查询所有的 namespace
+kubectl get namespaces
 
-* Pod 定义
-* TODO
+# 查询 namespaces 的细节
+kubectl describe namespaces
 
+# 查询所有的 pod
+kubectl get pods --all-namespaces
 
-### Pod 定义
+# 默认只会查询 default 中的 pod 信息
+kubectl get pods
 
-下面是一个 Pod 的资源定义：
+# 查询指定 namespace 的 pod
+kubectl get pods --namespace=kube-system
+```
+
+Namespace的定义
+
+使用yaml文件定义一个名为deployment的Namespace:
+
+```
+apiVersion: v1
+kind: Namespace
+metadata:
+  name: deployment
+```
+
+当创建对象时，就可以指定这个资源对象属于哪个Namespace:
 
 ```
 apiVersion: v1
 kind: Pod
 metadata:
   name: myweb
-  labels:
-    name: myweb
+  namespace: development
+```
+
+疑问：
+
+* 只会针对 Pod，设置 namespace 吗？
+
+
+### Horizontal Pod Autoscaler(HPA)
+
+HPA 也是一类资源对象：
+
+* 根据 Pod的负载变化情况，自动调整 Pod 数量。
+
+HPA有以下两种方式来度量Pod的负载情况：
+
+* CPU 复杂：CPU Utilization Percentage，百分比
+	* `Heapster`扩展组件，来获取 CPU 负载
+	* CPU的利用率百分比，通常是度量的Pod CPU `1min`内的`平均值`
+* 自定义的度量指标
+
+简单示例：
+
+```
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+  name: myweb
+  namespace: default
 spec:
-  containers:
-  - name: myweb
-    image: kubeguide/tomcat-app:v1
-    ports:
-    - containerPort: 8080
-    env:
-    - name: MYSQL_SERVER_HOST
-      value: 'mysql'
-    - name: MYSQL_SERVER_PORT
-      value: '3306'
-  - name: db
-    image: mysql
-    resources:
-      requests:                  # 最小资源申请量
-        memory: "64Mi"     # 64M内存
-        cpu: "250m"           # 0.25个CPU
-      limits:                       # 最大配额
-        memory: "128Mi"   # 128M 内存
-        cpu: "500m"           # 0.5个CPU
-```  
+  maxReplicas: 10
+  minReplicas: 2
+  scaleTargetRef:
+    kind: Deployment
+    name: myweb
+  targetCPUUtilizationPercentage: 90
+```
 
-Pod 的常用操作：
+当Pod 副本的CPU利用率超过90%时会触发自动扩容行为，且Pod数量最多不能超过10，最少不能低于2.
+
+除此之外，也可以使用命令操作：
 
 ```
-kubectl create -f  pod_file.yaml            # 创建pod
-kubectl describe pods POD_NAME  # 查看pod详细信息
-kubectl get pods                               # pods 列表
-kubectl delete pod POD_NAME    # 删除pod
-kubectl replace  pod_file.yaml      # 更新pod
+kubectl autoscale deployment myweb  --cpu-percent=90 --min=1 --max=10
 ```
+
+疑问：
+
+* 上述指定哪个 Pod 进行伸缩？
+* 什么时候触发 Pod 数量的收缩？
+
+
+### StatefulSet
+
+在Kubernetes系统中，Pod管理的对象如 RC，Deployment,DaemonSet 和Job 都是面向无状态的服务。对于无状态的服务我们可以任意销毁并在任意节点重建，但是在实际的应用中，很多服务是`有状态`的，特别是对于复杂的中间件集群，如 MySQL 集群，MongoDB集群，Zookeeper集群，etcd集群等，这些服务都有固定的网络标识，并有持久化的数据存储，这就需要使用StatefulSet对象。
+
+StatefulSet具有以下特性：
+
+* **稳定的网络标识**：StatefulSet里的每个Pod都有稳定且唯一的网络标识， 可以用来发现网络中的其他成员。
+* **启动顺序受控**：StatefulSet 控制的Pod副本的启停顺序是受控的，比如操作第n个Pod时，前n-1个Pod必须是正常运行的状态。
+* **持久化 Volume**：Pod 采用稳定的持久化存储卷，删除Pod时默认不会删除与StatefulSet相关的储存卷。
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
