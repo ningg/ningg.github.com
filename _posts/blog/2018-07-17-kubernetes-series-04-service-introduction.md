@@ -44,7 +44,17 @@ port、nodePort总结：
 使用calico等`overlay`网络，可能导致`hostport`不可用，可以增加 `hostNetwork: true` 配置启用 `host` 模式 (在pod中定义)
 
 
+## 关键问题
 
+Kubernetes的网络方式主要解决以下几个问题：
+
+1. **Pod 内部**：紧耦合的容器之间通信，通过 Pod 和 localhost 访问解决。
+1. **Pod 之间**：Pod之间通信，建立`通信子网`，比如隧道、路由，Flannel、Open vSwitch、Weave。
+1. **Pod 和外部**：Pod和Service，以及外部系统和Service的通信，引入Service解决。
+
+Kubernetes的网络会给每个Pod分配一个IP地址，不需要在Pod之间建立链接，也基本不需要去处理容器和主机之间的端口映射。（疑问：什么含义？）
+
+注意：Pod重建后，IP会被重新分配，所以内网通信不要依赖Pod IP；通过Service环境变量或者DNS解决。
 
 
 
@@ -55,6 +65,8 @@ port、nodePort总结：
 * [Kubernetes Documentation]
 * [Kubernetes 指南]
 * [Kubernetes Service & Network]
+* [闲谈 Kubernetes 的主要特性和经验分享]
+* [Labels and Selectors]
 
 
 
@@ -67,6 +79,8 @@ port、nodePort总结：
 [Kubernetes Documentation]:				https://kubernetes.io/docs/home/
 [Kubernetes 指南]:						https://legacy.gitbook.com/book/feisky/kubernetes/details
 [Kubernetes Service & Network]:		https://kubernetes.io/docs/concepts/services-networking/service/
+[闲谈 Kubernetes 的主要特性和经验分享]:		http://www.itboth.com/d/NzQjMn/docker-kubernetes
+[Labels and Selectors]:					https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
 
 
 

@@ -36,6 +36,15 @@ Kubernetes 的核心工作过程：
 3. **存储**：对象的**目标状态**（**预设状态**），保存在 `etcd` 中持久化储存；
 4. **自动控制**：跟踪、对比 etcd 中存储的**目标状态**与资源的**当前状态**，对差异`资源纠偏`，`自动控制`集群状态。
 
+Kubernetes 实际是：高度`自动化`的`资源控制`系统，将其管理的`一切`抽象为`资源`对象，大到服务器 Node 节点，小到服务实例 Pod。
+
+Kubernetes 的资源控制是一种`声明`+`引擎`的理念：
+
+1. **声明**：对某种资源，声明他的`目标状态`
+2. **自动**：Kubernetes 自动化资源控制系统，会一直努力将该`资源`对象维持在`目标状态`。
+
+
+
 ### 2.2.架构（物理+逻辑）
 
 Kubernetes 集群，是主从架构：
@@ -99,13 +108,27 @@ Kubernetes 集群，是主从架构：
 
 ### 2.3.集群的高可用
 
-TODO
+Kubernetes 集群，在生产环境，必须实现高可用：
 
+1. 实现Master节点及其核心组件的高可用；
+2. 如果Master节点出现问题的话，那整个集群就失去了控制；
 
+具体的 HA 示意图：
 
+![](/images/kubernetes-series/kubernertes-HA-arch.png)
 
+上述方式可以用作 HA，但仍未成熟，据了解，未来会更新升级 HA 的功能.
 
+具体工作原理：
 
+* **etcd 集群**：部署了3个Master节点，每个Master节点的etcd组成集群
+* **入口集群**：3个Master节点上的APIServer的前面放一个负载均衡器，工作节点和客户端通过这个`负载均衡`和APIServer进行通信
+* `pod-master`保证仅是`主master`可用，scheduler、controller-manager 在集群中多个实例只有一个工作，其他为备用
+
+官网关联资料：
+
+* [Set up High-Availability Kubernetes Masters](https://kubernetes.io/docs/tasks/administer-cluster/highly-available-master/)
+* [Creating Highly Available Clusters with kubeadm](https://kubernetes.io/docs/setup/independent/high-availability/)
 
 
 
@@ -126,6 +149,35 @@ TODO
 * Namespace
 * Label
 
+部署服务相关的资源：
+
+* **Pod**：Kubernetes的基本管理单元
+	* 一个Pod，运行在一个 Node 节点上，内部包含`多个容器`
+	* 通过Deployment可以部署Pod
+* **Deployment**：表示部署，支持滚动升级
+	* 在部署Pod的时候会创建一个`ReplicaSet`，来控制Pod实例的数量
+* **Service**: Service就是微服务架构中微服务
+	* 每个Service分配一个固定不变的`虚拟IP`即`ClusterIP`
+	* 一个Service后边可以有一个或多个Pod。
+	* Service将`客户端请求`转发到后边的某个Pod上，实现负载均衡
+* **Label**: Label是联系各种k8s资源的纽带
+	* 一个Service通过Label关联到后端的Pod上
+	* Service定义一个Pod的label选择器，具备这个Label的Pod就会为此Service效力
+
+其他资源：
+
+* `Namespace`: 用于实现`多租户`的逻辑隔离
+* `PV和PVC`: `持久卷`和`持久卷请求`，提供集群的持久存储抽象
+* `DaemonSet`: 在集群中的`每个Node`上，启动一个守护进程Pod
+* `Job`和`Schedued Job`
+* `Ingress`: 将集群外部流量接入到集群内
+* `ConfigMap`和`Secret`: 集中配置中心
+* `Horizontal Pod Autoscaler`: 根据负载实现Pod自动`弹性伸缩`
+
+
+几个资源之间的关系：（当前的理解，待修正）
+
+![](/images/kubernetes-series/kubernertes-core-concepts.png)
 
 
 ### Pod
@@ -226,6 +278,10 @@ Label Selector (标签选择器) ：筛选出具有指定 Label 的资源，方�
 name=mysql,env!=production
 name notin (tomcat),env!=production
 ```
+
+更多细节：
+
+* [Labels and Selectors](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/)
 
 ### RC，Replication Controller
 
@@ -732,6 +788,7 @@ StatefulSet具有以下特性：
 * [Kubernetes 指南]
 * [Kubernetes 核心概念简介]
 * [Kubernetes的组成和资源对象简介]
+* [Labels and Selectors]
 
 
 
@@ -748,6 +805,7 @@ StatefulSet具有以下特性：
 [Kubernetes Concepts]:					https://kubernetes.io/docs/concepts/
 [Kubernetes核心概念总结]:					https://www.cnblogs.com/zhenyuyaodidiao/p/6500720.html
 [Kubernetes的组成和资源对象简介]:			https://blog.frognew.com/2017/04/kubernetes-overview.html
+[Labels and Selectors]:					https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
 
 
 
