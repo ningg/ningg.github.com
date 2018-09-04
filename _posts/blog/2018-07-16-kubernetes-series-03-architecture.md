@@ -6,7 +6,7 @@ published: true
 category: docker
 ---
 
-## 概要
+## 1.概要
 
 Kubernetes 集群，几个基本疑问：
 
@@ -15,23 +15,19 @@ Kubernetes 集群，几个基本疑问：
 * 不同 Docker 节点之间，协作机制、处理逻辑是什么？
 
 
-## 核心概念
-
 几个方面：
 
+* 核心架构：物理架构，逻辑架构
 * 核心概念：什么含义，什么用途
-* 逻辑关系：核心概念之间协作关系
 
-
-
-## 核心架构
+## 2.架构
 
 两个方面：
 
-1. 逻辑架构
-2. 物理架构
+1. 基本工作过程
+2. 架构：逻辑架构、物理架构
 
-### 逻辑架构
+### 2.1.基本工作过程
 
 Kubernetes 的核心工作过程：
 
@@ -40,47 +36,96 @@ Kubernetes 的核心工作过程：
 3. **存储**：对象的**目标状态**（**预设状态**），保存在 `etcd` 中持久化储存；
 4. **自动控制**：跟踪、对比 etcd 中存储的**目标状态**与资源的**当前状态**，对差异`资源纠偏`，`自动控制`集群状态。
 
-### 节点(Master & Node)
+### 2.2.架构（物理+逻辑）
 
-Kubernetes 的节点，分为 2 种角色：
+Kubernetes 集群，是主从架构：
 
-* Master：管理节点
-	* 作用：Kubernetes 操作命令，控制整个
-* Node：工作节点
+* Master：管理节点，集群的控制和调度
+* Node：工作节点，执行具体的业务容器
 
-具体，2 种角色的节点，需要运行的进程和职责不同：
+![](/images/kubernetes-series/k8s-cluster-arch.png)
+
+下述几个组件，都是独立的进程，每个进程都是 Go 语言编写，实际部署 Kubernetes 集群，就是部署这些程序。
+
+* Master节点：
+	* kube-apiserver
+	* kube-controller-manager
+	* kube-scheduler
+* Node节点：
+	* kubelet
+	* kube-proxy
+
+具体，2 种角色的节点，需要运行的进程和职责不同，详细描述如下。
 
 **Master 管理节点**：管理整个 Kubernetes 集群，接收外部命令，维护集群状态。
 
 * **apiserver**： Kubernetes API Server
 	* 集群控制的入口
-	* **资源**的增删改查
+	* **资源**的增删改查，持久化存储到 `etcd`
 	* `kubectl` 直接与 API Server 交互，默认端口 `6443`。
-* **controller-manager**: 控制器的管理器
-	* 每个**资源**，都对应有一个**控制器**（*疑问：作用是什么？*）
-	* controller manager 管理这些控制器
-	* controller manager 是自动化的循环控制器
-	* Kubernetes 的核心控制守护进程，默认监听10252端口。（*疑问：为什么有监听段口感？*）
-* **scheduler**： 负责将 pod 资源调度到合适的 node 上。
-	* 调度算法：根据 node 节点的`性能`、`负载`、`数据位置`等，进行调度。
-	* 默认监听10251 端口。
 * **etcd**: 一个高可用的 `key-value` 存储系统
 	* 作用：存储**资源**的状态
 	* 支持 Restful 的API。
 	* 默认监听 2379 和 2380 端口（2379提供服务，2380用于集群节点通信）（疑问：集群节点，是说 etcd 的集群？ Master 集群？）
+* **scheduler**： 负责将 pod 资源调度到合适的 node 上。
+	* 调度算法：根据 node 节点的`性能`、`负载`、`数据位置`等，进行调度。
+	* 默认监听 `10251` 端口。
+* **controller-manager**: 所有资源的自动化控制中心
+	* 每个**资源**，都对应有一个**控制器**（*疑问：作用是什么？*）
+	* controller manager 管理这些控制器
+	* controller manager 是自动化的循环控制器
+	* Kubernetes 的核心控制守护进程，默认监听10252端口。（*疑问：为什么有监听段口感？*）
+
+补充说明：
+
+> `scheduler`和`controller-manager`都是通过`apiserver`从`etcd`中获取各种资源的状态，进行相应的**调度**和**控制**操作。
+
 
 **Node 节点**：Master 节点，将任务调度到 Node 节点，以 docker 方式运行；当 Node 节点宕机时，Master 会自动将 Node 上的任务调度到其他 Node 上。
 
-* **kubelet**: 负责达到 Pod 的目标运行状态
+* **kubelet**: 本节点Pod的生命周期管理，定期向Master上报本节点及Pod的基本信息
 	* Kubelet是在每个Node节点上运行agent
-	* 负责维护和管理所有容器
+	* 负责维护和管理所有容器：从 apiserver 接收 Pod 的创建请求，启动和停止Pod
 	* Kubelet不会管理不是由Kubernetes创建的容器
-	* 定期向Master汇报自身信息，如操作系统、Docker版本、CPU、内存、pod 运行状态等信息
-* **kube-proxy**：
+	* 定期向Master上报信息，如操作系统、Docker版本、CPU、内存、pod 运行状态等信息
+* **kube-proxy**：集群中 Service 的通信以及负载均衡
 	* **功能**：服务发现、反向代理。
 	* **反向代理**：支持TCP和UDP连接转发，默认基于Round Robin算法将客户端流量转发到与service对应的一组后端pod。
 	* **服务发现**：使用 etcd 的 watch 机制，监控集群中service和endpoint对象数据的动态变化，并且维护一个service到endpoint的映射关系。（本质是：路由关系）
+	* **实现方式**：存在两种实现方式，`userspace` 和 `iptables`。
+		* `userspace`：在用户空间，通过kuber-proxy实现负载均衡的代理服务，是最初的实现方案，较稳定、效率不高；
+		* `iptables`：在内核空间，是纯采用iptables来实现LB，是Kubernetes目前默认的方式；
 * **runtime**：一般使用 `docker` 容器，也支持其他的容器。
+
+### 2.3.集群的高可用
+
+TODO
+
+
+
+
+
+
+
+
+
+
+
+
+## 3.核心概念
+
+涉及到的多个核心概念：
+
+* Pod
+* Deployment
+* Replication Controller
+* Replica Set
+* StatefulSet
+* Service
+* Volume
+* Namespace
+* Label
+
 
 
 ### Pod
@@ -658,7 +703,7 @@ kubectl autoscale deployment myweb  --cpu-percent=90 --min=1 --max=10
 
 ### StatefulSet
 
-在Kubernetes系统中，Pod管理的对象如 RC，Deployment,DaemonSet 和Job 都是面向无状态的服务。对于无状态的服务我们可以任意销毁并在任意节点重建，但是在实际的应用中，很多服务是`有状态`的，特别是对于复杂的中间件集群，如 MySQL 集群，MongoDB集群，Zookeeper集群，etcd集群等，这些服务都有固定的网络标识，并有持久化的数据存储，这就需要使用StatefulSet对象。
+在Kubernetes系统中，Pod管理的对象如 RC、Deployment、DaemonSet 和 Job 都是面向无状态的服务。对于无状态的服务我们可以任意销毁并在任意节点重建，但是在实际的应用中，很多服务是`有状态`的，特别是对于复杂的中间件集群，如 MySQL 集群、MongoDB集群、Zookeeper集群、etcd集群等，这些服务都有固定的网络标识，并有持久化的数据存储，这就需要使用 StatefulSet对 象。
 
 StatefulSet具有以下特性：
 
@@ -670,24 +715,7 @@ StatefulSet具有以下特性：
 
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-## 遗留问题
+## 4.遗留问题
 
 定义资源的模板：
 
@@ -696,12 +724,14 @@ StatefulSet具有以下特性：
 
 
 
-## 参考资料
+## 5.参考资料
 
 
 * [Kubernetes Documentation]
+* [Kubernetes Concepts]
 * [Kubernetes 指南]
 * [Kubernetes 核心概念简介]
+* [Kubernetes的组成和资源对象简介]
 
 
 
@@ -715,8 +745,9 @@ StatefulSet具有以下特性：
 [Kubernetes Documentation]:				https://kubernetes.io/docs/home/
 [Kubernetes 指南]:						https://legacy.gitbook.com/book/feisky/kubernetes/details
 [Kubernetes 核心概念简介]:				http://blog.51cto.com/tryingstuff/2119034
-
-
+[Kubernetes Concepts]:					https://kubernetes.io/docs/concepts/
+[Kubernetes核心概念总结]:					https://www.cnblogs.com/zhenyuyaodidiao/p/6500720.html
+[Kubernetes的组成和资源对象简介]:			https://blog.frognew.com/2017/04/kubernetes-overview.html
 
 
 
