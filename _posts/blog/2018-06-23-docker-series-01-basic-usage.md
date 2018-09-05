@@ -27,6 +27,24 @@ category: docker
 更多细节，可以参考：
 
 * 官方文档：[Docker - Get Started](https://docs.docker.com/get-started/)
+* [Docker Command-Line Interfaces (CLIs)] 官网完整的命令说明
+
+一个典型的示意图：
+
+![](/images/docker-series/docker-commands.png)
+
+上图是一个image的简单使用：
+
+1. 镜像：
+	1. 通过 dockerfile 来 build image，本质就是基于 container 进行 commit 操作
+1. 容器：
+	1. 运行容器：直接run container
+	1. 管理容器：container进行stop、start、restart
+	1. 构造镜像：基于 container 进行 commit 操作
+1. 本地导出：对image进行save保存，以及加载load操作
+1. 镜像仓库：
+	1. 把image上传（push）到镜像仓库
+	1. 从仓库pull到本地
 
 ## 基本信息
 
@@ -97,7 +115,7 @@ docker ps
 # b. 创建 
 docker commit -m "message" CONTAINER name:tag
 
-# 2. 使用本地的 gz 安装文件，创建
+# 2. 使用本地的文件，创建（本地文件是 docker export 从容器导出的）
 docker import FILE - name:tag
 
 # 3. 基于 Dockerfile，创建
@@ -272,14 +290,14 @@ docker container kill [container]
 |diff|展示容器相对于构建它的镜像内容所做的改变|
 |events|实时打印服务端执行的事件|
 |exec|在已运行的容器中执行命令|
-|export|导出容器到本地快照文件|
+|export|导出`容器`到本地`快照文件`|
 |history|显示镜像每层的变更内容|
 |images|列出本地所有镜像|
-|import|导入本地容器快照文件为镜像|
+|import|导入本地`容器``快照文件`为镜像|
 |info|显示 Docker 详细的系统信息|
 |inspect|查看容器或镜像的配置信息, 默认为json数据|
 |kill| `-s` 选项向容器发送信号, 默认为SIGKILL信号(强制关闭)|
-|load|导入镜像压缩包|
+|load|导入`镜像`压缩包|
 |login|登录第三方仓库|
 |logout|退出第三方仓库|
 |logs|打印容器的控制台输出内容|
@@ -293,7 +311,7 @@ docker container kill [container]
 |rm|删除已停止的容器, `-f` 选项可强制删除正在运行的容器|
 |rmi|删除镜像(必须先删除该镜像构建的所有容器)|
 |run|根据镜像生成并进入一个新的容器|
-|save|打包本地镜像, 使用压缩包来完成迁移|
+|save|打包`本地镜像`, 使用压缩包来完成迁移|
 |search|查找镜像|
 |start|启动关闭的容器|
 |stats|显示容器对资源的使用情况(内存、CPU、磁盘等)|
@@ -306,11 +324,20 @@ docker container kill [container]
 |wait|阻塞当前命令直到对应的容器被关闭, 容器关闭后打印结束代码|
 |daemon|这个子命令已过期, 将在Docker 17.12之后的版本中移出, 直接使用dockerd|
 
+补充说明：
+
+* 基于**容器**：
+	* docker export：导出镜像文件
+	* docker import：导入镜像文件
+* 基于**本地镜像**：
+	* docker save：导出镜像文件
+	* docker load：导入镜像文件
 
 ## 参考资料
 
 * 官网：[https://www.docker.com/](https://www.docker.com/)
 * 官方文档：[Docker - Get Started](https://docs.docker.com/get-started/)
+* [Docker Command-Line Interfaces (CLIs)]
 
 
 
@@ -320,3 +347,5 @@ docker container kill [container]
 
 
 [NingG]:    http://ningg.github.com  "NingG"
+
+[Docker Command-Line Interfaces (CLIs)]:			https://docs.docker.com/engine/reference/run/

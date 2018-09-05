@@ -245,6 +245,10 @@ kubectl delete pod POD_NAME    # 删除pod
 kubectl replace  pod_file.yaml      # 更新pod
 ```
 
+疑问：
+
+* Pod 内的容器，共享 IP，是否独占`端口`呢？
+
 ### Label
 
 Label 几个方面：
@@ -285,15 +289,41 @@ name notin (tomcat),env!=production
 
 ### RC，Replication Controller
 
-复制控制器（Replication Controller），具体作用：
+复制控制器（Replication Controller），也是一种`资源`，声明 Pod 副本的目标状态，具体作用：
 
 * 保证有指定数量的 Pod 处于运行状态
 * 高级特性：滚动升级、回滚等
 
 一般配置参数：
 
-* 副本数：Pod 期待的副本数（replicas）（疑问：是否有默认值？）
-* 标签：用于筛选目标Pod的Label Selector.
+* **副本数**：Pod 期待的副本数（replicas）（疑问：是否有默认值？）
+* **标签**：用于筛选目标 Pod 的`Label Selector`
+* **模板**：创建 Pod 的模板（template）
+* **其他**：修改副本数，可以实现服务伸缩；修改模板中的镜像，可以实现滚动升级；
+
+示例：
+
+```
+apiVersion: v1
+kind: ReplicationController
+metadata:
+  name: nginx
+spec:
+  replicas: 3
+  selector:
+    app: nginx
+  template:
+    metadata:
+      name: nginx
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: nginx
+        ports:
+        - containerPort: 80
+```
 
 
 RC运行过程： 
@@ -789,6 +819,8 @@ StatefulSet具有以下特性：
 * [Kubernetes 核心概念简介]
 * [Kubernetes的组成和资源对象简介]
 * [Labels and Selectors]
+* [十分钟带你理解Kubernetes核心概念]
+* [Introduction to Kubernetes]
 
 
 
@@ -806,6 +838,8 @@ StatefulSet具有以下特性：
 [Kubernetes核心概念总结]:					https://www.cnblogs.com/zhenyuyaodidiao/p/6500720.html
 [Kubernetes的组成和资源对象简介]:			https://blog.frognew.com/2017/04/kubernetes-overview.html
 [Labels and Selectors]:					https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/
+[十分钟带你理解Kubernetes核心概念]:		http://dockone.io/article/932
+[Introduction to Kubernetes]:			https://www.slideshare.net/rajdeep/introduction-to-kubernetes
 
 
 
