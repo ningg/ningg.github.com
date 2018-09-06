@@ -38,6 +38,12 @@ ssh-keygen [-C comment] [-f output_keyfile]
 * Client 侧，`私钥`解密
 * Server 侧，比对解密结果
 
+## 快捷配置
+
+关于 SSH 的快捷配置：
+
+* [Redis 设计与实现：环境搭建手册](http://ningg.top/redis-lesson-1-installation/)
+
 
 [NingG]:    http://ningg.github.com  "NingG"
 
