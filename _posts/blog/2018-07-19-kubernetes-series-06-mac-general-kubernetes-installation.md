@@ -28,6 +28,12 @@ Mac 上，通过虚拟机，启动多个 CentOS 系统的虚拟节点，分为�
 * 安装虚拟机
 * 运行虚拟机
 
+**备注信息**：当前安装环境的系统版本
+
+* **Mac**：High Sierra 10.13.6
+* **VirtualBox**：5.2.16 r123759 (Qt5.6.3)
+* **Linux**：CentOS CentOS-7-x86_64-Everything-1804.iso
+
 ### 安装虚拟机
 
 在 Mac 上，安装虚拟机，具体操作：
