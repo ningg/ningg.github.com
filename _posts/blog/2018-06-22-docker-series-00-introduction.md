@@ -159,6 +159,9 @@ Docker 公司，借助 Moby ，提出 `容器平台` 的**构建规范**：
 
 直接按照 [Documentation](https://docs.docker.com/) 中 [Get Started](https://docker.github.io/get-started/)，逐步阅读并操作即可。
 
+具体，Linux 下安装：
+
+* CentOS 下，安装 Docker：[Get Docker CE for CentOS](https://docs.docker.com/install/linux/docker-ce/centos)
 
 
 ## 参考资料
