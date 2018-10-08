@@ -8,6 +8,8 @@ category: redis
 
 ## 0. 概要
 
+> 说明：当前分享，整理有独立的 keynote.
+
 基本问题：
 
 1. Sentinel 是什么？

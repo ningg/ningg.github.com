@@ -8,6 +8,8 @@ category: redis
 
 ## 背景
 
+> 说明：当前分享，整理有独立的 keynote.
+
 Redis 支持了 2 种持久化策略：
 
 * RDB
@@ -27,10 +29,6 @@ Redis 支持了 2 种持久化策略：
 5. RDB、AOF 的差异
 	* 全量 vs. 增量
 
-
-具体，看 ppt 吧：
-
-* [Redis 持久化](/images/redis/Redis-AOF-RDB.pdf)
 
 ## 简述
 

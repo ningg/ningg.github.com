@@ -6,9 +6,10 @@ published: true
 category: redis
 ---
 
-> ppt: [Redis 主从复制](/images/redis/Redis-Master-Slave.pdf)
 
 ## 概要
+
+> 说明：当前分享，整理有独立的 keynote.
 
 开始之前，简单说一下 Redis 集群中下面 3 者之间的关系：
 
