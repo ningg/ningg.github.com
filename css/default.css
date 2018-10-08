@@ -128,10 +128,10 @@ pre ol{margin-left:25px;list-style-type:decimal;}
 }
 
 /*****************about page****************/
-.index-content  .section { margin-left:30%; padding-top:80px; padding-right:15%; ;}
+.index-content .section { margin-left:30%; padding-top:80px; padding-right:15%; ;}
 .index-content .section .about-page { margin-left:15%; width:70%; margin:0 atuo;}
 .index-content .section .about-page ul{ margin-bottom:25px; margin-left:10%;}
-.index-content .section .about-page p+ul{ margin-top:-20px;}
+/*.index-content .section .about-page p+ul{ margin-top:-20px;} */
 .index-content .section .about-page p { text-indent: 2em;}
 .index-content .section .about-page ul li{ margin-bottom:5px; list-style:disc; line-height:1.5em;}
 .index-content .section .about-page ol{ margin-bottom:25px; margin-left:10%; }
