@@ -46,30 +46,23 @@ layout: about
 	* [数据平台](http://ningg.top/category/#%E6%95%B0%E6%8D%AE%E5%B9%B3%E5%8F%B0-ref)
 	* [HTTP](http://ningg.top/category/#http-ref)
 	* [计算机：基础原理](http://ningg.top/category/#%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86-ref)
+	* [技术成长](http://ningg.top/category/#%E6%8A%80%E6%9C%AF%E6%88%90%E9%95%BF-ref)
+	* [技术架构](http://ningg.top/category/#%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84-ref)
 * **系统架构**：
 	* [从 MQ 说到 Kafka](http://ningg.top/category/#kafka-ref)
 	* [猫眼演出：分销平台架构](http://ningg.top/arch-series-maoyan-show-open-platform-arch/)
-	* [技术成长系列：状态机的通用设计和实现](http://ningg.top/tech-growth-series-status-machine-general-design-and-key-points/)
 	* [实验平台架构原理](http://ningg.top/category/#experiment-ref) 
-	* [大型网站架构：高性能](http://ningg.top/large-scale-web-app-tech-1/)
-	* [代码格式规范：Java Code Style](http://ningg.top/tool-personal-intellij-idea-java-code-style/)
 
 
-需要再次整理的内容：
+需整理：
 
-* [实验平台架构原理](http://ningg.top/category/#experiment-ref) ：预期增加日志抽样等内容
 * [从 MQ 说到 Kafka](http://ningg.top/category/#kafka-ref) ：预期增加新的管理工具
-
-其他进行过片段分享，暂未整理 keynote 的内容：
-
+* [实验平台架构原理](http://ningg.top/category/#experiment-ref) ：预期增加日志抽样等内容
 * 项目管理：识别项目管理要点，提升项目交付质量
 * 团队建设：识人、招人的通用模式
 * 技术规划：考量因素和要点
 * 会议掌控：如何提升会议质量
 * 商业分析：借助商业模式画布，快速分析商业要点
-
-
-
 
 
 
