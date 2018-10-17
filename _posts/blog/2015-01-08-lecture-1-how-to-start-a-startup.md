@@ -4,7 +4,16 @@ title: Lecture 1--How to Start a Startup
 description: 文章阅读
 category: ycombinator
 ---
+特别说明：系列视频课程
 
+> 
+> 英文：[How to Start a Startup](https://startupclass.samaltman.com/lists/about/)
+> 
+> 中文：[斯坦福大学公开课：如何创业](http://open.163.com/special/opencourse/startup.html)
+> 
+
+
+当前课程的原文地址：
 
 > 原文地址：[Lecture 1--How to Start a Startup][Lecture 1--How to Start a Startup]
 
