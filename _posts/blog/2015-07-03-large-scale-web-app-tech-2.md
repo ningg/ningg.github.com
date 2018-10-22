@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 大型网站架构：高可用
-description: 
+description: 如何判断网站的可用性？如何提升可用性？
 published: true
 category: 技术架构
 ---
