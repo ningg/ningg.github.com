@@ -359,8 +359,47 @@ git clone git@gitcafe.com/username/newproject.git
 
 * [从一个git仓库迁移到另外一个git仓库](https://blog.csdn.net/samxx8/article/details/72329002)
 
+## 13. 删除已经加入 git 仓库的文件
 
-## 13. 参考来源
+**情况描述**：
+
+* 早期创建 git 仓库时，add 了文件
+* 后续，在 `.gitignore` 文件中，忽略了当前文件
+* 但，后续变更时，`git diff` 仍然能看到当前文件的变更
+
+**焦点**：
+
+> 如何忽略已经加入 git 仓库的文件？
+
+**解决办法**：
+
+```
+git rm --cached abacus-check-report.iml
+
+git commit -m "fix: 从原始版本中,删除 IDEA 的 iml 文件"
+
+git push origin release/1.1.x 
+```
+
+补充信息：git rm 和 git rm --cached 区别：
+
+
+`git rm`: 当我们需要删除暂存区或分支上的文件，同时工作区 '不需要' 这个文件，可以使用 'git rm'
+
+* git rm file
+* git commit -m 'delete file'
+* git push
+ 
+`git rm --cached`：当我们需要删除暂存区或分支上的文件，但是本地 '需要' 这个文件，只是 '不希望加入版本控制'，可以使用 'git rm --cached'
+
+* git rm --cached file
+* git commit -m 'delete remote file'
+* git push
+
+更多细节，参考：[git忽略已加入到版本库的文件](https://blog.csdn.net/beyond__devil/article/details/78929924)
+
+
+## 14. 参考来源
 
 * [git - 简明指南]
 * [图解Git]
