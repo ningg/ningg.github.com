@@ -46,7 +46,7 @@ category: blog
 
 刚刚看到的腾讯发家史，值得年轻人看看：
 
-* [马化腾讲述自己的成长史、创业史](https://baijiahao.baidu.com/po/feed/share?wfr=spider&for=pc&context=%7B%22sourceFrom%22%3A%22bjh%22%2C%22nid%22%3A%22news_3221323382367554603%22%7D)
+* [马化腾讲述自己的成长史、创业史](https://news.pedaily.cn/201611/20161116405461.shtml)
 
 
 
