@@ -26,6 +26,8 @@ category: 科技历史
 
 > Note：我不是从下面汇总思考的，如果涉及版权，大家请勿用于商业目的。
 
+读者有兴趣，可参考视频：
+
 <iframe src="//player.bilibili.com/player.html?aid=21748060&cid=35839772&page=1" scrolling="no" border="0" frameborder="no" framespacing="0" allowfullscreen="true"> </iframe>
 
 
