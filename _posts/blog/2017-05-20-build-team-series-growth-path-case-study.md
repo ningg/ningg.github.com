@@ -56,6 +56,8 @@ category: 团队
 	* 问题处理：CaseStudy，问题排查
 	* 讨论分享：别人经验借鉴
 
+![](/images/build-team-series/growth-path-time-and-site.png)
+
 ### 2.2. 如何进行 CaseStudy
 
 几个方面：
