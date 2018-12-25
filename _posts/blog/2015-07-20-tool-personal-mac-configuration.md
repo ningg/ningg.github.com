@@ -357,6 +357,8 @@ brew cask install adobe-air
 
 ### 5.5. EditThisCookie
 
+编辑、清理 cookie。
+
 直接在 chrome 的网上应用商店中，添加「EditThisCookie」
 
 ### 5.6. MindNode
@@ -374,6 +376,13 @@ brew cask install adobe-air
 
 * OmniGraffle Pro：在 Mac 下，用户比较多，准备试一下。
 * [http://xclient.info/](http://xclient.info/) 可以下载学习一下，如果流畅，请在 App Store 购买.
+
+### 5.8 FireShot：滚动截屏
+
+FireShot，Chrome 浏览器滚动截屏。
+
+直接在 chrome 的网上应用商店中，添加「FireShot」
+
 
 ## 6. 附录
 

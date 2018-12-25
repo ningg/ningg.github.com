@@ -242,7 +242,7 @@ Tips：
 
 ![](/images/build-team-series/high-output-management/online-check.png)
 
-几个尝试：
+几个常识：
 
 1. 无法评估次品，会造成什么损害时，则，不该以客户对我们的信赖为赌注。
 2. 人有惰性，需制定明确的检查计划，此能增进效率及提高产能。
