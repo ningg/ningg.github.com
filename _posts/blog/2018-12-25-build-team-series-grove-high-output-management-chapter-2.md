@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 格鲁夫第一课：打好团体战
-description: 
+description: 管理的最终目标是什么？管理活动有几类，都是什么作用？杠杆率，又是什么？如何高效的开会，会议又有哪些类别，目标是什么？
 published: true
 category: 团队
 ---
