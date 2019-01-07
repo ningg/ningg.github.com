@@ -55,6 +55,10 @@ category: mysql
 10. char、varchar 
 	1. char：定长，最后`空格`补齐
 	2. varchar：变长，开头一个字节，记录字符长度，实际存储空间是：字符长度 + 1
+11. 唯一性索引
+	1. 唯一性索引，是如何实现的
+	2. null 字段，是否可以作 unique key
+
 
 ## 典型问题剖析
 
@@ -274,6 +278,32 @@ MySQL 中日期类型字段有：
 因此，日期字段，创建索引时，要特别注意 SQL 优化。
 
 更多索引使用情况，参考：[如何提高查询速度](http://www.cnblogs.com/luxf/archive/2012/02/08/2343345.html)
+
+### 实践：唯一性索引
+
+关于 MySQL 中的唯一性索引，2 个典型疑问：
+
+1. 实现机制：唯一性索引，是如何实现的？
+2. null 字段：是否可以作为唯一性索引？
+
+唯一性索引，实现机制：
+
+* 本质都是 B+Tree，只是节点增加额外标记，不允许重复.
+
+
+null 字段：唯一性索引，是允许多个 null 值存在的。
+
+* null 值：null 表示不确定的语义，表示任意值，null 值之间，不相等，但可以作为判断条件
+* 存储引擎：所有的存储引擎，唯一性索引，都允许多 null 值存在。
+
+
+![](images/mysql-best-practice/mysql_index_null_constraint.png)
+
+
+更多细节，参考：
+
+* [MySQL 唯一性约束与 NULL](https://yemengying.com/2017/05/18/mysql-unique-key-null/)
+
 
 ## 参考资料
 
