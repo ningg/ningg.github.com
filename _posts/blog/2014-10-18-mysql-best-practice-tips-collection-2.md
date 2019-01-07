@@ -296,8 +296,9 @@ null 字段：唯一性索引，是允许多个 null 值存在的。
 * null 值：null 表示不确定的语义，表示任意值，null 值之间，不相等，但可以作为判断条件
 * 存储引擎：所有的存储引擎，唯一性索引，都允许多 null 值存在。
 
+具体说明：
 
-![](images/mysql-best-practice/mysql_index_null_constraint.png)
+![](/images/mysql-best-practice/mysql_index_null_constraint.png)
 
 
 更多细节，参考：
