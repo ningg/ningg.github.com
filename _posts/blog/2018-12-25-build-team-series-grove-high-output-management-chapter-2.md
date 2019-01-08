@@ -598,9 +598,9 @@ Tips：
 > 
 > 经理人，在会议中的最主要角色，是`协调者`，负责**聚焦主题**、**控制会议的进度**和**化解纠纷**。
 
-TODO：
+一个示意图：上司在部门会议中的角色，会议的理想状态：
 
-* 一个示意图：上司在部门会议中的角色，会议的理想状态
+![](/images/build-team-series/high-output-management/location-of-manager-in-conference.png)
 
 
 #### 2.1.3. 运营总结会议
@@ -719,9 +719,9 @@ Tips:
 2. 清楚的决策：根据信息，依赖可信的逻辑，做出清晰的决策
 3. 全力执行：基于上一步中的决策，全力执行，确保达到目标
 
-TODO：
+上面 3 个阶段：
 
-* 补充一张截图，上面 3 个阶段。
+![](/images/build-team-series/high-output-management/ideal-decision-progress.png)
 
 Tips:
 
@@ -906,9 +906,7 @@ Tips：规划行动方案之前，一定要先问自己：
 2. 为你们提供服务的对象
 3. 你的竞争者：公司内 or 公司外
 
-TODO： 
-
-* 补充一个示意图
+![](/images/build-team-series/high-output-management/define-external-env.png)
 
 
 要点：
