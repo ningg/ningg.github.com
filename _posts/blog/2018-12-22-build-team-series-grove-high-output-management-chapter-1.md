@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 格鲁夫第一课：早餐店的生产线
+title: 格鲁夫第一课：Chapter 1-早餐店的生产线
 description: 生产经营，掌控全局，要把握哪些要点？单次产品生产、规模化生产，有什么关联和差异？
 published: true
 category: 团队
