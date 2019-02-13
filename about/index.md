@@ -57,7 +57,6 @@ layout: about
 需整理：
 
 * [从 MQ 说到 Kafka](http://ningg.top/category/#kafka-ref) ：预期增加新的管理工具
-* [实验平台架构原理](http://ningg.top/category/#experiment-ref) ：预期增加日志抽样等内容
 * 项目管理：识别项目管理要点，提升项目交付质量
 * 团队建设：识人、招人的通用模式
 * 技术规划：考量因素和要点
