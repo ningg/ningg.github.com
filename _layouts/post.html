@@ -42,10 +42,10 @@ layout: defaultWithComment
                     {% assign pages_list = category[1] %}
                     {% for node in pages_list %}
                         {% if node.title != null %}
-                            {% if page.url == node.url %}
+                            {% if page.title == node.title %}
                                 <li class="active"><a href="{{node.url}}" class="active">{{node.title}}</a></li>
                             {% else %}
-                                <li><a href="{{node.url}}">{{node.title}}</a></li>
+                                <li><a href="{{node.url}}" target="_blank">{{node.title}}</a></li>
                             {% endif %}
                         {% endif %}
                     {% endfor %}
