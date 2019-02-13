@@ -3,3 +3,6 @@ _site/*
 
 # IDEA
 .idea/**
+
+# jekyll
+.jekyll-metadata

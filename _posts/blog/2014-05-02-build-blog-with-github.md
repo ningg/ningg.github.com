@@ -168,6 +168,45 @@ src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorM
 ![github-social-coding](/images/build-blog-with-github/github-social-coding.png)
 
 
+### 4.5MacPro 上搭建开发环境
+
+参考 [Blogging with Jekyll](http://jekyllrb.com/docs/quickstart/), 详细细节:
+
+```
+# 1.安装最新版 ruby
+$ brew install ruby
+
+# 2.安装 bundle 和 jekyll
+$ gem install --user-install bundler
+
+$ gem install --user-install jekyll
+
+# 3. 退出 iterm 终端, 重新打开, 并安装 bundle
+$ bundle install
+
+Could not locate Gemfile
+
+$ vim Gemfile
+source 'https://rubygems.org'
+gem 'github-pages', group: :jekyll_plugins
+
+$ bundle install
+
+
+# 4. 前往 jekyll blog 的目录下
+$ cd /Users/guoning/ningg/github/ningg.github.com
+
+# 5. 启动 jekyll 服务
+$ bundle exec jekyll serve
+
+# 下述方式, 只处理增量变更
+$ bundle exec jekyll serve --incremental
+
+# 6. 浏览器访问效果
+http://127.0.0.1:4000
+```
+
+
 [CSDN]:		http://www.csdn.net/		"CSDN"
 [javaEye]:	http://www.iteye.com/		"javaEye(现在更名为ITeye)"
 [OSCHINA]:	http://www.oschina.net/		"OSCHINA"

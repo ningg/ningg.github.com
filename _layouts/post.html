@@ -28,9 +28,32 @@ layout: defaultWithComment
         </div>
     </div>
 
-	
-    <div class="sidenav">
-		<iframe width="100%" height="75" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=0&isFans=0&uid=2356527183&verifier=1ccfb61e&colors=d6f3f7,ffffff,666666,0082cb,ecfbfd&dpc=1"></iframe>
+    <div id="sidenav-id" class="sidenav">
+        <iframe width="100%" height="75" class="share_self"  frameborder="0" scrolling="no" src="http://widget.weibo.com/weiboshow/index.php?language=&width=0&height=550&fansRow=2&ptype=1&speed=0&skin=1&isTitle=0&noborder=0&isWeibo=0&isFans=0&uid=2356527183&verifier=1ccfb61e&colors=d6f3f7,ffffff,666666,0082cb,ecfbfd&dpc=1"></iframe>
+    </div>
+
+    <div class="related-post">
+        <h3>同类文章:</h3>
+        {% assign curr_page_category_list = page.categories %}
+        {% for category in site.categories %}
+            {% if category[0] == curr_page_category_list[0] %}
+
+                <ul>
+                    {% assign pages_list = category[1] %}
+                    {% for node in pages_list %}
+                        {% if node.title != null %}
+                            {% if page.url == node.url %}
+                                <li class="active"><a href="{{node.url}}" class="active">{{node.title}}</a></li>
+                            {% else %}
+                                <li><a href="{{node.url}}">{{node.title}}</a></li>
+                            {% endif %}
+                        {% endif %}
+                    {% endfor %}
+                    {% assign pages_list = nil %}
+                </ul>
+
+            {% endif %}
+        {% endfor %}
     </div>
 
 </div>

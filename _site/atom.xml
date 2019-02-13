@@ -2,10 +2,10 @@
 <feed xmlns="http://www.w3.org/2005/Atom">
  
    <title>ningg.top</title>
-   <link href="http://ningg.top" rel="self" type="application/atom+xml"/>
-   <link href="http://ningg.top" rel="alternate" type="text/html" />
-   <updated>2015-06-15T19:35:07+08:00</updated>
-   <id>http://ningg.top</id>
+   <link href="http://localhost:4000" rel="self" type="application/atom+xml"/>
+   <link href="http://localhost:4000" rel="alternate" type="text/html" />
+   <updated>2019-02-14T01:35:29+08:00</updated>
+   <id>http://localhost:4000</id>
    <author>
      <name></name>
      <email></email>
@@ -13,385 +13,4239 @@
 
    
    <entry>
-     <title>Flume 1.6.0 梳理</title>
-     <link href="http://ningg.github.com/flume-1-6-0-summary"/>
-     <updated>2015-06-15T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/flume-1-6-0-summary</id>
-     <content type="html">&lt;p&gt;几点：&lt;/p&gt;
+     <title>科技历史系列：干嘉伟，世界观、方法论、解决问题实践</title>
+     <link href="http://ningg.github.com/tech-history-ganjiawei-world-view-and-methodology/"/>
+     <updated>2019-02-04T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/tech-history-ganjiawei-world-view-and-methodology</id>
+     <content type="html">&lt;p&gt;写在开头:&lt;/p&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;Flume涉及的概念：
-    &lt;ul&gt;
-      &lt;li&gt;内部结构&lt;/li&gt;
-      &lt;li&gt;相关术语&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;Flume的可靠性&lt;/li&gt;
-  &lt;li&gt;Flume 1.6.0的新特性&lt;/li&gt;
-  &lt;li&gt;搭建Flume插件定制环境&lt;/li&gt;
-  &lt;li&gt;整理GitHub上定制的SpoolDirTailFileSource
-    &lt;ul&gt;
-      &lt;li&gt;更新代码&lt;/li&gt;
-      &lt;li&gt;更新README&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-&lt;/ul&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;最近闲暇时间, 专注查阅学习了阿干老师的一些理念, 并整理了一篇其在运营领域的见解和操作实践(&lt;a href=&quot;http://ningg.top/tech-history-ganjiawei-how-to-manage-a-tech-company/&quot;&gt;科技历史系列：干嘉伟，如何运营一家科技企业
+&lt;/a&gt;)。&lt;/p&gt;
 
-&lt;h2 id=&quot;section&quot;&gt;参考来源&lt;/h2&gt;
+  &lt;p&gt;学习整理期间, 多次被细节中体现出的价值观、判断力、领导力等, 所折服。&lt;/p&gt;
 
-</content>
-   </entry>
-   
-   <entry>
-     <title>WordPress的开发调试环境</title>
-     <link href="http://ningg.github.com/wordpress-debug-env"/>
-     <updated>2014-09-05T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/wordpress-debug-env</id>
-     <content type="html">&lt;h2 id=&quot;section&quot;&gt;背景&lt;/h2&gt;
+  &lt;p&gt;按耐不住喜悦, 再整理一下阿干老师的世界观、基础方法论。&lt;/p&gt;
 
-&lt;p&gt;用WordPress建站，两个功能：一个是展示团队工作，另一个是方便其他人进来讨论。&lt;/p&gt;
+  &lt;p&gt;Note：当前文章，基本转载自 &lt;a href=&quot;https://www.lieyunwang.com/archives/448573&quot;&gt;美团干嘉伟：每天前进30公里，才是跟上行业第1的科学节奏&lt;/a&gt;，做了稍许调整。&lt;/p&gt;
+&lt;/blockquote&gt;
 
-&lt;p&gt;初步立意：使用WordPress搭建两个网站，团队工作展示一个，讨论区一个；&lt;/p&gt;
+&lt;h2 id=&quot;1世界观&quot;&gt;1.世界观&lt;/h2&gt;
 
-&lt;h2 id=&quot;section-1&quot;&gt;组件与安装&lt;/h2&gt;
+&lt;h3 id=&quot;11科学经验主义机会主义&quot;&gt;1.1.科学、经验主义、机会主义&lt;/h3&gt;
 
-&lt;p&gt;环境：Win 7，已经安装了JDK 6 和 JDK 7&lt;/p&gt;
+&lt;p&gt;离开一线后，我接触了很多传统企业，医疗、教育行业都在转型做互联网医疗、教育，跟真正意义上的互联网企业最大的差异在于，他们的世界观里，充斥着经验主义和机会主义。&lt;/p&gt;
 
-&lt;p&gt;下载软件清单如下：&lt;/p&gt;
+&lt;p&gt;这类企业&lt;strong&gt;缺少科学理解一件事的方法&lt;/strong&gt;，他们&lt;strong&gt;遇到事情的时候会抖机灵&lt;/strong&gt;，&lt;strong&gt;拍拍脑袋&lt;/strong&gt;就感觉自己创新了。其实，我们应该保持一种心态：&lt;strong&gt;你我不是这世上最聪明、勤奋的，也不是第一个做这件事的人&lt;/strong&gt;。&lt;/p&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;下载XAMPP：&lt;a href=&quot;https://www.apachefriends.org/zh_cn/index.html&quot;&gt;https://www.apachefriends.org/zh_cn/index.html&lt;/a&gt; 版本：1.8.3；对应PHP: 5.5.1&lt;/li&gt;
-  &lt;li&gt;下载eclipse for php：&lt;a href=&quot;http://www.eclipse.org/downloads/&quot;&gt;http://www.eclipse.org/downloads/&lt;/a&gt;  版本：eclipse-php-luna-R-win32-x86_64&lt;/li&gt;
-  &lt;li&gt;下载wordpress：&lt;a href=&quot;http://cn.wordpress.org/&quot;&gt;http://cn.wordpress.org/&lt;/a&gt; 版本：3.9&lt;/li&gt;
-  &lt;li&gt;下载主题：
-    &lt;ol&gt;
-      &lt;li&gt;hum：&lt;a href=&quot;http://wordpress.org/extend/themes/hum/&quot;&gt;http://wordpress.org/extend/themes/hum/&lt;/a&gt; 版本：0.2.1&lt;/li&gt;
-      &lt;li&gt;twenty eleven：&lt;a href=&quot;http://wordpress.org/themes/twentyeleven&quot;&gt;http://wordpress.org/themes/twentyeleven&lt;/a&gt; 版本：1.9&lt;/li&gt;
-    &lt;/ol&gt;
-  &lt;/li&gt;
-  &lt;li&gt;下载JDK：&lt;a href=&quot;http://www.oracle.com/technetwork/java/javase/downloads/index.html&quot;&gt;Oracle JDK(Sun)&lt;/a&gt; 版本：JDK 7u67&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;有一篇叫阿里云的文章，说的是阿里如何在那么不确定的情况下去做云计算？但其实阿里云干的事情有亚马逊作为先例的，甚至包括做电商、新零售Amazon Go。&lt;/p&gt;
 
-&lt;p&gt;依次安装：&lt;/p&gt;
+&lt;p&gt;所以在遇见困难的时候，&lt;strong&gt;知道怎么去学习&lt;/strong&gt;，&lt;strong&gt;好过你凭有限的经验做决策&lt;/strong&gt;，因为大多数人对于基本的常识是不清楚的，都是基于一些不清晰的常识在讨论问题，建立基本的思考框架很重要。&lt;/p&gt;
+
+&lt;p&gt;我深度参与了中国第一、第四的互联网公司，见证了在中国过去这些年里，互联网对其他企业的碾压，他们几乎没有招架之力。&lt;/p&gt;
+
+&lt;p&gt;其中最大的一个原因是，&lt;strong&gt;互联网&lt;/strong&gt;基本上都是在用&lt;code class=&quot;highlighter-rouge&quot;&gt;科学运营企业&lt;/code&gt;的方法在做，跟国外最新的&lt;strong&gt;经营&lt;/strong&gt;、&lt;strong&gt;管理&lt;/strong&gt;理念直接对接的。另外一个原因是，&lt;strong&gt;政府管制最少&lt;/strong&gt;，因为政府也不知道怎么管。&lt;/p&gt;
+
+&lt;p&gt;Tips：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;我们应该保持一种心态：你我不是这世上最聪明、勤奋的，也不是第一个做这件事的人。&lt;/p&gt;
+
+  &lt;p&gt;遇见困难的时候，知道怎么去学习，好过你凭有限的经验做决策。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;12长期价值短期利益&quot;&gt;1.2.长期价值、短期利益&lt;/h3&gt;
+
+&lt;p&gt;最近美团上市，很多人问我能不能买？从短期来说，我没有答案。目前美团400亿美元，长期来看，过千亿是非常大概率的事，甚至从某种程度来看，它比阿里的市场还要好。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;企业的有限性&lt;/strong&gt;体现在核心管理层的精力，钱可以融、但&lt;code class=&quot;highlighter-rouge&quot;&gt;时间是没法融&lt;/code&gt;的，那段时间现金流困难，也不知道资本市场什么时候会给投钱，有些公司就开始做一些短期流量变现的事情，沿途看见什么就捡什么，走到最后走不动了，长期下来损害了&lt;code class=&quot;highlighter-rouge&quot;&gt;核心价值&lt;/code&gt;。&lt;/p&gt;
+
+&lt;h3 id=&quot;13价值创造利益分配&quot;&gt;1.3.价值创造、利益分配&lt;/h3&gt;
+
+&lt;p&gt;我碰到过很多CEO在考虑问题时，都脱离了第一性原理，从来没考虑过&lt;strong&gt;最终的价值&lt;/strong&gt;由&lt;code class=&quot;highlighter-rouge&quot;&gt;谁来创造&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;创造了多少&lt;/code&gt;，都觉得找到一个机会轻轻松松就能成了，企业就能经营好了，这是个很危险的想法，好的企业都是死干、活干、巧干、狠干，加点运气，才能做成的。&lt;/p&gt;
+
+&lt;p&gt;更多细节，参考：&lt;a href=&quot;https://www.iyiou.com/p/12960.html&quot;&gt;美团COO干嘉伟：我是这么看美团和王兴的！&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;Tips：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;觉得&lt;code class=&quot;highlighter-rouge&quot;&gt;找到一个机会&lt;/code&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;轻轻松松&lt;/code&gt;就能成了，企业就能经营好了，这是个&lt;code class=&quot;highlighter-rouge&quot;&gt;很危险的想法&lt;/code&gt;。&lt;/p&gt;
+
+  &lt;p&gt;好的企业，都是&lt;strong&gt;死干、活干、巧干、狠干&lt;/strong&gt;，&lt;strong&gt;加点运气&lt;/strong&gt;，才能做成的。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;2大方法论&quot;&gt;2.大方法论&lt;/h2&gt;
+
+&lt;h3 id=&quot;21c端b端第一性原理&quot;&gt;2.1.C端—B端，第一性原理&lt;/h3&gt;
+
+&lt;p&gt;最先起来的三大门户，提供信息都是非常标准的。但慢慢地，供给越来越不标准化，原来要受空间时间的限制。而现在随时随地就能联网，用户的在线时长陡然增长，伴随着C端的应用流量移动化，流量的价值是首先容易体现出来的。&lt;/p&gt;
+
+&lt;p&gt;所谓互联网下半场，简单来说就是收割流量的机会越来越稀少了，这个时候，应该往&lt;strong&gt;供给端&lt;/strong&gt;走，这端的机会是永远存在的，因为永远要有人来生产。&lt;/p&gt;
+
+&lt;p&gt;国家现在也在讲供给侧改革，因为简单地靠圈流量挣钱行不通了，但我们可以基于现有的关系、数据基础设施，嫁接在阿里京东上面，往供给侧走，把供给侧做好，这会是个更好的商业模式，成功概率会更高。&lt;/p&gt;
+
+&lt;h3 id=&quot;22战略定力&quot;&gt;2.2.战略定力&lt;/h3&gt;
+
+&lt;p&gt;结合在阿里和美团的成功，我总结出：&lt;strong&gt;战略定力非常重要&lt;/strong&gt;。从我接触到的很多企业来讲，大多企业创始人特别缺乏对战略的深度思考。比如：&lt;/p&gt;
 
 &lt;ol&gt;
-  &lt;li&gt;XAMPP：WordPress的运行环境&lt;/li&gt;
-  &lt;li&gt;wordpress，并为其配置主题：
-    &lt;ul&gt;
-      &lt;li&gt;twenty eleven&lt;/li&gt;
-      &lt;li&gt;hum&lt;/li&gt;
-    &lt;/ul&gt;
-  &lt;/li&gt;
-  &lt;li&gt;eclipse：将整个wordpress文件夹，新建为PHP Project；&lt;/li&gt;
+  &lt;li&gt;这是不是一个机会？&lt;/li&gt;
+  &lt;li&gt;这件事能不能成？&lt;/li&gt;
+  &lt;li&gt;从逻辑上来讲，它创造了什么机会？&lt;/li&gt;
 &lt;/ol&gt;
 
-&lt;h2 id=&quot;section-2&quot;&gt;配置&lt;/h2&gt;
+&lt;p&gt;很多人看不到，他们所想要干的事情，要么是机会本身就是不存在的，或者机会存在、但不是他们的机会。其实如果能清晰回答这几个战略上的问题，他们就能进一步往下探索。&lt;/p&gt;
 
-&lt;p&gt;设计搭建其调试环境所需要的基本配置。&lt;/p&gt;
+&lt;p&gt;因为对&lt;strong&gt;战略思考的质量&lt;/strong&gt;不够、他们没发现有些仗不用打，也是没机会的。&lt;/p&gt;
 
-&lt;h3 id=&quot;section-3&quot;&gt;基本配置&lt;/h3&gt;
+&lt;p&gt;好的战略方向，做到60分的战略执行，就会有不错的收获；大多数企业问题还是在战略层，还有部分企业战略OK，但执行有问题。&lt;/p&gt;
 
-&lt;p&gt;主要是Apache、MySQL、PHP相关：&lt;/p&gt;
+&lt;p&gt;Tips：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;对战略思考的质量不够、他们没发现有些仗不用打。&lt;/p&gt;
+
+  &lt;p&gt;好的战略方向，做到60分的战略执行，就会有不错的收获。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;23对标执行&quot;&gt;2.3.对标执行&lt;/h3&gt;
+
+&lt;p&gt;讲到执行这块，最重要的还是&lt;strong&gt;对标学习的对象&lt;/strong&gt;，既然你不是最聪明、最勤奋的，那你就去参考别人是如何做的。因为太阳底下没有新鲜事，凡事一定有先例，能找到最优的方法论。&lt;/p&gt;
+
+&lt;p&gt;一家互联网创业公司，一开始运营时就要对标行业内的最高水平。美团刚刚起步之时，市场上的团购公司不胜枚举，为了使美团能够迅速成长起来，美团将目光和格局对标至当时已经风生水起的大众点评，后期经过千团大战，美团不仅仅活了下来，并且能够和大众点评平分秋色。&lt;/p&gt;
+
+&lt;p&gt;所以说选择对手很重要，对于互联网带动下创业形势，需要迅速反应，只有跟上行业NO.1的节奏，才有可能摆脱赢家通吃的噩梦。&lt;/p&gt;
+
+&lt;p&gt;Tips：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;讲到执行这块，最重要的还是对标学习的对象。&lt;/p&gt;
+
+  &lt;p&gt;既然你不是最聪明、最勤奋的，那你就去参考别人是如何做的。&lt;/p&gt;
+
+  &lt;p&gt;因为太阳底下没有新鲜事，凡事一定有先例，能找到最优的方法论。&lt;/p&gt;
+
+  &lt;p&gt;选择对手很重要，对于互联网带动下创业形势，&lt;code class=&quot;highlighter-rouge&quot;&gt;需要迅速反应&lt;/code&gt;，只有跟上行业NO.1的节奏，才有可能摆脱赢家通吃的噩梦。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;3小方法论&quot;&gt;3.小方法论&lt;/h2&gt;
+
+&lt;h3 id=&quot;31定义优秀复制放大&quot;&gt;3.1.定义优秀，复制放大&lt;/h3&gt;
+
+&lt;p&gt;刚入美团，为了尽快取得可持续、有机的增长，&lt;strong&gt;我问了各种各样的人&lt;/strong&gt;：&lt;strong&gt;销冠是什么样的&lt;/strong&gt;？总结出&lt;code class=&quot;highlighter-rouge&quot;&gt;可复制&lt;/code&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;可持续&lt;/code&gt;的销冠特征。&lt;/p&gt;
+
+&lt;p&gt;比较常见的回答：销售要有比较好的消费感，比如四菜一汤、情侣餐的搭配，卖爆了才能销冠，但这种是难以复制的。&lt;/p&gt;
+
+&lt;p&gt;最后我们发现，业绩的好坏跟供给数量呈高度相关关系，也就是说，跟”去5公里以外吃一个特优的套餐“相比，选择“去500米的地方吃一个次优的套餐“的客户明显要多，所以我要想把业绩做好就很明确了，要尽可能多地获取供给。&lt;/p&gt;
+
+&lt;p&gt;最后定义出来的销冠是：勤奋、愿意跑、有一定学习能力，可以标准化地上很多产品套餐。后来为了提高效率，我砍掉了一些岗位，把从签合同、到供给上线的一系列流程，从一开始的7天，缩短到10分钟。&lt;/p&gt;
+
+&lt;p&gt;我要解决的是：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;美团的1万多人都能最大化发挥他们的生产力&lt;/li&gt;
+  &lt;li&gt;而不是一个城市的业务经理不好业绩就差、经理好业绩就好。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;所以对营销管理而言，大部分是出在&lt;strong&gt;定义错了优秀&lt;/strong&gt;，把不那么&lt;code class=&quot;highlighter-rouge&quot;&gt;可持续&lt;/code&gt;的、&lt;code class=&quot;highlighter-rouge&quot;&gt;复制&lt;/code&gt;的&lt;strong&gt;投机取巧&lt;/strong&gt;定义为了优秀，&lt;strong&gt;鼓励了难以复制、甚至是不该鼓励的事情&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;h3 id=&quot;32每天前进30公里&quot;&gt;3.2.每天前进30公里&lt;/h3&gt;
+
+&lt;p&gt;日常管理运营，大家都在找诀窍，找让功力短时间大增的法门，但&lt;strong&gt;实际上捷径很难持续地拿到结果的&lt;/strong&gt;。举一个南极探险的例子：&lt;/p&gt;
+
+&lt;p&gt;1911年，南极还是一个人类未曾开拓过的未知领域，这就好比很多创业者目前所看到的未来。那时有两个竞争团队，一个是来自挪威的阿蒙森5人团队，另一个是斯科特的17人团队，两者都是从北欧出发驶向南极。&lt;/p&gt;
+
+&lt;p&gt;这两个团队接触的是同样的信息、面对的是同一个机会、并且是在几乎同一个时间点出发，这同样类似于当前的商业竞争环境。&lt;/p&gt;
+
+&lt;p&gt;最后，人数较少的阿蒙森团队，在2个多月后率先到达了南极点，并在21个月后，安全地返回了出发地点。&lt;/p&gt;
+
+&lt;p&gt;而人数较多的斯科特团队，不但延迟到达了南极点，而且最后无一生还，他们的尸体甚至在几年之后都没有找到。&lt;/p&gt;
+
+&lt;p&gt;为什么同样的目标、同样的环境，最后两者之间却有截然不同的结局？除了物资准备充分，使用适合的先进工具外，其中一个最重要的区别，是两种的不同策略。&lt;/p&gt;
+
+&lt;p&gt;斯科特队，天气差的时候索性不走，天气好的时候猛跑，狗马会出汗后很容易结冰，没有掌握好节奏、严格纪律，导致物资消耗很不均匀，最终斯科特团队在回来的路上，离大本营一天的路上，体力耗尽冻死在路上。&lt;/p&gt;
+
+&lt;p&gt;而阿蒙森队，有&lt;code class=&quot;highlighter-rouge&quot;&gt;明确的目标规划&lt;/code&gt;和&lt;code class=&quot;highlighter-rouge&quot;&gt;严格纪律&lt;/code&gt;，不会因为短期的顺利低估前方可能遇到的困难，也不会因为眼前的困难就怀疑前进的方向和速度。所以经营企业就是要每天前进30公里，保持科学的节奏。&lt;/p&gt;
+
+&lt;h3 id=&quot;33忽略个体差异好员工是培养出来的&quot;&gt;3.3.忽略个体差异，好员工是培养出来的&lt;/h3&gt;
+
+&lt;p&gt;学过管理的都知道一个概念：招一个好员工的收益远超招一个很一般的人。我觉得这个理论听起来有道理，但事实上，这在实际工作中并不是很实用。&lt;/p&gt;
+
+&lt;p&gt;首先，想在2个小时里里外外看透候选人的价值观、能力不太现实，通过面试把长期合适的人找出来是很难的。&lt;/p&gt;
+
+&lt;p&gt;所以要靠一个&lt;strong&gt;好的机制&lt;/strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;培养出&lt;/code&gt;优秀的员工：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;标准&lt;/strong&gt;：清晰定义“优秀”&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;赏罚&lt;/strong&gt;：设计好制度&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;管理&lt;/strong&gt;：基本管理做好&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;这样，&lt;strong&gt;员工就会成长，好的员工自己就会冒出来&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;h3 id=&quot;34虚事实做实事虚做&quot;&gt;3.4.虚事实做，实事虚做&lt;/h3&gt;
+
+&lt;p&gt;不少管理人员都很迷信价值观，会觉得阿里的价值观有效，想向阿里学习，其实这都是在把价值观当成掩饰他们管理不到位的工具，所以这种价值观是无效的。&lt;/p&gt;
+
+&lt;p&gt;培养机制的建立其实就是借假修真的一个过程，企业设计KPI、PK等等考核方式，只是一种手段，是一种假的表象，企业的真正的目的应该是通过一系列管理手段培养人才，这是真正的目的。通过假的表象手段&lt;strong&gt;激发员工的创造力、执行力&lt;/strong&gt;，&lt;strong&gt;传递有意义、有价值的信息&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;h2 id=&quot;4在美团做了5年的事情&quot;&gt;4.在美团做了5年的事情&lt;/h2&gt;
+
+&lt;h3 id=&quot;41abc四项基本原则&quot;&gt;4.1.ABC四项基本原则&lt;/h3&gt;
+
+&lt;p&gt;ABC 四项基本原则：基本理念和标准&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;设置MySQL的root密码，两种方式都可以：
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;人&lt;/code&gt;是美团最重要的资产，也是最重要的产品。&lt;/li&gt;
+  &lt;li&gt;管理者&lt;code class=&quot;highlighter-rouge&quot;&gt;用人&lt;/code&gt;，领导者&lt;code class=&quot;highlighter-rouge&quot;&gt;培养人&lt;/code&gt;，不轮岗不输出人才就没&lt;code class=&quot;highlighter-rouge&quot;&gt;机会&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;过程&lt;/code&gt;比&lt;code class=&quot;highlighter-rouge&quot;&gt;结果&lt;/code&gt;更重要&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;没有借口&lt;/code&gt;，过程和结果都要&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;企业最终成不成是取决于人，人是重要的资产，重点培养好人，事情自然就能做好； Manager跟Leader的区别，Manager能利用薪水，领导者能把平均水平下的人用好、并产生化学反应。&lt;/p&gt;
+
+&lt;p&gt;把最好的人用到最好的地方，在现实执行中会遇到很多困难，但只要&lt;code class=&quot;highlighter-rouge&quot;&gt;长期坚持&lt;/code&gt;才会看到它&lt;code class=&quot;highlighter-rouge&quot;&gt;累积&lt;/code&gt;的价值。&lt;/p&gt;
+
+&lt;h3 id=&quot;42efg直销管理抓手&quot;&gt;4.2.EFG直销管理抓手&lt;/h3&gt;
+
+&lt;p&gt;EFG 直销管理的落地措施：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;早启动，晚分享&lt;/strong&gt;：沟通、指导机制&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;saleskits&lt;/strong&gt;：技能工具分享&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;review&lt;/strong&gt;：复盘回顾&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;走访sop&lt;/strong&gt;：针对区域经理跟大区经理的紧箍咒，看哪些点都列出来，针对比如：员工状态、CRM的使用，给出建议，写一个长长的报告。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;43opq管理人员自我修养&quot;&gt;4.3.OPQ管理人员自我修养&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;三心&lt;/strong&gt;：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;不用上级说第二遍—&lt;strong&gt;省心&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;主动汇报工作进展—&lt;strong&gt;放心&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;乐于分享，帮助同事—&lt;strong&gt;开心&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;二禁&lt;/strong&gt;：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;严禁在下属面前流露出对上级和公司的&lt;code class=&quot;highlighter-rouge&quot;&gt;不满&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;表扬、激励下属时&lt;strong&gt;严禁过度承诺&lt;/strong&gt;；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;十二个字&lt;/strong&gt;：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;讲信用&lt;/li&gt;
+  &lt;li&gt;无官气&lt;/li&gt;
+  &lt;li&gt;有条理&lt;/li&gt;
+  &lt;li&gt;少大话&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;在阿里做区域经理的时候，我们就提倡要打造员工的“三心”理念：就是省心、放心、开心。上级布置工作，不用说第二遍，这叫省心；主动汇报工作进展，就是放心；主动分享、帮助同事，就是开心。&lt;/p&gt;
+
+&lt;p&gt;“二禁”是指，严禁在下属和同僚面前吐槽公司和上级；严禁过度承诺。吐槽或者抱怨上司、同事，会造成公司管理上的不稳定，说明公司的重点已经有所偏移，是不好的苗头。&lt;/p&gt;
+
+&lt;p&gt;管理层不能通过许诺的方式激励员工，未来的事谁也说不准，&lt;code class=&quot;highlighter-rouge&quot;&gt;过度许诺&lt;/code&gt;是管理人员&lt;strong&gt;对自己的身份不负责&lt;/strong&gt;、&lt;strong&gt;是对员工或者下属不负责&lt;/strong&gt;，&lt;strong&gt;如果许诺无法兑现&lt;/strong&gt;，&lt;strong&gt;就会背上不守信之名&lt;/strong&gt;，这就是言者无心、听者有意。&lt;/p&gt;
+
+&lt;h2 id=&quot;5参考资料&quot;&gt;5.参考资料&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.lieyunwang.com/archives/448573&quot;&gt;美团干嘉伟：每天前进30公里，才是跟上行业第1的科学节奏&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.iyiou.com/p/12960.html&quot;&gt;美团COO干嘉伟：我是这么看美团和王兴的！&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+   </entry>
+   
+   <entry>
+     <title>科技历史系列：干嘉伟，如何运营一家科技企业</title>
+     <link href="http://ningg.github.com/tech-history-ganjiawei-how-to-manage-a-tech-company/"/>
+     <updated>2019-01-31T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/tech-history-ganjiawei-how-to-manage-a-tech-company</id>
+     <content type="html">&lt;h2 id=&quot;0概要&quot;&gt;0.概要&lt;/h2&gt;
+
+&lt;p&gt;大概 3 年前，在管理学院，听阿干老师讲过组建团队，以及如何培养新人、制定决策，其中 2 个方面要点，让自己记忆最深：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;新人培养&lt;/strong&gt;：16 字，我做你看、我说你听、你做我看、你说我听&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;决策责任&lt;/strong&gt;：为结果负责的人，做决策；决策可能出错，但负责人为结果负责，后续复盘改进、沉淀积累即可，任何人都可能出错&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;自己在过去的 3 年多，都是以上述原则，进行实践、思考，受益很深。&lt;/p&gt;
+
+&lt;p&gt;阿干老师，在运营、产品、趋势判断等方面，都有很深厚的基础，为年轻人提供借鉴。当然，最核心的是他思考的逻辑、判断的逻辑。&lt;/p&gt;
+
+&lt;p&gt;为了从阿干老师处，学习、汲取更多经验，从下述几个方面入手：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;收集资料&lt;/strong&gt;：阿干老师，在内外分享的内容&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;系统思考&lt;/strong&gt;：
     &lt;ol&gt;
-      &lt;li&gt;CMD的命令行；&lt;/li&gt;
-      &lt;li&gt;myphpAdmin图形界面；&lt;/li&gt;
+      &lt;li&gt;针对每份资料，细细研读、整理&lt;/li&gt;
+      &lt;li&gt;融合贯通，整体思考阿干老师的建议和判断逻辑&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;积累沉淀&lt;/strong&gt;：从阿干老师的经验中，浓缩整理出自己可理解的建议，并在后续工作中，进行持续实践&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;1收集资料&quot;&gt;1.收集资料&lt;/h2&gt;
+
+&lt;p&gt;关于干嘉伟资料的收集：&lt;/p&gt;
+
+&lt;p&gt;运营管理：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;运营管理：如何科学运营一家企业 （高水平运营不只是做事，更是带人）&lt;/li&gt;
+  &lt;li&gt;文字：&lt;a href=&quot;https://mp.weixin.qq.com/s/aMzKFhHdxyp89Xi8tVc6oQ&quot;&gt;运营管理：如何科学运营一家企业(文字版)&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;视频：&lt;a href=&quot;https://www.bilibili.com/video/av21749257/&quot;&gt;运营管理：如何科学运营一家企业(视频版)&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;ppt：&lt;a href=&quot;https://alanhou.org/hundun-ganjiawei/&quot;&gt;运营管理：如何科学运营一家企业(原始 ppt)&lt;/a&gt; （自己也复原了一份）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;实践：业务和团队管理&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;实践：利用阿里管理文化，帮美团打造地推铁军&lt;/li&gt;
+  &lt;li&gt;文字：&lt;a href=&quot;https://www.chinaz.com/start/2014/0721/360344.shtml&quot;&gt;美团COO干嘉伟口述：我是如何帮美团打造出一支地推铁军？&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;世界观 &amp;amp; 方法论 &amp;amp; 实践心法&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;文字：&lt;a href=&quot;https://www.lieyunwang.com/archives/448573&quot;&gt;美团干嘉伟：每天前进30公里，才是跟上行业第1的科学节奏&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Note：太重要了，要单独整理&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;2系统思考&quot;&gt;2.系统思考&lt;/h2&gt;
+
+&lt;p&gt;整体，关于下述几件事情，在思考整理：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;如何运营一家企业？
+    &lt;ol&gt;
+      &lt;li&gt;运营：
+        &lt;ol&gt;
+          &lt;li&gt;运营，是什么？&lt;/li&gt;
+          &lt;li&gt;运营，常见问题&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+      &lt;li&gt;实践：美团的运营战和底层逻辑&lt;/li&gt;
+      &lt;li&gt;科学运营：
+        &lt;ol&gt;
+          &lt;li&gt;科学运营，是什么？&lt;/li&gt;
+          &lt;li&gt;如何，科学运营？&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;识人与做事&lt;/li&gt;
+  &lt;li&gt;实践：科学的管理文化，进行科学运营&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;21如何运营一家企业&quot;&gt;2.1.如何运营一家企业&lt;/h3&gt;
+
+&lt;p&gt;从 3 个大方面，来进行：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;运营：
+    &lt;ol&gt;
+      &lt;li&gt;运营，是什么&lt;/li&gt;
+      &lt;li&gt;运营，常见问题&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;实践：美团的运营战和底层逻辑&lt;/li&gt;
+  &lt;li&gt;科学运营：
+    &lt;ol&gt;
+      &lt;li&gt;科学运营，是什么&lt;/li&gt;
+      &lt;li&gt;如何，科学运营？&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;211运营&quot;&gt;2.1.1.运营&lt;/h4&gt;
+
+&lt;p&gt;两个方面：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;运营，是什么&lt;/li&gt;
+  &lt;li&gt;运营，常见问题&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h5 id=&quot;2111运营是什么&quot;&gt;2.1.1.1.运营，是什么？&lt;/h5&gt;
+
+&lt;p&gt;&lt;strong&gt;运营&lt;/strong&gt;：经营生意，对外经营、提供价值，获取收益.&lt;/p&gt;
+
+&lt;p&gt;战略 vs. 运营：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;战略&lt;/code&gt;：做正确的事
+    &lt;ol&gt;
+      &lt;li&gt;解决什么问题&lt;/li&gt;
+      &lt;li&gt;这件事的附加值，是什么&lt;/li&gt;
+      &lt;li&gt;壁垒，是什么&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;运营&lt;/code&gt;：正确的做事，把战略落地
+    &lt;ol&gt;
+      &lt;li&gt;设定目标&lt;/li&gt;
+      &lt;li&gt;组织架构&lt;/li&gt;
+      &lt;li&gt;运营管控&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;战略的&lt;strong&gt;公开性&lt;/strong&gt;和&lt;strong&gt;战略能力&lt;/strong&gt;：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;大家一定要明确，&lt;strong&gt;战略很重要&lt;/strong&gt;，&lt;strong&gt;指的是战略能力很重要&lt;/strong&gt;，&lt;strong&gt;而不是制定出来的某个战略&lt;/strong&gt;，因为战略本身是没有秘密的，你想做什么，只要别人不傻，最多几个月就想明白了。&lt;/p&gt;
+
+  &lt;p&gt;别指望靠一个idea、一个只有你看到而别人都没看到的机会去赢。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Tips：&lt;strong&gt;战略，不是核心竞争力，运营才是「核心竞争力」&lt;/strong&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;做企业，一定要&lt;strong&gt;抛弃一个幻想&lt;/strong&gt;：&lt;strong&gt;没有捷径&lt;/strong&gt;，&lt;strong&gt;只有合理的逻辑&lt;/strong&gt;&lt;/p&gt;
+
+  &lt;p&gt;&lt;strong&gt;幻象&lt;/strong&gt;：我找到一个机会，我特别聪明，或者我有资源认识了某些人，这个机会就是我的，我就成了。&lt;/p&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;短期来讲，这是个机会，但长期不成立。&lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;p&gt;&lt;strong&gt;本质&lt;/strong&gt;：价值和壁垒，&lt;strong&gt;长期&lt;/strong&gt;要看你在运营中&lt;strong&gt;创造了多大的价值&lt;/strong&gt;，有没有&lt;strong&gt;建立起壁垒&lt;/strong&gt;。&lt;/p&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;p&gt;价值大，但&lt;strong&gt;壁垒低&lt;/strong&gt;的话，别人一定也会进来。&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;企业核心的能力，做同样的事，你&lt;strong&gt;比别人做得更好&lt;/strong&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;strong&gt;运营&lt;/strong&gt;，是生存的&lt;code class=&quot;highlighter-rouge&quot;&gt;根本&lt;/code&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;h5 id=&quot;2112运营常见问题&quot;&gt;2.1.1.2.运营，常见问题&lt;/h5&gt;
+
+&lt;p&gt;&lt;strong&gt;警惕&lt;/strong&gt;：&lt;code class=&quot;highlighter-rouge&quot;&gt;运营退步&lt;/code&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;低端切入，逐步蚕食：
+    &lt;ol&gt;
+      &lt;li&gt;颠覆式创新里的颠覆者，大多是从低端市场开始切入，逐步蚕食。&lt;/li&gt;
+      &lt;li&gt;原来的领导者往往会说这是低端市场，不挣钱，我们不跟他们抢这么low的市场，我们专注于中高端。&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;思维惰怠，进取不足：
+    &lt;ol&gt;
+      &lt;li&gt;所有的企业，死之前都这样。&lt;/li&gt;
+      &lt;li&gt;说得好听一点是在战略升级，难听一点其实就是步步失守。&lt;/li&gt;
+      &lt;li&gt;因为守不住，只能“被升级”，其实很多时候升级和占住基础市场是不矛盾的。&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;切中要害：
+    &lt;ol&gt;
+      &lt;li&gt;所以，这一点很重要，你到底是在战略升级，还是在运营退步？&lt;/li&gt;
+      &lt;li&gt;如果是战略升级，要求有新的增长点，而且可量化&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;一个企业，&lt;strong&gt;时刻&lt;/strong&gt;要&lt;strong&gt;牢记&lt;/strong&gt;，&lt;code class=&quot;highlighter-rouge&quot;&gt;运营&lt;/code&gt;是&lt;code class=&quot;highlighter-rouge&quot;&gt;生存的根本&lt;/code&gt;。&lt;/p&gt;
+
+&lt;p&gt;了解了运营的意义，我和大家分享一下企业运营中最常见的6种问题。大家不妨对照一下自己的企业，做个健康体检。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;1.没有战略&lt;code class=&quot;highlighter-rouge&quot;&gt;路径分解&lt;/code&gt;，没有科学、清晰和准确的&lt;code class=&quot;highlighter-rouge&quot;&gt;目标&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;一个典型的例子是泰坦尼克。泰坦尼克建造于内燃机轮船高速发展的时代，那时它的战略是要成为横跨大西洋最快、最豪华的邮轮。&lt;/p&gt;
+
+&lt;p&gt;但在战略分解上，泰坦尼克出现了问题。它没有分解过为了达到这个目标，它每天要走多少海里。它的解决方案，就是夜里的海域上开足马力。&lt;/p&gt;
+
+&lt;p&gt;当时是冬天，欧洲北部很冷，冰山很多。等看到那块冰山的时候，它因为开得太快，想刹住已经来不及了。这个悲剧就是没有科学、清晰和准确的目标分解导致的。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;2.没用&lt;code class=&quot;highlighter-rouge&quot;&gt;科学手段&lt;/code&gt;和方法去&lt;code class=&quot;highlighter-rouge&quot;&gt;理解生意&lt;/code&gt;，做事情凭经验、拍脑袋&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;这在中国企业中非常常见，我可以说，绝大多数企业都是这样在做事情。思考和决策过程非常快，主要是靠经验主义，想当然，拍脑袋。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;3.&lt;code class=&quot;highlighter-rouge&quot;&gt; 组织架构&lt;/code&gt;不合理，用软件去解决硬件问题&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;很多企业，明明是硬件组织结构不合理，但却非要用管理的方法去弥补，整天开会。那些整天开会说要协同的企业，首先要检讨一下企业的组织结构是不是不合理。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;4.不关注各业务单元的价值和效率，&lt;code class=&quot;highlighter-rouge&quot;&gt;整体效率&lt;/code&gt;低下&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;很多企业会简单地把社会资源拉到企业内部来，比如设计的活多了，就成立一个设计部。但企业内部的需求是波动的、不稳定的，活多的时候忙不过来，活少的时候没事干，横竖效率都低。&lt;/p&gt;
+
+&lt;p&gt;很多企业经营出问题，最后的解决方法都是先把非核心部门砍掉，因为这个部门导致企业的整体效率低于社会水平，或者低于行业水平。&lt;/p&gt;
+
+&lt;p&gt;面多了加水，水多了加面，摊大饼一样地去发展企业，这也是企业非常常见的一个毛病。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;5.重消费端，轻供给侧，对经济&lt;code class=&quot;highlighter-rouge&quot;&gt;大周期&lt;/code&gt;缺乏认识&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;现在国家正在提供给端改革，企业们也开始提工匠精神。就是说，做同样的东西，你只有做得比别人效率更高，或者以同样的效率把东西做得更好，你才有生存的价值。&lt;/p&gt;
+
+&lt;p&gt;但现在一些企业，开始大搞互联网、电子商务、补贴消费者。我说他们是起大早赶晚集，该花钱抓C端需求爆发点的时候没看懂。现在好不容易回到供给端周期，是你擅长的生产，你又去盲目地搞C端，花钱砸市场。&lt;/p&gt;
+
+&lt;p&gt;所以这个节奏一定要踩准。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;6.没有掌握&lt;code class=&quot;highlighter-rouge&quot;&gt;科学的管理&lt;/code&gt;方法，凭本能和直觉带团队&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;我听到很多老板说，管理嘛就是靠喝酒，一顿大酒喝下去，什么都能搞定。他们甚至会说这顿酒喝得好不好，体现了这个团队有没有凝聚力，有没有战斗力。&lt;/p&gt;
+
+&lt;p&gt;喝酒重不重要？重要。可是光喝酒够不够？我认为是远远不够的。&lt;strong&gt;管理本身是科学，它是讲方法的&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;h4 id=&quot;212实践美团的运营战和底层逻辑&quot;&gt;2.1.2.实践：美团的运营战和底层逻辑&lt;/h4&gt;
+
+&lt;p&gt;我下面首先向大家系统介绍，美团在千团大战时期的几个经典运营案例。&lt;strong&gt;我们靠这套打法从“五千团大战”的红海市场中杀了出来，成为了市场中几乎唯一的幸存者。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;美团，扩张策略&lt;/li&gt;
+  &lt;li&gt;美团，补贴策略&lt;/li&gt;
+  &lt;li&gt;美团，盈利策略&lt;/li&gt;
+  &lt;li&gt;美团，数据跟踪策略&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h5 id=&quot;2121美团扩张策略&quot;&gt;2.1.2.1.美团，扩张策略&lt;/h5&gt;
+
+&lt;p&gt;2010到2011年间，美团杀入团购市场。当时我们的目标是做本地生活电商，因此必须要先搞明白如何在全国开站。&lt;/p&gt;
+
+&lt;p&gt;我们花了长达一年的时间，不断学习和理解，逐步建立起了正确的方法论。&lt;/p&gt;
+
+&lt;p&gt;团购市场是存在&lt;code class=&quot;highlighter-rouge&quot;&gt;规模效应&lt;/code&gt;和&lt;code class=&quot;highlighter-rouge&quot;&gt;网络效应&lt;/code&gt;的，所以像很多互联网领域那样，最终会形成&lt;code class=&quot;highlighter-rouge&quot;&gt;721的市场格局&lt;/code&gt;。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;第一名占70%的市场份额；&lt;/li&gt;
+  &lt;li&gt;第二名20%，苦苦增长；&lt;/li&gt;
+  &lt;li&gt;后面的10%，朝不保夕。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;美团的目标是成为那个7，我们要赢全国。可全国有350多个地级市（州），2800多个县（区），但公司资源有限，我们要怎么办？&lt;/p&gt;
+
+&lt;p&gt;我们把350多个地级市及以上的城市分成SABCD五级。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;S是北上广深这样的超级城市。&lt;/li&gt;
+  &lt;li&gt;AB级是各省省会，加上宁波、苏州这样的副省级。&lt;/li&gt;
+  &lt;li&gt;C和D是三四五线城市。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;S级城市是兵家必争之地，我们绝大多数竞争对手都在这里投入了最多的资金和资源，5000多家团购公司没有任何一家能取得绝对胜利。而哪家做不下去了，也一定到最后才关停这些城市的业务。所以，这个市场需要经历相当长的竞争周期。&lt;/p&gt;
+
+&lt;p&gt;在这些城市，&lt;strong&gt;我们的策略是咬住前三名，而不去砸钱争第一名&lt;/strong&gt;。一直到2012年中时，我们在全国的市场份额稳居第一了，但我们在S级城市还不是第一名，甚至到2013年都还不是。我们就保证有一口气挺在那里。&lt;/p&gt;
+
+&lt;p&gt;我们把&lt;strong&gt;资源集中在AB级城市&lt;/strong&gt;。我们用了半年时间，到2012年中的时候，在所有的AB城市都取得了毫无质疑的领先优势。我做一个北京的钱，可能能把西安、成都、重庆三个城市都做好。&lt;/p&gt;
+
+&lt;p&gt;这些AB级城市支撑着我们在北上广深打持久战和消耗战，直到把人家耗死。因为我有了市场份额，我就有正向现金流，我能挣钱。&lt;/p&gt;
+
+&lt;p&gt;而对大量CD级城市，我们的判断是，这5000多家团购公司绝大部分会在一年之内出现问题，并最终死掉。他们出问题时，肯定会先从这些市场退出。&lt;/p&gt;
+
+&lt;p&gt;美团的策略是，&lt;strong&gt;很多CD级城市我们先不进去，等别人出问题退出后，我们再去收割那些被培育过的市场&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;p&gt;Tips：&lt;strong&gt;扩张策略&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;终局判定&lt;/strong&gt;：最终，会是什么格局&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;区域划分&lt;/strong&gt;：供需的主要差异因素，区域上，进行划分&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;分级策略&lt;/strong&gt;：不同的地区，进行不同的策略，等待时机，一切有序发生&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;2122美团补贴策略&quot;&gt;2.1.2.2.美团，补贴策略&lt;/h5&gt;
+
+&lt;p&gt;美团是怎么理解补贴的呢？我们认为，&lt;strong&gt;花钱买来的流水是没有价值的&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;p&gt;当时大量团购公司补贴餐饮、电影票，换来了流水和交易额。但结果是，&lt;strong&gt;一旦不补贴，流水就没了&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;p&gt;实际上，&lt;strong&gt;供给端才是核心&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;p&gt;只有当你占领了好的供给，才能真正解决竞争的问题。因此我们关心的是，那些对消费者具有独特性的供给，美团有没有优势？&lt;/p&gt;
+
+&lt;p&gt;假设鸭血粉丝是一个南京人和游客都很热爱的小吃品类。&lt;/p&gt;
+
+&lt;p&gt;我们首先了解了，哪些鸭血粉丝汤是南京最好的，它就是&lt;strong&gt;攻占这个品类的制高点&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;p&gt;之后，我们研究它在团购网站上的销量。假如它在美团上卖50份，在另外两家一共卖100份，我们就会去跟这个老板谈，那100份我给你包了，我甚至承诺帮你卖得更多。&lt;strong&gt;只要你和我独家合作，我就满足你的销量&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;然后我们&lt;strong&gt;把补贴给到这家店的用户，通过补贴，实现承诺的销量&lt;/strong&gt;。这样用户要吃最好的鸭血粉丝汤，就只能来美团了。&lt;/p&gt;
+
+&lt;p&gt;总结一下，&lt;strong&gt;我们的竞争对手补贴是为了拿流水，我们补贴是为了拿供给的制高点&lt;/strong&gt;。美团花同样的钱，效果完全不同。C端补贴是扬汤止沸，相互捅刀子，供给端是釜底抽薪。&lt;/p&gt;
+
+&lt;p&gt;Tips：&lt;strong&gt;补贴策略&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;基本认知&lt;/strong&gt;：以钱买来的流水，没有价值；一旦不补贴，流水就没有了&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;把握本质&lt;/strong&gt;：供需两方，在整个业务场景中，最核心的因素是什么，把握头部商家，占领供给制高点&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;2123美团盈利策略&quot;&gt;2.1.2.3.美团，盈利策略&lt;/h5&gt;
+
+&lt;p&gt;&lt;strong&gt;2012年，我跟王兴商量把春节年会的主题定为”上岸”。就是要挣钱。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;一家公司要证明自己的业务有价值，就要有收入，否则只有两种可能：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;第一，学艺不精；&lt;/li&gt;
+  &lt;li&gt;第二，这件事不值得干。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;总之，你挣不到钱，就意味着社会不认可你的价值。&lt;/p&gt;
+
+&lt;p&gt;我们当时定了一个毛利率，假设要在全国获得4%的毛利吧。当时同行都在疯狂贴钱，我们这4%要怎么实现？&lt;/p&gt;
+
+&lt;p&gt;我们把市场分成了十几个行业，全国70多个城市，每个城市每个行业，都设定一个自己的毛利率。这个数值的设定和这个行业的特点、美团在这个城市的市场份额、这个行业在这个城市的市场份额都密切相关。我们最终在全国设了1000多个管理节点，在每个节点设计合理的毛利率。&lt;/p&gt;
+
+&lt;p&gt;在美团的管理系统里，每个销售员在录入合同时，首先要过毛利率审批这一关，没到达到要求就录不进去。&lt;/p&gt;
+
+&lt;p&gt;全国4%的毛利，就是这么拼出来的。&lt;strong&gt;2012年，全行业巨亏，但美团从11月开始实现了月度盈利。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;Tips：&lt;strong&gt;盈利策略&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;分级策略&lt;/strong&gt;：细化拆解，同类分级&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;2124美团数据跟踪策略&quot;&gt;2.1.2.4.美团，数据跟踪策略&lt;/h5&gt;
+
+&lt;p&gt;&lt;strong&gt;美团每天早晨9点的早会，是铁打的早会。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;每天早会，我们看什么呢？看大概25个日报数据。（Think：总共 25 个指标？）&lt;/p&gt;
+
+&lt;p&gt;大家先一起看数据情况，然后各个业务负责人解读数据。比如日比掉了1%，他就得解释为什么掉了。不过说实话，很多时候，这个数据是解释不了的。&lt;/p&gt;
+
+&lt;p&gt;那么，早会为什么这么重要？&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;我们经常讲&lt;strong&gt;互联网过的是狗年&lt;/strong&gt;。什么叫狗年？狗到了1岁相当于人老了7岁。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;在互联网这种高速发展的行业，拼的是大家的进化速度。&lt;/p&gt;
+
+&lt;p&gt;假如说竞争对手是一周开一次周会，那么&lt;strong&gt;我们每天看一遍数据，就意味着我们对业务的认识更深刻，我的反应速度和进化速度一定是超过对手的&lt;/strong&gt;。我们是在用正确的方法，以更高的频率进化。&lt;/p&gt;
+
+&lt;p&gt;所以，我们怎么样去理解一个生意，怎么样去制定目标，这是一个关乎企业生死的问题。&lt;/p&gt;
+
+&lt;p&gt;Tips：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;业务指标&lt;/strong&gt;：一批客观反映业务状况的指标，「核心指标」和「配对指标」，反映供给、需求、竞争力（服务质量）&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;严肃对待&lt;/strong&gt;：每个指标的变化，都要严肃的解读&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;高频同步&lt;/strong&gt;：每天晨会，高频、高效同步，提升紧迫感，加快进化&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h4 id=&quot;213科学运营&quot;&gt;2.1.3.科学运营&lt;/h4&gt;
+
+&lt;p&gt;关于「科学运营」，几个方面：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;科学运营，是什么？&lt;/li&gt;
+  &lt;li&gt;科学运营，如何做？&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h5 id=&quot;2131科学运营是什么&quot;&gt;2.1.3.1.科学运营，是什么&lt;/h5&gt;
+
+&lt;p&gt;科学运营：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;有&lt;code class=&quot;highlighter-rouge&quot;&gt;科学精神&lt;/code&gt;、勇气和&lt;code class=&quot;highlighter-rouge&quot;&gt;科学素养&lt;/code&gt;的核心团队，用&lt;code class=&quot;highlighter-rouge&quot;&gt;科技手段&lt;/code&gt;和&lt;code class=&quot;highlighter-rouge&quot;&gt;科学方法论&lt;/code&gt;，去&lt;strong&gt;经营一家企业&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;关键点：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;科学精神&lt;/strong&gt;：理性、实证、质疑，不断探索未知的边界&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;科学素养&lt;/strong&gt;：世界观、科学常识，独立思考&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;科技手段&lt;/strong&gt;：比如 IT 技术和应用&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;科学方法论&lt;/strong&gt;：解构 —&amp;gt; 观测 —&amp;gt; 对标 —&amp;gt; 学习 —&amp;gt; 重构&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;实践：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;互联网思维，只是科学运营的极片面阐述…&lt;/li&gt;
+  &lt;li&gt;赌场 vs. 酒店：只有传统企业与科技企业的区别&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h5 id=&quot;2132科学运营如何做&quot;&gt;2.1.3.2.科学运营，如何做&lt;/h5&gt;
+
+&lt;p&gt;阿干老师，在美团的实践中，边干边思考，从中抽象出科学运营的基本方法论，简称为「三步法」。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;第一步&lt;/strong&gt;：&lt;code class=&quot;highlighter-rouge&quot;&gt;科学理解&lt;/code&gt;自己的生意，科学设定&lt;code class=&quot;highlighter-rouge&quot;&gt;阶段目标&lt;/code&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;你从事一个生意，但未必真的理解自己的生意。不理解，就无法设定科学的阶段目标，运营无从展开。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;理解一门生意的科学流程是&lt;/strong&gt;：&lt;code class=&quot;highlighter-rouge&quot;&gt;解构&lt;/code&gt; — &lt;code class=&quot;highlighter-rouge&quot;&gt;观测&lt;/code&gt;— &lt;code class=&quot;highlighter-rouge&quot;&gt;对标&lt;/code&gt; — &lt;code class=&quot;highlighter-rouge&quot;&gt;学习&lt;/code&gt; — &lt;code class=&quot;highlighter-rouge&quot;&gt;重构&lt;/code&gt;。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;解构&lt;/strong&gt;，你可以从&lt;code class=&quot;highlighter-rouge&quot;&gt;时间&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;空间&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;业务&lt;/code&gt;几个维度去解构你的生意。比如美团在最初时如何选择城市站点，就是在时间和空间这两个维度进行了解构。科学解构，设定目标，是运营开展的前提，对企业来说是生死攸关的事情。&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;观测&lt;/strong&gt;，解构完成后，要对&lt;code class=&quot;highlighter-rouge&quot;&gt;关键指标&lt;/code&gt;进行持续的观测。大家知道管理上有一个基本定义：&lt;strong&gt;你衡量什么，就得到什么&lt;/strong&gt;。你无法衡量，就压根不知道发生了什么。也只有观测，才知道发生了什么，要改善什么。美团每天早晨的晨会，就是针对数据观测的及时反馈。&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;对标&lt;/strong&gt;，太阳底下没有新鲜事。今天的任何一个生意，你扒掉它的外壳，都有一个可能并不新鲜的内核。所以，到商业史中去找&lt;strong&gt;这件事谁做的最早、最好&lt;/strong&gt;，它就是你学习的对象，这比你站在那里拍脑袋的效果要好一万倍。美团去做毛利，用什么方法呢？我们对标的是零售业。它和我们一样面临着全国市场、复杂的品类管理，不是每个品类都盈利等等问题。所以，在历史的坐标里找到对标物很有效。&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;学习&lt;/strong&gt;，找到对标物，然后我们就坐上时光穿梭机，去向人家学习。人家踩过的坑，总结的经验，都可以为你所用，依葫芦画瓢，这是科学的方法。&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;重构&lt;/strong&gt;，在完成了前面4步之后，你对自己的生意有了深刻的理解，这时候就可以把切碎的指标拼接成完整的运营策略了，这时你就完成了对业务的重构。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;可量化、可衡量、可追溯、可控制，这才是好的运营结构&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/tech-history/ganjiawei-series/understand-your-biz.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;第二步&lt;/strong&gt;：建立&lt;code class=&quot;highlighter-rouge&quot;&gt;科学的组织架构&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;组织架构问题，是企业运营管理中最常见的问题&lt;/strong&gt;。它的第一大根源在于企业成长了，组织方式没有成长。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;组织架构问题 1&lt;/strong&gt;：企业成长，而组织方式和人才选拔制度并未成长。&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;解决方案&lt;/strong&gt;：通过&lt;code class=&quot;highlighter-rouge&quot;&gt;轮岗&lt;/code&gt;制度，培养 BM（Business Manager）。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;很多创业公司刚成立的组织架构，是CEO充当business manager（BM）的角色，也就是生意的管理人，他为整个生意负责；他管理下面的function manager（FM），也就是只管理某一块职能的生产总监或财务总监等，只对具体业务负责。&lt;/p&gt;
+
+&lt;p&gt;随着公司业务的发展，&lt;strong&gt;一个业务会细分成两个业务，或者增加了新的业务。那么，每一条业务线将都需要BM&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;p&gt;但很多企业是直接把一个FM任命为BM，但实际上他未必适合。&lt;/p&gt;
+
+&lt;p&gt;销售—销售主管—销售经理—销售总监，这在一个Function Manager的成长过程中是顺理成章的。但从一个销售总监成为一个事业部的负责人，就并非如此。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;管理问题因此出现&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;p&gt;如果是销售总监升上来做事业部负责人，他就会特别重视销售。客服部门会很惨，因为他根本不关心，从来没带过，不知道这个部门有多重要。&lt;/p&gt;
+
+&lt;p&gt;如果是客服总监升上来，就会很关注客户服务，履约质量，客户满意度。最终跟销售喝两场酒，把自己喝倒，说句“兄弟们我尽力了”。&lt;/p&gt;
+
+&lt;p&gt;怎么应对这个挑战？&lt;code class=&quot;highlighter-rouge&quot;&gt;轮岗&lt;/code&gt;是一个解决方案。&lt;strong&gt;这么做的最主要目的是什么？是培养BM&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/tech-history/ganjiawei-series/bm-fm-demo.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;组织架构的第二个挑战是，&lt;strong&gt;只要你的企业有了两条业务线，你的管理问题就会呈指数级的增长，是十倍&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;组织架构问题 2&lt;/strong&gt;：企业业务线增多，导致的管理问题，诸如资源分配不均。&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;解决方案&lt;/strong&gt;：深度理解业务，以高效执行为结果导向，权责分明，本质上，把业务想明白，部门该独立就独立。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;集团有职能部门，有设计，有客服。如果是这些部门是公用的话，那就会涉及到我这个资源先支持谁，支持A还是支持B。然后就开始打架了，因为资源永远是有限的。&lt;/p&gt;
+
+&lt;p&gt;那么，我们有解决方法吗？有。&lt;strong&gt;我们不要用软件去解决硬件的问题&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;硬件&lt;/strong&gt;：组织结构，部门划分&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;软件&lt;/strong&gt;：团队管理以及价值观念&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;组织架构是硬件问题，光靠管理是解决不了的，喝酒团建都没用。酒桌上的口头支持无法兑现，只会增加组织的沟通成本。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;解决方案是，从本质上把业务想明白，部门该独立就独立。这会最终为公司换来高效执行，权责分明。&lt;/strong&gt;&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;第三步&lt;/strong&gt;：建设“数据+团队”的高效运营体系&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;有了目标，有了组织架构，科学运营最终还要捏合成一个完整的体系，才能最终运转起来。&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;有个&lt;strong&gt;公认的前提&lt;/strong&gt;：老板 or CEO 需要依靠&lt;code class=&quot;highlighter-rouge&quot;&gt;团队的智慧&lt;/code&gt;和&lt;code class=&quot;highlighter-rouge&quot;&gt;数据&lt;/code&gt;去&lt;strong&gt;做决策&lt;/strong&gt;，而不能在组织层面，只有老板去思考、去决策。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;一个科学的体系,包含两个部分：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;决策体系&lt;/li&gt;
+  &lt;li&gt;团队运行效率&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;首先看决策体系&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;p&gt;传统企业的决策体系，常常是老板一人决策，一个人承担所有决策风险，然后经常被下面批评。&lt;/p&gt;
+
+&lt;p&gt;而好的&lt;strong&gt;现代决策体系中，CEO需要做好这 3 个事情&lt;/strong&gt;：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;决策团队&lt;/strong&gt;：组建集体决策的团队，打个比方说就是组织一个企业决策的陪审团；&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;制定流程&lt;/strong&gt;：制定讨论流程，就像法官要保证法庭的程序正义；&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;关键数据&lt;/strong&gt;：确定决策参考的关键数据，基于哪些数据来做出判断，这就像法庭上确认证据。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;不管是公司CEO，还是事业部负责人，做好这三样事情，决策效率都会大大提升。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/tech-history/ganjiawei-series/decision-sys.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;团队运行效率，需要在团队协作理念、团队梯度组建等方面，进行有耐心的积累，具体来说，就是人和事。&lt;/p&gt;
+
+&lt;h3 id=&quot;22识人与做事&quot;&gt;2.2.识人与做事&lt;/h3&gt;
+
+&lt;p&gt;2 个方面：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;识人&lt;/strong&gt;：人员三分&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;做事&lt;/strong&gt;：管理四段&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/tech-history/ganjiawei-series/person-3-and-thing-4.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;企业最终成不成是取决于人，人有分成 2 种角色：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;员工&lt;/li&gt;
+  &lt;li&gt;管理者&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;两个角色，各有各的心法。&lt;/p&gt;
+
+&lt;p&gt;招聘和培养员工的前提是辨识，我有一个非常简单实用的方法：“人员三分法”。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;野生纯天然&lt;/strong&gt;，大部分企业从创业开始，都是一群兄弟一起干。也许他们以前就是和你一起种地的兄弟，但企业做大后，他们是高管。但是实际上，这些管理人员没有经过好的系统训练。这个就像打仗。两把菜刀闹革命，一个农民勇敢一点、运气好一点，没有牺牲，可能就做了军长。但是他没有受过真正的训练。这些训练重不重要？很重要。因为你运气好活下来，做到军长了，但在实战中早晚会被人家打死的。如果他不会系统训练他的员工，他的员工伤亡率也会很高。怎么办？送他们去军校或自己建军校。&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;见过好体系&lt;/strong&gt;，腾讯的产品、百度的技术、阿里的运营、美团的地推（其实美团的技术和产品更强），这些都是猎头眼中的好体系，它们为员工提供了有系统的训练。人才的第二个层次是见过好体系的人，它们经历过这些体系，受过正规的训练。但这些人作为高级管理者往往是不够的，因为很多人会习惯性地照搬老经验，不知道如何因地制宜。这就是为什么空降高管会失败概率比较高的原因。&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;建过好体系&lt;/strong&gt;，最好的人才应该是既见识过好体系，也从零做起搭建过一个好体系，掌握了搭建体系的底层逻辑。所以，如果有这个条件，你应该去找这样的人。他不是完全基于经验，他知其然，知其所以然。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;我们再来看管理人员。&lt;strong&gt;我给大家一套“管理四段位”的模型&lt;/strong&gt;，大家可以偷偷照镜子，看自己处在哪个段位。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;自然生长&lt;/strong&gt;，最早的时候，几个人里面因为你钱多一点，或者点子多一点，大家让你当了老板，一直干了到今天。但是，实际上没人教过你怎么做老板，你也没学过怎样分析一个业务、运营好一家企业。很多老板是处于这个阶段。&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;目标预算管理&lt;/strong&gt;，我接触到的很多外企管理人员，大多停留在这个阶段。他们每天西装革履，在会议室里打开电脑看ppt，分析KPI。这就是管理。但只看结果是不够的。企业经营只有控制了过程，才能控制结果。光有目标预算，知道自己做得好不好，知道我是死是活，结果已经无法改变。用我老家嘉兴的俗话说：“等到看到结果的时候，棺材都已经抬出门了”。&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;过程管理&lt;/strong&gt;，是能很好的把业务逻辑进行分解梳理，然后通过管理系统去把各个关键的过程指标给抓起来，通过对过程的管控实现对结果的可控。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;但这还不是管理的最高境界。&lt;strong&gt;管理人员最轻松，却最有挑战的一件事是，让你的每个直接下属，在能力和意愿上不比你差&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;
+    &lt;p&gt;&lt;strong&gt;借假修真&lt;/strong&gt;，什么是借假修真？就是培养人，「假」就是标准操作规范 ，规定你必须怎么干，就怎么干，「真」是人才和组织的发展提升。&lt;/p&gt;
+  &lt;/li&gt;
+  &lt;li&gt;数据是假的，要求是假的。那什么是真的？团队的成长。&lt;/li&gt;
+  &lt;li&gt;如果你有七个下属，每个下属在业务能力、工作投入和责任心上都不比你差，这意味着什么？意味着你要拼命去学习，否则你就成了公司的天花板。&lt;/li&gt;
+  &lt;li&gt;你提高了，大家跟着你提高了，整个公司就往前走了。这是管理的最高境界。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;美团外卖开拓时期，所有的区域经理干部都是从团购调过去的，这意味着什么？意味着&lt;strong&gt;我们之前做的事都不是为了做事而做事，我们是为了在做事的过程中培养我们的干部&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;p&gt;这个就是借假修真。&lt;strong&gt;只有你的团队强了，你才能掌控更大的业务，创造更大的价值&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;p&gt;从表面上来看，其实看不出差别，大家管理都在做这些，都在看指标、看数据，但事实上我们的&lt;code class=&quot;highlighter-rouge&quot;&gt;出发点&lt;/code&gt;和&lt;code class=&quot;highlighter-rouge&quot;&gt;指导思想&lt;/code&gt;是不一样的，是有差异的。&lt;/p&gt;
+
+&lt;p&gt;做到「&lt;strong&gt;借假修真&lt;/strong&gt;」，是第四个层次，要做的是 2 件事：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;招募和训练下属&lt;/strong&gt;：管一家公司跟管一个国家其实本质上是一样的。国家要抓教育，企业就是招募和训练员工。&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;做好顶层设计&lt;/strong&gt;，或者叫制度设计。这个制度里面是&lt;code class=&quot;highlighter-rouge&quot;&gt;良币驱逐劣币&lt;/code&gt;，让有能力、有意愿的人得到他该得到的一切，鼓励大家都去努力。美国是世界上最发达的国家，是因为它有全球最好的教育体系，所谓的美国梦是真实存在的，因为它有这个机制，激励着你去努力、去上进，因为这个是有回报的。这个社会里，你如果制度设计之后，让他觉得虽然做好事辛苦一点、回报长一点，但是是可预期的，那有很多人还是选择从善去做好事。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;什么是人性?大家都希望活又轻松钱又多，又自由，所以人性没有好坏。做管理，就要针对人性的特点，设计出好的制度，让那些你希望的行为不断的发生，你认可的那类人得到他该得到的一切，甚至得到的比他想象的还要多，那样的话大家都会往这个方向去努力，这样你的管理才会变成越来越自发自愿的。&lt;/p&gt;
+
+&lt;p&gt;互联网企业，&lt;code class=&quot;highlighter-rouge&quot;&gt;投入产出比最高&lt;/code&gt;的一件事：&lt;strong&gt;花主要的时间，第一优先级去对标，把最好的人、最牛的人找进来&lt;/strong&gt;。找牛人，去行业内最牛的企业里，找团队 Leader。&lt;/p&gt;
+
+&lt;h3 id=&quot;23实践科学的管理文化进行科学运营&quot;&gt;2.3.实践：科学的管理文化，进行科学运营&lt;/h3&gt;
+
+&lt;p&gt;几个方面：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;基本价值观&lt;/li&gt;
+  &lt;li&gt;筛选公司的关注点&lt;/li&gt;
+  &lt;li&gt;实践：管理、切入等&lt;/li&gt;
+  &lt;li&gt;三心两禁&lt;/li&gt;
+  &lt;li&gt;关于人才管理：断事与用人，集体利益当先&lt;/li&gt;
+  &lt;li&gt;关于企业决策：不怕决策错误，就怕执行有问题&lt;/li&gt;
+  &lt;li&gt;关于团队速成的看法&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;231基本价值观&quot;&gt;2.3.1.基本价值观&lt;/h4&gt;
+
+&lt;p&gt;基本价值观：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;从来不相信自己是一个运气很好的人，我从来不相信你可以突然碰到一个机会，不劳而获就怎么样了&lt;/li&gt;
+  &lt;li&gt;还是相信勤勤恳恳，靠努力、靠实力来把一件事情越做越好，像那种说我们赶紧弄一下，然后很快就上市，我不去判断它的好坏，至少我认为这不是我的风格&lt;/li&gt;
+  &lt;li&gt;要做事情就会拉开架子从基本功开始，一步一步往上走。&lt;/li&gt;
+  &lt;li&gt;如果在节奏感上不一样，可能就算合作了，也会有很多冲突。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;232有潜力的公司&quot;&gt;2.3.2.有潜力的公司&lt;/h4&gt;
+
+&lt;p&gt;阿干老师，筛选公司时，关注 2 点：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;行业&lt;/strong&gt;，有没有&lt;code class=&quot;highlighter-rouge&quot;&gt;前景&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;核心管理团队&lt;/strong&gt;，做这件事的&lt;code class=&quot;highlighter-rouge&quot;&gt;动机&lt;/code&gt;和&lt;code class=&quot;highlighter-rouge&quot;&gt;心态&lt;/code&gt;（基因）&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;233实践管理切入等&quot;&gt;2.3.3.实践：管理、切入等&lt;/h4&gt;
+
+&lt;p&gt;具体切入一份新的工作时，实践上，需要关注下述几个方面：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;管理&lt;/strong&gt;：说白了，&lt;code class=&quot;highlighter-rouge&quot;&gt;信任&lt;/code&gt;非常重要
+    &lt;ol&gt;
+      &lt;li&gt;&lt;strong&gt;前提&lt;/strong&gt;：对行业非常懂，是个专家，如果有欠缺，就尽快补上&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;相互交流&lt;/strong&gt;：通过适当的方式，跟团队大量交互，快速让周边的人，感受到你真实的一面，这也是领导力的体现&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;周期活动&lt;/strong&gt;：走访城市、面对面交流等，不设主题，跟大家面对面交流，不一定把所有真相说出来，但说出来的一定是真的&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;用人&lt;/strong&gt;：你是什么样风格的人，你就会用什么样的人，用人是最大的政治，一个人是什么风格，一群人就是什么风格（阿干老师认可并践行阿里的：公开、开放、透明的管理方式）&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;思索实践、实践思索&lt;/strong&gt;：「&lt;code class=&quot;highlighter-rouge&quot;&gt;我知道&lt;/code&gt;」跟「&lt;code class=&quot;highlighter-rouge&quot;&gt;我真正懂得&lt;/code&gt;」有&lt;strong&gt;很大的差别&lt;/strong&gt;
+    &lt;ol&gt;
+      &lt;li&gt;&lt;strong&gt;业务&lt;/strong&gt;：业务技能层面
+        &lt;ol&gt;
+          &lt;li&gt;&lt;strong&gt;业务模型&lt;/strong&gt;：标准化的拆解和分析，把业务模型建起来&lt;/li&gt;
+          &lt;li&gt;&lt;strong&gt;过程管理&lt;/strong&gt;：我们要的是结果，但只有把过程管好，才能拿到好结果，只有做好 A\B\C，才能拿到D，首选需要把 A\B\C 拆出来，然后，需要大家知道如何做好 A\B\C，这个叫作标准作业流程（SOP）&lt;/li&gt;
+          &lt;li&gt;&lt;strong&gt;人员管理&lt;/strong&gt;：人是有情绪、有思想的，SOP 放在不同人身上，有不同效果，甚至是相反的效果，这就需要团队管理的工作&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;团队管理&lt;/strong&gt;：团队管理层面
+        &lt;ol&gt;
+          &lt;li&gt;&lt;strong&gt;积极正向&lt;/strong&gt;：管理的目标是，让团队保持积极正向&lt;/li&gt;
+          &lt;li&gt;&lt;strong&gt;公开透明&lt;/strong&gt;：前期推进 SOP 过程中，出现波动，需要跟团队讲管理的目标、运营管理的一些基本工作以及管理的 SOP 等的业务含义&lt;/li&gt;
+          &lt;li&gt;&lt;strong&gt;业务策略&lt;/strong&gt;：业务策略，没有什么太复杂的，无非先抓拜访量，再抓有效拜访量，先有量再有质；每天早上半小时晨会，晚上再把大家叫回来，把一天遇到的问题，跟主管经理一个一个过，解决第二天的问题；这些东西，很多公司都在做，只不过做的质量和坚持程度有差异&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;强化&lt;/strong&gt;：
+    &lt;ol&gt;
+      &lt;li&gt;&lt;strong&gt;标准化流程&lt;/strong&gt;：根据业务特点，把标准管理流程总结出来&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;管理工作&lt;/strong&gt;：再通过合适的管理手段，不断去强化、去运营&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;目标&lt;/strong&gt;：让两方面的配合越来越默契&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Note：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;我经常跟团队讲，这个世界上，同样一个工作，做的人很多，做法也大同小异，但真正的行家很少。&lt;/p&gt;
+
+  &lt;p&gt;什么叫真正的行家？有信心、有信仰&lt;/p&gt;
+
+  &lt;ol&gt;
+    &lt;li&gt;
+      &lt;p&gt;首先他有很强的对真相的探索意愿和能力，也就是所谓的打破沙锅问到底。&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;另外，他这样做成功过，他不这样做失败过。&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+
+  &lt;p&gt;吹牛大家都会，东边听两句，西边听两句。&lt;/p&gt;
+
+  &lt;p&gt;真正的行家，哪怕遇到再大的困难，再多的反对意见，也认为必须这样做。抓拜访量什么的，大家都知道，但很多人做不好，原因是什么?因为这不是他的信仰，碰到一些困难时，就会绕过去。比如有员工会说“我打电话效果挺好的，还更快，上门拜访，老板不在还可能白跑一趟，有这时间打电话不是更好吗?”很多时候，如果你不是真正的行家，就会被这个迷惑，管理动作就会走形。我知道跟我真正懂有很大的差别。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;234三心两禁&quot;&gt;2.3.4.三心两禁&lt;/h4&gt;
+
+&lt;p&gt;关于“三心二禁”： 省心、放心、开心，禁随意吐槽、禁过度许诺&lt;/p&gt;
+
+&lt;p&gt;阿干提到当初他在阿里做区域经理的时候，提倡要打造员工的“三心”理念：就是省心、放心、开心。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;上级布置工作，不用说第二遍，这叫&lt;code class=&quot;highlighter-rouge&quot;&gt;省心&lt;/code&gt;；&lt;/li&gt;
+  &lt;li&gt;主动汇报工作进展，就是&lt;code class=&quot;highlighter-rouge&quot;&gt;放心&lt;/code&gt;；&lt;/li&gt;
+  &lt;li&gt;主动分享、帮助同事，就是&lt;code class=&quot;highlighter-rouge&quot;&gt;开心&lt;/code&gt;。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;“二禁”是指：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;严禁在下属和同僚面前&lt;code class=&quot;highlighter-rouge&quot;&gt;吐槽&lt;/code&gt;公司和上级；&lt;/li&gt;
+  &lt;li&gt;严禁&lt;code class=&quot;highlighter-rouge&quot;&gt;过度承诺&lt;/code&gt;；&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;吐槽或者抱怨上司、同事，会造成公司管理上的不稳定，说明公司的重点已经有所偏移，是不好的苗头。管理层不能通过许诺的方式激励员工，未来的事谁也说不准，过度许诺是管理人员对自己的身份不负责、是对员工或者下属不负责，如果许诺无法兑现，就会背上不守信之名。&lt;/p&gt;
+
+&lt;p&gt;这就是&lt;strong&gt;言者无心、听者有意&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;h4 id=&quot;235关于人才管理断事与用人集体利益当先&quot;&gt;2.3.5.关于人才管理：断事与用人，集体利益当先&lt;/h4&gt;
+
+&lt;p&gt;对于人才的管理，企业更多的要充当土壤的角色，去培育出需要的人才。好的制度设计和人才培养机制是土壤，在其中的种子就有成长为参天大树的可能。在阿干看来，总监以上级别的管理层必须具备两类素质：&lt;strong&gt;一者是断事，再者是用人&lt;/strong&gt;。他举例提到，一家企业的主管如果整天忙的不可开交、满头大汗，那&lt;strong&gt;说明企业管理是存在问题的&lt;/strong&gt;。没有培养出可以独当一面的下属，在人才储备上是缺失的。&lt;/p&gt;
+
+&lt;p&gt;一个团结、富有激情的团队，除了具备领导力的leader，还应该要有以集体利益当先的精神。个人利益要为集体利益让步，做事之前要优先考虑集体利益。阿干提到，在他的眼里只有集体利益，没有个人利益，只要是影响集体利益的，一定是不能忍受的。对于一个不合适的、态度和能力达不到要求的管理人员来说，给他机会，就是没有给他的团队机会。&lt;/p&gt;
+
+&lt;p&gt;在谈到点评和美团合并后的运营同步性，他提到的还是集体利益要与个人利益的关系相协调，对伙伴坦诚、简单、主动。&lt;/p&gt;
+
+&lt;h4 id=&quot;236关于企业决策不怕决策错误就怕执行有问题&quot;&gt;2.3.6.关于企业决策，不怕决策错误，就怕执行有问题&lt;/h4&gt;
+
+&lt;p&gt;&lt;strong&gt;关于企业决策判断：不怕决策错误，就怕执行有问题&lt;/strong&gt;&lt;/p&gt;
+
+&lt;p&gt;企业管理人员在管理过程中，势必会出现或大或小的决策失误。&lt;/p&gt;
+
+&lt;p&gt;在阿干看来，决策判断错误是做管理必然会经历的一个事情，不存在不犯错误的管理人员，而这不重要。&lt;/p&gt;
+
+&lt;p&gt;对企业而言，最可怕的是到最后，分不清自己的失败是决策失误造成还是执行不下去而导致的。&lt;/p&gt;
+
+&lt;p&gt;整个团队如果是按照民主集中制的原则一起做的决策，那这个集体就要对决策的结果负责，就要有失败的打算，有承担后果的勇气。若真的是决策有错，大不了选择重新再来。要是牵扯到因为执行层面出现问题，导致项目失败，那说明企业在管理上不合格。&lt;/p&gt;
+
+&lt;h4 id=&quot;237关于团队速成&quot;&gt;2.3.7.关于团队速成&lt;/h4&gt;
+
+&lt;p&gt;团队：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;这个世界上只有一件事情是&lt;strong&gt;不能速成&lt;/strong&gt;的，那就是团队&lt;/li&gt;
+  &lt;li&gt;团队是不能速成的，它一定是&lt;strong&gt;由内而外自己长出来&lt;/strong&gt;、&lt;strong&gt;自己培养出来&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;不是自己长出来的，你去挖别人的人，就相当于从别人身上割一块肉，即使你贴到自己身上，它不是你的肉，过两天那块肉就烂了&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;不用过于担心，团队成员被挖走，同时，&lt;strong&gt;一定要在做事中，锻炼、培养自己的团队&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;h2 id=&quot;3积累沉淀&quot;&gt;3.积累沉淀&lt;/h2&gt;
+
+&lt;p&gt;几个方面：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;运营：科学三步&lt;/li&gt;
+  &lt;li&gt;识人：人员三分&lt;/li&gt;
+  &lt;li&gt;做事：管理四段&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;运营：科学运营，三步&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;事&lt;/strong&gt;：科学理解生意，科学拆解为&lt;strong&gt;阶段目标&lt;/strong&gt;，透彻理解、科学划分、发展阶段（3 个维度拆解，时间、空间、业务流程）&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;人&lt;/strong&gt;：科学组织架构，组织架构是硬件、管理是软件，不要用软件去解决硬件问题，围绕做事，需要的组织结构，该独立独立&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;量化&lt;/strong&gt;：建立「团队」+「数据」的高效运营体系，人在做事过程中，量化的东西，准确确定当前位置，以及高度可信的正确决策；
+    &lt;ol&gt;
+      &lt;li&gt;决策体系，需要 3 个方面
+        &lt;ol&gt;
+          &lt;li&gt;决策团队&lt;/li&gt;
+          &lt;li&gt;制定流程&lt;/li&gt;
+          &lt;li&gt;关键数据&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+      &lt;li&gt;高效的运营团队：识人（人员三分） + 做事（管理四段）&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;识人：人员三分&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;野生纯天然&lt;/li&gt;
+  &lt;li&gt;见过好体系&lt;/li&gt;
+  &lt;li&gt;建过好体系&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;做事：管理四段&lt;/strong&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;自然生长&lt;/strong&gt;：因为某些因素，自然而然，成为老板&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;目标预算管理&lt;/strong&gt;：只管目标和结果，不管过程中，出现的问题与细节纰漏&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;过程管理&lt;/strong&gt;：业务逻辑梳理，分解后，针对关键过程跟踪管理，并以此保证达到最终结果&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;借假修真&lt;/strong&gt;：管理的最轻松、又最有挑战的事情，让你的每一个直接下属，在能力和意愿上不比你差，需要 2 件事
+    &lt;ol&gt;
+      &lt;li&gt;招募和训练下属&lt;/li&gt;
+      &lt;li&gt;做好顶层设计：&lt;code class=&quot;highlighter-rouge&quot;&gt;良币驱逐劣币&lt;/code&gt;，让有能力、有意愿的人得到他该得到的一切，鼓励大家都去努力。&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Note：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;什么是人性？大家都希望活又轻松钱又多，又自由，所以人性没有好坏。&lt;/p&gt;
+
+  &lt;p&gt;&lt;strong&gt;做管理&lt;/strong&gt;，就要&lt;strong&gt;针对人性的特点&lt;/strong&gt;，设计出&lt;strong&gt;好的制度&lt;/strong&gt;：&lt;/p&gt;
+
+  &lt;ol&gt;
+    &lt;li&gt;
+      &lt;p&gt;让那些你&lt;code class=&quot;highlighter-rouge&quot;&gt;希望的行为&lt;/code&gt;不断的发生；&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;你认可的那类人&lt;code class=&quot;highlighter-rouge&quot;&gt;得到他该得到的一切&lt;/code&gt;，甚至得到的比他想象的还要多。&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;筛选公司&lt;/strong&gt;：关注 2 点&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;行业&lt;/strong&gt;，有没有前景&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;核心管理团队&lt;/strong&gt;，做这件事的动机和心态&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;基本价值观&lt;/strong&gt;：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;从来不相信自己是一个运气很好的人，我从来不相信你可以突然碰到一个机会，不劳而获就怎么样了&lt;/li&gt;
+  &lt;li&gt;还是相信勤勤恳恳，靠努力、靠实力来把一件事情越做越好，像那种说我们赶紧弄一下，然后很快就上市，我不去判断它的好坏，至少我认为这不是我的风格&lt;/li&gt;
+  &lt;li&gt;要做事情就会拉开架子从基本功开始，一步一步往上走。&lt;/li&gt;
+  &lt;li&gt;如果在节奏感上不一样，可能就算合作了，也会有很多冲突。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;4其他&quot;&gt;4.其他&lt;/h2&gt;
+
+&lt;p&gt;其他关联的几个方面：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;推荐图书&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;具体推荐的图书：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;《零售的哲学》：我看到的是价值观对企业经营的重要性&lt;/li&gt;
+  &lt;li&gt;《权力的终结》：管理的与时俱进&lt;/li&gt;
+  &lt;li&gt;《全球通史》：以史为鉴&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;5参考资料&quot;&gt;5.参考资料&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;干嘉伟：管理的与时俱进，推荐了 3 本书，涉及价值观、权利的与时俱进、宏观历史&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.lieyunwang.com/archives/448573&quot;&gt;美团干嘉伟：每天前进30公里，才是跟上行业第1的科学节奏&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://mp.weixin.qq.com/s/aMzKFhHdxyp89Xi8tVc6oQ&quot;&gt;干嘉伟：高水平运营不只是做事，更是带人&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.youmi.cn/2018/0627/75588.shtml&quot;&gt;干嘉伟12年管理心得：打造美团地推铁军的4个关键点&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://baixiaosheng.net/4832&quot;&gt;干嘉伟：美团运营管理心得&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.youmi.cn/2018/0507/75550.shtml&quot;&gt;王利芬对话干嘉伟&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.iyiou.com/p/23030.html&quot;&gt;干嘉伟：从阿里到美团，如何缔造一支地推铁血军团？&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.iyiou.com/p/12960.html&quot;&gt;美团COO干嘉伟：我是这么看美团和王兴的！&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+   </entry>
+   
+   <entry>
+     <title>产品运营系列：现状跟踪，指标统计</title>
+     <link href="http://ningg.github.com/product-series-indicator-of-situation/"/>
+     <updated>2019-01-07T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/product-series-indicator-of-situation</id>
+     <content type="html">&lt;h2 id=&quot;0-概要&quot;&gt;0. 概要&lt;/h2&gt;
+
+&lt;p&gt;跟踪产品和业务的状况，对整体情况，有一个客观的判断，才能支持下述决策：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;发现风险：哪个地方，出现风险之前，细微的指标，都有反映，有的剧烈、有的微弱&lt;/li&gt;
+  &lt;li&gt;业务预测：预判业务的增长规模，以及需要提前准备的资源（人力、资金）等&lt;/li&gt;
+  &lt;li&gt;支撑决策：发现业务的客观规律，获取客户/用户的反馈，支持科学决策&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;1-指标分类&quot;&gt;1. 指标分类&lt;/h2&gt;
+
+&lt;p&gt;上面所有的决策，都需要客观的跟踪产品和业务状况，都需要进行量化，也就需要指标，指标分为：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;核心指标：真正的直接反应核心的供给、需求、利润、品质等情况&lt;/li&gt;
+  &lt;li&gt;关联指标：其他关联的周边指标，方便发掘潜在问题、增长点、改进策略等情况&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;11-业务角度&quot;&gt;1.1. 业务角度&lt;/h3&gt;
+
+&lt;p&gt;从业务角度，整体上，指标分为 3 大类：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;供需指标&lt;/strong&gt;：
+    &lt;ul&gt;
+      &lt;li&gt;供给指标：服务\产品的数量、种类等&lt;/li&gt;
+      &lt;li&gt;需求指标：用户的数量、分布等&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;利润指标&lt;/strong&gt;：
+    &lt;ul&gt;
+      &lt;li&gt;营业额：订单的数量、订单金额&lt;/li&gt;
+      &lt;li&gt;成本：提供服务，所需的资源成本（资源、资金、人力等）&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;竞争力&lt;/strong&gt;：
+    &lt;ul&gt;
+      &lt;li&gt;用户反馈：用户吐槽的地方&lt;/li&gt;
+      &lt;li&gt;用户体验：用户使用的路径，使用功能的频率&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;12-研发角度&quot;&gt;1.2. 研发角度&lt;/h3&gt;
+
+&lt;p&gt;从研发角度，指标分为 4 大类：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;用户分析&lt;/strong&gt;：AU、DAU、WAU、MAU、APA、留存、复购、流失（跟留存相关）&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;行为分析&lt;/strong&gt;：使用时长、登录次数、功能使用情况&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;收入分析&lt;/strong&gt;：PUR、ARPU、ARPPU、LTV、付费率（活跃用户）、付费渗透率（所有潜在用户）&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;性能分析&lt;/strong&gt;：故障事件量（宕机、服务不可用等）、响应时长（页面加载速度等）&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;2-指标汇总&quot;&gt;2. 指标汇总&lt;/h2&gt;
+
+&lt;p&gt;几个常用指标的汇总：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/product-series/indicator-list-part1.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/product-series/indicator-list-part2.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;具体指标的文本表述：&lt;/p&gt;
+
+&lt;table&gt;
+  &lt;thead&gt;
+    &lt;tr&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;分类&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;指标&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;缩写&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;含义&lt;/th&gt;
+      &lt;th style=&quot;text-align: left&quot;&gt;备注&lt;/th&gt;
+    &lt;/tr&gt;
+  &lt;/thead&gt;
+  &lt;tbody&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;新增&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;日增&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;DNU&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Daily New Users，日新注册的用户&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;反映拓展能力&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;新增用户占比&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;日活用户中，新增用户的占比，DNU/DAU&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;活跃&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;日活&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;DAU&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Daily Activate Users，每日激活单元，每日活用用户数量。&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;一般来说，为用户提供了价值，就可以记入&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;周活&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;WAU&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;周活跃用户数&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;月活&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;MAU&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;月活跃用户数，一般少于 30* DAU，因为，需要用户去重。&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;留存&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;留存率&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;反映产品价值，大家愿意持续使用&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;用户粘性&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;SoU&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;用户粘性，Stickiness of User，SoU = DAU/MAU，用户留存&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;粘性发展指数&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;DoS&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Development of Stickiness，粘性发展指数（粘性的变化），DoU = SoU1/SoU2&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;并发&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;最高同时在线&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;PCU&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Peak Concurrent Users，最高同时在线用户数&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;平均同时在线&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;ACU&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Average Concurrent Users，平均同时在线用户数&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;付费&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;活跃用户&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;AU&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Active Users，统计时间段内，使用过服务的用户&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;活跃付费用户数&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;APA&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Active Paying Account，统计时间段内，活跃的付费用户数&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;付费比率&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;PUR&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;PUR(Pay User Rate)：付费比率，可通过 APA/AU 计算得出&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;付费用户&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;PU&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Paying Users，统计时间段内，支付过费用的用户&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;用户平均收入&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;ARPU&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Average Revenue Per User，用户的平均付费=总收入/AU&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;付费用户平均收入&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;ARPPU&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Average Revenue Per Paying User，付费用户中，平均用户收入，总收入/APA&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;生命周期价值&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;LTV&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Life Time Value，一个用户从开始使用服务，到流失，创造的总收入&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;竞争优势&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;市场占有率&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;MS&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Market Share，当前产品的「销售额」在当前品类所有产品中的「占比」&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;市场占有率，排他性&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;用户渗透率&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;CS&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Customer Penetration，被调查用户中，「使用」指定产品的「占比」&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;用户渗透率，共存性&lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;付费渗透率&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt; &lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;被调查用户中，付费用户的占比&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;投资&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;投资回报率&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;ROI&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt;Return On Investment，以年为粒度，年利润/投资总额&lt;/td&gt;
+      &lt;td style=&quot;text-align: left&quot;&gt; &lt;/td&gt;
+    &lt;/tr&gt;
+  &lt;/tbody&gt;
+&lt;/table&gt;
+
+&lt;h3 id=&quot;21-需求用户指标&quot;&gt;2.1. 需求：用户指标&lt;/h3&gt;
+
+&lt;p&gt;用户的识别，存在 2 个维度：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;设备&lt;/strong&gt;：设备唯一标识&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;账户&lt;/strong&gt;：登录账户&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;用户的需求，3 个方面的指标：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;新增&lt;/strong&gt;：产品的市场拓展能力&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;日活&lt;/strong&gt;：收入的主要来源&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;留存&lt;/strong&gt;：一般是说「新增留存」，也有「活跃留存」，新增用户第 n 天后，仍然活跃的用户数，1 日后留存、2 日后留存、n 日后留存&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;指标统计，可以基于几个维度：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;总体&lt;/li&gt;
+  &lt;li&gt;渠道&lt;/li&gt;
+  &lt;li&gt;版本&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;所以，存在，总体新增、渠道新增、版本新增等维度的指标。&lt;/p&gt;
+
+&lt;h3 id=&quot;22-需求活跃&quot;&gt;2.2. 需求：活跃&lt;/h3&gt;
+
+&lt;p&gt;日活的用户堆积示意图：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;日活&lt;/strong&gt;用户，来源：&lt;strong&gt;新增的用户&lt;/strong&gt;、&lt;strong&gt;往日留存的用户&lt;/strong&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;下图，形象表示了，随着时间推移，&lt;strong&gt;日活&lt;/strong&gt;用户的&lt;strong&gt;来源&lt;/strong&gt;：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/product-series/dau-proportion.webp&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;23-竞争力留存复购流失&quot;&gt;2.3. 竞争力：留存、复购、流失&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;留存率&lt;/strong&gt;：实例说明，&lt;code class=&quot;highlighter-rouge&quot;&gt;一日留存&lt;/code&gt;，完全基于&lt;code class=&quot;highlighter-rouge&quot;&gt;当日新增用户&lt;/code&gt;进行统计计数的&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;如果用户在5月1日，第一次使用我们的产品，记入5月1日 &lt;code class=&quot;highlighter-rouge&quot;&gt;新增用户数量&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;如果5月2日他还使用了，5月1日的&lt;code class=&quot;highlighter-rouge&quot;&gt;一日留存&lt;/code&gt;加一&lt;/li&gt;
+  &lt;li&gt;同理5月3日他又使用了，5月1日的&lt;code class=&quot;highlighter-rouge&quot;&gt;两日留存&lt;/code&gt;加一&lt;/li&gt;
+  &lt;li&gt;5月1日的 &lt;code class=&quot;highlighter-rouge&quot;&gt;一日留存率&lt;/code&gt; = 5月1日 &lt;code class=&quot;highlighter-rouge&quot;&gt;一日留存&lt;/code&gt; / 5月1日 &lt;code class=&quot;highlighter-rouge&quot;&gt;新增用户数量&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;几个核心指标：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;日活&lt;/strong&gt;：每天活跃用户数量，但，一些业务场景下，公司不会关注日活用户，会重点关注「订单数量」和「下单用户数量」，以及他们的时间分布&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;留存&lt;/strong&gt;：注册一定时间后，仍然使用服务
+    &lt;ol&gt;
+      &lt;li&gt;&lt;strong&gt;影响因素&lt;/strong&gt;：对留存的影响，一般是核心功能、产品体验、品质/质量&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;分析的目标&lt;/strong&gt;：落地在产品上，通过对产品的调整、优化，来提高留存&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;复购&lt;/strong&gt;：首次购买之后，再次购买的占比
+    &lt;ol&gt;
+      &lt;li&gt;&lt;strong&gt;关注&lt;/strong&gt;：消费行为&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;影响因素&lt;/strong&gt;：商品或服务的质量、客户满意度、售后体验等&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;分析的目标&lt;/strong&gt;：落地到产品或服务上&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;流失&lt;/strong&gt;：定义不同，比如留存用户的流失、复购用户的流失，超过一定时间，不再使用服务，就称为流失
+    &lt;ol&gt;
+      &lt;li&gt;正常情况下，留存和复购，就反映了流失的情况&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;分析的目标&lt;/strong&gt;：流失的分析，是为了细粒度发掘流失的详细原因&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;24-收入活跃用户和营收&quot;&gt;2.4. 收入：活跃用户和营收&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;活跃用户&lt;/strong&gt;和&lt;strong&gt;营收指标&lt;/strong&gt;的关系：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/product-series/profit-au-arpu.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;25-pmf产品市场满足度&quot;&gt;2.5. PMF：产品市场满足度&lt;/h3&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;PMF&lt;/code&gt;，Product / Market Fit，产品市场满足度：表示，产品刚好满足市场需求。&lt;/p&gt;
+
+&lt;p&gt;实际情况中，大部分产品，都是尚未满足市场需求，或者过度满足市场需求：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;Product/Market Underfitting&lt;/strong&gt;：产品尚未满足市场，需要产品的改进和扩张&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Product/Market Overfitting&lt;/strong&gt;：产品被市场套牢，并且随着市场的&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;具体的对应的企业：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;Product/Market Underfitting&lt;/strong&gt;：
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;初创&lt;/code&gt;企业&lt;/li&gt;
+      &lt;li&gt;需要在市场中，不断低成本试错，找到可行的路径，快速占领市场&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;Product/Market Overfitting&lt;/strong&gt;：
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;成熟&lt;/code&gt;企业&lt;/li&gt;
+      &lt;li&gt;在市场中占据重要低位，按照之前的方式做事，发现时代、科技、赛道都变了，固有利益太大，无法转身&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;一般来说：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;产品的&lt;code class=&quot;highlighter-rouge&quot;&gt;使用价值&lt;/code&gt; &amp;gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;购买的总成本&lt;/code&gt;，此时，称为 &lt;code class=&quot;highlighter-rouge&quot;&gt;PMF&lt;/code&gt;，&lt;strong&gt;产品满足了市场&lt;/strong&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;26-指标的用途评判和预测&quot;&gt;2.6. 指标的用途：评判和预测&lt;/h3&gt;
+
+&lt;p&gt;下述 2 个场景，都需要指标进行数据决策：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;判断，产品是否值得推广，一般依据&lt;strong&gt;留存率&lt;/strong&gt;判断
+    &lt;ol&gt;
+      &lt;li&gt;分渠道：不同渠道的留存率&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;预估活跃度和&lt;strong&gt;收入流水&lt;/strong&gt;
+    &lt;ol&gt;
+      &lt;li&gt;&lt;strong&gt;收入流水&lt;/strong&gt;：活跃用户 x 用户平均流水，AU x ARPU&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;3-参考资料&quot;&gt;3. 参考资料&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.jianshu.com/p/47aa5e243f1a&quot;&gt;如何定义日活用户（DAU: Daily Activate Units）比较好&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://blog.csdn.net/caodongfang126/article/details/78282086&quot;&gt;活跃用户的测算方法与用户黏性指数的提出&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://my.oschina.net/1123581321/blog/498981&quot;&gt;基本数据统计–新增、活跃、留存&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.zhihu.com/question/20075649&quot;&gt;对一个互联网产品做数据分析包含了对哪些数据进行分析？&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+</content>
+   </entry>
+   
+   <entry>
+     <title>科技历史系列：美团的读书理念</title>
+     <link href="http://ningg.github.com/tech-history-wangxing-and-wanghuiwen-talk-about-reading/"/>
+     <updated>2019-01-05T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/tech-history-wangxing-and-wanghuiwen-talk-about-reading</id>
+     <content type="html">&lt;p&gt;写在开头：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;当前文章，来自美团内部的「文化那些事儿」内部号分享，原文标题：&lt;strong&gt;兴哥、老王聊读书——如何选好书，如何学以致用&lt;/strong&gt;&lt;/p&gt;
+
+  &lt;p&gt;这篇文章，反复读了几遍，对读书，描述的比较透彻，数次冲动想分享出来，最终如愿了。&lt;/p&gt;
+
+  &lt;p&gt;Note：美团内部的文化、团队自驱的建设，都是行业标杆，其成为互联网重要一极，指日可待。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;1-概要&quot;&gt;1. 概要&lt;/h2&gt;
+
+&lt;p&gt;对于美团人来说，学习成长，永远是重要且紧急的事。工作这么忙，如何选书、如何读书，如何高效成长呢？&lt;/p&gt;
+
+&lt;p&gt;兴哥、老王他们的读书秘籍，被捣腾、整理出来了，供大家借鉴。&lt;/p&gt;
+
+&lt;h2 id=&quot;2-兴哥的读书之道&quot;&gt;2. 兴哥的读书之道&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;读书，要先读&lt;strong&gt;经典&lt;/strong&gt;，建立&lt;strong&gt;全局观&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;2017年年中，在兴哥面对面活动中，兴哥集中回答了大家提出的关于读书的问题，分享了他的读书心得：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;选书&lt;/strong&gt;，仔细选书，读书前，参考&lt;code class=&quot;highlighter-rouge&quot;&gt;专家的意见&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;顺序&lt;/strong&gt;，先读&lt;code class=&quot;highlighter-rouge&quot;&gt;经典&lt;/code&gt;，建立&lt;code class=&quot;highlighter-rouge&quot;&gt;全局观&lt;/code&gt;，再了解&lt;code class=&quot;highlighter-rouge&quot;&gt;前沿&lt;/code&gt;信息&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;21-选书仔细选书&quot;&gt;2.1. 选书，仔细选书&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;读书&lt;/strong&gt;之前要&lt;code class=&quot;highlighter-rouge&quot;&gt;仔细选书&lt;/code&gt;，多参考&lt;code class=&quot;highlighter-rouge&quot;&gt;专家意见&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;首先，任何事情&lt;strong&gt;投入要够&lt;/strong&gt;，在读书上&lt;strong&gt;选书&lt;/strong&gt;多花一些时间是对的，很多人在选书上花的时间太少了。&lt;/p&gt;
+
+&lt;p&gt;现在，选书已经比较容易了：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;尤其是你要英文过关的话，在&lt;strong&gt;亚马逊&lt;/strong&gt;上多搜几遍，认真地看它的专家书评和读者书评，总能找到不太离谱的书；&lt;/li&gt;
+  &lt;li&gt;如果你能找到&lt;strong&gt;行业的专家&lt;/strong&gt;，请他推荐一下，就更好了。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;22-顺序先读经典建立全局观再了解前沿&quot;&gt;2.2. 顺序，先读经典，建立全局观，再了解前沿&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;读书的&lt;strong&gt;次第&lt;/strong&gt;：先读&lt;strong&gt;经典&lt;/strong&gt;书建立&lt;strong&gt;全局观念&lt;/strong&gt;，再了解&lt;strong&gt;前沿&lt;/strong&gt;信息&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;最近看的书&lt;/strong&gt; vs. &lt;strong&gt;最值得看的书&lt;/strong&gt;：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;很多同学希望我推荐&lt;strong&gt;最近看&lt;/strong&gt;的书，这其实不是一个最正确的问题。&lt;/li&gt;
+  &lt;li&gt;为什么要关注最近呢？应该问&lt;strong&gt;最值得看&lt;/strong&gt;的是哪几本书。&lt;/li&gt;
+  &lt;li&gt;在与别人的交流中，还是应该关注&lt;strong&gt;更有长期价值&lt;/strong&gt;的事情，这也是think long term的具体体现。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;读书&lt;/strong&gt; vs. &lt;strong&gt;交流&lt;/strong&gt;：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;读书&lt;/strong&gt;肯定是最有利于&lt;strong&gt;建立全局观念&lt;/strong&gt;的，跟大家&lt;strong&gt;交流&lt;/strong&gt;的目的则是&lt;strong&gt;获取前沿&lt;/strong&gt;信息。&lt;/li&gt;
+  &lt;li&gt;但如果没有很好的全局意识，光了解前沿，是抓不住重点的。&lt;/li&gt;
+  &lt;li&gt;所以，我觉得不应该流行什么书，就看什么书，而应该看最基础的书。&lt;/li&gt;
+  &lt;li&gt;就拿《人类简史》来说，本身是一本不错的书，但是客观地讲它并没有多少学术创造性，只是把各种别人的东西串在一起。它属于科普和畅销书的类型，你愿意在读书上花时间的话，应该有更经典的书可以读。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;23-兴哥看经典&quot;&gt;2.3. 兴哥，看经典&lt;/h3&gt;
+
+&lt;p&gt;上面说到，应该以读书、读经典的书，建立全局观念，并把握全局、把握重点，现在的问题是：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;什么书，才是经典的书？&lt;/li&gt;
+  &lt;li&gt;兴哥，方便推荐经典的书吗？&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;经典的书籍&lt;/strong&gt;，奠定&lt;strong&gt;基本思想&lt;/strong&gt;的书籍：经典的书有哪些呢？&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;苏格拉底、柏拉图、亚里士多德等人，确实奠定了西方很多的基本理念，包括后来整个西方的这些思想，还有卢梭、霍布斯等等。&lt;/li&gt;
+  &lt;li&gt;另外&lt;code class=&quot;highlighter-rouge&quot;&gt;英国大宪章&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;美国独立宣言&lt;/code&gt;这些东西，是公认的西方思想里比较核心的。&lt;/li&gt;
+  &lt;li&gt;中国古代诸子百家的东西也挺好，孔子、老子、孙子。
+    &lt;ol&gt;
+      &lt;li&gt;《&lt;code class=&quot;highlighter-rouge&quot;&gt;孙子兵法&lt;/code&gt;》非常好，开篇就说‘兵者，国之大事也，死生之地，存亡之道，不可不察也’。&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;兴哥，围绕业务相关和不相关，推荐基本&lt;strong&gt;经典书籍&lt;/strong&gt;：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;如果要我推荐书的话，有的跟业务有点相关，有的跟业务不太相关。&lt;/li&gt;
+  &lt;li&gt;跟业务相关的，我推荐杰克·韦尔奇的《&lt;code class=&quot;highlighter-rouge&quot;&gt;赢&lt;/code&gt;》，还有英特尔CEO安德鲁·葛洛夫的《&lt;code class=&quot;highlighter-rouge&quot;&gt;High Output Management&lt;/code&gt;》，我不知道中文为什么译成《给经理人的第一堂课》，应该是高产出管理。&lt;/li&gt;
+  &lt;li&gt;跟业务不相关的，推荐多看看历史。比如，斯塔夫里阿诺斯的《&lt;code class=&quot;highlighter-rouge&quot;&gt;全球通史&lt;/code&gt;》是一本普及性的书，虽然没有特别多学术上的创见，但有助于了解更宏观的东西。”&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;3-老王的读书之道&quot;&gt;3. 老王的读书之道&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;读书，要做到&lt;code class=&quot;highlighter-rouge&quot;&gt;知行合一&lt;/code&gt;，实践、思考&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;2018年年初，在老王面对面活动中，有同学希望老王分享一下他的认知方法论，老王如是说：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;践行：身边不缺真理，是否理解、践行，拉开了人的差距&lt;/li&gt;
+  &lt;li&gt;致用：读书慢不怕，不影响结果，关键是否践行&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;31-上士闻到勤而行之&quot;&gt;3.1. 上士闻到，勤而行之&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;我们身边不缺真理，是否能&lt;code class=&quot;highlighter-rouge&quot;&gt;信&lt;/code&gt;、能&lt;code class=&quot;highlighter-rouge&quot;&gt;行&lt;/code&gt;，拉开了人的&lt;code class=&quot;highlighter-rouge&quot;&gt;差距&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;有个台词说：‘听说过很多大道理，但是过不好这一生。为什么呢？&lt;/p&gt;
+
+&lt;p&gt;因为《道德经》里面说：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;上士闻道，勤而行之，中士闻道，若存若亡，下士闻道则大笑之，不笑不足以为道。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;就是：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;那些大道理你听了，你信吗？&lt;/li&gt;
+  &lt;li&gt;信了，你做吗？&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;从听到信，人类转化率，大概千分之一，从信到做，可能百分之一。&lt;/p&gt;
+
+&lt;p&gt;大部分人过眼云烟，过了也就过了。网上有很多心灵鸡汤，说实话，我觉得那些话都写的挺好的，只是你消化不良。”&lt;/p&gt;
+
+&lt;h3 id=&quot;32-读书慢影响不大关键学以致用&quot;&gt;3.2. 读书慢，影响不大，关键学以致用&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;读书慢不怕，关键要能&lt;code class=&quot;highlighter-rouge&quot;&gt;学以致用&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;我读第一本英文书的时候，差不多每5个词就要查一下，所以读得极其慢，等你真的读完之后，你再去读下一本书就容易一些。&lt;/p&gt;
+
+&lt;p&gt;我看第一本商业书的时候，每一个词我都不懂，非常痛苦，《第五项修炼》我读了两年。&lt;/p&gt;
+
+&lt;p&gt;听说有人一年读300本书，真正学以致用不会读的那么快。&lt;/p&gt;
+
+&lt;p&gt;两年真的非常重要，因为你真读两年的话，能确保你两年的时间里面，有&lt;code class=&quot;highlighter-rouge&quot;&gt;场景&lt;/code&gt;会&lt;code class=&quot;highlighter-rouge&quot;&gt;用到&lt;/code&gt;这些书里的知识。你用一个礼拜读完了，啥也没经历，应用不了这些知识，不应用就无法见识到&lt;code class=&quot;highlighter-rouge&quot;&gt;它的威力&lt;/code&gt;。&lt;/p&gt;
+
+&lt;h2 id=&quot;4-个人思考&quot;&gt;4. 个人思考&lt;/h2&gt;
+
+&lt;p&gt;读书，个人思考：&lt;em&gt;（以自己的语言总结、吸收、固化到思维中）&lt;/em&gt;&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;读书&lt;/strong&gt;：&lt;code class=&quot;highlighter-rouge&quot;&gt;先读经典&lt;/code&gt;，建立&lt;code class=&quot;highlighter-rouge&quot;&gt;全局观念&lt;/code&gt;，把握&lt;code class=&quot;highlighter-rouge&quot;&gt;重点&lt;/code&gt;，&lt;code class=&quot;highlighter-rouge&quot;&gt;再了解前沿&lt;/code&gt;信息&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;交流&lt;/strong&gt;：读书，是为了建立全局观念，跟大家&lt;code class=&quot;highlighter-rouge&quot;&gt;交流&lt;/code&gt;，是为了&lt;code class=&quot;highlighter-rouge&quot;&gt;获取前沿&lt;/code&gt;信息&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;选书&lt;/strong&gt;：做每一件事，都需要&lt;code class=&quot;highlighter-rouge&quot;&gt;足够的投入&lt;/code&gt;，选书，需要投入精力，查询&lt;code class=&quot;highlighter-rouge&quot;&gt;书评&lt;/code&gt;、询问&lt;code class=&quot;highlighter-rouge&quot;&gt;专家意见&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;践行&lt;/strong&gt;：读书快慢，没有优劣区分，关键是否践行，上士闻到、&lt;code class=&quot;highlighter-rouge&quot;&gt;勤而行之&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;Note： 预期 5 年（2023年前后）左右，历史会证明美团是互联网中的一个巨无霸，非常重要一极。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+</content>
+   </entry>
+   
+   <entry>
+     <title>格鲁夫第一课：Chapter 3-推动组织的巧手</title>
+     <link href="http://ningg.github.com/build-team-series-grove-high-output-management-chapter-3/"/>
+     <updated>2018-12-26T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/build-team-series-grove-high-output-management-chapter-3</id>
+     <content type="html">&lt;h2 id=&quot;0概要&quot;&gt;0.概要&lt;/h2&gt;
+
+&lt;p&gt;几个方面，以及基本疑问：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;当早餐店，开始繁衍：
+    &lt;ul&gt;
+      &lt;li&gt;Think：是说开分店（规模化）的问题，以及解决思路和实操？&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;混血型组织：
+    &lt;ul&gt;
+      &lt;li&gt;Think：混血的含义？是否有必要？是否需要避免？有什么需要注意的实操？&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;双重报告：
+    &lt;ul&gt;
+      &lt;li&gt;Think：什么场景？什么问题？&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;每个人都听命于 3 个「长官」：
+    &lt;ul&gt;
+      &lt;li&gt;Think：是说必须考虑的 3 个因素？影响什么过程？决策是什么？&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;1当早餐店开始繁衍&quot;&gt;1.当早餐店开始繁衍&lt;/h2&gt;
+
+&lt;p&gt;背景：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;事情&lt;strong&gt;越来越复杂&lt;/strong&gt;：
+    &lt;ol&gt;
+      &lt;li&gt;内部升级：设备升级，节省成本，降低售价、回馈客户&lt;/li&gt;
+      &lt;li&gt;规模化扩张：规模扩大、设立分店&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;日常事务&lt;/code&gt;和&lt;code class=&quot;highlighter-rouge&quot;&gt;管理技巧&lt;/code&gt;：
+    &lt;ol&gt;
+      &lt;li&gt;一家店 vs. 多家店：独营 vs. 连锁经营&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Tips：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;集中&lt;/strong&gt;：部分环节，集中，带来高效&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;灵活&lt;/strong&gt;：部分环节，分散灵活决策，才更有效&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;11集权还是分权&quot;&gt;1.1.集权，还是分权？&lt;/h3&gt;
+
+&lt;p&gt;多种日常事务，该如何处理？&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;营销渠道&lt;/strong&gt;：广告等&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;团队&lt;/strong&gt;：招聘、薪资&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;原材料&lt;/strong&gt;：店址、采购&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;菜单&lt;/strong&gt;：服务的种类&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Tips：较好的做法，总公司征询地方意见，然后讨论，再做决策。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;总公司&lt;/strong&gt;：深度参与&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;分公司&lt;/strong&gt;：提出方案，主导方案的设计&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;整个商业，运转过程中，涉及的供给、需求、价值传递等：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/build-team-series/high-output-management/business-model-demo.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;12复杂性日增&quot;&gt;1.2.复杂性日增&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;规模化扩张&lt;/strong&gt;之后，事情变得复杂，因为增加了&lt;code class=&quot;highlighter-rouge&quot;&gt;地理&lt;/code&gt;维度：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;供需差异：「地区」维度，各项供给成本、需求偏好的差异&lt;/li&gt;
+  &lt;li&gt;地点分散：局部沟通，全局沟通效率较低&lt;/li&gt;
+  &lt;li&gt;人员增加：内部管理，也会损耗一部分费用&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;团队管理，要点：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;本质&lt;/strong&gt;：管理者的产出，是组织中，向他报告或受他影响的所有人，产出的总和。&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;标准&lt;/strong&gt;：管理的优劣，本质就是团队的优劣。&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;团队管理的实操&lt;/strong&gt;：从&lt;code class=&quot;highlighter-rouge&quot;&gt;人和事&lt;/code&gt;的&lt;strong&gt;规模&lt;/strong&gt;角度，进行划分、拆解
+    &lt;ol&gt;
+      &lt;li&gt;大的不确定的团队：拆解，得到下一步&lt;/li&gt;
+      &lt;li&gt;小的不确定的团队：分析，得到下一步&lt;/li&gt;
+      &lt;li&gt;小的确定的团队：组合，得到下一步&lt;/li&gt;
+      &lt;li&gt;大的确定的团队&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;具体来说，就是拆解和组合，&lt;code class=&quot;highlighter-rouge&quot;&gt;时间&lt;/code&gt;维度、&lt;code class=&quot;highlighter-rouge&quot;&gt;大小&lt;/code&gt;维度。&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/build-team-series/high-output-management/manage-team-practise.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Tips：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;之前的&lt;strong&gt;项目管理&lt;/strong&gt;，从「时间」的「长短」维度，进行处理：&lt;/p&gt;
+
+  &lt;ol&gt;
+    &lt;li&gt;
+      &lt;p&gt;长期不确定 –&amp;gt; 短期确定&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;长期不可预期 –&amp;gt; 短期不可预期&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;2混血组织&quot;&gt;2.混血组织&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;中层管理人&lt;/strong&gt;与&lt;strong&gt;黑箱&lt;/strong&gt; ：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;中层管理人，一般负责一个部门；&lt;/li&gt;
+  &lt;li&gt;一个&lt;code class=&quot;highlighter-rouge&quot;&gt;部门&lt;/code&gt;，可以看做&lt;code class=&quot;highlighter-rouge&quot;&gt;黑箱&lt;/code&gt;；&lt;/li&gt;
+  &lt;li&gt;一个&lt;code class=&quot;highlighter-rouge&quot;&gt;公司&lt;/code&gt;，通常由多个&lt;code class=&quot;highlighter-rouge&quot;&gt;黑箱&lt;/code&gt;组成，且&lt;code class=&quot;highlighter-rouge&quot;&gt;黑箱&lt;/code&gt;之间，密切相关；&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;21两种极端的组织类型&quot;&gt;2.1.两种极端的组织类型&lt;/h3&gt;
+
+&lt;p&gt;组织分类：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;项目制&lt;/strong&gt;：&lt;code class=&quot;highlighter-rouge&quot;&gt;任务&lt;/code&gt;导向，项目之间，互相低耦合&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;职能制&lt;/strong&gt;：&lt;code class=&quot;highlighter-rouge&quot;&gt;功能&lt;/code&gt;导向，类似的功能，集合在一个部门&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;关于 2 种，组织类型的示意图：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/build-team-series/high-output-management/two-org-style.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;好的经营管理：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;好的经营管理&lt;/strong&gt;，&lt;strong&gt;目标&lt;/strong&gt;：
+    &lt;ul&gt;
+      &lt;li&gt;中央集权和地方分权之间的折中把握。&lt;/li&gt;
+      &lt;li&gt;即，「应对及满足市场」与「充分发挥组织最大效率」之间的最佳组合。&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;市场&lt;/code&gt; &amp;amp; &lt;code class=&quot;highlighter-rouge&quot;&gt;效率&lt;/code&gt;：
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;市场&lt;/strong&gt;：市场差异、市场变化&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;效率&lt;/strong&gt;：资源共享、知识共享、灵活配置&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;项目制，作战单位：贴近「&lt;strong&gt;市场需求&lt;/strong&gt;」&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;应变能力&lt;/li&gt;
+  &lt;li&gt;完成任务：攻占山头&lt;/li&gt;
+  &lt;li&gt;行动的独立及自由&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;22折中而行混血型组织&quot;&gt;2.2.折中而行：混血型组织&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;混血型组织&lt;/strong&gt;，典型结构：&lt;code class=&quot;highlighter-rouge&quot;&gt;职能&lt;/code&gt; + &lt;code class=&quot;highlighter-rouge&quot;&gt;项目&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/build-team-series/high-output-management/mix-org-style.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;混血型组织&lt;/strong&gt;：在&lt;code class=&quot;highlighter-rouge&quot;&gt;应变能力&lt;/code&gt;与&lt;code class=&quot;highlighter-rouge&quot;&gt;管理杠杆&lt;/code&gt;（集中的效率）之间，取得平衡。&lt;/p&gt;
+
+&lt;p&gt;混血型组织中，涵盖了「职能制（功能性部门）」和「项目制（任务导向）」，具体的优劣：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/build-team-series/high-output-management/two-org-style-comparison.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;结论：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;组织结构，随着发展，最终都会趋于&lt;code class=&quot;highlighter-rouge&quot;&gt;混血型组织&lt;/code&gt;，&lt;code class=&quot;highlighter-rouge&quot;&gt;项目制&lt;/code&gt; + &lt;code class=&quot;highlighter-rouge&quot;&gt;职能制&lt;/code&gt;，&lt;strong&gt;无可取代&lt;/strong&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;23实践&quot;&gt;2.3.实践&lt;/h3&gt;
+
+&lt;p&gt;Tips：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;现状&lt;/strong&gt;：连锁店、军队、英特尔、大型互联网，都是混血型组织&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;趋势&lt;/strong&gt;：随着&lt;code class=&quot;highlighter-rouge&quot;&gt;组织成长&lt;/code&gt;，都&lt;strong&gt;不可避免&lt;/strong&gt;成为&lt;code class=&quot;highlighter-rouge&quot;&gt;混血型组织&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;有限资源分配&lt;/strong&gt;的问题，可以&lt;code class=&quot;highlighter-rouge&quot;&gt;设立委员会&lt;/code&gt;，不影响项目的情况下，负责获取并分配资源&lt;/li&gt;
+  &lt;li&gt;仅当没有「共同经营目标」时，可以不必采用「混血型组织」，例如，&lt;code class=&quot;highlighter-rouge&quot;&gt;集团的分公司&lt;/code&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;焦点：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;混血型组织&lt;/strong&gt;，高效运作的关键，&lt;strong&gt;最短时间内&lt;/strong&gt;，找出&lt;strong&gt;资源分配&lt;/strong&gt;的最佳方案，并&lt;strong&gt;有效解决&lt;/strong&gt;其可能产生的冲突。&lt;/li&gt;
+  &lt;li&gt;善用&lt;strong&gt;中层管理人员&lt;/strong&gt;，是解决问题的关键。需 2 种能力:
+    &lt;ol&gt;
+      &lt;li&gt;&lt;strong&gt;客观认识&lt;/strong&gt;：接受混血型组织，是&lt;code class=&quot;highlighter-rouge&quot;&gt;不可避免&lt;/code&gt;的，也是&lt;code class=&quot;highlighter-rouge&quot;&gt;合理的&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;管理方法&lt;/strong&gt;：双重报告&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;3双重报告&quot;&gt;3.双重报告&lt;/h2&gt;
+
+&lt;p&gt;Tips：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;双重报告&lt;/strong&gt;，以及&lt;code class=&quot;highlighter-rouge&quot;&gt;同级群体&lt;/code&gt;是否能&lt;code class=&quot;highlighter-rouge&quot;&gt;发挥&lt;/code&gt;最大效能，&lt;strong&gt;关键&lt;/strong&gt;：&lt;code class=&quot;highlighter-rouge&quot;&gt;健全的企业文化&lt;/code&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;双重报告：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;职能内&lt;/strong&gt;：指示&lt;code class=&quot;highlighter-rouge&quot;&gt;工作&lt;/code&gt;内容&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;项目内&lt;/strong&gt;：逐日&lt;code class=&quot;highlighter-rouge&quot;&gt;绩效&lt;/code&gt;考核&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;经理人的成长路径：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;个人贡献者&lt;/strong&gt;：只管事，不管人，业绩上，做得有声有色；&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;业务经理&lt;/strong&gt;：掌管经常做某业务的人&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;中层经理：双重报告&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;专业委员会&lt;/strong&gt;：同级群体、专业人员：
+    &lt;ol&gt;
+      &lt;li&gt;共享、互助、建议、决策；&lt;/li&gt;
+      &lt;li&gt;共性：很多问题，其实有很多相似之处；&lt;/li&gt;
+      &lt;li&gt;自由度：个体必须牺牲自己在决策上的自由度；&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;汇报上级&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;混血型组织&lt;/strong&gt;的要点：高效运转，依赖于让「职能部门」，满足「项目部门」的&lt;strong&gt;资源要求&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;p&gt;混血型组织，双重报告，都不应该造成额外的、或不必要的工作：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;真正必要的工作&lt;/strong&gt;：毫不留情，扫除官僚，&lt;code class=&quot;highlighter-rouge&quot;&gt;力行&lt;/code&gt;工作&lt;code class=&quot;highlighter-rouge&quot;&gt;简单化&lt;/code&gt;。&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;客观的复杂性&lt;/strong&gt;：客观认识「报告系统转变」，而产生的&lt;code class=&quot;highlighter-rouge&quot;&gt;复杂性&lt;/code&gt;。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;二度空间（组织）：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;定义&lt;/strong&gt;：二度空间（组织），一个参与协调工作，但并不属于他的例行工作范围，构成了「二度空间」
+    &lt;ol&gt;
+      &lt;li&gt;就是「变形的双重报告」&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;主线汇报&lt;/code&gt;之外，&lt;code class=&quot;highlighter-rouge&quot;&gt;虚线&lt;/code&gt;的另一个组织或另一个空间&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;组织&lt;code class=&quot;highlighter-rouge&quot;&gt;应变能力&lt;/code&gt;：大幅提升
+    &lt;ol&gt;
+      &lt;li&gt;个人的应变能力，随着组织需要，个人从属关系，随着空间转变而互换&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;短期&lt;/strong&gt;：很多小组，都是暂时性的，因事情结束或问题解决而解散&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;本质&lt;/strong&gt;：能解决问题&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Tips：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;多度空间（组织）的架构，让一个人随着组织需要，而改变其角色，时而当将军，时而当士兵，组织「应变的能力」，因而大幅提升。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Tips：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;环境变化，越来越快，问题越来越多，我们越来越需要，这种&lt;code class=&quot;highlighter-rouge&quot;&gt;临时性组织&lt;/code&gt;，&lt;strong&gt;二度空间（组织）&lt;/strong&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Tips：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;针对，高科技公司：&lt;/p&gt;
+
+  &lt;ol&gt;
+    &lt;li&gt;
+      &lt;p&gt;高科技公司的&lt;strong&gt;组织应变能力&lt;/strong&gt;，依赖&lt;code class=&quot;highlighter-rouge&quot;&gt;多度空间&lt;/code&gt;组织&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;strong&gt;多度空间&lt;/strong&gt;的关键：依赖&lt;code class=&quot;highlighter-rouge&quot;&gt;企业文化&lt;/code&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+
+  &lt;p&gt;a. &lt;strong&gt;混血组织&lt;/strong&gt;架构&lt;/p&gt;
+
+  &lt;p&gt;b. 健全的&lt;strong&gt;双重报告&lt;/strong&gt;&lt;/p&gt;
+
+  &lt;p&gt;最关键的，&lt;code class=&quot;highlighter-rouge&quot;&gt;有质量的&lt;/code&gt;落地，中层经理人，&lt;code class=&quot;highlighter-rouge&quot;&gt;个人角色&lt;/code&gt;的&lt;code class=&quot;highlighter-rouge&quot;&gt;快速转换&lt;/code&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;4每个人都听命于-3-个长官&quot;&gt;4.每个人，都听命于 3 个长官&lt;/h2&gt;
+
+&lt;p&gt;Tips：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;控制模式&lt;/code&gt;，必须&lt;code class=&quot;highlighter-rouge&quot;&gt;因时而变&lt;/code&gt;，没有包治百病的药。&lt;/p&gt;
+
+  &lt;p&gt;Note：控制模式，人行为的驱动因素。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;焦点&lt;/strong&gt;：人的行为，如何产生 or 被影响。&lt;/p&gt;
+
+&lt;p&gt;工作上的行为，主要受 3 项无形但极具效力的&lt;code class=&quot;highlighter-rouge&quot;&gt;因素&lt;/code&gt;控制：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;自由市场因素&lt;/strong&gt;：获利&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;契约义务&lt;/strong&gt;：确定标准、监督评估&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;文化价值观&lt;/strong&gt;：做人的基点，环境认同、做事方式一致、理念一致，组织认同的约束&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;41自由市场因素&quot;&gt;4.1.自由市场因素&lt;/h3&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;自由市场因素&lt;/code&gt;，引导人的行为：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;本质&lt;/strong&gt;：价格&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;原则&lt;/strong&gt; ：低买高卖，买方都希望以最低价买进，卖方都希望以最高价格卖出&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;适用场景&lt;/strong&gt;：买卖的商品或服务的价值，必须能以金钱来衡量。&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Thinks：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;为什么每天总会想着工作？&lt;/p&gt;
+
+  &lt;p&gt;Re：多度空间生存，才会增加个人的应变能力，以及多样性，乐趣也由此而生。&lt;/p&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;
+      &lt;p&gt;个人的生活&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;个人的家庭&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;个人的乐趣&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;然后，个人的意义：&lt;/p&gt;
+
+      &lt;ul&gt;
+        &lt;li&gt;
+          &lt;p&gt;生活的意义&lt;/p&gt;
+        &lt;/li&gt;
+        &lt;li&gt;
+          &lt;p&gt;工作的意义&lt;/p&gt;
+        &lt;/li&gt;
+      &lt;/ul&gt;
+    &lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;p&gt;职业发展上，有什么客观规律？&lt;/p&gt;
+
+  &lt;p&gt;Re：趋势、发展，群体中成员的要求：年轻？核心竞争力到底是什么？&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;42契约义务&quot;&gt;4.2.契约义务&lt;/h3&gt;
+
+&lt;p&gt;契约义务，引导人的行为：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;适用场景&lt;/strong&gt;：商品或服务的价值，难以判断时，应该如何做？&lt;/li&gt;
+  &lt;li&gt;具体操作：
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;约定&lt;/strong&gt;：结果和标准，制定规则&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;监督评估&lt;/strong&gt;：评估、纠正、监督，评估绩效&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;43文化价值观&quot;&gt;4.3.文化价值观&lt;/h3&gt;
+
+&lt;p&gt;文化价值观，引导人的行为：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;适用场景&lt;/strong&gt;：环境变化之快，快到我们来不及「改变规则」以应对时，或「契约义务」无法处理的状况时，文化价值观，便决定了我们的行动。&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;本质&lt;/strong&gt;：
+    &lt;ul&gt;
+      &lt;li&gt;大我胜于小我，团体利益先于个人利益&lt;/li&gt;
+      &lt;li&gt;相信牺牲私利，最终对你是有好处的：关键，如何产生&lt;code class=&quot;highlighter-rouge&quot;&gt;信任&lt;/code&gt;？
+        &lt;ul&gt;
+          &lt;li&gt;在这个「大我」中的个体，必须有
+            &lt;ul&gt;
+              &lt;li&gt;同样的价值观&lt;/li&gt;
+              &lt;li&gt;同样的目标&lt;/li&gt;
+              &lt;li&gt;甚至，同样的行事准则&lt;/li&gt;
+            &lt;/ul&gt;
+          &lt;/li&gt;
+          &lt;li&gt;对于「以上三者」的建立，在于这群人，是否有「相同的经验及背景」&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Tips：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;在「文化价值观」主导行为的层次上，经理角色，则，必须负责发展出「一套组织内」共享的「价值观」、「目标」以及「行事规则」，以建立个体对组织的信赖。&lt;/p&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;&lt;strong&gt;关键点&lt;/strong&gt;：言传不如身教，最好的方法，还是&lt;code class=&quot;highlighter-rouge&quot;&gt;以身作则&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;上行下效&lt;/code&gt;。&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Tips：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;误区：很容易，误认为「文化价值观」，是最好的「控制模式」，以「文化价值观」来引导「物品的买卖」，会一团糟，所有人都不满意：&lt;/p&gt;
+
+  &lt;ol&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;strong&gt;因地制宜&lt;/strong&gt;：控制模式，必须因地制宜，事实上，不存在一药通天下&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;strong&gt;适用的模式&lt;/strong&gt;：不同情况下，都会有一种「最合适」的控制模式&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;strong&gt;经理人的职责&lt;/strong&gt;：找出&lt;code class=&quot;highlighter-rouge&quot;&gt;适当的控制模式&lt;/code&gt;，并加以&lt;code class=&quot;highlighter-rouge&quot;&gt;应用&lt;/code&gt;。&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;44控制模式的选取&quot;&gt;4.4.控制模式的选取&lt;/h3&gt;
+
+&lt;p&gt;关键要点：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;对象&lt;/strong&gt;：员工的行为&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;影响因素&lt;/strong&gt;：2 个
+    &lt;ol&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;利益倾向&lt;/code&gt;：团队利益 or 个人利益&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;环境的情况&lt;/code&gt;：CUA 指标（Complexity，Uncertainty，Ambiguity） 复杂性、不确定性、指令的模糊性&lt;/li&gt;
     &lt;/ol&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&quot;section-4&quot;&gt;主题配置&lt;/h3&gt;
+&lt;p&gt;2 个维度，3 种控制模式，适用场景的建议：&lt;/p&gt;
 
-&lt;p&gt;主要是为成功安装主题，所需要进行的配置。&lt;/p&gt;
+&lt;p&gt;&lt;img src=&quot;/images/build-team-series/high-output-management/control-model-four-area.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;围绕上述，4 象限中，不同「控制模式」的使用情况，实际应用中：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/build-team-series/high-output-management/control-model-practise.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+</content>
+   </entry>
+   
+   <entry>
+     <title>格鲁夫第一课：Chapter 2-打好团体战</title>
+     <link href="http://ningg.github.com/build-team-series-grove-high-output-management-chapter-2/"/>
+     <updated>2018-12-25T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/build-team-series-grove-high-output-management-chapter-2</id>
+     <content type="html">&lt;h2 id=&quot;1-管理杠杆率&quot;&gt;1. 管理杠杆率&lt;/h2&gt;
+
+&lt;p&gt;管理活动的&lt;strong&gt;杠杆率&lt;/strong&gt;：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;对象&lt;/strong&gt;：&lt;code class=&quot;highlighter-rouge&quot;&gt;管理活动&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;作用&lt;/strong&gt;：&lt;code class=&quot;highlighter-rouge&quot;&gt;管理活动&lt;/code&gt;，对最终整体的&lt;code class=&quot;highlighter-rouge&quot;&gt;产出&lt;/code&gt;，都会产生影响；&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;杠杆率&lt;/strong&gt;：影响大小，就是管理活动的&lt;code class=&quot;highlighter-rouge&quot;&gt;杠杆率&lt;/code&gt;；&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;管理活动：&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;WordPress
-    &lt;ol&gt;
-      &lt;li&gt;取消twenty eleven主题中google front（因为google被墙了）&lt;/li&gt;
-    &lt;/ol&gt;
+  &lt;li&gt;信息收集：
+    &lt;ul&gt;
+      &lt;li&gt;沟通协调&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;判断&amp;amp;建议：
+    &lt;ul&gt;
+      &lt;li&gt;判断与意见&lt;/li&gt;
+      &lt;li&gt;执行的方向&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;规划：
+    &lt;ul&gt;
+      &lt;li&gt;产品计划&lt;/li&gt;
+      &lt;li&gt;资源分配方式&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;跟进：
+    &lt;ul&gt;
+      &lt;li&gt;检查错误：跟进&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;团队发展：
+    &lt;ul&gt;
+      &lt;li&gt;开展培训与协助下属在职业生涯上的发展&lt;/li&gt;
+      &lt;li&gt;传授课程&lt;/li&gt;
+    &lt;/ul&gt;
   &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h2 id=&quot;section-5&quot;&gt;调试&lt;/h2&gt;
+&lt;p&gt;&lt;strong&gt;产出&lt;/strong&gt;：&lt;strong&gt;直接管辖&lt;/strong&gt;部门的产出 + &lt;strong&gt;间接影响&lt;/strong&gt;部门的产出&lt;/p&gt;
 
-&lt;p&gt;调试是学习一个框架/语言较快的方式，这一部分将着重介绍如何进行调试。关注几点：&lt;/p&gt;
+&lt;h3 id=&quot;11-产出&quot;&gt;1.1. 产出&lt;/h3&gt;
+
+&lt;p&gt;产出：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;经理人，将他份内的事情，做到完善，但这并不是他的产出。&lt;/li&gt;
+  &lt;li&gt;产出：直接管辖、间接影响的部门的产出之和&lt;/li&gt;
+  &lt;li&gt;管理活动，非常重要，但并不会有任何直接的产出，产出来自他领导的部门。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;分内事与结果：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;管理活动&lt;/code&gt; + &lt;code class=&quot;highlighter-rouge&quot;&gt;专业指导&lt;/code&gt; + &lt;code class=&quot;highlighter-rouge&quot;&gt;...&lt;/code&gt; = 对结果产出，&lt;code class=&quot;highlighter-rouge&quot;&gt;有影响&lt;/code&gt;的&lt;code class=&quot;highlighter-rouge&quot;&gt;所有事&lt;/code&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;12-日常工作到底是什么&quot;&gt;1.2. 日常工作，到底是什么&lt;/h3&gt;
+
+&lt;p&gt;关于日常工作：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;事情&lt;/code&gt;，永远&lt;code class=&quot;highlighter-rouge&quot;&gt;做不完&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;并发能力&lt;/strong&gt;：同时处理&lt;code class=&quot;highlighter-rouge&quot;&gt;多件事情&lt;/code&gt;的能力&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;把握重点&lt;/strong&gt;：知道何时，转移注意力，把&lt;code class=&quot;highlighter-rouge&quot;&gt;精力&lt;/code&gt;放在&lt;code class=&quot;highlighter-rouge&quot;&gt;最能促进&lt;/code&gt;整体&lt;code class=&quot;highlighter-rouge&quot;&gt;产出&lt;/code&gt;的活动上（哪些活动，有最高的杠杆率）&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Tips:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;1.&lt;strong&gt;活动&lt;/strong&gt;：我们&lt;code class=&quot;highlighter-rouge&quot;&gt;日常&lt;/code&gt;做的事情，看起来，有些&lt;code class=&quot;highlighter-rouge&quot;&gt;烦琐&lt;/code&gt;；&lt;/p&gt;
+
+  &lt;p&gt;2.&lt;strong&gt;产出&lt;/strong&gt;：我们的&lt;code class=&quot;highlighter-rouge&quot;&gt;成就&lt;/code&gt;，与&lt;code class=&quot;highlighter-rouge&quot;&gt;活动&lt;/code&gt;相比，显得重要的多；&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;13-需要知道什么&quot;&gt;1.3. 需要，知道什么&lt;/h3&gt;
+
+&lt;p&gt;收集信息，几个途径：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;文字&lt;/strong&gt;：正式报告、备忘录&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;抱怨&lt;/strong&gt;：内部员工、外部客户&lt;/li&gt;
+  &lt;li&gt;重要的信息，往往来自&lt;code class=&quot;highlighter-rouge&quot;&gt;简短&lt;/code&gt;而&lt;code class=&quot;highlighter-rouge&quot;&gt;非正式&lt;/code&gt;的谈话&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Tips：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;1.顾客或者员工抱怨，是因为他们希望事情能改进；注意倾听，你能得到很有效的信息&lt;/p&gt;
+
+  &lt;p&gt;2.信息的价值，通常与其时效性，有绝对关系；&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;书面报告 vs. 口头交谈：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;书面报告&lt;/strong&gt;：
+    &lt;ol&gt;
+      &lt;li&gt;建立数据文件，形成知识库&lt;/li&gt;
+      &lt;li&gt;全面、客观：过滤并确认，涌来的各种信息，避免遗漏&lt;/li&gt;
+      &lt;li&gt;严格审视&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;口头交谈&lt;/strong&gt;：
+    &lt;ol&gt;
+      &lt;li&gt;时效：非常及时&lt;/li&gt;
+      &lt;li&gt;重要：总能传播重要信息&lt;/li&gt;
+      &lt;li&gt;概括、不完善：只能提供概括的、不完整的，且有时不正确的信息&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;14-吸收信息&quot;&gt;1.4. 吸收信息&lt;/h3&gt;
+
+&lt;p&gt;增强自己吸收信息的能力：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;途径：需要了解，能获取信息的途径&lt;/li&gt;
+  &lt;li&gt;吸收：知道怎么高效的吸收、理解信息&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;分享传递信息：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;共享&lt;/strong&gt;：将收集的信息，传递共享给下属&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;共识&lt;/strong&gt;：这是获取&lt;code class=&quot;highlighter-rouge&quot;&gt;授权&lt;/code&gt;的依据
+    &lt;ol&gt;
+      &lt;li&gt;&lt;strong&gt;目标&lt;/strong&gt;：明确自己的目标&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;重点&lt;/strong&gt;：优先的事项&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;方式&lt;/strong&gt;：做事的方式，基本理念&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Tips:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;1.走动：不时的在公司中走动，是极有效的收集信息的方法&lt;/p&gt;
+
+  &lt;p&gt;2.高效：有正事的下属，能及时与精力沟通，经理也能马上回复，效率非常高&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;15-决策&quot;&gt;1.5. 决策&lt;/h3&gt;
+
+&lt;p&gt;存在下述几类决策：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;有时，&lt;strong&gt;自己决策&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;多数时候，只是&lt;strong&gt;参与决策&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;有时，提供事实、自己的意见&lt;/li&gt;
+  &lt;li&gt;有时，&lt;strong&gt;讨论&lt;/strong&gt;各个方案的利弊，以确保决策的&lt;strong&gt;正确性&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;有时，对即将产出或已经做出的决策，进行&lt;strong&gt;检讨&lt;/strong&gt;，可能投否决票&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;决策，分为 2 大类：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;事前决策&lt;/strong&gt;：公司资源分配，依据未来将要进行的事，分配资源&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;事后决策&lt;/strong&gt;：解决已经发生或正在发生的某种问题，例如，品质管理有瑕疵、某个员工想离职等&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;收集信息&lt;/strong&gt;，是所有其他管理活动的&lt;strong&gt;基础&lt;/strong&gt;：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;传递信息&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;制定决策&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;做下属的学习对象&lt;/code&gt;，都是以你&lt;code class=&quot;highlighter-rouge&quot;&gt;掌握的信息&lt;/code&gt;为&lt;strong&gt;基础&lt;/strong&gt;的。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Tips：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;对一件事的&lt;code class=&quot;highlighter-rouge&quot;&gt;了解程度&lt;/code&gt;，将影响你的&lt;code class=&quot;highlighter-rouge&quot;&gt;决策&lt;/code&gt;，因此，&lt;strong&gt;收集信息&lt;/strong&gt;、&lt;strong&gt;掌握信息&lt;/strong&gt;，&lt;strong&gt;非常重要&lt;/strong&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;需要你直接&lt;strong&gt;制定决策&lt;/strong&gt;的事情，并不太多，大部分时候，都是在&lt;strong&gt;给出建议&lt;/strong&gt;：&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;如何进行调试；&lt;/li&gt;
-  &lt;li&gt;PHP web基本处理逻辑；&lt;/li&gt;
-  &lt;li&gt;WordPress中使用了哪些巧妙的设计，使其流行数年；&lt;/li&gt;
+  &lt;li&gt;基于掌握的信息，&lt;strong&gt;给予提示&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;信息共享：传递信息&lt;/li&gt;
+      &lt;li&gt;逻辑表达：将人或事情，引导到你觉得对的方向上&lt;/li&gt;
+      &lt;li&gt;避免决策：不是制定决策，因为没有给出明确的方向和结果&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;16-做好下属的表率&quot;&gt;1.6. 做好下属的表率&lt;/h3&gt;
+
+&lt;p&gt;经理人，一直都是&lt;strong&gt;下属的学习对象&lt;/strong&gt;：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;不明显，但，是下属的表率，是&lt;strong&gt;事实&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;言传&lt;/code&gt;，远不如&lt;code class=&quot;highlighter-rouge&quot;&gt;身教&lt;/code&gt;
+    &lt;ul&gt;
+      &lt;li&gt;工作时间，频繁打私人电话&lt;/li&gt;
+      &lt;li&gt;做事认真、严谨：会对周围同事，产生巨大影响&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Tips:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;1.&lt;strong&gt;做&lt;/strong&gt;：&lt;strong&gt;价值观&lt;/strong&gt;和&lt;strong&gt;行事规范&lt;/strong&gt;，很难简单&lt;code class=&quot;highlighter-rouge&quot;&gt;说&lt;/code&gt;出来，最好的办法，就是&lt;code class=&quot;highlighter-rouge&quot;&gt;做&lt;/code&gt;，还要做得&lt;code class=&quot;highlighter-rouge&quot;&gt;让人看得到&lt;/code&gt;。&lt;/p&gt;
+
+  &lt;p&gt;2.&lt;strong&gt;坚定&lt;/strong&gt;：我们内心认定，自己是别人的表率，才会管用。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;经理人，大部分时间，都是在&lt;strong&gt;分配&lt;/strong&gt;：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;分配资源&lt;/strong&gt;：人力、金钱、资产等资源&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;自己的时间&lt;/strong&gt;：最重要的，如何分配自己的时间&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Tips：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;如何运用时间&lt;/strong&gt;，甚至是一个人，能否成为&lt;code class=&quot;highlighter-rouge&quot;&gt;领导者&lt;/code&gt;或者&lt;code class=&quot;highlighter-rouge&quot;&gt;模范&lt;/code&gt;的最重要的一点。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;几类管理活动：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;收集信息&lt;/li&gt;
+  &lt;li&gt;传递信息&lt;/li&gt;
+  &lt;li&gt;制定决策&lt;/li&gt;
+  &lt;li&gt;给予决策&lt;/li&gt;
+  &lt;li&gt;为人表率&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;这些管理活动，为了达成效果，大都需要 &lt;code class=&quot;highlighter-rouge&quot;&gt;会议&lt;/code&gt;。&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;会议&lt;/strong&gt;：不是&lt;code class=&quot;highlighter-rouge&quot;&gt;管理活动&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;会议&lt;/strong&gt;：是开展管理活动的&lt;code class=&quot;highlighter-rouge&quot;&gt;媒介&lt;/code&gt;，可以有其他媒介&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Tips:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;关键点&lt;/strong&gt;：不同的管理活动，找到&lt;code class=&quot;highlighter-rouge&quot;&gt;高效的媒介&lt;/code&gt;，完成任务，就是找到了 &lt;code class=&quot;highlighter-rouge&quot;&gt;高杠杆率&lt;/code&gt; 的活动&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Think:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;对内，&lt;strong&gt;自身效率&lt;/strong&gt;：完成一个管理活动，时长&lt;/li&gt;
+  &lt;li&gt;对外，&lt;strong&gt;整体产出&lt;/strong&gt;：一个管理活动，对整体产出的影响&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;17-高杠杆是什么&quot;&gt;1.7. 高杠杆，是什么？&lt;/h3&gt;
+
+&lt;p&gt;经理人的产出：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;经理人的产出&lt;/code&gt; = &lt;code class=&quot;highlighter-rouge&quot;&gt;组织的产出的总和&lt;/code&gt; = 杠杆率A x 管理活动A + 杠杆率B x 管理活动B + ….&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Think:&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;相同的管理活动，杠杆率完全相同吗？&lt;/li&gt;
+  &lt;li&gt;杠杆率，是跟管理活动的分类，绑定的吗？&lt;/li&gt;
+  &lt;li&gt;同一类管理活动，做的效果不同，杠杆率也不同吗？&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;高杠杆率&lt;/strong&gt;的活动：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;同时影响多人&lt;/strong&gt;：一个经理人，可以同时影响很多人&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;对人影响深远&lt;/strong&gt;：一个经理人，一个简单的动作或一段简单的话，可以对别人，产生长远的影响时&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;技能知识传授&lt;/strong&gt;：一个经理人，提供的技术、知识、信息，对一群人的工作，产生影响时&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;同一个管理活动，&lt;strong&gt;杠杆率的大小&lt;/strong&gt;，取决于 &lt;code class=&quot;highlighter-rouge&quot;&gt;何时&lt;/code&gt; 进行：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;事先准备&lt;/strong&gt;，远好于&lt;strong&gt;事后补救&lt;/strong&gt;，效果会放大&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;例如：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;开会&lt;/strong&gt;：事前准备问题焦点、周知关联各方，方便大家聚焦&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;离职沟通&lt;/strong&gt;：极有潜力的员工决定辞职时，如果希望他回心转意，尽快找他谈谈，如果拖延，胜算就会减小&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;为了提高管理活动的&lt;code class=&quot;highlighter-rouge&quot;&gt;杠杆率&lt;/code&gt;，一定要把 &lt;code class=&quot;highlighter-rouge&quot;&gt;时效&lt;/code&gt; 的重要性，&lt;strong&gt;铭记在心&lt;/strong&gt;.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;一个非常常见的&lt;strong&gt;高杠杆率&lt;/strong&gt;的活动：&lt;code class=&quot;highlighter-rouge&quot;&gt;传授知识&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;技能&lt;/code&gt;或&lt;code class=&quot;highlighter-rouge&quot;&gt;价值观&lt;/code&gt;给下属：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;新人培训&lt;/strong&gt;：历史、目标、价值观以及管理风格
+    &lt;ul&gt;
+      &lt;li&gt;回答问题：讨论中，回答问题，传达整个公司解决问题的态度&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;业务培训&lt;/strong&gt;：熟悉产品线，培训业务代表，提升销售能力&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;技术培训&lt;/strong&gt;：生产技能的培训，必要时候，组织一个虚拟的培训小组，持续、高效培训，梳理、总结、再提炼知识&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;特别留意，还有&lt;code class=&quot;highlighter-rouge&quot;&gt;负杠杆率&lt;/code&gt;的管理活动，会减少整体的产出：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;开会迟到/缺席&lt;/strong&gt;：会议关键人物，没做准备、迟到、缺席等，都会导致其他参会人员的时间浪费（直接成本），而且还剥夺了他们做其他事情的机会（间接成本）。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;上面都是属于 &lt;code class=&quot;highlighter-rouge&quot;&gt;同时影响多人&lt;/code&gt; 的管理活动。&lt;/p&gt;
+
+&lt;h3 id=&quot;18-简单动作大影响&quot;&gt;1.8. 简单动作，大影响&lt;/h3&gt;
+
+&lt;p&gt;下文，说一些&lt;strong&gt;对人影响深远&lt;/strong&gt;的管理活动，这是高杠杆率管理活动的第二类。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;业绩评估&lt;/strong&gt;：需要花几个小时，做好这项工作
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;正杠杆&lt;/strong&gt;：客观评估、给出具体建议和榜样，激励下属，并调整努力方向&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;负杠杆&lt;/strong&gt;：无依据、不客观，影响下属士气，甚至让下属一蹶不振&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;建立索引目录卡&lt;/strong&gt;：有点费事，需要多做一步，但对全面掌握信息，高效工作、高效信息传达，影响深远&lt;/li&gt;
+  &lt;li&gt;经理人的士气：悲观 vs. 希望
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;一片愁云&lt;/strong&gt;：走入死胡同，看不到希望，就会一片愁云，会影响士气&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;充满希望&lt;/strong&gt;：看到可达路径，看到希望&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;经理人决策：&lt;strong&gt;举棋不定&lt;/strong&gt;
+    &lt;ul&gt;
+      &lt;li&gt;经理人&lt;code class=&quot;highlighter-rouge&quot;&gt;拖延决策&lt;/code&gt;，通常会影响到其他人的工作。&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;拖延决策&lt;/code&gt;，就是错误的决策，不亮绿灯，就表示仍是红灯，整个组织有可能因此停顿。&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Tips:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;一片愁云&lt;/code&gt;和&lt;code class=&quot;highlighter-rouge&quot;&gt;举棋不定&lt;/code&gt;，这两种经理人，都会有很高的&lt;code class=&quot;highlighter-rouge&quot;&gt;负杠杆率&lt;/code&gt;。&lt;/p&gt;
+
+  &lt;p&gt;需要&lt;code class=&quot;highlighter-rouge&quot;&gt;充满希望&lt;/code&gt;和&lt;code class=&quot;highlighter-rouge&quot;&gt;果断坚决&lt;/code&gt;，进行改善。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;开展培训&lt;/code&gt; 如果没有做好，重新开办培训就行了，但是&lt;code class=&quot;highlighter-rouge&quot;&gt;一片愁云&lt;/code&gt;和&lt;code class=&quot;highlighter-rouge&quot;&gt;举棋不定&lt;/code&gt; 却影响非常大。&lt;/p&gt;
+
+&lt;p&gt;另外，一个典型的负杠杆率动作，就是 &lt;code class=&quot;highlighter-rouge&quot;&gt;上级过渡干涉&lt;/code&gt; 下属的具体工作：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;现象&lt;/strong&gt;：上级用了&lt;strong&gt;太多&lt;/strong&gt;的&lt;strong&gt;技能性&lt;/strong&gt;的&lt;strong&gt;指令&lt;/strong&gt;（不论他是不是真懂）&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;影响&lt;/strong&gt;：下属逐渐变得畏首畏尾，丧失解决问题的信息和直觉，如此循环下去，组织的产出就会减少&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;通过 &lt;code class=&quot;highlighter-rouge&quot;&gt;对话提问&lt;/code&gt; 式的沟通，可以给出自己的担忧，和明确重点问题，通过获得关键问题的解决思路，来掌握当前项目的进展。&lt;/p&gt;
+
+&lt;p&gt;整体来说：特别留意，几种负杠杆率的活动，&lt;code class=&quot;highlighter-rouge&quot;&gt;一片愁云&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;举棋不定&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;过渡干预下属&lt;/code&gt;。&lt;/p&gt;
+
+&lt;h3 id=&quot;19-专家的影响力&quot;&gt;1.9. 专家的影响力&lt;/h3&gt;
+
+&lt;p&gt;第三类高杠杆率的活动，是指一个有&lt;code class=&quot;highlighter-rouge&quot;&gt;特殊技能&lt;/code&gt;或&lt;code class=&quot;highlighter-rouge&quot;&gt;知识&lt;/code&gt;的人，对他人产生影响。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;这些专家，不管是拥有专门的知识、技术，还是对趋势、市场状况的独到见解，都能因而对其他人产生巨大的影响，活动也有高杠杆率。&lt;/li&gt;
+  &lt;li&gt;管理的艺术，在于如何从多项看起来都很重要的活动中，挑出一两项甚至三项最重要的，然后，全心全意去做。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Tips:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;管理的艺术&lt;/strong&gt;，在于如何从&lt;code class=&quot;highlighter-rouge&quot;&gt;多项看起来都很重要的活动&lt;/code&gt;中，&lt;code class=&quot;highlighter-rouge&quot;&gt;挑出一两项&lt;/code&gt;甚至三项最重要的，然后，全心全意去做。 识别重点、把握重点。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;对我而言，留心顾客的抱怨，具有极高的杠杆率：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;收集信息：汇总、集中思考观察到的抱怨 and 建议&lt;/li&gt;
+  &lt;li&gt;筛选：根据经验，筛选出一些值得好好研究、分析的建议，这就是管理的艺术了&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;110-授权也有杠杆率&quot;&gt;1.10. 授权也有杠杆率&lt;/h3&gt;
+
+&lt;p&gt;不同职级，存在不同的核心职责，就存在授权。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;授权人&lt;/strong&gt;和&lt;strong&gt;被授权人&lt;/strong&gt;之间，高效的授权，有一个必要条件：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;相同的信息基础&lt;/li&gt;
+  &lt;li&gt;彼此认同的方法：开展工作和解决问题上&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;如果没有上述基础，就存在 &lt;code class=&quot;highlighter-rouge&quot;&gt;上级干涉&lt;/code&gt; 的问题。&lt;/p&gt;
+
+&lt;p&gt;授权之后，需要明确 2 件事，才能有较高的杠杆率：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;明确已经授权&lt;/strong&gt;：让被授权人，明确自己已经被授权&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;明确授权范围&lt;/strong&gt;：清晰的授权范围&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Tips:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;没有完备&lt;code class=&quot;highlighter-rouge&quot;&gt;监督计划&lt;/code&gt;，授权等于渎职。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;监督计划，采取明确里程碑、定期汇报进展。&lt;/p&gt;
+
+&lt;h3 id=&quot;111-监督原则&quot;&gt;1.11. 监督原则&lt;/h3&gt;
+
+&lt;p&gt;监督授权，方法跟之前的品质管理极为相似：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;在产品&lt;strong&gt;价值最低&lt;/strong&gt;的阶段，进行监督：例如，在报告的框架已经成型时，就进行审阅，避免优化漂亮之后，才发现其中的错误；&lt;/li&gt;
+  &lt;li&gt;设定&lt;strong&gt;检查频率&lt;/strong&gt;：定期汇报、不定期抽查，根据员工对授权项目的熟悉程度，确定频率和抽查周期。
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;熟悉程度&lt;/strong&gt;：是针对授权项目的熟悉程度，而不是针对一般事情通用逻辑而言，下属渐入佳境后，可以降低抽查频率&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;深入关键细节&lt;/strong&gt;：充分借鉴质量管理的原则，次数上，不应扰民，建议，监督他们&lt;code class=&quot;highlighter-rouge&quot;&gt;制定决策&lt;/code&gt;的过程。
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;要求&lt;/strong&gt;：授权员工，将细节想清楚&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;方式&lt;/strong&gt;：提问，重要的问题，来检测他是不是真的仔细考虑过&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Tips：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;经理人，应该不定期的&lt;code class=&quot;highlighter-rouge&quot;&gt;深入了解细节&lt;/code&gt;，而且在&lt;code class=&quot;highlighter-rouge&quot;&gt;次数上&lt;/code&gt;，应该&lt;code class=&quot;highlighter-rouge&quot;&gt;不扰民&lt;/code&gt;，以确保项目以&lt;strong&gt;合理速度进行&lt;/strong&gt;为限。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;112-提高管理活动的速度&quot;&gt;1.12. 提高管理活动的速度&lt;/h3&gt;
+
+&lt;p&gt;提高管理活动的速度，几个基本原则：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;一件事情，不要做两次&lt;/li&gt;
+  &lt;li&gt;只&lt;code class=&quot;highlighter-rouge&quot;&gt;站着开会&lt;/code&gt;：突出重点，快速开会&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;参考生产管理规则，具体的操作：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;找出限制步骤&lt;/strong&gt;：例如，员工培训
+    &lt;ol&gt;
+      &lt;li&gt;明确进行的时间和人员&lt;/li&gt;
+      &lt;li&gt;授课前，提前准备&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;类似工作，集中一起处理：例如，准备工作&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;安排好你的日程表&lt;/strong&gt;：合理、可预期
+    &lt;ol&gt;
+      &lt;li&gt;日程表：预测管理工作&lt;/li&gt;
+      &lt;li&gt;日程表：不仅是，&lt;code class=&quot;highlighter-rouge&quot;&gt;该做什么事情&lt;/code&gt;的仓库，而应该是&lt;code class=&quot;highlighter-rouge&quot;&gt;生产计划工具&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;具体操作：
+        &lt;ol&gt;
+          &lt;li&gt;重要可预期的工作：先确定，在指定时间，必须要完成的工作，再将其他重要但时间较有弹性的工作，穿插进来&lt;/li&gt;
+          &lt;li&gt;超负荷工作：超出自己负荷的工作，坚决说不，明白的表示不行或者婉言谢绝&lt;/li&gt;
+          &lt;li&gt;弹性空间：不要把日程拍得太紧，适当的缓冲时间&lt;/li&gt;
+        &lt;/ol&gt;
+      &lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;建立指标&lt;/strong&gt;：工作负荷，是否已经满载，有个指标标识，如何判断指标，靠自己的经验和直觉&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;存货法&lt;/strong&gt;：提高部门长期生产力的项目。
+    &lt;ol&gt;
+      &lt;li&gt;如果没有存货，则，经理人一有空挡，就想去干涉下属的工作。&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;标准化&lt;/strong&gt;：同样的事情，倾向使用相同的方法处理，更高效
+    &lt;ol&gt;
+      &lt;li&gt;建立标准化的处理程序，同时，应该继续因地制宜，思考有没有更好的方法&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Tips:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;首先，我们要找出&lt;code class=&quot;highlighter-rouge&quot;&gt;限制步骤&lt;/code&gt;，有一些活动，对经理人来说，是&lt;code class=&quot;highlighter-rouge&quot;&gt;非做不可&lt;/code&gt;的，在日程中&lt;strong&gt;一定要排进去&lt;/strong&gt;.&lt;/p&gt;
+
+  &lt;p&gt;其次，再将其他活动，&lt;code class=&quot;highlighter-rouge&quot;&gt;围绕这些重要性高的事情&lt;/code&gt;来规划.&lt;/p&gt;
+
+  &lt;p&gt;对于，超过你工作负荷的事，必须说不！因为如果接受了一件事情，而后来无法交差，其结果跟一开始拒绝是一样的，甚至更糟糕。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;113-你应该有多少个下属&quot;&gt;1.13. 你应该有多少个下属？&lt;/h3&gt;
+
+&lt;p&gt;管理杠杆率中，有个重要的变量：&lt;strong&gt;下属的人数&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;p&gt;Tips：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;如果下属人数不够，经理人的杠杆率，会降低很多；而，下属人数太多，同样也没有效率.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;一般，围绕两类经理人：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;初级经理人：负责 &lt;code class=&quot;highlighter-rouge&quot;&gt;带人&lt;/code&gt; 为主要任务&lt;/li&gt;
+  &lt;li&gt;中高级经理人：负责方向把握（方向决策、给出建议等）&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;无论是上面哪一类，都应该记住：&lt;strong&gt;6~8 个下属&lt;/strong&gt;的原则。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;6~8 个原则&lt;/strong&gt;，背后的逻辑：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;本质&lt;/strong&gt;：经理人，一周要在一个下属身上，花费 0.5 天左右时间（0.8~1 左右）&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;过多&lt;/strong&gt;：如果每个下属，分配 2 天，就产生&lt;code class=&quot;highlighter-rouge&quot;&gt;过度干扰&lt;/code&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;过少&lt;/strong&gt;：如果每个下属，分配 1 个小时，基本无法聊到正事&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;114-干扰和突发状况&quot;&gt;1.14. 干扰和突发状况&lt;/h3&gt;
+
+&lt;p&gt;经理人的工作，要朝着&lt;code class=&quot;highlighter-rouge&quot;&gt;制造工厂&lt;/code&gt;前进：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;制造工厂：预测生意、做好准备，计划模式&lt;/li&gt;
+  &lt;li&gt;修车厂：等着生意上门，接单模式&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Tips:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;突发情况，无法避免，但是需要提前发现和预判，通过在 &lt;code class=&quot;highlighter-rouge&quot;&gt;黑箱&lt;/code&gt; 上 &lt;code class=&quot;highlighter-rouge&quot;&gt;开窗&lt;/code&gt;，增加观察指标的方式，找出哪些事情，未来可能造成麻烦，提前发现问题。&lt;/p&gt;
+
+  &lt;p&gt;经常被经理人提出来的问题，是那些突发的情况，难以控制的干扰。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;如何解决突发情况和干扰，下面 2 种方式，是误区，不可取：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;躲起来：找个地方躲起来，这样便有属于自己的时间&lt;/li&gt;
+  &lt;li&gt;免扰：设定一个时间段，免打扰&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;115-解决良方&quot;&gt;1.15. 解决良方&lt;/h3&gt;
+
+&lt;p&gt;面对干扰和突发情况，可以采用生产管理的 &lt;code class=&quot;highlighter-rouge&quot;&gt;标准化&lt;/code&gt; 原则。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;问题归类&lt;/strong&gt;：准备好处理方案，减少处理时间&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;集中处理&lt;/strong&gt;：类似的问题，集中起来，一起解决&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;问题的关键点&lt;/strong&gt;：你的顾客，也是有事才来相求，但你可以提供&lt;strong&gt;多元化&lt;/strong&gt;的&lt;code class=&quot;highlighter-rouge&quot;&gt;就诊途径&lt;/code&gt;（例如定期开会 or 找个特别的时间），来处理他们的问题。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;定期开会&lt;/li&gt;
+  &lt;li&gt;特别的时间&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;我们学到的是：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;建立处理问题的模式：分类、CaseStudy 知识库&lt;/li&gt;
+  &lt;li&gt;化不规律，为规律：集中时间处理&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;这些方式，处理干扰事项。&lt;/p&gt;
+
+&lt;h2 id=&quot;2-管理的必经之路开会&quot;&gt;2. 管理的必经之路：开会&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;会议，作为管理活动的媒介。&lt;/p&gt;
+
+  &lt;p&gt;你绝对无法避免开会，但你可以让会议更有效率。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;先说一个经验结论：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;现实情况中，&lt;code class=&quot;highlighter-rouge&quot;&gt;过程导向&lt;/code&gt;的会议，大约能处理 &lt;code class=&quot;highlighter-rouge&quot;&gt;80%&lt;/code&gt; 的事情，剩下 &lt;code class=&quot;highlighter-rouge&quot;&gt;20%&lt;/code&gt; 需要依赖&lt;code class=&quot;highlighter-rouge&quot;&gt;任务导向&lt;/code&gt;的会议来解决。&lt;/p&gt;
+
+  &lt;p&gt;德鲁克说，如果经理人将超过 &lt;code class=&quot;highlighter-rouge&quot;&gt;25%&lt;/code&gt; 的时间，用在开会上，这个组织，就可能出了问题。&lt;/p&gt;
+
+  &lt;p&gt;Andy 觉得，必须改成：如果经理人，将超过 &lt;code class=&quot;highlighter-rouge&quot;&gt;25%&lt;/code&gt; 的时间，用在&lt;code class=&quot;highlighter-rouge&quot;&gt;应急&lt;/code&gt;的&lt;code class=&quot;highlighter-rouge&quot;&gt;任务导向&lt;/code&gt;会议上，这个组织就一定有了毛病。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;会议&lt;/strong&gt;，作为管理活动的媒介，需要支撑下述几类活动：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;提供信息与技术&lt;/li&gt;
+  &lt;li&gt;将理想的行事方法，传授给他人&lt;/li&gt;
+  &lt;li&gt;提出建议&lt;/li&gt;
+  &lt;li&gt;制定决策&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;针对上述 4 种管理活动，会议分为 2 类：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;过程导向&lt;/strong&gt;：定期举行，信息交流、知识技能共享&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;任务导向&lt;/strong&gt;：解决特定问题，不定期举行，通常会制定决策&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;21-过程导向的会议&quot;&gt;2.1. 过程导向的会议&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;规律化&lt;/strong&gt;，是提升会议效率的最好的方法。&lt;/p&gt;
+
+&lt;p&gt;会议之前，与会人员，都达成一个共识：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;会议的运作方式&lt;/strong&gt;：时间、过程、人员&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;需要讨论的焦点&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;需要达成的目标&lt;/strong&gt;&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;现实场景中，过程导向的会议，可以分为 3 类：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;一对一会议&lt;/li&gt;
+  &lt;li&gt;部门会议&lt;/li&gt;
+  &lt;li&gt;运营总结会议&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;211-一对一会议&quot;&gt;2.1.1. 一对一会议&lt;/h4&gt;
+
+&lt;p&gt;几个基本问题：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;什么作用？&lt;/li&gt;
+  &lt;li&gt;讨论什么内容？&lt;/li&gt;
+  &lt;li&gt;多长时间，进行一次？&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;作用：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;维系双方从属关系，是最主要的方式&lt;/li&gt;
+  &lt;li&gt;互通信息，彼此学习&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;主要内容：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;特定事项，讨论&lt;/li&gt;
+  &lt;li&gt;上司：将技能、经验传授给下属，并建议切入问题的方式&lt;/li&gt;
+  &lt;li&gt;下属：将工作中，遇到的问题，进行汇报&lt;/li&gt;
+  &lt;li&gt;绩效数字：例如下属用来作为指标的订单量、生产量、项目进度等&lt;/li&gt;
+  &lt;li&gt;有问题的指标，应该特别强调&lt;/li&gt;
+  &lt;li&gt;上次 1-1 会议之后，发生的任何重要的事情，无论是招聘，人事、组织的问题，还有未来的规则等都可以拿出来讨论&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;会议频率：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;基于下属对具体工作的熟悉程度，不是一般性的概括经验；&lt;/li&gt;
+  &lt;li&gt;如果处理的是一个新项目，应该提高开会频率，比如一周一次；&lt;/li&gt;
+  &lt;li&gt;如果下属已经游刃有余，一个月一次就可以了；&lt;/li&gt;
+  &lt;li&gt;让下属，有充足的时间，提出一些棘手的问题；&lt;/li&gt;
+  &lt;li&gt;会议时间，建议 0.5~1h，给出充足时间沟通；&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;其他要点：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;下属的会议：1-1 会议，完全由下属负责主导，预订会议室、掌握会议节奏&lt;/li&gt;
+  &lt;li&gt;提前准备会议纲要：双方提前仔细考虑，提出讨论的议题&lt;/li&gt;
+  &lt;li&gt;上司：是一个协调者，让下属能畅所欲言，他的工作情况或者不顺的情况&lt;/li&gt;
+  &lt;li&gt;上司：集学生和教练于一身&lt;/li&gt;
+  &lt;li&gt;再多问一个问题：让下属主动表达，而不是你去告诉&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;1-1 会议，更优效率，可借鉴的操作：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;上司、下属，都应该有会议纲要，并在会议中做笔记：
+    &lt;ul&gt;
+      &lt;li&gt;笔记：会议中，集中精神&lt;/li&gt;
+      &lt;li&gt;笔记：强迫自己，对信息，逻辑分类&lt;/li&gt;
+      &lt;li&gt;笔记：有效吸收信息&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;态度：重要的是写下来这个动作，表示一种承诺，对方感知到自己的理解进度&lt;/li&gt;
+  &lt;li&gt;建立存档：有效节省时间的方式，将重要但不紧急的事情，记录到笔记中，留待下次讨论&lt;/li&gt;
+  &lt;li&gt;心里话：鼓励下属在 1-1 会议中，说一些心里话，了解下属平常不愿意讲的工作问题，例如
+    &lt;ul&gt;
+      &lt;li&gt;对他绩效的满意程度&lt;/li&gt;
+      &lt;li&gt;是不是遇到挫折 or 阻碍&lt;/li&gt;
+      &lt;li&gt;是否对未来产生了怀疑&lt;/li&gt;
+      &lt;li&gt;Note：注意时机，要预留相对充足的时间&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;电话会议：跨地域的公司，非常有必要进行电话会议，并且，需要事前准备，都提前获得会议纲要，并且要做笔记，会议后，建议交换笔记。&lt;/li&gt;
+  &lt;li&gt;下次会议：对于过程导向的会议，在每一次会议结束前，都应该计划下一次会议的时间，因为是可预期的。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Tips:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;上司下属，公司中，经常见面，无法替代 1-1 的会议&lt;/p&gt;
+
+  &lt;p&gt;应对特定问题的任务导向会议，也无法替代 1-1 的会议&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;一对一会议的杠杆率：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;一对一会议：一次 1h 左右，会对下属接下来 2 周以上工作（80h），产生非常高的品质工作&lt;/li&gt;
+  &lt;li&gt;增进对下属工作的了解&lt;/li&gt;
+  &lt;li&gt;成功授权的基础：
+    &lt;ul&gt;
+      &lt;li&gt;上司和下属之间，建立共同的信息基础&lt;/li&gt;
+      &lt;li&gt;近似的处世方式&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;做好决策的基础：从下属身上学到的东西，绝对很重要&lt;/li&gt;
+  &lt;li&gt;严肃的谈一些，细微且复杂的事情&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;212-部门会议&quot;&gt;2.1.2. 部门会议&lt;/h4&gt;
+
+&lt;p&gt;&lt;strong&gt;部门会议&lt;/strong&gt;，参与人员涵盖了主管和下属，同事之间互动的机会。&lt;strong&gt;同事之间的互动&lt;/strong&gt;，尤其涉及&lt;code class=&quot;highlighter-rouge&quot;&gt;制定决策&lt;/code&gt;的时候，是做好管理工作的关键之一。&lt;/p&gt;
+
+&lt;p&gt;几个问题：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;会议内容？&lt;/li&gt;
+  &lt;li&gt;会议风格？天马行空 or 按部就班？&lt;/li&gt;
+  &lt;li&gt;上司的角色？ 主导会议 or 在旁观战？&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;会议内容：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;牵涉 2 个以上下述的问题&lt;/li&gt;
+  &lt;li&gt;如果某个问题，成为了，只有 2 个下属之间的对话，需要尽快打断，让他们私下再谈&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;会议的风格：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;整体：按部就班 + 天马行空&lt;/li&gt;
+  &lt;li&gt;按部就班：
+    &lt;ul&gt;
+      &lt;li&gt;有计划的进行&lt;/li&gt;
+      &lt;li&gt;与会人员，提前周知讨论的焦点&lt;/li&gt;
+      &lt;li&gt;共享会议资料&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;天马行空：保留一段开放时间，大家畅所欲言，也可以提前确定讨论主题。（例如，如何开会）&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;上司的风格：涵盖所有内容，需要因时而变&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;领导 or 旁观：领导会议进行 or 在旁观战？&lt;/li&gt;
+  &lt;li&gt;建议 or 决策：密切监视会议进展 or 直接参与发问和决策制定？&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Tips：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;部门会议中，上司的角色，不能包括 &lt;code class=&quot;highlighter-rouge&quot;&gt;主讲人&lt;/code&gt;。&lt;/p&gt;
+
+  &lt;p&gt;开部门会议，主要目的：&lt;strong&gt;自由讨论&lt;/strong&gt;&lt;/p&gt;
+
+  &lt;p&gt;如果经理人，扮演一个高高在上，并借此机会运用权势，开始一言堂，就违背了会议精神和目标。&lt;/p&gt;
+
+  &lt;p&gt;经理人，在会议中的最主要角色，是&lt;code class=&quot;highlighter-rouge&quot;&gt;协调者&lt;/code&gt;，负责&lt;strong&gt;聚焦主题&lt;/strong&gt;、&lt;strong&gt;控制会议的进度&lt;/strong&gt;和&lt;strong&gt;化解纠纷&lt;/strong&gt;。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;一个示意图：上司在部门会议中的角色，会议的理想状态：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/build-team-series/high-output-management/location-of-manager-in-conference.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;h4 id=&quot;213-运营总结会议&quot;&gt;2.1.3. 运营总结会议&lt;/h4&gt;
+
+&lt;p&gt;几个要点：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;会议人员？&lt;/li&gt;
+  &lt;li&gt;会议内容？&lt;/li&gt;
+  &lt;li&gt;会议风格？&lt;/li&gt;
+  &lt;li&gt;会议目标？&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;运营总结会议，是面向不常合作的同事，能有机会向其他同事，介绍他们工作的内容，并使大家对公司有更深的了解。&lt;/p&gt;
+
+&lt;p&gt;Tips：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;英特尔，运营总结会议，最主要的目的：&lt;/p&gt;
+
+  &lt;p&gt;让因组织关系而没有机会开一对一或部门会议的人，也能有机会彼此学习和分享经验。&lt;/p&gt;
+
+  &lt;p&gt;这对新进 or 资深经理人都有好处。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;关键作用：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;初级经理人：从资深经理人的批评、意见 or 建议中获益&lt;/li&gt;
+  &lt;li&gt;资深经理人：通过初级经理人，深入了解问题细节，对问题有另一层的认识&lt;/li&gt;
+  &lt;li&gt;激励作用：经理人在会上，提出方案时，会力求表现
+    &lt;ul&gt;
+      &lt;li&gt;注意：期望获取上司的关注&lt;/li&gt;
+      &lt;li&gt;存在感：期望从同事中，脱颖而出&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;运营总结会议，其中涉及哪些重要角色呢？&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;会议召集人：提案人的上司，负责组织会议，安排设备、时间、地点，以及提醒会议的时间、会议重点和结论&lt;/li&gt;
+  &lt;li&gt;总结负责人：以身作则，带动自由讨论&lt;/li&gt;
+  &lt;li&gt;提案人：让与会人员，理解提案的目标以及关键点
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;辅助&lt;/strong&gt;：充分利用辅助器材，幻灯片 or 投影仪&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;多途径&lt;/strong&gt;：人在吸收信息时，视觉、听觉，同等重要&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;目标&lt;/strong&gt;：与会者理解，而不是炫技&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;时间&lt;/strong&gt;：一般 1 张 ppt：4 mins 时间，最好是图形 or 统计数字&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;观察&lt;/strong&gt;：观察与会人的表情和动作，判断他们是否听懂 or 希望重述一遍，or 希望快速结束&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;其他与会者：
+    &lt;ul&gt;
+      &lt;li&gt;正面：专心听别人讲，并记下那些或许值得尝试的事情
+        &lt;ul&gt;
+          &lt;li&gt;不懂 or 有其他意见，就尽管去问&lt;/li&gt;
+          &lt;li&gt;开会，也是职责之一&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;负面：打哈欠、埋头看其他资料，还不如不来，因为会影响其他人的信心&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Tips:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;过程导向&lt;/strong&gt;的会议，都是&lt;code class=&quot;highlighter-rouge&quot;&gt;固定频率&lt;/code&gt;召开，&lt;code class=&quot;highlighter-rouge&quot;&gt;事先规划&lt;/code&gt;好，会议以&lt;strong&gt;信息交流&lt;/strong&gt;为主。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;22-任务导向的会议&quot;&gt;2.2. 任务导向的会议&lt;/h3&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;任务导向&lt;/code&gt;的会议：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;时间&lt;/strong&gt;：随时召开&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;目标&lt;/strong&gt;：必须产生决策&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Tips:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;任务导向&lt;/strong&gt;的会议，关键在于&lt;code class=&quot;highlighter-rouge&quot;&gt;会议主席&lt;/code&gt;，通常是&lt;code class=&quot;highlighter-rouge&quot;&gt;最在乎这场会议结果&lt;/code&gt;的人，来担任。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;会议主席，要做的工作：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;会议该如何进行？&lt;/li&gt;
+  &lt;li&gt;有哪些决策，需要制定？&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;召开会议之前，先问问你自己：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;目标：我有什么任务，要通过这场会议达成？&lt;/li&gt;
+  &lt;li&gt;必要性：是不是有必要开会？&lt;/li&gt;
+  &lt;li&gt;建议：如果还有一点迟疑 or 还有其他办法可以达成目标，就先不要急着开会&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Tips:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;如果你&lt;strong&gt;不知道&lt;/strong&gt;自己想要的&lt;strong&gt;是什么&lt;/strong&gt;，就&lt;strong&gt;不会得到&lt;/strong&gt;自己想要的。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;如果现在，确定必须要开一场会议，会议的主席，需要马上做一连串的事情：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;参会人员&lt;/strong&gt;：确定关键人员，并且明确确定，是否能够出席会议（或其他人替代），尽快通知&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;参会人数&lt;/strong&gt;：6~7 人，有些费力，最多 8 个人，是上限。&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;会议纲要&lt;/strong&gt;：提前、明确周知各方&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;会议纪律&lt;/strong&gt;：准时、每个人都明确自己的工作&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;固定进展&lt;/strong&gt;：会议一旦结束，主席需要，同步会议记录，涵盖会议决策以及采用的方案；时效性很重要，越快越好。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Tips：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;决策会议，绝不允许有人 &lt;code class=&quot;highlighter-rouge&quot;&gt;隔山观虎斗&lt;/code&gt;，这种旁观者，只会阻碍决策进行。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;理想状态中，经理人，应该避免开紧急且重要的&lt;strong&gt;任务导向&lt;/strong&gt;会议，因为，所有的事情，都在例行的&lt;strong&gt;过程导向&lt;/strong&gt;会议中处理好了。&lt;/p&gt;
+
+&lt;h2 id=&quot;3-不挥舞权杖的决策&quot;&gt;3. 不挥舞权杖的决策&lt;/h2&gt;
+
+&lt;p&gt;Tips:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;我们希望，&lt;strong&gt;决策&lt;/strong&gt;是由&lt;code class=&quot;highlighter-rouge&quot;&gt;离问题最近&lt;/code&gt;、且&lt;code class=&quot;highlighter-rouge&quot;&gt;最了解问题&lt;/code&gt;的人制定的。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;关于&lt;strong&gt;传统行业&lt;/strong&gt;和&lt;strong&gt;科技公司&lt;/strong&gt;，决策是有差异的：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;传统行业&lt;/strong&gt;：管理层级清晰，位高就权重，职位高的人，制定决策的能力或权限就很大&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;科技公司&lt;/strong&gt;：决策不完全由职位决定，掌握知识而职位不高的决策新秀也会脱颖而出
+    &lt;ol&gt;
+      &lt;li&gt;生存：公司靠掌握的知识，来生存与发展&lt;/li&gt;
+      &lt;li&gt;共存：知识的力量、职位的力量，之间既存在分歧，也存在共识，尽可能实现统一&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;31-理想的决策&quot;&gt;3.1. 理想的决策&lt;/h3&gt;
+
+&lt;p&gt;理想的决策过程，分 3 个阶段，形成一个闭环：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;自由讨论：充分的收集信息和思考逻辑&lt;/li&gt;
+  &lt;li&gt;清楚的决策：根据信息，依赖可信的逻辑，做出清晰的决策&lt;/li&gt;
+  &lt;li&gt;全力执行：基于上一步中的决策，全力执行，确保达到目标&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;上面 3 个阶段：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/build-team-series/high-output-management/ideal-decision-progress.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Tips:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;民主&lt;/strong&gt; &amp;amp; &lt;strong&gt;专制&lt;/strong&gt;：讨论民主 + 执行专制&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;311-自由讨论&quot;&gt;3.1.1. 自由讨论&lt;/h4&gt;
+
+&lt;p&gt;自由讨论阶段，常会遇到下面问题：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;倾向上级：讨论中，与会人，逐渐想知道别人的想法，特别是老板的想法，并在此后再开口，支持上司的观点&lt;/li&gt;
+  &lt;li&gt;知识偏离：公司依赖知识生存和发展，但决策过程中，真正掌握知识的人，并未贡献他们的知识与能力。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Tips:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;ol&gt;
+    &lt;li&gt;
+      &lt;p&gt;提前铺垫：提前整理方案，吹风，并引导大家的想法&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;知识全面：个人认知，要超越整个团队，全局重点的把握，人和事情&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/blockquote&gt;
+
+&lt;h4 id=&quot;312-清楚的决策&quot;&gt;3.1.2. 清楚的决策&lt;/h4&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;决策的关键&lt;/strong&gt;：清晰、清楚、明白，不模糊。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;决策过程中，常见的问题：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;模糊：决策的分歧较大的时候，倾向做出模糊的决策，讨好多数人&lt;/li&gt;
+  &lt;li&gt;问题：口头上，含糊的决策，绝对解决不了问题&lt;/li&gt;
+  &lt;li&gt;预期：模糊的决策，会导致事情无法推进，所有人都会不满&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h4 id=&quot;313-全力执行&quot;&gt;3.1.3. 全力执行&lt;/h4&gt;
+
+&lt;p&gt;客观事实：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;无法让所有人，都对决策完全满意；&lt;/li&gt;
+  &lt;li&gt;不存在，所有人都满意的决策；&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;所有人，都应该有一个基本共识：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;对集体的决策，即使不统一时，也能接受，并坚决执行。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;32-对基层授权&quot;&gt;3.2. 对基层授权&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;授权&lt;/strong&gt;：决策的制定以及执行，应交给一线经理/组长，他们&lt;strong&gt;离问题最近&lt;/strong&gt;，并且具备&lt;strong&gt;专业知识&lt;/strong&gt;和经验。&lt;/p&gt;
+
+&lt;p&gt;Tips：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;平等要看得见，例如，座位、吃饭等等&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;33-情绪同级群体综合征&quot;&gt;3.3. 情绪：同级群体综合征&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;同级群体综合征&lt;/strong&gt;：同级别同事之间，无法做出&lt;code class=&quot;highlighter-rouge&quot;&gt;客观&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;合理&lt;/code&gt;的&lt;strong&gt;决策&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;同级群体综合征，本质原因：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;情绪反应：参与制定决策的人，都有自尊、野心、恐惧以及缺乏安全感等情绪反应&lt;/li&gt;
+  &lt;li&gt;不熟悉：相互不熟悉的人，被凑在一起，情绪反应很容易浮现&lt;/li&gt;
+  &lt;li&gt;情绪放大：同级别或者无级别的一群人，在不熟悉的情况下，情绪反应更加明显&lt;/li&gt;
+  &lt;li&gt;破解循环：增加一个高一级别的人，来控制会议的主题和争议，很快会达成一致&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Tips：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;同级群体再加一&lt;/strong&gt;：当一群职位相当的人，要一起开会时，需要有一个职位再高一级的人参与会议，他不见得最能干 or 最具备专业知识，但，能够有效控制会议进行。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;34-趋同不想和别人意见不同&quot;&gt;3.4. 趋同：不想和别人意见不同&lt;/h3&gt;
+
+&lt;p&gt;背景：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;大部分人，都习惯当&lt;code class=&quot;highlighter-rouge&quot;&gt;缩头乌龟&lt;/code&gt;，不想跟别人的&lt;code class=&quot;highlighter-rouge&quot;&gt;意见不同&lt;/code&gt;，懒于思考。（没有&lt;strong&gt;自由贡献&lt;/strong&gt;自己的知识）&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;客观规律：讨论过程中，一般分为几个阶段&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;试探期&lt;/strong&gt;：开会时，前段会存在一个试探期，大家开始琢磨彼此的立场和想法&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;冒险期&lt;/strong&gt;：有人冒险提出一己之见&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;共识期&lt;/strong&gt;：有人感知到共识，并以&lt;code class=&quot;highlighter-rouge&quot;&gt;我想我们的意见（看法）...&lt;/code&gt; 语调表述&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;坚定期&lt;/strong&gt;：一开始上述共识，可能很薄弱，只要其他人员买他的账，立场就越发坚定&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Note：上面的情况，跟之前的等待上司表态，有差异：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;之前是：等待最高领导提出立场&lt;/li&gt;
+  &lt;li&gt;当前是：等待共识的形成，然后推波助澜，没有客观贡献自己的知识&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;根本原因&lt;/strong&gt;：自信心不足，自信心是以客观接受&lt;code class=&quot;highlighter-rouge&quot;&gt;犯错误无法避免，但可以尽量降低&lt;/code&gt;的前提之下。&lt;/p&gt;
+
+&lt;p&gt;Tips: 如果在会场中，发现，同级群体综合征迹象，但没有一个正式主席时&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;谁最关心结果，谁就应该站出来（结果利害相关方）&lt;/li&gt;
+  &lt;li&gt;如果找不到利害相关方，则，最资深的人当头&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;明确的责任人，来主导会议，会提供 2 方面的工作：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;跟进：跟进制定决策的过程&lt;/li&gt;
+  &lt;li&gt;信息：为参会者，制定决策，提供信息&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;35-怕大家觉得自己笨&quot;&gt;3.5. 怕大家觉得自己笨&lt;/h3&gt;
+
+&lt;p&gt;背景：大部分人，不会表达自己的意见。&lt;/p&gt;
+
+&lt;p&gt;本质原因：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;低层级的人，担心自己的意见被驳回，丢面子，不愿意发言&lt;/li&gt;
+  &lt;li&gt;有权利的高层级，可能专业上薄弱，怕人家觉得自己笨，不愿发言&lt;/li&gt;
+  &lt;li&gt;知识能力较强的人，并不喜欢市场因素介入决策，他们常抱怨&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Tips：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;必须自信，自己具备聪明才智以及意志力，可以克服意见不被采纳的恐惧，参与讨论，并表述自己的主张。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;人的反应，分为 2 个层级：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;本能：低层级的本能情绪&lt;/li&gt;
+  &lt;li&gt;逻辑：受教育之后，逻辑反应，合理的沟通&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;沟通的前提&lt;/strong&gt;：参与沟通的 2 人，都在&lt;code class=&quot;highlighter-rouge&quot;&gt;逻辑层面&lt;/code&gt;进行沟通；沟通之前，通过提问等方式，期望双方，都处于&lt;code class=&quot;highlighter-rouge&quot;&gt;逻辑层面&lt;/code&gt;。&lt;/p&gt;
+
+&lt;h3 id=&quot;36-制定决策&quot;&gt;3.6. 制定决策&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;理想状态&lt;/strong&gt;：充分讨论，广集各方观点，以及数据事实，再做出决策。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;实际场景&lt;/strong&gt;中，同级集体再加一，需以权势来做决策。&lt;/p&gt;
+
+&lt;p&gt;Tips：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;避免早产：绝对不要让你的决策早产，把握合理时机&lt;/li&gt;
+  &lt;li&gt;足够信息：确定已经在讨论中跟，收集到足够的信息，而非泛泛之言&lt;/li&gt;
+  &lt;li&gt;坚决决策：马上进入促成共识阶段，即使无法达成共识，也仍需进入决策阶段&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;会议主席，在决策之前，6 个要点，必须充分掌握：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;决策焦点：选择题，清晰的目标&lt;/li&gt;
+  &lt;li&gt;决策的时限：不是当前会议的时限，而是决策本身，需要给实施留出足够的时间&lt;/li&gt;
+  &lt;li&gt;决策人：哪个人是利害最相关方&lt;/li&gt;
+  &lt;li&gt;决策前，应该咨询谁：提前准备知识、获取知识和建议
+    &lt;ul&gt;
+      &lt;li&gt;提出一系列问题&lt;/li&gt;
+      &lt;li&gt;了解他们收集信息的途径以及可信度&lt;/li&gt;
+      &lt;li&gt;以及他们的思考逻辑&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;谁对此决策一言九鼎，可以全盘否定&lt;/li&gt;
+  &lt;li&gt;决策后，告知的对象：上级，同步信息&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;37-实例应用&quot;&gt;3.7. 实例应用&lt;/h3&gt;
+
+&lt;p&gt;一个决策的制定，需要花费大量的精力和时间。&lt;/p&gt;
+
+&lt;p&gt;Tips：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;决策参与人，好不容易达成共识，但被最终决策者，一票否决，会非常令人沮丧，甚至会影响士气以及工作效率。&lt;/li&gt;
+  &lt;li&gt;决策终结者，否定决策后，无法一走了之，需要说明其他决策的合理原因，并给予一段时间，让大家反应一下&lt;/li&gt;
+  &lt;li&gt;决策过程，看似复杂，实际上，客观就是如此，而且决策一向如此&lt;/li&gt;
+  &lt;li&gt;集体决策，通常不易达成，因为集体讨论过程太麻烦，因此，主要决策者，容易倾向于独断&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h2 id=&quot;4-规划为明天&quot;&gt;4. 规划：为明天&lt;/h2&gt;
+
+&lt;p&gt;Tips：规划行动方案之前，一定要先问自己：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;有什么事，是我今天做了，可以让明天更好；&lt;/li&gt;
+  &lt;li&gt;或者，至少让明天不会更糟&lt;/li&gt;
+  &lt;li&gt;做正确的事，而不是容易的事&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;规划的流程：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;预测：判断趋势和方向，预测需求&lt;/li&gt;
+  &lt;li&gt;现状：了解当前处境，判断现状持续下去的影响&lt;/li&gt;
+  &lt;li&gt;路线：基于现状和预测，指定可行的路线，往哪、做多少&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;41-预测外界环境的需求&quot;&gt;4.1. 预测：外界环境的需求&lt;/h3&gt;
+
+&lt;p&gt;界定外界环境：公司内的部门、公司外的标的参照物&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;你们的服务对象&lt;/li&gt;
+  &lt;li&gt;为你们提供服务的对象&lt;/li&gt;
+  &lt;li&gt;你的竞争者：公司内 or 公司外&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/build-team-series/high-output-management/define-external-env.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;要点：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;期望：顾客的期望&lt;/li&gt;
+  &lt;li&gt;现状：顾客对你的绩效，是否满意&lt;/li&gt;
+  &lt;li&gt;工具：有助于改善工作的科技工具的进展，例如当时的邮件通信等新的沟通工具&lt;/li&gt;
+  &lt;li&gt;支持方：为你们服务的部门的绩效&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;两种时间角度，检视环境：当前 &amp;amp; 未来&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;我的顾客，需要我提供什么？&lt;/li&gt;
+  &lt;li&gt;我的顾客，当前，是否感到满意？&lt;/li&gt;
+  &lt;li&gt;未来一年，他们期待，我做什么？&lt;/li&gt;
+  &lt;li&gt;焦点：外界环境、目前的需求、未来一年的需求，之间的差别。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Tips：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;预测外界环境需求时，保持问题的聚焦，不要考虑哪些行动可以解决问题。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;42-现状分析&quot;&gt;4.2. 现状分析&lt;/h3&gt;
+
+&lt;p&gt;Think： &lt;code class=&quot;highlighter-rouge&quot;&gt;现状&lt;/code&gt;是说：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;外部需求现状？&lt;/li&gt;
+  &lt;li&gt;系统建设现状？&lt;/li&gt;
+  &lt;li&gt;其他还有什么现状呢？&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;答：是&lt;code class=&quot;highlighter-rouge&quot;&gt;产出能力&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;产出品质&lt;/code&gt;的现状。&lt;/p&gt;
+
+&lt;p&gt;现状分析时，具体：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;能力：列出自身的能力&lt;/li&gt;
+  &lt;li&gt;事情：正在进行的项目，项目的进度，以及预期完成时间&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Tips：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;ol&gt;
+    &lt;li&gt;
+      &lt;p&gt;不是所有项目都会最终交付，约 80% 会正常、高质量交付&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;项目搁置的原因，需要归纳整理出来，并列入影响产出的预测变量，用于预估&lt;code class=&quot;highlighter-rouge&quot;&gt;产出能力&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;产出品质&lt;/code&gt;。&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;43-缩小差距&quot;&gt;4.3. 缩小差距&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;目标&lt;/strong&gt;：预测未来&lt;code class=&quot;highlighter-rouge&quot;&gt;市场需求&lt;/code&gt;与&lt;code class=&quot;highlighter-rouge&quot;&gt;产出能力&lt;/code&gt;之间的差距，采取改进措施 or 增加新的行动，缩小差距。&lt;/p&gt;
+
+&lt;p&gt;缩小差距，具体动作：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;做哪些动作，可以缩小差距？&lt;/li&gt;
+  &lt;li&gt;基于当前条件，你能做哪些动作？&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;44-规划流程的产出&quot;&gt;4.4. 规划流程的产出&lt;/h3&gt;
+
+&lt;p&gt;几个关键问题：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;规划的眼光，放多长远？
+    &lt;ul&gt;
+      &lt;li&gt;年度规划：通常涵盖 3 年，但事实上，真正被影响到的只有 1 年&lt;/li&gt;
+      &lt;li&gt;执行的内容：
+        &lt;ul&gt;
+          &lt;li&gt;部分：预期，规划中的内容，只有一部分会被实际执行&lt;/li&gt;
+          &lt;li&gt;间隔：两次规划之间，应该留出足够的时间，来做事情，判断决策的效力，以及其正确性&lt;/li&gt;
+        &lt;/ul&gt;
+      &lt;/li&gt;
+      &lt;li&gt;参与制定规划的人：负责运营的经理人，规划的人，应该是执行的人&lt;/li&gt;
+      &lt;li&gt;杠杆率：规划是管理工作中，极高的一环，具有极高的杠杆率&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;判断力和胆识
+    &lt;ul&gt;
+      &lt;li&gt;深思、复盘，锻炼自己的判断力和胆识&lt;/li&gt;
+      &lt;li&gt;对一个方案说是的时候，等于对其他方案说否，因为资源有限&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;45-目标管理&quot;&gt;4.5. 目标管理&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;目的&lt;/strong&gt;：按预期，达到目标&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;前提&lt;/strong&gt;：目标是短期的、明确的、清晰的，明确、简明扼要的描述清楚目标&lt;/p&gt;
+
+&lt;p&gt;Tips：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;如果不知道自己的目标是什么，就无法达到目标，原因很简单，你不知道是什么，就不可能拥有。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;目标管理：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;具体执行&lt;/strong&gt;：就是跟进进度中的关键里程碑&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;年度规划&lt;/strong&gt;，对应的目标，建议以&lt;code class=&quot;highlighter-rouge&quot;&gt;月&lt;/code&gt;为单位，设定目标，以&lt;code class=&quot;highlighter-rouge&quot;&gt;周&lt;/code&gt;为单位，跟进进展&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Tips：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;ol&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;strong&gt;数量&lt;/strong&gt;：如果有太多的目标，精力分散，就相当于没有目标；&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;strong&gt;杠杆率&lt;/strong&gt;：让目标管理，产生最大功效，必须懂得&lt;code class=&quot;highlighter-rouge&quot;&gt;慎定目标&lt;/code&gt;；&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/blockquote&gt;
+
+</content>
+   </entry>
+   
+   <entry>
+     <title>格鲁夫第一课：Chapter 1-早餐店的生产线</title>
+     <link href="http://ningg.github.com/build-team-series-grove-high-output-management-chapter-1/"/>
+     <updated>2018-12-22T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/build-team-series-grove-high-output-management-chapter-1</id>
+     <content type="html">&lt;blockquote&gt;
+  &lt;p&gt;这是《&lt;a href=&quot;https://book.douban.com/subject/1958120/&quot;&gt;格鲁夫给经理人的第一课&lt;/a&gt;》的研究思考，最初想根据自己的理解，给每一章节换个标题，但，想到 Andy 最初的标题，形象的再现了场景，就保留了。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;为了增加大家对 &lt;a href=&quot;https://en.wikipedia.org/wiki/Andrew_Grove&quot;&gt;Andrew Grove&lt;/a&gt; 的了解，简单摘录一段其他地方的介绍：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;当&lt;strong&gt;乔布斯&lt;/strong&gt;和&lt;strong&gt;Larry Ellison&lt;/strong&gt;（Oracle老板）告诉&lt;strong&gt;安迪&lt;/strong&gt;·&lt;strong&gt;格鲁夫&lt;/strong&gt;，他是他们&lt;strong&gt;在硅谷&lt;/strong&gt;唯一&lt;code class=&quot;highlighter-rouge&quot;&gt;愿意效劳&lt;/code&gt;的人时，&lt;strong&gt;格鲁夫&lt;/strong&gt;说你们两个我都不能要，因为他们就是“一对怪人”。&lt;/p&gt;
+
+  &lt;p&gt;他这么说的时候至少有一半是认真的，因为他并没有笑。&lt;/p&gt;
+
+  &lt;p&gt;“没关系，”Oracle的创始人Ellison说：“史蒂夫和我都很敬仰Andy。我们享受跟他在一起的宝贵时光，就算骂你也是那么有个性，那么令人难忘。”&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;更多关于格鲁夫的生平，可以参考：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://36kr.com/p/5045002.html&quot;&gt;格鲁夫，教硅谷如何做生意的人&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.bloomberg.com/news/articles/2016-03-22/andy-grove-the-man-who-taught-silicon-valley-how-to-do-business&quot;&gt;Andy Grove, Who Taught Silicon Valley How to Do Business&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h2 id=&quot;1-单次产品的生产&quot;&gt;1. 单次产品的生产&lt;/h2&gt;
+
+&lt;p&gt;产品的定义：满足需求，被人需要，触达用户/客户&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;品质：基本要求的约束&lt;/li&gt;
+  &lt;li&gt;成本&lt;/li&gt;
+  &lt;li&gt;时间：分阶段的时间（生产、测试、送达）&lt;/li&gt;
+  &lt;li&gt;触达：运送产品&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;11-主体流程&quot;&gt;1.1. 主体流程&lt;/h3&gt;
+
+&lt;p&gt;产品生产的&lt;strong&gt;主体流程&lt;/strong&gt;。&lt;/p&gt;
+
+&lt;p&gt;Tips:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;突发需求：如果生产流程，以应对顾客&lt;code class=&quot;highlighter-rouge&quot;&gt;突发的各种需求&lt;/code&gt;来设计，则会造成产能闲置，或存货成本提高.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;12-瓶颈步骤&quot;&gt;1.2. 瓶颈步骤&lt;/h3&gt;
+
+&lt;p&gt;在主体流程中，找出&lt;strong&gt;瓶颈步骤&lt;/strong&gt;：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;找出瓶颈步骤&lt;/li&gt;
+  &lt;li&gt;拟订并发流程&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;13-生产的三大阶段&quot;&gt;1.3. 生产的三大阶段&lt;/h3&gt;
+
+&lt;p&gt;任何生产，都有 3 大阶段，必不可少：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;制造&lt;/strong&gt;：物理、化学变化&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;组装&lt;/strong&gt;：零件组装成成品（组合策略）&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;测试&lt;/strong&gt;：对零件和最终产品的检查&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;14-应用现实场景&quot;&gt;1.4. 应用：现实场景&lt;/h3&gt;
+
+&lt;p&gt;在现实场景中，应用时，会有额外考量的因素：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;抽象 –&amp;gt; 场景复原&lt;/li&gt;
+  &lt;li&gt;简 –&amp;gt; 繁&lt;/li&gt;
+  &lt;li&gt;确定潜在关键点&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;15-找出最佳策略&quot;&gt;1.5. 找出最佳策略&lt;/h3&gt;
+
+&lt;p&gt;目标：以最低成本，达到理想的运送速度以及品质，即为，最佳策略.&lt;/p&gt;
+
+&lt;h3 id=&quot;16-测试与验货&quot;&gt;1.6. 测试与验货&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;常识&lt;/strong&gt;：连续性作业，并不能自动保证&lt;code class=&quot;highlighter-rouge&quot;&gt;较低的成本&lt;/code&gt;和&lt;code class=&quot;highlighter-rouge&quot;&gt;较好的品质&lt;/code&gt;；需要额外的测试和验货。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;线上检视&lt;/strong&gt;：一种测试方法，通过充分、必要条件的跟踪和监控，不牺牲产品。&lt;/p&gt;
+
+&lt;p&gt;Tips:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;1.原料存货的作用：新进的原料，验货不合格时，可以当场退货，而不会停工。&lt;/p&gt;
+
+  &lt;p&gt;2.原料存货的成本：存储、管理成本。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;17-及早发现及早解决&quot;&gt;1.7. 及早发现、及早解决&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;常识&lt;/strong&gt;：所有的生产流程，都有一个共同特性：原料在流程中，会变得越来越有价值。&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;在早期解决问题&lt;/strong&gt;：及早发现、及早解决，可以是我们在生产流程中，价值最低阶段修正问题。&lt;/p&gt;
+
+&lt;h2 id=&quot;2-规模化的生产&quot;&gt;2. 规模化的生产&lt;/h2&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;规模化的生产&lt;/strong&gt;，是基于&lt;strong&gt;单次产品的生产&lt;/strong&gt;，需要考虑规模化时的更多因素。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;为了更高效的掌控规模化生产，可以从下面几个方面着手。&lt;/p&gt;
+
+&lt;p&gt;Tips:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;我们不仅应辛勤工作，还得懂得如何工作。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;21-设定指标&quot;&gt;2.1. 设定指标&lt;/h3&gt;
+
+&lt;p&gt;针对规模化的生产，掌控全局，就是要掌控 3 个方面：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;生产的产品&lt;/li&gt;
+  &lt;li&gt;产生的利润&lt;/li&gt;
+  &lt;li&gt;客户的满意度&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Tips:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;指标分级：&lt;/p&gt;
+
+  &lt;p&gt;1.管好产品：需要一些指标；&lt;/p&gt;
+
+  &lt;p&gt;2.高效生产，需要更多的指标。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;通过 3 类、5 项信息，可以跟踪掌控，是否达到&lt;strong&gt;每日生产目标&lt;/strong&gt;：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;需求&lt;/strong&gt;：当日销售的预测（持续优化、科学预测）&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;供给&lt;/strong&gt;：
+    &lt;ol&gt;
+      &lt;li&gt;原料存货&lt;/li&gt;
+      &lt;li&gt;设备状况&lt;/li&gt;
+      &lt;li&gt;人力资源：请假情况&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;供给竞争力&lt;/strong&gt;：供给的品质
+    &lt;ol&gt;
+      &lt;li&gt;人力资源的品质：可以立即改善，客户满意度反馈&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Tips:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;ol&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;strong&gt;设定指标&lt;/strong&gt;，每天跟踪，通常能在问题没有变得太糟糕之前，就能将其发现、并解决掉。&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;strong&gt;指标体系&lt;/strong&gt;，指标成套，才会发挥作用：每项指标，针对不同作业目标，进行评估。&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;22-配对指标&quot;&gt;2.2. 配对指标&lt;/h3&gt;
+
+&lt;p&gt;Tips:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;配对指标&lt;/strong&gt;：用于作为补充指标，避免关键指标的过度反馈，在反馈时，依赖&lt;code class=&quot;highlighter-rouge&quot;&gt;配对指标&lt;/code&gt;了解可能的副作用。一般&lt;code class=&quot;highlighter-rouge&quot;&gt;关键指标&lt;/code&gt;，关注量，需要&lt;code class=&quot;highlighter-rouge&quot;&gt;配对指标&lt;/code&gt;，关注质。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;指标的作用&lt;/strong&gt;：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;目标：清楚的列明目标，跟进目标&lt;/li&gt;
+  &lt;li&gt;客观：为生产活动，提供了相当的客观性&lt;/li&gt;
+  &lt;li&gt;内部学习：不同的组织中，从事相同管理工作的人，有了相互对比、学习的依据。&lt;/li&gt;
+  &lt;li&gt;积极性：只有清晰的指标，人员效率、员工斗志，容易被激发。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;指标：将注意力，引导需要关键点上，降低风险。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;有效的指标：评估产出，而不是产出之前的生产活动。&lt;/li&gt;
+  &lt;li&gt;好的指标：衡量具体，且可计算的事情。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Tips:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;ol&gt;
+    &lt;li&gt;
+      &lt;p&gt;指标的作用：管理活动中，指标的功效，非常明显。&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;指标的第一原则：有指标，好过没有指标。&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;有效的指标：评估产出，而不是生产过程。&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;衡量具体、且可计算的事情。&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;配对指标：强调质的方面.&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;23-黑箱理论&quot;&gt;2.3. 黑箱理论&lt;/h3&gt;
+
+&lt;p&gt;&lt;strong&gt;黑箱&lt;/strong&gt;的定义：输入原料、人力，最终产品送达，其中的生产流程。&lt;/p&gt;
+
+&lt;p&gt;黑箱的几个重点：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;投入：生产资料&lt;/li&gt;
+  &lt;li&gt;产出：最终产品&lt;/li&gt;
+  &lt;li&gt;人力：人力资源&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;黑箱：弄清楚，内部生产流程，准确预估未来的产出。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;先行指标&lt;/strong&gt;：两端的指标，
+    &lt;ol&gt;
+      &lt;li&gt;生产：生产资料的故障记录&lt;/li&gt;
+      &lt;li&gt;产出：客户满意度&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;线性指标&lt;/strong&gt;：&lt;code class=&quot;highlighter-rouge&quot;&gt;业务目标&lt;/code&gt;和&lt;code class=&quot;highlighter-rouge&quot;&gt;当前进度&lt;/code&gt;，跟踪差距
+    &lt;ol&gt;
+      &lt;li&gt;早发现、早解决&lt;/li&gt;
+      &lt;li&gt;风险前置，提早解决&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;趋势指标&lt;/strong&gt;：指标的同比、环比，思考原因，预测未来状况&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;重复印证表&lt;/strong&gt;：持续的预测和复盘
+    &lt;ol&gt;
+      &lt;li&gt;预测：每个月，预测未来 3 个月的收入/产出&lt;/li&gt;
+      &lt;li&gt;复盘：每个月，都复盘过去一个月的实际收入，反思跟预测的差异原因&lt;/li&gt;
+      &lt;li&gt;再预测：复盘后，继续预测未来 3 个月的收入/产出&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;线性指标，示例：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/build-team-series/high-output-management/linear-indicator.jpeg&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;重复印证表，示例：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/build-team-series/high-output-management/stagger-chart.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Tips:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;ol&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;strong&gt;设定指标&lt;/strong&gt;：平时就会相对充分掌握情况&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li&gt;
+      &lt;p&gt;&lt;strong&gt;没有指标&lt;/strong&gt;：遇到突发情况，就会为了找资料而手忙脚乱，等找好资料，事情已经变得更糟了&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;24-控制产出&quot;&gt;2.4. 控制产出&lt;/h3&gt;
+
+&lt;p&gt;工厂的生产模式，有 2 种：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;接单生产&lt;/strong&gt;：效率低，几乎无法生存&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;计划生产&lt;/strong&gt;：合理预测，并以此设计生产，保持一定的存货水平，效率高，但需承担风险&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;计划生产：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;制造部门&lt;/strong&gt;（生产）和&lt;strong&gt;业务部门&lt;/strong&gt;（销售）：负责预测，并对预测负责；&lt;/li&gt;
+  &lt;li&gt;管理经理全权负责，不是好做法；&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;重复印证表&lt;/strong&gt;：同时应用在制造和销售的预测上；&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/build-team-series/high-output-management/stagger-chart.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;预测：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;预测&lt;/strong&gt;：通常只用在&lt;code class=&quot;highlighter-rouge&quot;&gt;厂务生产&lt;/code&gt;和&lt;code class=&quot;highlighter-rouge&quot;&gt;实体销售&lt;/code&gt;上，而&lt;code class=&quot;highlighter-rouge&quot;&gt;非管理活动&lt;/code&gt;上。&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;后管理&lt;/strong&gt;：对未来做预测，然后调整管理工作，是提高产能的重要方法。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Tips：&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;1.&lt;strong&gt;存货&lt;/strong&gt;：储备，&lt;code class=&quot;highlighter-rouge&quot;&gt;价值最低阶段&lt;/code&gt;的存货；整体存货成本相同时，存货价值越低，生产越具&lt;code class=&quot;highlighter-rouge&quot;&gt;弹性&lt;/code&gt;。&lt;/p&gt;
+
+  &lt;p&gt;2.&lt;strong&gt;管理&lt;/strong&gt;：至今仍被认为，相比于生产和销售，管理更注重&lt;code class=&quot;highlighter-rouge&quot;&gt;质量&lt;/code&gt;，且缺乏业绩目标或衡量的标准。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h3 id=&quot;25-品质保证&quot;&gt;2.5. 品质保证&lt;/h3&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;如果要以最低的成本，达到可以接受的品质，则，必须在尚未消耗太多成本之前，识别、淘汰掉瑕疵品。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;插图，线上检验，以确保品质：&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/build-team-series/high-output-management/online-check.png&quot; alt=&quot;&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;几个常识：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;无法评估次品，会造成什么损害时，则，不该以客户对我们的信赖为赌注。&lt;/li&gt;
+  &lt;li&gt;人有惰性，需制定明确的检查计划，此能增进效率及提高产能。&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;26-产能&quot;&gt;2.6. 产能&lt;/h3&gt;
+
+&lt;p&gt;单位人员效率：部门产出/部门人数&lt;/p&gt;
+
+&lt;p&gt;提升产能的方式，2 种：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;加速生产&lt;/strong&gt;：勤奋加班，或组织重整。&lt;/li&gt;
+  &lt;li&gt;改变&lt;strong&gt;工作的本质&lt;/strong&gt;：
+    &lt;ol&gt;
+      &lt;li&gt;做什么？&lt;/li&gt;
+      &lt;li&gt;怎么做&lt;/li&gt;
+      &lt;li&gt;而不是更快的做&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;27-杠杆率&quot;&gt;2.7. 杠杆率&lt;/h3&gt;
+
+&lt;p&gt;管理中，相同时间的投入，不同业务的产出不同。&lt;/p&gt;
+
+&lt;p&gt;为了提升杠杆率，下面几个操作：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;流程化&lt;/strong&gt;：梳理流程现状
+    &lt;ol&gt;
+      &lt;li&gt;完整的流程：不要忽略流程的片段&lt;/li&gt;
+      &lt;li&gt;重构流程：设定删减目标，一般第一回合， 30~50%&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;简单化&lt;/strong&gt;：生产流程，简化
+    &lt;ol&gt;
+      &lt;li&gt;质疑：每一步存在的理由&lt;/li&gt;
+      &lt;li&gt;删掉常识就知道、不必要的步骤&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;自动化&lt;/strong&gt;：尽可能自动化运转&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;Tips:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;1.&lt;strong&gt;管理活动&lt;/strong&gt;，大约 30% 是没有必要的，即，70% 的管理活动，便能完成产出目标。&lt;/p&gt;
+
+  &lt;p&gt;2.区分&lt;code class=&quot;highlighter-rouge&quot;&gt;活动&lt;/code&gt;和&lt;code class=&quot;highlighter-rouge&quot;&gt;产出&lt;/code&gt;：强调并着眼于产出，才是提高产能的关键。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;疑问：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;管理活动：有哪些？&lt;/li&gt;
+  &lt;li&gt;如何区分管理活动和产出？&lt;/li&gt;
+&lt;/ol&gt;
+
+</content>
+   </entry>
+   
+   <entry>
+     <title>图书系列：书架上的书</title>
+     <link href="http://ningg.github.com/book-series-01-book-list/"/>
+     <updated>2018-11-30T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/book-series-01-book-list</id>
+     <content type="html">&lt;h2 id=&quot;1-背景&quot;&gt;1. 背景&lt;/h2&gt;
+
+&lt;p&gt;晚上把客厅的三箱书整理一下。&lt;/p&gt;
+
+&lt;p&gt;现在技术这么发达，有没有什么软件，直接扫描商品，最后就能出一个清单呢？&lt;/p&gt;
+
+&lt;p&gt;简单搜索了一下，微信扫一扫条形码，可以识别商品，但是，无法生成一个统一的清单。&lt;/p&gt;
+
+&lt;p&gt;OK，借助微信扫一扫，采取下述方式，汇总一下箱子里的书：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;手机上，微信扫一扫，进入书简介页面&lt;/li&gt;
+  &lt;li&gt;微信中，收藏书的链接&lt;/li&gt;
+  &lt;li&gt;在 Mac 上，查看我的收藏，并复制书的名称&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;某大佬说，他的书单是最隐秘的财富，绝对不会让别人看。&lt;/p&gt;
+
+  &lt;p&gt;我这个初学者，并没有类似担心，发自己的书架，问题不大。因为，什么阶段读了什么书，才能准确反映人的隐私，而当前 blog 并没有提到自己读书的时间，另外，自己获取信息的来源，只有 1/5 左右，来自于书籍。&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;2-当前书目清单&quot;&gt;2. 当前书目清单&lt;/h2&gt;
+
+&lt;p&gt;初步扫了一下，涵盖 65% 的书目：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;Spring Boot 揭秘：快速构建微服务体系&lt;/li&gt;
+  &lt;li&gt;Docker 技术入门与实践（第 2 版）&lt;/li&gt;
+  &lt;li&gt;穷查理宝典：查理芒格智慧箴言录&lt;/li&gt;
+  &lt;li&gt;深入浅出 NodeJs&lt;/li&gt;
+  &lt;li&gt;IT 项目经理成长手记&lt;/li&gt;
+  &lt;li&gt;大型网站技术架构&lt;/li&gt;
+  &lt;li&gt;Redis 实践&lt;/li&gt;
+  &lt;li&gt;麦肯锡问题分析与解决技巧&lt;/li&gt;
+  &lt;li&gt;生命的重建&lt;/li&gt;
+  &lt;li&gt;有钱人性格说明书&lt;/li&gt;
+  &lt;li&gt;照着做，你就能带好团队&lt;/li&gt;
+  &lt;li&gt;主动的 UI 设计师&lt;/li&gt;
+  &lt;li&gt;腾讯传&lt;/li&gt;
+  &lt;li&gt;如何测试商业模式&lt;/li&gt;
+  &lt;li&gt;深入浅出 MyBatis 技术原理与实战&lt;/li&gt;
+  &lt;li&gt;实战 Java 虚拟机：JVM 故障诊断与性能调优&lt;/li&gt;
+  &lt;li&gt;亿级流量网站架构核心技术&lt;/li&gt;
+  &lt;li&gt;定位&lt;/li&gt;
+  &lt;li&gt;分布式服务框架原理与实践&lt;/li&gt;
+  &lt;li&gt;Effective Java&lt;/li&gt;
+  &lt;li&gt;轻量级微服务架构（上册）&lt;/li&gt;
+  &lt;li&gt;Spring Cloud 与 Docker 微服务架构实战&lt;/li&gt;
+  &lt;li&gt;大型网站系统与 Java 中间件实践&lt;/li&gt;
+  &lt;li&gt;MySQL 技术内幕： InnoDB 存储引擎（第 2 版）&lt;/li&gt;
+  &lt;li&gt;剑指 Offer&lt;/li&gt;
+  &lt;li&gt;编程之美&lt;/li&gt;
+  &lt;li&gt;实战 Java 高并发程序设计&lt;/li&gt;
+  &lt;li&gt;苹果：从个人英雄到伟大企业&lt;/li&gt;
+  &lt;li&gt;领导梯队&lt;/li&gt;
+  &lt;li&gt;运营笔记&lt;/li&gt;
+  &lt;li&gt;卓有成效的管理者&lt;/li&gt;
+  &lt;li&gt;管理的实践&lt;/li&gt;
+  &lt;li&gt;OKR：源于英特尔和谷歌的目标管理利器&lt;/li&gt;
+  &lt;li&gt;向前一步&lt;/li&gt;
+  &lt;li&gt;洛克菲勒写给儿子的 38 封信&lt;/li&gt;
+  &lt;li&gt;李光耀观天下&lt;/li&gt;
+  &lt;li&gt;关键对话&lt;/li&gt;
+  &lt;li&gt;褚时健传&lt;/li&gt;
+  &lt;li&gt;即兴的智慧&lt;/li&gt;
+  &lt;li&gt;培根论人生&lt;/li&gt;
+  &lt;li&gt;洛克菲勒自传&lt;/li&gt;
+  &lt;li&gt;富兰克林自传&lt;/li&gt;
+  &lt;li&gt;思考，快与慢&lt;/li&gt;
+  &lt;li&gt;MySQL 必知必会&lt;/li&gt;
+  &lt;li&gt;架构探险：从零开始写 JavaWeb 框架&lt;/li&gt;
+  &lt;li&gt;精进&lt;/li&gt;
+  &lt;li&gt;Spring Cloud 微服务实战&lt;/li&gt;
+  &lt;li&gt;给你一个公司，你能赚钱吗？&lt;/li&gt;
+  &lt;li&gt;人月神话&lt;/li&gt;
+  &lt;li&gt;刻意练习：如何从新手到大师&lt;/li&gt;
+  &lt;li&gt;从技术走向管理&lt;/li&gt;
+  &lt;li&gt;蔡康永的说话方式1-2&lt;/li&gt;
+  &lt;li&gt;菜场经济学&lt;/li&gt;
+  &lt;li&gt;明朝一哥王阳明&lt;/li&gt;
+  &lt;li&gt;MacTalk 跨越边界&lt;/li&gt;
+  &lt;li&gt;从优秀到卓越&lt;/li&gt;
+  &lt;li&gt;练习的心态：如何培养耐心、专注和自律&lt;/li&gt;
+  &lt;li&gt;素书&lt;/li&gt;
+  &lt;li&gt;从0到1：开启商业与未来的秘密&lt;/li&gt;
+  &lt;li&gt;学习之道&lt;/li&gt;
+  &lt;li&gt;架构真经&lt;/li&gt;
+  &lt;li&gt;富甲美国&lt;/li&gt;
+  &lt;li&gt;程序员修炼之道：从小工到专家&lt;/li&gt;
+  &lt;li&gt;李嘉诚传&lt;/li&gt;
+  &lt;li&gt;史玉柱自述：我的营销心得&lt;/li&gt;
+  &lt;li&gt;重新定位&lt;/li&gt;
+  &lt;li&gt;黑客与画家&lt;/li&gt;
+  &lt;li&gt;斯坦福大学创业成长课&lt;/li&gt;
+  &lt;li&gt;道德情操论&lt;/li&gt;
+  &lt;li&gt;深入分析 Java Web 技术内幕&lt;/li&gt;
+  &lt;li&gt;设计中的设计&lt;/li&gt;
+  &lt;li&gt;Redis 设计与实现&lt;/li&gt;
+  &lt;li&gt;JavaEE 开发的颠覆者：Spring Boot 实战&lt;/li&gt;
+  &lt;li&gt;产品经理的 20 堂必修课&lt;/li&gt;
+  &lt;li&gt;结网：改变世界的互联网产品经理&lt;/li&gt;
+  &lt;li&gt;人人都是产品经理&lt;/li&gt;
+  &lt;li&gt;点石成金&lt;/li&gt;
+  &lt;li&gt;我不是教你诈1~4&lt;/li&gt;
+  &lt;li&gt;从 Paxos 到 ZooKeeper：分布式一致性原理&lt;/li&gt;
+  &lt;li&gt;Swift 进阶&lt;/li&gt;
+  &lt;li&gt;ZooKeeper：分布式过程协同技术详解&lt;/li&gt;
+  &lt;li&gt;Producter：让产品从0到1&lt;/li&gt;
+  &lt;li&gt;领导梯队：应用手册篇&lt;/li&gt;
+  &lt;li&gt;Netty 权威指南（第2版）&lt;/li&gt;
+  &lt;li&gt;Maven 实战&lt;/li&gt;
+  &lt;li&gt;构建之法：现代软件工程&lt;/li&gt;
+  &lt;li&gt;新经济，新规则&lt;/li&gt;
+  &lt;li&gt;重新定义团队：谷歌如何工作&lt;/li&gt;
+  &lt;li&gt;创业 36 条军规&lt;/li&gt;
+  &lt;li&gt;创业维艰&lt;/li&gt;
+  &lt;li&gt;引爆点&lt;/li&gt;
+  &lt;li&gt;异类&lt;/li&gt;
+  &lt;li&gt;谈判力&lt;/li&gt;
+  &lt;li&gt;逆转&lt;/li&gt;
+  &lt;li&gt;大开眼界&lt;/li&gt;
+  &lt;li&gt;刘强东自述&lt;/li&gt;
+  &lt;li&gt;干法&lt;/li&gt;
+  &lt;li&gt;眨眼之间&lt;/li&gt;
+  &lt;li&gt;禅与摩托车维修艺术&lt;/li&gt;
+  &lt;li&gt;玩的就是会计&lt;/li&gt;
+  &lt;li&gt;乌合之众&lt;/li&gt;
+  &lt;li&gt;用户体验多面手&lt;/li&gt;
+  &lt;li&gt;iOS 开发指南&lt;/li&gt;
+  &lt;li&gt;风吹江南之互联网金融&lt;/li&gt;
+  &lt;li&gt;这就是搜索引擎&lt;/li&gt;
+  &lt;li&gt;Java 并发编程艺术&lt;/li&gt;
+  &lt;li&gt;Java 并发编程实战&lt;/li&gt;
+  &lt;li&gt;领域驱动设计&lt;/li&gt;
+  &lt;li&gt;实现领域驱动设计&lt;/li&gt;
+  &lt;li&gt;Axure RP7网站和 APP 原型制作从入门到精通&lt;/li&gt;
+  &lt;li&gt;锋利的 jQuery（第 2 版）&lt;/li&gt;
+  &lt;li&gt;邓小平时代&lt;/li&gt;
+  &lt;li&gt;金字塔原理&lt;/li&gt;
+  &lt;li&gt;商战&lt;/li&gt;
+  &lt;li&gt;MBA 教不了的创富课&lt;/li&gt;
+  &lt;li&gt;产品经理方法论&lt;/li&gt;
+  &lt;li&gt;破茧成蝶：用户体验设计师成长之路&lt;/li&gt;
+  &lt;li&gt;最简单的图形与最复杂的信息&lt;/li&gt;
+  &lt;li&gt;超爆魔鬼经济学&lt;/li&gt;
+  &lt;li&gt;读懂中国改革：关键 5 年 2016-2020&lt;/li&gt;
+  &lt;li&gt;情商&lt;/li&gt;
+  &lt;li&gt;代码整洁之道&lt;/li&gt;
+  &lt;li&gt;大数据&lt;/li&gt;
+  &lt;li&gt;万达哲学&lt;/li&gt;
+  &lt;li&gt;在你身边，为你设计&lt;/li&gt;
+  &lt;li&gt;周鸿祎自述：我的互联网方法论&lt;/li&gt;
+  &lt;li&gt;APP 蓝图：Axure RP 7.0移动互联网产品原型设计&lt;/li&gt;
+  &lt;li&gt;领导力 21 法则&lt;/li&gt;
+  &lt;li&gt;像间谍一样思考&lt;/li&gt;
+  &lt;li&gt;启示录：打造用户喜爱的产品&lt;/li&gt;
+  &lt;li&gt;Head First 设计模式&lt;/li&gt;
+  &lt;li&gt;Spring 实战（第4版）&lt;/li&gt;
+  &lt;li&gt;写给大家看的设计书&lt;/li&gt;
+  &lt;li&gt;第一行代码 Android&lt;/li&gt;
+  &lt;li&gt;决策与判断&lt;/li&gt;
+  &lt;li&gt;非暴力沟通&lt;/li&gt;
+  &lt;li&gt;态度（吴军）&lt;/li&gt;
+  &lt;li&gt;见识（吴军）&lt;/li&gt;
+  &lt;li&gt;你凭什么做好互联网：已借出&lt;/li&gt;
+  &lt;li&gt;格鲁夫给经理人的第一课：已借出&lt;/li&gt;
+  &lt;li&gt;创业就是要细分垄断：已借出&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;后续工作：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;分类：对上述数目，进行分类（技术、管理、产品、设计、运营、传记等）&lt;/li&gt;
+  &lt;li&gt;书评：TODO，考虑是否真的要给&lt;/li&gt;
 &lt;/ul&gt;
 
 </content>
    </entry>
    
    <entry>
-     <title>使用WordPress搭建简单站点</title>
-     <link href="http://ningg.github.com/use-wordpress"/>
-     <updated>2013-01-21T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/use-wordpress</id>
-     <content type="html">&lt;p&gt;几点：&lt;/p&gt;
+     <title>科技历史系列：格鲁夫，教硅谷如何做生意的人</title>
+     <link href="http://ningg.github.com/tech-history-andrew-grove-teach-how-do-business/"/>
+     <updated>2018-11-19T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/tech-history-andrew-grove-teach-how-do-business</id>
+     <content type="html">&lt;p&gt;原文地址：&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;搭建WordPress运行环境&lt;/li&gt;
-  &lt;li&gt;切换主题&lt;/li&gt;
-  &lt;li&gt;主题定制&lt;/li&gt;
-  &lt;li&gt;使用插件&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://36kr.com/p/5045002.html&quot;&gt;格鲁夫，教硅谷如何做生意的人&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://www.bloomberg.com/news/articles/2016-03-22/andy-grove-the-man-who-taught-silicon-valley-how-to-do-business&quot;&gt;Andy Grove, Who Taught Silicon Valley How to Do Business&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;基本思路：参考&lt;a href=&quot;http://cn.wordpress.org/&quot;&gt;官方网站&lt;/a&gt;进行。&lt;/p&gt;
+  &lt;p&gt;能够让乔布斯、Ellison、盖茨、扎克伯格等硅谷最著名的人，都崇敬无比的人恐怕非“&lt;strong&gt;偏执狂&lt;/strong&gt;”以及“&lt;strong&gt;经理人导师&lt;/strong&gt;” &lt;a href=&quot;https://en.wikipedia.org/wiki/Andrew_Grove&quot;&gt;格鲁夫&lt;/a&gt;莫属了。&lt;/p&gt;
+
+  &lt;p&gt;这位全球科技界商业领袖、前英特尔 CEO 辞世了，享年79 岁，向他致敬的最好方式莫过于回顾他的一生以及听听硅谷&lt;a href=&quot;http://www.bloomberg.com/news/articles/2016-03-22/andy-grove-the-man-who-taught-silicon-valley-how-to-do-business&quot;&gt;精英&lt;/a&gt;对他的评价了。&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;h2 id=&quot;wordpress&quot;&gt;安装WordPress&lt;/h2&gt;
+&lt;h2 id=&quot;0江湖轶事&quot;&gt;0.江湖轶事&lt;/h2&gt;
 
-&lt;p&gt;几点：&lt;/p&gt;
+&lt;p&gt;当乔布斯和Larry Ellison（Oracle老板）告诉安迪·格鲁夫，他是他们在硅谷唯一愿意效劳的人时，格鲁夫说你们两个我都不能要，因为他们就是“一对怪人”。&lt;/p&gt;
+
+&lt;p&gt;他这么说的时候至少有一半是认真的，因为他并没有笑。&lt;/p&gt;
+
+&lt;p&gt;“没关系，”Oracle的创始人Ellison说：“史蒂夫和我都很敬仰Andy。我们享受跟他在一起的宝贵时光，就算骂你也是那么有个性，那么令人难忘。”&lt;/p&gt;
+
+&lt;p&gt;三个技术史上最著名的人之间的餐桌对话说明了格鲁夫对硅谷崛起的影响。本周一，这位老者逝世了，享年79岁。&lt;/p&gt;
+
+&lt;p&gt;这位匈牙利出生的逃亡者是英特尔的创始人之一。他帮助这家半导体公司从1960年代的初创企业发展成了全球最大的芯片制造商并且至今仍保有这个头衔。写了《只有偏执狂才能生存》来教导如何处理企业危机的格鲁夫还有一项突破，那就是把英特尔变成了家喻户晓的名字。格鲁夫是从Ellison到乔布斯以及Facebook扎克伯格等众多硅谷精英的导师，其影响力可见一斑。&lt;/p&gt;
+
+&lt;p&gt;“Andy和我合作过几个项目，我不停地从他身上学到东西，”微软联合创始人盖茨说：“他站在创造个人计算机业的前沿，每每我跟他在一起总是被他的才华和愿景折服。”&lt;/p&gt;
+
+&lt;h2 id=&quot;1早年生活二战流离&quot;&gt;1.早年生活：二战流离&lt;/h2&gt;
+
+&lt;p&gt;格鲁夫原名Andras Grof， 1936年9月2日出生于布达佩斯，在那里他经历了上世纪欧洲最糟糕的一段时间。他成长于布达佩斯的一个犹太中产家庭。在他的自传《游向彼岸》中，他叙述了一段田园牧歌般的早年生活很快变成了一场动乱。在二战期间，他的父亲被征召进匈牙利军队的劳工营并被带到了苏联前线但随后被报告失踪。1944年，在纳粹入侵之后，他用假名躲进基督教家庭，侥幸逃过了席卷全国的针对犹太人的种族屠杀（约50万人被害）。&lt;/p&gt;
+
+&lt;p&gt;他靠躲在地窖里在入侵的苏联人和德国人的布达佩斯争夺战之中活了下来。但打败德国并没有结束苦难，他的家庭不得不忍受更加残暴的前苏联的统治。他的父亲骨瘦如柴地从劳工营返回后又因为被指控有资产阶级倾向而被迫劳动改造。格鲁夫后来是在恳求帮助弄掉“阶级敌人”出身之后才得以上大学。&lt;/p&gt;
+
+&lt;p&gt;1956年，匈牙利卷入了席卷东欧的反苏联浪潮，随后在附近响起的炮弹声中格鲁夫和他的家庭又再度躲进了地窖里。留意到从奥斯维辛集中营幸存下来的一位伯母的话后，格鲁夫加入了涌向奥地利边境的难民潮，迈上了通往西方之路。&lt;/p&gt;
+
+&lt;p&gt;此后他再也没有重返故土。&lt;/p&gt;
+
+&lt;h2 id=&quot;2怕得要死跨入风险&quot;&gt;2.怕得要死：跨入风险&lt;/h2&gt;
+
+&lt;p&gt;抵达美国的格鲁夫身上只有20美元，不过纽约的亲戚收留了他，后来他在纽约城市大学一边学习化学工程一边自学英语并以优异成绩毕业。但是他讨厌纽约的天气，于是他搬到了西海岸，来到加州大学伯克利分校并最终拿到了化学工程博士学位。&lt;/p&gt;
+
+&lt;p&gt;1963年，他加盟仙童半导体公司，硅谷的名字就是公司的那帮人起的，而且那帮人还是美国许多最大型的半导体公司的创始人和领袖。5年后，他跟着摩尔和诺伊斯一起出走创立了英特尔。&lt;/p&gt;
+
+&lt;p&gt;“我来英特尔的时候怕得要死，”格鲁夫在公司25周年纪念日上说：“我放弃了一份非常安定的工作，然后到一个未知的领域去进行一场全新的冒险。这太可怕了。可怕到睡觉都会做恶梦。”&lt;/p&gt;
+
+&lt;p&gt;但格鲁夫跟摩尔和诺伊斯3人是完美组合。后面两人都是极具才华的发明家，但性格刚好相反，一个是努力低调，另一个则精力旺盛，是天生的鼓动者和生意人。格鲁夫的性格在他们中间，给公司的1970年代懒散的加州态度带去了一股大有裨益的激情。曾在英特尔干了18年，后来去Dell领导PC分部的Carl Everett Jr回忆起了英特尔研发PC芯片的早期努力。&lt;/p&gt;
+
+&lt;p&gt;“那就像由这样一群工程师管理的建筑项目，这帮人虽然受过培训，但是用的工具和设备都是刚刚发明出来的，”他在2005年接受一次采访时说：“然后Andy来了。”&lt;/p&gt;
+
+&lt;p&gt;他的严苛近乎无情。格鲁夫要求包括摩尔在内的英特尔员工，如果早上8点以后到的话都要登记。在这家员工人数超过8万的公司里，任何超过2000美元的开支都要他亲自批准。&lt;/p&gt;
+
+&lt;p&gt;“我听说Andy有一次说过他唯一有过的老板就是我，” 2005年9月时摩尔说：“如果是那样的话，他根本就没有老板。”&lt;/p&gt;
+
+&lt;p&gt;如果说格鲁夫去英特尔经历了恐惧的话，这种恐惧并没有阻止他用这个来作为一种管理技术。他影响了一代的英特尔高管，后者把跟他一起做会议安排称为是一场“匈牙利人的审讯”。&lt;/p&gt;
+
+&lt;p&gt;“接受格鲁夫的指导就好像去看牙医不打麻醉剂，”前英特尔高管后成为VMWare CEO的Pat Gelsinger说：“你去开会的时候最好有自己的数据，有自己的观点，如果无法自证自己的观点，你最好不好出现在会上。”&lt;/p&gt;
+
+&lt;p&gt;哪怕是精心准备的演示，第一张还没翻过去想法就被格鲁夫无情地“撕”成碎片也是常有的事。但是过得了格鲁夫这一关的人指出，他这么做并不是在欺负人。&lt;/p&gt;
+
+&lt;p&gt;“他的残酷直接名声在外，但这都是为了逼出合适的答案，为了得到正确答案，他不惜使用任何必要的手段，” Gelsinger说。&lt;/p&gt;
+
+&lt;p&gt;发生在英特尔的争执并不会导致组织紊乱。格鲁夫给会议立下了“建设性对抗”以及“自由开放的辩论”的规矩，任何人都可以积极质询，不管职位高低。&lt;/p&gt;
+
+&lt;p&gt;“格鲁夫喜欢斗争，”英特尔的前CFO Andy Bryant在2005年接受采访时说。&lt;/p&gt;
+
+&lt;p&gt;战斗结束后，参战各方必须遵守他的另一条格言—“不同意也要执行（disagree and commit）”。2005年5月，时任英特尔主席的格鲁夫退休后，他开起了自己对任何提议都要求证据的玩笑。&lt;/p&gt;
+
+&lt;p&gt;“我没有100%满意自己，”他在最后一次出席股东会上说：“根据我的统计分析，这个比例大概是80%。”&lt;/p&gt;
+
+&lt;h2 id=&quot;3偏执狂艰难坚决&quot;&gt;3.偏执狂：艰难坚决&lt;/h2&gt;
+
+&lt;p&gt;格鲁夫做出艰难决定的能力在他的那本《只有偏执狂才能生存》体现得淋漓尽致。这种能力帮助英特尔度过了1980年代的危机，当时日本的芯片制造商成本和价格优势让英特尔处于不利的位置。对此他的回应是退出英特尔发家致富的内存芯片市场，然后把整个公司的资源全部投入到微处理器上面，赌PC市场会崛起。这是一场大赌。当时英特尔处理器离成为行业标准还很远。&lt;/p&gt;
+
+&lt;p&gt;在格鲁夫的领导下，该公司推出了Operation CRUSH计划，销售被许多人认为是很次的芯片。但是它做了一件当时其他公司没有做过的事情：兜售芯片对终端用户的好处，而不是强调其技术规格。在很短的时间内，英特尔的8086处理器就超过2000客户的目标，更重要的是，还在IBM涉猎的一款新PC中赢得了一席之地。&lt;/p&gt;
+
+&lt;h2 id=&quot;4intel-inside表里如一&quot;&gt;4.Intel Inside：表里如一&lt;/h2&gt;
+
+&lt;p&gt;格鲁夫的一位技术助理Dennis Carter注意到英特尔新推出的处理器一开始卖得没有老型号好，于是提议针对消费者开展一次营销。1991年，公司开始投钱推销“Intel Inside”理念，让消费者像了解电脑品牌一样了解了英特尔的芯片。身为科学家和高管的格鲁夫为了帮助营销，甚至也穿上了兔子造型的彩色工厂防护服，在台上跟其他演员一起为品牌鼓与呼。他的卖力演出得到了回报：英特尔成为了全球家喻户晓的品牌之一。消费者不再看机身品牌（惠普还是戴尔）来买电脑，而是根据里面究竟是哪款奔腾处理器来做出购买决定。&lt;/p&gt;
+
+&lt;p&gt;格鲁夫是在1986年开始担任英特尔CEO的，在此后的11年CEO生涯中，他帮助英特尔将其他竞争对手远远抛在了身后，攫取了PC处理器超过80%的市场份额，且至今仍保持如此。在此期间，英特尔的销售飙升了20倍，从1986年的12.7亿美元涨到了263亿美元。&lt;/p&gt;
+
+&lt;p&gt;“造就硅谷的人如果只能选一位的话，这个人就是Andy，” Marc Andreessen在2015年丘吉尔俱乐部颁奖典礼上说：“Andy为高规格的硅谷公司设立了典范。”（注：格鲁夫被丘吉尔俱乐部选为2015年传奇领袖，Marc Andreessen在A16Z的另一半Ben Horowitz也非常钦佩格鲁夫，在会上发表了感言对后者致敬）&lt;/p&gt;
+
+&lt;h2 id=&quot;5老师后世典范&quot;&gt;5.老师：后世典范&lt;/h2&gt;
+
+&lt;p&gt;硅谷精英对格鲁夫的崇敬之情再怎么夸张也不为过。他对以刚愎自用出名的乔布斯有着巨大的影响力。&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;基础环境：Apache、PHP、MySQL&lt;/li&gt;
-  &lt;li&gt;配置Apache服务、MySQL服务，开机自启动&lt;/li&gt;
-  &lt;li&gt;安装WordPress&lt;/li&gt;
+  &lt;li&gt;尽管乔布斯在苹果最早时期拉融资的推介未能打动英特尔高管，但格鲁夫个人选择投了这家公司。&lt;/li&gt;
+  &lt;li&gt;当乔布斯要做出是否回归自己被放逐额公司时，他找的是格鲁夫来寻求建议。&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&quot;apachephpmysql&quot;&gt;安装Apache、PHP、MySQL&lt;/h3&gt;
+&lt;p&gt;格鲁夫一生都在为硅谷新生代高管的成长腾出时间，对于扎克伯格以及Dropbox的Drew Houston等人来说，他扮演的是导师和假设挑战者的角色。&lt;/p&gt;
 
-&lt;p&gt;todo：&lt;/p&gt;
+&lt;p&gt;“在Facebook度过了一系列相当艰难的日子后，我第一次见到了Andy，像他那样身居高位的人是不会挪出时间来见我的，”扎克伯格在丘吉尔俱乐部的颁奖致辞中说：“他总是那么的慷慨大方。”&lt;/p&gt;
 
-&lt;ul&gt;
-  &lt;li&gt;（通过yum安装httpd、PHP、MySQL）&lt;/li&gt;
-  &lt;li&gt;安装之后，将其添加为服务，并且设置为：开机自动启动；&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;哪怕是他状况不佳的健康也成为了他人的的学习工具。1990年代，格鲁夫在治疗前列腺癌时，他在1996年财富杂志的封面文章介绍了自己的体会。随后又继续游说要改变医疗研究的方式，呼吁医疗保健业引入信息技术，把他个人的受挫变成行动号召。2008年1月，他在遗嘱中将高达4000万美元的资产捐给了由演员福克斯创立的旨在治愈帕金森症的Michael J. Fox Foundation。2000年，格鲁夫个人被诊断出患有帕金森症。&lt;/p&gt;
 
-&lt;h3 id=&quot;wordpress-1&quot;&gt;安装WordPress&lt;/h3&gt;
+&lt;p&gt;即便已经退休，他也并没有满足于到处去拿奖，活着在过去的成就里面。他的公开露面总是事情要讲的。2015年接受丘吉尔俱乐部颁给他的传奇领袖奖时，他努力走到了台上，拿起麦克风督促听众帮助难民。&lt;/p&gt;
 
-&lt;p&gt;todo&lt;/p&gt;
+&lt;p&gt;“我做到了，让我们伸出一点援手帮助他们也做到。”&lt;/p&gt;
 
-&lt;h3 id=&quot;wordpress-2&quot;&gt;WordPress本地化&lt;/h3&gt;
-
-&lt;p&gt;todo：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;官方文档中有介绍&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;参考来源&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://cn.wordpress.org/&quot;&gt;WordPress中文站&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
+&lt;p&gt;格鲁夫故后留下的是1958结婚的妻子Eva Kaston和两位女儿。&lt;/p&gt;
 
 </content>
    </entry>
    
    <entry>
-     <title>MySQL的版本和组件</title>
-     <link href="http://ningg.github.com/mysql-version-and-component"/>
-     <updated>2013-01-04T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/mysql-version-and-component</id>
-     <content type="html">&lt;h2 id=&quot;mysql&quot;&gt;MySQL版本&lt;/h2&gt;
+     <title>科技历史系列：李想-关于成长和选择</title>
+     <link href="http://ningg.github.com/tech-history-06-lixiang-series-grow-and-choose/"/>
+     <updated>2018-11-18T00:00:00+08:00</updated>
+     <id>http://ningg.github.com/tech-history-06-lixiang-series-grow-and-choose</id>
+     <content type="html">&lt;h2 id=&quot;1-概要&quot;&gt;1. 概要&lt;/h2&gt;
 
-&lt;p&gt;从&lt;a href=&quot;http://www.mysql.com/downloads/&quot;&gt;MySQL官网-下载地址&lt;/a&gt;可知，当前MySQL有如下几个版本：&lt;/p&gt;
+&lt;p&gt;李想回顾了过往的一些经历，以及&lt;code class=&quot;highlighter-rouge&quot;&gt;习惯&lt;/code&gt;，还有一些&lt;code class=&quot;highlighter-rouge&quot;&gt;思想意识&lt;/code&gt;的内容，值得思考借鉴一些。&lt;/p&gt;
 
-&lt;h3 id=&quot;mysql-enterprise-editioncommercial&quot;&gt;MySQL Enterprise Edition（commercial）&lt;/h3&gt;
+&lt;h2 id=&quot;2-李想的思考&quot;&gt;2. 李想的思考&lt;/h2&gt;
+
+&lt;p&gt;整体几个方面：&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;个人成长&lt;/li&gt;
+  &lt;li&gt;优秀表率&lt;/li&gt;
+  &lt;li&gt;心态开放&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;h3 id=&quot;21-个人成长&quot;&gt;2.1. 个人成长&lt;/h3&gt;
+
+&lt;p&gt;自己有几个习惯：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;总结&lt;/strong&gt;：
+    &lt;ul&gt;
+      &lt;li&gt;&lt;strong&gt;好与坏&lt;/strong&gt;：阶段总结，自己过去一段时间做的事情，好的地方、不好的地方，强化好的地方、有序改进不好的地方&lt;/li&gt;
+      &lt;li&gt;&lt;strong&gt;方向&lt;/strong&gt;：基于自己视野以及思考，看未来 2 年甚至更长一段时间的方向，不断扩充信息来源，完善自己的判断&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;牛人&lt;/strong&gt;：主动选择跟牛人在一起，在牛人多的环境中，&lt;code class=&quot;highlighter-rouge&quot;&gt;遇到牛人&lt;/code&gt;，&lt;code class=&quot;highlighter-rouge&quot;&gt;就高兴&lt;/code&gt;，在生活经验、企业管理、技术等方面，模仿、学习、思考、积淀&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;关于&lt;strong&gt;团队管理&lt;/strong&gt;和&lt;strong&gt;落地执行&lt;/strong&gt;：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;自己&lt;/strong&gt;：脑袋里，提前思考、分析，有完善的计划，一个自上而下的完整方案，要具备产品能力和商业能力&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;执行时&lt;/strong&gt;：自下而上，让大家提出、筛选、表述，抽象提取，达成一致。&lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;MySQL，企业版，商业版本，需付费&lt;/p&gt;
+  &lt;p&gt;本质跟傅盛提出的理念一致：&lt;/p&gt;
+
+  &lt;ul&gt;
+    &lt;li&gt;团队领导者，要在认知上覆盖整个团队；&lt;/li&gt;
+    &lt;li&gt;不要奢望自己不懂，通过整合、组装，达到好的结果。&lt;/li&gt;
+  &lt;/ul&gt;
+
+  &lt;p&gt;更多细节，参考：&lt;a href=&quot;http://ningg.top/fusheng-series-02-knowledge-management/&quot;&gt;管理本质就是认知管理&lt;/a&gt;&lt;/p&gt;
+
+  &lt;p&gt;当然，跟林彪军长，讲的军事指挥员，第一要勤快，也是一致的。参考 &lt;a href=&quot;http://ningg.top/linbiao-commander-lesson/&quot;&gt;林彪军团长的谈话&lt;/a&gt;&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;MySQL Enterprise Edition includes the most comprehensive set of advanced features and management tools for MySQL.&lt;/p&gt;
+&lt;p&gt;具体，要克服 2 个问题：&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;MySQL Database&lt;/li&gt;
-  &lt;li&gt;MySQL Storage Engines (InnoDB, MyISAM, etc.)&lt;/li&gt;
-  &lt;li&gt;MySQL Connectors (JDBC, ODBC, .Net, etc.)&lt;/li&gt;
-  &lt;li&gt;MySQL Replication&lt;/li&gt;
-  &lt;li&gt;MySQL Fabric&lt;/li&gt;
-  &lt;li&gt;MySQL Partitioning&lt;/li&gt;
-  &lt;li&gt;MySQL Utilities&lt;/li&gt;
-  &lt;li&gt;MySQL Workbench&lt;/li&gt;
-  &lt;li&gt;MySQL Enterprise Backup&lt;/li&gt;
-  &lt;li&gt;MySQL Enterprise Monitor&lt;/li&gt;
-  &lt;li&gt;MySQL Enterprise HA&lt;/li&gt;
-  &lt;li&gt;MySQL Enterprise Scalability&lt;/li&gt;
-  &lt;li&gt;MySQL Enterprise Security&lt;/li&gt;
-  &lt;li&gt;MySQL Enterprise Audit&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;贪心&lt;/strong&gt;：不要贪心，聚焦&lt;strong&gt;一个核心指标&lt;/strong&gt;即可，效果不会太差&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;恐惧&lt;/strong&gt;：不要担心让人不舒服，也不要总想让所有人都舒服，将目标正常表达出来，&lt;strong&gt;做一个正常人&lt;/strong&gt;，而不是一个好人或者坏人
+    &lt;ul&gt;
+      &lt;li&gt;相对于&lt;strong&gt;能解决问题&lt;/strong&gt;，只是&lt;code class=&quot;highlighter-rouge&quot;&gt;表面做个好人&lt;/code&gt;、&lt;code class=&quot;highlighter-rouge&quot;&gt;留个好印象&lt;/code&gt;，对具体的事情，并没有改进&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&quot;mysql-cluster-cgecommercial&quot;&gt;MySQL Cluster CGE（commercial）&lt;/h3&gt;
+&lt;p&gt;做事情，需要 3 方面的能力，需要有意识的思考：（对外经营、对内管理）&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;产品能力&lt;/li&gt;
+  &lt;li&gt;管理能力：内部（领导力）&lt;/li&gt;
+  &lt;li&gt;商业化能力&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;22-优秀表率&quot;&gt;2.2. 优秀表率&lt;/h3&gt;
+
+&lt;p&gt;跟优秀的人在一起，思路、做事非常顺，发现优秀的人、学习他们的思维和习惯。&lt;/p&gt;
+
+&lt;p&gt;秦致，在团队管理、商业化方面，拥有非常显著的优势，下面是他到汽车之家后的工作习惯。&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;&lt;strong&gt;冷静&lt;/strong&gt;：空降到汽车之家后， 1~2 个月内，未做任何具体业务的操作&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;沟通&lt;/strong&gt;：每个人都面聊，听的多、记得多、很少说，主要听取大家对公司的看法、对管理层自身的建议&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;提问&lt;/strong&gt;：中层以上管理层队伍（当时全公司只有 20 多人）
+    &lt;ol&gt;
+      &lt;li&gt;个人想获得什么？&lt;/li&gt;
+      &lt;li&gt;怎么衡量公司的赢？（只有公司赢，才能达到个人目标）&lt;/li&gt;
+      &lt;li&gt;如何去赢？&lt;/li&gt;
+    &lt;/ol&gt;
+  &lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;&lt;strong&gt;团队的状态&lt;/strong&gt;：坚信一定会成，每天都有进步，正向反馈&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;共同的目标&lt;/li&gt;
+  &lt;li&gt;共同的战略&lt;/li&gt;
+  &lt;li&gt;共同的价值观&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;&lt;strong&gt;团队内部&lt;/strong&gt;，本质：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;信任&lt;/li&gt;
+  &lt;li&gt;听&lt;/li&gt;
+  &lt;li&gt;凝聚&lt;/li&gt;
+  &lt;li&gt;依赖公开透明规则，自动淘汰&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;公司&lt;code class=&quot;highlighter-rouge&quot;&gt;负责人&lt;/code&gt;，&lt;strong&gt;最核心的工作&lt;/strong&gt;，只有两项：&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;strong&gt;达成共识&lt;/strong&gt;：&lt;code class=&quot;highlighter-rouge&quot;&gt;选择&lt;/code&gt;方向，在团队内部达成共识，引导团队，自洽的逻辑，&lt;code class=&quot;highlighter-rouge&quot;&gt;凝聚&lt;/code&gt;在同一个目标下&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;招优秀的人&lt;/strong&gt;：
+    &lt;ul&gt;
+      &lt;li&gt;招人，识别出优秀的人，最核心的能力&lt;/li&gt;
+      &lt;li&gt;培训体系：团队自成长&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
 
 &lt;blockquote&gt;
-  &lt;p&gt;MySQL集群，商业版本，需付费&lt;/p&gt;
+  &lt;p&gt;业务能力很重要，但是，公司负责人，有更应该做的事。&lt;/p&gt;
 &lt;/blockquote&gt;
 
-&lt;p&gt;MySQL Cluster is a real-time open source transactional database designed for fast, always-on access to data under high throughput conditions.&lt;/p&gt;
+&lt;h3 id=&quot;23-心态开放&quot;&gt;2.3. 心态开放&lt;/h3&gt;
+
+&lt;p&gt;新鲜的东西，优先看其优点：&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;MySQL Cluster&lt;/li&gt;
-  &lt;li&gt;MySQL Cluster Manager&lt;/li&gt;
-  &lt;li&gt;Plus, everything in MySQL Enterprise Edition&lt;/li&gt;
+  &lt;li&gt;发现快速涌现的&lt;code class=&quot;highlighter-rouge&quot;&gt;新事物&lt;/code&gt;，一定会&lt;strong&gt;研究其优点&lt;/strong&gt;&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;学习&lt;/strong&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;其优点&lt;/code&gt;&lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h3 id=&quot;mysql-community-editiongpl&quot;&gt;MySQL Community Edition（GPL）&lt;/h3&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;MySQL社区版本，遵循GPL，开源。&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;具体，MySQL Community Edition（GPL）包含多个MySQL相关的软件：&lt;/p&gt;
-
-&lt;p&gt;&lt;a href=&quot;http://www.mysql.com/downloads/&quot;&gt;MySQL官网-下载地址&lt;/a&gt; 都是MySQL数据库相关的，数据库备份、监控、管理的软件/工具，以及MySQL集群（GPL）安装软件。&lt;/p&gt;
-
-&lt;p&gt;具体，包含下面一系列的组件：&lt;/p&gt;
+&lt;p&gt;共享单车，刚出来的时候，质疑声音很强，但是在 2016年初，就研究了其逻辑：&lt;/p&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;MySQL Community Server (GPL)&lt;/li&gt;
-  &lt;li&gt;MySQL Cluster(GPL)&lt;/li&gt;
-  &lt;li&gt;Faric(GPL)&lt;/li&gt;
-  &lt;li&gt;Utilities(GPL)&lt;/li&gt;
-  &lt;li&gt;Workbench(GPL)&lt;/li&gt;
-  &lt;li&gt;Proxy(GPL)&lt;/li&gt;
-  &lt;li&gt;Connectors&lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;当前&lt;/strong&gt;：线上流量被少数几家垄断，价格很高
+    &lt;ul&gt;
+      &lt;li&gt;线上获取用户的成本，200~300 元&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;&lt;strong&gt;现状&lt;/strong&gt;：线下获得用户成本极低，通常在 50 元以下
+    &lt;ul&gt;
+      &lt;li&gt;共享单车，是获取流量的极低成本的生意&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
 &lt;/ul&gt;
 
-&lt;h4 id=&quot;mysql-community-server-gpl&quot;&gt;MySQL Community Server (GPL)&lt;/h4&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;MySQL Server社区版，遵循GPL，开源，免费&lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;MySQL Community Server is the world’s most popular open source database. &lt;/p&gt;
-
-&lt;h4 id=&quot;mysql-cluster-gpl&quot;&gt;MySQL Cluster (GPL)&lt;/h4&gt;
-
-&lt;p&gt;MySQL Cluster，遵循GPL，开源，免费&lt;/p&gt;
-
-&lt;p&gt;MySQL Cluster is a real-time, open source transactional database.&lt;/p&gt;
-
-&lt;h4 id=&quot;mysql-fabric-gpl&quot;&gt;MySQL Fabric (GPL)&lt;/h4&gt;
-
-&lt;p&gt;MySQL Fabric provides a framework for managing High Availability and Sharding.&lt;/p&gt;
-
-&lt;h4 id=&quot;mysql-utilities-gpl&quot;&gt;MySQL Utilities (GPL)&lt;/h4&gt;
-
-&lt;p&gt;MySQL Utilities provides a collection of command-line utilities for maintaining and administering MySQL servers.&lt;/p&gt;
-
-&lt;h4 id=&quot;mysql-workbench-gpl&quot;&gt;MySQL Workbench (GPL)&lt;/h4&gt;
-
-&lt;p&gt;MySQL Workbench is a next-generation visual database design application that can be used to efficiently design, manage and document database schemata. It is available as both, open source and commercial editions. &lt;/p&gt;
-
-&lt;h4 id=&quot;mysql-proxy-gpl&quot;&gt;MySQL Proxy (GPL)&lt;/h4&gt;
-
-&lt;p&gt;MySQL Proxy is a simple program that sits between your client and MySQL server(s) that can monitor, analyze or transform their communication. Its flexibility allows for a wide variety of uses, including load balancing; failover; query analysis; query filtering and modification; and many more.&lt;/p&gt;
-
-&lt;h4 id=&quot;mysql-connectors&quot;&gt;MySQL Connectors&lt;/h4&gt;
-
-&lt;p&gt;MySQL offers standard database driver connectivity for using MySQL with applications and tools that are compatible with industry standards ODBC and JDBC. &lt;/p&gt;
-
-&lt;h2 id=&quot;mysql-1&quot;&gt;MySQL组件&lt;/h2&gt;
-
-&lt;p&gt;下载&lt;a href=&quot;http://dev.mysql.com/downloads/mysql/&quot;&gt;MySQL Community Server (GPL)&lt;/a&gt;，本文下载的是&lt;code&gt;5.6.20&lt;/code&gt;版本：&lt;/p&gt;
-
-&lt;blockquote&gt;
-  &lt;p&gt;MySQL-5.6.20-1.el6.x86_64.rpm-bundle.tar &lt;/p&gt;
-&lt;/blockquote&gt;
-
-&lt;p&gt;解压后，得到多个rpm包：&lt;/p&gt;
+&lt;h2 id=&quot;3-参考资料&quot;&gt;3. 参考资料&lt;/h2&gt;
 
 &lt;ul&gt;
-  &lt;li&gt;MySQL-client-5.6.20-1.el6.x86_64.rpm&lt;/li&gt;
-  &lt;li&gt;MySQL-devel-5.6.20-1.el6.x86_64.rpm &lt;/li&gt;
-  &lt;li&gt;MySQL-embedded-5.6.20-1.el6.x86_64.rpm&lt;/li&gt;
-  &lt;li&gt;MySQL-server-5.6.20-1.el6.x86_64.rpm&lt;/li&gt;
-  &lt;li&gt;MySQL-shared-5.6.20-1.el6.x86_64.rpm&lt;/li&gt;
-  &lt;li&gt;MySQL-shared-compat-5.6.20-1.el6.x86_64.rpm&lt;/li&gt;
-  &lt;li&gt;MySQL-test-5.6.20-1.el6.x86_64.rpm&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;https://www.bilibili.com/video/av21748060/&quot;&gt;李想《产品与新商业》&lt;/a&gt;&lt;/li&gt;
 &lt;/ul&gt;
-
-&lt;h4 id=&quot;mysql-server-versionlinuxglibc25i386rpm&quot;&gt;MySQL-server-VERSION.linux_glibc2.5.i386.rpm&lt;/h4&gt;
-
-&lt;p&gt;The MySQL server. You need this unless you only want to connect to a MySQL server running on another machine.&lt;/p&gt;
-
-&lt;h4 id=&quot;mysql-client-versionlinuxglibc25i386rpm&quot;&gt;MySQL-client-VERSION.linux_glibc2.5.i386.rpm&lt;/h4&gt;
-
-&lt;p&gt;The standard MySQL client programs. You probably always want to install this package.&lt;/p&gt;
-
-&lt;h4 id=&quot;mysql-devel-versionlinuxglibc25i386rpm&quot;&gt;MySQL-devel-VERSION.linux_glibc2.5.i386.rpm&lt;/h4&gt;
-
-&lt;p&gt;The libraries and include files that are needed if to compile other MySQL clients, such as the Perl modules. Install this RPM if you intend to compile C API applications.&lt;/p&gt;
-
-&lt;h4 id=&quot;mysql-shared-versionlinuxglibc25i386rpm&quot;&gt;MySQL-shared-VERSION.linux_glibc2.5.i386.rpm&lt;/h4&gt;
-
-&lt;p&gt;This package contains the shared libraries (libmysqlclient.so*) that certain languages and applications need to dynamically load and use MySQL. It contains single-threaded and thread-safe libraries. Install this RPM if you intend to compile or run C API applications that depend on the shared client library.&lt;/p&gt;
-
-&lt;h4 id=&quot;mysql-shared-compat-versionlinuxglibc25i386rpm&quot;&gt;MySQL-shared-compat-VERSION.linux_glibc2.5.i386.rpm&lt;/h4&gt;
-
-&lt;p&gt;This package includes the shared libraries for older releases, but not the libraries for the current release. It contains single-threaded and thread-safe libraries. Install this package if you have applications installed that are dynamically linked against older versions of MySQL but you want to upgrade to the current version without breaking the library dependencies.&lt;/p&gt;
-
-&lt;p&gt;As of MySQL 5.6.5, the MySQL-shared-compat RPM package enables users of Red Hat-provided mysql-&lt;em&gt;-5.1RPM packages to migrate to Oracle-provided MySQL-&lt;/em&gt;-5.5 packages. MySQL-shared-compat replaces the Red Hat mysql-libs package by replacing libmysqlclient.so files of the latter package, thus satisfying dependencies of other packages on mysql-libs. This change affects only users of Red Hat (or Red Hat-compatible) RPM packages. Nothing is different for users of Oracle RPM packages.&lt;/p&gt;
-
-&lt;h4 id=&quot;mysql-embedded-versionlinuxglibc25i386rpm&quot;&gt;MySQL-embedded-VERSION.linux_glibc2.5.i386.rpm&lt;/h4&gt;
-
-&lt;p&gt;The embedded MySQL server library.&lt;/p&gt;
-
-&lt;h4 id=&quot;mysql-test-versionlinuxglibc25i386rpm&quot;&gt;MySQL-test-VERSION.linux_glibc2.5.i386.rpm&lt;/h4&gt;
-
-&lt;p&gt;This package includes the MySQL test suite.&lt;/p&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;参考来源&lt;/h2&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;&lt;a href=&quot;http://www.mysql.com/downloads/&quot;&gt;MySQL官网–下载地址&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://pangge.blog.51cto.com/6013757/1059896&quot;&gt;MySQL的三种安装方式&lt;/a&gt;&lt;/li&gt;
-  &lt;li&gt;&lt;a href=&quot;http://dev.mysql.com/downloads/mysql/&quot;&gt;MySQL官网–下载&lt;/a&gt;&lt;/li&gt;
-&lt;/ul&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>Linux下rpm命令</title>
-     <link href="http://ningg.github.com/linux-rpm"/>
-     <updated>2012-09-11T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/linux-rpm</id>
-     <content type="html">&lt;p&gt;几点：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;rpm命令，能够做什么？&lt;/li&gt;
-  &lt;li&gt;rpm命令，典型场景？&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;rpm&quot;&gt;rpm命令简介&lt;/h2&gt;
-
-&lt;h2 id=&quot;section&quot;&gt;典型场景&lt;/h2&gt;
-
-&lt;h3 id=&quot;section-1&quot;&gt;查询已安装的软件&lt;/h3&gt;
-
-&lt;p&gt;查询Linux下已经安装的软件：&lt;code&gt;rpm -qa | grep *httpd*&lt;/code&gt;&lt;/p&gt;
-
-</content>
-   </entry>
-   
-   <entry>
-     <title>Linux下Yum源以及yum命令</title>
-     <link href="http://ningg.github.com/linux-yum"/>
-     <updated>2012-05-17T00:00:00+08:00</updated>
-     <id>http://ningg.github.com/linux-yum</id>
-     <content type="html">&lt;p&gt;几点：&lt;/p&gt;
-
-&lt;ul&gt;
-  &lt;li&gt;如何配置Yum源&lt;/li&gt;
-  &lt;li&gt;常用的yum命令&lt;/li&gt;
-&lt;/ul&gt;
-
-&lt;h2 id=&quot;yum&quot;&gt;yum命令&lt;/h2&gt;
-
-&lt;p&gt;常用的yum命令，有些功能与rpm命令类似。&lt;em&gt;（单独写一个rpm命令的文章）&lt;/em&gt;&lt;/p&gt;
-
-&lt;h3 id=&quot;yum-list&quot;&gt;yum list：查询&lt;/h3&gt;
-
-&lt;p&gt;如何查看yum中是否有指定的安装包，例如，&lt;code&gt;apache&lt;/code&gt;服务器是否安装：&lt;code&gt;yum list *httpd*&lt;/code&gt;，会显示&lt;code&gt;Installed Packages&lt;/code&gt;和&lt;code&gt;Available Packages&lt;/code&gt;&lt;/p&gt;
 
 </content>
    </entry>
