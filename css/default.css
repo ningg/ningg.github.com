@@ -83,7 +83,7 @@ pre ol{margin-left:25px;list-style-type:decimal;}
 .entry ul li{margin-bottom:5px;list-style:disc;line-height:1.5em;}
 .entry ul li ul li{list-style-type:circle;}
 .entry ul li ol li{list-style-type:decimal;}
-.entry ol{margin-top:0px;margin-bottom:25px;margin-left:25px;}
+.entry ol{margin-top:5px;margin-bottom:5px;margin-left:25px;}
 .entry ol li{margin-bottom:5px;list-style:decimal;line-height:1.5em;}
 
 /*.entry blockquote{margin-left:25px;font-size:14px;font-style:italic;}*/
