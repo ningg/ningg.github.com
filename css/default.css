@@ -328,8 +328,8 @@ margin-bottom: 20px;
 #gotoTop{
 	display:none;
 	position:fixed;
-	right:10%;
-	bottom:10%;
+	right:8%;
+	bottom:8%;
 	cursor:pointer;
 	padding:12px 4px;
 	width:30px;
