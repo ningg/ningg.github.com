@@ -74,6 +74,9 @@ GitHub上对于个人博客的支持，实质是利用GitHub Pages功能来实�
 * GitHub上绑定域名：
 	* 创建CNAME
 	* 从[GitHub Help](https://help.github.com/) 上搜索 `custom domain`
+	* 可以参考:
+	    * [Setting up an apex domain](https://help.github.com/articles/setting-up-an-apex-domain/)
+	    * [Troubleshooting custom domains](https://help.github.com/articles/troubleshooting-custom-domains/)
 
 **TODO**：整理GitHub上域名配置的基本原理：
 
