@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 团队系列：新人培养-分析
+title: 团队系列：新人培养（2019版）-分析
 description: 新人入职，落地计划必不可少，新人培养，有哪些注意事项呢？
 published: true
 category: 团队
