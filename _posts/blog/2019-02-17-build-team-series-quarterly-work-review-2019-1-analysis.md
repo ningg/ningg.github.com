@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 团队系列：季度回顾（2019版）-分析
-description: 
+description: 季度回顾，需要考虑哪些方面？实际落地操作过程中，一些典型场景，如何做出合理判断？
 published: true
 category: 团队
 ---

@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 团队系列：季度回顾（2019版）-模板
-description: 
+description: 季度回顾，有没有可以参阅的模板，涵盖一些通用方面信息
 published: true
 category: 团队
 ---

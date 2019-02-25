@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 团队系列：季度规划（2019版）
-description: 
+description: 季度规划，对上从部门角度，需要考虑哪些方面？对下落地工作，需要考虑哪些方面？
 published: true
 category: 团队
 ---
