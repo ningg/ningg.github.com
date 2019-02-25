@@ -8,6 +8,17 @@ category: redis
 
 关于 Redis 的 Master-Slave 结构，读写分离时，过期 key 的处理，经常遇到问题：
 
+> 已经过期的 key, 从 slave 节点, 能够 `get` 查询到 key 仍然存在;
+>
+> 本质原因:
+>
+> 1. slave 节点无法主动进行 DEL 删除动作, 只能从 master 同步到更新命令, 即, slave 上 `惰性删除`策略失效
+>
+> 2. **Redis 3.2 之前**的版本中, get 命令, 从 slave 节点, 查询到 key 时, 即使 key 已经过期失效, 但仍返回这个 key.
+
+
+具体原理:
+
 1. 对 key 设置过期时间，相对与绝对时间都会转为绝对时间保存（PEXPIREAT 实现）
 1. Redis 过期 key 删除策略
 	1. **惰性删除**：获取 key 的时候，如果过期了删除。内存不友好，CPU 友好（读写之前会执行 expireIfNeeded）
@@ -21,6 +32,21 @@ category: redis
 
 Redis 3.2 之前，过期 key 的解决方案：
 
+* 查询 key 是否存在时, 使用 `ttl` 命令:
+    * 锁不存在: 结果 `< 0`, 表示 key 不存在;
+    * 锁已经存在: 结果 `> 0`, 表示 key 存在。
 
+
+Redis 3.2 之后, 修复了过期 Key 在 Slave 节点仍能 `get` 到取值, **修复策略**:
+
+1. 查询 Key 是否存在
+2. 如果 Key 存在, 则, 判断 key 是否过期
+3. 如果 Key 未过期, 则, 返回 Key 的取值; 否则, 返回 null
+4. 在 slave 节点上, 仍然不支持 `惰性删除` 的过期 key 删除策略
+
+参考资料:
+
+* Redis 命令, [TTL](https://redis.io/commands/ttl)
+* Redis 命令, [SETNX](https://redis.io/commands/setnx)
 
 [NingG]:    http://ningg.github.com  "NingG"
