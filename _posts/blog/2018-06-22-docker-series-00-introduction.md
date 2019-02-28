@@ -47,7 +47,7 @@ Docker 的版本，有 2 个：
 
 他们提供的支持和扩展，存在差异，更多细节参考 [Docker 的版本](https://www.docker.com/get-docker)
 
-备注，截止写 blog 的时候， Docker 最新版本为 `1.18`
+备注，截止写 blog 的时候， Docker 最新版本为 `18.03`
 
 几个常见的问题：
 
@@ -158,6 +158,36 @@ Docker 公司，借助 Moby ，提出 `容器平台` 的**构建规范**：
 ## 安装 & 使用
 
 直接按照 [Documentation](https://docs.docker.com/) 中 [Get Started](https://docker.github.io/get-started/)，逐步阅读并操作即可。
+
+几个典型操作：
+
+```
+# 1. 查看 docker 版本（简单的版本信息）
+$ docker -v
+Docker version 18.03.1-ce, build 9ee9f40
+
+# 2. 查看 docker client 和 Server(Engine) 的版本（详细的版本信息）
+$ docker version
+Client:
+ Version:      18.03.1-ce
+ API version:  1.37
+ Go version:   go1.9.5
+ Git commit:   9ee9f40
+ Built:        Thu Apr 26 07:13:02 2018
+ OS/Arch:      darwin/amd64
+ Experimental: false
+ Orchestrator: swarm
+
+Server:
+ Engine:
+  Version:      18.03.1-ce
+  API version:  1.37 (minimum version 1.12)
+  Go version:   go1.9.5
+  Git commit:   9ee9f40
+  Built:        Thu Apr 26 07:22:38 2018
+  OS/Arch:      linux/amd64
+  Experimental: false
+```
 
 具体，Linux 下安装：
 

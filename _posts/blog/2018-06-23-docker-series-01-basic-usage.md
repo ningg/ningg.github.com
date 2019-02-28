@@ -88,6 +88,15 @@ docker container ls -aq
 * 分析
 * 导出：离线携带
 
+设置 Docker Registry **镜像加速器**：
+
+* 登录 [https://cr.console.aliyun.com/cn-hangzhou/mirrors](https://cr.console.aliyun.com/cn-hangzhou/mirrors) 后，可以获取专属的**镜像加速地址**。
+
+具体，参考下述配置：
+
+![](/images/docker-series/docker-registry-accelerate-mirror-config.png)
+
+
 ### 基本操作
 
 镜像基本操作：
