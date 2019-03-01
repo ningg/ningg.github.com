@@ -6,6 +6,8 @@ published: true
 category: redis
 ---
 
+**目标**：搭建 Redis 集群，用于进行学习和研究。
+
 ## 1. 来几台机器
 
 美团云主机，绑定外网 IP 之后，即可使用：
@@ -51,9 +53,9 @@ Linux guoning 3.10.0-123.el7.x86_64 #1 SMP Mon Jun 30 12:09:22 UTC 2014 x86_64 x
 
 几点：
 
-* 统一用户：新建用户 redis
-* 统一目录：安装文件、数据、配置文件，统一目录存放
-* 统一安装 Redis：统一 Redis 的版本
+* **统一用户**：新建用户 redis
+* **统一目录**：安装文件、数据、配置文件，统一目录存放
+* **统一安装 Redis**：统一 Redis 的版本
 
 ### 2.1. 统一用户：新建用户 redis
 
@@ -71,8 +73,10 @@ visudo
 
 配置 SSH 免密码登录：
 
-* 本质：将本地的公钥，上传到远端服务器的`~/.ssh/authorized_keys` 文件中。
+* 本质：将本地的`公钥`，上传到远端服务器的`~/.ssh/authorized_keys` 文件中。
 * 示例代码如下：
+
+> **Tips**: `私钥`在`本地`，`公钥`在`远端`。
 
 ```
 // 上传公钥，配置免密码登录 （在 authorized_keys 后追加公钥）（有可能不需要执行 mkdir 命令）
@@ -145,6 +149,9 @@ Host redis-4
 
 （todo）（有没有自动化的方式，特别是当有10台机器时，人工配置工作量指数级增长）
 
+* 有**运维工具**，装机问题，是典型的运维问题。
+* 实例： 运维工具 `ansible`、`puppet`等
+
 当前只设定 redis 用户在 Redis 集群内部双向免密码登录。
 
 ### 2.2. 统一目录
@@ -160,7 +167,7 @@ Host redis-4
 
 ### 2.3. 统一安装 Redis
 
-实际上，有 puppet 类似工具来集中部署，这次涉及节点较少，暂时未启用 puppet。
+实际上，有 `puppet` 类似工具来集中部署，这次涉及节点较少，暂时未启用 puppet。
 
 ```
 [root@guoning ~]# yum search redis
@@ -193,7 +200,7 @@ Loading mirror speeds from cached hostfile
 
 #### 2.3.1. 各个节点上安装 Redis3
 
-CentOS 下源码方式安装 Redis3 的操作细节，参考：[http://ningg.top/redis-usage/][http://ningg.top/redis-usage/]
+CentOS 下源码方式安装 Redis3 的操作细节，参考：[Redis梳理](http://ningg.top/redis-usage/)
 
 Redis 3 的配置概要：
 
@@ -239,7 +246,9 @@ Redis 服务启动后，使用的配置文件？
 
 ### 3.2. 集群
 
-参考：todo
+参考：
+
+* [单服务器建 Redis 集群](http://ningg.top/redis-lesson-3-redis-server-install-on-single-server/)
 
 ## 4. Redis 的配置文件
 
@@ -270,11 +279,15 @@ NOTE：使用 `config set` 修改参数时，一定要同步修改 `redis.conf` 
 
 ## 5. 源码环境搭建
 
-环境：Mac
-IDE：Xcode
-源码来源：https://github.com/huangz1990/redis-3.0-annotated
+基本信息：
 
-使用Xcode查看 Redis 源码：（todo：使用Xcode 查看 Redis 源码 ）	 	 	 	 	 	 
+* 环境：Mac
+* IDE：Xcode
+* 源码来源：[https://github.com/huangz1990/redis-3.0-annotated](https://github.com/huangz1990/redis-3.0-annotated)
+
+使用Xcode查看 Redis 源码，单独整理了一篇文章：
+
+* [使用Xcode 查看 Redis 源码](http://ningg.top/redis-lesson-2-source-code-review-in-xcode/)	 	 	 	 	 	 
  
 ## 7. 参考来源
 
