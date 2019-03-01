@@ -278,6 +278,32 @@ cbdfe71a19769057a8d1fc7c4f7ddc7f031afab8 127.0.0.1:7005 myself,slave 8d8e092074b
 疑问：old master 再次上线之后，自动切换为 new master 的slave，哪个机制实现的？略神奇呀
 
 * master 会定期给 slave 发送消息吗？
+
+### 2.5. 补充：Docker 镜像方式
+
+Docker 镜像方式，启动 Redis 服务：参考 [Mac 上搭建 Redis 服务器](http://ningg.top/redis-lesson-0-installation-on-macbook-pro/)。
+
+如何基于 Docker 容器，来构建 Redis 集群。
+
+基本步骤：
+
+1. 创建 Redis 节点：docker 容器，实现 Redis 节点
+2. 连接到 Redis 节点，进行集群管理
+3. TODO：同一个宿主机上，不同的容器之间，网络如何互通？如何识别不同容器的 ip ？需要单独整理一份
+
+具体命令：
+
+```
+# 1. 基于本地配置文件， 启动 Redis 节点
+# 下面 /Users/guoning/ningg/projects/Redis/docker-config/7000/redis.conf 是本地配置文件的位置
+docker run -v /Users/guoning/ningg/projects/Redis/docker-config/7000/redis.conf:/usr/local/etc/redis/redis.conf --name myredis1 redis redis-server /usr/local/etc/redis/redis.conf
+
+# 2. 连接到 Redis 节点
+# redis: 默认，容器中 redis 表示 Redis 服务地址
+# 7000: 上一步中，设置了 Redis 的启动端口为 7000
+docker run -it --link myredis1:redis --rm redis redis-cli -h redis -p 7000
+```
+
  
 ## 3. 集群操作命令
 命令列表：

@@ -27,7 +27,7 @@ category: redis
 	* 更新速度快，优先使用 AOF
 	* AOF 加载，本质是：创建伪客户端，逐条执行 AOF 文件
 	* RDB 加载速度快
-	* AOF 加载，本质是：直接 load 内存镜像
+	* RDB 加载，本质是：直接 load 内存镜像
 * RDB、AOF加载时，Redis 服务器进程是否阻塞？
 	* BGSAVE\BGREWRITEAOF，都是子进程处理，不会阻塞任何请求
 * BGSAVE生成RDB文件时，Redis 服务器仍能提供服务，仅限于 read命令吗？
