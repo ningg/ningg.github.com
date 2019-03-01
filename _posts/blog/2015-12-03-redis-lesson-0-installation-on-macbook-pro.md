@@ -56,7 +56,7 @@ Docker 镜像方式，启动 Redis：
 
 1. [https://redis.io/](https://redis.io/)
 1. [https://redis.io/download](https://redis.io/download)
-1. [https://hub.docker.com/_/redis/](https://hub.docker.com/_/redis/)
+1. [Redis Imager of DockerHub]
 1. [https://github.com/docker-library/redis/blob/7be79f51e29a009fefdc218c8479d340b8c4a5e1/5.0/Dockerfile](https://github.com/docker-library/redis/blob/7be79f51e29a009fefdc218c8479d340b8c4a5e1/5.0/Dockerfile) 
 
 Docker 镜像方式，启动 Redis ，具体步骤：
