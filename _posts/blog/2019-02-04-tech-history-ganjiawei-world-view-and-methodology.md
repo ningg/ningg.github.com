@@ -8,7 +8,7 @@ category: 科技历史
 写在开头:
 
 > 最近闲暇时间, 专注查阅学习了阿干老师的一些理念, 并整理了一篇其在运营领域的见解和操作实践([科技历史系列：干嘉伟，如何运营一家科技企业
-](http://ningg.top/tech-history-ganjiawei-how-to-manage-a-tech-company/))。
+](/tech-history-ganjiawei-how-to-manage-a-tech-company/))。
 >
 > 学习整理期间, 多次被细节中体现出的价值观、判断力、领导力等, 所折服。
 >

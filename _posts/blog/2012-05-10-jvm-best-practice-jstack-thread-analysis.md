@@ -109,7 +109,7 @@ $ dockert -it [container] /bin/bash
 ## 参考来源
 
 * [一个Tomcat高CPU占用问题的定位][一个Tomcat高CPU占用问题的定位]
-* [top命令](http://ningg.top/linux-top/)
+* [top命令](/linux-top/)
 
 
 

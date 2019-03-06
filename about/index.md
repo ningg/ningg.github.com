@@ -33,30 +33,30 @@ layout: about
 公司内外，进行过的部分分享，这些分享都有独立的 ppt or keynote：
 
 * **思想意识**：
-	* [工具系列](http://ningg.top/category/#tool-ref)
-	* [效率提升](http://ningg.top/category/#%E6%95%88%E7%8E%87%E6%8F%90%E5%8D%87-ref)：积累的意识、组织的意识、开放的意识
-	* 雷军：[科技历史-雷军的一些看法](http://ningg.top/tech-history-01-leijun-xiaomi/) 
+	* [工具系列](/category/#tool-ref)
+	* [效率提升](/category/#%E6%95%88%E7%8E%87%E6%8F%90%E5%8D%87-ref)：积累的意识、组织的意识、开放的意识
+	* 雷军：[科技历史-雷军的一些看法](/tech-history-01-leijun-xiaomi/)
 * **技术专题**：
-	* [JVM](http://ningg.top/category/#jvm-ref)
-	* [Spring](http://ningg.top/category/#spring-ref)
-	* [MySQL](http://ningg.top/category/#mysql-ref)
-	* [Docker](http://ningg.top/category/#docker-ref)
-	* [Redis](http://ningg.top/category/#redis-ref)
-	* [ZooKeeper](http://ningg.top/category/#zookeeper-ref)
-	* [数据平台](http://ningg.top/category/#%E6%95%B0%E6%8D%AE%E5%B9%B3%E5%8F%B0-ref)
-	* [HTTP](http://ningg.top/category/#http-ref)
-	* [计算机：基础原理](http://ningg.top/category/#%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86-ref)
-	* [技术成长](http://ningg.top/category/#%E6%8A%80%E6%9C%AF%E6%88%90%E9%95%BF-ref)
-	* [技术架构](http://ningg.top/category/#%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84-ref)
+	* [JVM](/category/#jvm-ref)
+	* [Spring](/category/#spring-ref)
+	* [MySQL](/category/#mysql-ref)
+	* [Docker](/category/#docker-ref)
+	* [Redis](/category/#redis-ref)
+	* [ZooKeeper](/category/#zookeeper-ref)
+	* [数据平台](/category/#%E6%95%B0%E6%8D%AE%E5%B9%B3%E5%8F%B0-ref)
+	* [HTTP](/category/#http-ref)
+	* [计算机：基础原理](/category/#%E5%9F%BA%E7%A1%80%E5%8E%9F%E7%90%86-ref)
+	* [技术成长](/category/#%E6%8A%80%E6%9C%AF%E6%88%90%E9%95%BF-ref)
+	* [技术架构](/category/#%E6%8A%80%E6%9C%AF%E6%9E%B6%E6%9E%84-ref)
 * **系统架构**：
-	* [从 MQ 说到 Kafka](http://ningg.top/category/#kafka-ref)
-	* [猫眼演出：分销平台架构](http://ningg.top/arch-series-maoyan-show-open-platform-arch/)
-	* [实验平台架构原理](http://ningg.top/category/#experiment-ref) 
+	* [从 MQ 说到 Kafka](/category/#kafka-ref)
+	* [猫眼演出：分销平台架构](/arch-series-maoyan-show-open-platform-arch/)
+	* [实验平台架构原理](/category/#experiment-ref)
 
 
 需整理：
 
-* [从 MQ 说到 Kafka](http://ningg.top/category/#kafka-ref) ：预期增加新的管理工具
+* [从 MQ 说到 Kafka](/category/#kafka-ref) ：预期增加新的管理工具
 * 项目管理：识别项目管理要点，提升项目交付质量
 * 团队建设：识人、招人的通用模式
 * 技术规划：考量因素和要点

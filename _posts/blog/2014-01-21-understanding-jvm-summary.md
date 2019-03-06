@@ -20,10 +20,10 @@ JVM的内存空间，即，JVM运行时数据区（JVM runtime data areas），�
 
 其中：程序计数器、虚拟机栈、本地方法栈是Thread私有的，而JVM堆、方法区，是线程共享的。
 
-![](http://ningg.top/images/understanding-jvm/runtime-data-areas.png)
+![](/images/understanding-jvm/runtime-data-areas.png)
 
 
-![](http://ningg.top/images/understanding-jvm/internal-arch-of-jvm.gif)
+![](/images/understanding-jvm/internal-arch-of-jvm.gif)
 
 
 ### 细节参考
@@ -49,7 +49,7 @@ JVM负责为对象分配内存和回收内存，具体：**分代分配**，**�
 
 关于Young GC，参考下图：
 
-![](http://ningg.top/images/understanding-jvm/minor-gc.png)
+![](/images/understanding-jvm/minor-gc.png)
 
 
 思考：Full GC，只是针对老年代的GC？是否还包含永久代的GC？是的，Full GC 的时候，会同时清理老年代和永久代，永久代的GC要求很苛刻，主要是方法区中常量池内的常量、无用的类*（卸载）*；方法区的GC，并不是必须的，通过JVM的启动参数，可以进行配置。
@@ -93,10 +93,10 @@ JVM负责为对象分配内存和回收内存，具体：**分代分配**，**�
 * 直接指针：虚拟机栈的本地变量表中，直接存储对象的实例的地址，对象实例再指向对象类型；
 
 
-![](http://ningg.top/images/understanding-jvm/reference-pool.jpg)
+![](/images/understanding-jvm/reference-pool.jpg)
 
 
-![](http://ningg.top/images/understanding-jvm/direct-reference.jpg)
+![](/images/understanding-jvm/direct-reference.jpg)
 
 
 
@@ -153,7 +153,7 @@ JVM负责为对象分配内存和回收内存，具体：**分代分配**，**�
 	* 构造函数
 
 
-![](http://ningg.top/images/understanding-jvm/java-object-init.png)
+![](/images/understanding-jvm/java-object-init.png)
 
 
 ### 细节参考
@@ -176,7 +176,7 @@ JVM负责为对象分配内存和回收内存，具体：**分代分配**，**�
 
 > 这样做Java类和它的类加载器就一起具备了**带有优先级的层次关系**。例如类java.lang.Object,它存放在rt.jar中，无论哪一个类加载这个类，最终都会被委派到引导类加载器去完成它的加载，因此Object类在程序中的各种类加载器环境中都是一个类。这样做也保证**安全性**，因为如果有人想恶意置入代码，类加载器的代码就避免了这种情况的发生。
 
-![](http://ningg.top/images/understanding-jvm/classloader_tree.jpg)
+![](/images/understanding-jvm/classloader_tree.jpg)
 
 
 ## 细节参考
