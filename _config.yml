@@ -15,8 +15,8 @@ permalink: /:title/
 title: ningg.top
 
 # page中head部分的meta元素
-keywords: 激情 使命
-description: NingG's Blog
+keywords: 激情,使命
+description: NingG's Blog , ningg 的个人博客
 
 # url: http://ningg.github.com
 url: http://ningg.top
