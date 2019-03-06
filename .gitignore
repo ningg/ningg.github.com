@@ -6,3 +6,6 @@ _site/*
 
 # jekyll
 .jekyll-metadata
+
+# Mac local debug
+Gemfile.lock
