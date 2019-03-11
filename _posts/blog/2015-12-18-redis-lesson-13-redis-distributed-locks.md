@@ -197,6 +197,11 @@ Redlock 算法，典型步骤：
 1. client 向 `N` 个 `master` 节点，异步发送「**加锁请求**」，并设置超时时间（应小于锁自动释放时间）
 1. 当 client 获取 `N/2 + 1` 个 `master` 节点的「**加锁成功**」请求后，即，表示「**获取锁成功**」；否则，向「**所有的 master 节点**」发送「**解锁请求**」进行解锁。
 
+中间存在 2 个要点：
+
+1. 获取动作的**超时时间**：多 redis 节点，设置锁时，会耗费时间，需要设置一个超时时间，如果超过此时间，则，需要释放锁
+2. **失败重试**：针对单个 Redis 节点，获取锁失败时，需要`随机延迟`后，再重试获取当前 Redis 节点的锁
+
 Think：
 
 * `多 master 冗余` + `过半投票`策略，获取锁失败时，向「**所有的 master 节点**」发送「**释放锁的请求**」，是否会导致「其他进程」加锁成功后，锁也被释放。
@@ -309,7 +314,7 @@ ZooKeeper 另一种实现**互斥锁的方式**：
 * [https://juejin.im/post/5bbb0d8df265da0abd3533a5](https://juejin.im/post/5bbb0d8df265da0abd3533a5)
 * [分布式锁的实现原理](https://www.jianshu.com/p/6618471f6e75)
 * [http://ifeve.com/zookeeper-lock/](http://ifeve.com/zookeeper-lock/)
-* [http://ifeve.com/redis-lock/](http://ifeve.com/redis-lock/)
+* [http://ifeve.com/redis-lock/](http://ifeve.com/redis-lock/) 详细的官方文档说明
 
 
 
