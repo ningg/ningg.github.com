@@ -42,12 +42,14 @@ pom.xml 中添加如下配置：
             <groupId>org.apache.maven.plugins</groupId>  
             <artifactId>maven-assembly-plugin</artifactId>  
             <version>2.5.5</version>  
-            <configuration>  
+            <configuration>
+                <!-- Main 函数入口，可以删除：START -->
                 <archive>  
                     <manifest>  
                         <mainClass>com.xxg.Main</mainClass>  
                     </manifest>  
-                </archive>  
+                </archive>
+                <!-- Main 函数入口，可以删除：END -->
                 <descriptorRefs>  
                     <descriptorRef>jar-with-dependencies</descriptorRef>  
                 </descriptorRefs>  
@@ -65,9 +67,12 @@ pom.xml 中添加如下配置：
 mvn package assembly:single  
 ```
 
-打包后会在target目录下生成一个xxx-jar-with-dependencies.jar文件，这个文件不但包含了自己项目中的代码和资源，还包含了所有依赖包的内容。所以可以直接通过java -jar来运行。
+打包后会在`target`目录下生成一个`xxx-jar-with-dependencies.jar`文件，这个文件不但包含了自己项目中的代码和资源，还包含了所有依赖包的内容。所以可以直接通过`java -jar`来运行。
 
 
+更多信息，参考：
+
+* [Maven 进阶--- 打成包含依赖的jar包](https://blog.csdn.net/u014430366/article/details/76060366)
 
 
 
