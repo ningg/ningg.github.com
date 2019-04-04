@@ -67,6 +67,9 @@ h4+pre, h3+pre { margin-top:20px; }
 pre code{background-color:transparent;border:none;padding:0;word-wrap:normal;}
 pre ol{margin-left:25px;list-style-type:decimal;}
 
+/************Body style*******************/
+body{overflow:auto;overflow-x: hidden;}
+
 /************layout style*****************/
 #content {width:1060px;margin:90px auto 60px;min-height:400px;height:auto !important;height:400px; }
 
