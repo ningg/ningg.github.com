@@ -68,7 +68,7 @@ pre code{background-color:transparent;border:none;padding:0;word-wrap:normal;}
 pre ol{margin-left:25px;list-style-type:decimal;}
 
 /************Body style*******************/
-body{overflow:auto;overflow-x: hidden;}
+body{overflow:auto; overflow-x: hidden;}
 
 /************layout style*****************/
 #content {width:1060px;margin:90px auto 60px;min-height:400px;height:auto !important;height:400px; }
@@ -224,7 +224,7 @@ h3.about {color:#777;margin-top:20px;font-size:22px;margin-bottom:10px}
 .home-contact img { width:18px; }
 
 @media screen and (max-width: 750px){
-    body {font-size:14px;}
+    body {font-size:14px; overflow:auto; overflow-x: hidden;}
     #content {width:85%;margin:100px auto 50px; }
 	.related-post {width:85%;margin:auto auto 20px; }
 
