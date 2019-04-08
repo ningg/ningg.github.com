@@ -208,6 +208,19 @@ $ bundle exec jekyll serve --incremental
 # 6. 浏览器访问效果
 http://127.0.0.1:4000
 ```
+### 4.6开启HTTPS
+
+采用 `CNAME` 设置域名的别名后, 在 project 的 `settings` 下, 能够看到提示:
+
+* Your site is published at http://ningg.top/
+
+现在的焦点:  如何开启 HTTPS 呢?
+
+* TODO: 服务端需要额外配置证书, 暂时未启用 `https` 接入方式.
+
+更多细节, 参考:
+
+* [GitHub Pages 对自定义域名支持 HTTPS](https://likfe.com/2018/05/03/github-pages-custom-domains-support-https/)
 
 
 [CSDN]:		http://www.csdn.net/		"CSDN"
