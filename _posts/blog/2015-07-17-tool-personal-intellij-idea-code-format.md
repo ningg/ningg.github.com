@@ -7,6 +7,8 @@ category: tool
 
 小组内多成员协同开发，统一代码规范很必要，对于使用不同IDE的人员，这就是个问题。
 
+> **特别说明**：直接参考最新版的代码规范 [Java 代码规范 (code style + check style)](http://ningg.top/tool-personal-intellij-idea-java-code-style/)
+
 ## 1. IDEA 下使用 Eclipse 的配置文件
 
 1. 安装插件：直接在IDEA的Plugins中搜索『Eclipse Code Formatter』，安装这一插件即可。

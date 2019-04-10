@@ -325,7 +325,14 @@ brew cask info intellij-idea
 brew cask install intellij-idea
 ```
 
-安装之后，IDEA的基本配置参考: IntelliJ IDEA 17 新手入门(TODO)
+> **特别说明**：建议直接在 IntelliJ IDEA 的官网，下载安装文件，并进行安装 or 版本升级，因为官网安装文件是最新版本。
+
+安装之后，IDEA的基本配置, 参考:
+
+* [工具系列：IntelliJ IDEA (Mac)](http://ningg.top/tool-personal-intellij-idea-for-mac/)
+* [工具系列：IntelliJ IDEA (Windows)](http://ningg.top/tool-personal-intellij-idea-for-windows/)
+* [工具系列：IntelliJ IDEA (Mac) 运行速度优化](http://ningg.top/tool-personal-intellij-idea-for-mac-optimize/)
+* [工具系列：后台代码规范 (Eclipse、IDEA)](http://ningg.top/tool-personal-intellij-idea-code-format/)
 
 ### 5.2. Navicat
 
