@@ -482,16 +482,6 @@ Vim下光标定位：
 
 
 
-
-
-
-
-
-
-
-
-
-
 [NingG]:    http://ningg.github.com  "NingG"
 
 
