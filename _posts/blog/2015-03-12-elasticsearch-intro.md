@@ -20,8 +20,13 @@ category: elasticsearch
 
 ## 启动
 
-直接下载，然后解压，直接运行脚本`bin/elasticsearch`。如果希望 ElasticSearch 在后台运行，则执行命令`bin/elasticsearch -d`，其将 ElasticSearch 进程的父进程设置为超级进程（`pid=1`）。现在，如何测试是否启动成功？可向 `http://localhost:9200` 发送一条请求，会查看到返回的JSON字符串，具体效果如下：
+直接[下载](https://www.elastic.co/cn/downloads/elasticsearch)，然后解压，直接运行脚本`bin/elasticsearch`。如果希望 ElasticSearch 在后台运行，则执行命令`bin/elasticsearch -d`，其将 ElasticSearch 进程的父进程设置为超级进程（`pid=1`）。
 
+**Note**: 直接在 elastisearch 的 home 目录，执行 `bin/elasticsearch` 命令；不要 `cd bin` 后，单独执行 `elasticsearch` 命令，因为，大部分情况下，会提示有错误。
+
+现在，如何测试，是否启动成功呢？可向 `http://localhost:9200` 发送一条请求，会查看到返回的JSON字符串，具体效果如下：
+
+```
 	[ningg@localhost ~]$ curl -XGET http://localhost:9200/
 	{
 	  "status" : 200,
@@ -36,18 +41,24 @@ category: elasticsearch
 	  },
 	  "tagline" : "You Know, for Search"
 	}
+```
 
 补充几点：
 
-* 验证ElasticSearch是否成功启动，也可以直接使用浏览器，访问`http://localhost:9200`，将此处 `localhost` 替换为服务器的IP。
-* 在后台启动ElasticSearch的详细过程，可以参考`bin/elasticsearch`脚本细节，内部有详细说明，本质就是shell脚本中启动一个Java进程。
+* 浏览器验证：验证ElasticSearch是否成功启动，也可以直接使用浏览器，访问`http://localhost:9200`，将此处 `localhost` 替换为服务器的IP。
+* 启动的本质：在后台启动ElasticSearch的详细过程，可以参考`bin/elasticsearch`脚本细节，内部有详细说明，本质就是shell脚本中，启动一个Java进程。
 
 ## Index操作
 
+几个基本操作：
+
+1. 插入数据
+2. 查询数据
+3. 删除数据
 
 ### 插入数据
 
-如果指定的 `Index`\`Type` 不存在，则自动创建，下面为向`Index`\`Type` 插入数据的命令；
+如果指定的 `Index\Type` 不存在，则自动创建，下面为向`Index\Type` 插入数据的命令；
 
 	curl -XPUT 'http://localhost:9200/test/test/1' -d '{ "name" : "Ning Guo"}'
 	
