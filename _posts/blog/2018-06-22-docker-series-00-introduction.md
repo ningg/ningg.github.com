@@ -14,6 +14,8 @@ category: docker
 * Docker 相关的信息源：官网？版本迭代跟踪？源码库？
 * Docker 的安装和简单使用？
 
+> **Note**：整个 Docker 系列，进行的实践操作，在 GitHub 上，都放置了一份 [docker-learn](https://github.com/ningg/docker-learn) 操作配置
+
 ## Docker 是什么？
 
 从官网 [https://www.docker.com/](https://www.docker.com/) 开始，首页中看到几个重要信息：
@@ -199,6 +201,7 @@ Server:
 * 官网：[https://www.docker.com/](https://www.docker.com/)，必看
 * [GitBook：Docker简明教程](https://legacy.gitbook.com/book/jiajially/dockerguide/details)，必看
 * [GitBook：Docker —— 从入门到实践](https://legacy.gitbook.com/book/yeasy/docker_practice/details)，必看，持续更新
+* [docker-learn](https://github.com/ningg/docker-learn) 
 
 
 
