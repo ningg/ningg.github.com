@@ -10,7 +10,7 @@ category: docker
 
 组里 Q3 的技术氛围建设，确立了一个技术专题 《Docker 技术与原理》，做好动员和整体安排后，第一次我来开头，要质量高一些，做一个榜样，通过做出的事情，不断强化大家对团队理念的认可：高质量、不将就。
 
-> Note： 当前 blog ，有一份 keynote，`Docker：概述.key`
+> Note： 当前 blog ，有一份 keynote，`Docker：概述.key`, 另, 有一篇 **Docker 实践** 后续找时间发布.
 
 主要目标：
 

@@ -2,7 +2,7 @@
 layout: post
 title: Docker 系列：Docker 实践
 description: Docker 实践过程中，需要注意哪些细节？有没有潜在的缺陷？经验 or 教训，又有哪些？
-published: true
+published: false
 category: docker
 ---
 
