@@ -36,7 +36,7 @@ title: 自我介绍
 * **思想意识**：
 	* [效率提升](/category/#%E6%95%88%E7%8E%87%E6%8F%90%E5%8D%87-ref)：积累的意识、组织的意识、开放的意识
 	* [工具系列](/category/#tool-ref)：依赖高效工具, 高效协作，利其器、善其事
-	* [读书]()：
+	* [读书](/category/#%E5%9B%BE%E4%B9%A6-ref)：部分书单、纸质阅读标注的习惯
 
 * **技术专题**：
 	* [Java 并发](/category/#java-concurrency-ref)：Java 并发编程
