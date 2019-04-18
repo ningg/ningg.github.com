@@ -84,7 +84,7 @@ title: 自我介绍
 Note：需整理，下面几个，备注下
 
 * [从 MQ 说到 Kafka](/category/#kafka-ref) ：预期增加新的管理工具
-* 公开自己论文 `Soft-CSGDT` 资料，会议的 poster、ppt、要点简介（中文版）等
+* 公开自己论文 `Soft-CSGDT` 资料，会议的 poster、ppt、要点简介等
 
 
 ### 联系我
