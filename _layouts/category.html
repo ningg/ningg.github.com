@@ -17,13 +17,13 @@ layout: default
 			<ul class="tag_box list-inline">
 				{% assign categories_list = site.categories %}
 				{% if categories_list.first[0] == null %}
-					{% for category in categories_list %} 
+					{% for category in categories_list reversed %}
 						<li><a href="#{{ category }}-ref">
 							{{ category }} <span>{{ site.categories[category].size }}</span>
 						</a></li>
 					{% endfor %}
 				{% else %}
-					{% for category in categories_list %} 
+					{% for category in categories_list reversed %}
 						<li><a href="#{{ category[0] }}-ref">
 							{{ category[0] }} <span>{{ category[1].size }}</span>
 						</a></li>
@@ -32,7 +32,7 @@ layout: default
 				{% assign categories_list = nil %}
 			</ul>
 		
-			{% for category in site.categories %}
+			{% for category in site.categories reversed %}
 			<h2 id="{{ category[0] }}-ref">{{ category[0] }}</h2>
 			<ul>
 				{% assign pages_list = category[1] %}
