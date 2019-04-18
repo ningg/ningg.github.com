@@ -45,7 +45,7 @@ Docker 的数据管理，面临几个问题：
 
 如何挂载 volume、bind mount、tmpfs mount：
 
-* `Docker 17.06` 之前：`-v`\`--volume`\`--tmpfs` 参数设定
+* `Docker 17.06` 之前：`-v` \ `--volume` \ `--tmpfs` 参数设定
 * `Docker 17.06` 之后：`--mount` 参数设定，更清晰
  
 

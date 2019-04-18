@@ -22,9 +22,14 @@ category: elasticsearch
 关于上述场景，有几个疑问：
 
 1. **索引文件存储**：上述 solr 服务，完全以 web 服务发布，其构建的索引文件，直接存储在「具体机器本地」吗？也就是说，如果需要迁移机器，也需要迁移索引文件 or 需要重建索引文件。
-2. **ElasticSearch 服务**：按照上述 solr 的 web 服务模式，当前流行的 ElasticSearch 是否也可以直接构建 `轻量级`的搜索中心呢？
+2. **ElasticSearch 服务**：按照上述 solr 的 web 服务模式，当前流行的 ElasticSearch 是否也可以直接构建 `轻量级` 的搜索中心呢？
 
-基于上述业务场景，考虑 ElasticSearch 构建 `轻量级搜索中心`.
+Note: 关于上述 2 个问题，简单解答一下：
+
+1. Solr 的轻量级搜索中心，其索引文件、日志文件，是在 `solrconfig.xml` 文件的 `<config>`下`<dataDir>`配置项和 `<updateLog>`配置行进行指定的，之前我们的实践中，将文件存储在了 `/tmp` 路径下，其实是存在隐患的
+2. ElasticSearch 服务，从原理上，也可以构建 `轻量级` 的搜索中心。
+
+基于上述业务场景，以及 [搜索引擎选择： Elasticsearch与Solr] 中的比较，初步考虑 ElasticSearch 构建 `轻量级搜索中心`.
 
 ## Elastic 思考
 
@@ -52,7 +57,7 @@ category: elasticsearch
 
 使用 Elastic：构建轻量级搜索中心
 
-
+* TODO：这一部分，准备编写一个系列文章，敬请期待
 
 
 
@@ -61,6 +66,7 @@ category: elasticsearch
 
 * [Solr服务的搭建]
 * [Elastic] 官网
+* [搜索引擎选择： Elasticsearch与Solr]
 
 
 
@@ -73,6 +79,7 @@ category: elasticsearch
 [NingG]:    http://ningg.github.com  "NingG"
 [Solr服务的搭建]:		https://my.oschina.net/u/3375733/blog/1546608
 [Elastic]:		https://www.elastic.co/cn/
+[搜索引擎选择： Elasticsearch与Solr]:		http://i.zhcy.tk/blog/elasticsearchyu-solr/
 
 
 

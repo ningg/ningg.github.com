@@ -316,7 +316,7 @@ git commit --amend
 git log
 ```
 
-## 11. checkout 出指定 tag or commit 的代码
+## 11. Case：checkout 出指定 tag or commit 的代码
 
 具体操作：
 
@@ -332,7 +332,7 @@ git checkout -b new_branch_name commit_id
 
 ```
 
-## 12. 从 git 仓库迁移出代码，并导入到另一个 git 仓库
+## 12. Case：从 git 仓库迁移出代码，并导入到另一个 git 仓库
 
 具体操作：
 
@@ -359,7 +359,7 @@ git clone git@gitcafe.com/username/newproject.git
 
 * [从一个git仓库迁移到另外一个git仓库](https://blog.csdn.net/samxx8/article/details/72329002)
 
-## 13. 删除已经加入 git 仓库的文件
+## 13. Case：删除已经加入 git 仓库的文件
 
 **情况描述**：
 
@@ -398,8 +398,25 @@ git push origin release/1.1.x
 
 更多细节，参考：[git忽略已加入到版本库的文件](https://blog.csdn.net/beyond__devil/article/details/78929924)
 
+## 14. Case：当前目录下，设置 git 的用户名和邮箱
 
-## 14. 参考来源
+如果一台电脑下，不同目录，需要切换不同的 git 用户，则，需要针对具体的目录，执行对应的设置命令：
+
+```
+# .bash_profile 中，配置别名
+# Alias for init git for Work
+alias initGitForWork="source ~/initGitInfoLocalOfWork.sh"
+
+# 具体 initGitInfoLocalOfWork.sh 的配置
+git config --local user.name "郭宁"
+git config --local user.email "guoning@china.com"
+
+git config --local -l | grep user
+```
+
+
+
+## 15. 参考来源
 
 * [git - 简明指南]
 * [图解Git]
