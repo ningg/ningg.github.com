@@ -186,6 +186,23 @@ JVM 内存空间：
 * `HotspotVM` 是最`流行`的 JVM 实现之一
 * 后面针对 HotspotVM 内的具体实现进行介绍
 
+
+**HotspotVM**：串行、并行、并发
+
+* **串行**（`Serial`）：
+	* 单个 gc thread，标记、回收内存
+	* work thread `挂起`
+* **并行**（`Parallel`）：
+	* 多个 gc thread，标记、回收内存
+	* work thread `挂起`
+* **并发**（`Concurrent`）：
+	* gc thread，标记、回收内存
+	* work thread `正常执行`
+
+
+![](/images/jvm-series/serial-parallel-concurrent.png)
+
+
 #### 2.2.2. 具体的 GC 垃圾收集器
 
 * 简介：
@@ -210,6 +227,37 @@ JVM 内存空间：
 
 ![](/images/jvm-series/hotspot_vm_gc_collectors.png)
 
+
+其中，新生代的 Serial New、ParNew、Parallel Scavenge，具体的作用和区别：
+
+**Serial**（新生代-串行-收集器）：单线程，独占式，
+
+* 策略：标记-复制-清除
+* 优点：简单高效，适用 Client 模式的桌面应用（Eclipse）
+* 缺点：多核环境下，无法充分利用资源
+
+**ParNew**（新生代-并行-收集器）：多线程，独占式
+
+* 策略：标记-复制-清除（基于 Serial ，多线程版本）
+* 优点：多核环境下，提高 CPU 利用率
+* 缺点：单核环境下，比 Serial 效率要低
+
+
+**Parallel Scavenge**（新生代-并行-收集器）：多线程，独占式
+
+* 策略：标记-复制-清除
+* 优点：精准控制「吞吐量」、gc 时间
+* 吞吐量＝执行用户代码时间 / (执行用户代码时间 + 内存回收时间)
+* 配置参数：
+	* MaxGCPauseMillis：gc 时间的最大值
+	* GCTimeRatio：gc 时间占总时间的比例
+	* UseAdaptiveSizePolicy：开启 GC 内存分配的「自适应调节策略」，自动调整：
+		* 新生代大小
+		* Eden与Survivor 的比列
+		* 晋升老年代的对象年龄
+
+
+![](/images/jvm-series/parnew-and-parallel-new.png)
 
 
 #### 2.2.3. CMS 垃圾收集器（老年代）
