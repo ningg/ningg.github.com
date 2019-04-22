@@ -172,8 +172,20 @@ JVM 内存空间：
 
 ![](/images/jvm-series/hotspot_vm_heap_generation.png)
 
+哪些条件，会触发对象进入「老年代」：
+
+1. **对象年龄**：对象在「新生代」中`survivor 区`，存活的年龄，达到阈值（默认为 15），则，进入「老年代」
+2. **同龄对象过半**：年龄动态计算，对象在「新生代」中`survivor 区`，同龄对象大小之和，超过了 `survivor 区`的 `50%`，则，集体进入「老年代」
+3. **大对象**：大对象，在「新生代」放不下，直接进入「老年代」
+
+
 
 ### 2.2. 实现细节
+
+经验取值的说明：
+
+* young gc：单次时间，一般在 `10ms` 左右；
+* full gc：单次时间，一般优化后在 `500ms` 以下，可以接受。
 
 #### 2.2.1. 简要
 
@@ -279,6 +291,69 @@ JVM 内存空间：
 ![](/images/jvm-series/par_and_cms.png)
 
 
+**关于 CMS 垃圾收集器的重新标记**，细节参考下文。
+
+> **重新标记**过程中，需要进行`全堆扫描`，本质原因：存在`跨代引用`。
+> 
+> 1. **并发标记**过程中，一些`新生代`对象，可能重新引用了新的`老年代`对象
+> 
+> 2. **重新标记**过程中，由于 young gc 过程，才会触发`根搜索`，但 full gc 是独立的，不会进行重新的根搜索，因此，会采用`全堆扫描`
+> 
+> 优化要点：开启 `CMSScavengeBeforeRemark`， 在**重新标记**阶段，会强制进行一次 young gc，降低内存中，现有对象的数量，以此，降低`全堆扫描`的时间。
+
+
+
+**关于 CMS 垃圾收集器的缺陷**，参考下文。
+
+
+JVM GC 欺骗（CMS 垃圾收集器），核心过程：
+
+1. CMS：并发 GC 过程中
+	1. 新生代对象：不断进入老年代，老年代空间不足 CMS 失败；
+	2. 老年代 CMS 退化为：Serial Old 串行 GC，Stop-The-World；
+2. Full GC 之后，因为满足条件，不会抛出 OOM
+	1. 已经占用的 Heap 空间，未超过阈值（可用的 Heap 空间，满足 `GCHeapFreeLimit` (2%)）
+	2. GC 时间占比，未超过阈值：`GCTimeLimit`（默认 98%）
+
+解决办法：
+
+1. CMS 垃圾收集器，降低 CMS 退化概率：
+	1. 开启压缩，减少因为内存碎片，导致的 CMS 退化为 Serial Old 概率，具体参数：`-XX:+UseCMSCompactAtFullCollection` 和 `-XX:CMSFullGCsBeforeCompaction` 多少次 full gc 进行一次压缩，一般只设置 `CMSFullGCsBeforeCompaction` 每 4 次 Full GC 进行一次**内存整理**，比较合适；
+	2. 降低触发 full gc 的阈值：老年代已使用内存空间占比。尽早进行 GC：`-XX:CMSInitiatingOccupancyFraction` 老年代空间占用比例，触发的阈值。默认 `92%`，建议：`68%` （Note：内存使用率增长较快，阈值调低，降低 CMS 退化风险；内存使用率增长较慢，阈值调高，减少 CMS 收集频率）
+2. 调整 OOM 触发条件，避免在 OOM 边缘，性能过低：`GCHeapFreeLimit`（可用空间占比）、`GCTimeLimit`（GC 时间占比）
+
+
+Note：
+
+> 老年代的 CMS 垃圾收集，可能会退化为 Serial Old，其中：
+> 
+> 1. CMS：默认，标记-清除；（*可以开启压缩*：`-XX:+UseCMSCompactAtFullCollection` 和 `-XX:CMSFullGCsBeforeCompaction` 多少次 full gc 进行一次压缩）
+> 2. Serial Old：标记-清除-压缩
+
+
+**特别说明**：这个实际案例，本质是 2 个原因
+
+1. 老年代 CMS 退化为 `Serial Old`：
+	1. 设置开启`碎片压缩`，`CMSFullGCsBeforeCompaction` 多少次 full gc 进行一次压缩
+	2. 设置 full gc 的`触发条件`：`CMSInitiatingOccupancyFraction` 默认为 `92%`，建议设置为 `70%`
+2. OOM 默认阈值：GC 之后，只要不超过阈值，就认为可以继续尝试 GC，而不主动 OOM
+	1. 已占用 Heap 的阈值：默认 `98%`，建议设置为 `90%`
+	2. GC 占用时间的阈值：默认 `98%`，建议设置为 `90%`
+
+
+补充说明：
+
+> 关于 CMS 垃圾收集器的「Full GC 触发条件」 `CMSInitiatingOccupancyFraction` 老年代的「堆使用率」，默认值：
+> 
+> 1. **JDK 1.5**：默认值为 `68%`
+> 
+> 2. **JDK 1.6**：默认值为 `92%`
+
+关于 CMS，更多调优细节，参考：
+
+* [JVM实用参数（七）CMS收集器](http://ifeve.com/useful-jvm-flags-part-7-cms-collector/)
+
+
 #### 2.2.4. G1 垃圾收集器（新生代、老年代）
 
 G1，Garbage First：
@@ -298,6 +373,18 @@ G1，Garbage First：
 
 
 ![](/images/jvm-series/g1_collector.png)
+
+
+G1 垃圾收集器，更多细节：
+
+* [JVM中的G1垃圾回收器](http://www.importnew.com/15311.html)
+
+
+几个细节：
+
+1. G1 垃圾收集器的内存组织粒度：**Region**
+2. Region 大小：`-XX:G1HeapReginSize` 设置大小，一般为 1M~32M之间
+3. JVM最多支持2000个区域，可推算G1能支持的最大内存为2000*32M = 62.5G
 
 
 
@@ -326,7 +413,7 @@ G1，Garbage First：
 
 单独进行一次分享和整理：
 
-* TODO： 参考另一篇 blog.
+* [JVM 实践：GC 调优实践](/jvm-series-jvm-practice-jvm-gc-practices-tips/)
 
 ### 2.4. 补充
 
@@ -348,6 +435,24 @@ G1，Garbage First：
 	* Full GC，暂停时间比较长，认为 Stop-The-World （STW），参数配置时，重点考虑降低 Full GC 次数。
 
 ![](/images/jvm-series/hotspot_vm_heap_generation.png)
+
+
+#### 2.4.2. gc 过程中，全堆扫描
+
+GC 分为 young gc 和 full gc：
+
+1. Full GC：老年代，选取 CMS 作为垃圾收集器时，也存在「跨代引用」的问题
+	1. 4 个阶段：会经历`初始标记`、`并发标记`、`重新标记`、`并发清理` 4 个阶段
+	2. `重新标记`阶段，会进行`全堆扫描`，因为只有 young gc 才会进行「根搜索」，因此，只能「全表扫描」
+	3. 为了解决上述`重新标记`阶段，暂停时间过长，可以设置参数，强制`重新标记`之前，进行一次 young gc，减少新生代存活对象数量，提升「全表扫描」速度
+2. Young GC：年轻代，进行垃圾回收时，也存在「老年代」对象，持有「年轻代」对象的引用，因此，基本思路上，也是需要`扫描老年代`：
+	1. 数量少：经统计，「老年代」持有「新生代」对象引用的情况不足`1%`，根据这一特性JVM引入了卡表（`card table`）来实现这一目的
+	2. 卡表`card table`中，记录了 TODO
+
+
+更多细节，参考：
+
+* [从实际案例聊聊Java应用的GC优化]
 
  
 
@@ -371,6 +476,7 @@ G1，Garbage First：
 * [The Java Language Specification](https://docs.oracle.com/javase/specs/index.html) Java SE 6\7\8
 * [The Java Virtual Machine Specification](https://docs.oracle.com/javase/specs/index.html) Java SE 6\7\8
 * [Java 8 移除永久代](http://www.infoq.com/cn/articles/Java-PERMGEN-Removed/)
+* [从实际案例聊聊Java应用的GC优化]
 
 
 
@@ -379,3 +485,6 @@ G1，Garbage First：
 
 
 [NingG]:    http://ningg.github.com  "NingG"
+[从实际案例聊聊Java应用的GC优化]:		https://tech.meituan.com/2017/12/29/jvm-optimize.html
+
+

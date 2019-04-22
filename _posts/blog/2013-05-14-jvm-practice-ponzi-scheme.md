@@ -102,7 +102,7 @@ category: jvm
 解决办法：
 
 1. CMS 垃圾收集器，降低 CMS 退化概率：
-	1. 开启压缩，减少因为内存碎片，导致的 CMS 退化为 Serial Old 概率，具体参数：
+	1. 开启压缩，减少因为内存碎片，导致的 CMS 退化为 Serial Old 概率，具体参数：`-XX:+UseCMSCompactAtFullCollection` 和 `-XX:CMSFullGCsBeforeCompaction` 多少次 full gc 进行一次压缩；
 	2. 降低触发 full gc 的阈值：老年代已使用内存空间占比。尽早进行 GC：`-XX:CMSInitiatingOccupancyFraction` 老年代空间占用比例，触发的阈值。默认：`68%` （Note：内存使用率增长较快，阈值调低，降低 CMS 退化风险；内存使用率增长较慢，阈值调高，减少 CMS 收集频率）
 2. 调整 OOM 触发条件：`GCHeapFreeLimit`（可用空间占比）、`GCTimeLimit`（GC 时间占比）
 

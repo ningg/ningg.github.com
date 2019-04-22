@@ -54,11 +54,11 @@ category: jvm
 * **初步分析**：
 	* 线程「死循环」
 	* 线程「死锁」
-* 具体**定位步骤**：（`进程` -- `线程` -- 分析`线程上下文`）
+* 具体**定位步骤**：（`进程` -> `线程` -> 分析 `线程上下文`）
 	* top 命令：Linux 命令，查看实时的 CPU 使用情况，获得 pid
-	* top 命令：Linux 命令，查看进程中线程使用 CPU 的情况，记录 tid
+	* top 命令：Linux 命令，`top -H -p [pid]` 查看进程中线程使用 CPU 的情况，记录 tid
 	* jstack 命令：jvm 命令，查看指定进程下，所有线程的调用栈和执行状态
-		* 根据 top 命令获取的 tid（转换为 16 进制）
+		* 根据 top 命令，获取的 tid（转换为 16 进制）
 		* 找出目标线程的调用栈和执行状态
 	* 分析「目标线程」调用栈和执行状态，对应到源代码，修复问题
 
@@ -109,7 +109,7 @@ OOM 异常，细分为 3 类：
 	* MaxDirectMemorySize 设置「直接内存」
 	* 注意：约束「直接内存」+「Java 堆」 < 「OS 物理内存」
 
-### 2.4. 补充：
+### 2.4. 补充
 
 主要补充 3 个方面：
 
@@ -141,7 +141,7 @@ OOM 异常，细分为 3 类：
 	* 加载该类的 ClassLoader 也被回收
 	* 类对应的 Class 对象，没有被任何地方引用，主要是无法通过反射获取
 * **永久代，什么时候会回收**？
-	* 参数 -Xnoclassgc 控制是否开启永久代回收
+	* 参数 `-Xnoclassgc` 控制是否开启永久代回收
 	* 永久代满了，会触发 Full GC，如果 GC 后空间仍然不足，会抛出 OOM: PermGen space
 	* 永久代和老年代捆绑在一起，无论谁满了，都会触发永久代和老年代的垃圾收集 
 
@@ -163,12 +163,22 @@ OOM 异常，细分为 3 类：
 
 * OutOfMemroryError 什么时候挂掉进程，什么时候不会挂掉？
 * MaxDirectMemorySize参数设置的是JVM所能够使用的直接内存的最大值？
-* GC搜索越界？
+* GC 搜索越界：跨代搜索，会全堆扫描，采用 Remembered Set，类似虚拟账本。
 	* 1、新生代引用老年代的大对象，发生YGC时，是否会需要搜索老年代（虚拟账本？是否参与GC？），在JVM实现时通过虚拟账本的方式隔绝GC搜索越界；
-	* 2、FullGC时会发生老年代和永久代的GC搜索越界现象；
-* FullGC时对直接内存如何进行GC？
+	* 2、FullGC时，会发生老年代和永久代的GC搜索越界现象；
+* FullGC时，对直接内存如何进行GC？
 * 反射为什么会导致永久代GC发生难以判断的情况？
 
+
+关于`Remembered Set`概念：G1收集器中，Region之间的对象引用，以及其他收集器中的，新生代和老年代之间的对象引用，是使用`Remembered Set`来避免扫描全堆。G1中每个Region都有一个与之对应的Remembered Set，虚拟机发现程序对Reference类型数据进行写操作时，会产生一个Write Barrier暂时中断写操作，检查Reference引用的对象是否处于不同的Region之间(在分代中例子中就是检查是否老年代中的对象引用了新生代的对象)，如果是便通过CardTable把相关引用信息记录到被引用对象所属的Region的Remembered Set中。当内存回收时，在GC根节点的枚举范围加入Remembered Set即可保证不对全局堆扫描也不会有遗漏。
+
+G1虽然保留了CMS关于代的概念，但是代已经不是物理上连续区域，而是一个逻辑的概念。在标记过程中，每个区域的对象活性都被计算，在回收时候，就可以根据用户设置的停顿时间，选择活性较低的区域收集，这样既能保证垃圾回收，又能保证停顿时间，而且也不会降低太多的吞吐量。Remark阶段新算法的运用，以及收集过程中的压缩，都弥补了CMS不足。
+
+
+建议阅读 2 个资料：
+
+* [JVM 实践：GC 的 骗局](/jvm-practice-ponzi-scheme/)
+* [从实际案例聊聊Java应用的GC优化]
 
 ## 4. 参考资料
 
@@ -179,10 +189,12 @@ OOM 异常，细分为 3 类：
 * [The Java Language Specification](https://docs.oracle.com/javase/specs/index.html) Java SE 6\7\8
 * [The Java Virtual Machine Specification](https://docs.oracle.com/javase/specs/index.html) Java SE 6\7\8
 * [Java 8 移除永久代](http://www.infoq.com/cn/articles/Java-PERMGEN-Removed/)
+* [从实际案例聊聊Java应用的GC优化]
 
 
 
 
+[从实际案例聊聊Java应用的GC优化]:		https://tech.meituan.com/2017/12/29/jvm-optimize.html
 
 
 
