@@ -326,7 +326,14 @@ docker run -it --link myredis1:redis --rm redis redis-cli -h redis -p 7000
 * 登陆用户：redis
 
 ### 4.1. 搭建步骤
-### 4.1.1. 搭建 Master & Slave 结构
+
+两类场景：
+
+1. Master-Slave 结构
+2. Sentinel 集群
+
+
+#### 4.1.1. 搭建 Master & Slave 结构
 
 启动 redis master：
 

@@ -318,6 +318,11 @@ void aeMain(aeEventLoop *eventLoop) {
 - 一般情况下只有 serverCron 一个时间事件，性能测试 benchmark 模式下也不超过 2 个，所以无序链表实际上几乎退化成了一个指针
 - Redis 的主事件循环中轮流处理文件事件和时间事件，不会出现互相抢占。所以时间事件的实际执行时间也会比设定晚一些
 
+关于 IO 多路复用，更多细节，参考：
+
+* [IO 模型](/io-model/)
+* [Nginx 系列：Nginx 原理](/nginx-series-principle/)
+
 ### 客户端/服务器
 
 #### Summary
@@ -538,7 +543,7 @@ typedef struct slowlogEntry {
 
 ## 参考链接
 
-- DRAF 协议：<http://thesecretlivesofdata.com/raft/>
+- RAFT 协议：<http://thesecretlivesofdata.com/raft/>
 
 
 
