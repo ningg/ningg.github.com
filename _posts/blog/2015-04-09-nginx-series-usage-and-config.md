@@ -147,7 +147,7 @@ nginx 能够提供几个基本功能：
 
 关键看 --conf-path 对应的配置文件了，准备单独写一篇 wiki，详细说一下。
 
-看这里：[再探 nginx：配置和实践]
+看这里：[再探 nginx：配置和实践](/nginx-series-usage-and-practice/)
 
 ## 4. 附录：补充内容
 
