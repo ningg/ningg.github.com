@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Java容器 - List、Set、Map
+title: Java 剖析：List、Set、Map
 description: Java中容器类，2个接口，Collection和Map
 published: true
 category: java
