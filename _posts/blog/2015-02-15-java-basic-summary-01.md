@@ -283,6 +283,67 @@ ThreadLocal 在内存中的存储关系：
 更多细节，参考： [Java并发：ThreadLocal](/java-concurrency-4/)
 
 
+## 9. 多线程
+
+Java 下，多线程协作，常用的 2 个类：
+
+1. **CountDownLatch**：主线程，等待子线程
+2. **CyclicBarrier**：子线程之间，相互等待
+
+**CountDownLatch** 被用于：
+
+* 主线程等待多个子线程执行结束后
+* 主线程再执行
+
+因此，具体使用过程中：
+
+1. **主线程**：定义 `CountDownLatch` 需要等待的子线程个数
+1. **子线程**：调整 `CountDownLatch` 的剩余线程数
+1. **主线程**：`countDownLatch.await()` 阻塞等待子线程执行结束
+
+
+使用 **CyclicBarrier**，多个`子线程`之间`相互等待`，具体操作：
+
+1. 主线程：定义 CyclicBarrier 需要等待的子线程个数
+2. 子线程：调用 `CyclicBarrier.await()` 等待其他线程
+
+直译为循环栅栏，通过它可以**让一组线程全部到达某个状态后再同时执行，也就是说假如有5个线程协作完成一个任务，那么只有当每个线程都完成了各自的任务（都到达终点），才能继续运行（开始领奖）**。循环的意思是当所有等待线程都被释放（也就是所有线程完成各自的任务，整个程序开始继续执行）以后，CyclicBarrier 可以被重用。而上面的 CountDownLatch 只能用一次。
+
+
+更多细节，参考：[Java并发：concurrent 包](/java-concurrency-8/)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
