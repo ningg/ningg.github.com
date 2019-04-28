@@ -1,6 +1,6 @@
 ---
 layout: post
-title: Java并发 - ThreadLocal
+title: Java并发：ThreadLocal
 description: Java编程思想
 published: true
 category: java-concurrency
@@ -212,9 +212,9 @@ ThreadLocal 几点：
 		3. Entry 中，同时存储了 `key` 和 `value`
 		4. 数据存储时， Entry 数组，出现Hash，采取`避让`（开放寻址）策略，而非`数组拉链`（开放链路）策略
 		5. `Entry[]` 数组，初始长度为 16；大于 threshold 时，2 倍扩容。
-		6. `Entry[]` 数组中，key 是`弱引用`（WeakReference），ThreadLocal 变量被回收后，Entry 和 Value 并未被回收；ThreadLocalMap 只是用于存储的，供其他地方使用，但如果其他地方不再使用这个 threadLocal 对象了，由于其为弱引用，因此，其弱引用被自动置为 null；因此，Entry[] 可以回收其对应的 Entry 和 value；
+		6. `Entry[]` 数组中，对 `key` 是`弱引用`（WeakReference），ThreadLocal 变量被回收后，Entry 和 Value 并未被回收；ThreadLocalMap 只是用于存储的，供其他地方使用，但如果其他地方不再使用这个 threadLocal 对象了，由于其为弱引用，因此，其弱引用被自动置为 null；因此，Entry[] 可以回收其对应的 Entry 和 value；
 		7. 上述弱引用对应的 Entry，什么时候回收？get()、set() 会回收 Entry；
-		8. 内存泄漏问题：如果 threadLocal 不再使用了，但一直未调用 get、set 方法，则，内存泄漏
+		8. 内存泄漏问题：如果 threadLocal 不再使用了，但一直未调用 get、set 方法，则，内存泄漏；当然，如果线程彻底销毁，对应 ThreadLocal 会被回收，但在此之前，内存泄露；
 		9. 线程池问题：线程一直存活，下一次使用的时候，获取上一次使用时，设置的 threadLocal 变量，建议：使用之前先清理一次 threadLocal 变量；
 	4. 每个 ThreadLocal 都用于存储一个变量，ThreadLocalMap 中，可以存储多个变量
 
