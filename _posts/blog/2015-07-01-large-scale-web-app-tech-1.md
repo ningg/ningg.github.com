@@ -200,6 +200,12 @@ category: 技术架构
 **解决分布式缓存集群问题**：`一致性 Hash 算法`
 
 > 一致性 Hash 算法：本质，Client 使用「一致性 Hash 环」保存所有的「集群节点」，计算出 key 对应的 「Node」后，就对相应的 Node 进行读写操作。
+> 
+> 更多细节，参考：
+> 
+> 1. [什么是一致性Hash算法？](https://zhuanlan.zhihu.com/p/34985026)
+> 
+> 2. [对一致性Hash算法，Java代码实现的深入研究](https://www.cnblogs.com/xrq730/p/5186728.html)
 
 疑问：分布式缓存集群中，节点的增减，如何通知到 Client ？
 
