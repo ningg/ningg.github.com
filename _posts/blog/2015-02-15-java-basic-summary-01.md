@@ -246,6 +246,100 @@ category: java
 * [https://www.cnblogs.com/aspirant/p/6920418.html](https://www.cnblogs.com/aspirant/p/6920418.html)
 
 
+## 8. ThreadLocal
+
+
+ThreadLocal 几点：
+
+1. **作用**：线程本地变量，线程之间资源隔离，解决线程并发时，资源共享的问题；
+2. 实现：
+	1. 每个 Thread 都绑定了一个 `ThreadLocalMap`
+	2. ThreadLocal 的 set、get，都是针对 Thread 的 `ThreadLocalMap` 进行的
+	3. `ThreadLocalMap` 中，`Entry[] table`：
+		1. ThreadLocal 作为 `key`，定位到 `Entry`
+		2. ThreadLocal 存储的 `value` 作为 value
+		3. Entry 中，同时存储了 `key` 和 `value`
+		4. 数据存储时， Entry 数组，出现Hash，采取`避让`（开放寻址）策略，而非`数组拉链`（开放链路）策略
+		5. `Entry[]` 数组，初始长度为 16；大于 threshold 时，2 倍扩容。
+		6. `Entry[]` 数组中，对 `key` 是`弱引用`（WeakReference），ThreadLocal 变量被回收后，Entry 和 Value 并未被回收；ThreadLocalMap 只是用于存储的，供其他地方使用，但如果其他地方不再使用这个 threadLocal 对象了，由于其为弱引用，因此，其弱引用被自动置为 null；因此，Entry[] 可以回收其对应的 Entry 和 value；
+		7. 上述弱引用对应的 Entry，什么时候回收？get()、set() 会回收 Entry；
+		8. 内存泄漏问题：如果 threadLocal 不再使用了，但一直未调用 get、set 方法，则，内存泄漏；当然，如果线程彻底销毁，对应 ThreadLocal 会被回收，但在此之前，内存泄露；
+		9. 线程池问题：线程一直存活，下一次使用的时候，获取上一次使用时，设置的 threadLocal 变量，建议：使用之前先清理一次 threadLocal 变量；
+	4. 每个 ThreadLocal 都用于存储一个变量，ThreadLocalMap 中，可以存储多个变量
+
+ThreadLocal 在内存中的存储关系：
+
+![](/images/java-concurrency/threadLocal-in-mem.png)
+
+
+关于强引用（Strong）、软引用（Soft）、弱引用（Weak）、虚引用（Phantom）：
+
+1. **强引用**：我们平时使用的引用，`Object obj = new Object();` 只要引用存在，GC 时，就不会回收对象；
+2. **软引用**：还有一些用，但非必需的对象，系统发生**内存溢出之前**，会回收**软引用**指向的对象；
+3. **弱引用**：非必需的对象，**每次 GC** 时，都会回收**弱引用**指向的对象；
+4. **虚引用**：不影响对象的生命周期，**每次 GC** 时，都会回收，**虚引用**用于在 GC 回收对象时，获取一个**系统通知**。
+
+
+更多细节，参考： [Java并发：ThreadLocal](/java-concurrency-4/)
+
+
+## 9. 多线程
+
+Java 下，多线程协作，常用的 2 个类：
+
+1. **CountDownLatch**：主线程，等待子线程
+2. **CyclicBarrier**：子线程之间，相互等待
+
+**CountDownLatch** 被用于：
+
+* 主线程等待多个子线程执行结束后
+* 主线程再执行
+
+因此，具体使用过程中：
+
+1. **主线程**：定义 `CountDownLatch` 需要等待的子线程个数
+1. **子线程**：调整 `CountDownLatch` 的剩余线程数
+1. **主线程**：`countDownLatch.await()` 阻塞等待子线程执行结束
+
+
+使用 **CyclicBarrier**，多个`子线程`之间`相互等待`，具体操作：
+
+1. 主线程：定义 CyclicBarrier 需要等待的子线程个数
+2. 子线程：调用 `CyclicBarrier.await()` 等待其他线程
+
+直译为循环栅栏，通过它可以**让一组线程全部到达某个状态后再同时执行，也就是说假如有5个线程协作完成一个任务，那么只有当每个线程都完成了各自的任务（都到达终点），才能继续运行（开始领奖）**。循环的意思是当所有等待线程都被释放（也就是所有线程完成各自的任务，整个程序开始继续执行）以后，CyclicBarrier 可以被重用。而上面的 CountDownLatch 只能用一次。
+
+
+更多细节，参考：[Java并发：concurrent 包](/java-concurrency-8/)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
