@@ -183,7 +183,7 @@ TODO：
 
 * [详解 JVM Garbage First(G1) 垃圾收集器](https://blog.csdn.net/coderlius/article/details/79272773)
 
-## 3.参考资料
+## 4.参考资料
 
 * [详解 JVM Garbage First(G1) 垃圾收集器](https://blog.csdn.net/coderlius/article/details/79272773)
 * [Garbage First G1收集器 理解和原理分析](https://liuzhengyang.github.io/2017/06/07/garbage-first-collector/)
