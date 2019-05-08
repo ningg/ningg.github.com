@@ -182,6 +182,7 @@ G1 垃圾收集器，采用了 **SATB**（Snapshot At The Beginning），初始�
 TODO：
 
 * [详解 JVM Garbage First(G1) 垃圾收集器](https://blog.csdn.net/coderlius/article/details/79272773)
+* [G1 垃圾收集器调优](https://www.oracle.com/technetwork/cn/articles/java/g1gc-1984535-zhs.html)
 
 ## 4.参考资料
 
@@ -190,6 +191,7 @@ TODO：
 * [深入理解G1垃圾收集器](http://ifeve.com/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3g1%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/)
 * [JVM G1混合回收（mixed GC）的一些理解](https://www.jianshu.com/p/0b978e57d430)=
 * [JVM性能调优实践——G1 垃圾收集器介绍篇（超详细）](https://cloudpai.gitee.io/2018/08/23/2018-08-23-12/)
+* [G1 垃圾收集器调优](https://www.oracle.com/technetwork/cn/articles/java/g1gc-1984535-zhs.html)
 
 
 
