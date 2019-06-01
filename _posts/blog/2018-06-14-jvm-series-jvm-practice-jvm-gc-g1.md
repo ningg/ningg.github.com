@@ -172,6 +172,27 @@ G1 垃圾收集器，采用了 **SATB**（Snapshot At The Beginning），初始�
 1. **业务多碎片**：应用在运行过程中会产生大量内存碎片、需要经常压缩空间
 1. **防止高并发雪崩**：想要更可控、可预期的GC停顿周期；防止高并发下应用雪崩现象
 
+
+### 2.4.小结
+
+G1 垃圾收集器，围绕其 Young GC 和 Mixed GC，从整体宏观的角度上，跟之前所有的「串行」「并行」「并发」的垃圾收集器，存在本质的差异：
+
+1. 之前的垃圾收集器，要实现 **2 个基本步骤**：
+	1. **步骤1**：找到需要回收的对象
+	1. **步骤2**：回收
+	1. **Note**：上面两个步骤「步骤2」依赖「步骤1」，并且串行进行
+1. G1 垃圾收集器，在「**老年代**」，把 2 个步骤「同时进行」：
+	1. **找到需要回收的对象**：
+		1. 在找到需要回收的 Old Region 过程中，仍然可以同时「回收对象」，即 GC
+		1. 找到需要回收的 Old Region 过程，称为「**并发标记周期**」
+	1. **回收对象**：
+		1. 在「找需要回收的对象」**过程中**，可以持续并发的进行 GC，称为 `Young GC`，只会收「新生代」
+		1. 「找需要回收的对象」**过程结束后**，再进行的 GC，称为 `Mixed GC`，会同时回收「新生代」和「部分老年代」
+
+参考示意图：
+
+![](/images/jvm-series/g1-gc.png)
+
 ## 3.实践
 
 2 个方面：
@@ -182,6 +203,7 @@ G1 垃圾收集器，采用了 **SATB**（Snapshot At The Beginning），初始�
 TODO：
 
 * [详解 JVM Garbage First(G1) 垃圾收集器](https://blog.csdn.net/coderlius/article/details/79272773)
+* [G1 垃圾收集器调优](https://www.oracle.com/technetwork/cn/articles/java/g1gc-1984535-zhs.html)
 
 ## 4.参考资料
 
@@ -190,6 +212,7 @@ TODO：
 * [深入理解G1垃圾收集器](http://ifeve.com/%E6%B7%B1%E5%85%A5%E7%90%86%E8%A7%A3g1%E5%9E%83%E5%9C%BE%E6%94%B6%E9%9B%86%E5%99%A8/)
 * [JVM G1混合回收（mixed GC）的一些理解](https://www.jianshu.com/p/0b978e57d430)=
 * [JVM性能调优实践——G1 垃圾收集器介绍篇（超详细）](https://cloudpai.gitee.io/2018/08/23/2018-08-23-12/)
+* [G1 垃圾收集器调优](https://www.oracle.com/technetwork/cn/articles/java/g1gc-1984535-zhs.html)
 
 
 
