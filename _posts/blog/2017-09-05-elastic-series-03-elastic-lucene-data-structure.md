@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Elastic 系列：
-description: Elastic 能解决什么问题？对外提供的组件，极其基本用法？
+title: Elastic 系列：Lucene 的索引结构和查询效率
+description: 相对于 MySQL，ElasticSearch 查询速度是否会更快？ElasticSearch 在检索过程中，使用的是 Lucene，其底层涉及哪些数据结构？
 published: true
 category: elasticsearch
 ---
