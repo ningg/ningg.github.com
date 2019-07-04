@@ -116,6 +116,17 @@ ETL + Process
 
 
 
+## 3. 实践
+
+准实时数据处理系统（逻辑架构）：
+
+![](/images/massive-data/data-platform-demo.jpg)
+
+
+典型的数据收集系统（美团 16 年的方案）：
+
+![](/images/massive-data/meituan-data-collect-sys.png)
+
 
 
 
