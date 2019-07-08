@@ -304,7 +304,60 @@ brew cask search workbench
 brew cask install mysqlworkbench
 ````
 
-### 4.10. 解压工具 Unarchiver
+
+### 4.10. SequelPro
+
+具体：
+
+1. **关注**：MySQL Client 的操作工具。
+1. **背景**：之前一直用 MySQLWorkbench，一直莫名其妙的崩溃，后来左边栏也不见了，升级之后，仍然不好用。
+1. **操作**：
+	1. 卸载 MySQLWorkbench
+	1. 安装 Sequel Pro
+
+**卸载 MySQLWorkbench**：
+
+```
+// 查询是否安装 mysqlworkbench
+$ brew list mysqlworkbench
+ 
+// 卸载 mysqlworkbench
+$ brew cask uninstall mysqlworkbench
+```
+
+**安装 Sequel Pro**，具体：
+
+```
+// 搜索
+$ brew search sequelpro
+==> Searching local taps...
+==> Searching taps on GitHub...
+==> Searching blacklisted, migrated and deleted formulae...
+No formula found for "sequelpro".
+localhost:MySQL guoning$ brew cask search sequelpro
+==> Exact Match
+sequel-pro
+==> Partial Matches
+sequel-pro-nightly
+ 
+// 查询详情
+$ brew cask info sequel-pro
+sequel-pro: 1.1.2
+https://www.sequelpro.com/
+Not installed
+From: https://github.com/caskroom/homebrew-cask/blob/master/Casks/sequel-pro.rb
+==> Name
+Sequel Pro
+==> Artifacts
+Sequel Pro.app (App)
+ 
+// 安装 Sequel Pro
+$ brew cask install sequel-pro
+```
+
+
+
+### 4.11. 解压工具 Unarchiver
 
 安装 The Unarchiver：
 
