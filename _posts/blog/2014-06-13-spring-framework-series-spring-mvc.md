@@ -39,10 +39,10 @@ Servlet，全程 Server Applet，Java Servlet 是服务器端的应用程序。
 1. web.xml是Servlet [规范](https://www.jcp.org/en/jsr/detail?id=315)中定义的
 1. web.xml不是必须的，当只有静态内容时，可以不设置web.xml；
 
-web.xml 文件中 listener、filter、servlet 的简介：
+`web.xml` 文件中 `listener`、`filter`、`servlet` 的简介：
 
-1. context-param：设定参数，用于生成运行环境：上下文
-1. listener：监听器，监听触发事件，参考 JSR 315 的 11.2 部分
+1. **context-param**：设定参数，用于生成运行环境：上下文
+1. **listener**：监听器，监听触发事件，参考 JSR 315 的 11.2 部分
 	1. 生命周期中不同点，触发事件：
 		1. ServletContextListener：web application 初始化开始和结束，此监听事件一般用来初始化上下文环境。
 		1. HttpSessionListener：session 创建、销毁
@@ -51,10 +51,10 @@ web.xml 文件中 listener、filter、servlet 的简介：
 		1. ServletContextAttributeListener：增加属性、删除属性、修改属性
 		1. HttpSessionAttributeListener：同上
 		1. ServletRequestAttributeListener：同上
-1. filter：过滤器，对请求和响应进行处理，参考：[http://stackoverflow.com/q/4720942](http://stackoverflow.com/q/4720942) 和 JSR 315 的 6.1 部分
-1. servlet：具体的服务程序
-1. 加载顺序：
-	1. context-param → listener  → filter  → servlet
+1. **filter**：过滤器，对请求和响应进行处理，参考：[http://stackoverflow.com/q/4720942](http://stackoverflow.com/q/4720942) 和 JSR 315 的 6.1 部分
+1. **servlet**：具体的服务程序
+1. **加载顺序**：
+	1. `context-param` → `listener`  → `filter`  → `servlet`
 	1. 同一类配置，按先后顺序执行
 
 web.xml 对应的执行过程：
@@ -83,7 +83,7 @@ Servlet 的加载时间，`load-on-startup`，`<load-on-startup>5</load-on-start
 
 ### 3.1. 上下文环境
 
-什么是上下文？程序运行所需要的基础环境：
+什么是上下文？程序运行所需要的基础环境（`web.xml` 文件中配置）：
 
 ![](/images/spring-framework/root-and-servlet-web-application-context.png)
 
@@ -129,6 +129,23 @@ TODO：单独一篇 blog 整理
 DisptacherServler 中：
 
 * `List<HandlerExceptionResolver>`：对抛出的异常信息，进行处理
+
+
+### 3.5. HTTP 缓存机制
+
+Spring MVC 中配置，开启 ETag：`web.xml` 中配置
+
+```
+<filter>
+    <filter-name>shallowEtagHeaderFilter</filter-name>
+    <filter-class>org.springframework.web.filter.ShallowEtagHeaderFilter</filter-class>
+    <async-supported>true</async-supported>
+</filter>
+<filter-mapping>
+    <filter-name>shallowEtagHeaderFilter</filter-name>
+    <servlet-name>springServlet</servlet-name>
+</filter-mapping>
+```
  
 ## 4. 参考来源
 
