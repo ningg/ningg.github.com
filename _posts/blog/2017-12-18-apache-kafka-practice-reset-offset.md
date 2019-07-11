@@ -171,13 +171,17 @@ Option                                  Description
                                           can be given to allow fail-over.
 ```
 
+使用 Kafka 0.11+ 的工具，也可以操作 Kafka 0.10：
+
+* [https://stackoverflow.com/questions/45670937/kafka-0-11-how-to-reset-offsets](https://stackoverflow.com/questions/45670937/kafka-0-11-how-to-reset-offsets)
+* [https://stackoverflow.com/a/45517782](https://stackoverflow.com/a/45517782)
 
 ## 3.参考资料
 
 * [https://www.ctheu.com/2017/08/07/looking-at-kafka-s-consumers-offsets/#ingest-the-json-into-druid](https://www.ctheu.com/2017/08/07/looking-at-kafka-s-consumers-offsets/#ingest-the-json-into-druid)
 * [基于 Spring-Kafka 在消费 Kafka 中数据](https://docs.spring.io/autorepo/docs/spring-kafka-dist/1.1.6.BUILD-SNAPSHOT/reference/htmlsingle/#_topic_partition_initial_offset)
 * [http://kafka.apache.org/documentation/#operations](http://kafka.apache.org/documentation/#operations)
-* [Manually resetting offset for a Kafka topic](https://community.hortonworks.com/articles/81357/manually-resetting-offset-for-a-kafka-topic.html)： （consumer group offset 在 ZK 上托管） 
+* [Manually resetting offset for a Kafka topic](https://community.hortonworks.com/articles/81357/manually-resetting-offset-for-a-kafka-topic.html)：（consumer group offset 在 ZK 上托管） 
 
 
 
