@@ -6,7 +6,7 @@ published: true
 category: maven
 ---
 
-#### 设置 JDK 版本
+### 设置 JDK 版本
 
 pom.xml 中添加如下配置：
 
@@ -30,7 +30,7 @@ pom.xml 中添加如下配置：
 ```
 
 
-#### 把整个工程编译为一个 jar 包
+### 把整个工程编译为一个 jar 包
 
 pom.xml 中添加如下配置：
 
