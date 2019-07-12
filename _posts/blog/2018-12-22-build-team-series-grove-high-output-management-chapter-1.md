@@ -80,7 +80,7 @@ Tips:
 
 > **连续性作业**，并不能自动保证`较低的成本`和`较好的品质`；需要额外的测试和验货。
 
-**线上检视**：一种测试方法，通过`充分`、`必要`条件的跟踪和监控，不牺牲产品。
+**线上检视**：一种测试方法，通过`充分`、`必要`条件的跟踪和监控，不牺牲产品，本质就是「过程管控」。
 
 Tips:
 
@@ -213,7 +213,7 @@ Note：
 
 线性指标，示例：
 
-![](/images/build-team-series/high-output-management/linear-indicator.jpeg)
+![](/images/build-team-series/high-output-management/linear-indicator.png)
 
 重复印证表，示例：
 
@@ -313,7 +313,9 @@ Tips:
 1. 管理活动：有哪些？
 2. 如何区分管理活动和产出？
 
+## 3.参考资料
 
+* 《格鲁夫给经理人的第一课》 第一篇 早餐店的生产线
 
 
 
