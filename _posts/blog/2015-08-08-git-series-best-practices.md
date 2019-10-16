@@ -414,6 +414,72 @@ git config --local user.email "guoning@china.com"
 git config --local -l | grep user
 ```
 
+## 16. Case：github 上，fork 了项目，如何跟项目保持同步更新
+
+整体思路：
+
+1. 本地拉取：`原始仓库` 的代码
+2. 本地合并：本地将 `原始仓库` 的代码，合并到 `fork 的本地代码`中
+3. 本地推送：本地将 `合并后的代码`，推送到 `fork 的远端仓库`
+
+参考资料：
+
+* [Syncing a fork](https://help.github.com/en/articles/syncing-a-fork)
+* [Configuring a remote for a fork](https://help.github.com/en/articles/configuring-a-remote-for-a-fork)
+
+具体的操作命令：
+
+```
+# 1. 配置一个 remote 分支
+# a. 查看 remote 分支
+$ git remote -v
+origin	git@github.com:ningg/checkstyle.git (fetch)
+origin	git@github.com:ningg/checkstyle.git (push)
+
+# b. 增加 remote 分支：「原始仓库」
+$ git remote add upstream https://github.com/checkstyle/checkstyle.git
+
+
+$ git remote -v
+origin	git@github.com:ningg/checkstyle.git (fetch)
+origin	git@github.com:ningg/checkstyle.git (push)
+upstream	https://github.com/checkstyle/checkstyle.git (fetch)
+upstream	https://github.com/checkstyle/checkstyle.git (push)
+
+
+# 2. 本地代码合并
+# a. 拉取「原始仓库」代码
+$ git fetch upstream
+remote: Enumerating objects: 4079, done.
+remote: Counting objects: 100% (4079/4079), done.
+remote: Compressing objects: 100% (26/26), done.
+remote: Total 15053 (delta 4045), reused 4065 (delta 4045), pack-reused 10974
+Receiving objects: 100% (15053/15053), 4.82 MiB | 98.00 KiB/s, done.
+Resolving deltas: 100% (8330/8330), completed with 1281 local objects.
+From https://github.com/checkstyle/checkstyle
+ * [new branch]          master     -> upstream/master
+ * [new tag]             checkstyle-8.12 -> checkstyle-8.12
+ * [new tag]             checkstyle-8.13 -> checkstyle-8.13
+ * [new tag]             checkstyle-8.14 -> checkstyle-8.14
+ * [new tag]             checkstyle-8.15 -> checkstyle-8.15
+ * [new tag]             checkstyle-8.16 -> checkstyle-8.16
+ * [new tag]             checkstyle-8.17 -> checkstyle-8.17
+ * [new tag]             checkstyle-8.18 -> checkstyle-8.18
+ * [new tag]             checkstyle-8.19 -> checkstyle-8.19
+ * [new tag]             checkstyle-8.20 -> checkstyle-8.20
+ * [new tag]             checkstyle-8.21 -> checkstyle-8.21
+ * [new tag]             checkstyle-8.22 -> checkstyle-8.22
+ * [new tag]             checkstyle-8.23 -> checkstyle-8.23
+ * [new tag]             checkstyle-8.24 -> checkstyle-8.24
+ * [new tag]             checkstyle-8.25 -> checkstyle-8.25
+
+ 
+# b. 合并：原始仓库的代码，合并到本地 fork 的代码分支中
+$ git merge upstream/master
+
+# 3. 推送到远端
+$ git push origin master
+```
 
 
 ## 15. 参考来源
