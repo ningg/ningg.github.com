@@ -202,6 +202,7 @@ html, body{overflow:auto; overflow-x: hidden;}
 #disqus_container a.comment{font-size:14px;}
 h3.about {color:#777;margin-top:20px;font-size:22px;margin-bottom:10px}
 .about-link a {margin-right:10px;font-weight:bold;font-style:italic;font-size:13px;color:#E50053}
+#sidenav-id a {display: inline-block;color: #4A75B5;}
 
 
 /**************目录导航**************/
