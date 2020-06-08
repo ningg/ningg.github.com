@@ -52,17 +52,17 @@ Note：
 	* 瑞幸 `2.1k`
 
 
-具体细节：
+具体细节，参考下面.
 
-![](/images/biz-think-series/20200606-LK-h.jpeg)
-![](/images/biz-think-series/20200606-cmcm-h.jpeg)
+a.**猎豹移动（CMCM）的股价波动**：
+
+![](/images/biz-think-series/20200606-cmcm-level.jpeg)
 
 
 
-横向，看大图：
+b.**瑞幸咖啡（LK）的股价波动**：
 
 ![](/images/biz-think-series/20200606-LK-level.jpeg)
-![](/images/biz-think-series/20200606-cmcm-level.jpeg)
 
 
 ## 2.个人思考
