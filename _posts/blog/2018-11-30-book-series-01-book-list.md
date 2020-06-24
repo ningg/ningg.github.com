@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 图书系列：书架上的书
+title: 读书系列：书架上的书
 description: 跨越时空，书带着前人的感情、思考，温暖、慰藉、指点无数的人
 category: 图书 
 ---

@@ -1,6 +1,6 @@
 ---
 layout: post
-title: 如何从文字版资料中，获取信息
+title: 读书系列：如何从文字版资料中，获取信息
 description: 获取信息的途径有很多，如果已经拿到了文字版的资料，如何从其中获取信息呢，如何让有用的知识发挥出有用的价值？
 published: true
 category: 图书
