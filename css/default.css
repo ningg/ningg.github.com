@@ -99,7 +99,7 @@ html, body{overflow:auto; overflow-x: hidden;}
 .entry blockquote ul:last-child,blockquote ol:last-child{margin-bottom:0}
 
 
-.entry img{max-width:670px;display:block;margin:10px auto;}
+.entry img{max-width:670px;max-height:720px;display:block;margin:10px auto;}
 
 
 .related-post{margin-bottom:80px;width:680px; float:left; background:#fff; padding:30px; box-shadow:0 2px 6px #ccc; }
@@ -236,7 +236,7 @@ h3.about {color:#777;margin-top:20px;font-size:22px;margin-bottom:10px}
 
     .entry-title,.entry-title a {font-size:24px;}
     .entry-date {margin-bottom:40px;}
-    .entry img{max-width:90%;}
+    .entry img{max-width:90%;max-height:90%;}
     .entry pre ol li{margin-bottom:0;line-height:1em;}
     .entry pre code{line-height:1em;font-size:12px;}
     .sidenav {display:none;}
