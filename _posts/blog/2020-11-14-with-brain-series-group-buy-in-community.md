@@ -2,7 +2,7 @@
 layout: post
 title: 随想系列：社区团购的信息和逻辑
 description: 社区团购，为什么会热，有哪些信息 or 逻辑，这些是否是可以持续借鉴的，针对新生事物，如何进行相对准确的判断.
-published: true
+published: false
 category: 随想
 ---
 
