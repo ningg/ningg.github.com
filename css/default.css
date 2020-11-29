@@ -149,7 +149,7 @@ html, body{overflow:auto; overflow-x: hidden;}
 .index-content .section .about-page ol{ margin-bottom:25px; margin-left:10%; }
 .index-content .section .about-page ol li{ margin-bottom:5px; list-style:decimal; line-height:1.5em;}
 .index-content .section .about-page blockquote{margin-left:11%; /* font-size:14px; */ font-style:italic;}
-.index-content .section .about-page img{max-width:670px;display:block;margin:10px auto;}
+.index-content .section .about-page img{max-width:40%;display:block;margin:10px auto;}
 
 /*****************category page****************/
 .index-content .section .category-page { margin-left:15%; width:70%; margin:0 atuo;margin-bottom:700px;}
@@ -257,7 +257,7 @@ h3.about {color:#777;margin-top:20px;font-size:22px;margin-bottom:10px}
     .about .aside,
     .category .aside {display:none;background-image:none;}
 
-	.index-content .section .about-page img{max-width:90%;}
+	.index-content .section .about-page img{max-width:40%; width:210px;}
 }
 
 @media (max-width: 1020px){
