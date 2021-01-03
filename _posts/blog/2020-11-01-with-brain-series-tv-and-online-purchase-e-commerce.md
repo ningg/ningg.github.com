@@ -2,7 +2,7 @@
 layout: post
 title: 随想系列：晚会 和 在线购物
 description: 在线购物，跟晚会在一起，是否是必要的；晚会 or 在线购物哪个是主导的；新的时代场景下，在线购物，哪种形式更好呢？
-published: true
+published: false
 category: 随想
 ---
 
