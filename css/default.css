@@ -103,7 +103,8 @@ html, body{overflow:auto; overflow-x: hidden;}
 .entry img{max-width:670px;max-height:720px;display:block;margin:10px auto;}
 
 
-.related-post{margin-bottom:80px;width:680px; float:left; background:#fff; padding:30px; box-shadow:0 2px 6px #ccc; }
+/*.related-post{margin-bottom:80px;width:680px; float:left; background:#fff; padding:30px; box-shadow:0 2px 6px #ccc; }*/
+.related-post{margin-bottom:80px;width:680px; background:#fff; padding:30px; box-shadow:0 2px 6px #ccc; }
 .related-post ul{margin-bottom:25px;margin-left:25px;margin-top: 10px;}
 .related-post p+ul {margin-top:-5px;}
 .related-post ul li{margin-bottom:5px;list-style:disc;line-height:1.5em;}
