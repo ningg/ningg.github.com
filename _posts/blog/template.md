@@ -50,7 +50,7 @@ category: blog
 
 
 
-[NingG]:    http://ningg.github.com  "NingG"
+[NingG]:    http://ningg.github.io  "NingG"
 
 
 
