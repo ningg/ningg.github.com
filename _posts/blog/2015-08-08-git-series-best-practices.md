@@ -414,6 +414,36 @@ git config --local user.email "guoning@china.com"
 git config --local -l | grep user
 ```
 
+## 15. Case：当前分支提交的 commit，转移到其他分支
+
+### 修改尚未commit
+
+把branch A上修改的代码，转移到branch B下：
+
+```
+# 在 A 分支下，操作
+git stash
+
+# 在 B 分支下，操作
+git stash pop
+```
+
+### 修改已经 commit
+
+把branch A上修改的代码（已经 commit），转移到branch B下：
+
+```
+# 在 A 分支下，操作
+# 查看 commit 对应的 hashCode/commitID
+git log
+
+
+# 在 B 分支下，合并指定的 commit
+git cherry-pick commitID
+```
+
+更多细节，参考： [git分支,改动转移](https://blog.csdn.net/leo09999/article/details/105727564)
+
 ## 16. Case：github 上，fork 了项目，如何跟项目保持同步更新
 
 整体思路：
