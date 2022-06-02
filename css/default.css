@@ -102,6 +102,7 @@ html, body{overflow:auto; overflow-x: hidden;}
 
 .entry img{max-width:670px;max-height:720px;display:block;margin:10px auto;}
 
+#entry-bottom-url {border-left: 4px solid #ccc; border-left-width:4px;background-color:rgba(102,128,153,0.05);border-top-right-radius:10px;border-bottom-right-radius:5px;padding:15px 20px; color:#999;font-size:12px;}
 
 /*.related-post{margin-bottom:80px;width:680px; float:left; background:#fff; padding:30px; box-shadow:0 2px 6px #ccc; }*/
 .related-post{margin-bottom:80px;width:680px; background:#fff; padding:30px; box-shadow:0 2px 6px #ccc; }
