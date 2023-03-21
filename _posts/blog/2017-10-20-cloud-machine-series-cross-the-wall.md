@@ -181,6 +181,52 @@ Country / 国家: United States
 * VPS(Virtual Private Server)：就是 VM ，虚拟主机。
 
 
+> 【更新】：2023.01.15 使用了下面配置: 
+> 
+> *  [V2Ray搭建详细图文教程](https://github.com/233boy/v2ray/wiki/V2Ray%E6%90%AD%E5%BB%BA%E8%AF%A6%E7%BB%86%E5%9B%BE%E6%96%87%E6%95%99%E7%A8%8B)
+> * [V2Ray一键安装脚本](https://github.com/233boy/v2ray/wiki/V2Ray%E4%B8%80%E9%94%AE%E5%AE%89%E8%A3%85%E8%84%9A%E6%9C%AC)
+> 
+> 
+> [更新]： 2023.02.19
+> 
+> [https://github.com/v2fly/fhs-install-v2ray](https://github.com/v2fly/fhs-install-v2ray)
+> 
+> [https://github.com/v2fly/v2ray-examples](https://github.com/v2fly/v2ray-examples) 独立的配置
+> 
+> 
+> [https://github.com/wulabing/Xray_onekey](https://github.com/wulabing/Xray_onekey)
+
+域名：ningg.top
+主机记录：alidnscheck
+记录值：fe368e6e121a48cdad34ffd18b4569ee
+
+
+几个命令：
+
+```
+ systemctl enable v2ray
+ 
+ systemctl start v2ray
+ ```
+ 
+ 安装文件的位置：
+ 
+ ```
+installed: /usr/local/bin/v2ray
+installed: /usr/local/bin/v2ctl
+installed: /usr/local/share/v2ray/geoip.dat
+installed: /usr/local/share/v2ray/geosite.dat
+installed: /usr/local/etc/v2ray/config.json
+installed: /var/log/v2ray/
+installed: /var/log/v2ray/access.log
+installed: /var/log/v2ray/error.log
+installed: /etc/systemd/system/v2ray.service
+installed: /etc/systemd/system/v2ray@.service
+```
+
+
+
+
 ## 参考资料
 
 * [https://bwh1.net](https://bwh1.net)
