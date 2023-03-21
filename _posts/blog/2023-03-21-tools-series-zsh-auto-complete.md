@@ -6,14 +6,14 @@ published: true
 categories: mbp tool
 ---
 
-### 0.更改你的默认 shell
+## 0.更改你的默认 shell
 
 ```bash
 chsh -s /bin/zsh
 ```
 
 
-### 1.本地运行安装脚本
+## 1.本地运行安装脚本
 
 ```bash
 # 安装脚本
@@ -31,7 +31,7 @@ cat ~/.zshrc
 * (Install oh-my-zsh now)[https://ohmyz.sh/#install]
 
 
-### 2.安装自动补全的插件
+## 2.安装自动补全的插件
 
 ```bash
 # 将自动补全的插件，放到 plugins 下
@@ -42,7 +42,7 @@ git clone git@github.com:zsh-users/zsh-autosuggestions.git $ZSH_CUSTOM/plugins/z
 
 备注： 如果上述命令，无法正常执行，可以先 `git clone` 到本地`其他目录`，然后，`mv` 到`目标目录`。
 
-### 3.更新 zsh 插件
+## 3.更新 zsh 插件
 
 ```bash
 # 编辑 .zshrc 文件
