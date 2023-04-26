@@ -293,7 +293,15 @@ f12：
 1. cmd + shift + *：列编辑模式，光标同时定位多行
 
 
+### 5.4. 调整代码展示
 
+> 勤于思考，小步迭代 -> 整体革新
+
+调整代码展示样式：
+
+* 选中变量的背景颜色： https://blog.csdn.net/lxzpp/article/details/81081162
+  * `Settings` -> `Editor` -> `Color Schema` -> `General`
+  * 内部的 `Code` -> `Identifier under caret` 和 `Identifier under caret(write)`  
 
 
 
