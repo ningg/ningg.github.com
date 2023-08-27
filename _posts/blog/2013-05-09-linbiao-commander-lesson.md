@@ -3,7 +3,7 @@ layout: post
 title: 杨成武 - 林彪军团长的谈话
 description: 林彪个人的总结
 published: true
-category: blog
+categories: blog 历史 团队
 ---
 
 林彪军团长教我当师长
