@@ -44,7 +44,38 @@ debug 速度很慢，但是 run 速度很快，常见原因，有 2 类：
 scutil --set HostName "localhost"
 ```
 
-## 3. 参考来源
+
+## 3. IDEA 2022 配置优化
+
+基本思路：
+
+1. 查询配置文件
+2. 修改配置信息
+3. 重新启动
+
+
+具体操作：
+
+```
+# 1.查询配置文件
+$ pwd
+/Users/guoning/Library
+
+$ find . -name "idea.vmoptions"
+./Application Support/JetBrains/IdeaIC2022.3/idea.vmoptions
+./Preferences/IntelliJIdea2016.1/idea.vmoptions
+./Preferences/IntelliJIdea2017.1/idea.vmoptions
+./Preferences/IntelliJIdea2019.1/idea.vmoptions
+
+# 2.修改配置文件
+$ cd 'Application Support/JetBrains/IdeaIC2022.3'
+$ vim idea.vmoptions
+
+```
+
+具体配置的参考来源：[https://www.apispace.com/news/post/56537.html](https://www.apispace.com/news/post/56537.html)
+
+## 4. 参考来源
 
 
 1. [http://blog.mkfree.com/posts/227](http://blog.mkfree.com/posts/227)
