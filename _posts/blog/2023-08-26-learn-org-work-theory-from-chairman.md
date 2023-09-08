@@ -6,7 +6,7 @@ published: true
 categories: 历史 团队
 ---
 
-> 原文： http://theory.people.com.cn/n1/2016/0226/c49157-28151895.html
+> 原文： [http://theory.people.com.cn/n1/2016/0226/c49157-28151895.html](http://theory.people.com.cn/n1/2016/0226/c49157-28151895.html)
 
 七届二中上，前辈分享了些思考，主要在提升作风建设、能力建设等方面，直白、有力，读后让人充满力量。
 
