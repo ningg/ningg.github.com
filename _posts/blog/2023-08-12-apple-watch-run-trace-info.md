@@ -8,7 +8,7 @@ category: tool
 
 ### 0.概要
 
-原文，来至官网： https://support.apple.com/zh-cn/HT210385
+原文，来至官网： [https://support.apple.com/zh-cn/HT210385](https://support.apple.com/zh-cn/HT210385)
 
 
 
