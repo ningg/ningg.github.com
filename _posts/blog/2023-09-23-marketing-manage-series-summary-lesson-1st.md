@@ -938,6 +938,7 @@ STP 型营销：
 关联资料：
 
 * [常用工具书](https://wwfalcon.github.io/sdc_toolkits_page)
+* [10张图抽丝剥茧读懂《营销管理》](https://book.douban.com/review/12471911/)
 
 
 

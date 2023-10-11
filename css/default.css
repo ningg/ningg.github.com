@@ -164,10 +164,10 @@ html, body{overflow:auto; overflow-x: hidden;}
 .index-content .section .category-page blockquote{margin-left:11%; /* font-size:14px; */ font-style:italic;}
 .index-content .section .category-page img{max-width:670px;display:block;margin:10px auto;}
 .index-content .section .category-page  li a,
-.index-content .section .category-page  li a:visited {display:inline-block; zoom:1; color:#777; width:100%; }
-/*.index-content .section .category-page  li a:visited {display:inline-block; zoom:1; color:rgba(0,136,204,0.9); width:100%; }*/
-.index-content .section .category-page  li a:hover {text-decoration:none; color:#3498db;}
-/*.index-content .section .category-page  li a:hover {text-decoration:none; color:red;}*/
+/* .index-content .section .category-page  li a:visited {display:inline-block; zoom:1; color:#777; width:100%; }*/
+.index-content .section .category-page  li a:visited {display:inline-block; zoom:1; color:rgba(0,136,204,0.9); width:100%; }
+/* .index-content .section .category-page  li a:hover {text-decoration:none; color:#3498db;}*/
+.index-content .section .category-page  li a:hover {text-decoration:none; color:red;}
 .index-content .section .category-page .tag_box li{ display: inline-block; padding-left: 5px; padding-right: 5px;}
 .index-content .section .category-page .tag_box li a{padding: 3px; margin: 2px; line-height: 180%; border-radius: 3px; background-color: rgba(238,238,238,0.9);}
 .index-content .section .category-page .tag_box span{vertical-align: super; font-size: 0.8em;}
@@ -178,8 +178,8 @@ html, body{overflow:auto; overflow-x: hidden;}
 .index-content .artical-list li { margin-bottom:70px; }
 .index-content h2 { font-size:20px; margin-bottom:15px; word-break: break-all;}
 .index-content h2 a { color:#444 }
-.index-content h2 a:hover { color:#3498db; text-decoration:none; }
-/*.index-content h2 a:hover { color:#E50053; text-decoration:none; }*/
+/* .index-content h2 a:hover { color:#3498db; text-decoration:none; }*/
+.index-content h2 a:hover { color:#E50053; text-decoration:none; }
 .index-content .title-desc {color:#999;font-size:14px;line-height:1.6em;}
 
 .index-content .artical-cate { width:70%; margin:0 auto; }
@@ -187,12 +187,12 @@ html, body{overflow:auto; overflow-x: hidden;}
 .index-content .artical-cate li a,
 .index-content .artical-cate li a:visited { display:inline-block; zoom:1; color:#000; width:100%; }
 .index-content .artical-cate li a:hover { text-decoration:none; }
-.index-content .artical-cate li.on span{ color:#3498db; }
-/*.index-content .artical-cate li.on span{ color:red; }*/
+/* .index-content .artical-cate li.on span{ color:#3498db; }*/
+.index-content .artical-cate li.on span{ color:red; }
 
 .index-content .cate-bar { height:3px; width:70%; margin:0 auto;margin-bottom:100px; }
-.index-content #cateBar { display:inline-block; zoom:1; height:3px; background:#3498db; position:relative; width:0; }
-/*.index-content #cateBar { display:inline-block; zoom:1; height:3px; background:red; position:relative; width:0; }*/
+/* .index-content #cateBar { display:inline-block; zoom:1; height:3px; background:#3498db; position:relative; width:0; }*/
+.index-content #cateBar { display:inline-block; zoom:1; height:3px; background:red; position:relative; width:0; }
 
 /***************BeiAn Div******************/
 .copyright {background-color: #1a252f;}
