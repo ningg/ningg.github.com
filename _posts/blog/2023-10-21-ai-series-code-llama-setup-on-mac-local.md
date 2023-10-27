@@ -12,7 +12,7 @@ categories: AI OpenAI llama
 
 * 1.下载 [Code Llama 的仓库代码](https://github.com/facebookresearch/codellama)
 * 2.在网站中，登记接受协议[llama-downloads](https://ai.meta.com/resources/models-and-libraries/llama-downloads/)，并在邮件中获取 `model weights` 和 `tokenizers` 的下载地址；
-* 3.运行脚本 `download.sh` 并输入邮件中获取到的`链接`，最后选择模型参数。
+* 3.运行脚本 `download.sh` 并输入邮件中获取到的`链接`，最后选择模型参数，本地运行建议选择 `CodeLlama-7b-Instruct`。
 
 提示信息中，可用的模型：
 
@@ -28,7 +28,6 @@ categories: AI OpenAI llama
 
 
 
-
 ## 2.准备工作
 
 运行 `download.sh` 脚本之前，需要确认已经安装了 `wget` 和 `md5sum`：
@@ -38,13 +37,79 @@ categories: AI OpenAI llama
 brew install md5sha1sum
 ```
 
+安装 conda：
+
+* [Conda 简介，环境管理、依赖管理](https://ningg.top/python-series-conda-env-manage-intro/)
 
 
+安装 conda 后，创建一个 python = 3.8 的环境：
+
+```
+// 指定了特定的 mirror 镜像源，用于提升依赖的下载速度
+conda create -n codellama -c https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main python=3.8
+```
 
 
 关联资料：
 
 * [GitHub - Code Llama](https://github.com/facebookresearch/codellama)
+
+
+## 3.第一个 code llama 示例
+
+下载 [Code Llama 的仓库代码](https://github.com/facebookresearch/codellama) 后，命令行终端窗口内：
+
+```
+// conda， 创建 python=3.8 的环境
+conda create -n codellama -c https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main python=3.8
+
+// 切换到刚刚创建的 codellama 环境
+conda activate codellama
+
+// 安装 pytorch
+conda install pytorch
+
+// 进入 codellama 代码的目录
+cd codellama
+
+// 安装依赖（下载依赖的 torch 等包，可能耗时较长）
+pip install -e .
+
+```
+
+完成上述准备后，直接进行下面的示例，[README](https://github.com/facebookresearch/codellama/blob/main/README.md)。
+
+Different models require different model-parallel (MP) values:
+
+|  Model | MP |
+|--------|----|
+| 7B     | 1  |
+| 13B    | 2  |
+| 34B    | 4  |
+
+All models support sequence lengths up to 100,000 tokens, but we pre-allocate the cache according to `max_seq_len` and `max_batch_size` values. So set those according to your hardware and use-case.
+
+### Fine-tuned Instruction Models
+
+Code Llama - Instruct models are fine-tuned to follow instructions. To get the expected features and performance for them, a specific formatting defined in [`chat_completion`](https://github.com/facebookresearch/codellama/blob/main/llama/generation.py#L279-L366)
+needs to be followed, including the `INST` and `<<SYS>>` tags, `BOS` and `EOS` tokens, and the whitespaces and linebreaks in between (we recommend calling `strip()` on inputs to avoid double-spaces).
+You can use `chat_completion` directly to generate answers with the instruct model. 
+
+You can also deploy additional classifiers for filtering out inputs and outputs that are deemed unsafe. See the llama-recipes repo for [an example](https://github.com/facebookresearch/llama-recipes/blob/main/src/llama_recipes/inference/safety_utils.py) of how to add a safety checker to the inputs and outputs of your inference code.
+
+Examples using `CodeLlama-7b-Instruct`:
+
+```
+torchrun --nproc_per_node 1 example_instructions.py \
+    --ckpt_dir CodeLlama-7b-Instruct/ \
+    --tokenizer_path CodeLlama-7b-Instruct/tokenizer.model \
+    --max_seq_len 64 --max_batch_size 2
+```
+
+Fine-tuned instruction-following models are: the Code Llama - Instruct models `CodeLlama-7b-Instruct`, `CodeLlama-13b-Instruct`, `CodeLlama-34b-Instruct`.
+
+Code Llama is a new technology that carries potential risks with use. Testing conducted to date has not — and could not — cover all scenarios.
+In order to help developers address these risks, we have created the [Responsible Use Guide](https://github.com/facebookresearch/llama/blob/main/Responsible-Use-Guide.pdf). More details can be found in our research papers as well.
 
 
 

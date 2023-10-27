@@ -173,6 +173,17 @@ Tip
 * To verify, you can repeat the `conda info --envs` command.
 
 
+#### Delete the Conda environment
+
+Use the `conda env remove` command with the `--name` option followed by the name of the environment you want to delete. For example, to delete an environment named "myenv," you would use:
+
+```bash
+conda env remove --name myenv
+```
+
+Replace "myenv" with the name of the environment you want to delete.
+
+
 ### Managing Python
 
 When you create a new environment, conda installs the same Python version you used when you downloaded and installed Anaconda. If you want to use a different version of Python, for example Python 3.5, simply create a new environment and specify the version of Python that you want.
@@ -276,6 +287,7 @@ conda list
 
 
 
+
 ## 关联资料
 
 
@@ -288,7 +300,72 @@ conda list
 
 
 
+## 附录
 
+### 附录A：切换镜像地址，加速依赖包的下载
+
+#### Use the -c Option
+
+When creating a Conda environment or installing packages, you can use the `-c` option to specify which channels to search for packages. This can help you choose a faster mirror.
+
+```
+conda create -n myenv -c https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main python=3.8
+```
+
+#### Use Conda Mirrors
+
+* Conda provides a list of mirrors that you can use to download packages. Some of these mirrors may be faster when accessed from China.
+* You can add a Conda mirror as a channel to your Conda configuration. For example:
+
+```
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge
+```
+
+#### list all the Conda channels
+
+To list all the Conda channels that are currently configured on your system, you can use the conda config --show channels command. Open a terminal or command prompt, and simply run:
+
+```
+// 查询所有的 channels
+conda config --show channels
+
+// 删除 channels
+conda config --remove channels https://mirrors.cloud.tencent.com/anaconda/pkgs/main
+```
+
+This command will display a list of channels that are configured on your system. These channels are where Conda looks for packages when you install or update packages.
+
+You can see the order in which channels are searched, with the `highest-priority` channels `at the top`. Conda searches these channels in order to find packages and their dependencies.
+
+If you want to see the channels for a specific environment, activate that environment first and then run the same command. This will show you the channels configured for that environment.
+
+
+国内几个常见的镜像源：
+
+```
+// Tsinghua University Mirror (清华大学镜像):
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/free
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/pkgs/main
+conda config --add channels https://mirrors.tuna.tsinghua.edu.cn/anaconda/cloud/conda-forge
+
+// USTC Mirror (中国科学技术大学镜像): 推荐
+conda config --add channels http://mirrors.ustc.edu.cn/anaconda/pkgs/free
+conda config --add channels http://mirrors.ustc.edu.cn/anaconda/pkgs/main
+
+// Tencent Cloud Mirror (腾讯云镜像): 不一定可用，慎用
+conda config --add channels https://mirrors.cloud.tencent.com/anaconda/pkgs/free
+conda config --add channels https://mirrors.cloud.tencent.com/anaconda/pkgs/main
+conda config --add channels https://mirrors.cloud.tencent.com/anaconda/cloud/conda-forge
+
+// Aliyun Mirror (阿里云镜像): 不一定可用，慎用
+conda config --add channels http://mirrors.aliyun.com/pypi/simple
+
+
+// 下述命令，可以查看所有的 channels
+conda info
+
+```
 
 
 
