@@ -126,94 +126,109 @@ Copyleft是一种开放许可证类型，它要求知识产权的衍生作品必
 
 ### GPU[#](#term-GPU "Permalink to this term")
 
-[图形处理单元 Graphics Processing Unit](https://en.wikipedia.org/wiki/Graphics_processing_unit)：最初设计用于加速计算机图像处理，但现在经常用于机器学习中尴尬并行计算任务。
+[图形处理单元 Graphics Processing Unit](https://en.wikipedia.org/wiki/Graphics_processing_unit)：最初设计用于加速计算机图像处理，但现在经常用于机器学习中[并行  embarrassingly parallel](https://en.wikipedia.org/wiki/Embarrassingly_parallel) 计算任务。
 
 
-Hallucination[#](#term-Hallucination "Permalink to this term")
+### Hallucination 幻觉[#](#term-Hallucination "Permalink to this term")
 
-A model generating output that is [inexplicable by its training data](https://en.wikipedia.org/wiki/Hallucination_(artificial_intelligence)).
+模型生成的输出，与其训练数据无法解释的现象。
 
-IP[#](#term-IP "Permalink to this term")
+### IP 知识产权[#](#term-IP "Permalink to this term")
 
-[Intellectual Property](https://en.wikipedia.org/wiki/Intellectual_property): intangible creations by humans (e.g. code, text, art), typically legally protected from use without permission of the author(s).
+[知识产权 Intellectual Property](https://en.wikipedia.org/wiki/Intellectual_property): 人类创造的无形作品（例如代码、文本、艺术），通常受到法律保护，未经作者许可不得使用。
 
-Leaderboard[#](#term-Leaderboard "Permalink to this term")
+### Leaderboard 排行榜[#](#term-Leaderboard "Permalink to this term")
 
-Ranking of models based on their performance metrics on the same [benchmark(s)](#term-Benchmark), allowing fair task-specific comparison. See [Comparison of Leaderboards](eval-datasets/#leaderboards-table).
+根据模型在相同基准上的性能指标排名，进行公平的模型比较排名。
 
-LLM[#](#term-LLM "Permalink to this term")
+### LLM 大语言模型[#](#term-LLM "Permalink to this term")
 
-A [Large Language Model](https://en.wikipedia.org/wiki/Large_language_model) is neural network (often a [transformer](#term-Transformer) containing billions of parameters) designed to perform tasks in natural language via [fine tuning](https://en.wikipedia.org/wiki/Fine-tuning_(machine_learning)) or [prompt engineering](https://en.wikipedia.org/wiki/Prompt_engineering).
+[大型语言模型, Large Language Model](https://en.wikipedia.org/wiki/Large_language_model) 是一种神经网络（通常是包含数十亿参数的 Transformer），旨在通过微调或提示工程，执行自然语言任务。
 
-MLOps[#](#term-MLOps "Permalink to this term")
+### MLOps 机器学习运维[#](#term-MLOps "Permalink to this term")
 
-[Machine Learning Operations](https://blogs.nvidia.com/blog/2020/09/03/what-is-mlops): best practices to run AI using software products & cloud services
 
-MoE[#](#term-MoE "Permalink to this term")
+[机器学习运维 Machine Learning Operations](https://blogs.nvidia.com/blog/2020/09/03/what-is-mlops): 使用软件产品和云服务，来使用人工智能的最佳实践。
 
-[Mixture-of-Experts](https://en.wikipedia.org/wiki/Mixture_of_experts) is a technique which uses one or more specialist model(s) from a collection of models (“experts”) to solve general problems. Not that this is different from [ensemble](https://en.wikipedia.org/wiki/Ensemble_learning) models (which combine results from all models).
+### MoE 专家混合[#](#term-MoE "Permalink to this term")
 
-Open[#](#term-Open "Permalink to this term")
+[专家混合 Mixture-of-Experts](https://en.wikipedia.org/wiki/Mixture_of_experts) 是一种技术，它使用来自模型集合（“专家”）的一个或多个专门模型来解决一般问题。
 
-Ambiguous term that could mean “open source” or “open licence”. See [Meaning of “Open”](licences/#open).
+注意，这与集成模型（将所有模型的结果合并）不同。
 
-Permissive[#](#term-Permissive "Permalink to this term")
 
-A type of [open licence](licences/#open-licences) which allows reselling and closed-source modifications, and can often be used in larger projects alongside other licences. Usually, the only condition of use is citing the author by name.
+### Open 开放[#](#term-Open "Permalink to this term")
 
-Perplexity[#](#term-Perplexity "Permalink to this term")
+含义模糊的术语，可以指“开源”或“开放许可证”。
 
-[Perplexity](https://en.wikipedia.org/wiki/Perplexity) is a metric based on [entropy](https://en.wikipedia.org/wiki/Entropy_(information_theory)), and is a rough measure of the difficulty/uncertainty in a prediction problem.
 
-Public Domain[#](#term-Public-Domain "Permalink to this term")
+### Permissive 宽松许可证[#](#term-Permissive "Permalink to this term")
 
-“Open” [IP](#term-IP) owned by nobody (often due to the author disclaiming all rights) and thus can be used by anyone without restrictions. Technically a disclaimer/non-licence. See [Open licence subcategories](licences/#open-licences).
+一种允许转售和封闭源修改的开放许可证，通常可以与其他许可证一起在较大的项目中使用。通常，使用的唯一条件是需要注明引用来源的作者姓名。
 
-RAG[#](#term-RAG "Permalink to this term")
 
-[Retrieval Augmented Generation](https://www.pinecone.io/learn/retrieval-augmented-generation).
 
-RLHF[#](#term-RLHF "Permalink to this term")
+### Perplexity 迷惑度[#](#term-Perplexity "Permalink to this term")
 
-[Reinforcement Learning from Human Feedback](https://en.wikipedia.org/wiki/Reinforcement_learning_from_human_feedback) is often the second step in [alignment](#term-Alignment) (after [supervised fine-tuning](#term-Supervised-fine-tuning)), where a model is [rewarded or penalised](https://en.wikipedia.org/wiki/Reinforcement_learning) for it outputs based on human evaluation. See [Fine-tuning](fine-tuning/) and [Unaligned Models](unaligned-models/).
+[迷惑度 Perplexity](https://en.wikipedia.org/wiki/Perplexity)  是基于熵的度量，是对预测问题的困难度/不确定性的粗略度量。
 
-ROME[#](#term-ROME "Permalink to this term")
 
-The [Rank-One Model Editing algorithm](https://rome.baulab.info) alters a trained model’s weights to directly modify “learned” information \[[12](references/#id52 "Kevin Meng, David Bau, Alex Andonian, and Yonatan Belinkov. Locating and editing factual associations in GPT. 2023. arXiv:2202.05262."), [13](references/#id53 "Vikas Raunak and Arul Menezes. Rank-one editing of encoder-decoder models. 2022. arXiv:2211.13317.")\].
+### Public Domain 公有领域[#](#term-Public-Domain "Permalink to this term")
 
-SIMD[#](#term-SIMD "Permalink to this term")
+无人拥有的“开放”知识产权（通常是因为作者放弃了所有权利），可以供任何人无限制使用。在技术上是一种免责声明/非许可证。
 
-[Single Instruction, Multiple Data](https://en.wikipedia.org/wiki/SIMD) is a [data-level](https://en.wikipedia.org/wiki/Data_parallelism) [parallel processing](https://en.wikipedia.org/wiki/Parallel_computer) technique where one computational instruction is applied to multiple data simultaneously.
 
-SotA[#](#term-SotA "Permalink to this term")
+### RAG 检索增强生成[#](#term-RAG "Permalink to this term")
 
-State of the art: recent developments (under 1 year old).
+[检索增强生成 Retrieval Augmented Generation](https://www.pinecone.io/learn/retrieval-augmented-generation).
 
-Supervised fine-tuning[#](#term-Supervised-fine-tuning "Permalink to this term")
+### RLHF 人类反馈中强化学习[#](#term-RLHF "Permalink to this term")
 
-[SFT](https://cameronrwolfe.substack.com/p/understanding-and-using-supervised) is often the first step in model [alignment](#term-Alignment), and is usually followed by [RLHF](#term-RLHF). See [Fine-tuning](fine-tuning/) and [Unaligned Models](unaligned-models/).
+[人类反馈中进行强化学习 Reinforcement Learning from Human Feedback](https://en.wikipedia.org/wiki/Reinforcement_learning_from_human_feedback) 通常是调整的第二步（在监督微调之后），模型根据人类评估对其输出进行奖励或惩罚。
 
-Quantisation[#](#term-Quantisation "Permalink to this term")
 
-[Sacrificing precision](https://en.wikipedia.org/wiki/Quantization_(signal_processing)) of model weights (e.g. `uint8` instead of `float32`) in return for lower hardware memory requirements.
+### ROME 模型权重编辑[#](#term-ROME "Permalink to this term")
 
-Token[#](#term-Token "Permalink to this term")
+ [Rank-One Model Editing algorithm](https://rome.baulab.info) 算法，通过直接`修改``已训练模型`的**权重**，来修改“学到的”信息。
 
-A [token](https://learn.microsoft.com/en-us/semantic-kernel/prompt-engineering/tokens) is a “unit of text” for an [LLM](#term-LLM) to process/generate. A single token could represent a few characters or words, depending on the tokenisation method chosen. Tokens are usually [embedded](#term-Embedding).
 
-Transformer[#](#term-Transformer "Permalink to this term")
+### SIMD 单指令多数据 [#](#term-SIMD "Permalink to this term")
 
-A [transformer](https://en.wikipedia.org/wiki/Transformer_(machine_learning_model)) is a neural network using a parallel multi-head [attention](https://en.wikipedia.org/wiki/Attention_(machine_learning)) mechanism. The resultant reduce training time makes it well-suited for use in [LLMs](#term-LLM).
+[单指令多数据 Single Instruction, Multiple Data](https://en.wikipedia.org/wiki/SIMD)  是一种数据级并行处理技术，其中一个计算指令同时应用于多个数据。
 
-Vector Database[#](#term-Vector-Database "Permalink to this term")
 
-[Vector databases](https://en.wikipedia.org/wiki/Vector_database) provide efficient storage & search/retrieval for [vector embeddings](#term-Vector-Embedding). See [Vector Databases](vector-db/).
+### SotA 技术前沿[#](#term-SotA "Permalink to this term")
 
-Vector Embedding[#](#term-Vector-Embedding "Permalink to this term")
+State of the art， 技术领域的最新发展（不超过1年）。
 
-[Embedding](https://learn.microsoft.com/en-us/semantic-kernel/memories/embeddings) means encoding [tokens](#term-Token) into a numeric vector (i.e. array/list). This can be thought of as an intermediary between machine and human language, and thus helps [LLMs](#term-LLM) understand human language. See [LLM Embeddings](vector-db/#llm-embeddings).
 
-Vector Store[#](#term-Vector-Store "Permalink to this term")
+### Supervised fine-tuning 监督微调[#](#term-Supervised-fine-tuning "Permalink to this term")
+
+[监督微调 SFT](https://cameronrwolfe.substack.com/p/understanding-and-using-supervised) 通常是`模型调整`的第一步，通常后面跟随`RLHF`。
+
+### Quantisation 量化[#](#term-Quantisation "Permalink to this term")
+
+[牺牲精度 Sacrificing precision](https://en.wikipedia.org/wiki/Quantization_(signal_processing))：为降低硬件内存要求，而牺牲模型权重的精度（例如，使用uint8而不是float32）。
+
+### Token 标记[#](#term-Token "Permalink to this term")
+
+[token 标记](https://learn.microsoft.com/en-us/semantic-kernel/prompt-engineering/tokens) 是LLM处理/生成的“文本单元”。单个标记可以表示几个字符或单词，具体取决于所选的标记化方法。标记通常嵌入在模型中。
+
+### Transformer 变压器/转换器[#](#term-Transformer "Permalink to this term")
+
+[变压器 transformer](https://en.wikipedia.org/wiki/Transformer_(machine_learning_model)) 是一种使用`并行多头注意力`机制的**神经网络**。由于其缩短的训练时间，使其非常适用于LLM中的使用。
+
+
+### Vector Database 矢量数据库[#](#term-Vector-Database "Permalink to this term")
+
+[Vector databases 矢量数据库](https://en.wikipedia.org/wiki/Vector_database)  提供高效的存储和`矢量嵌入`的搜索/检索。
+
+### Vector Embedding 矢量嵌入[#](#term-Vector-Embedding "Permalink to this term")
+
+[嵌入 Embedding](https://learn.microsoft.com/en-us/semantic-kernel/memories/embeddings) 是将标记编码为`数值向量`（数组/列表）。可以将其视为机器语言和人类语言之间的中间步骤，有助于LLM理解人类语言。
+
+
+### Vector Store 矢量存储[#](#term-Vector-Store "Permalink to this term")
 
 See [vector database](#term-Vector-Database).
 
