@@ -96,21 +96,22 @@ Once exported we can load, manipulate, and run ONNX models. Let’s take a Pytho
 
 To install the official `onnx` python package:
 
-pip install onnx
+	pip install onnx
 
-Copy to clipboard
+
 
 To load, manipulate, and run ONNX models in your Python applications:
 
+```python
 import onnx
-
+	
 \# Load an ONNX model
 model \= onnx.load("your\_awesome\_model.onnx")
-
+	
 \# Perform inference with the model
 \# (Specific inference code depends on your application and framework)
+```
 
-Copy to clipboard
 
 ### Support[#](#support "Permalink to this heading")
 
@@ -155,14 +156,12 @@ There’s a detailed failure analysis ([video](https://www.youtube.com/watch?v=K
 
 Fig. 57 Analysis of Failures and Risks in Deep Learning Model Converters \[[143](../references/#id151 "Purvish Jajal, Wenxin Jiang, Arav Tewari, Joseph Woo, Yung-Hsiang Lu, George K. Thiruvathukal, and James C. Davis. Analysis of failures and risks in deep learning model converters: a case study in the ONNX ecosystem. 2023. arXiv:2303.17708.")\][#](#id15 "Permalink to this image")
 
-The top findings were:
 
-+   Crash (56%) and Wrong Model (33%) are the most common symptoms
-    
-+   The most common failure causes are Incompatibility and Type problems, each making up ∼25% of causes
-    
-+   The majority of failures are located with the Node Conversion stage (74%), with a further 10% in the Graph optimisation stage (mostly from tf2onnx).
-    
+一些主要的发现包括：
+
+* 崩溃（56%）和错误的模型（33%）是最常见的问题症状。
+* 最常见的失败原因是不兼容性和类型问题，分别占大约25%的原因。
+* 大多数失败发生在节点转换阶段（74%），另有10%发生在图优化阶段（主要来自tf2onnx）。
 
 See also
 
@@ -183,33 +182,35 @@ See also
 
 [ggerganov/ggml](https://github.com/ggerganov/ggml) is a tensor library for machine learning to enable large models and high performance on commodity hardware – the “GG” refers to the initials of its originator [Georgi Gerganov](https://github.com/ggerganov). In addition to defining low-level machine learning primitives like a tensor type, GGML defines a binary format for distributing large language models (LLMs). [llama.cpp](https://github.com/ggerganov/llama.cpp) and [whisper.cpp](https://github.com/ggerganov/whisper.cpp) are based on it.
 
+[ggerganov/ggml](https://github.com/ggerganov/ggml) 是一个用于机器学习的张量库(`tensor library`)，旨在在通用硬件上实现大型模型和高性能。
+除了定义低级机器学习原语，如张量类型，GGML 还定义了一种用于分发大型语言模型（LLMs）的`二进制格式`。[llama.cpp](https://github.com/ggerganov/llama.cpp) 和 [whisper.cpp](https://github.com/ggerganov/whisper.cpp) 是基于它构建的。
+
+> "GG" 是其创始人 Georgi Gerganov 的姓名缩写。
+
 ### Features and Benefits[#](#id4 "Permalink to this heading")
 
-+   Written in C
-    
-+   16-bit float and integer quantisation support (e.g. 4-bit, 5-bit, 8-bit)
-    
-+   Automatic differentiation
-    
-+   Built-in optimisation algorithms (e.g. ADAM, L-BFGS)
-    
-+   Optimised for Apple Silicon, on x86 arch utilises AVX / AVX2 intrinsics
-    
-+   Web support via WebAssembly and WASM SIMD
-    
-+   No third-party dependencies
-    
-+   zero memory allocations during runtime
+这是关于 ggerganov/ggml 库的一些特点：
+
+* 用 C 语言编写
+* 支持 `16 位`浮点数和整数量化（例如 4 位、5 位、8 位）
+* 自动微分
+* 内置的优化算法（如 ADAM、L-BFGS）
+* 针对 Apple Silicon 进行了优化，在 x86 架构上使用 AVX / AVX2 指令集
+* 通过 WebAssembly 和 WASM SIMD 支持 Web
+* 无第三方依赖
+* 运行时不需要内存分配
     
 
 To know more, see their [manifesto here](https://github.com/ggerganov/llama.cpp/discussions/205)
 
 ### Usage[#](#ggml-usage "Permalink to this heading")
 
-Overall GGML is moderate in terms of usability given it’s a fairly new project and growing, but has lots of [community support](#ggml-support) already.
+总体而言，GGML 在可用性方面属于中等水平，因为它是一个相对较新的项目，正在不断发展，但已经得到了许多社区支持。
 
 Here’s an example inference of GPT-2 GGML:
 
+
+```
 git clone https://github.com/ggerganov/ggml
 cd ggml
 mkdir build && cd build
@@ -219,47 +220,41 @@ make \-j4 gpt\-2
 \# Run the GPT-2 small 117M model
 ../examples/gpt\-2/download\-ggml\-model.sh 117M
 ./bin/gpt\-2 \-m models/gpt\-2\-117M/ggml\-model.bin \-p "This is an example"
+```
 
-Copy to clipboard
+
 
 ### Working[#](#working "Permalink to this heading")
 
 For usage, the model should be saved in the particular GGML file format which consists binary-encoded data that has a particular format specifying what kind of data is present in the file, how it is represented, and the order in which it appears.
 
-For a valid GGML file the following pieces of information should be present in order:
 
-1.  **GGML version number:** To support rapid development without sacrificing backwards-compatibility, GGML uses versioning to introduce improvements that may change the format of the encoding. The first value present in a valid GGML file is a “magic number” that indicates the GGML version that was used to encode the model. Here’s a [GPT-2 conversion example](https://github.com/ggerganov/ggml/blob/6319ae9ad7bdf9f834b2855d7e9fa70508e82f57/examples/gpt-2/convert-cerebras-to-ggml.py#L67) where it’s getting written.
+要创建一个有效的GGML文件，必须按照以下顺序包含以下信息：
+
+1. GGML版本号，**GGML version number**：GGML使用`版本控制`来支持快速开发，同时保持`向后兼容性`。有效的GGML文件的第一个值是一个“魔术数字”，表示使用的GGML版本。Here’s a [GPT-2 conversion example](https://github.com/ggerganov/ggml/blob/6319ae9ad7bdf9f834b2855d7e9fa70508e82f57/examples/gpt-2/convert-cerebras-to-ggml.py#L67) where it’s getting written.
+
+2. LLM组件 **Components of LLMs**：
+
+	1. 超参数，**Hyperparameters**：这些参数配置了模型的行为。有效的GGML文件，按`正确顺序`列出这些值，并使用正确的数据类型表示。Here’s an [example for GPT-2](https://github.com/ggerganov/ggml/blob/6319ae9ad7bdf9f834b2855d7e9fa70508e82f57/examples/gpt-2/convert-cerebras-to-ggml.py#L68-L72).
+	2. 词汇表，**Vocabulary**：这包括模型支持的所有标记 `tokens`。 Here’s an [example for GPT-2](https://github.com/ggerganov/ggml/blob/6319ae9ad7bdf9f834b2855d7e9fa70508e82f57/examples/gpt-2/convert-cerebras-to-ggml.py#L78-L83).
+	3. 权重， **Weights**：这些也被称为`模型的参数`（parameters of the model）。在GGML格式中，一个`张量`（tensor）由以下几个部分组成：
+		* 名称
+		* 表示张量的维数及其长度的4元素列表
+		* 张量中的权重列表
+            
+```    
+// Let’s consider the following weights:
     
-2.  **Components of LLMs:**
+weight_1 = [[0.334, 0.21], [0.0, 0.149]]
+weight_2 = [0.123, 0.21, 0.31]
     
-    1.  **Hyperparameters:** These are parameters which configures the behaviour of models. Valid GGML files lists these values in the correct order, and each value represented using the correct data type. Here’s an [example for GPT-2](https://github.com/ggerganov/ggml/blob/6319ae9ad7bdf9f834b2855d7e9fa70508e82f57/examples/gpt-2/convert-cerebras-to-ggml.py#L68-L72).
-        
-    2.  **Vocabulary:** These are all supported tokens for a model. Here’s an [example for GPT-2](https://github.com/ggerganov/ggml/blob/6319ae9ad7bdf9f834b2855d7e9fa70508e82f57/examples/gpt-2/convert-cerebras-to-ggml.py#L78-L83).
-        
-    3.  **Weights:** These are also called parameters of the model. The total number of weights in a model are referred to as the “size” of that model. In GGML format a tensor consists of few components:
-        
-        +   Name
-            
-        +   4 element list representing number of dimensions in the tensor and their lengths
-            
-        +   List of weights in the tensor
-            
-        
-        Let’s consider the following weights:
-        
-        weight\_1 \= \[\[0.334, 0.21\], \[0.0, 0.149\]\]
-        weight\_2 \= \[0.123, 0.21, 0.31\]
-        
-        Copy to clipboard
-        
-        Then GGML representation would be:
-        
-        {"weight\_1", \[2, 2, 1, 1\], \[0.334, 0.21, 0.0, 0.149\]}
-        {"weight\_2", \[3, 1, 1, 1\], \[0.123, 0.21, 0.31\]}
-        
-        Copy to clipboard
-        
-        For each weight representation the first list denotes dimensions and second list denotes weights. Dimensions list uses `1` as a placeholder for unused dimensions.
+// Then GGML representation would be:
+    
+{"weight_1", [2, 2, 1, 1], [0.334, 0.21, 0.0, 0.149]}
+{"weight_2", [3, 1, 1, 1], [0.123, 0.21, 0.31]}
+```  
+    
+For each weight representation the first list denotes dimensions and second list denotes weights. Dimensions list uses `1` as a placeholder for unused dimensions.
         
 
 #### Quantisation[#](#quantisation "Permalink to this heading")
@@ -346,7 +341,8 @@ See also
 
 ## TensorRT[#](#tensorrt "Permalink to this heading")
 
-TensorRT is an SDK for deep learning inference by NVIDIA, providing APIs and parsers to import trained models from all major deep learning frameworks which then generates optimised runtime engines deployable in diverse systems.
+
+`TensorRT` 是NVIDIA提供的深度学习推断软件开发工具包（SDK），它提供API和解析器，用于导入来自所有主要深度学习框架的训练模型，然后生成经过优化的运行时引擎，可部署在不同的系统上。
 
 ### Features and Benefits[#](#id10 "Permalink to this heading")
 
@@ -375,7 +371,8 @@ TensorRT’s main capability comes under giving out high performance inference e
 
 ### Usage[#](#tensorrt-usage "Permalink to this heading")
 
-Using [NVIDIA’s TensorRT containers](https://docs.nvidia.com/deeplearning/tensorrt/container-release-notes) can ease up setup, given it’s known what version of TensorRT, CUDA toolkit (if required).
+
+使用 [NVIDIA’s TensorRT containers 容器](https://docs.nvidia.com/deeplearning/tensorrt/container-release-notes) 可以简化设置流程，前提是已知TensorRT TensorRT \ CUDA toolkit  版本(if required).
 
 [![https://static.premai.io/book/model-formats_tensorrt-usage-flow.png](https://static.premai.io/book/model-formats_tensorrt-usage-flow.png)](https://static.premai.io/book/model-formats_tensorrt-usage-flow.png)
 
