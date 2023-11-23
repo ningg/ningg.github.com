@@ -1,7 +1,7 @@
 ---
 layout: post
-title: AI 系列：Vector Databases
-description: 向量数据库
+title: AI 系列：Software Development toolKits
+description: AI 开发平台/工具集
 published: true
 category: AI
 ---

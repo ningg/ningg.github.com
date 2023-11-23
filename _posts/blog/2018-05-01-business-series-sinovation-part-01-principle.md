@@ -158,3 +158,4 @@ TODO： 补充一张图片，说明上述 5 个阶段
 
 
 [NingG]:    http://ningg.github.com  "NingG"
+[创业就是要细分垄断]: 		https://book.douban.com/subject/27043167/
