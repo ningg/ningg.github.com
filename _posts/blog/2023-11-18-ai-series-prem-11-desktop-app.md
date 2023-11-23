@@ -164,6 +164,7 @@ However, it is less friendly and more clunky/ has a beta feel to it. For one, on
 
 Like LM Studio, there is a support for local server in GPT4All. But it took some time to find that this feature exists and was possible only from the [documentation](https://docs.gpt4all.io). The results seem far better than LM Studio with control over number of tokens and response though it is model dependent. Here’s the code for the same:
 
+```
 import openai
 openai.api\_base \= "http://localhost:4891/v1"
 openai.api\_key \= ""
@@ -182,8 +183,8 @@ response \= openai.Completion.create(
     stream\=False)
 \# Print the generated completion
 print(response)
+```
 
-Copy to clipboard
 
 The response can be found for the example `prompt`:
 
