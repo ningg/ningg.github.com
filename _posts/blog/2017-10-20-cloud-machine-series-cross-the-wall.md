@@ -195,6 +195,17 @@ Country / 国家: United States
 > 
 > 
 > [https://github.com/wulabing/Xray_onekey](https://github.com/wulabing/Xray_onekey)
+> 
+> 
+> [更新]： 2024.01.04
+> 
+> 主机迁移之后，需要进行的工作：
+> 
+> 1.域名解析迁移：https://dns.console.aliyun.com/ ，域名解析到新的 ip
+> 
+> 2.本地主机上，ping 域名，看看是否可以查询到解析结果
+> 
+> 3.ssh 远程到新的主机上，查看 v2ray 进程细节
 
 域名：ningg.top
 主机记录：alidnscheck
@@ -207,6 +218,15 @@ Country / 国家: United States
  systemctl enable v2ray
  
  systemctl start v2ray
+ 
+ systemctl status v2ray
+ 
+ // ssh 远程登录后，可以直接执行 v2ray 命令
+ ssh user@ip -p port
+ 
+ // 查看对应的 url 或者 qr 码
+ v2ray
+ 
  ```
  
  安装文件的位置：
