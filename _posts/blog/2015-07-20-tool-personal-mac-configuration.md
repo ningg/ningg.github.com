@@ -182,6 +182,9 @@ eval "$(jenv init -)"
 将 JDK 添加到 jenv 中，设置全局默认的 JDK:
 
 ```
+# 查看本机所有的 JDK 版本
+/usr/libexec/java_home -V
+
 # 添加 JDK 到 jenv
 jenv add /Library/Java/JavaVirtualMachines/jdk1.7.0_79.jdk/Contents/Home
 # 查看 JDK 列表
