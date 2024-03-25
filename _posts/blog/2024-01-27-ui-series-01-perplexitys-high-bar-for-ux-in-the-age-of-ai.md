@@ -3,7 +3,7 @@ layout: post
 title: UI 系列：AI 领域，新的 UI 交互设计
 description: 以 perplexity 为例，当前 UI 领域的典型交互.
 published: true
-categories: AI UI
+categories: AI ui
 ---
 
 > 
