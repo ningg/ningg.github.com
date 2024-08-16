@@ -38,7 +38,7 @@ category: 团队
 
 管理的分类：
 
-* 1.项目管理（`事`）：计划、执行、结果的管理
+* 1.项目管理（`事`）：计划、执行、结果的管理 ， 参考[项目管理：基本方法 & 实践建议（2023版）](https://ningg.top/summary-series-project-management-2023/)
 * 2.团队管理（`人`）：组织结构的管理
 
 此外：
@@ -213,7 +213,7 @@ category: 团队
 +   避免决策：武断的直接决策时，要谨慎，除非拥有更专业的知识、并且比一线员工更熟悉情况。  
 
 
-拓展： [高效的讨论](https://ningg.top/product-series-how-to-analyse-demand/) 、 [争议决策]()（参考之前的讨论）  
+参考： [高效的讨论](https://ningg.top/product-series-how-to-analyse-demand/) 、 [争议决策](https://ningg.top/summary-series-decision-from-discuss/)（参考之前的讨论）  
 
   
 
