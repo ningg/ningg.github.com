@@ -3,7 +3,7 @@ layout: post
 title: 用户增长：全局视角 & 常用策略
 description: 用户增长是什么？如何做增长？常用策略
 published: true
-category: 团队
+categories: 用户增长 营销管理
 ---
 
 > 活动是什么？活动是有固定目标的一项任务，一般用于支持业务增长，是增长的手段之一.
@@ -349,7 +349,7 @@ Note：拉新后，特别注意新用户的留存，培养用户的使用习惯�
 [NingG]:    http://ningg.github.io  "NingG"
 
 [用户增长策略的独孤九剑]:		https://www.woshipm.com/operate/3370689.html
-[]:			
+		
 
 
 
