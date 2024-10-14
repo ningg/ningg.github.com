@@ -50,7 +50,7 @@ Keynote/PPT 下载：
 
 快照数据生成的基本过程：
 
-![](images/zookeeper/zk-data-snapshot-dump-progress.png)
+![](/images/zookeeper/zk-data-snapshot-dump-progress.png)
 
 关键点：
 
