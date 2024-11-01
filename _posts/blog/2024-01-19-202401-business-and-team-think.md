@@ -61,3 +61,8 @@ categories: 团队 商业系列
 * Scrum 的问题所在，https://baoyu.io/translations/software-engineering/scrum-sucks
 
 
+## 3.企业文化
+
+参考：
+
+* [步步高的企业文化](https://xueqiu.com/8459576988/306684921)
