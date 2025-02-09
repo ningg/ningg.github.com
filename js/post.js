@@ -38,7 +38,7 @@ $(document).ready(function(){
     });
 
     (function(){
-        var ie6 = ($.browser.msie && $.browser.version=="6.0") ? true : false;
+        var ie6 = /MSIE 6\.0/.test(navigator.userAgent);
 
         function initHeading(){
             var h2 = [];
@@ -124,7 +124,7 @@ $(document).ready(function(){
 
             genIndex();
 
-            $(window).load(function(){
+            $(window).on("load", function(){
                 var scrollTop = [];
                 $.each($('#menuIndex li a'),function(index,item){
                     var selector = $(item).attr('data-id') ? '#'+$(item).attr('data-id') : 'h1'

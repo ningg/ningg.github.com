@@ -44,10 +44,10 @@ java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 -jar api
 
 如果是 Docker 方式，启动的 Java 应用，则，`docker-compose.yml` 增加下述环境变量：（指定远程调试端口为 5006）
 
-```
+```bash
 // docker 方式启动时， 在 docker-compose.yml 中，对应 Service 的 增加环境变量。
   citycode:
-    image: docker.mobike.io/mobike/citycode
+    image: docker.test.io/test/citycode
     networks:
       - infra
     environment:
