@@ -49,3 +49,26 @@ $ bundle exec jekyll serve --incremental
 # 6. 浏览器访问效果
 http://127.0.0.1:4000
 ```
+
+# Mac 的 M2 芯片，搭建开发环境
+
+基本思路：
+
+* 1.确定 terminal 处于 arm64 模式，而不是 Rosetta mode.
+* 2.切换为 zsh 
+* 3.按照官网，从头安装 ruby 和 jekyll，官网[参考](https://jekyllrb.com/docs/installation/macos/)
+* 4.提前删除项目下的 `Gemfile.lock`
+
+
+将 terminal 调整为 arm64 模式：[](https://www.moncefbelyamani.com/how-to-install-xcode-homebrew-git-rvm-ruby-on-mac/#installation)
+
+```
+// 1.查询当前模式
+$ uname -m
+x86_64
+
+// 2.如果上面返回 x86_64 而不是 arm64，则，需要直接卸载 iterm/iterm2，然后重装
+// 卸载可以在 finder 中搜索到应用，然后，移到废纸篓
+// 重装可以使用 brew
+brew install iterm2
+```
