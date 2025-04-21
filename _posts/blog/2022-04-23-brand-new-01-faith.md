@@ -3,7 +3,7 @@ layout: post
 title: Brand New：自尊、自信
 description: 自尊、自信，预期会自动达成，建立对自己的预期很重要。
 published: true
-category: blog
+categories: blog BrandNew
 ---
 
 如何看待自尊、自信。
