@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 科技历史系列：彼得·蒂尔，创业公司都是基于某个秘密而发展起来的
-description: 彼得·蒂尔 Peter Thiel是著名的美国企业家与风险资本家，他创建了PayPal，也是Palantir的投资人，Founders’Fund和对冲基金ClariumCapital的总裁，以及畅销书《ZerotoOne》的作者
+description: 彼得·蒂尔 Peter Thiel是著名的美国企业家，对未来的看法
 published: true
 category: 科技历史
 ---
