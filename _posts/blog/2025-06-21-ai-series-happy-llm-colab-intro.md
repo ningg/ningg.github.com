@@ -43,7 +43,7 @@ category: AI
 **备注**：这个项目，会跟 happy-llm 保持`周级别`更新。
 
 
-![](./happy-llm-colab.png)
+![](https://ningg.top/happy-llm-colab/happy-llm-colab.png)
 
 
 ### 3.📖 内容导航
