@@ -21,9 +21,9 @@ category: AI
 ## 2.在线阅读
 
 
-在线阅读（GitHub 版本）：[📚 《大模型技术30讲》](https://ningg.top/Machine-Learning-Q-and-AI/) 
+在线阅读（GitHub 版本）：[《大模型技术30讲》](https://ningg.top/Machine-Learning-Q-and-AI/) 
 
-* 1.入理解 LLM 核心原理，直击要点
+* 1.深入入理解 LLM 核心原理，直击要点
 * 2.陆续增加中文批注，增强理解
 
 
