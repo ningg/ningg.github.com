@@ -265,6 +265,7 @@ RM 本质上是一个文本分类模型，对于一个文本输出一个标量�
 
 * [Happy-LLM](https://datawhalechina.github.io/happy-llm)
 * [https://huggingface.co/learn](https://huggingface.co/learn)
+* [大语言模型](https://llmbook-zh.github.io/) 参考课件、串联思路
 
 
 
