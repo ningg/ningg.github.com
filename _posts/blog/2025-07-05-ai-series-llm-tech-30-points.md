@@ -48,6 +48,11 @@ category: AI
 * 1.深入入理解 LLM 核心原理，直击要点
 * 2.陆续增加中文批注，增强理解
 
+<div align='center'>
+    <img src="/images/llm/2023-ml-ai-beyond-cn.jpg"  width="30%">
+    <img src="/images/llm/2023-ml-ai-beyond.jpg"  width="27.65%">
+</div>
+
 
 ## 4.如何贡献   
 
@@ -57,7 +62,7 @@ category: AI
 - 💡 功能建议 - 有好想法就告诉我们
 - 📝 内容完善 - 帮助改进教程内容
 
-> [Note]: 后续资料会附上贡献者名单.
+> Note: 后续资料会附上贡献者名单.
 
 
 
