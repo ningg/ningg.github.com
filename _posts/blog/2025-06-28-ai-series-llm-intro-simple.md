@@ -15,7 +15,6 @@ category: AI
 我们用通俗语言讲解每一阶段的原理、作用和关键概念。
 
 
-
 ## 阶段 1：Tokenization（分词）
 
 **目标：把「人类语言」变成「数字」**
@@ -35,16 +34,12 @@ category: AI
 "." → 27
 ```
 
-### 有哪些常用 Tokenizer？
+**有哪些常用 Tokenizer？**
 
 *   **字符级**（小模型）：每个字符是一个 token → `["I", " ", "l", "o", "v", "e"]`
-    
 *   **单词级**：一个词是一个 token
-    
 *   **BPE（Byte Pair Encoding）**（主流）：将高频子词组合成 token，例如 `["un", "lik", "ely"]`
-    
 *   **SentencePiece** / **Tokenizer by OpenAI（tiktoken）**：高效，支持子词、空格、标点等编码方式
-    
 
 ## 阶段 2：构建模型结构（Transformer）
 
@@ -52,21 +47,18 @@ category: AI
 
 核心是 **Transformer 架构**，最早来自论文《Attention is All You Need》。
 
-### 基本组成：
+基本组成：
 
-*   **Embedding 层**：把 token 数字转为向量，比如 103 → \[0.23, -0.8, ...\]
-    
-*   **位置编码**：告诉模型每个词的位置顺序
-    
-*   **Self-Attention**：让每个词都能“关注”句子中其他词（比如 "not happy" 中，"not" 影响了 "happy"）
-    
-*   **MLP 层**：做最终的特征提取和预测
-    
-*   **Residual & LayerNorm**：帮助训练稳定
-    
+* **Embedding 层**：把 token 数字转为向量，比如 103 → \[0.23, -0.8, ...\]
+* **位置编码**：告诉模型每个词的位置顺序
+* **Self-Attention**：让每个词都能“关注”句子中其他词（比如 "not happy" 中，"not" 影响了 "happy"）
+* **MLP 层**：做最终的特征提取和预测，参考附录A.
+* **Residual & LayerNorm**：帮助训练稳定
+
+> TODO: 补充 Transformer 架构的图解
+
 
 多个 Transformer Block 叠在一起，就能“更深地理解”语言含义。
-
 
 
 ## 阶段 3：训练循环（输入、输出、损失函数）
@@ -80,13 +72,12 @@ category: AI
 目标：love AI
 ```
 
-每次让模型预测下一个词是什么，如果预测错了，就调整模型内部参数（反向传播）。
+每次让模型预测下一个词是什么，如果预测错了，就调整模型内部参数（**反向传播**）。
 
-### 损失函数：
+损失函数：
 
-*   通常用 **交叉熵（Cross Entropy Loss）**
-    
-*   越接近真实的词，Loss 越低
+* 通常用 **交叉熵（Cross Entropy Loss）**    
+* 越接近真实的词，Loss 越低
     
 
 ## 阶段 4：准备训练数据
@@ -96,20 +87,14 @@ category: AI
 常用的数据集：
 
 *   Wikipedia（百科全书）
-    
 *   BookCorpus（小说文本）
-    
 *   Common Crawl（互联网页面）
-    
 *   GitHub、Reddit、新闻等
-    
 
 特点：
 
 *   **越多越好**（LLM通常训练几百 GB ~ TB 级数据）
-    
 *   **清洗质量很关键**（去广告、乱码等）
-    
 
 数据通常要变成 token 编号后才能送进模型训练。
 
@@ -122,14 +107,11 @@ category: AI
 
 技术细节：
 
-*   **优化器**：通常用 AdamW（适合 NLP）
-    
-*   **多 GPU 并行**：分布式训练
-    
-*   **混合精度训练（FP16）**：更快，省显存
-    
-*   **梯度裁剪**：防止爆炸
-    
+* **优化器**：通常用 AdamW（适合 NLP）
+* **多 GPU 并行**：分布式训练
+* **混合精度训练（FP16）**：更快，省显存
+* **梯度裁剪**：防止爆炸
+  
 
 训练几小时到几周不等，依规模而定。
 
@@ -141,15 +123,11 @@ category: AI
 流程：
 
 1.  给模型输入开头 → “I love”
-    
 2.  模型预测下一个词 → “you”
-    
 3.  把预测结果接到输入上，再次预测下一个 → “so”
-    
 4.  重复直到达到长度或遇到结束符
-    
 
-### 常见采样方式：
+**常见采样方式：**
 
 | 方法  | 说明  |
 | --- | --- |
@@ -208,7 +186,10 @@ category: AI
 
 ## 关联资料
 
-* TODO
+* [知乎:入门大语言模型（LLM）看哪本书好呀?](https://www.zhihu.com/question/666070485)
+* [大模型技术 30 讲](https://ningg.top/Machine-Learning-Q-and-AI/#/)
+* [Build a Large Language Model (From Scratch) 中文版](https://ningg.top/Build-A-Large-Language-Model-CN/#/)
+* 百面大模型
 
 
 
