@@ -23,9 +23,14 @@ url: https://ningg.top
 beian: 京ICP备19013747号-1
 beian-url: https://beian.miit.gov.cn
 
-# feed: /atom.xml
-# atom_path : /atom.xml
+feed: /atom.xml
+atom_path: /atom.xml
 
 # author_info: <a href="http://ningg.github.com/">NingG</a>
 author_info: <a href="http://ningg.top/">NingG</a>
+
+# 作者信息配置
+author:
+  name: NingG
+  email: guoning.gn@gmail.com
 
