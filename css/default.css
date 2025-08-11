@@ -118,7 +118,7 @@ html, body{overflow:auto; overflow-x: hidden;}
     position: fixed;
     top: 0;
     left: 0;
-    width: 30%;
+    width: 25%;
     height: 100%;
     max-width: 500px;
     /* background:#000; */
@@ -143,7 +143,7 @@ html, body{overflow:auto; overflow-x: hidden;}
 }
 
 /*****************about page****************/
-.index-content .section { margin-left:30%; padding-top:80px; padding-right:15%; ;}
+.index-content .section { margin-left:25%; padding-top:80px; padding-right:15%; ;}
 .index-content .section .about-page { margin-left:15%; width:70%; margin:0 atuo;}
 .index-content .section .about-page ul{ margin-bottom:25px; margin-left:10%;}
 /*.index-content .section .about-page p+ul{ margin-top:-20px;} */
