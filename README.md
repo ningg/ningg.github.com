@@ -4,6 +4,7 @@
 
 ## 1.ChangeLog
 
+* 2025年8月，修正 RSS 订阅信息，README 中，增加个人联系方式。
 * 2019年3月，进行网站域名备案。
 * 2019年2月，post 页面，增加 `同类文章` 模块。
 * 2014年5月，基于[BeiYuu](http://beiyuu.com/) & [Havee](http://havee.me/) 的博客模版，改进出此博客
@@ -13,6 +14,8 @@
 ## 2. Mac 下, 搭建开发调试环境
 
 ### 2.1 搭建开发调试环境(旧版Mac)
+
+<details><summary>点击展开</summary>
 
 搭建开发环境, 参考 [Blogging with Jekyll](http://jekyllrb.com/docs/quickstart/).
 
@@ -51,8 +54,11 @@ $ bundle exec jekyll serve --incremental
 # 6. 浏览器访问效果
 http://127.0.0.1:4000
 ```
+</details>
 
 ### 2.2. Mac 的 M2 芯片，搭建开发环境(新版Mac)
+
+<details><summary>点击展开</summary>
 
 基本思路：
 
@@ -75,6 +81,9 @@ x86_64
 brew install iterm2
 ```
 
+</details>
+
+
 ## 3. 联系我
 
 关注微信公众号(订阅号: **ningg** )，留言交个朋友：
@@ -83,7 +92,9 @@ brew install iterm2
 
 **微信搜索**: 公众号 `ningg` or **微信扫码**，联系我，不吃亏.
 
-或者，通过以下方式联系我：
+<br />
+
+也可以，通过 weibo or mail 联系我：
 
 * [Weibo: ggningg](http://weibo.com/ggningg/)
 * [Email: guoning.gn AT gmail.com ](mailto:guoning.gn@gmail.com)
