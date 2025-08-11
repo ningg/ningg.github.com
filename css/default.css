@@ -183,7 +183,7 @@ html, body{overflow:auto; overflow-x: hidden;}
 .index-content .title-desc {color:#999;font-size:14px;line-height:1.6em;}
 
 .index-content .artical-cate { width:70%; margin:0 auto; }
-.index-content .artical-cate li { display:inline-block; *float:left; zoom:1; font-size:18px; width:32%; cursor:pointer; }
+.index-content .artical-cate li { display:inline-block; *float:left; zoom:1; font-size:18px; width:24%; cursor:pointer; text-align:center; }
 .index-content .artical-cate li a,
 .index-content .artical-cate li a:visited { display:inline-block; zoom:1; color:#000; width:100%; }
 .index-content .artical-cate li a:hover { text-decoration:none; }
