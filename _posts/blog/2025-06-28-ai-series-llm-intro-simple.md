@@ -8,6 +8,13 @@ category: AI
 
 从基础开始，一步一步带你了解一个大语言模型（LLM）是如何诞生的。你会看到一个“从文本 → 模型 → 智能输出”的完整流程，就像训练一个AI“语言小脑”的过程。
 
+LLM 的架构图，包含核心组件：
+
+![](/images/ai-series/llm-intro-simple/llm-arch-01.webp)
+
+
+![](/images/ai-series/llm-intro-simple/llm-arch-02.webp)
+
 
 
 ## 目标：从 0 理解 LLM 的 7 个核心阶段
@@ -55,7 +62,6 @@ category: AI
 * **MLP 层**：做最终的特征提取和预测，参考附录A.
 * **Residual & LayerNorm**：帮助训练稳定
 
-> TODO: 补充 Transformer 架构的图解
 
 
 多个 Transformer Block 叠在一起，就能“更深地理解”语言含义。
