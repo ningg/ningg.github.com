@@ -12,7 +12,8 @@ category: AI
 
 如果你正在学习大语言模型（LLM）并希望在线编写和调试 PyTorch 代码，目前确实有多个平台支持这种需求，而 Hugging Face 结合 Google Colab 是最主流、最适合初学者的方案之一。下面从不同角度为你梳理可行的平台及其特点：
 
-## 🚀 一、Hugging Face + Google Colab（推荐首选）
+##  一、Hugging Face + Google Colab（推荐首选）
+
 Hugging Face 本身并不提供在线的编程环境，但它深度集成了 Google Colab，支持一键在 Colab 中打开并运行 Notebook，适合学习 LLM 和 PyTorch 调试：
 
 1. **官方 Notebook 资源库**  
@@ -26,7 +27,8 @@ Hugging Face 本身并不提供在线的编程环境，但它深度集成了 Goo
    - 可配合 `%%debug` 魔术命令进行逐行调试；  
    - 直接输出中间变量、梯度值等，适合模型学习阶段的实验。
 
-## 🌐 二、其他支持 PyTorch 在线编写/调试的平台
+## 二、其他支持 PyTorch 在线编写/调试的平台
+
 如果你希望尝试更多环境，以下平台也值得关注：
 
 | **平台**       | **是否支持PyTorch** | **是否支持调试** | **GPU支持** | **集成Hugging Face** | **适用场景**         |
@@ -43,14 +45,15 @@ Hugging Face 本身并不提供在线的编程环境，但它深度集成了 Goo
 3. **VS Code Web 版（如 github.dev）**  
    支持在浏览器中运行 VS Code，配合 Jupyter 扩展可调试 PyTorch，需自行配置 GPU 环境（如连接云主机），灵活性高但门槛稍高。
 
-## 💎 三、调试技巧补充
+## 三、调试技巧补充
+
 无论使用哪个平台，以下方法能提升调试效率： 
  
 - **PyTorch 原生工具**：使用 `torch.autograd.gradcheck` 验证梯度计算；  
 - **异常定位**：结合 CUDA 错误信息（如 `CUDA_LAUNCH_BLOCKING=1`）定位 GPU 内存问题；  
 - **Hugging Face 特定调试**：通过 `pipeline(..., device_map="auto")` 自动分配多 GPU 负载。
 
-## 💎 四、总结：如何选择？
+## 四、总结：如何选择？
 
 - **入门/快速实验 → Hugging Face Notebooks + Colab**：官方资源丰富，环境开箱即用；  
 - **深度调试/自定义环境 → VS Code Web + 云主机**：适合复杂项目；  
