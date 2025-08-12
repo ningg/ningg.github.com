@@ -11,11 +11,33 @@
 * 2013年8月，基于[BeiYuu](http://beiyuu.com/) 博客模版，在GitHub上建立个人网站
 * 2012年9月，在内网使用Wordpress搭建个人博客
 
-## 2. Mac 下, 搭建开发调试环境
+## 2. 联系我
 
-### 2.1 搭建开发调试环境(旧版Mac)
+关注微信公众号(订阅号: **ningg** )，留言交个朋友：
+
+![](/images/wechat/qrcode_for_gh_7c277c30a2b5_344.jpg)
+
+**微信搜索**: 公众号 `ningg` or **微信扫码**，联系我，不吃亏.
+
+<br />
+
+也可以，通过 weibo or mail 联系我：
+
+* [Weibo: ggningg](http://weibo.com/ggningg/)
+* [Email: guoning.gn AT gmail.com ](mailto:guoning.gn@gmail.com)
+
+## 3. 订阅我的博客
+
+* [点击此处：RSS 订阅](https://ningg.top/atom.xml)
+
+
+## 附录A. Mac 下, 搭建开发调试环境
+
+### A.1. 搭建开发调试环境(旧版Mac)
 
 <details><summary>点击展开</summary>
+
+<br />
 
 搭建开发环境, 参考 [Blogging with Jekyll](http://jekyllrb.com/docs/quickstart/).
 
@@ -56,9 +78,11 @@ http://127.0.0.1:4000
 ```
 </details>
 
-### 2.2. Mac 的 M2 芯片，搭建开发环境(新版Mac)
+### A.2. Mac 的 M2 芯片，搭建开发环境(新版Mac)
 
 <details><summary>点击展开</summary>
+
+<br />
 
 基本思路：
 
@@ -84,22 +108,3 @@ brew install iterm2
 </details>
 
 
-## 3. 联系我
-
-关注微信公众号(订阅号: **ningg** )，留言交个朋友：
-
-![](/images/wechat/qrcode_for_gh_7c277c30a2b5_344.jpg)
-
-**微信搜索**: 公众号 `ningg` or **微信扫码**，联系我，不吃亏.
-
-<br />
-
-也可以，通过 weibo or mail 联系我：
-
-* [Weibo: ggningg](http://weibo.com/ggningg/)
-* [Email: guoning.gn AT gmail.com ](mailto:guoning.gn@gmail.com)
-
-## 4. 订阅我的博客
-
-
-* [点击此处：RSS 订阅](https://ningg.top/atom.xml)
