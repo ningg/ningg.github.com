@@ -196,6 +196,8 @@ LLM 的架构图，包含核心组件：
 * [大模型技术 30 讲](https://ningg.top/Machine-Learning-Q-and-AI/#/)
 * [Build a Large Language Model (From Scratch) 中文版](https://ningg.top/Build-A-Large-Language-Model-CN/#/)
 * 百面大模型
+* [大语言模型(赵鑫)](https://llmbook-zh.github.io/) 包含[电子版](https://llmbook-zh.github.io/LLMBook.pdf)
+* [Happy-LLM:从零开始的大语言模型原理与实践教程](https://datawhalechina.github.io/happy-llm/)
 
 
 
