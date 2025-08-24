@@ -1,7 +1,7 @@
 ---
 layout: post
 title: 动手构建大模型：阅读笔记
-description: 大模型的作用，从零构建 llm 的主要步骤
+description: 大模型的原理，从零构建 llm 的主要步骤
 published: true
 categories: AI 
 ---

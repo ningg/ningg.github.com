@@ -1,7 +1,7 @@
 ---
 layout: post
 title: AI 实践：本地搭建 RAG + LLMs
-description: 在本低搭建一套 RAG 系统，加深对原理细节的理解
+description: 在本地搭建一套 RAG 系统，加深对原理细节的理解
 published: true
 categories: AI 
 ---
