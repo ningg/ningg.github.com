@@ -24,7 +24,7 @@ category: AI
 
 上文提到的 RAG 指南，很大程度上是受到了最近的一篇 RAG 综述论文的启发（[“Retrieval-Augmented Generation for Large Language Models: A Survey”Gao, Yunfan 等人，2023](https://baoyu.io/translations/ai-paper/2312.10997-retrieval-augmented-generation-for-large-language-models-a-survey)）。
 
-## [](#基础-rag)基础 RAG
+## [](#基础-rag)1.基础 RAG
 
 今天的主流 RAG 涉及从外部知识库检索文档，并将这些文档及用户的查询传递给大语言模型（LLM），以生成响应。换言之，RAG 包含了
 
@@ -53,14 +53,14 @@ response = query_engine.query("A user's query")
 
 ```
 
-## [](#rag-成功的要求)RAG 成功的要求
+## [](#rag-成功的要求)2.RAG 成功的要求
 
 为了使 RAG 系统成功（即能够为用户问题提供有用且相关的答案），主要有两个高层次的要求：
 
 1.  **检索组件**，必须能够`找到`与用户查询**最相关**的文档。
 2.  **生成组件**，必须能够`有效利用`检索到的文档，**充分回答**用户的查询。
 
-## [](#高级-rag)高级 RAG
+## [](#高级-rag)3.高级 RAG
 
 在明确了成功的要求后，我们可以说，构建高级 RAG 实际上是关于运用更复杂的技术和策略（应用于检索或生成组件），以确保这些要求得以满足。
 
@@ -69,11 +69,11 @@ response = query_engine.query("A user's query")
 * 1.要么`独立`地解决两个高层次成功要求中的一个，
 * 2.要么`同时`解决这两个要求。
 
-## [](#如何找到与用户查询最相关的文档高级检索技术探索)如何找到与用户查询最相关的文档：高级检索技术探索
+## [](#如何找到与用户查询最相关的文档高级检索技术探索)4.检索：找到最相关文档
 
 接下来，我们将简要介绍几种复杂但有效的技术，以帮助实现有效检索的首要目标。
 
-### 1.分块大小：优化
+### 4.1.优化：分块大小
 
 **优化文档分块大小 (Chunk-Size Optimization):** 由于大语言模型 (LLM) 的上下文长度限制，我们在构建外部知识库时必须对文档进行分块。块大小不当会影响生成响应的准确性，因此这一步骤至关重要。
 
@@ -145,11 +145,11 @@ best_result = results.best_run_result
 best_chunk_size = results.best_run_result.params["chunk_size"]
 ```
 
-### 2.结构化外部知识：构建
+### 4.2.构建：结构化外部知识库
 
-**2. 构建结构化外部知识 (Structured External Knowledge):** 面对复杂场景时，比起普通的向量索引，我们可能需要一个更有结构性的外部知识库。
+**构建结构化外部知识 (Structured External Knowledge):** 面对复杂场景时，比起普通的向量索引，我们可能需要一个更有结构性的外部知识库。
 
-这样的设计可以在处理分散的知识源时，实现更精准的递归检索或路由检索。
+这样的设计可以在处理分散的知识源时，实现更精准的`递归检索`或`路由检索`。
 
 **LlamaIndex 结构化检索方法 (LlamaIndex Recursive Retrieval Recipe)** ([教程 (notebook guide)](https://docs.llamaindex.ai/en/stable/examples/retrievers/recursive_retriever_nodes.html))**:**
 
@@ -214,7 +214,7 @@ response = query_engine_chunk.query(
 )
 ```
 
-### 3.其他推荐资源
+### 4.3.其他推荐资源
 
 为了在复杂的检索情况下实现高准确度，我们准备了一系列高级技术的应用指南。以下是其中一些精选教程的链接：
 
@@ -224,11 +224,11 @@ response = query_engine_chunk.query(
 4.  [优化检索中使用的嵌入模型 (Fine-tuning Embedding Models used in Retrieval)](https://docs.llamaindex.ai/en/stable/examples/finetuning/embeddings/finetune_embedding.html)
 5.  [改进查询嵌入的方法 (HyDE) (Transforming Query Embeddings (HyDE))](https://docs.llamaindex.ai/en/stable/examples/query_transformations/HyDEQueryTransformDemo.html)
 
-## [](#高级生成技术必须高效利用检索到的文档)高级生成技术，必须高效利用检索到的文档
+## [](#高级生成技术必须高效利用检索到的文档)生成：高效利用文档
 
-本节内容与前一节相似，我们将展示一些高级技术的例子。这些技术的核心在于确保检索到的文档与生成器使用的大语言模型 (LLM) 高度匹配。
+本节内容与前一节相似，我们将展示一些高级技术的例子。这些技术的核心在于，确保检索到的文档与生成器使用的大语言模型 (LLM) 高度匹配。
 
-### 1.信息压缩
+### 5.1.信息压缩
 
 **信息压缩：** 大语言模型在处理信息时受到上下文长度的限制。此外，如果检索到的文档含有过多无关信息（即“噪音”），会导致生成的回应质量下降。
 
@@ -271,7 +271,7 @@ response = retriever_query_engine.query("A user query")
 
 ```
 
-### 2.结果重排
+### 5.2.结果重排
 
 **结果重新排序：** 大语言模型存在一种被称为“中途迷失”现象，即模型倾向于只关注提示语两端的极端内容。因此，在将文档提交给生成组件前，对其重新排序可以提高生成内容的质量。
 
@@ -305,11 +305,11 @@ response = query_engine.query(
 )
 ```
 
-## [](#高级技术用于同时提升检索和生成效果)高级技术用于同时提升检索和生成效果
+## [](#高级技术用于同时提升检索和生成效果)6.检索 + 生成
 
 在这个小节中，我们探讨了一些同时考虑检索与生成相结合的复杂技术，以期实现更有效的检索和更准确的生成回应。
 
-### 1.生成器增强的检索
+### 6.1.生成器增强的检索
 
 **生成器增强的检索：** 这些技术利用大语言模型固有的推理能力，在检索前先对用户的查询进行精细化处理，从而更准确地确定所需的信息，以提供有效的回应。
 
@@ -346,7 +346,7 @@ response = flare_query_engine.query(
 )
 ```
 
-### 2.迭代式检索与生成器相结合的 RAG
+### 6.2.迭代式检索与生成器相结合的 RAG
 
 **迭代式检索与生成器相结合的 RAG:** 在一些复杂的情况下，可能需要多步骤的推理来提供与用户查询相关且有用的答案。
 
@@ -375,18 +375,16 @@ retry_query_engine = RetryQueryEngine(
 retry_response = retry_query_engine.query("A user query")
 ```
 
-## [](#rag-测量方面的考量)RAG 测量方面的考量
+## [](#rag-测量方面的考量)7.RAG 效果评估
 
-对于 RAG 系统的评估自然是极其重要的。在 Gao, Yunfan 等人的调查论文中，他们提到了在 RAG 快速参考指南右上角所展示的 7 个关键测量方面。llama-index 库包括了多种评估工具和与 RAGAs 的整合功能，这些工具旨在帮助开发者从这些测量方面来评估他们的 RAG 系统是否满足预设的成功标准。下面，我们简要介绍了一些评估指南中的精选内容。
+对于 RAG 系统的评估自然是极其重要的。在 Gao, Yunfan 等人的调查论文中，他们提到了在 RAG 快速参考指南右上角所展示的 7 个关键测量方面。llama-index 库包括了多种评估工具和与 RAGs 的整合功能，这些工具旨在帮助开发者从这些测量方面来评估他们的 RAG 系统是否满足预设的成功标准。下面，我们简要介绍了一些评估指南中的精选内容。
 
 1.  [答案相关性和上下文相关性](https://docs.llamaindex.ai/en/latest/examples/evaluation/answer_and_context_relevancy.html)
 2.  [内容的忠实性](https://www.notion.so/LlamaIndex-Platform-0754edd9af1c4159bde12649c184c8ef?pvs=21)
 3.  [信息检索效果的评估](https://github.com/run-llama/llama_index/blob/main/docs/examples/evaluation/retrieval/retriever_eval.ipynb)
 4.  [使用批量评估工具 BatchEvalRunner 进行的评估](https://docs.llamaindex.ai/en/stable/examples/evaluation/batch_eval.html)
 
-## [](#现在你已经准备好掌握高级-rag-技术)现在你已经准备好掌握高级 RAG 技术
 
-希望通过阅读这篇博客文章，你能对使用这些先进技术构建高级 RAG 系统感到更加得心应手和充满信心！
 
 
 
