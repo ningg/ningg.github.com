@@ -12,7 +12,7 @@ categories: AI
 
 **GitHub 上，原文地址**：可以直接 fork 一份.
 
-* [rag-summary-and-practice](https://github.com/ningg/rag-summary-and-practice)
+* [rag-summary-and-practice](https://github.com/ningg/rag-summary-and-practice) or [在线阅读](https://ningg.top/rag-summary-and-practice/)
 * [rag-summary-and-practice(jupter 版本)](https://github.com/ningg/rag-summary-and-practice/blob/main/jupter/README.ipynb)
 
 
