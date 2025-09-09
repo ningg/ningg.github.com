@@ -198,7 +198,8 @@ LLM 的架构图，包含核心组件：
 * 百面大模型
 * [大语言模型(赵鑫)](https://llmbook-zh.github.io/) 包含[电子版](https://llmbook-zh.github.io/LLMBook.pdf)
 * [Happy-LLM:从零开始的大语言模型原理与实践教程](https://datawhalechina.github.io/happy-llm/)
-
+* [www.newsletter.swirlai.com](www.newsletter.swirlai.com) SwirlAI Newsletter 是一份涵盖 AI 工程（AI Engineering）、数据工程（Data Engineering）、机器学习（ML）、MLOps 等内容的专业知识型通讯，致力于以简明、易读的方式分享复杂的概念与实际经验
+* [https://medium.com/](https://medium.com/) 直接检索所有技术要点.
 
 
 
