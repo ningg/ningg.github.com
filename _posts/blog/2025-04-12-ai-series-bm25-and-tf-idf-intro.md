@@ -26,6 +26,12 @@ category: AI
 
 ## 2. BM25 对 TF-IDF 的改进
 
+> `BM25` 是 一种经典的**信息检索（IR）**算法，属于 **概率**相关性模型（Probabilistic Relevance Model, `PRM`） 的一个变体。它的作用是衡量`文档`与`查询`之间的相关性，经常用在搜索引擎、推荐系统和 RAG（Retrieval Augmented Generation）等场景中。
+>
+> * **BM**：代表 *Best Matching*，即“最佳匹配”。
+> * **25**：表示这是 *Okapi 系列算法*（Okapi BM）中的第 25 个版本。它并不是指数学上的公式编号，而是因为在伦敦城市大学（City University, London）开发 Okapi 信息检索系统时，迭代优化了很多次，最终定稿的版本编号就是 **BM25**。
+
+
 几个方面：
 
 * 1.公式
@@ -50,13 +56,18 @@ $$
 其中：
 
 * $TF(t,D)$：词 $t$ 在文档 $D$ 中的`词频`（Term Frequency）。
-* $|D|$：文档 $D$ 的`长度`（通常用词数）。
+* $\|D\|$：文档 $D$ 的`长度`（通常用词数）。
 * $\text{avgdl}$：语料库中文档的`平均长度`（average document length）。
 * $k_1$：`TF 饱和参数`，控制`词频上限`（常见取 1.2–2.0，典型值 `1.5`）。
 * $b$：`长度归一化强度`（0 表示不做长度修正，1 表示完全按文档长度修正，常取 `0.75`）。
 * $\text{IDF}(t)$：逆文档频率，用来衡量不同**文档之间**`词的区分能力`（稀有词权重高）。
 
 > 注：有些实现还把查询中词的频率 $qf$ 加入，乘以一个 $\frac{(k_3+1)qf}{k_3+qf}$ 项；但在多数实际系统里 $qf$ 较小或当做 1，所以常被省略。
+
+
+![](/images/ai-series/bm25/bm25-TF-demo.jpeg)
+
+在线绘图： [https://www.geogebra.org/graphing?lang=zh_CN]
 
 
 常用的 `IDF`（`Robertson–Sparck Jones`）形式之一是：
