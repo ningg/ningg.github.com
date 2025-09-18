@@ -189,6 +189,69 @@ embedding 模型（比如 BERT、SimCSE、BGE、M3E 等）和大语言模型（G
 
 ## 3. 训练方法
 
+> Embedding model 的训练过程，可以认为是：先预训练，然后再 对比学习、排序损失、多任务增强训练等微调。
+
+### 3.0. 简述训练过程
+
+**Embedding model 的训练过程**，通常分为两个大的阶段：
+
+
+#### 3.0.1. **预训练阶段 (Pre-training)**
+
+* **目标**：让模型具备基本的语义理解能力。
+* **做法**：
+
+  * 使用大规模无标注文本进行 **自监督训练**（Masked Language Model，Next Sentence Prediction，或其他变体）。
+  * 输出的 Transformer 编码器学会对文本片段进行语义表示。
+* **结果**：模型能把语言结构、词语共现、句子关系学到，但此时输出的 embedding **还不一定适合下游任务**（比如语义相似度计算、检索）。
+
+例子：BERT、RoBERTa、ELECTRA 这些都是在大语料上预训练的语言模型。
+
+#### 3.0.2. **微调阶段 (Fine-tuning for Embedding)**
+
+在通用语义基础上，使用 **有标注或弱标注数据**，结合 **对比学习、排序损失、多任务增强** 来提升 embedding 的效果。
+
+常见方法：
+
+1. **对比学习 (Contrastive Learning, 如 InfoNCE)**
+
+   * 输入正负样本对 `(q, pos, neg)`，拉近正样本 embedding，拉远负样本 embedding。
+   * 常用于语义匹配、检索。
+
+2. **排序损失 (Ranking Loss, 如 Triplet Loss, Pairwise Loss)**
+
+   * 强调 **排序关系**，例如：
+
+     * 给定一个 query，它与文档 A 的相关性比文档 B 高 → 模型要保证 `sim(q, A) > sim(q, B)`。
+
+3. **回归损失 (Regression Loss, 如 MSE)**
+
+   * 用在语义相似度标注任务 (STS, \[0,5] 分)。
+   * 目标是让 embedding 的余弦相似度，接近标注分数。
+
+4. **分类损失 (Classification Loss, 如 CrossEntropy)**
+
+   * 用在自然语言推理 (NLI) 数据上：
+
+     * premise-hypothesis 是 "蕴含" → 高相似度
+     * 是 "矛盾" → 低相似度
+     * 是 "中立" → 中间相似度
+
+5. **多任务增强 (Multi-task Training)**
+
+   * 将上述任务组合，比如 InfoNCE + MSE + NLI CrossEntropy，一起训练。
+   * 可以避免单一任务过拟合，提高 embedding 的泛化能力。
+
+
+总结起来：
+
+* **预训练**：大语料 → 学语言知识。
+* **微调**：对比学习 / 排序 / 回归 / 多任务 → 学相似度和检索能力。
+
+这就是所说的 “先预训练 → 再微调（对比学习、排序、多任务）” 的完整流程。
+
+
+
 通过 `对比学习` + `排序损失` + `多任务增强-训练`，来学习“语义空间”。
 
 embedding 模型和普通语言模型不同，核心是**相对相似性学习**（`contrastive learning`）。
@@ -416,7 +479,7 @@ CoSENT 损失函数，主要用在 STS（Semantic Textual Similarity）语义文
 * 输入句子对 `(s1, s2)`，标签是`相似度分数`（如 0–5）。
 * 传统方法：直接用 **MSE** 回归句子 embedding 的余弦相似度。
 
-问题：MSE 强制`相似度`和`标签的数值`接近，但实际下游任务只关心 **排序关系**，而不是数值拟合。比如：
+问题：MSE(Mean Squared Error, 平方差的平均值) 强制`相似度`和`标签的数值`接近，但实际下游任务只关心 **排序关系**，而不是数值拟合。比如：
 
 * (A,B) 标签 4.9
 * (A,C) 标签 4.7
@@ -475,14 +538,20 @@ $$
 
 ### 6.8. MSE / Cosine-regression（直接回归相似度）
 
-**公式**（若 label 在 \[-1,1] 或 \[0,5] 需先归一化）：
+> MSE = **Mean Squared Error**（均方误差），是最常见的`回归损失`函数之一，用来度量`预测值`与`真实值`差异的**平方**的**平均值**。
+
+**公式**（若 label 在 \[-1,1] 或 \[0,5] 需先归一化到 `sim` 相同的取值范围）：
 
 $$
 \mathcal{L}_{\text{MSE}}=(\operatorname{sim}(u,v)-y)^2
 $$
 
-* **缺点**：若 embedding 空间的分布与标签尺度不一致，直接回归会导致不稳定（且与 downstream 用 cosine 做检索时训练/测试不一致）。SBERT 曾用过 MSE，但实践中常与 ranking/contrastive 混合。
+* **缺点**：若 embedding **空间的分布**与**标签尺度**不一致，直接回归会导致不稳定（且与 downstream 用 cosine 做检索时训练/测试不一致）。SBERT 曾用过 MSE，但实践中常与 ranking/contrastive 混合。
 
+> 注意：
+> 
+> * 如果`标签取值范围`比`预测范围`大很多，Loss 会很大，梯度也会非常大，导致训练不稳定（梯度爆炸）。
+> * 归一化后，loss 数值会落在一个合理区间（通常 < 1），优化器更稳定。
 
 
 ### 6.9. 损失合并（Joint multi-loss）与权重策略
