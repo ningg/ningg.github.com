@@ -18,7 +18,37 @@ Embedding model，几个典型问题：
 
 
 
+典型术语，含义：
 
+* `InfoNCE` 全称是 Information Noise-Contrastive Estimation，最初用于互信息最大化，现在是对比学习里最常用的损失函数。
+* `CoSENT` 全称是 Contrastive Sentence (Embedding) Ordering Loss，是一种用于句子排序的损失函数。
+* `MSE` 全称是 Mean Squared Error，是最常见的`回归损失`函数之一，用来度量`预测值`与`真实值`差异的**平方**的**平均值**。
+* `STS` 全称是 Semantic Textual Similarity，是一种用于衡量句子语义相似度的任务。
+
+其中，前 3 个都是损失函数，用于训练 embedding 模型；后 1 个是任务，用于评估 embedding 模型。
+
+
+InfoNCE 损失函数，把正例的表征向量拉近 query，且把负例推远，使得在 embedding 空间内**正例相似度最大化**。当用 softmax 时，loss 实质上把正例的相似度当成“正确类别”的概率最大化。
+
+$$
+\mathcal{L}_{\text{InfoNCE}} = -\log\frac{\exp(\operatorname{sim}(q,p)/\tau)}{\exp(\operatorname{sim}(q,p)/\tau)+\sum_{n\in\mathcal{N}}\exp(\operatorname{sim}(q,n)/\tau)}
+$$
+
+
+CoSENT 的核心思想不是直接回归 label 到 cosine，而是**利用标注的相对排名信息**，用 pairwise 的 log-sum-exp 来保持“相似度排序一致性”。论文里给出的一个（interaction）形式是：
+
+$$
+\mathcal{L}_{\text{CoSENT}}=\log\!\Big(1+\sum_{(k,l):\; \text{label}(i,j)>\text{label}(k,l)}\exp\big(\lambda\big(f(k,l)-f(i,j)\big)\big)\Big)
+$$
+
+MSE 损失函数**公式**（若 label 在 \[-1,1] 或 \[0,5] 需先归一化到 `sim` 相同的取值范围）：
+
+$$
+\mathcal{L}_{\text{MSE}}=(\operatorname{sim}(u,v)-y)^2
+$$
+
+
+![](/images/ai-series/embedding-model/embedding-log-func.jpg)
 
 
 Embedding model（嵌入模型 / 向量表示模型）的原理，核心是：把离散的文本、图片、音频等信号，映射到连续的高维向量空间中，使得**语义相似的输入，在向量空间的距离也更近**。
@@ -351,6 +381,7 @@ $$
     * 需要足够多的负例（大 batch 或 memory-bank / momentum encoder），负例数量 直接影响效果。
     * 参考：InfoNCE 源/推导（CPC/InfoNCE）。
 
+
 > **InfoNCE** 全称是 Information Noise-Contrastive Estimation，最初用于互信息最大化，现在是对比学习里最常用的损失函数。
 >
 > **NCE** (Noise-Contrastive Estimation **噪声对比估计**)，是一种统计方法，用来把复杂的概率密度估计问题，转化为一个`二分类对比`问题：区分“真实样本”和“噪声样本”。
@@ -375,13 +406,13 @@ $$
 
 ### 6.3. Triplet Loss（锚-正-负）
 
-**公式**（距离版）：
+**公式**（距离版）： *保持术语一致，原则上不考虑距离版本写法*
 
 $$
 \mathcal{L}_{\text{triplet}}=\max\big(0,\; d(a,p)-d(a,n)+m\big)
 $$
 
-或相似度版：
+或相似度版：推荐"相似度版"写法，*语义越靠近、相似度越取值越高*
 
 $$
 \max\big(0,\; s(a,n)-s(a,p)+m\big)
@@ -402,13 +433,13 @@ $$
 常见形式：
 
 $$
-\mathcal{L}=\max\big(0,\; \text{margin} - (s(q,p)-s(q,n))\big)
+\mathcal{L}=\max\big(0,\;  (s(q,n)-s(q,p)) + \text{margin}\big)
 $$
 
 或用 logistic/sigmoid 平滑：
 
 $$
-\mathcal{L}=\log\big(1+\exp(-\lambda (s(q,p)-s(q,n)))\big)
+\mathcal{L}=\log\big(1+\exp(\lambda (s(q,n)-s(q,p)))\big)
 $$
 
 * $$\lambda$$：缩放系数（控制平滑/近似程度）。
