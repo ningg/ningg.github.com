@@ -7,57 +7,55 @@ category: AI
 ---
 
 
-0.术语汇总
+## 0.术语汇总
 
 
 术语全称：包含要解决的问题
 
-* VSM：向量空间模型（Vector Space Model, VSM），就是词嵌入
-* Word2Vec：语言模型（单层神经网络），实现预训练的词嵌入，Word2Vec的核心思想：利用词在文本中的`上下文信息`来捕捉词之间的`语义`关系，从而使得语义相似或相关的词在向量空间中距离较近。
-* BERT：根据句子，动态调整 词嵌入。Bidirectional Encoder Representations from Transformers， Encoder-Only 模型，自然语言理解（Natural Language Understanding-NLU）任务。
-* ELMo：Embeddings from Language Models，实现了一词多义、静态词向量到动态词向量的跨越式转变。首先在大型语料库上训练语言模型，得到词向量模型，然后在特定任务上对模型进行微调，得到更适合该任务的词向量，ELMo首次将预训练思想引入到词向量的生成中，使用双向LSTM结构，能够捕捉到词汇的上下文信息，生成更加丰富和准确的词向量表示。
-* LSTM：Long Short-Term Memory，长短时记忆网络，
-* MLM：掩码语言模型（Masked Language Model，MLM）
-* SOTA：最优性能（State Of The Art，SOTA）
-* NSP（Next Sentence Prediction，下一句预测）：token 之间，有关系；句子之间，也有关系。关系/练习就是信息。
-* T5（Text-To-Text Transfer Transformer）是由 Google 提出的一种预训练语言模型，通过将所有 NLP 任务统一表示为文本到文本的转换问题，大大简化了模型设计和任务处理。
-* GPT：Generative Pre-Training Language Model，是由 OpenAI 团队于 2018年发布的预训练语言模型。虽然学界普遍认可 BERT 作为预训练语言模型时代的代表，但首先明确提出预训练-微调思想的模型其实是 GPT。GPT 提出了通用预训练的概念，也就是在海量无监督语料上预训练，进而在每个特定任务上进行微调，从而实现这些任务的巨大收益。
-* CLM：因果语言模型，Casual Language Model，下简称 CLM，Decoder-Only 的模型结构往往更适合于文本生成任务，因此，Decoder-Only 模型往往选择了最传统也最直接的预训练任务——因果语言模型。
-* PLM：`预训练`语言模型（Pre-trained Language Model，PLM）
-* AGI：通用人工智能（Artificial General Intelligence，AGI）
-* LLM，即 Large Language Model，中文名为大语言模型或大型语言模型，是一种相较传统语言模型参数量更多、在更大规模语料上进行预训练的语言模型。
+* `VSM`：向量空间模型（Vector Space Model, VSM），就是词嵌入
+* `Word2Vec`：语言模型（单层神经网络），实现预训练的词嵌入，Word2Vec的核心思想：利用词在文本中的`上下文信息`来捕捉词之间的`语义`关系，从而使得语义相似或相关的词在向量空间中距离较近。
+* `BERT`：根据句子，动态调整 词嵌入。Bidirectional Encoder Representations from Transformers， Encoder-Only 模型，自然语言理解（Natural Language Understanding-NLU）任务。
+* `ELMo`：Embeddings from Language Models，实现了一词多义、静态词向量到动态词向量的跨越式转变。首先在大型语料库上`训练`语言模型，得到词向量模型，然后在特定任务上对模型进行`微调`，得到更适合该任务的词向量，ELMo首次将预训练思想引入到词向量的生成中，使用`双向LSTM`结构，能够捕捉到词汇的上下文信息，生成更加丰富和准确的词向量表示。
+* `LSTM`：Long Short-Term Memory，长短时记忆网络，
+* `MLM`：掩码语言模型（Masked Language Model，MLM）
+* `SOTA`：最优性能（State Of The Art，SOTA）
+* `NSP`（Next Sentence Prediction，下一句预测）：token 之间，有关系；句子之间，也有关系。关系/联系就是信息。
+* `T5`（Text-To-Text Transfer Transformer）是由 Google 提出的一种预训练语言模型，通过将所有 NLP 任务统一表示为`文本`到`文本`的转换问题，大大简化了模型设计和任务处理。
+* `GPT`：Generative Pre-Training Language Model，是由 OpenAI 团队于 2018年发布的预训练语言模型。虽然学界普遍认可 BERT 作为预训练语言模型时代的代表，但首先明确提出`预训练->微调`思想的模型其实是 GPT。GPT 提出了通用预训练的概念，也就是在海量无监督语料上预训练，进而在每个特定任务上进行微调，从而实现这些任务的巨大收益。
+* `CLM`：因果语言模型，Casual Language Model，下简称 CLM，Decoder-Only 的模型结构往往更适合于文本生成任务，因此，Decoder-Only 模型往往选择了最传统也最直接的预训练任务——因果语言模型。
+* `PLM`：`预训练`语言模型（Pre-trained Language Model，PLM）
+* `AGI`：通用人工智能（Artificial General Intelligence，AGI）
+* `LLM`，即 Large Language Model，中文名为大语言模型或大型语言模型，是一种相较传统语言模型参数量更多、在更大规模语料上进行预训练的语言模型。
 * 涌现能力（Emergent Abilities）：涌现能力是指同样的模型架构与预训练任务下，某些能力在小型模型中不明显，但在大型模型中特别突出。可以类比到物理学中的相变现象，涌现能力的显现就像是模型性能随着规模增大而迅速提升，超过了随机水平，也就是我们常说的量变引起了质变。
 * 上下文学习（In-context Learning）：上下文学习是指允许语言模型在提供自然语言指令或多个任务示例的情况下，通过理解上下文并生成相应输出的方式来执行任务，而无需额外的训练或参数更新。
-* RoPE：LLM 大部分采用了旋转位置编码（Rotary Positional Encoding，RoPE）（或者同样具有外推能力的 AliBi）作为位置编码，具有一定的长度外推能力，也就是在推理时能够处理显著长于训练长度的文本。
+* `RoPE`：LLM 大部分采用了旋转位置编码（Rotary Positional Encoding，RoPE）（或者同样具有外推能力的 AliBi）作为位置编码，具有一定的`长度外推`能力，也就是在**推理时**能够处理显著长于**训练长度**的文本。
 * `监督微调`（Supervised Fine-Tuning，`SFT`），SFT 的主要目标是让模型从多种类型、多种风格的指令中获得泛化的指令遵循能力，也就是能够理解并回复用户的指令。
 * `强化学习与人类反馈`（Reinforcement Learning with Human Feedback，`RLHF`）
-* PPO，Proximal Policy Optimization，近端策略优化算法
-* DPO（Direct Preference Optimization，直接偏好优化）：
+* `PPO`，Proximal Policy Optimization，近端策略优化算法
+* `DPO`，Direct Preference Optimization，直接偏好优化
 
 
 
-
-
-
-1.嵌入 Embedding
+## 1.嵌入 Embedding
 
 在机器学习和自然语言处理（NLP）中，嵌入（Embedding） 是一种将离散型数据（如词语、类别、符号）转换为连续型向量表示的技术。
 
 将符号映射到连续向量空间，使机器能够数学化地理解语义。
 
-其本质是，构建一个从`高维稀疏空间`到`低维稠密空间`的**映射**，旨在捕捉数据背后的语义或结构关系。
+其本质是，构建一个从`高维稀疏空间`到`低维稠密空间`的**映射**，旨在`捕捉语义`或结构关系。
 
 
 
-2.层归一化
+## 2.层归一化
 
-层归一化，也就是 `Layer Norm`，是深度学习中经典的归一化操作。
+层归一化，也就是 `Layer Norm`，是深度学习中经典的`归一化`操作。
 
-归一化核心是，为了让不同层输入的`取值范围`或者`分布`能够比较一致。
+归一化核心是：为了让**不同层**输入的`取值范围`或者`分布`能够比较一致。
 
 
-由于深度神经网络中每一层的输入都是上一层的输出，因此多层传递下，对网络中较高的层，之前的所有神经层的参数变化会导致其输入的分布发生较大的改变。
-也就是说，随着神经网络参数的更新，各层的输出分布是不相同的，且差异会随着网络深度的增大而增大。但是，需要预测的条件分布始终是相同的，从而也就造成了预测的误差。
+由于深度神经网络中每一层的输入都是上一层的输出，因此多层传递下，对网络中较高的层，之前的所有神经层的参数变化，会导致其输入的分布发生较大的改变。
+
+也就是说，随着神经网络参数的更新，各层的输出分布是不相同的，且差异会随着网络深度的增大而增大。但是，需要预测的`条件分布`始终是相同的，从而也就造成了预测的误差。 ???
 
 在深度神经网络中，往往需要`归一化`操作，将每一层的`输入`都归一化成`标准正态分布`。
 
@@ -66,9 +64,9 @@ category: AI
 
 
 
-3.残差连接
+## 3.残差连接
 
-残差连接， Residual Connection。
+残差连接，`Residual Connection`。
 
 由于 Transformer 模型结构较复杂、层数较深，​为了避免模型退化，Transformer 采用了残差连接的思想来连接每一个子层。残差连接，即下一层的输入不仅是上一层的输出，还包括上一层的输入。
 
@@ -77,9 +75,9 @@ category: AI
 
 
 
-4.前馈神经网络
+## 4.前馈神经网络
 
-前馈神经网络（Feed Forward Neural Network，下简称 FFN）：`每一层`的`神经元`都和`上下两层`的每一个神经元`完全连接`的网络结构。
+前馈神经网络（Feed Forward Neural Network，下简称 `FFN`）：`每一层`的`神经元`都和`上下两层`的每一个神经元`完全连接`的网络结构。
 
 
 每一个 `编码层` Encoder Layer ，都包含一个上文讲的`注意力机制`和一个`前馈神经网络`。
@@ -91,25 +89,25 @@ category: AI
 
 
 
-5.线性层 Linear
+## 5.线性层 Linear
 
 
 有什么作用？
 
 
-6.激活函数
+## 6.激活函数
 
 
 激活函数，只是为了，结果分布变成标准正态分布？
 
 
-7.dropout 函数
+## 7.dropout 函数
 
 
 什么作用？
 
 
-8.Decoder 解码
+## 8.Decoder 解码
 
 先搭建 Decoder Layer，再将 N 个 Decoder Layer 组装为 Decoder。
 
@@ -119,7 +117,7 @@ category: AI
 2. 第二个注意力层是一个多头注意力层，该层将使用第一个注意力层的输出作为 query，使用 Encoder 的输出作为 key 和 value，来计算注意力分数
 
 
-9.预训练+微调范式
+## 9.预训练+微调范式
 
 
 在 2018年，ELMo 的诞生标志着预训练+微调范式的诞生。ELMo 模型基于双向 LSTM 架构，在训练数据上基于语言模型进行预训练，再针对下游任务进行微调，表现出了更加优越的性能，将 NLP 领域导向预训练+微调的研究思路。而 BERT 也采用了该范式，并通过将模型架构调整为 Transformer，引入更适合文本理解、能捕捉深层双向语义关系的预训练任务 MLM，将预训练-微调范式推向了高潮。
@@ -133,19 +131,19 @@ GPT-2 的另一个重大突破是以 `zero-shot`（零样本学习）为主要�
 在 GPT 系列模型的基础上，通过引入`预训练`-`指令微调`-`人类反馈强化学习`的三阶段训练，OpenAI 发布了跨时代的 ChatGPT，引发了大模型的热潮。
 
 
-10.T5
+## 10.T5
 
 学习 Encoder-Decoder 结构的模型，主要介绍 T5 的模型架构和预训练任务，以及 T5 模型首次提出的 NLP 大一统思想。
 
 T5（Text-To-Text Transfer Transformer）是由 Google 提出的一种预训练语言模型，通过将所有 NLP 任务统一表示为文本到文本的转换问题，大大简化了模型设计和任务处理。T5 基于 Transformer 架构，包含编码器和解码器两个部分，使用自注意力机制和多头注意力捕捉全局依赖关系，利用相对位置编码处理长序列中的位置信息，并在每层中包含前馈神经网络进一步处理特征。
 
 
-11.CLM 因果语言模型
+## 11.CLM 因果语言模型
 
 因果语言模型，Casual Language Model，CLM 可以看作 N-gram 语言模型的一个直接扩展。N-gram 语言模型是基于前 N 个 token 来预测下一个 token，CLM 则是基于一个自然语言序列的前面所有 token 来预测下一个 token，通过不断重复该过程来实现目标文本序列的生成。也就是说，CLM 是一个经典的补全形式。
 
 
-12.GLM
+## 12.GLM
 
 GLM 的核心创新点主要在于其提出的 GLM（General Language Model，通用语言模型）任务，这也是 GLM 的名字由来。GLM 是一种结合了自编码思想和自回归思想的预训练方法。所谓自编码思想，其实也就是 MLM 的任务学习思路，在输入文本中随机删除连续的 tokens，要求模型学习被删除的 tokens；所谓自回归思想，其实就是传统的 CLM 任务学习思路，也就是要求模型按顺序重建连续 tokens。
 
@@ -162,7 +160,7 @@ GLM 系列模型是由智谱开发的主流中文 LLM 之一，包括 ChatGLM1�
 
 
 
-13.LLM
+## 13.LLM
 
 一般来说，LLM 指包含数百亿（或更多）参数的语言模型，它们往往在数 T token 语料上通过多卡分布式集群进行预训练，具备远超出传统预训练模型的文本理解与生成能力。不过，随着 LLM 研究的不断深入，多种参数尺寸的 LLM 逐渐丰富，广义的 LLM 一般覆盖了从十亿参数（如 Qwen-1.5B）到千亿参数（如 Grok-314B）的所有大型语言模型。只要模型展现出涌现能力，即在一系列复杂任务上表现出远超传统预训练模型（如 BERT、T5）的能力与潜力，都可以称之为 LLM。
 
@@ -185,7 +183,7 @@ LLM 的能力：
 
 
 
-14.上下文学习（In-context Learning）
+## 14.上下文学习（In-context Learning）
 
 上下文学习（In-context Learning）：是指允许语言模型在提供自然语言指令或多个任务示例的情况下，通过理解上下文并生成相应输出的方式来执行任务，而无需额外的训练或参数更新。
 
@@ -193,13 +191,13 @@ LLM 的能力：
 
 
 
-15.指令遵循（Instruction Following）
+## 15.指令遵循（Instruction Following）
 
 通过使用自然语言描述的多任务数据进行微调，也就是所谓的 `指令微调` ，LLM 被证明在同样使用指令形式化描述的`未见过的任务`上表现良好。也就是说，经过指令微调的 LLM 能够理解并遵循未见过的指令，并根据任务指令执行任务，而无需事先见过具体示例，这展示了其强大的泛化能力。
 
 
 
-16.逐步推理（Step by Step Reasoning）
+## 16.逐步推理（Step by Step Reasoning）
 
 LLM 通过采用思维链（Chain-of-Thought，CoT）推理策略，可以利用包含中间推理步骤的提示机制来解决这些任务，从而得出最终答案。据推测，这种能力可能是通过对代码的训练获得的。
 
@@ -207,7 +205,7 @@ LLM 通过采用思维链（Chain-of-Thought，CoT）推理策略，可以利用
 
 
 
-17.RLHF 人类反馈强化学习
+## 17.RLHF 人类反馈强化学习
 
 RLHF，全称是 Reinforcement Learning from Human Feedback，即人类反馈强化学习
 
@@ -225,13 +223,13 @@ LLM 会不断根据 Pretrain 学到的基础知识和 SFT 学到的解题能力�
 RLHF 分为两个步骤：训练 RM 和 PPO 训练。
 
 
-18.RM
+## 18.RM
 
 RM，Reward Model，即奖励模型。RM 是用于拟合人类偏好，来给 LLM 做出反馈的。在强化学习的训练中，对于 LLM 的每一个回复，RM 会进行打分，这个打分反映了生成回复符合人类偏好的程度。然后 LLM 会根据强化学习的原理，基于 RM 的打分来进行优化训练。
 
 RM 本质上是一个文本分类模型，对于一个文本输出一个标量奖励，和文本分类任务中的隐藏层输出非常类似。在具体实现上，RM 也往往就是传统的 LLM 架构（或 BERT 架构）加上一层分类层，和用于文本分类的 LLM 架构完全一致，只不过使用隐藏层输出而不是最后的分类输出而已。
 
-19.PPO 近端策略优化算法
+## 19.PPO 近端策略优化算法
 
 在完成 RM 训练之后，就可以使用 PPO 算法来进行强化学习训练。`PPO`，Proximal Policy Optimization，`近端策略优化算法`，是一种经典的 RL 算法。事实上，强化学习训练时也可以使用其他的强化学习算法，但目前 PPO 算法因为成熟、成本较低，还是最适合 RLHF 的算法。
 
@@ -242,7 +240,7 @@ RM 本质上是一个文本分类模型，对于一个文本输出一个标量�
 
 如此大的资源占用和复杂的训练过程，使 RLHF 成为一个门槛非常高的阶段。也有学者从监督学习的思路出发，提出了 DPO（Direct Preference Optimization，直接偏好优化），可以低门槛平替 RLHF。
 
-20.DPO 直接偏好优化
+## 20.DPO 直接偏好优化
 
  `DPO`（Direct Preference Optimization，`直接偏好优化`），可以低门槛平替 RLHF。
  
