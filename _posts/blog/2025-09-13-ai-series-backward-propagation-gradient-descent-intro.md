@@ -1,6 +1,6 @@
 ---
 layout: post
-title: AI系列：反向传播 & 梯度下降
+title: AI 系列：反向传播 & 梯度下降
 description: Backward Propagation & Gradient Descent 工作原理
 published: true
 category: AI
