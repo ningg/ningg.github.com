@@ -1,6 +1,6 @@
 ---
 layout: post
-title: AI系列：强化学习 vs 对比学习，简述
+title: AI 系列：强化学习 vs 对比学习，简述
 description: Reinforcement Learning vs Contrastive Learning，试用场景、原理、差异
 published: true
 category: AI
