@@ -1377,7 +1377,7 @@ loss = CrossEntropyLoss()(logits.view(-1, vocab_size), labels.view(-1))
 
 这里的 `CrossEntropyLoss` 内部逻辑：
 
-* 会逐 token 计算 $$-log p(w_t | w_<t)$$
+* 会逐 token 计算 $$-log p(w_t \mid w_{<t})$$
 * 然后 **默认对所有 token 求平均（或求和，再除以 token 数）**
   * `reduction="mean"`（默认）：平均
   * `reduction="sum"`：总和
@@ -1403,12 +1403,12 @@ loss = CrossEntropyLoss()(logits.view(-1, vocab_size), labels.view(-1))
 $$
 \text{Loss} = \frac{1}{5}\Big(
 -\log P(w_2|w_1)
-
-* -\log P(w_3|w_1,w_2)
-* -\log P(w_4|w_1,w_2,w_3)
-* -\log P(w_5|w_1,w_2,w_3,w_4)
-* -\log P(w_6|w_1,w_2,w_3,w_4,w_5)
+-\log P(w_3|w_1,w_2)
+-\log P(w_4|w_1,w_2,w_3)
+-\log P(w_5|w_1,w_2,w_3,w_4)
+-\log P(w_6|w_1,w_2,w_3,w_4,w_5)
   \Big)
+
 $$
 
 只是 PyTorch 自动聚合了。
