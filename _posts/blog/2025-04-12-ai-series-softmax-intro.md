@@ -94,6 +94,160 @@ $$
 > **一句话总结**：激活函数是神经网络的“非线性引擎”，赋予模型解决复杂问题的能力；Softmax 则是多分类任务的“概率转换器”，其“Soft”体现在以概率形式逼近最大值选择。
 
 
+## **五、交叉熵对 logits 的导数**
+
+LLM 训练过程中，先计算交叉熵损失，再计算梯度：交叉熵对 logits 的导数，就是梯度。
+
+把“公式推导”跟“业务直觉”联系起来。
+
+
+### 1. 交叉熵损失 (Cross-Entropy Loss)
+
+分类问题里最常见：
+
+$$
+L = -\sum_{i=1}^C y_i \log p_i
+$$
+
+* $$C$$：类别数
+* $$y_i$$：真实标签（`one-hot` 时只有一个 1，其余是 0）
+* $$p_i$$：模型预测的概率（softmax 输出）
+
+对 logits ($$z_i$$)（softmax 前的分数）求导时：
+
+$$
+\frac{\partial L}{\partial z_i} = p_i - y_i
+$$
+
+这就是交叉熵损失的`梯度`形式。
+
+
+### 2.交叉熵损失的梯队推导
+
+我们来完整推一遍 **交叉熵对 logits 的导数**，这样你就能直观理解为什么结果是 $$p_i - y_i$$。
+
+
+#### 1. 定义
+
+Softmax 函数：
+
+$$
+p_i = \frac{e^{z_i}}{\sum_{j=1}^C e^{z_j}}
+$$
+
+交叉熵损失（单分类 one-hot 标签）：
+
+$$
+L = -\sum_{i=1}^C y_i \log p_i
+$$
+
+其中：
+
+* $$y_i$$ 是 one-hot 向量（真实类别的那个位置 = 1，其余 = 0）。
+* $$p_i$$ 是预测概率（softmax 输出）。
+
+
+
+#### 2. 求导过程
+
+我们想要求：
+
+$$
+\frac{\partial L}{\partial z_i}
+$$
+
+
+第一步：对 $$p_i$$ 的求导`链式法则`
+
+$$
+\frac{\partial L}{\partial z_i} = \sum_{k=1}^C \frac{\partial L}{\partial p_k} \cdot \frac{\partial p_k}{\partial z_i}
+$$
+
+
+第二步：先算 $$(\frac{\partial L}{\partial p_k})$$
+
+$$
+L = -\sum_{k=1}^C y_k \log p_k
+$$
+
+所以：
+$$
+\frac{\partial L}{\partial p_k} = -\frac{y_k}{p_k}
+$$
+
+
+第三步：再算 $$(\frac{\partial p_k}{\partial z_i})$$
+
+softmax 的性质：
+$$
+\frac{\partial p_k}{\partial z_i} =
+\begin{cases}
+p_i (1 - p_i), & k = i \
+
+* p_k p_i, & k \neq i
+  \end{cases}
+  $$
+
+这是因为 softmax 是向量函数，导数会出现这种「`对角+非对角`」形式。
+
+
+第四步：合并
+
+代入：
+
+$$
+\frac{\partial L}{\partial z_i}
+= \sum_{k=1}^C \left(-\frac{y_k}{p_k}\right) \cdot \frac{\partial p_k}{\partial z_i}
+$$
+
+展开两部分：
+
+* 当 (k = i)：
+  $$
+  -\frac{y_i}{p_i} \cdot p_i (1 - p_i) = -y_i (1 - p_i)
+  $$
+
+* 当 (k \neq i)：
+  $$
+  -\frac{y_k}{p_k} \cdot (-p_k p_i) = y_k p_i
+  $$
+
+合并：
+
+$$
+\frac{\partial L}{\partial z_i} = -y_i (1 - p_i) + \sum_{k \neq i} y_k p_i
+$$
+
+因为 $$y$$ 是 one-hot，($$\sum_{k \neq i} y_k = 1 - y_i$$)。
+所以：
+
+$$
+\frac{\partial L}{\partial z_i} = -y_i + y_i p_i + p_i (1 - y_i)
+$$
+
+化简：
+
+$$
+\frac{\partial L}{\partial z_i} = p_i - y_i
+$$
+
+
+#### 3. 直观解释
+
+* **如果类别 i 是正确类别**($$y_i = 1$$)：
+  $$(\frac{\partial L}{\partial z_i} = p_i - 1)$$
+  → 预测越低，梯度越大（负数，推动往上调）。
+
+* **如果类别 i 是错误类别**($$y_i = 0$$)：
+  $$(\frac{\partial L}{\partial z_i} = p_i)$$
+  → 预测越高，梯度越大（正数，推动往下调）。
+
+所以它自动带有“推高正确类别，压低错误类别”的特性。
+
+#### 4. 总结
+
+`交叉熵` + `softmax` 的梯度： **天然简化成 ($$p_i - y_i$$)**，这就是为什么深度学习框架里常常直接写成一行代码 `grad = p - y`。
+
 
 
 
