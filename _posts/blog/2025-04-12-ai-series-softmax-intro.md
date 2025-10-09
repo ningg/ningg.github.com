@@ -179,16 +179,16 @@ $$
 第三步：再算 $$(\frac{\partial p_k}{\partial z_i})$$
 
 softmax 的性质：
+
 $$
 \frac{\partial p_k}{\partial z_i} =
 \begin{cases}
-p_i (1 - p_i), & k = i \
+p_i (1 - p_i), & k = i 
+\\p_k p_i, & k \neq i
+\end{cases}
+$$
 
-* p_k p_i, & k \neq i
-  \end{cases}
-  $$
-
-这是因为 softmax 是向量函数，导数会出现这种「`对角+非对角`」形式。
+这是因为 softmax 是向量函数，导数会出现这种 `对角+非对角` 形式。
 
 
 第四步：合并
@@ -202,12 +202,12 @@ $$
 
 展开两部分：
 
-* 当 (k = i)：
+* 当 (`k = i`)：
   $$
   -\frac{y_i}{p_i} \cdot p_i (1 - p_i) = -y_i (1 - p_i)
   $$
 
-* 当 (k \neq i)：
+* 当 (`k ≠ i`)：
   $$
   -\frac{y_k}{p_k} \cdot (-p_k p_i) = y_k p_i
   $$
@@ -242,7 +242,7 @@ $$
   $$(\frac{\partial L}{\partial z_i} = p_i)$$
   → 预测越高，梯度越大（正数，推动往下调）。
 
-所以它自动带有“推高正确类别，压低错误类别”的特性。
+所以它自动带有“**推高正确类别**，**压低错误类别**”的特性。
 
 #### 4. 总结
 
