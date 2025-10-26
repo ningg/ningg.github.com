@@ -10,8 +10,10 @@ category: AI
 
 ## 1.基本概念
 
-- **argmax** = **arg**ument of **max**imum（最大值的参数/索引）
+- **argmax** = **arg**ument of **max**imum（最大值的参数/索引），argument 自变量
 - 它不返回最大值本身，而是返回`最大值`在张量中的`位置索引`
+
+> `argmax`： arg + max，找到让 `max(·)` 取得最大值的自变量（的位置/取值）。
 
 ## 2.简单示例
 
