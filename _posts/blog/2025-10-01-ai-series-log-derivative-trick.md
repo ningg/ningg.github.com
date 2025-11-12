@@ -22,9 +22,9 @@ $$
 \nabla_\theta \mathbb{E}_{x \sim p_\theta(x)}[f(x)]
 $$
 
-其中 $p_\theta(x)$ 是依赖于参数 $\theta$ 的概率分布。
+其中 $$p_\theta(x)$$ 是依赖于参数 $$\theta$$ 的概率分布。
 
-直接对这个期望`求导不方便`，因为 $x$ 是从分布中`采样`得到的。
+直接对这个期望`求导不方便`，因为 $$x$$ 是从分布中`采样`得到的。
 
 
 于是用 **log-derivative trick**：
@@ -33,19 +33,22 @@ $$
 \nabla_\theta p_\theta(x) = p_\theta(x) \nabla_\theta \log p_\theta(x)
 $$
 
-> 简单推导：$\nabla \log x = \frac{1}{x}\nabla x  \implies \nabla x = x \nabla \log x$。
+> 简单推导： $$\nabla \log x = \frac{1}{x}\nabla x  \implies \nabla x = x \nabla \log x$$ 。 
 
 代入后：
 
 $$
 \nabla_\theta \mathbb{E}_{x \sim p_\theta}[f(x)]
 $$
+
 $$
 = \nabla_\theta \int f(x) p_\theta(x) dx
 $$
+
 $$
 = \int f(x) \nabla_\theta p_\theta(x) dx
 $$
+
 $$
 = \int f(x) p_\theta(x) \nabla_\theta \log p_\theta(x) dx
 $$
@@ -66,7 +69,7 @@ $$
 
 * 直接对`概率求导`，不好算；
 * 但对 `log 概率求导`，更简单；
-* 所以我们“**加一乘一**”，借助 $p_\theta(x)\nabla_\theta \log p_\theta(x)$ 来转化。
+* 所以我们“**加一乘一**”，借助 $$p_\theta(x)\nabla_\theta \log p_\theta(x)$$ 来转化。
 
 这一步在数学上，相当于引入了一个 **对数梯度**，让**期望的梯度**可以用**采样估计**：
 
@@ -77,7 +80,7 @@ $$
 
 ### 1.3. 在强化学习中的应用
 
-在强化学习的**策略梯度**（Policy Gradient）中，策略 $\pi_\theta(a|s)$ 是一个概率分布，目标函数是：
+在强化学习的**策略梯度**（Policy Gradient）中，策略 $$\pi_\theta(a|s)$$ 是一个概率分布，目标函数是：
 
 $$
 J(\theta) = \mathbb{E}_{\tau \sim \pi_\theta}[R(\tau)]
@@ -120,12 +123,12 @@ $$
 
 这里：
 
-* $\tau = (s_0, a_0, s_1, a_1, \dots)$ 是一条“轨迹（`trajectory`）”；
-* 它是从策略分布 $\pi_\theta(a|s)$ 与环境动态 $p(s_{t+1}|s_t, a_t)$ 共同生成的；
-* $R(\tau)$ 是这条轨迹上的**累计奖励**。
+* $$\tau = (s_0, a_0, s_1, a_1, \dots)$$ 是一条“轨迹（`trajectory`）”；
+* 它是从策略分布 $$\pi_\theta(a|s)$$ 与环境动态 $$p(s_{t+1}|s_t, a_t)$$ 共同生成的；
+* $$R(\tau)$$ 是这条轨迹上的**累计奖励**。
 
 
-直接算期望 $\mathbb{E}_{\tau \sim \pi_\theta}$ 很困难，因为轨迹**空间非常大**、**分布复杂**。
+直接算期望 $$\mathbb{E}_{\tau \sim \pi_\theta}$$ 很困难，因为轨迹**空间非常大**、**分布复杂**。
 
 于是使用 **log-derivative trick**：
 
@@ -136,7 +139,7 @@ $$
 
 这一步的关键好处是：
 
-* 只需要能**采样出轨迹** $\tau$，然后计算 $R(\tau)$ 和 $\nabla_\theta \log \pi_\theta(\tau)$，就能近似这个期望。
+* 只需要能**采样出轨迹** $$\tau$$，然后计算 $$R(\tau)$$ 和 $$\nabla_\theta \log \pi_\theta(\tau)$$，就能近似这个期望。
 
 于是我们用**采样平均**来估计梯度：
 
@@ -160,14 +163,14 @@ $$
 比如：
 
 * **Actor-Critic 方法**：在采样轨迹的基础上，用 Critic 网络（价值函数）来**减少方差**；
-* **GAE（Generalized Advantage Estimation）**：用“优势函数”代替原始回报 $R(\tau)$，平衡偏差和方差。
+* **GAE（Generalized Advantage Estimation）**：用“优势函数”代替原始回报 $$R(\tau)$$，平衡偏差和方差。
 
 这些仍然依赖采样轨迹，但**改进了估计**方式。
 
 
 #### 2.2.2. 模型驱动的方法（不一定采样轨迹）
 
-如果你有**已知的环境模型** $p(s'|s,a)$，可以直接：
+如果你有**已知的环境模型** $$p(s'|s,a)$$，可以直接：
 
 * 构造 **解析的动态规划方程（Policy Evaluation / Policy Iteration）**；
 * 或者用 **确定性梯度（Deterministic Policy Gradient）**，在**连续空间**中求期望；
