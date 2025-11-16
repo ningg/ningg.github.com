@@ -6,11 +6,14 @@ published: true
 categories: AI
 ---
 
+> 完整细节，参考：[RL 强化学习，数学理论、典型算法.](https://github.com/ningg/reinforcement-learning-theory-and-practice)  GitHub 项目，其中包含了 完整数学推导、Q-learning 示例、REINFORCE 示例，以及 Actor-Critic 演进过程等细节。
+
 ## 0.概要
+
 
 现在 RL 是 AI 领域非常热门的方向之一，特别是高级智能的典型训练方法。
 
-RL，全程 Reinforcement Learning，强化学习，是一种通过与环境交互，学习最优策略的机器学习方法。
+RL，全称 `Reinforcement Learning`，强化学习，是一种通过与环境交互，学习最优策略的机器学习方法。
 
 机器学习方法，可以分为 3 大类：
 
@@ -23,7 +26,7 @@ RL，全程 Reinforcement Learning，强化学习，是一种通过与环境交�
 
 非常有必要，集中学习下 RL 的理论基础 & 典型算法。
 
-过去几周，线闲暇时间，集中学习了一遍，点击下面查看细节：
+过去几周，闲暇时间，集中学习了一遍，点击下面查看细节：
 
 * [RL 强化学习，数学理论、典型算法.](https://github.com/ningg/reinforcement-learning-theory-and-practice) ：这是个 GitHub 项目。
 
@@ -37,7 +40,7 @@ RL，全程 Reinforcement Learning，强化学习，是一种通过与环境交�
 
 ## 2.场景建模 MDP
 
-我们通常假设环境满足 **Markov Decision Process (MDP)**：
+我们通常假设环境满足 **Markov Decision Process (MDP)** 马尔可夫决策过程：
 
 $$
 \mathcal{M} = (\mathcal{S}, \mathcal{A}, P, R, \gamma)
@@ -46,8 +49,8 @@ $$
 * $$\mathcal{S}$$：状态空间
 * $$\mathcal{A}$$：动作空间
 * $$P(s'\|s,a)$$：状态转移概率，表示在状态 $$s$$ 下，采取动作 $$a$$ 后，转移到状态 $$s'$$ 的概率。
-* $$R(s,a)$$：即时奖励函数
-* $$\gamma$$：折扣系数
+* $$R(s,a)$$：即时奖励函数，在状态 $$s$$ 下，采取动作 $$a$$ 后，获得的即时奖励。
+* $$\gamma$$：折扣系数，表示在当前时间点，未来奖励的折扣率，范围在 $$[0,1]$$ 之间。
 
 **马尔可夫性**的含义是：
 
@@ -137,14 +140,16 @@ $$
 
 ### 4.2.贝尔曼方程：递归关系
 
-这是 `RL` 理论的核心方程。
+贝尔曼方程（Bellman Equation），这是 `RL` 理论的核心方程。
 
 $$
 Q^{\pi}(s,a) 
 $$
+
 $$
 = \mathbb{E}\big[R(s,a) + \gamma V_{s'} \big]
 $$
+
 $$
 = \mathbb{E}\big[R(s,a) + \gamma \sum_{a'} \pi(a'|s') \cdot Q^{\pi}(s',a') \big]
 $$
@@ -267,14 +272,16 @@ $$
 
 #### 5.2.2.思路
 
-1. 策略由参数 $$\theta$$ 决定（通常是一个`神经网络`）。
-2. 目标是最大化期望累计奖励：
+3 个步骤：
+
+1.策略由参数 $$\theta$$ 决定（通常是一个`神经网络`）。
+2.目标是最大化期望累计奖励：
 
 $$
 J(\theta) = \mathbb{E}_{\pi\theta}\Big[\sum_t \gamma^t R_t\Big]
 $$
 
-3. 使用梯度上升（Policy Gradient）更新：
+3.使用梯度上升（Policy Gradient）更新：
 
 $$
 \theta \leftarrow \theta + \alpha \nabla_\theta J(\theta)
@@ -290,7 +297,7 @@ $$
 #### 5.2.4.缺点
 
 * 收敛慢、方差大；
-* 通常需要配合价值估计（这就引出了 **Actor-Critic**）。
+* 通常需要配合`价值估计`（这就引出了 **Actor-Critic**）。
 
 
 
