@@ -1,7 +1,7 @@
 ---
 layout: post
-title: Claude Code 系列：安装 & 使用 - 放弃改用 Codex
-description: 
+title: Claude Code 系列：安装&使用-放弃，改用 Codex
+description: 用最先进的生产力工具
 published: true
 category: AI
 ---
