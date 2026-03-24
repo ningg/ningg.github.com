@@ -24,7 +24,7 @@ npm install -g @anthropic-ai/claude-code
 
 claude 官网：
 
-* https://claude.com/product/claude-code
+* [claude code 官网](https://claude.com/product/claude-code)
 
 
 ## 二、安装 codex (推荐)
