@@ -33,6 +33,27 @@
 
 ## 附录A. Mac 下, 搭建开发调试环境
 
+### A.0. 推荐启动方式
+
+优先使用仓库内置脚本：
+
+```bash
+cd /Users/guoning/ningg/github/ningg.github.com
+./bin/dev
+```
+
+说明：
+
+* 默认启动地址：`http://127.0.0.1:4000`
+* 如果 `4000` 端口已经被旧的本地 Jekyll/Ruby 进程占用，脚本会自动清理后重新启动
+* 如果占用 `4000` 的不是 Jekyll/Ruby 进程，脚本会直接报错并停止，避免误杀其他服务
+
+也可以通过环境变量覆盖地址：
+
+```bash
+JEKYLL_HOST=127.0.0.1 JEKYLL_PORT=4001 ./bin/dev
+```
+
 ### A.1. 搭建开发调试环境(旧版Mac)
 
 <details><summary>点击展开</summary>
@@ -67,8 +88,11 @@ $ bundle install
 # 4. 前往 jekyll blog 的目录下
 $ cd /Users/guoning/ningg/github/ningg.github.com
 
-# 5. 启动 jekyll 服务
-$ bundle exec jekyll serve
+# 5. 启动 jekyll 服务（推荐）
+$ ./bin/dev
+
+# 兜底方式：手动启动 jekyll 服务
+$ bundle exec jekyll serve --host 127.0.0.1 --port 4000 --trace
 
 # 下述方式, 只处理增量变更
 $ bundle exec jekyll serve --incremental
@@ -106,5 +130,4 @@ brew install iterm2
 ```
 
 </details>
-
 

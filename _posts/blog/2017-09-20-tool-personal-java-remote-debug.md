@@ -44,6 +44,7 @@ java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 -jar api
 
 如果是 Docker 方式，启动的 Java 应用，则，`docker-compose.yml` 增加下述环境变量：（指定远程调试端口为 5006）
 
+{% raw %}
 ```bash
 // docker 方式启动时， 在 docker-compose.yml 中，对应 Service 的 增加环境变量。
   citycode:
@@ -59,6 +60,7 @@ java -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5005 -jar api
       // 下面是新增的配置
       - JAVA_OPTS=-agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=5006
 ```
+{% endraw %}
 
 Docker 方式，重新启动上述 Java 应用：
 
@@ -114,4 +116,3 @@ Note: 上述 Remote 中，「Command line arguments for running remote JVM」参
 
 
 [NingG]:    http://ningg.github.com  "NingG"
-
