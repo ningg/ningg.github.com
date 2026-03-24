@@ -35,10 +35,14 @@
 
 ### A.0. 推荐启动方式
 
+<details><summary>点击展开</summary>
+
+<br />
+
 优先使用仓库内置脚本：
 
 ```bash
-cd /Users/guoning/ningg/github/ningg.github.com
+cd ./ningg.github.com
 ./bin/dev
 ```
 
@@ -53,6 +57,8 @@ cd /Users/guoning/ningg/github/ningg.github.com
 ```bash
 JEKYLL_HOST=127.0.0.1 JEKYLL_PORT=4001 ./bin/dev
 ```
+
+</details>
 
 ### A.1. 搭建开发调试环境(旧版Mac)
 
