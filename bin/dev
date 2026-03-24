@@ -1,0 +1,44 @@
+#!/usr/bin/env bash
+
+set -euo pipefail
+
+ROOT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")/.." && pwd)"
+HOST="${JEKYLL_HOST:-127.0.0.1}"
+PORT="${JEKYLL_PORT:-4000}"
+
+cd "$ROOT_DIR"
+
+if ! command -v bundle >/dev/null 2>&1; then
+  echo "error: bundler 未安装，请先执行 bundle install" >&2
+  exit 1
+fi
+
+if command -v lsof >/dev/null 2>&1; then
+  listener_lines="$(lsof -nP -iTCP:"$PORT" -sTCP:LISTEN 2>/dev/null | tail -n +2 || true)"
+  if [[ -n "$listener_lines" ]]; then
+    echo "发现端口 $PORT 已被占用，准备清理旧的本地 Jekyll 进程："
+    echo "$listener_lines"
+
+    while IFS= read -r line; do
+      [[ -z "$line" ]] && continue
+      command_name="$(awk '{print $1}' <<<"$line")"
+      pid="$(awk '{print $2}' <<<"$line")"
+      if [[ "$command_name" =~ ^(ruby|jekyll|bundle)$ ]]; then
+        if ! kill "$pid" 2>/dev/null; then
+          echo "error: 无法停止旧的本地 Jekyll 进程（$command_name, pid=$pid）。" >&2
+          echo "请确认当前用户有权限结束该进程，或手动执行 kill $pid 后再重试。" >&2
+          exit 1
+        fi
+      else
+        echo "error: 端口 $PORT 被非 Jekyll 进程占用（$command_name, pid=$pid），已停止自动清理。" >&2
+        echo "请先手动确认并释放该端口后再重试。" >&2
+        exit 1
+      fi
+    done <<<"$listener_lines"
+
+    sleep 1
+  fi
+fi
+
+echo "启动 Jekyll: http://$HOST:$PORT"
+exec bundle exec jekyll serve --host "$HOST" --port "$PORT" --trace
