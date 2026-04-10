@@ -31,9 +31,9 @@ Agentic 时代已经来了，热热闹闹，作为从业者，需要了解些技
 
 用最新的 `GPT-5.4 模型`，单独做了一份「中英文版本」：
 
-* 在线浏览：https://ningg.top/Agentic-Design-Patterns-CN
+* 在线浏览：[https://ningg.top/Agentic-Design-Patterns-CN](https://ningg.top/Agentic-Design-Patterns-CN)
 * pdf 下载：[《Agentic Design Patterns》 智能体设计模式，中英文版本  PDF 版本](https://github.com/user-attachments/files/26620935/Agentic-Design-Patterns-CN.pdf)
-* GitHub 地址：https://github.com/ningg/Agentic-Design-Patterns-CN
+* GitHub 地址：[https://github.com/ningg/Agentic-Design-Patterns-CN](https://github.com/ningg/Agentic-Design-Patterns-CN)
 
 
 相互大家一起维护~
