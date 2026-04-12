@@ -40,7 +40,6 @@ Agentic 时代已经来了，热热闹闹，作为从业者，需要了解些技
 
 
 <p align="center">
-  <img src="/images/ai-series/agentic-design-patterns/Agentic_Design_Patterns_Book_Cover.png" alt="Agentic Design Patterns" width="200" />
   <img src="/images/ai-series/agentic-design-patterns/Agentic_Design_Patterns_Book_Cover_CN.png" alt="Agentic Design Patterns" width="200" />
 </p>
 
