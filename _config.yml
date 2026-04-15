@@ -12,11 +12,15 @@ permalink: /:title/
 
 
 # title: NingG.github.com
-title: ningg.top
+title: 郭宁的个人博客
+
+# 网站语言设置
+lang: zh-CN
+locale: zh_CN
 
 # page中head部分的meta元素
-keywords: 激情,使命
-description: NingG's Blog , ningg 的个人博客
+keywords: 郭宁, 技术博客, 编程, 软件工程, 架构设计, 云计算, 激情, 使命
+description: 郭宁的个人博客 - 分享技术心得、架构设计与编程经验
 
 # url: http://ningg.github.com
 url: https://ningg.top
@@ -33,4 +37,24 @@ author_info: <a href="http://ningg.top/">NingG</a>
 author:
   name: NingG
   email: guoning.gn@gmail.com
+  twitter: # 可填写 Twitter 账号
+  github: ningg
+
+# SEO 默认图片（用于 Open Graph 和 Twitter Cards）
+default_image: /images/default-og-image.png
+
+# Jekyll 插件
+plugins:
+  - jekyll-seo-tag
+  - jekyll-sitemap
+
+# SEO 标签配置
+jekyll-seo-tag:
+  social:
+    name: 郭宁
+    links:
+      - https://github.com/ningg
+
+# 网站发布日期（用于结构化数据）
+site_launch_date: 2014-01-01
 
