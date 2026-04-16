@@ -1,0 +1,12 @@
+# robots.txt for ningg.top
+# Allow all search engines to crawl the site
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://ningg.top/sitemap.xml
+
+# Disallow specific paths (if needed in the future)
+# Disallow: /private/
+# Disallow: /admin/
