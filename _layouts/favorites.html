@@ -2,23 +2,29 @@
 layout: default
 ---
 
-
-<div class="index-content about">
+<div class="index-content favorites">
     <div class="section">
-        {% include main-nav.html active='about' %}
+        {% include main-nav.html active='favorites' %}
 
-		<div class="cate-bar"><span id="cateBar"></span></div>
+        <div class="cate-bar"><span id="cateBar"></span></div>
 
-        <!-- <ul class="artical-list"></ul> -->
-		<div class="about-page">
-			{{ content }}
-		</div>
+        <ul class="artical-list">
+        {% assign items = site.favorites | sort: 'date' | reverse %}
+        {% for item in items %}
+            {% unless item.published == false %}
+            <li>
+                <h2><a href="{{ item.url }}">{{ item.title }}</a></h2>
+                <div class="title-desc">{{ item.description }}</div>
+            </li>
+            {% endunless %}
+        {% endfor %}
+        </ul>
+
+        {{ content }}
     </div>
     <div class="aside">
     </div>
 </div>
-
-
 
 <script type="text/javascript">
     $(function(){

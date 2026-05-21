@@ -135,7 +135,6 @@ html, body{overflow:auto; overflow-x: hidden;}
 .about .aside{
     /* background-image:url(https://d233eq3e3p3cv0.cloudfront.net/max/1000/0*kTUZamBulGQZg1MW.jpeg); */
     /* background-image: url("/images/side-background.jpg"); */
-);
 }
 .category .aside{
     /* background-image:url(https://d233eq3e3p3cv0.cloudfront.net/max/1000/0*cF2i1ZosSP_UTJig.jpeg); */
@@ -183,7 +182,7 @@ html, body{overflow:auto; overflow-x: hidden;}
 .index-content .title-desc {color:#999;font-size:14px;line-height:1.6em;}
 
 .index-content .artical-cate { width:70%; margin:0 auto; }
-.index-content .artical-cate li { display:inline-block; *float:left; zoom:1; font-size:18px; width:32%; cursor:pointer; text-align:center; }
+.index-content .artical-cate li { display:inline-block; *float:left; zoom:1; font-size:18px; width:24%; cursor:pointer; text-align:center; }
 .index-content .artical-cate li a,
 .index-content .artical-cate li a:visited { display:inline-block; zoom:1; color:#000; width:100%; }
 .index-content .artical-cate li a:hover { text-decoration:none; }

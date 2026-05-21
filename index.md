@@ -4,11 +4,7 @@ layout: home
 
 <div class="index-content blog">
     <div class="section">
-        <ul class="artical-cate">
-            <li class="on"><a href="/"><span>Blog</span></a></li>
-            <li><a href="/category"><span>Category</span></a></li>
-            <li><a href="/about"><span>About</span></a></li>
-        </ul>
+        {% include main-nav.html active='blog' %}
 
         <div class="cate-bar"><span id="cateBar"></span></div>
 
