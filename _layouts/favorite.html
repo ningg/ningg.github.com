@@ -1,0 +1,59 @@
+---
+layout: default
+---
+
+<link rel="stylesheet" href="/js/prettify/prettify.css" />
+<style type="text/css">
+    body { background:#e8e8e8; }
+    @media screen and (max-width: 750px){
+        body { background:#fff; }
+    }
+    @media screen and (max-width: 1020px){
+        body { background:#fff; }
+    }
+</style>
+
+<div id="content">
+    <div class="entry">
+        <h1 class="entry-title"><a href="{{ page.url }}" title="{{ page.title }}">{{ page.title }}</a></h1>
+        <p class="entry-date">{{ page.date|date:"%Y-%m-%d" }}</p>
+        {% if page.source_url %}
+        <p class="entry-source">原文链接：<a href="{{ page.source_url }}" target="_blank" rel="noopener noreferrer">{{ page.source_url }}</a></p>
+        {% endif %}
+        {{ content }}
+
+        <p></p>
+        <blockquote id="entry-bottom-url">收藏页地址：<a href="{{ site.url }}{{ page.url }}" title="{{ page.title }}">{{ site.url }}{{ page.url }}</a> </blockquote>
+
+        <div id="disqus_container">
+            <div style="margin-bottom:20px" class="right">
+                点击:<a href="{{ site.url }}/about" target="_blank">联系我</a>
+            </div>
+	    <a href="#" class="comment" onclick="return false;">点击查看评论(Note:可能被墙了)</a>
+            <div id="disqus_thread"></div>
+        </div>
+    </div>
+
+    <div id="sidenav-id" class="sidenav">
+        微信公众号 <strong>ningg</strong>, <a href="{{ site.url }}/about" target="_blank">联系我</a>
+    </div>
+
+    {% if page.tags and page.tags.size > 0 %}
+    <div class="related-post">
+        <h3>更多收藏:</h3>
+        <ul>
+            {% assign related = site.favorites | where_exp: "item", "item.url != page.url" | sort: 'date' | reverse %}
+            {% for item in related limit:10 %}
+                {% unless item.published == false %}
+                <li><a href="{{ item.url }}" target="_blank">{{ item.title }}</a></li>
+                {% endunless %}
+            {% endfor %}
+        </ul>
+
+        <p><strong>微信搜索</strong>: 公众号 <strong>ningg</strong>, <a href="{{ site.url }}/about" target="_blank">联系我</a>, 交个朋友.</p>
+    </div>
+    {% endif %}
+
+</div>
+
+<script src="/js/post.js" type="text/javascript"></script>

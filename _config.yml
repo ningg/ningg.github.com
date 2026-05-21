@@ -58,3 +58,15 @@ jekyll-seo-tag:
 # 网站发布日期（用于结构化数据）
 site_launch_date: 2014-01-01
 
+collections:
+  favorites:
+    output: true
+    permalink: /favorites/:title/
+
+defaults:
+  - scope:
+      path: ""
+      type: favorites
+    values:
+      layout: favorite
+

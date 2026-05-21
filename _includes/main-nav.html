@@ -1,0 +1,6 @@
+<ul class="artical-cate">
+    <li{% if include.active == 'blog' %} class="on"{% endif %}><a href="/"><span>Blog</span></a></li>
+    <li{% if include.active == 'category' %} class="on"{% endif %}><a href="/category"><span>Category</span></a></li>
+    <li{% if include.active == 'favorites' %} class="on"{% endif %}><a href="/favorites"><span>Collection</span></a></li>
+    <li{% if include.active == 'about' %} class="on"{% endif %}><a href="/about"><span>About</span></a></li>
+</ul>
