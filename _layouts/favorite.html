@@ -17,9 +17,14 @@ layout: default
     <div class="entry">
         <h1 class="entry-title"><a href="{{ page.url }}" title="{{ page.title }}">{{ page.title }}</a></h1>
         <p class="entry-date">{{ page.date|date:"%Y-%m-%d" }}</p>
+        
         {% if page.source_url %}
-        <p class="entry-source">原文链接：<a href="{{ page.source_url }}" target="_blank" rel="noopener noreferrer">{{ page.source_url }}</a></p>
+        <blockquote id="entry-top-url">
+             <p class="entry-source">原文链接：<a href="{{ page.source_url }}" target="_blank" rel="noopener noreferrer">{{ page.source_url }}</a></p>
+        </blockquote>
         {% endif %}
+
+
         {{ content }}
 
         <p></p>
