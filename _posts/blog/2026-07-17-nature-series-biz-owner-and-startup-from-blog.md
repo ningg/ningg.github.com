@@ -2,8 +2,8 @@
 layout: post
 title: 只看公开博客：是否适合业务负责人？2026 年在中国是否适合创业？
 description: 仅依据 ningg.top 公开内容做能力画像——业务负责人适合度偏高，创业窗口在 AI 方向，但执行与风险承担无法仅凭博客证明。
-published: false
-category: nature
+published: true
+categories: review blog
 ---
 
 ## 零、概要
