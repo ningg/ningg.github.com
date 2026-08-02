@@ -54,6 +54,37 @@ category: nature
 
 Published URL: `https://ningg.top/nature-series-shaping-self-input-and-reflection/`
 
+## Blog + Collection habit（跟 Founder 学）
+
+File: `_posts/blog/2026-08-02-nature-series-learn-from-founder.md`
+
+```yaml
+---
+layout: post
+title: 跟 Founder 学：完整语料与定期追问
+description: 从徐新的学习方式出发：穷尽一手材料，定期追问「最近习得」，用来完善自己的知识与判断体系。
+published: false
+category: nature
+---
+```
+
+Practice when clipping founders / recurring people:
+
+* **原文**：corpus skeleton（时间线、一手材料清单、关键判断），不只金句
+* **批注**：语料完整度、本次习得、冲突/印证、下次复盘提问
+
+```markdown
+## 批注
+
+* **语料完整度**：已读演讲 / 年报清单；还缺…
+* **本次习得**：…
+* **冲突或印证**：…
+* **下次复盘提问**：最近是否练出新思考或技能？
+* **关联博文**：[跟 Founder 学：完整语料与定期追问](/nature-series-learn-from-founder/)
+```
+
+Published URL (after `published: true`): `https://ningg.top/nature-series-learn-from-founder/`
+
 ## Draft workflow
 
 1. Create file with `published: false`
