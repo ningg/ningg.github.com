@@ -74,6 +74,19 @@ published: false
 
 Do not paraphrase copyrighted text at length; prefer summaries and short quotes.
 
+### Founder / 人物类剪藏（跟 Founder 学）
+
+When the clipping is about a **founder, operator, or recurring person** you intend to learn from over time, expand 批注 (and lightly structure 原文) with:
+
+| Prompt | What to capture |
+|--------|-----------------|
+| 语料完整度 | What primary sources exist (talks, letters, filings, interviews); what is still missing |
+| 本次习得 | New thinking or skill signal from this piece — not just a quote |
+| 冲突 / 印证 | How it collides with or supports existing judgment |
+| 下次复盘提问 | 1–3 questions for the next review / meeting (e.g. 「最近是否练出新思考或技能？」) |
+
+原文 for these entries should prefer a **corpus skeleton** (timeline, source list, key judgments) over isolated hot takes. Method note: [/nature-series-learn-from-founder/](https://ningg.top/nature-series-learn-from-founder/).
+
 ## Step 4: Generate Blog (if requested)
 
 **Filename:** `_posts/blog/YYYY-MM-DD-<slug>.md`
@@ -123,4 +136,5 @@ When both exist:
 - [ ] `description` is one clear sentence
 - [ ] `source_url` present when clipping external content
 - [ ] Cross-links use site-relative paths (`/favorites/...`, `/post-slug/`)
+- [ ] Founder / person clippings: 批注 covers 语料完整度、本次习得、下次复盘提问 when applicable
 - [ ] No secrets or private data in committed files
