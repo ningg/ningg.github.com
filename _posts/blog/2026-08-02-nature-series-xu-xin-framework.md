@@ -2,7 +2,7 @@
 layout: post
 title: 跟徐新学：消费者洞察、学习方式与判断框架
 description: 系统拆解徐新：认知框架、一线学习、五个判断问题，以及普通人可迁移的长期复利。
-published: false
+published: true
 category: nature
 ---
 

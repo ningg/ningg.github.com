@@ -3,7 +3,7 @@ title: Agent 时代：工作往上挪一层，品位与手艺更值钱
 description: Aaron Levie 回应「vibe coding 已死」：Agent 没有消灭工作，只是把瓶颈从执行挪到意图质量、审核与管理开销。
 date: 2026-08-04
 tags: [AI, agent, vibe-coding]
-published: false
+published: true
 ---
 
 ## 原文
